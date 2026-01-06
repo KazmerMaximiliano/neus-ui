@@ -1,7 +1,7 @@
 // Import CSS styles for the library
 // Users must import this CSS file in their application
 // import 'neus-ui/dist/index.css';
-import './index.css';
+import './css/app.css';
 
 // Theme system exports
 export { useColors } from './components/theme';

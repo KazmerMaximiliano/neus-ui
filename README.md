@@ -19,7 +19,7 @@ pnpm add git+https://github.com/KazmerMaximiliano/neus-ui.git
 ### 1. Import CSS and Setup Theme Provider
 
 ```tsx
-import "neus-ui/dist/index.css";
+import "neus-ui/dist/app.css";
 import { ThemeProvider } from "neus-ui";
 
 function App() {

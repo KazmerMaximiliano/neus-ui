@@ -4,7 +4,6 @@
   border: 1px solid var(--color-border-light);
   border-radius: 1.5em;
   overflow: hidden;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .interactive-map-container .search-box-wrapper {
