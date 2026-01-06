@@ -7,11 +7,8 @@ const meta: Meta<typeof MenuComponent> = {
   component: MenuComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     icon: {
       description: "Icon displayed in the menu avatar",

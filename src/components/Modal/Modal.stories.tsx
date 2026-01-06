@@ -6,11 +6,8 @@ const meta: Meta<typeof ModalComponent> = {
   component: ModalComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     isOpen: {
       control: { type: "boolean" },

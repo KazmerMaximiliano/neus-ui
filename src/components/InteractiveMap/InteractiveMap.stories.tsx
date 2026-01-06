@@ -10,6 +10,7 @@ const meta: Meta<typeof InteractiveMapComponent> = {
       autodocs: true,
     },
   },
+  tags: ["autodocs"],
   argTypes: {
     googleMapsApiKey: {
       control: "text",

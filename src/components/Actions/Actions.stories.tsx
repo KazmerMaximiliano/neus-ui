@@ -6,11 +6,8 @@ const meta: Meta<typeof ActionsComponent> = {
   component: ActionsComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     onInfo: {
       action: "info clicked",

@@ -7,11 +7,8 @@ const meta: Meta<typeof IconButtonComponent> = {
   component: IconButtonComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     icon: {
       control: false,

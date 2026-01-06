@@ -6,11 +6,8 @@ const meta: Meta<typeof InputComponent> = {
   component: InputComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     name: {
       control: { type: "text" },

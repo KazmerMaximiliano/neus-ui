@@ -6,11 +6,8 @@ const meta: Meta<typeof ButtonComponent> = {
   component: ButtonComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     label: {
       control: "text",

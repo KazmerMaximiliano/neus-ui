@@ -6,11 +6,8 @@ const meta: Meta<typeof SelectComponent> = {
   component: SelectComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     options: {
       control: { type: "object" },
