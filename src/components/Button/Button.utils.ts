@@ -1,6 +1,6 @@
-import { colors } from "../theme";
+import { ThemeColors } from "../../providers";
 
-export const getLoaderColor = (style: string, color: string): string => {
+export const getLoaderColor = (style: string, color: string, colors: ThemeColors): string => {
   if (style === "solid") {
     return colors.white;
   }

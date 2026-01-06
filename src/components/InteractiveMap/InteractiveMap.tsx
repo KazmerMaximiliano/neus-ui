@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { reverseGeocode } from "../../services/geocoding";
 import { Input } from "../Input/Input";
-import { colors } from "../theme";
+import { useColors } from "../theme";
 import "./InteractiveMap.styles.css";
 import { InteractiveMapProps } from "./InteractiveMap.types";
 
@@ -20,6 +20,7 @@ export const InteractiveMap = ({
   instructionsText,
   onLocationSelect,
 }: InteractiveMapProps) => {
+  const colors = useColors();
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey,

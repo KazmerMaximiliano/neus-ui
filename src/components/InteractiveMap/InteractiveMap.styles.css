@@ -1,5 +1,3 @@
-@import "../../css/app.css";
-
 .interactive-map-container {
   display: flex;
   flex-direction: column;

@@ -1,73 +1,158 @@
-# React + TypeScript + Vite
+# Neus UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React UI component library built with TypeScript and dynamic theming capabilities.
 
-Currently, two official plugins are available:
+## 📦 Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Install directly from GitHub:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install git+https://github.com/KazmerMaximiliano/neus-ui.git
+# or
+yarn add git+https://github.com/KazmerMaximiliano/neus-ui.git
+# or
+pnpm add git+https://github.com/KazmerMaximiliano/neus-ui.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Quick Start
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Import CSS and Setup Theme Provider
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```tsx
+import "neus-ui/dist/index.css";
+import { ThemeProvider } from "neus-ui";
+
+function App() {
+  return (
+    <ThemeProvider initialTheme={{ primaryColor: "#e91e63" }}>
+      {/* Your app content */}
+    </ThemeProvider>
+  );
+}
 ```
+
+### 2. Use Components
+
+```tsx
+import { Button, Input, Modal, DataTable, useColors } from "neus-ui";
+
+function MyComponent() {
+  const colors = useColors();
+
+  return (
+    <div>
+      <Button variant="solid" color="primary">
+        Click me
+      </Button>
+      <Input placeholder="Enter text..." />
+    </div>
+  );
+}
+```
+
+## 🎨 Dynamic Theming
+
+### Basic Theme Configuration
+
+```tsx
+import { ThemeProvider, useTheme } from "neus-ui";
+
+function ThemeControls() {
+  const { updateTheme } = useTheme();
+
+  return (
+    <div>
+      <button onClick={() => updateTheme({ primaryColor: "#e91e63" })}>
+        Pink Theme
+      </button>
+      <button onClick={() => updateTheme({ primaryColor: "#2196f3" })}>
+        Blue Theme
+      </button>
+    </div>
+  );
+}
+```
+
+### Using Colors in Custom Components
+
+```tsx
+import { useColors } from "neus-ui";
+
+function CustomComponent() {
+  const colors = useColors();
+
+  return (
+    <div
+      style={{
+        backgroundColor: colors.primary.main,
+        color: colors.white,
+        border: `1px solid ${colors.primary.dark}`,
+      }}
+    >
+      Custom styled component
+    </div>
+  );
+}
+```
+
+### CSS Variables
+
+All theme colors are available as CSS variables:
+
+```css
+.custom-element {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary-dark);
+  color: var(--color-white);
+}
+
+.custom-element:hover {
+  background-color: var(--color-primary-light);
+}
+```
+
+## 📚 Available Components
+
+| Component        | Description                                             |
+| ---------------- | ------------------------------------------------------- |
+| `Button`         | Buttons with multiple variants (solid, outlined, ghost) |
+| `Input`          | Text input fields with validation states                |
+| `Select`         | Dropdown select components                              |
+| `MultiSelect`    | Multi-selection dropdown                                |
+| `Checkbox`       | Checkbox with indeterminate state                       |
+| `Modal`          | Modal dialogs with backdrop                             |
+| `DataTable`      | Tables with sorting, filtering, and pagination          |
+| `Sidebar`        | Collapsible sidebar navigation                          |
+| `Link`           | Styled link components                                  |
+| `IconButton`     | Buttons with icons                                      |
+| `InteractiveMap` | Interactive map components                              |
+
+## 🔧 API Reference
+
+### ThemeProvider
+
+```tsx
+interface ThemeProviderProps {
+  children: ReactNode;
+  initialTheme?: {
+    primaryColor?: string;
+    successColor?: string;
+    errorColor?: string;
+    infoColor?: string;
+  };
+}
+```
+
+### Hooks
+
+- `useTheme()` - Access theme configuration and update functions
+- `useColors()` - Access all theme colors with variants
+- `useResponsive()` - Responsive breakpoint utilities
+
+### Color Variants
+
+Each theme color automatically generates:
+
+- `main` - The original color
+- `light` - 10% opacity variant
+- `dark` - 15% darker variant

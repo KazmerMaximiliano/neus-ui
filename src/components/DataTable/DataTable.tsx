@@ -10,7 +10,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useResponsive } from "../../hooks/useResponsive";
 import { Actions } from "../Actions/Actions";
 import { IconButton } from "../IconButton/IconButton";
-import { colors } from "../theme";
+import { useColors } from "../theme";
 import "./DataTable.styles.css";
 import { DataTableColDef, DataTableProps } from "./DataTable.types";
 
@@ -46,6 +46,7 @@ const DataTableComponent = <T extends object>({
   noDataDescription,
 }: DataTableProps<T>) => {
   const { isMobile, isTablet } = useResponsive();
+  const colors = useColors();
 
   const { current_page, last_page, per_page, total } = pagination;
 

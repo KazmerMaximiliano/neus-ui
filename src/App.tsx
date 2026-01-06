@@ -1,3 +1,10 @@
+import "./css/app.css";
+import { ThemeProvider } from "./providers";
+
 export const App = () => {
-  return <div>App</div>;
+  return (
+    <ThemeProvider>
+      <div>App</div>
+    </ThemeProvider>
+  );
 };

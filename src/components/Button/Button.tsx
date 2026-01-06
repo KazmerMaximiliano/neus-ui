@@ -1,4 +1,5 @@
 import { BeatLoader } from "react-spinners";
+import { useColors } from "../theme";
 import "./Button.styles.css";
 import { ButtonProps } from "./Button.types";
 import { getButtonClasses, getLoaderColor } from "./Button.utils";
@@ -13,8 +14,9 @@ export const Button = ({
   loading = false,
   onClick,
 }: ButtonProps) => {
+  const colors = useColors();
   const buttonClasses = getButtonClasses(variant, color, fullWidth);
-  const loaderColor = getLoaderColor(variant, color);
+  const loaderColor = getLoaderColor(variant, color, colors);
 
   return (
     <button

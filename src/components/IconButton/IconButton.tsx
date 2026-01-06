@@ -1,4 +1,5 @@
 import { BeatLoader } from "react-spinners";
+import { useColors } from "../theme";
 import "./IconButton.styles.css";
 import { ButtonProps } from "./IconButton.types";
 import {
@@ -18,8 +19,9 @@ export const IconButton = ({
   loading = false,
   onClick,
 }: ButtonProps) => {
+  const colors = useColors();
   const buttonClasses = getIconButtonClasses(variant, color, size);
-  const loaderColor = getLoaderColor(variant, color);
+  const loaderColor = getLoaderColor(variant, color, colors);
   const iconSize = getIconSize(size);
   const loaderSize = getLoaderSize(size);
 

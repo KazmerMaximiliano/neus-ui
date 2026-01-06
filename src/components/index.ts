@@ -10,4 +10,5 @@ export * from "./Modal/Modal";
 export * from "./MultiSelect/MultiSelect";
 export * from "./Select/Select";
 export * from "./Sidebar/Sidebar";
-export * from "./UserMenu/UserMenu";
+
+export { useColors } from "./theme";
