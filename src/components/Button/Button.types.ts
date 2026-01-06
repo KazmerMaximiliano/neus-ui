@@ -10,5 +10,5 @@ export type ButtonProps = {
   disabled?: boolean;
   fullWidth?: boolean;
   loading?: boolean;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 };

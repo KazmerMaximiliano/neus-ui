@@ -21,7 +21,7 @@ export const Button = ({
   return (
     <button
       className={buttonClasses}
-      onClick={onClick}
+      onClick={(e) => onClick?.(e)}
       type={type}
       disabled={disabled || loading}
     >

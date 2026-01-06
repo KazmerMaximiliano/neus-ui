@@ -2,6 +2,7 @@ export * from "./Actions/Actions";
 export * from "./Button/Button";
 export * from "./Checkbox/Checkbox";
 export * from "./DataTable/DataTable";
+export * from "./FileUploader/FileUploader";
 export * from "./IconButton/IconButton";
 export * from "./Input/Input";
 export * from "./InteractiveMap/InteractiveMap";
