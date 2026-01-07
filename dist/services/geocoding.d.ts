@@ -4,5 +4,5 @@ interface LocationData {
     state: string;
     city: string;
 }
-export declare function reverseGeocode(lat: number, lng: number): Promise<LocationData>;
+export declare function reverseGeocode(lat: number, lng: number, googleMapsApiKey?: string): Promise<LocationData>;
 export {};

@@ -69,7 +69,7 @@ export const InteractiveMap = ({
   const updateLocationFromCoordinates = useCallback(
     async (lat: number, lng: number) => {
       try {
-        const locationData = await reverseGeocode(lat, lng);
+        const locationData = await reverseGeocode(lat, lng, googleMapsApiKey);
 
         onLocationSelect({
           coordinates: `${lat},${lng}`,
