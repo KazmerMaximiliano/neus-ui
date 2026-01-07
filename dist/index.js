@@ -20,7 +20,7 @@ const Fa = (e) => {
   if (!i) return e;
   const s = 1 - t / 100, o = Math.round(i.r * s), n = Math.round(i.g * s), r = Math.round(i.b * s);
   return Eu(o, n, r);
-}, zA = (e, t) => {
+}, WA = (e, t) => {
   const i = Fa(e);
   if (!i) return e;
   const s = 1 + t / 100, o = Math.min(255, Math.round(i.r * s)), n = Math.min(255, Math.round(i.g * s)), r = Math.min(255, Math.round(i.b * s));
@@ -70,7 +70,7 @@ const Fa = (e) => {
     light: i,
     dark: s
   };
-}, _A = ({
+}, zA = ({
   children: e,
   initialTheme: t = {}
 }) => {
@@ -39056,7 +39056,7 @@ const II = ({
       )
     ] })
   ] });
-}, jA = kI;
+}, $A = kI;
 function AI(e) {
   return $t({ attr: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, child: [{ tag: "path", attr: { d: "M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" }, child: [] }, { tag: "polyline", attr: { points: "13 2 13 9 20 9" }, child: [] }] })(e);
 }
@@ -39100,7 +39100,7 @@ const HI = (e, t) => e.reduce((s, o) => s + o.size, 0) > t ? {
     return r;
   const a = NI(o, t);
   return a.valid ? { valid: !0 } : a;
-}, KA = ({
+}, jA = ({
   allowedTypes: e,
   maxWeight: t = 10 * 1024 * 1024,
   multiple: i = !1,
@@ -44175,36 +44175,9 @@ k(of, "defaultProps", {
 });
 k(of, "contextType", de);
 async function OA(e, t) {
-  const i = "AIzaSyB_BGLCH90XAOtAelqOWsdFxiLjqrbisO0";
-  try {
-    const s = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${e},${t}&key=${i}&language=es`
-    );
-    if (!s.ok)
-      throw new Error(`Error en geocoding: ${s.statusText}`);
-    const o = await s.json();
-    if (o.status !== "OK" || o.results.length === 0)
-      throw new Error("No se encontraron resultados de geocoding");
-    const n = o.results[0];
-    return GA(n);
-  } catch (s) {
-    throw console.error("Error en reverse geocoding:", s), s;
-  }
+  throw new Error("VITE_GOOGLE_MAPS_API_KEY no está configurada");
 }
-function GA(e) {
-  const t = e.address_components;
-  let i = "", s = "", o = "";
-  return t.forEach((n) => {
-    const r = n.types;
-    r.includes("country") && (i = n.long_name), (r.includes("administrative_area_level_1") || r.includes("administrative_area_level_2")) && (s || (s = n.long_name)), r.includes("locality") && (o = n.long_name), !o && r.includes("administrative_area_level_3") && (o = n.long_name);
-  }), {
-    address: e.formatted_address,
-    country: i,
-    state: s,
-    city: o
-  };
-}
-const qA = ({
+const KA = ({
   googleMapsApiKey: e,
   initialCoordinates: t,
   initialAddress: i,
@@ -44325,7 +44298,7 @@ const qA = ({
       "You can drag the marker to adjust the location"
     ] }) })
   ] }) : /* @__PURE__ */ W("div", { className: "map-loading", children: /* @__PURE__ */ W(xa, { color: r.primary.main, speedMultiplier: 0.5 }) });
-}, ZA = ({ label: e, type: t = "primary", href: i = "#" }) => /* @__PURE__ */ W("a", { className: `link link--${t}`, href: i, children: e }), YA = ({
+}, qA = ({ label: e, type: t = "primary", href: i = "#" }) => /* @__PURE__ */ W("a", { className: `link link--${t}`, href: i, children: e }), ZA = ({
   isOpen: e = !1,
   title: t,
   children: i,
@@ -44348,7 +44321,7 @@ const qA = ({
       }
     )
   ] })
-] }) }) : null, QA = ({
+] }) }) : null, YA = ({
   name: e,
   placeholder: t,
   error: i,
@@ -44425,7 +44398,7 @@ const qA = ({
     ] }),
     /* @__PURE__ */ W("div", { className: "multiselect-error", children: i })
   ] });
-}, JA = ({
+}, QA = ({
   name: e,
   defaultValue: t,
   placeholder: i,
@@ -44447,7 +44420,7 @@ const qA = ({
     }
   ) }),
   /* @__PURE__ */ W("div", { className: "select-error", children: s })
-] }), HA = ({ title: e, items: t }) => {
+] }), GA = ({ title: e, items: t }) => {
   const { isMobile: i } = Wp(), [s, o] = P(!1);
   return /* @__PURE__ */ Se(
     "div",
@@ -44474,7 +44447,7 @@ const qA = ({
       ]
     }
   );
-}, BA = "NEUS UI", XA = ({ children: e, routes: t, menu: i }) => {
+}, HA = "NEUS UI", JA = ({ children: e, routes: t, menu: i }) => {
   const [s, o] = P(!1);
   return /* @__PURE__ */ Se("div", { className: "app-template", children: [
     /* @__PURE__ */ Se("div", { className: "header-container", children: [
@@ -44491,12 +44464,12 @@ const qA = ({
       "div",
       {
         className: `sidebar-container ${s ? "sidebar-container--active" : ""}`,
-        children: /* @__PURE__ */ W(HA, { title: BA, items: t })
+        children: /* @__PURE__ */ W(GA, { title: HA, items: t })
       }
     ),
     /* @__PURE__ */ W("div", { className: "content", children: /* @__PURE__ */ W("div", { className: "content-container", children: e }) })
   ] });
-}, eO = ({
+}, XA = ({
   children: e,
   submitLabel: t,
   loading: i
@@ -44506,23 +44479,23 @@ const qA = ({
 ] });
 export {
   Of as Actions,
-  XA as AppTemplate,
+  JA as AppTemplate,
   Us as Button,
   Bf as Checkbox,
-  jA as DataTable,
-  KA as FileUploader,
-  eO as FormTemplate,
+  $A as DataTable,
+  jA as FileUploader,
+  XA as FormTemplate,
   Qi as IconButton,
   WI as Input,
-  qA as InteractiveMap,
-  ZA as Link,
-  YA as Modal,
-  QA as MultiSelect,
-  JA as Select,
-  HA as Sidebar,
-  _A as ThemeProvider,
+  KA as InteractiveMap,
+  qA as Link,
+  ZA as Modal,
+  YA as MultiSelect,
+  QA as Select,
+  GA as Sidebar,
+  zA as ThemeProvider,
   cf as getDarkenColor,
-  zA as getLightenColor,
+  WA as getLightenColor,
   Fa as hexToRgb,
   Eu as rgbToHex,
   Nn as useColors,
