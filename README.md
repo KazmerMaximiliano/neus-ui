@@ -115,17 +115,31 @@ All theme colors are available as CSS variables:
 
 | Component        | Description                                             |
 | ---------------- | ------------------------------------------------------- |
+| `Actions`        | Action buttons grouping and management                  |
 | `Button`         | Buttons with multiple variants (solid, outlined, ghost) |
-| `Input`          | Text input fields with validation states                |
-| `Select`         | Dropdown select components                              |
-| `MultiSelect`    | Multi-selection dropdown                                |
 | `Checkbox`       | Checkbox with indeterminate state                       |
-| `Modal`          | Modal dialogs with backdrop                             |
 | `DataTable`      | Tables with sorting, filtering, and pagination          |
-| `Sidebar`        | Collapsible sidebar navigation                          |
-| `Link`           | Styled link components                                  |
+| `FileUploader`   | File upload component with drag and drop support        |
 | `IconButton`     | Buttons with icons                                      |
+| `Input`          | Text input fields with validation states                |
 | `InteractiveMap` | Interactive map components                              |
+| `Link`           | Styled link components                                  |
+| `Menu`           | Dropdown menu with customizable items                   |
+| `Modal`          | Modal dialogs with backdrop                             |
+| `MultiSelect`    | Multi-selection dropdown                                |
+| `Select`         | Dropdown select components                              |
+| `Sidebar`        | Collapsible sidebar navigation                          |
+
+## 🏗️ Available Templates
+
+| Template       | Description                                         |
+| -------------- | --------------------------------------------------- |
+| `AppTemplate`  | Complete application layout with sidebar and header |
+| `FormTemplate` | Form layout template with validation support        |
+
+## 📖 Complete Documentation
+
+> **💡 Tip**: For detailed component props, examples, and interactive demos, visit the complete documentation at [https://kazmermaximiliano.github.io/neus-ui](https://kazmermaximiliano.github.io/neus-ui)
 
 ## 🔧 API Reference
 
