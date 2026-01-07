@@ -19,10 +19,9 @@ interface GeocodeResult {
 // Perform reverse geocoding of coordinates using Google Geocoding API
 export async function reverseGeocode(
   lat: number,
-  lng: number
+  lng: number,
+  googleMapsApiKey?: string
 ): Promise<LocationData> {
-  const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-
   if (!googleMapsApiKey) {
     throw new Error("VITE_GOOGLE_MAPS_API_KEY no está configurada");
   }
