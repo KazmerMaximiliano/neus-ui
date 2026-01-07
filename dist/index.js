@@ -44498,7 +44498,7 @@ const KA = ({
   children: e,
   submitLabel: t,
   loading: i
-}) => /* @__PURE__ */ Ce("div", { className: "form-template", children: [
+}) => /* @__PURE__ */ Ce("div", { className: "form", children: [
   e,
   /* @__PURE__ */ V(Us, { type: "submit", label: t, loading: i, fullWidth: !0 })
 ] });
