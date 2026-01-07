@@ -8,8 +8,9 @@ export const FormTemplate = ({
   loading,
 }: FormTemplateProps) => {
   return (
-    <div className="form-template">
+    <div className="form">
       {children}
+
       <Button type="submit" label={submitLabel} loading={loading} fullWidth />
     </div>
   );
