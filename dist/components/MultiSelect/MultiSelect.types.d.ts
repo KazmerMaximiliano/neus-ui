@@ -8,5 +8,6 @@ export interface MultiSelectProps {
     placeholder?: string;
     label?: string;
     defaultValue?: string[];
+    disabled?: boolean;
     onChange?: (values: string[]) => void;
 }

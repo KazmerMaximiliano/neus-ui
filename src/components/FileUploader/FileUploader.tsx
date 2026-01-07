@@ -12,6 +12,7 @@ export const FileUploader = ({
   error,
   deleteFilesText = "Delete files",
   placeholder = "Click to upload or drag and drop files here",
+  disabled = false,
   onChange,
 }: FileUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -42,6 +43,8 @@ export const FileUploader = ({
 
   const handleFiles = useCallback(
     (files: FileList | File[]) => {
+      if (disabled) return;
+
       const fileArray = Array.from(files);
       const validation = validateFiles(
         files,
@@ -65,30 +68,43 @@ export const FileUploader = ({
 
       onChange(uploadData);
     },
-    [allowedTypes, maxWeight, multiple, onChange, createPreview]
+    [allowedTypes, maxWeight, multiple, onChange, createPreview, disabled]
   );
 
-  const handleDrag = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  }, []);
+  const handleDrag = useCallback(
+    (e: React.DragEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    [disabled]
+  );
 
-  const handleDragIn = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      setDragActive(true);
-    }
-  }, []);
+  const handleDragIn = useCallback(
+    (e: React.DragEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+        setDragActive(true);
+      }
+    },
+    [disabled]
+  );
 
-  const handleDragOut = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-  }, []);
+  const handleDragOut = useCallback(
+    (e: React.DragEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(false);
+    },
+    [disabled]
+  );
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
+      if (disabled) return;
       e.preventDefault();
       e.stopPropagation();
       setDragActive(false);
@@ -98,16 +114,18 @@ export const FileUploader = ({
         e.dataTransfer.clearData();
       }
     },
-    [handleFiles]
+    [handleFiles, disabled]
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (disabled) return;
     if (e.target.files && e.target.files.length > 0) {
       handleFiles(e.target.files);
     }
   };
 
   const handleClick = () => {
+    if (disabled) return;
     fileInputRef.current?.click();
   };
 
@@ -225,12 +243,15 @@ export const FileUploader = ({
       <div
         className={`file-upload-area ${dragActive ? "drag-active" : ""} ${
           error ? "error" : ""
-        } ${selectedFiles.length > 0 ? "has-files" : ""}`}
-        {...(selectedFiles.length === 0 && { onClick: handleClick })}
-        onDragEnter={handleDragIn}
-        onDragLeave={handleDragOut}
-        onDragOver={handleDrag}
-        onDrop={handleDrop}
+        } ${selectedFiles.length > 0 ? "has-files" : ""} ${
+          disabled ? "disabled" : ""
+        }`}
+        {...(!disabled &&
+          selectedFiles.length === 0 && { onClick: handleClick })}
+        onDragEnter={!disabled ? handleDragIn : undefined}
+        onDragLeave={!disabled ? handleDragOut : undefined}
+        onDragOver={!disabled ? handleDrag : undefined}
+        onDrop={!disabled ? handleDrop : undefined}
       >
         {renderContent()}
       </div>

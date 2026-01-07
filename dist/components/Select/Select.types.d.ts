@@ -9,5 +9,6 @@ export type SelectProps = {
     placeholder?: string;
     label?: string;
     error?: string;
+    disabled?: boolean;
     onChange?: (value: string) => void;
 };

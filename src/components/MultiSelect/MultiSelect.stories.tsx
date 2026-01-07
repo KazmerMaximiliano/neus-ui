@@ -58,6 +58,14 @@ const meta: Meta<typeof MultiSelectComponent> = {
         category: "Props",
       },
     },
+    disabled: {
+      control: { type: "boolean" },
+      description: "Whether the multiselect is disabled",
+      table: {
+        type: { summary: "boolean" },
+        category: "Props",
+      },
+    },
     onChange: {
       action: "values changed",
       description: "Callback function triggered when selected values change",
@@ -82,6 +90,7 @@ export const MultiSelect: Story = {
     ],
     placeholder: "Select multiple options...",
     defaultValue: ["option1"],
+    disabled: false,
     onChange: (values: string[]) => console.log("Selected values:", values),
   },
 };

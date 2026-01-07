@@ -26,6 +26,10 @@ const meta: Meta<typeof FileUplaoderComponent> = {
     placeholder: {
       control: "text",
     },
+    disabled: {
+      control: "boolean",
+      description: "Whether the file uploader is disabled",
+    },
   },
 };
 
@@ -36,6 +40,7 @@ export const FileUploader: Story = {
     allowedTypes: [FileType.IMAGE, FileType.PDF, FileType.DOC],
     maxWeight: 5 * 1024 * 1024,
     multiple: false,
+    disabled: false,
     onChange: (data, error) => {
       console.log("File upload data:", data);
       if (error) console.error("Upload error:", error);

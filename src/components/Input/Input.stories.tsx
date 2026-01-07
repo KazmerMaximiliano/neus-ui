@@ -98,6 +98,14 @@ const meta: Meta<typeof InputComponent> = {
         category: "Props",
       },
     },
+    disabled: {
+      control: { type: "boolean" },
+      description: "Whether the input is disabled",
+      table: {
+        type: { summary: "boolean" },
+        category: "Props",
+      },
+    },
     onChange: {
       action: "input changed",
       description: "Callback function triggered when input value changes",
@@ -122,6 +130,7 @@ export const Input: Story = {
     min: "",
     max: "",
     step: "",
+    disabled: false,
     onChange: (value: string) => console.log("Input changed:", value),
   },
 };
