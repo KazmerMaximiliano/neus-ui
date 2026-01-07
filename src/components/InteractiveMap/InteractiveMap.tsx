@@ -18,6 +18,7 @@ export const InteractiveMap = ({
   initialAddress,
   searchBoxPlaceholder,
   instructionsText,
+  readonly = false,
   onLocationSelect,
 }: InteractiveMapProps) => {
   const colors = useColors();
@@ -71,13 +72,15 @@ export const InteractiveMap = ({
       try {
         const locationData = await reverseGeocode(lat, lng, googleMapsApiKey);
 
-        onLocationSelect({
-          coordinates: `${lat},${lng}`,
-          address: locationData.address,
-          country: locationData.country,
-          state: locationData.state,
-          city: locationData.city,
-        });
+        if (onLocationSelect) {
+          onLocationSelect({
+            coordinates: `${lat},${lng}`,
+            address: locationData.address,
+            country: locationData.country,
+            state: locationData.state,
+            city: locationData.city,
+          });
+        }
       } catch (error) {
         console.error("Error en reverse geocoding:", error);
       }
@@ -144,18 +147,20 @@ export const InteractiveMap = ({
 
   return (
     <div className="interactive-map-container">
-      <div className="search-box-wrapper">
-        <StandaloneSearchBox
-          onLoad={onSearchBoxLoad}
-          onPlacesChanged={onPlacesChanged}
-        >
-          <Input
-            type="text"
-            placeholder={searchBoxPlaceholder || "Find location..."}
-            value={initialAddress || ""}
-          ></Input>
-        </StandaloneSearchBox>
-      </div>
+      {!readonly && (
+        <div className="search-box-wrapper">
+          <StandaloneSearchBox
+            onLoad={onSearchBoxLoad}
+            onPlacesChanged={onPlacesChanged}
+          >
+            <Input
+              type="text"
+              placeholder={searchBoxPlaceholder || "Find location..."}
+              value={initialAddress || ""}
+            ></Input>
+          </StandaloneSearchBox>
+        </div>
+      )}
 
       <GoogleMap
         mapContainerClassName="map-container"
@@ -185,16 +190,18 @@ export const InteractiveMap = ({
         )}
       </GoogleMap>
 
-      <div className="map-info">
-        {instructionsText ? (
-          <p>{instructionsText}</p>
-        ) : (
-          <p>
-            Click on the map or search for a location to place a pin <br />
-            You can drag the marker to adjust the location
-          </p>
-        )}
-      </div>
+      {!readonly && (
+        <div className="map-info">
+          {instructionsText ? (
+            <p>{instructionsText}</p>
+          ) : (
+            <p>
+              Click on the map or search for a location to place a pin <br />
+              You can drag the marker to adjust the location
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
