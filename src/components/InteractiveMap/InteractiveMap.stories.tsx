@@ -32,6 +32,10 @@ const meta: Meta<typeof InteractiveMapComponent> = {
       control: "text",
       description: "Custom instructions text below the map",
     },
+    readonly: {
+      control: "boolean",
+      description: "If true, the map is in read-only mode",
+    },
     onLocationSelect: {
       action: "location-selected",
       description: "Callback when a location is selected",
@@ -47,7 +51,7 @@ const mockOnLocationSelect = (location: any) => {
 
 export const InteractiveMap: Story = {
   args: {
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "",
+    googleMapsApiKey: "",
     initialCoordinates: "-31.4201,-64.1888",
     initialAddress: "Plaza San Martín, Córdoba, Argentina",
     onLocationSelect: mockOnLocationSelect,

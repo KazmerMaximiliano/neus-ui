@@ -11,5 +11,6 @@ export type InteractiveMapProps = {
     initialAddress?: string;
     searchBoxPlaceholder?: string;
     instructionsText?: string;
-    onLocationSelect: (location: LocationData) => void;
+    readonly?: boolean;
+    onLocationSelect?: (location: LocationData) => void;
 };
