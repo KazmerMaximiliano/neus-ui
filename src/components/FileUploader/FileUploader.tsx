@@ -44,7 +44,7 @@ export const FileUploader = ({
   const handleFiles = useCallback(
     (files: FileList | File[]) => {
       if (disabled) return;
-      
+
       const fileArray = Array.from(files);
       const validation = validateFiles(
         files,
@@ -71,27 +71,36 @@ export const FileUploader = ({
     [allowedTypes, maxWeight, multiple, onChange, createPreview, disabled]
   );
 
-  const handleDrag = useCallback((e: React.DragEvent) => {
-    if (disabled) return;
-    e.preventDefault();
-    e.stopPropagation();
-  }, [disabled]);
+  const handleDrag = useCallback(
+    (e: React.DragEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    [disabled]
+  );
 
-  const handleDragIn = useCallback((e: React.DragEvent) => {
-    if (disabled) return;
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-      setDragActive(true);
-    }
-  }, [disabled]);
+  const handleDragIn = useCallback(
+    (e: React.DragEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+        setDragActive(true);
+      }
+    },
+    [disabled]
+  );
 
-  const handleDragOut = useCallback((e: React.DragEvent) => {
-    if (disabled) return;
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-  }, [disabled]);
+  const handleDragOut = useCallback(
+    (e: React.DragEvent) => {
+      if (disabled) return;
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(false);
+    },
+    [disabled]
+  );
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -237,7 +246,8 @@ export const FileUploader = ({
         } ${selectedFiles.length > 0 ? "has-files" : ""} ${
           disabled ? "disabled" : ""
         }`}
-        {...(!disabled && selectedFiles.length === 0 && { onClick: handleClick })}
+        {...(!disabled &&
+          selectedFiles.length === 0 && { onClick: handleClick })}
         onDragEnter={!disabled ? handleDragIn : undefined}
         onDragLeave={!disabled ? handleDragOut : undefined}
         onDragOver={!disabled ? handleDrag : undefined}

@@ -1,7 +1,12 @@
 import "./Checkbox.styles.css";
 import { CheckboxProps } from "./Checkbox.types";
 
-export const Checkbox = ({ name, checked, disabled = false, onChange }: CheckboxProps) => {
+export const Checkbox = ({
+  name,
+  checked,
+  disabled = false,
+  onChange,
+}: CheckboxProps) => {
   return (
     <input
       className="checkbox"

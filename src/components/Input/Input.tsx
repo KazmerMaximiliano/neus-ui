@@ -16,9 +16,19 @@ export const Input = ({
 }: InputProps) => {
   return (
     <div className="input-wrapper">
-      {label && <label className={`input-label${error ? " error" : ""}${disabled ? " disabled" : ""}`}>{label}</label>}
+      {label && (
+        <label
+          className={`input-label${error ? " error" : ""}${
+            disabled ? " disabled" : ""
+          }`}
+        >
+          {label}
+        </label>
+      )}
       <input
-        className={`input input-${type}${error ? " error" : ""}${disabled ? " disabled" : ""}`}
+        className={`input input-${type}${error ? " error" : ""}${
+          disabled ? " disabled" : ""
+        }`}
         type={type}
         name={name}
         defaultValue={defaultValue}

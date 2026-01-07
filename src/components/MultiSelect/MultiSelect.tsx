@@ -34,7 +34,7 @@ export const MultiSelect = ({
 
   const handleToggleOption = (value: string) => {
     if (disabled) return;
-    
+
     const newValues = selectedValues.includes(value)
       ? selectedValues.filter((v) => v !== value)
       : [...selectedValues, value];
@@ -45,7 +45,7 @@ export const MultiSelect = ({
 
   const handleRemoveTag = (valueToRemove: string) => {
     if (disabled) return;
-    
+
     const newValues = selectedValues.filter((v) => v !== valueToRemove);
     setSelectedValues(newValues);
     onChange?.(newValues);
@@ -58,7 +58,11 @@ export const MultiSelect = ({
   return (
     <div className="multiselect-wrapper" ref={containerRef}>
       {displayLabel && (
-        <label className={`multiselect-label${error ? " error" : ""}${disabled ? " disabled" : ""}`}>
+        <label
+          className={`multiselect-label${error ? " error" : ""}${
+            disabled ? " disabled" : ""
+          }`}
+        >
           {displayLabel}
         </label>
       )}
@@ -73,7 +77,9 @@ export const MultiSelect = ({
 
       <div className="multiselect-container">
         <div
-          className={`multiselect${error ? " error" : ""}${disabled ? " disabled" : ""}`}
+          className={`multiselect${error ? " error" : ""}${
+            disabled ? " disabled" : ""
+          }`}
           onClick={() => !disabled && setIsOpen(!isOpen)}
           tabIndex={disabled ? -1 : 0}
         >

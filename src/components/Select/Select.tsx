@@ -16,13 +16,19 @@ export const Select = ({
   return (
     <div className="select-wrapper">
       {displayLabel && (
-        <label className={`select-label${error ? " error" : ""}${disabled ? " disabled" : ""}`}>
+        <label
+          className={`select-label${error ? " error" : ""}${
+            disabled ? " disabled" : ""
+          }`}
+        >
           {displayLabel}
         </label>
       )}
       <div className="select-container">
         <select
-          className={`select${error ? " error" : ""}${disabled ? " disabled" : ""}`}
+          className={`select${error ? " error" : ""}${
+            disabled ? " disabled" : ""
+          }`}
           name={name}
           defaultValue={defaultValue}
           disabled={disabled}
