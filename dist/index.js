@@ -44500,7 +44500,7 @@ const KA = ({
   loading: i
 }) => /* @__PURE__ */ Ce("div", { className: "form", children: [
   e,
-  /* @__PURE__ */ V(Us, { type: "submit", label: t, loading: i, fullWidth: !0 })
+  /* @__PURE__ */ V(Us, { type: "submit", label: t, loading: i })
 ] });
 export {
   Of as Actions,
