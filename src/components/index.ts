@@ -7,6 +7,7 @@ export * from "./IconButton/IconButton";
 export * from "./Input/Input";
 export * from "./InteractiveMap/InteractiveMap";
 export * from "./Link/Link";
+export * from "./Menu/Menu";
 export * from "./Modal/Modal";
 export * from "./MultiSelect/MultiSelect";
 export * from "./Select/Select";
