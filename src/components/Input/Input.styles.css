@@ -5,6 +5,17 @@
   gap: 8px;
 }
 
+.input-label {
+  font-size: 0.9em;
+  color: var(--color-primary);
+  margin-left: 1em;
+  font-weight: 500;
+}
+
+.input-label.error {
+  color: var(--color-error);
+}
+
 .input {
   display: inline-block;
   background-color: var(--color-white);

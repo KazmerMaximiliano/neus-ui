@@ -39251,28 +39251,30 @@ const HI = (e, t) => e.reduce((s, o) => s + o.size, 0) > t ? {
   name: e,
   defaultValue: t,
   placeholder: i,
-  error: s,
-  type: o = "text",
-  min: n,
-  max: r,
-  step: a,
-  onChange: l
+  label: s,
+  error: o,
+  type: n = "text",
+  min: r,
+  max: a,
+  step: l,
+  onChange: d
 }) => /* @__PURE__ */ Ce("div", { className: "input-wrapper", children: [
+  s && /* @__PURE__ */ V("label", { className: `input-label${o ? " error" : ""}`, children: s }),
   /* @__PURE__ */ V(
     "input",
     {
-      className: `input input-${o}${s ? " error" : ""}`,
-      type: o,
+      className: `input input-${n}${o ? " error" : ""}`,
+      type: n,
       name: e,
       defaultValue: t,
       placeholder: i,
-      min: n,
-      max: r,
-      step: a,
-      onChange: (d) => l?.(d.target.value)
+      min: r,
+      max: a,
+      step: l,
+      onChange: (c) => d?.(c.target.value)
     }
   ),
-  /* @__PURE__ */ V("div", { className: "input-error", children: s })
+  o && /* @__PURE__ */ V("div", { className: "input-error", children: o })
 ] });
 function oo(e) {
   "@babel/helpers - typeof";

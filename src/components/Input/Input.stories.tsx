@@ -33,6 +33,14 @@ const meta: Meta<typeof InputComponent> = {
         category: "Props",
       },
     },
+    label: {
+      control: { type: "text" },
+      description: "Label text for the input",
+      table: {
+        type: { summary: "string" },
+        category: "Props",
+      },
+    },
     error: {
       control: { type: "text" },
       description: "Error message to display",
@@ -107,6 +115,7 @@ export const Input: Story = {
   args: {
     name: "example-input",
     placeholder: "Enter text here...",
+    label: "Example Input",
     type: "text",
     defaultValue: "",
     error: "",
