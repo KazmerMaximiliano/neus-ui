@@ -1,7 +1,0 @@
-import{r as t,j as e}from"./iframe-DDW51fCe.js";import{u as d}from"./useResponsive-BoeiF1AM.js";const c=({title:a,items:r})=>{const{isMobile:n}=d(),[l,i]=t.useState(!1);return e.jsxs("div",{className:"sidebar",onMouseEnter:()=>i(!0),onMouseLeave:()=>i(!1),children:[e.jsx("div",{className:"sidebar-header",children:e.jsx("div",{className:"sidebar-header-fix",children:e.jsx("div",{className:"sidebar-title",children:l||n?a:a?.charAt(0)})})}),e.jsx("div",{className:"sidebar-body",children:r.map((s,o)=>s.visible!==!1&&e.jsxs("div",{className:`sidebar-button ${s.active?"active":""}`,onClick:s.onClick,children:[s.icon&&e.jsx(s.icon,{size:14,className:"sidebar-button-icon"}),e.jsx("div",{className:"sidebar-button-label",children:s.label})]},o))})]})};c.__docgenInfo={description:"",methods:[],displayName:"Sidebar",props:{items:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
-  label: string;
-  icon?: IconType;
-  onClick?: () => void;
-  active?: boolean;
-  visible?: boolean;
-}`,signature:{properties:[{key:"label",value:{name:"string",required:!0}},{key:"icon",value:{name:"IconType",required:!1}},{key:"onClick",value:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}},required:!1}},{key:"active",value:{name:"boolean",required:!1}},{key:"visible",value:{name:"boolean",required:!1}}]}}],raw:"SidebarItem[]"},description:""},title:{required:!1,tsType:{name:"string"},description:""}}};export{c as S};

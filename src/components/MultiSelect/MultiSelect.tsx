@@ -10,10 +10,13 @@ export const MultiSelect = ({
   error,
   options,
   value = [],
+  defaultValue = [],
   disabled = false,
   onChange,
 }: MultiSelectProps) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>(value);
+  const [selectedValues, setSelectedValues] = useState<string[]>(
+    value.length > 0 ? value : defaultValue
+  );
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const displayLabel = label || placeholder;

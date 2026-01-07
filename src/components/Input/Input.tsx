@@ -4,6 +4,7 @@ import { InputProps } from "./Input.types";
 export const Input = ({
   name,
   value,
+  defaultValue,
   placeholder,
   label,
   error,
@@ -33,6 +34,7 @@ export const Input = ({
         type={type}
         name={name}
         value={value}
+        defaultValue={defaultValue}
         placeholder={placeholder}
         min={min}
         max={max}

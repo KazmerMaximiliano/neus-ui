@@ -39267,41 +39267,43 @@ const HI = (e, t) => e.reduce((s, o) => s + o.size, 0) > t ? {
 }, WI = ({
   name: e,
   value: t,
-  placeholder: i,
-  label: s,
-  error: o,
-  disabled: n = !1,
-  readonly: r = !1,
-  type: a = "text",
-  min: l,
-  max: d,
-  step: c,
-  onChange: u
+  defaultValue: i,
+  placeholder: s,
+  label: o,
+  error: n,
+  disabled: r = !1,
+  readonly: a = !1,
+  type: l = "text",
+  min: d,
+  max: c,
+  step: u,
+  onChange: h
 }) => /* @__PURE__ */ Ce("div", { className: "input-wrapper", children: [
-  s && /* @__PURE__ */ N(
+  o && /* @__PURE__ */ N(
     "label",
     {
-      className: `input-label${o ? " error" : ""}${n ? " disabled" : ""}`,
-      children: s
+      className: `input-label${n ? " error" : ""}${r ? " disabled" : ""}`,
+      children: o
     }
   ),
   /* @__PURE__ */ N(
     "input",
     {
-      className: `input input-${a}${o ? " error" : ""}${n ? " disabled" : ""}`,
-      type: a,
+      className: `input input-${l}${n ? " error" : ""}${r ? " disabled" : ""}`,
+      type: l,
       name: e,
       value: t,
-      placeholder: i,
-      min: l,
-      max: d,
-      step: c,
-      disabled: n,
-      readOnly: r,
-      onChange: (h) => !n && u?.(h.target.value)
+      defaultValue: i,
+      placeholder: s,
+      min: d,
+      max: c,
+      step: u,
+      disabled: r,
+      readOnly: a,
+      onChange: (g) => !r && h?.(g.target.value)
     }
   ),
-  o && /* @__PURE__ */ N("div", { className: "input-error", children: o })
+  n && /* @__PURE__ */ N("div", { className: "input-error", children: n })
 ] });
 function oo(e) {
   "@babel/helpers - typeof";
@@ -44410,85 +44412,88 @@ const qA = ({
   error: s,
   options: o,
   value: n = [],
-  disabled: r = !1,
-  onChange: a
+  defaultValue: r = [],
+  disabled: a = !1,
+  onChange: l
 }) => {
-  const [l, d] = P(n), [c, u] = P(!1), h = H(null), g = i || t;
+  const [d, c] = P(
+    n.length > 0 ? n : r
+  ), [u, h] = P(!1), g = H(null), p = i || t;
   S(() => {
-    d(n);
+    c(n);
   }, [n]), S(() => {
-    const v = (C) => {
-      h.current && !h.current.contains(C.target) && u(!1);
+    const C = (b) => {
+      g.current && !g.current.contains(b.target) && h(!1);
     };
-    return document.addEventListener("mousedown", v), () => document.removeEventListener("mousedown", v);
+    return document.addEventListener("mousedown", C), () => document.removeEventListener("mousedown", C);
   }, []);
-  const p = (v) => {
-    if (r) return;
-    const C = l.includes(v) ? l.filter((b) => b !== v) : [...l, v];
-    d(C), a?.(C);
-  }, f = (v) => {
-    if (r) return;
-    const C = l.filter((b) => b !== v);
-    d(C), a?.(C);
-  }, m = l.map(
-    (v) => o.find((C) => C.value === v)?.label || v
+  const f = (C) => {
+    if (a) return;
+    const b = d.includes(C) ? d.filter((y) => y !== C) : [...d, C];
+    c(b), l?.(b);
+  }, m = (C) => {
+    if (a) return;
+    const b = d.filter((y) => y !== C);
+    c(b), l?.(b);
+  }, v = d.map(
+    (C) => o.find((b) => b.value === C)?.label || C
   );
-  return /* @__PURE__ */ Ce("div", { className: "multiselect-wrapper", ref: h, children: [
-    g && /* @__PURE__ */ N(
+  return /* @__PURE__ */ Ce("div", { className: "multiselect-wrapper", ref: g, children: [
+    p && /* @__PURE__ */ N(
       "label",
       {
-        className: `multiselect-label${s ? " error" : ""}${r ? " disabled" : ""}`,
-        children: g
+        className: `multiselect-label${s ? " error" : ""}${a ? " disabled" : ""}`,
+        children: p
       }
     ),
-    l.map((v, C) => /* @__PURE__ */ N(
+    d.map((C, b) => /* @__PURE__ */ N(
       "input",
       {
         type: "hidden",
-        name: `${e}[${C}]`,
-        value: v
+        name: `${e}[${b}]`,
+        value: C
       },
-      C
+      b
     )),
     /* @__PURE__ */ Ce("div", { className: "multiselect-container", children: [
       /* @__PURE__ */ N(
         "div",
         {
-          className: `multiselect${s ? " error" : ""}${r ? " disabled" : ""}`,
-          onClick: () => !r && u(!c),
-          tabIndex: r ? -1 : 0,
-          children: l.length === 0 ? /* @__PURE__ */ N("span", { className: "multiselect-placeholder", children: t }) : m.map((v, C) => /* @__PURE__ */ Ce("span", { className: "multiselect-tag", children: [
-            v,
-            !r && /* @__PURE__ */ N(
+          className: `multiselect${s ? " error" : ""}${a ? " disabled" : ""}`,
+          onClick: () => !a && h(!u),
+          tabIndex: a ? -1 : 0,
+          children: d.length === 0 ? /* @__PURE__ */ N("span", { className: "multiselect-placeholder", children: t }) : v.map((C, b) => /* @__PURE__ */ Ce("span", { className: "multiselect-tag", children: [
+            C,
+            !a && /* @__PURE__ */ N(
               "span",
               {
                 className: "multiselect-tag-remove",
-                onClick: (b) => {
-                  b.stopPropagation(), f(l[C]);
+                onClick: (y) => {
+                  y.stopPropagation(), m(d[b]);
                 },
                 children: "×"
               }
             )
-          ] }, C))
+          ] }, b))
         }
       ),
-      c && !r && /* @__PURE__ */ N("div", { className: "multiselect-dropdown", children: o.map((v) => /* @__PURE__ */ Ce(
+      u && !a && /* @__PURE__ */ N("div", { className: "multiselect-dropdown", children: o.map((C) => /* @__PURE__ */ Ce(
         "div",
         {
           className: "multiselect-option",
-          onClick: () => p(v.value),
+          onClick: () => f(C.value),
           children: [
             /* @__PURE__ */ N(
               Bf,
               {
-                checked: l.includes(v.value),
-                onChange: () => p(v.value)
+                checked: d.includes(C.value),
+                onChange: () => f(C.value)
               }
             ),
-            /* @__PURE__ */ N("span", { children: v.label })
+            /* @__PURE__ */ N("span", { children: C.label })
           ]
         },
-        v.value
+        C.value
       )) })
     ] }),
     /* @__PURE__ */ N("div", { className: "multiselect-error", children: s })
@@ -44496,37 +44501,39 @@ const qA = ({
 }, XA = ({
   name: e,
   value: t,
-  placeholder: i,
-  label: s,
-  error: o,
-  disabled: n = !1,
-  options: r,
-  onChange: a
+  defaultValue: i,
+  placeholder: s,
+  label: o,
+  error: n,
+  disabled: r = !1,
+  options: a,
+  onChange: l
 }) => {
-  const l = s || i;
+  const d = o || s;
   return /* @__PURE__ */ Ce("div", { className: "select-wrapper", children: [
-    l && /* @__PURE__ */ N(
+    d && /* @__PURE__ */ N(
       "label",
       {
-        className: `select-label${o ? " error" : ""}${n ? " disabled" : ""}`,
-        children: l
+        className: `select-label${n ? " error" : ""}${r ? " disabled" : ""}`,
+        children: d
       }
     ),
     /* @__PURE__ */ N("div", { className: "select-container", children: /* @__PURE__ */ Ce(
       "select",
       {
-        className: `select${o ? " error" : ""}${n ? " disabled" : ""}`,
+        className: `select${n ? " error" : ""}${r ? " disabled" : ""}`,
         name: e,
-        value: t || "",
-        disabled: n,
-        onChange: (d) => !n && a?.(d.target.value),
+        value: t,
+        defaultValue: i,
+        disabled: r,
+        onChange: (c) => !r && l?.(c.target.value),
         children: [
-          !t && /* @__PURE__ */ N("option", { value: "", disabled: !0, children: i || "Selecciona una opción..." }),
-          r.map((d) => /* @__PURE__ */ N("option", { value: d.value, children: d.label }, d.value))
+          !t && !i && /* @__PURE__ */ N("option", { value: "", disabled: !0, children: s || "Selecciona una opción..." }),
+          a.map((c) => /* @__PURE__ */ N("option", { value: c.value, children: c.label }, c.value))
         ]
       }
     ) }),
-    o && /* @__PURE__ */ N("div", { className: "select-error", children: o })
+    n && /* @__PURE__ */ N("div", { className: "select-error", children: n })
   ] });
 }, HA = ({ title: e, items: t }) => {
   const { isMobile: i } = Wp(), [s, o] = P(!1);
