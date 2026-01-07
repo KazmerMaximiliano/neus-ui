@@ -6,6 +6,7 @@ import { MultiSelectProps } from "./MultiSelect.types";
 export const MultiSelect = ({
   name,
   placeholder,
+  label,
   error,
   options,
   defaultValue = [],
@@ -14,6 +15,7 @@ export const MultiSelect = ({
   const [selectedValues, setSelectedValues] = useState<string[]>(defaultValue);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const displayLabel = label || placeholder;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -50,6 +52,11 @@ export const MultiSelect = ({
 
   return (
     <div className="multiselect-wrapper" ref={containerRef}>
+      {displayLabel && (
+        <label className={`multiselect-label${error ? " error" : ""}`}>
+          {displayLabel}
+        </label>
+      )}
       {selectedValues.map((value, index) => (
         <input
           key={index}

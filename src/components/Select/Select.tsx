@@ -5,12 +5,20 @@ export const Select = ({
   name,
   defaultValue,
   placeholder,
+  label,
   error,
   options,
   onChange,
 }: SelectProps) => {
+  const displayLabel = label || placeholder;
+
   return (
     <div className="select-wrapper">
+      {displayLabel && (
+        <label className={`select-label${error ? " error" : ""}`}>
+          {displayLabel}
+        </label>
+      )}
       <div className="select-container">
         <select
           className={`select${error ? " error" : ""}`}
@@ -18,9 +26,9 @@ export const Select = ({
           defaultValue={defaultValue}
           onChange={(e) => onChange?.(e.target.value)}
         >
-          {placeholder && (
+          {!defaultValue && (
             <option value="" disabled>
-              {placeholder}
+              {placeholder || "Selecciona una opción..."}
             </option>
           )}
           {options.map((option) => (
@@ -30,7 +38,7 @@ export const Select = ({
           ))}
         </select>
       </div>
-      <div className="select-error">{error}</div>
+      {error && <div className="select-error">{error}</div>}
     </div>
   );
 };
