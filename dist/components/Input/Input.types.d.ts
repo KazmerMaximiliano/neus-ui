@@ -1,0 +1,11 @@
+export type InputProps = {
+    name?: string;
+    defaultValue?: string;
+    placeholder?: string;
+    error?: string;
+    type?: 'text' | 'password' | 'email' | 'number' | 'color' | 'date' | 'datetime-local' | 'month' | 'tel' | 'time' | 'url' | 'week';
+    min?: string | number;
+    max?: string | number;
+    step?: string | number;
+    onChange?: (value: string) => void;
+};
