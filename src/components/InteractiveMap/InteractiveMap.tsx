@@ -152,7 +152,7 @@ export const InteractiveMap = ({
           <Input
             type="text"
             placeholder={searchBoxPlaceholder || "Find location..."}
-            defaultValue={initialAddress || ""}
+            value={initialAddress || ""}
           ></Input>
         </StandaloneSearchBox>
       </div>

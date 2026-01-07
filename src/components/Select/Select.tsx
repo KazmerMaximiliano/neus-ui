@@ -3,7 +3,7 @@ import { SelectProps } from "./Select.types";
 
 export const Select = ({
   name,
-  defaultValue,
+  value,
   placeholder,
   label,
   error,
@@ -30,11 +30,11 @@ export const Select = ({
             disabled ? " disabled" : ""
           }`}
           name={name}
-          defaultValue={defaultValue}
+          value={value || ""}
           disabled={disabled}
           onChange={(e) => !disabled && onChange?.(e.target.value)}
         >
-          {!defaultValue && (
+          {!value && (
             <option value="" disabled>
               {placeholder || "Selecciona una opción..."}
             </option>
