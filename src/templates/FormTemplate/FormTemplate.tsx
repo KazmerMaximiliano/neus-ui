@@ -11,7 +11,7 @@ export const FormTemplate = ({
     <div className="form">
       {children}
 
-      <Button type="submit" label={submitLabel} loading={loading} fullWidth />
+      <Button type="submit" label={submitLabel} loading={loading} />
     </div>
   );
 };
