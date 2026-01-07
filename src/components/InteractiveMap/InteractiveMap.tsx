@@ -55,6 +55,14 @@ export const InteractiveMap = ({
     return { lat: -31.4201, lng: -64.1888 };
   }, [initialCoordinates, userLocation]);
 
+  // Set initial marker position if coordinates are provided
+  useEffect(() => {
+    if (initialCoordinates) {
+      const [lat, lng] = initialCoordinates.split(",").map(Number);
+      setMarkerPosition({ lat, lng });
+    }
+  }, [initialCoordinates]);
+
   const onLoad = useCallback((map: google.maps.Map) => {
     setMap(map);
   }, []);
@@ -165,7 +173,7 @@ export const InteractiveMap = ({
       <GoogleMap
         mapContainerClassName="map-container"
         center={defaultCenter}
-        zoom={12}
+        zoom={initialCoordinates ? 15 : 12}
         onLoad={onLoad}
         onUnmount={onUnmount}
         onClick={(e) => {

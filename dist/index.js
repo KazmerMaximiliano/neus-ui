@@ -44258,7 +44258,14 @@ const qA = ({
       return { lat: T, lng: x };
     }
     return m || { lat: -31.4201, lng: -64.1888 };
-  }, [t, m]), w = oe((T) => {
+  }, [t, m]);
+  S(() => {
+    if (t) {
+      const [T, x] = t.split(",").map(Number);
+      g({ lat: T, lng: x });
+    }
+  }, [t]);
+  const w = oe((T) => {
     u(T);
   }, []), y = oe(() => {
     u(null);
@@ -44331,7 +44338,7 @@ const qA = ({
       {
         mapContainerClassName: "map-container",
         center: C,
-        zoom: 12,
+        zoom: t ? 15 : 12,
         onLoad: w,
         onUnmount: y,
         onClick: (T) => {

@@ -24,6 +24,19 @@
   border-right: none !important;
 }
 
+.actions-cell .actions-container {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4px !important;
+  height: 100% !important;
+}
+
+.actions-cell .icon-button {
+  flex-shrink: 0 !important;
+}
+
 .actions-header,
 .ag-header-cell[col-id="actions"],
 .ag-header-cell.actions-header,
