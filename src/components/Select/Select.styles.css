@@ -79,3 +79,25 @@
   font-size: 0.85em;
   margin-left: 1em;
 }
+
+.select-label.disabled {
+  color: var(--color-gray-500, #999);
+}
+
+.select-container:has(.select.disabled)::after {
+  border-right-color: var(--color-gray-500, #999);
+  border-bottom-color: var(--color-gray-500, #999);
+}
+
+.select.disabled {
+  background-color: var(--color-gray-100, #f5f5f5);
+  border-color: var(--color-gray-300, #ccc);
+  color: var(--color-gray-500, #999);
+  cursor: not-allowed;
+}
+
+.select.disabled:hover,
+.select.disabled:focus,
+.select.disabled:active {
+  border-color: var(--color-gray-300, #ccc);
+}

@@ -10,6 +10,7 @@ export const MultiSelect = ({
   error,
   options,
   defaultValue = [],
+  disabled = false,
   onChange,
 }: MultiSelectProps) => {
   const [selectedValues, setSelectedValues] = useState<string[]>(defaultValue);
@@ -32,6 +33,8 @@ export const MultiSelect = ({
   }, []);
 
   const handleToggleOption = (value: string) => {
+    if (disabled) return;
+    
     const newValues = selectedValues.includes(value)
       ? selectedValues.filter((v) => v !== value)
       : [...selectedValues, value];
@@ -41,6 +44,8 @@ export const MultiSelect = ({
   };
 
   const handleRemoveTag = (valueToRemove: string) => {
+    if (disabled) return;
+    
     const newValues = selectedValues.filter((v) => v !== valueToRemove);
     setSelectedValues(newValues);
     onChange?.(newValues);
@@ -53,7 +58,7 @@ export const MultiSelect = ({
   return (
     <div className="multiselect-wrapper" ref={containerRef}>
       {displayLabel && (
-        <label className={`multiselect-label${error ? " error" : ""}`}>
+        <label className={`multiselect-label${error ? " error" : ""}${disabled ? " disabled" : ""}`}>
           {displayLabel}
         </label>
       )}
@@ -68,9 +73,9 @@ export const MultiSelect = ({
 
       <div className="multiselect-container">
         <div
-          className={`multiselect${error ? " error" : ""}`}
-          onClick={() => setIsOpen(!isOpen)}
-          tabIndex={0}
+          className={`multiselect${error ? " error" : ""}${disabled ? " disabled" : ""}`}
+          onClick={() => !disabled && setIsOpen(!isOpen)}
+          tabIndex={disabled ? -1 : 0}
         >
           {selectedValues.length === 0 ? (
             <span className="multiselect-placeholder">{placeholder}</span>
@@ -78,21 +83,23 @@ export const MultiSelect = ({
             selectedLabels.map((label, index) => (
               <span key={index} className="multiselect-tag">
                 {label}
-                <span
-                  className="multiselect-tag-remove"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleRemoveTag(selectedValues[index]);
-                  }}
-                >
-                  ×
-                </span>
+                {!disabled && (
+                  <span
+                    className="multiselect-tag-remove"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemoveTag(selectedValues[index]);
+                    }}
+                  >
+                    ×
+                  </span>
+                )}
               </span>
             ))
           )}
         </div>
 
-        {isOpen && (
+        {isOpen && !disabled && (
           <div className="multiselect-dropdown">
             {options.map((option) => (
               <div

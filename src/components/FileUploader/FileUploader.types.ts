@@ -29,5 +29,6 @@ export type FileUploaderProps = {
   error?: string;
   placeholder?: string;
   deleteFilesText?: string;
+  disabled?: boolean;
   onChange: (data: FileUploadData | null, error?: FileUploadError) => void;
 }

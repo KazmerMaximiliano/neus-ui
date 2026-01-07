@@ -58,6 +58,14 @@ const meta: Meta<typeof SelectComponent> = {
         category: "Props",
       },
     },
+    disabled: {
+      control: { type: "boolean" },
+      description: "Whether the select is disabled",
+      table: {
+        type: { summary: "boolean" },
+        category: "Props",
+      },
+    },
     onChange: {
       action: "value changed",
       description: "Callback function triggered when selected value changes",
@@ -82,6 +90,7 @@ export const Select: Story = {
     name: "example-select",
     placeholder: "Select an option...",
     defaultValue: "option1",
+    disabled: false,
     onChange: (value: string) => console.log("Selected value:", value),
   },
 };

@@ -25,6 +25,14 @@ const meta: Meta<typeof CheckboxComponent> = {
         category: "Props",
       },
     },
+    disabled: {
+      control: { type: "boolean" },
+      description: "Whether the checkbox is disabled",
+      table: {
+        type: { summary: "boolean" },
+        category: "Props",
+      },
+    },
     onChange: {
       action: "checkbox changed",
       description: "Callback function triggered when checkbox state changes",
@@ -42,6 +50,7 @@ export const Checkbox: Story = {
   args: {
     name: "example-checkbox",
     checked: false,
+    disabled: false,
     onChange: (checked: boolean) => console.log("Checkbox changed:", checked),
   },
 };

@@ -7,6 +7,7 @@ export const Input = ({
   placeholder,
   label,
   error,
+  disabled = false,
   type = "text",
   min,
   max,
@@ -15,9 +16,9 @@ export const Input = ({
 }: InputProps) => {
   return (
     <div className="input-wrapper">
-      {label && <label className={`input-label${error ? " error" : ""}`}>{label}</label>}
+      {label && <label className={`input-label${error ? " error" : ""}${disabled ? " disabled" : ""}`}>{label}</label>}
       <input
-        className={`input input-${type}${error ? " error" : ""}`}
+        className={`input input-${type}${error ? " error" : ""}${disabled ? " disabled" : ""}`}
         type={type}
         name={name}
         defaultValue={defaultValue}
@@ -25,7 +26,8 @@ export const Input = ({
         min={min}
         max={max}
         step={step}
-        onChange={(e) => onChange?.(e.target.value)}
+        disabled={disabled}
+        onChange={(e) => !disabled && onChange?.(e.target.value)}
       />
       {error && <div className="input-error">{error}</div>}
     </div>
