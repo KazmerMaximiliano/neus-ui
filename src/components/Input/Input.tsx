@@ -5,6 +5,7 @@ export const Input = ({
   name,
   defaultValue,
   placeholder,
+  label,
   error,
   type = "text",
   min,
@@ -14,6 +15,7 @@ export const Input = ({
 }: InputProps) => {
   return (
     <div className="input-wrapper">
+      {label && <label className={`input-label${error ? " error" : ""}`}>{label}</label>}
       <input
         className={`input input-${type}${error ? " error" : ""}`}
         type={type}
@@ -25,7 +27,7 @@ export const Input = ({
         step={step}
         onChange={(e) => onChange?.(e.target.value)}
       />
-      <div className="input-error">{error}</div>
+      {error && <div className="input-error">{error}</div>}
     </div>
   );
 };
