@@ -8,6 +8,7 @@ export const Input = ({
   label,
   error,
   disabled = false,
+  readonly = false,
   type = "text",
   min,
   max,
@@ -37,6 +38,7 @@ export const Input = ({
         max={max}
         step={step}
         disabled={disabled}
+        readOnly={readonly}
         onChange={(e) => !disabled && onChange?.(e.target.value)}
       />
       {error && <div className="input-error">{error}</div>}

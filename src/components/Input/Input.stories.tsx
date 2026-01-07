@@ -106,6 +106,14 @@ const meta: Meta<typeof InputComponent> = {
         category: "Props",
       },
     },
+    readonly: {
+      control: { type: "boolean" },
+      description: "Whether the input is read-only",
+      table: {
+        type: { summary: "boolean" },
+        category: "Props",
+      },
+    },
     onChange: {
       action: "input changed",
       description: "Callback function triggered when input value changes",
