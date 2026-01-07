@@ -21,7 +21,15 @@ const meta: Meta<typeof InputComponent> = {
       control: { type: "text" },
       description: "The current value for the input",
       table: {
-        type: { summary: "string" },
+        type: { summary: "string | number" },
+        category: "Props",
+      },
+    },
+    defaultValue: {
+      control: { type: "text" },
+      description: "The default value for the input (for uncontrolled usage)",
+      table: {
+        type: { summary: "string | number" },
         category: "Props",
       },
     },
@@ -134,6 +142,7 @@ export const Input: Story = {
     label: "Example Input",
     type: "text",
     value: "",
+    defaultValue: "",
     error: "",
     min: "",
     max: "",

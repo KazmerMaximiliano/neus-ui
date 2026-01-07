@@ -58,6 +58,14 @@ const meta: Meta<typeof MultiSelectComponent> = {
         category: "Props",
       },
     },
+    defaultValue: {
+      control: { type: "object" },
+      description: "Array of default selected values (for uncontrolled usage)",
+      table: {
+        type: { summary: "string[]" },
+        category: "Props",
+      },
+    },
     disabled: {
       control: { type: "boolean" },
       description: "Whether the multiselect is disabled",
@@ -90,6 +98,7 @@ export const MultiSelect: Story = {
     ],
     placeholder: "Select multiple options...",
     value: ["option1"],
+    defaultValue: [],
     disabled: false,
     onChange: (values: string[]) => console.log("Selected values:", values),
   },

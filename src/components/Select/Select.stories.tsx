@@ -33,6 +33,14 @@ const meta: Meta<typeof SelectComponent> = {
         category: "Props",
       },
     },
+    defaultValue: {
+      control: { type: "text" },
+      description: "The default selected value (for uncontrolled usage)",
+      table: {
+        type: { summary: "string" },
+        category: "Props",
+      },
+    },
     placeholder: {
       control: { type: "text" },
       description: "Placeholder text for the select",
@@ -90,6 +98,7 @@ export const Select: Story = {
     name: "example-select",
     placeholder: "Select an option...",
     value: "option1",
+    defaultValue: "",
     disabled: false,
     onChange: (value: string) => console.log("Selected value:", value),
   },

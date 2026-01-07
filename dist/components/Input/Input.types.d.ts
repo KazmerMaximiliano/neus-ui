@@ -1,6 +1,7 @@
 export type InputProps = {
     name?: string;
     value?: string | number;
+    defaultValue?: string | number;
     placeholder?: string;
     label?: string;
     error?: string;
