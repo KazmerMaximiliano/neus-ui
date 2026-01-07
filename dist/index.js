@@ -39271,11 +39271,12 @@ const HI = (e, t) => e.reduce((s, o) => s + o.size, 0) > t ? {
   label: s,
   error: o,
   disabled: n = !1,
-  type: r = "text",
-  min: a,
-  max: l,
-  step: d,
-  onChange: c
+  readonly: r = !1,
+  type: a = "text",
+  min: l,
+  max: d,
+  step: c,
+  onChange: u
 }) => /* @__PURE__ */ Ce("div", { className: "input-wrapper", children: [
   s && /* @__PURE__ */ N(
     "label",
@@ -39287,16 +39288,17 @@ const HI = (e, t) => e.reduce((s, o) => s + o.size, 0) > t ? {
   /* @__PURE__ */ N(
     "input",
     {
-      className: `input input-${r}${o ? " error" : ""}${n ? " disabled" : ""}`,
-      type: r,
+      className: `input input-${a}${o ? " error" : ""}${n ? " disabled" : ""}`,
+      type: a,
       name: e,
       value: t,
       placeholder: i,
-      min: a,
-      max: l,
-      step: d,
+      min: l,
+      max: d,
+      step: c,
       disabled: n,
-      onChange: (u) => !n && c?.(u.target.value)
+      readOnly: r,
+      onChange: (h) => !n && u?.(h.target.value)
     }
   ),
   o && /* @__PURE__ */ N("div", { className: "input-error", children: o })

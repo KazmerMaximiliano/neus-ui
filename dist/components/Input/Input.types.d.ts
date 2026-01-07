@@ -5,6 +5,7 @@ export type InputProps = {
     label?: string;
     error?: string;
     disabled?: boolean;
+    readonly?: boolean;
     type?: 'text' | 'password' | 'email' | 'number' | 'color' | 'date' | 'datetime-local' | 'month' | 'tel' | 'time' | 'url' | 'week';
     min?: string | number;
     max?: string | number;
