@@ -41,6 +41,15 @@ const meta: Meta<typeof MultiSelectComponent> = {
         category: "Props",
       },
     },
+    label: {
+      control: { type: "text" },
+      description:
+        "Label text for the multiselect (automatically used when placeholder is provided)",
+      table: {
+        type: { summary: "string" },
+        category: "Props",
+      },
+    },
     defaultValue: {
       control: { type: "object" },
       description: "Array of default selected values",

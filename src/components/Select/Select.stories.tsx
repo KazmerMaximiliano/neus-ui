@@ -41,6 +41,15 @@ const meta: Meta<typeof SelectComponent> = {
         category: "Props",
       },
     },
+    label: {
+      control: { type: "text" },
+      description:
+        "Label text for the select (automatically used when placeholder is provided)",
+      table: {
+        type: { summary: "string" },
+        category: "Props",
+      },
+    },
     error: {
       control: { type: "text" },
       description: "Error message to display",

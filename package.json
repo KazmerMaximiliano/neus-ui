@@ -24,6 +24,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "build-docs": "storybook build -o ./docs",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {

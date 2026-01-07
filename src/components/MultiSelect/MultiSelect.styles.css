@@ -6,6 +6,17 @@
   height: 43px;
 }
 
+.multiselect-label {
+  font-size: 0.9em;
+  color: var(--color-primary);
+  margin-left: 1em;
+  font-weight: 500;
+}
+
+.multiselect-label.error {
+  color: var(--color-error);
+}
+
 .multiselect-container {
   position: relative;
   width: 100%;
