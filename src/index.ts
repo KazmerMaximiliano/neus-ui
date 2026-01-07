@@ -16,5 +16,8 @@ export {
 // Component exports
 export * from './components';
 
+// Templates exports
+export * from './templates';
+
 // Hook exports
 export { useResponsive } from './hooks/useResponsive';
