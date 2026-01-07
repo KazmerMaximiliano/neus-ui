@@ -7,11 +7,8 @@ const meta: Meta<typeof SidebarComponent> = {
   component: SidebarComponent,
   parameters: {
     layout: "fullscreen",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     items: {
       control: { type: "object" },

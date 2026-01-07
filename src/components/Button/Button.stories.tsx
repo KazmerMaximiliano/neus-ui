@@ -1,16 +1,13 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Button as ButtonComponente } from "./Button";
+import { Button as ButtonComponent } from "./Button";
 
-const meta: Meta<typeof ButtonComponente> = {
+const meta: Meta<typeof ButtonComponent> = {
   title: "Components/Button",
-  component: ButtonComponente,
+  component: ButtonComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     label: {
       control: "text",

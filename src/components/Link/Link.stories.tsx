@@ -6,11 +6,8 @@ const meta: Meta<typeof LinkComponent> = {
   component: LinkComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     label: {
       control: { type: "text" },

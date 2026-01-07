@@ -6,13 +6,8 @@ const meta: Meta<typeof DataTableComponent> = {
   component: DataTableComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      description: {
-        component:
-          "A responsive data table component with pagination, actions, and customizable columns.",
-      },
-    },
   },
+  tags: ["autodocs"],
   argTypes: {
     data: {
       control: false,
@@ -139,8 +134,7 @@ export const DataTable: Story = {
     (Story) => (
       <div
         style={{
-          height: "100vh",
-          width: "90vw",
+          width: "60vw",
           padding: "1rem",
           display: "flex",
           flexDirection: "column",

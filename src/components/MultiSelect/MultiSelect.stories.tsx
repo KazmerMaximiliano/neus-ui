@@ -6,11 +6,8 @@ const meta: Meta<typeof MultiSelectComponent> = {
   component: MultiSelectComponent,
   parameters: {
     layout: "centered",
-    docs: {
-      autodocs: false,
-    },
   },
-  tags: ["!autodocs"],
+  tags: ["autodocs"],
   argTypes: {
     name: {
       control: { type: "text" },
