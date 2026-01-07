@@ -440,7 +440,12 @@ const Tf = (e, t, i) => {
       children: r ? /* @__PURE__ */ N(xa, { color: c, speedMultiplier: 0.5 }) : e
     }
   );
-}, Bf = ({ name: e, checked: t, disabled: i = !1, onChange: s }) => /* @__PURE__ */ N(
+}, Bf = ({
+  name: e,
+  checked: t,
+  disabled: i = !1,
+  onChange: s
+}) => /* @__PURE__ */ N(
   "input",
   {
     className: "checkbox",
@@ -39142,13 +39147,22 @@ const HI = (e, t) => e.reduce((s, o) => s + o.size, 0) > t ? {
       a(G);
     },
     [e, t, i, a, v, r]
-  ), b = oe((E) => {
-    r || (E.preventDefault(), E.stopPropagation());
-  }, [r]), y = oe((E) => {
-    r || (E.preventDefault(), E.stopPropagation(), E.dataTransfer.items && E.dataTransfer.items.length > 0 && c(!0));
-  }, [r]), w = oe((E) => {
-    r || (E.preventDefault(), E.stopPropagation(), c(!1));
-  }, [r]), F = oe(
+  ), b = oe(
+    (E) => {
+      r || (E.preventDefault(), E.stopPropagation());
+    },
+    [r]
+  ), y = oe(
+    (E) => {
+      r || (E.preventDefault(), E.stopPropagation(), E.dataTransfer.items && E.dataTransfer.items.length > 0 && c(!0));
+    },
+    [r]
+  ), w = oe(
+    (E) => {
+      r || (E.preventDefault(), E.stopPropagation(), c(!1));
+    },
+    [r]
+  ), F = oe(
     (E) => {
       r || (E.preventDefault(), E.stopPropagation(), c(!1), E.dataTransfer.files && E.dataTransfer.files.length > 0 && (C(E.dataTransfer.files), E.dataTransfer.clearData()));
     },
@@ -39252,7 +39266,7 @@ const HI = (e, t) => e.reduce((s, o) => s + o.size, 0) > t ? {
   ] });
 }, WI = ({
   name: e,
-  defaultValue: t,
+  value: t,
   placeholder: i,
   label: s,
   error: o,
@@ -39263,14 +39277,20 @@ const HI = (e, t) => e.reduce((s, o) => s + o.size, 0) > t ? {
   step: d,
   onChange: c
 }) => /* @__PURE__ */ Ce("div", { className: "input-wrapper", children: [
-  s && /* @__PURE__ */ N("label", { className: `input-label${o ? " error" : ""}${n ? " disabled" : ""}`, children: s }),
+  s && /* @__PURE__ */ N(
+    "label",
+    {
+      className: `input-label${o ? " error" : ""}${n ? " disabled" : ""}`,
+      children: s
+    }
+  ),
   /* @__PURE__ */ N(
     "input",
     {
       className: `input input-${r}${o ? " error" : ""}${n ? " disabled" : ""}`,
       type: r,
       name: e,
-      defaultValue: t,
+      value: t,
       placeholder: i,
       min: a,
       max: l,
@@ -44296,7 +44316,7 @@ const qA = ({
           {
             type: "text",
             placeholder: s || "Find location...",
-            defaultValue: i || ""
+            value: i || ""
           }
         )
       }
@@ -44387,12 +44407,14 @@ const qA = ({
   label: i,
   error: s,
   options: o,
-  defaultValue: n = [],
+  value: n = [],
   disabled: r = !1,
   onChange: a
 }) => {
   const [l, d] = P(n), [c, u] = P(!1), h = H(null), g = i || t;
   S(() => {
+    d(n);
+  }, [n]), S(() => {
     const v = (C) => {
       h.current && !h.current.contains(C.target) && u(!1);
     };
@@ -44410,7 +44432,13 @@ const qA = ({
     (v) => o.find((C) => C.value === v)?.label || v
   );
   return /* @__PURE__ */ Ce("div", { className: "multiselect-wrapper", ref: h, children: [
-    g && /* @__PURE__ */ N("label", { className: `multiselect-label${s ? " error" : ""}${r ? " disabled" : ""}`, children: g }),
+    g && /* @__PURE__ */ N(
+      "label",
+      {
+        className: `multiselect-label${s ? " error" : ""}${r ? " disabled" : ""}`,
+        children: g
+      }
+    ),
     l.map((v, C) => /* @__PURE__ */ N(
       "input",
       {
@@ -44465,7 +44493,7 @@ const qA = ({
   ] });
 }, XA = ({
   name: e,
-  defaultValue: t,
+  value: t,
   placeholder: i,
   label: s,
   error: o,
@@ -44475,13 +44503,19 @@ const qA = ({
 }) => {
   const l = s || i;
   return /* @__PURE__ */ Ce("div", { className: "select-wrapper", children: [
-    l && /* @__PURE__ */ N("label", { className: `select-label${o ? " error" : ""}${n ? " disabled" : ""}`, children: l }),
+    l && /* @__PURE__ */ N(
+      "label",
+      {
+        className: `select-label${o ? " error" : ""}${n ? " disabled" : ""}`,
+        children: l
+      }
+    ),
     /* @__PURE__ */ N("div", { className: "select-container", children: /* @__PURE__ */ Ce(
       "select",
       {
         className: `select${o ? " error" : ""}${n ? " disabled" : ""}`,
         name: e,
-        defaultValue: t,
+        value: t || "",
         disabled: n,
         onChange: (d) => !n && a?.(d.target.value),
         children: [

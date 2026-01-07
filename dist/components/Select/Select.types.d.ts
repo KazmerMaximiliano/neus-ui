@@ -5,7 +5,7 @@ export type SelectOption = {
 export type SelectProps = {
     options: SelectOption[];
     name?: string;
-    defaultValue?: string;
+    value?: string;
     placeholder?: string;
     label?: string;
     error?: string;

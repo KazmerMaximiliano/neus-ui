@@ -17,9 +17,9 @@ const meta: Meta<typeof InputComponent> = {
         category: "Props",
       },
     },
-    defaultValue: {
+    value: {
       control: { type: "text" },
-      description: "The default value for the input",
+      description: "The current value for the input",
       table: {
         type: { summary: "string" },
         category: "Props",
@@ -125,7 +125,7 @@ export const Input: Story = {
     placeholder: "Enter text here...",
     label: "Example Input",
     type: "text",
-    defaultValue: "",
+    value: "",
     error: "",
     min: "",
     max: "",

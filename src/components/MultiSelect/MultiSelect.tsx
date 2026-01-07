@@ -9,14 +9,18 @@ export const MultiSelect = ({
   label,
   error,
   options,
-  defaultValue = [],
+  value = [],
   disabled = false,
   onChange,
 }: MultiSelectProps) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>(defaultValue);
+  const [selectedValues, setSelectedValues] = useState<string[]>(value);
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const displayLabel = label || placeholder;
+
+  useEffect(() => {
+    setSelectedValues(value);
+  }, [value]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
