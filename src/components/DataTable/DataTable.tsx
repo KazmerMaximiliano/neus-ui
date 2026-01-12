@@ -42,6 +42,7 @@ const DataTableComponent = <T extends object>({
   onInfo,
   onPaginationChange,
   columnLabels,
+  useCardLayout = true,
   noDataTitle,
   noDataDescription,
 }: DataTableProps<T>) => {
@@ -146,6 +147,48 @@ const DataTableComponent = <T extends object>({
     }
   };
 
+  const renderCardLayout = () => {
+    if (rowData.length === 0) {
+      return (
+        <NoRowsOverlay
+          noDataTitle={noDataTitle}
+          noDataDescription={noDataDescription}
+        />
+      );
+    }
+
+    return (
+      <div className="data-table-cards">
+        {rowData.map((row, index) => {
+          const rowObject = row as Record<string, any>;
+          return (
+            <div key={index} className="data-table-card">
+              <div className="card-content">
+                {Object.entries(rowObject).map(([key, value]) => (
+                  <div key={key} className="card-row">
+                    <strong className="card-label">
+                      {columnLabels?.[key] || key}:
+                    </strong>
+                    <span className="card-value">{String(value)}</span>
+                  </div>
+                ))}
+              </div>
+              {(onEdit || onDelete || onInfo) && (
+                <div className="card-actions">
+                  <Actions
+                    onInfo={onInfo ? () => onInfo(row) : undefined}
+                    onEdit={onEdit ? () => onEdit(row) : undefined}
+                    onDelete={onDelete ? () => onDelete(row) : undefined}
+                  />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   useEffect(() => {
     defineRowData();
     defineColumnsByData();
@@ -154,38 +197,42 @@ const DataTableComponent = <T extends object>({
 
   return (
     <div className="data-table-container">
-      <AgGridReact
-        theme={responsiveTheme}
-        rowData={rowData}
-        columnDefs={colDefs}
-        pagination={false}
-        paginationPageSize={per_page || 10}
-        paginationPageSizeSelector={pageSizeSelector}
-        suppressPaginationPanel={false}
-        paginationAutoPageSize={false}
-        suppressScrollOnNewData={true}
-        maintainColumnOrder={true}
-        suppressColumnVirtualisation={isMobile}
-        suppressHorizontalScroll={false}
-        alwaysShowHorizontalScroll={false}
-        suppressMenuHide={isMobile}
-        suppressNoRowsOverlay={false}
-        suppressRowHoverHighlight={false}
-        rowSelection={isMobile ? undefined : "single"}
-        rowHeight={isMobile ? 48 : undefined}
-        headerHeight={isMobile ? 40 : undefined}
-        domLayout="autoHeight"
-        autoSizeStrategy={{
-          type: "fitGridWidth",
-          defaultMinWidth: 100,
-        }}
-        noRowsOverlayComponent={() => (
-          <NoRowsOverlay
-            noDataTitle={noDataTitle}
-            noDataDescription={noDataDescription}
-          />
-        )}
-      />
+      {isMobile && useCardLayout ? (
+        renderCardLayout()
+      ) : (
+        <AgGridReact
+          theme={responsiveTheme}
+          rowData={rowData}
+          columnDefs={colDefs}
+          pagination={false}
+          paginationPageSize={per_page || 10}
+          paginationPageSizeSelector={pageSizeSelector}
+          suppressPaginationPanel={false}
+          paginationAutoPageSize={false}
+          suppressScrollOnNewData={true}
+          maintainColumnOrder={true}
+          suppressColumnVirtualisation={isMobile}
+          suppressHorizontalScroll={false}
+          alwaysShowHorizontalScroll={false}
+          suppressMenuHide={isMobile}
+          suppressNoRowsOverlay={false}
+          suppressRowHoverHighlight={false}
+          rowSelection={isMobile ? undefined : "single"}
+          rowHeight={isMobile ? 48 : undefined}
+          headerHeight={isMobile ? 40 : undefined}
+          domLayout="autoHeight"
+          autoSizeStrategy={{
+            type: "fitGridWidth",
+            defaultMinWidth: 100,
+          }}
+          noRowsOverlayComponent={() => (
+            <NoRowsOverlay
+              noDataTitle={noDataTitle}
+              noDataDescription={noDataDescription}
+            />
+          )}
+        />
+      )}
 
       <div className="pagination-controls">
         <IconButton

@@ -1,0 +1,10 @@
+import{j as e}from"./iframe-BBmzJCBT.js";import"./Actions-gQU82Nrl.js";import{B as n}from"./Button-DSJfUmKw.js";import"./Checkbox-DqHZTPcp.js";import"./DataTable-Coq7KkUN.js";import"./FileUploader-CbmVpl5p.js";import"./IconButton-CluMoHgI.js";import{I as r}from"./Input-DVh9GUG3.js";import"./InteractiveMap-CwTNmpAr.js";import"./Link-Bk9H2_8C.js";import"./Menu-DEeNlTRr.js";import"./Modal-w0QLcCX0.js";import"./MultiSelect-D8CVwd0P.js";import"./Select-Bow81_hQ.js";import"./Sidebar-_EhJM2bz.js";import"./preload-helper-PPVm8Dsz.js";import"./index-Cf_3owKX.js";import"./iconBase-DuaqxvJM.js";import"./theme-jLv7A-8A.js";import"./index-GN8RQs3y.js";import"./index-DxrYyNu5.js";import"./useResponsive-DSerBf2G.js";const o=({children:a,submitLabel:s,loading:i})=>e.jsxs("div",{className:"form",children:[a,e.jsx(n,{type:"submit",label:s,loading:i})]});o.__docgenInfo={description:"",methods:[],displayName:"FormTemplate",props:{children:{required:!0,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:""},submitLabel:{required:!0,tsType:{name:"string"},description:""},loading:{required:!1,tsType:{name:"boolean"},description:""}}};const _={title:"Templates/FormTemplate",component:o,parameters:{layout:"centered"},tags:["autodocs"],argTypes:{children:{control:!1,description:"Content to display in the main area",defaultValue:"Main content area"},submitLabel:{control:"text",description:"Label for the submit button",defaultValue:"Submit"},loading:{control:"boolean",description:"Loading state for the submit button",defaultValue:!1}}},t={args:{children:e.jsxs(e.Fragment,{children:[e.jsx(r,{placeholder:"Enter your username"}),e.jsx(r,{placeholder:"Enter your password",type:"password"})]}),submitLabel:"Submit",loading:!1}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
+  args: {
+    children: <>
+        <Input placeholder="Enter your username" />
+        <Input placeholder="Enter your password" type="password" />
+      </>,
+    submitLabel: "Submit",
+    loading: false
+  }
+}`,...t.parameters?.docs?.source}}};const q=["FormTemplate"];export{t as FormTemplate,q as __namedExportsOrder,_ as default};
