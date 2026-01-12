@@ -17,6 +17,7 @@ export type DataTableProps<T extends object = object> = {
     onInfo?: (rowData: T) => void;
     onPaginationChange?: (params: PaginationChangeParams) => void;
     columnLabels?: Record<string, string>;
+    useCardLayout?: boolean;
     noDataTitle?: string;
     noDataDescription?: string;
 };

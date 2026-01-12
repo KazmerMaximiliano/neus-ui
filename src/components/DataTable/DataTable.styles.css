@@ -56,6 +56,61 @@
   border-right: none !important;
 }
 
+.data-table-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.data-table-card {
+  border: 1px solid var(--color-gray-200);
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+.data-table-card:active {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.data-table-card .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.data-table-card .card-row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+
+.data-table-card .card-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  text-transform: capitalize;
+}
+
+.data-table-card .card-value {
+  font-size: 1rem;
+  color: var(--color-gray-600);
+  word-break: break-word;
+}
+
+.data-table-card .card-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-gray-100);
+}
+
 .no-rows-overlay {
   display: flex;
   align-items: center;

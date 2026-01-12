@@ -37,6 +37,10 @@ const meta: Meta<typeof DataTableComponent> = {
       control: "object",
       description: "Object mapping column fields to display labels",
     },
+    useCardLayout: {
+      control: "boolean",
+      description: "Enable card layout on mobile devices",
+    },
     noDataTitle: {
       control: "text",
       description: "Title to show when no data is available",
@@ -115,6 +119,7 @@ export const DataTable: Story = {
     data: sampleData,
     pagination: samplePagination,
     columnLabels,
+    useCardLayout: true,
     noDataTitle: "No users found",
     noDataDescription: "Try adjusting your search criteria or add new users",
     onEdit: (rowData: any) => {
