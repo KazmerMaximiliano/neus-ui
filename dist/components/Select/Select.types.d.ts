@@ -1,5 +1,5 @@
 export type SelectOption = {
-    value: string;
+    value?: string | null;
     label: string;
 };
 export type SelectProps = {

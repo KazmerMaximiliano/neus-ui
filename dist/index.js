@@ -44459,9 +44459,10 @@ const qA = ({
     return document.addEventListener("mousedown", C), () => document.removeEventListener("mousedown", C);
   }, []);
   const f = (C) => {
-    if (a) return;
-    const b = d.includes(C) ? d.filter((y) => y !== C) : [...d, C];
-    c(b), l?.(b);
+    if (!a && C) {
+      const b = d.includes(C) ? d.filter((y) => y !== C) : [...d, C];
+      c(b), l?.(b);
+    }
   }, m = (C) => {
     if (a) return;
     const b = d.filter((y) => y !== C);
@@ -44517,7 +44518,7 @@ const qA = ({
             /* @__PURE__ */ N(
               Nf,
               {
-                checked: d.includes(C.value),
+                checked: d.includes(C.value ?? ""),
                 onChange: () => f(C.value)
               }
             ),
@@ -44560,7 +44561,7 @@ const qA = ({
         onChange: (c) => !r && l?.(c.target.value),
         children: [
           !t && !i && /* @__PURE__ */ N("option", { value: "", disabled: !0, children: s || "Selecciona una opción..." }),
-          a.map((c) => /* @__PURE__ */ N("option", { value: c.value, children: c.label }, c.value))
+          a.map((c) => /* @__PURE__ */ N("option", { value: c.value ?? void 0, children: c.label }, c.value))
         ]
       }
     ) }),

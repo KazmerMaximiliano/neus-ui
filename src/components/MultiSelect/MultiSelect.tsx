@@ -39,15 +39,16 @@ export const MultiSelect = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleToggleOption = (value: string) => {
+  const handleToggleOption = (value?: string | null) => {
     if (disabled) return;
+    if (value) {
+      const newValues = selectedValues.includes(value)
+        ? selectedValues.filter((v) => v !== value)
+        : [...selectedValues, value];
 
-    const newValues = selectedValues.includes(value)
-      ? selectedValues.filter((v) => v !== value)
-      : [...selectedValues, value];
-
-    setSelectedValues(newValues);
-    onChange?.(newValues);
+      setSelectedValues(newValues);
+      onChange?.(newValues);
+    }
   };
 
   const handleRemoveTag = (valueToRemove: string) => {
@@ -121,7 +122,7 @@ export const MultiSelect = ({
                 onClick={() => handleToggleOption(option.value)}
               >
                 <Checkbox
-                  checked={selectedValues.includes(option.value)}
+                  checked={selectedValues.includes(option.value ?? "")}
                   onChange={() => handleToggleOption(option.value)}
                 />
                 <span>{option.label}</span>

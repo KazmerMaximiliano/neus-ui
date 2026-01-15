@@ -1,9 +1,10 @@
+export type SelectOption = {
+    value?: string | null;
+    label: string;
+};
 export interface MultiSelectProps {
     name: string;
-    options: {
-        value: string;
-        label: string;
-    }[];
+    options: SelectOption[];
     error?: string;
     placeholder?: string;
     label?: string;
