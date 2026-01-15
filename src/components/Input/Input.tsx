@@ -10,6 +10,7 @@ export const Input = ({
   error,
   disabled = false,
   readonly = false,
+  required = false,
   type = "text",
   min,
   max,
@@ -25,12 +26,14 @@ export const Input = ({
           }`}
         >
           {label}
+          {required && <span className="input-required">*</span>}
         </label>
       )}
       <input
         className={`input input-${type}${error ? " error" : ""}${
           disabled ? " disabled" : ""
         }`}
+        required={required}
         type={type}
         name={name}
         value={value}

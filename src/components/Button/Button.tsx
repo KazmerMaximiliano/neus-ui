@@ -26,7 +26,7 @@ export const Button = ({
       disabled={disabled || loading}
     >
       {loading ? (
-        <BeatLoader color={loaderColor} speedMultiplier={0.5} />
+        <BeatLoader size={6} color={loaderColor} speedMultiplier={0.5} />
       ) : (
         label
       )}

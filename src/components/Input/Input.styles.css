@@ -12,6 +12,11 @@
   font-weight: 500;
 }
 
+.input-required {
+  color: var(--color-error);
+  margin-left: 0.25em;
+}
+
 .input-label.error {
   color: var(--color-error);
 }

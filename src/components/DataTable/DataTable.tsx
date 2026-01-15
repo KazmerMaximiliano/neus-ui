@@ -45,6 +45,7 @@ const DataTableComponent = <T extends object>({
   useCardLayout = true,
   noDataTitle,
   noDataDescription,
+  hiddenColumns = [],
 }: DataTableProps<T>) => {
   const { isMobile, isTablet } = useResponsive();
   const colors = useColors();
@@ -79,10 +80,12 @@ const DataTableComponent = <T extends object>({
       return;
     }
 
-    const columns: DataTableColDef[] = Object.keys(data[0]).map((key) => ({
-      field: key,
-      headerName: columnLabels?.[key] || key,
-    }));
+    const columns: DataTableColDef[] = Object.keys(data[0])
+      .filter((key) => !hiddenColumns.includes(key))
+      .map((key) => ({
+        field: key,
+        headerName: columnLabels?.[key] || key,
+      }));
 
     if (onEdit || onDelete || onInfo) {
       columns.push({
@@ -193,7 +196,7 @@ const DataTableComponent = <T extends object>({
     defineRowData();
     defineColumnsByData();
     handlePageSizeSelector();
-  }, [data, columnLabels]);
+  }, [data, columnLabels, hiddenColumns]);
 
   return (
     <div className="data-table-container">

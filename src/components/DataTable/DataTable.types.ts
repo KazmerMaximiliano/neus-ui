@@ -23,6 +23,7 @@ export type DataTableProps<T extends object = object> = {
   useCardLayout?: boolean;
   noDataTitle?: string;
   noDataDescription?: string;
+  hiddenColumns?: string[];
 }
 
 export type DataTableColDef = ColDef | ColGroupDef;

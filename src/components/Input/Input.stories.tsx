@@ -122,6 +122,14 @@ const meta: Meta<typeof InputComponent> = {
         category: "Props",
       },
     },
+    required: {
+      control: { type: "boolean" },
+      description: "Whether the input is required (shows red asterisk)",
+      table: {
+        type: { summary: "boolean" },
+        category: "Props",
+      },
+    },
     onChange: {
       action: "input changed",
       description: "Callback function triggered when input value changes",
@@ -148,6 +156,7 @@ export const Input: Story = {
     max: "",
     step: "",
     disabled: false,
+    required: false,
     onChange: (value: string) => console.log("Input changed:", value),
   },
 };
