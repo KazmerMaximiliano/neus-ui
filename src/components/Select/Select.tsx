@@ -42,7 +42,7 @@ export const Select = ({
             </option>
           )}
           {options.map((option) => (
-            <option key={option.value} value={option.value}>
+            <option key={option.value} value={option.value ?? undefined}>
               {option.label}
             </option>
           ))}
