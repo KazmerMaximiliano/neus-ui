@@ -49,6 +49,10 @@ const meta: Meta<typeof DataTableComponent> = {
       control: "text",
       description: "Description to show when no data is available",
     },
+    hiddenColumns: {
+      control: "object",
+      description: "Array of column field names to hide",
+    },
   },
 };
 
@@ -121,6 +125,7 @@ export const DataTable: Story = {
     columnLabels,
     useCardLayout: true,
     noDataTitle: "No users found",
+    hiddenColumns: [],
     noDataDescription: "Try adjusting your search criteria or add new users",
     onEdit: (rowData: any) => {
       console.log("Edit user:", rowData);

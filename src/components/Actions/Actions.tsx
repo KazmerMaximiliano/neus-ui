@@ -1,5 +1,4 @@
-import { FaPen, FaTrash } from "react-icons/fa";
-import { FaCircleInfo } from "react-icons/fa6";
+import { FaInfoCircle, FaPen, FaTrash } from "react-icons/fa";
 import { IconButton } from "../IconButton/IconButton";
 import "./Actions.styles.css";
 import { ActionsProps } from "./Actions.types";
@@ -9,7 +8,7 @@ export const Actions = ({ onInfo, onEdit, onDelete }: ActionsProps) => {
     <div className="actions-container">
       {onInfo && (
         <IconButton
-          icon={FaCircleInfo}
+          icon={FaInfoCircle}
           size="small"
           variant="text"
           color="info"
