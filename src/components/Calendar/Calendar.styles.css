@@ -67,3 +67,57 @@
 .calendar-container.readonly .rdp-head_cell {
   opacity: 0.8;
 }
+
+.calendar-container .rdp-nav {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.calendar-container .rdp-nav button .rdp-chevron {
+  fill: var(--color-primary);
+}
+
+.calendar-container .rdp-month_caption {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar-container .rdp-month_caption .rdp-caption_label {
+  color: var(--color-primary);
+}
+
+.calendar-container .rdp-today {
+  color: var(--color-primary);
+}
+
+.calendar-container .rdp-day_button {
+  padding: 2px 0px 0px 0px;
+}
+
+.calendar-container .rdp-day {
+  width: 42px;
+  height: 42px;
+}
+
+.calendar-container .rdp-selected .rdp-day_button {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border: none;
+}
+
+.calendar-container .rdp-selected.rdp-range_start .rdp-day_button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50% 0 0 50%;
+  border: none;
+}
+
+.calendar-container .rdp-selected.rdp-range_end .rdp-day_button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 0 50% 50% 0;
+  border: none;
+}
