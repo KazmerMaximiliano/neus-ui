@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import type { DateRange } from "react-day-picker";
 import { Calendar as CalendarComponent } from "./Calendar";
-import { CalendarDateRange } from "./Calendar.types";
 
 const meta: Meta<typeof CalendarComponent> = {
   title: "Components/Calendar",
@@ -11,61 +10,122 @@ const meta: Meta<typeof CalendarComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    mode: {
-      control: "select",
-      options: ["single", "range"],
-      description: "Selection mode: single date or range",
+    value: {
+      control: false,
+      description: "The current selected date(s)",
+      table: {
+        type: { summary: "Date | Date[] | DateRange" },
+      },
     },
-    selected: {
-      control: "object",
-      description: "Selected date or date range",
+    defaultValue: {
+      control: false,
+      description: "The initial date(s) value",
+      table: {
+        type: { summary: "Date | Date[] | DateRange" },
+      },
     },
-    locale: {
+    name: {
       control: "text",
-      description: "Locale for date formatting (e.g., es-ES, en-US, fr-FR)",
+      description: "The name attribute for the input",
+      table: {
+        type: { summary: "string" },
+      },
     },
     label: {
       control: "text",
-      description: "Calendar label",
-    },
-    required: {
-      control: "boolean",
-      description: "If the input is required",
+      description: "Label text displayed above the calendar",
+      table: {
+        type: { summary: "string" },
+      },
     },
     disabled: {
       control: "boolean",
-      description: "If the input is disabled",
+      description: "Disables the calendar from user interaction",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
     },
     readonly: {
       control: "boolean",
-      description: "If the input is read-only",
+      description: "Makes the calendar read-only",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
     },
     multiple: {
       control: "boolean",
-      description: "If true, displays two months side by side",
+      description: "Allows selection of multiple dates",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
     },
     error: {
       control: "text",
-      description: "Error message",
+      description: "Error message to display",
+      table: {
+        type: { summary: "string" },
+      },
     },
-    onSelect: { action: "date selected" },
+    onChange: {
+      control: false,
+      description: "Callback when date selection changes",
+      table: {
+        type: {
+          summary: "(value: Date | Date[] | DateRange | undefined) => void",
+        },
+      },
+    },
+    mode: {
+      control: "select",
+      options: ["single", "range", "multiple"],
+      description: "Calendar selection mode",
+      table: {
+        type: { summary: "single | range | multiple" },
+      },
+    },
+    required: {
+      control: "boolean",
+      description: "Whether a date selection is required",
+      table: {
+        type: { summary: "boolean" },
+        defaultValue: { summary: "false" },
+      },
+    },
+    selected: {
+      control: false,
+      description: "The selected date(s) (from DayPicker)",
+      table: {
+        type: { summary: "Date | DateRange | Date[]" },
+      },
+    },
   },
 };
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<
+  typeof CalendarComponent &
+    (
+      | { mode: "single"; selected: Date; required?: boolean }
+      | { mode: "range"; selected: DateRange; required: true }
+      | { mode: "multiple"; selected: Date[]; required: true }
+    )
+>;
 
 export const Calendar: Story = {
   args: {
     mode: "single",
-    selected: undefined,
-    locale: "en",
+    selected: new Date(),
+    required: false,
     label: "Select a date",
-    required: true,
+    name: "calendar",
     disabled: false,
     readonly: false,
     multiple: false,
     error: undefined,
-    onSelect: undefined,
+    value: undefined,
+    defaultValue: undefined,
   },
 };
 

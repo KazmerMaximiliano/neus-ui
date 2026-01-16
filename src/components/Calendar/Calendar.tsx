@@ -2,42 +2,48 @@ import { useEffect, useState } from "react";
 import { DayPicker, type DateRange } from "react-day-picker";
 import "react-day-picker/style.css";
 import "./Calendar.styles.css";
-import { CalendarProps } from "./Calendar.types";
-import { formatDate, formatDateRange } from "./Calendar.utils";
+import type { CalendarProps } from "./Calendar.types";
+import { getDayPickerProps, serializeValue } from "./Calendar.utils";
 
 export const Calendar = ({
   mode = "single",
-  selected,
-  locale = "en-US",
+  value,
+  defaultValue,
+  name,
   label,
   required = false,
   disabled = false,
   readonly = false,
   multiple = false,
   error,
-  onSelect,
+  onChange,
 }: CalendarProps) => {
+  const isControlled = value !== undefined;
+  const initialValue = isControlled ? value : defaultValue;
   const [selectedDate, setSelectedDate] = useState<
-    Date | Date[] | DateRange | undefined
-  >(selected);
+    Date | DateRange | Date[] | undefined
+  >(initialValue);
 
-  const displayValue =
-    mode === "single"
-      ? formatDate(selected as Date | undefined, locale)
-      : mode === "range"
-      ? formatDateRange(selected as DateRange | undefined, locale)
-      : "";
+  const currentValue = isControlled ? value : selectedDate;
 
-  const handleSelect = (value: Date | Date[] | DateRange | undefined) => {
+  const dayPickerProps = getDayPickerProps(mode, currentValue, required);
+
+  const handleSelect = (newValue: Date | DateRange | Date[] | undefined) => {
     if (!disabled && !readonly) {
-      setSelectedDate(value);
-      onSelect?.(value);
+      if (!isControlled) {
+        setSelectedDate(newValue);
+      }
+      if (onChange) {
+        (onChange as (value: any) => void)(newValue);
+      }
     }
   };
 
   useEffect(() => {
-    setSelectedDate(selected);
-  }, [selected]);
+    if (isControlled) {
+      setSelectedDate(value);
+    }
+  }, [value, isControlled]);
 
   return (
     <div
@@ -58,14 +64,21 @@ export const Calendar = ({
         <DayPicker
           showOutsideDays={false}
           fixedWeeks={true}
-          mode={mode || "single"}
-          required={required}
-          selected={selectedDate}
+          disabled={disabled}
           onSelect={handleSelect}
           numberOfMonths={multiple ? 2 : 1}
-          disabled={disabled}
+          {...dayPickerProps}
         />
       </div>
+
+      {name && (
+        <input
+          type="hidden"
+          name={name}
+          value={serializeValue(currentValue)}
+          required={required}
+        />
+      )}
 
       {error && (
         <div className="info-container">

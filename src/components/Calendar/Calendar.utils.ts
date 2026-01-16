@@ -1,32 +1,50 @@
 import type { DateRange } from "react-day-picker";
+import { DayPickerPropsType } from "./Calendar.types";
 
-export const formatDate = (
-  date: Date | undefined,
-  locale: string = "en-US"
+export const serializeValue = (
+  val: Date | Date[] | DateRange | undefined,
 ): string => {
-  if (!date) return "";
-
-  return date.toLocaleDateString(locale, {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
+  if (!val) return "";
+  if (val instanceof Date) return val.toISOString();
+  if (Array.isArray(val)) return val.map((d) => d.toISOString()).join(",");
+  if ("from" in val) {
+    return `${val.from?.toISOString() || ""},${val.to?.toISOString() || ""}`;
+  }
+  return "";
 };
 
-export const formatDateRange = (
-  range: DateRange | undefined,
-  locale: string = "en-US"
-): string => {
-  if (!range || (!range.from && !range.to)) return "";
-
-  if (range.from && !range.to) return formatDate(range.from, locale);
-
-  if (range.from && range.to) {
-    return `${formatDate(range.from, locale)} - ${formatDate(
-      range.to,
-      locale
-    )}`;
+export const getDayPickerProps = (
+  mode: string,
+  currentValue: Date | DateRange | Date[] | undefined,
+  required: boolean,
+): DayPickerPropsType => {
+  if (mode === "single") {
+    return {
+      mode: "single",
+      selected: currentValue as Date,
+      required: required as boolean,
+    };
   }
-  
-  return "";
+
+  if (mode === "range") {
+    return {
+      mode: "range",
+      selected: currentValue as DateRange,
+      required: true,
+    };
+  }
+
+  if (mode === "multiple") {
+    return {
+      mode: "multiple",
+      selected: currentValue as Date[],
+      required: true,
+    };
+  }
+
+  return {
+    mode: "single",
+    selected: currentValue as Date,
+    required: required as boolean,
+  };
 };

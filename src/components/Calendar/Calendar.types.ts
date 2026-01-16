@@ -1,16 +1,18 @@
-import type { DateRange, Mode } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 
-export type CalendarMode = Mode;
-
-export type CalendarProps = {
-  mode?: CalendarMode;
-  selected?: Date | Date[] | DateRange;
-  locale?: string;
+export type CalendarProps = DayPickerPropsType & {
+  value?: Date | Date[] | DateRange;
+  defaultValue?: Date | Date[] | DateRange;
+  name?: string;
   label?: string;
-  required?: boolean;
   disabled?: boolean;
   readonly?: boolean;
   multiple?: boolean;
   error?: string;
-  onSelect?: (value: Date | Date[] | DateRange | undefined) => void;
+  onChange?: (value: Date | Date[] | DateRange | undefined) => void;
 };
+
+export type DayPickerPropsType =
+  | { mode: "single"; selected: Date; required: boolean }
+  | { mode: "range"; selected: DateRange; required: true }
+  | { mode: "multiple"; selected: Date[]; required: true };
