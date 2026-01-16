@@ -1,0 +1,47 @@
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border-light);
+  border-radius: 1.5em;
+  min-width: 350px;
+  max-height: 550px;
+  overflow: hidden;
+}
+
+.calendar-container .label-wrapper {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.calendar-container .day-picker-container {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.calendar-container .info-container {
+  padding: 1rem;
+  border-top: 1px solid var(--color-border-light);
+  font-size: 0.875rem;
+  color: #555;
+  text-align: start;
+}
+
+.calendar-label {
+  font-size: 1em;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.calendar-label.error {
+  color: var(--color-error);
+}
+
+.calendar-required {
+  color: var(--color-error);
+  margin-left: 0.25em;
+}
+
+/* REACT DAY PICKER STYLES */
