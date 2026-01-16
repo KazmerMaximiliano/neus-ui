@@ -10,6 +10,7 @@ export type CalendarProps = {
   required?: boolean;
   disabled?: boolean;
   readonly?: boolean;
+  multiple?: boolean;
   error?: string;
   onSelect?: (value: Date | Date[] | DateRange | undefined) => void;
 };

@@ -45,3 +45,7 @@
 }
 
 /* REACT DAY PICKER STYLES */
+.calendar-container .day-picker-container .rdp-months {
+  display: flex;
+  gap: 1rem;
+}

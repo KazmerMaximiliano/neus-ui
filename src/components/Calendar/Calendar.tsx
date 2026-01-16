@@ -13,6 +13,7 @@ export const Calendar = ({
   required = false,
   disabled = false,
   readonly = false,
+  multiple = false,
   error,
   onSelect,
 }: CalendarProps) => {
@@ -55,6 +56,7 @@ export const Calendar = ({
           required={required}
           selected={selectedDate}
           onSelect={handleSelect}
+          numberOfMonths={multiple ? 2 : 1}
         />
       </div>
 

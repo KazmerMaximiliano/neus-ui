@@ -40,6 +40,10 @@ const meta: Meta<typeof CalendarComponent> = {
       control: "boolean",
       description: "If the input is read-only",
     },
+    multiple: {
+      control: "boolean",
+      description: "If true, displays two months side by side",
+    },
     error: {
       control: "text",
       description: "Error message",
@@ -59,6 +63,7 @@ export const Calendar: Story = {
     required: true,
     disabled: false,
     readonly: false,
+    multiple: false,
     error: undefined,
     onSelect: undefined,
   },
