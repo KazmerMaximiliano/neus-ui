@@ -13,6 +13,15 @@
   border-bottom: 1px solid var(--color-border-light);
 }
 
+.calendar-container.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.calendar-container.disabled .calendar-label {
+  color: var(--color-border-light);
+}
+
 .calendar-container .day-picker-container {
   width: 100%;
   height: 300px;
@@ -48,4 +57,13 @@
 .calendar-container .day-picker-container .rdp-months {
   display: flex;
   gap: 1rem;
+}
+
+.calendar-container.readonly .rdp-cell [role="button"]:not(.rdp-day_selected) {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.calendar-container.readonly .rdp-head_cell {
+  opacity: 0.8;
 }

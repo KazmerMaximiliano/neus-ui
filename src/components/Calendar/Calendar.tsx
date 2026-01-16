@@ -29,8 +29,10 @@ export const Calendar = ({
       : "";
 
   const handleSelect = (value: Date | Date[] | DateRange | undefined) => {
-    setSelectedDate(value);
-    onSelect?.(value);
+    if (!disabled && !readonly) {
+      setSelectedDate(value);
+      onSelect?.(value);
+    }
   };
 
   useEffect(() => {
@@ -38,7 +40,11 @@ export const Calendar = ({
   }, [selected]);
 
   return (
-    <div className="calendar-container">
+    <div
+      className={`calendar-container${disabled ? " disabled" : ""}${
+        readonly ? " readonly" : ""
+      }`}
+    >
       {label && (
         <div className="label-wrapper">
           <label className={`calendar-label${error ? " error" : ""}`}>
@@ -57,6 +63,7 @@ export const Calendar = ({
           selected={selectedDate}
           onSelect={handleSelect}
           numberOfMonths={multiple ? 2 : 1}
+          disabled={disabled}
         />
       </div>
 
