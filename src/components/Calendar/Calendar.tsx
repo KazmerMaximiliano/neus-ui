@@ -34,7 +34,7 @@ export const Calendar = ({
         setSelectedDate(newValue);
       }
       if (onChange) {
-        (onChange as (value: any) => void)(newValue);
+        onChange(newValue);
       }
     }
   };

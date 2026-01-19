@@ -3,6 +3,7 @@ export * from "./Button/Button";
 export * from "./Calendar/Calendar";
 export * from "./Checkbox/Checkbox";
 export * from "./DataTable/DataTable";
+export * from "./DateInput/DateInput";
 export * from "./FileUploader/FileUploader";
 export * from "./IconButton/IconButton";
 export * from "./Input/Input";

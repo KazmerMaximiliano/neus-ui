@@ -123,6 +123,7 @@ All theme colors are available as CSS variables:
 | `IconButton`     | Buttons with icons                                      |
 | `Input`          | Text input fields with validation states                |
 | `InteractiveMap` | Interactive map components                              |
+| `DateInput`      | Date input fields with validation states                |
 | `Link`           | Styled link components                                  |
 | `Menu`           | Dropdown menu with customizable items                   |
 | `Modal`          | Modal dialogs with backdrop                             |

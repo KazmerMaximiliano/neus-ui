@@ -8,7 +8,16 @@ export type InputProps = {
   disabled?: boolean;
   readonly?: boolean;
   required?: boolean;
-  type?: 'text' | 'password' | 'email' | 'number' | 'color' | 'date' | 'datetime-local' | 'month' | 'tel' | 'time' | 'url' | 'week';
+  type?:
+    | "text"
+    | "password"
+    | "email"
+    | "number"
+    | "color"
+    | "tel"
+    | "time"
+    | "url"
+    | "week";
   min?: string | number;
   max?: string | number;
   step?: string | number;
