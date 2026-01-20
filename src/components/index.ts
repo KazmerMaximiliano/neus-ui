@@ -3,7 +3,6 @@ export * from "./Button/Button";
 export * from "./Calendar/Calendar";
 export * from "./Checkbox/Checkbox";
 export * from "./Clock/Clock";
-export * from "./Clock/Clock.types";
 export * from "./DataTable/DataTable";
 export * from "./DateInput/DateInput";
 export * from "./FileUploader/FileUploader";

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Checkbox } from "../Checkbox/Checkbox";
 import "./MultiSelect.styles.css";
 import { MultiSelectProps } from "./MultiSelect.types";
@@ -15,15 +15,18 @@ export const MultiSelect = ({
   onChange,
 }: MultiSelectProps) => {
   const [selectedValues, setSelectedValues] = useState<string[]>(
-    value.length > 0 ? value : defaultValue
+    value.length > 0 ? value : defaultValue,
   );
   const [isOpen, setIsOpen] = useState(false);
+  const memoizedValue = useMemo(() => value, [value]);
   const containerRef = useRef<HTMLDivElement>(null);
   const displayLabel = label || placeholder;
 
   useEffect(() => {
-    setSelectedValues(value);
-  }, [value]);
+    if (memoizedValue.length > 0) {
+      setSelectedValues(memoizedValue);
+    }
+  }, [memoizedValue]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -60,11 +63,11 @@ export const MultiSelect = ({
   };
 
   const selectedLabels = selectedValues.map(
-    (value) => options.find((option) => option.value === value)?.label || value
+    (value) => options.find((option) => option.value === value)?.label || value,
   );
 
   return (
-    <div className="multiselect-wrapper" ref={containerRef}>
+    <div className="multiselect-wrapper">
       {displayLabel && (
         <label
           className={`multiselect-label${error ? " error" : ""}${

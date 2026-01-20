@@ -137,7 +137,6 @@ export const Input: Story = {
     label: "Example Input",
     type: "text",
     value: "",
-    defaultValue: "",
     error: "",
     min: "",
     max: "",

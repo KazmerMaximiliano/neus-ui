@@ -12,6 +12,8 @@ import { useColors } from "../theme";
 import "./InteractiveMap.styles.css";
 import { InteractiveMapProps } from "./InteractiveMap.types";
 
+const GOOGLE_MAPS_LIBRARIES: "places"[] = ["places"];
+
 export const InteractiveMap = ({
   googleMapsApiKey,
   initialCoordinates,
@@ -25,11 +27,11 @@ export const InteractiveMap = ({
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey,
-    libraries: ["places"],
+    libraries: GOOGLE_MAPS_LIBRARIES,
   });
 
   const handleMapClickRef = useRef<(lat: number, lng: number) => Promise<void>>(
-    async () => {}
+    async () => {},
   );
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -93,7 +95,7 @@ export const InteractiveMap = ({
         console.error("Error en reverse geocoding:", error);
       }
     },
-    [onLocationSelect]
+    [onLocationSelect],
   );
 
   const onPlacesChanged = useCallback(async () => {
@@ -134,13 +136,15 @@ export const InteractiveMap = ({
           });
         },
         (error) => {
-          console.warn("Could not get user location:", error.message);
+          if (import.meta.env.DEV) {
+            console.debug("Geolocation error:", error.message);
+          }
         },
         {
           enableHighAccuracy: true,
           timeout: 10000,
           maximumAge: 300000,
-        }
+        },
       );
     }
   }, []);
