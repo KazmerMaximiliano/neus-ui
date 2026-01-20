@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { DateInput as DateInputComponent } from "./DateInput";
+import { TimeInput as TimeInputComponent } from "./TimeInput";
 
-const meta: Meta<typeof DateInputComponent> = {
-  title: "Components/DateInput",
-  component: DateInputComponent,
+const meta: Meta<typeof TimeInputComponent> = {
+  title: "Components/TimeInput",
+  component: TimeInputComponent,
   parameters: {
     layout: "centered",
   },
@@ -11,16 +11,16 @@ const meta: Meta<typeof DateInputComponent> = {
   argTypes: {
     value: {
       control: false,
-      description: "The current selected date(s)",
+      description: "The current selected time(s)",
       table: {
-        type: { summary: "Date | DateRange" },
+        type: { summary: "TimeValue" },
       },
     },
     defaultValue: {
       control: false,
-      description: "The initial date(s) value",
+      description: "The initial time(s) value",
       table: {
-        type: { summary: "Date | DateRange" },
+        type: { summary: "TimeValue" },
       },
     },
     name: {
@@ -42,7 +42,7 @@ const meta: Meta<typeof DateInputComponent> = {
       description: "Placeholder text for the input",
       table: {
         type: { summary: "string" },
-        defaultValue: { summary: "Select a date" },
+        defaultValue: { summary: "Select a time" },
       },
     },
     disabled: {
@@ -63,7 +63,7 @@ const meta: Meta<typeof DateInputComponent> = {
     },
     required: {
       control: "boolean",
-      description: "Whether a date selection is required",
+      description: "Whether a time selection is required",
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: "false" },
@@ -76,21 +76,12 @@ const meta: Meta<typeof DateInputComponent> = {
         type: { summary: "string" },
       },
     },
-    mode: {
-      control: "select",
-      options: ["single", "range"],
-      description: "Date selection mode",
-      table: {
-        type: { summary: "single | range" },
-        defaultValue: { summary: "single" },
-      },
-    },
     onChange: {
       control: false,
-      description: "Callback when date selection changes",
+      description: "Callback when time selection changes",
       table: {
         type: {
-          summary: "(value: Date | DateRange | undefined) => void",
+          summary: "(value: TimeValue | undefined) => void",
         },
       },
     },
@@ -99,12 +90,11 @@ const meta: Meta<typeof DateInputComponent> = {
 
 type Story = StoryObj<typeof meta>;
 
-export const DateInput: Story = {
+export const TimeInput: Story = {
   args: {
-    mode: "single",
-    label: "Select a date",
-    name: "date-input",
-    placeholder: "Pick a date...",
+    label: "Select a time",
+    name: "time-input",
+    placeholder: "Pick a time...",
     disabled: false,
     readonly: false,
     required: false,

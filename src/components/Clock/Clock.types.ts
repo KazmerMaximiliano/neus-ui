@@ -10,10 +10,3 @@ export type ClockProps = {
   format?: "12h" | "24h";
   onChange?: (value: TimeValue) => void;
 };
-
-// value?: TimeValue;
-// defaultValue?: TimeValue;
-// name?: string;
-// label?: string;
-// required?: boolean;
-// error?: string;
