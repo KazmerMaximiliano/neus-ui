@@ -1,0 +1,33 @@
+.time-clock-number {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: -16px;
+  margin-top: -16px;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--color-gray-700, #333);
+  border-radius: 50%;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.time-clock-number.inner {
+  font-size: 0.8em;
+  color: var(--color-gray-500, #666);
+}
+
+.time-clock-number.selected {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  z-index: 2;
+}
+
+.time-clock-number.inner.selected {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
