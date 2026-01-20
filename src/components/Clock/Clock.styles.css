@@ -1,40 +1,40 @@
-.time-clock-wrapper {
+.clock-wrapper {
   width: fit-content;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.time-clock-wrapper.disabled {
+.clock-wrapper.disabled {
   opacity: 0.6;
   pointer-events: none;
 }
 
-.time-clock-wrapper.readonly {
+.clock-wrapper.readonly {
   pointer-events: none;
 }
 
-.time-clock-label {
+.clock-label {
   font-size: 0.9em;
   color: var(--color-primary);
   margin-left: 1em;
   font-weight: 500;
 }
 
-.time-clock-required {
+.clock-required {
   color: var(--color-error);
   margin-left: 0.25em;
 }
 
-.time-clock-label.error {
+.clock-label.error {
   color: var(--color-error);
 }
 
-.time-clock-label.disabled {
+.clock-label.disabled {
   color: var(--color-gray-500, #999);
 }
 
-.time-clock-container {
+.clock-container {
   min-width: 350px;
   max-height: 550px;
   background-color: var(--color-white);
@@ -43,7 +43,7 @@
   overflow: hidden;
 }
 
-.time-clock-header {
+.clock-header {
   background-color: var(--color-primary);
   padding: 1.5em;
   display: flex;
@@ -51,12 +51,12 @@
   align-items: center;
 }
 
-.time-clock-display {
+.clock-display {
   display: flex;
   align-items: center;
 }
 
-.time-clock-time-button {
+.clock-time-button {
   background: none;
   border: none;
   color: var(--color-white);
@@ -69,32 +69,32 @@
   font-family: inherit;
 }
 
-.time-clock-time-button:hover:not(:disabled) {
+.clock-time-button:hover:not(:disabled) {
   opacity: 0.8;
 }
 
-.time-clock-time-button.active {
+.clock-time-button.active {
   opacity: 1;
 }
 
-.time-clock-time-button:disabled {
+.clock-time-button:disabled {
   cursor: not-allowed;
 }
 
-.time-clock-separator {
+.clock-separator {
   color: var(--color-white);
   font-size: 3em;
   font-weight: 500;
   opacity: 0.6;
 }
 
-.time-clock-period {
+.clock-period {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.time-clock-period-button {
+.clock-period-button {
   background: none;
   border: none;
   color: var(--color-white);
@@ -107,19 +107,19 @@
   font-family: inherit;
 }
 
-.time-clock-period-button:hover:not(:disabled) {
+.clock-period-button:hover:not(:disabled) {
   opacity: 0.8;
 }
 
-.time-clock-period-button.active {
+.clock-period-button.active {
   opacity: 1;
 }
 
-.time-clock-period-button:disabled {
+.clock-period-button:disabled {
   cursor: not-allowed;
 }
 
-.time-clock-face {
+.clock-face {
   position: relative;
   width: 240px;
   height: 240px;
@@ -130,12 +130,12 @@
   user-select: none;
 }
 
-.time-clock-face:focus {
+.clock-face:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-.time-clock-center {
+.clock-center {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -147,7 +147,7 @@
   z-index: 3;
 }
 
-.time-clock-hand {
+.clock-hand {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -160,7 +160,7 @@
     width 0.2s ease;
 }
 
-.time-clock-hand-tip {
+.clock-hand-tip {
   position: absolute;
   right: -16px;
   top: 50%;
@@ -171,7 +171,7 @@
   border-radius: 50%;
 }
 
-.time-clock-numbers {
+.clock-numbers {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -179,7 +179,7 @@
   height: 0;
 }
 
-.time-clock-error {
+.clock-error {
   color: var(--color-error);
   font-size: 0.85em;
   margin-left: 1em;

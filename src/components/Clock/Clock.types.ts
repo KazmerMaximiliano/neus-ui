@@ -3,7 +3,7 @@ export type TimeValue = {
   minutes: number;
 };
 
-export type TimeClockProps = {
+export type ClockProps = {
   value?: TimeValue;
   disabled?: boolean;
   readonly?: boolean;

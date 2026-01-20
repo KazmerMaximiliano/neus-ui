@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { TimeClock as TimeClockComponent } from "./TimeClock";
+import { Clock as ClockComponent } from "./Clock";
 
-const meta: Meta<typeof TimeClockComponent> = {
-  title: "Components/TimeClock",
-  component: TimeClockComponent,
+const meta: Meta<typeof ClockComponent> = {
+  title: "Components/Clock",
+  component: ClockComponent,
   parameters: {
     layout: "centered",
   },
@@ -55,7 +55,7 @@ const meta: Meta<typeof TimeClockComponent> = {
 
 type Story = StoryObj<typeof meta>;
 
-export const TimeClock: Story = {
+export const Clock: Story = {
   args: {
     format: "12h",
     disabled: false,

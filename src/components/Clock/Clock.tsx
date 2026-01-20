@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { ClockNumbers } from "../ClockNumbers/ClockNumbers";
-import "./TimeClock.styles.css";
-import { TimeClockProps, TimeValue } from "./TimeClock.types";
+import "./Clock.styles.css";
+import { ClockProps, TimeValue } from "./Clock.types";
 import {
   getDisplayHours,
   getHandAngle,
   getHandLength,
-} from "./TimeClock.utils";
+} from "./Clock.utils";
 
-export const TimeClock = ({
+export const Clock = ({
   value,
   disabled,
   readonly,
   format = "12h",
   onChange,
-}: TimeClockProps) => {
+}: ClockProps) => {
   const initialValue = value || { hours: 12, minutes: 0 };
   const isControlled = value !== undefined;
 
@@ -95,14 +95,14 @@ export const TimeClock = ({
 
   return (
     <div
-      className={`time-clock-wrapper${disabled ? " disabled" : ""}${readonly ? " readonly" : ""}`}
+      className={`clock-wrapper${disabled ? " disabled" : ""}${readonly ? " readonly" : ""}`}
     >
-      <div className="time-clock-container">
-        <div className="time-clock-header">
-          <div className="time-clock-display">
+      <div className="clock-container">
+        <div className="clock-header">
+          <div className="clock-display">
             <button
               type="button"
-              className={`time-clock-time-button${mode === "hours" ? " active" : ""}`}
+              className={`clock-time-button${mode === "hours" ? " active" : ""}`}
               onClick={() => !disabled && !readonly && setMode("hours")}
               disabled={disabled}
             >
@@ -110,10 +110,10 @@ export const TimeClock = ({
                 .toString()
                 .padStart(2, "0")}
             </button>
-            <span className="time-clock-separator">:</span>
+            <span className="clock-separator">:</span>
             <button
               type="button"
-              className={`time-clock-time-button${mode === "minutes" ? " active" : ""}`}
+              className={`clock-time-button${mode === "minutes" ? " active" : ""}`}
               onClick={() => !disabled && !readonly && setMode("minutes")}
               disabled={disabled}
             >
@@ -121,10 +121,10 @@ export const TimeClock = ({
             </button>
           </div>
           {format === "12h" && (
-            <div className="time-clock-period">
+            <div className="clock-period">
               <button
                 type="button"
-                className={`time-clock-period-button${period === "AM" ? " active" : ""}`}
+                className={`clock-period-button${period === "AM" ? " active" : ""}`}
                 onClick={() => handlePeriodChange("AM")}
                 disabled={disabled}
               >
@@ -132,7 +132,7 @@ export const TimeClock = ({
               </button>
               <button
                 type="button"
-                className={`time-clock-period-button${period === "PM" ? " active" : ""}`}
+                className={`clock-period-button${period === "PM" ? " active" : ""}`}
                 onClick={() => handlePeriodChange("PM")}
                 disabled={disabled}
               >
@@ -142,22 +142,22 @@ export const TimeClock = ({
           )}
         </div>
         <div
-          className="time-clock-face"
+          className="clock-face"
           onClick={handleClockClick}
           role="button"
           tabIndex={disabled ? -1 : 0}
         >
-          <div className="time-clock-center" />
+          <div className="clock-center" />
           <div
-            className="time-clock-hand"
+            className="clock-hand"
             style={{
               transform: `rotate(${getHandAngle({ mode, format, currentValue })}deg)`,
               width: `${getHandLength({ mode, format, currentValue })}px`,
             }}
           >
-            <div className="time-clock-hand-tip" />
+            <div className="clock-hand-tip" />
           </div>
-          <div className="time-clock-numbers">
+          <div className="clock-numbers">
             <ClockNumbers
               mode={mode}
               format={format}

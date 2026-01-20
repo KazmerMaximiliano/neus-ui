@@ -14,7 +14,7 @@ export * from "./Modal/Modal";
 export * from "./MultiSelect/MultiSelect";
 export * from "./Select/Select";
 export * from "./Sidebar/Sidebar";
-export * from "./TimeClock/TimeClock";
-export * from "./TimeClock/TimeClock.types";
+export * from "./Clock/Clock";
+export * from "./Clock/Clock.types";
 
 export { useColors } from "./theme";
