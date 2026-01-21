@@ -61,6 +61,7 @@ export const InteractiveMap = ({
   useEffect(() => {
     if (initialCoordinates) {
       const [lat, lng] = initialCoordinates.split(",").map(Number);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMarkerPosition({ lat, lng });
     }
   }, [initialCoordinates]);
@@ -95,7 +96,7 @@ export const InteractiveMap = ({
         console.error("Error en reverse geocoding:", error);
       }
     },
-    [onLocationSelect],
+    [onLocationSelect, googleMapsApiKey],
   );
 
   const onPlacesChanged = useCallback(async () => {

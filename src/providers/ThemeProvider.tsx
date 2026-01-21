@@ -1,61 +1,11 @@
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { getDarkenColor, hexToRgb } from "../utils";
-
-export interface ThemeColors {
-  primary: {
-    main: string;
-    light: string;
-    dark: string;
-  };
-  success: {
-    main: string;
-    light: string;
-    dark: string;
-  };
-  error: {
-    main: string;
-    light: string;
-    dark: string;
-  };
-  info: {
-    main: string;
-    light: string;
-    dark: string;
-  };
-  white: string;
-  black: string;
-  gray: {
-    900: string;
-    700: string;
-    600: string;
-    500: string;
-    400: string;
-    300: string;
-    200: string;
-    150: string;
-    100: string;
-  };
-  borderLight: string;
-  shadow: string;
-}
-
-export interface ThemeConfig {
-  primaryColor?: string;
-  successColor?: string;
-  errorColor?: string;
-  infoColor?: string;
-}
-
-interface ThemeContextValue {
-  colors: ThemeColors;
-  updateTheme: (config: ThemeConfig) => void;
-}
+import {
+  ThemeContext,
+  type ThemeColors,
+  type ThemeConfig,
+  type ThemeContextValue,
+} from "./ThemeContext";
 
 const defaultColors: ThemeColors = {
   primary: {
@@ -94,8 +44,6 @@ const defaultColors: ThemeColors = {
   borderLight: "rgba(40, 53, 147, 0.1)",
   shadow: "rgba(0, 0, 0, 0.1)",
 };
-
-const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export interface ThemeProviderProps {
   children: ReactNode;
@@ -198,12 +146,4 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
       {children}
     </ThemeContext.Provider>
   );
-};
-
-export const useTheme = (): ThemeContextValue => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return context;
 };

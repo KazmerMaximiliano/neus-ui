@@ -78,8 +78,10 @@ export const DateInput = ({
     }
   }, [isOpen]);
 
+  // Sync internal state when controlled prop changes
   useEffect(() => {
     if (isControlled) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedDate(value);
     }
   }, [value, isControlled]);

@@ -1,7 +1,53 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { DataTable as DataTableComponent } from "./DataTable";
 
-const meta: Meta<typeof DataTableComponent> = {
+// Sample data for the story
+const sampleData = [
+  {
+    id: 1,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    role: "Admin",
+    status: "Active",
+    created_at: "2024-01-15",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    email: "jane.smith@example.com",
+    role: "User",
+    status: "Active",
+    created_at: "2024-01-16",
+  },
+  {
+    id: 3,
+    name: "Bob Johnson",
+    email: "bob.johnson@example.com",
+    role: "Moderator",
+    status: "Inactive",
+    created_at: "2024-01-17",
+  },
+  {
+    id: 4,
+    name: "Alice Brown",
+    email: "alice.brown@example.com",
+    role: "User",
+    status: "Active",
+    created_at: "2024-01-18",
+  },
+  {
+    id: 5,
+    name: "Charlie Wilson",
+    email: "charlie.wilson@example.com",
+    role: "User",
+    status: "Active",
+    created_at: "2024-01-19",
+  },
+];
+
+type SampleDataType = (typeof sampleData)[number];
+
+const meta: Meta<typeof DataTableComponent<SampleDataType>> = {
   title: "Components/DataTable",
   component: DataTableComponent,
   parameters: {
@@ -58,50 +104,6 @@ const meta: Meta<typeof DataTableComponent> = {
 
 type Story = StoryObj<typeof meta>;
 
-// Sample data for the story
-const sampleData = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role: "Admin",
-    status: "Active",
-    created_at: "2024-01-15",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    role: "User",
-    status: "Active",
-    created_at: "2024-01-16",
-  },
-  {
-    id: 3,
-    name: "Bob Johnson",
-    email: "bob.johnson@example.com",
-    role: "Moderator",
-    status: "Inactive",
-    created_at: "2024-01-17",
-  },
-  {
-    id: 4,
-    name: "Alice Brown",
-    email: "alice.brown@example.com",
-    role: "User",
-    status: "Active",
-    created_at: "2024-01-18",
-  },
-  {
-    id: 5,
-    name: "Charlie Wilson",
-    email: "charlie.wilson@example.com",
-    role: "User",
-    status: "Active",
-    created_at: "2024-01-19",
-  },
-];
-
 const samplePagination = {
   current_page: 1,
   last_page: 3,
@@ -127,16 +129,16 @@ export const DataTable: Story = {
     noDataTitle: "No users found",
     hiddenColumns: [],
     noDataDescription: "Try adjusting your search criteria or add new users",
-    onEdit: (rowData: any) => {
+    onEdit: (rowData: SampleDataType) => {
       console.log("Edit user:", rowData);
     },
-    onDelete: (rowData: any) => {
+    onDelete: (rowData: SampleDataType) => {
       console.log("Delete user:", rowData);
     },
-    onInfo: (rowData: any) => {
+    onInfo: (rowData: SampleDataType) => {
       console.log("View user info:", rowData);
     },
-    onPaginationChange: (params: any) => {
+    onPaginationChange: (params: { currentPage: number; pageSize: number }) => {
       console.log("Pagination changed:", params);
     },
   },

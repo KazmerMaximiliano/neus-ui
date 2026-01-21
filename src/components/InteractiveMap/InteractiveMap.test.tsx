@@ -4,11 +4,11 @@ import { ThemeProvider } from "../../providers/ThemeProvider";
 import { InteractiveMap } from "./InteractiveMap";
 
 vi.mock("@react-google-maps/api", () => ({
-  GoogleMap: ({ children }: any) => (
+  GoogleMap: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="google-map">{children}</div>
   ),
   Marker: () => <div data-testid="map-marker" />,
-  StandaloneSearchBox: ({ children }: any) => (
+  StandaloneSearchBox: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="search-box">{children}</div>
   ),
   useJsApiLoader: () => ({

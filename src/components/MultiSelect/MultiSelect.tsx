@@ -22,8 +22,10 @@ export const MultiSelect = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const displayLabel = label || placeholder;
 
+  // Sync internal state when controlled prop changes
   useEffect(() => {
     if (memoizedValue.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedValues(memoizedValue);
     }
   }, [memoizedValue]);

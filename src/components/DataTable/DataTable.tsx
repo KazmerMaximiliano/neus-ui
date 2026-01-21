@@ -168,7 +168,7 @@ const DataTableComponent = <T extends object>({
     return (
       <div className="data-table-cards">
         {rowData.map((row, index) => {
-          const rowObject = row as Record<string, any>;
+          const rowObject = row as Record<string, unknown>;
           return (
             <div key={index} className="data-table-card">
               <div className="card-content">
