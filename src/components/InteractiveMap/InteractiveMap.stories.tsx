@@ -45,7 +45,7 @@ const meta: Meta<typeof InteractiveMapComponent> = {
 
 type Story = StoryObj<typeof meta>;
 
-const mockOnLocationSelect = (location: any) => {
+const mockOnLocationSelect = (location: Record<string, unknown>) => {
   console.log("Location selected:", location);
 };
 

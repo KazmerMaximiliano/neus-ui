@@ -5,7 +5,7 @@ import {
   themeQuartz,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useResponsive } from "../../hooks/useResponsive";
 import { Actions } from "../Actions/Actions";
@@ -14,7 +14,6 @@ import { useColors } from "../theme";
 import "./DataTable.styles.css";
 import { DataTableColDef, DataTableProps } from "./DataTable.types";
 
-// Register AG Grid modules
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 const NoRowsOverlay = ({
@@ -50,11 +49,20 @@ const DataTableComponent = <T extends object>({
   const { isMobile, isTablet } = useResponsive();
   const colors = useColors();
 
-  const { current_page, last_page, per_page, total } = pagination;
+  const { current_page, last_page, per_page } = pagination;
 
   const [rowData, setRowData] = useState(data);
   const [colDefs, setColDefs] = useState<DataTableColDef[]>([]);
-  const [pageSizeSelector, setPageSizeSelector] = useState<number[]>([]);
+
+  const memoizedColumnLabels = useMemo(
+    () => columnLabels || {},
+    [columnLabels],
+  );
+
+  const memoizedHiddenColumns = useMemo(
+    () => hiddenColumns || [],
+    [hiddenColumns],
+  );
 
   const responsiveTheme = useMemo(() => {
     return themeQuartz.withParams({
@@ -68,23 +76,38 @@ const DataTableComponent = <T extends object>({
       spacing: isMobile ? 4 : isTablet ? 6 : 8,
       wrapperBorderRadius: 24,
     });
-  }, [isMobile, isTablet]);
+  }, [isMobile, isTablet, colors.primary.main]);
 
-  const defineRowData = () => {
-    setRowData(data);
-  };
+  const renderActions = useCallback(
+    (params: ICellRendererParams) => {
+      const rowData = params.data;
 
-  const defineColumnsByData = () => {
+      if (!rowData) {
+        return null;
+      }
+
+      return (
+        <Actions
+          onInfo={onInfo ? () => onInfo(rowData) : undefined}
+          onEdit={onEdit ? () => onEdit(rowData) : undefined}
+          onDelete={onDelete ? () => onDelete(rowData) : undefined}
+        />
+      );
+    },
+    [onInfo, onEdit, onDelete],
+  );
+
+  const defineColumnsByData = useCallback(() => {
     if (data.length === 0) {
       setColDefs([]);
       return;
     }
 
     const columns: DataTableColDef[] = Object.keys(data[0])
-      .filter((key) => !hiddenColumns.includes(key))
+      .filter((key) => !memoizedHiddenColumns.includes(key))
       .map((key) => ({
         field: key,
-        headerName: columnLabels?.[key] || key,
+        headerName: memoizedColumnLabels?.[key] || key,
       }));
 
     if (onEdit || onDelete || onInfo) {
@@ -106,51 +129,33 @@ const DataTableComponent = <T extends object>({
     }
 
     setColDefs(columns);
-  };
+  }, [
+    data,
+    memoizedHiddenColumns,
+    memoizedColumnLabels,
+    onEdit,
+    onDelete,
+    onInfo,
+    renderActions,
+  ]);
 
-  const renderActions = (params: ICellRendererParams) => {
-    const rowData = params.data;
+  const handlePaginate = useCallback(
+    (current: number, size: number) => {
+      if (current_page === current && per_page === size) {
+        return;
+      }
 
-    if (!rowData) {
-      return null;
-    }
+      if (onPaginationChange) {
+        onPaginationChange({
+          currentPage: current,
+          pageSize: size,
+        });
+      }
+    },
+    [current_page, per_page, onPaginationChange],
+  );
 
-    return (
-      <Actions
-        onInfo={onInfo ? () => onInfo(rowData) : undefined}
-        onEdit={onEdit ? () => onEdit(rowData) : undefined}
-        onDelete={onDelete ? () => onDelete(rowData) : undefined}
-      />
-    );
-  };
-
-  const handlePageSizeSelector = () => {
-    const source = total && total > 0 ? total : data.length;
-    const baseSizes = [10, 25, 50, 100];
-
-    let sizes = baseSizes.filter((size) => size <= source);
-
-    if (sizes.length === 0) {
-      sizes = [Math.max(1, source)];
-    }
-
-    setPageSizeSelector(sizes);
-  };
-
-  const handlePaginate = (current: number, size: number) => {
-    if (current_page === current && per_page === size) {
-      return;
-    }
-
-    if (onPaginationChange) {
-      onPaginationChange({
-        currentPage: current,
-        pageSize: size,
-      });
-    }
-  };
-
-  const renderCardLayout = () => {
+  const renderCardLayout = useCallback(() => {
     if (rowData.length === 0) {
       return (
         <NoRowsOverlay
@@ -163,18 +168,20 @@ const DataTableComponent = <T extends object>({
     return (
       <div className="data-table-cards">
         {rowData.map((row, index) => {
-          const rowObject = row as Record<string, any>;
+          const rowObject = row as Record<string, unknown>;
           return (
             <div key={index} className="data-table-card">
               <div className="card-content">
-                {Object.entries(rowObject).map(([key, value]) => (
-                  <div key={key} className="card-row">
-                    <strong className="card-label">
-                      {columnLabels?.[key] || key}:
-                    </strong>
-                    <span className="card-value">{String(value)}</span>
-                  </div>
-                ))}
+                {Object.entries(rowObject)
+                  .filter(([key]) => !memoizedHiddenColumns.includes(key))
+                  .map(([key, value]) => (
+                    <div key={key} className="card-row">
+                      <strong className="card-label">
+                        {memoizedColumnLabels?.[key] || key}:
+                      </strong>
+                      <span className="card-value">{String(value)}</span>
+                    </div>
+                  ))}
               </div>
               {(onEdit || onDelete || onInfo) && (
                 <div className="card-actions">
@@ -190,13 +197,32 @@ const DataTableComponent = <T extends object>({
         })}
       </div>
     );
-  };
+  }, [
+    rowData,
+    memoizedColumnLabels,
+    memoizedHiddenColumns,
+    noDataTitle,
+    noDataDescription,
+    onEdit,
+    onDelete,
+    onInfo,
+  ]);
+
+  const handlePreviousPage = useCallback(() => {
+    handlePaginate(current_page - 1, per_page);
+  }, [current_page, per_page, handlePaginate]);
+
+  const handleNextPage = useCallback(() => {
+    handlePaginate(current_page + 1, per_page);
+  }, [current_page, per_page, handlePaginate]);
 
   useEffect(() => {
-    defineRowData();
+    setRowData(data);
+  }, [data]);
+
+  useEffect(() => {
     defineColumnsByData();
-    handlePageSizeSelector();
-  }, [data, columnLabels, hiddenColumns]);
+  }, [defineColumnsByData]);
 
   return (
     <div className="data-table-container">
@@ -209,7 +235,6 @@ const DataTableComponent = <T extends object>({
           columnDefs={colDefs}
           pagination={false}
           paginationPageSize={per_page || 10}
-          paginationPageSizeSelector={pageSizeSelector}
           suppressPaginationPanel={false}
           paginationAutoPageSize={false}
           suppressScrollOnNewData={true}
@@ -220,7 +245,6 @@ const DataTableComponent = <T extends object>({
           suppressMenuHide={isMobile}
           suppressNoRowsOverlay={false}
           suppressRowHoverHighlight={false}
-          rowSelection={isMobile ? undefined : "single"}
           rowHeight={isMobile ? 48 : undefined}
           headerHeight={isMobile ? 40 : undefined}
           domLayout="autoHeight"
@@ -240,9 +264,7 @@ const DataTableComponent = <T extends object>({
       <div className="pagination-controls">
         <IconButton
           disabled={current_page === 1}
-          onClick={() => {
-            handlePaginate(current_page - 1, per_page);
-          }}
+          onClick={handlePreviousPage}
           icon={FaChevronLeft}
         />
         <span className="pagination-info">
@@ -250,9 +272,7 @@ const DataTableComponent = <T extends object>({
         </span>
         <IconButton
           disabled={current_page === last_page}
-          onClick={() => {
-            handlePaginate(current_page + 1, per_page);
-          }}
+          onClick={handleNextPage}
           icon={FaChevronRight}
         />
       </div>

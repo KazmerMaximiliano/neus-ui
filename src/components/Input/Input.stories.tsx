@@ -59,25 +59,12 @@ const meta: Meta<typeof InputComponent> = {
     },
     type: {
       control: { type: "select" },
-      options: [
-        "text",
-        "password",
-        "email",
-        "number",
-        "color",
-        "date",
-        "datetime-local",
-        "month",
-        "tel",
-        "time",
-        "url",
-        "week",
-      ],
+      options: ["text", "password", "email", "number", "color", "tel", "url"],
       description: "The type of input field",
       table: {
         type: {
           summary:
-            "'text' | 'password' | 'email' | 'number' | 'color' | 'date' | 'datetime-local' | 'month' | 'tel' | 'time' | 'url' | 'week'",
+            "'text' | 'password' | 'email' | 'number' | 'color' | 'tel' | 'url'",
         },
         category: "Props",
       },
@@ -150,7 +137,6 @@ export const Input: Story = {
     label: "Example Input",
     type: "text",
     value: "",
-    defaultValue: "",
     error: "",
     min: "",
     max: "",
