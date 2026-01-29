@@ -6,7 +6,7 @@ NAME: Neus UI
 TYPE: React UI Component Library
 PRIMARY_LANGUAGE: TypeScript
 TARGET_FRAMEWORK: React 19+
-REPOSITORY: https://github.com/KazmerMaximiliano/neus-ui
+REPOSITORY: <https://github.com/KazmerMaximiliano/neus-ui>
 DEFAULT_BRANCH: main
 PACKAGE_MANAGER: pnpm
 
@@ -110,7 +110,8 @@ ComponentName/
 | Input          | src/components/Input/          | STABLE | Text validation                  |
 | InteractiveMap | src/components/InteractiveMap/ | STABLE | Google Maps integration          |
 | Link           | src/components/Link/           | STABLE | Styled links                     |
-| Menu           | src/components/Menu/           | STABLE | Dropdown menu                    |
+| Dropdown       | src/components/Dropdown/       | STABLE | Dropdown menu                    |
+| Menu           | src/components/Menu/           | STABLE | Actions menu                     |
 | Modal          | src/components/Modal/          | STABLE | Dialog boxes                     |
 | MultiSelect    | src/components/MultiSelect/    | STABLE | Multiple selection               |
 | Select         | src/components/Select/         | STABLE | Single selection                 |
@@ -165,7 +166,7 @@ ComponentName/
 
 ### TypeScript Conventions
 
-#### Type Definitions MUST follow pattern:
+#### Type Definitions MUST follow pattern
 
 ```typescript
 // FILE: ComponentName.types.ts
@@ -181,7 +182,7 @@ export type ComponentProps = {
 };
 ```
 
-#### Component Implementation MUST follow pattern:
+#### Component Implementation MUST follow pattern
 
 ```typescript
 // FILE: ComponentName.tsx
@@ -207,7 +208,7 @@ export const ComponentName = ({
 };
 ```
 
-### Import Order MUST be:
+### Import Order MUST be
 
 1. React and external dependencies
 2. Internal components and hooks
@@ -457,7 +458,7 @@ Storybook
 
 ## CRITICAL CONSTRAINTS
 
-### MUST NOT VIOLATE:
+### MUST NOT VIOLATE
 
 1. Component file structure pattern
 2. Type definition separation
@@ -467,7 +468,7 @@ Storybook
 6. ESLint rules
 7. Import organization
 
-### MUST ALWAYS:
+### MUST ALWAYS
 
 1. Create .types.ts file for components
 2. Create .styles.css file for components
@@ -477,7 +478,7 @@ Storybook
 6. Test all interactive features
 7. Update documentation
 
-### SHOULD TYPICALLY:
+### SHOULD TYPICALLY
 
 1. Create .utils.ts if complex logic needed
 2. Create .stories.tsx for Storybook
@@ -485,6 +486,35 @@ Storybook
 4. Handle disabled/loading/error states
 5. Provide meaningful error messages
 6. Support keyboard navigation
+
+## STORYBOOK STORIES STYLE GUIDE
+
+### Philosophy
+
+Each component MUST export a single Story that exposes all props as editable controls via `argTypes`. Do NOT create multiple stories for different states (e.g., `Disabled`, `Loading`, `Outlined`). Instead, let the user explore all states interactively through Storybook controls.
+
+### Story Rules
+
+| RULE                          | DESCRIPTION                                                                       |
+| ----------------------------- | --------------------------------------------------------------------------------- |
+| Single story per component    | Export only ONE named Story matching the component name                           |
+| All props as args             | Every prop must appear in `args` with a sensible default value                    |
+| All props in argTypes         | Every prop must have a `control` type and `description` in `argTypes`             |
+| Use `action` for callbacks    | Event handler props use `action: "eventName"` instead of a value in `args`        |
+| Use `autodocs` tag            | Always include `tags: ["autodocs"]` for automatic documentation                   |
+| Centered layout               | Use `parameters: { layout: "centered" }` unless the component requires full width |
+| Named export = component name | The Story export name must match the component name (e.g., `export const Button`) |
+| Default export = meta         | The meta object is always the default export                                      |
+
+### Control Types Reference
+
+| PROP TYPE          | CONTROL     | EXAMPLE                                        |
+| ------------------ | ----------- | ---------------------------------------------- |
+| `string`           | `"text"`    | `control: "text"`                              |
+| `boolean`          | `"boolean"` | `control: "boolean"`                           |
+| `union of strings` | `"select"`  | `control: "select", options: [...]`            |
+| `number`           | `"number"`  | `control: "number"`                            |
+| `callback / event` | `action`    | `action: "clicked"` (in argTypes, not in args) |
 
 ## DOCUMENTATION SOURCES
 

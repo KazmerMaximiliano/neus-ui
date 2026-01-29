@@ -33,6 +33,33 @@ const meta: Meta<typeof ActionsComponent> = {
         category: "Events",
       },
     },
+    infoLabel: {
+      control: "text",
+      description: "Custom label for the info menu item",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "Info" },
+        category: "Labels",
+      },
+    },
+    editLabel: {
+      control: "text",
+      description: "Custom label for the edit menu item",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "Edit" },
+        category: "Labels",
+      },
+    },
+    deleteLabel: {
+      control: "text",
+      description: "Custom label for the delete menu item",
+      table: {
+        type: { summary: "string" },
+        defaultValue: { summary: "Delete" },
+        category: "Labels",
+      },
+    },
   },
 };
 
