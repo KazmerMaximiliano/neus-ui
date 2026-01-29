@@ -114,9 +114,12 @@ describe("Actions", () => {
       const onDelete = vi.fn();
       renderActions({ onInfo, onEdit, onDelete });
       openMenu();
-
       fireEvent.click(screen.getByText("Info"));
+
+      openMenu();
       fireEvent.click(screen.getByText("Edit"));
+
+      openMenu();
       fireEvent.click(screen.getByText("Delete"));
 
       expect(onInfo).toHaveBeenCalledTimes(1);

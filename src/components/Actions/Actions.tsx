@@ -21,7 +21,7 @@ export const Actions = ({
 
   return (
     <div className="actions-container">
-      <Menu icon={FaEllipsisV} items={items} />
+      <Menu icon={FaEllipsisV} items={items} size="small" />
     </div>
   );
 };
