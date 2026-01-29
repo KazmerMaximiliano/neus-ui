@@ -16,6 +16,7 @@ export const TimeInput = ({
   value,
   defaultValue,
   required,
+  format = "24h",
   onChange,
 }: TimeInputProps) => {
   const isControlled = value !== undefined;
@@ -29,7 +30,7 @@ export const TimeInput = ({
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const currentValue = isControlled ? value : selectedTime;
-  const displayValue = serializeTimeValue(currentValue);
+  const displayValue = serializeTimeValue(currentValue, format);
 
   const handleSelect = (newValue: TimeValue | undefined) => {
     if (!disabled && !readonly) {
@@ -103,6 +104,7 @@ export const TimeInput = ({
               }
               disabled={disabled}
               readonly={readonly}
+              format={format}
             />
           </div>
         )}
@@ -112,7 +114,7 @@ export const TimeInput = ({
         <input
           type="hidden"
           name={name}
-          value={serializeTimeValue(currentValue)}
+          value={serializeTimeValue(currentValue, "24h")}
           required={required}
         />
       )}
