@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { Button } from "../Button/Button";
+import { IconButton } from "../IconButton/IconButton";
 import "./Menu.styles.css";
 import { MenuProps } from "./Menu.types";
 
-export const Menu = ({ icon: Icon, name, items }: MenuProps) => {
+export const Menu = ({ icon: Icon, text, items }: MenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const [openMenu, setOpenMenu] = useState(false);
@@ -23,15 +25,23 @@ export const Menu = ({ icon: Icon, name, items }: MenuProps) => {
     };
   }, [openMenu]);
 
+  const handleToggle = () => {
+    setOpenMenu(!openMenu);
+  };
+
   return (
-    <div className="menu" ref={menuRef} onClick={() => setOpenMenu(!openMenu)}>
-      <div className="menu-avatar">{Icon ? <Icon /> : "X"}</div>
-      <div className={`menu-caret ${openMenu ? "menu-caret--open" : ""}`} />
+    <div className="menu" ref={menuRef}>
+      {Icon ? (
+        <IconButton icon={Icon} variant="text" onClick={handleToggle} />
+      ) : (
+        <Button
+          label={text || ""}
+          variant="text"
+          onClick={handleToggle}
+        />
+      )}
       {openMenu && (
         <div className="menu-dropdown">
-          <div className="menu-item">
-            <span className="menu-name">{name || ""}</span>
-          </div>
           {items.map((item, index) => (
             <div
               key={index}

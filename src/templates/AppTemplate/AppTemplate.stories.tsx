@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { FaBell, FaCog, FaHome, FaSearch, FaUser } from "react-icons/fa";
-import { Menu } from "../../components/Menu/Menu";
+import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { AppTemplate as AppTemplateComponent } from "./AppTemplate";
 
 const meta: Meta<typeof AppTemplateComponent> = {
@@ -87,7 +87,7 @@ export const AppTemplate: Story = {
       </div>
     ),
     routes: defaultRoutes,
-    menu: <Menu items={menuItems} name="User" icon={FaUser} />,
+    menu: <Dropdown items={menuItems} name="User" icon={FaUser} />,
   },
 };
 

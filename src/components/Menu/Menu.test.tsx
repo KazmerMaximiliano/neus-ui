@@ -1,6 +1,7 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { FaUser } from "react-icons/fa";
+import { ThemeProvider } from "../../providers/ThemeProvider";
 import { Menu } from "./Menu";
 
 afterEach(() => {
@@ -14,7 +15,11 @@ const defaultItems = [
 ];
 
 const renderMenu = (props = {}) => {
-  return render(<Menu items={defaultItems} {...props} />);
+  return render(
+    <ThemeProvider>
+      <Menu items={defaultItems} {...props} />
+    </ThemeProvider>,
+  );
 };
 
 describe("Menu", () => {
@@ -24,24 +29,20 @@ describe("Menu", () => {
       expect(container.querySelector(".menu")).toBeInTheDocument();
     });
 
-    it("renders avatar container", () => {
-      const { container } = renderMenu();
-      expect(container.querySelector(".menu-avatar")).toBeInTheDocument();
+    it("renders a Button with text when text prop is provided", () => {
+      renderMenu({ text: "Options" });
+      expect(screen.getByText("Options")).toBeInTheDocument();
     });
 
-    it("renders X when no icon provided", () => {
-      const { container } = renderMenu();
-      expect(container.querySelector(".menu-avatar")).toHaveTextContent("X");
-    });
-
-    it("renders icon when provided", () => {
+    it("renders an IconButton when icon prop is provided", () => {
       const { container } = renderMenu({ icon: FaUser });
-      expect(container.querySelector(".menu-avatar svg")).toBeInTheDocument();
+      expect(container.querySelector("svg")).toBeInTheDocument();
     });
 
-    it("renders caret indicator", () => {
+    it("renders a Button with empty label when no icon or text provided", () => {
       const { container } = renderMenu();
-      expect(container.querySelector(".menu-caret")).toBeInTheDocument();
+      const button = container.querySelector("button");
+      expect(button).toBeInTheDocument();
     });
   });
 
@@ -51,48 +52,37 @@ describe("Menu", () => {
       expect(container.querySelector(".menu-dropdown")).not.toBeInTheDocument();
     });
 
-    it("opens dropdown on click", () => {
-      const { container } = renderMenu();
-      const menu = container.querySelector(".menu");
-      fireEvent.click(menu!);
+    it("opens dropdown on click with text trigger", () => {
+      const { container } = renderMenu({ text: "Options" });
+      fireEvent.click(screen.getByText("Options"));
       expect(container.querySelector(".menu-dropdown")).toBeInTheDocument();
     });
 
     it("closes dropdown on second click", () => {
-      const { container } = renderMenu();
-      const menu = container.querySelector(".menu");
-      fireEvent.click(menu!);
-      fireEvent.click(menu!);
+      const { container } = renderMenu({ text: "Options" });
+      fireEvent.click(screen.getByText("Options"));
+      fireEvent.click(screen.getByText("Options"));
       expect(container.querySelector(".menu-dropdown")).not.toBeInTheDocument();
     });
 
-    it("shows name in dropdown when provided", () => {
-      const { container } = renderMenu({ name: "John Doe" });
-      const menu = container.querySelector(".menu");
-      fireEvent.click(menu!);
-      expect(screen.getByText("John Doe")).toBeInTheDocument();
+    it("opens dropdown when icon trigger is clicked", () => {
+      renderMenu({ icon: FaUser });
+      const button = document.querySelector("button");
+      fireEvent.click(button!);
+      expect(document.querySelector(".menu-dropdown")).toBeInTheDocument();
     });
 
-    it("shows all menu items", () => {
-      const { container } = renderMenu();
-      const menu = container.querySelector(".menu");
-      fireEvent.click(menu!);
+    it("shows all menu items when open", () => {
+      renderMenu({ text: "Options" });
+      fireEvent.click(screen.getByText("Options"));
       expect(screen.getByText("Profile")).toBeInTheDocument();
       expect(screen.getByText("Settings")).toBeInTheDocument();
       expect(screen.getByText("Logout")).toBeInTheDocument();
     });
 
-    it("adds open class to caret when dropdown is open", () => {
-      const { container } = renderMenu();
-      const menu = container.querySelector(".menu");
-      fireEvent.click(menu!);
-      expect(container.querySelector(".menu-caret--open")).toBeInTheDocument();
-    });
-
     it("closes dropdown on outside click", () => {
-      const { container } = renderMenu();
-      const menu = container.querySelector(".menu");
-      fireEvent.click(menu!);
+      const { container } = renderMenu({ text: "Options" });
+      fireEvent.click(screen.getByText("Options"));
       expect(container.querySelector(".menu-dropdown")).toBeInTheDocument();
       fireEvent.mouseDown(document.body);
       expect(container.querySelector(".menu-dropdown")).not.toBeInTheDocument();
@@ -103,17 +93,19 @@ describe("Menu", () => {
     it("calls item onClick when clicked", () => {
       const onClick = vi.fn();
       const items = [{ label: "Click me", onClick }];
-      const { container } = render(<Menu items={items} />);
-      const menu = container.querySelector(".menu");
-      fireEvent.click(menu!);
+      render(
+        <ThemeProvider>
+          <Menu items={items} text="Options" />
+        </ThemeProvider>,
+      );
+      fireEvent.click(screen.getByText("Options"));
       fireEvent.click(screen.getByText("Click me"));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
     it("renders items with clickable class", () => {
-      const { container } = renderMenu();
-      const menu = container.querySelector(".menu");
-      fireEvent.click(menu!);
+      const { container } = renderMenu({ text: "Options" });
+      fireEvent.click(screen.getByText("Options"));
       const clickableItems = container.querySelectorAll(".menu-item.clickable");
       expect(clickableItems).toHaveLength(3);
     });

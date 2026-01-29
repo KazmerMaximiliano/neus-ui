@@ -5,6 +5,6 @@ export type MenuItem = {
 };
 export type MenuProps = {
     icon?: IconType;
-    name?: string;
+    text?: string;
     items: MenuItem[];
 };

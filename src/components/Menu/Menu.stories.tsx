@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FaUser } from "react-icons/fa";
+import { FaEllipsisV } from "react-icons/fa";
 import { Menu as MenuComponent } from "./Menu";
 
 const meta: Meta<typeof MenuComponent> = {
@@ -11,10 +11,10 @@ const meta: Meta<typeof MenuComponent> = {
   tags: ["autodocs"],
   argTypes: {
     icon: {
-      description: "Icon displayed in the menu avatar",
+      description: "Icon to display as the menu trigger (uses IconButton)",
     },
-    name: {
-      description: "Name displayed at the top of the dropdown menu",
+    text: {
+      description: "Text to display as the menu trigger (uses Button)",
       control: "text",
     },
     items: {
@@ -27,24 +27,19 @@ type Story = StoryObj<typeof meta>;
 
 export const Menu: Story = {
   args: {
-    icon: FaUser,
-    name: "John Doe",
+    icon: FaEllipsisV,
     items: [
       {
-        label: "My Profile",
-        onClick: () => alert("Navigating to profile"),
+        label: "Edit",
+        onClick: () => alert("Edit"),
       },
       {
-        label: "Settings",
-        onClick: () => alert("Opening settings"),
+        label: "Delete",
+        onClick: () => alert("Delete"),
       },
       {
-        label: "Help",
-        onClick: () => alert("Showing help"),
-      },
-      {
-        label: "Sign Out",
-        onClick: () => alert("Signing out"),
+        label: "Share",
+        onClick: () => alert("Share"),
       },
     ],
   },
