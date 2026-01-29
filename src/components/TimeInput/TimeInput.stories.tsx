@@ -76,6 +76,15 @@ const meta: Meta<typeof TimeInputComponent> = {
         type: { summary: "string" },
       },
     },
+    format: {
+      control: "radio",
+      options: ["12h", "24h"],
+      description: "Time display format (12-hour or 24-hour)",
+      table: {
+        type: { summary: '"12h" | "24h"' },
+        defaultValue: { summary: '"24h"' },
+      },
+    },
     onChange: {
       control: false,
       description: "Callback when time selection changes",
@@ -99,6 +108,7 @@ export const TimeInput: Story = {
     readonly: false,
     required: false,
     error: undefined,
+    format: "24h",
   },
 };
 

@@ -47782,7 +47782,15 @@ const DH = ["places"], BH = ({
       ]
     }
   );
-}, Th = (e) => e ? `${e.hours.toString().padStart(2, "0")}:${e.minutes.toString().padStart(2, "0")}` : "", $H = ({
+}, Th = (e, t = "24h") => {
+  if (!e) return "";
+  const s = e.minutes.toString().padStart(2, "0");
+  if (t === "12h") {
+    const i = e.hours >= 12 ? "PM" : "AM";
+    return `${(e.hours % 12 || 12).toString().padStart(2, "0")}:${s} ${i}`;
+  }
+  return `${e.hours.toString().padStart(2, "0")}:${s}`;
+}, $H = ({
   label: e,
   name: t,
   error: s,
@@ -47792,24 +47800,25 @@ const DH = ["places"], BH = ({
   value: r,
   defaultValue: a,
   required: l,
-  onChange: c
+  format: c = "24h",
+  onChange: d
 }) => {
-  const d = r !== void 0, [u, h] = F(
-    d ? r : a
-  ), [g, p] = F(!1), f = B(null), m = B(null), v = d ? r : u, C = Th(v), b = (y) => {
-    !i && !o && (d || h(y), c && c(y));
+  const u = r !== void 0, [h, g] = F(
+    u ? r : a
+  ), [p, f] = F(!1), m = B(null), v = B(null), C = u ? r : h, b = Th(C, c), y = (w) => {
+    !i && !o && (u || g(w), d && d(w));
   };
   return P(() => {
-    const y = (w) => {
-      f.current && !f.current.contains(w.target) && p(!1);
+    const w = (S) => {
+      m.current && !m.current.contains(S.target) && f(!1);
     };
-    if (g)
-      return document.addEventListener("mousedown", y), () => {
-        document.removeEventListener("mousedown", y);
+    if (p)
+      return document.addEventListener("mousedown", w), () => {
+        document.removeEventListener("mousedown", w);
       };
-  }, [g]), P(() => {
-    d && h(r);
-  }, [r, d]), /* @__PURE__ */ oe("div", { className: "time-input-wrapper", ref: f, children: [
+  }, [p]), P(() => {
+    u && g(r);
+  }, [r, u]), /* @__PURE__ */ oe("div", { className: "time-input-wrapper", ref: m, children: [
     e && /* @__PURE__ */ oe(
       "label",
       {
@@ -47824,21 +47833,22 @@ const DH = ["places"], BH = ({
       /* @__PURE__ */ I(
         "button",
         {
-          ref: m,
+          ref: v,
           className: `time-input-field${s ? " error" : ""}${i ? " disabled" : ""}`,
-          onClick: () => !i && !o && p(!g),
+          onClick: () => !i && !o && f(!p),
           disabled: i,
           type: "button",
-          children: C || n
+          children: b || n
         }
       ),
-      g && /* @__PURE__ */ I("div", { className: "time-input-dropdown", children: /* @__PURE__ */ I(
+      p && /* @__PURE__ */ I("div", { className: "time-input-dropdown", children: /* @__PURE__ */ I(
         Db,
         {
-          value: v,
-          onChange: (y) => b(y),
+          value: C,
+          onChange: (w) => y(w),
           disabled: i,
-          readonly: o
+          readonly: o,
+          format: c
         }
       ) })
     ] }),
@@ -47847,7 +47857,7 @@ const DH = ["places"], BH = ({
       {
         type: "hidden",
         name: t,
-        value: Th(v),
+        value: Th(C, "24h"),
         required: l
       }
     ),

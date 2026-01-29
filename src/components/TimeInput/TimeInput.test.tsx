@@ -190,6 +190,43 @@ describe("TimeInput", () => {
     });
   });
 
+  describe("format", () => {
+    it("displays time in 24h format by default", () => {
+      renderTimeInput({ value: { hours: 14, minutes: 30 } });
+      expect(screen.getByText("14:30")).toBeInTheDocument();
+    });
+
+    it("displays time in 12h format with PM", () => {
+      renderTimeInput({ value: { hours: 14, minutes: 30 }, format: "12h" });
+      expect(screen.getByText("02:30 PM")).toBeInTheDocument();
+    });
+
+    it("displays time in 12h format with AM", () => {
+      renderTimeInput({ value: { hours: 9, minutes: 15 }, format: "12h" });
+      expect(screen.getByText("09:15 AM")).toBeInTheDocument();
+    });
+
+    it("displays 12:00 PM for noon in 12h format", () => {
+      renderTimeInput({ value: { hours: 12, minutes: 0 }, format: "12h" });
+      expect(screen.getByText("12:00 PM")).toBeInTheDocument();
+    });
+
+    it("displays 12:00 AM for midnight in 12h format", () => {
+      renderTimeInput({ value: { hours: 0, minutes: 0 }, format: "12h" });
+      expect(screen.getByText("12:00 AM")).toBeInTheDocument();
+    });
+
+    it("hidden input always uses 24h format", () => {
+      const { container } = renderTimeInput({
+        name: "time",
+        value: { hours: 14, minutes: 30 },
+        format: "12h",
+      });
+      const hiddenInput = container.querySelector('input[type="hidden"]');
+      expect(hiddenInput).toHaveAttribute("value", "14:30");
+    });
+  });
+
   describe("controlled vs uncontrolled", () => {
     it("works with defaultValue", () => {
       renderTimeInput({ defaultValue: { hours: 10, minutes: 30 } });
