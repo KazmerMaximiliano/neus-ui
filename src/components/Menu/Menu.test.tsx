@@ -48,21 +48,21 @@ describe("Menu", () => {
 
   describe("dropdown", () => {
     it("does not show dropdown by default", () => {
-      const { container } = renderMenu();
-      expect(container.querySelector(".menu-dropdown")).not.toBeInTheDocument();
+      renderMenu();
+      expect(document.querySelector(".menu-dropdown")).not.toBeInTheDocument();
     });
 
     it("opens dropdown on click with text trigger", () => {
-      const { container } = renderMenu({ text: "Options" });
+      renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
-      expect(container.querySelector(".menu-dropdown")).toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).toBeInTheDocument();
     });
 
     it("closes dropdown on second click", () => {
-      const { container } = renderMenu({ text: "Options" });
+      renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
       fireEvent.click(screen.getByText("Options"));
-      expect(container.querySelector(".menu-dropdown")).not.toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).not.toBeInTheDocument();
     });
 
     it("opens dropdown when icon trigger is clicked", () => {
@@ -81,11 +81,11 @@ describe("Menu", () => {
     });
 
     it("closes dropdown on outside click", () => {
-      const { container } = renderMenu({ text: "Options" });
+      renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
-      expect(container.querySelector(".menu-dropdown")).toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).toBeInTheDocument();
       fireEvent.mouseDown(document.body);
-      expect(container.querySelector(".menu-dropdown")).not.toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).not.toBeInTheDocument();
     });
   });
 
@@ -104,9 +104,9 @@ describe("Menu", () => {
     });
 
     it("renders items with clickable class", () => {
-      const { container } = renderMenu({ text: "Options" });
+      renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
-      const clickableItems = container.querySelectorAll(".menu-item.clickable");
+      const clickableItems = document.querySelectorAll(".menu-item.clickable");
       expect(clickableItems).toHaveLength(3);
     });
   });
