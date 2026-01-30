@@ -10,7 +10,7 @@ export const DateInput = ({
   name,
   error,
   disabled,
-  mode,
+  mode = "single",
   placeholder,
   readonly,
   value,
