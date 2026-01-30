@@ -47930,7 +47930,7 @@ const FH = ["places"], HH = ({
   loading: s
 }) => /* @__PURE__ */ oe("div", { className: "form", children: [
   e,
-  /* @__PURE__ */ I(Ki, { type: "submit", label: t, loading: s })
+  /* @__PURE__ */ I("div", { className: "submit-container", children: /* @__PURE__ */ I(Ki, { type: "submit", label: t, loading: s }) })
 ] });
 export {
   Mc as Actions,
