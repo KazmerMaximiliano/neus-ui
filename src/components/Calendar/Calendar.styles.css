@@ -6,6 +6,7 @@
   min-width: 350px;
   max-height: 550px;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .calendar-container .label-wrapper {

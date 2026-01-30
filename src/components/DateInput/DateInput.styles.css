@@ -99,6 +99,7 @@
   z-index: 10000;
   overflow: visible;
   animation: slideDown 0.2s ease-out;
+  background-color: #fff;
 }
 
 @keyframes slideDown {

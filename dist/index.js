@@ -42218,7 +42218,7 @@ const fu = ({
   name: t,
   error: s,
   disabled: i,
-  mode: n,
+  mode: n = "single",
   placeholder: o,
   readonly: r,
   value: a,
