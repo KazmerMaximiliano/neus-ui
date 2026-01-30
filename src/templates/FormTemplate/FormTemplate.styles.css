@@ -9,9 +9,10 @@
   grid-column: span 1;
 }
 
-.form .button {
+.form .submit-container {
   grid-column: span 2;
-  margin: auto;
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media (max-width: 768px) {
@@ -20,11 +21,11 @@
   }
 
   .form .input-wrapper,
-  .form .button {
+  .form .submit-container {
     grid-column: span 1;
   }
 
-  .form .button {
+  .form .submit-container .button {
     width: 100%;
   }
 }

@@ -1,0 +1,1 @@
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.form .input-wrapper{grid-column:span 1}.form .submit-container{grid-column:span 2;display:flex;justify-content:flex-end}@media(max-width:768px){.form{grid-template-columns:1fr}.form .input-wrapper,.form .submit-container{grid-column:span 1}.form .submit-container .button{width:100%}}
