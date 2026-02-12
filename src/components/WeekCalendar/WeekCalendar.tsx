@@ -10,6 +10,9 @@ import { formatDate, getSunday, getWeekDays } from "./WeekCalendar.utils";
 export const WeekCalendar = ({
   title = "Calendar",
   events = [],
+  hoverContent,
+  onEventClick,
+  onWeekChange,
 }: WeekCalendarProps) => {
   const [weekStart, setWeekStart] = useState<Date>(() => getSunday(new Date()));
 
@@ -24,6 +27,9 @@ export const WeekCalendar = ({
     setWeekStart((prev) => {
       const d = new Date(prev);
       d.setDate(d.getDate() - 7);
+      const end = new Date(d);
+      end.setDate(end.getDate() + 6);
+      onWeekChange?.(d, end);
       return d;
     });
   };
@@ -32,6 +38,9 @@ export const WeekCalendar = ({
     setWeekStart((prev) => {
       const d = new Date(prev);
       d.setDate(d.getDate() + 7);
+      const end = new Date(d);
+      end.setDate(end.getDate() + 6);
+      onWeekChange?.(d, end);
       return d;
     });
   };
@@ -60,7 +69,7 @@ export const WeekCalendar = ({
       </div>
       <div className="week-calendar">
         <div className="week-calendar-row">
-          <div className="week-calendar-lodging-cell"></div>
+          <div className="week-calendar-category-cell"></div>
           {days.map((day) => {
             const isToday = day.getTime() === today.getTime();
             return (
@@ -87,6 +96,8 @@ export const WeekCalendar = ({
               entry.category.color ??
               CATEGORY_COLORS[index % CATEGORY_COLORS.length]
             }
+            hoverContent={hoverContent}
+            onEventClick={onEventClick}
           />
         ))}
       </div>

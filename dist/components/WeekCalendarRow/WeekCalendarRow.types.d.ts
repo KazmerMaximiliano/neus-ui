@@ -24,4 +24,6 @@ export type WeekCalendarRowProps = {
     entry: EventsByCategory;
     days: Date[];
     color: string;
+    hoverContent?: React.ReactNode;
+    onEventClick?: (event: CalendarEvent) => void;
 };

@@ -3,7 +3,7 @@
   grid-template-columns: repeat(9, 1fr);
 }
 
-.week-calendar-lodging-cell {
+.week-calendar-category-cell {
   position: relative;
   grid-column: span 2;
   border: 1px solid var(--color-border-light);
@@ -26,8 +26,8 @@
   gap: 2px;
 }
 
-.week-calendar-day-cell .reservation-single,
-.week-calendar-day-cell .reservation-start {
+.week-calendar-day-cell .event-single,
+.week-calendar-day-cell .event-start {
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -37,7 +37,7 @@
   justify-content: center;
 }
 
-.reservation-content {
+.event-content {
   position: absolute;
   left: 50%;
   transform: translate(-23px, -50%);
@@ -54,7 +54,7 @@
   pointer-events: none;
 }
 
-.reservation-avatar {
+.event-avatar {
   width: 30px;
   height: 30px;
   min-width: 30px;
@@ -68,13 +68,13 @@
   justify-content: center;
 }
 
-.reservation-info {
+.event-info {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.reservation-guest-name {
+.event-title {
   font-size: 12px;
   font-weight: 600;
   color: var(--color-white);
@@ -83,14 +83,14 @@
   text-overflow: ellipsis;
 }
 
-.reservation-guest-count {
+.event-description {
   font-size: 10px;
   font-weight: 400;
   color: var(--color-white-300);
   line-height: 1.2;
 }
 
-.week-calendar-day-cell .reservation-start::after {
+.week-calendar-day-cell .event-start::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -101,7 +101,7 @@
   background-color: inherit;
 }
 
-.week-calendar-day-cell .reservation-continue {
+.week-calendar-day-cell .event-continue {
   position: absolute;
   left: -1px;
   width: calc(100% + 2px);
@@ -109,14 +109,14 @@
   z-index: 1;
 }
 
-.week-calendar-day-cell .reservation-end {
+.week-calendar-day-cell .event-end {
   width: 46px;
   height: 46px;
   border-radius: 50%;
   z-index: 1;
 }
 
-.week-calendar-day-cell .reservation-end::before {
+.week-calendar-day-cell .event-end::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -127,7 +127,7 @@
   background-color: inherit;
 }
 
-.week-calendar-lodging-cell.with-point::before {
+.week-calendar-category-cell.with-point::before {
   content: "";
   position: absolute;
   left: 10px;
@@ -162,7 +162,7 @@
   background-color: #6ec6a3;
 }
 
-.week-calendar-lodging-name {
+.week-calendar-category-name {
   width: 100%;
   font-size: 14px;
   font-weight: 600;
@@ -174,7 +174,7 @@
   text-overflow: ellipsis;
 }
 
-.week-calendar-lodging-info {
+.week-calendar-category-info {
   width: 100%;
   font-size: 12px;
   font-weight: 400;
@@ -184,4 +184,15 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.week-calendar-day-cell.clickable {
+  cursor: pointer;
+}
+
+.week-calendar-hover-tooltip {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  transform: translate(12px, 12px);
 }

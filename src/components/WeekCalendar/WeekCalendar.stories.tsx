@@ -25,6 +25,21 @@ const meta: Meta<typeof WeekCalendarComponent> = {
       control: "object",
       description: "Array of event categories with their events",
     },
+    hoverContent: {
+      control: false,
+      description:
+        "Custom React node displayed as a tooltip at the cursor position when hovering over event cells",
+    },
+    onEventClick: {
+      action: "eventClicked",
+      description:
+        "Callback fired when clicking an event cell, receives the CalendarEvent",
+    },
+    onWeekChange: {
+      action: "weekChanged",
+      description:
+        "Callback fired when navigating to a different week, receives weekStart and weekEnd dates",
+    },
   },
 };
 
@@ -33,6 +48,20 @@ type Story = StoryObj<typeof meta>;
 export const WeekCalendar: Story = {
   args: {
     title: "Events",
+    hoverContent: (
+      <div
+        style={{
+          padding: "8px 12px",
+          backgroundColor: "#fff",
+          border: "1px solid #e0e0e0",
+          borderRadius: "8px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+          fontSize: "13px",
+        }}
+      >
+        Click to see details
+      </div>
+    ),
     events: [
       {
         category: { title: "Room A", label: "Suite", color: "purple" },

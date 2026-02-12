@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { ThemeProvider } from "../../providers/ThemeProvider";
 import { WeekCalendar } from "./WeekCalendar";
 import { WeekCalendarProps } from "./WeekCalendar.types";
@@ -78,18 +78,18 @@ describe("WeekCalendar", () => {
   describe("events", () => {
     it("renders without events by default", () => {
       const { container } = renderWeekCalendar();
-      const lodgingCells = container.querySelectorAll(
-        ".week-calendar-lodging-cell.with-point",
+      const categoryCells = container.querySelectorAll(
+        ".week-calendar-category-cell.with-point",
       );
-      expect(lodgingCells).toHaveLength(0);
+      expect(categoryCells).toHaveLength(0);
     });
 
     it("renders event rows when events are provided", () => {
       const { container } = renderWeekCalendar({ events: mockEvents });
-      const lodgingCells = container.querySelectorAll(
-        ".week-calendar-lodging-cell.with-point",
+      const categoryCells = container.querySelectorAll(
+        ".week-calendar-category-cell.with-point",
       );
-      expect(lodgingCells).toHaveLength(1);
+      expect(categoryCells).toHaveLength(1);
     });
 
     it("renders category title and label", () => {
@@ -140,6 +140,102 @@ describe("WeekCalendar", () => {
       const { container } = renderWeekCalendar();
       const todayCell = container.querySelector(".week-calendar-day-today");
       expect(todayCell).toBeInTheDocument();
+    });
+  });
+
+  describe("onWeekChange", () => {
+    it("calls onWeekChange when navigating to previous week", () => {
+      const handleWeekChange = vi.fn();
+      const { container } = renderWeekCalendar({
+        onWeekChange: handleWeekChange,
+      });
+      const prevButton = container.querySelectorAll(
+        ".week-selector button",
+      )[0];
+      fireEvent.click(prevButton);
+      expect(handleWeekChange).toHaveBeenCalledTimes(1);
+      expect(handleWeekChange).toHaveBeenCalledWith(
+        expect.any(Date),
+        expect.any(Date),
+      );
+    });
+
+    it("calls onWeekChange when navigating to next week", () => {
+      const handleWeekChange = vi.fn();
+      const { container } = renderWeekCalendar({
+        onWeekChange: handleWeekChange,
+      });
+      const nextButton = container.querySelectorAll(
+        ".week-selector button",
+      )[1];
+      fireEvent.click(nextButton);
+      expect(handleWeekChange).toHaveBeenCalledTimes(1);
+      expect(handleWeekChange).toHaveBeenCalledWith(
+        expect.any(Date),
+        expect.any(Date),
+      );
+    });
+
+    it("provides weekEnd 6 days after weekStart", () => {
+      const handleWeekChange = vi.fn();
+      const { container } = renderWeekCalendar({
+        onWeekChange: handleWeekChange,
+      });
+      const nextButton = container.querySelectorAll(
+        ".week-selector button",
+      )[1];
+      fireEvent.click(nextButton);
+      const [start, end] = handleWeekChange.mock.calls[0];
+      const diffDays = Math.round(
+        (end.getTime() - start.getTime()) / 86400000,
+      );
+      expect(diffDays).toBe(6);
+    });
+
+    it("does not throw when onWeekChange is not provided", () => {
+      const { container } = renderWeekCalendar();
+      const prevButton = container.querySelectorAll(
+        ".week-selector button",
+      )[0];
+      expect(() => fireEvent.click(prevButton)).not.toThrow();
+    });
+  });
+
+  describe("hoverContent", () => {
+    it("passes hoverContent to event rows", () => {
+      const { container } = renderWeekCalendar({
+        events: mockEvents,
+        hoverContent: <span>Hover tooltip</span>,
+      });
+      const dayCells = container.querySelectorAll(".week-calendar-day-cell");
+      const eventCell = Array.from(dayCells).find(
+        (cell) =>
+          cell.querySelector("[class^='event-']") !== null,
+      );
+      if (eventCell) {
+        fireEvent.mouseMove(eventCell, { clientX: 100, clientY: 200 });
+        expect(screen.getByText("Hover tooltip")).toBeInTheDocument();
+      }
+    });
+  });
+
+  describe("onEventClick", () => {
+    it("passes onEventClick to event rows", () => {
+      const handleClick = vi.fn();
+      const { container } = renderWeekCalendar({
+        events: mockEvents,
+        onEventClick: handleClick,
+      });
+      const clickableCells = container.querySelectorAll(
+        ".week-calendar-day-cell.clickable",
+      );
+      if (clickableCells.length > 0) {
+        fireEvent.click(clickableCells[0]);
+        expect(handleClick).toHaveBeenCalledTimes(1);
+        expect(handleClick).toHaveBeenCalledWith(
+          expect.objectContaining({ title: "John Doe" }),
+        );
+      }
     });
   });
 });

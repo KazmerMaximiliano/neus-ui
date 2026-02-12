@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 18+ reusable UI components
+- 21+ reusable UI components
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -61,7 +61,7 @@ PERMITTED operations:
 ```
 neus-ui/
 ├── src/
-│   ├── components/              [DIRECTORY] 18+ UI components
+│   ├── components/              [DIRECTORY] 21+ UI components
 │   ├── templates/               [DIRECTORY] Pre-built layouts
 │   ├── hooks/                   [DIRECTORY] Custom React hooks
 │   ├── providers/               [DIRECTORY] Context providers
@@ -94,29 +94,32 @@ ComponentName/
 
 ## COMPONENT INVENTORY
 
-### Implemented Components (18 total)
+### Implemented Components (21 total)
 
-| NAME           | FILE_PATH                      | STATUS | FEATURES                         |
-| -------------- | ------------------------------ | ------ | -------------------------------- |
-| Actions        | src/components/Actions/        | STABLE | Action grouping                  |
-| Button         | src/components/Button/         | STABLE | Multiple variants, loading state |
-| Calendar       | src/components/Calendar/       | STABLE | Date picker                      |
-| Checkbox       | src/components/Checkbox/       | STABLE | Indeterminate state              |
-| Clock          | src/components/Clock/          | STABLE | Time picker                      |
-| DataTable      | src/components/DataTable/      | STABLE | Sorting, pagination, filtering   |
-| DateInput      | src/components/DateInput/      | STABLE | Date validation                  |
-| FileUploader   | src/components/FileUploader/   | STABLE | Drag and drop                    |
-| IconButton     | src/components/IconButton/     | STABLE | Icon containers                  |
-| Input          | src/components/Input/          | STABLE | Text validation                  |
-| InteractiveMap | src/components/InteractiveMap/ | STABLE | Google Maps integration          |
-| Link           | src/components/Link/           | STABLE | Styled links                     |
-| Dropdown       | src/components/Dropdown/       | STABLE | Dropdown menu                    |
-| Menu           | src/components/Menu/           | STABLE | Actions menu                     |
-| Modal          | src/components/Modal/          | STABLE | Dialog boxes                     |
-| MultiSelect    | src/components/MultiSelect/    | STABLE | Multiple selection               |
-| Select         | src/components/Select/         | STABLE | Single selection                 |
-| Sidebar        | src/components/Sidebar/        | STABLE | Navigation panel                 |
-| TimeInput      | src/components/TimeInput/      | STABLE | Time validation                  |
+| NAME             | FILE_PATH                          | STATUS | FEATURES                                    |
+| ---------------- | ---------------------------------- | ------ | ------------------------------------------- |
+| Actions          | src/components/Actions/            | STABLE | Action grouping                             |
+| Button           | src/components/Button/             | STABLE | Multiple variants, loading state            |
+| Calendar         | src/components/Calendar/           | STABLE | Date picker                                 |
+| Card             | src/components/Card/               | STABLE | Avatar, header, color variants, fill mode   |
+| Checkbox         | src/components/Checkbox/           | STABLE | Indeterminate state                         |
+| Clock            | src/components/Clock/              | STABLE | Time picker                                 |
+| DataTable        | src/components/DataTable/          | STABLE | Sorting, pagination, filtering              |
+| DateInput        | src/components/DateInput/          | STABLE | Date validation                             |
+| Dropdown         | src/components/Dropdown/           | STABLE | Dropdown menu                               |
+| FileUploader     | src/components/FileUploader/       | STABLE | Drag and drop                               |
+| IconButton       | src/components/IconButton/         | STABLE | Icon containers                             |
+| Input            | src/components/Input/              | STABLE | Text validation                             |
+| InteractiveMap   | src/components/InteractiveMap/     | STABLE | Google Maps integration                     |
+| Link             | src/components/Link/               | STABLE | Styled links                                |
+| Menu             | src/components/Menu/               | STABLE | Actions menu                                |
+| Modal            | src/components/Modal/              | STABLE | Dialog boxes                                |
+| MultiSelect      | src/components/MultiSelect/        | STABLE | Multiple selection                          |
+| Select           | src/components/Select/             | STABLE | Single selection                            |
+| Sidebar          | src/components/Sidebar/            | STABLE | Navigation panel                            |
+| TimeInput        | src/components/TimeInput/          | STABLE | Time validation                             |
+| WeekCalendar     | src/components/WeekCalendar/       | STABLE | Weekly view, event categories, navigation   |
+| WeekCalendarRow  | src/components/WeekCalendarRow/    | STABLE | Event row with hover tooltip, click handler |
 
 ### Implemented Templates (2 total)
 

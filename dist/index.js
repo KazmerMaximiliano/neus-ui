@@ -1,6 +1,6 @@
-import { jsx as T, jsxs as ee, Fragment as qs } from "react/jsx-runtime";
+import { jsx as T, jsxs as J, Fragment as qs } from "react/jsx-runtime";
 import * as mo from "react";
-import k, { createContext as xr, useState as F, useEffect as P, useContext as Se, useRef as B, useCallback as X, useLayoutEffect as jt, useMemo as te, forwardRef as wl, useImperativeHandle as bl, memo as De, createElement as Ym, Suspense as Zm, Component as Qm, PureComponent as Ve, createRef as yl, Children as gs, isValidElement as Oh, cloneElement as Nh } from "react";
+import k, { createContext as xr, useState as F, useEffect as P, useContext as Se, useRef as B, useCallback as ee, useLayoutEffect as jt, useMemo as te, forwardRef as wl, useImperativeHandle as bl, memo as De, createElement as Ym, Suspense as Zm, Component as Qm, PureComponent as Ve, createRef as yl, Children as gs, isValidElement as Oh, cloneElement as Nh } from "react";
 import * as Gh from "react-dom";
 import Jm, { createPortal as dn } from "react-dom";
 const Sl = (e) => {
@@ -411,7 +411,7 @@ const Cv = (e, t, s) => {
   size: s = "medium",
   items: n
 }) => {
-  const i = B(null), o = B(null), [r, a] = F(!1), [l, c] = F({ top: 0, left: 0 }), d = X(() => {
+  const i = B(null), o = B(null), [r, a] = F(!1), [l, c] = F({ top: 0, left: 0 }), d = ee(() => {
     if (o.current) {
       const h = o.current.getBoundingClientRect();
       c({
@@ -431,7 +431,7 @@ const Cv = (e, t, s) => {
   const u = () => {
     r || d(), a(!r);
   };
-  return /* @__PURE__ */ ee("div", { className: "menu", ref: o, children: [
+  return /* @__PURE__ */ J("div", { className: "menu", ref: o, children: [
     e ? /* @__PURE__ */ T(
       Yn,
       {
@@ -2307,9 +2307,9 @@ function hw(e) {
   return k.createElement(t.Dropdown, { ...e });
 }
 function gw(e) {
-  const { onPreviousClick: t, onNextClick: s, previousMonth: n, nextMonth: i, ...o } = e, { components: r, classNames: a, labels: { labelPrevious: l, labelNext: c } } = eo(), d = X((h) => {
+  const { onPreviousClick: t, onNextClick: s, previousMonth: n, nextMonth: i, ...o } = e, { components: r, classNames: a, labels: { labelPrevious: l, labelNext: c } } = eo(), d = ee((h) => {
     i && s?.(h);
-  }, [i, s]), u = X((h) => {
+  }, [i, s]), u = ee((h) => {
     n && t?.(h);
   }, [n, t]);
   return k.createElement(
@@ -3109,17 +3109,17 @@ function wb(e) {
     t.classNames
   ]);
   t.today || (t = { ...t, today: r.today() });
-  const { captionLayout: c, mode: d, navLayout: u, numberOfMonths: h = 1, onDayBlur: g, onDayClick: p, onDayFocus: f, onDayKeyDown: m, onDayMouseEnter: v, onDayMouseLeave: C, onNextClick: b, onPrevClick: y, showWeekNumber: w, styles: S } = t, { formatCaption: R, formatDay: M, formatMonthDropdown: D, formatWeekNumber: E, formatWeekNumberHeader: x, formatWeekdayName: L, formatYearDropdown: H } = i, V = lb(t, r), { days: A, months: J, navStart: Q, navEnd: U, previousMonth: Z, nextMonth: z, goToMonth: Y } = V, K = Mw(A, t, Q, U, r), { isSelected: _, select: oe, selected: G } = Cb(t, r) ?? {}, { blur: pe, focused: be, isFocusTarget: ae, moveFocus: Ee, setFocused: q } = ub(t, V, K, _ ?? (() => !1), r), { labelDayButton: he, labelGridcell: Te, labelGrid: Ne, labelMonthDropdown: tt, labelNav: me, labelPrevious: ue, labelNext: Pe, labelWeekday: je, labelWeekNumber: We, labelWeekNumberHeader: le, labelYearDropdown: ye } = o, Ye = te(() => qw(r, t.ISOWeek, t.broadcastCalendar, t.today), [r, t.ISOWeek, t.broadcastCalendar, t.today]), ot = d !== void 0 || p !== void 0, Ge = X(() => {
+  const { captionLayout: c, mode: d, navLayout: u, numberOfMonths: h = 1, onDayBlur: g, onDayClick: p, onDayFocus: f, onDayKeyDown: m, onDayMouseEnter: v, onDayMouseLeave: C, onNextClick: b, onPrevClick: y, showWeekNumber: w, styles: S } = t, { formatCaption: R, formatDay: M, formatMonthDropdown: D, formatWeekNumber: E, formatWeekNumberHeader: x, formatWeekdayName: L, formatYearDropdown: H } = i, V = lb(t, r), { days: A, months: X, navStart: Q, navEnd: U, previousMonth: Z, nextMonth: z, goToMonth: Y } = V, K = Mw(A, t, Q, U, r), { isSelected: _, select: oe, selected: G } = Cb(t, r) ?? {}, { blur: pe, focused: be, isFocusTarget: ae, moveFocus: Ee, setFocused: q } = ub(t, V, K, _ ?? (() => !1), r), { labelDayButton: he, labelGridcell: Te, labelGrid: Ne, labelMonthDropdown: tt, labelNav: me, labelPrevious: ue, labelNext: Pe, labelWeekday: je, labelWeekNumber: We, labelWeekNumberHeader: le, labelYearDropdown: ye } = o, Ye = te(() => qw(r, t.ISOWeek, t.broadcastCalendar, t.today), [r, t.ISOWeek, t.broadcastCalendar, t.today]), ot = d !== void 0 || p !== void 0, Ge = ee(() => {
     Z && (Y(Z), y?.(Z));
-  }, [Z, Y, y]), mt = X(() => {
+  }, [Z, Y, y]), mt = ee(() => {
     z && (Y(z), b?.(z));
-  }, [Y, z, b]), mn = X((ce, Fe) => (de) => {
+  }, [Y, z, b]), mn = ee((ce, Fe) => (de) => {
     de.preventDefault(), de.stopPropagation(), q(ce), !Fe.disabled && (oe?.(ce.date, Fe, de), p?.(ce.date, Fe, de));
-  }, [oe, p, q]), Xt = X((ce, Fe) => (de) => {
+  }, [oe, p, q]), Xt = ee((ce, Fe) => (de) => {
     q(ce), f?.(ce.date, Fe, de);
-  }, [f, q]), Oe = X((ce, Fe) => (de) => {
+  }, [f, q]), Oe = ee((ce, Fe) => (de) => {
     pe(), g?.(ce.date, Fe, de);
-  }, [pe, g]), Ze = X((ce, Fe) => (de) => {
+  }, [pe, g]), Ze = ee((ce, Fe) => (de) => {
     const Me = {
       ArrowLeft: [
         de.shiftKey ? "month" : "day",
@@ -3142,14 +3142,14 @@ function wb(e) {
       Ee(ct, Ce);
     }
     m?.(ce.date, Fe, de);
-  }, [Ee, m, t.dir]), vn = X((ce, Fe) => (de) => {
+  }, [Ee, m, t.dir]), vn = ee((ce, Fe) => (de) => {
     v?.(ce.date, Fe, de);
-  }, [v]), Cn = X((ce, Fe) => (de) => {
+  }, [v]), Cn = ee((ce, Fe) => (de) => {
     C?.(ce.date, Fe, de);
-  }, [C]), uo = X((ce) => (Fe) => {
+  }, [C]), uo = ee((ce) => (Fe) => {
     const de = Number(Fe.target.value), Me = r.setMonth(r.startOfMonth(ce), de);
     Y(Me);
-  }, [r, Y]), wn = X((ce) => (Fe) => {
+  }, [r, Y]), wn = ee((ce) => (Fe) => {
     const de = Number(Fe.target.value), Me = r.setYear(r.startOfMonth(ce), de);
     Y(Me);
   }, [r, Y]), { className: ho, style: bn } = te(() => ({
@@ -3158,7 +3158,7 @@ function wb(e) {
   }), [l, t.className, t.style, S]), go = Lw(t), Bs = B(null);
   Xw(Bs, !!t.animate, {
     classNames: l,
-    months: J,
+    months: X,
     focused: be,
     dateLib: r
   });
@@ -3167,7 +3167,7 @@ function wb(e) {
     selected: G,
     select: oe,
     isSelected: _,
-    months: J,
+    months: X,
     nextMonth: z,
     previousMonth: Z,
     goToMonth: Y,
@@ -3188,7 +3188,7 @@ function wb(e) {
         n.Months,
         { className: l[ne.Months], style: S?.[ne.Months] },
         !t.hideNavigation && !u && k.createElement(n.Nav, { "data-animated-nav": t.animate ? "true" : void 0, className: l[ne.Nav], style: S?.[ne.Nav], "aria-label": me(), onPreviousClick: Ge, onNextClick: mt, previousMonth: Z, nextMonth: z }),
-        J.map((ce, Fe) => k.createElement(
+        X.map((ce, Fe) => k.createElement(
           n.Month,
           {
             "data-animated-month": t.animate ? "true" : void 0,
@@ -3296,12 +3296,12 @@ const bb = (e) => e ? e instanceof Date ? e.toISOString() : Array.isArray(e) ? e
   };
   return P(() => {
     u && p(t);
-  }, [t, u]), /* @__PURE__ */ ee(
+  }, [t, u]), /* @__PURE__ */ J(
     "div",
     {
       className: `calendar-container${r ? " disabled" : ""}${a ? " readonly" : ""}`,
       children: [
-        i && /* @__PURE__ */ T("div", { className: "label-wrapper", children: /* @__PURE__ */ ee("label", { className: `calendar-label${c ? " error" : ""}`, children: [
+        i && /* @__PURE__ */ T("div", { className: "label-wrapper", children: /* @__PURE__ */ J("label", { className: `calendar-label${c ? " error" : ""}`, children: [
           i,
           o && /* @__PURE__ */ T("span", { className: "calendar-required", children: "*" })
         ] }) }),
@@ -3329,7 +3329,23 @@ const bb = (e) => e ? e instanceof Date ? e.toISOString() : Array.isArray(e) ? e
       ]
     }
   );
-}, Sb = ({
+}, _H = ({
+  avatarImage: e,
+  avatarAlt: t,
+  header: s,
+  content: n,
+  fill: i,
+  color: o
+}) => /* @__PURE__ */ J("div", { className: `card ${i ? "fill" : ""} ${o || ""}`, children: [
+  (e || t) && /* @__PURE__ */ T("div", { className: "avatar-wrapper", children: e ? /* @__PURE__ */ T("img", { src: e, alt: t, className: "avatar" }) : /* @__PURE__ */ T("div", { className: "avatar-placeholder", children: t ? t.charAt(0).toUpperCase() : "A" }) }),
+  /* @__PURE__ */ J("div", { className: "content-wrapper", children: [
+    s && /* @__PURE__ */ J("div", { className: "card-header", children: [
+      /* @__PURE__ */ T("div", { className: "header-leading", children: s?.leading }),
+      /* @__PURE__ */ T("div", { className: "header-trailing", children: s?.trailing })
+    ] }),
+    /* @__PURE__ */ T("div", { className: "card-body", children: n })
+  ] })
+] }), Sb = ({
   name: e,
   checked: t,
   disabled: s = !1,
@@ -3360,7 +3376,7 @@ const bb = (e) => e ? e instanceof Date ? e.toISOString() : Array.isArray(e) ? e
   if (e === "hours")
     if (t === "24h") {
       const i = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], o = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-      return /* @__PURE__ */ ee(qs, { children: [
+      return /* @__PURE__ */ J(qs, { children: [
         i.map((r, a) => {
           const l = (a * 30 - 90) * (Math.PI / 180), c = Math.cos(l) * 100, d = Math.sin(l) * 100, u = s.hours === r;
           return /* @__PURE__ */ T(
@@ -3471,9 +3487,9 @@ const bb = (e) => e ? e instanceof Date ? e.toISOString() : Array.isArray(e) ? e
     "div",
     {
       className: `clock-wrapper${t ? " disabled" : ""}${s ? " readonly" : ""}`,
-      children: /* @__PURE__ */ ee("div", { className: "clock-container", children: [
-        /* @__PURE__ */ ee("div", { className: "clock-header", children: [
-          /* @__PURE__ */ ee("div", { className: "clock-display", children: [
+      children: /* @__PURE__ */ J("div", { className: "clock-container", children: [
+        /* @__PURE__ */ J("div", { className: "clock-header", children: [
+          /* @__PURE__ */ J("div", { className: "clock-display", children: [
             /* @__PURE__ */ T(
               "button",
               {
@@ -3496,7 +3512,7 @@ const bb = (e) => e ? e instanceof Date ? e.toISOString() : Array.isArray(e) ? e
               }
             )
           ] }),
-          n === "12h" && /* @__PURE__ */ ee("div", { className: "clock-period", children: [
+          n === "12h" && /* @__PURE__ */ J("div", { className: "clock-period", children: [
             /* @__PURE__ */ T(
               "button",
               {
@@ -3519,7 +3535,7 @@ const bb = (e) => e ? e instanceof Date ? e.toISOString() : Array.isArray(e) ? e
             )
           ] })
         ] }),
-        /* @__PURE__ */ ee(
+        /* @__PURE__ */ J(
           "div",
           {
             className: "clock-face",
@@ -5850,7 +5866,7 @@ function At(e, t, s) {
   }, C = (w, S, R) => {
     const M = fp(e, s), D = S.slice(), E = {}, x = {}, L = [], H = [], V = [];
     let A = 0;
-    const J = i?.columns.slice() ?? [], Q = o?.columns.slice() ?? [];
+    const X = i?.columns.slice() ?? [], Q = o?.columns.slice() ?? [];
     for (const z of w) {
       const Y = z.colId;
       if (Y.startsWith(Ir)) {
@@ -5865,7 +5881,7 @@ function At(e, t, s) {
       _ ? (v(_, z, E, x, !1), Ot(D, _)) : (V.push(z), A += 1);
     }
     const U = (z) => v(z, null, E, x, !1);
-    D.forEach(U), i?.sortColumns(Xc.bind(i, E, J)), o?.sortColumns(Xc.bind(o, x, Q)), n.refreshCols(!1, s);
+    D.forEach(U), i?.sortColumns(Xc.bind(i, E, X)), o?.sortColumns(Xc.bind(o, x, Q)), n.refreshCols(!1, s);
     const Z = (z, Y, K = []) => {
       for (const _ of Y) {
         const oe = z(_.colId);
@@ -40154,7 +40170,7 @@ var Fm = wl((e, t) => {
       return !1;
     }
   })), jt(() => co(d, n, o.current), [d]);
-  const M = X((Q) => {
+  const M = ee((Q) => {
     if (i.current = Q, !Q || n.isDestroyed()) {
       c.current = n.destroyBean(c.current);
       return;
@@ -40182,7 +40198,7 @@ var Fm = wl((e, t) => {
   }, []), D = te(() => `ag-cell-wrapper ${m.toString()}`, [m]), E = te(() => `ag-group-expanded ${C.toString()}`, [C]), x = te(
     () => `ag-group-contracted ${y.toString()}`,
     [y]
-  ), L = te(() => `ag-group-checkbox ${S.toString()}`, [S]), H = d?.componentFromFramework, V = H ? d.componentClass : void 0, A = d == null && p != null, J = ii(p);
+  ), L = te(() => `ag-group-checkbox ${S.toString()}`, [S]), H = d?.componentFromFramework, V = H ? d.componentClass : void 0, A = d == null && p != null, X = ii(p);
   return /* @__PURE__ */ k.createElement(
     "span",
     {
@@ -40193,7 +40209,7 @@ var Fm = wl((e, t) => {
     /* @__PURE__ */ k.createElement("span", { className: E, ref: a }),
     /* @__PURE__ */ k.createElement("span", { className: x, ref: l }),
     /* @__PURE__ */ k.createElement("span", { className: L, ref: r }),
-    /* @__PURE__ */ k.createElement("span", { className: "ag-group-value", ref: o }, A ? J : H ? /* @__PURE__ */ k.createElement(V, { ...d.params }) : null),
+    /* @__PURE__ */ k.createElement("span", { className: "ag-group-value", ref: o }, A ? X : H ? /* @__PURE__ */ k.createElement(V, { ...d.params }) : null),
     /* @__PURE__ */ k.createElement("span", { className: "ag-group-child-count" }, h)
   );
 }), du = Fm, wc = xr({
@@ -40647,7 +40663,7 @@ var I1 = 1e3, A1 = class {
 }, O1 = ({ ctrl: e }) => {
   const t = e.isAlive(), { context: s } = Se(lt), [n, i] = F(), [o, r] = F(), a = B(), l = B(null), c = B(null), d = B(null), u = B(), h = B();
   t && !h.current && (h.current = new io(() => l.current));
-  const g = X((v) => {
+  const g = ee((v) => {
     if (l.current = v, !v || !e.isAlive() || s.isDestroyed()) {
       a.current = s.destroyBean(a.current);
       return;
@@ -40703,7 +40719,7 @@ var I1 = 1e3, A1 = class {
     () => new Lt("ag-floating-filter-button", "ag-hidden")
   ), [u, h] = F("false"), [g, p] = F(), [, f] = F(1), m = B(), v = B(null), C = B(null), b = B(null), y = B(null), w = B(), S = B(), R = (z) => {
     z != null && w.current && w.current(z);
-  }, M = X((z) => {
+  }, M = ee((z) => {
     if (v.current = z, !z || !e.isAlive() || t.isDestroyed()) {
       m.current = t.destroyBean(m.current);
       return;
@@ -40731,12 +40747,12 @@ var I1 = 1e3, A1 = class {
     () => co(g, t, C.current, R),
     [g]
   );
-  const D = te(() => o.toString(), [o]), E = te(() => a.toString(), [a]), x = te(() => c.toString(), [c]), L = te(() => !!(g && g.componentFromFramework && ai(g.componentClass)), [g]), H = te(() => s.get("reactiveCustomComponents"), []), V = te(() => s.get("enableFilterHandlers"), []), [A, J] = F();
+  const D = te(() => o.toString(), [o]), E = te(() => a.toString(), [a]), x = te(() => c.toString(), [c]), L = te(() => !!(g && g.componentFromFramework && ai(g.componentClass)), [g]), H = te(() => s.get("reactiveCustomComponents"), []), V = te(() => s.get("enableFilterHandlers"), []), [A, X] = F();
   P(() => {
     if (g?.componentFromFramework)
       if (H) {
         const z = V ? G1 : P1, Y = new z(g.params, () => f((K) => K + 1));
-        R(Y), J(Y);
+        R(Y), X(Y);
       } else
         bc();
   }, [g]);
@@ -40769,7 +40785,7 @@ var I1 = 1e3, A1 = class {
     )
   ));
 }, B1 = De(H1), V1 = ({ ctrl: e }) => {
-  const { context: t } = Se(lt), [s, n] = F(), [i, o] = F(() => new Lt()), [r, a] = F(() => new Lt()), [l, c] = F("false"), [d, u] = F(), [h, g] = F(), p = B(), f = B(null), m = B(null), v = B(null), C = B(), b = X((D) => {
+  const { context: t } = Se(lt), [s, n] = F(), [i, o] = F(() => new Lt()), [r, a] = F(() => new Lt()), [l, c] = F("false"), [d, u] = F(), [h, g] = F(), p = B(), f = B(null), m = B(null), v = B(null), C = B(), b = ee((D) => {
     if (f.current = D, !D || !e.isAlive() || t.isDestroyed()) {
       p.current = t.destroyBean(p.current);
       return;
@@ -40807,7 +40823,7 @@ var I1 = 1e3, A1 = class {
   ), R = h?.componentFromFramework, M = h?.componentClass;
   return /* @__PURE__ */ k.createElement("div", { ref: b, style: s, className: w, role: "columnheader", "aria-expanded": d }, /* @__PURE__ */ k.createElement("div", { ref: v, className: "ag-header-cell-comp-wrapper", role: "presentation" }, R ? y ? /* @__PURE__ */ k.createElement(M, { ...h.params }) : /* @__PURE__ */ k.createElement(M, { ...h.params, ref: C }) : null), /* @__PURE__ */ k.createElement("div", { ref: m, "aria-hidden": l, className: S }));
 }, W1 = De(V1), z1 = ({ ctrl: e }) => {
-  const { gos: t, context: s } = Se(lt), { topOffset: n, rowHeight: i } = te(() => e.getTopAndHeight(), []), o = te(() => t.get("tabIndex"), []), [r, a] = F(() => e.getAriaRowIndex()), l = e.headerRowClass, [c, d] = F(() => i + "px"), [u, h] = F(() => n + "px"), g = B(null), [p, f] = F(() => e.getUpdatedHeaderCtrls()), m = B(), v = B(null), C = X((w) => {
+  const { gos: t, context: s } = Se(lt), { topOffset: n, rowHeight: i } = te(() => e.getTopAndHeight(), []), o = te(() => t.get("tabIndex"), []), [r, a] = F(() => e.getAriaRowIndex()), l = e.headerRowClass, [c, d] = F(() => i + "px"), [u, h] = F(() => n + "px"), g = B(null), [p, f] = F(() => e.getUpdatedHeaderCtrls()), m = B(), v = B(null), C = ee((w) => {
     if (v.current = w, !w || !e.isAlive() || s.isDestroyed()) {
       m.current = s.destroyBean(m.current);
       return;
@@ -40834,7 +40850,7 @@ var I1 = 1e3, A1 = class {
       top: u
     }),
     [c, u]
-  ), y = X((w) => {
+  ), y = ee((w) => {
     switch (e.type) {
       case "group":
         return /* @__PURE__ */ k.createElement(W1, { ctrl: w, key: w.instanceId });
@@ -40857,7 +40873,7 @@ var I1 = 1e3, A1 = class {
     p.map(y)
   );
 }, _1 = De(z1), U1 = ({ pinned: e }) => {
-  const [t, s] = F(!0), [n, i] = F([]), { context: o } = Se(lt), r = B(null), a = B(null), l = B(), c = e === "left", d = e === "right", u = !c && !d, h = X((f) => {
+  const [t, s] = F(!0), [n, i] = F([]), { context: o } = Se(lt), r = B(null), a = B(null), l = B(), c = e === "left", d = e === "right", u = !c && !d, h = ee((f) => {
     if (r.current = f, !f || o.isDestroyed()) {
       l.current = o.destroyBean(l.current);
       return;
@@ -40882,7 +40898,7 @@ var I1 = 1e3, A1 = class {
   }, []), g = t ? "" : "ag-hidden", p = () => n.map((f) => /* @__PURE__ */ k.createElement(_1, { ctrl: f, key: f.instanceId }));
   return c ? /* @__PURE__ */ k.createElement("div", { ref: h, className: "ag-pinned-left-header " + g, "aria-hidden": !t, role: "rowgroup" }, p()) : d ? /* @__PURE__ */ k.createElement("div", { ref: h, className: "ag-pinned-right-header " + g, "aria-hidden": !t, role: "rowgroup" }, p()) : u ? /* @__PURE__ */ k.createElement("div", { ref: h, className: "ag-header-viewport " + g, role: "rowgroup", tabIndex: -1 }, /* @__PURE__ */ k.createElement("div", { ref: a, className: "ag-header-container", role: "presentation" }, p())) : null;
 }, Ea = De(U1), $1 = () => {
-  const [e, t] = F(() => new Lt()), [s, n] = F(), { context: i } = Se(lt), o = B(null), r = B(), a = X((d) => {
+  const [e, t] = F(() => new Lt()), [s, n] = F(), { context: i } = Se(lt), o = B(null), r = B(), a = ee((d) => {
     if (o.current = d, !d || i.isDestroyed()) {
       r.current = i.destroyBean(r.current);
       return;
@@ -41026,7 +41042,7 @@ var I1 = 1e3, A1 = class {
     }
   ) : c && i ? /* @__PURE__ */ k.createElement(hu, { editDetails: e, cellCtrl: n, eParentCell: s, jsChildComp: i }) : null;
 }, X1 = (e, t, s, n, i, o) => {
-  const { context: r } = Se(lt), a = X(() => {
+  const { context: r } = Se(lt), a = ee(() => {
     const l = i.current;
     if (!l)
       return;
@@ -41082,9 +41098,9 @@ var I1 = 1e3, A1 = class {
     instanceId: r
   } = e, a = B(), [l, c] = F(
     () => e.isCellRenderer() ? void 0 : { compDetails: void 0, value: e.getValueToDisplay(), force: !1 }
-  ), [d, u] = F(), [h, g] = F(1), [p, f] = F(), [m, v] = F(!1), [C, b] = F(!1), [y, w] = F(!1), [S, R] = F(), M = te(() => e.isForceWrapper(), [e]), D = te(() => e.getCellAriaRole(), [e]), E = B(null), x = B(null), L = B(null), H = B(), V = B(), A = B(), J = B([]), Q = B(), U = B(), [Z, z] = F(0), Y = X((ue) => {
+  ), [d, u] = F(), [h, g] = F(1), [p, f] = F(), [m, v] = F(!1), [C, b] = F(!1), [y, w] = F(!1), [S, R] = F(), M = te(() => e.isForceWrapper(), [e]), D = te(() => e.getCellAriaRole(), [e]), E = B(null), x = B(null), L = B(null), H = B(), V = B(), A = B(), X = B([]), Q = B(), U = B(), [Z, z] = F(0), Y = ee((ue) => {
     U.current = ue, z((Pe) => Pe + 1);
-  }, []), K = l != null && (m || y || C) && (d == null || !!d.popup), _ = M || K, oe = te(() => e.getCellValueClass(), [e]), G = X(
+  }, []), K = l != null && (m || y || C) && (d == null || !!d.popup), _ = M || K, oe = te(() => e.getCellValueClass(), [e]), G = ee(
     (ue) => {
       if (V.current = ue, ue) {
         const Pe = ue.isCancelBeforeStart && ue.isCancelBeforeStart();
@@ -41122,25 +41138,25 @@ var I1 = 1e3, A1 = class {
       });
     };
   }, [d]);
-  const ae = X(
+  const ae = ee(
     (ue) => {
       if (A.current = ue, !ue || i.isDestroyed() || !e.isAlive()) {
-        const We = J.current;
-        J.current = [];
+        const We = X.current;
+        X.current = [];
         for (const le of We)
           le();
         return;
       }
       let Pe;
       const je = (We) => {
-        We && (ue.insertAdjacentElement("afterbegin", We.getGui()), J.current.push(() => {
+        We && (ue.insertAdjacentElement("afterbegin", We.getGui()), X.current.push(() => {
           Ls(We.getGui()), i.destroyBean(We), Q.current === Pe && (Q.current = void 0);
         }));
       };
       m && je(e.createSelectionCheckbox()), y && je(e.createDndSource()), C && (Pe = e.createRowDragComp(), Q.current = Pe, Pe && (je(Pe), Pe.refreshVisibility()));
     },
     [e, i, y, C, m]
-  ), Ee = X(() => {
+  ), Ee = ee(() => {
     const ue = !e.isCellSpanning() || x.current, Pe = E.current;
     if (!Pe || !ue || !e || !e.isAlive() || i.isDestroyed()) {
       a.current = i.destroyBean(a.current);
@@ -41209,9 +41225,9 @@ var I1 = 1e3, A1 = class {
       s,
       a.current
     );
-  }, []), q = X((ue) => {
+  }, []), q = ee((ue) => {
     E.current = ue, Ee();
-  }, []), he = X((ue) => {
+  }, []), he = ee((ue) => {
     x.current = ue, Ee();
   }, []), Te = te(() => !!(l?.compDetails?.componentFromFramework && ai(l.compDetails.componentClass)), [l]);
   jt(() => {
@@ -41240,24 +41256,24 @@ var I1 = 1e3, A1 = class {
     () => c ? e.getInitialRowTop(t) : void 0
   ), [D, E] = F(
     () => c ? e.getInitialTransform(t) : void 0
-  ), x = B(null), L = B(), H = B(), V = B(!1), [A, J] = F(0);
+  ), x = B(null), L = B(), H = B(), V = B(!1), [A, X] = F(0);
   P(() => {
     if (V.current || !w || A > 10)
       return;
     const q = x.current?.firstChild;
-    q ? (e.setupDetailRowAutoHeight(q), V.current = !0) : J((he) => he + 1);
+    q ? (e.setupDetailRowAutoHeight(q), V.current = !0) : X((he) => he + 1);
   }, [w, A]);
   const Q = B();
   Q.current || (Q.current = new io(() => x.current));
   const U = B(() => {
-  }), Z = X((q) => (U.current = q, () => {
+  }), Z = ee((q) => (U.current = q, () => {
     U.current = () => {
     };
   }), []), z = f1(
     Z,
     () => C.current,
     []
-  ), Y = o ? z : b, K = X((q) => {
+  ), Y = o ? z : b, K = ee((q) => {
     if (x.current = q, r.current = q ? s.createBean(new oi()) : s.destroyBean(r.current), !q) {
       e.unsetComp(t);
       return;
@@ -41336,10 +41352,10 @@ var I1 = 1e3, A1 = class {
 }, pu = De(nN), iN = ({ name: e }) => {
   const { context: t, gos: s } = Se(lt), n = te(() => ro(e), [e]), i = B(null), o = B(null), r = B(null), a = B([]), l = B([]), [c, d] = F(() => []), u = !!s.get("enableCellSpan") && !!n.getSpannedRowCtrls, h = B([]), g = B([]), [p, f] = F(() => []), m = B(!1), v = B(), C = te(() => Mt("ag-viewport", Jp(e)), [e]), b = te(() => Mt(Bo(e)), [e]), y = te(() => Mt("ag-spanning-container", QP(e)), [e]), w = n.type === "center" || u, S = w ? i : o;
   _s(" AG Row Container " + e + " ", S);
-  const R = X(() => {
-    const A = !w || i.current != null, J = o.current != null, Q = !u || r.current != null;
-    return A && J && Q;
-  }, []), M = X(() => i.current == null && o.current == null && r.current == null, []), D = X(() => {
+  const R = ee(() => {
+    const A = !w || i.current != null, X = o.current != null, Q = !u || r.current != null;
+    return A && X && Q;
+  }, []), M = ee(() => i.current == null && o.current == null && r.current == null, []), D = ee(() => {
     if (M() && (v.current = t.destroyBean(v.current)), !t.isDestroyed() && R()) {
       const A = (U) => {
         const Z = Cr(
@@ -41348,7 +41364,7 @@ var I1 = 1e3, A1 = class {
           m.current
         );
         Z !== l.current && (l.current = Z, Zi(U, () => d(Z)));
-      }, J = (U) => {
+      }, X = (U) => {
         const Z = Cr(
           g.current,
           h.current,
@@ -41368,7 +41384,7 @@ var I1 = 1e3, A1 = class {
         },
         setSpannedRowCtrls: (U, Z) => {
           const z = !!Z && h.current.length > 0 && U.length > 0;
-          h.current = U, J(z);
+          h.current = U, X(z);
         },
         setDomOrder: (U) => {
           m.current != U && (m.current = U, A(!1));
@@ -41387,17 +41403,17 @@ var I1 = 1e3, A1 = class {
         i.current
       );
     }
-  }, [R, M]), E = X(
+  }, [R, M]), E = ee(
     (A) => {
       o.current = A, D();
     },
     [D]
-  ), x = X(
+  ), x = ee(
     (A) => {
       r.current = A, D();
     },
     [D]
-  ), L = X(
+  ), L = ee(
     (A) => {
       i.current = A, D();
     },
@@ -41416,11 +41432,11 @@ var I1 = 1e3, A1 = class {
   const V = () => /* @__PURE__ */ k.createElement("div", { className: y, ref: x, role: "presentation" }, p.map((A) => /* @__PURE__ */ k.createElement(pu, { rowCtrl: A, containerType: n.type, key: A.instanceId })));
   return /* @__PURE__ */ k.createElement("div", { className: C, ref: L, role: "rowgroup" }, H(), u ? V() : null);
 }, oN = De(iN), rN = () => {
-  const e = Se(lt), { context: t, overlays: s } = e, [n, i] = F(""), [o, r] = F(0), [a, l] = F(0), [c, d] = F("0px"), [u, h] = F("0px"), [g, p] = F("100%"), [f, m] = F("0px"), [v, C] = F("0px"), [b, y] = F("100%"), [w, S] = F(!0), [R, M] = F(!0), [D, E] = F(null), [x, L] = F(""), [H, V] = F(null), [A, J] = F("ag-layout-normal"), Q = B();
+  const e = Se(lt), { context: t, overlays: s } = e, [n, i] = F(""), [o, r] = F(0), [a, l] = F(0), [c, d] = F("0px"), [u, h] = F("0px"), [g, p] = F("100%"), [f, m] = F("0px"), [v, C] = F("0px"), [b, y] = F("100%"), [w, S] = F(!0), [R, M] = F(!0), [D, E] = F(null), [x, L] = F(""), [H, V] = F(null), [A, X] = F("ag-layout-normal"), Q = B();
   Q.current || (Q.current = new io(() => U.current));
   const U = B(null), Z = B(null), z = B(null), Y = B(null), K = B(null), _ = B(null), oe = B(null), G = B([]), pe = B([]);
   _s(" AG Grid Body ", U), _s(" AG Pinned Top ", Z), _s(" AG Sticky Top ", z), _s(" AG Middle ", _), _s(" AG Pinned Bottom ", oe);
-  const be = X((ye) => {
+  const be = ee((ye) => {
     if (U.current = ye, !ye || t.isDestroyed()) {
       G.current = t.destroyBeans(G.current);
       for (const Oe of pe.current)
@@ -41455,7 +41471,7 @@ var I1 = 1e3, A1 = class {
       setTopInvisible: S,
       setBottomInvisible: M,
       setColumnMovingCss: (Oe, Ze) => Q.current.toggleCss(Oe, Ze),
-      updateLayoutClasses: J,
+      updateLayoutClasses: X,
       setAlwaysVerticalScrollClass: E,
       setPinnedTopBottomOverflowY: L,
       setCellSelectableCss: (Oe, Ze) => V(Ze ? Oe : null),
@@ -41570,7 +41586,7 @@ var I1 = 1e3, A1 = class {
       u.current?.forceFocusOutOfContainer(v);
     }
   }));
-  const g = X(() => {
+  const g = ee(() => {
     const v = c.current, C = d.current;
     if (!v && !C || l.isDestroyed()) {
       u.current = l.destroyBean(u.current);
@@ -41593,12 +41609,12 @@ var I1 = 1e3, A1 = class {
         })
       );
     }
-  }, []), p = X(
+  }, []), p = ee(
     (v) => {
       c.current = v, g();
     },
     [g]
-  ), f = X(
+  ), f = ee(
     (v) => {
       d.current = v, g();
     },
@@ -41617,10 +41633,10 @@ var I1 = 1e3, A1 = class {
   return /* @__PURE__ */ k.createElement(k.Fragment, null, m("top"), s, m("bottom"));
 }, cN = wl(lN), dN = De(cN), uN = ({ context: e }) => {
   const [t, s] = F(""), [n, i] = F(""), [o, r] = F(null), [a, l] = F(null), [c, d] = F(!1), [u, h] = F(), g = B(), p = B(null), f = B(), [m, v] = F(null), C = B(() => {
-  }), b = B(), y = B([]), w = X(() => {
+  }), b = B(), y = B([]), w = ee(() => {
   }, []);
   _s(" AG Grid ", p);
-  const S = X((L) => {
+  const S = ee((L) => {
     if (p.current = L, g.current = L ? e.createBean(new gD()) : e.destroyBean(g.current), !L || e.isDestroyed())
       return;
     const H = g.current;
@@ -41639,8 +41655,8 @@ var I1 = 1e3, A1 = class {
       },
       updateLayoutClasses: i,
       getFocusableContainers: () => {
-        const A = [], J = p.current?.querySelector(".ag-root");
-        J && A.push({ getGui: () => J });
+        const A = [], X = p.current?.querySelector(".ag-root");
+        X && A.push({ getGui: () => X });
         for (const Q of y.current)
           Q.isDisplayed() && A.push(Q);
         return A;
@@ -41656,7 +41672,7 @@ var I1 = 1e3, A1 = class {
       return;
     const V = [], {
       watermarkSelector: A,
-      paginationSelector: J,
+      paginationSelector: X,
       sideBarSelector: Q,
       statusBarSelector: U,
       gridHeaderDropZonesSelector: Z
@@ -41673,8 +41689,8 @@ var I1 = 1e3, A1 = class {
       const _ = e.createBean(new K()), oe = _.getGui();
       return H.insertAdjacentElement("beforeend", oe), z.push(oe), V.push(_), _;
     };
-    if (U && Y(U.component), J) {
-      const K = Y(J.component);
+    if (U && Y(U.component), X) {
+      const K = Y(X.component);
       b.current = K, y.current.push(K);
     }
     return A && Y(A.component), () => {
@@ -41696,9 +41712,9 @@ var I1 = 1e3, A1 = class {
       cursor: o ?? ""
     }),
     [a, o]
-  ), E = X((L) => {
+  ), E = ee((L) => {
     f.current = L, h(L !== null);
-  }, []), x = X(() => !g.current?.isFocusable(), []);
+  }, []), x = ee(() => !g.current?.isFocusable(), []);
   return /* @__PURE__ */ k.createElement("div", { ref: S, className: R, style: D, role: "presentation" }, /* @__PURE__ */ k.createElement("div", { className: M, ref: v, role: "presentation" }, c && m && !e.isDestroyed() && /* @__PURE__ */ k.createElement(lt.Provider, { value: e.getBeans() }, /* @__PURE__ */ k.createElement(
     dN,
     {
@@ -41755,7 +41771,7 @@ var I1 = 1e3, A1 = class {
   componentWrappingElement: void 0,
   ...Em
 }, Lm = new Set(Object.keys(pN)), fN = new Set(Object.keys(Em)), km = (e) => {
-  const t = B(), s = B(null), n = B(null), i = B([]), o = B([]), r = B(e), a = B(), l = B(), c = B(!1), [d, u] = F(void 0), [, h] = F(0), g = X((v) => {
+  const t = B(), s = B(null), n = B(null), i = B([]), o = B([]), r = B(e), a = B(), l = B(), c = B(!1), [d, u] = F(void 0), [, h] = F(0), g = ee((v) => {
     if (s.current = v, !v) {
       for (const x of i.current)
         x();
@@ -41833,7 +41849,7 @@ var I1 = 1e3, A1 = class {
   }, []), p = te(() => ({
     height: "100%",
     ...e.containerStyle || {}
-  }), [e.containerStyle]), f = X((v) => {
+  }), [e.containerStyle]), f = ee((v) => {
     c.current && !a.current?.shouldQueueUpdates() ? v() : o.current.push(v);
   }, []);
   P(() => {
@@ -41920,7 +41936,7 @@ var vN = class extends HL {
       return f.current?.refresh() ?? !1;
     }
   })), e.template && W(230);
-  const w = X((R) => {
+  const w = ee((R) => {
     if (m.current = R, !R || i.isDestroyed()) {
       f.current = i.destroyBean(f.current), v.current?.();
       return;
@@ -41943,7 +41959,7 @@ var vN = class extends HL {
       };
       v.current = ms(s, R, E), E();
     }
-  }, []), S = X((R) => {
+  }, []), S = ee((R) => {
     f.current?.registerDetailWithMaster(R);
   }, []);
   return /* @__PURE__ */ k.createElement("div", { className: b, ref: w }, u && /* @__PURE__ */ k.createElement(
@@ -42026,7 +42042,7 @@ Py.registerModules([u1]);
 const fu = ({
   noDataTitle: e = "No data to show",
   noDataDescription: t = "No records found matching the search criteria"
-}) => /* @__PURE__ */ T("div", { className: "no-rows-overlay", children: /* @__PURE__ */ ee("div", { className: "no-rows-content", children: [
+}) => /* @__PURE__ */ T("div", { className: "no-rows-overlay", children: /* @__PURE__ */ J("div", { className: "no-rows-content", children: [
   /* @__PURE__ */ T("h3", { className: "no-rows-title", children: e }),
   /* @__PURE__ */ T("p", { className: "no-rows-description", children: t })
 ] }) }), yN = ({
@@ -42058,7 +42074,7 @@ const fu = ({
     headerFontSize: u ? 14 : h ? 15 : 16,
     spacing: u ? 4 : h ? 6 : 8,
     wrapperBorderRadius: 24
-  }), [u, h, g.primary.main]), M = X(
+  }), [u, h, g.primary.main]), M = ee(
     (V) => {
       const A = V.data;
       return A ? /* @__PURE__ */ T(
@@ -42071,7 +42087,7 @@ const fu = ({
       ) : null;
     },
     [i, s, n]
-  ), D = X(() => {
+  ), D = ee(() => {
     if (e.length === 0) {
       y([]);
       return;
@@ -42103,7 +42119,7 @@ const fu = ({
     n,
     i,
     M
-  ]), E = X(
+  ]), E = ee(
     (V, A) => {
       p === V && m === A || o && o({
         currentPage: V,
@@ -42111,15 +42127,15 @@ const fu = ({
       });
     },
     [p, m, o]
-  ), x = X(() => v.length === 0 ? /* @__PURE__ */ T(
+  ), x = ee(() => v.length === 0 ? /* @__PURE__ */ T(
     fu,
     {
       noDataTitle: l,
       noDataDescription: c
     }
-  ) : /* @__PURE__ */ T("div", { className: "data-table-cards", children: v.map((V, A) => /* @__PURE__ */ ee("div", { className: "data-table-card", children: [
-    /* @__PURE__ */ T("div", { className: "card-content", children: Object.entries(V).filter(([Q]) => !S.includes(Q)).map(([Q, U]) => /* @__PURE__ */ ee("div", { className: "card-row", children: [
-      /* @__PURE__ */ ee("strong", { className: "card-label", children: [
+  ) : /* @__PURE__ */ T("div", { className: "data-table-cards", children: v.map((V, A) => /* @__PURE__ */ J("div", { className: "data-table-card", children: [
+    /* @__PURE__ */ T("div", { className: "card-content", children: Object.entries(V).filter(([Q]) => !S.includes(Q)).map(([Q, U]) => /* @__PURE__ */ J("div", { className: "card-row", children: [
+      /* @__PURE__ */ J("strong", { className: "card-label", children: [
         w?.[Q] || Q,
         ":"
       ] }),
@@ -42142,16 +42158,16 @@ const fu = ({
     s,
     n,
     i
-  ]), L = X(() => {
+  ]), L = ee(() => {
     E(p - 1, m);
-  }, [p, m, E]), H = X(() => {
+  }, [p, m, E]), H = ee(() => {
     E(p + 1, m);
   }, [p, m, E]);
   return P(() => {
     C(e);
   }, [e]), P(() => {
     D();
-  }, [D]), /* @__PURE__ */ ee("div", { className: "data-table-container", children: [
+  }, [D]), /* @__PURE__ */ J("div", { className: "data-table-container", children: [
     u && a ? x() : /* @__PURE__ */ T(
       bN,
       {
@@ -42186,7 +42202,7 @@ const fu = ({
         )
       }
     ),
-    /* @__PURE__ */ ee("div", { className: "pagination-controls", children: [
+    /* @__PURE__ */ J("div", { className: "pagination-controls", children: [
       /* @__PURE__ */ T(
         Yn,
         {
@@ -42206,14 +42222,14 @@ const fu = ({
       )
     ] })
   ] });
-}, $H = yN, SN = (e, t = "single") => {
+}, jH = yN, SN = (e, t = "single") => {
   if (!e) return "";
   if (t === "range" && "from" in e) {
     const s = e.from ? e.from.toLocaleDateString() : "", n = e.to ? e.to.toLocaleDateString() : "";
     return s && n ? `${s} - ${n}` : s ? `${s} - ` : "";
   }
   return e instanceof Date ? e.toLocaleDateString() : "";
-}, RN = (e) => e ? e instanceof Date ? e.toISOString() : "from" in e ? `${e.from?.toISOString() || ""},${e.to?.toISOString() || ""}` : "" : "", jH = ({
+}, RN = (e) => e ? e instanceof Date ? e.toISOString() : "from" in e ? `${e.from?.toISOString() || ""},${e.to?.toISOString() || ""}` : "" : "", KH = ({
   label: e,
   name: t,
   error: s,
@@ -42239,8 +42255,8 @@ const fu = ({
       };
   }, [p]), P(() => {
     u && g(a);
-  }, [a, u]), /* @__PURE__ */ ee("div", { className: "date-input-wrapper", ref: m, children: [
-    e && /* @__PURE__ */ ee(
+  }, [a, u]), /* @__PURE__ */ J("div", { className: "date-input-wrapper", ref: m, children: [
+    e && /* @__PURE__ */ J(
       "label",
       {
         className: `date-input-label${s ? " error" : ""}${n ? " disabled" : ""}`,
@@ -42250,7 +42266,7 @@ const fu = ({
         ]
       }
     ),
-    /* @__PURE__ */ ee("div", { className: "date-input-container", children: [
+    /* @__PURE__ */ J("div", { className: "date-input-container", children: [
       /* @__PURE__ */ T(
         "button",
         {
@@ -42308,6 +42324,31 @@ const fu = ({
     ),
     s && /* @__PURE__ */ T("div", { className: "date-input-error", children: s })
   ] });
+}, qH = ({ icon: e, name: t, items: s }) => {
+  const n = B(null), [i, o] = F(!1);
+  return P(() => {
+    const r = (a) => {
+      n.current && !n.current.contains(a.target) && o(!1);
+    };
+    return i && document.addEventListener("mousedown", r), () => {
+      document.removeEventListener("mousedown", r);
+    };
+  }, [i]), /* @__PURE__ */ J("div", { className: "dropdown", ref: n, onClick: () => o(!i), children: [
+    /* @__PURE__ */ T("div", { className: "dropdown-avatar", children: e ? /* @__PURE__ */ T(e, {}) : "X" }),
+    /* @__PURE__ */ T("div", { className: `dropdown-caret ${i ? "dropdown-caret--open" : ""}` }),
+    i && /* @__PURE__ */ J("div", { className: "dropdown-panel", children: [
+      /* @__PURE__ */ T("div", { className: "dropdown-item", children: /* @__PURE__ */ T("span", { className: "dropdown-name", children: t || "" }) }),
+      s.map((r, a) => /* @__PURE__ */ T(
+        "div",
+        {
+          className: "dropdown-item clickable",
+          onClick: r.onClick,
+          children: r.label
+        },
+        a
+      ))
+    ] })
+  ] });
 };
 function PN(e) {
   return ps({ attr: { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, child: [{ tag: "path", attr: { d: "M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" }, child: [] }, { tag: "polyline", attr: { points: "13 2 13 9 20 9" }, child: [] }] })(e);
@@ -42352,7 +42393,7 @@ const MN = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
     return r;
   const a = EN(i, t);
   return a.valid ? { valid: !0 } : a;
-}, KH = ({
+}, YH = ({
   allowedTypes: e,
   maxWeight: t = 10 * 1024 * 1024,
   multiple: s = !1,
@@ -42362,7 +42403,7 @@ const MN = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
   disabled: r = !1,
   onChange: a
 }) => {
-  const l = B(null), [c, d] = F(!1), [u, h] = F([]), [g, p] = F(null), f = (L) => L.type.startsWith("image/"), m = X(() => e.join(","), [e]), v = X(
+  const l = B(null), [c, d] = F(!1), [u, h] = F([]), [g, p] = F(null), f = (L) => L.type.startsWith("image/"), m = ee(() => e.join(","), [e]), v = ee(
     (L) => {
       if (f(L) && !s) {
         const H = new FileReader();
@@ -42372,7 +42413,7 @@ const MN = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
       }
     },
     [s]
-  ), C = X(
+  ), C = ee(
     (L) => {
       if (r) return;
       const H = Array.from(L), V = LN(
@@ -42388,27 +42429,27 @@ const MN = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
       h(H), v(H[0]);
       const A = {
         files: H,
-        totalSize: H.reduce((J, Q) => J + Q.size, 0)
+        totalSize: H.reduce((X, Q) => X + Q.size, 0)
       };
       a(A);
     },
     [e, t, s, a, v, r]
-  ), b = X(
+  ), b = ee(
     (L) => {
       r || (L.preventDefault(), L.stopPropagation());
     },
     [r]
-  ), y = X(
+  ), y = ee(
     (L) => {
       r || (L.preventDefault(), L.stopPropagation(), L.dataTransfer.items && L.dataTransfer.items.length > 0 && d(!0));
     },
     [r]
-  ), w = X(
+  ), w = ee(
     (L) => {
       r || (L.preventDefault(), L.stopPropagation(), d(!1));
     },
     [r]
-  ), S = X(
+  ), S = ee(
     (L) => {
       r || (L.preventDefault(), L.stopPropagation(), d(!1), L.dataTransfer.files && L.dataTransfer.files.length > 0 && (C(L.dataTransfer.files), L.dataTransfer.clearData()));
     },
@@ -42423,21 +42464,21 @@ const MN = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
     if (L === 0) return "0 Bytes";
     const H = 1024, V = ["Bytes", "KB", "MB", "GB"], A = Math.floor(Math.log(L) / Math.log(H));
     return parseFloat((L / Math.pow(H, A)).toFixed(2)) + " " + V[A];
-  }, x = () => u.length === 0 ? /* @__PURE__ */ ee("div", { className: "file-upload-content", children: [
+  }, x = () => u.length === 0 ? /* @__PURE__ */ J("div", { className: "file-upload-content", children: [
     /* @__PURE__ */ T(DN, { className: "upload-icon" }),
     /* @__PURE__ */ T("p", { className: "upload-text", children: o }),
-    /* @__PURE__ */ ee("p", { className: "upload-hint", children: [
+    /* @__PURE__ */ J("p", { className: "upload-hint", children: [
       "Supported formats:",
       " ",
       /* @__PURE__ */ T("span", { children: e.map((L) => L.replace("*", "")).join(", ") })
     ] }),
-    /* @__PURE__ */ ee("p", { className: "upload-hint", children: [
+    /* @__PURE__ */ J("p", { className: "upload-hint", children: [
       "Max size: ",
       /* @__PURE__ */ T("span", { children: E(t) })
     ] })
-  ] }) : g && !s && f(u[0]) ? /* @__PURE__ */ ee("div", { className: "file-preview", children: [
+  ] }) : g && !s && f(u[0]) ? /* @__PURE__ */ J("div", { className: "file-preview", children: [
     /* @__PURE__ */ T("img", { src: g, alt: "Preview", className: "preview-image" }),
-    /* @__PURE__ */ ee("div", { className: "file-info", children: [
+    /* @__PURE__ */ J("div", { className: "file-info", children: [
       /* @__PURE__ */ T("p", { className: "file-name", children: u[0].name }),
       /* @__PURE__ */ T("p", { className: "file-size", children: E(u[0].size) })
     ] }),
@@ -42451,24 +42492,24 @@ const MN = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
         onClick: D
       }
     )
-  ] }) : /* @__PURE__ */ ee("div", { className: "file-selected", children: [
+  ] }) : /* @__PURE__ */ J("div", { className: "file-selected", children: [
     /* @__PURE__ */ T("div", { className: "file-icon-container", children: f(u[0]) ? /* @__PURE__ */ T(FN, { className: "file-icon" }) : /* @__PURE__ */ T(PN, { className: "file-icon" }) }),
-    /* @__PURE__ */ T("div", { className: "file-details", children: s ? /* @__PURE__ */ ee(qs, { children: [
-      /* @__PURE__ */ ee("p", { className: "file-count", children: [
+    /* @__PURE__ */ T("div", { className: "file-details", children: s ? /* @__PURE__ */ J(qs, { children: [
+      /* @__PURE__ */ J("p", { className: "file-count", children: [
         u.length,
         " file",
         u.length > 1 ? "s" : "",
         " ",
         "selected"
       ] }),
-      /* @__PURE__ */ ee("p", { className: "total-size", children: [
+      /* @__PURE__ */ J("p", { className: "total-size", children: [
         "Total size:",
         " ",
         E(
           u.reduce((L, H) => L + H.size, 0)
         )
       ] })
-    ] }) : /* @__PURE__ */ ee(qs, { children: [
+    ] }) : /* @__PURE__ */ J(qs, { children: [
       /* @__PURE__ */ T("p", { className: "file-name", children: u[0].name }),
       /* @__PURE__ */ T("p", { className: "file-size", children: E(u[0].size) })
     ] }) }),
@@ -42483,7 +42524,7 @@ const MN = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
       }
     )
   ] });
-  return /* @__PURE__ */ ee("div", { className: "file-uploader-container", children: [
+  return /* @__PURE__ */ J("div", { className: "file-uploader-container", children: [
     /* @__PURE__ */ T(
       "input",
       {
@@ -42525,8 +42566,8 @@ const MN = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
   max: u,
   step: h,
   onChange: g
-}) => /* @__PURE__ */ ee("div", { className: "input-wrapper", children: [
-  i && /* @__PURE__ */ ee(
+}) => /* @__PURE__ */ J("div", { className: "input-wrapper", children: [
+  i && /* @__PURE__ */ J(
     "label",
     {
       className: `input-label${o ? " error" : ""}${r ? " disabled" : ""}`,
@@ -42743,7 +42784,7 @@ function zN(e) {
     // onZoomChanged,
     onLoad: b,
     onUnmount: y
-  } = e, [w, S] = F(null), R = B(null), [M, D] = F(null), [E, x] = F(null), [L, H] = F(null), [V, A] = F(null), [J, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null), [K, _] = F(null), [oe, G] = F(null), [pe, be] = F(null), [ae, Ee] = F(null), [q, he] = F(null);
+  } = e, [w, S] = F(null), R = B(null), [M, D] = F(null), [E, x] = F(null), [L, H] = F(null), [V, A] = F(null), [X, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null), [K, _] = F(null), [oe, G] = F(null), [pe, be] = F(null), [ae, Ee] = F(null), [q, he] = F(null);
   return P(() => {
     s && w !== null && w.setOptions(s);
   }, [w, s]), P(() => {
@@ -42755,7 +42796,7 @@ function zN(e) {
   }, [d]), P(() => {
     w && u && (V !== null && google.maps.event.removeListener(V), A(google.maps.event.addListener(w, "dragstart", u)));
   }, [u]), P(() => {
-    w && f && (J !== null && google.maps.event.removeListener(J), Q(google.maps.event.addListener(w, "mousedown", f)));
+    w && f && (X !== null && google.maps.event.removeListener(X), Q(google.maps.event.addListener(w, "mousedown", f)));
   }, [f]), P(() => {
     w && h && (U !== null && google.maps.event.removeListener(U), Z(google.maps.event.addListener(w, "mousemove", h)));
   }, [h]), P(() => {
@@ -43052,7 +43093,7 @@ class UN extends Ve {
     }
   }
   render() {
-    return ee(qs, {
+    return J(qs, {
       children: [T("div", {
         ref: this.getRef
       }), this.state.loaded ? this.props.children : this.props.loadingElement || T(Gm, {})]
@@ -43860,7 +43901,7 @@ function dG(e) {
     onAnimationChanged: H,
     onDraggableChanged: V,
     onFlatChanged: A,
-    onIconChanged: J,
+    onIconChanged: X,
     onPositionChanged: Q,
     onShapeChanged: U,
     onTitleChanged: Z,
@@ -43928,8 +43969,8 @@ function dG(e) {
   }, [V]), P(() => {
     G && A && (bn !== null && google.maps.event.removeListener(bn), go(google.maps.event.addListener(G, "flat_changed", A)));
   }, [A]), P(() => {
-    G && J && (Bs !== null && google.maps.event.removeListener(Bs), po(google.maps.event.addListener(G, "icon_changed", J)));
-  }, [J]), P(() => {
+    G && X && (Bs !== null && google.maps.event.removeListener(Bs), po(google.maps.event.addListener(G, "icon_changed", X)));
+  }, [X]), P(() => {
     G && Q && (ce !== null && google.maps.event.removeListener(ce), Fe(google.maps.event.addListener(G, "position_changed", Q)));
   }, [Q]), P(() => {
     G && U && (de !== null && google.maps.event.removeListener(de), Me(google.maps.event.addListener(G, "shape_changed", U)));
@@ -43945,7 +43986,7 @@ function dG(e) {
     }), {}, {
       position: t
     }), ge = new google.maps.Marker(di);
-    return n ? n.addMarker(ge, !!i) : ge.setMap(oe), t && ge.setPosition(t), typeof a < "u" && ge.setVisible(a), typeof r < "u" && ge.setDraggable(r), typeof c < "u" && ge.setClickable(c), typeof d == "string" && ge.setCursor(d), u && ge.setIcon(u), typeof h < "u" && ge.setLabel(h), typeof g < "u" && ge.setOpacity(g), p && ge.setShape(p), typeof f == "string" && ge.setTitle(f), typeof m == "number" && ge.setZIndex(m), C && ae(google.maps.event.addListener(ge, "dblclick", C)), y && q(google.maps.event.addListener(ge, "dragend", y)), w && Te(google.maps.event.addListener(ge, "dragstart", w)), D && tt(google.maps.event.addListener(ge, "mousedown", D)), S && ue(google.maps.event.addListener(ge, "mouseout", S)), R && je(google.maps.event.addListener(ge, "mouseover", R)), M && le(google.maps.event.addListener(ge, "mouseup", M)), E && Ye(google.maps.event.addListener(ge, "rightclick", E)), v && Ge(google.maps.event.addListener(ge, "click", v)), b && mn(google.maps.event.addListener(ge, "drag", b)), x && Oe(google.maps.event.addListener(ge, "clickable_changed", x)), L && vn(google.maps.event.addListener(ge, "cursor_changed", L)), H && uo(google.maps.event.addListener(ge, "animation_changed", H)), V && ho(google.maps.event.addListener(ge, "draggable_changed", V)), A && go(google.maps.event.addListener(ge, "flat_changed", A)), J && po(google.maps.event.addListener(ge, "icon_changed", J)), Q && Fe(google.maps.event.addListener(ge, "position_changed", Q)), U && Me(google.maps.event.addListener(ge, "shape_changed", U)), Z && Ce(google.maps.event.addListener(ge, "title_changed", Z)), z && fo(google.maps.event.addListener(ge, "visible_changed", z)), Y && Rn(google.maps.event.addListener(ge, "zindex_changed", Y)), pe(ge), K && K(ge), () => {
+    return n ? n.addMarker(ge, !!i) : ge.setMap(oe), t && ge.setPosition(t), typeof a < "u" && ge.setVisible(a), typeof r < "u" && ge.setDraggable(r), typeof c < "u" && ge.setClickable(c), typeof d == "string" && ge.setCursor(d), u && ge.setIcon(u), typeof h < "u" && ge.setLabel(h), typeof g < "u" && ge.setOpacity(g), p && ge.setShape(p), typeof f == "string" && ge.setTitle(f), typeof m == "number" && ge.setZIndex(m), C && ae(google.maps.event.addListener(ge, "dblclick", C)), y && q(google.maps.event.addListener(ge, "dragend", y)), w && Te(google.maps.event.addListener(ge, "dragstart", w)), D && tt(google.maps.event.addListener(ge, "mousedown", D)), S && ue(google.maps.event.addListener(ge, "mouseout", S)), R && je(google.maps.event.addListener(ge, "mouseover", R)), M && le(google.maps.event.addListener(ge, "mouseup", M)), E && Ye(google.maps.event.addListener(ge, "rightclick", E)), v && Ge(google.maps.event.addListener(ge, "click", v)), b && mn(google.maps.event.addListener(ge, "drag", b)), x && Oe(google.maps.event.addListener(ge, "clickable_changed", x)), L && vn(google.maps.event.addListener(ge, "cursor_changed", L)), H && uo(google.maps.event.addListener(ge, "animation_changed", H)), V && ho(google.maps.event.addListener(ge, "draggable_changed", V)), A && go(google.maps.event.addListener(ge, "flat_changed", A)), X && po(google.maps.event.addListener(ge, "icon_changed", X)), Q && Fe(google.maps.event.addListener(ge, "position_changed", Q)), U && Me(google.maps.event.addListener(ge, "shape_changed", U)), Z && Ce(google.maps.event.addListener(ge, "title_changed", Z)), z && fo(google.maps.event.addListener(ge, "visible_changed", z)), Y && Rn(google.maps.event.addListener(ge, "zindex_changed", Y)), pe(ge), K && K(ge), () => {
       be !== null && google.maps.event.removeListener(be), Ee !== null && google.maps.event.removeListener(Ee), he !== null && google.maps.event.removeListener(he), Ne !== null && google.maps.event.removeListener(Ne), me !== null && google.maps.event.removeListener(me), Pe !== null && google.maps.event.removeListener(Pe), We !== null && google.maps.event.removeListener(We), ye !== null && google.maps.event.removeListener(ye), ot !== null && google.maps.event.removeListener(ot), Xt !== null && google.maps.event.removeListener(Xt), Ze !== null && google.maps.event.removeListener(Ze), Cn !== null && google.maps.event.removeListener(Cn), wn !== null && google.maps.event.removeListener(wn), bn !== null && google.maps.event.removeListener(bn), Bs !== null && google.maps.event.removeListener(Bs), ce !== null && google.maps.event.removeListener(ce), ct !== null && google.maps.event.removeListener(ct), yn !== null && google.maps.event.removeListener(yn), Sn !== null && google.maps.event.removeListener(Sn), _ && _(ge), n ? n.removeMarker(ge, !!i) : ge && ge.setMap(null);
     };
   }, []);
@@ -44540,7 +44581,7 @@ function SG(e) {
     onMouseOut: S,
     onLoad: R,
     onUnmount: M
-  } = e, [D, E] = F(null), x = Se(fe), [L, H] = F(null), [V, A] = F(null), [J, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null);
+  } = e, [D, E] = F(null), x = Se(fe), [L, H] = F(null), [V, A] = F(null), [X, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null);
   return P(() => {
     D && S && (U !== null && google.maps.event.removeListener(U), Z(google.maps.event.addListener(D, Dt.onMouseOut, S)));
   }, [S]), P(() => {
@@ -44550,7 +44591,7 @@ function SG(e) {
   }, [C]), P(() => {
     D && b && (V !== null && google.maps.event.removeListener(V), A(google.maps.event.addListener(D, Dt.onClusteringBegin, b)));
   }, [b]), P(() => {
-    D && y && (J !== null && google.maps.event.removeListener(J), A(google.maps.event.addListener(D, Dt.onClusteringEnd, y)));
+    D && y && (X !== null && google.maps.event.removeListener(X), A(google.maps.event.addListener(D, Dt.onClusteringEnd, y)));
   }, [y]), P(() => {
     typeof n < "u" && D !== null && xe.averageCenter(D, n);
   }, [D, n]), P(() => {
@@ -44585,7 +44626,7 @@ function SG(e) {
     if (x) {
       var K = bG({}, s || yG), _ = new Bm(x, [], K);
       return n && xe.averageCenter(_, n), i && xe.batchSizeIE(_, i), o && xe.calculator(_, o), r && xe.clusterClass(_, r), a && xe.enableRetinaIcons(_, a), l && xe.gridSize(_, l), c && xe.ignoreHidden(_, c), d && xe.imageExtension(_, d), u && xe.imagePath(_, u), h && xe.imageSizes(_, h), g && xe.maxZoom(_, g), p && xe.minimumClusterSize(_, p), f && xe.styles(_, f), m && xe.title(_, m), v && xe.zoomOnClick(_, v), S && Z(google.maps.event.addListener(_, Dt.onMouseOut, S)), w && Y(google.maps.event.addListener(_, Dt.onMouseOver, w)), C && H(google.maps.event.addListener(_, Dt.onClick, C)), b && A(google.maps.event.addListener(_, Dt.onClusteringBegin, b)), y && Q(google.maps.event.addListener(_, Dt.onClusteringEnd, y)), E(_), R && R(_), () => {
-        U !== null && google.maps.event.removeListener(U), z !== null && google.maps.event.removeListener(z), L !== null && google.maps.event.removeListener(L), V !== null && google.maps.event.removeListener(V), J !== null && google.maps.event.removeListener(J), M && M(_);
+        U !== null && google.maps.event.removeListener(U), z !== null && google.maps.event.removeListener(z), L !== null && google.maps.event.removeListener(L), V !== null && google.maps.event.removeListener(V), X !== null && google.maps.event.removeListener(X), M && M(_);
       };
     }
   }, []), D !== null && t(D) || null;
@@ -45901,7 +45942,7 @@ function YG(e) {
     onDrag: m,
     onLoad: v,
     onUnmount: C
-  } = e, b = Se(fe), [y, w] = F(null), [S, R] = F(null), [M, D] = F(null), [E, x] = F(null), [L, H] = F(null), [V, A] = F(null), [J, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null), [K, _] = F(null), [oe, G] = F(null), [pe, be] = F(null);
+  } = e, b = Se(fe), [y, w] = F(null), [S, R] = F(null), [M, D] = F(null), [E, x] = F(null), [L, H] = F(null), [V, A] = F(null), [X, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null), [K, _] = F(null), [oe, G] = F(null), [pe, be] = F(null);
   return P(() => {
     y !== null && y.setMap(b);
   }, [b]), P(() => {
@@ -45925,7 +45966,7 @@ function YG(e) {
   }, [c]), P(() => {
     y && d && (V !== null && google.maps.event.removeListener(V), A(google.maps.event.addListener(y, "mousemove", d)));
   }, [d]), P(() => {
-    y && u && (J !== null && google.maps.event.removeListener(J), Q(google.maps.event.addListener(y, "mouseout", u)));
+    y && u && (X !== null && google.maps.event.removeListener(X), Q(google.maps.event.addListener(y, "mouseout", u)));
   }, [u]), P(() => {
     y && h && (U !== null && google.maps.event.removeListener(U), Z(google.maps.event.addListener(y, "mouseover", h)));
   }, [h]), P(() => {
@@ -45941,7 +45982,7 @@ function YG(e) {
       map: b
     }));
     return o && ae.setPath(o), typeof i < "u" && ae.setVisible(i), typeof n < "u" && ae.setEditable(n), typeof s < "u" && ae.setDraggable(s), r && R(google.maps.event.addListener(ae, "dblclick", r)), a && D(google.maps.event.addListener(ae, "dragend", a)), l && x(google.maps.event.addListener(ae, "dragstart", l)), c && H(google.maps.event.addListener(ae, "mousedown", c)), d && A(google.maps.event.addListener(ae, "mousemove", d)), u && Q(google.maps.event.addListener(ae, "mouseout", u)), h && Z(google.maps.event.addListener(ae, "mouseover", h)), g && Y(google.maps.event.addListener(ae, "mouseup", g)), p && _(google.maps.event.addListener(ae, "rightclick", p)), f && G(google.maps.event.addListener(ae, "click", f)), m && be(google.maps.event.addListener(ae, "drag", m)), w(ae), v && v(ae), () => {
-      S !== null && google.maps.event.removeListener(S), M !== null && google.maps.event.removeListener(M), E !== null && google.maps.event.removeListener(E), L !== null && google.maps.event.removeListener(L), V !== null && google.maps.event.removeListener(V), J !== null && google.maps.event.removeListener(J), U !== null && google.maps.event.removeListener(U), z !== null && google.maps.event.removeListener(z), K !== null && google.maps.event.removeListener(K), oe !== null && google.maps.event.removeListener(oe), C && C(ae), ae.setMap(null);
+      S !== null && google.maps.event.removeListener(S), M !== null && google.maps.event.removeListener(M), E !== null && google.maps.event.removeListener(E), L !== null && google.maps.event.removeListener(L), V !== null && google.maps.event.removeListener(V), X !== null && google.maps.event.removeListener(X), U !== null && google.maps.event.removeListener(U), z !== null && google.maps.event.removeListener(z), K !== null && google.maps.event.removeListener(K), oe !== null && google.maps.event.removeListener(oe), C && C(ae), ae.setMap(null);
     };
   }, []), null;
 }
@@ -46065,7 +46106,7 @@ function QG(e) {
     onLoad: C,
     onUnmount: b,
     onEdit: y
-  } = e, w = Se(fe), [S, R] = F(null), [M, D] = F(null), [E, x] = F(null), [L, H] = F(null), [V, A] = F(null), [J, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null), [K, _] = F(null), [oe, G] = F(null), [pe, be] = F(null), [ae, Ee] = F(null);
+  } = e, w = Se(fe), [S, R] = F(null), [M, D] = F(null), [E, x] = F(null), [L, H] = F(null), [V, A] = F(null), [X, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null), [K, _] = F(null), [oe, G] = F(null), [pe, be] = F(null), [ae, Ee] = F(null);
   return P(() => {
     S !== null && S.setMap(w);
   }, [w]), P(() => {
@@ -46097,7 +46138,7 @@ function QG(e) {
   }, [c]), P(() => {
     S && typeof d == "function" && (V !== null && google.maps.event.removeListener(V), A(google.maps.event.addListener(S, "mousedown", d)));
   }, [d]), P(() => {
-    S && typeof u == "function" && (J !== null && google.maps.event.removeListener(J), Q(google.maps.event.addListener(S, "mousemove", u)));
+    S && typeof u == "function" && (X !== null && google.maps.event.removeListener(X), Q(google.maps.event.addListener(S, "mousemove", u)));
   }, [u]), P(() => {
     S && typeof h == "function" && (U !== null && google.maps.event.removeListener(U), Z(google.maps.event.addListener(S, "mouseout", h)));
   }, [h]), P(() => {
@@ -46115,7 +46156,7 @@ function QG(e) {
       map: w
     }));
     return o && q.setPath(o), r && q.setPaths(r), typeof i < "u" && q.setVisible(i), typeof n < "u" && q.setEditable(n), typeof s < "u" && q.setDraggable(s), a && D(google.maps.event.addListener(q, "dblclick", a)), l && x(google.maps.event.addListener(q, "dragend", l)), c && H(google.maps.event.addListener(q, "dragstart", c)), d && A(google.maps.event.addListener(q, "mousedown", d)), u && Q(google.maps.event.addListener(q, "mousemove", u)), h && Z(google.maps.event.addListener(q, "mouseout", h)), g && Y(google.maps.event.addListener(q, "mouseover", g)), p && _(google.maps.event.addListener(q, "mouseup", p)), f && G(google.maps.event.addListener(q, "rightclick", f)), m && be(google.maps.event.addListener(q, "click", m)), v && Ee(google.maps.event.addListener(q, "drag", v)), R(q), C && C(q), () => {
-      M !== null && google.maps.event.removeListener(M), E !== null && google.maps.event.removeListener(E), L !== null && google.maps.event.removeListener(L), V !== null && google.maps.event.removeListener(V), J !== null && google.maps.event.removeListener(J), U !== null && google.maps.event.removeListener(U), z !== null && google.maps.event.removeListener(z), K !== null && google.maps.event.removeListener(K), oe !== null && google.maps.event.removeListener(oe), pe !== null && google.maps.event.removeListener(pe), b && b(q), q.setMap(null);
+      M !== null && google.maps.event.removeListener(M), E !== null && google.maps.event.removeListener(E), L !== null && google.maps.event.removeListener(L), V !== null && google.maps.event.removeListener(V), X !== null && google.maps.event.removeListener(X), U !== null && google.maps.event.removeListener(U), z !== null && google.maps.event.removeListener(z), K !== null && google.maps.event.removeListener(K), oe !== null && google.maps.event.removeListener(oe), pe !== null && google.maps.event.removeListener(pe), b && b(q), q.setMap(null);
     };
   }, []), null;
 }
@@ -46226,7 +46267,7 @@ function XG(e) {
     onBoundsChanged: v,
     onLoad: C,
     onUnmount: b
-  } = e, y = Se(fe), [w, S] = F(null), [R, M] = F(null), [D, E] = F(null), [x, L] = F(null), [H, V] = F(null), [A, J] = F(null), [Q, U] = F(null), [Z, z] = F(null), [Y, K] = F(null), [_, oe] = F(null), [G, pe] = F(null), [be, ae] = F(null), [Ee, q] = F(null);
+  } = e, y = Se(fe), [w, S] = F(null), [R, M] = F(null), [D, E] = F(null), [x, L] = F(null), [H, V] = F(null), [A, X] = F(null), [Q, U] = F(null), [Z, z] = F(null), [Y, K] = F(null), [_, oe] = F(null), [G, pe] = F(null), [be, ae] = F(null), [Ee, q] = F(null);
   return P(() => {
     w !== null && w.setMap(y);
   }, [y]), P(() => {
@@ -46248,7 +46289,7 @@ function XG(e) {
   }, [l]), P(() => {
     w && c && (H !== null && google.maps.event.removeListener(H), V(google.maps.event.addListener(w, "mousedown", c)));
   }, [c]), P(() => {
-    w && d && (A !== null && google.maps.event.removeListener(A), J(google.maps.event.addListener(w, "mousemove", d)));
+    w && d && (A !== null && google.maps.event.removeListener(A), X(google.maps.event.addListener(w, "mousemove", d)));
   }, [d]), P(() => {
     w && u && (Q !== null && google.maps.event.removeListener(Q), U(google.maps.event.addListener(w, "mouseout", u)));
   }, [u]), P(() => {
@@ -46267,7 +46308,7 @@ function XG(e) {
     var he = new google.maps.Rectangle(Pr(Pr({}, t), {}, {
       map: y
     }));
-    return typeof o < "u" && he.setVisible(o), typeof i < "u" && he.setEditable(i), typeof n < "u" && he.setDraggable(n), typeof s < "u" && he.setBounds(s), r && M(google.maps.event.addListener(he, "dblclick", r)), a && E(google.maps.event.addListener(he, "dragend", a)), l && L(google.maps.event.addListener(he, "dragstart", l)), c && V(google.maps.event.addListener(he, "mousedown", c)), d && J(google.maps.event.addListener(he, "mousemove", d)), u && U(google.maps.event.addListener(he, "mouseout", u)), h && z(google.maps.event.addListener(he, "mouseover", h)), g && K(google.maps.event.addListener(he, "mouseup", g)), p && oe(google.maps.event.addListener(he, "rightclick", p)), f && pe(google.maps.event.addListener(he, "click", f)), m && ae(google.maps.event.addListener(he, "drag", m)), v && q(google.maps.event.addListener(he, "bounds_changed", v)), S(he), C && C(he), () => {
+    return typeof o < "u" && he.setVisible(o), typeof i < "u" && he.setEditable(i), typeof n < "u" && he.setDraggable(n), typeof s < "u" && he.setBounds(s), r && M(google.maps.event.addListener(he, "dblclick", r)), a && E(google.maps.event.addListener(he, "dragend", a)), l && L(google.maps.event.addListener(he, "dragstart", l)), c && V(google.maps.event.addListener(he, "mousedown", c)), d && X(google.maps.event.addListener(he, "mousemove", d)), u && U(google.maps.event.addListener(he, "mouseout", u)), h && z(google.maps.event.addListener(he, "mouseover", h)), g && K(google.maps.event.addListener(he, "mouseup", g)), p && oe(google.maps.event.addListener(he, "rightclick", p)), f && pe(google.maps.event.addListener(he, "click", f)), m && ae(google.maps.event.addListener(he, "drag", m)), v && q(google.maps.event.addListener(he, "bounds_changed", v)), S(he), C && C(he), () => {
       R !== null && google.maps.event.removeListener(R), D !== null && google.maps.event.removeListener(D), x !== null && google.maps.event.removeListener(x), H !== null && google.maps.event.removeListener(H), A !== null && google.maps.event.removeListener(A), Q !== null && google.maps.event.removeListener(Q), Z !== null && google.maps.event.removeListener(Z), Y !== null && google.maps.event.removeListener(Y), _ !== null && google.maps.event.removeListener(_), G !== null && google.maps.event.removeListener(G), be !== null && google.maps.event.removeListener(be), Ee !== null && google.maps.event.removeListener(Ee), b && b(he), he.setMap(null);
     };
   }, []), null;
@@ -46395,7 +46436,7 @@ function sH(e) {
     onRadiusChanged: b,
     onLoad: y,
     onUnmount: w
-  } = e, S = Se(fe), [R, M] = F(null), [D, E] = F(null), [x, L] = F(null), [H, V] = F(null), [A, J] = F(null), [Q, U] = F(null), [Z, z] = F(null), [Y, K] = F(null), [_, oe] = F(null), [G, pe] = F(null), [be, ae] = F(null), [Ee, q] = F(null), [he, Te] = F(null), [Ne, tt] = F(null);
+  } = e, S = Se(fe), [R, M] = F(null), [D, E] = F(null), [x, L] = F(null), [H, V] = F(null), [A, X] = F(null), [Q, U] = F(null), [Z, z] = F(null), [Y, K] = F(null), [_, oe] = F(null), [G, pe] = F(null), [be, ae] = F(null), [Ee, q] = F(null), [he, Te] = F(null), [Ne, tt] = F(null);
   return P(() => {
     R !== null && R.setMap(S);
   }, [S]), P(() => {
@@ -46417,7 +46458,7 @@ function sH(e) {
   }, [l]), P(() => {
     R && c && (H !== null && google.maps.event.removeListener(H), V(google.maps.event.addListener(R, "dragstart", c)));
   }, [c]), P(() => {
-    R && d && (A !== null && google.maps.event.removeListener(A), J(google.maps.event.addListener(R, "mousedown", d)));
+    R && d && (A !== null && google.maps.event.removeListener(A), X(google.maps.event.addListener(R, "mousedown", d)));
   }, [d]), P(() => {
     R && u && (Q !== null && google.maps.event.removeListener(Q), U(google.maps.event.addListener(R, "mousemove", u)));
   }, [u]), P(() => {
@@ -46440,7 +46481,7 @@ function sH(e) {
     var me = new google.maps.Circle(Fr(Fr({}, t || tH), {}, {
       map: S
     }));
-    return typeof n == "number" && me.setRadius(n), typeof s < "u" && me.setCenter(s), typeof n == "number" && me.setRadius(n), typeof r < "u" && me.setVisible(r), typeof o < "u" && me.setEditable(o), typeof i < "u" && me.setDraggable(i), a && E(google.maps.event.addListener(me, "dblclick", a)), l && L(google.maps.event.addListener(me, "dragend", l)), c && V(google.maps.event.addListener(me, "dragstart", c)), d && J(google.maps.event.addListener(me, "mousedown", d)), u && U(google.maps.event.addListener(me, "mousemove", u)), h && z(google.maps.event.addListener(me, "mouseout", h)), g && K(google.maps.event.addListener(me, "mouseover", g)), p && oe(google.maps.event.addListener(me, "mouseup", p)), f && pe(google.maps.event.addListener(me, "rightclick", f)), m && ae(google.maps.event.addListener(me, "click", m)), v && q(google.maps.event.addListener(me, "drag", v)), C && Te(google.maps.event.addListener(me, "center_changed", C)), b && tt(google.maps.event.addListener(me, "radius_changed", b)), M(me), y && y(me), () => {
+    return typeof n == "number" && me.setRadius(n), typeof s < "u" && me.setCenter(s), typeof n == "number" && me.setRadius(n), typeof r < "u" && me.setVisible(r), typeof o < "u" && me.setEditable(o), typeof i < "u" && me.setDraggable(i), a && E(google.maps.event.addListener(me, "dblclick", a)), l && L(google.maps.event.addListener(me, "dragend", l)), c && V(google.maps.event.addListener(me, "dragstart", c)), d && X(google.maps.event.addListener(me, "mousedown", d)), u && U(google.maps.event.addListener(me, "mousemove", u)), h && z(google.maps.event.addListener(me, "mouseout", h)), g && K(google.maps.event.addListener(me, "mouseover", g)), p && oe(google.maps.event.addListener(me, "mouseup", p)), f && pe(google.maps.event.addListener(me, "rightclick", f)), m && ae(google.maps.event.addListener(me, "click", m)), v && q(google.maps.event.addListener(me, "drag", v)), C && Te(google.maps.event.addListener(me, "center_changed", C)), b && tt(google.maps.event.addListener(me, "radius_changed", b)), M(me), y && y(me), () => {
       D !== null && google.maps.event.removeListener(D), x !== null && google.maps.event.removeListener(x), H !== null && google.maps.event.removeListener(H), A !== null && google.maps.event.removeListener(A), Q !== null && google.maps.event.removeListener(Q), Z !== null && google.maps.event.removeListener(Z), Y !== null && google.maps.event.removeListener(Y), _ !== null && google.maps.event.removeListener(_), G !== null && google.maps.event.removeListener(G), be !== null && google.maps.event.removeListener(be), he !== null && google.maps.event.removeListener(he), Ne !== null && google.maps.event.removeListener(Ne), w && w(me), me.setMap(null);
     };
   }, []), null;
@@ -46586,7 +46627,7 @@ function iH(e) {
     onSetProperty: p,
     onLoad: f,
     onUnmount: m
-  } = e, v = Se(fe), [C, b] = F(null), [y, w] = F(null), [S, R] = F(null), [M, D] = F(null), [E, x] = F(null), [L, H] = F(null), [V, A] = F(null), [J, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null), [K, _] = F(null), [oe, G] = F(null), [pe, be] = F(null), [ae, Ee] = F(null);
+  } = e, v = Se(fe), [C, b] = F(null), [y, w] = F(null), [S, R] = F(null), [M, D] = F(null), [E, x] = F(null), [L, H] = F(null), [V, A] = F(null), [X, Q] = F(null), [U, Z] = F(null), [z, Y] = F(null), [K, _] = F(null), [oe, G] = F(null), [pe, be] = F(null), [ae, Ee] = F(null);
   return P(() => {
     C !== null && C.setMap(v);
   }, [v]), P(() => {
@@ -46602,7 +46643,7 @@ function iH(e) {
   }, [a]), P(() => {
     C && l && (V !== null && google.maps.event.removeListener(V), A(google.maps.event.addListener(C, "mouseup", l)));
   }, [l]), P(() => {
-    C && c && (J !== null && google.maps.event.removeListener(J), Q(google.maps.event.addListener(C, "rightclick", c)));
+    C && c && (X !== null && google.maps.event.removeListener(X), Q(google.maps.event.addListener(C, "rightclick", c)));
   }, [c]), P(() => {
     C && s && (U !== null && google.maps.event.removeListener(U), Z(google.maps.event.addListener(C, "click", s)));
   }, [s]), P(() => {
@@ -46623,7 +46664,7 @@ function iH(e) {
       n && w(google.maps.event.addListener(q, "dblclick", n)), i && R(google.maps.event.addListener(q, "mousedown", i)), o && D(google.maps.event.addListener(q, "mousemove", o)), r && x(google.maps.event.addListener(q, "mouseout", r)), a && H(google.maps.event.addListener(q, "mouseover", a)), l && A(google.maps.event.addListener(q, "mouseup", l)), c && Q(google.maps.event.addListener(q, "rightclick", c)), s && Z(google.maps.event.addListener(q, "click", s)), d && Y(google.maps.event.addListener(q, "addfeature", d)), u && _(google.maps.event.addListener(q, "removefeature", u)), h && G(google.maps.event.addListener(q, "removeproperty", h)), g && be(google.maps.event.addListener(q, "setgeometry", g)), p && Ee(google.maps.event.addListener(q, "setproperty", p)), b(q), f && f(q);
     }
     return () => {
-      C && (y !== null && google.maps.event.removeListener(y), S !== null && google.maps.event.removeListener(S), M !== null && google.maps.event.removeListener(M), E !== null && google.maps.event.removeListener(E), L !== null && google.maps.event.removeListener(L), V !== null && google.maps.event.removeListener(V), J !== null && google.maps.event.removeListener(J), U !== null && google.maps.event.removeListener(U), z !== null && google.maps.event.removeListener(z), K !== null && google.maps.event.removeListener(K), oe !== null && google.maps.event.removeListener(oe), pe !== null && google.maps.event.removeListener(pe), ae !== null && google.maps.event.removeListener(ae), m && m(C), C.setMap(null));
+      C && (y !== null && google.maps.event.removeListener(y), S !== null && google.maps.event.removeListener(S), M !== null && google.maps.event.removeListener(M), E !== null && google.maps.event.removeListener(E), L !== null && google.maps.event.removeListener(L), V !== null && google.maps.event.removeListener(V), X !== null && google.maps.event.removeListener(X), U !== null && google.maps.event.removeListener(U), z !== null && google.maps.event.removeListener(z), K !== null && google.maps.event.removeListener(K), oe !== null && google.maps.event.removeListener(oe), pe !== null && google.maps.event.removeListener(pe), ae !== null && google.maps.event.removeListener(ae), m && m(C), C.setMap(null));
     };
   }, []), null;
 }
@@ -47487,7 +47528,7 @@ function DH(e) {
     city: i
   };
 }
-const MH = ["places"], qH = ({
+const MH = ["places"], ZH = ({
   googleMapsApiKey: e,
   initialCoordinates: t,
   initialAddress: s,
@@ -47516,13 +47557,13 @@ const MH = ["places"], qH = ({
       g({ lat: M, lng: D });
     }
   }, [t]);
-  const b = X((M) => {
+  const b = ee((M) => {
     u(M);
-  }, []), y = X(() => {
+  }, []), y = ee(() => {
     u(null);
-  }, []), w = X((M) => {
+  }, []), w = ee((M) => {
     f(M);
-  }, []), S = X(
+  }, []), S = ee(
     async (M, D) => {
       try {
         const E = await FH(M, D, e);
@@ -47538,7 +47579,7 @@ const MH = ["places"], qH = ({
       }
     },
     [r, e]
-  ), R = X(async () => {
+  ), R = ee(async () => {
     if (!p) return;
     const M = p.getPlaces();
     if (!M || M.length === 0) return;
@@ -47567,7 +47608,7 @@ const MH = ["places"], qH = ({
         maximumAge: 3e5
       }
     );
-  }, []), l ? /* @__PURE__ */ ee("div", { className: "interactive-map-container", children: [
+  }, []), l ? /* @__PURE__ */ J("div", { className: "interactive-map-container", children: [
     !o && /* @__PURE__ */ T("div", { className: "search-box-wrapper", children: /* @__PURE__ */ T(
       Km,
       {
@@ -47609,38 +47650,13 @@ const MH = ["places"], qH = ({
         )
       }
     ),
-    !o && /* @__PURE__ */ T("div", { className: "map-info", children: i ? /* @__PURE__ */ T("p", { children: i }) : /* @__PURE__ */ ee("p", { children: [
+    !o && /* @__PURE__ */ T("div", { className: "map-info", children: i ? /* @__PURE__ */ T("p", { children: i }) : /* @__PURE__ */ J("p", { children: [
       "Click on the map or search for a location to place a pin ",
       /* @__PURE__ */ T("br", {}),
       "You can drag the marker to adjust the location"
     ] }) })
   ] }) : /* @__PURE__ */ T("div", { className: "map-loading", children: /* @__PURE__ */ T(Rl, { color: a.primary.main, speedMultiplier: 0.5 }) });
-}, YH = ({ label: e, type: t = "primary", href: s = "#" }) => /* @__PURE__ */ T("a", { className: `link link--${t}`, href: s, children: e }), ZH = ({ icon: e, name: t, items: s }) => {
-  const n = B(null), [i, o] = F(!1);
-  return P(() => {
-    const r = (a) => {
-      n.current && !n.current.contains(a.target) && o(!1);
-    };
-    return i && document.addEventListener("mousedown", r), () => {
-      document.removeEventListener("mousedown", r);
-    };
-  }, [i]), /* @__PURE__ */ ee("div", { className: "dropdown", ref: n, onClick: () => o(!i), children: [
-    /* @__PURE__ */ T("div", { className: "dropdown-avatar", children: e ? /* @__PURE__ */ T(e, {}) : "X" }),
-    /* @__PURE__ */ T("div", { className: `dropdown-caret ${i ? "dropdown-caret--open" : ""}` }),
-    i && /* @__PURE__ */ ee("div", { className: "dropdown-panel", children: [
-      /* @__PURE__ */ T("div", { className: "dropdown-item", children: /* @__PURE__ */ T("span", { className: "dropdown-name", children: t || "" }) }),
-      s.map((r, a) => /* @__PURE__ */ T(
-        "div",
-        {
-          className: "dropdown-item clickable",
-          onClick: r.onClick,
-          children: r.label
-        },
-        a
-      ))
-    ] })
-  ] });
-}, QH = ({
+}, QH = ({ label: e, type: t = "primary", href: s = "#" }) => /* @__PURE__ */ T("a", { className: `link link--${t}`, href: s, children: e }), JH = ({
   isOpen: e = !1,
   title: t,
   children: s,
@@ -47649,10 +47665,10 @@ const MH = ["places"], qH = ({
   confirmText: o = "Confirmar",
   cancelText: r = "Cancelar",
   confirmButtonColor: a = "primary"
-}) => e ? /* @__PURE__ */ T("div", { className: "modal-backdrop", onClick: i, children: /* @__PURE__ */ ee("div", { className: "modal-content", onClick: (l) => l.stopPropagation(), children: [
+}) => e ? /* @__PURE__ */ T("div", { className: "modal-backdrop", onClick: i, children: /* @__PURE__ */ J("div", { className: "modal-content", onClick: (l) => l.stopPropagation(), children: [
   t && /* @__PURE__ */ T("div", { className: "modal-header", children: /* @__PURE__ */ T("h3", { children: t }) }),
   s && /* @__PURE__ */ T("div", { className: "modal-body", children: s }),
-  (n || i) && /* @__PURE__ */ ee("div", { className: "modal-footer", children: [
+  (n || i) && /* @__PURE__ */ J("div", { className: "modal-footer", children: [
     i && /* @__PURE__ */ T(qn, { label: r, onClick: i }),
     n && /* @__PURE__ */ T(
       qn,
@@ -47663,7 +47679,7 @@ const MH = ["places"], qH = ({
       }
     )
   ] })
-] }) }) : null, JH = ({
+] }) }) : null, XH = ({
   name: e,
   placeholder: t,
   label: s,
@@ -47697,7 +47713,7 @@ const MH = ["places"], qH = ({
   }, C = c.map(
     (b) => i.find((y) => y.value === b)?.label || b
   );
-  return /* @__PURE__ */ ee("div", { className: "multiselect-wrapper", children: [
+  return /* @__PURE__ */ J("div", { className: "multiselect-wrapper", children: [
     f && /* @__PURE__ */ T(
       "label",
       {
@@ -47714,14 +47730,14 @@ const MH = ["places"], qH = ({
       },
       y
     )),
-    /* @__PURE__ */ ee("div", { className: "multiselect-container", children: [
+    /* @__PURE__ */ J("div", { className: "multiselect-container", children: [
       /* @__PURE__ */ T(
         "div",
         {
           className: `multiselect${n ? " error" : ""}${a ? " disabled" : ""}`,
           onClick: () => !a && h(!u),
           tabIndex: a ? -1 : 0,
-          children: c.length === 0 ? /* @__PURE__ */ T("span", { className: "multiselect-placeholder", children: t }) : C.map((b, y) => /* @__PURE__ */ ee("span", { className: "multiselect-tag", children: [
+          children: c.length === 0 ? /* @__PURE__ */ T("span", { className: "multiselect-placeholder", children: t }) : C.map((b, y) => /* @__PURE__ */ J("span", { className: "multiselect-tag", children: [
             b,
             !a && /* @__PURE__ */ T(
               "span",
@@ -47736,7 +47752,7 @@ const MH = ["places"], qH = ({
           ] }, y))
         }
       ),
-      u && !a && /* @__PURE__ */ T("div", { className: "multiselect-dropdown", children: i.map((b) => /* @__PURE__ */ ee(
+      u && !a && /* @__PURE__ */ T("div", { className: "multiselect-dropdown", children: i.map((b) => /* @__PURE__ */ J(
         "div",
         {
           className: "multiselect-option",
@@ -47757,7 +47773,7 @@ const MH = ["places"], qH = ({
     ] }),
     /* @__PURE__ */ T("div", { className: "multiselect-error", children: n })
   ] });
-}, XH = ({
+}, eB = ({
   name: e,
   value: t,
   defaultValue: s,
@@ -47769,7 +47785,7 @@ const MH = ["places"], qH = ({
   onChange: l
 }) => {
   const c = i || n;
-  return /* @__PURE__ */ ee("div", { className: "select-wrapper", children: [
+  return /* @__PURE__ */ J("div", { className: "select-wrapper", children: [
     c && /* @__PURE__ */ T(
       "label",
       {
@@ -47777,7 +47793,7 @@ const MH = ["places"], qH = ({
         children: c
       }
     ),
-    /* @__PURE__ */ T("div", { className: "select-container", children: /* @__PURE__ */ ee(
+    /* @__PURE__ */ T("div", { className: "select-container", children: /* @__PURE__ */ J(
       "select",
       {
         className: `select${o ? " error" : ""}${r ? " disabled" : ""}`,
@@ -47796,7 +47812,7 @@ const MH = ["places"], qH = ({
   ] });
 }, xH = ({ title: e, items: t }) => {
   const { isMobile: s } = Tm(), [n, i] = F(!1);
-  return /* @__PURE__ */ ee(
+  return /* @__PURE__ */ J(
     "div",
     {
       className: "sidebar",
@@ -47805,7 +47821,7 @@ const MH = ["places"], qH = ({
       children: [
         /* @__PURE__ */ T("div", { className: "sidebar-header", children: /* @__PURE__ */ T("div", { className: "sidebar-header-fix", children: /* @__PURE__ */ T("div", { className: "sidebar-title", children: n || s ? e : e?.charAt(0) }) }) }),
         /* @__PURE__ */ T("div", { className: "sidebar-body", children: t.map(
-          (o, r) => o.visible !== !1 && /* @__PURE__ */ ee(
+          (o, r) => o.visible !== !1 && /* @__PURE__ */ J(
             "div",
             {
               className: `sidebar-button ${o.active ? "active" : ""}`,
@@ -47829,7 +47845,7 @@ const MH = ["places"], qH = ({
     return `${(e.hours % 12 || 12).toString().padStart(2, "0")}:${s} ${n}`;
   }
   return `${e.hours.toString().padStart(2, "0")}:${s}`;
-}, eB = ({
+}, tB = ({
   label: e,
   name: t,
   error: s,
@@ -47857,8 +47873,8 @@ const MH = ["places"], qH = ({
       };
   }, [p]), P(() => {
     u && g(r);
-  }, [r, u]), /* @__PURE__ */ ee("div", { className: "time-input-wrapper", ref: m, children: [
-    e && /* @__PURE__ */ ee(
+  }, [r, u]), /* @__PURE__ */ J("div", { className: "time-input-wrapper", ref: m, children: [
+    e && /* @__PURE__ */ J(
       "label",
       {
         className: `time-input-label${s ? " error" : ""}${n ? " disabled" : ""}`,
@@ -47868,7 +47884,7 @@ const MH = ["places"], qH = ({
         ]
       }
     ),
-    /* @__PURE__ */ ee("div", { className: "time-input-container", children: [
+    /* @__PURE__ */ J("div", { className: "time-input-container", children: [
       /* @__PURE__ */ T(
         "button",
         {
@@ -47931,80 +47947,116 @@ const kH = {
 }, IH = ({
   entry: e,
   days: t,
-  color: s
-}) => /* @__PURE__ */ ee("div", { className: "week-calendar-row", children: [
-  /* @__PURE__ */ ee("div", { className: `week-calendar-lodging-cell with-point ${s}`, children: [
-    /* @__PURE__ */ T("p", { className: "week-calendar-lodging-name", children: e.category.title }),
-    /* @__PURE__ */ T("p", { className: "week-calendar-lodging-info", children: e.category.label })
-  ] }),
-  t.map((n) => {
-    const { type: i, event: o, durationDays: r } = TH(n, e.events), a = o?.title?.charAt(0).toUpperCase() ?? "?", l = r > 2, c = i === "single" || i === "start";
-    return /* @__PURE__ */ ee("div", { className: "week-calendar-day-cell", children: [
-      i !== "empty" && /* @__PURE__ */ T(
+  color: s,
+  hoverContent: n,
+  onEventClick: i
+}) => {
+  const [o, r] = F(
+    null
+  ), a = (c) => {
+    r({ x: c.clientX, y: c.clientY });
+  }, l = () => {
+    r(null);
+  };
+  return /* @__PURE__ */ J("div", { className: "week-calendar-row", children: [
+    /* @__PURE__ */ J("div", { className: `week-calendar-category-cell with-point ${s}`, children: [
+      /* @__PURE__ */ T("p", { className: "week-calendar-category-name", children: e.category.title }),
+      /* @__PURE__ */ T("p", { className: "week-calendar-category-info", children: e.category.label })
+    ] }),
+    t.map((c) => {
+      const { type: d, event: u, durationDays: h } = TH(c, e.events), g = u?.title?.charAt(0).toUpperCase() ?? "?", p = h > 2, f = d === "single" || d === "start", m = d !== "empty";
+      return /* @__PURE__ */ J(
         "div",
         {
-          className: `reservation-${i}`,
-          style: { backgroundColor: kH[s] }
-        }
-      ),
-      c && /* @__PURE__ */ ee(
-        "div",
-        {
-          className: "reservation-content",
-          style: l ? { width: `calc(${r} * 100%)` } : void 0,
+          className: `week-calendar-day-cell${m && i ? " clickable" : ""}`,
+          onMouseMove: m && n ? a : void 0,
+          onMouseLeave: m && n ? l : void 0,
+          onClick: m && i && u ? () => i(u) : void 0,
           children: [
-            /* @__PURE__ */ T("span", { className: "reservation-avatar", children: a }),
-            l && o && /* @__PURE__ */ ee("div", { className: "reservation-info", children: [
-              /* @__PURE__ */ T("span", { className: "reservation-guest-name", children: o.title }),
-              o.description && /* @__PURE__ */ T("span", { className: "reservation-guest-count", children: o.description })
-            ] })
+            m && /* @__PURE__ */ T(
+              "div",
+              {
+                className: `event-${d}`,
+                style: { backgroundColor: kH[s] }
+              }
+            ),
+            f && /* @__PURE__ */ J(
+              "div",
+              {
+                className: "event-content",
+                style: p ? { width: `calc(${h} * 100%)` } : void 0,
+                children: [
+                  /* @__PURE__ */ T("span", { className: "event-avatar", children: g }),
+                  p && u && /* @__PURE__ */ J("div", { className: "event-info", children: [
+                    /* @__PURE__ */ T("span", { className: "event-title", children: u.title }),
+                    u.description && /* @__PURE__ */ T("span", { className: "event-description", children: u.description })
+                  ] })
+                ]
+              }
+            )
           ]
-        }
-      )
-    ] }, n.toISOString());
-  })
-] }), AH = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], Ih = ["purple", "pink", "red", "yellow", "blue", "green"], OH = (e) => Array.from({ length: 7 }, (t, s) => {
+        },
+        c.toISOString()
+      );
+    }),
+    n && o && /* @__PURE__ */ T(
+      "div",
+      {
+        className: "week-calendar-hover-tooltip",
+        style: { left: o.x, top: o.y },
+        children: n
+      }
+    )
+  ] });
+}, AH = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], Ih = ["purple", "pink", "red", "yellow", "blue", "green"], OH = (e) => Array.from({ length: 7 }, (t, s) => {
   const n = new Date(e);
   return n.setDate(n.getDate() + s), n;
 }), NH = (e) => {
   const t = new Date(e);
   return t.setDate(t.getDate() - t.getDay()), t.setHours(0, 0, 0, 0), t;
-}, Ah = (e) => e.toLocaleDateString("en-US", { day: "numeric", month: "short" }), tB = ({
+}, Ah = (e) => e.toLocaleDateString("en-US", { day: "numeric", month: "short" }), sB = ({
   title: e = "Calendar",
-  events: t = []
+  events: t = [],
+  hoverContent: s,
+  onEventClick: n,
+  onWeekChange: i
 }) => {
-  const [s, n] = F(() => NH(/* @__PURE__ */ new Date())), i = new Date(s);
-  i.setDate(i.getDate() + 6);
-  const o = OH(s), r = /* @__PURE__ */ new Date();
-  r.setHours(0, 0, 0, 0);
-  const a = () => {
-    n((c) => {
-      const d = new Date(c);
-      return d.setDate(d.getDate() - 7), d;
+  const [o, r] = F(() => NH(/* @__PURE__ */ new Date())), a = new Date(o);
+  a.setDate(a.getDate() + 6);
+  const l = OH(o), c = /* @__PURE__ */ new Date();
+  c.setHours(0, 0, 0, 0);
+  const d = () => {
+    r((h) => {
+      const g = new Date(h);
+      g.setDate(g.getDate() - 7);
+      const p = new Date(g);
+      return p.setDate(p.getDate() + 6), i?.(g, p), g;
     });
-  }, l = () => {
-    n((c) => {
-      const d = new Date(c);
-      return d.setDate(d.getDate() + 7), d;
+  }, u = () => {
+    r((h) => {
+      const g = new Date(h);
+      g.setDate(g.getDate() + 7);
+      const p = new Date(g);
+      return p.setDate(p.getDate() + 6), i?.(g, p), g;
     });
   };
-  return /* @__PURE__ */ ee("div", { className: "week-calendar-container", children: [
-    /* @__PURE__ */ ee("div", { className: "week-calendar-header", children: [
+  return /* @__PURE__ */ J("div", { className: "week-calendar-container", children: [
+    /* @__PURE__ */ J("div", { className: "week-calendar-header", children: [
       /* @__PURE__ */ T("div", { className: "week-calendar-title", children: e }),
-      /* @__PURE__ */ ee("div", { className: "week-selector", children: [
+      /* @__PURE__ */ J("div", { className: "week-selector", children: [
         /* @__PURE__ */ T(
           Yn,
           {
             size: "small",
             variant: "text",
             icon: EH,
-            onClick: a
+            onClick: d
           }
         ),
-        /* @__PURE__ */ ee("span", { children: [
-          Ah(s),
+        /* @__PURE__ */ J("span", { children: [
+          Ah(o),
           " - ",
-          Ah(i)
+          Ah(a)
         ] }),
         /* @__PURE__ */ T(
           Yn,
@@ -48012,44 +48064,46 @@ const kH = {
             size: "small",
             variant: "text",
             icon: LH,
-            onClick: l
+            onClick: u
           }
         )
       ] })
     ] }),
-    /* @__PURE__ */ ee("div", { className: "week-calendar", children: [
-      /* @__PURE__ */ ee("div", { className: "week-calendar-row", children: [
-        /* @__PURE__ */ T("div", { className: "week-calendar-lodging-cell" }),
-        o.map((c) => {
-          const d = c.getTime() === r.getTime();
-          return /* @__PURE__ */ ee(
+    /* @__PURE__ */ J("div", { className: "week-calendar", children: [
+      /* @__PURE__ */ J("div", { className: "week-calendar-row", children: [
+        /* @__PURE__ */ T("div", { className: "week-calendar-category-cell" }),
+        l.map((h) => {
+          const g = h.getTime() === c.getTime();
+          return /* @__PURE__ */ J(
             "div",
             {
-              className: `week-calendar-day-cell${d ? " week-calendar-day-today" : ""}`,
+              className: `week-calendar-day-cell${g ? " week-calendar-day-today" : ""}`,
               children: [
-                /* @__PURE__ */ T("span", { className: "week-calendar-day-name", children: AH[c.getDay()] }),
-                /* @__PURE__ */ T("span", { className: "week-calendar-day-number", children: c.getDate() })
+                /* @__PURE__ */ T("span", { className: "week-calendar-day-name", children: AH[h.getDay()] }),
+                /* @__PURE__ */ T("span", { className: "week-calendar-day-number", children: h.getDate() })
               ]
             },
-            c.toISOString()
+            h.toISOString()
           );
         })
       ] }),
-      t.map((c, d) => /* @__PURE__ */ T(
+      t.map((h, g) => /* @__PURE__ */ T(
         IH,
         {
-          entry: c,
-          days: o,
-          color: c.category.color ?? Ih[d % Ih.length]
+          entry: h,
+          days: l,
+          color: h.category.color ?? Ih[g % Ih.length],
+          hoverContent: s,
+          onEventClick: n
         },
-        c.category.title
+        h.category.title
       ))
     ] })
   ] });
-}, GH = "NEUS UI", sB = ({ children: e, routes: t, menu: s }) => {
+}, GH = "NEUS UI", nB = ({ children: e, routes: t, menu: s }) => {
   const [n, i] = F(!1);
-  return /* @__PURE__ */ ee("div", { className: "app-template", children: [
-    /* @__PURE__ */ ee("div", { className: "header-container", children: [
+  return /* @__PURE__ */ J("div", { className: "app-template", children: [
+    /* @__PURE__ */ J("div", { className: "header-container", children: [
       /* @__PURE__ */ T(
         Yn,
         {
@@ -48068,38 +48122,39 @@ const kH = {
     ),
     /* @__PURE__ */ T("div", { className: "content", children: /* @__PURE__ */ T("div", { className: "content-container", children: e }) })
   ] });
-}, nB = ({
+}, iB = ({
   children: e,
   submitLabel: t,
   loading: s
-}) => /* @__PURE__ */ ee("div", { className: "form", children: [
+}) => /* @__PURE__ */ J("div", { className: "form", children: [
   e,
   /* @__PURE__ */ T("div", { className: "submit-container", children: /* @__PURE__ */ T(qn, { type: "submit", label: t, loading: s }) })
 ] });
 export {
   Mc as Actions,
-  sB as AppTemplate,
+  nB as AppTemplate,
   qn as Button,
   Wc as Calendar,
+  _H as Card,
   Sb as Checkbox,
   Mb as Clock,
-  $H as DataTable,
-  jH as DateInput,
-  ZH as Dropdown,
-  KH as FileUploader,
-  nB as FormTemplate,
+  jH as DataTable,
+  KH as DateInput,
+  qH as Dropdown,
+  YH as FileUploader,
+  iB as FormTemplate,
   Yn as IconButton,
   kN as Input,
-  qH as InteractiveMap,
-  YH as Link,
+  ZH as InteractiveMap,
+  QH as Link,
   Pv as Menu,
-  QH as Modal,
-  JH as MultiSelect,
-  XH as Select,
+  JH as Modal,
+  XH as MultiSelect,
+  eB as Select,
   xH as Sidebar,
   zH as ThemeProvider,
-  eB as TimeInput,
-  tB as WeekCalendar,
+  tB as TimeInput,
+  sB as WeekCalendar,
   IH as WeekCalendarRow,
   Xm as getDarkenColor,
   WH as getLightenColor,
