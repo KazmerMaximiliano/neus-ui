@@ -16,11 +16,15 @@
 - [ClockNumbers](#clocknumbers)
 - [Modal](#modal)
 - [Sidebar](#sidebar)
+- [Dropdown](#dropdown)
 - [Menu](#menu)
 - [DataTable](#datatable)
 - [FileUploader](#fileuploader)
 - [Actions](#actions)
 - [InteractiveMap](#interactivemap)
+- [Card](#card)
+- [WeekCalendar](#weekcalendar)
+- [WeekCalendarRow](#weekcalendarrow)
 
 ---
 
@@ -708,6 +712,55 @@ export function AppLayout() {
 
 ---
 
+## Dropdown
+
+Dropdown menu component triggered by an icon avatar with a caret indicator.
+
+### Props
+
+| Property | Type             | Required | Description                 |
+| -------- | ---------------- | -------- | --------------------------- |
+| `icon`   | `IconType`       | ❌       | Icon displayed as avatar    |
+| `name`   | `string`         | ❌       | Name displayed in the panel |
+| `items`  | `DropdownItem[]` | ✅       | Array of dropdown items     |
+
+**DropdownItem:**
+
+```tsx
+type DropdownItem = {
+  label: string;
+  onClick: () => void;
+};
+```
+
+### Usage Example
+
+```tsx
+import { Dropdown } from "@neus-ui/components";
+import { FiUser } from "react-icons/fi";
+
+export function UserDropdown() {
+  const items = [
+    {
+      label: "Profile",
+      onClick: () => console.log("Go to profile"),
+    },
+    {
+      label: "Settings",
+      onClick: () => console.log("Go to settings"),
+    },
+    {
+      label: "Logout",
+      onClick: () => console.log("Logging out..."),
+    },
+  ];
+
+  return <Dropdown icon={FiUser} name="John Doe" items={items} />;
+}
+```
+
+---
+
 ## Menu
 
 Contextual or dropdown menu component with actions.
@@ -1068,6 +1121,164 @@ export function LocationSelector() {
   );
 }
 ```
+
+---
+
+## Card
+
+Flexible card component with optional avatar, header sections, color variants, and fill mode.
+
+### Props
+
+| Property      | Type              | Required | Description                                        |
+| ------------- | ----------------- | -------- | -------------------------------------------------- |
+| `avatarImage` | `string`          | ❌       | URL for the avatar image                           |
+| `avatarAlt`   | `string`          | ❌       | Alt text for avatar; first letter used as fallback |
+| `header`      | `CardHeaderProps` | ❌       | Header with leading and trailing content           |
+| `content`     | `React.ReactNode` | ❌       | Card body content                                  |
+| `fill`        | `boolean`         | ❌       | Enables filled background style                    |
+| `color`       | `CardColor`       | ❌       | Color variant for the card                         |
+
+**CardHeaderProps:**
+
+```tsx
+type CardHeaderProps = {
+  leading?: React.ReactNode;
+  trailing?: React.ReactNode;
+};
+```
+
+**CardColor:**
+
+```tsx
+type CardColor = "purple" | "pink" | "red" | "yellow" | "blue" | "green";
+```
+
+### Usage Example
+
+```tsx
+import { Card } from "@neus-ui/components";
+
+export function UserCard() {
+  return (
+    <Card
+      avatarImage="https://example.com/avatar.jpg"
+      avatarAlt="John"
+      header={{
+        leading: <span>John Doe</span>,
+        trailing: <span>Admin</span>,
+      }}
+      content={<p>User profile card with details.</p>}
+      color="blue"
+      fill
+    />
+  );
+}
+```
+
+---
+
+## WeekCalendar
+
+Weekly calendar component that displays events organized by categories across a 7-day view with navigation.
+
+### Props
+
+| Property       | Type                                     | Required | Description                                         |
+| -------------- | ---------------------------------------- | -------- | --------------------------------------------------- |
+| `title`        | `string`                                 | ❌       | Calendar title (default: `'Calendar'`)              |
+| `events`       | `EventsByCategory[]`                     | ❌       | Array of event groups organized by category         |
+| `hoverContent` | `React.ReactNode`                        | ❌       | Custom tooltip shown at cursor on event cell hover  |
+| `onEventClick` | `(event: CalendarEvent) => void`         | ❌       | Callback when clicking an event cell                |
+| `onWeekChange` | `(weekStart: Date, weekEnd: Date) => void` | ❌     | Callback when navigating to a different week        |
+
+**EventsByCategory:**
+
+```tsx
+type EventsByCategory = {
+  category: Category;
+  events: CalendarEvent[];
+};
+
+type Category = {
+  color?: string;
+  title: string;
+  label: string;
+};
+
+type CalendarEvent = {
+  id?: number;
+  title: string;
+  start: Date;
+  end: Date;
+  description?: string;
+};
+```
+
+### Usage Example
+
+```tsx
+import { WeekCalendar } from "@neus-ui/components";
+
+export function EventsCalendar() {
+  const events = [
+    {
+      category: { title: "Room A", label: "Suite", color: "purple" },
+      events: [
+        {
+          id: 1,
+          title: "John Doe",
+          start: new Date(2024, 0, 15),
+          end: new Date(2024, 0, 17),
+          description: "2 guests",
+        },
+      ],
+    },
+    {
+      category: { title: "Room B", label: "Standard", color: "blue" },
+      events: [
+        {
+          id: 2,
+          title: "Jane Smith",
+          start: new Date(2024, 0, 14),
+          end: new Date(2024, 0, 14),
+          description: "1 guest",
+        },
+      ],
+    },
+  ];
+
+  return (
+    <WeekCalendar
+      title="Reservations"
+      events={events}
+      hoverContent={<div>Event details tooltip</div>}
+      onEventClick={(event) => console.log("Clicked:", event.title)}
+      onWeekChange={(start, end) => console.log("Week:", start, end)}
+    />
+  );
+}
+```
+
+---
+
+## WeekCalendarRow
+
+Row component used internally by `WeekCalendar` to render a single category row with its events across the week days.
+
+### Props
+
+| Property       | Type                             | Required | Description                                         |
+| -------------- | -------------------------------- | -------- | --------------------------------------------------- |
+| `entry`        | `EventsByCategory`               | ✅       | Category with its events                            |
+| `days`         | `Date[]`                         | ✅       | Array of dates representing the week                |
+| `color`        | `string`                         | ✅       | Color for the category indicator                    |
+| `hoverContent` | `React.ReactNode`                | ❌       | Custom tooltip shown at cursor on event cell hover  |
+| `onEventClick` | `(event: CalendarEvent) => void` | ❌       | Callback when clicking an event cell                |
+
+### Note
+
+This is typically used internally by `WeekCalendar` and does not need to be used directly in most applications.
 
 ---
 

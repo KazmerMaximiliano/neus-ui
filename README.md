@@ -23,7 +23,7 @@ A modern React UI component library built with TypeScript and dynamic theming ca
 ### Why Neus UI?
 
 - **🎨 Dynamic Theming**: Flexible theming system allowing real-time color changes
-- **🛠️ Ready-to-Use Components**: 18+ professional pre-built components
+- **🛠️ Ready-to-Use Components**: 21+ professional pre-built components
 - **📱 Responsive**: Designed with mobile-first approach in mind
 - **🧩 Composable**: Modular components that are easy to combine
 - **🎭 Customizable**: CSS variables and hooks for deep customization
@@ -42,7 +42,7 @@ A modern React UI component library built with TypeScript and dynamic theming ca
 
 ```
 src/
-├── components/        # 18+ reusable UI components
+├── components/        # 21+ reusable UI components
 ├── templates/         # Pre-built layouts
 ├── hooks/             # Custom hooks (useTheme, useColors, useResponsive)
 ├── providers/         # ThemeProvider for theme management
@@ -251,26 +251,30 @@ All theme colors are available as CSS variables:
 
 ### Available Components
 
-| Component        | Description                                             |
-| ---------------- | ------------------------------------------------------- |
-| `Actions`        | Action buttons grouping and management                  |
-| `Button`         | Buttons with multiple variants (solid, outlined, ghost) |
-| `Calendar`       | Date picker component                                   |
-| `Checkbox`       | Checkbox with indeterminate state                       |
-| `Clock`          | Time picker component                                   |
-| `DataTable`      | Tables with sorting, filtering, and pagination          |
-| `FileUploader`   | File upload component with drag and drop support        |
-| `IconButton`     | Buttons with icons                                      |
-| `Input`          | Text input fields with validation states                |
-| `InteractiveMap` | Interactive map components                              |
-| `DateInput`      | Date input fields with validation states                |
-| `TimeInput`      | Time input fields with validation states                |
-| `Link`           | Styled link components                                  |
-| `Menu`           | Dropdown menu with customizable items                   |
-| `Modal`          | Modal dialogs with backdrop                             |
-| `MultiSelect`    | Multi-selection dropdown                                |
-| `Select`         | Dropdown select components                              |
-| `Sidebar`        | Collapsible sidebar navigation                          |
+| Component          | Description                                             |
+| ------------------ | ------------------------------------------------------- |
+| `Actions`          | Action buttons grouping and management                  |
+| `Button`           | Buttons with multiple variants (solid, outlined, ghost) |
+| `Calendar`         | Date picker component                                   |
+| `Card`             | Flexible card with avatar, header, and color variants   |
+| `Checkbox`         | Checkbox with indeterminate state                       |
+| `Clock`            | Time picker component                                   |
+| `DataTable`        | Tables with sorting, filtering, and pagination          |
+| `DateInput`        | Date input fields with validation states                |
+| `Dropdown`         | Dropdown menu triggered by icon avatar                  |
+| `FileUploader`     | File upload component with drag and drop support        |
+| `IconButton`       | Buttons with icons                                      |
+| `Input`            | Text input fields with validation states                |
+| `InteractiveMap`   | Interactive map components                              |
+| `Link`             | Styled link components                                  |
+| `Menu`             | Contextual actions menu                                 |
+| `Modal`            | Modal dialogs with backdrop                             |
+| `MultiSelect`      | Multi-selection dropdown                                |
+| `Select`           | Dropdown select components                              |
+| `Sidebar`          | Collapsible sidebar navigation                          |
+| `TimeInput`        | Time input fields with validation states                |
+| `WeekCalendar`     | Weekly calendar with event categories and navigation    |
+| `WeekCalendarRow`  | Event row for WeekCalendar (internal)                   |
 
 ### 🏗️ Available Templates
 
