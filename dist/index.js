@@ -47956,15 +47956,15 @@ const OH = ["places"], sB = ({
     o && /* @__PURE__ */ L("div", { className: "select-error", children: o })
   ] });
 }, NH = ({ title: e, items: t }) => {
-  const { isMobile: s } = Im(), [n, i] = F(!1);
+  const { isTablet: s } = Im(), [n, i] = F(!1);
   return /* @__PURE__ */ J(
     "div",
     {
       className: "sidebar",
-      onMouseEnter: () => i(!0),
-      onMouseLeave: () => i(!1),
+      onMouseEnter: s ? () => i(!0) : void 0,
+      onMouseLeave: s ? () => i(!1) : void 0,
       children: [
-        /* @__PURE__ */ L("div", { className: "sidebar-header", children: /* @__PURE__ */ L("div", { className: "sidebar-header-fix", children: /* @__PURE__ */ L("div", { className: "sidebar-title", children: n || s ? e : e?.charAt(0) }) }) }),
+        /* @__PURE__ */ L("div", { className: "sidebar-header", children: /* @__PURE__ */ L("div", { className: "sidebar-header-fix", children: /* @__PURE__ */ L("div", { className: "sidebar-title", children: !s || n ? e : e?.charAt(0) }) }) }),
         /* @__PURE__ */ L("div", { className: "sidebar-body", children: t.map(
           (o, r) => o.visible !== !1 && /* @__PURE__ */ J(
             "div",

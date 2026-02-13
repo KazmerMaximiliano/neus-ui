@@ -4,20 +4,20 @@ import "./Sidebar.styles.css";
 import { SidebarProps } from "./Sidebar.types";
 
 export const Sidebar = ({ title, items }: SidebarProps) => {
-  const { isMobile } = useResponsive();
+  const { isTablet } = useResponsive();
 
   const [showFullTitle, setShowFullTitle] = useState(false);
 
   return (
     <div
       className="sidebar"
-      onMouseEnter={() => setShowFullTitle(true)}
-      onMouseLeave={() => setShowFullTitle(false)}
+      onMouseEnter={isTablet ? () => setShowFullTitle(true) : undefined}
+      onMouseLeave={isTablet ? () => setShowFullTitle(false) : undefined}
     >
       <div className="sidebar-header">
         <div className="sidebar-header-fix">
           <div className="sidebar-title">
-            {showFullTitle || isMobile ? title : title?.charAt(0)}
+            {!isTablet || showFullTitle ? title : title?.charAt(0)}
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@ export const Sidebar = ({ title, items }: SidebarProps) => {
                 )}
                 <div className="sidebar-button-label">{item.label}</div>
               </div>
-            )
+            ),
         )}
       </div>
     </div>

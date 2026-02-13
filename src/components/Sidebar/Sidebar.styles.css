@@ -97,7 +97,8 @@
   animation: ease all 0.2s;
 }
 
-@media (min-width: 768px) {
+/* Estos estilos los quiero en pantallas de 768px a pantallas de 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
   .sidebar:hover {
     width: 250px;
   }
@@ -125,7 +126,8 @@
   }
 }
 
-@media (max-width: 768px) {
+/* Estos estilos los quiero en pantallas de 0px a pantallas de 768px y en pantallas de 1024px en adelante */
+@media (max-width: 768px), (min-width: 1024px) {
   .sidebar {
     width: 250px;
   }
@@ -150,6 +152,14 @@
     height: 100vh;
   }
 
+  .sidebar .sidebar-title {
+    font-size: 1em;
+    background-color: transparent;
+    color: var(--color-primary);
+  }
+}
+
+@media (max-width: 768px) {
   .sidebar .sidebar-header {
     display: none;
   }
