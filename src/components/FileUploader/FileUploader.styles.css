@@ -12,7 +12,7 @@
   min-height: 200px;
   padding: 1rem;
   border: 2px dashed var(--color-border-light);
-  border-radius: 1.5em;
+  border-radius: var(--radius-default);
   background-color: var(--color-background);
   cursor: pointer;
   transition: all 0.3s ease;

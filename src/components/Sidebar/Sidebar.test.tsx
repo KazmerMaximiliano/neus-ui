@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { FaCog, FaHome, FaUser } from "react-icons/fa";
+import { House, Settings, User } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Sidebar } from "./Sidebar";
 
@@ -17,9 +17,9 @@ afterEach(() => {
 });
 
 const defaultItems = [
-  { label: "Home", icon: FaHome, onClick: vi.fn() },
-  { label: "Profile", icon: FaUser, onClick: vi.fn() },
-  { label: "Settings", icon: FaCog, onClick: vi.fn() },
+  { label: "Home", icon: House, onClick: vi.fn() },
+  { label: "Profile", icon: User, onClick: vi.fn() },
+  { label: "Settings", icon: Settings, onClick: vi.fn() },
 ];
 
 const renderSidebar = (props = {}) => {

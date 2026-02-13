@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { Plus } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { FaPlus } from "react-icons/fa";
 import { ThemeProvider } from "../../providers/ThemeProvider";
 import { IconButton } from "./IconButton";
 
@@ -11,7 +11,7 @@ afterEach(() => {
 const renderIconButton = (props = {}) => {
   return render(
     <ThemeProvider>
-      <IconButton icon={FaPlus} {...props} />
+      <IconButton icon={Plus} {...props} />
     </ThemeProvider>,
   );
 };

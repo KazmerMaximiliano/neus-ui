@@ -15,31 +15,29 @@ const renderActions = (props = {}) => {
   );
 };
 
-const openMenu = () => {
-  const button = screen.getByRole("button");
-  fireEvent.click(button);
-};
-
 describe("Actions", () => {
   describe("rendering", () => {
-    it("renders nothing when no handlers are provided", () => {
+    it("renders no buttons when no handlers are provided", () => {
       const { container } = renderActions();
-      expect(container.querySelector(".actions-container")).toBeNull();
+      expect(container.querySelector("button")).toBeNull();
     });
 
-    it("renders menu button when onInfo is provided", () => {
+    it("renders one button when onInfo is provided", () => {
       renderActions({ onInfo: vi.fn() });
-      expect(screen.getByRole("button")).toBeInTheDocument();
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(1);
     });
 
-    it("renders menu button when onEdit is provided", () => {
+    it("renders one button when onEdit is provided", () => {
       renderActions({ onEdit: vi.fn() });
-      expect(screen.getByRole("button")).toBeInTheDocument();
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(1);
     });
 
-    it("renders menu button when onDelete is provided", () => {
+    it("renders one button when onDelete is provided", () => {
       renderActions({ onDelete: vi.fn() });
-      expect(screen.getByRole("button")).toBeInTheDocument();
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(1);
     });
 
     it("renders container with correct class", () => {
@@ -47,80 +45,58 @@ describe("Actions", () => {
       expect(container.querySelector(".actions-container")).toBeInTheDocument();
     });
 
-    it("shows all menu items when all handlers are provided", () => {
+    it("renders three buttons when all handlers are provided", () => {
       renderActions({
         onInfo: vi.fn(),
         onEdit: vi.fn(),
         onDelete: vi.fn(),
       });
-      openMenu();
-      expect(screen.getByText("Info")).toBeInTheDocument();
-      expect(screen.getByText("Edit")).toBeInTheDocument();
-      expect(screen.getByText("Delete")).toBeInTheDocument();
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(3);
     });
 
-    it("shows only provided menu items", () => {
+    it("renders only buttons for provided handlers", () => {
       renderActions({ onInfo: vi.fn(), onDelete: vi.fn() });
-      openMenu();
-      expect(screen.getByText("Info")).toBeInTheDocument();
-      expect(screen.queryByText("Edit")).toBeNull();
-      expect(screen.getByText("Delete")).toBeInTheDocument();
-    });
-
-    it("renders custom labels when provided", () => {
-      renderActions({
-        onInfo: vi.fn(),
-        onEdit: vi.fn(),
-        onDelete: vi.fn(),
-        infoLabel: "Detalles",
-        editLabel: "Editar",
-        deleteLabel: "Eliminar",
-      });
-      openMenu();
-      expect(screen.getByText("Detalles")).toBeInTheDocument();
-      expect(screen.getByText("Editar")).toBeInTheDocument();
-      expect(screen.getByText("Eliminar")).toBeInTheDocument();
+      const buttons = screen.getAllByRole("button");
+      expect(buttons).toHaveLength(2);
     });
   });
 
   describe("click handling", () => {
-    it("calls onInfo when Info menu item is clicked", () => {
+    it("calls onInfo when info button is clicked", () => {
       const onInfo = vi.fn();
       renderActions({ onInfo });
-      openMenu();
-      fireEvent.click(screen.getByText("Info"));
+      const button = screen.getByRole("button");
+      fireEvent.click(button);
       expect(onInfo).toHaveBeenCalledTimes(1);
     });
 
-    it("calls onEdit when Edit menu item is clicked", () => {
+    it("calls onEdit when edit button is clicked", () => {
       const onEdit = vi.fn();
       renderActions({ onEdit });
-      openMenu();
-      fireEvent.click(screen.getByText("Edit"));
+      const button = screen.getByRole("button");
+      fireEvent.click(button);
       expect(onEdit).toHaveBeenCalledTimes(1);
     });
 
-    it("calls onDelete when Delete menu item is clicked", () => {
+    it("calls onDelete when delete button is clicked", () => {
       const onDelete = vi.fn();
       renderActions({ onDelete });
-      openMenu();
-      fireEvent.click(screen.getByText("Delete"));
+      const button = screen.getByRole("button");
+      fireEvent.click(button);
       expect(onDelete).toHaveBeenCalledTimes(1);
     });
 
-    it("calls correct handler when multiple items exist", () => {
+    it("calls correct handler when multiple buttons exist", () => {
       const onInfo = vi.fn();
       const onEdit = vi.fn();
       const onDelete = vi.fn();
       renderActions({ onInfo, onEdit, onDelete });
-      openMenu();
-      fireEvent.click(screen.getByText("Info"));
+      const buttons = screen.getAllByRole("button");
 
-      openMenu();
-      fireEvent.click(screen.getByText("Edit"));
-
-      openMenu();
-      fireEvent.click(screen.getByText("Delete"));
+      fireEvent.click(buttons[0]);
+      fireEvent.click(buttons[1]);
+      fireEvent.click(buttons[2]);
 
       expect(onInfo).toHaveBeenCalledTimes(1);
       expect(onEdit).toHaveBeenCalledTimes(1);

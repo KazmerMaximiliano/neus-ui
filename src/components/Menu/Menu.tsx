@@ -71,31 +71,30 @@ export const Menu = ({
       ) : (
         <Button label={text || ""} variant="text" onClick={handleToggle} />
       )}
-      {openMenu &&
-        createPortal(
-          <div
-            className="menu-dropdown"
-            ref={menuRef}
-            style={{
-              top: position.top,
-              left: position.left,
-            }}
-          >
-            {items.map((item, index) => (
-              <div
-                key={index}
-                className="menu-item clickable"
-                onClick={() => {
-                  item.onClick();
-                  setOpenMenu(false);
-                }}
-              >
-                {item.label}
-              </div>
-            ))}
-          </div>,
-          document.body,
-        )}
+      {createPortal(
+        <div
+          className={`menu-dropdown ${openMenu ? "menu-dropdown--open" : ""}`}
+          ref={menuRef}
+          style={{
+            top: position.top,
+            left: position.left,
+          }}
+        >
+          {items.map((item, index) => (
+            <div
+              key={index}
+              className="menu-item clickable"
+              onClick={() => {
+                item.onClick();
+                setOpenMenu(false);
+              }}
+            >
+              {item.label}
+            </div>
+          ))}
+        </div>,
+        document.body,
+      )}
     </div>
   );
 };

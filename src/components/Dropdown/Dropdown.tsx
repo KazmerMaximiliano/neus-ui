@@ -27,22 +27,20 @@ export const Dropdown = ({ icon: Icon, name, items }: DropdownProps) => {
     <div className="dropdown" ref={dropdownRef} onClick={() => setOpenDropdown(!openDropdown)}>
       <div className="dropdown-avatar">{Icon ? <Icon /> : "X"}</div>
       <div className={`dropdown-caret ${openDropdown ? "dropdown-caret--open" : ""}`} />
-      {openDropdown && (
-        <div className="dropdown-panel">
-          <div className="dropdown-item">
-            <span className="dropdown-name">{name || ""}</span>
-          </div>
-          {items.map((item, index) => (
-            <div
-              key={index}
-              className="dropdown-item clickable"
-              onClick={item.onClick}
-            >
-              {item.label}
-            </div>
-          ))}
+      <div className={`dropdown-panel ${openDropdown ? "dropdown-panel--open" : ""}`}>
+        <div className="dropdown-item">
+          <span className="dropdown-name">{name || ""}</span>
         </div>
-      )}
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className="dropdown-item clickable"
+            onClick={item.onClick}
+          >
+            {item.label}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FaEllipsisV } from "react-icons/fa";
+import { EllipsisVertical } from "lucide-react";
 import { Menu as MenuComponent } from "./Menu";
 
 const meta: Meta<typeof MenuComponent> = {
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Menu: Story = {
   args: {
-    icon: FaEllipsisV,
+    icon: EllipsisVertical,
     items: [
       {
         label: "Edit",

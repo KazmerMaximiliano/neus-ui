@@ -11,5 +11,7 @@ export interface MultiSelectProps {
     value?: string[];
     defaultValue?: string[];
     disabled?: boolean;
+    viewSearchBar?: boolean;
+    searchBarPlaceholder?: string;
     onChange?: (values: string[]) => void;
 }

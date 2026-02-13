@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { FaBars } from "react-icons/fa";
+import { Menu } from "lucide-react";
 import { IconButton, Sidebar } from "../../components";
 import "./AppTemplate.styles.css";
 import { AppTemplateProps } from "./AppTemplate.types";
@@ -13,10 +13,7 @@ export const AppTemplate = ({ children, routes, menu }: AppTemplateProps) => {
   return (
     <div className="app-template">
       <div className="header-container">
-        <IconButton
-          icon={FaBars}
-          onClick={() => setShowSidebar(!showSidebar)}
-        />
+        <IconButton icon={Menu} onClick={() => setShowSidebar(!showSidebar)} />
         {menu}
       </div>
 

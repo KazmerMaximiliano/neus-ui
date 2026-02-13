@@ -5,8 +5,8 @@ import {
   themeQuartz,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useResponsive } from "../../hooks/useResponsive";
 import { Actions } from "../Actions/Actions";
 import { IconButton } from "../IconButton/IconButton";
@@ -74,7 +74,7 @@ const DataTableComponent = <T extends object>({
       fontSize: isMobile ? 14 : isTablet ? 15 : 16,
       headerFontSize: isMobile ? 14 : isTablet ? 15 : 16,
       spacing: isMobile ? 4 : isTablet ? 6 : 8,
-      wrapperBorderRadius: 24,
+      wrapperBorderRadius: 16,
     });
   }, [isMobile, isTablet, colors.primary.main]);
 
@@ -265,7 +265,7 @@ const DataTableComponent = <T extends object>({
         <IconButton
           disabled={current_page === 1}
           onClick={handlePreviousPage}
-          icon={FaChevronLeft}
+          icon={ChevronLeft}
         />
         <span className="pagination-info">
           {`${current_page} / ${last_page}`}
@@ -273,7 +273,7 @@ const DataTableComponent = <T extends object>({
         <IconButton
           disabled={current_page === last_page}
           onClick={handleNextPage}
-          icon={FaChevronRight}
+          icon={ChevronRight}
         />
       </div>
     </div>

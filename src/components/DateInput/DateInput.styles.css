@@ -94,7 +94,7 @@
 .date-input-dropdown {
   position: absolute;
   top: 52px;
-  border-radius: 1.5em;
+  border-radius: var(--radius-default);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 10000;
   overflow: visible;

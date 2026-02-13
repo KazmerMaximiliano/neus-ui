@@ -116,8 +116,8 @@ export const DateInput = ({
           <div
             className="date-input-dropdown"
             style={{
-              left: mode == "single" ? "-75px" : "-250px",
-              minWidth: mode == "single" ? "350px" : "700px",
+              left: mode == "single" ? "-70px" : "-215px",
+              minWidth: mode == "single" ? "325px" : "625px",
             }}
           >
             {mode === "single" ? (

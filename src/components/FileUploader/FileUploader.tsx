@@ -1,5 +1,5 @@
+import { CloudUpload, File, Image } from "lucide-react";
 import React, { useCallback, useRef, useState } from "react";
-import { FiFile, FiImage, FiUpload } from "react-icons/fi";
 import { Button } from "../Button/Button";
 import "./FileUploader.styles.css";
 import { FileUploadData, FileUploaderProps } from "./FileUploader.types";
@@ -38,7 +38,7 @@ export const FileUploader = ({
         reader.readAsDataURL(file);
       }
     },
-    [multiple]
+    [multiple],
   );
 
   const handleFiles = useCallback(
@@ -50,7 +50,7 @@ export const FileUploader = ({
         files,
         allowedTypes,
         maxWeight,
-        multiple
+        multiple,
       );
 
       if (!validation.valid && validation.error) {
@@ -68,7 +68,7 @@ export const FileUploader = ({
 
       onChange(uploadData);
     },
-    [allowedTypes, maxWeight, multiple, onChange, createPreview, disabled]
+    [allowedTypes, maxWeight, multiple, onChange, createPreview, disabled],
   );
 
   const handleDrag = useCallback(
@@ -77,7 +77,7 @@ export const FileUploader = ({
       e.preventDefault();
       e.stopPropagation();
     },
-    [disabled]
+    [disabled],
   );
 
   const handleDragIn = useCallback(
@@ -89,7 +89,7 @@ export const FileUploader = ({
         setDragActive(true);
       }
     },
-    [disabled]
+    [disabled],
   );
 
   const handleDragOut = useCallback(
@@ -99,7 +99,7 @@ export const FileUploader = ({
       e.stopPropagation();
       setDragActive(false);
     },
-    [disabled]
+    [disabled],
   );
 
   const handleDrop = useCallback(
@@ -114,7 +114,7 @@ export const FileUploader = ({
         e.dataTransfer.clearData();
       }
     },
-    [handleFiles, disabled]
+    [handleFiles, disabled],
   );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -151,7 +151,7 @@ export const FileUploader = ({
     if (selectedFiles.length === 0) {
       return (
         <div className="file-upload-content">
-          <FiUpload className="upload-icon" />
+          <CloudUpload className="upload-icon" />
           <p className="upload-text">{placeholder}</p>
           <p className="upload-hint">
             Supported formats:{" "}
@@ -190,9 +190,9 @@ export const FileUploader = ({
       <div className="file-selected">
         <div className="file-icon-container">
           {isImageFile(selectedFiles[0]) ? (
-            <FiImage className="file-icon" />
+            <Image className="file-icon" />
           ) : (
-            <FiFile className="file-icon" />
+            <File className="file-icon" />
           )}
         </div>
         <div className="file-details">
@@ -205,7 +205,7 @@ export const FileUploader = ({
               <p className="total-size">
                 Total size:{" "}
                 {formatFileSize(
-                  selectedFiles.reduce((sum, file) => sum + file.size, 0)
+                  selectedFiles.reduce((sum, file) => sum + file.size, 0),
                 )}
               </p>
             </>

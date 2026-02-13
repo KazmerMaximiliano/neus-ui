@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FaUser } from "react-icons/fa";
+import { User } from "lucide-react";
 import { Dropdown as DropdownComponent } from "./Dropdown";
 
 const meta: Meta<typeof DropdownComponent> = {
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Dropdown: Story = {
   args: {
-    icon: FaUser,
+    icon: User,
     name: "John Doe",
     items: [
       {

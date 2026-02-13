@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FaBell, FaCog, FaHome, FaSearch, FaUser } from "react-icons/fa";
+import { Bell, House, Search, Settings, User } from "lucide-react";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { AppTemplate as AppTemplateComponent } from "./AppTemplate";
 
@@ -32,35 +32,35 @@ type Story = StoryObj<typeof meta>;
 const defaultRoutes = [
   {
     label: "Home",
-    icon: FaHome,
+    icon: House,
     onClick: () => console.log("Home clicked"),
     active: true,
     visible: true,
   },
   {
     label: "Profile",
-    icon: FaUser,
+    icon: User,
     onClick: () => console.log("Profile clicked"),
     active: false,
     visible: true,
   },
   {
     label: "Search",
-    icon: FaSearch,
+    icon: Search,
     onClick: () => console.log("Search clicked"),
     active: false,
     visible: true,
   },
   {
     label: "Settings",
-    icon: FaCog,
+    icon: Settings,
     onClick: () => console.log("Settings clicked"),
     active: false,
     visible: true,
   },
   {
     label: "Notifications",
-    icon: FaBell,
+    icon: Bell,
     onClick: () => console.log("Notifications clicked"),
     active: false,
     visible: false,
@@ -87,7 +87,7 @@ export const AppTemplate: Story = {
       </div>
     ),
     routes: defaultRoutes,
-    menu: <Dropdown items={menuItems} name="User" icon={FaUser} />,
+    menu: <Dropdown items={menuItems} name="User" icon={User} />,
   },
 };
 

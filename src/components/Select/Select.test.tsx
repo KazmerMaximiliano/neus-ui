@@ -19,28 +19,28 @@ const renderSelect = (props = {}) => {
 describe("Select", () => {
   describe("rendering", () => {
     it("renders select element", () => {
-      renderSelect();
-      expect(screen.getByRole("combobox")).toBeInTheDocument();
+      const { container } = renderSelect();
+      expect(container.querySelector(".select")).toBeInTheDocument();
     });
 
     it("renders with base select class", () => {
-      renderSelect();
-      expect(screen.getByRole("combobox")).toHaveClass("select");
+      const { container } = renderSelect();
+      expect(container.querySelector(".select")).toBeInTheDocument();
     });
 
-    it("renders all options", () => {
-      renderSelect();
+    it("renders all options when open", () => {
+      const { container } = renderSelect();
+      const select = container.querySelector(".select") as HTMLElement;
+      fireEvent.click(select);
       expect(screen.getByText("Option 1")).toBeInTheDocument();
       expect(screen.getByText("Option 2")).toBeInTheDocument();
       expect(screen.getByText("Option 3")).toBeInTheDocument();
     });
 
-    it("renders with name attribute", () => {
-      renderSelect({ name: "test-select" });
-      expect(screen.getByRole("combobox")).toHaveAttribute(
-        "name",
-        "test-select",
-      );
+    it("renders with name attribute on hidden input", () => {
+      const { container } = renderSelect({ name: "test-select" });
+      const hiddenInput = container.querySelector("input[type=\"hidden\"]");
+      expect(hiddenInput).toHaveAttribute("name", "test-select");
     });
 
     it("renders default placeholder when no value", () => {
@@ -51,9 +51,8 @@ describe("Select", () => {
     });
 
     it("renders custom placeholder", () => {
-      renderSelect({ placeholder: "Choose..." });
-      const options = screen.getAllByText("Choose...");
-      expect(options.length).toBeGreaterThan(0);
+      const { container } = renderSelect({ placeholder: "Choose..." });
+      expect(container.querySelector(".select-placeholder")).toHaveTextContent("Choose...");
     });
   });
 
@@ -90,44 +89,49 @@ describe("Select", () => {
     });
 
     it("applies error class to select when error is present", () => {
-      renderSelect({ error: "Error message" });
-      expect(screen.getByRole("combobox")).toHaveClass("error");
+      const { container } = renderSelect({ error: "Error message" });
+      expect(container.querySelector(".select")).toHaveClass("error");
     });
   });
 
   describe("disabled state", () => {
-    it("is disabled when disabled prop is true", () => {
-      renderSelect({ disabled: true });
-      expect(screen.getByRole("combobox")).toBeDisabled();
+    it("applies disabled class when disabled prop is true", () => {
+      const { container } = renderSelect({ disabled: true });
+      expect(container.querySelector(".select")).toHaveClass("disabled");
     });
 
-    it("applies disabled class to select when disabled", () => {
-      renderSelect({ disabled: true });
-      expect(screen.getByRole("combobox")).toHaveClass("disabled");
+    it("does not open dropdown when disabled", () => {
+      const { container } = renderSelect({ disabled: true });
+      const select = container.querySelector(".select") as HTMLElement;
+      fireEvent.click(select);
+      expect(
+        container.querySelector(".select-dropdown"),
+      ).not.toHaveClass("select-dropdown--open");
     });
 
     it("does not call onChange when disabled", () => {
       const onChange = vi.fn();
-      renderSelect({ disabled: true, onChange });
-      fireEvent.change(screen.getByRole("combobox"), {
-        target: { value: "2" },
-      });
+      const { container } = renderSelect({ disabled: true, onChange });
+      const select = container.querySelector(".select") as HTMLElement;
+      fireEvent.click(select);
       expect(onChange).not.toHaveBeenCalled();
     });
   });
 
   describe("value", () => {
     it("renders with controlled value", () => {
-      renderSelect({ value: "2", onChange: vi.fn() });
-      expect(screen.getByRole("combobox")).toHaveValue("2");
+      const { container } = renderSelect({ value: "2", onChange: vi.fn() });
+      const select = container.querySelector(".select") as HTMLElement;
+      expect(select).toHaveTextContent("Option 2");
     });
 
     it("renders with defaultValue", () => {
-      renderSelect({ defaultValue: "3" });
-      expect(screen.getByRole("combobox")).toHaveValue("3");
+      const { container } = renderSelect({ defaultValue: "3" });
+      const select = container.querySelector(".select") as HTMLElement;
+      expect(select).toHaveTextContent("Option 3");
     });
 
-    it("does not render placeholder option when value is set", () => {
+    it("does not render placeholder when value is set", () => {
       renderSelect({ value: "1", onChange: vi.fn() });
       expect(
         screen.queryByText("Selecciona una opción..."),
@@ -138,20 +142,64 @@ describe("Select", () => {
   describe("change handling", () => {
     it("calls onChange with selected value", () => {
       const onChange = vi.fn();
-      renderSelect({ onChange });
-      fireEvent.change(screen.getByRole("combobox"), {
-        target: { value: "2" },
-      });
+      const { container } = renderSelect({ onChange });
+      const select = container.querySelector(".select") as HTMLElement;
+      fireEvent.click(select);
+      fireEvent.click(screen.getByText("Option 2"));
       expect(onChange).toHaveBeenCalledWith("2");
     });
 
+    it("closes dropdown after selecting an option", () => {
+      const { container } = renderSelect({ onChange: vi.fn() });
+      const select = container.querySelector(".select") as HTMLElement;
+      fireEvent.click(select);
+      expect(
+        container.querySelector(".select-dropdown"),
+      ).toHaveClass("select-dropdown--open");
+      fireEvent.click(screen.getByText("Option 1"));
+      expect(
+        container.querySelector(".select-dropdown"),
+      ).not.toHaveClass("select-dropdown--open");
+    });
+
     it("works without onChange handler", () => {
-      renderSelect({ defaultValue: "1" });
-      expect(() =>
-        fireEvent.change(screen.getByRole("combobox"), {
-          target: { value: "2" },
-        }),
-      ).not.toThrow();
+      const { container } = renderSelect({ defaultValue: "1" });
+      const select = container.querySelector(".select") as HTMLElement;
+      expect(() => {
+        fireEvent.click(select);
+        fireEvent.click(screen.getByText("Option 2"));
+      }).not.toThrow();
+    });
+  });
+
+  describe("dropdown", () => {
+    it("does not show dropdown by default", () => {
+      const { container } = renderSelect();
+      expect(
+        container.querySelector(".select-dropdown"),
+      ).not.toHaveClass("select-dropdown--open");
+    });
+
+    it("opens dropdown on click", () => {
+      const { container } = renderSelect();
+      const select = container.querySelector(".select") as HTMLElement;
+      fireEvent.click(select);
+      expect(
+        container.querySelector(".select-dropdown"),
+      ).toHaveClass("select-dropdown--open");
+    });
+
+    it("closes dropdown on outside click", () => {
+      const { container } = renderSelect();
+      const select = container.querySelector(".select") as HTMLElement;
+      fireEvent.click(select);
+      expect(
+        container.querySelector(".select-dropdown"),
+      ).toHaveClass("select-dropdown--open");
+      fireEvent.mouseDown(document.body);
+      expect(
+        container.querySelector(".select-dropdown"),
+      ).not.toHaveClass("select-dropdown--open");
     });
   });
 
@@ -161,7 +209,9 @@ describe("Select", () => {
         { value: null, label: "None" },
         { value: "1", label: "Option 1" },
       ];
-      render(<Select options={optionsWithNull} />);
+      const { container } = render(<Select options={optionsWithNull} />);
+      const select = container.querySelector(".select") as HTMLElement;
+      fireEvent.click(select);
       expect(screen.getByText("None")).toBeInTheDocument();
     });
   });

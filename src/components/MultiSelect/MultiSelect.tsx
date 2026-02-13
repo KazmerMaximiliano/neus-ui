@@ -12,12 +12,15 @@ export const MultiSelect = ({
   value = [],
   defaultValue = [],
   disabled = false,
+  viewSearchBar = true,
+  searchBarPlaceholder = "Buscar...",
   onChange,
 }: MultiSelectProps) => {
   const [selectedValues, setSelectedValues] = useState<string[]>(
     value.length > 0 ? value : defaultValue,
   );
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const memoizedValue = useMemo(() => value, [value]);
   const containerRef = useRef<HTMLDivElement>(null);
   const displayLabel = label || placeholder;
@@ -37,6 +40,7 @@ export const MultiSelect = ({
         !containerRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
+        setSearchQuery("");
       }
     };
 
@@ -64,6 +68,13 @@ export const MultiSelect = ({
     onChange?.(newValues);
   };
 
+  const filteredOptions = useMemo(() => {
+    if (!searchQuery) return options;
+    return options.filter((option) =>
+      option.label.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+  }, [options, searchQuery]);
+
   const selectedLabels = selectedValues.map(
     (value) => options.find((option) => option.value === value)?.label || value,
   );
@@ -88,12 +99,19 @@ export const MultiSelect = ({
         />
       ))}
 
-      <div className="multiselect-container">
+      <div
+        className={`multiselect-container${isOpen && !disabled ? " open" : ""}`}
+      >
         <div
           className={`multiselect${error ? " error" : ""}${
             disabled ? " disabled" : ""
           }`}
-          onClick={() => !disabled && setIsOpen(!isOpen)}
+          onClick={() => {
+            if (!disabled) {
+              if (isOpen) setSearchQuery("");
+              setIsOpen(!isOpen);
+            }
+          }}
           tabIndex={disabled ? -1 : 0}
         >
           {selectedValues.length === 0 ? (
@@ -118,23 +136,35 @@ export const MultiSelect = ({
           )}
         </div>
 
-        {isOpen && !disabled && (
-          <div className="multiselect-dropdown">
-            {options.map((option) => (
-              <div
-                key={option.value}
-                className="multiselect-option"
-                onClick={() => handleToggleOption(option.value)}
-              >
-                <Checkbox
-                  checked={selectedValues.includes(option.value ?? "")}
-                  onChange={() => handleToggleOption(option.value)}
-                />
-                <span>{option.label}</span>
-              </div>
-            ))}
-          </div>
-        )}
+        <div
+          className={`multiselect-dropdown${isOpen && !disabled ? " multiselect-dropdown--open" : ""}`}
+        >
+          {viewSearchBar && (
+            <div className="multiselect-search">
+              <input
+                type="text"
+                className="multiselect-search-input"
+                placeholder={searchBarPlaceholder}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          )}
+          {filteredOptions.map((option) => (
+            <div
+              key={option.value}
+              className="multiselect-option"
+              onClick={() => handleToggleOption(option.value)}
+            >
+              <Checkbox
+                checked={selectedValues.includes(option.value ?? "")}
+                onChange={() => handleToggleOption(option.value)}
+              />
+              <span>{option.label}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="multiselect-error">{error}</div>

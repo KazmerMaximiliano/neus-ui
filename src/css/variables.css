@@ -48,4 +48,7 @@
 
   /* Shadow */
   --color-shadow: var(--color-black-100);
+
+  /* Radius */
+  --radius-default: 16px;
 }

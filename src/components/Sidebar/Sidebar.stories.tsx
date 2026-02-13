@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FaCog, FaFile, FaHome, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { Files, House, LogOut, Settings, User } from "lucide-react";
 import { Sidebar as SidebarComponent } from "./Sidebar";
 
 const meta: Meta<typeof SidebarComponent> = {
@@ -37,35 +37,35 @@ export const Sidebar: Story = {
     items: [
       {
         label: "Dashboard",
-        icon: FaHome,
+        icon: House,
         onClick: () => console.log("Dashboard clicked"),
         active: true,
         visible: true,
       },
       {
         label: "Profile",
-        icon: FaUser,
+        icon: User,
         onClick: () => console.log("Profile clicked"),
         active: false,
         visible: true,
       },
       {
         label: "Documents",
-        icon: FaFile,
+        icon: Files,
         onClick: () => console.log("Documents clicked"),
         active: false,
         visible: true,
       },
       {
         label: "Settings",
-        icon: FaCog,
+        icon: Settings,
         onClick: () => console.log("Settings clicked"),
         active: false,
         visible: true,
       },
       {
         label: "Logout",
-        icon: FaSignOutAlt,
+        icon: LogOut,
         onClick: () => console.log("Logout clicked"),
         active: false,
         visible: true,

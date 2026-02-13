@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { User } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { FaUser } from "react-icons/fa";
 import { ThemeProvider } from "../../providers/ThemeProvider";
 import { Menu } from "./Menu";
 
@@ -35,7 +35,7 @@ describe("Menu", () => {
     });
 
     it("renders an IconButton when icon prop is provided", () => {
-      const { container } = renderMenu({ icon: FaUser });
+      const { container } = renderMenu({ icon: User });
       expect(container.querySelector("svg")).toBeInTheDocument();
     });
 
@@ -49,27 +49,35 @@ describe("Menu", () => {
   describe("dropdown", () => {
     it("does not show dropdown by default", () => {
       renderMenu();
-      expect(document.querySelector(".menu-dropdown")).not.toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).not.toHaveClass(
+        "menu-dropdown--open",
+      );
     });
 
     it("opens dropdown on click with text trigger", () => {
       renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu-dropdown")).toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).toHaveClass(
+        "menu-dropdown--open",
+      );
     });
 
     it("closes dropdown on second click", () => {
       renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
       fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu-dropdown")).not.toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).not.toHaveClass(
+        "menu-dropdown--open",
+      );
     });
 
     it("opens dropdown when icon trigger is clicked", () => {
-      renderMenu({ icon: FaUser });
+      renderMenu({ icon: User });
       const button = document.querySelector("button");
       fireEvent.click(button!);
-      expect(document.querySelector(".menu-dropdown")).toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).toHaveClass(
+        "menu-dropdown--open",
+      );
     });
 
     it("shows all menu items when open", () => {
@@ -83,9 +91,13 @@ describe("Menu", () => {
     it("closes dropdown on outside click", () => {
       renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu-dropdown")).toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).toHaveClass(
+        "menu-dropdown--open",
+      );
       fireEvent.mouseDown(document.body);
-      expect(document.querySelector(".menu-dropdown")).not.toBeInTheDocument();
+      expect(document.querySelector(".menu-dropdown")).not.toHaveClass(
+        "menu-dropdown--open",
+      );
     });
   });
 

@@ -21,9 +21,7 @@ describe("DateInput", () => {
 
     it("renders date input field button", () => {
       const { container } = renderDateInput();
-      expect(
-        container.querySelector(".date-input-field"),
-      ).toBeInTheDocument();
+      expect(container.querySelector(".date-input-field")).toBeInTheDocument();
     });
 
     it("renders placeholder when no value", () => {
@@ -186,7 +184,7 @@ describe("DateInput", () => {
       const button = container.querySelector(".date-input-field");
       fireEvent.click(button!);
       const dropdown = container.querySelector(".date-input-dropdown");
-      expect(dropdown).toHaveStyle({ minWidth: "700px" });
+      expect(dropdown).toHaveStyle({ minWidth: "625px" });
     });
   });
 

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { FaPen } from "react-icons/fa";
+import { Pencil } from "lucide-react";
 import { IconButton as IconButtonComponent } from "./IconButton";
 
 const meta: Meta<typeof IconButtonComponent> = {
@@ -53,7 +53,7 @@ type Story = StoryObj<typeof meta>;
 
 export const IconButton: Story = {
   args: {
-    icon: FaPen,
+    icon: Pencil,
     type: "button",
     variant: "solid",
     color: "primary",

@@ -1,9 +1,9 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { IconButton } from "../IconButton/IconButton";
 import { WeekCalendarRow } from "../WeekCalendarRow/WeekCalendarRow";
-import "./WeekCalendar.styles.css";
 import { CATEGORY_COLORS, DAY_NAMES } from "./WeekCalendar.constants";
+import "./WeekCalendar.styles.css";
 import { WeekCalendarProps } from "./WeekCalendar.types";
 import { formatDate, getCenterDate, getWeekDays } from "./WeekCalendar.utils";
 
@@ -14,7 +14,9 @@ export const WeekCalendar = ({
   onEventClick,
   onDayChange,
 }: WeekCalendarProps) => {
-  const [weekStart, setWeekStart] = useState<Date>(() => getCenterDate(new Date()));
+  const [weekStart, setWeekStart] = useState<Date>(() =>
+    getCenterDate(new Date()),
+  );
 
   const weekEnd = new Date(weekStart);
   weekEnd.setDate(weekEnd.getDate() + 6);
@@ -53,7 +55,7 @@ export const WeekCalendar = ({
           <IconButton
             size="small"
             variant="text"
-            icon={FaChevronLeft}
+            icon={ChevronLeft}
             onClick={goToPreviousDay}
           />
           <span>
@@ -62,7 +64,7 @@ export const WeekCalendar = ({
           <IconButton
             size="small"
             variant="text"
-            icon={FaChevronRight}
+            icon={ChevronRight}
             onClick={goToNextDay}
           />
         </div>
