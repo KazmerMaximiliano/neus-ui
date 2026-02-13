@@ -5,16 +5,16 @@ import { WeekCalendarRow } from "../WeekCalendarRow/WeekCalendarRow";
 import "./WeekCalendar.styles.css";
 import { CATEGORY_COLORS, DAY_NAMES } from "./WeekCalendar.constants";
 import { WeekCalendarProps } from "./WeekCalendar.types";
-import { formatDate, getSunday, getWeekDays } from "./WeekCalendar.utils";
+import { formatDate, getCenterDate, getWeekDays } from "./WeekCalendar.utils";
 
 export const WeekCalendar = ({
   title = "Calendar",
   events = [],
   hoverContent,
   onEventClick,
-  onWeekChange,
+  onDayChange,
 }: WeekCalendarProps) => {
-  const [weekStart, setWeekStart] = useState<Date>(() => getSunday(new Date()));
+  const [weekStart, setWeekStart] = useState<Date>(() => getCenterDate(new Date()));
 
   const weekEnd = new Date(weekStart);
   weekEnd.setDate(weekEnd.getDate() + 6);
@@ -23,24 +23,24 @@ export const WeekCalendar = ({
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const goToPreviousWeek = () => {
+  const goToPreviousDay = () => {
     setWeekStart((prev) => {
       const d = new Date(prev);
-      d.setDate(d.getDate() - 7);
+      d.setDate(d.getDate() - 1);
       const end = new Date(d);
       end.setDate(end.getDate() + 6);
-      onWeekChange?.(d, end);
+      onDayChange?.(d, end);
       return d;
     });
   };
 
-  const goToNextWeek = () => {
+  const goToNextDay = () => {
     setWeekStart((prev) => {
       const d = new Date(prev);
-      d.setDate(d.getDate() + 7);
+      d.setDate(d.getDate() + 1);
       const end = new Date(d);
       end.setDate(end.getDate() + 6);
-      onWeekChange?.(d, end);
+      onDayChange?.(d, end);
       return d;
     });
   };
@@ -54,7 +54,7 @@ export const WeekCalendar = ({
             size="small"
             variant="text"
             icon={FaChevronLeft}
-            onClick={goToPreviousWeek}
+            onClick={goToPreviousDay}
           />
           <span>
             {formatDate(weekStart)} - {formatDate(weekEnd)}
@@ -63,7 +63,7 @@ export const WeekCalendar = ({
             size="small"
             variant="text"
             icon={FaChevronRight}
-            onClick={goToNextWeek}
+            onClick={goToNextDay}
           />
         </div>
       </div>

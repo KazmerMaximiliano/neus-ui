@@ -45,6 +45,7 @@ export const InteractiveMap = ({
     lat: number;
     lng: number;
   } | null>(null);
+  const [searchValue, setSearchValue] = useState(initialAddress || "");
 
   const defaultCenter = useMemo(() => {
     if (initialCoordinates) {
@@ -169,7 +170,8 @@ export const InteractiveMap = ({
             <Input
               type="text"
               placeholder={searchBoxPlaceholder || "Find location..."}
-              value={initialAddress || ""}
+              value={searchValue}
+              onChange={(value) => setSearchValue(value)}
             ></Input>
           </StandaloneSearchBox>
         </div>
