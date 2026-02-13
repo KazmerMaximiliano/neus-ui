@@ -266,6 +266,8 @@ const DataTableComponent = <T extends object>({
           disabled={current_page === 1}
           onClick={handlePreviousPage}
           icon={ChevronLeft}
+          size="small"
+          variant="text"
         />
         <span className="pagination-info">
           {`${current_page} / ${last_page}`}
@@ -274,6 +276,8 @@ const DataTableComponent = <T extends object>({
           disabled={current_page === last_page}
           onClick={handleNextPage}
           icon={ChevronRight}
+          size="small"
+          variant="text"
         />
       </div>
     </div>

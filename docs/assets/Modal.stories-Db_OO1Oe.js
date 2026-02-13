@@ -1,0 +1,12 @@
+import{M as o}from"./Modal-BAKfJAFb.js";import"./iframe-CQynyMMU.js";import"./preload-helper-PPVm8Dsz.js";import"./Button-C24GTpiG.js";import"./theme-CRbcjS4r.js";const l={title:"Components/Modal",component:o,parameters:{layout:"centered"},tags:["autodocs"],argTypes:{isOpen:{control:{type:"boolean"},description:"Whether the modal is visible or hidden",table:{type:{summary:"boolean"},category:"Props",defaultValue:{summary:"false"}}},title:{control:{type:"text"},description:"The title displayed in the modal header",table:{type:{summary:"string"},category:"Props"}},children:{control:{type:"text"},description:"The content displayed in the modal body",table:{type:{summary:"React.ReactNode"},category:"Props"}},confirmText:{control:{type:"text"},description:"Text for the confirm button",table:{type:{summary:"string"},category:"Props",defaultValue:{summary:"'Confirmar'"}}},cancelText:{control:{type:"text"},description:"Text for the cancel button",table:{type:{summary:"string"},category:"Props",defaultValue:{summary:"'Cancelar'"}}},confirmButtonColor:{control:{type:"select"},options:["primary","success","error","info"],description:"Color variant for the confirm button",table:{type:{summary:"'primary' | 'success' | 'error' | 'info'"},category:"Props",defaultValue:{summary:"'primary'"}}},onConfirm:{action:"confirmed",description:"Callback function triggered when confirm button is clicked",table:{type:{summary:"() => void"},category:"Events"}},onCancel:{action:"cancelled",description:"Callback function triggered when cancel button is clicked or backdrop is clicked",table:{type:{summary:"() => void"},category:"Events"}}}},e={args:{isOpen:!0,title:"Modal Title",children:"This is the modal content. You can add any content here.",confirmText:"Confirm",cancelText:"Cancel",confirmButtonColor:"primary",onConfirm:()=>console.log("Modal confirmed"),onCancel:()=>console.log("Modal cancelled")}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
+  args: {
+    isOpen: true,
+    title: "Modal Title",
+    children: "This is the modal content. You can add any content here.",
+    confirmText: "Confirm",
+    cancelText: "Cancel",
+    confirmButtonColor: "primary",
+    onConfirm: () => console.log("Modal confirmed"),
+    onCancel: () => console.log("Modal cancelled")
+  }
+}`,...e.parameters?.docs?.source}}};const i=["Modal"];export{e as Modal,i as __namedExportsOrder,l as default};

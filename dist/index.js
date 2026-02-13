@@ -42228,7 +42228,9 @@ const vu = ({
         {
           disabled: p === 1,
           onClick: k,
-          icon: _h
+          icon: _h,
+          size: "small",
+          variant: "text"
         }
       ),
       /* @__PURE__ */ L("span", { className: "pagination-info", children: `${p} / ${f}` }),
@@ -42237,7 +42239,9 @@ const vu = ({
         {
           disabled: p === f,
           onClick: G,
-          icon: Uh
+          icon: Uh,
+          size: "small",
+          variant: "text"
         }
       )
     ] })
