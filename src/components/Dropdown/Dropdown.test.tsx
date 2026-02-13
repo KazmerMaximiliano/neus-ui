@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { User } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { FaUser } from "react-icons/fa";
 import { Dropdown } from "./Dropdown";
 
 afterEach(() => {
@@ -31,12 +31,16 @@ describe("Dropdown", () => {
 
     it("renders X when no icon provided", () => {
       const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown-avatar")).toHaveTextContent("X");
+      expect(container.querySelector(".dropdown-avatar")).toHaveTextContent(
+        "X",
+      );
     });
 
     it("renders icon when provided", () => {
-      const { container } = renderDropdown({ icon: FaUser });
-      expect(container.querySelector(".dropdown-avatar svg")).toBeInTheDocument();
+      const { container } = renderDropdown({ icon: User });
+      expect(
+        container.querySelector(".dropdown-avatar svg"),
+      ).toBeInTheDocument();
     });
 
     it("renders caret indicator", () => {
@@ -48,14 +52,18 @@ describe("Dropdown", () => {
   describe("panel", () => {
     it("does not show panel by default", () => {
       const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown-panel")).not.toBeInTheDocument();
+      expect(container.querySelector(".dropdown-panel")).not.toHaveClass(
+        "dropdown-panel--open",
+      );
     });
 
     it("opens panel on click", () => {
       const { container } = renderDropdown();
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown-panel")).toBeInTheDocument();
+      expect(container.querySelector(".dropdown-panel")).toHaveClass(
+        "dropdown-panel--open",
+      );
     });
 
     it("closes panel on second click", () => {
@@ -63,7 +71,9 @@ describe("Dropdown", () => {
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
       fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown-panel")).not.toBeInTheDocument();
+      expect(container.querySelector(".dropdown-panel")).not.toHaveClass(
+        "dropdown-panel--open",
+      );
     });
 
     it("shows name in panel when provided", () => {
@@ -86,16 +96,22 @@ describe("Dropdown", () => {
       const { container } = renderDropdown();
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown-caret--open")).toBeInTheDocument();
+      expect(
+        container.querySelector(".dropdown-caret--open"),
+      ).toBeInTheDocument();
     });
 
     it("closes panel on outside click", () => {
       const { container } = renderDropdown();
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown-panel")).toBeInTheDocument();
+      expect(container.querySelector(".dropdown-panel")).toHaveClass(
+        "dropdown-panel--open",
+      );
       fireEvent.mouseDown(document.body);
-      expect(container.querySelector(".dropdown-panel")).not.toBeInTheDocument();
+      expect(container.querySelector(".dropdown-panel")).not.toHaveClass(
+        "dropdown-panel--open",
+      );
     });
   });
 
@@ -114,7 +130,9 @@ describe("Dropdown", () => {
       const { container } = renderDropdown();
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
-      const clickableItems = container.querySelectorAll(".dropdown-item.clickable");
+      const clickableItems = container.querySelectorAll(
+        ".dropdown-item.clickable",
+      );
       expect(clickableItems).toHaveLength(3);
     });
   });

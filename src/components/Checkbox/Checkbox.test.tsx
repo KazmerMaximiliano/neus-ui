@@ -33,8 +33,8 @@ describe("Checkbox", () => {
     });
 
     it("renders with checkbox class", () => {
-      renderCheckbox();
-      expect(screen.getByRole("checkbox")).toHaveClass("checkbox");
+      const { container } = renderCheckbox();
+      expect(container.querySelector(".checkbox")).toBeInTheDocument();
     });
   });
 

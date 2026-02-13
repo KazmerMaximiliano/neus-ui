@@ -85,14 +85,14 @@ describe("MultiSelect", () => {
 
       expect(
         container.querySelector(".multiselect-dropdown"),
-      ).not.toBeInTheDocument();
+      ).not.toHaveClass("multiselect-dropdown--open");
 
       fireEvent.click(multiSelectElement);
 
       await waitFor(() => {
         expect(
           container.querySelector(".multiselect-dropdown"),
-        ).toBeInTheDocument();
+        ).toHaveClass("multiselect-dropdown--open");
       });
     });
 
@@ -106,14 +106,14 @@ describe("MultiSelect", () => {
       await waitFor(() => {
         expect(
           container.querySelector(".multiselect-dropdown"),
-        ).toBeInTheDocument();
+        ).toHaveClass("multiselect-dropdown--open");
       });
 
       fireEvent.click(multiSelectElement);
       await waitFor(() => {
         expect(
           container.querySelector(".multiselect-dropdown"),
-        ).not.toBeInTheDocument();
+        ).not.toHaveClass("multiselect-dropdown--open");
       });
     });
 
@@ -129,7 +129,7 @@ describe("MultiSelect", () => {
 
       expect(
         container.querySelector(".multiselect-dropdown"),
-      ).not.toBeInTheDocument();
+      ).not.toHaveClass("multiselect-dropdown--open");
     });
   });
 
@@ -148,7 +148,7 @@ describe("MultiSelect", () => {
       await waitFor(() => {
         expect(
           container.querySelector(".multiselect-dropdown"),
-        ).toBeInTheDocument();
+        ).toHaveClass("multiselect-dropdown--open");
       });
 
       const firstOption = container.querySelector(
@@ -183,7 +183,7 @@ describe("MultiSelect", () => {
       await waitFor(() => {
         expect(
           container.querySelector(".multiselect-dropdown"),
-        ).toBeInTheDocument();
+        ).toHaveClass("multiselect-dropdown--open");
       });
 
       const firstOption = container.querySelector(
@@ -208,7 +208,7 @@ describe("MultiSelect", () => {
       await waitFor(() => {
         expect(
           container.querySelector(".multiselect-dropdown"),
-        ).toBeInTheDocument();
+        ).toHaveClass("multiselect-dropdown--open");
       });
 
       const options = container.querySelectorAll(".multiselect-option");
@@ -246,7 +246,7 @@ describe("MultiSelect", () => {
       expect(handleChange).not.toHaveBeenCalled();
       expect(
         container.querySelector(".multiselect-dropdown"),
-      ).not.toBeInTheDocument();
+      ).not.toHaveClass("multiselect-dropdown--open");
     });
 
     it("does not remove tag when disabled", () => {
@@ -295,7 +295,7 @@ describe("MultiSelect", () => {
       await waitFor(() => {
         expect(
           container.querySelector(".multiselect-dropdown"),
-        ).toBeInTheDocument();
+        ).toHaveClass("multiselect-dropdown--open");
       });
 
       const options = container.querySelectorAll(".multiselect-option");
@@ -336,8 +336,8 @@ describe("MultiSelect", () => {
       ) as HTMLElement;
       fireEvent.click(multiSelectElement);
 
-      const options = container.querySelector(".multiselect-dropdown");
-      expect(options?.children.length).toBe(0);
+      const options = container.querySelectorAll(".multiselect-option");
+      expect(options.length).toBe(0);
     });
 
     it("handles options with null value", () => {
@@ -353,8 +353,8 @@ describe("MultiSelect", () => {
       ) as HTMLElement;
       fireEvent.click(multiSelectElement);
 
-      const optionsContainer = container.querySelector(".multiselect-dropdown");
-      expect(optionsContainer?.children.length).toBe(2);
+      const options = container.querySelectorAll(".multiselect-option");
+      expect(options.length).toBe(2);
     });
   });
 });
