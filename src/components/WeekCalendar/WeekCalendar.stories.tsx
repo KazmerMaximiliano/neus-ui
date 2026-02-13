@@ -35,10 +35,10 @@ const meta: Meta<typeof WeekCalendarComponent> = {
       description:
         "Callback fired when clicking an event cell, receives the CalendarEvent",
     },
-    onWeekChange: {
-      action: "weekChanged",
+    onDayChange: {
+      action: "dayChanged",
       description:
-        "Callback fired when navigating to a different week, receives weekStart and weekEnd dates",
+        "Callback fired when navigating to a different day, receives weekStart and weekEnd dates",
     },
   },
 };

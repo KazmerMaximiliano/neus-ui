@@ -56,17 +56,6 @@ describe("WeekCalendar", () => {
       expect(dayNames).toHaveLength(7);
     });
 
-    it("renders day names", () => {
-      renderWeekCalendar();
-      expect(screen.getByText("Sun")).toBeInTheDocument();
-      expect(screen.getByText("Mon")).toBeInTheDocument();
-      expect(screen.getByText("Tue")).toBeInTheDocument();
-      expect(screen.getByText("Wed")).toBeInTheDocument();
-      expect(screen.getByText("Thu")).toBeInTheDocument();
-      expect(screen.getByText("Fri")).toBeInTheDocument();
-      expect(screen.getByText("Sat")).toBeInTheDocument();
-    });
-
     it("renders the date range in the header", () => {
       const { container } = renderWeekCalendar();
       const weekSelector = container.querySelector(".week-selector");
@@ -106,7 +95,7 @@ describe("WeekCalendar", () => {
       expect(buttons).toHaveLength(2);
     });
 
-    it("navigates to the previous week", () => {
+    it("navigates to the previous day", () => {
       const { container } = renderWeekCalendar();
       const weekSelector = container.querySelector(".week-selector");
       const initialText = weekSelector?.textContent;
@@ -120,7 +109,7 @@ describe("WeekCalendar", () => {
       expect(updatedText).not.toBe(initialText);
     });
 
-    it("navigates to the next week", () => {
+    it("navigates to the next day", () => {
       const { container } = renderWeekCalendar();
       const weekSelector = container.querySelector(".week-selector");
       const initialText = weekSelector?.textContent;
@@ -141,58 +130,67 @@ describe("WeekCalendar", () => {
       const todayCell = container.querySelector(".week-calendar-day-today");
       expect(todayCell).toBeInTheDocument();
     });
+
+    it("centers today in the middle of the 7-day range", () => {
+      const { container } = renderWeekCalendar();
+      const dayCells = container.querySelectorAll(".week-calendar-day-cell");
+      const todayIndex = Array.from(dayCells).findIndex((cell) =>
+        cell.classList.contains("week-calendar-day-today"),
+      );
+      expect(todayIndex).toBe(3);
+    });
   });
 
-  describe("onWeekChange", () => {
-    it("calls onWeekChange when navigating to previous week", () => {
-      const handleWeekChange = vi.fn();
+  describe("onDayChange", () => {
+    it("calls onDayChange when navigating to previous day", () => {
+      const handleDayChange = vi.fn();
       const { container } = renderWeekCalendar({
-        onWeekChange: handleWeekChange,
+        onDayChange: handleDayChange,
       });
       const prevButton = container.querySelectorAll(
         ".week-selector button",
       )[0];
       fireEvent.click(prevButton);
-      expect(handleWeekChange).toHaveBeenCalledTimes(1);
-      expect(handleWeekChange).toHaveBeenCalledWith(
+      expect(handleDayChange).toHaveBeenCalledTimes(1);
+      expect(handleDayChange).toHaveBeenCalledWith(
         expect.any(Date),
         expect.any(Date),
       );
     });
 
-    it("calls onWeekChange when navigating to next week", () => {
-      const handleWeekChange = vi.fn();
+    it("calls onDayChange when navigating to next day", () => {
+      const handleDayChange = vi.fn();
       const { container } = renderWeekCalendar({
-        onWeekChange: handleWeekChange,
+        onDayChange: handleDayChange,
       });
       const nextButton = container.querySelectorAll(
         ".week-selector button",
       )[1];
       fireEvent.click(nextButton);
-      expect(handleWeekChange).toHaveBeenCalledTimes(1);
-      expect(handleWeekChange).toHaveBeenCalledWith(
+      expect(handleDayChange).toHaveBeenCalledTimes(1);
+      expect(handleDayChange).toHaveBeenCalledWith(
         expect.any(Date),
         expect.any(Date),
       );
     });
 
     it("provides weekEnd 6 days after weekStart", () => {
-      const handleWeekChange = vi.fn();
+      const handleDayChange = vi.fn();
       const { container } = renderWeekCalendar({
-        onWeekChange: handleWeekChange,
+        onDayChange: handleDayChange,
       });
       const nextButton = container.querySelectorAll(
         ".week-selector button",
       )[1];
       fireEvent.click(nextButton);
-      const [start, end] = handleWeekChange.mock.calls[0];
+      const [start, end] = handleDayChange.mock.calls[0];
       const diffDays = Math.round(
         (end.getTime() - start.getTime()) / 86400000,
       );
       expect(diffDays).toBe(6);
     });
 
-    it("does not throw when onWeekChange is not provided", () => {
+    it("does not throw when onDayChange is not provided", () => {
       const { container } = renderWeekCalendar();
       const prevButton = container.querySelectorAll(
         ".week-selector button",

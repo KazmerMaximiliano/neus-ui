@@ -6,9 +6,9 @@ export const getWeekDays = (start: Date): Date[] => {
   });
 }
 
-export const getSunday = (date: Date): Date => {
+export const getCenterDate = (date: Date): Date => {
   const d = new Date(date);
-  d.setDate(d.getDate() - d.getDay());
+  d.setDate(d.getDate() - 3);
   d.setHours(0, 0, 0, 0);
   return d;
 }

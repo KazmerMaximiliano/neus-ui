@@ -4,5 +4,5 @@ export type WeekCalendarProps = {
     events?: EventsByCategory[];
     hoverContent?: React.ReactNode;
     onEventClick?: (event: CalendarEvent) => void;
-    onWeekChange?: (weekStart: Date, weekEnd: Date) => void;
+    onDayChange?: (weekStart: Date, weekEnd: Date) => void;
 };
