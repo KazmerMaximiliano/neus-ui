@@ -139,27 +139,27 @@
 }
 
 .with-point.purple::before {
-  background-color: #9681bd;
+  background-color: #7e6594;
 }
 
 .with-point.pink::before {
-  background-color: #f39dc1;
+  background-color: #c86b7b;
 }
 
 .with-point.red::before {
-  background-color: #f1576b;
+  background-color: #c6412f;
 }
 
 .with-point.yellow::before {
-  background-color: #fac755;
+  background-color: #d99e2b;
 }
 
 .with-point.blue::before {
-  background-color: #75cdd1;
+  background-color: #4a7b9d;
 }
 
 .with-point.green::before {
-  background-color: #6ec6a3;
+  background-color: #5ca874;
 }
 
 .week-calendar-category-name {

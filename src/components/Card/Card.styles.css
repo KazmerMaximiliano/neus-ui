@@ -8,7 +8,7 @@
   padding: 1rem;
   overflow: hidden;
   background-color: #fff;
-  color: #000;
+  color: #fff;
 }
 
 .card .avatar-wrapper {
@@ -56,61 +56,49 @@
 }
 
 .fill.purple {
-  background-color: #9681bd;
-  color: #fff;
+  background-color: #7e6594;
 }
 
 .fill.purple.avatar-placeholder {
-  background-color: #9681bd;
-  color: #fff;
+  background-color: #644b78;
 }
 
 .fill.pink {
-  background-color: #f39dc1;
-  color: #fff;
+  background-color: #c86b7b;
 }
 
 .fill.pink.avatar-placeholder {
-  background-color: #f39dc1;
-  color: #fff;
+  background-color: #aa5564;
 }
 
 .fill.red {
-  background-color: #f1576b;
-  color: #fff;
+  background-color: #c6412f;
 }
 
 .fill.red.avatar-placeholder {
-  background-color: #f1576b;
-  color: #fff;
+  background-color: #a53223;
 }
 
 .fill.yellow {
-  background-color: #fac755;
-  color: #000;
+  background-color: #d99e2b;
 }
 
 .fill.yellow.avatar-placeholder {
-  background-color: #fac755;
-  color: #000;
+  background-color: #b9821e;
 }
 
 .fill.blue {
-  background-color: #75cdd1;
-  color: #fff;
+  background-color: #4a7b9d;
 }
 
 .fill.blue.avatar-placeholder {
-  background-color: #75cdd1;
-  color: #fff;
+  background-color: #375f7d;
 }
 
 .fill.green {
-  background-color: #6ec6a3;
-  color: #fff;
+  background-color: #5ca874;
 }
 
 .fill.green.avatar-placeholder {
-  background-color: #6ec6a3;
-  color: #fff;
+  background-color: #468c5a;
 }
