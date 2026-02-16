@@ -58,7 +58,7 @@ export const Card: Story = {
       leading: <h3>Card Title</h3>,
       trailing: <span>Trailing Info</span>,
     },
-    fill: false,
+    fill: true,
     color: "blue",
   },
 };
