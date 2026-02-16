@@ -48068,12 +48068,12 @@ const OH = ["places"], sB = ({
     s && /* @__PURE__ */ L("div", { className: "time-input-error", children: s })
   ] });
 }, GH = {
-  purple: "#9681bd",
-  pink: "#f39dc1",
-  red: "#f1576b",
-  yellow: "#fac755",
-  blue: "#75cdd1",
-  green: "#6ec6a3"
+  purple: "#7e6594",
+  pink: "#c86b7b",
+  red: "#c6412f",
+  yellow: "#d99e2b",
+  blue: "#4a7b9d",
+  green: "#5ca874"
 }, HH = (e, t) => {
   const s = e.getTime();
   for (const n of t) {
