@@ -64,7 +64,7 @@ export const WeekCalendar: Story = {
     ),
     events: [
       {
-        category: { title: "Room A", label: "Suite", color: "purple" },
+        category: { title: "Room A", label: "Suite", color: "blue" },
         events: [
           {
             id: 1,
