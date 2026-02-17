@@ -18,32 +18,39 @@ describe("Card", () => {
       expect(document.querySelector(".card")).toBeInTheDocument();
     });
 
-    it("renders with content", () => {
-      renderCard({ content: "Card content" });
+    it("renders with children", () => {
+      render(<Card>Card content</Card>);
       expect(screen.getByText("Card content")).toBeInTheDocument();
     });
 
-    it("renders content inside card-body", () => {
-      renderCard({ content: "Body text" });
+    it("renders children inside card-body", () => {
+      render(<Card>Body text</Card>);
       const body = document.querySelector(".card-body");
       expect(body).toBeInTheDocument();
       expect(body).toHaveTextContent("Body text");
     });
 
-    it("renders ReactNode content", () => {
-      renderCard({ content: <span data-testid="custom">Custom</span> });
+    it("renders ReactNode children", () => {
+      render(
+        <Card>
+          <span data-testid="custom">Custom</span>
+        </Card>,
+      );
       expect(screen.getByTestId("custom")).toBeInTheDocument();
     });
   });
 
   describe("avatar", () => {
     it("does not render avatar-wrapper when no avatar props provided", () => {
-      renderCard({ content: "No avatar" });
+      render(<Card>No avatar</Card>);
       expect(document.querySelector(".avatar-wrapper")).not.toBeInTheDocument();
     });
 
     it("renders avatar image when avatarImage is provided", () => {
-      renderCard({ avatarImage: "https://example.com/avatar.png", avatarAlt: "User" });
+      renderCard({
+        avatarImage: "https://example.com/avatar.png",
+        avatarAlt: "User",
+      });
       const img = screen.getByAltText("User");
       expect(img).toBeInTheDocument();
       expect(img).toHaveAttribute("src", "https://example.com/avatar.png");
@@ -63,7 +70,7 @@ describe("Card", () => {
       expect(placeholder).toHaveTextContent("J");
     });
 
-    it("renders 'A' in placeholder when avatarAlt is empty string", () => {
+    it("does not render avatar-wrapper when avatarAlt is empty string", () => {
       renderCard({ avatarAlt: "" });
       expect(document.querySelector(".avatar-wrapper")).not.toBeInTheDocument();
     });
@@ -77,38 +84,44 @@ describe("Card", () => {
   });
 
   describe("header", () => {
-    it("does not render header when header prop is not provided", () => {
-      renderCard({ content: "No header" });
+    it("does not render header when leading and trailing are not provided", () => {
+      render(<Card>No header</Card>);
       expect(document.querySelector(".card-header")).not.toBeInTheDocument();
     });
 
     it("renders header with leading content", () => {
-      renderCard({ header: { leading: "Title" } });
+      renderCard({ leading: "Title" });
       const leading = document.querySelector(".header-leading");
       expect(leading).toBeInTheDocument();
       expect(leading).toHaveTextContent("Title");
     });
 
     it("renders header with trailing content", () => {
-      renderCard({ header: { trailing: "Action" } });
+      renderCard({ trailing: "Action" });
       const trailing = document.querySelector(".header-trailing");
       expect(trailing).toBeInTheDocument();
       expect(trailing).toHaveTextContent("Action");
     });
 
     it("renders header with both leading and trailing", () => {
-      renderCard({ header: { leading: "Title", trailing: "Button" } });
-      expect(document.querySelector(".header-leading")).toHaveTextContent("Title");
-      expect(document.querySelector(".header-trailing")).toHaveTextContent("Button");
+      renderCard({ leading: "Title", trailing: "Button" });
+      expect(document.querySelector(".header-leading")).toHaveTextContent(
+        "Title",
+      );
+      expect(document.querySelector(".header-trailing")).toHaveTextContent(
+        "Button",
+      );
     });
 
     it("renders ReactNode in header leading", () => {
-      renderCard({ header: { leading: <span data-testid="lead">Lead</span> } });
+      renderCard({ leading: <span data-testid="lead">Lead</span> });
       expect(screen.getByTestId("lead")).toBeInTheDocument();
     });
 
     it("renders ReactNode in header trailing", () => {
-      renderCard({ header: { trailing: <button data-testid="action">X</button> } });
+      renderCard({
+        trailing: <button data-testid="action">X</button>,
+      });
       expect(screen.getByTestId("action")).toBeInTheDocument();
     });
   });
@@ -153,21 +166,29 @@ describe("Card", () => {
 
   describe("combined props", () => {
     it("renders full card with all props", () => {
-      renderCard({
-        avatarImage: "https://example.com/avatar.png",
-        avatarAlt: "User",
-        header: { leading: "Title", trailing: "Close" },
-        content: "Full content",
-        fill: true,
-        color: "blue",
-      });
+      render(
+        <Card
+          avatarImage="https://example.com/avatar.png"
+          avatarAlt="User"
+          leading="Title"
+          trailing="Close"
+          fill
+          color="blue"
+        >
+          Full content
+        </Card>,
+      );
 
       const card = document.querySelector(".card");
       expect(card).toHaveClass("fill");
       expect(card).toHaveClass("blue");
       expect(screen.getByAltText("User")).toBeInTheDocument();
-      expect(document.querySelector(".header-leading")).toHaveTextContent("Title");
-      expect(document.querySelector(".header-trailing")).toHaveTextContent("Close");
+      expect(document.querySelector(".header-leading")).toHaveTextContent(
+        "Title",
+      );
+      expect(document.querySelector(".header-trailing")).toHaveTextContent(
+        "Close",
+      );
       expect(screen.getByText("Full content")).toBeInTheDocument();
     });
   });

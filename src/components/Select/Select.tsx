@@ -15,19 +15,14 @@ export const Select = ({
   options,
   onChange,
 }: SelectProps) => {
-  const [selectedValue, setSelectedValue] = useState<string>(
-    value ?? defaultValue ?? "",
+  const [internalValue, setInternalValue] = useState<string>(
+    defaultValue ?? "",
   );
+  const selectedValue = value ? value : internalValue;
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
   const displayLabel = label || placeholder;
-
-  useEffect(() => {
-    if (value !== undefined) {
-      setSelectedValue(value);
-    }
-  }, [value]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -57,7 +52,7 @@ export const Select = ({
 
   const handleSelect = (optionValue: string) => {
     if (disabled) return;
-    setSelectedValue(optionValue);
+    setInternalValue(optionValue);
     onChange?.(optionValue);
     setIsOpen(false);
     setSearchQuery("");

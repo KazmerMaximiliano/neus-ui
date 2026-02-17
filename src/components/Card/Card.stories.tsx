@@ -9,7 +9,7 @@ const meta: Meta<typeof CardComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    content: {
+    children: {
       control: false,
       description:
         "The main content of the card, which can be any React node (text, elements, etc.)",
@@ -23,10 +23,15 @@ const meta: Meta<typeof CardComponent> = {
       description:
         "Alternative text for the avatar image, used for accessibility.",
     },
-    header: {
+    leading: {
       control: false,
       description:
-        "An optional header for the card, which can include leading and trailing elements.",
+        "Content to display in the leading section of the card header (e.g., title, icon).",
+    },
+    trailing: {
+      control: false,
+      description:
+        "Content to display in the trailing section of the card header (e.g., action buttons, status).",
     },
     fill: {
       control: "boolean",
@@ -52,12 +57,10 @@ const CardContent = () => (
 
 export const Card: Story = {
   args: {
-    content: <CardContent />,
+    children: <CardContent />,
     avatarAlt: "Username",
-    header: {
-      leading: <h3>Card Title</h3>,
-      trailing: <span>Trailing Info</span>,
-    },
+    leading: <h3>Card Title</h3>,
+    trailing: <span>Trailing Info</span>,
     fill: true,
     color: "blue",
   },
