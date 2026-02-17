@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { Checkbox } from "../Checkbox/Checkbox";
 import "./MultiSelect.styles.css";
 import { MultiSelectProps } from "./MultiSelect.types";
@@ -16,22 +16,12 @@ export const MultiSelect = ({
   searchBarPlaceholder = "Buscar...",
   onChange,
 }: MultiSelectProps) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>(
-    value.length > 0 ? value : defaultValue,
-  );
+  const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
+  const selectedValues = value.length > 0 ? value : internalValues;
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const memoizedValue = useMemo(() => value, [value]);
   const containerRef = useRef<HTMLDivElement>(null);
   const displayLabel = label || placeholder;
-
-  // Sync internal state when controlled prop changes
-  useEffect(() => {
-    if (memoizedValue.length > 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSelectedValues(memoizedValue);
-    }
-  }, [memoizedValue]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -55,7 +45,7 @@ export const MultiSelect = ({
         ? selectedValues.filter((v) => v !== value)
         : [...selectedValues, value];
 
-      setSelectedValues(newValues);
+      setInternalValues(newValues);
       onChange?.(newValues);
     }
   };
@@ -64,7 +54,7 @@ export const MultiSelect = ({
     if (disabled) return;
 
     const newValues = selectedValues.filter((v) => v !== valueToRemove);
-    setSelectedValues(newValues);
+    setInternalValues(newValues);
     onChange?.(newValues);
   };
 

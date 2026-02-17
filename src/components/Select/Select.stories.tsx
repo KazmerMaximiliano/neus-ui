@@ -95,11 +95,13 @@ export const Select: Story = {
       { value: "option3", label: "Option 3" },
       { value: "option4", label: "Option 4" },
     ],
+
     name: "example-select",
     placeholder: "Select an option...",
-    value: "option1",
+    value: "",
     disabled: false,
     onChange: (value: string) => console.log("Selected value:", value),
+    defaultValue: "option1"
   },
 };
 

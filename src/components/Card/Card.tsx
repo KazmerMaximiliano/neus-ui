@@ -4,8 +4,9 @@ import { CardProps } from "./Card.types";
 export const Card = ({
   avatarImage,
   avatarAlt,
-  header,
-  content,
+  leading,
+  trailing,
+  children,
   fill,
   color,
 }: CardProps) => {
@@ -24,13 +25,13 @@ export const Card = ({
       )}
 
       <div className="content-wrapper">
-        {header && (
+        {(leading || trailing) && (
           <div className="card-header">
-            <div className="header-leading">{header?.leading}</div>
-            <div className="header-trailing">{header?.trailing}</div>
+            <div className="header-leading">{leading}</div>
+            <div className="header-trailing">{trailing}</div>
           </div>
         )}
-        <div className="card-body">{content}</div>
+        <div className="card-body">{children}</div>
       </div>
     </div>
   );
