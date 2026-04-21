@@ -25,7 +25,7 @@ describe("Card", () => {
 
     it("renders children inside card-body", () => {
       render(<Card>Body text</Card>);
-      const body = document.querySelector(".card-body");
+      const body = document.querySelector(".card__body");
       expect(body).toBeInTheDocument();
       expect(body).toHaveTextContent("Body text");
     });
@@ -43,7 +43,7 @@ describe("Card", () => {
   describe("avatar", () => {
     it("does not render avatar-wrapper when no avatar props provided", () => {
       render(<Card>No avatar</Card>);
-      expect(document.querySelector(".avatar-wrapper")).not.toBeInTheDocument();
+      expect(document.querySelector(".card__avatar-wrapper")).not.toBeInTheDocument();
     });
 
     it("renders avatar image when avatarImage is provided", () => {
@@ -59,20 +59,20 @@ describe("Card", () => {
 
     it("renders avatar placeholder when only avatarAlt is provided", () => {
       renderCard({ avatarAlt: "Max" });
-      const placeholder = document.querySelector(".avatar-placeholder");
+      const placeholder = document.querySelector(".card__avatar-placeholder");
       expect(placeholder).toBeInTheDocument();
       expect(placeholder).toHaveTextContent("M");
     });
 
     it("renders uppercase first letter of avatarAlt in placeholder", () => {
       renderCard({ avatarAlt: "john" });
-      const placeholder = document.querySelector(".avatar-placeholder");
+      const placeholder = document.querySelector(".card__avatar-placeholder");
       expect(placeholder).toHaveTextContent("J");
     });
 
     it("does not render avatar-wrapper when avatarAlt is empty string", () => {
       renderCard({ avatarAlt: "" });
-      expect(document.querySelector(".avatar-wrapper")).not.toBeInTheDocument();
+      expect(document.querySelector(".card__avatar-wrapper")).not.toBeInTheDocument();
     });
 
     it("renders avatar-wrapper when avatarImage is provided without avatarAlt", () => {
@@ -86,29 +86,29 @@ describe("Card", () => {
   describe("header", () => {
     it("does not render header when leading and trailing are not provided", () => {
       render(<Card>No header</Card>);
-      expect(document.querySelector(".card-header")).not.toBeInTheDocument();
+      expect(document.querySelector(".card__header")).not.toBeInTheDocument();
     });
 
     it("renders header with leading content", () => {
       renderCard({ leading: "Title" });
-      const leading = document.querySelector(".header-leading");
+      const leading = document.querySelector(".card__header-leading");
       expect(leading).toBeInTheDocument();
       expect(leading).toHaveTextContent("Title");
     });
 
     it("renders header with trailing content", () => {
       renderCard({ trailing: "Action" });
-      const trailing = document.querySelector(".header-trailing");
+      const trailing = document.querySelector(".card__header-trailing");
       expect(trailing).toBeInTheDocument();
       expect(trailing).toHaveTextContent("Action");
     });
 
     it("renders header with both leading and trailing", () => {
       renderCard({ leading: "Title", trailing: "Button" });
-      expect(document.querySelector(".header-leading")).toHaveTextContent(
+      expect(document.querySelector(".card__header-leading")).toHaveTextContent(
         "Title",
       );
-      expect(document.querySelector(".header-trailing")).toHaveTextContent(
+      expect(document.querySelector(".card__header-trailing")).toHaveTextContent(
         "Button",
       );
     });
@@ -129,17 +129,17 @@ describe("Card", () => {
   describe("fill", () => {
     it("does not apply fill class by default", () => {
       renderCard();
-      expect(document.querySelector(".card")).not.toHaveClass("fill");
+      expect(document.querySelector(".card")).not.toHaveClass("card--fill");
     });
 
     it("applies fill class when fill is true", () => {
       renderCard({ fill: true });
-      expect(document.querySelector(".card")).toHaveClass("fill");
+      expect(document.querySelector(".card")).toHaveClass("card--fill");
     });
 
     it("does not apply fill class when fill is false", () => {
       renderCard({ fill: false });
-      expect(document.querySelector(".card")).not.toHaveClass("fill");
+      expect(document.querySelector(".card")).not.toHaveClass("card--fill");
     });
   });
 
@@ -147,19 +147,19 @@ describe("Card", () => {
     it("does not apply color class by default", () => {
       renderCard();
       const card = document.querySelector(".card");
-      expect(card).not.toHaveClass("purple");
-      expect(card).not.toHaveClass("pink");
-      expect(card).not.toHaveClass("red");
-      expect(card).not.toHaveClass("yellow");
-      expect(card).not.toHaveClass("blue");
-      expect(card).not.toHaveClass("green");
+      expect(card).not.toHaveClass("card--purple");
+      expect(card).not.toHaveClass("card--pink");
+      expect(card).not.toHaveClass("card--red");
+      expect(card).not.toHaveClass("card--yellow");
+      expect(card).not.toHaveClass("card--blue");
+      expect(card).not.toHaveClass("card--green");
     });
 
     it.each(["purple", "pink", "red", "yellow", "blue", "green"] as const)(
       "applies %s color class when specified",
       (color) => {
         renderCard({ color, fill: true });
-        expect(document.querySelector(".card")).toHaveClass(color);
+        expect(document.querySelector(".card")).toHaveClass(`card--${color}`);
       },
     );
   });
@@ -180,13 +180,13 @@ describe("Card", () => {
       );
 
       const card = document.querySelector(".card");
-      expect(card).toHaveClass("fill");
-      expect(card).toHaveClass("blue");
+      expect(card).toHaveClass("card--fill");
+      expect(card).toHaveClass("card--blue");
       expect(screen.getByAltText("User")).toBeInTheDocument();
-      expect(document.querySelector(".header-leading")).toHaveTextContent(
+      expect(document.querySelector(".card__header-leading")).toHaveTextContent(
         "Title",
       );
-      expect(document.querySelector(".header-trailing")).toHaveTextContent(
+      expect(document.querySelector(".card__header-trailing")).toHaveTextContent(
         "Close",
       );
       expect(screen.getByText("Full content")).toBeInTheDocument();

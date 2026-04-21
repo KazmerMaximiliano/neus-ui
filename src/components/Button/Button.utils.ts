@@ -23,7 +23,8 @@ export const getButtonClasses = (
 ): string => {
   const classes = [
     "button",
-    `button--${variant}-${color}`,
+    `button--${variant}`,
+    `button--${color}`,
     fullWidth ? "button--full-width" : "",
   ];
 

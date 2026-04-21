@@ -49,16 +49,16 @@ describe("Menu", () => {
   describe("dropdown", () => {
     it("does not show dropdown by default", () => {
       renderMenu();
-      expect(document.querySelector(".menu-dropdown")).not.toHaveClass(
-        "menu-dropdown--open",
+      expect(document.querySelector(".menu__dropdown")).not.toHaveClass(
+        "menu__dropdown--open",
       );
     });
 
     it("opens dropdown on click with text trigger", () => {
       renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu-dropdown")).toHaveClass(
-        "menu-dropdown--open",
+      expect(document.querySelector(".menu__dropdown")).toHaveClass(
+        "menu__dropdown--open",
       );
     });
 
@@ -66,8 +66,8 @@ describe("Menu", () => {
       renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
       fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu-dropdown")).not.toHaveClass(
-        "menu-dropdown--open",
+      expect(document.querySelector(".menu__dropdown")).not.toHaveClass(
+        "menu__dropdown--open",
       );
     });
 
@@ -75,8 +75,8 @@ describe("Menu", () => {
       renderMenu({ icon: User });
       const button = document.querySelector("button");
       fireEvent.click(button!);
-      expect(document.querySelector(".menu-dropdown")).toHaveClass(
-        "menu-dropdown--open",
+      expect(document.querySelector(".menu__dropdown")).toHaveClass(
+        "menu__dropdown--open",
       );
     });
 
@@ -91,12 +91,12 @@ describe("Menu", () => {
     it("closes dropdown on outside click", () => {
       renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu-dropdown")).toHaveClass(
-        "menu-dropdown--open",
+      expect(document.querySelector(".menu__dropdown")).toHaveClass(
+        "menu__dropdown--open",
       );
       fireEvent.mouseDown(document.body);
-      expect(document.querySelector(".menu-dropdown")).not.toHaveClass(
-        "menu-dropdown--open",
+      expect(document.querySelector(".menu__dropdown")).not.toHaveClass(
+        "menu__dropdown--open",
       );
     });
   });
@@ -118,7 +118,7 @@ describe("Menu", () => {
     it("renders items with clickable class", () => {
       renderMenu({ text: "Options" });
       fireEvent.click(screen.getByText("Options"));
-      const clickableItems = document.querySelectorAll(".menu-item.clickable");
+      const clickableItems = document.querySelectorAll(".menu__item--clickable");
       expect(clickableItems).toHaveLength(3);
     });
   });

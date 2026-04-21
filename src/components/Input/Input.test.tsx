@@ -71,13 +71,13 @@ describe("Input", () => {
     it("applies error class to label when error is present", () => {
       renderInput({ label: "Test Label", error: "Error message" });
       const label = screen.getByText("Test Label");
-      expect(label).toHaveClass("error");
+      expect(label).toHaveClass("input__label--error");
     });
 
     it("applies disabled class to label when disabled", () => {
       renderInput({ label: "Test Label", disabled: true });
       const label = screen.getByText("Test Label");
-      expect(label).toHaveClass("disabled");
+      expect(label).toHaveClass("input__label--disabled");
     });
   });
 
@@ -97,7 +97,7 @@ describe("Input", () => {
     it("applies error class to input when error is present", () => {
       renderInput({ error: "Error message" });
       const input = screen.getByRole("textbox");
-      expect(input).toHaveClass("error");
+      expect(input).toHaveClass("input--error");
     });
   });
 
@@ -109,7 +109,7 @@ describe("Input", () => {
 
     it("applies disabled class to input when disabled", () => {
       renderInput({ disabled: true });
-      expect(screen.getByRole("textbox")).toHaveClass("disabled");
+      expect(screen.getByRole("textbox")).toHaveClass("input--disabled");
     });
 
     it("does not call onChange when disabled", () => {
@@ -192,14 +192,14 @@ describe("Input", () => {
       renderInput({ type: "color" });
       const input = document.querySelector('input[type="color"]');
       expect(input).toBeInTheDocument();
-      expect(input).toHaveClass("input-color");
+      expect(input).toHaveClass("input--color");
     });
 
     it.each(["text", "email", "tel", "url"] as const)(
       "applies correct class for %s type",
       (type) => {
         renderInput({ type });
-        expect(screen.getByRole("textbox")).toHaveClass(`input-${type}`);
+        expect(screen.getByRole("textbox")).toHaveClass(`input--${type}`);
       },
     );
   });

@@ -25,16 +25,16 @@ export const Dropdown = ({ icon: Icon, name, items }: DropdownProps) => {
 
   return (
     <div className="dropdown" ref={dropdownRef} onClick={() => setOpenDropdown(!openDropdown)}>
-      <div className="dropdown-avatar">{Icon ? <Icon /> : "X"}</div>
-      <div className={`dropdown-caret ${openDropdown ? "dropdown-caret--open" : ""}`} />
-      <div className={`dropdown-panel ${openDropdown ? "dropdown-panel--open" : ""}`}>
-        <div className="dropdown-item">
-          <span className="dropdown-name">{name || ""}</span>
+      <div className="dropdown__avatar">{Icon ? <Icon /> : "X"}</div>
+      <div className={`dropdown__caret${openDropdown ? " dropdown__caret--open" : ""}`} />
+      <div className={`dropdown__panel${openDropdown ? " dropdown__panel--open" : ""}`}>
+        <div className="dropdown__item">
+          <span className="dropdown__name">{name || ""}</span>
         </div>
         {items.map((item, index) => (
           <div
             key={index}
-            className="dropdown-item clickable"
+            className="dropdown__item dropdown__item--clickable"
             onClick={item.onClick}
           >
             {item.label}

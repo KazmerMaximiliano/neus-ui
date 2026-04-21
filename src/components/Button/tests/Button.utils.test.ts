@@ -10,7 +10,8 @@ describe("getButtonClasses", () => {
 
   it("returns correct variant-color class", () => {
     const result = getButtonClasses("solid", "primary", false);
-    expect(result).toContain("button--solid-primary");
+    expect(result).toContain("button--solid");
+    expect(result).toContain("button--primary");
   });
 
   it("includes fullWidth class when true", () => {
@@ -38,7 +39,8 @@ describe("getButtonClasses", () => {
     ["text", "info"],
   ])("returns correct class for %s variant with %s color", (variant, color) => {
     const result = getButtonClasses(variant, color, false);
-    expect(result).toBe(`button button--${variant}-${color}`);
+    expect(result).toContain(`button--${variant}`);
+    expect(result).toContain(`button--${color}`);
   });
 
   it("returns trimmed string without extra spaces when fullWidth is false", () => {

@@ -1,40 +1,40 @@
-.clock-wrapper {
+.clock__wrapper {
   width: fit-content;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.clock-wrapper.disabled {
+.clock__wrapper--disabled {
   opacity: 0.6;
   pointer-events: none;
 }
 
-.clock-wrapper.readonly {
+.clock__wrapper--readonly {
   pointer-events: none;
 }
 
-.clock-label {
+.clock__label {
   font-size: 0.9em;
   color: var(--color-primary);
   margin-left: 1em;
   font-weight: 500;
 }
 
-.clock-required {
+.clock__required {
   color: var(--color-error);
   margin-left: 0.25em;
 }
 
-.clock-label.error {
+.clock__label--error {
   color: var(--color-error);
 }
 
-.clock-label.disabled {
+.clock__label--disabled {
   color: var(--color-gray-500, #999);
 }
 
-.clock-container {
+.clock__container {
   min-width: 350px;
   max-height: 550px;
   background-color: var(--color-white);
@@ -43,7 +43,7 @@
   overflow: hidden;
 }
 
-.clock-header {
+.clock__header {
   background-color: var(--color-primary);
   padding: 1.5em;
   display: flex;
@@ -51,12 +51,12 @@
   align-items: center;
 }
 
-.clock-display {
+.clock__display {
   display: flex;
   align-items: center;
 }
 
-.clock-time-button {
+.clock__time-button {
   background: none;
   border: none;
   color: var(--color-white);
@@ -69,32 +69,32 @@
   font-family: inherit;
 }
 
-.clock-time-button:hover:not(:disabled) {
+.clock__time-button:hover:not(:disabled) {
   opacity: 0.8;
 }
 
-.clock-time-button.active {
+.clock__time-button--active {
   opacity: 1;
 }
 
-.clock-time-button:disabled {
+.clock__time-button:disabled {
   cursor: not-allowed;
 }
 
-.clock-separator {
+.clock__separator {
   color: var(--color-white);
   font-size: 3em;
   font-weight: 500;
   opacity: 0.6;
 }
 
-.clock-period {
+.clock__period {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.clock-period-button {
+.clock__period-button {
   background: none;
   border: none;
   color: var(--color-white);
@@ -107,19 +107,19 @@
   font-family: inherit;
 }
 
-.clock-period-button:hover:not(:disabled) {
+.clock__period-button:hover:not(:disabled) {
   opacity: 0.8;
 }
 
-.clock-period-button.active {
+.clock__period-button--active {
   opacity: 1;
 }
 
-.clock-period-button:disabled {
+.clock__period-button:disabled {
   cursor: not-allowed;
 }
 
-.clock-face {
+.clock__face {
   position: relative;
   width: 240px;
   height: 240px;
@@ -130,12 +130,12 @@
   user-select: none;
 }
 
-.clock-face:focus {
+.clock__face:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-.clock-center {
+.clock__center {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -147,7 +147,7 @@
   z-index: 3;
 }
 
-.clock-hand {
+.clock__hand {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -160,7 +160,7 @@
     width 0.2s ease;
 }
 
-.clock-hand-tip {
+.clock__hand-tip {
   position: absolute;
   right: -16px;
   top: 50%;
@@ -171,7 +171,7 @@
   border-radius: 50%;
 }
 
-.clock-numbers {
+.clock__numbers {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -179,7 +179,7 @@
   height: 0;
 }
 
-.clock-error {
+.clock__error-message {
   color: var(--color-error);
   font-size: 0.85em;
   margin-left: 1em;

@@ -95,14 +95,14 @@ export const Clock = ({
 
   return (
     <div
-      className={`clock-wrapper${disabled ? " disabled" : ""}${readonly ? " readonly" : ""}`}
+      className={`clock__wrapper${disabled ? " clock__wrapper--disabled" : ""}${readonly ? " clock__wrapper--readonly" : ""}`}
     >
-      <div className="clock-container">
-        <div className="clock-header">
-          <div className="clock-display">
+      <div className="clock__container">
+        <div className="clock__header">
+          <div className="clock__display">
             <button
               type="button"
-              className={`clock-time-button${mode === "hours" ? " active" : ""}`}
+              className={`clock__time-button${mode === "hours" ? " clock__time-button--active" : ""}`}
               onClick={() => !disabled && !readonly && setMode("hours")}
               disabled={disabled}
             >
@@ -110,10 +110,10 @@ export const Clock = ({
                 .toString()
                 .padStart(2, "0")}
             </button>
-            <span className="clock-separator">:</span>
+            <span className="clock__separator">:</span>
             <button
               type="button"
-              className={`clock-time-button${mode === "minutes" ? " active" : ""}`}
+              className={`clock__time-button${mode === "minutes" ? " clock__time-button--active" : ""}`}
               onClick={() => !disabled && !readonly && setMode("minutes")}
               disabled={disabled}
             >
@@ -121,10 +121,10 @@ export const Clock = ({
             </button>
           </div>
           {format === "12h" && (
-            <div className="clock-period">
+            <div className="clock__period">
               <button
                 type="button"
-                className={`clock-period-button${period === "AM" ? " active" : ""}`}
+                className={`clock__period-button${period === "AM" ? " clock__period-button--active" : ""}`}
                 onClick={() => handlePeriodChange("AM")}
                 disabled={disabled}
               >
@@ -132,7 +132,7 @@ export const Clock = ({
               </button>
               <button
                 type="button"
-                className={`clock-period-button${period === "PM" ? " active" : ""}`}
+                className={`clock__period-button${period === "PM" ? " clock__period-button--active" : ""}`}
                 onClick={() => handlePeriodChange("PM")}
                 disabled={disabled}
               >
@@ -142,22 +142,22 @@ export const Clock = ({
           )}
         </div>
         <div
-          className="clock-face"
+          className="clock__face"
           onClick={handleClockClick}
           role="button"
           tabIndex={disabled ? -1 : 0}
         >
-          <div className="clock-center" />
+          <div className="clock__center" />
           <div
-            className="clock-hand"
+            className="clock__hand"
             style={{
               transform: `rotate(${getHandAngle({ mode, format, currentValue })}deg)`,
               width: `${getHandLength({ mode, format, currentValue })}px`,
             }}
           >
-            <div className="clock-hand-tip" />
+            <div className="clock__hand-tip" />
           </div>
-          <div className="clock-numbers">
+          <div className="clock__numbers">
             <ClockNumbers
               mode={mode}
               format={format}

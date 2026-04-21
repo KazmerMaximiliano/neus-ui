@@ -10,7 +10,7 @@ export const Checkbox = ({
 }: CheckboxProps) => {
   return (
     <label
-      className={`checkbox${checked ? " checked" : ""}${disabled ? " disabled" : ""}`}
+      className={`checkbox${checked ? " checkbox--checked" : ""}${disabled ? " checkbox--disabled" : ""}`}
     >
       <input
         type="checkbox"
@@ -20,7 +20,7 @@ export const Checkbox = ({
         disabled={disabled}
         readOnly
       />
-      <Check className="checkbox-icon" />
+      <Check className="checkbox__icon" />
     </label>
   );
 };

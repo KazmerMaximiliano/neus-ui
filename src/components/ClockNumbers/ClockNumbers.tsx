@@ -21,7 +21,7 @@ export const ClockNumbers = ({
             return (
               <span
                 key={`outer-${hour}`}
-                className={`time-clock-number${isSelected ? " selected" : ""}`}
+                className={`clock__number${isSelected ? " clock__number--selected" : ""}`}
                 style={{
                   transform: `translate(${x}px, ${y}px)`,
                 }}
@@ -38,7 +38,7 @@ export const ClockNumbers = ({
             return (
               <span
                 key={`inner-${hour}`}
-                className={`time-clock-number inner${isSelected ? " selected" : ""}`}
+                className={`clock__number clock__number--inner${isSelected ? " clock__number--selected" : ""}`}
                 style={{
                   transform: `translate(${x}px, ${y}px)`,
                 }}
@@ -62,7 +62,7 @@ export const ClockNumbers = ({
             return (
               <span
                 key={hour}
-                className={`time-clock-number${isSelected ? " selected" : ""}`}
+                className={`clock__number${isSelected ? " clock__number--selected" : ""}`}
                 style={{
                   transform: `translate(${x}px, ${y}px)`,
                 }}
@@ -87,7 +87,7 @@ export const ClockNumbers = ({
         return (
           <span
             key={minute}
-            className={`time-clock-number${isSelected ? " selected" : ""}`}
+            className={`clock__number${isSelected ? " clock__number--selected" : ""}`}
             style={{
               transform: `translate(${x}px, ${y}px)`,
             }}

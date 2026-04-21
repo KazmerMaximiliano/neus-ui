@@ -18,20 +18,20 @@ export const Input = ({
   onChange,
 }: InputProps) => {
   return (
-    <div className="input-wrapper">
+    <div className="input__wrapper">
       {label && (
         <label
-          className={`input-label${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`input__label${error ? " input__label--error" : ""}${
+            disabled ? " input__label--disabled" : ""
           }`}
         >
           {label}
-          {required && <span className="input-required">*</span>}
+          {required && <span className="input__required">*</span>}
         </label>
       )}
       <input
-        className={`input input-${type}${error ? " error" : ""}${
-          disabled ? " disabled" : ""
+        className={`input input--${type}${error ? " input--error" : ""}${
+          disabled ? " input--disabled" : ""
         }`}
         required={required}
         type={type}
@@ -46,7 +46,7 @@ export const Input = ({
         readOnly={readonly}
         onChange={(e) => !disabled && onChange?.(e.target.value)}
       />
-      {error && <div className="input-error">{error}</div>}
+      {error && <div className="input__error-message">{error}</div>}
     </div>
   );
 };

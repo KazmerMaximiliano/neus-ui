@@ -87,23 +87,23 @@ export const DateInput = ({
   }, [value, isControlled]);
 
   return (
-    <div className="date-input-wrapper" ref={containerRef}>
+    <div className="date-input__wrapper" ref={containerRef}>
       {label && (
         <label
-          className={`date-input-label${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`date-input__label${error ? " date-input__label--error" : ""}${
+            disabled ? " date-input__label--disabled" : ""
           }`}
         >
           {label}
-          {required && <span className="date-input-required">*</span>}
+          {required && <span className="date-input__required">*</span>}
         </label>
       )}
 
-      <div className="date-input-container">
+      <div className="date-input__container">
         <button
           ref={buttonRef}
-          className={`date-input-field${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`date-input__field${error ? " date-input__field--error" : ""}${
+            disabled ? " date-input__field--disabled" : ""
           }`}
           onClick={() => !disabled && !readonly && setIsOpen(!isOpen)}
           disabled={disabled}
@@ -114,7 +114,7 @@ export const DateInput = ({
 
         {isOpen && (
           <div
-            className="date-input-dropdown"
+            className="date-input__dropdown"
             style={{
               left: mode == "single" ? "-70px" : "-215px",
               minWidth: mode == "single" ? "325px" : "625px",
@@ -159,7 +159,7 @@ export const DateInput = ({
         />
       )}
 
-      {error && <div className="date-input-error">{error}</div>}
+      {error && <div className="date-input__error-message">{error}</div>}
     </div>
   );
 };

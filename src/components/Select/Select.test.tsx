@@ -52,7 +52,7 @@ describe("Select", () => {
 
     it("renders custom placeholder", () => {
       const { container } = renderSelect({ placeholder: "Choose..." });
-      expect(container.querySelector(".select-placeholder")).toHaveTextContent("Choose...");
+      expect(container.querySelector(".select__placeholder")).toHaveTextContent("Choose...");
     });
   });
 
@@ -64,7 +64,7 @@ describe("Select", () => {
 
     it("uses placeholder as label when label not provided", () => {
       const { container } = renderSelect({ placeholder: "Placeholder Label" });
-      const label = container.querySelector(".select-label");
+      const label = container.querySelector(".select__label");
       expect(label).toBeInTheDocument();
       expect(label).toHaveTextContent("Placeholder Label");
     });
@@ -72,13 +72,13 @@ describe("Select", () => {
     it("applies error class to label when error is present", () => {
       renderSelect({ label: "Test Label", error: "Error message" });
       const label = screen.getByText("Test Label");
-      expect(label).toHaveClass("error");
+      expect(label).toHaveClass("select__label--error");
     });
 
     it("applies disabled class to label when disabled", () => {
       renderSelect({ label: "Test Label", disabled: true });
       const label = screen.getByText("Test Label");
-      expect(label).toHaveClass("disabled");
+      expect(label).toHaveClass("select__label--disabled");
     });
   });
 
@@ -90,14 +90,14 @@ describe("Select", () => {
 
     it("applies error class to select when error is present", () => {
       const { container } = renderSelect({ error: "Error message" });
-      expect(container.querySelector(".select")).toHaveClass("error");
+      expect(container.querySelector(".select")).toHaveClass("select--error");
     });
   });
 
   describe("disabled state", () => {
     it("applies disabled class when disabled prop is true", () => {
       const { container } = renderSelect({ disabled: true });
-      expect(container.querySelector(".select")).toHaveClass("disabled");
+      expect(container.querySelector(".select")).toHaveClass("select--disabled");
     });
 
     it("does not open dropdown when disabled", () => {
@@ -105,8 +105,8 @@ describe("Select", () => {
       const select = container.querySelector(".select") as HTMLElement;
       fireEvent.click(select);
       expect(
-        container.querySelector(".select-dropdown"),
-      ).not.toHaveClass("select-dropdown--open");
+        container.querySelector(".select__dropdown"),
+      ).not.toHaveClass("select__dropdown--open");
     });
 
     it("does not call onChange when disabled", () => {
@@ -154,12 +154,12 @@ describe("Select", () => {
       const select = container.querySelector(".select") as HTMLElement;
       fireEvent.click(select);
       expect(
-        container.querySelector(".select-dropdown"),
-      ).toHaveClass("select-dropdown--open");
+        container.querySelector(".select__dropdown"),
+      ).toHaveClass("select__dropdown--open");
       fireEvent.click(screen.getByText("Option 1"));
       expect(
-        container.querySelector(".select-dropdown"),
-      ).not.toHaveClass("select-dropdown--open");
+        container.querySelector(".select__dropdown"),
+      ).not.toHaveClass("select__dropdown--open");
     });
 
     it("works without onChange handler", () => {
@@ -176,8 +176,8 @@ describe("Select", () => {
     it("does not show dropdown by default", () => {
       const { container } = renderSelect();
       expect(
-        container.querySelector(".select-dropdown"),
-      ).not.toHaveClass("select-dropdown--open");
+        container.querySelector(".select__dropdown"),
+      ).not.toHaveClass("select__dropdown--open");
     });
 
     it("opens dropdown on click", () => {
@@ -185,8 +185,8 @@ describe("Select", () => {
       const select = container.querySelector(".select") as HTMLElement;
       fireEvent.click(select);
       expect(
-        container.querySelector(".select-dropdown"),
-      ).toHaveClass("select-dropdown--open");
+        container.querySelector(".select__dropdown"),
+      ).toHaveClass("select__dropdown--open");
     });
 
     it("closes dropdown on outside click", () => {
@@ -194,12 +194,12 @@ describe("Select", () => {
       const select = container.querySelector(".select") as HTMLElement;
       fireEvent.click(select);
       expect(
-        container.querySelector(".select-dropdown"),
-      ).toHaveClass("select-dropdown--open");
+        container.querySelector(".select__dropdown"),
+      ).toHaveClass("select__dropdown--open");
       fireEvent.mouseDown(document.body);
       expect(
-        container.querySelector(".select-dropdown"),
-      ).not.toHaveClass("select-dropdown--open");
+        container.querySelector(".select__dropdown"),
+      ).not.toHaveClass("select__dropdown--open");
     });
   });
 

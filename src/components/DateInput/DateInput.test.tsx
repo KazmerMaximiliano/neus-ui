@@ -15,13 +15,13 @@ describe("DateInput", () => {
     it("renders date input wrapper", () => {
       const { container } = renderDateInput();
       expect(
-        container.querySelector(".date-input-wrapper"),
+        container.querySelector(".date-input__wrapper"),
       ).toBeInTheDocument();
     });
 
     it("renders date input field button", () => {
       const { container } = renderDateInput();
-      expect(container.querySelector(".date-input-field")).toBeInTheDocument();
+      expect(container.querySelector(".date-input__field")).toBeInTheDocument();
     });
 
     it("renders placeholder when no value", () => {
@@ -39,7 +39,7 @@ describe("DateInput", () => {
     it("does not render label when not provided", () => {
       const { container } = renderDateInput();
       expect(
-        container.querySelector(".date-input-label"),
+        container.querySelector(".date-input__label"),
       ).not.toBeInTheDocument();
     });
 
@@ -51,13 +51,13 @@ describe("DateInput", () => {
     it("applies error class to label when error is present", () => {
       renderDateInput({ label: "Birth Date", error: "Error" });
       const label = screen.getByText("Birth Date");
-      expect(label).toHaveClass("error");
+      expect(label).toHaveClass("date-input__label--error");
     });
 
     it("applies disabled class to label when disabled", () => {
       renderDateInput({ label: "Birth Date", disabled: true });
       const label = screen.getByText("Birth Date");
-      expect(label).toHaveClass("disabled");
+      expect(label).toHaveClass("date-input__label--disabled");
     });
   });
 
@@ -70,7 +70,7 @@ describe("DateInput", () => {
     it("applies error class to field when error is present", () => {
       const { container } = renderDateInput({ error: "Error" });
       expect(
-        container.querySelector(".date-input-field.error"),
+        container.querySelector(".date-input__field--error"),
       ).toBeInTheDocument();
     });
   });
@@ -78,23 +78,23 @@ describe("DateInput", () => {
   describe("disabled state", () => {
     it("disables the button when disabled", () => {
       const { container } = renderDateInput({ disabled: true });
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       expect(button).toBeDisabled();
     });
 
     it("applies disabled class to field when disabled", () => {
       const { container } = renderDateInput({ disabled: true });
       expect(
-        container.querySelector(".date-input-field.disabled"),
+        container.querySelector(".date-input__field--disabled"),
       ).toBeInTheDocument();
     });
 
     it("does not open dropdown when disabled", () => {
       const { container } = renderDateInput({ disabled: true });
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".date-input-dropdown"),
+        container.querySelector(".date-input__dropdown"),
       ).not.toBeInTheDocument();
     });
   });
@@ -102,10 +102,10 @@ describe("DateInput", () => {
   describe("readonly state", () => {
     it("does not open dropdown when readonly", () => {
       const { container } = renderDateInput({ readonly: true });
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".date-input-dropdown"),
+        container.querySelector(".date-input__dropdown"),
       ).not.toBeInTheDocument();
     });
   });
@@ -113,36 +113,36 @@ describe("DateInput", () => {
   describe("dropdown", () => {
     it("opens dropdown on click", () => {
       const { container } = renderDateInput();
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".date-input-dropdown"),
+        container.querySelector(".date-input__dropdown"),
       ).toBeInTheDocument();
     });
 
     it("closes dropdown on outside click", () => {
       const { container } = renderDateInput();
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".date-input-dropdown"),
+        container.querySelector(".date-input__dropdown"),
       ).toBeInTheDocument();
       fireEvent.mouseDown(document.body);
       expect(
-        container.querySelector(".date-input-dropdown"),
+        container.querySelector(".date-input__dropdown"),
       ).not.toBeInTheDocument();
     });
 
     it("toggles dropdown on click", () => {
       const { container } = renderDateInput();
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".date-input-dropdown"),
+        container.querySelector(".date-input__dropdown"),
       ).toBeInTheDocument();
       fireEvent.click(button!);
       expect(
-        container.querySelector(".date-input-dropdown"),
+        container.querySelector(".date-input__dropdown"),
       ).not.toBeInTheDocument();
     });
   });
@@ -172,18 +172,18 @@ describe("DateInput", () => {
   describe("modes", () => {
     it("renders in single mode by default", () => {
       const { container } = renderDateInput();
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".date-input-dropdown"),
+        container.querySelector(".date-input__dropdown"),
       ).toBeInTheDocument();
     });
 
     it("renders range mode dropdown with correct width", () => {
       const { container } = renderDateInput({ mode: "range" });
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       fireEvent.click(button!);
-      const dropdown = container.querySelector(".date-input-dropdown");
+      const dropdown = container.querySelector(".date-input__dropdown");
       expect(dropdown).toHaveStyle({ minWidth: "625px" });
     });
   });
@@ -192,7 +192,7 @@ describe("DateInput", () => {
     it("works with defaultValue", () => {
       const date = new Date(2024, 0, 15);
       const { container } = renderDateInput({ defaultValue: date });
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       expect(button?.textContent).toBeTruthy();
       expect(button?.textContent).not.toBe("");
     });
@@ -200,7 +200,7 @@ describe("DateInput", () => {
     it("works with controlled value", () => {
       const date = new Date(2024, 5, 20);
       const { container } = renderDateInput({ value: date, onChange: vi.fn() });
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       expect(button?.textContent).toBeTruthy();
       expect(button?.textContent).not.toBe("");
     });
@@ -211,7 +211,7 @@ describe("DateInput", () => {
       const { rerender, container } = render(
         <DateInput value={date1} onChange={vi.fn()} />,
       );
-      const button = container.querySelector(".date-input-field");
+      const button = container.querySelector(".date-input__field");
       const firstValue = button?.textContent;
       expect(firstValue).toBeTruthy();
       rerender(<DateInput value={date2} onChange={vi.fn()} />);

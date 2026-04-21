@@ -23,7 +23,8 @@ export const getIconButtonClasses = (
 ): string => {
   const classes = [
     "icon-button",
-    `icon-button--${variant}-${color}`,
+    `icon-button--${variant}`,
+    `icon-button--${color}`,
     `icon-button--${size}`,
   ];
 

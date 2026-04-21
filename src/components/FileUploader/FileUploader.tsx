@@ -147,33 +147,31 @@ export const FileUploader = ({
   };
 
   const renderContent = () => {
-    // No files selected
     if (selectedFiles.length === 0) {
       return (
-        <div className="file-upload-content">
-          <CloudUpload className="upload-icon" />
-          <p className="upload-text">{placeholder}</p>
-          <p className="upload-hint">
+        <div className="file-uploader__content">
+          <CloudUpload className="file-uploader__upload-icon" />
+          <p className="file-uploader__upload-text">{placeholder}</p>
+          <p className="file-uploader__upload-hint">
             Supported formats:{" "}
             <span>
               {allowedTypes.map((type) => type.replace("*", "")).join(", ")}
             </span>
           </p>
-          <p className="upload-hint">
+          <p className="file-uploader__upload-hint">
             Max size: <span>{formatFileSize(maxWeight)}</span>
           </p>
         </div>
       );
     }
 
-    // Preview for single image file when not multiple
     if (previewUrl && !multiple && isImageFile(selectedFiles[0])) {
       return (
-        <div className="file-preview">
-          <img src={previewUrl} alt="Preview" className="preview-image" />
-          <div className="file-info">
-            <p className="file-name">{selectedFiles[0].name}</p>
-            <p className="file-size">{formatFileSize(selectedFiles[0].size)}</p>
+        <div className="file-uploader__preview">
+          <img src={previewUrl} alt="Preview" className="file-uploader__preview-image" />
+          <div className="file-uploader__file-info">
+            <p className="file-uploader__file-name">{selectedFiles[0].name}</p>
+            <p className="file-uploader__file-size">{formatFileSize(selectedFiles[0].size)}</p>
           </div>
           <Button
             label={deleteFilesText}
@@ -187,22 +185,22 @@ export const FileUploader = ({
     }
 
     return (
-      <div className="file-selected">
-        <div className="file-icon-container">
+      <div className="file-uploader__selected">
+        <div className="file-uploader__icon-container">
           {isImageFile(selectedFiles[0]) ? (
-            <Image className="file-icon" />
+            <Image className="file-uploader__icon" />
           ) : (
-            <File className="file-icon" />
+            <File className="file-uploader__icon" />
           )}
         </div>
-        <div className="file-details">
+        <div className="file-uploader__details">
           {multiple ? (
             <>
-              <p className="file-count">
+              <p className="file-uploader__file-count">
                 {selectedFiles.length} file{selectedFiles.length > 1 ? "s" : ""}{" "}
                 selected
               </p>
-              <p className="total-size">
+              <p className="file-uploader__total-size">
                 Total size:{" "}
                 {formatFileSize(
                   selectedFiles.reduce((sum, file) => sum + file.size, 0),
@@ -211,8 +209,8 @@ export const FileUploader = ({
             </>
           ) : (
             <>
-              <p className="file-name">{selectedFiles[0].name}</p>
-              <p className="file-size">
+              <p className="file-uploader__file-name">{selectedFiles[0].name}</p>
+              <p className="file-uploader__file-size">
                 {formatFileSize(selectedFiles[0].size)}
               </p>
             </>
@@ -230,21 +228,21 @@ export const FileUploader = ({
   };
 
   return (
-    <div className="file-uploader-container">
+    <div className="file-uploader">
       <input
         ref={fileInputRef}
         type="file"
         multiple={multiple}
         accept={getAcceptString()}
         onChange={handleInputChange}
-        className="file-input"
+        className="file-uploader__input"
         style={{ display: "none" }}
       />
       <div
-        className={`file-upload-area ${dragActive ? "drag-active" : ""} ${
-          error ? "error" : ""
-        } ${selectedFiles.length > 0 ? "has-files" : ""} ${
-          disabled ? "disabled" : ""
+        className={`file-uploader__area${dragActive ? " file-uploader__area--drag-active" : ""}${
+          error ? " file-uploader__area--error" : ""
+        }${selectedFiles.length > 0 ? " file-uploader__area--has-files" : ""}${
+          disabled ? " file-uploader__area--disabled" : ""
         }`}
         {...(!disabled &&
           selectedFiles.length === 0 && { onClick: handleClick })}
@@ -255,7 +253,7 @@ export const FileUploader = ({
       >
         {renderContent()}
       </div>
-      {error && <div className="error-message">{error}</div>}
+      {error && <div className="file-uploader__error-message">{error}</div>}
     </div>
   );
 };

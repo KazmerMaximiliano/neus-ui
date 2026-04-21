@@ -1,4 +1,4 @@
-.time-clock-number {
+.clock__number {
   position: absolute;
   display: flex;
   align-items: center;
@@ -16,18 +16,18 @@
     color 0.2s;
 }
 
-.time-clock-number.inner {
+.clock__number--inner {
   font-size: 0.8em;
   color: var(--color-gray-500, #666);
 }
 
-.time-clock-number.selected {
+.clock__number--selected {
   background-color: var(--color-primary);
   color: var(--color-white);
   z-index: 2;
 }
 
-.time-clock-number.inner.selected {
+.clock__number--inner.clock__number--selected {
   background-color: var(--color-primary);
   color: var(--color-white);
 }

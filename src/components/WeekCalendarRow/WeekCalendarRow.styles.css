@@ -3,7 +3,7 @@
   grid-template-columns: repeat(9, 1fr);
 }
 
-.week-calendar-category-cell {
+.week-calendar-row__category-cell {
   position: relative;
   grid-column: span 2;
   border: 1px solid var(--color-border-light);
@@ -14,7 +14,7 @@
   justify-content: center;
 }
 
-.week-calendar-day-cell {
+.week-calendar-row__day-cell {
   grid-column: span 1;
   position: relative;
   border: 1px solid var(--color-border-light);
@@ -26,8 +26,8 @@
   gap: 2px;
 }
 
-.week-calendar-day-cell .event-single,
-.week-calendar-day-cell .event-start {
+.week-calendar-row__day-cell .week-calendar-row__event--single,
+.week-calendar-row__day-cell .week-calendar-row__event--start {
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -37,7 +37,7 @@
   justify-content: center;
 }
 
-.event-content {
+.week-calendar-row__event-content {
   position: absolute;
   left: 50%;
   transform: translate(-23px, -50%);
@@ -54,7 +54,7 @@
   pointer-events: none;
 }
 
-.event-avatar {
+.week-calendar-row__event-avatar {
   width: 30px;
   height: 30px;
   min-width: 30px;
@@ -68,13 +68,13 @@
   justify-content: center;
 }
 
-.event-info {
+.week-calendar-row__event-info {
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.event-title {
+.week-calendar-row__event-title {
   font-size: 12px;
   font-weight: 600;
   color: var(--color-white);
@@ -83,14 +83,14 @@
   text-overflow: ellipsis;
 }
 
-.event-description {
+.week-calendar-row__event-description {
   font-size: 10px;
   font-weight: 400;
   color: var(--color-white-300);
   line-height: 1.2;
 }
 
-.week-calendar-day-cell .event-start::after {
+.week-calendar-row__day-cell .week-calendar-row__event--start::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -101,7 +101,7 @@
   background-color: inherit;
 }
 
-.week-calendar-day-cell .event-continue {
+.week-calendar-row__day-cell .week-calendar-row__event--continue {
   position: absolute;
   left: -1px;
   width: calc(100% + 2px);
@@ -109,14 +109,14 @@
   z-index: 1;
 }
 
-.week-calendar-day-cell .event-end {
+.week-calendar-row__day-cell .week-calendar-row__event--end {
   width: 46px;
   height: 46px;
   border-radius: 50%;
   z-index: 1;
 }
 
-.week-calendar-day-cell .event-end::before {
+.week-calendar-row__day-cell .week-calendar-row__event--end::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -127,7 +127,7 @@
   background-color: inherit;
 }
 
-.week-calendar-category-cell.with-point::before {
+.week-calendar-row__category-cell--with-point::before {
   content: "";
   position: absolute;
   left: 10px;
@@ -138,31 +138,31 @@
   border-radius: 50%;
 }
 
-.with-point.purple::before {
+.week-calendar-row__category-cell--with-point.week-calendar-row--purple::before {
   background-color: #7e6594;
 }
 
-.with-point.pink::before {
+.week-calendar-row__category-cell--with-point.week-calendar-row--pink::before {
   background-color: #c86b7b;
 }
 
-.with-point.red::before {
+.week-calendar-row__category-cell--with-point.week-calendar-row--red::before {
   background-color: #c6412f;
 }
 
-.with-point.yellow::before {
+.week-calendar-row__category-cell--with-point.week-calendar-row--yellow::before {
   background-color: #d99e2b;
 }
 
-.with-point.blue::before {
+.week-calendar-row__category-cell--with-point.week-calendar-row--blue::before {
   background-color: #4a7b9d;
 }
 
-.with-point.green::before {
+.week-calendar-row__category-cell--with-point.week-calendar-row--green::before {
   background-color: #5ca874;
 }
 
-.week-calendar-category-name {
+.week-calendar-row__category-name {
   width: 100%;
   font-size: 14px;
   font-weight: 600;
@@ -174,7 +174,7 @@
   text-overflow: ellipsis;
 }
 
-.week-calendar-category-info {
+.week-calendar-row__category-info {
   width: 100%;
   font-size: 12px;
   font-weight: 400;
@@ -186,11 +186,11 @@
   text-overflow: ellipsis;
 }
 
-.week-calendar-day-cell.clickable {
+.week-calendar-row__day-cell--clickable {
   cursor: pointer;
 }
 
-.week-calendar-hover-tooltip {
+.week-calendar-row__hover-tooltip {
   position: fixed;
   z-index: 100;
   pointer-events: none;

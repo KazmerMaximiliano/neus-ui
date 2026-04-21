@@ -26,12 +26,12 @@ describe("Dropdown", () => {
 
     it("renders avatar container", () => {
       const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown-avatar")).toBeInTheDocument();
+      expect(container.querySelector(".dropdown__avatar")).toBeInTheDocument();
     });
 
     it("renders X when no icon provided", () => {
       const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown-avatar")).toHaveTextContent(
+      expect(container.querySelector(".dropdown__avatar")).toHaveTextContent(
         "X",
       );
     });
@@ -39,21 +39,21 @@ describe("Dropdown", () => {
     it("renders icon when provided", () => {
       const { container } = renderDropdown({ icon: User });
       expect(
-        container.querySelector(".dropdown-avatar svg"),
+        container.querySelector(".dropdown__avatar svg"),
       ).toBeInTheDocument();
     });
 
     it("renders caret indicator", () => {
       const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown-caret")).toBeInTheDocument();
+      expect(container.querySelector(".dropdown__caret")).toBeInTheDocument();
     });
   });
 
   describe("panel", () => {
     it("does not show panel by default", () => {
       const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown-panel")).not.toHaveClass(
-        "dropdown-panel--open",
+      expect(container.querySelector(".dropdown__panel")).not.toHaveClass(
+        "dropdown__panel--open",
       );
     });
 
@@ -61,8 +61,8 @@ describe("Dropdown", () => {
       const { container } = renderDropdown();
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown-panel")).toHaveClass(
-        "dropdown-panel--open",
+      expect(container.querySelector(".dropdown__panel")).toHaveClass(
+        "dropdown__panel--open",
       );
     });
 
@@ -71,8 +71,8 @@ describe("Dropdown", () => {
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
       fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown-panel")).not.toHaveClass(
-        "dropdown-panel--open",
+      expect(container.querySelector(".dropdown__panel")).not.toHaveClass(
+        "dropdown__panel--open",
       );
     });
 
@@ -97,7 +97,7 @@ describe("Dropdown", () => {
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
       expect(
-        container.querySelector(".dropdown-caret--open"),
+        container.querySelector(".dropdown__caret--open"),
       ).toBeInTheDocument();
     });
 
@@ -105,12 +105,12 @@ describe("Dropdown", () => {
       const { container } = renderDropdown();
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown-panel")).toHaveClass(
-        "dropdown-panel--open",
+      expect(container.querySelector(".dropdown__panel")).toHaveClass(
+        "dropdown__panel--open",
       );
       fireEvent.mouseDown(document.body);
-      expect(container.querySelector(".dropdown-panel")).not.toHaveClass(
-        "dropdown-panel--open",
+      expect(container.querySelector(".dropdown__panel")).not.toHaveClass(
+        "dropdown__panel--open",
       );
     });
   });
@@ -131,7 +131,7 @@ describe("Dropdown", () => {
       const dropdown = container.querySelector(".dropdown");
       fireEvent.click(dropdown!);
       const clickableItems = container.querySelectorAll(
-        ".dropdown-item.clickable",
+        ".dropdown__item--clickable",
       );
       expect(clickableItems).toHaveLength(3);
     });

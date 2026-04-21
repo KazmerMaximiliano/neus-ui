@@ -70,23 +70,23 @@ export const TimeInput = ({
   }, [value, isControlled]);
 
   return (
-    <div className="time-input-wrapper" ref={containerRef}>
+    <div className="time-input__wrapper" ref={containerRef}>
       {label && (
         <label
-          className={`time-input-label${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`time-input__label${error ? " time-input__label--error" : ""}${
+            disabled ? " time-input__label--disabled" : ""
           }`}
         >
           {label}
-          {required && <span className="time-input-required">*</span>}
+          {required && <span className="time-input__required">*</span>}
         </label>
       )}
 
-      <div className="time-input-container">
+      <div className="time-input__container">
         <button
           ref={buttonRef}
-          className={`time-input-field${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`time-input__field${error ? " time-input__field--error" : ""}${
+            disabled ? " time-input__field--disabled" : ""
           }`}
           onClick={() => !disabled && !readonly && setIsOpen(!isOpen)}
           disabled={disabled}
@@ -96,7 +96,7 @@ export const TimeInput = ({
         </button>
 
         {isOpen && (
-          <div className="time-input-dropdown">
+          <div className="time-input__dropdown">
             <Clock
               value={currentValue}
               onChange={(newValue) =>
@@ -119,7 +119,7 @@ export const TimeInput = ({
         />
       )}
 
-      {error && <div className="time-input-error">{error}</div>}
+      {error && <div className="time-input__error-message">{error}</div>}
     </div>
   );
 };
