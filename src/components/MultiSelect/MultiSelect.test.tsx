@@ -33,7 +33,7 @@ describe("MultiSelect", () => {
   describe("Rendering", () => {
     it("renders with placeholder when no value is selected", () => {
       const { container } = renderMultiSelect();
-      const placeholder = container.querySelector(".multiselect-placeholder");
+      const placeholder = container.querySelector(".multiselect__placeholder");
       expect(placeholder).toBeInTheDocument();
       expect(placeholder).toHaveTextContent("Select options");
     });
@@ -42,7 +42,7 @@ describe("MultiSelect", () => {
       const { container } = renderMultiSelect({
         label: "Choose items",
       });
-      const label = container.querySelector(".multiselect-label");
+      const label = container.querySelector(".multiselect__label");
       expect(label).toBeInTheDocument();
       expect(label).toHaveTextContent("Choose items");
     });
@@ -52,7 +52,7 @@ describe("MultiSelect", () => {
         placeholder: "Select multiple items",
         label: undefined,
       });
-      const label = container.querySelector(".multiselect-label");
+      const label = container.querySelector(".multiselect__label");
       expect(label).toHaveTextContent("Select multiple items");
     });
 
@@ -71,7 +71,7 @@ describe("MultiSelect", () => {
       const { container } = renderMultiSelect({
         error: "This field is required",
       });
-      const errorElement = container.querySelector(".multiselect-error");
+      const errorElement = container.querySelector(".multiselect__error-message");
       expect(errorElement).toHaveTextContent("This field is required");
     });
   });
@@ -84,15 +84,15 @@ describe("MultiSelect", () => {
       ) as HTMLElement;
 
       expect(
-        container.querySelector(".multiselect-dropdown"),
-      ).not.toHaveClass("multiselect-dropdown--open");
+        container.querySelector(".multiselect__dropdown"),
+      ).not.toHaveClass("multiselect__dropdown--open");
 
       fireEvent.click(multiSelectElement);
 
       await waitFor(() => {
         expect(
-          container.querySelector(".multiselect-dropdown"),
-        ).toHaveClass("multiselect-dropdown--open");
+          container.querySelector(".multiselect__dropdown"),
+        ).toHaveClass("multiselect__dropdown--open");
       });
     });
 
@@ -105,15 +105,15 @@ describe("MultiSelect", () => {
       fireEvent.click(multiSelectElement);
       await waitFor(() => {
         expect(
-          container.querySelector(".multiselect-dropdown"),
-        ).toHaveClass("multiselect-dropdown--open");
+          container.querySelector(".multiselect__dropdown"),
+        ).toHaveClass("multiselect__dropdown--open");
       });
 
       fireEvent.click(multiSelectElement);
       await waitFor(() => {
         expect(
-          container.querySelector(".multiselect-dropdown"),
-        ).not.toHaveClass("multiselect-dropdown--open");
+          container.querySelector(".multiselect__dropdown"),
+        ).not.toHaveClass("multiselect__dropdown--open");
       });
     });
 
@@ -128,8 +128,8 @@ describe("MultiSelect", () => {
       fireEvent.click(multiSelectElement);
 
       expect(
-        container.querySelector(".multiselect-dropdown"),
-      ).not.toHaveClass("multiselect-dropdown--open");
+        container.querySelector(".multiselect__dropdown"),
+      ).not.toHaveClass("multiselect__dropdown--open");
     });
   });
 
@@ -147,12 +147,12 @@ describe("MultiSelect", () => {
 
       await waitFor(() => {
         expect(
-          container.querySelector(".multiselect-dropdown"),
-        ).toHaveClass("multiselect-dropdown--open");
+          container.querySelector(".multiselect__dropdown"),
+        ).toHaveClass("multiselect__dropdown--open");
       });
 
       const firstOption = container.querySelector(
-        ".multiselect-option",
+        ".multiselect__option",
       ) as HTMLElement;
       fireEvent.click(firstOption);
 
@@ -164,7 +164,7 @@ describe("MultiSelect", () => {
         value: ["option1", "option2"],
       });
 
-      const tags = container.querySelectorAll(".multiselect-tag");
+      const tags = container.querySelectorAll(".multiselect__tag");
       expect(tags).toHaveLength(2);
     });
 
@@ -182,12 +182,12 @@ describe("MultiSelect", () => {
 
       await waitFor(() => {
         expect(
-          container.querySelector(".multiselect-dropdown"),
-        ).toHaveClass("multiselect-dropdown--open");
+          container.querySelector(".multiselect__dropdown"),
+        ).toHaveClass("multiselect__dropdown--open");
       });
 
       const firstOption = container.querySelector(
-        ".multiselect-option",
+        ".multiselect__option",
       ) as HTMLElement;
       fireEvent.click(firstOption);
 
@@ -207,11 +207,11 @@ describe("MultiSelect", () => {
 
       await waitFor(() => {
         expect(
-          container.querySelector(".multiselect-dropdown"),
-        ).toHaveClass("multiselect-dropdown--open");
+          container.querySelector(".multiselect__dropdown"),
+        ).toHaveClass("multiselect__dropdown--open");
       });
 
-      const options = container.querySelectorAll(".multiselect-option");
+      const options = container.querySelectorAll(".multiselect__option");
       fireEvent.click(options[0]);
       fireEvent.click(options[1]);
 
@@ -225,7 +225,7 @@ describe("MultiSelect", () => {
         onChange: handleChange,
       });
 
-      const removeTags = container.querySelectorAll(".multiselect-tag-remove");
+      const removeTags = container.querySelectorAll(".multiselect__tag-remove");
       fireEvent.click(removeTags[0]);
 
       expect(handleChange).toHaveBeenCalledWith(["option2"]);
@@ -245,8 +245,8 @@ describe("MultiSelect", () => {
 
       expect(handleChange).not.toHaveBeenCalled();
       expect(
-        container.querySelector(".multiselect-dropdown"),
-      ).not.toHaveClass("multiselect-dropdown--open");
+        container.querySelector(".multiselect__dropdown"),
+      ).not.toHaveClass("multiselect__dropdown--open");
     });
 
     it("does not remove tag when disabled", () => {
@@ -255,7 +255,7 @@ describe("MultiSelect", () => {
         disabled: true,
       });
 
-      const removeTag = container.querySelector(".multiselect-tag-remove");
+      const removeTag = container.querySelector(".multiselect__tag-remove");
       expect(removeTag).not.toBeInTheDocument();
     });
   });
@@ -267,7 +267,7 @@ describe("MultiSelect", () => {
         value: undefined,
       });
 
-      const tags = container.querySelectorAll(".multiselect-tag");
+      const tags = container.querySelectorAll(".multiselect__tag");
       expect(tags).toHaveLength(1);
     });
 
@@ -276,7 +276,7 @@ describe("MultiSelect", () => {
         value: ["option1"],
       });
 
-      const tags = container.querySelectorAll(".multiselect-tag");
+      const tags = container.querySelectorAll(".multiselect__tag");
       expect(tags).toHaveLength(1);
     });
 
@@ -294,11 +294,11 @@ describe("MultiSelect", () => {
 
       await waitFor(() => {
         expect(
-          container.querySelector(".multiselect-dropdown"),
-        ).toHaveClass("multiselect-dropdown--open");
+          container.querySelector(".multiselect__dropdown"),
+        ).toHaveClass("multiselect__dropdown--open");
       });
 
-      const options = container.querySelectorAll(".multiselect-option");
+      const options = container.querySelectorAll(".multiselect__option");
       fireEvent.click(options[1]); // Seleccionar option2
 
       expect(handleChange).toHaveBeenCalledWith(["option1", "option2"]);
@@ -336,7 +336,7 @@ describe("MultiSelect", () => {
       ) as HTMLElement;
       fireEvent.click(multiSelectElement);
 
-      const options = container.querySelectorAll(".multiselect-option");
+      const options = container.querySelectorAll(".multiselect__option");
       expect(options.length).toBe(0);
     });
 
@@ -353,7 +353,7 @@ describe("MultiSelect", () => {
       ) as HTMLElement;
       fireEvent.click(multiSelectElement);
 
-      const options = container.querySelectorAll(".multiselect-option");
+      const options = container.querySelectorAll(".multiselect__option");
       expect(options.length).toBe(2);
     });
   });

@@ -25,18 +25,18 @@ describe("FileUploader", () => {
     it("renders file uploader container", () => {
       const { container } = renderFileUploader();
       expect(
-        container.querySelector(".file-uploader-container"),
+        container.querySelector(".file-uploader"),
       ).toBeInTheDocument();
     });
 
     it("renders file upload area", () => {
       const { container } = renderFileUploader();
-      expect(container.querySelector(".file-upload-area")).toBeInTheDocument();
+      expect(container.querySelector(".file-uploader__area")).toBeInTheDocument();
     });
 
     it("renders upload icon", () => {
       const { container } = renderFileUploader();
-      expect(container.querySelector(".upload-icon")).toBeInTheDocument();
+      expect(container.querySelector(".file-uploader__upload-icon")).toBeInTheDocument();
     });
 
     it("renders default placeholder text", () => {
@@ -78,7 +78,7 @@ describe("FileUploader", () => {
     it("applies error class to upload area when error is present", () => {
       const { container } = renderFileUploader({ error: "Error" });
       expect(
-        container.querySelector(".file-upload-area.error"),
+        container.querySelector(".file-uploader__area--error"),
       ).toBeInTheDocument();
     });
   });
@@ -87,7 +87,7 @@ describe("FileUploader", () => {
     it("applies disabled class when disabled", () => {
       const { container } = renderFileUploader({ disabled: true });
       expect(
-        container.querySelector(".file-upload-area.disabled"),
+        container.querySelector(".file-uploader__area--disabled"),
       ).toBeInTheDocument();
     });
 
@@ -97,7 +97,7 @@ describe("FileUploader", () => {
         'input[type="file"]',
       ) as HTMLInputElement;
       const clickSpy = vi.spyOn(input, "click");
-      const uploadArea = container.querySelector(".file-upload-area");
+      const uploadArea = container.querySelector(".file-uploader__area");
       fireEvent.click(uploadArea!);
       expect(clickSpy).not.toHaveBeenCalled();
     });
@@ -162,20 +162,20 @@ describe("FileUploader", () => {
   describe("drag and drop", () => {
     it("applies drag-active class on drag enter", () => {
       const { container } = renderFileUploader();
-      const uploadArea = container.querySelector(".file-upload-area");
+      const uploadArea = container.querySelector(".file-uploader__area");
 
       fireEvent.dragEnter(uploadArea!, {
         dataTransfer: { items: [{}] },
       });
 
       expect(
-        container.querySelector(".file-upload-area.drag-active"),
+        container.querySelector(".file-uploader__area--drag-active"),
       ).toBeInTheDocument();
     });
 
     it("removes drag-active class on drag leave", () => {
       const { container } = renderFileUploader();
-      const uploadArea = container.querySelector(".file-upload-area");
+      const uploadArea = container.querySelector(".file-uploader__area");
 
       fireEvent.dragEnter(uploadArea!, {
         dataTransfer: { items: [{}] },
@@ -183,20 +183,20 @@ describe("FileUploader", () => {
       fireEvent.dragLeave(uploadArea!);
 
       expect(
-        container.querySelector(".file-upload-area.drag-active"),
+        container.querySelector(".file-uploader__area--drag-active"),
       ).not.toBeInTheDocument();
     });
 
     it("does not apply drag-active class when disabled", () => {
       const { container } = renderFileUploader({ disabled: true });
-      const uploadArea = container.querySelector(".file-upload-area");
+      const uploadArea = container.querySelector(".file-uploader__area");
 
       fireEvent.dragEnter(uploadArea!, {
         dataTransfer: { items: [{}] },
       });
 
       expect(
-        container.querySelector(".file-upload-area.drag-active"),
+        container.querySelector(".file-uploader__area--drag-active"),
       ).not.toBeInTheDocument();
     });
   });
@@ -206,7 +206,7 @@ describe("FileUploader", () => {
       const { container } = renderFileUploader({
         deleteFilesText: "Remove all",
       });
-      expect(container.querySelector(".file-uploader-container")).toBeInTheDocument();
+      expect(container.querySelector(".file-uploader")).toBeInTheDocument();
     });
   });
 });

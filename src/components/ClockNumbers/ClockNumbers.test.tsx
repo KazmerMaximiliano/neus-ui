@@ -22,7 +22,7 @@ describe("ClockNumbers", () => {
         format: "12h",
         currentValue: { hours: 12, minutes: 0 },
       });
-      const numbers = container.querySelectorAll(".time-clock-number");
+      const numbers = container.querySelectorAll(".clock__number");
       expect(numbers).toHaveLength(12);
     });
 
@@ -32,7 +32,7 @@ describe("ClockNumbers", () => {
         format: "12h",
         currentValue: { hours: 12, minutes: 0 },
       });
-      const numbers = container.querySelectorAll(".time-clock-number");
+      const numbers = container.querySelectorAll(".clock__number");
       const values = Array.from(numbers).map((n) => n.textContent);
       expect(values).toContain("12");
       expect(values).toContain("1");
@@ -46,7 +46,7 @@ describe("ClockNumbers", () => {
         currentValue: { hours: 3, minutes: 0 },
       });
       const selectedNumber = container.querySelector(
-        ".time-clock-number.selected",
+        ".clock__number--selected",
       );
       expect(selectedNumber).toBeInTheDocument();
       expect(selectedNumber).toHaveTextContent("3");
@@ -60,7 +60,7 @@ describe("ClockNumbers", () => {
         format: "24h",
         currentValue: { hours: 12, minutes: 0 },
       });
-      const numbers = container.querySelectorAll(".time-clock-number");
+      const numbers = container.querySelectorAll(".clock__number");
       expect(numbers).toHaveLength(24);
     });
 
@@ -71,7 +71,7 @@ describe("ClockNumbers", () => {
         currentValue: { hours: 12, minutes: 0 },
       });
       const numbers = container.querySelectorAll(
-        ".time-clock-number:not(.inner)",
+        ".clock__number:not(.clock__number--inner)",
       );
       const values = Array.from(numbers).map((n) => n.textContent);
       expect(values).toContain("12");
@@ -87,7 +87,7 @@ describe("ClockNumbers", () => {
         currentValue: { hours: 0, minutes: 0 },
       });
       const innerNumbers = container.querySelectorAll(
-        ".time-clock-number.inner",
+        ".clock__number--inner",
       );
       expect(innerNumbers).toHaveLength(12);
       const values = Array.from(innerNumbers).map((n) => n.textContent);
@@ -104,7 +104,7 @@ describe("ClockNumbers", () => {
         currentValue: { hours: 15, minutes: 0 },
       });
       const selectedNumber = container.querySelector(
-        ".time-clock-number.selected:not(.inner)",
+        ".clock__number--selected:not(.clock__number--inner)",
       );
       expect(selectedNumber).toBeInTheDocument();
       expect(selectedNumber).toHaveTextContent("15");
@@ -117,7 +117,7 @@ describe("ClockNumbers", () => {
         currentValue: { hours: 3, minutes: 0 },
       });
       const selectedNumber = container.querySelector(
-        ".time-clock-number.inner.selected",
+        ".clock__number--inner.clock__number--selected",
       );
       expect(selectedNumber).toBeInTheDocument();
       expect(selectedNumber).toHaveTextContent("3");
@@ -131,7 +131,7 @@ describe("ClockNumbers", () => {
         format: "12h",
         currentValue: { hours: 12, minutes: 0 },
       });
-      const numbers = container.querySelectorAll(".time-clock-number");
+      const numbers = container.querySelectorAll(".clock__number");
       expect(numbers).toHaveLength(12);
     });
 
@@ -141,7 +141,7 @@ describe("ClockNumbers", () => {
         format: "12h",
         currentValue: { hours: 12, minutes: 0 },
       });
-      const numbers = container.querySelectorAll(".time-clock-number");
+      const numbers = container.querySelectorAll(".clock__number");
       const values = Array.from(numbers).map((n) => n.textContent);
       expect(values).toContain("00");
       expect(values).toContain("15");
@@ -155,7 +155,7 @@ describe("ClockNumbers", () => {
         format: "12h",
         currentValue: { hours: 12, minutes: 5 },
       });
-      const numbers = container.querySelectorAll(".time-clock-number");
+      const numbers = container.querySelectorAll(".clock__number");
       const values = Array.from(numbers).map((n) => n.textContent);
       expect(values).toContain("05");
     });
@@ -167,7 +167,7 @@ describe("ClockNumbers", () => {
         currentValue: { hours: 12, minutes: 15 },
       });
       const selectedNumber = container.querySelector(
-        ".time-clock-number.selected",
+        ".clock__number--selected",
       );
       expect(selectedNumber).toBeInTheDocument();
       expect(selectedNumber).toHaveTextContent("15");
@@ -179,7 +179,7 @@ describe("ClockNumbers", () => {
         format: "24h",
         currentValue: { hours: 12, minutes: 30 },
       });
-      const numbers = container.querySelectorAll(".time-clock-number");
+      const numbers = container.querySelectorAll(".clock__number");
       expect(numbers).toHaveLength(12);
     });
   });
@@ -191,7 +191,7 @@ describe("ClockNumbers", () => {
         format: "12h",
         currentValue: { hours: 12, minutes: 0 },
       });
-      const number = container.querySelector(".time-clock-number");
+      const number = container.querySelector(".clock__number");
       expect(number).toHaveAttribute("style");
       expect(number?.getAttribute("style")).toContain("transform");
     });

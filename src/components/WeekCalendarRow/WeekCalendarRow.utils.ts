@@ -1,4 +1,9 @@
+import { CATEGORY_COLORS_HEX } from "./WeekCalendarRow.constants";
 import { CalendarEvent, DayCellType } from "./WeekCalendarRow.types";
+
+export const resolveColor = (color: string): string => {
+  return CATEGORY_COLORS_HEX[color] ?? color;
+};
 
 export const getDayCellInfo = (
   day: Date,

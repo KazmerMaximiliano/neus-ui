@@ -12,6 +12,7 @@ A modern React UI component library built with TypeScript and dynamic theming ca
 - [📚 Components](#-components)
   - [Available Components](#available-components)
   - [Available Templates](#-available-templates)
+- [📖 Documentation](#-documentation)
 - [🔧 API Reference](#-api-reference)
 - [💻 Code Style Guidelines](#-code-style-guidelines)
 - [✅ Testing Instructions](#-testing-instructions)
@@ -283,7 +284,18 @@ All theme colors are available as CSS variables:
 | `AppTemplate`  | Complete application layout with sidebar and header |
 | `FormTemplate` | Form layout with validation and submission handling |
 
-> **💡 Pro Tip**: For detailed component props, usage examples, and interactive demos, visit the [Components Documentation](COMPONENTS.md) or check out the complete documentation at [https://kazmermaximiliano.github.io/neus-ui](https://kazmermaximiliano.github.io/neus-ui).
+> **💡 Pro Tip**: Explore all components interactively at **[kazmermaximiliano.github.io/neus-ui](https://kazmermaximiliano.github.io/neus-ui/)** — live props editor, usage examples, and full API docs powered by Storybook.
+
+## 📖 Documentation
+
+In-repo guides are located in the [`guides/`](guides/) directory:
+
+| Guide | Description |
+| --- | --- |
+| [Storybook Docs](https://kazmermaximiliano.github.io/neus-ui/) | Interactive component explorer with live props and usage examples |
+| [guides/COMPONENTS.md](guides/COMPONENTS.md) | Index of all components and templates with links to individual docs |
+| [guides/components/](guides/components/) | One dedicated file per component — props, types, and usage examples |
+| [guides/DESING_SYSTEM.md](guides/DESING_SYSTEM.md) | Theming API, color system, typography, spacing, and visual patterns |
 
 ## 🔧 API Reference
 

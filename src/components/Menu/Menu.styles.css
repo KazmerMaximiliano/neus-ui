@@ -3,7 +3,7 @@
   display: inline-block;
 }
 
-.menu-dropdown {
+.menu__dropdown {
   position: fixed;
   transform: translateX(-100%) translateY(-0.5em);
   background-color: var(--color-white);
@@ -17,13 +17,13 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.menu-dropdown--open {
+.menu__dropdown--open {
   opacity: 1;
   transform: translateX(-100%) translateY(0);
   pointer-events: auto;
 }
 
-.menu-item {
+.menu__item {
   padding: 1em var(--radius-default);
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -42,7 +42,7 @@
     border-bottom-right-radius: var(--radius-default);
   }
 
-  &.clickable:hover {
+  &.menu__item--clickable:hover {
     background-color: var(--color-black-100);
   }
 }

@@ -59,11 +59,11 @@ export const Select = ({
   };
 
   return (
-    <div className="select-wrapper" ref={containerRef}>
+    <div className="select__wrapper" ref={containerRef}>
       {displayLabel && (
         <label
-          className={`select-label${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`select__label${error ? " select__label--error" : ""}${
+            disabled ? " select__label--disabled" : ""
           }`}
         >
           {displayLabel}
@@ -72,10 +72,10 @@ export const Select = ({
       {name && (
         <input type="hidden" name={name} value={selectedValue} />
       )}
-      <div className={`select-container${isOpen && !disabled ? " open" : ""}`}>
+      <div className={`select__container${isOpen && !disabled ? " select__container--open" : ""}`}>
         <div
-          className={`select${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`select${error ? " select--error" : ""}${
+            disabled ? " select--disabled" : ""
           }`}
           onClick={() => {
             if (!disabled) {
@@ -85,17 +85,17 @@ export const Select = ({
           }}
           tabIndex={disabled ? -1 : 0}
         >
-          <span className={selectedLabel ? "" : "select-placeholder"}>
+          <span className={selectedLabel ? "" : "select__placeholder"}>
             {selectedLabel || placeholder || "Selecciona una opción..."}
           </span>
         </div>
 
-        <div className={`select-dropdown${isOpen && !disabled ? " select-dropdown--open" : ""}`}>
+        <div className={`select__dropdown${isOpen && !disabled ? " select__dropdown--open" : ""}`}>
           {viewSearchBar && (
-            <div className="select-search">
+            <div className="select__search">
               <input
                 type="text"
-                className="select-search-input"
+                className="select__search-input"
                 placeholder={searchBarPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -106,7 +106,7 @@ export const Select = ({
           {filteredOptions.map((option) => (
             <div
               key={option.value}
-              className={`select-option${option.value === selectedValue ? " selected" : ""}`}
+              className={`select__option${option.value === selectedValue ? " select__option--selected" : ""}`}
               onClick={() => handleSelect(option.value ?? "")}
             >
               {option.label}
@@ -114,7 +114,7 @@ export const Select = ({
           ))}
         </div>
       </div>
-      {error && <div className="select-error">{error}</div>}
+      {error && <div className="select__error-message">{error}</div>}
     </div>
   );
 };

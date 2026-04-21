@@ -33,7 +33,7 @@ describe("InteractiveMap", () => {
     it("renders map container", () => {
       const { container } = renderInteractiveMap();
       expect(
-        container.querySelector(".interactive-map-container"),
+        container.querySelector(".interactive-map"),
       ).toBeInTheDocument();
     });
 
@@ -54,12 +54,12 @@ describe("InteractiveMap", () => {
 
     it("renders instructions text when not readonly", () => {
       const { container } = renderInteractiveMap();
-      expect(container.querySelector(".map-info")).toBeInTheDocument();
+      expect(container.querySelector(".interactive-map__info")).toBeInTheDocument();
     });
 
     it("does not render instructions when readonly", () => {
       const { container } = renderInteractiveMap({ readonly: true });
-      expect(container.querySelector(".map-info")).not.toBeInTheDocument();
+      expect(container.querySelector(".interactive-map__info")).not.toBeInTheDocument();
     });
   });
 

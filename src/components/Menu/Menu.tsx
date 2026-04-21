@@ -73,7 +73,7 @@ export const Menu = ({
       )}
       {createPortal(
         <div
-          className={`menu-dropdown ${openMenu ? "menu-dropdown--open" : ""}`}
+          className={`menu__dropdown${openMenu ? " menu__dropdown--open" : ""}`}
           ref={menuRef}
           style={{
             top: position.top,
@@ -83,7 +83,7 @@ export const Menu = ({
           {items.map((item, index) => (
             <div
               key={index}
-              className="menu-item clickable"
+              className="menu__item menu__item--clickable"
               onClick={() => {
                 item.onClick();
                 setOpenMenu(false);

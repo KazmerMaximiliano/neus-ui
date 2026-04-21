@@ -3,7 +3,7 @@ import { CalendarEvent, EventsByCategory } from "../WeekCalendarRow/WeekCalendar
 export type WeekCalendarProps = {
   title?: string;
   events?: EventsByCategory[];
-  hoverContent?: React.ReactNode;
+  hoverContent?: (event: CalendarEvent) => React.ReactNode;
   onEventClick?: (event: CalendarEvent) => void;
   onDayChange?: (weekStart: Date, weekEnd: Date) => void;
 };

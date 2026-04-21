@@ -21,7 +21,7 @@
   pointer-events: none;
 }
 
-.checkbox-icon {
+.checkbox__icon {
   color: var(--color-white);
   font-size: 12px;
   opacity: 0;
@@ -32,26 +32,26 @@
   border-color: var(--color-primary-light);
 }
 
-.checkbox.checked {
+.checkbox--checked {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
 
-.checkbox.checked .checkbox-icon {
+.checkbox--checked .checkbox__icon {
   opacity: 1;
 }
 
-.checkbox.disabled {
+.checkbox--disabled {
   background-color: var(--color-gray-100, #f5f5f5);
   border-color: var(--color-gray-300, #ccc);
   cursor: not-allowed;
 }
 
-.checkbox.disabled.checked {
+.checkbox--disabled.checkbox--checked {
   background-color: var(--color-gray-300, #ccc);
   border-color: var(--color-gray-300, #ccc);
 }
 
-.checkbox.disabled.checked .checkbox-icon {
+.checkbox--disabled.checkbox--checked .checkbox__icon {
   color: var(--color-gray-600, #666);
 }

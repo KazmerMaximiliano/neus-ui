@@ -15,18 +15,18 @@ export const Modal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="modal-backdrop" onClick={onCancel}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+    <div className="modal__backdrop" onClick={onCancel}>
+      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         {title && (
-          <div className="modal-header">
+          <div className="modal__header">
             <h3>{title}</h3>
           </div>
         )}
 
-        {children && <div className="modal-body">{children}</div>}
+        {children && <div className="modal__body">{children}</div>}
 
         {(onConfirm || onCancel) && (
-          <div className="modal-footer">
+          <div className="modal__footer">
             {onCancel && <Button label={cancelText} onClick={onCancel} />}
             {onConfirm && (
               <Button

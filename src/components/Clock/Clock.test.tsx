@@ -14,27 +14,27 @@ describe("Clock", () => {
   describe("rendering", () => {
     it("renders clock wrapper", () => {
       const { container } = renderClock();
-      expect(container.querySelector(".clock-wrapper")).toBeInTheDocument();
+      expect(container.querySelector(".clock__wrapper")).toBeInTheDocument();
     });
 
     it("renders clock container", () => {
       const { container } = renderClock();
-      expect(container.querySelector(".clock-container")).toBeInTheDocument();
+      expect(container.querySelector(".clock__container")).toBeInTheDocument();
     });
 
     it("renders clock face", () => {
       const { container } = renderClock();
-      expect(container.querySelector(".clock-face")).toBeInTheDocument();
+      expect(container.querySelector(".clock__face")).toBeInTheDocument();
     });
 
     it("renders clock hand", () => {
       const { container } = renderClock();
-      expect(container.querySelector(".clock-hand")).toBeInTheDocument();
+      expect(container.querySelector(".clock__hand")).toBeInTheDocument();
     });
 
     it("renders clock center", () => {
       const { container } = renderClock();
-      expect(container.querySelector(".clock-center")).toBeInTheDocument();
+      expect(container.querySelector(".clock__center")).toBeInTheDocument();
     });
   });
 
@@ -53,20 +53,20 @@ describe("Clock", () => {
 
     it("displays correct initial time", () => {
       const { container } = renderClock({ value: { hours: 10, minutes: 30 } });
-      const buttons = container.querySelectorAll(".clock-time-button");
+      const buttons = container.querySelectorAll(".clock__time-button");
       expect(buttons[0]).toHaveTextContent("10");
       expect(buttons[1]).toHaveTextContent("30");
     });
 
     it("pads single digit minutes with zero", () => {
       const { container } = renderClock({ value: { hours: 10, minutes: 5 } });
-      const buttons = container.querySelectorAll(".clock-time-button");
+      const buttons = container.querySelectorAll(".clock__time-button");
       expect(buttons[1]).toHaveTextContent("05");
     });
 
     it("displays default time when no value provided", () => {
       const { container } = renderClock();
-      const buttons = container.querySelectorAll(".clock-time-button");
+      const buttons = container.querySelectorAll(".clock__time-button");
       expect(buttons[0]).toHaveTextContent("12");
       expect(buttons[1]).toHaveTextContent("00");
     });
@@ -82,13 +82,13 @@ describe("Clock", () => {
     it("activates AM button for morning hours", () => {
       renderClock({ value: { hours: 9, minutes: 0 }, format: "12h" });
       const amButton = screen.getByText("AM");
-      expect(amButton).toHaveClass("active");
+      expect(amButton).toHaveClass("clock__period-button--active");
     });
 
     it("activates PM button for afternoon hours", () => {
       renderClock({ value: { hours: 15, minutes: 0 }, format: "12h" });
       const pmButton = screen.getByText("PM");
-      expect(pmButton).toHaveClass("active");
+      expect(pmButton).toHaveClass("clock__period-button--active");
     });
   });
 
@@ -104,7 +104,7 @@ describe("Clock", () => {
     it("starts in hours mode", () => {
       const { container } = renderClock();
       const hoursButton = container.querySelector(
-        ".clock-time-button.active",
+        ".clock__time-button--active",
       );
       expect(hoursButton).toBeInTheDocument();
     });
@@ -114,7 +114,7 @@ describe("Clock", () => {
       const buttons = screen.getAllByRole("button");
       const minutesButton = buttons[1];
       fireEvent.click(minutesButton);
-      expect(minutesButton).toHaveClass("active");
+      expect(minutesButton).toHaveClass("clock__time-button--active");
     });
 
     it("switches to hours mode when hours button is clicked", () => {
@@ -122,7 +122,7 @@ describe("Clock", () => {
       const buttons = screen.getAllByRole("button");
       const hoursButton = buttons[0];
       fireEvent.click(hoursButton);
-      expect(hoursButton).toHaveClass("active");
+      expect(hoursButton).toHaveClass("clock__time-button--active");
     });
   });
 
@@ -130,13 +130,13 @@ describe("Clock", () => {
     it("applies disabled class when disabled", () => {
       const { container } = renderClock({ disabled: true });
       expect(
-        container.querySelector(".clock-wrapper.disabled"),
+        container.querySelector(".clock__wrapper--disabled"),
       ).toBeInTheDocument();
     });
 
     it("disables time buttons when disabled", () => {
       const { container } = renderClock({ disabled: true });
-      const timeButtons = container.querySelectorAll(".clock-time-button");
+      const timeButtons = container.querySelectorAll(".clock__time-button");
       timeButtons.forEach((button) => {
         expect(button).toBeDisabled();
       });
@@ -147,7 +147,7 @@ describe("Clock", () => {
     it("applies readonly class when readonly", () => {
       const { container } = renderClock({ readonly: true });
       expect(
-        container.querySelector(".clock-wrapper.readonly"),
+        container.querySelector(".clock__wrapper--readonly"),
       ).toBeInTheDocument();
     });
   });
@@ -156,7 +156,7 @@ describe("Clock", () => {
     it("calls onChange when time is selected", () => {
       const onChange = vi.fn();
       const { container } = renderClock({ onChange });
-      const clockFace = container.querySelector(".clock-face");
+      const clockFace = container.querySelector(".clock__face");
       fireEvent.click(clockFace!);
       expect(onChange).toHaveBeenCalled();
     });
@@ -164,7 +164,7 @@ describe("Clock", () => {
     it("does not call onChange when disabled", () => {
       const onChange = vi.fn();
       const { container } = renderClock({ disabled: true, onChange });
-      const clockFace = container.querySelector(".clock-face");
+      const clockFace = container.querySelector(".clock__face");
       fireEvent.click(clockFace!);
       expect(onChange).not.toHaveBeenCalled();
     });
@@ -172,7 +172,7 @@ describe("Clock", () => {
     it("does not call onChange when readonly", () => {
       const onChange = vi.fn();
       const { container } = renderClock({ readonly: true, onChange });
-      const clockFace = container.querySelector(".clock-face");
+      const clockFace = container.querySelector(".clock__face");
       fireEvent.click(clockFace!);
       expect(onChange).not.toHaveBeenCalled();
     });

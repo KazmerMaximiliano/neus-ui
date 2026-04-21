@@ -5,7 +5,7 @@ import { ActionsProps } from "./Actions.types";
 
 export const Actions = ({ onInfo, onEdit, onDelete }: ActionsProps) => {
   return (
-    <div className="actions-container">
+    <div className="actions">
       {onInfo && (
         <IconButton
           icon={Info}

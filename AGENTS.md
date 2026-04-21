@@ -94,7 +94,7 @@ ComponentName/
 
 ## COMPONENT INVENTORY
 
-### Implemented Components (21 total)
+### Implemented Components (22 total)
 
 | NAME             | FILE_PATH                          | STATUS | FEATURES                                    |
 | ---------------- | ---------------------------------- | ------ | ------------------------------------------- |
@@ -399,7 +399,9 @@ When agents need to implement new components, use this checklist:
 - [ ] Verify `pnpm build` succeeds
 - [ ] Verify `pnpm test:coverage` shows 70%+ coverage
 - [ ] Verify component works in Storybook
-- [ ] Update AGENTS.md if adding new patterns
+- [ ] Create guides/components/ComponentName.md with props and usage example
+- [ ] Update guides/COMPONENTS.md index table with the new component
+- [ ] Update AGENTS.md COMPONENT INVENTORY if adding new component
 - [ ] Update README.md if component is user-facing
 
 ## ERROR HANDLING FOR AGENTS
@@ -523,10 +525,12 @@ Each component MUST export a single Story that exposes all props as editable con
 
 For agents needing additional information:
 
-| QUESTION           | SOURCE               | LOCATION                      |
-| ------------------ | -------------------- | ----------------------------- |
-| Component usage?   | README.md            | /README.md                    |
-| Component props?   | COMPONENTS.md        | /COMPONENTS.md                |
-| Type definitions?  | Component.types.ts   | src/components/ComponentName/ |
-| Test examples?     | Component.test.tsx   | src/components/ComponentName/ |
-| Styling reference? | Component.styles.css | src/components/ComponentName/ |
+| QUESTION                    | SOURCE                          | LOCATION                           |
+| --------------------------- | ------------------------------- | ---------------------------------- |
+| Component usage?            | README.md                       | /README.md                         |
+| Component index?            | guides/COMPONENTS.md            | /guides/COMPONENTS.md              |
+| Component props + examples? | guides/components/ComponentName.md | /guides/components/             |
+| Design system / theming?    | guides/DESING_SYSTEM.md         | /guides/DESING_SYSTEM.md           |
+| Type definitions?           | Component.types.ts              | src/components/ComponentName/      |
+| Test examples?              | Component.test.tsx              | src/components/ComponentName/      |
+| Styling reference?          | Component.styles.css            | src/components/ComponentName/      |

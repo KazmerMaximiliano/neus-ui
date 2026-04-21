@@ -153,16 +153,16 @@ export const InteractiveMap = ({
 
   if (!isLoaded) {
     return (
-      <div className="map-loading">
+      <div className="interactive-map__loading">
         <BeatLoader color={colors.primary.main} speedMultiplier={0.5} />
       </div>
     );
   }
 
   return (
-    <div className="interactive-map-container">
+    <div className="interactive-map">
       {!readonly && (
-        <div className="search-box-wrapper">
+        <div className="interactive-map__search-box">
           <StandaloneSearchBox
             onLoad={onSearchBoxLoad}
             onPlacesChanged={onPlacesChanged}
@@ -178,7 +178,7 @@ export const InteractiveMap = ({
       )}
 
       <GoogleMap
-        mapContainerClassName="map-container"
+        mapContainerClassName="interactive-map__map"
         center={defaultCenter}
         zoom={initialCoordinates ? 15 : 12}
         onLoad={onLoad}
@@ -206,7 +206,7 @@ export const InteractiveMap = ({
       </GoogleMap>
 
       {!readonly && (
-        <div className="map-info">
+        <div className="interactive-map__info">
           {instructionsText ? (
             <p>{instructionsText}</p>
           ) : (

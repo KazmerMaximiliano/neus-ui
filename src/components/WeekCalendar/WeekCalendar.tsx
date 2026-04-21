@@ -48,10 +48,10 @@ export const WeekCalendar = ({
   };
 
   return (
-    <div className="week-calendar-container">
-      <div className="week-calendar-header">
-        <div className="week-calendar-title">{title}</div>
-        <div className="week-selector">
+    <div className="week-calendar">
+      <div className="week-calendar__header">
+        <div className="week-calendar__title">{title}</div>
+        <div className="week-calendar__selector">
           <IconButton
             size="small"
             variant="text"
@@ -69,20 +69,20 @@ export const WeekCalendar = ({
           />
         </div>
       </div>
-      <div className="week-calendar">
+      <div className="week-calendar__grid">
         <div className="week-calendar-row">
-          <div className="week-calendar-category-cell"></div>
+          <div className="week-calendar-row__category-cell"></div>
           {days.map((day) => {
             const isToday = day.getTime() === today.getTime();
             return (
               <div
                 key={day.toISOString()}
-                className={`week-calendar-day-cell${isToday ? " week-calendar-day-today" : ""}`}
+                className={`week-calendar-row__day-cell${isToday ? " week-calendar__day-cell--today" : ""}`}
               >
-                <span className="week-calendar-day-name">
+                <span className="week-calendar__day-name">
                   {DAY_NAMES[day.getDay()]}
                 </span>
-                <span className="week-calendar-day-number">
+                <span className="week-calendar__day-number">
                   {day.getDate()}
                 </span>
               </div>

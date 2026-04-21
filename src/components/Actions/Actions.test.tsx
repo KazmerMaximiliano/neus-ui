@@ -42,7 +42,7 @@ describe("Actions", () => {
 
     it("renders container with correct class", () => {
       const { container } = renderActions({ onInfo: vi.fn() });
-      expect(container.querySelector(".actions-container")).toBeInTheDocument();
+      expect(container.querySelector(".actions")).toBeInTheDocument();
     });
 
     it("renders three buttons when all handlers are provided", () => {

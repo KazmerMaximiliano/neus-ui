@@ -35,12 +35,12 @@ describe("Sidebar", () => {
 
     it("renders sidebar header", () => {
       const { container } = renderSidebar();
-      expect(container.querySelector(".sidebar-header")).toBeInTheDocument();
+      expect(container.querySelector(".sidebar__header")).toBeInTheDocument();
     });
 
     it("renders sidebar body", () => {
       const { container } = renderSidebar();
-      expect(container.querySelector(".sidebar-body")).toBeInTheDocument();
+      expect(container.querySelector(".sidebar__body")).toBeInTheDocument();
     });
 
     it("renders all visible items", () => {
@@ -52,7 +52,7 @@ describe("Sidebar", () => {
 
     it("renders icons for items", () => {
       const { container } = renderSidebar();
-      const icons = container.querySelectorAll(".sidebar-button-icon");
+      const icons = container.querySelectorAll(".sidebar__button-icon");
       expect(icons).toHaveLength(3);
     });
   });
@@ -60,7 +60,7 @@ describe("Sidebar", () => {
   describe("title", () => {
     it("renders first character of title by default", () => {
       const { container } = renderSidebar({ title: "My App" });
-      const titleElement = container.querySelector(".sidebar-title");
+      const titleElement = container.querySelector(".sidebar__title");
       expect(titleElement).toHaveTextContent("M");
     });
 
@@ -68,7 +68,7 @@ describe("Sidebar", () => {
       const { container } = renderSidebar({ title: "My App" });
       const sidebar = container.querySelector(".sidebar");
       fireEvent.mouseEnter(sidebar!);
-      const titleElement = container.querySelector(".sidebar-title");
+      const titleElement = container.querySelector(".sidebar__title");
       expect(titleElement).toHaveTextContent("My App");
     });
 
@@ -77,7 +77,7 @@ describe("Sidebar", () => {
       const sidebar = container.querySelector(".sidebar");
       fireEvent.mouseEnter(sidebar!);
       fireEvent.mouseLeave(sidebar!);
-      const titleElement = container.querySelector(".sidebar-title");
+      const titleElement = container.querySelector(".sidebar__title");
       expect(titleElement).toHaveTextContent("M");
     });
   });
@@ -87,7 +87,7 @@ describe("Sidebar", () => {
       const onClick = vi.fn();
       const items = [{ label: "Click me", onClick }];
       const { container } = render(<Sidebar items={items} />);
-      const button = container.querySelector(".sidebar-button");
+      const button = container.querySelector(".sidebar__button");
       fireEvent.click(button!);
       expect(onClick).toHaveBeenCalledTimes(1);
     });
@@ -98,9 +98,9 @@ describe("Sidebar", () => {
         { label: "Inactive", active: false, onClick: vi.fn() },
       ];
       const { container } = render(<Sidebar items={items} />);
-      const buttons = container.querySelectorAll(".sidebar-button");
-      expect(buttons[0]).toHaveClass("active");
-      expect(buttons[1]).not.toHaveClass("active");
+      const buttons = container.querySelectorAll(".sidebar__button");
+      expect(buttons[0]).toHaveClass("sidebar__button--active");
+      expect(buttons[1]).not.toHaveClass("sidebar__button--active");
     });
 
     it("does not render items with visible=false", () => {

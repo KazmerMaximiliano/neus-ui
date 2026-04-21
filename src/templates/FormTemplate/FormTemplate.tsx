@@ -8,10 +8,10 @@ export const FormTemplate = ({
   loading,
 }: FormTemplateProps) => {
   return (
-    <div className="form">
+    <div className="form-template">
       {children}
 
-      <div className="submit-container">
+      <div className="form-template__submit">
         <Button type="submit" label={submitLabel} loading={loading} />
       </div>
     </div>

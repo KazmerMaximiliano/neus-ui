@@ -16,14 +16,14 @@ describe("Calendar", () => {
     it("renders calendar container", () => {
       const { container } = renderCalendar();
       expect(
-        container.querySelector(".calendar-container"),
+        container.querySelector(".calendar"),
       ).toBeInTheDocument();
     });
 
     it("renders day picker container", () => {
       const { container } = renderCalendar();
       expect(
-        container.querySelector(".day-picker-container"),
+        container.querySelector(".calendar__day-picker"),
       ).toBeInTheDocument();
     });
   });
@@ -36,7 +36,7 @@ describe("Calendar", () => {
 
     it("does not render label when not provided", () => {
       const { container } = renderCalendar();
-      expect(container.querySelector(".calendar-label")).not.toBeInTheDocument();
+      expect(container.querySelector(".calendar__label")).not.toBeInTheDocument();
     });
 
     it("renders required indicator when required is true", () => {
@@ -47,7 +47,7 @@ describe("Calendar", () => {
     it("applies error class to label when error is present", () => {
       renderCalendar({ label: "Select Date", error: "Error" });
       const label = screen.getByText("Select Date");
-      expect(label).toHaveClass("error");
+      expect(label).toHaveClass("calendar__label--error");
     });
   });
 
@@ -59,7 +59,7 @@ describe("Calendar", () => {
 
     it("does not render error when not provided", () => {
       const { container } = renderCalendar();
-      expect(container.querySelector(".calendar-error")).not.toBeInTheDocument();
+      expect(container.querySelector(".calendar__error-message")).not.toBeInTheDocument();
     });
   });
 
@@ -67,7 +67,7 @@ describe("Calendar", () => {
     it("applies disabled class when disabled", () => {
       const { container } = renderCalendar({ disabled: true });
       expect(
-        container.querySelector(".calendar-container.disabled"),
+        container.querySelector(".calendar--disabled"),
       ).toBeInTheDocument();
     });
   });
@@ -76,7 +76,7 @@ describe("Calendar", () => {
     it("applies readonly class when readonly", () => {
       const { container } = renderCalendar({ readonly: true });
       expect(
-        container.querySelector(".calendar-container.readonly"),
+        container.querySelector(".calendar--readonly"),
       ).toBeInTheDocument();
     });
   });
@@ -107,14 +107,14 @@ describe("Calendar", () => {
     it("renders in single mode by default", () => {
       const { container } = renderCalendar();
       expect(
-        container.querySelector(".day-picker-container"),
+        container.querySelector(".calendar__day-picker"),
       ).toBeInTheDocument();
     });
 
     it("renders two months when multiple is true", () => {
       const { container } = renderCalendar({ multiple: true });
       expect(
-        container.querySelector(".day-picker-container"),
+        container.querySelector(".calendar__day-picker"),
       ).toBeInTheDocument();
     });
   });
@@ -124,7 +124,7 @@ describe("Calendar", () => {
       const date = new Date(2024, 0, 15);
       const { container } = renderCalendar({ defaultValue: date });
       expect(
-        container.querySelector(".calendar-container"),
+        container.querySelector(".calendar"),
       ).toBeInTheDocument();
     });
 
@@ -132,7 +132,7 @@ describe("Calendar", () => {
       const date = new Date(2024, 0, 15);
       const { container } = renderCalendar({ value: date, onChange: vi.fn() });
       expect(
-        container.querySelector(".calendar-container"),
+        container.querySelector(".calendar"),
       ).toBeInTheDocument();
     });
   });

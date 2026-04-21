@@ -27,13 +27,13 @@ describe("Button", () => {
       const button = screen.getByRole("button");
       expect(button).toHaveAttribute("type", "button");
       expect(button).not.toBeDisabled();
-      expect(button).toHaveClass("button", "button--solid-primary");
+      expect(button).toHaveClass("button", "button--solid", "button--primary");
     });
 
     it("renders with custom variant and color", () => {
       renderButton({ variant: "outlined", color: "success" });
       const button = screen.getByRole("button");
-      expect(button).toHaveClass("button--outlined-success");
+      expect(button).toHaveClass("button--outlined", "button--success");
     });
 
     it("renders with fullWidth class when fullWidth is true", () => {
@@ -107,7 +107,7 @@ describe("Button", () => {
       (variant) => {
         renderButton({ variant });
         const button = screen.getByRole("button");
-        expect(button).toHaveClass(`button--${variant}-primary`);
+        expect(button).toHaveClass(`button--${variant}`, "button--primary");
       },
     );
   });
@@ -118,7 +118,7 @@ describe("Button", () => {
       (color) => {
         renderButton({ color });
         const button = screen.getByRole("button");
-        expect(button).toHaveClass(`button--solid-${color}`);
+        expect(button).toHaveClass("button--solid", `button--${color}`);
       },
     );
   });

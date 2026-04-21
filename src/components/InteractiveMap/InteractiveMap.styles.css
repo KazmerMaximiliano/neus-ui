@@ -1,4 +1,4 @@
-.interactive-map-container {
+.interactive-map {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--color-border-light);
@@ -8,17 +8,17 @@
   overflow: hidden;
 }
 
-.interactive-map-container .search-box-wrapper {
+.interactive-map .interactive-map__search-box {
   padding: 1rem;
   border-bottom: 1px solid var(--color-border-light);
 }
 
-.interactive-map-container .map-container {
+.interactive-map .interactive-map__map {
   width: 100%;
   height: 400px;
 }
 
-.interactive-map-container .map-info {
+.interactive-map .interactive-map__info {
   padding: 1rem;
   border-top: 1px solid var(--color-border-light);
   font-size: 0.875rem;
@@ -26,7 +26,7 @@
   text-align: center;
 }
 
-.map-loading {
+.interactive-map__loading {
   display: flex;
   align-items: center;
   justify-content: center;

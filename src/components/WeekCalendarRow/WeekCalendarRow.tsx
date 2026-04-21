@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { CATEGORY_COLORS_HEX } from "./WeekCalendarRow.constants";
 import "./WeekCalendarRow.styles.css";
-import { WeekCalendarRowProps } from "./WeekCalendarRow.types";
-import { getDayCellInfo } from "./WeekCalendarRow.utils";
+import { CalendarEvent, WeekCalendarRowProps } from "./WeekCalendarRow.types";
+import { getDayCellInfo, resolveColor } from "./WeekCalendarRow.utils";
 
 export const WeekCalendarRow = ({
   entry,
@@ -14,6 +13,7 @@ export const WeekCalendarRow = ({
   const [hoverPos, setHoverPos] = useState<{ x: number; y: number } | null>(
     null
   );
+  const [hoveredEvent, setHoveredEvent] = useState<CalendarEvent | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setHoverPos({ x: e.clientX, y: e.clientY });
@@ -21,13 +21,19 @@ export const WeekCalendarRow = ({
 
   const handleMouseLeave = () => {
     setHoverPos(null);
+    setHoveredEvent(null);
   };
+
+  const resolvedColor = resolveColor(color);
 
   return (
     <div className="week-calendar-row">
-      <div className={`week-calendar-category-cell with-point ${color}`}>
-        <p className="week-calendar-category-name">{entry.category.title}</p>
-        <p className="week-calendar-category-info">{entry.category.label}</p>
+      <div
+        className="week-calendar-row__category-cell week-calendar-row__category-cell--with-point"
+        style={{ "--category-dot-color": resolvedColor } as React.CSSProperties}
+      >
+        <p className="week-calendar-row__category-name">{entry.category.title}</p>
+        <p className="week-calendar-row__category-info">{entry.category.label}</p>
       </div>
       {days.map((day) => {
         const { type, event, durationDays } = getDayCellInfo(day, entry.events);
@@ -39,8 +45,12 @@ export const WeekCalendarRow = ({
         return (
           <div
             key={day.toISOString()}
-            className={`week-calendar-day-cell${hasEvent && onEventClick ? " clickable" : ""}`}
-            onMouseMove={hasEvent && hoverContent ? handleMouseMove : undefined}
+            className={`week-calendar-row__day-cell${hasEvent && onEventClick ? " week-calendar-row__day-cell--clickable" : ""}`}
+            onMouseMove={
+              hasEvent && hoverContent && event
+                ? (e) => { handleMouseMove(e); setHoveredEvent(event); }
+                : undefined
+            }
             onMouseLeave={
               hasEvent && hoverContent ? handleMouseLeave : undefined
             }
@@ -52,27 +62,27 @@ export const WeekCalendarRow = ({
           >
             {hasEvent && (
               <div
-                className={`event-${type}`}
-                style={{ backgroundColor: CATEGORY_COLORS_HEX[color] }}
+                className={`week-calendar-row__event--${type}`}
+                style={{ backgroundColor: resolvedColor }}
               />
             )}
             {showContent && (
               <div
-                className="event-content"
+                className="week-calendar-row__event-content"
                 style={
                   showDetails
                     ? { width: `calc(${durationDays} * 100%)` }
                     : undefined
                 }
               >
-                <span className="event-avatar">{initial}</span>
+                <span className="week-calendar-row__event-avatar">{initial}</span>
                 {showDetails && event && (
-                  <div className="event-info">
-                    <span className="event-title">
+                  <div className="week-calendar-row__event-info">
+                    <span className="week-calendar-row__event-title">
                       {event.title}
                     </span>
                     {event.description && (
-                      <span className="event-description">
+                      <span className="week-calendar-row__event-description">
                         {event.description}
                       </span>
                     )}
@@ -83,12 +93,12 @@ export const WeekCalendarRow = ({
           </div>
         );
       })}
-      {hoverContent && hoverPos && (
+      {hoverContent && hoverPos && hoveredEvent && (
         <div
-          className="week-calendar-hover-tooltip"
+          className="week-calendar-row__hover-tooltip"
           style={{ left: hoverPos.x, top: hoverPos.y }}
         >
-          {hoverContent}
+          {hoverContent(hoveredEvent)}
         </div>
       )}
     </div>

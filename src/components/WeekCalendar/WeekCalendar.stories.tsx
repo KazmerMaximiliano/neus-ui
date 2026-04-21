@@ -28,7 +28,7 @@ const meta: Meta<typeof WeekCalendarComponent> = {
     hoverContent: {
       control: false,
       description:
-        "Custom React node displayed as a tooltip at the cursor position when hovering over event cells",
+        "Render function called with the hovered CalendarEvent, returns a React node displayed as tooltip at the cursor position",
     },
     onEventClick: {
       action: "eventClicked",
@@ -48,7 +48,7 @@ type Story = StoryObj<typeof meta>;
 export const WeekCalendar: Story = {
   args: {
     title: "Events",
-    hoverContent: (
+    hoverContent: (event) => (
       <div
         style={{
           padding: "8px 12px",
@@ -59,12 +59,13 @@ export const WeekCalendar: Story = {
           fontSize: "13px",
         }}
       >
-        Click to see details
+        <strong>{event.title}</strong>
+        {event.description && <p style={{ margin: "4px 0 0" }}>{event.description}</p>}
       </div>
     ),
     events: [
       {
-        category: { title: "Room A", label: "Suite", color: "blue" },
+        category: { title: "Room A", label: "Suite", color: "#FF5733" },
         events: [
           {
             id: 1,

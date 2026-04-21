@@ -11,27 +11,27 @@ export const Card = ({
   color,
 }: CardProps) => {
   return (
-    <div className={`card ${fill ? "fill" : ""} ${color ? color : ""}`}>
+    <div className={`card${fill ? " card--fill" : ""}${color ? ` card--${color}` : ""}`}>
       {(avatarImage || avatarAlt) && (
-        <div className="avatar-wrapper">
+        <div className="card__avatar-wrapper">
           {avatarImage ? (
             <img src={avatarImage} alt={avatarAlt} className="avatar" />
           ) : (
-            <div className="avatar-placeholder">
+            <div className="card__avatar-placeholder">
               {avatarAlt ? avatarAlt.charAt(0).toUpperCase() : "A"}
             </div>
           )}
         </div>
       )}
 
-      <div className="content-wrapper">
+      <div className="card__content">
         {(leading || trailing) && (
-          <div className="card-header">
-            <div className="header-leading">{leading}</div>
-            <div className="header-trailing">{trailing}</div>
+          <div className="card__header">
+            <div className="card__header-leading">{leading}</div>
+            <div className="card__header-trailing">{trailing}</div>
           </div>
         )}
-        <div className="card-body">{children}</div>
+        <div className="card__body">{children}</div>
       </div>
     </div>
   );

@@ -15,14 +15,14 @@ describe("TimeInput", () => {
     it("renders time input wrapper", () => {
       const { container } = renderTimeInput();
       expect(
-        container.querySelector(".time-input-wrapper"),
+        container.querySelector(".time-input__wrapper"),
       ).toBeInTheDocument();
     });
 
     it("renders time input field button", () => {
       const { container } = renderTimeInput();
       expect(
-        container.querySelector(".time-input-field"),
+        container.querySelector(".time-input__field"),
       ).toBeInTheDocument();
     });
 
@@ -41,7 +41,7 @@ describe("TimeInput", () => {
     it("does not render label when not provided", () => {
       const { container } = renderTimeInput();
       expect(
-        container.querySelector(".time-input-label"),
+        container.querySelector(".time-input__label"),
       ).not.toBeInTheDocument();
     });
 
@@ -53,13 +53,13 @@ describe("TimeInput", () => {
     it("applies error class to label when error is present", () => {
       renderTimeInput({ label: "Start Time", error: "Error" });
       const label = screen.getByText("Start Time");
-      expect(label).toHaveClass("error");
+      expect(label).toHaveClass("time-input__label--error");
     });
 
     it("applies disabled class to label when disabled", () => {
       renderTimeInput({ label: "Start Time", disabled: true });
       const label = screen.getByText("Start Time");
-      expect(label).toHaveClass("disabled");
+      expect(label).toHaveClass("time-input__label--disabled");
     });
   });
 
@@ -72,7 +72,7 @@ describe("TimeInput", () => {
     it("applies error class to field when error is present", () => {
       const { container } = renderTimeInput({ error: "Error" });
       expect(
-        container.querySelector(".time-input-field.error"),
+        container.querySelector(".time-input__field--error"),
       ).toBeInTheDocument();
     });
   });
@@ -80,23 +80,23 @@ describe("TimeInput", () => {
   describe("disabled state", () => {
     it("disables the button when disabled", () => {
       const { container } = renderTimeInput({ disabled: true });
-      const button = container.querySelector(".time-input-field");
+      const button = container.querySelector(".time-input__field");
       expect(button).toBeDisabled();
     });
 
     it("applies disabled class to field when disabled", () => {
       const { container } = renderTimeInput({ disabled: true });
       expect(
-        container.querySelector(".time-input-field.disabled"),
+        container.querySelector(".time-input__field--disabled"),
       ).toBeInTheDocument();
     });
 
     it("does not open dropdown when disabled", () => {
       const { container } = renderTimeInput({ disabled: true });
-      const button = container.querySelector(".time-input-field");
+      const button = container.querySelector(".time-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".time-input-dropdown"),
+        container.querySelector(".time-input__dropdown"),
       ).not.toBeInTheDocument();
     });
   });
@@ -104,10 +104,10 @@ describe("TimeInput", () => {
   describe("readonly state", () => {
     it("does not open dropdown when readonly", () => {
       const { container } = renderTimeInput({ readonly: true });
-      const button = container.querySelector(".time-input-field");
+      const button = container.querySelector(".time-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".time-input-dropdown"),
+        container.querySelector(".time-input__dropdown"),
       ).not.toBeInTheDocument();
     });
   });
@@ -115,44 +115,44 @@ describe("TimeInput", () => {
   describe("dropdown", () => {
     it("opens dropdown on click", () => {
       const { container } = renderTimeInput();
-      const button = container.querySelector(".time-input-field");
+      const button = container.querySelector(".time-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".time-input-dropdown"),
+        container.querySelector(".time-input__dropdown"),
       ).toBeInTheDocument();
     });
 
     it("closes dropdown on outside click", () => {
       const { container } = renderTimeInput();
-      const button = container.querySelector(".time-input-field");
+      const button = container.querySelector(".time-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".time-input-dropdown"),
+        container.querySelector(".time-input__dropdown"),
       ).toBeInTheDocument();
       fireEvent.mouseDown(document.body);
       expect(
-        container.querySelector(".time-input-dropdown"),
+        container.querySelector(".time-input__dropdown"),
       ).not.toBeInTheDocument();
     });
 
     it("toggles dropdown on click", () => {
       const { container } = renderTimeInput();
-      const button = container.querySelector(".time-input-field");
+      const button = container.querySelector(".time-input__field");
       fireEvent.click(button!);
       expect(
-        container.querySelector(".time-input-dropdown"),
+        container.querySelector(".time-input__dropdown"),
       ).toBeInTheDocument();
       fireEvent.click(button!);
       expect(
-        container.querySelector(".time-input-dropdown"),
+        container.querySelector(".time-input__dropdown"),
       ).not.toBeInTheDocument();
     });
 
     it("renders Clock component in dropdown", () => {
       const { container } = renderTimeInput();
-      const button = container.querySelector(".time-input-field");
+      const button = container.querySelector(".time-input__field");
       fireEvent.click(button!);
-      expect(container.querySelector(".clock-wrapper")).toBeInTheDocument();
+      expect(container.querySelector(".clock__wrapper")).toBeInTheDocument();
     });
   });
 

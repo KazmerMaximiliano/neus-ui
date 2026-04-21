@@ -1,4 +1,4 @@
-.week-calendar-container {
+.week-calendar {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -10,31 +10,31 @@
   background-color: var(--color-white);
 }
 
-.week-calendar-header {
+.week-calendar__header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.week-calendar-title {
+.week-calendar__title {
   font-size: 18px;
   font-weight: 700;
   color: var(--color-gray-900);
 }
 
-.week-selector {
+.week-calendar__selector {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
 }
 
-.week-calendar {
+.week-calendar__grid {
   border-radius: 8px;
 }
 
-.week-calendar-day-name {
+.week-calendar__day-name {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -42,21 +42,21 @@
   letter-spacing: 0.5px;
 }
 
-.week-calendar-day-number {
+.week-calendar__day-number {
   font-size: 22px;
   font-weight: 700;
   color: var(--color-gray-900);
   line-height: 1;
 }
 
-.week-calendar-day-today {
+.week-calendar__day-cell--today {
   background-color: var(--color-primary-light);
 }
 
-.week-calendar-day-today .week-calendar-day-name {
+.week-calendar__day-cell--today .week-calendar__day-name {
   color: var(--color-primary);
 }
 
-.week-calendar-day-today .week-calendar-day-number {
+.week-calendar__day-cell--today .week-calendar__day-number {
   color: var(--color-primary);
 }

@@ -14,26 +14,26 @@ export const Sidebar = ({ title, items }: SidebarProps) => {
       onMouseEnter={isTablet ? () => setShowFullTitle(true) : undefined}
       onMouseLeave={isTablet ? () => setShowFullTitle(false) : undefined}
     >
-      <div className="sidebar-header">
-        <div className="sidebar-header-fix">
-          <div className="sidebar-title">
+      <div className="sidebar__header">
+        <div className="sidebar__header-inner">
+          <div className="sidebar__title">
             {!isTablet || showFullTitle ? title : title?.charAt(0)}
           </div>
         </div>
       </div>
-      <div className="sidebar-body">
+      <div className="sidebar__body">
         {items.map(
           (item, index) =>
             item.visible !== false && (
               <div
                 key={index}
-                className={`sidebar-button ${item.active ? "active" : ""}`}
+                className={`sidebar__button${item.active ? " sidebar__button--active" : ""}`}
                 onClick={item.onClick}
               >
                 {item.icon && (
-                  <item.icon size={14} className="sidebar-button-icon" />
+                  <item.icon size={14} className="sidebar__button-icon" />
                 )}
-                <div className="sidebar-button-label">{item.label}</div>
+                <div className="sidebar__button-label">{item.label}</div>
               </div>
             ),
         )}

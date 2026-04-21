@@ -1,31 +1,31 @@
-.form {
+.form-template {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-top: 16px;
 }
 
-.form .input-wrapper {
+.form-template .input__wrapper {
   grid-column: span 1;
 }
 
-.form .submit-container {
+.form-template__submit {
   grid-column: span 2;
   display: flex;
   justify-content: flex-end;
 }
 
 @media (max-width: 768px) {
-  .form {
+  .form-template {
     grid-template-columns: 1fr;
   }
 
-  .form .input-wrapper,
-  .form .submit-container {
+  .form-template .input__wrapper,
+  .form-template__submit {
     grid-column: span 1;
   }
 
-  .form .submit-container .button {
+  .form-template__submit .button {
     width: 100%;
   }
 }

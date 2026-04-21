@@ -19,22 +19,22 @@ describe("Modal", () => {
   describe("rendering", () => {
     it("renders nothing when isOpen is false", () => {
       const { container } = renderModal({ isOpen: false });
-      expect(container.querySelector(".modal-backdrop")).not.toBeInTheDocument();
+      expect(container.querySelector(".modal__backdrop")).not.toBeInTheDocument();
     });
 
     it("renders nothing when isOpen is not provided", () => {
       const { container } = renderModal();
-      expect(container.querySelector(".modal-backdrop")).not.toBeInTheDocument();
+      expect(container.querySelector(".modal__backdrop")).not.toBeInTheDocument();
     });
 
     it("renders backdrop when isOpen is true", () => {
       const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal-backdrop")).toBeInTheDocument();
+      expect(container.querySelector(".modal__backdrop")).toBeInTheDocument();
     });
 
     it("renders modal content when isOpen is true", () => {
       const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal-content")).toBeInTheDocument();
+      expect(container.querySelector(".modal__content")).toBeInTheDocument();
     });
   });
 
@@ -46,12 +46,12 @@ describe("Modal", () => {
 
     it("does not render header when title is not provided", () => {
       const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal-header")).not.toBeInTheDocument();
+      expect(container.querySelector(".modal__header")).not.toBeInTheDocument();
     });
 
     it("renders header with title", () => {
       const { container } = renderModal({ isOpen: true, title: "Test Title" });
-      expect(container.querySelector(".modal-header")).toBeInTheDocument();
+      expect(container.querySelector(".modal__header")).toBeInTheDocument();
     });
   });
 
@@ -66,7 +66,7 @@ describe("Modal", () => {
 
     it("does not render body when children are not provided", () => {
       const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal-body")).not.toBeInTheDocument();
+      expect(container.querySelector(".modal__body")).not.toBeInTheDocument();
     });
 
     it("renders body with children", () => {
@@ -74,7 +74,7 @@ describe("Modal", () => {
         isOpen: true,
         children: <span>Content</span>,
       });
-      expect(container.querySelector(".modal-body")).toBeInTheDocument();
+      expect(container.querySelector(".modal__body")).toBeInTheDocument();
     });
   });
 
@@ -109,7 +109,7 @@ describe("Modal", () => {
 
     it("does not render footer when no handlers provided", () => {
       const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal-footer")).not.toBeInTheDocument();
+      expect(container.querySelector(".modal__footer")).not.toBeInTheDocument();
     });
 
     it("renders footer when handlers are provided", () => {
@@ -118,7 +118,7 @@ describe("Modal", () => {
         onConfirm: vi.fn(),
         onCancel: vi.fn(),
       });
-      expect(container.querySelector(".modal-footer")).toBeInTheDocument();
+      expect(container.querySelector(".modal__footer")).toBeInTheDocument();
     });
   });
 
@@ -140,7 +140,7 @@ describe("Modal", () => {
     it("calls onCancel when backdrop is clicked", () => {
       const onCancel = vi.fn();
       const { container } = renderModal({ isOpen: true, onCancel });
-      const backdrop = container.querySelector(".modal-backdrop");
+      const backdrop = container.querySelector(".modal__backdrop");
       fireEvent.click(backdrop!);
       expect(onCancel).toHaveBeenCalledTimes(1);
     });
@@ -148,7 +148,7 @@ describe("Modal", () => {
     it("does not call onCancel when modal content is clicked", () => {
       const onCancel = vi.fn();
       const { container } = renderModal({ isOpen: true, onCancel });
-      const content = container.querySelector(".modal-content");
+      const content = container.querySelector(".modal__content");
       fireEvent.click(content!);
       expect(onCancel).not.toHaveBeenCalled();
     });

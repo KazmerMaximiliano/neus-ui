@@ -24,10 +24,10 @@ const NoRowsOverlay = ({
   noDataDescription?: string;
 }) => {
   return (
-    <div className="no-rows-overlay">
-      <div className="no-rows-content">
-        <h3 className="no-rows-title">{noDataTitle}</h3>
-        <p className="no-rows-description">{noDataDescription}</p>
+    <div className="data-table__no-rows">
+      <div className="data-table__no-rows-content">
+        <h3 className="data-table__no-rows-title">{noDataTitle}</h3>
+        <p className="data-table__no-rows-description">{noDataDescription}</p>
       </div>
     </div>
   );
@@ -119,8 +119,8 @@ const DataTableComponent = <T extends object>({
         filter: false,
         resizable: false,
         pinned: "right",
-        cellClass: "actions-cell",
-        headerClass: "actions-header",
+        cellClass: "data-table__actions-cell",
+        headerClass: "data-table__actions-header",
         cellStyle: {
           borderLeft: "none",
           borderRight: "none",
@@ -166,25 +166,25 @@ const DataTableComponent = <T extends object>({
     }
 
     return (
-      <div className="data-table-cards">
+      <div className="data-table__cards">
         {rowData.map((row, index) => {
           const rowObject = row as Record<string, unknown>;
           return (
-            <div key={index} className="data-table-card">
-              <div className="card-content">
+            <div key={index} className="data-table__card">
+              <div className="data-table__card-content">
                 {Object.entries(rowObject)
                   .filter(([key]) => !memoizedHiddenColumns.includes(key))
                   .map(([key, value]) => (
-                    <div key={key} className="card-row">
-                      <strong className="card-label">
+                    <div key={key} className="data-table__card-row">
+                      <strong className="data-table__card-label">
                         {memoizedColumnLabels?.[key] || key}:
                       </strong>
-                      <span className="card-value">{String(value)}</span>
+                      <span className="data-table__card-value">{String(value)}</span>
                     </div>
                   ))}
               </div>
               {(onEdit || onDelete || onInfo) && (
-                <div className="card-actions">
+                <div className="data-table__card-actions">
                   <Actions
                     onInfo={onInfo ? () => onInfo(row) : undefined}
                     onEdit={onEdit ? () => onEdit(row) : undefined}
@@ -225,7 +225,7 @@ const DataTableComponent = <T extends object>({
   }, [defineColumnsByData]);
 
   return (
-    <div className="data-table-container">
+    <div className="data-table">
       {isMobile && useCardLayout ? (
         renderCardLayout()
       ) : (
@@ -261,7 +261,7 @@ const DataTableComponent = <T extends object>({
         />
       )}
 
-      <div className="pagination-controls">
+      <div className="data-table__pagination">
         <IconButton
           disabled={current_page === 1}
           onClick={handlePreviousPage}
@@ -269,7 +269,7 @@ const DataTableComponent = <T extends object>({
           size="small"
           variant="text"
         />
-        <span className="pagination-info">
+        <span className="data-table__pagination-info">
           {`${current_page} / ${last_page}`}
         </span>
         <IconButton

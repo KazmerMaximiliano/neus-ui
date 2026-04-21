@@ -70,11 +70,11 @@ export const MultiSelect = ({
   );
 
   return (
-    <div className="multiselect-wrapper">
+    <div className="multiselect__wrapper">
       {displayLabel && (
         <label
-          className={`multiselect-label${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`multiselect__label${error ? " multiselect__label--error" : ""}${
+            disabled ? " multiselect__label--disabled" : ""
           }`}
         >
           {displayLabel}
@@ -90,11 +90,11 @@ export const MultiSelect = ({
       ))}
 
       <div
-        className={`multiselect-container${isOpen && !disabled ? " open" : ""}`}
+        className={`multiselect__container${isOpen && !disabled ? " multiselect__container--open" : ""}`}
       >
         <div
-          className={`multiselect${error ? " error" : ""}${
-            disabled ? " disabled" : ""
+          className={`multiselect${error ? " multiselect--error" : ""}${
+            disabled ? " multiselect--disabled" : ""
           }`}
           onClick={() => {
             if (!disabled) {
@@ -105,14 +105,14 @@ export const MultiSelect = ({
           tabIndex={disabled ? -1 : 0}
         >
           {selectedValues.length === 0 ? (
-            <span className="multiselect-placeholder">{placeholder}</span>
+            <span className="multiselect__placeholder">{placeholder}</span>
           ) : (
             selectedLabels.map((label, index) => (
-              <span key={index} className="multiselect-tag">
+              <span key={index} className="multiselect__tag">
                 {label}
                 {!disabled && (
                   <span
-                    className="multiselect-tag-remove"
+                    className="multiselect__tag-remove"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleRemoveTag(selectedValues[index]);
@@ -127,13 +127,13 @@ export const MultiSelect = ({
         </div>
 
         <div
-          className={`multiselect-dropdown${isOpen && !disabled ? " multiselect-dropdown--open" : ""}`}
+          className={`multiselect__dropdown${isOpen && !disabled ? " multiselect__dropdown--open" : ""}`}
         >
           {viewSearchBar && (
-            <div className="multiselect-search">
+            <div className="multiselect__search">
               <input
                 type="text"
-                className="multiselect-search-input"
+                className="multiselect__search-input"
                 placeholder={searchBarPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -144,7 +144,7 @@ export const MultiSelect = ({
           {filteredOptions.map((option) => (
             <div
               key={option.value}
-              className="multiselect-option"
+              className="multiselect__option"
               onClick={() => handleToggleOption(option.value)}
             >
               <Checkbox
@@ -157,7 +157,7 @@ export const MultiSelect = ({
         </div>
       </div>
 
-      <div className="multiselect-error">{error}</div>
+      <div className="multiselect__error-message">{error}</div>
     </div>
   );
 };

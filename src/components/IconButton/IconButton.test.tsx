@@ -102,7 +102,7 @@ describe("IconButton", () => {
       (variant) => {
         renderIconButton({ variant });
         const button = screen.getByRole("button");
-        expect(button).toHaveClass(`icon-button--${variant}-primary`);
+        expect(button).toHaveClass(`icon-button--${variant}`, "icon-button--primary");
       },
     );
   });
@@ -113,7 +113,7 @@ describe("IconButton", () => {
       (color) => {
         renderIconButton({ color });
         const button = screen.getByRole("button");
-        expect(button).toHaveClass(`icon-button--solid-${color}`);
+        expect(button).toHaveClass("icon-button--solid", `icon-button--${color}`);
       },
     );
   });

@@ -49,20 +49,20 @@ export const Calendar = ({
 
   return (
     <div
-      className={`calendar-container${disabled ? " disabled" : ""}${
-        readonly ? " readonly" : ""
+      className={`calendar${disabled ? " calendar--disabled" : ""}${
+        readonly ? " calendar--readonly" : ""
       }`}
     >
       {label && (
-        <div className="label-wrapper">
-          <label className={`calendar-label${error ? " error" : ""}`}>
+        <div className="calendar__label-wrapper">
+          <label className={`calendar__label${error ? " calendar__label--error" : ""}`}>
             {label}
-            {required && <span className="calendar-required">*</span>}
+            {required && <span className="calendar__required">*</span>}
           </label>
         </div>
       )}
 
-      <div className="day-picker-container">
+      <div className="calendar__day-picker">
         <DayPicker
           showOutsideDays={false}
           fixedWeeks={true}
@@ -83,8 +83,8 @@ export const Calendar = ({
       )}
 
       {error && (
-        <div className="info-container">
-          <div className="calendar-error">{error}</div>
+        <div className="calendar__info">
+          <div className="calendar__error-message">{error}</div>
         </div>
       )}
     </div>
