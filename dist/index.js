@@ -20,7 +20,7 @@ const Sl = (e) => {
   if (!s) return e;
   const n = 1 - t / 100, i = Math.round(s.r * n), o = Math.round(s.g * n), r = Math.round(s.b * n);
   return Vh(i, o, r);
-}, KH = (e, t) => {
+}, qH = (e, t) => {
   const s = Sl(e);
   if (!s) return e;
   const n = 1 + t / 100, i = Math.min(255, Math.round(s.r * n)), o = Math.min(255, Math.round(s.g * n)), r = Math.min(255, Math.round(s.b * n));
@@ -72,7 +72,7 @@ const Sl = (e) => {
     light: s,
     dark: n
   };
-}, qH = ({
+}, YH = ({
   children: e,
   initialTheme: t = {}
 }) => {
@@ -3343,7 +3343,7 @@ const Lb = (e) => e ? e instanceof Date ? e.toISOString() : Array.isArray(e) ? e
       ]
     }
   );
-}, YH = ({
+}, ZH = ({
   avatarImage: e,
   avatarAlt: t,
   leading: s,
@@ -42249,14 +42249,14 @@ const vu = ({
       )
     ] })
   ] });
-}, JH = TN, IN = (e, t = "single") => {
+}, XH = TN, IN = (e, t = "single") => {
   if (!e) return "";
   if (t === "range" && "from" in e) {
     const s = e.from ? e.from.toLocaleDateString() : "", n = e.to ? e.to.toLocaleDateString() : "";
     return s && n ? `${s} - ${n}` : s ? `${s} - ` : "";
   }
   return e instanceof Date ? e.toLocaleDateString() : "";
-}, AN = (e) => e ? e instanceof Date ? e.toISOString() : "from" in e ? `${e.from?.toISOString() || ""},${e.to?.toISOString() || ""}` : "" : "", XH = ({
+}, AN = (e) => e ? e instanceof Date ? e.toISOString() : "from" in e ? `${e.from?.toISOString() || ""},${e.to?.toISOString() || ""}` : "" : "", eB = ({
   label: e,
   name: t,
   error: s,
@@ -42351,7 +42351,7 @@ const vu = ({
     ),
     s && /* @__PURE__ */ L("div", { className: "date-input__error-message", children: s })
   ] });
-}, eB = ({ icon: e, name: t, items: s }) => {
+}, tB = ({ icon: e, name: t, items: s }) => {
   const n = B(null), [i, o] = F(!1);
   return P(() => {
     const r = (a) => {
@@ -42411,7 +42411,7 @@ const ON = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
     return r;
   const a = GN(i, t);
   return a.valid ? { valid: !0 } : a;
-}, tB = ({
+}, sB = ({
   allowedTypes: e,
   maxWeight: t = 10 * 1024 * 1024,
   multiple: s = !1,
@@ -47546,7 +47546,7 @@ function AH(e) {
     city: i
   };
 }
-const OH = ["places"], sB = ({
+const OH = ["places"], nB = ({
   googleMapsApiKey: e,
   initialCoordinates: t,
   initialAddress: s,
@@ -47675,7 +47675,7 @@ const OH = ["places"], sB = ({
       "You can drag the marker to adjust the location"
     ] }) })
   ] }) : /* @__PURE__ */ L("div", { className: "interactive-map__loading", children: /* @__PURE__ */ L(Rl, { color: a.primary.main, speedMultiplier: 0.5 }) });
-}, nB = ({ label: e, type: t = "primary", href: s = "#" }) => /* @__PURE__ */ L("a", { className: `link link--${t}`, href: s, children: e }), iB = ({
+}, iB = ({ label: e, type: t = "primary", href: s = "#" }) => /* @__PURE__ */ L("a", { className: `link link--${t}`, href: s, children: e }), oB = ({
   icon: e,
   text: t,
   size: s = "medium",
@@ -47737,7 +47737,7 @@ const OH = ["places"], sB = ({
       document.body
     )
   ] });
-}, oB = ({
+}, rB = ({
   isOpen: e = !1,
   title: t,
   children: s,
@@ -47760,7 +47760,7 @@ const OH = ["places"], sB = ({
       }
     )
   ] })
-] }) }) : null, rB = ({
+] }) }) : null, aB = ({
   name: e,
   placeholder: t,
   label: s,
@@ -47881,7 +47881,7 @@ const OH = ["places"], sB = ({
     ),
     /* @__PURE__ */ L("div", { className: "multiselect__error-message", children: n })
   ] });
-}, aB = ({
+}, lB = ({
   name: e,
   value: t,
   defaultValue: s,
@@ -47991,7 +47991,7 @@ const OH = ["places"], sB = ({
     return `${(e.hours % 12 || 12).toString().padStart(2, "0")}:${s} ${n}`;
   }
   return `${e.hours.toString().padStart(2, "0")}:${s}`;
-}, lB = ({
+}, cB = ({
   label: e,
   name: t,
   error: s,
@@ -48071,7 +48071,7 @@ const OH = ["places"], sB = ({
   yellow: "#d99e2b",
   blue: "#4a7b9d",
   green: "#5ca874"
-}, HH = (e, t) => {
+}, HH = (e) => GH[e] ?? e, BH = (e, t) => {
   const s = e.getTime();
   for (const n of t) {
     const i = new Date(n.start);
@@ -48083,7 +48083,7 @@ const OH = ["places"], sB = ({
     return r && a ? c = "single" : r ? c = "start" : a ? c = "end" : c = "continue", { type: c, event: n, durationDays: l };
   }
   return { type: "empty", event: null, durationDays: 0 };
-}, BH = ({
+}, VH = ({
   entry: e,
   days: t,
   color: s,
@@ -48092,68 +48092,77 @@ const OH = ["places"], sB = ({
 }) => {
   const [o, r] = F(
     null
-  ), a = (c) => {
-    r({ x: c.clientX, y: c.clientY });
-  }, l = () => {
-    r(null);
-  };
+  ), [a, l] = F(null), c = (h) => {
+    r({ x: h.clientX, y: h.clientY });
+  }, d = () => {
+    r(null), l(null);
+  }, u = HH(s);
   return /* @__PURE__ */ J("div", { className: "week-calendar-row", children: [
-    /* @__PURE__ */ J("div", { className: `week-calendar-row__category-cell week-calendar-row__category-cell--with-point week-calendar-row--${s}`, children: [
-      /* @__PURE__ */ L("p", { className: "week-calendar-row__category-name", children: e.category.title }),
-      /* @__PURE__ */ L("p", { className: "week-calendar-row__category-info", children: e.category.label })
-    ] }),
-    t.map((c) => {
-      const { type: d, event: u, durationDays: h } = HH(c, e.events), g = u?.title?.charAt(0).toUpperCase() ?? "?", p = h > 2, f = d === "single" || d === "start", m = d !== "empty";
+    /* @__PURE__ */ J(
+      "div",
+      {
+        className: "week-calendar-row__category-cell week-calendar-row__category-cell--with-point",
+        style: { "--category-dot-color": u },
+        children: [
+          /* @__PURE__ */ L("p", { className: "week-calendar-row__category-name", children: e.category.title }),
+          /* @__PURE__ */ L("p", { className: "week-calendar-row__category-info", children: e.category.label })
+        ]
+      }
+    ),
+    t.map((h) => {
+      const { type: g, event: p, durationDays: f } = BH(h, e.events), m = p?.title?.charAt(0).toUpperCase() ?? "?", v = f > 2, C = g === "single" || g === "start", b = g !== "empty";
       return /* @__PURE__ */ J(
         "div",
         {
-          className: `week-calendar-row__day-cell${m && i ? " week-calendar-row__day-cell--clickable" : ""}`,
-          onMouseMove: m && n ? a : void 0,
-          onMouseLeave: m && n ? l : void 0,
-          onClick: m && i && u ? () => i(u) : void 0,
+          className: `week-calendar-row__day-cell${b && i ? " week-calendar-row__day-cell--clickable" : ""}`,
+          onMouseMove: b && n && p ? (S) => {
+            c(S), l(p);
+          } : void 0,
+          onMouseLeave: b && n ? d : void 0,
+          onClick: b && i && p ? () => i(p) : void 0,
           children: [
-            m && /* @__PURE__ */ L(
+            b && /* @__PURE__ */ L(
               "div",
               {
-                className: `week-calendar-row__event--${d}`,
-                style: { backgroundColor: GH[s] }
+                className: `week-calendar-row__event--${g}`,
+                style: { backgroundColor: u }
               }
             ),
-            f && /* @__PURE__ */ J(
+            C && /* @__PURE__ */ J(
               "div",
               {
                 className: "week-calendar-row__event-content",
-                style: p ? { width: `calc(${h} * 100%)` } : void 0,
+                style: v ? { width: `calc(${f} * 100%)` } : void 0,
                 children: [
-                  /* @__PURE__ */ L("span", { className: "week-calendar-row__event-avatar", children: g }),
-                  p && u && /* @__PURE__ */ J("div", { className: "week-calendar-row__event-info", children: [
-                    /* @__PURE__ */ L("span", { className: "week-calendar-row__event-title", children: u.title }),
-                    u.description && /* @__PURE__ */ L("span", { className: "week-calendar-row__event-description", children: u.description })
+                  /* @__PURE__ */ L("span", { className: "week-calendar-row__event-avatar", children: m }),
+                  v && p && /* @__PURE__ */ J("div", { className: "week-calendar-row__event-info", children: [
+                    /* @__PURE__ */ L("span", { className: "week-calendar-row__event-title", children: p.title }),
+                    p.description && /* @__PURE__ */ L("span", { className: "week-calendar-row__event-description", children: p.description })
                   ] })
                 ]
               }
             )
           ]
         },
-        c.toISOString()
+        h.toISOString()
       );
     }),
-    n && o && /* @__PURE__ */ L(
+    n && o && a && /* @__PURE__ */ L(
       "div",
       {
         className: "week-calendar-row__hover-tooltip",
         style: { left: o.x, top: o.y },
-        children: n
+        children: n(a)
       }
     )
   ] });
-}, VH = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], Oh = ["purple", "pink", "red", "yellow", "blue", "green"], WH = (e) => Array.from({ length: 7 }, (t, s) => {
+}, WH = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], Oh = ["purple", "pink", "red", "yellow", "blue", "green"], _H = (e) => Array.from({ length: 7 }, (t, s) => {
   const n = new Date(e);
   return n.setDate(n.getDate() + s), n;
-}), _H = (e) => {
+}), zH = (e) => {
   const t = new Date(e);
   return t.setDate(t.getDate() - 3), t.setHours(0, 0, 0, 0), t;
-}, Nh = (e) => e.toLocaleDateString("en-US", { day: "numeric", month: "short" }), cB = ({
+}, Nh = (e) => e.toLocaleDateString("en-US", { day: "numeric", month: "short" }), dB = ({
   title: e = "Calendar",
   events: t = [],
   hoverContent: s,
@@ -48161,10 +48170,10 @@ const OH = ["places"], sB = ({
   onDayChange: i
 }) => {
   const [o, r] = F(
-    () => _H(/* @__PURE__ */ new Date())
+    () => zH(/* @__PURE__ */ new Date())
   ), a = new Date(o);
   a.setDate(a.getDate() + 6);
-  const l = WH(o), c = /* @__PURE__ */ new Date();
+  const l = _H(o), c = /* @__PURE__ */ new Date();
   c.setHours(0, 0, 0, 0);
   const d = () => {
     r((h) => {
@@ -48220,7 +48229,7 @@ const OH = ["places"], sB = ({
             {
               className: `week-calendar-row__day-cell${g ? " week-calendar__day-cell--today" : ""}`,
               children: [
-                /* @__PURE__ */ L("span", { className: "week-calendar__day-name", children: VH[h.getDay()] }),
+                /* @__PURE__ */ L("span", { className: "week-calendar__day-name", children: WH[h.getDay()] }),
                 /* @__PURE__ */ L("span", { className: "week-calendar__day-number", children: h.getDate() })
               ]
             },
@@ -48229,7 +48238,7 @@ const OH = ["places"], sB = ({
         })
       ] }),
       t.map((h, g) => /* @__PURE__ */ L(
-        BH,
+        VH,
         {
           entry: h,
           days: l,
@@ -48241,7 +48250,7 @@ const OH = ["places"], sB = ({
       ))
     ] })
   ] });
-}, zH = "NEUS UI", dB = ({ children: e, routes: t, menu: s }) => {
+}, UH = "NEUS UI", uB = ({ children: e, routes: t, menu: s }) => {
   const [n, i] = F(!1), o = () => {
     i(!1);
   };
@@ -48256,12 +48265,12 @@ const OH = ["places"], sB = ({
       {
         className: `app-template__sidebar${n ? " app-template__sidebar--active" : ""}`,
         onClick: o,
-        children: /* @__PURE__ */ L(NH, { title: zH, items: t })
+        children: /* @__PURE__ */ L(NH, { title: UH, items: t })
       }
     ),
     /* @__PURE__ */ L("div", { className: "app-template__content", children: /* @__PURE__ */ L("div", { className: "app-template__content-container", children: e }) })
   ] });
-}, uB = ({
+}, hB = ({
   children: e,
   submitLabel: t,
   loading: s
@@ -48271,32 +48280,32 @@ const OH = ["places"], sB = ({
 ] });
 export {
   Ec as Actions,
-  dB as AppTemplate,
+  uB as AppTemplate,
   Zn as Button,
   zc as Calendar,
-  YH as Card,
+  ZH as Card,
   Ib as Checkbox,
   Hb as Clock,
-  JH as DataTable,
-  XH as DateInput,
-  eB as Dropdown,
-  tB as FileUploader,
-  uB as FormTemplate,
+  XH as DataTable,
+  eB as DateInput,
+  tB as Dropdown,
+  sB as FileUploader,
+  hB as FormTemplate,
   cs as IconButton,
   BN as Input,
-  sB as InteractiveMap,
-  nB as Link,
-  iB as Menu,
-  oB as Modal,
-  rB as MultiSelect,
-  aB as Select,
+  nB as InteractiveMap,
+  iB as Link,
+  oB as Menu,
+  rB as Modal,
+  aB as MultiSelect,
+  lB as Select,
   NH as Sidebar,
-  qH as ThemeProvider,
-  lB as TimeInput,
-  cB as WeekCalendar,
-  BH as WeekCalendarRow,
+  YH as ThemeProvider,
+  cB as TimeInput,
+  dB as WeekCalendar,
+  VH as WeekCalendarRow,
   Xm as getDarkenColor,
-  KH as getLightenColor,
+  qH as getLightenColor,
   Sl as hexToRgb,
   Vh as rgbToHex,
   kr as useColors,

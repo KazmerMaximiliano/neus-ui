@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { CATEGORY_COLORS_HEX } from "./WeekCalendarRow.constants";
 import "./WeekCalendarRow.styles.css";
-import { WeekCalendarRowProps } from "./WeekCalendarRow.types";
-import { getDayCellInfo } from "./WeekCalendarRow.utils";
+import { CalendarEvent, WeekCalendarRowProps } from "./WeekCalendarRow.types";
+import { getDayCellInfo, resolveColor } from "./WeekCalendarRow.utils";
 
 export const WeekCalendarRow = ({
   entry,
@@ -14,6 +13,7 @@ export const WeekCalendarRow = ({
   const [hoverPos, setHoverPos] = useState<{ x: number; y: number } | null>(
     null
   );
+  const [hoveredEvent, setHoveredEvent] = useState<CalendarEvent | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setHoverPos({ x: e.clientX, y: e.clientY });
@@ -21,11 +21,17 @@ export const WeekCalendarRow = ({
 
   const handleMouseLeave = () => {
     setHoverPos(null);
+    setHoveredEvent(null);
   };
+
+  const resolvedColor = resolveColor(color);
 
   return (
     <div className="week-calendar-row">
-      <div className={`week-calendar-row__category-cell week-calendar-row__category-cell--with-point week-calendar-row--${color}`}>
+      <div
+        className="week-calendar-row__category-cell week-calendar-row__category-cell--with-point"
+        style={{ "--category-dot-color": resolvedColor } as React.CSSProperties}
+      >
         <p className="week-calendar-row__category-name">{entry.category.title}</p>
         <p className="week-calendar-row__category-info">{entry.category.label}</p>
       </div>
@@ -40,7 +46,11 @@ export const WeekCalendarRow = ({
           <div
             key={day.toISOString()}
             className={`week-calendar-row__day-cell${hasEvent && onEventClick ? " week-calendar-row__day-cell--clickable" : ""}`}
-            onMouseMove={hasEvent && hoverContent ? handleMouseMove : undefined}
+            onMouseMove={
+              hasEvent && hoverContent && event
+                ? (e) => { handleMouseMove(e); setHoveredEvent(event); }
+                : undefined
+            }
             onMouseLeave={
               hasEvent && hoverContent ? handleMouseLeave : undefined
             }
@@ -53,7 +63,7 @@ export const WeekCalendarRow = ({
             {hasEvent && (
               <div
                 className={`week-calendar-row__event--${type}`}
-                style={{ backgroundColor: CATEGORY_COLORS_HEX[color] }}
+                style={{ backgroundColor: resolvedColor }}
               />
             )}
             {showContent && (
@@ -83,12 +93,12 @@ export const WeekCalendarRow = ({
           </div>
         );
       })}
-      {hoverContent && hoverPos && (
+      {hoverContent && hoverPos && hoveredEvent && (
         <div
           className="week-calendar-row__hover-tooltip"
           style={{ left: hoverPos.x, top: hoverPos.y }}
         >
-          {hoverContent}
+          {hoverContent(hoveredEvent)}
         </div>
       )}
     </div>

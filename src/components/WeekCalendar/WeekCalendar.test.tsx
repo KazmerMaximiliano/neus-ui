@@ -200,10 +200,10 @@ describe("WeekCalendar", () => {
   });
 
   describe("hoverContent", () => {
-    it("passes hoverContent to event rows", () => {
+    it("passes hoverContent to event rows and renders with event data", () => {
       const { container } = renderWeekCalendar({
         events: mockEvents,
-        hoverContent: <span>Hover tooltip</span>,
+        hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(".week-calendar-row__day-cell");
       const eventCell = Array.from(dayCells).find(
@@ -212,7 +212,7 @@ describe("WeekCalendar", () => {
       );
       if (eventCell) {
         fireEvent.mouseMove(eventCell, { clientX: 100, clientY: 200 });
-        expect(screen.getByText("Hover tooltip")).toBeInTheDocument();
+        expect(screen.getByText("John Doe")).toBeInTheDocument();
       }
     });
   });

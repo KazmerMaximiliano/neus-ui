@@ -136,30 +136,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-}
-
-.week-calendar-row__category-cell--with-point.week-calendar-row--purple::before {
-  background-color: #7e6594;
-}
-
-.week-calendar-row__category-cell--with-point.week-calendar-row--pink::before {
-  background-color: #c86b7b;
-}
-
-.week-calendar-row__category-cell--with-point.week-calendar-row--red::before {
-  background-color: #c6412f;
-}
-
-.week-calendar-row__category-cell--with-point.week-calendar-row--yellow::before {
-  background-color: #d99e2b;
-}
-
-.week-calendar-row__category-cell--with-point.week-calendar-row--blue::before {
-  background-color: #4a7b9d;
-}
-
-.week-calendar-row__category-cell--with-point.week-calendar-row--green::before {
-  background-color: #5ca874;
+  background-color: var(--category-dot-color, #ccc);
 }
 
 .week-calendar-row__category-name {

@@ -62,10 +62,16 @@ describe("WeekCalendarRow", () => {
       expect(screen.getByText("Label A")).toBeInTheDocument();
     });
 
-    it("renders category cell with color class", () => {
+    it("renders category cell with resolved color as CSS variable", () => {
       const { container } = renderRow({ color: "blue" });
-      const cell = container.querySelector(".week-calendar-row__category-cell");
-      expect(cell).toHaveClass("week-calendar-row--blue");
+      const cell = container.querySelector(".week-calendar-row__category-cell") as HTMLElement;
+      expect(cell.style.getPropertyValue("--category-dot-color")).toBe("#4a7b9d");
+    });
+
+    it("renders category cell with arbitrary hex color as CSS variable", () => {
+      const { container } = renderRow({ color: "#FF5733" });
+      const cell = container.querySelector(".week-calendar-row__category-cell") as HTMLElement;
+      expect(cell.style.getPropertyValue("--category-dot-color")).toBe("#FF5733");
     });
 
     it("renders day cells for each day", () => {
@@ -141,7 +147,7 @@ describe("WeekCalendarRow", () => {
 
     it("does not render tooltip before hovering", () => {
       const { container } = renderRow({
-        hoverContent: <span>Tooltip</span>,
+        hoverContent: (event) => <span>{event.title}</span>,
       });
       expect(
         container.querySelector(".week-calendar-row__hover-tooltip"),
@@ -150,18 +156,27 @@ describe("WeekCalendarRow", () => {
 
     it("renders tooltip on mouse move over event cell", () => {
       const { container } = renderRow({
-        hoverContent: <span>Tooltip</span>,
+        hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(".week-calendar-row__day-cell");
       fireEvent.mouseMove(dayCells[0], { clientX: 100, clientY: 200 });
       const tooltip = container.querySelector(".week-calendar-row__hover-tooltip");
       expect(tooltip).toBeInTheDocument();
-      expect(screen.getByText("Tooltip")).toBeInTheDocument();
+      expect(screen.getByText("Test Event")).toBeInTheDocument();
+    });
+
+    it("renders tooltip with event data from hoverContent function", () => {
+      const { container } = renderRow({
+        hoverContent: (event) => <span data-testid="desc">{event.description}</span>,
+      });
+      const dayCells = container.querySelectorAll(".week-calendar-row__day-cell");
+      fireEvent.mouseMove(dayCells[0], { clientX: 100, clientY: 200 });
+      expect(screen.getByTestId("desc").textContent).toBe("A description");
     });
 
     it("positions tooltip at cursor coordinates", () => {
       const { container } = renderRow({
-        hoverContent: <span>Tooltip</span>,
+        hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(".week-calendar-row__day-cell");
       fireEvent.mouseMove(dayCells[0], { clientX: 150, clientY: 250 });
@@ -171,7 +186,7 @@ describe("WeekCalendarRow", () => {
 
     it("hides tooltip on mouse leave", () => {
       const { container } = renderRow({
-        hoverContent: <span>Tooltip</span>,
+        hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(".week-calendar-row__day-cell");
       fireEvent.mouseMove(dayCells[0], { clientX: 100, clientY: 200 });
@@ -186,7 +201,7 @@ describe("WeekCalendarRow", () => {
 
     it("does not show tooltip on mouse move over empty cell", () => {
       const { container } = renderRow({
-        hoverContent: <span>Tooltip</span>,
+        hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(".week-calendar-row__day-cell");
       fireEvent.mouseMove(dayCells[2], { clientX: 100, clientY: 200 });
