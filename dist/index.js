@@ -48289,6 +48289,7 @@ export {
   XH as DataTable,
   eB as DateInput,
   tB as Dropdown,
+  Ko as FileType,
   sB as FileUploader,
   hB as FormTemplate,
   cs as IconButton,
