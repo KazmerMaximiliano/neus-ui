@@ -8,6 +8,7 @@ export * from "./DataTable/DataTable";
 export * from "./DateInput/DateInput";
 export * from "./Dropdown/Dropdown";
 export * from "./FileUploader/FileUploader";
+export { FileType } from "./FileUploader/FileUploader.types";
 export * from "./IconButton/IconButton";
 export * from "./Input/Input";
 export * from "./InteractiveMap/InteractiveMap";
