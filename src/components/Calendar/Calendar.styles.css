@@ -28,7 +28,34 @@
   height: 300px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+}
+
+.calendar .calendar__day-picker--calendar {
+  align-items: stretch;
+}
+
+.calendar .calendar__day-picker--calendar .rdp-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar .calendar__day-picker--calendar .rdp-months {
+  flex: 1;
+  display: flex;
+}
+
+.calendar .calendar__day-picker--calendar .rdp-month {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar .calendar__day-picker--calendar .rdp-month_grid {
+  flex: 1;
+  width: 100%;
 }
 
 .calendar .calendar__info {
@@ -54,6 +81,131 @@
   margin-left: 0.25em;
 }
 
+/* OVERLAY: month & year pickers */
+.calendar__day-picker {
+  position: relative;
+}
+
+.calendar__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.calendar__overlay-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.calendar__overlay-year-btn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.calendar__overlay-year-btn:hover {
+  background-color: var(--color-primary-light);
+}
+
+
+/* Month grid: 3×4 */
+.calendar__month-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.calendar__month-item {
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  color: #333;
+  padding: 0.5rem 0.25rem;
+  transition: background-color 0.15s;
+}
+
+.calendar__month-item:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.calendar__month-item--selected {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.calendar__month-item--selected:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Year list: scrollable */
+.calendar__year-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.calendar__year-item {
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: #333;
+  padding: 0.4rem 0.5rem;
+  text-align: center;
+  transition: background-color 0.15s;
+}
+
+.calendar__year-item:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.calendar__year-item--selected {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.calendar__year-item--selected:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Make the native caption label look clickable */
+.calendar .rdp-caption_label {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px 6px;
+  transition: background-color 0.15s;
+}
+
+.calendar .rdp-caption_label:hover {
+  background-color: var(--color-primary-light);
+}
+
 /* REACT DAY PICKER STYLES */
 .calendar .calendar__day-picker .rdp-months {
   display: flex;
@@ -71,6 +223,7 @@
 
 .calendar .rdp-nav {
   width: 100%;
+  height: 36px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -82,25 +235,40 @@
 
 .calendar .rdp-month_caption {
   width: 100%;
+  height: 36px;
+  font-size: 0.9375rem;
   display: flex;
   justify-content: center;
+  margin: 0.5rem 0rem 1rem 0rem;
+}
+
+.calendar .rdp-nav {
+  margin: 0.5rem 0rem 1rem 0rem;
 }
 
 .calendar .rdp-month_caption .rdp-caption_label {
   color: var(--color-primary);
 }
 
+.calendar .rdp-weekday {
+  height: 20px;
+  padding: 0;
+  line-height: 20px;
+}
+
 .calendar .rdp-today {
   color: var(--color-primary);
 }
 
-.calendar .rdp-day_button {
-  padding: 2px 0px 0px 0px;
+.calendar .rdp-day {
+  width: 36px;
+  height: 36px;
 }
 
-.calendar .rdp-day {
-  width: 42px;
-  height: 42px;
+.calendar .rdp-day_button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
 }
 
 .calendar .rdp-selected .rdp-day_button {

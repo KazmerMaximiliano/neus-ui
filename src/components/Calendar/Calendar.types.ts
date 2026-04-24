@@ -1,5 +1,10 @@
 import type { DateRange } from "react-day-picker";
 
+export type YearRange = {
+  from: number;
+  to: number;
+};
+
 export type CalendarProps = DayPickerPropsType & {
   value?: Date | Date[] | DateRange;
   defaultValue?: Date | Date[] | DateRange;
@@ -9,6 +14,7 @@ export type CalendarProps = DayPickerPropsType & {
   readonly?: boolean;
   multiple?: boolean;
   error?: string;
+  yearRange?: YearRange;
   onChange?: (value: Date | Date[] | DateRange | undefined) => void;
 };
 

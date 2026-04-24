@@ -101,6 +101,14 @@ const meta: Meta<typeof CalendarComponent> = {
         type: { summary: "Date | DateRange | Date[]" },
       },
     },
+    yearRange: {
+      control: "object",
+      description: "Range of years available in the year picker",
+      table: {
+        type: { summary: "{ from: number; to: number }" },
+        defaultValue: { summary: "currentYear - 50 to currentYear + 10" },
+      },
+    },
   },
 };
 
@@ -126,6 +134,7 @@ export const Calendar: Story = {
     error: undefined,
     value: undefined,
     defaultValue: undefined,
+    yearRange: { from: 1970, to: 2040 },
   },
 };
 

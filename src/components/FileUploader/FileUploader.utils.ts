@@ -47,22 +47,19 @@ export const validateFileTypes = (
   files: File[],
   allowedTypes: FileType[]
 ): { valid: boolean; error?: FileUploadError } => {
-  const allowedMimeTypes = allowedTypes.map((type) => {
-    if (type === FileType.IMAGE) return 'image/';
-    if (type === FileType.VIDEO) return 'video/';
-    if (type === FileType.AUDIO) return 'audio/';
-    return type.replace('.', '');
-  });
-
   for (const file of files) {
-    const isValidType = allowedMimeTypes.some((allowedType) => {
-      if (allowedType.endsWith('/')) {
-        return file.type.startsWith(allowedType);
-      }
-      return (
-        file.name.toLowerCase().endsWith(allowedType) ||
-        file.type.includes(allowedType)
-      );
+    const isValidType = allowedTypes.some((type) => {
+      if (type === FileType.IMAGE) return file.type.startsWith('image/');
+      if (type === FileType.VIDEO) return file.type.startsWith('video/');
+      if (type === FileType.AUDIO) return file.type.startsWith('audio/');
+
+      return type
+        .split(',')
+        .some(
+          (ext) =>
+            file.name.toLowerCase().endsWith(ext) ||
+            file.type.includes(ext.replace('.', '')),
+        );
     });
 
     if (!isValidType) {

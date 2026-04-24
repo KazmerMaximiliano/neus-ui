@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 
 export const FileUploader: Story = {
   args: {
-    allowedTypes: [FileType.IMAGE, FileType.PDF, FileType.DOC],
+    allowedTypes: [FileType.JPG, FileType.PNG, FileType.SVG, FileType.PDF, FileType.DOC],
     maxWeight: 5 * 1024 * 1024,
     multiple: false,
     disabled: false,
