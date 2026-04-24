@@ -1,5 +1,10 @@
 export enum FileType {
   IMAGE = 'image/*',
+  JPG = '.jpg,.jpeg',
+  PNG = '.png',
+  SVG = '.svg',
+  GIF = '.gif',
+  WEBP = '.webp',
   PDF = '.pdf',
   DOC = '.doc,.docx',
   XLS = '.xls,.xlsx',

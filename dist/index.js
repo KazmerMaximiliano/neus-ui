@@ -42377,7 +42377,7 @@ const vu = ({
     ] })
   ] });
 };
-var Ko = /* @__PURE__ */ ((e) => (e.IMAGE = "image/*", e.PDF = ".pdf", e.DOC = ".doc,.docx", e.XLS = ".xls,.xlsx", e.TXT = ".txt", e.ZIP = ".zip", e.RAR = ".rar", e.VIDEO = "video/*", e.AUDIO = "audio/*", e.CSV = ".csv", e.JSON = ".json", e))(Ko || {});
+var Ko = /* @__PURE__ */ ((e) => (e.IMAGE = "image/*", e.JPG = ".jpg,.jpeg", e.PNG = ".png", e.SVG = ".svg", e.GIF = ".gif", e.WEBP = ".webp", e.PDF = ".pdf", e.DOC = ".doc,.docx", e.XLS = ".xls,.xlsx", e.TXT = ".txt", e.ZIP = ".zip", e.RAR = ".rar", e.VIDEO = "video/*", e.AUDIO = "audio/*", e.CSV = ".csv", e.JSON = ".json", e))(Ko || {});
 const ON = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
   valid: !1,
   error: {
@@ -42391,14 +42391,15 @@ const ON = (e, t) => e.reduce((n, i) => n + i.size, 0) > t ? {
     message: "Only one file is allowed"
   }
 } : { valid: !0 }, GN = (e, t) => {
-  const s = t.map((n) => n === Ko.IMAGE ? "image/" : n === Ko.VIDEO ? "video/" : n === Ko.AUDIO ? "audio/" : n.replace(".", ""));
-  for (const n of e)
-    if (!s.some((o) => o.endsWith("/") ? n.type.startsWith(o) : n.name.toLowerCase().endsWith(o) || n.type.includes(o)))
+  for (const s of e)
+    if (!t.some((i) => i === Ko.IMAGE ? s.type.startsWith("image/") : i === Ko.VIDEO ? s.type.startsWith("video/") : i === Ko.AUDIO ? s.type.startsWith("audio/") : i.split(",").some(
+      (o) => s.name.toLowerCase().endsWith(o) || s.type.includes(o.replace(".", ""))
+    )))
       return {
         valid: !1,
         error: {
           type: "type",
-          message: `File type "${n.type}" is not allowed`
+          message: `File type "${s.type}" is not allowed`
         }
       };
   return { valid: !0 };
