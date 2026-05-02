@@ -5,8 +5,7 @@ pnpm test
 # Build production and docs
 
 pnpm build
-
-# Stage all generated/updated files
+pnpm docs:build
 
 # Stage all generated/updated files
 
