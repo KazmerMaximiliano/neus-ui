@@ -1,1 +1,0 @@
-import{_ as i,c as a,o as t,ak as n}from"./chunks/framework.DqPmtexI.js";const g=JSON.parse('{"title":"Testing","description":"","frontmatter":{},"headers":[],"relativePath":"testing.md","filePath":"testing.md"}'),h={name:"testing.md"};function l(e,s,k,p,r,E){return t(),a("div",null,[...s[0]||(s[0]=[n("",22)])])}const y=i(h,[["render",l]]);export{g as __pageData,y as default};

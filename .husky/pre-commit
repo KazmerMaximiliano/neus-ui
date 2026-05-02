@@ -2,11 +2,6 @@
 
 pnpm test
 
-# Build production and docs
-
-pnpm build
-pnpm docs:build
-
 # Stage all generated/updated files
 
 git add .

@@ -1,1 +1,0 @@
-import{_ as i,c as a,o as t,ak as n}from"./chunks/framework.DqPmtexI.js";const E=JSON.parse('{"title":"Theming","description":"","frontmatter":{},"headers":[],"relativePath":"theming.md","filePath":"theming.md"}'),l={name:"theming.md"};function h(e,s,k,r,p,d){return t(),a("div",null,[...s[0]||(s[0]=[n("",29)])])}const c=i(l,[["render",h]]);export{E as __pageData,c as default};
