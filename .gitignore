@@ -22,12 +22,16 @@ dist-ssr
 *.sln
 *.sw?
 
-*storybook.log
-storybook-static
-
 *.env
 
 .claude
-coverage
 
-docs/.vitepress/cache
+# Build outputs
+dist/
+storybook-docs/
+storybook-static/
+coverage/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+*storybook.log
