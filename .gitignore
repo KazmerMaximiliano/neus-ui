@@ -29,3 +29,5 @@ storybook-static
 
 .claude
 coverage
+
+docs/.vitepress/cache
