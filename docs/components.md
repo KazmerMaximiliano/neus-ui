@@ -1,6 +1,6 @@
 # Components Documentation
 
-Detailed documentation for each component and template is maintained in individual files inside [`./components/`](./components/). Click any link below to open it.
+Detailed documentation for each component and template is maintained in individual files inside the `components/` directory. Click any link below to open it.
 
 ## Components
 
