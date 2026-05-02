@@ -1,9 +1,13 @@
 # Run tests — block commit if they fail
+
 pnpm test
 
 # Build production and docs
+
 pnpm build
-pnpm build-docs
 
 # Stage all generated/updated files
+
+# Stage all generated/updated files
+
 git add .
