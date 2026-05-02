@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/neus-ui/',
   vite: {
     plugins: [react()],
     resolve: {
