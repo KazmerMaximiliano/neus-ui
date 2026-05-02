@@ -24,7 +24,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build-docs": "storybook build -o ./docs",
+    "build-docs": "storybook build -o ./storybook-docs",
     "prepublishOnly": "pnpm run build",
     "test": "vitest --run",
     "test:unit": "vitest --project unit --run",
