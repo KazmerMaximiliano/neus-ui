@@ -17,9 +17,9 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
 };
 
-export function ActionsDemoInner() {
+export function ActionsDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ padding: "1.5rem 0" }}>
         <p style={labelStyle}>All actions</p>
         <div style={rowStyle}>

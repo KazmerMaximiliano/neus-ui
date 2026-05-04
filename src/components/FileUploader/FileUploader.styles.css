@@ -11,9 +11,9 @@
   justify-content: center;
   min-height: 200px;
   padding: 1rem;
-  border: 2px dashed var(--color-border-light);
+  border: 2px dashed var(--color-border-input);
   border-radius: var(--radius-default);
-  background-color: var(--color-background);
+  background-color: var(--color-surface);
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -22,7 +22,7 @@
 
 .file-uploader__area:hover {
   border-color: var(--color-primary);
-  background-color: var(--color-background-hover, rgba(0, 0, 0, 0.02));
+  background-color: var(--color-surface-hover);
 }
 
 .file-uploader__area--drag-active {
@@ -32,13 +32,13 @@
 }
 
 .file-uploader__area--error {
-  border-color: var(--color-error, #dc3545);
-  background-color: var(--color-error-light, rgba(220, 53, 69, 0.1));
+  border-color: var(--color-error);
+  background-color: var(--color-error-light);
 }
 
 .file-uploader__area--has-files {
   border-style: solid;
-  border-color: var(--color-success, #28a745);
+  border-color: var(--color-success);
 }
 
 .file-uploader__input {
@@ -61,20 +61,20 @@
 
 .file-uploader__upload-icon {
   font-size: 3rem;
-  color: #666;
+  color: var(--color-text-muted);
   margin-bottom: 0.5rem;
 }
 
 .file-uploader__upload-text {
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-primary);
   margin: 0;
 }
 
 .file-uploader__upload-hint {
   font-size: 0.875rem;
-  color: #666;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -109,7 +109,7 @@
 .file-uploader__file-count {
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text-primary);
   margin: 0;
   word-break: break-word;
 }
@@ -117,7 +117,7 @@
 .file-uploader__file-size,
 .file-uploader__total-size {
   font-size: 0.875rem;
-  color: #666;
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -136,15 +136,12 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: var(
-    --color-primary-light,
-    rgba(var(--color-primary-rgb), 0.1)
-  );
+  background-color: var(--color-primary-light);
 }
 
 .file-uploader__icon {
   font-size: 1.5rem;
-  color: var(--color-primary, #007bff);
+  color: var(--color-primary);
 }
 
 .file-uploader__details {
@@ -159,9 +156,9 @@
   margin-top: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
-  color: var(--color-error, #dc3545);
-  background-color: var(--color-error-light, rgba(220, 53, 69, 0.1));
-  border: 1px solid var(--color-error, #dc3545);
+  color: var(--color-error);
+  background-color: var(--color-error-light);
+  border: 1px solid var(--color-error);
   border-radius: 0.5rem;
 }
 
@@ -212,20 +209,20 @@
 }
 
 .file-uploader__area--disabled {
-  background-color: var(--color-gray-100, #f5f5f5);
-  border-color: var(--color-gray-300, #ccc);
+  background-color: var(--color-surface-disabled);
+  border-color: var(--color-border-subtle);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .file-uploader__area--disabled:hover {
-  border-color: var(--color-gray-300, #ccc);
-  background-color: var(--color-gray-100, #f5f5f5);
+  border-color: var(--color-border-subtle);
+  background-color: var(--color-surface-disabled);
   transform: none;
 }
 
 .file-uploader__area--disabled .file-uploader__upload-icon,
 .file-uploader__area--disabled .file-uploader__upload-text,
 .file-uploader__area--disabled .file-uploader__upload-hint {
-  color: var(--color-gray-500, #999);
+  color: var(--color-text-disabled);
 }

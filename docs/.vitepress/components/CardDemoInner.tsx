@@ -19,9 +19,9 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "0.75rem",
 };
 
-export function CardDemoInner() {
+export function CardDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ padding: "1.5rem 0" }}>
         <p style={labelStyle}>Color variants (fill)</p>
         <div style={gridStyle}>

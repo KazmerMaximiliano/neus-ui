@@ -31,9 +31,9 @@ function ModalDemo({ color }: { color: ButtonColor }) {
   );
 }
 
-export function ModalDemoInner() {
+export function ModalDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", padding: "1.5rem 0" }}>
         {colors.map((color) => (
           <ModalDemo key={color} color={color} />

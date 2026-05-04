@@ -20,9 +20,9 @@ function ClockDemo({ format }: { format: "12h" | "24h" }) {
   );
 }
 
-export function ClockDemoInner() {
+export function ClockDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "3rem", padding: "1.5rem 0" }}>
         <ClockDemo format="24h" />
         <ClockDemo format="12h" />

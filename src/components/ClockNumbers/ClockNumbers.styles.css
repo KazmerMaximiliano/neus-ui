@@ -9,7 +9,7 @@
   margin-top: -16px;
   font-size: 0.9em;
   font-weight: 500;
-  color: var(--color-gray-700, #333);
+  color: var(--color-text-primary);
   border-radius: 50%;
   transition:
     background-color 0.2s,
@@ -18,7 +18,7 @@
 
 .clock__number--inner {
   font-size: 0.8em;
-  color: var(--color-gray-500, #666);
+  color: var(--color-text-muted);
 }
 
 .clock__number--selected {

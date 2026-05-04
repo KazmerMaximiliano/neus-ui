@@ -1,7 +1,8 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import { getDarkenColor, hexToRgb } from "../utils";
+import { getDarkenColor, getLightenColor, hexToRgb } from "../utils";
 import {
   ThemeContext,
+  type ColorScheme,
   type ThemeColors,
   type ThemeConfig,
   type ThemeContextValue,
@@ -48,26 +49,36 @@ const defaultColors: ThemeColors = {
 export interface ThemeProviderProps {
   children: ReactNode;
   initialTheme?: ThemeConfig;
+  initialColorScheme?: ColorScheme;
 }
 
-const generateColorVariants = (mainColor: string) => {
+const generateColorVariants = (mainColor: string, isDark = false) => {
   const rgb = hexToRgb(mainColor);
   if (!rgb) return { main: mainColor, light: mainColor, dark: mainColor };
 
-  const lightColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.1)`;
-  const darkColor = getDarkenColor(mainColor, 15);
+  if (isDark) {
+    const lightenedMain = getLightenColor(mainColor, 60);
+    const lightenedRgb = hexToRgb(lightenedMain) ?? rgb;
+    return {
+      main: lightenedMain,
+      light: `rgba(${lightenedRgb.r}, ${lightenedRgb.g}, ${lightenedRgb.b}, 0.15)`,
+      dark: getLightenColor(mainColor, 80),
+    };
+  }
 
   return {
     main: mainColor,
-    light: lightColor,
-    dark: darkColor,
+    light: `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.1)`,
+    dark: getDarkenColor(mainColor, 15),
   };
 };
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   initialTheme = {},
+  initialColorScheme = "light",
 }) => {
+  const [colorScheme, setColorSchemeState] = useState<ColorScheme>(initialColorScheme);
   const [colors, setColors] = useState<ThemeColors>(() => {
     const newColors = { ...defaultColors };
 
@@ -88,26 +99,32 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     return newColors;
   });
 
-  const updateCSSVariables = (newColors: ThemeColors) => {
+  const updateCSSVariables = (newColors: ThemeColors, scheme: ColorScheme) => {
     const root = document.documentElement;
+    const isDark = scheme === "dark";
 
-    root.style.setProperty("--color-primary", newColors.primary.main);
-    root.style.setProperty("--color-primary-light", newColors.primary.light);
-    root.style.setProperty("--color-primary-dark", newColors.primary.dark);
+    const primary = generateColorVariants(newColors.primary.main, isDark);
+    const success = generateColorVariants(newColors.success.main, isDark);
+    const error = generateColorVariants(newColors.error.main, isDark);
+    const info = generateColorVariants(newColors.info.main, isDark);
 
-    root.style.setProperty("--color-success", newColors.success.main);
-    root.style.setProperty("--color-success-light", newColors.success.light);
-    root.style.setProperty("--color-success-dark", newColors.success.dark);
+    root.style.setProperty("--color-primary", primary.main);
+    root.style.setProperty("--color-primary-light", primary.light);
+    root.style.setProperty("--color-primary-dark", primary.dark);
 
-    root.style.setProperty("--color-error", newColors.error.main);
-    root.style.setProperty("--color-error-light", newColors.error.light);
-    root.style.setProperty("--color-error-dark", newColors.error.dark);
+    root.style.setProperty("--color-success", success.main);
+    root.style.setProperty("--color-success-light", success.light);
+    root.style.setProperty("--color-success-dark", success.dark);
 
-    root.style.setProperty("--color-info", newColors.info.main);
-    root.style.setProperty("--color-info-light", newColors.info.light);
-    root.style.setProperty("--color-info-dark", newColors.info.dark);
+    root.style.setProperty("--color-error", error.main);
+    root.style.setProperty("--color-error-light", error.light);
+    root.style.setProperty("--color-error-dark", error.dark);
 
-    root.style.setProperty("--color-border-light", newColors.borderLight);
+    root.style.setProperty("--color-info", info.main);
+    root.style.setProperty("--color-info-light", info.light);
+    root.style.setProperty("--color-info-dark", info.dark);
+
+    root.style.setProperty("--color-border-light", primary.light);
   };
 
   const updateTheme = (config: ThemeConfig) => {
@@ -132,13 +149,30 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     });
   };
 
+  const setColorScheme = (scheme: ColorScheme) => {
+    setColorSchemeState(scheme);
+  };
+
   useEffect(() => {
-    updateCSSVariables(colors);
-  }, [colors]);
+    updateCSSVariables(colors, colorScheme);
+  }, [colors, colorScheme]);
+
+  useEffect(() => {
+    setColorSchemeState(initialColorScheme);
+  }, [initialColorScheme]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-color-scheme", colorScheme);
+    document.body.style.backgroundColor =
+      colorScheme === "dark" ? "#1e1e2e" : "";
+    document.body.style.transition = "background-color 0.2s ease";
+  }, [colorScheme]);
 
   const contextValue: ThemeContextValue = {
     colors,
     updateTheme,
+    colorScheme,
+    setColorScheme,
   };
 
   return (

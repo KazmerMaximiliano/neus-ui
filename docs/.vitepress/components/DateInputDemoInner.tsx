@@ -17,9 +17,9 @@ const sectionStyle: React.CSSProperties = {
   maxWidth: "320px",
 };
 
-export function DateInputDemoInner() {
+export function DateInputDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={sectionStyle}>
         <div>
           <p style={labelStyle}>Single date</p>

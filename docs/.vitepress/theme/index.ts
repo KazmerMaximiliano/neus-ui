@@ -1,7 +1,8 @@
 // https://vitepress.dev/guide/custom-theme
-import { h } from 'vue'
+import { h, watchEffect } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import { useData } from 'vitepress'
 import './style.css'
 import NeusLogo from '../components/NeusLogo.vue'
 import ButtonDemo from '../components/ButtonDemo.vue'
@@ -26,11 +27,24 @@ import TimeInputDemo from '../components/TimeInputDemo.vue'
 import WeekCalendarDemo from '../components/WeekCalendarDemo.vue'
 import WeekCalendarRowDemo from '../components/WeekCalendarRowDemo.vue'
 
+function SyncColorScheme() {
+  const { isDark } = useData()
+  watchEffect(() => {
+    if (typeof document === 'undefined') return
+    document.documentElement.setAttribute(
+      'data-color-scheme',
+      isDark.value ? 'dark' : 'light'
+    )
+  })
+  return h('span', { style: 'display:none' })
+}
+
 export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
       'home-hero-image': () => h(NeusLogo),
+      'layout-top': () => h(SyncColorScheme),
     })
   },
   enhanceApp({ app }) {

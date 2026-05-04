@@ -49,9 +49,9 @@ function RangeDemo() {
   );
 }
 
-export function CalendarDemoInner() {
+export function CalendarDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={sectionStyle}>
         <SingleDemo />
         <RangeDemo />

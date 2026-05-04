@@ -23,8 +23,8 @@
 
 .input {
   display: inline-block;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border-light);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-input);
   color: var(--color-primary);
   border-radius: 3em;
   padding: 1em 2em;
@@ -32,6 +32,11 @@
   min-width: 200px;
   box-sizing: border-box;
   transition: border-color 0.2s;
+}
+
+.input::placeholder {
+  color: var(--color-text-placeholder);
+  opacity: 1;
 }
 
 .input:focus {
@@ -99,7 +104,7 @@
 }
 
 .input:hover:not(:focus) {
-  border-color: var(--color-border-dark, #ccc);
+  border-color: var(--color-border-input-hover);
 }
 
 .input__error-message {
@@ -109,18 +114,18 @@
 }
 
 .input__label--disabled {
-  color: var(--color-gray-500, #999);
+  color: var(--color-text-disabled);
 }
 
 .input--disabled {
-  background-color: var(--color-gray-100, #f5f5f5);
-  border-color: var(--color-gray-300, #ccc);
-  color: var(--color-gray-500, #999);
+  background-color: var(--color-surface-disabled);
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-disabled);
   cursor: not-allowed;
 }
 
 .input--disabled:hover,
 .input--disabled:focus,
 .input--disabled:active {
-  border-color: var(--color-gray-300, #ccc);
+  border-color: var(--color-border-subtle);
 }

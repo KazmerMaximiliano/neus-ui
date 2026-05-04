@@ -47,8 +47,8 @@
 .select {
   display: flex;
   align-items: center;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border-light);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-input);
   color: var(--color-primary);
   border-radius: 3em;
   padding-right: 3.5em;
@@ -74,7 +74,7 @@
 }
 
 .select__placeholder {
-  color: var(--color-gray-400);
+  color: var(--color-text-placeholder);
 }
 
 .select__error-message {
@@ -88,8 +88,8 @@
   top: 120%;
   left: 0;
   right: 0;
-  background: var(--color-white);
-  border: 1px solid var(--color-border-light);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-input);
   border-radius: var(--radius-default);
   max-height: 250px;
   overflow-y: auto;
@@ -110,20 +110,21 @@
 
 .select__search {
   padding: 8px;
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-subtle);
   position: sticky;
   top: 0;
-  background: var(--color-white);
+  background: var(--color-surface);
 }
 
 .select__search-input {
   width: 100%;
   padding: 6px 10px;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--color-border-input);
   border-radius: var(--radius-default);
   font-size: 0.9em;
   outline: none;
   color: var(--color-primary);
+  background-color: var(--color-surface);
   box-sizing: border-box;
 }
 
@@ -139,6 +140,7 @@
   font-size: 0.95em;
   font-weight: 500;
   transition: background-color 0.2s ease;
+  color: var(--color-text-primary);
 }
 
 .select__option:hover {
@@ -151,23 +153,23 @@
 }
 
 .select__label--disabled {
-  color: var(--color-gray-500, #999);
+  color: var(--color-text-disabled);
 }
 
 .select__container:has(.select--disabled)::after {
-  border-right-color: var(--color-gray-500, #999);
-  border-bottom-color: var(--color-gray-500, #999);
+  border-right-color: var(--color-text-disabled);
+  border-bottom-color: var(--color-text-disabled);
 }
 
 .select--disabled {
-  background-color: var(--color-gray-100, #f5f5f5);
-  border-color: var(--color-gray-300, #ccc);
-  color: var(--color-gray-500, #999);
+  background-color: var(--color-surface-disabled);
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-disabled);
   cursor: not-allowed;
 }
 
 .select--disabled:hover,
 .select--disabled:focus,
 .select--disabled:active {
-  border-color: var(--color-gray-300, #ccc);
+  border-color: var(--color-border-subtle);
 }

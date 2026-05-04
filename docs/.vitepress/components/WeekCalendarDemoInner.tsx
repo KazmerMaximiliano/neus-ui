@@ -45,9 +45,9 @@ const hoverContent = (event: CalendarEvent) => (
   </div>
 );
 
-export function WeekCalendarDemoInner() {
+export function WeekCalendarDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ padding: "1.5rem 0" }}>
         <WeekCalendar
           title="Room Schedule"

@@ -16,9 +16,9 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "0.75rem",
 };
 
-export function MenuDemoInner() {
+export function MenuDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ padding: "1.5rem 0", display: "flex", gap: "3rem", flexWrap: "wrap", alignItems: "flex-start" }}>
         <div>
           <p style={labelStyle}>Icon trigger (vertical)</p>

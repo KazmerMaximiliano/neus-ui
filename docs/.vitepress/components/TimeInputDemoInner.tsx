@@ -17,9 +17,9 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "0.75rem",
 };
 
-export function TimeInputDemoInner() {
+export function TimeInputDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={sectionStyle}>
         <div>
           <p style={labelStyle}>24h format</p>

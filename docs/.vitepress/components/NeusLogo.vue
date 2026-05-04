@@ -1,7 +1,7 @@
 <template>
   <div class="neus-logo-wrapper">
     <div class="neus-logo-glow" aria-hidden="true" />
-    <img src="/neuslogo.png" alt="Neus UI" class="neus-logo-img" />
+    <img src="/neuslogowhite.png" alt="Neus UI" class="neus-logo-img" />
   </div>
 </template>
 

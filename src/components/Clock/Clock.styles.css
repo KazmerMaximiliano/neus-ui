@@ -31,14 +31,14 @@
 }
 
 .clock__label--disabled {
-  color: var(--color-gray-500, #999);
+  color: var(--color-text-disabled);
 }
 
 .clock__container {
   min-width: 350px;
   max-height: 550px;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border-light);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-input);
   border-radius: var(--radius-default);
   overflow: hidden;
 }
@@ -125,7 +125,7 @@
   height: 240px;
   margin: 20px auto;
   border-radius: 50%;
-  background-color: var(--color-gray-100, #f5f5f5);
+  background-color: var(--color-surface-secondary);
   cursor: pointer;
   user-select: none;
 }
