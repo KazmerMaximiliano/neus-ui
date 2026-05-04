@@ -149,18 +149,30 @@ body {
 }
 
 /**
- * Neus component CSS uses generic .link and .button class names that clash
- * with VitePress chrome. Only reset the visual properties that cause the
- * clash — never touch layout properties (padding, border-radius) so
- * VitePress scoped styles keep working.
+ * Neus component CSS uses generic class names (.link, .button, .actions)
+ * that clash with VitePress chrome. Reset only the properties that cause
+ * visible breakage — never layout props VitePress scoped styles rely on.
  * -------------------------------------------------------------------------- */
-.VPLink.link,
+/* Neus Link.styles.css pollutes .link globally — neutralize per context.
+   Never use !important on layout props the VP scoped styles control. */
 .VPSidebar .link,
+.VPNav .link,
+.VPNavBar .link,
 .VPNavScreen .link {
+  background: transparent !important;
+  border-radius: 0 !important;
   text-transform: none !important;
-  letter-spacing: normal !important;
-  font-size: inherit !important;
   font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  font-size: inherit !important;
+  transition: none !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+}
+
+/* Sidebar needs padding reset — nav keeps its scoped padding */
+.VPSidebar .link {
+  padding: 0 !important;
 }
 
 .VPFlyout .button,
@@ -169,5 +181,22 @@ body {
   letter-spacing: normal !important;
   font-size: inherit !important;
   font-weight: inherit !important;
+}
+
+/* Actions.styles.css sets height:100% and justify-content:center on .actions,
+   which breaks VPHero's .actions container sizing. */
+.VPHero .actions {
+  height: auto !important;
+  justify-content: flex-start !important;
+}
+
+.VPHero.has-image .actions {
+  justify-content: center !important;
+}
+
+@media (min-width: 960px) {
+  .VPHero.has-image .actions {
+    justify-content: flex-start !important;
+  }
 }
 

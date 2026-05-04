@@ -1,12 +1,10 @@
 // https://vitepress.dev/guide/custom-theme
-import { h, watchEffect } from 'vue'
 import type { Theme } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
 import { useData } from 'vitepress'
-import './style.css'
-import NeusLogo from '../components/NeusLogo.vue'
-import ButtonDemo from '../components/ButtonDemo.vue'
+import DefaultTheme from 'vitepress/theme'
+import { h, watchEffect } from 'vue'
 import ActionsDemo from '../components/ActionsDemo.vue'
+import ButtonDemo from '../components/ButtonDemo.vue'
 import CalendarDemo from '../components/CalendarDemo.vue'
 import CardDemo from '../components/CardDemo.vue'
 import CheckboxDemo from '../components/CheckboxDemo.vue'
@@ -21,11 +19,12 @@ import LinkDemo from '../components/LinkDemo.vue'
 import MenuDemo from '../components/MenuDemo.vue'
 import ModalDemo from '../components/ModalDemo.vue'
 import MultiSelectDemo from '../components/MultiSelectDemo.vue'
+import NeusLogo from '../components/NeusLogo.vue'
 import SelectDemo from '../components/SelectDemo.vue'
-import SidebarDemo from '../components/SidebarDemo.vue'
 import TimeInputDemo from '../components/TimeInputDemo.vue'
 import WeekCalendarDemo from '../components/WeekCalendarDemo.vue'
 import WeekCalendarRowDemo from '../components/WeekCalendarRowDemo.vue'
+import './style.css'
 
 function SyncColorScheme() {
   const { isDark } = useData()
@@ -66,7 +65,6 @@ export default {
     app.component('ModalDemo', ModalDemo)
     app.component('MultiSelectDemo', MultiSelectDemo)
     app.component('SelectDemo', SelectDemo)
-    app.component('SidebarDemo', SidebarDemo)
     app.component('TimeInputDemo', TimeInputDemo)
     app.component('WeekCalendarDemo', WeekCalendarDemo)
     app.component('WeekCalendarRowDemo', WeekCalendarRowDemo)

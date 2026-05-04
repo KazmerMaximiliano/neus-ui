@@ -21,13 +21,6 @@ type SidebarItem = {
 };
 ```
 
-
-## Live Demo
-
-<ClientOnly>
-  <SidebarDemo />
-</ClientOnly>
-
 ## Usage Example
 
 ```tsx
