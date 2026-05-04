@@ -10,13 +10,31 @@ import { withBase } from 'vitepress'
 </script>
 
 <style scoped>
+/* Mirror VitePress .image-src positioning so the slot doesn't add height to the flow */
 .neus-logo-wrapper {
-  position: relative;
-  display: inline-flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 250px;
+  width: 192px;
+  height: 192px;
+}
+
+@media (min-width: 640px) {
+  .neus-logo-wrapper {
+    width: 256px;
+    height: 256px;
+  }
+}
+
+@media (min-width: 960px) {
+  .neus-logo-wrapper {
+    width: 320px;
+    height: 320px;
+  }
 }
 
 .neus-logo-glow {
@@ -36,8 +54,8 @@ import { withBase } from 'vitepress'
 
 .neus-logo-img {
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   z-index: 1;
   filter: drop-shadow(0 0 12px rgba(57, 117, 194, 0.4))
