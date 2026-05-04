@@ -1,9 +1,13 @@
 <template>
   <div class="neus-logo-wrapper">
     <div class="neus-logo-glow" aria-hidden="true" />
-    <img src="/neuslogowhite.png" alt="Neus UI" class="neus-logo-img" />
+    <img :src="withBase('/neuslogowhite.png')" alt="Neus UI" class="neus-logo-img" />
   </div>
 </template>
+
+<script setup lang="ts">
+import { withBase } from 'vitepress'
+</script>
 
 <style scoped>
 .neus-logo-wrapper {
