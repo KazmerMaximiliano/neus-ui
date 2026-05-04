@@ -1,3 +1,5 @@
+@import "../../../src/css/variables.css";
+
 /**
  * Customize default theme styling by overriding CSS variables:
  * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
@@ -127,5 +129,22 @@
   --vp-custom-block-tip-text: var(--vp-c-text-1);
   --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+}
+
+/**
+ * Dark mode: align VitePress chrome with neus dark surface colors
+ * -------------------------------------------------------------------------- */
+
+.dark {
+  --vp-c-bg: #1e1e2e;
+  --vp-c-bg-alt: #16161e;
+  --vp-c-bg-elv: #2a2a3d;
+  --vp-c-bg-soft: #2a2a3d;
+}
+
+/* ThemeProvider sets body bg inline — always override so VitePress controls it */
+body {
+  background-color: var(--vp-c-bg) !important;
+  transition: background-color 0.2s ease;
 }
 

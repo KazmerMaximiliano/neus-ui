@@ -19,7 +19,7 @@ const columnLabels: Record<string, string> = {
   status: "Status",
 };
 
-export function DataTableDemoInner() {
+export function DataTableDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   const [pagination, setPagination] = useState<PaginationInfo>({
     current_page: 1,
     last_page: 1,
@@ -28,7 +28,7 @@ export function DataTableDemoInner() {
   });
 
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ padding: "1.5rem 0" }}>
         <DataTable
           data={ROWS}

@@ -1,17 +1,17 @@
 .calendar {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--color-border-input);
   border-radius: var(--radius-default);
   min-width: 325px;
   max-height: 500px;
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--color-surface);
 }
 
 .calendar .calendar__label-wrapper {
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .calendar--disabled {
@@ -20,7 +20,7 @@
 }
 
 .calendar--disabled .calendar__label {
-  color: var(--color-border-light);
+  color: var(--color-border-input);
 }
 
 .calendar .calendar__day-picker {
@@ -60,9 +60,9 @@
 
 .calendar .calendar__info {
   padding: 1rem;
-  border-top: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--color-border-subtle);
   font-size: 0.875rem;
-  color: #555;
+  color: var(--color-text-secondary);
   text-align: start;
 }
 
@@ -89,7 +89,7 @@
 .calendar__overlay {
   position: absolute;
   inset: 0;
-  background-color: #fff;
+  background-color: var(--color-surface);
   display: flex;
   flex-direction: column;
   z-index: 10;
@@ -136,7 +136,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.8125rem;
-  color: #333;
+  color: var(--color-text-primary);
   padding: 0.5rem 0.25rem;
   transition: background-color 0.15s;
 }
@@ -172,7 +172,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9375rem;
-  color: #333;
+  color: var(--color-text-primary);
   padding: 0.4rem 0.5rem;
   text-align: center;
   transition: background-color 0.15s;
@@ -210,6 +210,32 @@
 .calendar .calendar__day-picker .rdp-months {
   display: flex;
   gap: 1rem;
+}
+
+/* Override RDP variables to use theme colors */
+.calendar .rdp-root {
+  --rdp-accent-color: var(--color-primary);
+  --rdp-accent-background-color: var(--color-primary-light);
+  --rdp-today-color: var(--color-primary);
+  --rdp-range_start-color: var(--color-text-on-primary);
+  --rdp-range_end-color: var(--color-text-on-primary);
+  --rdp-range_start-date-background-color: var(--color-primary);
+  --rdp-range_end-date-background-color: var(--color-primary);
+  --rdp-range_middle-background-color: var(--color-primary-light);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  color-scheme: light dark;
+}
+
+/* Reset browser-applied dark color-scheme backgrounds on table elements */
+.calendar .rdp-month_grid,
+.calendar .rdp-month_grid tbody,
+.calendar .rdp-month_grid tr,
+.calendar .rdp-month_grid td,
+.calendar .rdp-month_grid th,
+.calendar .rdp-week,
+.calendar .rdp-day {
+  background-color: transparent !important;
 }
 
 .calendar--readonly .rdp-cell [role="button"]:not(.rdp-day_selected) {
@@ -254,6 +280,7 @@
   height: 20px;
   padding: 0;
   line-height: 20px;
+  color: var(--color-text-muted);
 }
 
 .calendar .rdp-today {
@@ -269,6 +296,13 @@
   width: 34px;
   height: 34px;
   padding: 0;
+  color: var(--color-text-primary);
+  background: none;
+}
+
+.calendar .rdp-day:not(.rdp-selected):not(.rdp-today) .rdp-day_button:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 .calendar .rdp-selected .rdp-day_button {

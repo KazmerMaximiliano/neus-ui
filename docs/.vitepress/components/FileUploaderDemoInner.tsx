@@ -3,9 +3,9 @@ import { ThemeProvider } from "@neus-ui/src/providers/ThemeProvider";
 import { FileUploader } from "@neus-ui/src/components/FileUploader/FileUploader";
 import { FileType } from "@neus-ui/src/components/FileUploader/FileUploader.types";
 
-export function FileUploaderDemoInner() {
+export function FileUploaderDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem", padding: "1.5rem 0", maxWidth: "480px" }}>
         <div>
           <p style={{ fontSize: "0.85rem", color: "#64748b", fontWeight: 600, marginBottom: "0.75rem" }}>Images only</p>

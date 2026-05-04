@@ -24,9 +24,9 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "0.75rem",
 };
 
-export function SelectDemoInner() {
+export function SelectDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={sectionStyle}>
         <div>
           <p style={labelStyle}>Default</p>

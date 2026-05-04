@@ -104,7 +104,7 @@ export const DateInput = ({
           ref={buttonRef}
           className={`date-input__field${error ? " date-input__field--error" : ""}${
             disabled ? " date-input__field--disabled" : ""
-          }`}
+          }${displayValue ? " date-input__field--has-value" : ""}`}
           onClick={() => !disabled && !readonly && setIsOpen(!isOpen)}
           disabled={disabled}
           type="button"

@@ -12,7 +12,7 @@ const baseItems: SidebarItem[] = [
   { label: "Logout", icon: LogOut, visible: true },
 ];
 
-export function SidebarDemoInner() {
+export function SidebarDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const items = baseItems.map((item, i) => ({
@@ -22,7 +22,7 @@ export function SidebarDemoInner() {
   }));
 
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ padding: "1.5rem 0", height: "320px", display: "flex" }}>
         <Sidebar title="Navigation" items={items} />
       </div>

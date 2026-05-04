@@ -17,7 +17,7 @@
 }
 
 .date-input__label--disabled {
-  color: var(--color-gray-500, #999);
+  color: var(--color-text-disabled);
 }
 
 .date-input__required {
@@ -38,9 +38,8 @@
 
 .date-input__field {
   display: inline-block;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border-light);
-  color: var(--color-primary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-input);
   border-radius: 3em;
   padding: 1em 2em;
   width: 100%;
@@ -49,11 +48,15 @@
   text-align: left;
   transition: border-color 0.2s;
   cursor: pointer;
-  color: var(--color-gray-400);
+  color: var(--color-text-placeholder);
+}
+
+.date-input__field--has-value {
+  color: var(--color-text-primary);
 }
 
 .date-input__field:hover:not(:disabled) {
-  border-color: var(--color-border-dark, #ccc);
+  border-color: var(--color-border-input-hover);
 }
 
 .date-input__field:focus {
@@ -79,27 +82,27 @@
 }
 
 .date-input__field--disabled {
-  background-color: var(--color-gray-100, #f5f5f5);
-  border-color: var(--color-gray-300, #ccc);
-  color: var(--color-gray-500, #999);
+  background-color: var(--color-surface-disabled);
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-disabled);
   cursor: not-allowed;
 }
 
 .date-input__field--disabled:hover,
 .date-input__field--disabled:focus,
 .date-input__field--disabled:active {
-  border-color: var(--color-gray-300, #ccc);
+  border-color: var(--color-border-subtle);
 }
 
 .date-input__dropdown {
   position: absolute;
   top: 52px;
   border-radius: var(--radius-default);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--color-shadow);
   z-index: 10000;
   overflow: visible;
   animation: slideDown 0.2s ease-out;
-  background-color: #fff;
+  background-color: var(--color-surface);
 }
 
 @keyframes slideDown {

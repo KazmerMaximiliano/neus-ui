@@ -19,9 +19,9 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
 };
 
-export function InputDemoInner() {
+export function InputDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={sectionStyle}>
         {types.map((type) => (
           <div key={type}>

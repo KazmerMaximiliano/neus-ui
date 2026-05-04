@@ -16,9 +16,9 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "0.75rem",
 };
 
-export function LinkDemoInner() {
+export function LinkDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ padding: "1.5rem 0", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
         <div>
           <p style={labelStyle}>Primary</p>

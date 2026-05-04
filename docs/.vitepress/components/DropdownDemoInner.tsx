@@ -10,9 +10,9 @@ const items = [
   { label: "Sign Out", onClick: () => alert("Sign Out") },
 ];
 
-export function DropdownDemoInner() {
+export function DropdownDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ display: "flex", gap: "3rem", alignItems: "flex-start", padding: "1.5rem 0" }}>
         <div>
           <p style={{ fontSize: "0.85rem", color: "#64748b", fontWeight: 600, marginBottom: "0.75rem" }}>With icon + name</p>

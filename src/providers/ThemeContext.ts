@@ -45,9 +45,13 @@ export interface ThemeConfig {
   infoColor?: string;
 }
 
+export type ColorScheme = "light" | "dark";
+
 export interface ThemeContextValue {
   colors: ThemeColors;
   updateTheme: (config: ThemeConfig) => void;
+  colorScheme: ColorScheme;
+  setColorScheme: (scheme: ColorScheme) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextValue | undefined>(

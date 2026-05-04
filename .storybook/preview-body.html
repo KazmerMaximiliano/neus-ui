@@ -1,0 +1,70 @@
+<style>
+  html[data-color-scheme="dark"],
+  html[data-color-scheme="dark"] body {
+    background-color: #1e1e2e !important;
+    color: #e2e8f0;
+  }
+
+  /* story canvas iframe root */
+  html[data-color-scheme="dark"] #storybook-root {
+    background-color: #1e1e2e !important;
+  }
+
+  /* docs page containers — background only, no color override (components handle their own colors) */
+  html[data-color-scheme="dark"] #storybook-docs,
+  html[data-color-scheme="dark"] .sbdocs-wrapper,
+  html[data-color-scheme="dark"] .sbdocs-content,
+  html[data-color-scheme="dark"] .sbdocs-preview {
+    background-color: #1e1e2e !important;
+  }
+
+  /* arg table */
+  html[data-color-scheme="dark"] .docblock-argstable,
+  html[data-color-scheme="dark"] .docblock-argstable-head,
+  html[data-color-scheme="dark"] .docblock-argstable-body,
+  html[data-color-scheme="dark"] table,
+  html[data-color-scheme="dark"] th,
+  html[data-color-scheme="dark"] td {
+    background-color: #2a2a3d !important;
+    color: #e2e8f0 !important;
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+
+  html[data-color-scheme="dark"] tr:nth-child(even) td {
+    background-color: #1e1e2e !important;
+  }
+
+  /* docs headings and text — scoped to sbdocs only, not story canvas */
+  html[data-color-scheme="dark"] .sbdocs h1,
+  html[data-color-scheme="dark"] .sbdocs h2,
+  html[data-color-scheme="dark"] .sbdocs h3,
+  html[data-color-scheme="dark"] .sbdocs p,
+  html[data-color-scheme="dark"] .sbdocs-wrapper h1,
+  html[data-color-scheme="dark"] .sbdocs-wrapper h2,
+  html[data-color-scheme="dark"] .sbdocs-wrapper h3,
+  html[data-color-scheme="dark"] .sbdocs-wrapper p {
+    color: #e2e8f0 !important;
+  }
+
+  /* toolbar and controls */
+  html[data-color-scheme="dark"] .os-host,
+  html[data-color-scheme="dark"] .sb-bar {
+    background-color: #2a2a3d !important;
+  }
+
+  /* canvas zoom toolbar (role=toolbar) */
+  html[data-color-scheme="dark"] [role="toolbar"] {
+    background-color: #2a2a3d !important;
+    border-bottom-color: rgba(255,255,255,0.08) !important;
+  }
+
+  html[data-color-scheme="dark"] [role="toolbar"] button,
+  html[data-color-scheme="dark"] [role="toolbar"] a {
+    background-color: transparent !important;
+    color: #e2e8f0 !important;
+  }
+
+  html[data-color-scheme="dark"] [role="toolbar"] svg {
+    color: #e2e8f0 !important;
+  }
+</style>

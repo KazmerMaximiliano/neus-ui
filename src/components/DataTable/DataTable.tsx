@@ -10,7 +10,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useResponsive } from "../../hooks/useResponsive";
 import { Actions } from "../Actions/Actions";
 import { IconButton } from "../IconButton/IconButton";
-import { useColors } from "../theme";
+import { useColors, useColorScheme } from "../theme";
 import "./DataTable.styles.css";
 import { DataTableColDef, DataTableProps } from "./DataTable.types";
 
@@ -48,6 +48,7 @@ const DataTableComponent = <T extends object>({
 }: DataTableProps<T>) => {
   const { isMobile, isTablet } = useResponsive();
   const colors = useColors();
+  const colorScheme = useColorScheme();
 
   const { current_page, last_page, per_page } = pagination;
 
@@ -65,18 +66,29 @@ const DataTableComponent = <T extends object>({
   );
 
   const responsiveTheme = useMemo(() => {
+    const isDark = colorScheme === "dark";
     return themeQuartz.withParams({
       accentColor: colors.primary.main,
       borderRadius: 6,
-      browserColorScheme: "light",
+      browserColorScheme: isDark ? "dark" : "light",
       columnBorder: false,
       fontFamily: ["Arial", "sans-serif"],
       fontSize: isMobile ? 14 : isTablet ? 15 : 16,
       headerFontSize: isMobile ? 14 : isTablet ? 15 : 16,
       spacing: isMobile ? 4 : isTablet ? 6 : 8,
       wrapperBorderRadius: 16,
+      ...(isDark && {
+        backgroundColor: "#1e1e2e",
+        foregroundColor: "#e2e8f0",
+        headerBackgroundColor: "#2a2a3d",
+        headerTextColor: "#e2e8f0",
+        borderColor: "rgba(255,255,255,0.1)",
+        rowHoverColor: "rgba(255,255,255,0.04)",
+        oddRowBackgroundColor: "#1e1e2e",
+        chromeBackgroundColor: "#1e1e2e",
+      }),
     });
-  }, [isMobile, isTablet, colors.primary.main]);
+  }, [isMobile, isTablet, colors.primary.main, colorScheme]);
 
   const renderActions = useCallback(
     (params: ICellRendererParams) => {

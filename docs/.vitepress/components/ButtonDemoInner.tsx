@@ -20,9 +20,9 @@ const rowStyle: React.CSSProperties = {
   alignItems: "center",
 };
 
-export function ButtonDemoInner() {
+export function ButtonDemoInner({ colorScheme = "light" }: { colorScheme?: "light" | "dark" }) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialColorScheme={colorScheme}>
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem", padding: "1.5rem 0" }}>
         {variants.map((variant) => (
           <div key={variant}>
