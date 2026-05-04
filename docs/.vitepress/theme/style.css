@@ -148,3 +148,34 @@ body {
   transition: background-color 0.2s ease;
 }
 
+/**
+ * Neus component CSS uses generic .link and .button class names that clash
+ * with VitePress chrome (VPSidebarItem, VPFlyout, VPNavScreenMenuGroup).
+ * Reset those properties on VitePress elements so only neus demo containers
+ * are affected.
+ * -------------------------------------------------------------------------- */
+.VPNav .link,
+.VPSidebar .link,
+.VPNavScreen .link,
+.VPNavScreenTranslations .link,
+.NotFound .link {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.VPNav .button,
+.VPNavScreen .button,
+.VPFlyout .button {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0;
+  border-radius: 0;
+}
+
