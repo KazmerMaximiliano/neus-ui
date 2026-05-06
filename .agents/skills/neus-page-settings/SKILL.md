@@ -29,34 +29,28 @@ Generates a settings page with grouped form sections.
 ## Before starting
 
 Read:
-- `.agents/skills/_shared/anti-slop.md`
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Input, Select, Checkbox, Button sections
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
-Use `AskUserQuestion` in ONE call:
+Ask the user these questions and wait for their complete reply before generating:
 
-```json
-{
-  "questions": [
-    {
-      "question": "Will the page use AppTemplate?",
-      "header": "Layout",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, with AppTemplate (Recommended)", "description": "Sidebar + navigation header" },
-        { "label": "No, content only", "description": "No app shell" }
-      ]
-    }
-  ]
-}
-```
+---
 
-Also ask in free text:
+**Layout** — Will the page use AppTemplate?
+- Yes, with AppTemplate (recommended) — sidebar + navigation header
+- No, content only — no app shell
+
+Also include in your reply:
 - Page name
 - Configuration sections (e.g.: "Profile: name, email, avatar"; "Notifications: email_alerts:checkbox, sms_alerts:checkbox")
 - Exact fields per section with input type
 - If using AppTemplate: sidebar items + active route
+
+---
 
 ## Phase 1 — P0 Verification
 
@@ -70,6 +64,8 @@ Also ask in free text:
 
 ```tsx
 import { AppTemplate, Input, Select, Checkbox, Button } from 'neus-ui';
+// CSS goes in SettingsPage.styles.css — NEVER use <style> tags or inline styles
+import './SettingsPage.styles.css';
 
 type SettingsData = {
   // ...exact fields from intake
@@ -123,7 +119,8 @@ export const SettingsPage = ({ defaultValues, onSave, loading, routes }: Setting
 };
 ```
 
-### Minimal CSS
+### SettingsPage.styles.css
+
 
 ```css
 .settings-page { padding: 1.5rem; max-width: 800px; }

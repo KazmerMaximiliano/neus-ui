@@ -23,7 +23,10 @@ Generates a standalone hero section component.
 ## Before starting
 
 Read:
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Button, Link sections
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
@@ -40,6 +43,8 @@ Ask in free text:
 
 ```tsx
 import { Button, Link } from 'neus-ui';
+// CSS goes in Hero.styles.css — NEVER use <style> tags or inline styles
+import './Hero.styles.css';
 
 type HeroProps = {
   onPrimaryAction?: () => void;
@@ -53,8 +58,9 @@ export const Hero = ({ onPrimaryAction, onSecondaryAction }: HeroProps) => (
       <p className="hero__subheading">[Subheading from intake]</p>
       <div className="hero__actions">
         <Button label="[Primary CTA]" variant="solid" color="primary" onClick={onPrimaryAction} />
+        {/* Hero has light background → type="primary". Use "secondary" only on dark bg. */}
         {onSecondaryAction && (
-          <Link label="[Secondary CTA] →" type="secondary" onClick={onSecondaryAction} />
+          <Link label="[Secondary CTA] →" type="primary" onClick={onSecondaryAction} />
         )}
       </div>
     </div>
@@ -62,6 +68,9 @@ export const Hero = ({ onPrimaryAction, onSecondaryAction }: HeroProps) => (
   </section>
 );
 ```
+
+### Hero.styles.css
+
 
 ```css
 .hero { padding: 5rem 2rem; text-align: center; /* or text-align: left for left-aligned */ }

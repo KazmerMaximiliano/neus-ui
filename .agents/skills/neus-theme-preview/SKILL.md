@@ -24,6 +24,8 @@ Generates a preview page showing all Neus UI design system tokens.
 ## Before starting
 
 Read:
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/theme-config.md` — all available CSS variables
 - `.agents/skills/_shared/component-catalog.md` — to show components in action
 
@@ -37,6 +39,8 @@ Only ask:
 
 ```tsx
 import { ThemeProvider, Button, Input, Card, Checkbox } from 'neus-ui';
+// CSS goes in ThemePreviewPage.styles.css — NEVER use <style> tags or inline styles
+import './ThemePreviewPage.styles.css';
 
 export const ThemePreviewPage = () => (
   <div className="theme-preview">
@@ -104,6 +108,9 @@ export const ThemePreviewPage = () => (
   </div>
 );
 ```
+
+### ThemePreviewPage.styles.css
+
 
 ```css
 .theme-preview { padding: 2rem; max-width: 1000px; margin: 0 auto; }

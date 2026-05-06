@@ -31,12 +31,18 @@ Generates a general-purpose landing with hero, content sections, and CTA. Adapts
 ## Before starting
 
 Read:
-- `.agents/skills/_shared/anti-slop.md` — "Marketing Pages" section
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules ("Marketing Pages" section)
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Button, Card, Link, Input sections
+- `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE; asymmetric hero grid, flagship feature card spans full width, fade-up animation on hero, section padding `6rem 2rem`
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
-Ask in free text via `AskUserQuestion`:
+Ask the user these questions and wait for their complete reply before generating:
+
+---
+
 1. What type of page is it? (portfolio, company, event, agency, personal, other)
 2. Page name/brand
 3. Main headline (H1)
@@ -45,11 +51,25 @@ Ask in free text via `AskUserQuestion`:
 6. Does it include a contact form? (yes/no)
 7. Primary theme color
 
+---
+
 ## Phase 1 — P0 Verification
 
 - [ ] Output sections == intake sections
 - [ ] No invented copy — everything comes from the user
 - [ ] No AppTemplate or sidebar
+
+## Feature Tile
+
+When the page has a features/services section, use `Card` with `icon`, `title`, and `description` slots:
+
+```tsx
+<Card
+  icon={<SomeIcon size={24} color="var(--color-primary)" />}
+  title="[Service title from intake]"
+  description="[Service description from intake]"
+/>
+```
 
 ## Phase 2 — Generate Artifact
 

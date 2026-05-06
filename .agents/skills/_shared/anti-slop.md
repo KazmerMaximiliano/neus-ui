@@ -48,6 +48,24 @@ Run this internal check before emitting code. If any dimension fails, fix it fir
 3. Custom CSS only when component props cannot achieve the layout requirement
 4. Never override component internals with `!important`
 
+**CRITICAL — CSS must always go in a separate file. Never inline.**
+
+- **NEVER** use `<style>{...}</style>` tags inside a component — this is the primary source of unscoped, hard-to-override styles
+- **NEVER** use `style={{}}` inline style props
+- **ALWAYS** output CSS in a dedicated `ComponentName.styles.css` file and import it:
+
+```tsx
+// ComponentName.tsx
+import './ComponentName.styles.css';
+```
+
+```css
+/* ComponentName.styles.css */
+.component-name { ... }
+```
+
+Each skill output is **two files minimum**: `ComponentName.tsx` + `ComponentName.styles.css`.
+
 ## Import Rule
 
 ```tsx

@@ -25,7 +25,10 @@ Generates an empty state component with icon, message, and optional CTA.
 ## Before starting
 
 Read:
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Button section
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
@@ -41,6 +44,8 @@ Ask in free text:
 ```tsx
 import { Button } from 'neus-ui';
 import { [IconName] } from 'lucide-react';
+// CSS goes in EmptyState.styles.css — NEVER use <style> tags or inline styles
+import './EmptyState.styles.css';
 
 type EmptyStateProps = {
   onAction?: () => void;
@@ -64,6 +69,9 @@ export const EmptyState = ({ onAction }: EmptyStateProps) => (
   </div>
 );
 ```
+
+### EmptyState.styles.css
+
 
 ```css
 .empty-state {

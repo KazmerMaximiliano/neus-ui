@@ -36,57 +36,43 @@ Generates a form page using FormTemplate with typed fields and external data sou
 
 Read these files:
 - `.agents/skills/_shared/anti-slop.md`
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — FormTemplate, Input, Select, MultiSelect, FileUploader, InteractiveMap sections
+- `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE; H1 gets left-border accent `border-left: 4px solid var(--color-primary); padding-left: 1rem`, field gap `1.25rem`
 - `.agents/skills/_shared/checklist.md`
 - `references/form-patterns.md` — layout patterns and special field types
 
 ## Phase 0 — Collect Data
 
-Use `AskUserQuestion` in ONE call:
+Ask the user these questions and wait for their complete reply before generating:
 
-```json
-{
-  "questions": [
-    {
-      "question": "Is the form for creating, editing, or both?",
-      "header": "Mode",
-      "multiSelect": false,
-      "options": [
-        { "label": "Create (Recommended)", "description": "Creation form — no initial values" },
-        { "label": "Edit", "description": "Edit form — receives defaultValues from API" },
-        { "label": "Both (Create/Edit)", "description": "Single component used for both create and edit" }
-      ]
-    },
-    {
-      "question": "Will this page use AppTemplate (navigation sidebar)?",
-      "header": "Layout",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, with AppTemplate (Recommended)", "description": "Includes sidebar + header" },
-        { "label": "No, form only", "description": "Just FormTemplate without app shell" }
-      ]
-    },
-    {
-      "question": "Are there fields that receive options from the backend?",
-      "header": "External data",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes (Select/MultiSelect with API options)", "description": "Component will receive options as prop Array<{value, label}>" },
-        { "label": "No, all fields are text/date/number", "description": "No selects with dynamic options" }
-      ]
-    }
-  ]
-}
-```
+---
 
-Also ask in free text:
+**Mode** — Is the form for creating, editing, or both?
+- Create (recommended) — creation form, no initial values
+- Edit — receives defaultValues from API
+- Both (Create/Edit) — single component used for both modes
+
+**Layout** — Will this page use AppTemplate (navigation sidebar)?
+- Yes, with AppTemplate (recommended) — includes sidebar + header
+- No, form only — just FormTemplate without app shell
+
+**External data** — Are there fields that receive options from the backend?
+- Yes (Select/MultiSelect with API options) — component will receive options as prop `Array<{value, label}>`
+- No, all fields are text/date/number — no selects with dynamic options
+
+Also include in your reply:
 - Entity name (singular PascalCase)
 - Form fields with exact input type: `name:text, price:number, category:select, tags:multiselect, avatar:file, birthDate:date, startTime:time, location:map`
 - Required vs optional fields
 - If Select/MultiSelect: exact prop name for the options (e.g.: `categoryOptions`)
 - If FileUploader: allowed file types (image, PDF, etc.)
 - If using AppTemplate: sidebar items + active route
+  — IMPORTANT: sidebar shows only top-level sections. This form route (create/edit)
+    MUST have `visible: false`; it is reached via list/detail buttons, not sidebar.
 - Primary theme color (hex or "use default")
+
+---
 
 ## Phase 1 — P0 Verification
 
@@ -95,6 +81,9 @@ Also ask in free text:
 - [ ] FileUploader: `onChange` handler as prop, not hardcoded
 - [ ] InteractiveMap: initial values as props, handler as prop
 - [ ] Imports from `neus-ui` only
+- [ ] FormTemplate has NO `onSubmit`, `onCancel`, or `cancelLabel` props — these do not exist
+- [ ] Select has NO `required` prop — handle validation externally
+- [ ] SidebarItem NOT imported from `neus-ui` — defined locally if needed
 
 ## Phase 2 — Generate Artifact
 
@@ -132,12 +121,21 @@ export const EntityForm = ({
   loading = false,
   routes,
 }: EntityFormProps) => {
+  // FormTemplate only accepts: children, submitLabel, loading.
+  // NO onSubmit, NO onCancel, NO cancelLabel props.
+  // Wrap with <form> to handle submission. Handle cancel externally via Button.
   const content = (
     <div className="entity-form">
       <h1>Create / Edit [Entity]</h1>
-      <FormTemplate submitLabel="Save" loading={loading}>
-        {/* Fields from intake — exact order, no extras */}
-      </FormTemplate>
+      <form onSubmit={(e) => { e.preventDefault(); onSubmit(/* collect form data */); }}>
+        <FormTemplate submitLabel="Save" loading={loading}>
+          {/* Fields from intake — exact order, no extras */}
+        </FormTemplate>
+      </form>
+      {/* Cancel: external Button, not a FormTemplate prop */}
+      {onCancel && (
+        <Button label="Cancel" variant="text" color="primary" onClick={onCancel} />
+      )}
     </div>
   );
 

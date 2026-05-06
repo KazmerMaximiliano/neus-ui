@@ -25,12 +25,14 @@ od:
 
 Generates a multi-step form with FormTemplate per step and navigation.
 
-**Pending Component**: `Stepper` does not exist in Neus UI — implement with CSS and document.
 
 ## Before starting
 
 Read:
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — FormTemplate, Input, Select, Button sections
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 - `.agents/skills/neus-page-form/references/form-patterns.md` — field patterns
 
 ## Phase 0 — Collect Data
@@ -45,8 +47,10 @@ Ask in free text:
 ## Phase 2 — Generate
 
 ```tsx
-import { FormTemplate, Input, Select, Button } from 'neus-ui';
+import { FormTemplate, Input, Select, Button, Stepper } from 'neus-ui';
 import { useState } from 'react';
+// CSS goes in WizardForm.styles.css — NEVER use <style> tags or inline styles
+import './WizardForm.styles.css';
 
 const STEPS = [
   { title: '[Step 1 title]', fields: [...] },
@@ -67,16 +71,15 @@ export const WizardForm = ({ onSubmit, loading }: WizardProps) => {
 
   return (
     <div className="wizard">
-      {/* Progress bar (Stepper pending — CSS workaround) */}
-      <div className="wizard__progress">
-        <div
-          className="wizard__progress-bar"
-          style={{ width: `${((step + 1) / STEPS.length) * 100}%` }}
-        />
-      </div>
+      {/* Step progress */}
+      <Stepper
+        currentStep={step}
+        totalSteps={STEPS.length}
+        variant="linear"
+        showLabels
+      />
 
       <div className="wizard__step-info">
-        <span className="wizard__step-count">Step {step + 1} of {STEPS.length}</span>
         <h2>{STEPS[step].title}</h2>
       </div>
 
@@ -100,11 +103,11 @@ export const WizardForm = ({ onSubmit, loading }: WizardProps) => {
 };
 ```
 
+### WizardForm.styles.css
+
+
 ```css
 .wizard { max-width: 700px; margin: 2rem auto; padding: 0 1.5rem; }
-.wizard__progress { height: 4px; background: var(--color-gray-200); border-radius: 2px; margin-bottom: 2rem; }
-.wizard__progress-bar { height: 100%; background: var(--color-primary); border-radius: 2px; transition: width 0.3s ease; }
-.wizard__step-info { margin-bottom: 1.5rem; }
-.wizard__step-count { font-size: 0.8rem; color: var(--color-gray-500); text-transform: uppercase; letter-spacing: 0.05em; }
-.wizard__step-info h2 { font-size: 1.5rem; font-weight: 600; color: var(--color-gray-900); margin-top: 0.25rem; }
+.wizard__step-info { margin-bottom: 1.5rem; margin-top: 1.5rem; }
+.wizard__step-info h2 { font-size: 1.5rem; font-weight: 600; color: var(--color-gray-900); margin: 0; }
 ```

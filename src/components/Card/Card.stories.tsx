@@ -11,59 +11,77 @@ const meta: Meta<typeof CardComponent> = {
   argTypes: {
     children: {
       control: false,
-      description:
-        "The main content of the card, which can be any React node (text, elements, etc.)",
+      description: "Free-form body content (rendered below slots).",
     },
     avatarImage: {
       control: "text",
-      description: "URL of the avatar image to display in the card.",
+      description: "URL of the avatar image.",
     },
     avatarAlt: {
       control: "text",
-      description:
-        "Alternative text for the avatar image, used for accessibility.",
+      description: "Alt text (or initials fallback) for the avatar.",
     },
     leading: {
       control: false,
-      description:
-        "Content to display in the leading section of the card header (e.g., title, icon).",
+      description: "Header leading slot (title, icon, etc.).",
     },
     trailing: {
       control: false,
-      description:
-        "Content to display in the trailing section of the card header (e.g., action buttons, status).",
+      description: "Header trailing slot (actions, status, etc.).",
     },
     fill: {
       control: "boolean",
-      description:
-        "If true, the card will take up the full width of its container.",
+      description: "Fill background with the selected color.",
     },
     color: {
       control: "select",
       options: ["purple", "pink", "red", "yellow", "blue", "green"],
-      description: "The color theme of the card.",
+      description: "Decorative color palette (requires fill=true for background).",
+    },
+    icon: {
+      control: false,
+      description: "Icon slot rendered above title and description.",
+    },
+    title: {
+      control: "text",
+      description: "Optional title slot rendered inside the card.",
+    },
+    description: {
+      control: "text",
+      description: "Optional description slot rendered below title.",
+    },
+    highlighted: {
+      control: "boolean",
+      description: "Applies primary-color border and tinted background.",
+    },
+    selected: {
+      control: "boolean",
+      description: "Applies selected state styling (primary border + tint).",
+    },
+    disabled: {
+      control: "boolean",
+      description: "Reduces opacity and blocks interaction.",
+    },
+    onClick: {
+      action: "clicked",
+      description: "Makes Card a <button>. Triggers on click when not disabled.",
     },
   },
 };
 
-type Story = StoryObj<typeof meta>;
+export default meta;
 
-const CardContent = () => (
-  <div>
-    <p>This is a card component. You can put any content here.</p>
-    <p>It supports text, images, and other React elements.</p>
-  </div>
-);
+type Story = StoryObj<typeof meta>;
 
 export const Card: Story = {
   args: {
-    children: <CardContent />,
-    avatarAlt: "Username",
-    leading: <h3>Card Title</h3>,
-    trailing: <span>Trailing Info</span>,
-    fill: true,
-    color: "blue",
+    title: "Titulo",
+    description: "Descripcion",
+    avatarAlt: "",
+    highlighted: false,
+    selected: false,
+    disabled: false,
+    fill: false,
+    color: "purple",
   },
 };
-
-export default meta;

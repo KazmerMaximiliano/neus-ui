@@ -34,58 +34,40 @@ Generates a complete list page using DataTable, Actions, and a delete confirmati
 
 Read these reference files:
 - `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — component props
+- `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE; H1 gets left-border accent `border-left: 4px solid var(--color-primary)`, pair with Badge showing total count
 - `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
-Use `AskUserQuestion` in ONE call:
+Ask the user these questions and wait for their complete reply before generating:
 
-```json
-{
-  "questions": [
-    {
-      "question": "What is the entity name? (singular PascalCase, e.g.: Product, ServiceOrder)",
-      "header": "Entity",
-      "multiSelect": false,
-      "options": []
-    },
-    {
-      "question": "What row actions will the table have?",
-      "header": "Actions",
-      "multiSelect": true,
-      "options": [
-        { "label": "View detail", "description": "Info button that navigates to the detail page" },
-        { "label": "Edit", "description": "Edit button that opens the edit form" },
-        { "label": "Delete", "description": "Delete button with confirmation modal" }
-      ]
-    },
-    {
-      "question": "Will this page use AppTemplate (navigation sidebar)?",
-      "header": "Layout",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, with AppTemplate (Recommended)", "description": "Includes sidebar + navigation header" },
-        { "label": "No, content only", "description": "Just the list component, no app shell" }
-      ]
-    },
-    {
-      "question": "Does data come from an API/backend?",
-      "header": "Data",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, from API (Recommended)", "description": "Component will receive data[] and pagination as props" },
-        { "label": "No, static test data", "description": "Use hardcoded mock data for prototype" }
-      ]
-    }
-  ]
-}
-```
+---
 
-Also ask in free text:
+**Entity** — What is the entity name? (singular PascalCase, e.g.: Product, ServiceOrder)
+
+**Actions** — What row actions will the table have? (can select multiple)
+- View detail — info button that navigates to the detail page
+- Edit — edit button that opens the edit form
+- Delete — delete button with confirmation modal
+
+**Layout** — Will this page use AppTemplate (navigation sidebar)?
+- Yes, with AppTemplate (recommended) — includes sidebar + navigation header
+- No, content only — just the list component, no app shell
+
+**Data** — Does data come from an API/backend?
+- Yes, from API (recommended) — component will receive data[] and pagination as props
+- No, static test data — use hardcoded mock data for prototype
+
+Also include in your reply:
 - Columns to display (field + type), exact — do not add extras
-- If using AppTemplate: sidebar items (label + lucide-react icon) and active route
+- If using AppTemplate: sidebar items (label + icon name) and active route
+  — IMPORTANT: sidebar shows only top-level sections. "Create", "Edit", "Detail" routes
+    MUST have `visible: false`; they are reached via in-page buttons, never sidebar links.
 - Primary theme color (hex or "use default")
+
+---
 
 ## Phase 1 — P0 Verification
 
@@ -103,8 +85,10 @@ Produce the complete `.tsx` file.
 ### Component structure
 
 ```tsx
-import { AppTemplate, DataTable, Modal, Button } from 'neus-ui';
+import { AppTemplate, DataTable, Modal, Button, Badge } from 'neus-ui';
 import { PlusCircle, [IconFromSidebar] } from 'lucide-react';
+// CSS goes in EntityList.styles.css — NEVER use <style> tags or inline styles
+import './EntityList.styles.css';
 
 // Types
 type Entity = {
@@ -193,20 +177,46 @@ export const EntityList = ({
 };
 ```
 
-### Minimal CSS
+### Status column pattern
+
+When a column represents status/state values, use `Badge` instead of plain text:
+
+```tsx
+// columnLabels maps the raw field name to a display label
+columnLabels={{ status: 'Estado', name: 'Nombre' }}
+
+// DataTable renders raw cell values — for status cells, use a custom renderer
+// if DataTable supports it, or show the Badge in a detail/modal context.
+// Simple approach: map status to human-readable label via columnLabels,
+// and use Badge in detail/modal views where you control the cell JSX.
+
+// Pattern for status display outside DataTable (e.g. in modals or detail cards):
+<Badge
+  label={item.status === 'active' ? 'Activo' : 'Inactivo'}
+  color={item.status === 'active' ? 'success' : 'neutral'}
+/>
+```
+
+### EntityList.styles.css
+
 
 ```css
-.entity-list { padding: 1.5rem; }
+.entity-list { padding: 2rem; }
 .entity-list__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 .entity-list__header h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: var(--color-gray-900);
+  border-left: 4px solid var(--color-primary);
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 ```
 

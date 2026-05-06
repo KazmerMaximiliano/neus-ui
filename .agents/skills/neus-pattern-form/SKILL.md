@@ -27,8 +27,31 @@ Generates a standalone form component using FormTemplate.
 ## Before starting
 
 Read:
-- `.agents/skills/_shared/component-catalog.md` — FormTemplate, Input, Select, etc. sections
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
+- `.agents/skills/_shared/component-catalog.md` — FormTemplate, Card, Input, Select, etc. sections
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 - `.agents/skills/neus-page-form/references/form-patterns.md` — field patterns
+
+## Radio-group / Option picker
+
+When the form has a single-choice field that benefits from a visual card layout (e.g. plan selector, goal picker), use `Card` with `title`, `description`, `selected`, and `onClick`:
+
+```tsx
+import { Card } from 'neus-ui';
+
+<div role="radiogroup" aria-label="[Field label]">
+  {options.map((opt) => (
+    <Card
+      key={opt.value}
+      title={opt.label}
+      description={opt.description}
+      selected={value === opt.value}
+      onClick={() => onChange(opt.value)}
+    />
+  ))}
+</div>
+```
 
 ## Phase 0 — Collect Data
 

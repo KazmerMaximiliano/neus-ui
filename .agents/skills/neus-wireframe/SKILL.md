@@ -22,6 +22,12 @@ od:
 
 Generates a lo-fi ASCII sketch of the requested layout. No components, no CSS. Structure only.
 
+## Before starting
+
+Read:
+- `.agents/skills/_shared/prop-constraints.md` — so Neus UI Mapping table uses correct prop values
+- `.agents/skills/_shared/component-catalog.md` — component reference for the mapping table
+
 ## Phase 0 — Collect Data (minimum)
 
 Ask in one question:

@@ -30,51 +30,36 @@ Generates a detail/show page with Card, Actions, and delete confirmation Modal.
 
 Read:
 - `.agents/skills/_shared/anti-slop.md`
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Card, Actions, Modal, Button, Link sections
 
 ## Phase 0 — Collect Data
 
-Use `AskUserQuestion` in ONE call:
+Ask the user these questions and wait for their complete reply before generating:
 
-```json
-{
-  "questions": [
-    {
-      "question": "What actions will be available on the detail page?",
-      "header": "Actions",
-      "multiSelect": true,
-      "options": [
-        { "label": "Edit", "description": "Button that navigates to the edit form" },
-        { "label": "Delete", "description": "Button with confirmation modal" },
-        { "label": "Back to list", "description": "Navigation link back to the list" }
-      ]
-    },
-    {
-      "question": "Is there an image/avatar to display?",
-      "header": "Image",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, has image/avatar", "description": "Show record image in the Card" },
-        { "label": "No image", "description": "Text fields and data only" }
-      ]
-    },
-    {
-      "question": "Will this page use AppTemplate (navigation sidebar)?",
-      "header": "Layout",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, with AppTemplate (Recommended)", "description": "Includes sidebar + header" },
-        { "label": "No, content only", "description": "No app shell" }
-      ]
-    }
-  ]
-}
-```
+---
 
-Also ask in free text:
+**Actions** — What actions will be available on the detail page? (can select multiple)
+- Edit — button that navigates to the edit form
+- Delete — button with confirmation modal
+- Back to list — navigation link back to the list
+
+**Image** — Is there an image/avatar to display?
+- Yes, has image/avatar — show record image in the Card
+- No image — text fields and data only
+
+**Layout** — Will this page use AppTemplate (navigation sidebar)?
+- Yes, with AppTemplate (recommended) — includes sidebar + header
+- No, content only — no app shell
+
+Also include in your reply:
 - Entity name (singular PascalCase)
 - Fields to display (exact — do not add extras)
 - If using AppTemplate: sidebar items + active route
+  — IMPORTANT: sidebar shows only top-level sections. This detail route
+    MUST have `visible: false`; it is reached via list row action, not sidebar.
+
+---
 
 ## Phase 1 — P0 Verification
 
@@ -87,8 +72,11 @@ Also ask in free text:
 ### Base structure
 
 ```tsx
-import { AppTemplate, Card, Actions, Modal, Button, Link } from 'neus-ui';
+import { AppTemplate, Card, Actions, Modal, Button, Badge } from 'neus-ui';
 import { ArrowLeft, Edit, Trash2 } from 'lucide-react';
+// Requires: pnpm add lucide-react
+// CSS goes in EntityDetail.styles.css — NEVER use <style> tags or inline styles
+import './EntityDetail.styles.css';
 
 type Entity = {
   id: number;
@@ -115,7 +103,10 @@ export const EntityDetail = ({
   const content = (
     <div className="entity-detail">
       <div className="entity-detail__nav">
-        {onBack && <Link label="← Back to list" type="secondary" onClick={onBack} />}
+        {/* Back button: use outlined/text variant — never ghost/secondary (do not exist) */}
+        {onBack && (
+          <Button label="← Back to list" variant="outlined" color="primary" onClick={onBack} />
+        )}
         <Actions
           onEdit={onEdit}
           onDelete={onDelete ? () => setShowDeleteModal(true) : undefined}
@@ -156,7 +147,8 @@ export const EntityDetail = ({
 };
 ```
 
-### Minimal CSS
+### EntityDetail.styles.css
+
 
 ```css
 .entity-detail { padding: 1.5rem; }
@@ -184,4 +176,19 @@ export const EntityDetail = ({
   font-size: 1rem;
   color: var(--color-gray-900);
 }
+```
+
+### Status field pattern
+
+```tsx
+{/* For status/enum fields: use Badge with semantic color mapping */}
+<div className="entity-detail__field">
+  <span className="entity-detail__label">Status</span>
+  <span className="entity-detail__value">
+    <Badge
+      label={item.status === 'active' ? 'Active' : 'Inactive'}
+      color={item.status === 'active' ? 'success' : 'neutral'}
+    />
+  </span>
+</div>
 ```

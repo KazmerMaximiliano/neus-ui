@@ -27,7 +27,10 @@ Generates a standalone, reusable DataTable component without full page structure
 ## Before starting
 
 Read:
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — DataTable, Actions, Modal sections
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 

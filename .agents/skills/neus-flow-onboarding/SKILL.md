@@ -25,50 +25,39 @@ od:
 
 Generates a multi-step onboarding flow with visual stepper and navigation.
 
-**Pending Component**: `Stepper` does not exist in Neus UI — implement with CSS and document as pending.
 
 ## Before starting
 
 Read:
-- `.agents/skills/_shared/anti-slop.md`
-- `.agents/skills/_shared/component-catalog.md` — Button, Input, Checkbox sections
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
+- `.agents/skills/_shared/component-catalog.md` — Button, Card, Input, Checkbox, Stepper sections
+- `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE; use fade-up animation on `.onboarding__step`, H2 at `1.75rem weight-700`
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
-Use `AskUserQuestion` in ONE call:
+Ask the user these questions and wait for their complete reply before generating:
 
-```json
-{
-  "questions": [
-    {
-      "question": "Does any step include a data form?",
-      "header": "Form",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, some step has inputs", "description": "Email, name, preferences, etc." },
-        { "label": "No, informational content only", "description": "Text, images, and action buttons" }
-      ]
-    },
-    {
-      "question": "What onboarding style?",
-      "header": "Style",
-      "multiSelect": false,
-      "options": [
-        { "label": "Minimalist (Recommended)", "description": "Centered content, clean background, large typography" },
-        { "label": "Illustrated", "description": "Areas for illustrations or large icons per step" },
-        { "label": "Data first", "description": "Form in the first step, explanations after" }
-      ]
-    }
-  ]
-}
-```
+---
 
-Also ask in free text:
+**Form** — Does any step include a data form?
+- Yes, some step has inputs — email, name, preferences, etc.
+- No, informational content only — text, images, and action buttons
+
+**Style** — What onboarding style?
+- Minimalist (recommended) — centered content, clean background, large typography
+- Illustrated — areas for illustrations or large icons per step
+- Data first — form in the first step, explanations after
+
+Also include in your reply:
 - Product/app name
-- 3 steps: title + short description (exact from user)
+- 3 steps: title + short description (exact — do not invent)
 - Final CTA: text + destination (e.g.: "Get started" → dashboard)
 - If form: which fields on which step
 - Primary theme color
+
+---
 
 ## Phase 1 — P0 Verification
 
@@ -80,9 +69,33 @@ Also ask in free text:
 
 ### Base structure
 
+## Selectable Card (option picker steps)
+
+When a step asks the user to pick one option from a list, use `Card` with `title`, `description`, `selected`, and `onClick` props instead of custom button styles:
+
 ```tsx
-import { Button, Input, Checkbox } from 'neus-ui';
+import { Card } from 'neus-ui';
+
+<div role="radiogroup" aria-label="[Step question]">
+  {options.map((opt) => (
+    <Card
+      key={opt.value}
+      title={opt.label}
+      description={opt.description}
+      selected={selected === opt.value}
+      onClick={() => setSelected(opt.value)}
+    />
+  ))}
+</div>
+```
+
+## Base structure
+
+```tsx
+import { Button, Card, Input, Checkbox, Stepper } from 'neus-ui';
 import { useState } from 'react';
+// CSS goes in OnboardingFlow.styles.css — NEVER use <style> tags or inline styles
+import './OnboardingFlow.styles.css';
 
 const STEPS = [
   { title: '[Step 1 title from intake]', description: '[Step 1 desc from intake]' },
@@ -101,15 +114,14 @@ export const OnboardingFlow = ({ onComplete }: OnboardingProps) => {
 
   return (
     <div className="onboarding">
-      {/* Step indicator (Stepper — pending component, CSS workaround) */}
-      <div className="onboarding__stepper">
-        {STEPS.map((_, i) => (
-          <div
-            key={i}
-            className={`onboarding__step-dot ${i <= currentStep ? 'onboarding__step-dot--active' : ''}`}
-          />
-        ))}
-      </div>
+      {/* Step indicator */}
+      <Stepper
+        currentStep={currentStep}
+        totalSteps={STEPS.length}
+        variant="dots"
+        labels={STEPS.map((s) => s.title)}
+        showLabels
+      />
 
       {/* Step content */}
       <div className="onboarding__content">
@@ -140,6 +152,9 @@ export const OnboardingFlow = ({ onComplete }: OnboardingProps) => {
 };
 ```
 
+### OnboardingFlow.styles.css
+
+
 ```css
 .onboarding {
   min-height: 100vh;
@@ -150,15 +165,6 @@ export const OnboardingFlow = ({ onComplete }: OnboardingProps) => {
   padding: 2rem;
   background: var(--color-white);
 }
-.onboarding__stepper { display: flex; gap: 0.5rem; margin-bottom: 3rem; }
-.onboarding__step-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--color-gray-200);
-  transition: background 0.2s ease;
-}
-.onboarding__step-dot--active { background: var(--color-primary); }
 .onboarding__content { max-width: 480px; text-align: center; margin-bottom: 3rem; }
 .onboarding__content h2 { font-size: 1.75rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem; }
 .onboarding__content p { font-size: 1rem; color: var(--color-gray-600); line-height: 1.6; }

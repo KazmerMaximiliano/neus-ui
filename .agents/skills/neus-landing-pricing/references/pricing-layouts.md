@@ -2,13 +2,17 @@
 
 ## Plan Cards Grid
 
+Use `Card` with `highlighted` prop. Compose pricing content in `children`.
+
 ```tsx
+import { Card, Button } from 'neus-ui';
+
 <section className="pricing__plans">
   <div className="pricing__plans-grid">
-    {/* One div per plan from intake */}
-    <div className={`pricing__plan ${plan.featured ? 'pricing__plan--featured' : ''}`}>
+    {/* One Card per plan from intake */}
+    <Card highlighted={plan.featured}>
       <div className="pricing__plan-header">
-        <h3>{plan.name}</h3>
+        <h3 className="pricing__plan-name">{plan.name}</h3>
         {plan.featured && <span className="pricing__badge">Recommended</span>}
       </div>
       <div className="pricing__plan-price">
@@ -24,7 +28,7 @@
         color="primary"
         fullWidth
       />
-    </div>
+    </Card>
   </div>
 </section>
 ```
@@ -39,21 +43,8 @@
   margin: 0 auto;
   align-items: start;
 }
-.pricing__plan {
-  border: 1px solid var(--color-border-light);
-  border-radius: 16px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  background: var(--color-white);
-}
-.pricing__plan--featured {
-  border-color: var(--color-primary);
-  box-shadow: 0 4px 20px var(--color-primary-light);
-}
-.pricing__plan-header { display: flex; justify-content: space-between; align-items: center; }
-.pricing__plan-header h3 { font-size: 1.25rem; font-weight: 600; }
+.pricing__plan-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.pricing__plan-name { font-size: 1.25rem; font-weight: 600; margin: 0; }
 .pricing__badge {
   background: var(--color-primary-light);
   color: var(--color-primary);
@@ -62,10 +53,10 @@
   font-size: 0.75rem;
   font-weight: 600;
 }
-.pricing__plan-price { display: flex; align-items: baseline; gap: 0.25rem; }
+.pricing__plan-price { display: flex; align-items: baseline; gap: 0.25rem; margin-bottom: 1rem; }
 .pricing__amount { font-size: 2.5rem; font-weight: 700; color: var(--color-primary); }
 .pricing__period { font-size: 1rem; color: var(--color-gray-500); }
-.pricing__features { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.pricing__features { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; margin-bottom: 1rem; }
 .pricing__features li {
   font-size: 0.9rem;
   color: var(--color-gray-700);

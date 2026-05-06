@@ -31,41 +31,38 @@ Generates a centered authentication page (no sidebar, no AppTemplate).
 ## Before starting
 
 Read:
-- `.agents/skills/_shared/anti-slop.md`
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Input, Button, Link sections
+- `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE; use fade-up on `.auth__card`, H1 at `1.5rem weight-700` centered, section background from palette
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
-Use `AskUserQuestion` in ONE call:
+Ask the user these questions and wait for their complete reply before generating:
 
-```json
-{
-  "questions": [
-    {
-      "question": "What type of authentication page do you need?",
-      "header": "Type",
-      "multiSelect": false,
-      "options": [
-        { "label": "Login (Recommended)", "description": "Email + password + sign in button" },
-        { "label": "Register", "description": "Name + email + password + confirmation" },
-        { "label": "Reset password", "description": "Email only + reset button" },
-        { "label": "Login + Register (tabs)", "description": "Both forms with toggle between them" }
-      ]
-    }
-  ]
-}
-```
+---
 
-Also ask:
+**Type** — What type of authentication page do you need?
+- Login (recommended) — email + password + sign in button
+- Register — name + email + password + confirmation
+- Reset password — email only + reset button
+- Login + Register (tabs) — both forms with toggle between them
+
+Also include in your reply:
 - App/product name
 - Logo or name to show in the form header
 - Link to "Register" from login? (yes/no)
 - Primary theme color
 
+---
+
 ## Phase 2 — Generate Artifact
 
 ```tsx
 import { Input, Button, Link } from 'neus-ui';
+// CSS goes in LoginPage.styles.css — NEVER use <style> tags or inline styles
+import './LoginPage.styles.css';
 
 type AuthFormProps = {
   onSubmit: (credentials: { email: string; password: string }) => void;
@@ -119,7 +116,8 @@ export const LoginPage = ({ onSubmit, loading, error }: AuthFormProps) => {
         />
 
         <div className="auth-card__links">
-          <Link label="Forgot your password?" type="secondary" href="/forgot-password" />
+          {/* Auth card has white background → type="primary" for all links */}
+          <Link label="Forgot your password?" type="primary" href="/forgot-password" />
           <Link label="Create account" type="primary" href="/register" />
         </div>
       </div>
@@ -127,6 +125,9 @@ export const LoginPage = ({ onSubmit, loading, error }: AuthFormProps) => {
   );
 };
 ```
+
+### LoginPage.styles.css
+
 
 ```css
 .auth-page {

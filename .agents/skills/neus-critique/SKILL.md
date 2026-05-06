@@ -26,6 +26,9 @@ Generates a structured design review report evaluating 5 key dimensions.
 ## Before starting
 
 Read:
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
+- `.agents/skills/_shared/component-catalog.md` — component props reference
 - `references/critique-rubric.md` — 5 dimension definitions and scoring criteria
 
 ## Phase 0 — Collect Material

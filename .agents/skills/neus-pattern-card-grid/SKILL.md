@@ -23,7 +23,10 @@ Generates a responsive Card grid component.
 ## Before starting
 
 Read:
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Card, Button sections
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
@@ -39,6 +42,8 @@ Ask in free text:
 
 ```tsx
 import { Card, Button } from 'neus-ui';
+// CSS goes in EntityCardGrid.styles.css — NEVER use <style> tags or inline styles
+import './EntityCardGrid.styles.css';
 
 const CARD_COLORS = ['blue', 'green', 'purple', 'yellow', 'pink', 'red'] as const;
 
@@ -78,6 +83,9 @@ export const EntityCardGrid = ({ items, onSelect }: EntityCardGridProps) => (
   </div>
 );
 ```
+
+### EntityCardGrid.styles.css
+
 
 ```css
 .card-grid {

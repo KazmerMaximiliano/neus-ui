@@ -24,8 +24,11 @@ Generates a public page shell: sticky header + main + footer. No AppTemplate, no
 ## Before starting
 
 Read:
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Button, Link sections
-- `.agents/skills/_shared/theme-config.md`
+- `.agents/skills/_shared/theme-config.md` — ThemeProvider config
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 
 ## Phase 0 — Collect Data
 
@@ -40,6 +43,8 @@ Ask in free text:
 
 ```tsx
 import { Button, Link, ThemeProvider } from 'neus-ui';
+// CSS goes in LandingLayout.styles.css — NEVER use <style> tags or inline styles
+import './LandingLayout.styles.css';
 
 type LandingLayoutProps = {
   children: React.ReactNode;
@@ -53,8 +58,8 @@ export const LandingLayout = ({ children }: LandingLayoutProps) => (
         <div className="landing-layout__header-inner">
           <span className="landing-layout__brand">[BrandName]</span>
           <nav className="landing-layout__nav">
-            {/* Nav items from intake */}
-            <Link label="[NavItem1]" type="secondary" href="#[section]" />
+            {/* Nav items from intake — type="primary" on white header background */}
+            <Link label="[NavItem1]" type="primary" href="#[section]" />
           </nav>
           <Button label="[Header CTA]" variant="solid" color="primary" onClick={() => {}} />
         </div>
@@ -77,6 +82,8 @@ export const LandingLayout = ({ children }: LandingLayoutProps) => (
   </ThemeProvider>
 );
 ```
+
+### LandingLayout.styles.css
 
 ```css
 .landing-layout { min-height: 100vh; display: flex; flex-direction: column; }

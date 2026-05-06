@@ -1,5 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import userEvent from "@testing-library/user-event";
 import { Card } from "./Card";
 import { CardProps } from "./Card.types";
 
@@ -37,6 +38,16 @@ describe("Card", () => {
         </Card>,
       );
       expect(screen.getByTestId("custom")).toBeInTheDocument();
+    });
+
+    it("renders as div by default", () => {
+      renderCard();
+      expect(document.querySelector("div.card")).toBeInTheDocument();
+    });
+
+    it("renders as button when onClick is provided", () => {
+      renderCard({ onClick: vi.fn() });
+      expect(document.querySelector("button.card")).toBeInTheDocument();
     });
   });
 
@@ -105,12 +116,8 @@ describe("Card", () => {
 
     it("renders header with both leading and trailing", () => {
       renderCard({ leading: "Title", trailing: "Button" });
-      expect(document.querySelector(".card__header-leading")).toHaveTextContent(
-        "Title",
-      );
-      expect(document.querySelector(".card__header-trailing")).toHaveTextContent(
-        "Button",
-      );
+      expect(document.querySelector(".card__header-leading")).toHaveTextContent("Title");
+      expect(document.querySelector(".card__header-trailing")).toHaveTextContent("Button");
     });
 
     it("renders ReactNode in header leading", () => {
@@ -119,10 +126,49 @@ describe("Card", () => {
     });
 
     it("renders ReactNode in header trailing", () => {
-      renderCard({
-        trailing: <button data-testid="action">X</button>,
-      });
+      renderCard({ trailing: <button data-testid="action">X</button> });
       expect(screen.getByTestId("action")).toBeInTheDocument();
+    });
+  });
+
+  describe("slots (icon, title, description)", () => {
+    it("does not render slots section when no slot props provided", () => {
+      renderCard();
+      expect(document.querySelector(".card__slots")).not.toBeInTheDocument();
+    });
+
+    it("renders icon slot", () => {
+      renderCard({ icon: <span data-testid="icon">★</span> });
+      expect(screen.getByTestId("icon")).toBeInTheDocument();
+      expect(document.querySelector(".card__slot-icon")).toBeInTheDocument();
+    });
+
+    it("renders title slot", () => {
+      renderCard({ title: "Feature Title" });
+      expect(screen.getByText("Feature Title")).toBeInTheDocument();
+      expect(document.querySelector(".card__slot-title")).toBeInTheDocument();
+    });
+
+    it("renders description slot", () => {
+      renderCard({ description: "Feature description text" });
+      expect(screen.getByText("Feature description text")).toBeInTheDocument();
+      expect(document.querySelector(".card__slot-description")).toBeInTheDocument();
+    });
+
+    it("renders all slots together", () => {
+      renderCard({
+        icon: <span data-testid="icon">★</span>,
+        title: "Fast Invoicing",
+        description: "Create invoices in seconds",
+      });
+      expect(screen.getByTestId("icon")).toBeInTheDocument();
+      expect(screen.getByText("Fast Invoicing")).toBeInTheDocument();
+      expect(screen.getByText("Create invoices in seconds")).toBeInTheDocument();
+    });
+
+    it("does not render icon element when icon is not provided", () => {
+      renderCard({ title: "No icon" });
+      expect(document.querySelector(".card__slot-icon")).not.toBeInTheDocument();
     });
   });
 
@@ -164,8 +210,60 @@ describe("Card", () => {
     );
   });
 
+  describe("behavioral modifiers", () => {
+    it("applies card--highlighted class when highlighted is true", () => {
+      renderCard({ highlighted: true });
+      expect(document.querySelector(".card")).toHaveClass("card--highlighted");
+    });
+
+    it("does not apply card--highlighted class by default", () => {
+      renderCard();
+      expect(document.querySelector(".card")).not.toHaveClass("card--highlighted");
+    });
+
+    it("applies card--selected class when selected is true", () => {
+      renderCard({ selected: true });
+      expect(document.querySelector(".card")).toHaveClass("card--selected");
+    });
+
+    it("does not apply card--selected class by default", () => {
+      renderCard();
+      expect(document.querySelector(".card")).not.toHaveClass("card--selected");
+    });
+
+    it("applies card--disabled class when disabled is true", () => {
+      renderCard({ disabled: true });
+      expect(document.querySelector(".card")).toHaveClass("card--disabled");
+    });
+
+    it("does not apply card--disabled class by default", () => {
+      renderCard();
+      expect(document.querySelector(".card")).not.toHaveClass("card--disabled");
+    });
+
+    it("applies card--interactive class when onClick is provided", () => {
+      renderCard({ onClick: vi.fn() });
+      expect(document.querySelector(".card")).toHaveClass("card--interactive");
+    });
+
+    it("calls onClick when card is clicked", async () => {
+      const handleClick = vi.fn();
+      renderCard({ onClick: handleClick });
+      await userEvent.click(document.querySelector("button.card")!);
+      expect(handleClick).toHaveBeenCalledOnce();
+    });
+
+    it("does not call onClick when disabled", async () => {
+      const handleClick = vi.fn();
+      renderCard({ onClick: handleClick, disabled: true });
+      const btn = document.querySelector("button.card")!;
+      await userEvent.click(btn);
+      expect(handleClick).not.toHaveBeenCalled();
+    });
+  });
+
   describe("combined props", () => {
-    it("renders full card with all props", () => {
+    it("renders full card with all default props", () => {
       render(
         <Card
           avatarImage="https://example.com/avatar.png"
@@ -183,12 +281,8 @@ describe("Card", () => {
       expect(card).toHaveClass("card--fill");
       expect(card).toHaveClass("card--blue");
       expect(screen.getByAltText("User")).toBeInTheDocument();
-      expect(document.querySelector(".card__header-leading")).toHaveTextContent(
-        "Title",
-      );
-      expect(document.querySelector(".card__header-trailing")).toHaveTextContent(
-        "Close",
-      );
+      expect(document.querySelector(".card__header-leading")).toHaveTextContent("Title");
+      expect(document.querySelector(".card__header-trailing")).toHaveTextContent("Close");
       expect(screen.getByText("Full content")).toBeInTheDocument();
     });
   });

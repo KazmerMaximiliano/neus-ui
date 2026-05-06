@@ -21,5 +21,7 @@ export * from "./Sidebar/Sidebar";
 export * from "./TimeInput/TimeInput";
 export * from "./WeekCalendar/WeekCalendar";
 export * from "./WeekCalendarRow/WeekCalendarRow";
+export * from "./Stepper/Stepper";
+export * from "./Badge/Badge";
 
 export { useColors } from "./theme";

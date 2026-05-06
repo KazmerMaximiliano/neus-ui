@@ -36,41 +36,29 @@ Generates a product landing page with hero, features, optional social proof, opt
 ## Before starting
 
 Read:
-- `.agents/skills/_shared/anti-slop.md` — "Marketing Pages" section
+- `.agents/skills/_shared/anti-slop.md` — mandatory quality rules ("Marketing Pages" section)
+- `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Button, Card, Link sections
-- `.agents/skills/_shared/theme-config.md` — for ThemeProvider config
+- `.agents/skills/_shared/theme-config.md` — ThemeProvider config
+- `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE from neus-designer context; enforce layout composition, typography scale, color usage, and animation budget
+- `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 - `references/landing-sections.md` — section patterns
 
 ## Phase 0 — Collect Data
 
-Use `AskUserQuestion` in ONE call:
+Ask the user these questions and wait for their complete reply before generating:
 
-```json
-{
-  "questions": [
-    {
-      "question": "Will the landing include a pricing section?",
-      "header": "Pricing",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, with plans and prices (Recommended)", "description": "Section with pricing plan cards" },
-        { "label": "No, just hero + features + CTA", "description": "Landing without pricing" }
-      ]
-    },
-    {
-      "question": "Will it include social proof (testimonials or metrics)?",
-      "header": "Social proof",
-      "multiSelect": false,
-      "options": [
-        { "label": "Yes, real testimonials/metrics", "description": "User will provide them" },
-        { "label": "No social proof", "description": "Omit testimonials section" }
-      ]
-    }
-  ]
-}
-```
+---
 
-Also ask in free text:
+**Pricing** — Will the landing include a pricing section?
+- Yes, with plans and prices (recommended) — section with pricing plan cards
+- No, just hero + features + CTA — landing without pricing
+
+**Social proof** — Will it include social proof (testimonials or metrics)?
+- Yes, real testimonials/metrics — user will provide them
+- No social proof — omit testimonials section entirely
+
+Also include in your reply:
 - Product name and tagline (1 line)
 - Features to highlight (max 6, exact: title + short description)
 - Primary CTA: button text + destination
@@ -78,6 +66,8 @@ Also ask in free text:
 - If social proof: exact testimonials or metrics (if said "no", omit completely)
 - Primary theme color (hex or "use default")
 - Header nav items (navigation links)
+
+---
 
 ## Phase 1 — P0 Verification
 
@@ -94,6 +84,8 @@ Read `references/landing-sections.md` for each section's patterns.
 
 ```tsx
 import { Button, Card, Link } from 'neus-ui';
+// CSS goes in ProductLanding.styles.css — NEVER use <style> tags or inline styles
+import './ProductLanding.styles.css';
 
 type LandingProps = {
   // Static content — no API props for marketing copy
@@ -111,7 +103,8 @@ export const ProductLanding = () => {
         <p>[Subheading from intake]</p>
         <div className="landing__hero-cta">
           <Button label="[CTA from intake]" variant="solid" color="primary" />
-          <Link label="Watch demo" type="secondary" href="#demo" />
+          {/* Secondary link in hero: use type="primary" — hero has a light background */}
+          <Link label="See how it works" type="primary" href="#features" />
         </div>
       </section>
 
@@ -132,19 +125,57 @@ export const ProductLanding = () => {
 };
 ```
 
+## Feature Tile
+
+Use `Card` with `icon`, `title`, and `description` slots:
+
+```tsx
+<Card
+  icon={<SomeIcon size={24} color="var(--color-primary)" />}
+  title="[Feature title from intake]"
+  description="[Feature description from intake]"
+/>
+```
+
+## Pricing Card
+
+Use `Card` with `highlighted` prop. Compose full content in `children`:
+
+```tsx
+<Card highlighted={plan.highlighted}>
+  {plan.highlighted && <span className="pricing__badge">Most popular</span>}
+  <p className="pricing__name">{plan.name}</p>
+  <div className="pricing__amount">
+    <span className="pricing__price">{plan.price}</span>
+    <span className="pricing__period">{plan.period}</span>
+  </div>
+  <ul className="pricing__features">
+    {plan.features.map((f) => (
+      <li key={f}><span aria-hidden="true">✓</span> {f}</li>
+    ))}
+  </ul>
+  <Button
+    label={plan.cta}
+    variant={plan.highlighted ? "solid" : "outlined"}
+    color="primary"
+    fullWidth
+  />
+</Card>
+```
+
 ## Missing Neus UI Components
 
-This skill requires components not yet available. Implement with CSS:
 - **NavigationBar**: `<header>` with flex nav — document as pending
-- **FeatureTile**: Use `Card` with `leading` prop for the icon
 - **TestimonialCard**: Use `Card` with `avatarImage` + blockquote content (if requested)
-- **PricingCard**: Use `Card` with custom pricing structure (if requested)
 
-Document each in NEUS-DESING.md "Pending Components" section.
-
-## Phase 3 — Theme CSS
+## Phase 3 — ProductLanding.styles.css
 
 ```css
+@keyframes neus-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .landing { font-family: inherit; }
 .landing__nav {
   position: sticky;
@@ -159,15 +190,48 @@ Document each in NEUS-DESING.md "Pending Components" section.
   box-shadow: 0 2px 8px var(--color-shadow);
 }
 .landing__hero {
-  text-align: center;
-  padding: 5rem 2rem;
-  max-width: 800px;
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  align-items: center;
+  gap: 3rem;
+  padding: 6rem 2rem;
+  max-width: 1200px;
   margin: 0 auto;
 }
-.landing__hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem; }
-.landing__hero p { font-size: 1.25rem; color: var(--color-gray-600); margin-bottom: 2rem; }
-.landing__hero-cta { display: flex; gap: 1rem; justify-content: center; align-items: center; }
-.landing__features { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
-.landing__features h2 { text-align: center; font-size: 2rem; font-weight: 600; margin-bottom: 3rem; color: var(--color-gray-900); }
-.landing__features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+/* If no visual element on right side, use centered single-column: */
+/* .landing__hero { text-align: center; padding: 6rem 2rem; max-width: 800px; margin: 0 auto; } */
+.landing__hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  color: var(--color-gray-900);
+  margin-bottom: 1rem;
+  animation: neus-fade-up 0.5s ease forwards;
+}
+.landing__hero p {
+  font-size: 1.25rem;
+  color: var(--color-gray-600);
+  margin-bottom: 2rem;
+  animation: neus-fade-up 0.5s 0.1s ease both;
+}
+.landing__hero-cta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  animation: neus-fade-up 0.5s 0.2s ease both;
+}
+.landing__features { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+.landing__features h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 3rem; color: var(--color-gray-900); }
+/* Flagship feature: first card spans full width */
+.landing__features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+.landing__features-grid > *:first-child { grid-column: 1 / -1; }
+/* Staggered card animation */
+.landing__features-grid > *:nth-child(1) { animation: neus-fade-up 0.5s 0.05s ease both; }
+.landing__features-grid > *:nth-child(2) { animation: neus-fade-up 0.5s 0.15s ease both; }
+.landing__features-grid > *:nth-child(3) { animation: neus-fade-up 0.5s 0.25s ease both; }
+.landing__features-grid > *:nth-child(4) { animation: neus-fade-up 0.5s 0.35s ease both; }
+/* Alternating section backgrounds */
+.landing__features-alt { background: var(--color-primary-light); }
+/* Footer CTA */
+.landing__cta-section { background: var(--color-primary-light); padding: 6rem 2rem; text-align: center; }
 ```
