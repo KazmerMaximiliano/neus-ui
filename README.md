@@ -16,6 +16,7 @@ A modern React UI component library built with TypeScript and dynamic theming ca
 - [🔧 API Reference](#-api-reference)
 - [💻 Code Style Guidelines](#-code-style-guidelines)
 - [✅ Testing Instructions](#-testing-instructions)
+- [📄 License](#-license)
 
 ## 📋 Project Overview
 
@@ -252,30 +253,30 @@ All theme colors are available as CSS variables:
 
 ### Available Components
 
-| Component          | Description                                             |
-| ------------------ | ------------------------------------------------------- |
-| `Actions`          | Action buttons grouping and management                  |
-| `Button`           | Buttons with multiple variants (solid, outlined, ghost) |
-| `Calendar`         | Date picker component                                   |
-| `Card`             | Flexible card with avatar, header, and color variants   |
-| `Checkbox`         | Checkbox with indeterminate state                       |
-| `Clock`            | Time picker component                                   |
-| `DataTable`        | Tables with sorting, filtering, and pagination          |
-| `DateInput`        | Date input fields with validation states                |
-| `Dropdown`         | Dropdown menu triggered by icon avatar                  |
-| `FileUploader`     | File upload component with drag and drop support        |
-| `IconButton`       | Buttons with icons                                      |
-| `Input`            | Text input fields with validation states                |
-| `InteractiveMap`   | Interactive map components                              |
-| `Link`             | Styled link components                                  |
-| `Menu`             | Contextual actions menu                                 |
-| `Modal`            | Modal dialogs with backdrop                             |
-| `MultiSelect`      | Multi-selection dropdown                                |
-| `Select`           | Dropdown select components                              |
-| `Sidebar`          | Collapsible sidebar navigation                          |
-| `TimeInput`        | Time input fields with validation states                |
-| `WeekCalendar`     | Weekly calendar with event categories and navigation    |
-| `WeekCalendarRow`  | Event row for WeekCalendar (internal)                   |
+| Component         | Description                                             |
+| ----------------- | ------------------------------------------------------- |
+| `Actions`         | Action buttons grouping and management                  |
+| `Button`          | Buttons with multiple variants (solid, outlined, ghost) |
+| `Calendar`        | Date picker component                                   |
+| `Card`            | Flexible card with avatar, header, and color variants   |
+| `Checkbox`        | Checkbox with indeterminate state                       |
+| `Clock`           | Time picker component                                   |
+| `DataTable`       | Tables with sorting, filtering, and pagination          |
+| `DateInput`       | Date input fields with validation states                |
+| `Dropdown`        | Dropdown menu triggered by icon avatar                  |
+| `FileUploader`    | File upload component with drag and drop support        |
+| `IconButton`      | Buttons with icons                                      |
+| `Input`           | Text input fields with validation states                |
+| `InteractiveMap`  | Interactive map components                              |
+| `Link`            | Styled link components                                  |
+| `Menu`            | Contextual actions menu                                 |
+| `Modal`           | Modal dialogs with backdrop                             |
+| `MultiSelect`     | Multi-selection dropdown                                |
+| `Select`          | Dropdown select components                              |
+| `Sidebar`         | Collapsible sidebar navigation                          |
+| `TimeInput`       | Time input fields with validation states                |
+| `WeekCalendar`    | Weekly calendar with event categories and navigation    |
+| `WeekCalendarRow` | Event row for WeekCalendar (internal)                   |
 
 ### 🏗️ Available Templates
 
@@ -290,12 +291,12 @@ All theme colors are available as CSS variables:
 
 In-repo guides are located in the [`guides/`](guides/) directory:
 
-| Guide | Description |
-| --- | --- |
-| [Storybook Docs](https://kazmermaximiliano.github.io/neus-ui/) | Interactive component explorer with live props and usage examples |
-| [guides/COMPONENTS.md](guides/COMPONENTS.md) | Index of all components and templates with links to individual docs |
-| [guides/components/](guides/components/) | One dedicated file per component — props, types, and usage examples |
-| [guides/DESING_SYSTEM.md](guides/DESING_SYSTEM.md) | Theming API, color system, typography, spacing, and visual patterns |
+| Guide                                                          | Description                                                         |
+| -------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [Storybook Docs](https://kazmermaximiliano.github.io/neus-ui/) | Interactive component explorer with live props and usage examples   |
+| [guides/COMPONENTS.md](guides/COMPONENTS.md)                   | Index of all components and templates with links to individual docs |
+| [guides/components/](guides/components/)                       | One dedicated file per component — props, types, and usage examples |
+| [guides/DESING_SYSTEM.md](guides/DESING_SYSTEM.md)             | Theming API, color system, typography, spacing, and visual patterns |
 
 ## 🔧 API Reference
 
@@ -767,3 +768,21 @@ it("should render with theme", () => {
   expect(screen.getByRole("button")).toBeInTheDocument();
 });
 ```
+
+## 📄 License
+
+Copyright 2026 Maximiliano Kazmer
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+See the [LICENSE](./LICENSE) file for the full license text.

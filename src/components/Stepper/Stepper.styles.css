@@ -1,0 +1,192 @@
+/* ---- Stepper base ---- */
+.stepper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ================================================================
+   DOTS VARIANT
+   ================================================================ */
+
+/*
+  Track = flex row. Direct children: __step (shrink-0) and __connector (flex: 1).
+  Connector must be a sibling of __step — not nested inside it —
+  so flex: 1 stretches it between dots.
+*/
+.stepper--dots .stepper__track {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.stepper--dots .stepper__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* ---- Dot ---- */
+.stepper__dot {
+  border-radius: 50%;
+  border: 2px solid var(--color-gray-200);
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--color-gray-400);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.stepper__dot--small {
+  width: 28px;
+  height: 28px;
+  font-size: 0.7rem;
+}
+.stepper__dot--medium {
+  width: 36px;
+  height: 36px;
+  font-size: 0.8125rem;
+}
+.stepper__dot--large {
+  width: 48px;
+  height: 48px;
+  font-size: 1rem;
+}
+
+.stepper__dot--active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.stepper__dot--done {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.stepper__dot--clickable {
+  cursor: pointer;
+}
+.stepper__dot--clickable:hover {
+  opacity: 0.85;
+}
+
+/* ---- Label — scales with dot size ---- */
+.stepper__label {
+  font-weight: 500;
+  color: var(--color-gray-400);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.stepper__label--small {
+  font-size: 0.6875rem;
+}
+.stepper__label--medium {
+  font-size: 0.8rem;
+}
+.stepper__label--large {
+  font-size: 0.9375rem;
+}
+
+.stepper__label--active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.stepper__label--done {
+  color: var(--color-gray-500);
+}
+.stepper__label--inactive {
+  color: var(--color-gray-400);
+}
+
+/* ---- Connector — direct sibling of __step in the track row ---- */
+.stepper__connector {
+  flex: 1;
+  min-width: 24px;
+  height: 2px;
+  background: var(--color-gray-200);
+  transition: background 0.2s ease;
+  align-self: flex-start;
+}
+
+/* margin-top = half dot height so line bisects the circle */
+.stepper__connector--size-small {
+  margin-top: 14px;
+}
+.stepper__connector--size-medium {
+  margin-top: 18px;
+}
+.stepper__connector--size-large {
+  margin-top: 24px;
+}
+
+.stepper__connector--done {
+  background: var(--color-primary);
+}
+
+/* ================================================================
+   LINEAR VARIANT
+   ================================================================ */
+.stepper--linear .stepper__track {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.stepper__counter {
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.stepper__bar {
+  height: 4px;
+  background: var(--color-gray-200);
+  border-radius: 2px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.stepper__bar-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* ================================================================
+   SIMPLE VARIANT
+   ================================================================ */
+.stepper--simple .stepper__track {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.stepper__simple-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-gray-200);
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.stepper__simple-dot--active {
+  background: var(--color-primary);
+}
