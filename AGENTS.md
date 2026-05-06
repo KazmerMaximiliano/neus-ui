@@ -94,11 +94,12 @@ ComponentName/
 
 ## COMPONENT INVENTORY
 
-### Implemented Components (22 total)
+### Implemented Components (24 total)
 
 | NAME             | FILE_PATH                          | STATUS | FEATURES                                    |
 | ---------------- | ---------------------------------- | ------ | ------------------------------------------- |
 | Actions          | src/components/Actions/            | STABLE | Action grouping                             |
+| Badge            | src/components/Badge/              | STABLE | Solid/dot variants, 5 semantic colors       |
 | Button           | src/components/Button/             | STABLE | Multiple variants, loading state            |
 | Calendar         | src/components/Calendar/           | STABLE | Date picker                                 |
 | Card             | src/components/Card/               | STABLE | Avatar, header, color variants, fill mode   |
@@ -120,6 +121,7 @@ ComponentName/
 | TimeInput        | src/components/TimeInput/          | STABLE | Time validation                             |
 | WeekCalendar     | src/components/WeekCalendar/       | STABLE | Weekly view, event categories, navigation   |
 | WeekCalendarRow  | src/components/WeekCalendarRow/    | STABLE | Event row with hover tooltip, click handler |
+| Stepper          | src/components/Stepper/            | STABLE | Dots/linear/simple variants, labels, step click |
 
 ### Implemented Templates (2 total)
 

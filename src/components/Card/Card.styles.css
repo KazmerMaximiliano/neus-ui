@@ -48,7 +48,7 @@
 }
 
 .card .card__content .card__body {
-  padding: 1rem 0px;
+  padding-top: 0.75rem;
 }
 
 .card--fill {
@@ -101,4 +101,67 @@
 
 .card--fill.card--green .card__avatar-placeholder {
   background-color: #468c5a;
+}
+
+.card--interactive {
+  cursor: pointer;
+  text-align: left;
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.card--interactive:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.card--selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.card--highlighted {
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-primary-light);
+}
+
+.card--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.card .card__slots {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+}
+
+.card .card__slot-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-default);
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.card .card__slot-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+.card .card__slot-description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+  line-height: 1.5;
 }

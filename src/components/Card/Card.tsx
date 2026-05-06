@@ -2,16 +2,47 @@ import "./Card.styles.css";
 import { CardProps } from "./Card.types";
 
 export const Card = ({
+  children,
   avatarImage,
   avatarAlt,
   leading,
   trailing,
-  children,
   fill,
   color,
+  icon,
+  title,
+  description,
+  highlighted = false,
+  selected = false,
+  disabled = false,
+  onClick,
 }: CardProps) => {
+  const isInteractive = Boolean(onClick);
+
+  const classNames = [
+    "card",
+    fill ? "card--fill" : "",
+    color ? `card--${color}` : "",
+    highlighted ? "card--highlighted" : "",
+    selected ? "card--selected" : "",
+    disabled ? "card--disabled" : "",
+    isInteractive ? "card--interactive" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const Wrapper = isInteractive ? "button" : "div";
+
+  const wrapperProps = isInteractive
+    ? {
+        type: "button" as const,
+        disabled,
+        onClick: disabled ? undefined : onClick,
+      }
+    : {};
+
   return (
-    <div className={`card${fill ? " card--fill" : ""}${color ? ` card--${color}` : ""}`}>
+    <Wrapper className={classNames} {...wrapperProps}>
       {(avatarImage || avatarAlt) && (
         <div className="card__avatar-wrapper">
           {avatarImage ? (
@@ -31,8 +62,17 @@ export const Card = ({
             <div className="card__header-trailing">{trailing}</div>
           </div>
         )}
-        <div className="card__body">{children}</div>
+
+        {(icon || title || description) && (
+          <div className="card__slots">
+            {icon && <div className="card__slot-icon">{icon}</div>}
+            {title && <p className="card__slot-title">{title}</p>}
+            {description && <p className="card__slot-description">{description}</p>}
+          </div>
+        )}
+
+        {children && <div className="card__body">{children}</div>}
       </div>
-    </div>
+    </Wrapper>
   );
 };
