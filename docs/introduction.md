@@ -7,17 +7,18 @@
 | Feature | Description |
 | --- | --- |
 | **Dynamic Theming** | Real-time color switching via `ThemeProvider` — no page reload |
-| **22+ Components** | Button, DataTable, Calendar, Modal, Select, Sidebar, WeekCalendar, and more |
+| **24+ Components** | Button, DataTable, Calendar, Modal, Select, Sidebar, Stepper, WeekCalendar, and more |
 | **TypeScript First** | Full type definitions on every component and hook |
 | **CSS Variables** | Deep integration with CSS custom properties for easy overrides |
 | **Custom Hooks** | `useTheme`, `useColors`, `useResponsive` for maximum flexibility |
 | **Ready-Made Templates** | Pre-built layouts: `AppTemplate`, `FormTemplate` |
+| **AI-First Workflow** | Neus Design skills and the `neus-designer` subagent generate typed UI from product intent |
 
 ## Project Structure
 
 ```
 src/
-├── components/    # 22+ reusable UI components
+├── components/    # 24+ reusable UI components
 ├── templates/     # Pre-built layouts (AppTemplate, FormTemplate)
 ├── hooks/         # useTheme, useColors, useResponsive
 ├── providers/     # ThemeProvider
@@ -70,6 +71,7 @@ function MyPage() {
 
 - [Installation →](./installation) — full install guide, peer deps, CSS setup
 - [Theming →](./theming) — ThemeProvider API, CSS variables, custom colors
-- [Components →](./components) — all 22 components with live demos
+- [Components →](./components) — all 24+ components with live demos
+- [AI-First Workflow →](./ai-first) — Neus Design, skills, subagents, and anti-slop rules
 - [Design System →](./design-system) — color system, spacing, typography
 - [Testing →](./testing) — Vitest setup, test patterns, coverage

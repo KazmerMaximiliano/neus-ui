@@ -1,43 +1,49 @@
-# Components Documentation
+# Components
 
-Detailed documentation for each component and template is maintained in individual files inside the `components/` directory. Click any link below to open it.
+Neus UI keeps this page as a lightweight reference for the available
+components and templates. Interactive previews, prop controls, and examples
+are available in [Storybook](/storybook/).
 
-## Components
+## Component Reference
 
-| Component                                          | Description                                                 |
-| -------------------------------------------------- | ----------------------------------------------------------- |
-| [Actions](./components/Actions.md)                 | Action group for edit, delete, and info                     |
-| [Button](./components/Button.md)                   | Versatile button with variants, colors, and states          |
-| [Calendar](./components/Calendar.md)               | Date picker — single, range, or multiple                    |
-| [Card](./components/Card.md)                       | Flexible card with avatar, header slots, and color variants |
-| [Checkbox](./components/Checkbox.md)               | Controlled/uncontrolled checkbox                            |
-| [Clock](./components/Clock.md)                     | Circular clock for picking hours and minutes                |
-| [ClockNumbers](./components/ClockNumbers.md)       | Internal clock numbers display (used by Clock)              |
-| [DataTable](./components/DataTable.md)             | Paginated data table with row actions                       |
-| [DateInput](./components/DateInput.md)             | Text input that opens a date picker                         |
-| [Dropdown](./components/Dropdown.md)               | Icon-triggered dropdown menu                                |
-| [FileUploader](./components/FileUploader.md)       | File upload with type and size validation                   |
-| [IconButton](./components/IconButton.md)           | Button that renders a single icon                           |
-| [Input](./components/Input.md)                     | Text input with multiple types and validation               |
-| [InteractiveMap](./components/InteractiveMap.md)   | Google Maps location picker                                 |
-| [Link](./components/Link.md)                       | Styled anchor with primary/secondary variants               |
-| [Menu](./components/Menu.md)                       | Contextual menu with configurable actions                   |
-| [Modal](./components/Modal.md)                     | Dialog with confirm/cancel actions                          |
-| [MultiSelect](./components/MultiSelect.md)         | Select multiple options from a list                         |
-| [Select](./components/Select.md)                   | Select a single option from a list                          |
-| [Sidebar](./components/Sidebar.md)                 | Navigation sidebar with icon support                        |
-| [TimeInput](./components/TimeInput.md)             | Text input that opens a clock picker                        |
-| [WeekCalendar](./components/WeekCalendar.md)       | 7-day calendar with categorized events                      |
-| [WeekCalendarRow](./components/WeekCalendarRow.md) | Single category row inside WeekCalendar                     |
+| Component | Description |
+| --- | --- |
+| Actions | Action group for edit, delete, and info flows |
+| Badge | Small status indicator with semantic color variants |
+| Button | Button with variants, colors, loading, and disabled states |
+| Calendar | Date picker for single, range, or multiple selection |
+| Card | Content container with avatar, header, and color variants |
+| Checkbox | Controlled or uncontrolled checkbox with indeterminate state |
+| Clock | Circular time picker for hours and minutes |
+| DataTable | Sortable, paginated table with filtering and row actions |
+| DateInput | Text input that opens a calendar picker |
+| Dropdown | Icon-triggered dropdown menu |
+| FileUploader | File upload with drag and drop, type, and size validation |
+| IconButton | Button optimized for rendering a single icon |
+| Input | Text input with multiple types and validation states |
+| InteractiveMap | Google Maps location picker |
+| Link | Styled anchor with primary and secondary variants |
+| Menu | Contextual menu with configurable actions |
+| Modal | Dialog with confirm and cancel actions |
+| MultiSelect | Select multiple options from a list |
+| Select | Select a single option from a list |
+| Sidebar | Navigation sidebar with icon support |
+| Stepper | Progress indicator with dots, linear, and simple variants |
+| TimeInput | Text input that opens a clock picker |
+| WeekCalendar | 7-day calendar with categorized events |
+| WeekCalendarRow | Category row used by WeekCalendar |
 
 ## Templates
 
-| Template                                     | Description                               |
-| -------------------------------------------- | ----------------------------------------- |
-| [AppTemplate](./components/AppTemplate.md)   | Full app layout with sidebar and top menu |
-| [FormTemplate](./components/FormTemplate.md) | Form layout with built-in submit button   |
+| Template | Description |
+| --- | --- |
+| AppTemplate | Full application layout with sidebar and top menu |
+| FormTemplate | Form layout with validation and submission support |
 
----
+## Storybook
+
+Open [Storybook](/storybook/) to explore every component with interactive
+controls and generated API documentation.
 
 ## General Usage
 
