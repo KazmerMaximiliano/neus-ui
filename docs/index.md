@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: "Neus UI"
-  text: "React component library built for speed."
-  tagline: 22+ production-ready components. TypeScript. Dynamic theming. Zero config.
+  text: "AI-first React component library."
+  tagline: Production-ready components, TypeScript, dynamic theming, project skills, and subagent orchestration for generated UI.
   image:
     alt: Neus UI
   actions:
@@ -12,29 +12,29 @@ hero:
       text: Get Started
       link: /introduction
     - theme: alt
+      text: AI-First Workflow
+      link: /ai-first
+    - theme: alt
       text: Components
       link: /components
-    - theme: alt
-      text: Design System
-      link: /design-system
 
 features:
+  - icon: 🧠
+    title: AI-First Workflow
+    details: Neus Design turns product intent into typed .tsx interfaces built with Neus UI components.
+  - icon: 🧭
+    title: Subagent Orchestration
+    details: The neus-designer subagent handles intake, visual direction, skill planning, and generation coherence.
+  - icon: 🧰
+    title: Project Skills
+    details: Focused skills generate dashboards, forms, lists, detail pages, landing pages, onboarding flows, and reusable patterns.
+  - icon: 🧩
+    title: 24+ Components
+    details: Button, DataTable, Calendar, Modal, Select, Sidebar, Stepper, WeekCalendar, and more.
   - icon: 🎨
     title: Dynamic Theming
-    details: Real-time color switching via CSS variables and ThemeProvider. No page reload required.
-  - icon: 🧩
-    title: 22+ Components
-    details: Button, DataTable, Calendar, Modal, Select, Sidebar, WeekCalendar, and more — all production-ready.
+    details: Runtime color switching via CSS variables and ThemeProvider. No page reload required.
   - icon: 🔷
     title: TypeScript First
     details: Every component ships with full type definitions. Autocomplete and type safety out of the box.
-  - icon: ⚡
-    title: Vite Powered
-    details: Built and bundled with Vite 7. Fast dev server, tree-shakeable ESM output.
-  - icon: 🧪
-    title: Tested
-    details: Vitest + React Testing Library. Unit tests co-located with every component.
-  - icon: 📖
-    title: Interactive Docs
-    details: Live component demos embedded in every doc page. See it, tweak it, use it.
 ---
