@@ -44,13 +44,22 @@ jobs:
       - name: Build docs
         run: pnpm run docs:build
 
+      - name: Compose Pages artifact
+        run: cp -R docs/.vitepress/dist "${{ runner.temp }}/pages"
+
       - name: Build Storybook
-        run: pnpm exec storybook build -o docs/.vitepress/dist/storybook
+        run: pnpm exec storybook build --output-dir "${{ runner.temp }}/pages/storybook"
+
+      - name: Verify Pages artifact
+        run: |
+          test -f "${{ runner.temp }}/pages/index.html"
+          test -f "${{ runner.temp }}/pages/storybook/index.html"
+          ls -la "${{ runner.temp }}/pages/storybook/index.html"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs/.vitepress/dist
+          path: ${{ runner.temp }}/pages
 
   deploy:
     needs: build
