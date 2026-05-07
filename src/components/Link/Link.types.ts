@@ -4,4 +4,5 @@ export type LinkProps = {
   label: string;
   type?: LinkType;
   href?: string;
+  onClick?: () => void;
 };
