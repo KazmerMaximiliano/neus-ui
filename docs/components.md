@@ -2,7 +2,8 @@
 
 Neus UI keeps this page as a lightweight reference for the available
 components and templates. Interactive previews, prop controls, and examples
-are available in [Storybook](/storybook/).
+are available in
+<a href="https://kazmermaximiliano.github.io/neus-ui/storybook/" target="_self">Storybook</a>.
 
 ## Component Reference
 
@@ -42,8 +43,10 @@ are available in [Storybook](/storybook/).
 
 ## Storybook
 
-Open [Storybook](/storybook/) to explore every component with interactive
-controls and generated API documentation.
+Open
+<a href="https://kazmermaximiliano.github.io/neus-ui/storybook/" target="_self">Storybook</a>
+to explore every component with interactive controls and generated API
+documentation.
 
 ## General Usage
 
