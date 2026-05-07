@@ -6,13 +6,14 @@ export const FormTemplate = ({
   children,
   submitLabel,
   loading,
+  actions,
 }: FormTemplateProps) => {
   return (
     <div className="form-template">
       {children}
 
       <div className="form-template__submit">
-        <Button type="submit" label={submitLabel} loading={loading} />
+        {actions ?? <Button type="submit" label={submitLabel} loading={loading} />}
       </div>
     </div>
   );
