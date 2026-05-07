@@ -102,18 +102,26 @@ export const WizardForm = ({ onSubmit, loading }: WizardProps) => {
       <FormTemplate
         submitLabel={isLast ? '[Final CTA]' : 'Continue'}
         loading={isLast ? loading : false}
+        actions={
+          <div className="wizard__actions">
+            {step > 0 && (
+              <Button
+                label="Back"
+                variant="outlined"
+                color="primary"
+                onClick={() => setStep((s) => s - 1)}
+              />
+            )}
+            <Button
+              type="submit"
+              label={isLast ? '[Final CTA]' : 'Continue'}
+              loading={isLast ? loading : false}
+            />
+          </div>
+        }
       >
         {/* Fields for current step — from intake */}
       </FormTemplate>
-
-      {step > 0 && (
-        <Button
-          label="Back"
-          variant="text"
-          color="primary"
-          onClick={() => setStep((s) => s - 1)}
-        />
-      )}
     </div>
   );
 };
@@ -126,4 +134,5 @@ export const WizardForm = ({ onSubmit, loading }: WizardProps) => {
 .wizard { max-width: 700px; margin: 2rem auto; padding: 0 1.5rem; }
 .wizard__step-info { margin-bottom: 1.5rem; margin-top: 1.5rem; }
 .wizard__step-info h2 { font-size: 1.5rem; font-weight: 600; color: var(--color-gray-900); margin: 0; }
+.wizard__actions { display: flex; flex-direction: row; align-items: center; justify-content: flex-end; gap: 0.75rem; width: 100%; }
 ```

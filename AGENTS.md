@@ -96,32 +96,32 @@ ComponentName/
 
 ### Implemented Components (24 total)
 
-| NAME             | FILE_PATH                          | STATUS | FEATURES                                    |
-| ---------------- | ---------------------------------- | ------ | ------------------------------------------- |
-| Actions          | src/components/Actions/            | STABLE | Action grouping                             |
-| Badge            | src/components/Badge/              | STABLE | Solid/dot variants, 5 semantic colors       |
-| Button           | src/components/Button/             | STABLE | Multiple variants, loading state            |
-| Calendar         | src/components/Calendar/           | STABLE | Date picker                                 |
-| Card             | src/components/Card/               | STABLE | Avatar, header, color variants, fill mode   |
-| Checkbox         | src/components/Checkbox/           | STABLE | Indeterminate state                         |
-| Clock            | src/components/Clock/              | STABLE | Time picker                                 |
-| DataTable        | src/components/DataTable/          | STABLE | Sorting, pagination, filtering              |
-| DateInput        | src/components/DateInput/          | STABLE | Date validation                             |
-| Dropdown         | src/components/Dropdown/           | STABLE | Dropdown menu                               |
-| FileUploader     | src/components/FileUploader/       | STABLE | Drag and drop                               |
-| IconButton       | src/components/IconButton/         | STABLE | Icon containers                             |
-| Input            | src/components/Input/              | STABLE | Text validation                             |
-| InteractiveMap   | src/components/InteractiveMap/     | STABLE | Google Maps integration                     |
-| Link             | src/components/Link/               | STABLE | Styled links                                |
-| Menu             | src/components/Menu/               | STABLE | Actions menu                                |
-| Modal            | src/components/Modal/              | STABLE | Dialog boxes                                |
-| MultiSelect      | src/components/MultiSelect/        | STABLE | Multiple selection                          |
-| Select           | src/components/Select/             | STABLE | Single selection                            |
-| Sidebar          | src/components/Sidebar/            | STABLE | Navigation panel                            |
-| TimeInput        | src/components/TimeInput/          | STABLE | Time validation                             |
-| WeekCalendar     | src/components/WeekCalendar/       | STABLE | Weekly view, event categories, navigation   |
-| WeekCalendarRow  | src/components/WeekCalendarRow/    | STABLE | Event row with hover tooltip, click handler |
-| Stepper          | src/components/Stepper/            | STABLE | Dots/linear/simple variants, labels, step click |
+| NAME            | FILE_PATH                       | STATUS | FEATURES                                        |
+| --------------- | ------------------------------- | ------ | ----------------------------------------------- |
+| Actions         | src/components/Actions/         | STABLE | Action grouping                                 |
+| Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
+| Button          | src/components/Button/          | STABLE | Multiple variants, loading state                |
+| Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
+| Card            | src/components/Card/            | STABLE | Avatar, header, color variants, fill mode       |
+| Checkbox        | src/components/Checkbox/        | STABLE | Indeterminate state                             |
+| Clock           | src/components/Clock/           | STABLE | Time picker                                     |
+| DataTable       | src/components/DataTable/       | STABLE | Sorting, pagination, filtering                  |
+| DateInput       | src/components/DateInput/       | STABLE | Date validation                                 |
+| Dropdown        | src/components/Dropdown/        | STABLE | Dropdown menu                                   |
+| FileUploader    | src/components/FileUploader/    | STABLE | Drag and drop                                   |
+| IconButton      | src/components/IconButton/      | STABLE | Icon containers                                 |
+| Input           | src/components/Input/           | STABLE | Text validation                                 |
+| InteractiveMap  | src/components/InteractiveMap/  | STABLE | Google Maps integration                         |
+| Link            | src/components/Link/            | STABLE | Styled links                                    |
+| Menu            | src/components/Menu/            | STABLE | Actions menu                                    |
+| Modal           | src/components/Modal/           | STABLE | Dialog boxes                                    |
+| MultiSelect     | src/components/MultiSelect/     | STABLE | Multiple selection                              |
+| Select          | src/components/Select/          | STABLE | Single selection                                |
+| Sidebar         | src/components/Sidebar/         | STABLE | Navigation panel                                |
+| TimeInput       | src/components/TimeInput/       | STABLE | Time validation                                 |
+| WeekCalendar    | src/components/WeekCalendar/    | STABLE | Weekly view, event categories, navigation       |
+| WeekCalendarRow | src/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
+| Stepper         | src/components/Stepper/         | STABLE | Dots/linear/simple variants, labels, step click |
 
 ### Implemented Templates (2 total)
 
@@ -527,12 +527,12 @@ Each component MUST export a single Story that exposes all props as editable con
 
 For agents needing additional information:
 
-| QUESTION                    | SOURCE                          | LOCATION                           |
-| --------------------------- | ------------------------------- | ---------------------------------- |
-| Component usage?            | README.md                       | /README.md                         |
-| Component index?            | guides/COMPONENTS.md            | /guides/COMPONENTS.md              |
-| Component props + examples? | guides/components/ComponentName.md | /guides/components/             |
-| Design system / theming?    | guides/DESING_SYSTEM.md         | /guides/DESING_SYSTEM.md           |
-| Type definitions?           | Component.types.ts              | src/components/ComponentName/      |
-| Test examples?              | Component.test.tsx              | src/components/ComponentName/      |
-| Styling reference?          | Component.styles.css            | src/components/ComponentName/      |
+| QUESTION                    | SOURCE                             | LOCATION                      |
+| --------------------------- | ---------------------------------- | ----------------------------- |
+| Component usage?            | README.md                          | /README.md                    |
+| Component index?            | guides/COMPONENTS.md               | /guides/COMPONENTS.md         |
+| Component props + examples? | guides/components/ComponentName.md | /guides/components/           |
+| Design system / theming?    | guides/DESING_SYSTEM.md            | /guides/DESING_SYSTEM.md      |
+| Type definitions?           | Component.types.ts                 | src/components/ComponentName/ |
+| Test examples?              | Component.test.tsx                 | src/components/ComponentName/ |
+| Styling reference?          | Component.styles.css               | src/components/ComponentName/ |

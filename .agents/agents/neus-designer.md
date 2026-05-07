@@ -148,7 +148,6 @@ Based on the answers, decide which skills to invoke:
 | Table only         | `neus-page-list` or `neus-pattern-table`                                                             |
 | Onboarding         | `neus-page-auth` → `neus-flow-onboarding`                                                            |
 | Multi-step wizard  | `neus-flow-wizard`                                                                                   |
-| Kanban             | `neus-flow-kanban`                                                                                   |
 | Settings           | `neus-page-settings`                                                                                 |
 | Blog post          | `neus-page-blog`                                                                                     |
 | Generic landing    | `neus-layout-landing` → `neus-landing-generic`                                                       |
@@ -205,12 +204,10 @@ After all skills complete, verify:
 | `neus-pattern-hero`      | Patterns      | Hero section                                |
 | `neus-flow-onboarding`   | Flows         | 3-screen onboarding                         |
 | `neus-flow-wizard`       | Flows         | Multi-step form                             |
-| `neus-flow-kanban`       | Flows         | Kanban board                                |
 | `neus-layout-app`        | Layouts       | Shell with AppTemplate + sidebar            |
 | `neus-layout-landing`    | Layouts       | Marketing shell without sidebar             |
 | `neus-layout-empty`      | Layouts       | Empty state component                       |
 | `neus-theme-preview`     | Design System | Theme token preview                         |
-| `neus-critique`          | Analysis      | Design review report                        |
 | `neus-wireframe`         | Analysis      | Lo-fi wireframe                             |
 
 ---
