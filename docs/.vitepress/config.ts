@@ -1,5 +1,7 @@
 import { defineConfig } from "vitepress";
 
+const storybookUrl = "https://kazmermaximiliano.github.io/neus-ui/storybook/";
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: "/neus-ui/",
@@ -16,7 +18,7 @@ export default defineConfig({
       { text: "Get Started", link: "/introduction" },
       { text: "AI-First", link: "/ai-first" },
       { text: "Components", link: "/components" },
-      { text: "Storybook", link: "/storybook/" },
+      { text: "Storybook", link: storybookUrl, target: "_self" },
     ],
 
     sidebar: [
@@ -35,7 +37,7 @@ export default defineConfig({
           { text: "AI-First Workflow", link: "/ai-first" },
           { text: "Design System", link: "/design-system" },
           { text: "All Components", link: "/components" },
-          { text: "Storybook", link: "/storybook/" },
+          { text: "Storybook", link: storybookUrl, target: "_self" },
         ],
       },
     ],
