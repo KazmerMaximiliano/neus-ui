@@ -59,17 +59,30 @@ Same intake as `neus-page-form` but without asking about AppTemplate.
 
 ## Phase 2 — Generate
 
+Produce **three files** in this order: `EntityForm.types.ts` → `EntityForm.tsx` → `EntityForm.styles.css`.
+
+### EntityForm.types.ts
+
+```ts
+export type Entity = {
+  // exact fields from intake
+};
+
+export type EntityFormProps = {
+  defaultValues?: Partial<Entity>;
+  // [field]Options?: SelectOption[];   — only if backend-driven selects
+  onSubmit: (data: Entity) => void;
+  loading?: boolean;
+};
+```
+
+### EntityForm.tsx
+
 Produce only the FormTemplate component with its fields. No page wrapper. The exported component is the form itself, ready to embed in any page or modal.
 
 ```tsx
-import { FormTemplate, Input, Select, ... } from 'neus-ui';
-
-type EntityFormProps = {
-  defaultValues?: Partial<Entity>;
-  [field]Options?: SelectOption[];   // only if backend-driven selects
-  onSubmit: (data: EntityFormData) => void;
-  loading?: boolean;
-};
+import { FormTemplate, Input, Select } from 'neus-ui';
+import type { EntityFormProps } from './EntityForm.types';
 
 export const EntityForm = ({ defaultValues, onSubmit, loading }: EntityFormProps) => (
   <FormTemplate submitLabel="Save" loading={loading}>

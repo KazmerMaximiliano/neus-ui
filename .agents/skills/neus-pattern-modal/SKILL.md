@@ -38,14 +38,23 @@ Ask in free text:
 
 ## Phase 2 — Generate
 
-```tsx
-import { Modal, Button } from 'neus-ui';
-import { useState } from 'react';
+Produce **three files** in this order: `ConfirmModal.types.ts` → `ConfirmModal.tsx` → `ConfirmModal.styles.css`.
 
-type ConfirmModalProps = {
+### ConfirmModal.types.ts
+
+```ts
+export type ConfirmModalProps = {
   onConfirm: () => void;
   loading?: boolean;
 };
+```
+
+### ConfirmModal.tsx
+
+```tsx
+import { Modal, Button } from 'neus-ui';
+import { useState } from 'react';
+import type { ConfirmModalProps } from './ConfirmModal.types';
 
 export const DeleteConfirmModal = ({ onConfirm, loading }: ConfirmModalProps) => {
   const [isOpen, setIsOpen] = useState(false);

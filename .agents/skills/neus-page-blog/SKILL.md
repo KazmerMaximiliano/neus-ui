@@ -50,15 +50,33 @@ Ask in free text:
 ## Phase 2 — Generate Artifact
 
 Read `references/blog-layouts.md` for each section's patterns.
+Produce **three files**: `BlogPost.tsx` + `BlogPost.styles.css` + `BlogPost.types.ts`.
+
+### BlogPost.types.ts
+
+```ts
+export type RelatedArticle = {
+  title: string;
+  category: string;
+  excerpt: string;
+  href: string;
+};
+
+export type BlogPostProps = {
+  // Static editorial content — no API props
+  // Add relatedArticles prop only if "Related articles" was requested
+  relatedArticles?: RelatedArticle[];
+};
+```
+
+### BlogPost.tsx
 
 ```tsx
 import { Card, Link, Button } from 'neus-ui';
+import './BlogPost.styles.css';
+import type { BlogPostProps } from './BlogPost.types';
 
-type BlogPostProps = {
-  // Static content — editorial copy, no API props
-};
-
-export const BlogPost = () => {
+export const BlogPost = ({ relatedArticles }: BlogPostProps) => {
   return (
     <div className="blog">
       {/* 1. Masthead (Nav) */}

@@ -80,18 +80,45 @@ Also include in your reply:
 
 Read `references/landing-sections.md` for each section's patterns.
 
+Produce **three files** in this order: `ProductLanding.types.ts` → `ProductLanding.tsx` → `ProductLanding.styles.css`.
+
+### ProductLanding.types.ts
+
+```ts
+export type NavItem = {
+  label: string;
+  href: string;
+};
+
+export type Feature = {
+  icon: string;
+  title: string;
+  description: string;
+};
+
+export type PricingPlan = {
+  name: string;
+  price: string;
+  period: string;
+  features: string[];
+  cta: string;
+  highlighted?: boolean;
+};
+
+export type ProductLandingProps = {
+  // Static marketing content — no API props
+  onGetStarted?: () => void;
+};
+```
+
 ### Base component structure
 
 ```tsx
 import { Button, Card, Link } from 'neus-ui';
-// CSS goes in ProductLanding.styles.css — NEVER use <style> tags or inline styles
 import './ProductLanding.styles.css';
+import type { ProductLandingProps } from './ProductLanding.types';
 
-type LandingProps = {
-  // Static content — no API props for marketing copy
-};
-
-export const ProductLanding = () => {
+export const ProductLanding = ({ onGetStarted }: ProductLandingProps) => {
   return (
     <div className="landing">
       {/* 1. Navigation Header */}

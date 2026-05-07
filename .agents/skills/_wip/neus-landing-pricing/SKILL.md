@@ -73,6 +73,38 @@ Also include in your reply:
 
 Read `references/pricing-layouts.md`.
 
+Produce **three files** in this order: `PricingPage.types.ts` → `PricingPage.tsx` → `PricingPage.styles.css`.
+
+### PricingPage.types.ts
+
+```ts
+export type PricingPlan = {
+  name: string;
+  price: string;
+  period: string;
+  features: string[];
+  cta: string;
+  highlighted?: boolean;
+};
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+export type PricingPageProps = {
+  // Static marketing content — no API props
+};
+```
+
+### PricingPage.tsx
+
+```tsx
+import { Button, Card, Link } from 'neus-ui';
+import './PricingPage.styles.css';
+import type { PricingPlan, FaqItem, PricingPageProps } from './PricingPage.types';
+```
+
 ## Pricing Card
 
 Use `Card` with `highlighted` prop. Compose full content in `children`:

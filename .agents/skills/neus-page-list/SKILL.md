@@ -80,36 +80,50 @@ Before writing code:
 ## Phase 2 — Generate Artifact
 
 Read `references/layouts.md` for the layout pattern.
-Produce the complete `.tsx` file.
+Produce **three files**: `EntityList.tsx` + `EntityList.styles.css` + `EntityList.types.ts`.
 
-### Component structure
+### EntityList.types.ts
 
-```tsx
-import { AppTemplate, DataTable, Modal, Button, Badge } from 'neus-ui';
-import { PlusCircle, [IconFromSidebar] } from 'lucide-react';
-// CSS goes in EntityList.styles.css — NEVER use <style> tags or inline styles
-import './EntityList.styles.css';
-
-// Types
-type Entity = {
+```ts
+export type Entity = {
   id: number;
   // ...exact fields from intake
 };
 
-type EntityListProps = {
+export type PaginationInfo = {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+};
+
+export type EntityListProps = {
   data: Entity[];              // from API — never hardcode
-  pagination: {
-    current_page: number;
-    last_page: number;
-    per_page: number;
-    total: number;
-  };
+  pagination: PaginationInfo;
   onEdit?: (item: Entity) => void;
   onDelete?: (item: Entity) => void;
   onInfo?: (item: Entity) => void;
   onPaginationChange?: (params: { currentPage: number; pageSize: number }) => void;
   onCreateNew?: () => void;
 };
+
+// SidebarItem is NOT exported from neus-ui — define locally
+export type SidebarItem = {
+  label: string;
+  icon?: React.ComponentType<{ size?: number }>;
+  onClick?: () => void;
+  active?: boolean;
+  visible?: boolean;
+};
+```
+
+### Component structure
+
+```tsx
+import { AppTemplate, DataTable, Modal, Button, Badge } from 'neus-ui';
+import { PlusCircle, [IconFromSidebar] } from 'lucide-react';
+import './EntityList.styles.css';
+import type { Entity, EntityListProps, SidebarItem } from './EntityList.types';
 
 export const EntityList = ({
   data,

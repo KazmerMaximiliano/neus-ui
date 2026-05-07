@@ -40,22 +40,30 @@ Ask in free text:
 
 ## Phase 2 — Generate
 
-```tsx
-import { Card, Button } from 'neus-ui';
-// CSS goes in EntityCardGrid.styles.css — NEVER use <style> tags or inline styles
-import './EntityCardGrid.styles.css';
+Produce **three files** in this order: `EntityCardGrid.types.ts` → `EntityCardGrid.tsx` → `EntityCardGrid.styles.css`.
 
-const CARD_COLORS = ['blue', 'green', 'purple', 'yellow', 'pink', 'red'] as const;
+### EntityCardGrid.types.ts
 
-type Entity = {
+```ts
+export type Entity = {
   id: number;
   // ...exact fields from intake
 };
 
-type EntityCardGridProps = {
-  items: Entity[];       // from API — never hardcode
+export type EntityCardGridProps = {
+  items: Entity[];
   onSelect?: (item: Entity) => void;
 };
+```
+
+### EntityCardGrid.tsx
+
+```tsx
+import { Card, Button } from 'neus-ui';
+import './EntityCardGrid.styles.css';
+import type { Entity, EntityCardGridProps } from './EntityCardGrid.types';
+
+const CARD_COLORS = ['blue', 'green', 'purple', 'yellow', 'pink', 'red'] as const;
 
 export const EntityCardGrid = ({ items, onSelect }: EntityCardGridProps) => (
   <div className="card-grid">
