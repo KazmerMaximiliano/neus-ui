@@ -1,12 +1,12 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Link } from "./Link";
 
 afterEach(() => {
   cleanup();
 });
 
-const renderLink = (props: { label: string; type?: "primary" | "secondary"; href?: string }) => {
+const renderLink = (props: { label: string; type?: "primary" | "secondary"; href?: string; onClick?: () => void }) => {
   return render(<Link {...props} />);
 };
 
@@ -64,5 +64,19 @@ describe("Link", () => {
         expect(screen.getByRole("link")).toHaveClass(`link--${type}`);
       },
     );
+  });
+
+  describe("click handling", () => {
+    it("calls onClick when clicked", () => {
+      const onClick = vi.fn();
+      renderLink({ label: "Test Link", onClick });
+      fireEvent.click(screen.getByRole("link"));
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it("works without onClick handler", () => {
+      renderLink({ label: "Test Link" });
+      expect(() => fireEvent.click(screen.getByRole("link"))).not.toThrow();
+    });
   });
 });

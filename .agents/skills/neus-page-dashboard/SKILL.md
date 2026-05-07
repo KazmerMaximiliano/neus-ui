@@ -74,32 +74,53 @@ Also include in your reply:
 ## Phase 2 — Generate Artifact
 
 Read `references/dashboard-layouts.md` for the card grid pattern.
+Produce **three files**: `Dashboard.tsx` + `Dashboard.styles.css` + `Dashboard.types.ts`.
+
+### Dashboard.types.ts
+
+```ts
+export type KpiData = {
+  total: number;
+  average: number;
+  // ...exact KPIs from intake
+};
+
+export type RecentEntity = {
+  id: number;
+  // ...exact columns from intake
+};
+
+export type PaginationInfo = {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+};
+
+export type DashboardProps = {
+  kpis: KpiData;                    // from API — never hardcode
+  recentData?: RecentEntity[];      // if table requested
+  pagination?: PaginationInfo;      // if table requested
+  routes?: SidebarItem[];
+};
+
+// SidebarItem is NOT exported from neus-ui — define locally
+export type SidebarItem = {
+  label: string;
+  icon?: React.ComponentType<{ size?: number }>;
+  onClick?: () => void;
+  active?: boolean;
+  visible?: boolean;
+};
+```
 
 ### Base structure
 
 ```tsx
 import { AppTemplate, Card, DataTable, Badge } from 'neus-ui';
 import { TrendingUp, DollarSign, Users, [OtherIcons] } from 'lucide-react';
-// CSS goes in Dashboard.styles.css — NEVER use <style> tags or inline styles
 import './Dashboard.styles.css';
-
-type KpiData = {
-  total: number;
-  average: number;
-  // ...exact KPIs from intake
-};
-
-type RecentEntity = {
-  id: number;
-  // ...exact columns from intake
-};
-
-type DashboardProps = {
-  kpis: KpiData;                    // from API — never hardcode
-  recentData?: RecentEntity[];      // if table requested
-  pagination?: PaginationInfo;      // if table requested
-  routes?: SidebarItem[];
-};
+import type { KpiData, RecentEntity, DashboardProps, SidebarItem } from './Dashboard.types';
 
 export const Dashboard = ({ kpis, recentData, pagination, routes }: DashboardProps) => {
   const content = (

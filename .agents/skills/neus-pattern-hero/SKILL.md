@@ -41,15 +41,23 @@ Ask in free text:
 
 ## Phase 2 — Generate
 
-```tsx
-import { Button, Link } from 'neus-ui';
-// CSS goes in Hero.styles.css — NEVER use <style> tags or inline styles
-import './Hero.styles.css';
+Produce **three files** in this order: `Hero.types.ts` → `Hero.tsx` → `Hero.styles.css`.
 
-type HeroProps = {
+### Hero.types.ts
+
+```ts
+export type HeroProps = {
   onPrimaryAction?: () => void;
   onSecondaryAction?: () => void;
 };
+```
+
+### Hero.tsx
+
+```tsx
+import { Button, Link } from 'neus-ui';
+import './Hero.styles.css';
+import type { HeroProps } from './Hero.types';
 
 export const Hero = ({ onPrimaryAction, onSecondaryAction }: HeroProps) => (
   <section className="hero">

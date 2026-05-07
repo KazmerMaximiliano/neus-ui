@@ -73,6 +73,38 @@ When the page has a features/services section, use `Card` with `icon`, `title`, 
 
 ## Phase 2 — Generate Artifact
 
+Produce **three files** in this order: `PageName.types.ts` → `PageName.tsx` → `PageName.styles.css`.
+
+### PageName.types.ts
+
+```ts
+export type NavItem = {
+  label: string;
+  href: string;
+};
+
+// Add section-specific types based on intake (services, portfolio items, event details, etc.)
+export type PageNameProps = {
+  // Static content — no API props for marketing copy
+};
+```
+
+### PageName.tsx
+
+```tsx
+import { Button, Card, Link } from 'neus-ui';
+import './PageName.styles.css';
+import type { PageNameProps } from './PageName.types';
+
+export const PageName = ({}: PageNameProps) => {
+  return (
+    <div className="landing">
+      {/* sections exactly as requested in intake */}
+    </div>
+  );
+};
+```
+
 Produce the page with exactly the sections requested. Flexible structure based on landing type. Use the same CSS patterns from `neus-landing-saas` references for style consistency.
 
 If it includes a contact form:
@@ -82,7 +114,7 @@ If it includes a contact form:
   <div className="landing__contact-form">
     <Input name="name" label="Name" required />
     <Input name="email" label="Email" type="email" required />
-    <Button label="Send" type="submit" variant="solid" color="primary" />
+    <Button label="Send" type="submit" variant="solid" color="primary" onClick={() => onSubmit?.()} />
   </div>
 </section>
 ```

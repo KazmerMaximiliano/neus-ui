@@ -42,20 +42,36 @@ Ask in free text:
 
 ## Phase 2 — Generate
 
-```tsx
-import { DataTable, Modal } from 'neus-ui';
-import { useState } from 'react';
+Produce **three files** in this order: `EntityTable.types.ts` → `EntityTable.tsx` → `EntityTable.styles.css`.
 
-type Entity = { id: number; /* exact fields */ };
+### EntityTable.types.ts
 
-type EntityTableProps = {
+```ts
+export type Entity = { id: number; /* exact fields from intake */ };
+
+export type PaginationInfo = {
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  total: number;
+};
+
+export type EntityTableProps = {
   data: Entity[];
-  pagination: { current_page: number; last_page: number; per_page: number; total: number };
+  pagination: PaginationInfo;
   onEdit?: (item: Entity) => void;
   onDelete?: (item: Entity) => void;
   onInfo?: (item: Entity) => void;
   onPaginationChange?: (params: { currentPage: number; pageSize: number }) => void;
 };
+```
+
+### EntityTable.tsx
+
+```tsx
+import { DataTable, Modal } from 'neus-ui';
+import { useState } from 'react';
+import type { Entity, EntityTableProps } from './EntityTable.types';
 
 export const EntityTable = ({ data, pagination, onEdit, onDelete, onInfo, onPaginationChange }: EntityTableProps) => {
   const [deleteTarget, setDeleteTarget] = useState<Entity | null>(null);

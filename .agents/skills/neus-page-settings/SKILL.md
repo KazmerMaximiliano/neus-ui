@@ -60,23 +60,38 @@ Also include in your reply:
 
 ## Phase 2 — Generate Artifact
 
-### Base structure
+Produce **three files**: `SettingsPage.tsx` + `SettingsPage.styles.css` + `SettingsPage.types.ts`.
 
-```tsx
-import { AppTemplate, Input, Select, Checkbox, Button } from 'neus-ui';
-// CSS goes in SettingsPage.styles.css — NEVER use <style> tags or inline styles
-import './SettingsPage.styles.css';
+### SettingsPage.types.ts
 
-type SettingsData = {
+```ts
+export type SettingsData = {
   // ...exact fields from intake
 };
 
-type SettingsPageProps = {
+export type SettingsPageProps = {
   defaultValues?: Partial<SettingsData>;
   onSave: (data: SettingsData) => void;
   loading?: boolean;
   routes?: SidebarItem[];
 };
+
+// SidebarItem is NOT exported from neus-ui — define locally
+export type SidebarItem = {
+  label: string;
+  icon?: React.ComponentType<{ size?: number }>;
+  onClick?: () => void;
+  active?: boolean;
+  visible?: boolean;
+};
+```
+
+### Base structure
+
+```tsx
+import { AppTemplate, Input, Select, Checkbox, Button } from 'neus-ui';
+import './SettingsPage.styles.css';
+import type { SettingsData, SettingsPageProps, SidebarItem } from './SettingsPage.types';
 
 export const SettingsPage = ({ defaultValues, onSave, loading, routes }: SettingsPageProps) => {
   const [values, setValues] = useState<Partial<SettingsData>>(defaultValues ?? {});

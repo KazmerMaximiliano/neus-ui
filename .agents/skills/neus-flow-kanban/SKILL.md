@@ -51,32 +51,40 @@ Ask in free text:
 
 ## Phase 2 — Generate
 
-```tsx
-import { AppTemplate, Card, Button, Dropdown } from 'neus-ui';
-import { MoreVertical, Plus } from 'lucide-react';
+Produce **three files** in this order: `KanbanBoard.types.ts` → `KanbanBoard.tsx` → `KanbanBoard.styles.css`.
 
-type TaskCard = {
+### KanbanBoard.types.ts
+
+```ts
+export type TaskCard = {
   id: number;
   title: string;
   // ...exact fields from intake
-  status: 'pending' | 'in_progress' | 'review' | 'done'; // match columns
+  status: 'pending' | 'in_progress' | 'review' | 'done'; // match columns from intake
 };
 
-type KanbanBoardProps = {
-  tasks: TaskCard[];           // from API — never hardcode
+export type KanbanBoardProps = {
+  tasks: TaskCard[];
   onMoveTask?: (taskId: number, newStatus: TaskCard['status']) => void;
   onEditTask?: (task: TaskCard) => void;
   onDeleteTask?: (taskId: number) => void;
   onAddTask?: (status: TaskCard['status']) => void;
-  routes?: SidebarItem[];
 };
+```
+
+### KanbanBoard.tsx
+
+```tsx
+import { AppTemplate, Card, Button, Dropdown } from 'neus-ui';
+import { MoreVertical, Plus } from 'lucide-react';
+import type { TaskCard, KanbanBoardProps } from './KanbanBoard.types';
 
 const COLUMNS = [
   { key: 'pending', label: '[Column 1 from intake]' },
   // ...exact columns from intake
 ];
 
-export const KanbanBoard = ({ tasks, onMoveTask, onEditTask, onDeleteTask, routes }: KanbanBoardProps) => {
+export const KanbanBoard = ({ tasks, onMoveTask, onEditTask, onDeleteTask }: KanbanBoardProps) => {
   const content = (
     <div className="kanban">
       <h1>[Board name from intake]</h1>

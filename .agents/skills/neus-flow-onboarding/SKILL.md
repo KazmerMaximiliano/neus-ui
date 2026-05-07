@@ -91,21 +91,34 @@ import { Card } from 'neus-ui';
 
 ## Base structure
 
+Produce **three files** in this order: `OnboardingFlow.types.ts` → `OnboardingFlow.tsx` → `OnboardingFlow.styles.css`.
+
+### OnboardingFlow.types.ts
+
+```ts
+export type OnboardingStep = {
+  title: string;
+  description: string;
+};
+
+export type OnboardingProps = {
+  onComplete: () => void;
+};
+```
+
+### OnboardingFlow.tsx
+
 ```tsx
 import { Button, Card, Input, Checkbox, Stepper } from 'neus-ui';
 import { useState } from 'react';
-// CSS goes in OnboardingFlow.styles.css — NEVER use <style> tags or inline styles
 import './OnboardingFlow.styles.css';
+import type { OnboardingProps } from './OnboardingFlow.types';
 
 const STEPS = [
   { title: '[Step 1 title from intake]', description: '[Step 1 desc from intake]' },
   { title: '[Step 2 title from intake]', description: '[Step 2 desc from intake]' },
   { title: '[Step 3 title from intake]', description: '[Step 3 desc from intake]' },
 ];
-
-type OnboardingProps = {
-  onComplete: () => void;
-};
 
 export const OnboardingFlow = ({ onComplete }: OnboardingProps) => {
   const [currentStep, setCurrentStep] = useState(0);

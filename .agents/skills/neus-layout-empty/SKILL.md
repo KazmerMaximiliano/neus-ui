@@ -41,15 +41,23 @@ Ask in free text:
 
 ## Phase 2 — Generate
 
+Produce **three files** in this order: `EmptyState.types.ts` → `EmptyState.tsx` → `EmptyState.styles.css`.
+
+### EmptyState.types.ts
+
+```ts
+export type EmptyStateProps = {
+  onAction?: () => void;
+};
+```
+
+### EmptyState.tsx
+
 ```tsx
 import { Button } from 'neus-ui';
 import { [IconName] } from 'lucide-react';
-// CSS goes in EmptyState.styles.css — NEVER use <style> tags or inline styles
 import './EmptyState.styles.css';
-
-type EmptyStateProps = {
-  onAction?: () => void;
-};
+import type { EmptyStateProps } from './EmptyState.types';
 
 export const EmptyState = ({ onAction }: EmptyStateProps) => (
   <div className="empty-state">

@@ -69,27 +69,42 @@ Also include in your reply:
 
 ## Phase 2 — Generate Artifact
 
-### Base structure
+Produce **three files**: `EntityDetail.tsx` + `EntityDetail.styles.css` + `EntityDetail.types.ts`.
 
-```tsx
-import { AppTemplate, Card, Actions, Modal, Button, Badge } from 'neus-ui';
-import { ArrowLeft, Edit, Trash2 } from 'lucide-react';
-// Requires: pnpm add lucide-react
-// CSS goes in EntityDetail.styles.css — NEVER use <style> tags or inline styles
-import './EntityDetail.styles.css';
+### EntityDetail.types.ts
 
-type Entity = {
+```ts
+export type Entity = {
   id: number;
   // ...exact fields from intake
 };
 
-type EntityDetailProps = {
+export type EntityDetailProps = {
   item: Entity;                    // from API — never hardcode
   onEdit?: () => void;
   onDelete?: () => void;
   onBack?: () => void;
   routes?: SidebarItem[];          // for AppTemplate
 };
+
+// SidebarItem is NOT exported from neus-ui — define locally
+export type SidebarItem = {
+  label: string;
+  icon?: React.ComponentType<{ size?: number }>;
+  onClick?: () => void;
+  active?: boolean;
+  visible?: boolean;
+};
+```
+
+### Base structure
+
+```tsx
+import { AppTemplate, Card, Actions, Modal, Button, Badge } from 'neus-ui';
+import { ArrowLeft, Edit, Trash2 } from 'lucide-react';
+// Requires: pnpm add lucide-react
+import './EntityDetail.styles.css';
+import type { Entity, EntityDetailProps, SidebarItem } from './EntityDetail.types';
 
 export const EntityDetail = ({
   item,

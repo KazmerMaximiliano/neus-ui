@@ -143,7 +143,6 @@ Based on the answers, decide which skills to invoke:
 | ------------------ | ---------------------------------------------------------------------------------------------------- |
 | App with dashboard | `neus-layout-app` → `neus-page-dashboard` → `neus-page-list` → `neus-page-form` → `neus-page-detail` |
 | Landing page       | `neus-layout-landing` → `neus-landing-saas`                                                          |
-| Pricing page       | `neus-landing-pricing`                                                                               |
 | App + Landing      | `neus-layout-landing` → `neus-landing-saas` → `neus-layout-app` → `neus-page-dashboard`              |
 | Form only          | `neus-page-form` or `neus-pattern-form`                                                              |
 | Table only         | `neus-page-list` or `neus-pattern-table`                                                             |
@@ -196,7 +195,6 @@ After all skills complete, verify:
 | `neus-page-dashboard`    | App views     | KPIs + data overview                        |
 | `neus-page-settings`     | App views     | Settings/preferences                        |
 | `neus-landing-saas`      | Marketing     | SaaS landing with hero + features + pricing |
-| `neus-landing-pricing`   | Marketing     | Standalone pricing page                     |
 | `neus-landing-generic`   | Marketing     | General-purpose landing                     |
 | `neus-page-auth`         | Marketing     | Login / register                            |
 | `neus-page-blog`         | Marketing     | Blog post / editorial article               |
@@ -226,6 +224,6 @@ After all skills complete, verify:
 5. Verify anti-slop.md and prop-constraints.md before each skill invocation
 6. If the user specifies exact colors (hex), use those instead of the preset
 7. Document in NEUS-DESING.md any missing component found during generation
-8. **CSS always goes in a separate file** — every component output is two files: `ComponentName.tsx` + `ComponentName.styles.css`. NEVER use `<style>` tags inside components or `style={{}}` inline props (exception: dynamic numeric values like progress bar widths that cannot come from a CSS class).
+8. **CSS and types always go in separate files** — every component output is three files: `ComponentName.tsx` + `ComponentName.styles.css` + `ComponentName.types.ts`. NEVER use `<style>` tags inside components or `style={{}}` inline props (exception: dynamic numeric values like progress bar widths that cannot come from a CSS class). NEVER declare `type` or `interface` inside `.tsx` files.
 9. **Sidebar shows ONLY top-level sections.** Secondary routes (create, edit, detail) MUST have `visible: false` in `buildRoutes` — they are reached via in-page buttons (list's "Create", row's "Edit"/"View"), NEVER via sidebar links. Only one sidebar entry per entity module (e.g. "Employees", not "Employees + Add Employee + Employee Detail").
 10. **Always pass the VISUAL DIRECTIVE block when invoking skills.** Skills must apply every directive: card colors, fill, H1 size, animation, and layout composition rules from design-personality.md.

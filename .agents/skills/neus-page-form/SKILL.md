@@ -88,17 +88,18 @@ Also include in your reply:
 ## Phase 2 — Generate Artifact
 
 Read `references/form-patterns.md` for special field patterns.
+Produce **three files**: `EntityForm.tsx` + `EntityForm.styles.css` + `EntityForm.types.ts`.
 
-### Base component structure
+### EntityForm.types.ts
 
-```tsx
-import { AppTemplate, FormTemplate, Input, Select, MultiSelect,
-         FileUploader, DateInput, TimeInput, InteractiveMap, FileType } from 'neus-ui';
+```ts
+export type SelectOption = { value?: string | null; label: string };
 
-// Types
-type SelectOption = { value?: string | null; label: string };
+export type Entity = {
+  // ...exact fields from intake
+};
 
-type EntityFormProps = {
+export type EntityFormProps = {
   // Edit mode: receive existing values
   defaultValues?: Partial<Entity>;
   // Backend-driven options (only for select/multiselect fields from API)
@@ -113,6 +114,24 @@ type EntityFormProps = {
   // AppTemplate routes (only if requested)
   routes?: SidebarItem[];
 };
+
+// SidebarItem is NOT exported from neus-ui — define locally
+export type SidebarItem = {
+  label: string;
+  icon?: React.ComponentType<{ size?: number }>;
+  onClick?: () => void;
+  active?: boolean;
+  visible?: boolean;
+};
+```
+
+### Base component structure
+
+```tsx
+import { AppTemplate, FormTemplate, Input, Select, MultiSelect,
+         FileUploader, DateInput, TimeInput, InteractiveMap, FileType } from 'neus-ui';
+import './EntityForm.styles.css';
+import type { Entity, EntityFormProps, SelectOption, SidebarItem } from './EntityForm.types';
 
 export const EntityForm = ({
   defaultValues,

@@ -107,17 +107,27 @@ Valid Select props: `options`, `name`, `value`, `defaultValue`, `placeholder`, `
 
 ## Link
 
-**`type` must match background color:**
+**Valid props:** `label`, `type`, `href`, `onClick`
 
-- `type="primary"` → colored text. Use on **light/white backgrounds** (nav headers, body, hero)
-- `type="secondary"` → muted gray. Use ONLY on **dark backgrounds**
+**`onClick` is supported** — use for inline actions in hero/CTA sections without page navigation.
+
+**`type` visual behavior:**
+
+- `type="primary"` → brand color text. Use on **light/white backgrounds** (nav headers, body, hero)
+- `type="secondary"` → muted gray (`--color-gray-500`). Legible on **both light and dark** backgrounds
 
 ```tsx
-// CORRECT — white nav header
+// CORRECT — primary in white nav header
 <Link label="Features" type="primary" href="#features" />
 
-// WRONG — secondary on white nav = invisible link
-<Link label="Features" type="secondary" href="#features" />
+// CORRECT — secondary as subdued style (works on any background)
+<Link label="Terms" type="secondary" href="/terms" />
+
+// CORRECT — onClick for hero CTA without navigation
+<Link label="See how it works →" type="primary" onClick={onSecondaryAction} />
+
+// WRONG — secondary is no longer invisible on light backgrounds; this is now valid
+// (old guidance was wrong — secondary now uses --color-gray-500)
 ```
 
 ---

@@ -14,6 +14,8 @@ Apply these rules in EVERY skill before emitting any artifact.
 - Generate a sidebar or AppTemplate for landing/marketing pages
 - Add features not in the intake ("I added a search bar just in case")
 - Use `any` TypeScript type — always type props correctly
+- Import `FormEvent` from React — React 19: use Button `type="submit"` + `onClick` instead
+- Declare `type` or `interface` in a `.tsx` file — all types must live in `ComponentName.types.ts`
 
 ## Self-Critique Mandatory (5 dimensions)
 
@@ -64,7 +66,54 @@ import './ComponentName.styles.css';
 .component-name { ... }
 ```
 
-Each skill output is **two files minimum**: `ComponentName.tsx` + `ComponentName.styles.css`.
+Each skill output is **three files minimum**: `ComponentName.tsx` + `ComponentName.styles.css` + `ComponentName.types.ts`.
+
+**Types file pattern** — all `type` and `interface` declarations MUST live in `ComponentName.types.ts`, not in the `.tsx` file:
+
+```ts
+// ComponentName.types.ts
+export type Entity = {
+  id: number;
+  // ...fields from intake
+};
+
+export type EntityProps = {
+  data: Entity[];
+  onEdit?: (item: Entity) => void;
+  // ...
+};
+
+// SidebarItem is NOT exported from neus-ui — define it here
+export type SidebarItem = {
+  label: string;
+  icon?: React.ComponentType<{ size?: number }>;
+  onClick?: () => void;
+  active?: boolean;
+  visible?: boolean;
+};
+```
+
+```tsx
+// ComponentName.tsx — import types, never redeclare them
+import type { Entity, EntityProps } from './ComponentName.types';
+import './ComponentName.styles.css';
+```
+
+## React 19 — Form Handling
+
+NEVER use `import { FormEvent } from 'react'` or `import type { FormEvent } from 'react'`.
+
+Use Button with `type="submit"` and `onClick`. No `<form onSubmit>` handler needed:
+
+```tsx
+<Button
+  label="Submit"
+  type="submit"
+  variant="solid"
+  color="primary"
+  onClick={() => onSubmit?.(data)}
+/>
+```
 
 ## Import Rule
 

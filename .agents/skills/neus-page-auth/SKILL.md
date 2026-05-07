@@ -59,16 +59,29 @@ Also include in your reply:
 
 ## Phase 2 — Generate Artifact
 
-```tsx
-import { Input, Button, Link } from 'neus-ui';
-// CSS goes in LoginPage.styles.css — NEVER use <style> tags or inline styles
-import './LoginPage.styles.css';
+Produce **three files**: `LoginPage.tsx` + `LoginPage.styles.css` + `LoginPage.types.ts`.
 
-type AuthFormProps = {
-  onSubmit: (credentials: { email: string; password: string }) => void;
+### LoginPage.types.ts
+
+```ts
+export type AuthCredentials = {
+  email: string;
+  password: string;
+};
+
+export type AuthFormProps = {
+  onSubmit: (credentials: AuthCredentials) => void;
   loading?: boolean;
   error?: string;
 };
+```
+
+### LoginPage.tsx
+
+```tsx
+import { Input, Button, Link } from 'neus-ui';
+import './LoginPage.styles.css';
+import type { AuthCredentials, AuthFormProps } from './LoginPage.types';
 
 export const LoginPage = ({ onSubmit, loading, error }: AuthFormProps) => {
   const [email, setEmail] = useState('');

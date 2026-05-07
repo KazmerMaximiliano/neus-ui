@@ -41,14 +41,27 @@ Ask in free text:
 
 ## Phase 2 — Generate
 
-```tsx
-import { Button, Link, ThemeProvider } from 'neus-ui';
-// CSS goes in LandingLayout.styles.css — NEVER use <style> tags or inline styles
-import './LandingLayout.styles.css';
+Produce **three files** in this order: `LandingLayout.types.ts` → `LandingLayout.tsx` → `LandingLayout.styles.css`.
 
-type LandingLayoutProps = {
+### LandingLayout.types.ts
+
+```ts
+export type NavItem = {
+  label: string;
+  href: string;
+};
+
+export type LandingLayoutProps = {
   children: React.ReactNode;
 };
+```
+
+### LandingLayout.tsx
+
+```tsx
+import { Button, Link, ThemeProvider } from 'neus-ui';
+import './LandingLayout.styles.css';
+import type { LandingLayoutProps } from './LandingLayout.types';
 
 export const LandingLayout = ({ children }: LandingLayoutProps) => (
   <ThemeProvider initialTheme={{ primaryColor: '[hex from intake]' }}>

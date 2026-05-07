@@ -49,6 +49,26 @@ Ask in free text:
 
 Read `references/sidebar-patterns.md`.
 
+Produce **three files** in this order: `AppShell.types.ts` → `AppShell.tsx` → `AppShell.styles.css`.
+
+### AppShell.types.ts
+
+```ts
+export type SidebarItem = {
+  label: string;
+  icon?: React.ComponentType<{ size?: number }>;
+  onClick?: () => void;
+  active?: boolean;
+  visible?: boolean;
+};
+
+export type AppShellProps = {
+  children: React.ReactNode;
+  activeRoute?: string;
+  onNavigate?: (route: string) => void;
+};
+```
+
 ### Navigation rule — sidebar vs. in-page access
 
 **CRITICAL:** The sidebar shows ONLY top-level sections (e.g. "Employees", "Products").
@@ -75,22 +95,8 @@ WRONG:
 ```tsx
 import { AppTemplate, ThemeProvider } from 'neus-ui';
 import { Home, Users, Package, [OtherIcons] } from 'lucide-react';
+import type { SidebarItem, AppShellProps } from './AppShell.types';
 // Requires: pnpm add lucide-react
-
-// SidebarItem is NOT exported from neus-ui — define locally
-type SidebarItem = {
-  label: string;
-  icon?: React.ComponentType<{ size?: number }>;
-  onClick?: () => void;
-  active?: boolean;
-  visible?: boolean;
-};
-
-type AppShellProps = {
-  children: React.ReactNode;
-  activeRoute?: string;
-  onNavigate?: (route: string) => void;
-};
 
 const buildRoutes = (activeRoute: string, onNavigate: (r: string) => void) => [
   {

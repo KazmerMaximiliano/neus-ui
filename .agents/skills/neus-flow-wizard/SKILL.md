@@ -46,23 +46,39 @@ Ask in free text:
 
 ## Phase 2 — Generate
 
+Produce **three files** in this order: `WizardForm.types.ts` → `WizardForm.tsx` → `WizardForm.styles.css`.
+
+### WizardForm.types.ts
+
+```ts
+export type WizardStep = {
+  title: string;
+};
+
+export type WizardFormData = {
+  // exact fields from intake across all steps
+};
+
+export type WizardProps = {
+  onSubmit: (allData: WizardFormData) => void;
+  loading?: boolean;
+  // Backend-driven options per step — add only if intake has backend selects
+  // [field]Options?: SelectOption[];
+};
+```
+
+### WizardForm.tsx
+
 ```tsx
 import { FormTemplate, Input, Select, Button, Stepper } from 'neus-ui';
 import { useState } from 'react';
-// CSS goes in WizardForm.styles.css — NEVER use <style> tags or inline styles
 import './WizardForm.styles.css';
+import type { WizardProps, WizardFormData } from './WizardForm.types';
 
 const STEPS = [
   { title: '[Step 1 title]', fields: [...] },
   { title: '[Step 2 title]', fields: [...] },
 ];
-
-type WizardProps = {
-  onSubmit: (allData: WizardFormData) => void;
-  loading?: boolean;
-  // Backend-driven options per step
-  [field]Options?: SelectOption[];
-};
 
 export const WizardForm = ({ onSubmit, loading }: WizardProps) => {
   const [step, setStep] = useState(0);

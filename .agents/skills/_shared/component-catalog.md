@@ -451,7 +451,7 @@ import { InteractiveMap } from "neus-ui";
 
 ## Link
 
-Styled navigation link.
+Inline hyperlink. Renders as plain text — no borders, no uppercase, no padding. Underline appears on hover.
 
 ```tsx
 import { Link } from "neus-ui";
@@ -461,13 +461,18 @@ import { Link } from "neus-ui";
   type="primary" // 'primary' | 'secondary'
   href="/products"
 />;
+
+{/* With onClick — use when no page navigation is needed */}
+<Link label="Learn more →" type="primary" onClick={onSecondaryAction} />;
 ```
+
+**Props:** `label` (required), `type` (`'primary' | 'secondary'`, default `'primary'`), `href` (default `'#'`), `onClick` (`() => void`)
 
 **CRITICAL — type usage:**
 
-- `type="primary"` → colored text (uses `--color-primary`). Use on **light/white backgrounds** — nav headers, body text, hero sections.
-- `type="secondary"` → muted gray text. Use **only on dark backgrounds** (dark footers, colored sections) where primary color would clash.
-- **Common mistake**: using `type="secondary"` in a white nav header makes the link nearly invisible. Default to `type="primary"` unless the background is dark.
+- `type="primary"` → brand color text (`--color-primary`). Use on **light/white backgrounds** — nav headers, body text, hero sections.
+- `type="secondary"` → muted gray text (`--color-gray-500`). Safe on **any background** (light or dark) when a subdued style is needed.
+- **Common mistake**: do NOT pass both `href` and `onClick` expecting navigation — `onClick` fires but `href` still navigates. Use one or the other.
 
 ---
 
