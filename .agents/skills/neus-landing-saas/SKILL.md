@@ -42,6 +42,7 @@ Read:
 - `.agents/skills/_shared/theme-config.md` — ThemeProvider config
 - `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE from neus-designer context; enforce layout composition, typography scale, color usage, and animation budget
 - `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
+- `.agents/skills/_shared/layout-patterns.md` — optional advanced landing patterns (stats row, section-head split, hero showcase grid, eyebrow pill, compact tile grid)
 - `references/landing-sections.md` — section patterns
 
 ## Phase 0 — Collect Data
@@ -197,13 +198,16 @@ Use `Card` with `highlighted` prop. Compose full content in `children`:
 
 ## Phase 3 — ProductLanding.styles.css
 
+Apply Mode from VISUAL DIRECTIVE. Consult `.agents/skills/_shared/layout-patterns.md` landing section for optional advanced patterns (stats row, section-head split, hero showcase grid, compact tile grid, eyebrow pill).
+
 ```css
 @keyframes neus-fade-up {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.landing { font-family: inherit; }
+/* Light mode (default) */
+.landing { font-family: var(--font-display); }
 .landing__nav {
   position: sticky;
   top: 0;
@@ -212,10 +216,14 @@ Use `Card` with `highlighted` prop. Compose full content in `children`:
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border-light);
-  box-shadow: 0 2px 8px var(--color-shadow);
+  /* Light glass nav */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
+/* Dark mode nav — apply when Mode: dark */
+/* .landing__nav { background: rgba(10, 10, 20, 0.8); border-bottom: 1px solid rgba(255,255,255,0.06); } */
 .landing__hero {
   display: grid;
   grid-template-columns: 1.4fr 0.6fr;
@@ -228,12 +236,17 @@ Use `Card` with `highlighted` prop. Compose full content in `children`:
 /* If no visual element on right side, use centered single-column: */
 /* .landing__hero { text-align: center; padding: 6rem 2rem; max-width: 800px; margin: 0 auto; } */
 .landing__hero h1 {
+  font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--color-gray-900);
   margin-bottom: 1rem;
   animation: neus-fade-up 0.5s ease forwards;
 }
+/* Dark mode H1 — gradient text option */
+/* .landing__hero h1 { color: #e2e8f0; }
+   Apply .neus-gradient-text on the H1 element for gradient text effect */
 .landing__hero p {
   font-size: 1.25rem;
   color: var(--color-gray-600);
@@ -248,7 +261,14 @@ Use `Card` with `highlighted` prop. Compose full content in `children`:
   animation: neus-fade-up 0.5s 0.2s ease both;
 }
 .landing__features { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
-.landing__features h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 3rem; color: var(--color-gray-900); }
+.landing__features h2 {
+  font-family: var(--font-display);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: var(--color-gray-900);
+}
 /* Flagship feature: first card spans full width */
 .landing__features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
 .landing__features-grid > *:first-child { grid-column: 1 / -1; }
@@ -261,4 +281,10 @@ Use `Card` with `highlighted` prop. Compose full content in `children`:
 .landing__features-alt { background: var(--color-primary-light); }
 /* Footer CTA */
 .landing__cta-section { background: var(--color-primary-light); padding: 6rem 2rem; text-align: center; }
+
+/* Dark mode page overrides — apply when Mode: dark */
+/* .landing { background: #0a0a14; color: #e2e8f0; } */
+/* .landing__features h2 { color: #e2e8f0; } */
+/* .landing__features-alt { background: rgba(20,20,40,0.4); } */
+/* .landing__cta-section { background: rgba(99,102,241,0.1); border-top: 1px solid rgba(129,140,248,0.2); } */
 ```

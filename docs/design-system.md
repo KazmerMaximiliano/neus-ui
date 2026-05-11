@@ -177,70 +177,171 @@ Fixed colors not affected by `updateTheme`.
 
 ## Typography
 
-Neus UI does not ship a custom font. The base stack is system sans-serif.
+Neus UI ships **Manrope** as its primary typeface (loaded from Google Fonts) and **JetBrains Mono** for code and metadata. The base font is set via CSS variables and applied to `html, body` in the library stylesheet — all components inherit it automatically.
+
+### Font Tokens
+
+| Token            | Value                                          | Usage                      |
+| ---------------- | ---------------------------------------------- | -------------------------- |
+| `--font-display` | `"Manrope", system-ui, sans-serif`             | Display and UI text        |
+| `--font-body`    | `"Manrope", system-ui, sans-serif`             | Body and component text    |
+| `--font-mono`    | `"JetBrains Mono", ui-monospace, monospace`    | Code, tokens, metadata     |
+
+To use the monospace family in your own CSS:
 
 ```css
-font-family: Arial, Helvetica, sans-serif;
-font-size: 16px; /* base */
+.my-code { font-family: var(--font-mono); }
 ```
+
+Or use the utility class:
+
+```html
+<span class="neus-mono">API key: abc123</span>
+```
+
+### Font Size Scale
+
+| Token       | Value  | Role                          |
+| ----------- | ------ | ----------------------------- |
+| `--fs-xs`   | `12px` | Eyebrow, caption, badge       |
+| `--fs-sm`   | `13px` | Button label, helper text     |
+| `--fs-base` | `14px` | Body default (standard UI)    |
+| `--fs-md`   | `16px` | Body large, base font-size    |
+| `--fs-lg`   | `18px` | Card title, section heads     |
+| `--fs-xl`   | `20px` | Section title                 |
+| `--fs-2xl`  | `24px` | Subsection heading            |
+| `--fs-3xl`  | `32px` | Section heading               |
+| `--fs-4xl`  | `48px` | Main heading                  |
+| `--fs-5xl`  | `64px` | Hero / display                |
 
 ### Text Styles Used Across Components
 
-| Role           | Size     | Weight | Transform   | Notes                       |
-| -------------- | -------- | ------ | ----------- | --------------------------- |
-| Button label   | `0.7em`  | `bold` | `uppercase` | Letter-spacing `0.25em`     |
-| Input label    | `0.9em`  | `500`  | —           | Shown above the field       |
-| Error message  | `0.8em`  | `400`  | —           | Color `--color-error`       |
-| Modal title    | `1.25rem`| `600`  | —           |                             |
-| Section heading| `18px`   | `600`  | —           | WeekCalendar title          |
-| Body / default | `1rem`   | `400`  | —           |                             |
+| Role           | Size          | Weight | Transform   | Notes                       |
+| -------------- | ------------- | ------ | ----------- | --------------------------- |
+| Button label   | `var(--fs-sm)`| `bold` | `uppercase` | Letter-spacing `0.25em`     |
+| Input label    | `0.9em`       | `500`  | —           | Shown above the field       |
+| Error message  | `0.85em`      | `400`  | —           | Color `--color-error`       |
+| Modal title    | `1.25rem`     | `600`  | —           |                             |
+| Section heading| `var(--fs-lg)`| `600`  | —           | WeekCalendar title          |
+| Body / default | `var(--fs-md)`| `400`  | —           |                             |
 
 ---
 
 ## Spacing
 
-Components use a mix of `em` (scales with font size) and fixed `px`/`rem` values.
+Neus UI uses a **4px base unit** spacing scale. Prefer these tokens over ad-hoc values.
 
-### Common Padding Values
+### Spacing Tokens
 
-| Context              | Value          |
-| -------------------- | -------------- |
-| Button               | `1.25em 3em`   |
-| Input / Select field | `1em 2em`      |
-| Sidebar button       | `1.25em 2em`   |
-| Card                 | `1rem`         |
-| Modal header / body  | `1.5rem`       |
-| Modal footer         | `1rem 1.5rem`  |
-| Calendar             | `1rem 1.5rem`  |
-| WeekCalendar outer   | `20px 32px`    |
+| Token        | Value  |
+| ------------ | ------ |
+| `--space-1`  | `4px`  |
+| `--space-2`  | `8px`  |
+| `--space-3`  | `12px` |
+| `--space-4`  | `16px` |
+| `--space-6`  | `24px` |
+| `--space-8`  | `32px` |
+| `--space-12` | `48px` |
+| `--space-16` | `64px` |
 
-### Common Gap Values
+### Common Component Padding
 
-`0.5rem` · `0.75rem` · `1rem` · `8px` · `16px`
+| Context              | Value                    |
+| -------------------- | ------------------------ |
+| Button (medium)      | `12px 22px`              |
+| Button (small)       | `8px 14px`               |
+| Button (large)       | `16px 28px`              |
+| Input / Select field | `1em 2em`                |
+| Sidebar button       | `1.25em 2em`             |
+| Card                 | `1rem`                   |
+| Modal header / body  | `1.5rem`                 |
+| Modal footer         | `1rem 1.5rem`            |
+| WeekCalendar outer   | `20px 32px`              |
 
 ---
 
 ## Border Radius
 
-| Context                               | Value              | Shape    |
-| ------------------------------------- | ------------------ | -------- |
-| `--radius-default`                    | `16px`             | Cards, modals, dropdowns, panels |
-| Buttons, inputs, selects              | `3em`              | Pill     |
-| Sidebar corners                       | `32px`             | Rounded panel |
-| Event cells, avatars, clock face      | `50%`              | Circle   |
-| Checkbox                              | `4px`              | Slightly rounded square |
-| WeekCalendar grid cells               | `8px`              | Subtle   |
+| Token              | Value  | Usage                                    |
+| ------------------ | ------ | ---------------------------------------- |
+| `--radius-default` | `16px` | Cards, modals, dropdowns, panels         |
+| `--radius-md`      | `12px` | Inputs, chips, search fields             |
+| `--radius-sm`      | `8px`  | Tags, small surface accents              |
+| `--radius-pill`    | `3em`  | Buttons, pill inputs, selects            |
+| —                  | `32px` | Sidebar corners                          |
+| —                  | `50%`  | Avatars, clock face, dot indicators      |
+| —                  | `4px`  | Checkbox                                 |
 
 ---
 
-## Shadows
+## Shadows & Glows
 
-| Context                    | Value                                  |
-| -------------------------- | -------------------------------------- |
-| Modal, Dropdown panel      | `0 4px 20px var(--color-shadow)`       |
-| Dropdown item hover        | `0 4px 8px var(--color-shadow)`        |
-| Date / Time picker panel   | `0 4px 12px rgba(0, 0, 0, 0.15)`      |
-| DataTable card (active)    | `0 2px 8px rgba(0, 0, 0, 0.12)`       |
+### Component Shadows
+
+| Context                    | Value                                             |
+| -------------------------- | ------------------------------------------------- |
+| Modal, Dropdown panel      | `0 4px 20px var(--color-shadow)`                  |
+| DataTable card (active)    | `0 2px 8px var(--color-shadow)`                   |
+| Date / Time picker panel   | `0 4px 12px rgba(0, 0, 0, 0.15)`                 |
+| Button solid primary       | `inset 0 1px 0 rgba(255,255,255,0.25), 0 8px 24px -6px rgba(99,102,241,0.55)` |
+| Button solid success       | `inset 0 1px 0 rgba(255,255,255,0.3), 0 8px 24px -6px rgba(74,222,128,0.4)`  |
+| Button solid error         | `inset 0 1px 0 rgba(255,255,255,0.25), 0 8px 24px -6px rgba(248,113,113,0.4)` |
+| Checkbox checked           | `0 4px 12px -4px rgba(99,102,241,0.6)`           |
+| Input focus ring           | `inset 0 1px 2px rgba(0,0,0,0.2), 0 0 0 3px rgba(129,140,248,0.18)` |
+| Input error focus ring     | `0 0 0 3px rgba(248,113,113,0.18)`               |
+
+### Glow Tokens
+
+Use these tokens for glow effects in custom components or decorative surfaces.
+
+| Token                | Value                                                               | Usage               |
+| -------------------- | ------------------------------------------------------------------- | ------------------- |
+| `--glow-brand`       | `0 0 40px rgba(99, 102, 241, 0.35)`                                | Subtle indigo glow  |
+| `--glow-brand-strong`| `0 0 60px rgba(99, 102, 241, 0.5), 0 0 100px rgba(217, 70, 239, 0.25)` | Hero glow      |
+| `--glow-cyan`        | `0 0 30px rgba(34, 211, 238, 0.4)`                                 | Accent cyan glow    |
+
+```css
+.my-card { box-shadow: var(--glow-brand); }
+```
+
+---
+
+## Gradients
+
+Brand gradients are available as tokens for decorative use. Do not apply them to interactive state backgrounds.
+
+| Token                  | Value                                                                         | Usage                    |
+| ---------------------- | ----------------------------------------------------------------------------- | ------------------------ |
+| `--gradient-brand`     | `linear-gradient(135deg, #22d3ee 0%, #6366f1 45%, #d946ef 100%)`             | Spectrum accent gradient |
+| `--gradient-brand-soft`| `linear-gradient(135deg, rgba(34,211,238,0.18) … rgba(217,70,239,0.18) 100%)`| Subtle tinted surface    |
+
+```css
+.hero-title { background: var(--gradient-brand); }
+```
+
+Or use the utility class for gradient text:
+
+```html
+<h1 class="neus-gradient-text">Welcome to Neus UI</h1>
+```
+
+---
+
+## Utility Classes
+
+The library exposes three global utility classes available after importing the stylesheet.
+
+| Class                | Description                                                      |
+| -------------------- | ---------------------------------------------------------------- |
+| `.neus-gradient-text`| Clips the brand gradient as text fill (use on headings)          |
+| `.neus-eyebrow`      | Uppercase, spaced label in primary color. Used for section labels|
+| `.neus-mono`         | Switches font to `--font-mono` (JetBrains Mono)                 |
+
+```html
+<p class="neus-eyebrow">New feature</p>
+<h2 class="neus-gradient-text">Built for the modern web</h2>
+<code class="neus-mono">const x = 42;</code>
+```
 
 ---
 
@@ -299,13 +400,13 @@ Every interactive component follows this state model:
 
 ### Button Variants
 
-| Variant    | Background     | Border      | Text color   |
-| ---------- | -------------- | ----------- | ------------ |
-| `solid`    | Color main     | None        | White        |
-| `outlined` | Transparent    | Color main  | Color main   |
-| `text`     | Transparent    | None        | Color main   |
+| Variant    | Background                  | Border         | Text color          |
+| ---------- | --------------------------- | -------------- | ------------------- |
+| `solid`    | Gradient (color-based glow) | None           | White (dark on success) |
+| `outlined` | Transparent                 | Inset shadow   | Color main          |
+| `text`     | Transparent                 | None           | Color main          |
 
-All variants share the same hover, loading, and disabled logic.
+Solid primary/info use an indigo gradient with a glow shadow. Solid success uses a green gradient with dark text (`#052e16`). Solid error uses a red gradient. All variants share hover, loading, and disabled logic. Active state adds `transform: translateY(1px)`.
 
 ### Color Prop Behavior
 

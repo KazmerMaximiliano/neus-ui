@@ -94,6 +94,7 @@ export const EntityCardGrid = ({ items, onSelect }: EntityCardGridProps) => (
 
 ### EntityCardGrid.styles.css
 
+Apply Mode from VISUAL DIRECTIVE.
 
 ```css
 .card-grid {
@@ -101,5 +102,14 @@ export const EntityCardGrid = ({ items, onSelect }: EntityCardGridProps) => (
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.25rem;
 }
-.card-grid__title { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.card-grid__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .card-grid wrapper: background: #0a0a14; padding: 2rem; */
+/* Card component handles its own surface — use fill={true} for colored cards or let Card handle glass via parent */
 ```

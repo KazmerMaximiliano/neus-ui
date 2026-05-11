@@ -16,6 +16,9 @@ Apply these rules in EVERY skill before emitting any artifact.
 - Use `any` TypeScript type — always type props correctly
 - Import `FormEvent` from React — React 19: use Button `type="submit"` + `onClick` instead
 - Declare `type` or `interface` in a `.tsx` file — all types must live in `ComponentName.types.ts`
+- Hardcode `Arial`, `Helvetica`, or generic `sans-serif` as a display font stack — use `var(--font-display)` (Manrope is now the library default)
+- Use flat `border` to style a Button outlined element — the component uses `inset box-shadow` internally; a border override will conflict visually
+- Override Button disabled opacity with `0.6` — the current spec is `0.4`
 
 ## Self-Critique Mandatory (5 dimensions)
 
@@ -49,6 +52,10 @@ Run this internal check before emitting code. If any dimension fails, fix it fir
 2. Use `var(--color-primary)`, `var(--color-gray-300)` etc. for theme consistency
 3. Custom CSS only when component props cannot achieve the layout requirement
 4. Never override component internals with `!important`
+5. Prefer `var(--fs-*)` tokens over hardcoded `px` font sizes (e.g. `var(--fs-sm)` instead of `13px`)
+6. Prefer `var(--space-*)` tokens over hardcoded `px` spacing where a token maps cleanly
+7. Prefer `var(--radius-sm)`, `var(--radius-md)`, `var(--radius-pill)` over hardcoded radius values
+8. Use `var(--font-display)` for headings and UI labels; `var(--font-mono)` for code, metadata, KPI labels
 
 **CRITICAL — CSS must always go in a separate file. Never inline.**
 

@@ -9,13 +9,14 @@ export const Button = ({
   type = "button",
   variant = "solid",
   color = "primary",
+  size = "medium",
   fullWidth = false,
   disabled = false,
   loading = false,
   onClick,
 }: ButtonProps) => {
   const colors = useColors();
-  const buttonClasses = getButtonClasses(variant, color, fullWidth);
+  const buttonClasses = getButtonClasses(variant, color, size, fullWidth);
   const loaderColor = getLoaderColor(variant, color, colors);
 
   return (

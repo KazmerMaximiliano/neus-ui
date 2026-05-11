@@ -167,8 +167,15 @@ export const OnboardingFlow = ({ onComplete }: OnboardingProps) => {
 
 ### OnboardingFlow.styles.css
 
+Apply Mode from VISUAL DIRECTIVE: `light` → white background, white card; `dark` → dark canvas, glass card.
 
 ```css
+@keyframes neus-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Light mode (default) */
 .onboarding {
   min-height: 100vh;
   display: flex;
@@ -176,10 +183,23 @@ export const OnboardingFlow = ({ onComplete }: OnboardingProps) => {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: var(--color-white);
+  background: var(--color-gray-100);
 }
+.onboarding__step { animation: neus-fade-up 0.5s ease forwards; }
 .onboarding__content { max-width: 480px; text-align: center; margin-bottom: 3rem; }
-.onboarding__content h2 { font-size: 1.75rem; font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem; }
+.onboarding__content h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: 1rem;
+}
 .onboarding__content p { font-size: 1rem; color: var(--color-gray-600); line-height: 1.6; }
 .onboarding__nav { display: flex; gap: 1rem; align-items: center; }
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .onboarding { background: #0a0a14; color: #e2e8f0; } */
+/* .onboarding__content h2 { color: #e2e8f0; } */
+/* .onboarding__content p { color: #94a3b8; } */
+/* Card wrapper: background: rgba(20,20,40,0.55); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 2.5rem; */
 ```

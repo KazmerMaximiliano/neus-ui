@@ -28,6 +28,11 @@ const meta: Meta<typeof ButtonComponent> = {
       options: ["primary", "success", "error", "info"],
       description: "The color scheme of the button",
     },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "The size of the button",
+    },
     disabled: {
       control: "boolean",
       description: "Disables the button when true",
@@ -55,6 +60,7 @@ export const Button: Story = {
     type: "button",
     variant: "solid",
     color: "primary",
+    size: "medium",
     disabled: false,
     fullWidth: false,
     loading: false,

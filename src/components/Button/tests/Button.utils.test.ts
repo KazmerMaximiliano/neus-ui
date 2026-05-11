@@ -4,24 +4,33 @@ import { getButtonClasses, getLoaderColor } from "../Button.utils";
 
 describe("getButtonClasses", () => {
   it("returns base button class", () => {
-    const result = getButtonClasses("solid", "primary", false);
+    const result = getButtonClasses("solid", "primary", "medium", false);
     expect(result).toContain("button");
   });
 
   it("returns correct variant-color class", () => {
-    const result = getButtonClasses("solid", "primary", false);
+    const result = getButtonClasses("solid", "primary", "medium", false);
     expect(result).toContain("button--solid");
     expect(result).toContain("button--primary");
   });
 
   it("includes fullWidth class when true", () => {
-    const result = getButtonClasses("solid", "primary", true);
+    const result = getButtonClasses("solid", "primary", "medium", true);
     expect(result).toContain("button--full-width");
   });
 
   it("does not include fullWidth class when false", () => {
-    const result = getButtonClasses("solid", "primary", false);
+    const result = getButtonClasses("solid", "primary", "medium", false);
     expect(result).not.toContain("button--full-width");
+  });
+
+  it.each([
+    ["small"],
+    ["medium"],
+    ["large"],
+  ])("includes size class button--%s", (size) => {
+    const result = getButtonClasses("solid", "primary", size, false);
+    expect(result).toContain(`button--${size}`);
   });
 
   it.each([
@@ -38,13 +47,13 @@ describe("getButtonClasses", () => {
     ["text", "error"],
     ["text", "info"],
   ])("returns correct class for %s variant with %s color", (variant, color) => {
-    const result = getButtonClasses(variant, color, false);
+    const result = getButtonClasses(variant, color, "medium", false);
     expect(result).toContain(`button--${variant}`);
     expect(result).toContain(`button--${color}`);
   });
 
   it("returns trimmed string without extra spaces when fullWidth is false", () => {
-    const result = getButtonClasses("solid", "primary", false);
+    const result = getButtonClasses("solid", "primary", "medium", false);
     expect(result).not.toMatch(/\s{2,}/);
   });
 });

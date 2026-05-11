@@ -164,6 +164,7 @@ export const EntityDetail = ({
 
 ### EntityDetail.styles.css
 
+Apply Mode from VISUAL DIRECTIVE.
 
 ```css
 .entity-detail { padding: 1.5rem; }
@@ -181,16 +182,23 @@ export const EntityDetail = ({
   border-bottom: 1px solid var(--color-border-light);
 }
 .entity-detail__label {
-  font-size: 0.8em;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
   color: var(--color-gray-500);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.15em;
 }
 .entity-detail__value {
+  font-family: var(--font-display);
   font-size: 1rem;
   color: var(--color-gray-900);
 }
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .entity-detail { background: #0a0a14; color: #e2e8f0; } */
+/* .entity-detail__value { color: #e2e8f0; } */
+/* .entity-detail__field { border-color: rgba(255,255,255,0.08); } */
 ```
 
 ### Status field pattern

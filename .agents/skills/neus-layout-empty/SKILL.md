@@ -92,6 +92,15 @@ export const EmptyState = ({ onAction }: EmptyStateProps) => (
   gap: 1rem;
 }
 .empty-state__icon { margin-bottom: 0.5rem; }
-.empty-state__title { font-size: 1.25rem; font-weight: 600; color: var(--color-gray-700); }
+.empty-state__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-gray-700);
+}
 .empty-state__description { font-size: 0.95rem; color: var(--color-gray-500); max-width: 320px; line-height: 1.5; }
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .empty-state__title { color: #e2e8f0; } */
+/* .empty-state__description { color: #94a3b8; } */
 ```

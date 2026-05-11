@@ -53,6 +53,7 @@ Before starting any phase, read these reference files:
 - `.agents/skills/_shared/theme-config.md` — theming system configuration
 - `.agents/skills/_shared/design-personality.md` — visual creativity and personality directives
 - `.agents/skills/_shared/checklist.md` — P0/P1/P2 checklist
+- `.agents/skills/_shared/layout-patterns.md` — optional reference layout patterns from new_design/kits
 
 ---
 
@@ -70,6 +71,10 @@ I need to understand the visual identity of your project before generating anyth
 - Corporate and formal — blues, grays (B2B dashboards, enterprise tools)
 - Creative and expressive — soft gradients, artistic palettes (portfolios, agencies, media)
 
+**Visual mode** — What surface style should the UI use?
+- Light (recommended default) — white/gray surfaces, clean and readable
+- Dark — dark canvas (`#0a0a14`) with glass surfaces (`backdrop-filter: blur`), rich depth
+
 **Theme** — Will the app have dark mode, light mode, or both?
 - Light mode only (recommended — simpler to implement)
 - Dark mode only (entertainment apps, dev tools)
@@ -82,10 +87,9 @@ I need to understand the visual identity of your project before generating anyth
 - Soft / friendly — rounded borders, pastel colors, illustrative icons
 
 **Typography** — How should the typography feel?
-- Modern and tech (recommended) — clean sans-serif, well-spaced (SaaS, tech apps)
+- Modern and tech (recommended) — Manrope display + JetBrains Mono for metadata (default Neus UI fonts)
 - Classic and elegant — humanist style (education, health, editorial)
 - Friendly and casual — rounded sans-serif (consumer apps, social networks)
-- Use system default — Arial/Helvetica from the Neus UI design system
 
 ---
 
@@ -125,11 +129,16 @@ Then read `.agents/skills/_shared/design-personality.md` and select the personal
 VISUAL DIRECTIVE:
 - Palette: [Vibrant / Neutral / Corporate / Creative]
 - Personality: [Kinetic / Airy / Structured / Layered]
+- Mode: [light / dark]
 - Animation: [neus-fade-up on [element] / neus-slide-in on [element] / none]
 - Layout: [asymmetric 2-col hero / flagship-card grid / left-border H1 / centered auth]
 - H1: [clamp(2.5rem,6vw,4rem) weight-800 / 1.75rem weight-700 + left-border / 1.5rem weight-700]
 - Card colors: [blue+green+purple+yellow / primary fills / grayscale]
 ```
+
+**Mode resolution:**
+- `light` → skills use `background: var(--color-white); border: 1px solid var(--color-border-light)` for surfaces
+- `dark` → skills use glass surfaces (`background: rgba(20,20,40,0.55); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08)`) on a dark canvas (`background: #0a0a14; color: #e2e8f0`)
 
 Document the resolved theme colors and the VISUAL DIRECTIVE block to carry through all remaining phases.
 
@@ -181,6 +190,9 @@ After all skills complete, verify:
 - No extra fields beyond what was requested
 - CSS variables are consistent
 - VISUAL DIRECTIVE was applied: KPI cards have `fill={true}`, H1 sizes match the directive, animations are present where specified
+- Mode consistency: if dark mode was selected, no `background: var(--color-white)` in generated CSS; if light, no dark canvas values
+- Page headings use `font-family: var(--font-display)` — not Arial/Helvetica
+- Monospace metadata (KPI labels, field labels, table headers) use `font-family: var(--font-mono)` where applicable
 
 ---
 
@@ -224,3 +236,4 @@ After all skills complete, verify:
 8. **CSS and types always go in separate files** — every component output is three files: `ComponentName.tsx` + `ComponentName.styles.css` + `ComponentName.types.ts`. NEVER use `<style>` tags inside components or `style={{}}` inline props (exception: dynamic numeric values like progress bar widths that cannot come from a CSS class). NEVER declare `type` or `interface` inside `.tsx` files.
 9. **Sidebar shows ONLY top-level sections.** Secondary routes (create, edit, detail) MUST have `visible: false` in `buildRoutes` — they are reached via in-page buttons (list's "Create", row's "Edit"/"View"), NEVER via sidebar links. Only one sidebar entry per entity module (e.g. "Employees", not "Employees + Add Employee + Employee Detail").
 10. **Always pass the VISUAL DIRECTIVE block when invoking skills.** Skills must apply every directive: card colors, fill, H1 size, animation, and layout composition rules from design-personality.md.
+11. **Always resolve and pass Mode (light/dark) in the VISUAL DIRECTIVE.** Light is the default when not specified. Dark mode means: canvas `background: #0a0a14; color: #e2e8f0`, glass surfaces `background: rgba(20,20,40,0.55); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08)`. Do not mix dark canvas with white surface CSS.

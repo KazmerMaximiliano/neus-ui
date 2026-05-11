@@ -69,19 +69,34 @@ These are additive to `anti-slop.md`. All colors still come from `var(--color-*)
 
 ## Section 4 — Typography Scale
 
-Neus UI base: Arial/Helvetica, 16px. These overrides go in `.styles.css`:
+Neus UI base: **Manrope** (`--font-display`), 16px. JetBrains Mono (`--font-mono`) for metadata. These overrides go in `.styles.css`:
 
-| Context | Size | Weight | Notes |
-|---------|------|--------|-------|
-| Landing H1 | `clamp(2.5rem, 6vw, 4rem)` | `800` | Never below `2rem` |
-| Landing H2 section heading | `2rem` | `700` | Not `1.5rem` |
-| App page H1 | `1.75rem` | `700` | + left-border accent |
-| Dashboard KPI value | `2.5rem` | `800` | Center-aligned in card |
-| Dashboard KPI label | `0.875rem` | `500` | Uppercase, letter-spacing `0.05em` |
-| Auth page heading | `1.5rem` | `700` | Centered |
-| Card title in feature grid | `1.125rem` | `600` | — |
+| Context | Size | Weight | Font | Notes |
+|---------|------|--------|------|-------|
+| Landing H1 | `clamp(2.5rem, 6vw, 4rem)` | `800` | `--font-display` | Never below `2rem`; tracking `-0.03em` |
+| Landing H2 section heading | `2rem` | `700` | `--font-display` | Not `1.5rem` |
+| App page H1 | `1.75rem` | `700` | `--font-display` | + left-border accent |
+| Dashboard KPI value | `2.5rem` | `800` | `--font-display` | Center-aligned in card |
+| Dashboard KPI label | `0.75rem` | `500` | `--font-mono` | Uppercase, `letter-spacing: 0.15em` |
+| Auth page heading | `1.5rem` | `700` | `--font-display` | Centered |
+| Card title in feature grid | `1.125rem` | `600` | `--font-display` | — |
+| Eyebrow / section metadata | `0.6875rem` (11px) | `500` | `--font-mono` | Uppercase, `letter-spacing: 0.15em`, primary color |
+| Table column headers | `0.6875rem` (11px) | `500` | `--font-mono` | Uppercase, `letter-spacing: 0.15em` |
 
 Never produce an H1 below `1.5rem`. Never use `font-weight: 400` for a page heading.
+
+**Eyebrow pattern** — use for section metadata, category labels, KPI labels, table headers:
+```css
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+}
+```
+Or use the global `.neus-eyebrow` utility class. For muted metadata (table headers, secondary labels), set `color: var(--color-gray-500)` instead.
 
 ---
 
@@ -158,6 +173,19 @@ These are additive to `anti-slop.md` — focused on visual creativity, not code 
 
 ---
 
+## Section 8 — Kit Layout Patterns (Reference)
+
+The `new_design/kits/` directory contains four reference pages (dashboard, landing, docs, playground) that demonstrate advanced layout and information architecture patterns. These are **optional reference patterns** — use them when the intake suggests a similar need, not as mandatory requirements.
+
+See `.agents/skills/_shared/layout-patterns.md` for the documented patterns.
+
+**When to consult layout-patterns.md:**
+- Dashboard with multiple KPI metrics and data panels → dashboard pattern
+- Landing/marketing page with stats, feature grid, or showcase → landing patterns
+- Documentation or multi-panel UI → docs/playground patterns
+
+---
+
 ## VISUAL DIRECTIVE Block Format
 
 After reading this file and resolving the palette, build this block and include it verbatim in the context passed to every skill invocation:
@@ -166,10 +194,15 @@ After reading this file and resolving the palette, build this block and include 
 VISUAL DIRECTIVE:
 - Palette: [Vibrant / Neutral / Corporate / Creative]
 - Personality: [Kinetic / Airy / Structured / Layered]
+- Mode: [light / dark]
 - Animation: [neus-fade-up on [element] / neus-slide-in on [element] / none]
 - Layout: [asymmetric 2-col hero / flagship-card grid / left-border H1 / centered auth]
 - H1: [clamp(2.5rem,6vw,4rem) weight-800 / 1.75rem weight-700 + left-border / 1.5rem weight-700]
 - Card colors: [blue+green+purple+yellow / primary fills / grayscale]
 ```
+
+**Mode context for CSS:**
+- `light` → standard surfaces: `background: var(--color-white); border: 1px solid var(--color-border-light)`
+- `dark` → glass surfaces: `background: rgba(20,20,40,0.55); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08)` on canvas `background: #0a0a14; color: #e2e8f0`
 
 Skills must apply every directive in this block. If a directive conflicts with a prop constraint in `prop-constraints.md`, the constraint wins.

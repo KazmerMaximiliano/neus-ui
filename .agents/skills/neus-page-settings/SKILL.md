@@ -136,10 +136,18 @@ export const SettingsPage = ({ defaultValues, onSave, loading, routes }: Setting
 
 ### SettingsPage.styles.css
 
+Apply Mode from VISUAL DIRECTIVE: `light` → white sections; `dark` → glass surface sections on dark canvas.
 
 ```css
 .settings-page { padding: 1.5rem; max-width: 800px; }
-.settings-page h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 2rem; color: var(--color-gray-900); }
+.settings-page h1 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--color-gray-900);
+}
+/* Light mode section */
 .settings-page__section {
   background: var(--color-white);
   border: 1px solid var(--color-border-light);
@@ -147,10 +155,19 @@ export const SettingsPage = ({ defaultValues, onSave, loading, routes }: Setting
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 }
+/* Dark mode section — use when Mode: dark */
+/* .settings-page__section {
+  background: rgba(20, 20, 40, 0.55);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+} */
 .settings-page__section-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-gray-700);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gray-500);
   margin-bottom: 1.25rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--color-border-light);

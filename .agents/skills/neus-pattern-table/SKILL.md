@@ -103,3 +103,11 @@ export const EntityTable = ({ data, pagination, onEdit, onDelete, onInfo, onPagi
   );
 };
 ```
+
+### EntityTable.styles.css
+
+```css
+/* Wrapper — apply Mode from VISUAL DIRECTIVE */
+/* Light (default): no additional wrapper styles needed; DataTable handles its own surface */
+/* Dark: .entity-table { background: #0a0a14; color: #e2e8f0; } */
+```

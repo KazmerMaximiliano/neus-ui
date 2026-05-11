@@ -44,6 +44,7 @@ Ask in free text:
 3. Default active section
 4. Is there a menu in the top-right header? (e.g.: user avatar, notifications)
 5. Primary theme color (hex or "use default")
+6. Visual mode: light (default) or dark?
 
 ## Phase 2 — Generate
 
@@ -131,6 +132,11 @@ export const AppShell = ({
       successColor: '#10B981',
       errorColor: '#EF4444',
       infoColor: '#3B82F6',
+      // Dark mode preset — uncomment when Mode: dark
+      // primaryColor: '#6366f1',
+      // successColor: '#10b981',
+      // errorColor: '#f87171',
+      // infoColor: '#38bdf8',
     }}>
       <AppTemplate
         routes={routes}
@@ -141,6 +147,18 @@ export const AppShell = ({
     </ThemeProvider>
   );
 };
+```
+
+### AppShell.styles.css
+
+```css
+/* AppTemplate and Sidebar handle their own surface styles — no sidebar CSS needed here. */
+
+/* Light mode (default): no wrapper overrides needed */
+
+/* Dark mode canvas — uncomment when Mode: dark */
+/* html, body { background: #0a0a14; } */
+/* AppTemplate passes dark context via ThemeProvider; content pages own their own bg */
 ```
 
 ### Shell usage

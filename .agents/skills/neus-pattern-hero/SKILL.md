@@ -79,11 +79,39 @@ export const Hero = ({ onPrimaryAction, onSecondaryAction }: HeroProps) => (
 
 ### Hero.styles.css
 
+Apply Mode from VISUAL DIRECTIVE. See `layout-patterns.md` for optional eyebrow pill pattern.
 
 ```css
-.hero { padding: 5rem 2rem; text-align: center; /* or text-align: left for left-aligned */ }
+@keyframes neus-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Light mode (default) */
+.hero { padding: 6rem 2rem; text-align: center; /* or text-align: left for left-aligned */ }
 .hero__content { max-width: 700px; margin: 0 auto; }
-.hero__headline { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; color: var(--color-gray-900); margin-bottom: 1rem; line-height: 1.1; }
-.hero__subheading { font-size: 1.2rem; color: var(--color-gray-600); margin-bottom: 2rem; line-height: 1.6; }
+.hero__headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-gray-900);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  animation: neus-fade-up 0.5s ease forwards;
+}
+.hero__subheading {
+  font-size: 1.2rem;
+  color: var(--color-gray-600);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  animation: neus-fade-up 0.5s 0.1s ease both;
+}
 .hero__actions { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .hero { background: #0a0a14; color: #e2e8f0; } */
+/* .hero__headline { color: #e2e8f0; }
+   Add class="neus-gradient-text" to H1 element for gradient text */
+/* .hero__subheading { color: #94a3b8; } */
 ```

@@ -90,6 +90,53 @@ export const BlogPost = ({ relatedArticles }: BlogPostProps) => {
 };
 ```
 
+### BlogPost.styles.css
+
+Apply Mode from VISUAL DIRECTIVE.
+
+```css
+/* Light mode (default) */
+.blog { font-family: var(--font-display); }
+.blog__masthead {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  /* Light glass nav */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.blog__category {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+.blog__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-gray-900);
+  margin-bottom: 1.5rem;
+}
+.blog__body { max-width: 680px; margin: 0 auto; font-size: 1.0625rem; line-height: 1.75; color: var(--color-gray-700); }
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .blog { background: #0a0a14; color: #e2e8f0; } */
+/* .blog__masthead { background: rgba(10,10,20,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); } */
+/* .blog__title { color: #e2e8f0; } */
+/* .blog__body { color: #94a3b8; } */
+```
+
 ## Missing Neus UI Components
 
 - **NavigationBar/Masthead**: Use custom `<header>` — document as pending

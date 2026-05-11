@@ -98,16 +98,22 @@ export const LandingLayout = ({ children }: LandingLayoutProps) => (
 
 ### LandingLayout.styles.css
 
+Apply Mode from VISUAL DIRECTIVE. Use glass nav for both modes.
+
 ```css
 .landing-layout { min-height: 100vh; display: flex; flex-direction: column; }
 .landing-layout__header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border-light);
-  box-shadow: 0 2px 8px var(--color-shadow);
+  /* Light mode glass nav (default) */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
+/* Dark mode nav — apply when Mode: dark */
+/* .landing-layout__header { background: rgba(10,10,20,0.8); border-bottom: 1px solid rgba(255,255,255,0.06); } */
 .landing-layout__header-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -117,7 +123,12 @@ export const LandingLayout = ({ children }: LandingLayoutProps) => (
   align-items: center;
   gap: 2rem;
 }
-.landing-layout__brand { font-size: 1.25rem; font-weight: 700; color: var(--color-primary); }
+.landing-layout__brand {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
 .landing-layout__nav { display: flex; gap: 1.5rem; align-items: center; }
 .landing-layout__main { flex: 1; }
 .landing-layout__footer {
@@ -130,4 +141,8 @@ export const LandingLayout = ({ children }: LandingLayoutProps) => (
   color: var(--color-gray-500);
 }
 .landing-layout__footer-links { display: flex; gap: 1rem; }
+
+/* Dark mode page — apply when Mode: dark */
+/* .landing-layout { background: #0a0a14; color: #e2e8f0; } */
+/* .landing-layout__footer { border-color: rgba(255,255,255,0.08); color: #64748b; } */
 ```

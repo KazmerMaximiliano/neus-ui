@@ -141,8 +141,15 @@ export const LoginPage = ({ onSubmit, loading, error }: AuthFormProps) => {
 
 ### LoginPage.styles.css
 
+Apply Mode from VISUAL DIRECTIVE: `light` → gray background + white card; `dark` → dark canvas + glass card.
 
 ```css
+@keyframes neus-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Light mode (default) */
 .auth-page {
   min-height: 100vh;
   display: flex;
@@ -161,9 +168,16 @@ export const LoginPage = ({ onSubmit, loading, error }: AuthFormProps) => {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  animation: neus-fade-up 0.4s ease forwards;
 }
 .auth-card__brand { text-align: center; }
-.auth-card__brand h1 { font-size: 1.75rem; font-weight: 700; color: var(--color-primary); margin-bottom: 0.25rem; }
+.auth-card__brand h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
 .auth-card__brand p { color: var(--color-gray-500); font-size: 0.95rem; }
 .auth-card__error {
   background: var(--color-error-light);
@@ -174,4 +188,16 @@ export const LoginPage = ({ onSubmit, loading, error }: AuthFormProps) => {
 }
 .auth-card__fields { display: flex; flex-direction: column; gap: 1rem; }
 .auth-card__links { display: flex; justify-content: space-between; align-items: center; }
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .auth-page { background: #0a0a14; } */
+/* .auth-card {
+  background: rgba(20, 20, 40, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+} */
+/* .auth-card__brand h1 { color: #818cf8; } */
+/* .auth-card__brand p { color: #94a3b8; } */
 ```

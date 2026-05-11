@@ -90,3 +90,10 @@ export const EntityForm = ({ defaultValues, onSubmit, loading }: EntityFormProps
   </FormTemplate>
 );
 ```
+
+### EntityForm.styles.css
+
+```css
+/* FormTemplate handles its own layout. Add wrapper styles per Mode if needed. */
+/* Dark mode: .entity-form { background: #0a0a14; color: #e2e8f0; } */
+```

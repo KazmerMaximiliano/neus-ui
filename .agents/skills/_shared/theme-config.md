@@ -110,10 +110,110 @@ const MyComponent = () => {
 | Corporativos y formales | `#1E40AF` | `#059669` | `#DC2626` | `#0284C7` |
 | Creativos y expresivos | `#8B5CF6` | `#10B981` | `#F43F5E` | `#6366F1` |
 
+## Typography Tokens
+
+The base font has changed from Arial/Helvetica to **Manrope**. All components inherit automatically via the stylesheet.
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--font-display` | `Manrope, system-ui, sans-serif` | Headings, UI labels, buttons |
+| `--font-body` | `Manrope, system-ui, sans-serif` | Body text, paragraphs |
+| `--font-mono` | `JetBrains Mono, ui-monospace, monospace` | Code, metadata labels, KPI labels, eyebrows |
+
+Always reference these tokens in skill-generated CSS — never hardcode `Arial`, `Helvetica`, or `sans-serif` as display fonts.
+
+**Font size scale:**
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--fs-xs` | `12px` | Micro labels, legal text |
+| `--fs-sm` | `13px` | Small UI text, button labels |
+| `--fs-base` | `14px` | Base body text |
+| `--fs-md` | `16px` | Standard body |
+| `--fs-lg` | `18px` | Large body, card descriptions |
+| `--fs-xl` | `20px` | Sub-headings |
+| `--fs-2xl` | `24px` | Section headings |
+| `--fs-3xl` | `32px` | Page headings |
+| `--fs-4xl` | `48px` | Display headings |
+| `--fs-5xl` | `64px` | Hero display |
+
+**Spacing scale (4px base unit):**
+
+| Token | Value |
+|-------|-------|
+| `--space-1` | `4px` |
+| `--space-2` | `8px` |
+| `--space-3` | `12px` |
+| `--space-4` | `16px` |
+| `--space-5` | `20px` |
+| `--space-6` | `24px` |
+| `--space-8` | `32px` |
+| `--space-10` | `40px` |
+| `--space-12` | `48px` |
+| `--space-16` | `64px` |
+
+## Extended Design Tokens
+
+### Radius variants
+
+| Token | Value | Use |
+|-------|-------|-----|
+| `--radius-sm` | `8px` | Tags, accents, small chips |
+| `--radius-md` | `12px` | Chips, search inputs |
+| `--radius-default` | `16px` | Cards, panels (unchanged) |
+| `--radius-pill` | `3em` | Buttons, pill inputs |
+
+### Gradient tokens
+
+| Token | Value |
+|-------|-------|
+| `--gradient-brand` | `linear-gradient(135deg, #22d3ee 0%, #6366f1 45%, #d946ef 100%)` |
+| `--gradient-brand-soft` | Same stops at 18% opacity — for tinted surface backgrounds |
+| `--gradient-mesh` | Mesh of 3 radial gradients (cyan top-left, magenta bottom-right, indigo center) on dark canvas |
+
+**Gradient text pattern:**
+```css
+.element {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+/* Or use the utility class: */
+<span className="neus-gradient-text">Text</span>
+```
+
+### Glow tokens
+
+| Token | Use |
+|-------|-----|
+| `--glow-brand` | Subtle indigo ambient glow for interactive elements |
+| `--glow-brand-strong` | Strong indigo + magenta glow for hero surfaces |
+| `--glow-cyan` | Cyan accent glow for info/accent states |
+
+### Utility CSS classes
+
+These classes are available globally after the Neus UI stylesheet is imported:
+
+| Class | Effect |
+|-------|--------|
+| `.neus-gradient-text` | Clips `--gradient-brand` as text fill |
+| `.neus-eyebrow` | Uppercase, letter-spaced label in primary color |
+| `.neus-mono` | Applies `--font-mono` (JetBrains Mono) |
+
+**Eyebrow pattern** (for section/metadata labels):
+```css
+font-family: var(--font-mono);
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 0.15em;
+color: var(--color-primary);
+```
+
 ## Design System Defaults (when no ThemeProvider config)
 
-- Border radius: `16px` cards/modals, `3em` buttons/inputs, `32px` sidebar
+- Border radius: `16px` cards/modals (`--radius-default`), `3em` buttons/inputs (`--radius-pill`), `32px` sidebar
 - Transitions: `0.2s ease` interactive, `0.3s ease` dropdowns/sidebar
 - Shadows: `0 4px 20px var(--color-shadow)` modals, `0 4px 8px var(--color-shadow)` hover
-- Typography: Arial, Helvetica, sans-serif; 16px base
+- Typography: **Manrope** (`--font-display`), 16px base — *not* Arial/Helvetica
 - Button label: 0.7em bold uppercase, letter-spacing 0.25em
