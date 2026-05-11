@@ -28,12 +28,14 @@ Generates a multi-step form with FormTemplate per step and navigation.
 
 ## Before starting
 
-Read:
+The "Shared Rules" section below is always active. Additionally read:
 - `.agents/skills/_shared/anti-slop.md` — mandatory quality rules
 - `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — FormTemplate, Input, Select, Button sections
 - `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 - `.agents/skills/neus-page-form/references/form-patterns.md` — field patterns
+- `.agents/skills/_shared/dark-surfaces.md` — dark mode CSS recipes (read when Mode: dark)
+- `.agents/skills/_shared/light-surfaces.md` — light mode CSS recipes (read when Mode: light)
 
 ## Phase 0 — Collect Data
 
@@ -44,7 +46,23 @@ Ask in free text:
 4. Final CTA: button text
 5. Uses AppTemplate? (yes/no)
 
+6. **Theme mode**: light or dark? (default: light)
+
 ## Phase 2 — Generate
+## Phase 1 — Visual Resolution
+
+- Mode: `dark` → read `dark-surfaces.md`; use `#0a0a14` canvas, glass surfaces where applicable
+- Mode: `light` → read `light-surfaces.md`; use `var(--color-white)` or `var(--color-surface)` backgrounds (default)
+
+Declare:
+
+```
+VISUAL DIRECTIVE
+  Mode: dark | light
+  Surface file: dark-surfaces.md | light-surfaces.md
+```
+
+
 
 Produce **three files** in this order: `WizardForm.types.ts` → `WizardForm.tsx` → `WizardForm.styles.css`.
 
@@ -149,3 +167,51 @@ Apply Mode from VISUAL DIRECTIVE: `light` → white card wrapper; `dark` → gla
 /* .wizard__step-info h2 { color: #e2e8f0; } */
 /* Wrap step content in a glass card: background: rgba(20,20,40,0.55); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2rem; */
 ```
+
+---
+
+## Shared Rules (Embedded)
+
+> These rules are always active. They apply even if `_shared/` files are not read.
+
+### Output — always three files
+
+Every skill output: `ComponentName.types.ts` → `ComponentName.tsx` → `ComponentName.styles.css`.
+No inline styles (`style={{}}`). No `<style>` tags inside components. CSS only in `.styles.css`.
+
+### Imports
+
+```tsx
+import { Button, Card, Input, Badge, Link, Select, Modal, DataTable } from 'neus-ui';
+```
+
+Never import from internal paths like `../../components/Button/Button`.
+
+### Types
+
+All `type` / `interface` declarations → `ComponentName.types.ts`. Never declare types in `.tsx`.
+
+### React 19 — No FormEvent
+
+Never `import { FormEvent } from 'react'`. Use `<Button type="submit" onClick={...} />` instead.
+
+### Component Prop Constraints
+
+- **Button** `variant`: `"solid"` | `"outlined"` | `"text"` — `"ghost"` does NOT exist
+- **Button** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"white"` — `"white"` for dark canvas only
+- **Button** `size`: `"small"` | `"medium"` | `"large"`
+- **Card** `variant`: `"default"` | `"glass"` — `"glass"` for dark canvas
+- **Badge** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"neutral"`
+- **Link** `type`: `"primary"` (brand) | `"secondary"` (muted gray)
+- **Select**: no `required` prop — handle validation externally
+- **FormTemplate**: only `children`, `submitLabel`, `loading` — no `onSubmit`/`onCancel`
+
+### Slop Blacklist
+
+- No inline styles / `style={{}}` / `<style>` tags
+- No hardcoded data arrays when data comes from API — use typed props
+- No invented copy (fake testimonials, placeholder names, fake metrics)
+- No `any` TypeScript type
+- No raw `<a>`, `<span>`, `<input>`, `<button>` when a Neus UI component exists
+- No hardcoded font stacks — use `var(--font-display)` / `var(--font-mono)`
+- In dark mode: no `var(--color-primary-light)` as section background; no raw div cards — use `<Card variant="glass">`

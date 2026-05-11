@@ -101,4 +101,19 @@ describe("getLoaderColor", () => {
       expect(result).not.toBe(mockThemeColors.white);
     },
   );
+
+  it("returns dark color for solid white button", () => {
+    const result = getLoaderColor("solid", "white", mockThemeColors);
+    expect(result).toBe("#0a0a14");
+  });
+
+  it("returns white color for outlined white button", () => {
+    const result = getLoaderColor("outlined", "white", mockThemeColors);
+    expect(result).toBe("#ffffff");
+  });
+
+  it("returns white color for text white button", () => {
+    const result = getLoaderColor("text", "white", mockThemeColors);
+    expect(result).toBe("#ffffff");
+  });
 });

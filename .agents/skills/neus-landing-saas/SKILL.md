@@ -35,14 +35,16 @@ Generates a product landing page with hero, features, optional social proof, opt
 
 ## Before starting
 
-Read:
+The "Shared Rules" section below is always active. Additionally read:
 - `.agents/skills/_shared/anti-slop.md` — mandatory quality rules ("Marketing Pages" section)
 - `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Button, Card, Link sections
 - `.agents/skills/_shared/theme-config.md` — ThemeProvider config
-- `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE from neus-designer context; enforce layout composition, typography scale, color usage, and animation budget
+- `.agents/skills/_shared/design-personality.md` — VISUAL DIRECTIVE format, personality axis
 - `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
-- `.agents/skills/_shared/layout-patterns.md` — optional advanced landing patterns (stats row, section-head split, hero showcase grid, eyebrow pill, compact tile grid)
+- `.agents/skills/_shared/dark-surfaces.md` — dark mode CSS recipes (read when Mode: dark)
+- `.agents/skills/_shared/light-surfaces.md` — light mode CSS recipes (read when Mode: light)
+- `.agents/skills/_shared/layout-patterns.md` — optional advanced landing patterns
 - `references/landing-sections.md` — section patterns
 
 ## Phase 0 — Collect Data
@@ -67,10 +69,28 @@ Also include in your reply:
 - If social proof: exact testimonials or metrics (if said "no", omit completely)
 - Primary theme color (hex or "use default")
 - Header nav items (navigation links)
+- **Theme mode**: light or dark? (default: light)
+- **Visual personality**: clean/airy, editorial/layered, bold/kinetic, or structured? (optional)
 
 ---
 
-## Phase 1 — P0 Verification
+## Phase 1 — Visual Resolution
+
+Before writing any code, resolve the VISUAL DIRECTIVE:
+
+- Mode: `dark` → read `dark-surfaces.md`; use `#0a0a14` canvas, glass nav, `<Card variant="glass">` for features, `color="white"` buttons in hero
+- Mode: `light` → read `light-surfaces.md`; use `var(--color-white)` canvas, standard `<Card>`, `color="primary"` buttons
+
+Declare:
+
+```
+VISUAL DIRECTIVE
+  Mode: dark | light
+  Personality: [from intake or default: Structured]
+  Surface file: dark-surfaces.md | light-surfaces.md
+```
+
+## Phase 1b — P0 Verification
 
 - [ ] ZERO invented data — everything comes from intake or user explicitly stated what to use
 - [ ] No AppTemplate, no Sidebar
@@ -288,3 +308,51 @@ Apply Mode from VISUAL DIRECTIVE. Consult `.agents/skills/_shared/layout-pattern
 /* .landing__features-alt { background: rgba(20,20,40,0.4); } */
 /* .landing__cta-section { background: rgba(99,102,241,0.1); border-top: 1px solid rgba(129,140,248,0.2); } */
 ```
+
+---
+
+## Shared Rules (Embedded)
+
+> These rules are always active. They apply even if `_shared/` files are not read.
+
+### Output — always three files
+
+Every skill output: `ComponentName.types.ts` → `ComponentName.tsx` → `ComponentName.styles.css`.
+No inline styles (`style={{}}`). No `<style>` tags inside components. CSS only in `.styles.css`.
+
+### Imports
+
+```tsx
+import { Button, Card, Input, Badge, Link, Select, Modal, DataTable } from 'neus-ui';
+```
+
+Never import from internal paths like `../../components/Button/Button`.
+
+### Types
+
+All `type` / `interface` declarations → `ComponentName.types.ts`. Never declare types in `.tsx`.
+
+### React 19 — No FormEvent
+
+Never `import { FormEvent } from 'react'`. Use `<Button type="submit" onClick={...} />` instead.
+
+### Component Prop Constraints
+
+- **Button** `variant`: `"solid"` | `"outlined"` | `"text"` — `"ghost"` does NOT exist
+- **Button** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"white"` — `"white"` for dark canvas only
+- **Button** `size`: `"small"` | `"medium"` | `"large"`
+- **Card** `variant`: `"default"` | `"glass"` — `"glass"` for dark canvas
+- **Badge** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"neutral"`
+- **Link** `type`: `"primary"` (brand) | `"secondary"` (muted gray)
+- **Select**: no `required` prop — handle validation externally
+- **FormTemplate**: only `children`, `submitLabel`, `loading` — no `onSubmit`/`onCancel`
+
+### Slop Blacklist
+
+- No inline styles / `style={{}}` / `<style>` tags
+- No hardcoded data arrays when data comes from API — use typed props
+- No invented copy (fake testimonials, placeholder names, fake metrics)
+- No `any` TypeScript type
+- No raw `<a>`, `<span>`, `<input>`, `<button>` when a Neus UI component exists
+- No hardcoded font stacks — use `var(--font-display)` / `var(--font-mono)`
+- In dark mode: no `var(--color-primary-light)` as section background; no raw div cards — use `<Card variant="glass">`

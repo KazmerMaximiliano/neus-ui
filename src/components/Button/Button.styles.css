@@ -298,3 +298,52 @@
   background: var(--color-gray-400);
   box-shadow: none;
 }
+
+/* White — for use on dark canvas surfaces */
+.button--outlined.button--white {
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.7);
+}
+
+.button--outlined.button--white:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1.5px #ffffff;
+}
+
+.button--outlined.button--white:disabled,
+.button--outlined.button--white[disabled] {
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.button--text.button--white {
+  color: #ffffff;
+}
+
+.button--text.button--white:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.button--text.button--white:disabled,
+.button--text.button--white[disabled] {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.button--solid.button--white {
+  background: #ffffff;
+  color: #0a0a14 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 8px 24px -6px rgba(255, 255, 255, 0.2);
+}
+
+.button--solid.button--white:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+.button--solid.button--white:disabled,
+.button--solid.button--white[disabled] {
+  background: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.6) !important;
+  box-shadow: none;
+}

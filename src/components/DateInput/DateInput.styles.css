@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: flex-start;
 }
 
 .date-input__label {
@@ -92,6 +93,14 @@
 .date-input__field--disabled:focus,
 .date-input__field--disabled:active {
   border-color: var(--color-border-subtle);
+}
+
+[data-color-scheme="dark"] .date-input__label:not(.date-input__label--error):not(.date-input__label--disabled) {
+  color: var(--color-label-on-dark);
+}
+
+[data-color-scheme="dark"] .date-input__field:not(.date-input__field--error):not(.date-input__field--disabled) {
+  color: var(--color-label-on-dark);
 }
 
 .date-input__dropdown {

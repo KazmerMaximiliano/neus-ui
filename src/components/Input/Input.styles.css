@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: flex-start;
 }
 
 .input__label {
@@ -136,4 +137,12 @@
 .input--disabled:focus,
 .input--disabled:active {
   border-color: var(--color-border-subtle);
+}
+
+[data-color-scheme="dark"] .input__label:not(.input__label--error):not(.input__label--disabled) {
+  color: var(--color-label-on-dark);
+}
+
+[data-color-scheme="dark"] .input:not(.input--error):not(.input--disabled) {
+  color: var(--color-label-on-dark);
 }

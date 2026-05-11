@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: flex-start;
 }
 
 .time-input__label {
@@ -88,6 +89,14 @@
 .time-input__field--disabled:focus,
 .time-input__field--disabled:active {
   border-color: var(--color-border-subtle);
+}
+
+[data-color-scheme="dark"] .time-input__label:not(.time-input__label--error):not(.time-input__label--disabled) {
+  color: var(--color-label-on-dark);
+}
+
+[data-color-scheme="dark"] .time-input__field:not(.time-input__field--error):not(.time-input__field--disabled) {
+  color: var(--color-label-on-dark);
 }
 
 .time-input__dropdown {
