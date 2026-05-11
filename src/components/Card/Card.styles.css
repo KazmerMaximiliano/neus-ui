@@ -167,3 +167,66 @@
   color: var(--color-gray-500);
   line-height: 1.5;
 }
+
+/* ─── Glass variant ─── */
+.card--glass {
+  background: rgba(20, 20, 40, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.card--glass:hover {
+  border-color: rgba(129, 140, 248, 0.35);
+  transform: translateY(-2px);
+}
+
+/* ─── Dark mode fill overrides ─── */
+[data-color-scheme="dark"] .card--fill.card--purple {
+  background-color: rgba(165, 180, 252, 0.35);
+}
+
+[data-color-scheme="dark"] .card--fill.card--purple .card__avatar-placeholder {
+  background-color: rgba(165, 180, 252, 0.5);
+}
+
+[data-color-scheme="dark"] .card--fill.card--pink {
+  background-color: rgba(239, 83, 80, 0.30);
+}
+
+[data-color-scheme="dark"] .card--fill.card--pink .card__avatar-placeholder {
+  background-color: rgba(239, 83, 80, 0.45);
+}
+
+[data-color-scheme="dark"] .card--fill.card--red {
+  background-color: rgba(239, 83, 80, 0.40);
+}
+
+[data-color-scheme="dark"] .card--fill.card--red .card__avatar-placeholder {
+  background-color: rgba(239, 83, 80, 0.55);
+}
+
+[data-color-scheme="dark"] .card--fill.card--yellow {
+  background-color: rgba(217, 158, 43, 0.40);
+}
+
+[data-color-scheme="dark"] .card--fill.card--yellow .card__avatar-placeholder {
+  background-color: rgba(217, 158, 43, 0.55);
+}
+
+[data-color-scheme="dark"] .card--fill.card--blue {
+  background-color: rgba(102, 187, 206, 0.30);
+}
+
+[data-color-scheme="dark"] .card--fill.card--blue .card__avatar-placeholder {
+  background-color: rgba(102, 187, 206, 0.45);
+}
+
+[data-color-scheme="dark"] .card--fill.card--green {
+  background-color: rgba(102, 187, 106, 0.35);
+}
+
+[data-color-scheme="dark"] .card--fill.card--green .card__avatar-placeholder {
+  background-color: rgba(102, 187, 106, 0.50);
+}

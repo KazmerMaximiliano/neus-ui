@@ -203,6 +203,310 @@ VISUAL DIRECTIVE:
 
 **Mode context for CSS:**
 - `light` → standard surfaces: `background: var(--color-white); border: 1px solid var(--color-border-light)`
-- `dark` → glass surfaces: `background: rgba(20,20,40,0.55); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08)` on canvas `background: #0a0a14; color: #e2e8f0`
+- `dark` → see Section 9 for the full surface recipe system. One-line summary: canvas `background: #0a0a14; color: #e2e8f0`, cards use glass morphism (`rgba` + `backdrop-filter: blur`). Never use `var(--color-white)` as a background in dark mode.
 
 Skills must apply every directive in this block. If a directive conflicts with a prop constraint in `prop-constraints.md`, the constraint wins.
+
+---
+
+## Section 9 — Dark Mode Surface Recipes
+
+When `Mode: dark`, replace all standard surfaces with the recipes below. See also `.agents/skills/_shared/dark-surfaces.md` for copy-pasteable CSS blocks.
+
+### 9.1 — Canvas (page root)
+
+```css
+.page-dark {
+  min-height: 100vh;
+  background: #0a0a14;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+```
+
+Add mesh gradient + grid overlay as fixed pseudo-layers (z-index 0, pointer-events none):
+
+```css
+/* mesh — three radial gradients, fixed behind everything */
+.page-dark__mesh {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 0%, rgba(34,211,238,0.18), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 30%, rgba(217,70,239,0.16), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 50% 90%, rgba(99,102,241,0.20), transparent 70%);
+}
+
+/* grid overlay — subtle dot grid masked to top area */
+.page-dark__grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 30%, black, transparent 80%);
+}
+```
+
+All content sits inside a `.page-dark__content` at `position: relative; z-index: 1`.
+
+---
+
+### 9.2 — Glass Card (default dark surface)
+
+Use for article cards, feature tiles, info panels:
+
+```css
+.glass-card {
+  background: rgba(20,20,40,0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.glass-card:hover {
+  border-color: rgba(129,140,248,0.35);
+  transform: translateY(-2px);
+}
+```
+
+---
+
+### 9.3 — Glass Nav (sticky top bar)
+
+```css
+.glass-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(10,10,20,0.6);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+```
+
+Include a brand mark (32px square, gradient fill, mono initial, glow shadow):
+
+```css
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #22d3ee 0%, #6366f1 50%, #d946ef 100%);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #0a0a14;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  box-shadow: 0 0 24px rgba(99,102,241,0.45);
+}
+```
+
+Nav links: `font-size: 13px; color: #94a3b8; transition: color 0.2s` → hover `color: white`.
+
+---
+
+### 9.4 — Newsletter / CTA Glow Card
+
+Full-width centered card with radial glow behind and subtle grid texture:
+
+```css
+.nl-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(15,15,30,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 64px 56px;
+  text-align: center;
+}
+
+/* radial glow behind content */
+.nl-card::before {
+  content: "";
+  position: absolute;
+  inset: -40% -10% auto -10%;
+  height: 80%;
+  background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(99,102,241,0.32), transparent 70%);
+  z-index: -1;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* subtle grid texture */
+.nl-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent 80%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* all direct children above pseudo layers */
+.nl-card > * { position: relative; z-index: 1; }
+```
+
+Newsletter input: pill-shaped container (not separate `<Input>` + `<Button>`):
+
+```css
+.nl-form {
+  display: flex;
+  gap: 10px;
+  max-width: 520px;
+  margin: 0 auto;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3em;
+  padding: 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.nl-form:focus-within {
+  border-color: rgba(129,140,248,0.5);
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.12);
+}
+```
+
+**Note:** The pill form is a native `<input>` + `<button>` inside `.nl-form`, NOT Neus UI `<Input>` + `<Button>` — those components can't be inlined into a pill container.
+
+---
+
+### 9.5 — Eyebrow Pill (dark hero)
+
+```css
+.eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 28px;
+}
+
+.eyebrow-pill__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 12px #22d3ee;
+}
+```
+
+---
+
+### 9.6 — Gradient Text
+
+For H1 accent words or newsletter headings in dark + vibrant mode:
+
+```css
+.gradient-text {
+  background: linear-gradient(135deg, #22d3ee 0%, #818cf8 45%, #d946ef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+```
+
+Apply as a `<span className="gradient-text">` around the accent word(s) in the heading.
+
+---
+
+### 9.7 — Category Pills
+
+For article/content cards — per-category tint, not a Neus UI component:
+
+```css
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 2em; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600; }
+.pill--systems  { background: rgba(34,211,238,0.12);  color: #22d3ee; }
+.pill--design   { background: rgba(217,70,239,0.12);  color: #e879f9; }
+.pill--craft    { background: rgba(129,140,248,0.14); color: #a5b4fc; }
+.pill--tools    { background: rgba(76,175,80,0.14);   color: #6ee78b; }
+.pill--notes    { background: rgba(244,191,67,0.14);  color: #fbbf24; }
+.pill--featured { background: linear-gradient(135deg, rgba(34,211,238,0.18), rgba(217,70,239,0.18)); color: white; border: 1px solid rgba(217,70,239,0.4); }
+```
+
+Map category strings to class names in a `CATEGORY_PILL_CLASS` constant in the component.
+
+---
+
+### 9.8 — Featured Content Art Panel
+
+For a featured card with a visual left panel (no real image):
+
+```css
+.featured-art {
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 30%, rgba(34,211,238,0.45), transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 80%, rgba(217,70,239,0.5), transparent 60%),
+    #0e0e22;
+  min-height: 360px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* inner grid texture */
+.featured-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent 80%);
+}
+
+/* centered code glyph */
+.featured-art__glyph {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 96px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: -0.04em;
+  text-shadow: 0 0 60px rgba(99,102,241,0.6);
+}
+
+/* blinking cursor */
+.featured-art__cursor {
+  display: inline-block;
+  width: 0.12em;
+  height: 0.9em;
+  background: #22d3ee;
+  margin-left: 0.06em;
+  vertical-align: -0.05em;
+  animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+```
+
+Art panel sits left in a `grid-template-columns: 1.05fr 0.95fr` split inside a glass-card wrapper.

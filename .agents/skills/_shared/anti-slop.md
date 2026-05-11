@@ -19,6 +19,15 @@ Apply these rules in EVERY skill before emitting any artifact.
 - Hardcode `Arial`, `Helvetica`, or generic `sans-serif` as a display font stack — use `var(--font-display)` (Manrope is now the library default)
 - Use flat `border` to style a Button outlined element — the component uses `inset box-shadow` internally; a border override will conflict visually
 - Override Button disabled opacity with `0.6` — the current spec is `0.4`
+- Use `var(--color-white)` or `background: white` as the page background when `Mode: dark` — use `#0a0a14` canvas + surfaces from `dark-surfaces.md`
+- Use a raw `<div>` with custom CSS for content cards in dark mode — use `<Card variant="glass">` instead
+- Skip the sticky glass nav on dark landing pages — always include a nav with `position: sticky; backdrop-filter: blur(20px)`
+- Use raw `<a>` tags for nav or footer links — always use `<Link type="secondary" href label />`
+- Use raw `<span>` elements for category or content tags — always use `<Badge variant="solid" color={BADGE_COLOR[cat] ?? "neutral"} label={cat} />`
+- Use raw `<input>` + `<button>` for newsletter/email forms — always use Neus UI `<Input>` + `<Button>` in a flex layout
+- Omit the eyebrow pill in dark mode hero — always include it (glowing dot + mono label)
+- Skip gradient text when `Mode: dark` + `Palette: Vibrant` — apply `.gradient-text` to the H1 accent word
+- Use `var(--color-primary-light)` as a section background in dark mode — it is a light-mode-only utility; use `rgba` surfaces in dark
 
 ## Self-Critique Mandatory (5 dimensions)
 
@@ -56,6 +65,12 @@ Run this internal check before emitting code. If any dimension fails, fix it fir
 6. Prefer `var(--space-*)` tokens over hardcoded `px` spacing where a token maps cleanly
 7. Prefer `var(--radius-sm)`, `var(--radius-md)`, `var(--radius-pill)` over hardcoded radius values
 8. Use `var(--font-display)` for headings and UI labels; `var(--font-mono)` for code, metadata, KPI labels
+
+**Dark mode CSS rules:**
+
+9. When `Mode: dark`: use `dark-surfaces.md` recipes instead of `var(--color-*)` for backgrounds and borders. The `var(--color-*)` tokens are light-mode-first; dark mode uses explicit `rgba(...)` values from the surface system.
+10. Glass card surfaces: `background: rgba(20,20,40,0.55); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.08)` — copy verbatim from `dark-surfaces.md §2`
+11. Gradient text: define `.gradient-text { background: linear-gradient(135deg, #22d3ee 0%, #818cf8 45%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }` in the component's `.styles.css`; apply as `<span className="gradient-text">` in JSX
 
 **CRITICAL — CSS must always go in a separate file. Never inline.**
 
