@@ -34,6 +34,7 @@ Read:
 - `.agents/skills/_shared/component-catalog.md` — Card, DataTable, AppTemplate sections
 - `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE; KPI cards must have `fill={true}` with distinct colors, primary KPI spans 2 columns, apply slide-in animation
 - `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
+- `.agents/skills/_shared/layout-patterns.md` — dashboard KPI strip, 2fr/1fr panel grid, and panel-head patterns (optional advanced layouts)
 - `references/dashboard-layouts.md` — KPI grid patterns
 
 ## Phase 0 — Collect Data
@@ -166,6 +167,7 @@ export const Dashboard = ({ kpis, recentData, pagination, routes }: DashboardPro
 
 ### Dashboard.styles.css
 
+Apply Mode from the VISUAL DIRECTIVE: `light` → standard surfaces; `dark` → glass surfaces on dark canvas.
 
 ```css
 @keyframes neus-slide-in {
@@ -173,8 +175,10 @@ export const Dashboard = ({ kpis, recentData, pagination, routes }: DashboardPro
   to   { opacity: 1; transform: translateX(0); }
 }
 
+/* Light mode (default) */
 .dashboard { padding: 2rem; }
 .dashboard h1 {
+  font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 2rem;
@@ -184,7 +188,7 @@ export const Dashboard = ({ kpis, recentData, pagination, routes }: DashboardPro
 }
 .dashboard__kpis {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* or repeat(4,1fr) for 4 KPIs */
   gap: 1.5rem;
   margin-bottom: 3rem;
   animation: neus-slide-in 0.4s ease forwards;
@@ -200,13 +204,30 @@ export const Dashboard = ({ kpis, recentData, pagination, routes }: DashboardPro
   text-align: center;
   color: var(--color-white);
 }
-.dashboard__kpi-value { font-size: 2.5rem; font-weight: 800; }
+.dashboard__kpi-value {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+}
 .dashboard__kpi-label {
-  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem; /* 11px */
   font-weight: 500;
   opacity: 0.9;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.15em;
 }
-.dashboard__table h2 { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-gray-700); }
+.dashboard__table h2 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-gray-700);
+}
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .dashboard { background: #0a0a14; color: #e2e8f0; } */
+/* .dashboard h1 { color: #e2e8f0; } */
+/* .dashboard__table h2 { color: #94a3b8; } */
+/* KPI panel/card surfaces become glass — handled by Card component fill */
 ```

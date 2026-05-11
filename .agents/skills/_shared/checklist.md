@@ -23,6 +23,9 @@ Apply this checklist to every artifact before emitting. P0 items block emission.
 - [ ] All event handler props are optional: `onEdit?: () => void`
 - [ ] TypeScript types are explicit — no `any` usage
 - [ ] Neus UI components used for all interactive elements (no bare `<button>`, `<input>`, `<select>`)
+- [ ] Page headings use `font-family: var(--font-display)` — not Arial/Helvetica or unspecified
+- [ ] Monospace metadata (KPI labels, field labels, table headers) use `font-family: var(--font-mono)`
+- [ ] Chosen mode (light/dark) is consistently applied throughout the generated CSS (no white backgrounds in dark mode, no dark backgrounds in light mode)
 
 ---
 
@@ -69,14 +72,12 @@ These are not in Neus UI — implement inline and document as pending:
 | Need | Workaround | Document as |
 |------|-----------|-------------|
 | Toast/notification | div with fixed position + animation | Toast |
-| Badge/tag | `<span>` with pill CSS | Badge |
 | Tabs | div + button group with active state | Tabs |
 | Accordion/FAQ | `<details>`/`<summary>` | Accordion |
 | Top navigation bar | div with flex + sticky | NavigationBar |
 | Feature tile | Card with icon slot via `leading` prop | FeatureTile |
 | Testimonial card | Card with avatar + quote | TestimonialCard |
 | Pricing card | Card with structured content | PricingCard |
-| Step indicator | div + numbered circles | Stepper |
 | Breadcrumb | `<nav>` + `<ol>` | Breadcrumb |
 | Skeleton loader | div with shimmer animation | Skeleton |
 | Empty state | div with icon + text + CTA | EmptyState |

@@ -165,6 +165,27 @@ export const EntityForm = ({
 };
 ```
 
+### EntityForm.styles.css
+
+Apply Mode from VISUAL DIRECTIVE.
+
+```css
+.entity-form { padding: 2rem; }
+.entity-form h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--color-gray-900);
+  border-left: 4px solid var(--color-primary);
+  padding-left: 1rem;
+}
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .entity-form { background: #0a0a14; color: #e2e8f0; } */
+/* .entity-form h1 { color: #e2e8f0; } */
+```
+
 ## Phase 3 — P1/P2 Checklist
 
 - [ ] defaultValues wired to inputs via `defaultValue` prop

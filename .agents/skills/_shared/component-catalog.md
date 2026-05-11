@@ -91,6 +91,7 @@ import { Button } from "neus-ui";
   label="Guardar"
   variant="solid" // 'solid' | 'outlined' | 'text'
   color="primary" // 'primary' | 'success' | 'error' | 'info'
+  size="medium" // 'small' | 'medium' | 'large'
   type="submit" // 'button' | 'submit' | 'reset'
   fullWidth={false}
   loading={false}
@@ -104,12 +105,17 @@ import { Button } from "neus-ui";
 |------|------|---------|
 | label | `string` | required |
 | variant | `'solid' \| 'outlined' \| 'text'` | `'solid'` |
-| color | `'primary' \| 'success' \| 'error' \| 'info'` |
+| color | `'primary' \| 'success' \| 'error' \| 'info'` | `'primary'` |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` |
 | type | `'button' \| 'submit' \| 'reset'` | `'button'` |
 | fullWidth | `boolean` | `false` |
 | loading | `boolean` | `false` |
 | disabled | `boolean` | `false` |
 | onClick | `(e?) => void` | — |
+
+**Size padding/font-size:** `small` → `8px 14px / 12px`, `medium` → `12px 22px / 13px`, `large` → `16px 28px / 14px`.
+
+**Visual appearance (no API change):** Solid `primary`/`info` now renders a gradient (`linear-gradient(180deg, #8b95fc → #6366f1)`) with an inset highlight and indigo glow shadow. `success` and `error` also have gradient + glow variants. Outlined uses an `inset box-shadow` ring instead of a flat border. Disabled opacity is `0.4` (previously `0.6`).
 
 **CRITICAL — variant exact values:** `"solid"`, `"outlined"`, `"text"`. The value `"outline"` does not exist and will throw a TypeScript error. Always spell it `"outlined"`.
 
@@ -184,6 +190,8 @@ import { Card } from "neus-ui";
 
 **Note:** `color` is a decorative palette (not semantic). For KPI cards use `fill={true}` with a color.
 
+**Visual appearance (no API change):** Interactive cards (those with `onClick`) gain `transform: translateY(-1px)` on hover, creating a subtle lift effect.
+
 ### Feature tile (landing pages)
 
 ```tsx
@@ -239,6 +247,8 @@ Developer composes the full pricing layout in `children`:
 ---
 
 ## Checkbox
+
+**Visual appearance (no API change):** Checked state gains an indigo glow shadow (`0 4px 12px -4px rgba(99,102,241,0.6)`).
 
 ```tsx
 import { Checkbox } from "neus-ui";
@@ -405,6 +415,8 @@ import { Trash2 } from "lucide-react";
 ## Input
 
 Text input with label, error, and type variants.
+
+**Visual appearance (no API change):** Base state has an inset depth shadow (`inset 0 1px 2px rgba(0,0,0,0.2)`). Focus ring: `0 0 0 3px rgba(129,140,248,0.18)` (indigo). Error focus ring: `0 0 0 3px rgba(248,113,113,0.18)` (red).
 
 ```tsx
 import { Input } from "neus-ui";
@@ -791,7 +803,6 @@ These features are not covered by current Neus UI components. When a skill requi
 | **Accordion/FAQ**      | Alta     | landing-pricing, page-settings           | `<details>`/`<summary>` HTML                                                          |
 | **NavigationBar**      | Alta     | landing-saas, landing-pricing, page-blog | Sticky div + flex nav                                                                 |
 | **TestimonialCard**    | Media    | landing-saas, landing-generic            | Card with avatar + blockquote                                                         |
-| **Stepper**            | Media    | flow-onboarding, flow-wizard             | Numbered circles + connector                                                          |
 | **Breadcrumb**         | Baja     | page-detail, page-form                   | `<nav>` + `<ol>`                                                                      |
 | **Skeleton**           | Baja     | todas                                    | Shimmer div animation                                                                 |
 | **EmptyState**         | Baja     | page-list, page-dashboard                | Icon + text + CTA div                                                                 |

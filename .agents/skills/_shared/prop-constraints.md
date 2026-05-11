@@ -18,16 +18,27 @@
 - `"danger"` → does NOT exist → TS error
 - `"default"` → does NOT exist → TS error
 
+**Valid `size` values:** `"small"` | `"medium"` | `"large"` (default `"medium"`)
+
+- Padding/font: `small` → `8px 14px / 12px`, `medium` → `12px 22px / 13px`, `large` → `16px 28px / 14px`
+- No other size values exist. Do not pass custom px values as `size`.
+
 **For a "back" or "cancel" button** use `variant="outlined" color="primary"` — NOT ghost/secondary.
 
 ```tsx
 // CORRECT
 <Button label="← Back" variant="outlined" color="primary" onClick={onBack} />
 <Button label="Cancel" variant="text" color="primary" onClick={onCancel} />
+<Button label="Save" variant="solid" color="primary" size="small" />
 
 // WRONG — these do not exist
 <Button variant="ghost" color="secondary" />
+<Button size="xs" />
 ```
+
+**Outlined variant note:** The outlined Button now uses `box-shadow: inset 0 0 0 1px ...` internally instead of a CSS `border`. If you need to override the ring color in custom CSS, target the box-shadow, not border-color.
+
+**Disabled opacity:** `0.4` (updated from `0.6`). Do not override with `opacity: 0.6` in custom CSS — it will visually conflict with the component's own disabled state.
 
 ---
 
@@ -244,6 +255,8 @@ If the consumer project does not have lucide-react installed, all icon imports w
 | `Button variant="outline"` | ❌ typo | Use `variant="outlined"` |
 | `Button color="secondary"` | ❌ does not exist | Use `color="primary"` |
 | `Button color="danger"` | ❌ does not exist | Use `color="error"` |
+| `Button size="xs"` | ❌ does not exist | Use `size="small"` |
+| `Button size="lg"` | ❌ does not exist | Use `size="large"` |
 | `Card variant="..."` | ❌ prop does not exist | No variant system — use `children` for layout |
 | `FormTemplate onSubmit` | ❌ prop does not exist | Wrap with `<form onSubmit>` |
 | `FormTemplate onCancel` | ❌ prop does not exist | Handle cancel externally |

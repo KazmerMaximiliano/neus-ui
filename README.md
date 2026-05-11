@@ -61,7 +61,7 @@ import { Button, ThemeProvider } from "neus-ui";
 function App() {
   return (
     <ThemeProvider initialTheme={{ primaryColor: "#3975C2" }}>
-      <Button label="Get started" variant="solid" color="primary" />
+      <Button label="Get started" variant="solid" color="primary" size="medium" />
     </ThemeProvider>
   );
 }

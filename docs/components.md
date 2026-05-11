@@ -11,7 +11,7 @@ are available in
 | --- | --- |
 | Actions | Action group for edit, delete, and info flows |
 | Badge | Small status indicator with semantic color variants |
-| Button | Button with variants, colors, loading, and disabled states |
+| Button | Button with variants, sizes (small/medium/large), colors, loading, and disabled states |
 | Calendar | Date picker for single, range, or multiple selection |
 | Card | Content container with avatar, header, and color variants |
 | Checkbox | Controlled or uncontrolled checkbox with indeterminate state |

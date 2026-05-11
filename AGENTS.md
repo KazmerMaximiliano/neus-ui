@@ -100,7 +100,7 @@ ComponentName/
 | --------------- | ------------------------------- | ------ | ----------------------------------------------- |
 | Actions         | src/components/Actions/         | STABLE | Action grouping                                 |
 | Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
-| Button          | src/components/Button/          | STABLE | Multiple variants, loading state                |
+| Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state |
 | Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
 | Card            | src/components/Card/            | STABLE | Avatar, header, color variants, fill mode       |
 | Checkbox        | src/components/Checkbox/        | STABLE | Indeterminate state                             |

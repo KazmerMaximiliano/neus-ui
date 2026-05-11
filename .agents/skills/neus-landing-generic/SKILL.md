@@ -36,6 +36,7 @@ Read:
 - `.agents/skills/_shared/component-catalog.md` — Button, Card, Link, Input sections
 - `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE; asymmetric hero grid, flagship feature card spans full width, fade-up animation on hero, section padding `6rem 2rem`
 - `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
+- `.agents/skills/_shared/layout-patterns.md` — optional advanced landing patterns (stats row, section-head split, hero eyebrow pill, mode-adaptive nav)
 
 ## Phase 0 — Collect Data
 

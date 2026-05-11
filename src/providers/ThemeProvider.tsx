@@ -125,6 +125,60 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     root.style.setProperty("--color-info-dark", info.dark);
 
     root.style.setProperty("--color-border-light", primary.light);
+    root.style.setProperty("--color-border-input", primary.light);
+    root.style.setProperty("--color-border", primary.light);
+
+    const primaryRgb = hexToRgb(newColors.primary.main);
+    const errorRgb = hexToRgb(newColors.error.main);
+    const successRgb = hexToRgb(newColors.success.main);
+    const focusOpacity = isDark ? 0.25 : 0.18;
+
+    if (primaryRgb) {
+      root.style.setProperty(
+        "--color-focus-ring",
+        `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, ${focusOpacity})`
+      );
+      root.style.setProperty(
+        "--color-info-100",
+        `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.05)`
+      );
+      root.style.setProperty(
+        "--color-info-300",
+        `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.4)`
+      );
+      root.style.setProperty(
+        "--color-outlined-ring",
+        `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.4)`
+      );
+      root.style.setProperty(
+        "--color-outlined-ring-hover",
+        `rgba(${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}, 0.7)`
+      );
+    }
+    if (errorRgb) {
+      root.style.setProperty(
+        "--color-focus-ring-error",
+        `rgba(${errorRgb.r}, ${errorRgb.g}, ${errorRgb.b}, ${focusOpacity})`
+      );
+      root.style.setProperty(
+        "--color-outlined-ring-error",
+        `rgba(${errorRgb.r}, ${errorRgb.g}, ${errorRgb.b}, 0.4)`
+      );
+      root.style.setProperty(
+        "--color-outlined-ring-error-hover",
+        `rgba(${errorRgb.r}, ${errorRgb.g}, ${errorRgb.b}, 0.7)`
+      );
+    }
+    if (successRgb) {
+      root.style.setProperty(
+        "--color-outlined-ring-success",
+        `rgba(${successRgb.r}, ${successRgb.g}, ${successRgb.b}, 0.4)`
+      );
+      root.style.setProperty(
+        "--color-outlined-ring-success-hover",
+        `rgba(${successRgb.r}, ${successRgb.g}, ${successRgb.b}, 0.7)`
+      );
+    }
   };
 
   const updateTheme = (config: ThemeConfig) => {

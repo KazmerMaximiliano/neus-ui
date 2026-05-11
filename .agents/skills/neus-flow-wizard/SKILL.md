@@ -129,10 +129,23 @@ export const WizardForm = ({ onSubmit, loading }: WizardProps) => {
 
 ### WizardForm.styles.css
 
+Apply Mode from VISUAL DIRECTIVE: `light` → white card wrapper; `dark` → glass surface card on dark canvas.
 
 ```css
+/* Light mode (default) */
 .wizard { max-width: 700px; margin: 2rem auto; padding: 0 1.5rem; }
 .wizard__step-info { margin-bottom: 1.5rem; margin-top: 1.5rem; }
-.wizard__step-info h2 { font-size: 1.5rem; font-weight: 600; color: var(--color-gray-900); margin: 0; }
+.wizard__step-info h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin: 0;
+}
 .wizard__actions { display: flex; flex-direction: row; align-items: center; justify-content: flex-end; gap: 0.75rem; width: 100%; }
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .wizard { background: #0a0a14; color: #e2e8f0; padding: 2rem; } */
+/* .wizard__step-info h2 { color: #e2e8f0; } */
+/* Wrap step content in a glass card: background: rgba(20,20,40,0.55); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2rem; */
 ```

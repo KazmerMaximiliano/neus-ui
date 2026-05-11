@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "./variables.css";
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   border: 0;
@@ -10,6 +13,32 @@
 html,
 body {
   height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Utility classes ── */
+
+.neus-gradient-text {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.neus-eyebrow {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.neus-mono {
+  font-family: var(--font-mono);
 }

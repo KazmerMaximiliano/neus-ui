@@ -213,6 +213,7 @@ columnLabels={{ status: 'Estado', name: 'Nombre' }}
 
 ### EntityList.styles.css
 
+Apply Mode from VISUAL DIRECTIVE: `light` → standard surfaces; `dark` → dark canvas + glass table wrapper.
 
 ```css
 .entity-list { padding: 2rem; }
@@ -223,6 +224,7 @@ columnLabels={{ status: 'Estado', name: 'Nombre' }}
   margin-bottom: 2rem;
 }
 .entity-list__header h1 {
+  font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--color-gray-900);
@@ -232,6 +234,10 @@ columnLabels={{ status: 'Estado', name: 'Nombre' }}
   align-items: center;
   gap: 0.75rem;
 }
+
+/* Dark mode overrides — apply when Mode: dark */
+/* .entity-list { background: #0a0a14; color: #e2e8f0; } */
+/* .entity-list__header h1 { color: #e2e8f0; } */
 ```
 
 ## Phase 3 — P1/P2 Checklist

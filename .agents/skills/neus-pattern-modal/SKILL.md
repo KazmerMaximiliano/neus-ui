@@ -82,3 +82,10 @@ export const DeleteConfirmModal = ({ onConfirm, loading }: ConfirmModalProps) =>
   );
 };
 ```
+
+### ConfirmModal.styles.css
+
+```css
+/* Modal component handles its own surface styles. No wrapper CSS needed. */
+/* Trigger button styling is inherited from Button component. */
+```
