@@ -32,13 +32,14 @@ Generates a general-purpose landing with hero, content sections, and CTA. Adapts
 
 ## Before starting
 
-Read ALL of these before Phase 0:
+The "Shared Rules" section below is always active. Additionally read ALL of these before Phase 0:
 
 - `.agents/skills/_shared/anti-slop.md` — mandatory quality rules ("Marketing Pages" section)
 - `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — Button, Card, Link, Input sections
 - `.agents/skills/_shared/design-personality.md` — personality axis, VISUAL DIRECTIVE format, Section 9 dark mode surface recipes
-- `.agents/skills/_shared/dark-surfaces.md` — copy-pasteable CSS blocks for dark mode (canvas, glass card, glass nav, nl-card, eyebrow pill, gradient text, category pills, art panel, meta row, footer)
+- `.agents/skills/_shared/dark-surfaces.md` — dark mode CSS recipes (read when Mode: dark)
+- `.agents/skills/_shared/light-surfaces.md` — light mode CSS recipes (read when Mode: light)
 - `.agents/skills/_shared/checklist.md` — P0/P1/P2 gates
 - `.agents/skills/_shared/layout-patterns.md` — landing patterns (stats row, section-head split, hero eyebrow pill, mode-adaptive nav)
 - `.agents/skills/neus-landing-generic/references/dark-landing-patterns.md` — section layout anatomy and JSX patterns for dark landings
@@ -404,3 +405,51 @@ export const PageName = ({ articles, onSubscribe }: PageNameProps) => {
   .page-name__newsletter { padding: 5rem 1.25rem; }
 }
 ```
+
+---
+
+## Shared Rules (Embedded)
+
+> These rules are always active. They apply even if `_shared/` files are not read.
+
+### Output — always three files
+
+Every skill output: `ComponentName.types.ts` → `ComponentName.tsx` → `ComponentName.styles.css`.
+No inline styles (`style={{}}`). No `<style>` tags inside components. CSS only in `.styles.css`.
+
+### Imports
+
+```tsx
+import { Button, Card, Input, Badge, Link, Select, Modal, DataTable } from 'neus-ui';
+```
+
+Never import from internal paths like `../../components/Button/Button`.
+
+### Types
+
+All `type` / `interface` declarations → `ComponentName.types.ts`. Never declare types in `.tsx`.
+
+### React 19 — No FormEvent
+
+Never `import { FormEvent } from 'react'`. Use `<Button type="submit" onClick={...} />` instead.
+
+### Component Prop Constraints
+
+- **Button** `variant`: `"solid"` | `"outlined"` | `"text"` — `"ghost"` does NOT exist
+- **Button** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"white"` — `"white"` for dark canvas only
+- **Button** `size`: `"small"` | `"medium"` | `"large"`
+- **Card** `variant`: `"default"` | `"glass"` — `"glass"` for dark canvas
+- **Badge** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"neutral"`
+- **Link** `type`: `"primary"` (brand) | `"secondary"` (muted gray)
+- **Select**: no `required` prop — handle validation externally
+- **FormTemplate**: only `children`, `submitLabel`, `loading` — no `onSubmit`/`onCancel`
+
+### Slop Blacklist
+
+- No inline styles / `style={{}}` / `<style>` tags
+- No hardcoded data arrays when data comes from API — use typed props
+- No invented copy (fake testimonials, placeholder names, fake metrics)
+- No `any` TypeScript type
+- No raw `<a>`, `<span>`, `<input>`, `<button>` when a Neus UI component exists
+- No hardcoded font stacks — use `var(--font-display)` / `var(--font-mono)`
+- In dark mode: no `var(--color-primary-light)` as section background; no raw div cards — use `<Card variant="glass">`

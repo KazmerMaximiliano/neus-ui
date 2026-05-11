@@ -12,11 +12,18 @@
 - `"ghost"` → does NOT exist → TS error
 - `"primary"` → does NOT exist as variant → TS error
 
-**Valid `color` values:** `"primary"` | `"success"` | `"error"` | `"info"`
+**Valid `color` values:** `"primary"` | `"success"` | `"error"` | `"info"` | `"white"`
 
 - `"secondary"` → does NOT exist → TS error
 - `"danger"` → does NOT exist → TS error
 - `"default"` → does NOT exist → TS error
+
+**`color="white"`** — for buttons on dark canvas surfaces. All three variants work:
+- `variant="solid" color="white"` → white fill, near-black text (`#0a0a14`)
+- `variant="outlined" color="white"` → white ring, white text
+- `variant="text" color="white"` → white text, translucent hover
+
+Do NOT use `color="white"` on light backgrounds — white solid button on white canvas is invisible.
 
 **Valid `size` values:** `"small"` | `"medium"` | `"large"` (default `"medium"`)
 
@@ -61,7 +68,10 @@
 
 **`onClick` makes Card a `<button>`.** When `onClick` is provided the root element changes to `<button>`. Use this for selectable card patterns.
 
-**No `variant` prop.** Card has no variant system — layout is always controlled by the developer via `children`.
+**`variant` values:** `"default"` | `"glass"`
+
+- `variant="glass"` → glass-morphism surface: semi-transparent dark fill, `backdrop-filter: blur(14px)`, translucent border. Use on dark canvas overlaying a background image or gradient.
+- All other behavior identical to default.
 
 ---
 
@@ -255,6 +265,7 @@ If the consumer project does not have lucide-react installed, all icon imports w
 | `Button variant="outline"` | ❌ typo | Use `variant="outlined"` |
 | `Button color="secondary"` | ❌ does not exist | Use `color="primary"` |
 | `Button color="danger"` | ❌ does not exist | Use `color="error"` |
+| `Button color="white"` on light bg | ⚠️ invisible | Only use on dark canvas |
 | `Button size="xs"` | ❌ does not exist | Use `size="small"` |
 | `Button size="lg"` | ❌ does not exist | Use `size="large"` |
 | `Card variant="..."` | ❌ prop does not exist | No variant system — use `children` for layout |

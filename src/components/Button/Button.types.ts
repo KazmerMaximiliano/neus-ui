@@ -1,6 +1,6 @@
 type ButtonType = 'button' | 'submit' | 'reset';
 type ButtonVariant = 'outlined' | 'text' | 'solid';
-export type ButtonColor = 'primary' | 'success' | 'error' | 'info';
+export type ButtonColor = 'primary' | 'success' | 'error' | 'info' | 'white';
 type ButtonSize = 'small' | 'medium' | 'large';
 
 export type ButtonProps = {

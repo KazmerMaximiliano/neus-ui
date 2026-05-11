@@ -34,12 +34,14 @@ Generates a form page using FormTemplate with typed fields and external data sou
 
 ## Before starting
 
-Read these files:
+The "Shared Rules" section below is always active. Additionally read:
 - `.agents/skills/_shared/anti-slop.md`
 - `.agents/skills/_shared/prop-constraints.md` — forbidden props and non-existent components
 - `.agents/skills/_shared/component-catalog.md` — FormTemplate, Input, Select, MultiSelect, FileUploader, InteractiveMap sections
 - `.agents/skills/_shared/design-personality.md` — apply VISUAL DIRECTIVE; H1 gets left-border accent `border-left: 4px solid var(--color-primary); padding-left: 1rem`, field gap `1.25rem`
 - `.agents/skills/_shared/checklist.md`
+- `.agents/skills/_shared/dark-surfaces.md` — dark mode CSS recipes (read when Theme mode: dark)
+- `.agents/skills/_shared/light-surfaces.md` — light mode CSS recipes (read when Theme mode: light)
 - `references/form-patterns.md` — layout patterns and special field types
 
 ## Phase 0 — Collect Data
@@ -71,10 +73,24 @@ Also include in your reply:
   — IMPORTANT: sidebar shows only top-level sections. This form route (create/edit)
     MUST have `visible: false`; it is reached via list/detail buttons, not sidebar.
 - Primary theme color (hex or "use default")
+- **Theme mode**: light or dark? (default: light) — note: "Mode" above refers to create/edit; this is for visual theme
 
 ---
 
-## Phase 1 — P0 Verification
+## Phase 1 — Visual Resolution
+
+- Theme mode: `dark` → read `dark-surfaces.md`; use `#0a0a14` canvas, glass form wrapper
+- Theme mode: `light` → read `light-surfaces.md`; use `var(--color-white)` or `var(--color-surface)` (default)
+
+Declare:
+
+```
+VISUAL DIRECTIVE
+  Mode: dark | light
+  Surface file: dark-surfaces.md | light-surfaces.md
+```
+
+## Phase 1b — P0 Verification
 
 - [ ] Output fields == intake fields (zero extras)
 - [ ] Select/MultiSelect with backend-driven options: receives prop `options: SelectOption[]`, not hardcoded
@@ -192,3 +208,99 @@ Apply Mode from VISUAL DIRECTIVE.
 - [ ] Required fields marked with `required` prop
 - [ ] Optional fields without `required`
 - [ ] Missing component names documented in NEUS-DESING.md
+
+---
+
+## Shared Rules (Embedded)
+
+> These rules are always active. They apply even if `_shared/` files are not read.
+
+### Output — always three files
+
+Every skill output: `ComponentName.types.ts` → `ComponentName.tsx` → `ComponentName.styles.css`.
+No inline styles (`style={{}}`). No `<style>` tags inside components. CSS only in `.styles.css`.
+
+### Imports
+
+```tsx
+import { Button, Card, Input, Badge, Link, Select, Modal, DataTable } from 'neus-ui';
+```
+
+Never import from internal paths like `../../components/Button/Button`.
+
+### Types
+
+All `type` / `interface` declarations → `ComponentName.types.ts`. Never declare types in `.tsx`.
+
+### React 19 — No FormEvent
+
+Never `import { FormEvent } from 'react'`. Use `<Button type="submit" onClick={...} />` instead.
+
+### Component Prop Constraints
+
+- **Button** `variant`: `"solid"` | `"outlined"` | `"text"` — `"ghost"` does NOT exist
+- **Button** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"white"` — `"white"` for dark canvas only
+- **Button** `size`: `"small"` | `"medium"` | `"large"`
+- **Card** `variant`: `"default"` | `"glass"` — `"glass"` for dark canvas
+- **Badge** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"neutral"`
+- **Link** `type`: `"primary"` (brand) | `"secondary"` (muted gray)
+- **Select**: no `required` prop — handle validation externally
+- **FormTemplate**: only `children`, `submitLabel`, `loading` — no `onSubmit`/`onCancel`
+
+### Slop Blacklist
+
+- No inline styles / `style={{}}` / `<style>` tags
+- No hardcoded data arrays when data comes from API — use typed props
+- No invented copy (fake testimonials, placeholder names, fake metrics)
+- No `any` TypeScript type
+- No raw `<a>`, `<span>`, `<input>`, `<button>` when a Neus UI component exists
+- No hardcoded font stacks — use `var(--font-display)` / `var(--font-mono)`
+- In dark mode: no `var(--color-primary-light)` as section background; no raw div cards — use `<Card variant="glass">`
+
+---
+
+## Shared Rules (Embedded)
+
+> These rules are always active. They apply even if `_shared/` files are not read.
+
+### Output — always three files
+
+Every skill output: `ComponentName.types.ts` → `ComponentName.tsx` → `ComponentName.styles.css`.
+No inline styles (`style={{}}`). No `<style>` tags inside components. CSS only in `.styles.css`.
+
+### Imports
+
+```tsx
+import { Button, Card, Input, Badge, Link, Select, Modal, DataTable } from 'neus-ui';
+```
+
+Never import from internal paths like `../../components/Button/Button`.
+
+### Types
+
+All `type` / `interface` declarations → `ComponentName.types.ts`. Never declare types in `.tsx`.
+
+### React 19 — No FormEvent
+
+Never `import { FormEvent } from 'react'`. Use `<Button type="submit" onClick={...} />` instead.
+
+### Component Prop Constraints
+
+- **Button** `variant`: `"solid"` | `"outlined"` | `"text"` — `"ghost"` does NOT exist
+- **Button** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"white"` — `"white"` for dark canvas only
+- **Button** `size`: `"small"` | `"medium"` | `"large"`
+- **Card** `variant`: `"default"` | `"glass"` — `"glass"` for dark canvas
+- **Badge** `color`: `"primary"` | `"success"` | `"error"` | `"info"` | `"neutral"`
+- **Link** `type`: `"primary"` (brand) | `"secondary"` (muted gray)
+- **Select**: no `required` prop — handle validation externally
+- **FormTemplate**: only `children`, `submitLabel`, `loading` — no `onSubmit`/`onCancel`
+
+### Slop Blacklist
+
+- No inline styles / `style={{}}` / `<style>` tags
+- No hardcoded data arrays when data comes from API — use typed props
+- No invented copy (fake testimonials, placeholder names, fake metrics)
+- No `any` TypeScript type
+- No raw `<a>`, `<span>`, `<input>`, `<button>` when a Neus UI component exists
+- No hardcoded font stacks — use `var(--font-display)` / `var(--font-mono)`
+- In dark mode: no `var(--color-primary-light)` as section background; no raw div cards — use `<Card variant="glass">`

@@ -1,8 +1,16 @@
 import { ThemeColors } from "../../providers";
 
 export const getLoaderColor = (style: string, color: string, colors: ThemeColors): string => {
+  if (style === "solid" && color === "white") {
+    return "#0a0a14";
+  }
+
   if (style === "solid") {
     return colors.white;
+  }
+
+  if (color === "white") {
+    return "#ffffff";
   }
 
   const colorMap: Record<string, string> = {
