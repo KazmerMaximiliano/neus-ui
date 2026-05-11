@@ -3,6 +3,7 @@ import { CardProps } from "./Card.types";
 
 export const Card = ({
   children,
+  variant = "default",
   avatarImage,
   avatarAlt,
   leading,
@@ -21,6 +22,7 @@ export const Card = ({
 
   const classNames = [
     "card",
+    variant === "glass" ? "card--glass" : "",
     fill ? "card--fill" : "",
     color ? `card--${color}` : "",
     highlighted ? "card--highlighted" : "",
