@@ -13,6 +13,9 @@ export const Button = ({
   fullWidth = false,
   disabled = false,
   loading = false,
+  buttonStyle,
+  labelStyle,
+  loaderStyle,
   onClick,
 }: ButtonProps) => {
   const colors = useColors();
@@ -22,14 +25,20 @@ export const Button = ({
   return (
     <button
       className={buttonClasses}
+      style={buttonStyle}
       onClick={(e) => onClick?.(e)}
       type={type}
       disabled={disabled || loading}
     >
       {loading ? (
-        <BeatLoader size={6} color={loaderColor} speedMultiplier={0.5} />
+        <BeatLoader
+          size={6}
+          color={loaderColor}
+          speedMultiplier={0.5}
+          style={loaderStyle}
+        />
       ) : (
-        label
+        <span style={labelStyle}>{label}</span>
       )}
     </button>
   );

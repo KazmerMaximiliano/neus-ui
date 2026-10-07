@@ -25,7 +25,7 @@ const meta: Meta<typeof ButtonComponent> = {
     },
     color: {
       control: "select",
-      options: ["primary", "success", "error", "info"],
+      options: ["primary", "success", "error", "info", "white"],
       description: "The color scheme of the button",
     },
     size: {
@@ -44,6 +44,18 @@ const meta: Meta<typeof ButtonComponent> = {
     loading: {
       control: "boolean",
       description: "Shows a loading spinner when true",
+    },
+    buttonStyle: {
+      control: "object",
+      description: "CSS properties applied to the button element",
+    },
+    labelStyle: {
+      control: "object",
+      description: "CSS properties applied to the label span",
+    },
+    loaderStyle: {
+      control: "object",
+      description: "CSS properties applied to the BeatLoader container (not its individual dots)",
     },
     onClick: {
       action: "clicked",
@@ -64,6 +76,9 @@ export const Button: Story = {
     disabled: false,
     fullWidth: false,
     loading: false,
+    buttonStyle: {},
+    labelStyle: {},
+    loaderStyle: {},
   },
 };
 

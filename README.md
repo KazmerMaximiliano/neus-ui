@@ -71,6 +71,11 @@ function App() {
 
 Use `pnpm` for all repository commands.
 
+Keep `vitest`, `@vitest/browser-playwright`, and `@vitest/coverage-v8` on
+matching 4.x versions for `@storybook/addon-vitest` 10.6.0. TypeScript is
+restricted to `~6.0.3` because `typescript-eslint` 8.69.0 requires a version
+below 6.1.0. Run `pnpm peers check` after dependency updates.
+
 ### Development
 
 ```bash
@@ -166,6 +171,7 @@ and empty states.
 Run the full test suite:
 
 ```bash
+pnpm exec playwright install chromium --only-shell
 pnpm test
 ```
 

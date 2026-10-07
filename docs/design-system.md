@@ -402,11 +402,15 @@ Every interactive component follows this state model:
 
 | Variant    | Background                  | Border         | Text color          |
 | ---------- | --------------------------- | -------------- | ------------------- |
-| `solid`    | Gradient (color-based glow) | None           | White (dark on success) |
-| `outlined` | Transparent                 | Inset shadow   | Color main          |
+| `solid`    | Color main                  | None           | White (black on success/white) |
+| `outlined` | Transparent                 | 1px solid      | Color main          |
 | `text`     | Transparent                 | None           | Color main          |
 
-Solid primary/info use an indigo gradient with a glow shadow. Solid success uses a green gradient with dark text (`#052e16`). Solid error uses a red gradient. All variants share hover, loading, and disabled logic. Active state adds `transform: translateY(1px)`.
+Buttons use flat, theme-based colors without gradients, shadows, or movement on press. Solid buttons use `--color-{color}` and switch to `--color-{color}-dark` on hover. Outlined and text variants use the corresponding light background on hover. The `white` color remains available for dark surfaces. Sizes (`small`, `medium`, `large`), full width, loading, and disabled states are supported across all variants.
+
+### Input Appearance
+
+Inputs use a flat `--color-surface` background and a 1px `--color-border-input` border, without inset shadows or focus glows. Focus changes the border to `--color-info-300`; errors retain `--color-error`, including on hover and focus. Disabled fields use the disabled surface and text tokens. These states adapt to both light and dark themes.
 
 ### Color Prop Behavior
 

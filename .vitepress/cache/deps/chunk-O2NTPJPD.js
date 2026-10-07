@@ -1,10 +1,10 @@
 import {
   __commonJS
-} from "./chunk-BUSYA2B4.js";
+} from "./chunk-Q4AC2O6Z.js";
 
-// node_modules/.pnpm/react@19.2.3/node_modules/react/cjs/react.development.js
+// node_modules/.pnpm/react@19.2.8/node_modules/react/cjs/react.development.js
 var require_react_development = __commonJS({
-  "node_modules/.pnpm/react@19.2.3/node_modules/react/cjs/react.development.js"(exports, module) {
+  "node_modules/.pnpm/react@19.2.8/node_modules/react/cjs/react.development.js"(exports, module) {
     "use strict";
     (function() {
       function defineDeprecationWarning(methodName, info) {
@@ -968,15 +968,15 @@ var require_react_development = __commonJS({
       exports.useTransition = function() {
         return resolveDispatcher().useTransition();
       };
-      exports.version = "19.2.3";
+      exports.version = "19.2.8";
       "undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
     })();
   }
 });
 
-// node_modules/.pnpm/react@19.2.3/node_modules/react/index.js
+// node_modules/.pnpm/react@19.2.8/node_modules/react/index.js
 var require_react = __commonJS({
-  "node_modules/.pnpm/react@19.2.3/node_modules/react/index.js"(exports, module) {
+  "node_modules/.pnpm/react@19.2.8/node_modules/react/index.js"(exports, module) {
     if (false) {
       module.exports = null;
     } else {
@@ -988,4 +988,4 @@ var require_react = __commonJS({
 export {
   require_react
 };
-//# sourceMappingURL=chunk-6DLEEOAZ.js.map
+//# sourceMappingURL=chunk-O2NTPJPD.js.map

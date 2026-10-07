@@ -48,6 +48,24 @@ Open
 to explore every component with interactive controls and generated API
 documentation.
 
+### Button design systems
+
+The **Design Systems / Button / Button** story compares Broadsheet, Classical,
+Industry, Modernist, Nocturne, and Organic from `design-systems/`. Each card shows
+an interactive button and a loading preview on a light surface.
+
+Use the object controls to edit `buttonStyle` (the button), `labelStyle` (the text
+span), and `loaderStyle` (the BeatLoader container, not its individual dots).
+The style objects reference CSS variables scoped to each card in
+`src/components/Button/Button.design-systems.styles.css`. The recipes adapt each
+system's `tokens.css` and `DESIGN.md` button guidelines; fonts use local fallbacks
+when the original font is unavailable. Hover, focus, and pressed states are
+defined in the same CSS file.
+
+`label`, `loading`, `disabled`, and `fullWidth` remain interactive controls.
+Variant, color, and size are fixed by the recipes; use **Components / Button**
+to explore those props and the three style objects independently.
+
 ## General Usage
 
 ### Importing Components
