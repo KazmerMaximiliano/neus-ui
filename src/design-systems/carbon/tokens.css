@@ -1,0 +1,13 @@
+[data-design-system="carbon"] {
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-body);
+  --font-mono: "IBM Plex Mono", Menlo, monospace;
+}
+
+[data-design-system="carbon"][data-color-scheme="light"] {
+  --color-surface: #ffffff;
+  --color-surface-secondary: #f4f4f4;
+  --color-text-primary: #161616;
+  --color-text-secondary: #525252;
+  --color-text-placeholder: #6f6f6f;
+}

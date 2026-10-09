@@ -1,7 +1,10 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { Button as ButtonComponent } from "./Button";
+import type { ButtonStoryArgs } from "./Button.types";
 
-const meta: Meta<typeof ButtonComponent> = {
+const meta: Meta<ButtonStoryArgs> = {
   title: "Components/Button",
   component: ButtonComponent,
   parameters: {
@@ -9,6 +12,11 @@ const meta: Meta<typeof ButtonComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the button",
+    },
     label: {
       control: "text",
       description: "The text displayed inside the button",
@@ -64,10 +72,9 @@ const meta: Meta<typeof ButtonComponent> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Button: Story = {
+export const Button: StoryObj<ButtonStoryArgs> = {
   args: {
+    designSystem: "neus",
     label: "Click Me",
     type: "button",
     variant: "solid",
@@ -80,6 +87,11 @@ export const Button: Story = {
     labelStyle: {},
     loaderStyle: {},
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <ButtonComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

@@ -1,0 +1,31 @@
+/* Public Button token contract. Recipes override values, never component selectors. */
+:root,
+[data-design-system] {
+  --button-radius: var(--radius-pill);
+  --button-font-family: var(--font-body);
+  --button-font-size-small: var(--fs-xs);
+  --button-font-size-medium: var(--fs-sm);
+  --button-font-size-large: var(--fs-base);
+  --button-padding-small: 8px 14px;
+  --button-padding-medium: 12px 22px;
+  --button-padding-large: 16px 28px;
+  --button-line-height: 1;
+  --button-label-weight: 700;
+  --button-label-spacing: 0.25em;
+  --button-label-transform: uppercase;
+  --button-justify: center;
+  --button-border-width: 0px;
+  --button-border-color: transparent;
+  --button-outlined-border-width: 1px;
+  --button-shadow: none;
+  --button-shadow-hover: none;
+  --button-shadow-active: none;
+  --button-active-transform: none;
+  --button-loader-size: 6px;
+  --button-loader-gap: 0px;
+  --button-disabled-opacity: 0.6;
+  --button-disabled-background: var(--color-gray-400);
+  --button-disabled-color: var(--color-white);
+  --button-transition: background-color 180ms ease, border-color 180ms ease,
+    color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}

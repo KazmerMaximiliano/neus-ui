@@ -1,5 +1,7 @@
 # Introduction
 
+[Documentation index](./README.md)
+
 **Neus UI** is a React component library built with TypeScript, designed to accelerate web application development with consistent, customizable interfaces and a dynamic theming system.
 
 ## Why Neus UI?
@@ -20,8 +22,8 @@
 src/
 ├── components/    # 24+ reusable UI components
 ├── templates/     # Pre-built layouts (AppTemplate, FormTemplate)
-├── hooks/         # useTheme, useColors, useResponsive
-├── providers/     # ThemeProvider
+├── hooks/         # Shared hooks such as useResponsive
+├── providers/     # Providers with their own context, types, and hooks
 ├── css/           # Global CSS variables
 ├── utils/         # Color utilities
 └── services/      # Auxiliary services
@@ -69,9 +71,11 @@ function MyPage() {
 
 ## Next Steps
 
-- [Installation →](./installation) — full install guide, peer deps, CSS setup
-- [Theming →](./theming) — ThemeProvider API, CSS variables, custom colors
-- [Components →](./components) — all 24+ components with live demos
-- [AI-First Workflow →](./ai-first) — Neus Design, skills, subagents, and anti-slop rules
-- [Design System →](./design-system) — color system, spacing, typography
-- [Testing →](./testing) — Vitest setup, test patterns, coverage
+- [Installation](./installation.md) — full install guide, peer deps, CSS setup
+- [Theming](./theming.md) — ThemeProvider API, CSS variables, custom colors
+- [Components](./components.md) — component and template reference
+- [AI-First Workflow](./ai-first.md) — Neus Design, skills, subagents, and anti-slop rules
+- [Design System](./design-system.md) — color system, spacing, typography
+- [Design Systems](./design-systems.md) — theme recipes and extension steps
+- [Testing](./testing.md) — Vitest setup, test patterns, coverage
+- [Development](./development.md) — repository commands and contribution conventions

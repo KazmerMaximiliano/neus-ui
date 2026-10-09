@@ -1,0 +1,20 @@
+[data-design-system="neobrutalism"] {
+  --button-radius: 4px;
+  --button-padding-small: 8px 16px;
+  --button-padding-medium: 12px 24px;
+  --button-padding-large: 16px 32px;
+  --button-font-size-medium: 15px;
+  --button-font-size-large: 17px;
+  --button-line-height: 20px;
+  --button-label-weight: 800;
+  --button-label-spacing: normal;
+  --button-border-width: 3px;
+  --button-border-color: var(--color-text-primary);
+  --button-outlined-border-width: 3px;
+  --button-shadow: 4px 4px 0 var(--color-text-primary);
+  --button-shadow-hover: 4px 4px 0 var(--color-text-primary);
+  --button-shadow-active: 2px 2px 0 var(--color-text-primary);
+  --button-active-transform: translate(2px, 2px);
+  --button-loader-gap: 4px;
+  --button-loader-size: 7px;
+}

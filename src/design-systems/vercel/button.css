@@ -1,0 +1,14 @@
+[data-design-system="vercel"] {
+  --button-radius: 6px;
+  --button-padding-small: 6px 12px;
+  --button-padding-medium: 8px 16px;
+  --button-padding-large: 12px 24px;
+  --button-font-size-medium: 14px;
+  --button-font-size-large: 16px;
+  --button-line-height: 20px;
+  --button-label-weight: 500;
+  --button-label-spacing: normal;
+  --button-label-transform: none;
+  --button-loader-size: 5px;
+  --button-loader-gap: 1px;
+}

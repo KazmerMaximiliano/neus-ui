@@ -43,6 +43,21 @@ export default defineConfig({
           name: 'unit',
           environment: 'jsdom',
           include: ['src/**/*.test.{ts,tsx}'],
+          exclude: ['src/**/*.browser.test.tsx'],
+          setupFiles: ['./vitest.setup.ts']
+        }
+      },
+      {
+        extends: true,
+        test: {
+          name: 'design-systems',
+          include: ['src/design-systems/**/*.browser.test.tsx'],
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright({}),
+            instances: [{ browser: 'chromium' }]
+          },
           setupFiles: ['./vitest.setup.ts']
         }
       },

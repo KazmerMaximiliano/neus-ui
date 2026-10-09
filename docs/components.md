@@ -1,9 +1,11 @@
 # Components
 
+[Documentation index](./README.md)
+
 Neus UI keeps this page as a lightweight reference for the available
 components and templates. Interactive previews, prop controls, and examples
 are available in
-<a href="https://kazmermaximiliano.github.io/neus-ui/storybook/" target="_self">Storybook</a>.
+[Storybook](https://kazmermaximiliano.github.io/neus-ui/storybook/).
 
 ## Component Reference
 
@@ -43,28 +45,39 @@ are available in
 
 ## Storybook
 
+Run `pnpm storybook` locally, or use `pnpm build-storybook` to generate the
+interactive catalog in `storybook-static/`.
+
 Open
-<a href="https://kazmermaximiliano.github.io/neus-ui/storybook/" target="_self">Storybook</a>
+[Storybook](https://kazmermaximiliano.github.io/neus-ui/storybook/)
 to explore every component with interactive controls and generated API
 documentation.
 
-### Button design systems
+### Design-system selection
 
-The **Design Systems / Button / Button** story compares Broadsheet, Classical,
-Industry, Modernist, Nocturne, and Organic from `design-systems/`. Each card shows
-an interactive button and a loading preview on a light surface.
+The single **Components / Button / Button** story includes a `designSystem`
+control for **Neus UI** (default), **Apple**, **Carbon**, **Material**,
+**Neobrutalism**, and **Vercel**. It previews one button in the selected system,
+independently of the toolbar's design-system selection.
+
+The preview uses a local `ThemeProvider` scope and follows the toolbar's light/dark
+selection. `designSystem` is a
+story control declared in `Button.types.ts`; applications select the system
+through `ThemeProvider`, rather than a Button prop.
 
 Use the object controls to edit `buttonStyle` (the button), `labelStyle` (the text
 span), and `loaderStyle` (the BeatLoader container, not its individual dots).
-The style objects reference CSS variables scoped to each card in
-`src/components/Button/Button.design-systems.styles.css`. The recipes adapt each
-system's `tokens.css` and `DESIGN.md` button guidelines; fonts use local fallbacks
-when the original font is unavailable. Hover, focus, and pressed states are
-defined in the same CSS file.
+Design recipes live in `src/design-systems/` and supply CSS tokens to the actual
+components. `loaderStyle.color` colors the dots through `currentColor`, and
+`loaderStyle.fontSize` controls their size. The recipes adapt the Markdown
+guidelines in `design-systems/`; unspecified details are illustrative choices.
+Fonts use local fallbacks when the original font is unavailable.
 
-`label`, `loading`, `disabled`, and `fullWidth` remain interactive controls.
-Variant, color, and size are fixed by the recipes; use **Components / Button**
-to explore those props and the three style objects independently.
+Variant, color, size, loading, disabled, and fullWidth remain independent controls
+in every Button design. Enable `loading` to preview the loader in the selected
+system. Design-system adaptations currently apply only to Button; Input retains
+its existing implementation and styles. See
+[Design systems](./design-systems.md) for architecture and extension steps.
 
 ## General Usage
 
@@ -72,14 +85,14 @@ to explore those props and the three style objects independently.
 
 ```tsx
 // Import a single component
-import { Button } from "@neus-ui/components";
+import { Button } from "neus-ui";
 
 // Import multiple components
-import { Button, Input, Checkbox, Modal } from "@neus-ui/components";
+import { Button, Input, Checkbox, Modal } from "neus-ui";
 ```
 
 ### Importing Templates
 
 ```tsx
-import { AppTemplate, FormTemplate } from "@neus-ui/templates";
+import { AppTemplate, FormTemplate } from "neus-ui";
 ```

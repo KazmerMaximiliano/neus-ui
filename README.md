@@ -6,12 +6,12 @@ workflow powered by project skills and the `neus-designer` subagent.
 
 ## Documentation
 
-Start with the public documentation:
+All project guides live in [`docs/`](./docs/README.md) as Markdown files:
 
-**[Open the Neus UI documentation](https://kazmermaximiliano.github.io/neus-ui/)**
+**[Open the documentation index](./docs/README.md)**
 
-The docs include installation, theming, component references, testing guidance,
-Storybook, and the AI-first Neus Design workflow.
+The guides cover installation, theming, components, development, testing, and
+the Neus Design workflow. Read them directly in GitHub or a Markdown editor.
 
 ## Project Overview
 
@@ -25,6 +25,7 @@ typed APIs, CSS variable theming, and ready-made layout templates.
 | Components | 24+ reusable UI components including Button, DataTable, Modal, Select, Calendar, Sidebar, Stepper, and WeekCalendar |
 | Templates | `AppTemplate` for application shells and `FormTemplate` for validated forms |
 | Theming | Runtime theme updates with `ThemeProvider`, `useTheme`, `useColors`, and CSS variables |
+| Design systems | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel themes; Button adaptations |
 | Testing | Vitest, React Testing Library, Storybook integration, and coverage reporting |
 | AI-first workflow | `neus-designer` orchestrates project intake and invokes Neus UI skills to generate typed `.tsx` UI artifacts |
 
@@ -34,14 +35,15 @@ typed APIs, CSS variable theming, and ready-made layout templates.
 src/
 ├── components/        # Reusable UI components
 ├── templates/         # AppTemplate and FormTemplate
-├── hooks/             # useTheme, useColors, useResponsive
-├── providers/         # ThemeProvider
+├── hooks/             # Shared hooks such as useResponsive
+├── providers/         # Providers with their own context, types, and hooks
+├── design-systems/    # Shared palettes and per-component CSS tokens
 ├── css/               # Global CSS variables and base styles
 ├── utils/             # Utility functions
 └── services/          # Auxiliary services
 
-docs/                  # VitePress documentation
-.agents/               # Neus Design subagent and skills
+docs/                  # Markdown guides and reference
+.storybook/            # Interactive component catalog configuration
 ```
 
 ### Installation
@@ -67,174 +69,44 @@ function App() {
 }
 ```
 
-## Build and Test Commands
+### Design systems
 
-Use `pnpm` for all repository commands.
+Select a design system at the provider boundary. Neus UI remains the default:
 
-Keep `vitest`, `@vitest/browser-playwright`, and `@vitest/coverage-v8` on
-matching 4.x versions for `@storybook/addon-vitest` 10.6.0. TypeScript is
-restricted to `~6.0.3` because `typescript-eslint` 8.69.0 requires a version
-below 6.1.0. Run `pnpm peers check` after dependency updates.
+```tsx
+<ThemeProvider designSystem="carbon" colorScheme="dark">
+  <Button label="Continue" />
+</ThemeProvider>
+```
 
-### Development
+Nested providers create isolated scopes. Button's `buttonStyle`, `labelStyle`, and
+`loaderStyle` remain available for individual overrides. See the
+[design-system architecture guide](docs/design-systems.md) for coverage and how
+to add components or systems.
+
+## Development
 
 ```bash
 pnpm install
-pnpm dev
 pnpm storybook
-pnpm preview
-```
-
-### Library build
-
-```bash
 pnpm build
-pnpm build:types
-```
-
-### Documentation build
-
-```bash
-pnpm docs:dev
-pnpm docs:build
-pnpm docs:preview
-pnpm build-storybook
-```
-
-### Tests and quality
-
-```bash
-pnpm test
 pnpm test:unit
-pnpm test:watch
-pnpm test:coverage
 pnpm lint
 ```
 
-## Code Style Guidelines
+See [Development](./docs/development.md) for all commands and code conventions,
+and [Testing](./docs/testing.md) for browser tests and coverage.
 
-Neus UI uses strict TypeScript conventions and component file boundaries. New
-components must follow the established directory structure:
-
-```text
-ComponentName/
-├── ComponentName.tsx
-├── ComponentName.types.ts
-├── ComponentName.styles.css
-├── ComponentName.test.tsx
-├── ComponentName.stories.tsx
-└── ComponentName.utils.ts   # optional
-```
-
-Core rules:
-
-- Use named exports only. Do not use default exports.
-- Keep props and shared types in `ComponentName.types.ts`.
-- Keep styles in `ComponentName.styles.css`; use theme CSS variables.
-- Keep tests co-located in `ComponentName.test.tsx`.
-- Use ES module imports and follow the project import order.
-- Prefer semantic React Testing Library queries over implementation details.
-- Keep components typed, focused, and compatible with React 19+.
-
-Recommended import order:
-
-```tsx
-import React, { useState } from "react";
-import { FiIcon } from "react-icons/fi";
-import { Button } from "../Button/Button";
-import { useColors } from "../theme";
-import "./ComponentName.styles.css";
-import type { ComponentNameProps } from "./ComponentName.types";
-import { getComponentClasses } from "./ComponentName.utils";
-```
-
-Style components with CSS variables:
-
-```css
-.component-name {
-  background-color: var(--color-primary);
-  border: 1px solid var(--color-border-light);
-  color: var(--color-white);
-}
-
-.component-name:hover {
-  background-color: var(--color-primary-light);
-}
-```
-
-## Testing Instructions
-
-Neus UI uses Vitest and React Testing Library. Tests should cover rendering,
-interactions, prop variations, and edge cases such as disabled, loading, error,
-and empty states.
-
-Run the full test suite:
-
-```bash
-pnpm exec playwright install chromium --only-shell
-pnpm test
-```
-
-Run only unit tests:
-
-```bash
-pnpm test:unit
-```
-
-Run coverage:
-
-```bash
-pnpm test:coverage
-```
-
-Example test pattern:
-
-```tsx
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
-import { Button } from "./Button";
-
-describe("Button", () => {
-  it("calls onClick when clicked", async () => {
-    const handleClick = vi.fn();
-
-    render(<Button label="Save" onClick={handleClick} />);
-
-    await userEvent.click(screen.getByRole("button", { name: /save/i }));
-
-    expect(handleClick).toHaveBeenCalled();
-  });
-});
-```
-
-## AI-First Neus Design
-
-Neus Design turns natural language UI requests into production-ready `.tsx`
-artifacts built from Neus UI components. The `neus-designer` subagent handles
-project intake, resolves visual direction, and invokes specialized skills for
-app layouts, dashboards, forms, lists, landing pages, onboarding flows, and
-component patterns.
-
-The workflow follows a strict anti-slop rule: generated fields, columns,
-sections, and copy must come from the user's request. Neus Design should not
-invent data, fake social proof, or extra UI surfaces.
-
-Read the public guide:
-
-**[AI-first workflow documentation](https://kazmermaximiliano.github.io/neus-ui/ai-first)**
-
-The root [`NEUS-DESING.md`](./NEUS-DESING.md) file remains the deeper source
-reference for the project-specific AI system.
-
-## Useful Links
+## Useful links
 
 | Resource | Link |
 | --- | --- |
-| Documentation | https://kazmermaximiliano.github.io/neus-ui/ |
-| AI-first workflow | https://kazmermaximiliano.github.io/neus-ui/ai-first |
-| Storybook | https://kazmermaximiliano.github.io/neus-ui/storybook/ |
-| Repository | https://github.com/KazmerMaximiliano/neus-ui |
+| Documentation | [Index](./docs/README.md) |
+| Components and templates | [Component reference](./docs/components.md) |
+| AI-first workflow | [Workflow guide](./docs/ai-first.md) |
+| Neus Design | [Detailed reference](./docs/neus-design.md) |
+| Storybook | [Interactive catalog](https://kazmermaximiliano.github.io/neus-ui/storybook/) |
+| Repository | [GitHub](https://github.com/KazmerMaximiliano/neus-ui) |
 
 ## License
 

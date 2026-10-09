@@ -1,5 +1,7 @@
 # Installation
 
+[Documentation index](./README.md)
+
 ## Requirements
 
 | Dependency | Version |
@@ -99,13 +101,13 @@ Neus UI bundles React separately. Ensure these are installed in your project:
 import "neus-ui/dist/neus-ui.css";
 import { ThemeProvider, Button } from "neus-ui";
 
-export default function App() {
+export const App = () => {
   return (
     <ThemeProvider>
       <Button label="It works!" variant="solid" color="primary" />
     </ThemeProvider>
   );
-}
+};
 ```
 
 If the button renders with color, installation is complete.

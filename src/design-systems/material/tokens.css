@@ -1,0 +1,8 @@
+[data-design-system="material"] {
+  --font-body: "Inter", "Roboto", Arial, sans-serif;
+  --font-display: "Roboto", var(--font-body);
+}
+
+[data-design-system="material"][data-color-scheme="light"] {
+  --color-text-primary: #111827;
+}

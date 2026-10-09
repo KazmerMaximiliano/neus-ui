@@ -5,7 +5,8 @@ import './css/app.css';
 
 // Theme system exports
 export { useColors } from './components/theme';
-export { ThemeProvider, useTheme, type ThemeColors, type ThemeConfig } from './providers';
+export { ThemeProvider, useTheme, type ThemeColors, type ThemeConfig, type ThemeProviderProps, type ColorScheme } from './providers';
+export { DESIGN_SYSTEMS, type DesignSystem, type DesignSystemId } from './design-systems';
 
 // Color utility functions
 export {

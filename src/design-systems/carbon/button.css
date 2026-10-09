@@ -1,0 +1,14 @@
+[data-design-system="carbon"] {
+  --button-radius: 0px;
+  --button-padding-small: 10px 47px 10px 15px;
+  --button-padding-medium: 14px 63px 14px 15px;
+  --button-padding-large: 22px 63px 22px 15px;
+  --button-font-size-medium: 14px;
+  --button-font-size-large: 16px;
+  --button-line-height: 20px;
+  --button-label-weight: 400;
+  --button-label-spacing: 0.16px;
+  --button-label-transform: none;
+  --button-justify: flex-start;
+  --button-loader-gap: 4px;
+}

@@ -1,0 +1,16 @@
+[data-design-system="material"] {
+  --button-radius: 20px;
+  --button-padding-small: 8px 16px;
+  --button-padding-medium: 10px 24px;
+  --button-padding-large: 14px 28px;
+  --button-font-size-medium: 14px;
+  --button-font-size-large: 16px;
+  --button-line-height: 20px;
+  --button-label-weight: 500;
+  --button-label-spacing: 0.1px;
+  --button-label-transform: none;
+  --button-shadow: 0 2px 4px var(--color-shadow);
+  --button-shadow-hover: 0 3px 6px var(--color-shadow);
+  --button-shadow-active: 0 1px 2px var(--color-shadow);
+  --button-loader-gap: 3px;
+}

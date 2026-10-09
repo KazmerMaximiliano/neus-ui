@@ -1,6 +1,10 @@
 # Theming
 
-Neus UI uses a dynamic theming system built on CSS custom properties. Colors are set at runtime by `ThemeProvider` and consumed by all components via CSS variables.
+[Documentation index](./README.md)
+
+Neus UI uses CSS custom properties for shared semantic colors and component design
+tokens. `ThemeProvider` selects a design system, resolves its palette, and exposes
+the same colors to CSS and `useColors()`. Neus UI is the default design system.
 
 ## ThemeProvider
 
@@ -9,36 +13,95 @@ Wrap your app once at the root. All components must be inside it:
 ```tsx
 import { ThemeProvider } from "neus-ui";
 
-function App() {
+export const App = () => {
   return (
     <ThemeProvider initialTheme={{ primaryColor: "#3975C2" }}>
       {/* your app */}
     </ThemeProvider>
   );
-}
+};
 ```
 
 ### Props
 
 ```tsx
-interface ThemeProviderProps {
+type ThemeProviderProps = {
   children: ReactNode;
+  designSystem?: "neus" | "apple" | "carbon" | "material" | "neobrutalism" | "vercel";
+  initialColorScheme?: "light" | "dark";
+  colorScheme?: "light" | "dark";
+  scope?: "global" | "local";
+  className?: string;
   initialTheme?: {
     primaryColor?: string;  // hex color
     successColor?: string;
     errorColor?: string;
     infoColor?: string;
   };
-}
+};
 ```
 
-Each color automatically generates three variants:
+`initialTheme` and `initialColorScheme` initialize internal state. Change colors
+later with `updateTheme()` and mode with `setColorScheme()` from `useTheme()`.
+The `colorScheme` prop is controlled and takes precedence over internal state.
+`designSystem` can change at any time. Color overrides remain until replaced or
+the provider is remounted; their values are used as supplied in both modes.
+
+The root provider writes tokens to the document root without adding a wrapper.
+Nested providers always create a local scope. Use `scope="local"` for independent
+top-level previews; `className` applies to this scope's `display: contents` wrapper.
+Local scopes never change the document root or body. Nested providers inherit
+the system and mode when omitted, but resolve their own palette and overrides.
+
+```tsx
+<ThemeProvider designSystem="carbon" colorScheme="dark">
+  <Button label="Continue" />
+  <ThemeProvider designSystem="neus" colorScheme="light">
+    <Input label="Name" />
+  </ThemeProvider>
+</ThemeProvider>
+```
+
+Only Button currently has component-specific adaptations in every system.
+Input retains its existing implementation and styles.
+See [Design systems](./design-systems.md) for architecture, coverage, and extension
+steps. Components rendered through a portal outside a local scope inherit the
+portal container's CSS theme. Local providers render their scope attributes and
+CSS variables on the server as well. Global document updates happen on client mount.
+
+Each resolved color includes three variants:
 
 | Variant | Rule |
 | --- | --- |
 | `main` | The original color |
-| `light` | 10% opacity |
-| `dark` | 15% darker |
+| `light` | 10% opacity in light mode, 15% in dark mode |
+| `dark` | 15% darker, or the design system's explicit primary hover color |
+
+## Source organization
+
+Each provider owns its implementation, context, types, styles, utilities, and
+hooks. The root `providers/index.ts` re-exports each provider's public barrel.
+
+```text
+src/providers/
+├── index.ts
+└── ThemeProvider/
+    ├── index.ts
+    ├── ThemeProvider.tsx
+    ├── ThemeProvider.types.ts
+    ├── ThemeProvider.styles.css
+    ├── ThemeProvider.utils.ts
+    ├── ThemeProvider.test.tsx
+    ├── ThemeProvider.stories.tsx
+    ├── ThemeContext.ts
+    └── hooks/
+        ├── index.ts
+        └── useTheme.ts
+```
+
+Library consumers continue to import `ThemeProvider`, `useTheme`, and the public
+theme types from `neus-ui`. Internal consumers can use the `providers` barrel;
+`ThemeContext` remains internal to `ThemeProvider`.
 
 ## Changing Theme at Runtime
 
@@ -47,7 +110,7 @@ Use `useTheme` to update colors dynamically — no page reload needed:
 ```tsx
 import { useTheme } from "neus-ui";
 
-function ThemeSwitcher() {
+export const ThemeSwitcher = () => {
   const { updateTheme } = useTheme();
 
   return (
@@ -60,7 +123,7 @@ function ThemeSwitcher() {
       </button>
     </div>
   );
-}
+};
 ```
 
 ## useColors Hook
@@ -70,21 +133,11 @@ Access all resolved theme colors in any component:
 ```tsx
 import { useColors } from "neus-ui";
 
-function CustomCard() {
+export const PrimaryColor = () => {
   const colors = useColors();
 
-  return (
-    <div
-      style={{
-        backgroundColor: colors.primary.main,
-        border: `1px solid ${colors.primary.dark}`,
-        color: colors.white,
-      }}
-    >
-      Custom styled element
-    </div>
-  );
-}
+  return <output>{colors.primary.main}</output>;
+};
 ```
 
 ### Colors Object Shape
@@ -92,7 +145,7 @@ function CustomCard() {
 ```tsx
 colors.primary.main   // "#3975C2"
 colors.primary.light  // "rgba(57, 117, 194, 0.1)"
-colors.primary.dark   // "#2a5a9e"
+colors.primary.dark   // Resolved hover color
 colors.success.main
 colors.error.main
 colors.info.main
@@ -105,7 +158,8 @@ colors.gray[500]      // "#64748b"
 
 ## CSS Variables
 
-All theme colors are available as CSS variables on `:root`. Use them directly in any CSS file or inline style:
+Theme colors are available on `:root` for a global provider and on the local
+container for a scoped provider. Use them directly in CSS files:
 
 ```css
 .my-element {
@@ -126,8 +180,11 @@ All theme colors are available as CSS variables on `:root`. Use them directly in
 | Variable | Description |
 | --- | --- |
 | `--color-primary` | Primary brand color |
-| `--color-primary-light` | Primary at 10% opacity |
-| `--color-primary-dark` | Primary 15% darker |
+| `--color-primary-light` | Subtle primary background |
+| `--color-primary-dark` | Primary hover color |
+| `--color-primary-active` | Primary pressed color |
+| `--color-text-on-primary` | Foreground on a solid primary background |
+| `--color-focus` | Focus indicator color |
 | `--color-success` | Success state |
 | `--color-success-light` | Success light |
 | `--color-success-dark` | Success dark |

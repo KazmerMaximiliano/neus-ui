@@ -1,5 +1,7 @@
 # Testing
 
+[Documentation index](./README.md)
+
 Neus UI uses **Vitest** + **React Testing Library**. Test files live next to their components (`.test.tsx`).
 
 ## Run Tests
@@ -11,6 +13,9 @@ pnpm test
 # Unit tests only
 pnpm test:unit
 
+# Computed CSS, nested theme scopes, and keyboard interactions in Chromium
+pnpm test:design-systems
+
 # Watch mode (re-runs on file change)
 pnpm test:watch
 
@@ -18,14 +23,29 @@ pnpm test:watch
 pnpm test:coverage
 ```
 
+## Storybook Type Checking
+
+Story files and `.storybook/` configuration use `tsconfig.storybook.json`,
+referenced by the root TypeScript configuration. It includes Vite's client types
+and `src/vite-env.d.ts` so the editor can resolve CSS imports in stories.
+Stories remain excluded from the library build.
+
+```bash
+pnpm exec tsc --project tsconfig.storybook.json --noEmit
+```
+
 ## Test Structure
 
 ```
 src/components/Button/
 ├── Button.tsx
-├── Button.test.tsx   ← unit tests
+├── Button.test.tsx   ← component, accessibility, story, and utility tests
 └── Button.types.ts
 ```
+
+Button's tests are consolidated in `Button.test.tsx`, including `getButtonClasses`
+and the existing story's design-system controls. Keep related cases grouped with
+`describe` blocks instead of adding a separate `tests/` directory.
 
 ## Basic Test Pattern
 
@@ -128,4 +148,9 @@ pnpm test -- --grep="Button"
 ## Configuration
 
 - **`vitest.setup.ts`** — imports `@testing-library/jest-dom/vitest` matchers
-- **`vite.config.ts`** — defines two test projects: `unit` (jsdom) and `storybook` (Playwright/Chromium)
+- **`vite.config.ts`** — defines `unit` (jsdom), `design-systems` (computed CSS and interactions in Chromium), and `storybook` (stories in Chromium)
+
+Design-system browser tests verify all six palettes in both color schemes,
+independent Button variants and sizes, nested scope resets, runtime switching,
+loader overrides, keyboard focus, and disabled/loading Button interactions. They wait for transitions
+before asserting final styles. Unit tests cover provider cleanup and state updates.

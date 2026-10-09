@@ -6,7 +6,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["dist", "coverage", "docs", "storybook-docs", ".vitepress"]),
+  globalIgnores(["dist", "coverage", "storybook-static"]),
   {
     files: ["**/*.{ts,tsx}"],
     extends: [

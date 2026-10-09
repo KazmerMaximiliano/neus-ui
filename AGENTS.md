@@ -148,7 +148,6 @@ ComponentName/
 | `pnpm build`           | dist/ folder with compiled code | 5-10s  |
 | `pnpm build:types`     | TypeScript declaration files    | 3-5s   |
 | `pnpm build-storybook` | Static Storybook site           | 15-30s |
-| `pnpm build-docs`      | Documentation in docs/          | 15-30s |
 
 ### Testing Commands
 
@@ -401,8 +400,8 @@ When agents need to implement new components, use this checklist:
 - [ ] Verify `pnpm build` succeeds
 - [ ] Verify `pnpm test:coverage` shows 70%+ coverage
 - [ ] Verify component works in Storybook
-- [ ] Create guides/components/ComponentName.md with props and usage example
-- [ ] Update guides/COMPONENTS.md index table with the new component
+- [ ] Create docs/components/ComponentName.md with props and usage example
+- [ ] Update docs/components.md index table with the new component
 - [ ] Update AGENTS.md COMPONENT INVENTORY if adding new component
 - [ ] Update README.md if component is user-facing
 
@@ -530,9 +529,16 @@ For agents needing additional information:
 | QUESTION                    | SOURCE                             | LOCATION                      |
 | --------------------------- | ---------------------------------- | ----------------------------- |
 | Component usage?            | README.md                          | /README.md                    |
-| Component index?            | guides/COMPONENTS.md               | /guides/COMPONENTS.md         |
-| Component props + examples? | guides/components/ComponentName.md | /guides/components/           |
-| Design system / theming?    | guides/DESING_SYSTEM.md            | /guides/DESING_SYSTEM.md      |
+| Documentation index?       | docs/README.md                    | /docs/README.md              |
+| Component index?            | docs/components.md                | /docs/components.md          |
+| Component props + examples? | docs/components/ComponentName.md  | /docs/components/            |
+| Design system / theming?    | docs/design-system.md, docs/theming.md | /docs/                    |
 | Type definitions?           | Component.types.ts                 | src/components/ComponentName/ |
 | Test examples?              | Component.test.tsx                 | src/components/ComponentName/ |
 | Styling reference?          | Component.styles.css               | src/components/ComponentName/ |
+
+All project documentation lives in `docs/` as Markdown. Use relative links with
+explicit `.md` extensions and keep `docs/README.md` up to date when adding guides.
+Documentation can be read directly in the repository or a Markdown editor;
+it does not require a development server or build step. Storybook provides the
+interactive component catalog separately.

@@ -1,5 +1,7 @@
 # AI-First Workflow
 
+[Documentation index](./README.md)
+
 Neus UI is designed as an AI-first component library. The components,
 templates, documentation, and project-local skills work together so agents can
 turn natural language requests into production-ready React interfaces.
@@ -113,11 +115,10 @@ The orchestrator maps user intent to `ThemeProvider` colors:
 ```
 
 Custom styles should rely on the public tokens documented in
-[Design System](./design-system) and [Theming](./theming).
+[Design System](./design-system.md) and [Theming](./theming.md).
 
 ## Source Reference
 
-This page is the public guide for the AI-first workflow. The deeper project
-source lives in
-[`NEUS-DESING.md`](https://github.com/KazmerMaximiliano/neus-ui/blob/main/NEUS-DESING.md),
-alongside the local subagent and skill files.
+This page introduces the AI-first workflow. The detailed
+[Neus Design reference](./neus-design.md) describes the skill catalog,
+orchestrator, and extension conventions.

@@ -1,0 +1,13 @@
+/* Every scope starts with a complete Neus baseline, including a nested light scope. */
+:root,
+[data-design-system] {
+  --theme-color-scheme: light;
+  --color-focus: var(--color-primary);
+  --color-primary-active: var(--color-primary-dark);
+  --color-control-text: var(--color-primary);
+}
+
+[data-color-scheme="dark"] {
+  --theme-color-scheme: dark;
+  --color-control-text: var(--color-text-primary);
+}

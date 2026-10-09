@@ -1,5 +1,7 @@
 # Design System
 
+[Documentation index](./README.md)
+
 ## Table of Contents
 
 - [Theming](#theming)
@@ -7,7 +9,7 @@
 - [Typography](#typography)
 - [Spacing](#spacing)
 - [Border Radius](#border-radius)
-- [Shadows](#shadows)
+- [Shadows & Glows](#shadows--glows)
 - [Transitions & Animations](#transitions--animations)
 - [Component Patterns](#component-patterns)
 

@@ -1,0 +1,11 @@
+[data-design-system="vercel"] {
+  --font-body: "Geist", Arial, sans-serif;
+  --font-display: var(--font-body);
+  --font-mono: "Geist Mono", monospace;
+}
+
+[data-design-system="vercel"][data-color-scheme="light"] {
+  --color-surface: #ffffff;
+  --color-text-primary: #171717;
+  --color-text-secondary: #4d4d4d;
+}

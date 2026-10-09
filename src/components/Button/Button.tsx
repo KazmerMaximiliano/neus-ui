@@ -1,9 +1,9 @@
 import { BeatLoader } from "react-spinners";
-import { useColors } from "../theme";
 import "./Button.styles.css";
 import { ButtonProps } from "./Button.types";
-import { getButtonClasses, getLoaderColor } from "./Button.utils";
+import { getButtonClasses } from "./Button.utils";
 
+/** A token-driven action with independent variants, colors and sizes. */
 export const Button = ({
   label,
   type = "button",
@@ -18,9 +18,7 @@ export const Button = ({
   loaderStyle,
   onClick,
 }: ButtonProps) => {
-  const colors = useColors();
   const buttonClasses = getButtonClasses(variant, color, size, fullWidth);
-  const loaderColor = getLoaderColor(variant, color, colors);
 
   return (
     <button
@@ -29,16 +27,20 @@ export const Button = ({
       onClick={(e) => onClick?.(e)}
       type={type}
       disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      aria-label={loading ? label : undefined}
     >
       {loading ? (
         <BeatLoader
-          size={6}
-          color={loaderColor}
+          className="button-loader"
+          size="1em"
+          margin="0.333333em"
+          color="currentColor"
           speedMultiplier={0.5}
           style={loaderStyle}
         />
       ) : (
-        <span style={labelStyle}>{label}</span>
+        <span className="button-label" style={labelStyle}>{label}</span>
       )}
     </button>
   );

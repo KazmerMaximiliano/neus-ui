@@ -1,71 +1,51 @@
-import type { Preview } from '@storybook/react-vite';
-import { addons } from 'storybook/internal/preview-api';
-import React, { useEffect } from 'react';
-import '../src/css/app.css';
-import { ThemeProvider } from '../src/providers';
-
-function applyScheme(scheme: string) {
-  document.documentElement.setAttribute('data-color-scheme', scheme);
-  document.body.style.backgroundColor = scheme === 'dark' ? '#1e1e2e' : '';
-  document.body.style.transition = 'background-color 0.2s ease';
-}
-
-// Apply scheme to whichever iframe this module loads in
-const channel = addons.getChannel();
-channel.on('globalsUpdated', ({ globals }: { globals: Record<string, string> }) => {
-  if (globals.colorScheme) applyScheme(globals.colorScheme);
-});
-channel.on('SET_GLOBALS', ({ globals }: { globals: Record<string, string> }) => {
-  if (globals.colorScheme) applyScheme(globals.colorScheme);
-});
+import type { Preview } from "@storybook/react-vite";
+import { DESIGN_SYSTEMS } from "../src/design-systems";
+import { ThemeProvider } from "../src/providers";
+import "../src/css/app.css";
+import type { DesignSystemId } from "../src/design-systems";
+import type { ColorScheme } from "../src/providers";
 
 const preview: Preview = {
   globalTypes: {
-    colorScheme: {
-      description: 'Color scheme',
+    designSystem: {
+      description: "Design system",
       toolbar: {
-        title: 'Theme',
-        icon: 'circlehollow',
+        title: "Design system",
+        icon: "paintbrush",
+        items: DESIGN_SYSTEMS.map(({ id, name }) => ({ value: id, title: name })),
+        dynamicTitle: true,
+      },
+    },
+    colorScheme: {
+      description: "Color scheme",
+      toolbar: {
+        title: "Theme",
+        icon: "circlehollow",
         items: [
-          { value: 'light', title: 'Light', icon: 'sun' },
-          { value: 'dark', title: 'Dark', icon: 'moon' },
+          { value: "light", title: "Light", icon: "sun" },
+          { value: "dark", title: "Dark", icon: "moon" },
         ],
         dynamicTitle: true,
       },
     },
   },
-
-  initialGlobals: {
-    colorScheme: 'light',
-  },
-
+  initialGlobals: { designSystem: "neus", colorScheme: "light" },
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
+      matchers: { color: /(background|color)$/i, date: /Date$/i },
     },
-    a11y: {
-      test: 'todo',
-    },
+    a11y: { test: "todo" },
   },
-
   decorators: [
-    (Story, context) => {
-      const scheme = (context.globals.colorScheme as 'light' | 'dark') ?? 'light';
-
-      useEffect(() => {
-        applyScheme(scheme);
-      }, [scheme]);
-
-      return React.createElement(
-        ThemeProvider,
-        { initialTheme: { primaryColor: '#283593' }, initialColorScheme: scheme },
-        React.createElement(Story, {})
-      );
-    },
+    (Story, context) => (
+      <ThemeProvider
+        designSystem={(context.globals.designSystem as DesignSystemId) ?? "neus"}
+        colorScheme={(context.globals.colorScheme as ColorScheme) ?? "light"}
+      >
+        <Story />
+      </ThemeProvider>
+    ),
   ],
 };
 

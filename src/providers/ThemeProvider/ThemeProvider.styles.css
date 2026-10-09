@@ -1,0 +1,6 @@
+.neus-theme-scope {
+  display: contents;
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  color-scheme: var(--theme-color-scheme, light);
+}

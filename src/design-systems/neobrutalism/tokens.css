@@ -1,0 +1,10 @@
+[data-design-system="neobrutalism"] {
+  --font-body: "Inter", Arial, sans-serif;
+  --font-display: var(--font-body);
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+[data-design-system="neobrutalism"][data-color-scheme="light"] {
+  --color-surface: #fbfbf9;
+  --color-text-primary: #1c293c;
+}
