@@ -15,7 +15,11 @@ are available in
 | Badge | Small status indicator with semantic color variants |
 | Button | Button with variants, sizes (small/medium/large), colors, loading, and disabled states |
 | Calendar | Date picker for single, range, or multiple selection |
-| Card | Content container with avatar, header, and color variants |
+| [Card](./components/Card.md) | Composable surface with six design-system adaptations |
+| [CardHeader](./components/CardHeader.md) | Free-form header content and actions |
+| [CardMedia](./components/CardMedia.md) | Images, video, audio, frames and custom media components |
+| [CardContent](./components/CardContent.md) | Themed content spacing |
+| [CardFooter](./components/CardFooter.md) | Wrapping footer content and actions |
 | Checkbox | Controlled or uncontrolled checkbox with indeterminate state |
 | Clock | Circular time picker for hours and minutes |
 | DataTable | Sortable, paginated table with filtering and row actions |
@@ -69,14 +73,18 @@ Use the object controls to edit `buttonStyle` (the button), `labelStyle` (the te
 span), and `loaderStyle` (the BeatLoader container, not its individual dots).
 Design recipes live in `src/design-systems/` and supply CSS tokens to the actual
 components. `loaderStyle.color` colors the dots through `currentColor`, and
-`loaderStyle.fontSize` controls their size. The recipes adapt the Markdown
-guidelines in `design-systems/`; unspecified details are illustrative choices.
+`loaderStyle.fontSize` controls their size. The recipes are project adaptations;
+unspecified details are illustrative choices.
 Fonts use local fallbacks when the original font is unavailable.
 
 Variant, color, size, loading, disabled, and fullWidth remain independent controls
 in every Button design. Enable `loading` to preview the loader in the selected
-system. Design-system adaptations currently apply only to Button; Input retains
-its existing implementation and styles. See
+system. Card and its four subcomponents also have one story each with the same
+local design selector. Card exposes `className` and `style` on every component;
+the main example composes all sections, while their stories expose independent
+controls. CardMedia previews images, video, audio and iframes.
+See the [Card guide](./components/Card.md) for the new API and migration.
+Input retains its existing implementation and styles. See
 [Design systems](./design-systems.md) for architecture and extension steps.
 
 ## General Usage

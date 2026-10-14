@@ -65,6 +65,8 @@ ComponentName/
 Core rules:
 
 - Use named exports for components. Storybook metadata uses a default export.
+- Button and Card group their public components and types in a local `index.ts`;
+  `src/components/index.ts` re-exports each family through that entry point.
 - Keep props and shared types in `ComponentName.types.ts`.
 - Keep styles in `ComponentName.styles.css`; use theme CSS variables.
 - Keep tests co-located in `ComponentName.test.tsx`.

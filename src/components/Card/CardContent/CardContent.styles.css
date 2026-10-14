@@ -1,0 +1,5 @@
+.card-content {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: var(--card-content-padding);
+}

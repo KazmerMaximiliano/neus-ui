@@ -3,8 +3,9 @@
 Neus UI is a React component library with TypeScript, CSS variable theming,
 reusable components, and application templates.
 
-All project guides are Markdown files in this directory. Read them directly in
-GitHub or a Markdown editor; no server or build step is required.
+The main guides are Markdown files in this directory; the component refactor
+guide lives at the repository root. Read them directly in GitHub or a Markdown
+editor; no server or build step is required.
 
 ## Getting started
 
@@ -19,6 +20,8 @@ GitHub or a Markdown editor; no server or build step is required.
 | [Theming](./theming.md) | ThemeProvider, light/dark modes, scopes, hooks, and runtime color changes |
 | [Design system](./design-system.md) | Color tokens, typography, spacing, and component styling conventions |
 | [Design systems](./design-systems.md) | Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel adaptations |
+| [Component refactor guide](../REFACTOR_GUIDE.md) | Button and Card patterns, design tokens, modular customization, exports and migration workflow |
+| [Card composition and migration](./components/Card.md) | Card, Header, Media, Content and Footer props, themes and examples |
 | [Development](./development.md) | Repository commands, code style, and documentation maintenance |
 | [Testing](./testing.md) | Unit tests, browser tests, coverage, and Storybook type checking |
 | [AI-first workflow](./ai-first.md) | Overview of the Neus Design workflow |

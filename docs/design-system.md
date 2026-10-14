@@ -162,9 +162,11 @@ Fixed colors not affected by `updateTheme`.
 
 ---
 
-### Card Color Palette
+### Calendar Event Color Palette
 
-`Card` and `WeekCalendarRow` use a fixed set of decorative colors (not part of the semantic scale).
+`WeekCalendarRow` uses a fixed set of decorative colors (not part of the semantic scale).
+Card uses semantic surface tokens and design-system recipes; see its
+[composition and styling guide](./components/Card.md).
 
 | Name     | Value     |
 | -------- | --------- |
@@ -255,7 +257,9 @@ Neus UI uses a **4px base unit** spacing scale. Prefer these tokens over ad-hoc 
 | Button (large)       | `16px 28px`              |
 | Input / Select field | `1em 2em`                |
 | Sidebar button       | `1.25em 2em`             |
-| Card                 | `1rem`                   |
+| Card / CardMedia     | `0`                     |
+| CardHeader / CardContent | `16px`              |
+| CardFooter           | `8px`                   |
 | Modal header / body  | `1.5rem`                 |
 | Modal footer         | `1rem 1.5rem`            |
 | WeekCalendar outer   | `20px 32px`              |

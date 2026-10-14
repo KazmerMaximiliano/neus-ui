@@ -22,16 +22,16 @@ export const SaveAction = () => (
 | ID | Design system | Component adaptations |
 | --- | --- | --- |
 | `neus` | Neus UI (default) | Original library design |
-| `apple` | Apple | Button |
-| `carbon` | Carbon | Button |
-| `material` | Material | Button |
-| `neobrutalism` | Neobrutalism | Button |
-| `vercel` | Vercel | Button |
+| `apple` | Apple | Button, Card |
+| `carbon` | Carbon | Button, Card |
+| `material` | Material | Button, Card |
+| `neobrutalism` | Neobrutalism | Button, Card |
+| `vercel` | Vercel | Button, Card |
 
-External systems are adaptations of the local `design-systems/*.md` references,
+External systems are project adaptations of their design references,
 with illustrative choices where a reference leaves details unspecified. They are
 not complete implementations of the original libraries. Fonts use local fallbacks.
-Only Button currently has component-specific design-system adaptations. Input and
+Button and the composable Card family have component-specific adaptations. Input and
 other components receive shared theme colors but retain their existing structure
 and styles.
 `DESIGN_SYSTEMS` and `DesignSystemId` are public exports for application selectors.
@@ -46,10 +46,12 @@ src/design-systems/
 ├── design-systems.css       # Ordered CSS entry point
 ├── neus/
 │   ├── tokens.css           # Default semantic tokens
-│   └── button.css           # Complete Button token contract
+│   ├── button.css           # Complete Button token contract
+│   └── card.css             # Complete Card token contract
 └── <system>/
     ├── tokens.css           # Shared visual tokens
-    └── button.css           # Button token overrides
+    ├── button.css           # Button token overrides
+    └── card.css             # Card family token overrides
 
 src/providers/ThemeProvider/ # Scope, palette resolution, context, and cleanup
 src/components/Button/Button.stories.tsx # Single preview with a design-system selector
@@ -76,6 +78,22 @@ Variant, semantic color, size, and loading state remain independent of the syste
 Loader dots inherit `currentColor`. `loaderStyle.color` changes their color and
 `loaderStyle.fontSize` changes their size; `gap` changes the spacing between dots.
 The label inherits the button's color and typography unless overridden.
+
+Card, CardHeader, CardMedia, CardContent and CardFooter each accept `className`
+and `style?: CSSProperties | null`, defaulting to null. Card is a passive container
+with no padding; Header/Content use 16px, Footer uses 8px with an 8px gap, and Media
+reaches the inside border. Every Card token resets at each provider boundary.
+See the [Card guide](./components/Card.md) for the public tokens, examples and
+breaking migration from the previous slot/state props.
+
+Card recipes preserve the original Neus surface and header divider, with geometry
+adaptations for all other systems. Their missing layout details use
+[Material Cards](https://m1.material.io/components/cards.html) as a reference;
+[Carbon tiles](https://www.carbondesignsystem.com/building-blocks/core/components/tile/specifications)
+and [Geist materials](https://vercel.com/geist/materials) inform those adaptations.
+The legacy `design-systems/*.md` files referenced by registry metadata are not
+included in this checkout; Card's complete implementation lives under
+`src/design-systems/`.
 
 For reusable application overrides, use a local scope class in a stylesheet:
 

@@ -154,3 +154,14 @@ Design-system browser tests verify all six palettes in both color schemes,
 independent Button variants and sizes, nested scope resets, runtime switching,
 loader overrides, keyboard focus, and disabled/loading Button interactions. They wait for transitions
 before asserting final styles. Unit tests cover provider cleanup and state updates.
+
+Card browser tests also cover the six designs in light/dark mode, section padding,
+media proportions and edge alignment, nested/sibling scopes, runtime switching,
+per-element overrides, and keyboard navigation of child actions. The co-located
+Card tests cover composition, media types, custom players, refs and public exports.
+Negative type assertions reject retired Card props and invalid media attributes,
+refs and children. Run them through the existing test TypeScript project:
+
+```bash
+pnpm exec tsc --project tsconfig.test.json --noEmit
+```

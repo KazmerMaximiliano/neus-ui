@@ -1,0 +1,7 @@
+[data-design-system="material"] {
+  --card-radius: 12px;
+  --card-background: var(--color-surface-secondary);
+  --card-border-width: 0px;
+  --card-shadow: 0 1px 3px var(--color-shadow);
+  --card-header-border-width: 0px;
+}

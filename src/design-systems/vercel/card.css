@@ -1,0 +1,5 @@
+[data-design-system="vercel"] {
+  --card-radius: 6px;
+  --card-border-color: var(--color-border-subtle);
+  --card-header-border-width: 0px;
+}

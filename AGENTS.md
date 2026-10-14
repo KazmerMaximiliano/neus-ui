@@ -94,7 +94,7 @@ ComponentName/
 
 ## COMPONENT INVENTORY
 
-### Implemented Components (24 total)
+### Implemented Components (28 total)
 
 | NAME            | FILE_PATH                       | STATUS | FEATURES                                        |
 | --------------- | ------------------------------- | ------ | ----------------------------------------------- |
@@ -102,7 +102,11 @@ ComponentName/
 | Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
 | Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state |
 | Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
-| Card            | src/components/Card/            | STABLE | Avatar, header, color variants, fill mode       |
+| Card            | src/components/Card/            | STABLE | Composable themed surface, className and style |
+| CardHeader      | src/components/Card/CardHeader/ | STABLE | Free-form header content and actions |
+| CardMedia       | src/components/Card/CardMedia/  | STABLE | Polymorphic media with native/custom props and refs |
+| CardContent     | src/components/Card/CardContent/ | STABLE | Content spacing with arbitrary children |
+| CardFooter      | src/components/Card/CardFooter/ | STABLE | Wrapping footer content and actions |
 | Checkbox        | src/components/Checkbox/        | STABLE | Indeterminate state                             |
 | Clock           | src/components/Clock/           | STABLE | Time picker                                     |
 | DataTable       | src/components/DataTable/       | STABLE | Sorting, pagination, filtering                  |
