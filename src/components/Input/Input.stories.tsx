@@ -1,9 +1,62 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { useArgs } from "storybook/preview-api";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Input as InputComponent } from "./Input";
-import type { InputStoryArgs } from "./Input.types";
+import type {
+  InputStoryArgs,
+  InputStoryPreviewProps,
+  InputStoryState,
+} from "./Input.types";
+
+const InputPreview = ({
+  designSystem,
+  updateArgs,
+  ...args
+}: InputStoryPreviewProps) => {
+  const controlled = args.value !== undefined;
+  const [preview, setPreview] = useState<InputStoryState>({
+    value: args.value,
+    argsValue: args.value,
+    pendingValues: [],
+  });
+
+  if (args.value !== preview.argsValue) {
+    const pendingIndex =
+      typeof args.value === "string"
+        ? preview.pendingValues.indexOf(args.value)
+        : -1;
+    setPreview({
+      argsValue: args.value,
+      value: pendingIndex < 0 ? args.value : preview.value,
+      pendingValues:
+        pendingIndex < 0 ? [] : preview.pendingValues.slice(pendingIndex + 1),
+    });
+  }
+
+  return (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <InputComponent
+        {...args}
+        key={controlled ? "controlled" : "uncontrolled"}
+        value={controlled ? preview.value : undefined}
+        defaultValue={controlled ? undefined : args.defaultValue}
+        onChange={(value) => {
+          args.onChange?.(value);
+          if (controlled) {
+            setPreview((current) => ({
+              ...current,
+              value,
+              pendingValues: [...current.pendingValues, value],
+            }));
+            updateArgs({ value });
+          }
+        }}
+      />
+    </ThemeProvider>
+  );
+};
 
 const meta: Meta<InputStoryArgs> = {
   title: "Components/Input",
@@ -23,11 +76,23 @@ const meta: Meta<InputStoryArgs> = {
       control: "text",
       description: "Accessible name for a field without a visible label",
     },
-    wrapperStyle: { control: "object", description: "Styles for the outer container" },
-    inputStyle: { control: "object", description: "Styles for the native input" },
+    wrapperStyle: {
+      control: "object",
+      description: "Styles for the outer container",
+    },
+    inputStyle: {
+      control: "object",
+      description: "Styles for the native input",
+    },
     labelStyle: { control: "object", description: "Styles for the label" },
-    requiredStyle: { control: "object", description: "Styles for the required marker" },
-    errorStyle: { control: "object", description: "Styles for the error message" },
+    requiredStyle: {
+      control: "object",
+      description: "Styles for the required marker",
+    },
+    errorStyle: {
+      control: "object",
+      description: "Styles for the error message",
+    },
     name: {
       control: { type: "text" },
       description: "The name attribute for the input element",
@@ -171,23 +236,9 @@ export const Input: StoryObj<typeof meta> = {
     disabled: false,
     required: false,
   },
-  render: function Render({ designSystem, ...args }) {
+  render: function Render(args) {
     const [, updateArgs] = useArgs<InputStoryArgs>();
-    const controlled = args.value !== undefined;
-
-    return (
-      <ThemeProvider scope="local" designSystem={designSystem}>
-        <InputComponent
-          {...args}
-          key={controlled ? "controlled" : "uncontrolled"}
-          defaultValue={controlled ? undefined : args.defaultValue}
-          onChange={(value) => {
-            args.onChange?.(value);
-            if (controlled) updateArgs({ value });
-          }}
-        />
-      </ThemeProvider>
-    );
+    return <InputPreview {...args} updateArgs={updateArgs} />;
   },
 };
 

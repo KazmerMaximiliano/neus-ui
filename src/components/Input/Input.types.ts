@@ -28,3 +28,13 @@ export type InputProps = {
 export type InputStoryArgs = InputProps & {
   designSystem: DesignSystemId;
 };
+
+export type InputStoryState = {
+  value: InputProps["value"];
+  argsValue: InputProps["value"];
+  pendingValues: string[];
+};
+
+export type InputStoryPreviewProps = InputStoryArgs & {
+  updateArgs: (args: Partial<InputStoryArgs>) => void;
+};
