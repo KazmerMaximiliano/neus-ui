@@ -1,6 +1,6 @@
 # Guía de refactor de componentes: diseños y personalización modular
 
-Esta guía documenta el patrón implementado en Button y Card y explica cómo
+Esta guía documenta el patrón implementado en Button, Input y Card y explica cómo
 aplicarlo a otros componentes de Neus UI. Está dirigida a quienes modifican la
 biblioteca y a quienes deben migrar sus usos en aplicaciones.
 
@@ -641,6 +641,33 @@ README, el índice de documentación y el inventario de AGENTS cuando correspond
 
 El refactor queda completo cuando la API, los estilos, los exports, las
 historias, las pruebas y la documentación describen el mismo comportamiento.
+
+## Input: aplicación del patrón de partes internas
+
+Input sigue el enfoque de Button y conserva sus siete tipos, `readonly`,
+`disabled`, `required`, restricciones numéricas y modos controlado/no controlado.
+`onChange` sigue recibiendo un string, también para números y valores vacíos.
+No se retiraron props ni clases: `.input__wrapper` sigue integrándose con FormTemplate.
+
+- `wrapperStyle`, `inputStyle`, `labelStyle`, `requiredStyle` y `errorStyle`
+  son objetos `CSSProperties` opcionales, sin overrides predeterminados; cada
+  objeto se aplica únicamente al elemento correspondiente.
+- `id` y `aria-label` son opcionales. Un ID generado con `useId` vincula etiqueta
+  y campo; `aria-describedby` vincula el error y `aria-invalid` expone su estado.
+- El contrato completo `--input-*` vive en `src/design-systems/neus/input.css`.
+  Las seis recetas se registran como `"Input"` y reinician sus valores por ámbito.
+  El texto Neus usa `--color-control-text`, evitando selectores oscuros que
+  atraviesen un provider claro anidado.
+- Neus conserva su geometría y hace explícito el tamaño nativo de fuente de
+  13.333333px; la familia de fuente sigue ahora `--font-body`. Las otras recetas
+  son adaptaciones del proyecto con etiqueta externa, no reproducciones completas.
+- `Input/index.ts` exporta componente y props. `InputStoryArgs` queda interno.
+  La única historia sincroniza `value` mediante `useArgs` y permite explorar
+  `defaultValue` cuando `value` es `undefined`; el selector de diseño es local.
+
+Ver [la guía de Input](./docs/components/Input.md),
+[el contrato Neus](./src/design-systems/neus/input.css) y
+[las pruebas Chromium](./src/design-systems/input.browser.test.tsx).
 
 ## 7. Checklist para el siguiente componente
 

@@ -1,7 +1,11 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useArgs } from "storybook/preview-api";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { Input as InputComponent } from "./Input";
+import type { InputStoryArgs } from "./Input.types";
 
-const meta: Meta<typeof InputComponent> = {
+const meta: Meta<InputStoryArgs> = {
   title: "Components/Input",
   component: InputComponent,
   parameters: {
@@ -9,6 +13,21 @@ const meta: Meta<typeof InputComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "Design system used for this local preview",
+    },
+    id: { control: "text", description: "Field ID; generated when omitted" },
+    "aria-label": {
+      control: "text",
+      description: "Accessible name for a field without a visible label",
+    },
+    wrapperStyle: { control: "object", description: "Styles for the outer container" },
+    inputStyle: { control: "object", description: "Styles for the native input" },
+    labelStyle: { control: "object", description: "Styles for the label" },
+    requiredStyle: { control: "object", description: "Styles for the required marker" },
+    errorStyle: { control: "object", description: "Styles for the error message" },
     name: {
       control: { type: "text" },
       description: "The name attribute for the input element",
@@ -71,7 +90,7 @@ const meta: Meta<typeof InputComponent> = {
     },
     min: {
       control: { type: "text" },
-      description: "The minimum value (for number, date, time types)",
+      description: "The minimum value (for number inputs)",
       table: {
         type: { summary: "string | number" },
         category: "Props",
@@ -79,7 +98,7 @@ const meta: Meta<typeof InputComponent> = {
     },
     max: {
       control: { type: "text" },
-      description: "The maximum value (for number, date, time types)",
+      description: "The maximum value (for number inputs)",
       table: {
         type: { summary: "string | number" },
         category: "Props",
@@ -87,7 +106,7 @@ const meta: Meta<typeof InputComponent> = {
     },
     step: {
       control: { type: "text" },
-      description: "The step increment (for number, date, time types)",
+      description: "The step increment (for number inputs)",
       table: {
         type: { summary: "string | number" },
         category: "Props",
@@ -128,11 +147,19 @@ const meta: Meta<typeof InputComponent> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Input: Story = {
+export const Input: StoryObj<typeof meta> = {
   args: {
+    designSystem: "neus",
+    id: undefined,
+    "aria-label": undefined,
     name: "example-input",
+    defaultValue: undefined,
+    readonly: false,
+    wrapperStyle: {},
+    inputStyle: {},
+    labelStyle: {},
+    requiredStyle: {},
+    errorStyle: {},
     placeholder: "Enter text here...",
     label: "Example Input",
     type: "text",
@@ -143,7 +170,24 @@ export const Input: Story = {
     step: "",
     disabled: false,
     required: false,
-    onChange: (value: string) => console.log("Input changed:", value),
+  },
+  render: function Render({ designSystem, ...args }) {
+    const [, updateArgs] = useArgs<InputStoryArgs>();
+    const controlled = args.value !== undefined;
+
+    return (
+      <ThemeProvider scope="local" designSystem={designSystem}>
+        <InputComponent
+          {...args}
+          key={controlled ? "controlled" : "uncontrolled"}
+          defaultValue={controlled ? undefined : args.defaultValue}
+          onChange={(value) => {
+            args.onChange?.(value);
+            if (controlled) updateArgs({ value });
+          }}
+        />
+      </ThemeProvider>
+    );
   },
 };
 

@@ -22,18 +22,19 @@ export const SaveAction = () => (
 | ID | Design system | Component adaptations |
 | --- | --- | --- |
 | `neus` | Neus UI (default) | Original library design |
-| `apple` | Apple | Button, Card |
-| `carbon` | Carbon | Button, Card |
-| `material` | Material | Button, Card |
-| `neobrutalism` | Neobrutalism | Button, Card |
-| `vercel` | Vercel | Button, Card |
+| `apple` | Apple | Button, Card, Input |
+| `carbon` | Carbon | Button, Card, Input |
+| `material` | Material | Button, Card, Input |
+| `neobrutalism` | Neobrutalism | Button, Card, Input |
+| `vercel` | Vercel | Button, Card, Input |
 
 External systems are project adaptations of their design references,
 with illustrative choices where a reference leaves details unspecified. They are
 not complete implementations of the original libraries. Fonts use local fallbacks.
-Button and the composable Card family have component-specific adaptations. Input and
-other components receive shared theme colors but retain their existing structure
-and styles.
+Button, Input and the composable Card family have component-specific adaptations.
+Other components receive shared theme colors but retain their existing structure
+and styles. See the [Input guide](./components/Input.md) for its token contract and
+per-part customization.
 `DESIGN_SYSTEMS` and `DesignSystemId` are public exports for application selectors.
 
 ## Responsibilities
@@ -47,11 +48,13 @@ src/design-systems/
 ├── neus/
 │   ├── tokens.css           # Default semantic tokens
 │   ├── button.css           # Complete Button token contract
-│   └── card.css             # Complete Card token contract
+│   ├── card.css             # Complete Card token contract
+│   └── input.css            # Complete Input token contract
 └── <system>/
     ├── tokens.css           # Shared visual tokens
     ├── button.css           # Button token overrides
-    └── card.css             # Card family token overrides
+    ├── card.css             # Card family token overrides
+    └── input.css            # Input token overrides
 
 src/providers/ThemeProvider/ # Scope, palette resolution, context, and cleanup
 src/components/Button/Button.stories.tsx # Single preview with a design-system selector

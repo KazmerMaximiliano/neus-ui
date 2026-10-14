@@ -416,7 +416,7 @@ Buttons use flat, theme-based colors without gradients, shadows, or movement on 
 
 ### Input Appearance
 
-Inputs use a flat `--color-surface` background and a 1px `--color-border-input` border, without inset shadows or focus glows. Focus changes the border to `--color-info-300`; errors retain `--color-error`, including on hover and focus. Disabled fields use the disabled surface and text tokens. These states adapt to both light and dark themes.
+The Neus Input recipe uses a flat `--color-surface` background and a 1px `--color-border-input` border, without inset shadows or focus glows. Focus changes the border to `--color-info-300`; errors retain `--color-error`, including on hover and focus. Disabled fields use the disabled surface and text tokens. These states adapt to both light and dark themes. Input now consumes its complete `--input-*` contract, including per-part typography, spacing, color-picker geometry and disabled states. Other designs override these tokens; see [Input](./components/Input.md) for the six recipes and customization API.
 
 ### Color Prop Behavior
 

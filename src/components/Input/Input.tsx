@@ -1,7 +1,10 @@
+import { useId } from "react";
 import "./Input.styles.css";
-import { InputProps } from "./Input.types";
+import type { InputProps } from "./Input.types";
 
 export const Input = ({
+  id,
+  "aria-label": ariaLabel,
   name,
   value,
   defaultValue,
@@ -15,21 +18,45 @@ export const Input = ({
   min,
   max,
   step,
+  wrapperStyle,
+  inputStyle,
+  labelStyle,
+  requiredStyle,
+  errorStyle,
   onChange,
 }: InputProps) => {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
+  const errorId = `${inputId}-error`;
+
   return (
-    <div className="input__wrapper">
+    <div className="input__wrapper" style={wrapperStyle}>
       {label && (
         <label
+          htmlFor={inputId}
+          style={labelStyle}
           className={`input__label${error ? " input__label--error" : ""}${
             disabled ? " input__label--disabled" : ""
           }`}
         >
           {label}
-          {required && <span className="input__required">*</span>}
+          {required && (
+            <span
+              className="input__required"
+              style={requiredStyle}
+              aria-hidden="true"
+            >
+              *
+            </span>
+          )}
         </label>
       )}
       <input
+        id={inputId}
+        aria-label={ariaLabel}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : undefined}
+        style={inputStyle}
         className={`input input--${type}${error ? " input--error" : ""}${
           disabled ? " input--disabled" : ""
         }`}
@@ -46,7 +73,11 @@ export const Input = ({
         readOnly={readonly}
         onChange={(e) => !disabled && onChange?.(e.target.value)}
       />
-      {error && <div className="input__error-message">{error}</div>}
+      {error && (
+        <div id={errorId} className="input__error-message" style={errorStyle}>
+          {error}
+        </div>
+      )}
     </div>
   );
 };

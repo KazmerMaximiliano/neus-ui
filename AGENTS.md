@@ -114,7 +114,7 @@ ComponentName/
 | Dropdown        | src/components/Dropdown/        | STABLE | Dropdown menu                                   |
 | FileUploader    | src/components/FileUploader/    | STABLE | Drag and drop                                   |
 | IconButton      | src/components/IconButton/      | STABLE | Icon containers                                 |
-| Input           | src/components/Input/           | STABLE | Text validation                                 |
+| Input           | src/components/Input/           | STABLE | Seven native types, accessible errors, per-part styles, six token recipes |
 | InteractiveMap  | src/components/InteractiveMap/  | STABLE | Google Maps integration                         |
 | Link            | src/components/Link/            | STABLE | Styled links                                    |
 | Menu            | src/components/Menu/            | STABLE | Actions menu                                    |

@@ -20,7 +20,8 @@ editor; no server or build step is required.
 | [Theming](./theming.md) | ThemeProvider, light/dark modes, scopes, hooks, and runtime color changes |
 | [Design system](./design-system.md) | Color tokens, typography, spacing, and component styling conventions |
 | [Design systems](./design-systems.md) | Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel adaptations |
-| [Component refactor guide](../REFACTOR_GUIDE.md) | Button and Card patterns, design tokens, modular customization, exports and migration workflow |
+| [Component refactor guide](../REFACTOR_GUIDE.md) | Button, Input and Card patterns, design tokens, modular customization, exports and migration workflow |
+| [Input](./components/Input.md) | Props, accessibility, CSS tokens, six recipes and per-part customization |
 | [Card composition and migration](./components/Card.md) | Card, Header, Media, Content and Footer props, themes and examples |
 | [Development](./development.md) | Repository commands, code style, and documentation maintenance |
 | [Testing](./testing.md) | Unit tests, browser tests, coverage, and Storybook type checking |

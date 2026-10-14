@@ -1,0 +1,14 @@
+[data-design-system="apple"] {
+  --input-radius: 8px;
+  --input-padding: 12px 16px;
+  --input-border-color: var(--color-border-subtle);
+  --input-font-size: 14px;
+  --input-line-height: 20px;
+  --input-color: var(--color-text-primary);
+  --input-label-color: var(--color-text-primary);
+  --input-label-offset: 0px;
+  --input-error-offset: 0px;
+  --input-focus-border-color: var(--color-focus);
+  --input-focus-shadow: 0 0 0 2px var(--color-focus-ring);
+  --input-error-focus-shadow: 0 0 0 2px var(--color-focus-ring-error);
+}

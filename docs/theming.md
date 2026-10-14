@@ -63,7 +63,7 @@ the system and mode when omitted, but resolve their own palette and overrides.
 ```
 
 Only Button currently has component-specific adaptations in every system.
-Input retains its existing implementation and styles.
+Input now has six token-driven recipes and per-part style overrides, while preserving its existing behavior. See the [Input guide](./components/Input.md).
 See [Design systems](./design-systems.md) for architecture, coverage, and extension
 steps. Components rendered through a portal outside a local scope inherit the
 portal container's CSS theme. Local providers render their scope attributes and

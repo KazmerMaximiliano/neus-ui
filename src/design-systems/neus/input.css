@@ -1,0 +1,40 @@
+:root,
+[data-design-system] {
+  --input-gap: 8px;
+  --input-font-family: var(--font-body);
+  --input-font-size: 13.333333px;
+  --input-line-height: normal;
+  --input-font-weight: 400;
+  --input-background: var(--color-surface);
+  --input-color: var(--color-control-text);
+  --input-radius: 3em;
+  --input-padding: 1em 2em;
+  --input-min-width: 200px;
+  --input-border-width: 1px;
+  --input-border-color: var(--color-border-input);
+  --input-hover-border-color: var(--color-border-input-hover);
+  --input-focus-border-color: var(--color-info-300);
+  --input-shadow: none;
+  --input-focus-shadow: none;
+  --input-transition: border-color 0.2s;
+  --input-placeholder-color: var(--color-text-placeholder);
+  --input-placeholder-opacity: 1;
+  --input-label-font-size: 0.9em;
+  --input-label-color: var(--color-control-text);
+  --input-label-offset: 1em;
+  --input-label-weight: 500;
+  --input-required-color: var(--color-error);
+  --input-required-gap: 0.25em;
+  --input-error-color: var(--color-error);
+  --input-error-border-color: var(--color-error);
+  --input-error-font-size: 0.85em;
+  --input-error-offset: 1em;
+  --input-error-focus-shadow: none;
+  --input-disabled-background: var(--color-surface-disabled);
+  --input-disabled-border-color: var(--color-border-subtle);
+  --input-disabled-color: var(--color-text-disabled);
+  --input-disabled-shadow: none;
+  --input-color-padding: 0px;
+  --input-color-height: 3.5em;
+  --input-color-swatch-padding: 0px;
+}

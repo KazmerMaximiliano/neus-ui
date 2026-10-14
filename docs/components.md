@@ -27,7 +27,7 @@ are available in
 | Dropdown | Icon-triggered dropdown menu |
 | FileUploader | File upload with drag and drop, type, and size validation |
 | IconButton | Button optimized for rendering a single icon |
-| Input | Text input with multiple types and validation states |
+| [Input](./components/Input.md) | Native field with seven types, accessible errors, per-part styles and six design-system adaptations |
 | InteractiveMap | Google Maps location picker |
 | Link | Styled anchor with primary and secondary variants |
 | Menu | Contextual menu with configurable actions |
@@ -84,7 +84,7 @@ local design selector. Card exposes `className` and `style` on every component;
 the main example composes all sections, while their stories expose independent
 controls. CardMedia previews images, video, audio and iframes.
 See the [Card guide](./components/Card.md) for the new API and migration.
-Input retains its existing implementation and styles. See
+Input now has six token-driven recipes and per-part style overrides, while preserving its existing behavior. See the [Input guide](./components/Input.md). See
 [Design systems](./design-systems.md) for architecture and extension steps.
 
 ## General Usage

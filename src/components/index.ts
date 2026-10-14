@@ -10,7 +10,7 @@ export * from "./Dropdown/Dropdown";
 export * from "./FileUploader/FileUploader";
 export { FileType } from "./FileUploader/FileUploader.types";
 export * from "./IconButton/IconButton";
-export * from "./Input/Input";
+export * from "./Input";
 export * from "./InteractiveMap/InteractiveMap";
 export * from "./Link/Link";
 export * from "./Menu/Menu";
