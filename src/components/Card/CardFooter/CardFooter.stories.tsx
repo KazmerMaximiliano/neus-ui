@@ -8,7 +8,7 @@ import { CardFooter as CardFooterComponent } from "./CardFooter";
 import type { CardFooterStoryArgs } from "./CardFooter.types";
 
 const meta: Meta<CardFooterStoryArgs> = {
-  title: "Components/Card/CardFooter",
+  title: "Base/Card/CardFooter",
   component: CardFooterComponent,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

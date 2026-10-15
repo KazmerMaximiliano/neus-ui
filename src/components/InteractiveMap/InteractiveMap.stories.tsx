@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { InteractiveMap as InteractiveMapComponent } from "./InteractiveMap";
 
 const meta: Meta<typeof InteractiveMapComponent> = {
-  title: "Components/InteractiveMap",
+  title: "Location/InteractiveMap",
   component: InteractiveMapComponent,
   parameters: {
     layout: "centered",

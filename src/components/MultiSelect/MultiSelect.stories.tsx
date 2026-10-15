@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { MultiSelect as MultiSelectComponent } from "./MultiSelect";
 
 const meta: Meta<typeof MultiSelectComponent> = {
-  title: "Components/MultiSelect",
+  title: "Base/MultiSelect",
   component: MultiSelectComponent,
   parameters: {
     layout: "centered",

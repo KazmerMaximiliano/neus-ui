@@ -382,6 +382,7 @@ When agents need to implement new components, use this checklist:
 ### Pre-implementation
 
 - [ ] Read component requirements
+- [ ] Read the relevant `src/design-systems/<id>/DESIGN.md` before adapting a component
 - [ ] Check existing similar components for patterns
 - [ ] Plan component props interface
 - [ ] Identify required CSS variables
@@ -537,11 +538,22 @@ For agents needing additional information:
 | Component index?            | docs/components.md                | /docs/components.md          |
 | Component props + examples? | docs/components/ComponentName.md  | /docs/components/            |
 | Design system / theming?    | docs/design-system.md, docs/theming.md | /docs/                    |
+| Visual identity / refactor target? | DESIGN.md per system, indexed in docs/design-systems.md | src/design-systems/<id>/DESIGN.md |
 | Type definitions?           | Component.types.ts                 | src/components/ComponentName/ |
 | Test examples?              | Component.test.tsx                 | src/components/ComponentName/ |
 | Styling reference?          | Component.styles.css               | src/components/ComponentName/ |
 
-All project documentation lives in `docs/` as Markdown. Use relative links with
+Project documentation lives in `docs/` as Markdown, with explicit exceptions for
+the root component refactor guide and `src/design-systems/<id>/DESIGN.md`. The six
+design specifications live beside their CSS recipes so that visual intent and
+implementation can be reviewed together. Read the relevant specification before
+adding or adapting component recipes. Follow its target rules, verify its current
+implementation against code, and treat refactor gaps as future work rather than
+implemented behavior. Update the document when a refactor closes or changes a gap.
+CSS and TypeScript remain the source of implemented token values; do not duplicate
+them into YAML or infer API changes from design targets. Keep external source links
+and consultation dates in each specification, distinguishing local decisions from
+official guidance. Use relative links with
 explicit `.md` extensions and keep `docs/README.md` up to date when adding guides.
 Documentation can be read directly in the repository or a Markdown editor;
 it does not require a development server or build step. Storybook provides the

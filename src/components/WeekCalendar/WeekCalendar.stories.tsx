@@ -10,7 +10,7 @@ const threeDaysLater = new Date(today);
 threeDaysLater.setDate(threeDaysLater.getDate() + 3);
 
 const meta: Meta<typeof WeekCalendarComponent> = {
-  title: "Components/WeekCalendar",
+  title: "Date & Time/WeekCalendar",
   component: WeekCalendarComponent,
   parameters: {
     layout: "centered",

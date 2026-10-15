@@ -2,6 +2,12 @@
 
 [Documentation index](./README.md)
 
+This guide covers shared theme primitives and component conventions. For visual
+identity, composition rules, and future refactor targets, read the six
+[design specifications](./design-systems.md#design-intent-and-implementation).
+Implemented values are defined in CSS and TypeScript; each `DESIGN.md` distinguishes
+its target rules from the current recipes and remaining gaps.
+
 ## Table of Contents
 
 - [Theming](#theming)

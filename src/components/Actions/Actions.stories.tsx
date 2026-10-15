@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Actions as ActionsComponent } from "./Actions";
 
 const meta: Meta<typeof ActionsComponent> = {
-  title: "Components/Actions",
+  title: "Others/Actions",
   component: ActionsComponent,
   parameters: {
     layout: "centered",

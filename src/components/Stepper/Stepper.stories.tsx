@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Stepper as StepperComponent } from "./Stepper";
 
 const meta: Meta<typeof StepperComponent> = {
-  title: "Components/Stepper",
+  title: "Navigation/Stepper",
   component: StepperComponent,
   parameters: {
     layout: "centered",

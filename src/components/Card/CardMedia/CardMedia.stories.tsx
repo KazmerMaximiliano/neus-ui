@@ -8,7 +8,7 @@ import { CardMedia as CardMediaComponent } from "./CardMedia";
 import type { CardMediaStoryArgs } from "./CardMedia.types";
 
 const meta: Meta<CardMediaStoryArgs> = {
-  title: "Components/Card/CardMedia",
+  title: "Base/Card/CardMedia",
   component: CardMediaComponent,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

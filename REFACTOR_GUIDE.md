@@ -8,6 +8,14 @@ La estructura y el comportamiento pertenecen al componente. Los sistemas de
 diseño definen su apariencia mediante variables CSS. La aplicación puede
 personalizar un ámbito completo, una instancia o una sección concreta.
 
+Antes de adaptar un componente, leer el `DESIGN.md` del sistema correspondiente
+en `src/design-systems/<id>/`. El [índice de diseños](./docs/design-systems.md)
+enlaza las seis especificaciones. Cada una distingue reglas objetivo, implementación
+actual y diferencias pendientes. Los valores implementados siguen en CSS/TypeScript;
+las diferencias que requieren nueva anatomía o API deben tratarse explícitamente,
+sin incorporarlas de manera incidental en una receta visual. Al completar un
+refactor, actualizar la implementación y los pendientes del documento.
+
 ## 1. Qué cambió en Button y Card
 
 | Aspecto | Button | Card |
@@ -32,6 +40,7 @@ adaptaciones del proyecto; su cobertura figura en el registro compartido.
 | Tokens semánticos | Superficies, colores, tipografía, espaciados y radios generales | `src/css/variables.css` |
 | Selección del tema | Sistema activo, claro/oscuro, ámbitos y colores personalizados | `src/providers/ThemeProvider/` |
 | Configuración de diseños | IDs, metadatos, cobertura y paletas | `src/design-systems/` |
+| Especificación visual | Identidad, reglas objetivo, fuentes y diferencias pendientes | `src/design-systems/<sistema>/DESIGN.md` |
 | Contrato visual del componente | Valores Neus completos de sus tokens | `src/design-systems/neus/<componente>.css` |
 | Receta de un diseño | Valores que cambian respecto de Neus | `src/design-systems/<sistema>/<componente>.css` |
 | Estilos del componente | Selectores, estructura, estados y consumo de tokens | `<ComponentName>.styles.css` |

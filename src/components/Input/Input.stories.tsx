@@ -59,7 +59,7 @@ const InputPreview = ({
 };
 
 const meta: Meta<InputStoryArgs> = {
-  title: "Components/Input",
+  title: "Base/Input",
   component: InputComponent,
   parameters: {
     layout: "centered",

@@ -7,7 +7,7 @@ import { CardHeader as CardHeaderComponent } from "./CardHeader";
 import type { CardHeaderStoryArgs } from "./CardHeader.types";
 
 const meta: Meta<CardHeaderStoryArgs> = {
-  title: "Components/Card/CardHeader",
+  title: "Base/Card/CardHeader",
   component: CardHeaderComponent,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

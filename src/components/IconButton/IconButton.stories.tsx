@@ -3,7 +3,7 @@ import { Pencil } from "lucide-react";
 import { IconButton as IconButtonComponent } from "./IconButton";
 
 const meta: Meta<typeof IconButtonComponent> = {
-  title: "Components/IconButton",
+  title: "Base/IconButton",
   component: IconButtonComponent,
   parameters: {
     layout: "centered",

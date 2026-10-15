@@ -8,7 +8,7 @@ import "./Sidebar.stories.css";
 import type { SidebarStoryArgs } from "./Sidebar.types";
 
 const meta: Meta<SidebarStoryArgs> = {
-  title: "Components/Sidebar",
+  title: "Navigation/Sidebar",
   component: SidebarComponent,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

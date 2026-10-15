@@ -7,7 +7,7 @@ import { CardContent as CardContentComponent } from "./CardContent";
 import type { CardContentStoryArgs } from "./CardContent.types";
 
 const meta: Meta<CardContentStoryArgs> = {
-  title: "Components/Card/CardContent",
+  title: "Base/Card/CardContent",
   component: CardContentComponent,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

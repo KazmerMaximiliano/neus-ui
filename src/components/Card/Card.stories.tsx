@@ -12,7 +12,7 @@ import { CardHeader } from "./CardHeader/CardHeader";
 import { CardMedia } from "./CardMedia/CardMedia";
 
 const meta: Meta<CardStoryArgs> = {
-  title: "Components/Card",
+  title: "Base/Card",
   component: CardComponent,
   parameters: { layout: "centered" },
   tags: ["autodocs"],

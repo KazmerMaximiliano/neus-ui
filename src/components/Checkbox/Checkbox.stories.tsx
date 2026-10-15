@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Checkbox as CheckboxComponent } from "./Checkbox";
 
 const meta: Meta<typeof CheckboxComponent> = {
-  title: "Components/Checkbox",
+  title: "Base/Checkbox",
   component: CheckboxComponent,
   parameters: {
     layout: "centered",

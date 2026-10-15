@@ -19,14 +19,14 @@ export const SaveAction = () => (
 );
 ```
 
-| ID | Design system | Component adaptations |
+| ID | Design specification | Component adaptations |
 | --- | --- | --- |
-| `neus` | Neus UI (default) | Original library design |
-| `apple` | Apple | Button, Card, Input, Sidebar |
-| `carbon` | Carbon | Button, Card, Input, Sidebar |
-| `material` | Material | Button, Card, Input, Sidebar |
-| `neobrutalism` | Neobrutalism | Button, Card, Input, Sidebar |
-| `vercel` | Vercel | Button, Card, Input, Sidebar |
+| `neus` | [Neus UI (default)](../src/design-systems/neus/DESIGN.md) | Original library design; token recipes for Button, Card, Input, Sidebar |
+| `apple` | [Apple HIG — sober surfaces](../src/design-systems/apple/DESIGN.md) | Button, Card, Input, Sidebar |
+| `carbon` | [IBM Carbon](../src/design-systems/carbon/DESIGN.md) | Button, Card, Input, Sidebar |
+| `material` | [Material 3 base](../src/design-systems/material/DESIGN.md) | Button, Card, Input, Sidebar |
+| `neobrutalism` | [Neobrutalism — Neus vocabulary](../src/design-systems/neobrutalism/DESIGN.md) | Button, Card, Input, Sidebar |
+| `vercel` | [Vercel Geist](../src/design-systems/vercel/DESIGN.md) | Button, Card, Input, Sidebar |
 
 External systems are project adaptations of their design references,
 with illustrative choices where a reference leaves details unspecified. They are
@@ -37,6 +37,34 @@ and styles. See the [Input guide](./components/Input.md) for its token contract 
 per-part customization.
 `DESIGN_SYSTEMS` and `DesignSystemId` are public exports for application selectors.
 
+## Design intent and implementation
+
+Each system has a `DESIGN.md` beside its CSS recipes, following the eight prose
+sections of [Google's DESIGN.md format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
+(alpha; consulted 2026-10-14). YAML is intentionally omitted: CSS and TypeScript
+remain the source of implemented values. The documents explain how to apply those
+values and what future adaptations should achieve.
+
+- **Target rules** define visual direction. External systems aim toward their
+  primary references; local web mappings are identified explicitly.
+- **Current implementation** describes the existing recipes and inherited defaults.
+- **Refactor gaps** identify differences and missing roles, anatomy, or behavior.
+  They are future work, not implemented capabilities or automatic API changes.
+
+Read the relevant specification before adapting a component, then inspect its
+recipe, shared defaults, and actual states. Add any missing token to the complete
+Neus reset contract before overriding it in another system. Update the current
+implementation and gaps when a refactor lands; update source links and consultation
+dates when revisiting external guidance. A source update does not silently change
+the chosen target: Apple uses sober surfaces without requiring Liquid Glass, and
+Material uses M3 base rather than Expressive.
+
+`DESIGN_SYSTEMS.source` contains repository-relative paths to these documents,
+not application URLs or package subpath exports. The documents are available in
+the repository; the published package still contains only `dist` artifacts.
+The existing [token reference](./design-system.md) and [theming guide](./theming.md)
+describe shared mechanics; they do not replace each system's visual specification.
+
 ## Responsibilities
 
 ```text
@@ -46,12 +74,14 @@ src/design-systems/
 ├── palettes.ts              # Light/dark action colors for CSS and useColors
 ├── design-systems.css       # Ordered CSS entry point
 ├── neus/
+│   ├── DESIGN.md             # Design intent, current implementation, and gaps
 │   ├── tokens.css           # Default semantic tokens
 │   ├── button.css           # Complete Button token contract
 │   ├── card.css             # Complete Card token contract
 │   ├── input.css            # Complete Input token contract
 │   └── sidebar.css          # Complete Sidebar token contract
 └── <system>/
+    ├── DESIGN.md             # Reference-based target and local adaptation decisions
     ├── tokens.css           # Shared visual tokens
     ├── button.css           # Button token overrides
     ├── card.css             # Card family token overrides
@@ -96,9 +126,10 @@ adaptations for all other systems. Their missing layout details use
 [Material Cards](https://m1.material.io/components/cards.html) as a reference;
 [Carbon tiles](https://www.carbondesignsystem.com/building-blocks/core/components/tile/specifications)
 and [Geist materials](https://vercel.com/geist/materials) inform those adaptations.
-The legacy `design-systems/*.md` files referenced by registry metadata are not
-included in this checkout; Card's complete implementation lives under
-`src/design-systems/`.
+The specifications linked above record the target and remaining differences for
+each Card adaptation. Its implemented values live under `src/design-systems/`;
+the Material 1 reference used for the earlier Card work does not define the new
+Material 3 target.
 
 For reusable application overrides, use a local scope class in a stylesheet:
 
@@ -118,7 +149,9 @@ Sidebar keeps its mobile dialog inside the provider scope, preserving inherited 
 
 ## Adding a component
 
-1. Keep its behavior and props independent of the selected system.
+1. Read each relevant `DESIGN.md`. Keep behavior and props independent of the
+   selected system; distinguish visual gaps from changes requiring shared anatomy
+   or a separately designed public API.
 2. Replace visual constants in its stylesheet with component-prefixed tokens.
 3. Define every token's Neus default in `neus/<component>.css`, resetting it on
    both `:root` and `[data-design-system]`.
@@ -129,10 +162,13 @@ Sidebar keeps its mobile dialog inside the provider scope, preserving inherited 
    story argument types in the component's `.types.ts` file.
 6. Test behavior in the component's unit tests and computed styles, nested scope
    resets, and light/dark states in the browser project.
+7. Update each affected specification's current implementation and remaining gaps.
 
 ## Adding a system
 
-1. Add its typed ID, registry metadata, and light/dark action palette.
+1. Write its `DESIGN.md` using the same eight sections, source/date attribution,
+   and target/current/gaps distinction. Add its typed ID, registry metadata with a
+   repository-relative document path, and light/dark action palette.
 2. Create its `tokens.css` and component recipe files. Use a scope selector such
    as `[data-design-system="example"]`; avoid descendant overrides and `!important`.
 3. Import its CSS after the Neus baseline and list only implemented adaptations

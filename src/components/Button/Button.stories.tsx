@@ -5,7 +5,7 @@ import { Button as ButtonComponent } from "./Button";
 import type { ButtonStoryArgs } from "./Button.types";
 
 const meta: Meta<ButtonStoryArgs> = {
-  title: "Components/Button",
+  title: "Base/Button",
   component: ButtonComponent,
   parameters: {
     layout: "centered",

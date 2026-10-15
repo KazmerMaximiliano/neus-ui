@@ -3,7 +3,7 @@ import { User } from "lucide-react";
 import { Dropdown as DropdownComponent } from "./Dropdown";
 
 const meta: Meta<typeof DropdownComponent> = {
-  title: "Components/Dropdown",
+  title: "Base/Dropdown",
   component: DropdownComponent,
   parameters: {
     layout: "centered",

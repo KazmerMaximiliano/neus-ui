@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Modal as ModalComponent } from "./Modal";
 
 const meta: Meta<typeof ModalComponent> = {
-  title: "Components/Modal",
+  title: "Base/Modal",
   component: ModalComponent,
   parameters: {
     layout: "centered",

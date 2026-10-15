@@ -3,7 +3,7 @@ import { FileUploader as FileUplaoderComponent } from "./FileUploader";
 import { FileType } from "./FileUploader.types";
 
 const meta: Meta<typeof FileUplaoderComponent> = {
-  title: "Components/FileUploader",
+  title: "Base/FileUploader",
   component: FileUplaoderComponent,
   parameters: {
     layout: "centered",

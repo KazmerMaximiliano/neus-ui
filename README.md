@@ -111,6 +111,7 @@ and [Testing](./docs/testing.md) for browser tests and coverage.
 | --- | --- |
 | Documentation | [Index](./docs/README.md) |
 | Components and templates | [Component reference](./docs/components.md) |
+| Design specifications | [Six systems: principles, implementation, and refactor targets](./docs/design-systems.md) |
 | AI-first workflow | [Workflow guide](./docs/ai-first.md) |
 | Neus Design | [Detailed reference](./docs/neus-design.md) |
 | Storybook | [Interactive catalog](https://kazmermaximiliano.github.io/neus-ui/storybook/) |

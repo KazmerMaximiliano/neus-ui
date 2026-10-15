@@ -48,7 +48,7 @@ const sampleData = [
 type SampleDataType = (typeof sampleData)[number];
 
 const meta: Meta<typeof DataTableComponent<SampleDataType>> = {
-  title: "Components/DataTable",
+  title: "Others/DataTable",
   component: DataTableComponent,
   parameters: {
     layout: "centered",

@@ -3,7 +3,7 @@ import { EllipsisVertical } from "lucide-react";
 import { Menu as MenuComponent } from "./Menu";
 
 const meta: Meta<typeof MenuComponent> = {
-  title: "Components/Menu",
+  title: "Base/Menu",
   component: MenuComponent,
   parameters: {
     layout: "centered",
