@@ -1,6 +1,6 @@
 # Guía de refactor de componentes: diseños y personalización modular
 
-Esta guía documenta el patrón implementado en Button, Input y Card y explica cómo
+Esta guía documenta el patrón implementado en Button, Input, Card y Sidebar y explica cómo
 aplicarlo a otros componentes de Neus UI. Está dirigida a quienes modifican la
 biblioteca y a quienes deben migrar sus usos en aplicaciones.
 
@@ -668,6 +668,40 @@ No se retiraron props ni clases: `.input__wrapper` sigue integrándose con FormT
 Ver [la guía de Input](./docs/components/Input.md),
 [el contrato Neus](./src/design-systems/neus/input.css) y
 [las pruebas Chromium](./src/design-systems/input.browser.test.tsx).
+
+## Sidebar: partes internas, decoración transparente y comportamiento responsive
+
+Sidebar conserva `title`, `items` y sus callbacks, siguiendo el patrón de Button.
+Su índice exporta componente, props, items y etiquetas accesibles. El avatar
+del encabezado sustituye la inicial suelta y la flecha en tablet y actúa como
+control de expansión. En mobile aparece en el panel abierto; desktop muestra
+el título completo. `children` permite reemplazar ese contenido de marca con
+JSX no interactivo y clases/estilos del consumidor, sin props específicas de logos. `className`
+permite overrides reutilizables; nueve objetos `CSSProperties` opcionales se
+aplican al root, encabezado, título, navegación, opciones, iconos, etiquetas,
+control de apertura/expansión y cierre. No hay estilos inline predeterminados.
+
+El contrato completo `--sidebar-*` y las seis recetas separan apariencia de
+comportamiento. La curva cóncava de NEUS usa un pseudoelemento con máscara radial
+transparente; comparte `--sidebar-background` con el cuerpo. La máscara no se
+aplica al contenido. Así se conserva la silueta sobre colores, degradados e
+imágenes sin simular el fondo de la página. Las recetas externas desactivan la
+decoración cóncava y usan sus superficies, bordes y radios.
+
+Los breakpoints son `<768`, `768–1023` y `≥1024`, sin solapamientos. Tablet
+conserva la barra compacta y agrega foco y expansión fijada por botón. Mobile
+usa hamburguesa flotante y un diálogo nativo dentro del ámbito del tema, con
+foco inicial, cierre, restauración de foco y limpieza del bloqueo de scroll.
+Cambiar de breakpoint reinicia los estados transitorios. React no consulta el
+sistema de diseño; CSS suministra todos los valores visuales.
+
+AppTemplate elimina su estado, hamburguesa y overlay propios y reserva espacio
+con los mismos tokens y selectores de expansión. Al migrar un consumidor externo,
+retirar controles móviles duplicados y adaptar selectores que exigían `div`:
+las opciones ahora son botones semánticos. `active` sigue siendo responsabilidad
+de la aplicación. Ver [Sidebar](./docs/components/Sidebar.md),
+[contrato Neus](./src/design-systems/neus/sidebar.css) y
+[pruebas Chromium](./src/design-systems/sidebar.browser.test.tsx).
 
 ## 7. Checklist para el siguiente componente
 

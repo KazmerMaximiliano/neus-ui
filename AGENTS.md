@@ -121,7 +121,7 @@ ComponentName/
 | Modal           | src/components/Modal/           | STABLE | Dialog boxes                                    |
 | MultiSelect     | src/components/MultiSelect/     | STABLE | Multiple selection                              |
 | Select          | src/components/Select/          | STABLE | Single selection                                |
-| Sidebar         | src/components/Sidebar/         | STABLE | Navigation panel                                |
+| Sidebar         | src/components/Sidebar/         | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer |
 | TimeInput       | src/components/TimeInput/       | STABLE | Time validation                                 |
 | WeekCalendar    | src/components/WeekCalendar/    | STABLE | Weekly view, event categories, navigation       |
 | WeekCalendarRow | src/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |

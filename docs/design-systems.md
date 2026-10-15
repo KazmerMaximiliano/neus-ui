@@ -22,16 +22,16 @@ export const SaveAction = () => (
 | ID | Design system | Component adaptations |
 | --- | --- | --- |
 | `neus` | Neus UI (default) | Original library design |
-| `apple` | Apple | Button, Card, Input |
-| `carbon` | Carbon | Button, Card, Input |
-| `material` | Material | Button, Card, Input |
-| `neobrutalism` | Neobrutalism | Button, Card, Input |
-| `vercel` | Vercel | Button, Card, Input |
+| `apple` | Apple | Button, Card, Input, Sidebar |
+| `carbon` | Carbon | Button, Card, Input, Sidebar |
+| `material` | Material | Button, Card, Input, Sidebar |
+| `neobrutalism` | Neobrutalism | Button, Card, Input, Sidebar |
+| `vercel` | Vercel | Button, Card, Input, Sidebar |
 
 External systems are project adaptations of their design references,
 with illustrative choices where a reference leaves details unspecified. They are
 not complete implementations of the original libraries. Fonts use local fallbacks.
-Button, Input and the composable Card family have component-specific adaptations.
+Button, Input, Sidebar and the composable Card family have component-specific adaptations.
 Other components receive shared theme colors but retain their existing structure
 and styles. See the [Input guide](./components/Input.md) for its token contract and
 per-part customization.
@@ -49,12 +49,14 @@ src/design-systems/
 │   ├── tokens.css           # Default semantic tokens
 │   ├── button.css           # Complete Button token contract
 │   ├── card.css             # Complete Card token contract
-│   └── input.css            # Complete Input token contract
+│   ├── input.css            # Complete Input token contract
+│   └── sidebar.css          # Complete Sidebar token contract
 └── <system>/
     ├── tokens.css           # Shared visual tokens
     ├── button.css           # Button token overrides
     ├── card.css             # Card family token overrides
-    └── input.css            # Input token overrides
+    ├── input.css            # Input token overrides
+    └── sidebar.css          # Sidebar token overrides
 
 src/providers/ThemeProvider/ # Scope, palette resolution, context, and cleanup
 src/components/Button/Button.stories.tsx # Single preview with a design-system selector
@@ -111,6 +113,8 @@ For reusable application overrides, use a local scope class in a stylesheet:
   --button-radius: var(--radius-pill);
 }
 ```
+
+Sidebar keeps its mobile dialog inside the provider scope, preserving inherited tokens in the browser top layer. Its NEUS curves use transparent decoration; other recipes disable the concave wedge. See [Sidebar](./components/Sidebar.md) for per-part styles, token controls and responsive behavior.
 
 ## Adding a component
 

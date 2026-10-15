@@ -1,0 +1,16 @@
+.sidebar-story {
+  min-height: 100dvh;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+.sidebar-story--solid {
+  background: var(--color-surface-secondary);
+}
+.sidebar-story--gradient {
+  background: var(--gradient-brand-soft);
+}
+.sidebar-story--image {
+  background-image: url("../Card/Card.stories.svg");
+  background-size: cover;
+  background-position: center;
+}

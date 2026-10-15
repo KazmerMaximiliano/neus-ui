@@ -1,0 +1,34 @@
+[data-design-system="neobrutalism"] {
+  --sidebar-background: var(--color-surface);
+  --sidebar-color: var(--color-text-primary);
+  --sidebar-header-background: var(--sidebar-background);
+  --sidebar-decoration-display: none;
+  --sidebar-convex-radius: 0px;
+  --sidebar-title-color: var(--color-text-primary);
+  --sidebar-item-color: var(--color-text-secondary);
+  --sidebar-item-hover-background: var(--color-surface-hover);
+  --sidebar-item-hover-color: var(--color-text-primary);
+  --sidebar-item-active-background: var(--color-primary-light);
+  --sidebar-item-active-color: var(--color-primary);
+  --sidebar-item-focus-color: var(--color-focus);
+  --sidebar-item-size: 14px;
+  --sidebar-item-weight: 500;
+  --sidebar-item-spacing: 0px;
+  --sidebar-item-transform: none;
+  --sidebar-item-padding: 12px 16px;
+  --sidebar-body-gap: 8px;
+  --sidebar-border-width: 1px;
+  --sidebar-item-radius: 4px;
+  --sidebar-item-active-background: var(--color-primary);
+  --sidebar-item-active-color: var(--color-text-on-primary);
+  --sidebar-border-width: 3px;
+  --sidebar-border-color: var(--color-text-primary);
+  --sidebar-item-border-width: 2px;
+  --sidebar-item-border-color: var(--color-text-primary);
+  --sidebar-item-weight: 700;
+  --sidebar-shadow: 4px 4px 0 var(--color-text-primary);
+  --sidebar-control-radius: 4px;
+  --sidebar-control-border-width: 3px;
+  --sidebar-control-border-color: var(--color-text-primary);
+  --sidebar-control-shadow: 3px 3px 0 var(--color-text-primary);
+}

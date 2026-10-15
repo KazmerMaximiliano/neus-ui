@@ -1,174 +1,339 @@
 .sidebar {
+  --sidebar-current-width: var(--sidebar-width);
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 100px;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-current-width);
   height: 100vh;
-  transition: ease width 0.2s;
-  z-index: 1000;
+  height: 100dvh;
+  color: var(--sidebar-color);
+  font-family: var(--sidebar-font-family);
+  z-index: var(--sidebar-z-index);
+  transition: width var(--sidebar-transition);
+}
+
+.sidebar__panel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  border: var(--sidebar-border-width) solid var(--sidebar-border-color);
+  border-radius: var(--sidebar-radius);
+  box-shadow: var(--sidebar-shadow);
 }
 
 .sidebar__header {
-  height: 10vh;
-  background-color: var(--color-primary);
+  position: relative;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  min-height: var(--sidebar-header-min-height);
+  height: var(--sidebar-header-height);
+  padding: var(--sidebar-header-padding);
+  background: var(--sidebar-header-background);
+  border-bottom: var(--sidebar-header-border-width) solid
+    var(--sidebar-border-color);
+}
+
+/* Only this decorative wedge is masked. The rest of the header is transparent. */
+.sidebar__header::after {
+  content: "";
+  display: var(--sidebar-decoration-display);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: var(--sidebar-concave-radius);
+  height: var(--sidebar-concave-radius);
+  background: var(--sidebar-background);
+  mask-image: radial-gradient(
+    circle at top right,
+    transparent calc(var(--sidebar-concave-radius) - 0.5px),
+    black var(--sidebar-concave-radius)
+  );
+  pointer-events: none;
 }
 
 .sidebar__header-inner {
-  height: 10vh;
-  border-radius: 0 0 0 32px;
-  background-color: var(--color-white);
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.sidebar__body {
-  height: 90vh;
-  border-radius: 0 32px 0 0;
-  background: var(--color-primary);
-  background-size: 100% 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 24px;
-}
-
-.sidebar__button {
-  display: inline-block;
-  background: transparent;
-  border-radius: 3.5em;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 0.25em;
-  font-size: 0.7em;
-  transition: border-color 0.2s ease;
-  cursor: pointer;
-  width: 3.5em;
-  height: 3.5em;
-  margin-bottom: 16px;
-  display: flex;
-  flex-direction: row;
+  height: 100%;
   align-items: center;
   justify-content: center;
-  animation: ease all 0.2s;
-}
-
-.sidebar__button:hover {
-  background-color: var(--color-white-100);
-}
-
-.sidebar__button--active {
-  background-color: var(--color-white-200);
-}
-
-.sidebar__button .sidebar__button-label {
-  display: none;
-  color: var(--color-white-300);
-}
-
-.sidebar__button .sidebar__button-icon {
-  margin-bottom: 2px;
-  color: var(--color-white-300);
-}
-
-.sidebar__button--active .sidebar__button-label {
-  color: var(--color-white);
-}
-
-.sidebar__button--active .sidebar__button-icon {
-  color: var(--color-white);
-}
-
-.sidebar__button:disabled,
-.sidebar__button[disabled] {
-  cursor: not-allowed;
-  opacity: 0.6;
+  gap: var(--sidebar-header-gap);
 }
 
 .sidebar__title {
-  padding: 1.25em;
-  border-radius: 50%;
-  font-size: 0.75em;
-  font-weight: bold;
-  line-height: 0.75em;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  animation: ease all 0.2s;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--sidebar-title-color);
+  font-size: var(--sidebar-title-size);
+  font-weight: var(--sidebar-title-weight);
+  letter-spacing: var(--sidebar-title-spacing);
+  line-height: var(--sidebar-title-line-height);
 }
 
-/* Estos estilos los quiero en pantallas de 768px a pantallas de 1024px */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .sidebar:hover {
-    width: 250px;
-  }
-
-  .sidebar:hover .sidebar__button {
-    padding: 1.25em 2em;
-    border-radius: 3em;
-    justify-content: flex-start;
-    width: 80%;
-    height: auto;
-  }
-
-  .sidebar:hover .sidebar__button .sidebar__button-label {
-    display: inline;
-  }
-
-  .sidebar:hover .sidebar__button .sidebar__button-icon {
-    margin-right: 1em;
-  }
-
-  .sidebar:hover .sidebar__title {
-    font-size: 1em;
-    background-color: transparent;
-    color: var(--color-primary);
-  }
+.sidebar__avatar {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--sidebar-control-size);
+  height: var(--sidebar-control-size);
+  border-radius: var(--sidebar-avatar-radius);
+  background: var(--sidebar-control-background);
+  color: var(--sidebar-control-color);
+  overflow: hidden;
 }
 
-/* Estos estilos los quiero en pantallas de 0px a pantallas de 768px y en pantallas de 1024px en adelante */
-@media (max-width: 768px), (min-width: 1024px) {
+.sidebar__avatar .sidebar__title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+}
+
+.sidebar__body {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--sidebar-body-gap);
+  padding: var(--sidebar-body-padding);
+  border-radius: 0 var(--sidebar-convex-radius) 0 0;
+  background: var(--sidebar-background);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.sidebar__button {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--sidebar-item-gap);
+  min-width: 0;
+  min-height: var(--sidebar-item-min-height);
+  width: 100%;
+  padding: var(--sidebar-item-padding);
+  border-style: solid;
+  border-width: var(--sidebar-item-border-width);
+  border-color: var(--sidebar-item-border-color);
+  border-radius: var(--sidebar-item-radius);
+  background: var(--sidebar-item-background);
+  color: var(--sidebar-item-color);
+  font-family: inherit;
+  font-size: var(--sidebar-item-size);
+  font-weight: var(--sidebar-item-weight);
+  line-height: var(--sidebar-item-line-height);
+  letter-spacing: var(--sidebar-item-spacing);
+  text-transform: var(--sidebar-item-transform);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color var(--sidebar-transition),
+    color var(--sidebar-transition);
+}
+
+.sidebar__button:hover {
+  background: var(--sidebar-item-hover-background);
+  color: var(--sidebar-item-hover-color);
+}
+
+.sidebar__button--active,
+.sidebar__button--active:hover {
+  background: var(--sidebar-item-active-background);
+  color: var(--sidebar-item-active-color);
+}
+
+.sidebar__button-icon {
+  flex: 0 0 auto;
+  width: var(--sidebar-icon-size);
+  height: var(--sidebar-icon-size);
+  color: inherit;
+}
+
+.sidebar__button-initial {
+  text-align: center;
+}
+.sidebar__button-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: inherit;
+}
+
+.sidebar__toggle,
+.sidebar__expand,
+.sidebar__close {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: var(--sidebar-control-size);
+  height: var(--sidebar-control-size);
+  padding: 0;
+  font-family: inherit;
+  border: var(--sidebar-control-border-width) solid
+    var(--sidebar-control-border-color);
+  border-radius: var(--sidebar-control-radius);
+  background: var(--sidebar-control-background);
+  color: var(--sidebar-control-color);
+  box-shadow: var(--sidebar-control-shadow);
+  cursor: pointer;
+  transition: background-color var(--sidebar-transition);
+}
+
+.sidebar__expand.sidebar__avatar {
+  border-radius: var(--sidebar-avatar-radius);
+}
+
+.sidebar__toggle[aria-expanded="true"] {
+  visibility: hidden;
+}
+
+.sidebar__toggle:hover,
+.sidebar__expand:hover,
+.sidebar__close:hover {
+  background: var(--sidebar-control-hover-background);
+}
+
+.sidebar__toggle svg,
+.sidebar__expand svg,
+.sidebar__close svg {
+  width: var(--sidebar-control-icon-size);
+  height: var(--sidebar-control-icon-size);
+}
+
+.sidebar__button:focus-visible {
+  outline: var(--sidebar-focus-width) solid var(--sidebar-item-focus-color);
+  outline-offset: var(--sidebar-focus-offset);
+}
+
+.sidebar__toggle:focus-visible,
+.sidebar__expand:focus-visible,
+.sidebar__close:focus-visible {
+  outline: var(--sidebar-focus-width) solid var(--sidebar-control-focus-color);
+  outline-offset: var(--sidebar-control-focus-offset);
+}
+
+.sidebar__dialog {
+  position: fixed;
+  inset: 0 auto 0 0;
+  box-sizing: border-box;
+  width: min(
+    var(--sidebar-mobile-width),
+    calc(100vw - var(--sidebar-floating-offset))
+  );
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  overflow: visible;
+}
+
+.sidebar__dialog::backdrop {
+  background: var(--sidebar-backdrop-background);
+}
+
+html.sidebar-scroll-locked,
+html.sidebar-scroll-locked body {
+  overflow: hidden !important;
+}
+
+@media (768px <= width < 1024px) {
   .sidebar {
-    width: 250px;
+    --sidebar-current-width: var(--sidebar-compact-width);
   }
-
-  .sidebar .sidebar__button {
-    padding: 1.25em 2em;
-    border-radius: 3em;
-    justify-content: flex-start;
-    width: 80%;
-    height: auto;
+  .sidebar__header {
+    min-height: max(
+      var(--sidebar-header-min-height),
+      calc(2 * var(--sidebar-header-padding) + var(--sidebar-control-size))
+    );
   }
-
-  .sidebar .sidebar__button .sidebar__button-label {
-    display: inline;
+  .sidebar:where(:not([data-expanded="true"]):not(:focus-within))
+    .sidebar__button-label {
+    display: none;
   }
-
-  .sidebar .sidebar__button .sidebar__button-icon {
-    margin-right: 1em;
+  .sidebar:where(:not([data-expanded="true"]):not(:focus-within))
+    .sidebar__button {
+    padding: 0;
+    justify-content: center;
   }
-
-  .sidebar__body {
-    height: 100vh;
-  }
-
-  .sidebar .sidebar__title {
-    font-size: 1em;
-    background-color: transparent;
-    color: var(--color-primary);
+  .sidebar:focus-within,
+  .sidebar[data-expanded="true"] {
+    --sidebar-current-width: var(--sidebar-width);
   }
 }
 
-@media (max-width: 768px) {
-  .sidebar .sidebar__header {
-    display: none;
+@media (768px <= width < 1024px) and (hover: hover) {
+  .sidebar:hover {
+    --sidebar-current-width: var(--sidebar-width);
   }
-
-  .sidebar .sidebar__header-inner {
-    display: none;
+  .sidebar:hover .sidebar__button-label {
+    display: inline;
   }
+  .sidebar:hover .sidebar__button {
+    padding: var(--sidebar-item-padding);
+    justify-content: flex-start;
+  }
+}
 
-  .sidebar .sidebar__title {
-    display: none;
+@media (width < 768px) {
+  .sidebar {
+    width: 0;
+    height: 0;
+  }
+  .sidebar__toggle {
+    position: fixed;
+    top: calc(var(--sidebar-floating-offset) + env(safe-area-inset-top, 0px));
+    left: calc(var(--sidebar-floating-offset) + env(safe-area-inset-left, 0px));
+  }
+  .sidebar__header {
+    min-height: calc(
+      var(--sidebar-header-min-height) + env(safe-area-inset-top, 0px)
+    );
+    height: calc(var(--sidebar-header-height) + env(safe-area-inset-top, 0px));
+    padding-top: calc(
+      var(--sidebar-header-padding) + env(safe-area-inset-top, 0px)
+    );
+    padding-left: calc(
+      var(--sidebar-header-padding) + env(safe-area-inset-left, 0px)
+    );
+  }
+  .sidebar__header-inner {
+    justify-content: space-between;
+  }
+  .sidebar__close {
+    margin-left: auto;
+  }
+  .sidebar__body {
+    padding-bottom: calc(
+      var(--sidebar-body-padding-bottom) + env(safe-area-inset-bottom, 0px)
+    );
+    padding-left: calc(
+      var(--sidebar-body-padding-left) + env(safe-area-inset-left, 0px)
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar__button,
+  .sidebar__toggle,
+  .sidebar__expand,
+  .sidebar__close {
+    transition: none;
   }
 }

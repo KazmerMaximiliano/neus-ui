@@ -34,7 +34,7 @@ are available in
 | Modal | Dialog with confirm and cancel actions |
 | MultiSelect | Select multiple options from a list |
 | Select | Select a single option from a list |
-| Sidebar | Navigation sidebar with icon support |
+| [Sidebar](./components/Sidebar.md) | Six token recipes, transparent curves, compact tablet rail and mobile drawer |
 | Stepper | Progress indicator with dots, linear, and simple variants |
 | TimeInput | Text input that opens a clock picker |
 | WeekCalendar | 7-day calendar with categorized events |
@@ -86,6 +86,8 @@ controls. CardMedia previews images, video, audio and iframes.
 See the [Card guide](./components/Card.md) for the new API and migration.
 Input now has six token-driven recipes and per-part style overrides, while preserving its existing behavior. See the [Input guide](./components/Input.md). See
 [Design systems](./design-systems.md) for architecture and extension steps.
+
+Sidebar has a single fullscreen story with local design selection and page-background controls. See [Sidebar](./components/Sidebar.md) for responsive behavior, tokens and AppTemplate integration.
 
 ## General Usage
 

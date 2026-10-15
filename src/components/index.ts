@@ -17,7 +17,7 @@ export * from "./Menu/Menu";
 export * from "./Modal/Modal";
 export * from "./MultiSelect/MultiSelect";
 export * from "./Select/Select";
-export * from "./Sidebar/Sidebar";
+export * from "./Sidebar";
 export * from "./TimeInput/TimeInput";
 export * from "./WeekCalendar/WeekCalendar";
 export * from "./WeekCalendarRow/WeekCalendarRow";

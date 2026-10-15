@@ -1,5 +1,4 @@
-import { SidebarItem } from "../../components/Sidebar/Sidebar.types";
-
+import type { SidebarItem } from "../../components/Sidebar";
 
 export type AppTemplateProps = {
   children: React.ReactNode;

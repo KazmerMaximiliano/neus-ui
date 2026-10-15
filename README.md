@@ -11,7 +11,7 @@ Project guides are available in [`docs/`](./docs/README.md) as Markdown files:
 **[Open the documentation index](./docs/README.md)**
 
 The [component refactor guide](./REFACTOR_GUIDE.md) at the repository root
-documents the Button, Input and Card patterns for design systems and modular customization.
+documents the Button, Input, Card and Sidebar patterns for design systems and modular customization.
 
 The guides cover installation, theming, components, development, testing, and
 the Neus Design workflow. Read them directly in GitHub or a Markdown editor.
@@ -28,7 +28,7 @@ typed APIs, CSS variable theming, and ready-made layout templates.
 | Components | 28 reusable UI components including Button, composable Card sections, DataTable, Modal, Select, Calendar, Sidebar, Stepper, and WeekCalendar |
 | Templates | `AppTemplate` for application shells and `FormTemplate` for validated forms |
 | Theming | Runtime theme updates with `ThemeProvider`, `useTheme`, `useColors`, and CSS variables |
-| Design systems | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel themes; Button, Input and Card adaptations |
+| Design systems | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel themes; Button, Input, Card and Sidebar adaptations |
 | Testing | Vitest, React Testing Library, Storybook integration, and coverage reporting |
 | AI-first workflow | `neus-designer` orchestrates project intake and invokes Neus UI skills to generate typed `.tsx` UI artifacts |
 
@@ -89,6 +89,8 @@ The new Card API replaces content slots and state props with children; see the
 [Card composition and migration guide](./docs/components/Card.md). See the
 [design-system architecture guide](docs/design-systems.md) for coverage and how
 to add components or systems.
+
+Sidebar preserves the NEUS curves over custom page backgrounds and adapts to all six systems. It provides a compact tablet rail and a floating mobile menu; AppTemplate uses the same navigation without duplicate controls. See the [Sidebar guide](./docs/components/Sidebar.md).
 
 ## Development
 
