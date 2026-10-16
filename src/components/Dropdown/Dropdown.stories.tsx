@@ -14,6 +14,49 @@ const meta: Meta<DropdownStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    avatarClassName: {
+      control: "text",
+      description: "Additional classes for avatar",
+    },
+    avatarIconClassName: {
+      control: "text",
+      description: "Additional classes for avatarIcon",
+    },
+    avatarIconStyle: {
+      control: "object",
+      description: "Style override for avatarIcon",
+    },
+    avatarStyle: {
+      control: "object",
+      description: "Style override for avatar",
+    },
+    caretClassName: {
+      control: "text",
+      description: "Additional classes for caret",
+    },
+    caretStyle: { control: "object", description: "Style override for caret" },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    itemClassName: {
+      control: "text",
+      description: "Additional classes for item",
+    },
+    menuClassName: {
+      control: "text",
+      description: "Additional classes for menu",
+    },
+    nameClassName: {
+      control: "text",
+      description: "Additional classes for name",
+    },
+    nameStyle: { control: "object", description: "Style override for name" },
+    style: { control: "object", description: "Style override for style" },
+    triggerClassName: {
+      control: "text",
+      description: "Additional classes for trigger",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -49,6 +92,19 @@ const meta: Meta<DropdownStoryArgs> = {
 
 export const Dropdown: StoryObj<DropdownStoryArgs> = {
   args: {
+    avatarClassName: undefined,
+    avatarIconClassName: undefined,
+    avatarIconStyle: undefined,
+    avatarStyle: undefined,
+    caretClassName: undefined,
+    caretStyle: undefined,
+    className: undefined,
+    itemClassName: undefined,
+    menuClassName: undefined,
+    nameClassName: undefined,
+    nameStyle: undefined,
+    style: undefined,
+    triggerClassName: undefined,
     designSystem: "neus",
     icon: User,
     name: "Ada Lovelace",

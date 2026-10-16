@@ -33,14 +33,10 @@ export type ThemeContextValue = {
 
 export type ThemeProviderProps = {
   children: ReactNode;
-  /** Inherits the parent system, or defaults to Neus UI. */
   designSystem?: DesignSystemId;
   initialTheme?: ThemeConfig;
   initialColorScheme?: ColorScheme;
-  /** Controlled mode; use initialColorScheme for internal state. */
   colorScheme?: ColorScheme;
-  /** Root providers default to global; nested providers always use a local scope. */
   scope?: "global" | "local";
-  /** Class applied to the local scope container. */
   className?: string;
 };

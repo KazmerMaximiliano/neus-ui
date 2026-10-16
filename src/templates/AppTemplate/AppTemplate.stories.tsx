@@ -1,16 +1,28 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { Bell, House, Search, Settings, User } from "lucide-react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { User } from "lucide-react";
+import { designSystemControl, withDesignSystem } from "../../../.storybook/designSystem";
 import { Dropdown } from "../../components/Dropdown/Dropdown";
 import { AppTemplate as AppTemplateComponent } from "./AppTemplate";
+import type { DesignSystemPreviewArgs } from "../../../.storybook/designSystem.types";
+import type { AppTemplateProps } from "./AppTemplate.types";
+import { DEFAULT_ROUTES, MENU_ITEMS } from "../../../.storybook/fixtures/AppTemplate.consts";
 
-const meta: Meta<typeof AppTemplateComponent> = {
+const meta: Meta<AppTemplateProps & DesignSystemPreviewArgs> = {
   title: "Templates/AppTemplate",
   component: AppTemplateComponent,
   parameters: {
     layout: "fullscreen",
   },
   tags: ["autodocs"],
+  decorators: [withDesignSystem],
   argTypes: {
+    sidebarContainerClassName: { control: "text", description: "Additional CSS classes for sidebar container" },
+    sidebarContainerStyle: { control: "object", description: "Inline CSS override for sidebar container" },
+    designSystem: designSystemControl,
+    contentClassName: { control: "text", description: "Additional classes for content" },
+    contentContainerClassName: { control: "text", description: "Additional classes for contentContainer" },
+    headerClassName: { control: "text", description: "Additional classes for header" },
+    sidebarClassName: { control: "text", description: "Additional classes for sidebar" },
     title: { control: "text", description: "title override" },
     className: { control: "text", description: "className override" },
     style: { control: "object", description: "style override" },
@@ -37,53 +49,19 @@ const meta: Meta<typeof AppTemplateComponent> = {
 
 type Story = StoryObj<typeof meta>;
 
-const defaultRoutes = [
-  {
-    label: "Home",
-    icon: House,
-    onClick: () => console.log("Home clicked"),
-    active: true,
-    visible: true,
-  },
-  {
-    label: "Profile",
-    icon: User,
-    onClick: () => console.log("Profile clicked"),
-    active: false,
-    visible: true,
-  },
-  {
-    label: "Search",
-    icon: Search,
-    onClick: () => console.log("Search clicked"),
-    active: false,
-    visible: true,
-  },
-  {
-    label: "Settings",
-    icon: Settings,
-    onClick: () => console.log("Settings clicked"),
-    active: false,
-    visible: true,
-  },
-  {
-    label: "Notifications",
-    icon: Bell,
-    onClick: () => console.log("Notifications clicked"),
-    active: false,
-    visible: false,
-  },
-];
 
-const menuItems = [
-  {
-    label: "Logout",
-    onClick: () => console.log("Logout clicked"),
-  },
-];
+
+
 
 export const AppTemplate: Story = {
   args: {
+    sidebarContainerClassName: undefined,
+    sidebarContainerStyle: undefined,
+    designSystem: "global",
+    contentClassName: undefined,
+    contentContainerClassName: undefined,
+    headerClassName: undefined,
+    sidebarClassName: undefined,
     title: undefined,
     className: undefined,
     style: {},
@@ -102,8 +80,8 @@ export const AppTemplate: Story = {
         </p>
       </div>
     ),
-    routes: defaultRoutes,
-    menu: <Dropdown items={menuItems} name="User" icon={User} />,
+    routes: DEFAULT_ROUTES,
+    menu: <Dropdown items={MENU_ITEMS} name="User" icon={User} />,
   },
 };
 

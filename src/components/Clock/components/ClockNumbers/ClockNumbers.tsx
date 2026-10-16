@@ -1,15 +1,16 @@
 import type { CSSProperties } from "react";
+import "./ClockNumbers.styles.css";
+import { ClockNumbersProps, DialNumber } from "./ClockNumbers.types";
 import {
   HOURS_12,
   INNER_HOURS,
   MINUTES,
   OUTER_HOURS,
 } from "./ClockNumbers.consts";
-import "./ClockNumbers.styles.css";
-import { ClockNumbersProps, DialNumber } from "./ClockNumbers.types";
 import { getDisplayHours } from "./ClockNumbers.utils";
 
 export const ClockNumbers = ({
+  numberClassName,
   numberStyle,
   mode,
   format,
@@ -52,9 +53,13 @@ export const ClockNumbers = ({
           key={key}
           aria-hidden
           data-label={label}
-          className={`clock__number${inner ? " clock__number--inner" : ""}${
-            selected ? " clock__number--selected" : ""
-          }`}
+          className={[
+            `clock__number${inner ? " clock__number--inner" : ""}${selected ? " clock__number--selected" : ""
+            }`,
+            numberClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
           style={
             {
               "--clock-number-angle": `${(index % 12) * 30}deg`,

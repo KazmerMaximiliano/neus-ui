@@ -2,18 +2,21 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { DayPicker, type DateRange } from "react-day-picker";
 import "react-day-picker/style.css";
-import { OpenMonthViewContext } from "./CalendarContext";
-import { CaptionButton } from "./components/CaptionButton";
 import {
-  YEAR_RANGE_FUTURE_OFFSET,
-  YEAR_RANGE_PAST_OFFSET,
-} from "./Calendar.consts";
+  CalendarCaptionContext,
+  OpenMonthViewContext,
+} from "./CalendarContext";
+import { CaptionButton } from "./components/CaptionButton";
 import "./Calendar.styles.css";
 import type {
   CalendarPickerView,
   CalendarProps,
   CalendarSelection,
 } from "./Calendar.types";
+import {
+  YEAR_RANGE_FUTURE_OFFSET,
+  YEAR_RANGE_PAST_OFFSET,
+} from "./Calendar.consts";
 import { getCalendarLocalization, serializeValue } from "./Calendar.utils";
 
 export const Calendar = (props: CalendarProps) => {
@@ -33,6 +36,7 @@ export const Calendar = (props: CalendarProps) => {
     labelStyle,
     errorStyle,
   } = props;
+
   const localization = useMemo(
     () => getCalendarLocalization(language),
     [language],
@@ -88,24 +92,24 @@ export const Calendar = (props: CalendarProps) => {
   const dayPickerProps =
     props.mode === "range"
       ? {
-          mode: "range" as const,
-          selected: currentValue as DateRange | undefined,
-          required,
-          onSelect: (v: DateRange | undefined) => handleSelect(v),
-        }
+        mode: "range" as const,
+        selected: currentValue as DateRange | undefined,
+        required,
+        onSelect: (v: DateRange | undefined) => handleSelect(v),
+      }
       : props.mode === "multiple"
         ? {
-            mode: "multiple" as const,
-            selected: currentValue as Date[] | undefined,
-            required,
-            onSelect: (v: Date[] | undefined) => handleSelect(v),
-          }
+          mode: "multiple" as const,
+          selected: currentValue as Date[] | undefined,
+          required,
+          onSelect: (v: Date[] | undefined) => handleSelect(v),
+        }
         : {
-            mode: "single" as const,
-            selected: currentValue as Date | undefined,
-            required,
-            onSelect: (v: Date | undefined) => handleSelect(v),
-          };
+          mode: "single" as const,
+          selected: currentValue as Date | undefined,
+          required,
+          onSelect: (v: Date | undefined) => handleSelect(v),
+        };
 
   const handleSelect = (newValue: CalendarSelection) => {
     if (!disabled && !readonly) {
@@ -152,9 +156,13 @@ export const Calendar = (props: CalendarProps) => {
       aria-labelledby={label ? labelId : undefined}
       aria-describedby={error ? errorId : undefined}
       aria-disabled={disabled || undefined}
-      className={`calendar${disabled ? " calendar--disabled" : ""}${
-        readonly ? " calendar--readonly" : ""
-      }${numberOfMonths > 1 ? " calendar--multiple" : ""}`}
+      className={[
+        `calendar${disabled ? " calendar--disabled" : ""}${readonly ? " calendar--readonly" : ""
+        }${numberOfMonths > 1 ? " calendar--multiple" : ""}`,
+        props.className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       style={calendarStyle}
       onKeyDown={(event) => {
         if (event.key === "Escape" && view !== "calendar") {
@@ -164,15 +172,31 @@ export const Calendar = (props: CalendarProps) => {
       }}
     >
       {label && (
-        <div className="calendar__label-wrapper">
+        <div
+          className={["calendar__label-wrapper", props.labelWrapperClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={props.labelWrapperStyle}
+        >
           <span
             id={labelId}
-            className={`calendar__label${error ? " calendar__label--error" : ""}`}
+            className={[
+              `calendar__label${error ? " calendar__label--error" : ""}`,
+              props.labelClassName,
+            ]
+              .filter(Boolean)
+              .join(" ")}
             style={labelStyle}
           >
             {label}
             {required && (
-              <span className="calendar__required" aria-hidden>
+              <span
+                className={["calendar__required", props.requiredClassName]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={props.requiredStyle}
+                aria-hidden
+              >
                 *
               </span>
             )}
@@ -181,47 +205,98 @@ export const Calendar = (props: CalendarProps) => {
       )}
 
       <div
-        className={`calendar__day-picker${view === "calendar" ? " calendar__day-picker--calendar" : ""}`}
+        className={[
+          `calendar__day-picker${view === "calendar" ? " calendar__day-picker--calendar" : ""}`,
+          props.dayPickerClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        style={props.dayPickerStyle}
       >
-        <OpenMonthViewContext.Provider value={() => setView("month")}>
-          <DayPicker
-            components={{ CaptionLabel: CaptionButton }}
-            formatters={localization.formatters}
-            labels={localization.labels}
-            showOutsideDays={false}
-            fixedWeeks={true}
-            disabled={disabled}
-            numberOfMonths={Math.max(1, Math.floor(numberOfMonths) || 1)}
-            month={displayMonth}
-            onMonthChange={setDisplayMonth}
-            {...dayPickerProps}
-          />
-        </OpenMonthViewContext.Provider>
+        <CalendarCaptionContext.Provider
+          value={{
+            captionClassName: props.captionClassName,
+            captionStyle: props.captionStyle,
+          }}
+        >
+          <OpenMonthViewContext.Provider value={() => setView("month")}>
+            <DayPicker
+              components={{ CaptionLabel: CaptionButton }}
+              formatters={localization.formatters}
+              labels={localization.labels}
+              showOutsideDays={false}
+              fixedWeeks={true}
+              disabled={disabled}
+              numberOfMonths={Math.max(1, Math.floor(numberOfMonths) || 1)}
+              month={displayMonth}
+              onMonthChange={setDisplayMonth}
+              {...dayPickerProps}
+            />
+          </OpenMonthViewContext.Provider>
+        </CalendarCaptionContext.Provider>
 
         {view === "month" && (
-          <div className="calendar__overlay">
-            <div className="calendar__overlay-header">
+          <div
+            className={["calendar__overlay", props.overlayClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={props.overlayStyle}
+          >
+            <div
+              className={[
+                "calendar__overlay-header",
+                props.overlayHeaderClassName,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              style={props.overlayHeaderStyle}
+            >
               <button
                 type="button"
-                className="calendar__overlay-year-btn"
+                className={[
+                  "calendar__overlay-year-btn",
+                  props.overlayYearBtnClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={props.overlayYearBtnStyle}
                 aria-expanded={false}
                 onClick={() => setView("year")}
               >
                 {localization.formatYear(displayMonth)}
-                <ChevronDown size={14} />
+                <ChevronDown
+                  size={14}
+                  className={[
+                    "calendar__overlay-year-icon",
+                    props.overlayYearIconClassName,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={props.overlayYearIconStyle}
+                />
               </button>
             </div>
-            <div className="calendar__month-grid">
+            <div
+              className={["calendar__month-grid", props.monthGridClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={props.monthGridStyle}
+            >
               {localization.monthNames.map((name, idx) => (
                 <button
                   key={idx}
                   type="button"
                   aria-pressed={idx === displayMonth.getMonth()}
-                  className={`calendar__month-item${
-                    idx === displayMonth.getMonth()
+                  className={[
+                    `calendar__month-item${idx === displayMonth.getMonth()
                       ? " calendar__month-item--selected"
                       : ""
-                  }`}
+                    }`,
+                    props.monthItemClassName,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={props.monthItemStyle}
                   onClick={() => selectMonth(idx)}
                 >
                   {name}
@@ -232,29 +307,68 @@ export const Calendar = (props: CalendarProps) => {
         )}
 
         {view === "year" && (
-          <div className="calendar__overlay">
-            <div className="calendar__overlay-header">
+          <div
+            className={["calendar__overlay", props.overlayClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={props.overlayStyle}
+          >
+            <div
+              className={[
+                "calendar__overlay-header",
+                props.overlayHeaderClassName,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              style={props.overlayHeaderStyle}
+            >
               <button
                 type="button"
-                className="calendar__overlay-year-btn"
+                className={[
+                  "calendar__overlay-year-btn",
+                  props.overlayYearBtnClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={props.overlayYearBtnStyle}
                 aria-expanded={true}
                 onClick={() => setView("month")}
               >
                 {localization.formatYear(displayMonth)}
-                <ChevronUp size={14} />
+                <ChevronUp
+                  size={14}
+                  className={[
+                    "calendar__overlay-year-icon",
+                    props.overlayYearIconClassName,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={props.overlayYearIconStyle}
+                />
               </button>
             </div>
-            <div className="calendar__year-list" ref={yearListRef}>
+            <div
+              className={["calendar__year-list", props.yearListClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={props.yearListStyle}
+              ref={yearListRef}
+            >
               {years.map((y) => (
                 <button
                   key={y}
                   type="button"
                   aria-pressed={y === displayMonth.getFullYear()}
-                  className={`calendar__year-item${
-                    y === displayMonth.getFullYear()
+                  className={[
+                    `calendar__year-item${y === displayMonth.getFullYear()
                       ? " calendar__year-item--selected"
                       : ""
-                  }`}
+                    }`,
+                    props.yearItemClassName,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={props.yearItemStyle}
                   onClick={() => selectYear(y)}
                 >
                   {localization.formatYear(new Date(y, 0, 1))}
@@ -275,10 +389,17 @@ export const Calendar = (props: CalendarProps) => {
       )}
 
       {error && (
-        <div className="calendar__info">
+        <div
+          className={["calendar__info", props.infoClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={props.infoStyle}
+        >
           <div
             id={errorId}
-            className="calendar__error-message"
+            className={["calendar__error-message", props.errorClassName]
+              .filter(Boolean)
+              .join(" ")}
             style={errorStyle}
           >
             {error}

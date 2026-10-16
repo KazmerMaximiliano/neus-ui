@@ -5,6 +5,35 @@ import type { DesignSystemId } from "../../design-systems";
 export type YearRange = { from: number; to: number; };
 
 type CalendarBaseProps = {
+  overlayYearIconClassName?: string;
+  overlayYearIconStyle?: CSSProperties;
+  captionClassName?: string;
+  captionStyle?: CSSProperties;
+  className?: string;
+  dayPickerClassName?: string;
+  dayPickerStyle?: CSSProperties;
+  errorClassName?: string;
+  infoClassName?: string;
+  infoStyle?: CSSProperties;
+  labelClassName?: string;
+  labelWrapperClassName?: string;
+  labelWrapperStyle?: CSSProperties;
+  monthGridClassName?: string;
+  monthGridStyle?: CSSProperties;
+  monthItemClassName?: string;
+  monthItemStyle?: CSSProperties;
+  overlayClassName?: string;
+  overlayHeaderClassName?: string;
+  overlayHeaderStyle?: CSSProperties;
+  overlayStyle?: CSSProperties;
+  overlayYearBtnClassName?: string;
+  overlayYearBtnStyle?: CSSProperties;
+  requiredClassName?: string;
+  requiredStyle?: CSSProperties;
+  yearItemClassName?: string;
+  yearItemStyle?: CSSProperties;
+  yearListClassName?: string;
+  yearListStyle?: CSSProperties;
   language?: string;
   name?: string;
   label?: string;
@@ -27,6 +56,10 @@ export type CalendarProps = CalendarBaseProps & (
 
 export type CalendarSelection = Date | Date[] | DateRange | undefined;
 export type CalendarPickerView = "calendar" | "month" | "year";
+export type CalendarCaptionCustomization = {
+  captionClassName?: string;
+  captionStyle?: CSSProperties;
+};
 export type CalendarLocalization = {
   language: string;
   monthNames: string[];

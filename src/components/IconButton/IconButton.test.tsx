@@ -1,9 +1,16 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { Plus } from "lucide-react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
+import { Settings as CustomizationIcon, Plus } from "lucide-react";
 import type { ComponentProps } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
 import { ThemeProvider } from "../../providers/ThemeProvider";
-import { IconButton } from "./IconButton";
+import { IconButton as CustomizationComponent, IconButton } from "./IconButton";
 import { getIconButtonClasses } from "./IconButton.utils";
 
 afterEach(() => {
@@ -189,4 +196,64 @@ describe("IconButton accessibility and customization", () => {
       "icon-button icon-button--text icon-button--error icon-button--large",
     );
   });
+});
+
+describe("IconButton part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "buttonStyle",
+      base: "icon-button",
+      phase: "default",
+    },
+    {
+      cls: "loaderClassName",
+      sty: "loaderStyle",
+      base: "icon-button-loader",
+      phase: "loading",
+    },
+    {
+      cls: "iconClassName",
+      sty: "iconStyle",
+      base: "icon-button-icon",
+      phase: "default",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            icon={CustomizationIcon}
+            label="Settings"
+            loading={phase === "loading"}
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            icon={CustomizationIcon}
+            label="Settings"
+            loading={phase === "loading"}
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

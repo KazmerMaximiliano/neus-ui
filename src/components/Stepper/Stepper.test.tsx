@@ -1,7 +1,14 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Stepper } from "./Stepper";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { Stepper as CustomizationComponent, Stepper } from "./Stepper";
 
 afterEach(() => {
   cleanup();
@@ -377,4 +384,134 @@ describe("Stepper accessibility and parts", () => {
       "stepper--large",
     );
   });
+});
+
+describe("Stepper part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "style",
+      base: "stepper",
+      phase: "dots",
+    },
+    {
+      cls: "trackClassName",
+      sty: "trackStyle",
+      base: "stepper__track",
+      phase: "dots",
+    },
+    {
+      cls: "stepClassName",
+      sty: "stepStyle",
+      base: "stepper__step",
+      phase: "dots",
+    },
+    {
+      cls: "dotClassName",
+      sty: "dotStyle",
+      base: "stepper__dot",
+      phase: "dots",
+    },
+    {
+      cls: "checkClassName",
+      sty: "checkStyle",
+      base: "stepper__check",
+      phase: "dots",
+    },
+    {
+      cls: "srOnlyClassName",
+      sty: "srOnlyStyle",
+      base: "stepper__sr-only",
+      phase: "dots",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "stepper__label",
+      phase: "dots",
+    },
+    {
+      cls: "connectorClassName",
+      sty: "connectorStyle",
+      base: "stepper__connector",
+      phase: "dots",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "stepper__counter",
+      phase: "linear",
+    },
+    {
+      cls: "barClassName",
+      sty: "barStyle",
+      base: "stepper__bar",
+      phase: "linear",
+    },
+    {
+      cls: "barFillClassName",
+      sty: "barFillStyle",
+      base: "stepper__bar-fill",
+      phase: "linear",
+    },
+    {
+      cls: "dotClassName",
+      sty: "dotStyle",
+      base: "stepper__simple-dot",
+      phase: "simple",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            variant={
+              phase === "linear"
+                ? "linear"
+                : phase === "simple"
+                  ? "simple"
+                  : "dots"
+            }
+            currentStep={1}
+            totalSteps={4}
+            showLabels
+            labels={["One", "Two", "Three", "Four"]}
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            variant={
+              phase === "linear"
+                ? "linear"
+                : phase === "simple"
+                  ? "simple"
+                  : "dots"
+            }
+            currentStep={1}
+            totalSteps={4}
+            showLabels
+            labels={["One", "Two", "Three", "Four"]}
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

@@ -4,6 +4,24 @@ import type { DesignSystemId } from "../../design-systems";
 import type { FieldPresentationProps } from "../Input/Input.types";
 
 export type DateInputProps = FieldPresentationProps & {
+  placeholderClassName?: string;
+  placeholderStyle?: CSSProperties;
+  className?: string;
+  containerClassName?: string;
+  containerStyle?: CSSProperties;
+  dropdownClassName?: string;
+  dropdownStyle?: CSSProperties;
+  errorClassName?: string;
+  fieldClassName?: string;
+  iconClassName?: string;
+  iconStyle?: CSSProperties;
+  labelClassName?: string;
+  panelClassName?: string;
+  requiredClassName?: string;
+  requiredStyle?: CSSProperties;
+  style?: CSSProperties;
+  valueClassName?: string;
+  valueStyle?: CSSProperties;
   panelStyle?: CSSProperties;
   value?: Date | DateRange;
   defaultValue?: Date | DateRange;

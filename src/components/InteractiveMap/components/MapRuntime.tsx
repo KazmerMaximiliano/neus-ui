@@ -4,18 +4,32 @@ import {
   StandaloneSearchBox,
   useJsApiLoader,
 } from "@react-google-maps/api";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { reverseGeocode } from "../../../services/geocoding";
 import { Input } from "../../Input/Input";
-import { DEFAULT_CENTER, GOOGLE_MAPS_LIBRARIES } from "../InteractiveMap.consts";
 import type {
   InteractiveMapProps,
   MapCoordinates,
   MapSelection,
 } from "../InteractiveMap.types";
+import {
+  DEFAULT_CENTER,
+  GOOGLE_MAPS_LIBRARIES,
+} from "../InteractiveMap.consts";
 import { parseCoordinates } from "../InteractiveMap.utils";
 
 export const MapRuntime = ({
+  errorClassName,
+  instructionsClassName,
+  loadingClassName,
+  mapClassName,
+  searchClassName,
   googleMapsApiKey,
   initialCoordinates,
   initialAddress,
@@ -69,7 +83,7 @@ export const MapRuntime = ({
             lng: position.coords.longitude,
           });
       },
-      () => {},
+      () => { },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 },
     );
     return () => {
@@ -111,7 +125,13 @@ export const MapRuntime = ({
 
   if (loadError)
     return (
-      <div role="alert" className="interactive-map__error" style={errorStyle}>
+      <div
+        role="alert"
+        className={["interactive-map__error", errorClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={errorStyle}
+      >
         Unable to load the map.
       </div>
     );
@@ -119,7 +139,9 @@ export const MapRuntime = ({
     return (
       <div
         role="status"
-        className="interactive-map__loading"
+        className={["interactive-map__loading", loadingClassName]
+          .filter(Boolean)
+          .join(" ")}
         style={loadingStyle}
       >
         Loading map…
@@ -129,7 +151,12 @@ export const MapRuntime = ({
   return (
     <>
       {!readonly && (
-        <div className="interactive-map__search-box" style={searchStyle}>
+        <div
+          className={["interactive-map__search-box", searchClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={searchStyle}
+        >
           <StandaloneSearchBox
             onLoad={setSearchBox}
             onPlacesChanged={() => {
@@ -152,7 +179,9 @@ export const MapRuntime = ({
         </div>
       )}
       <GoogleMap
-        mapContainerClassName="interactive-map__map"
+        mapContainerClassName={["interactive-map__map", mapClassName]
+          .filter(Boolean)
+          .join(" ")}
         mapContainerStyle={mapStyle}
         center={selection.position ?? userLocation ?? DEFAULT_CENTER}
         zoom={selection.position ? 15 : 12}
@@ -163,12 +192,12 @@ export const MapRuntime = ({
           readonly
             ? undefined
             : (e) => {
-                if (e.latLng)
-                  void selectLocation({
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                  });
-              }
+              if (e.latLng)
+                void selectLocation({
+                  lat: e.latLng.lat(),
+                  lng: e.latLng.lng(),
+                });
+            }
         }
       >
         {selection.position && (
@@ -179,23 +208,34 @@ export const MapRuntime = ({
               readonly
                 ? undefined
                 : (e) => {
-                    if (e.latLng)
-                      void selectLocation({
-                        lat: e.latLng.lat(),
-                        lng: e.latLng.lng(),
-                      });
-                  }
+                  if (e.latLng)
+                    void selectLocation({
+                      lat: e.latLng.lat(),
+                      lng: e.latLng.lng(),
+                    });
+                }
             }
           />
         )}
       </GoogleMap>
       {selection.error && (
-        <div role="alert" className="interactive-map__error" style={errorStyle}>
+        <div
+          role="alert"
+          className={["interactive-map__error", errorClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={errorStyle}
+        >
           Unable to resolve this location. Choose another location to try again.
         </div>
       )}
       {!readonly && (
-        <div className="interactive-map__info" style={instructionsStyle}>
+        <div
+          className={["interactive-map__info", instructionsClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={instructionsStyle}
+        >
           <p>
             {instructionsText ||
               "Click on the map or search for a location to place a pin. You can drag the marker to adjust the location."}
@@ -205,4 +245,3 @@ export const MapRuntime = ({
     </>
   );
 };
-

@@ -12,6 +12,145 @@ const meta: Meta<MultiSelectStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    tagRemoveIconClassName: {
+      control: "text",
+      description: "Customization for tagRemoveIcon",
+    },
+    tagRemoveIconStyle: {
+      control: "object",
+      description: "Customization for tagRemoveIcon",
+    },
+    boxClassName: {
+      control: "text",
+      description: "Additional classes for box",
+    },
+    boxStyle: { control: "object", description: "Style override for box" },
+    caretClassName: {
+      control: "text",
+      description: "Additional classes for caret",
+    },
+    caretStyle: { control: "object", description: "Style override for caret" },
+    checkboxClassName: {
+      control: "text",
+      description: "Additional classes for checkbox",
+    },
+    checkboxStyle: {
+      control: "object",
+      description: "Style override for checkbox",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    emptyClassName: {
+      control: "text",
+      description: "Additional classes for empty",
+    },
+    emptyStyle: { control: "object", description: "Style override for empty" },
+    errorMessageClassName: {
+      control: "text",
+      description: "Additional classes for errorMessage",
+    },
+    errorMessageStyle: {
+      control: "object",
+      description: "Style override for errorMessage",
+    },
+    fieldClassName: {
+      control: "text",
+      description: "Additional classes for field",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    iconStyle: { control: "object", description: "Style override for icon" },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    labelStyle: { control: "object", description: "Style override for label" },
+    listClassName: {
+      control: "text",
+      description: "Additional classes for list",
+    },
+    listContentClassName: {
+      control: "text",
+      description: "Additional classes for listContent",
+    },
+    listContentStyle: {
+      control: "object",
+      description: "Style override for listContent",
+    },
+    optionClassName: {
+      control: "text",
+      description: "Additional classes for option",
+    },
+    optionLabelClassName: {
+      control: "text",
+      description: "Additional classes for optionLabel",
+    },
+    optionLabelStyle: {
+      control: "object",
+      description: "Style override for optionLabel",
+    },
+    panelClassName: {
+      control: "text",
+      description: "Additional classes for panel",
+    },
+    panelStyle: { control: "object", description: "Style override for panel" },
+    placeholderClassName: {
+      control: "text",
+      description: "Additional classes for placeholder",
+    },
+    placeholderStyle: {
+      control: "object",
+      description: "Style override for placeholder",
+    },
+    searchClassName: {
+      control: "text",
+      description: "Additional classes for search",
+    },
+    searchInputClassName: {
+      control: "text",
+      description: "Additional classes for searchInput",
+    },
+    searchInputStyle: {
+      control: "object",
+      description: "Style override for searchInput",
+    },
+    searchStyle: {
+      control: "object",
+      description: "Style override for search",
+    },
+    srOnlyClassName: {
+      control: "text",
+      description: "Additional classes for srOnly",
+    },
+    srOnlyStyle: {
+      control: "object",
+      description: "Style override for srOnly",
+    },
+    style: { control: "object", description: "Style override for style" },
+    tagClassName: {
+      control: "text",
+      description: "Additional classes for tag",
+    },
+    tagRemoveClassName: {
+      control: "text",
+      description: "Additional classes for tagRemove",
+    },
+    tagRemoveStyle: {
+      control: "object",
+      description: "Style override for tagRemove",
+    },
+    triggerClassName: {
+      control: "text",
+      description: "Additional classes for trigger",
+    },
+    triggerStyle: {
+      control: "object",
+      description: "Style override for trigger",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -64,6 +203,46 @@ const meta: Meta<MultiSelectStoryArgs> = {
 
 export const MultiSelect: StoryObj<MultiSelectStoryArgs> = {
   args: {
+    tagRemoveIconClassName: undefined,
+    tagRemoveIconStyle: undefined,
+    boxClassName: undefined,
+    boxStyle: undefined,
+    caretClassName: undefined,
+    caretStyle: undefined,
+    checkboxClassName: undefined,
+    checkboxStyle: undefined,
+    className: undefined,
+    emptyClassName: undefined,
+    emptyStyle: undefined,
+    errorMessageClassName: undefined,
+    errorMessageStyle: undefined,
+    fieldClassName: undefined,
+    iconClassName: undefined,
+    iconStyle: undefined,
+    labelClassName: undefined,
+    labelStyle: undefined,
+    listClassName: undefined,
+    listContentClassName: undefined,
+    listContentStyle: undefined,
+    optionClassName: undefined,
+    optionLabelClassName: undefined,
+    optionLabelStyle: undefined,
+    panelClassName: undefined,
+    panelStyle: undefined,
+    placeholderClassName: undefined,
+    placeholderStyle: undefined,
+    searchClassName: undefined,
+    searchInputClassName: undefined,
+    searchInputStyle: undefined,
+    searchStyle: undefined,
+    srOnlyClassName: undefined,
+    srOnlyStyle: undefined,
+    style: undefined,
+    tagClassName: undefined,
+    tagRemoveClassName: undefined,
+    tagRemoveStyle: undefined,
+    triggerClassName: undefined,
+    triggerStyle: undefined,
     designSystem: "neus",
     label: "Countries",
     placeholder: "Select countries",

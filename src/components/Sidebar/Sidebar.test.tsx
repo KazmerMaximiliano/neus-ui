@@ -1,15 +1,18 @@
 import {
   act,
   cleanup,
+  fireEvent as fireCustomization,
   fireEvent,
   render,
+  render as renderCustomization,
   screen,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { House } from "lucide-react";
+import { Settings as CustomizationIcon, House } from "lucide-react";
 import { renderToString } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { Sidebar } from "./Sidebar";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { Sidebar as CustomizationComponent, Sidebar } from "./Sidebar";
 import { lockSidebarScroll } from "./Sidebar.utils";
 
 const resize = (width: number) =>
@@ -42,11 +45,11 @@ beforeEach(() => {
   resize(1280);
 
   vi.spyOn(HTMLDialogElement.prototype, "showModal").mockImplementation(
-    function (this: HTMLDialogElement) {
+    function(this: HTMLDialogElement) {
       this.setAttribute("open", "");
     },
   );
-  vi.spyOn(HTMLDialogElement.prototype, "close").mockImplementation(function (
+  vi.spyOn(HTMLDialogElement.prototype, "close").mockImplementation(function(
     this: HTMLDialogElement,
   ) {
     this.removeAttribute("open");
@@ -160,7 +163,7 @@ describe("Sidebar navigation", () => {
   it("renders a deterministic desktop shell on the server", () => {
     resize(375);
     expect(renderToString(<Sidebar items={[]} />)).toContain(
-      'data-viewport="desktop"',
+      "data-viewport=\"desktop\"",
     );
   });
 });
@@ -383,4 +386,158 @@ describe("Sidebar mobile", () => {
     expect(document.documentElement).toHaveClass("sidebar-scroll-locked");
     document.documentElement.classList.remove("sidebar-scroll-locked");
   });
+});
+
+describe("Sidebar part customization", () => {
+  it.each([
+    {
+      cls: "closeIconClassName",
+      sty: "closeIconStyle",
+      base: "sidebar__close-icon",
+      phase: "mobile",
+    },
+    {
+      cls: "toggleIconClassName",
+      sty: "toggleIconStyle",
+      base: "sidebar__toggle-icon",
+      phase: "mobile",
+    },
+    {
+      cls: "toggleClassName",
+      sty: "toggleStyle",
+      base: "sidebar__toggle",
+      phase: "mobile",
+    },
+
+    {
+      cls: "titleClassName",
+      sty: "titleStyle",
+      base: "sidebar__title",
+      phase: "default",
+    },
+    {
+      cls: "panelClassName",
+      sty: "panelStyle",
+      base: "sidebar__panel",
+      phase: "default",
+    },
+    {
+      cls: "headerClassName",
+      sty: "headerStyle",
+      base: "sidebar__header",
+      phase: "default",
+    },
+    {
+      cls: "headerInnerClassName",
+      sty: "headerInnerStyle",
+      base: "sidebar__header-inner",
+      phase: "default",
+    },
+    {
+      cls: "avatarClassName",
+      sty: "avatarStyle",
+      base: "sidebar__avatar",
+      phase: "mobile",
+    },
+    {
+      cls: "closeButtonClassName",
+      sty: "closeButtonStyle",
+      base: "sidebar__close",
+      phase: "mobile",
+    },
+    {
+      cls: "toggleClassName",
+      sty: "toggleStyle",
+      base: "sidebar__expand",
+      phase: "tablet",
+    },
+    {
+      cls: "bodyClassName",
+      sty: "bodyStyle",
+      base: "sidebar__body",
+      phase: "default",
+    },
+    {
+      cls: "itemClassName",
+      sty: "itemStyle",
+      base: "sidebar__button",
+      phase: "default",
+    },
+    {
+      cls: "iconClassName",
+      sty: "iconStyle",
+      base: "sidebar__button-icon",
+      phase: "default",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "sidebar__button-label",
+      phase: "default",
+    },
+    {
+      cls: "className",
+      sty: "sidebarStyle",
+      base: "sidebar",
+      phase: "default",
+    },
+    {
+      cls: "toggleClassName",
+      sty: "toggleStyle",
+      base: "sidebar__expand",
+      phase: "tablet",
+    },
+    {
+      cls: "dialogClassName",
+      sty: "dialogStyle",
+      base: "sidebar__dialog",
+      phase: "mobile",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      resize(phase === "mobile" ? 375 : phase === "tablet" ? 900 : 1280);
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            title="Workspace"
+            items={[
+              { label: "Home", icon: CustomizationIcon, active: true },
+              { label: "Settings" },
+            ]}
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      if (phase === "mobile")
+        fireCustomization.click(
+          view.container.querySelector(".sidebar__toggle")!,
+        );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            title="Workspace"
+            items={[
+              { label: "Home", icon: CustomizationIcon, active: true },
+              { label: "Settings" },
+            ]}
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

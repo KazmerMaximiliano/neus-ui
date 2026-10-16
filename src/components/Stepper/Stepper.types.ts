@@ -5,6 +5,22 @@ type StepperVariant = "dots" | "linear" | "simple";
 type StepperSize = "small" | "medium" | "large";
 
 export type StepperProps = {
+  barClassName?: string;
+  barFillClassName?: string;
+  barFillStyle?: CSSProperties;
+  checkClassName?: string;
+  checkStyle?: CSSProperties;
+  className?: string;
+  connectorClassName?: string;
+  dotClassName?: string;
+  labelClassName?: string;
+  srOnlyClassName?: string;
+  srOnlyStyle?: CSSProperties;
+  stepClassName?: string;
+  stepStyle?: CSSProperties;
+  style?: CSSProperties;
+  trackClassName?: string;
+  trackStyle?: CSSProperties;
   currentStep: number;
   totalSteps: number;
   variant?: StepperVariant;

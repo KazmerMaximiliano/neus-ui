@@ -8,8 +8,34 @@ import { CATEGORY_COLORS, DAY_NAMES } from "./WeekCalendar.consts";
 import { formatDate, getCenterDate, getWeekDays } from "./WeekCalendar.utils";
 
 export const WeekCalendar = ({
-  className, style, headerStyle, navigationStyle, gridStyle,
-  categoryStyle, eventStyle, tooltipStyle,
+  dateRangeClassName,
+  dateRangeStyle,
+  categoryClassName,
+  eventClassName,
+  tooltipClassName,
+  dayNameClassName,
+  dayNameStyle,
+  dayNumberClassName,
+  dayNumberStyle,
+  gridClassName,
+  headerCategoryCellClassName,
+  headerCategoryCellStyle,
+  headerClassName,
+  headerDayCellClassName,
+  headerDayCellStyle,
+  headerRowClassName,
+  headerRowStyle,
+  navigationClassName,
+  titleClassName,
+  titleStyle,
+  className,
+  style,
+  headerStyle,
+  navigationStyle,
+  gridStyle,
+  categoryStyle,
+  eventStyle,
+  tooltipStyle,
   title = "Calendar",
   events = [],
   hoverContent,
@@ -37,10 +63,30 @@ export const WeekCalendar = ({
   };
 
   return (
-    <div className={["week-calendar", className].filter(Boolean).join(" ")} style={style}>
-      <div className="week-calendar__header" style={headerStyle}>
-        <div className="week-calendar__title">{title}</div>
-        <div className="week-calendar__selector" style={navigationStyle}>
+    <div
+      className={["week-calendar", className].filter(Boolean).join(" ")}
+      style={style}
+    >
+      <div
+        className={["week-calendar__header", headerClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={headerStyle}
+      >
+        <div
+          className={["week-calendar__title", titleClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={titleStyle}
+        >
+          {title}
+        </div>
+        <div
+          className={["week-calendar__selector", navigationClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={navigationStyle}
+        >
           <IconButton
             size="small"
             variant="text"
@@ -48,7 +94,12 @@ export const WeekCalendar = ({
             label="Anterior"
             onClick={() => navigate(-1)}
           />
-          <span>
+          <span
+            className={["week-calendar__date-range", dateRangeClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={dateRangeStyle}
+          >
             {formatDate(weekStart)} - {formatDate(weekEnd)}
           </span>
           <IconButton
@@ -60,21 +111,55 @@ export const WeekCalendar = ({
           />
         </div>
       </div>
-      <div className="week-calendar__grid" style={gridStyle}>
-        <div className="week-calendar-row">
-          <div className="week-calendar-row__category-cell"></div>
+      <div
+        className={["week-calendar__grid", gridClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={gridStyle}
+      >
+        <div
+          className={["week-calendar-row", headerRowClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={headerRowStyle}
+        >
+          <div
+            className={[
+              "week-calendar-row__category-cell",
+              headerCategoryCellClassName,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            style={headerCategoryCellStyle}
+          ></div>
           {days.map((day) => {
             const isToday = day.getTime() === today.getTime();
             return (
               <div
                 aria-current={isToday ? "date" : undefined}
                 key={day.toISOString()}
-                className={`week-calendar-row__day-cell${isToday ? " week-calendar__day-cell--today" : ""}`}
+                className={[
+                  `week-calendar-row__day-cell${isToday ? " week-calendar__day-cell--today" : ""}`,
+                  headerDayCellClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={headerDayCellStyle}
               >
-                <span className="week-calendar__day-name">
+                <span
+                  className={["week-calendar__day-name", dayNameClassName]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={dayNameStyle}
+                >
                   {DAY_NAMES[day.getDay()]}
                 </span>
-                <span className="week-calendar__day-number">
+                <span
+                  className={["week-calendar__day-number", dayNumberClassName]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={dayNumberStyle}
+                >
                   {day.getDate()}
                 </span>
               </div>
@@ -83,6 +168,9 @@ export const WeekCalendar = ({
         </div>
         {events.map((entry, index) => (
           <WeekCalendarRow
+            categoryClassName={categoryClassName}
+            eventClassName={eventClassName}
+            tooltipClassName={tooltipClassName}
             categoryStyle={categoryStyle}
             eventStyle={eventStyle}
             tooltipStyle={tooltipStyle}

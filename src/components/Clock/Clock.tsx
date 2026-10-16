@@ -1,7 +1,8 @@
 import { useState, type CSSProperties, type KeyboardEvent } from "react";
-import { INNER_RING_THRESHOLD, KEY_STEPS } from "./Clock.consts";
+import { ClockNumbers } from "./components/ClockNumbers/ClockNumbers";
 import "./Clock.styles.css";
 import { ClockProps, TimeValue } from "./Clock.types";
+import { INNER_RING_THRESHOLD, KEY_STEPS } from "./Clock.consts";
 import {
   getDisplayHours,
   getHandAngle,
@@ -9,9 +10,29 @@ import {
   serializeTimeValue,
   stepTime,
 } from "./Clock.utils";
-import { ClockNumbers } from "./components/ClockNumbers/ClockNumbers";
 
 export const Clock = ({
+  numberClassName,
+  centerClassName,
+  centerStyle,
+  className,
+  clockClassName,
+  displayClassName,
+  displayStyle,
+  faceClassName,
+  handTipClassName,
+  handTipStyle,
+  headerClassName,
+  indicatorClassName,
+  numbersClassName,
+  numbersStyle,
+  periodClassName,
+  periodContentClassName,
+  periodContentStyle,
+  segmentClassName,
+  separatorClassName,
+  separatorStyle,
+  style,
   value,
   disabled,
   readonly,
@@ -124,14 +145,40 @@ export const Clock = ({
 
   return (
     <div
-      className={`clock__wrapper${disabled ? " clock__wrapper--disabled" : ""}${readonly ? " clock__wrapper--readonly" : ""}`}
+      className={[
+        `clock__wrapper${disabled ? " clock__wrapper--disabled" : ""}${readonly ? " clock__wrapper--readonly" : ""}`,
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={style}
     >
-      <div className="clock__container" style={clockStyle}>
-        <div className="clock__header" style={headerStyle}>
-          <div className="clock__display">
+      <div
+        className={["clock__container", clockClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={clockStyle}
+      >
+        <div
+          className={["clock__header", headerClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={headerStyle}
+        >
+          <div
+            className={["clock__display", displayClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={displayStyle}
+          >
             <button
               type="button"
-              className={`clock__time-button${mode === "hours" ? " clock__time-button--active" : ""}`}
+              className={[
+                `clock__time-button${mode === "hours" ? " clock__time-button--active" : ""}`,
+                segmentClassName,
+              ]
+                .filter(Boolean)
+                .join(" ")}
               style={segmentStyle}
               aria-label="Horas"
               aria-pressed={mode === "hours"}
@@ -142,10 +189,22 @@ export const Clock = ({
                 .toString()
                 .padStart(2, "0")}
             </button>
-            <span className="clock__separator">:</span>
+            <span
+              className={["clock__separator", separatorClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={separatorStyle}
+            >
+              :
+            </span>
             <button
               type="button"
-              className={`clock__time-button${mode === "minutes" ? " clock__time-button--active" : ""}`}
+              className={[
+                `clock__time-button${mode === "minutes" ? " clock__time-button--active" : ""}`,
+                segmentClassName,
+              ]
+                .filter(Boolean)
+                .join(" ")}
               style={segmentStyle}
               aria-label="Minutos"
               aria-pressed={mode === "minutes"}
@@ -156,10 +215,20 @@ export const Clock = ({
             </button>
           </div>
           {format === "12h" && (
-            <div className="clock__period">
+            <div
+              className={["clock__period", periodContentClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={periodContentStyle}
+            >
               <button
                 type="button"
-                className={`clock__period-button${period === "AM" ? " clock__period-button--active" : ""}`}
+                className={[
+                  `clock__period-button${period === "AM" ? " clock__period-button--active" : ""}`,
+                  periodClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 style={periodStyle}
                 aria-pressed={period === "AM"}
                 onClick={() => handlePeriodChange("AM")}
@@ -169,7 +238,12 @@ export const Clock = ({
               </button>
               <button
                 type="button"
-                className={`clock__period-button${period === "PM" ? " clock__period-button--active" : ""}`}
+                className={[
+                  `clock__period-button${period === "PM" ? " clock__period-button--active" : ""}`,
+                  periodClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 style={periodStyle}
                 aria-pressed={period === "PM"}
                 onClick={() => handlePeriodChange("PM")}
@@ -181,8 +255,8 @@ export const Clock = ({
           )}
         </div>
         <div
-          className="clock__face"
-          style={{ ...faceStyle, ...handStyle }}
+          className={["clock__face", faceClassName].filter(Boolean).join(" ")}
+          style={{ ...handStyle, ...faceStyle }}
           onClick={handleClockClick}
           onKeyDown={handleFaceKeyDown}
           role="slider"
@@ -195,12 +269,33 @@ export const Clock = ({
           aria-disabled={disabled || undefined}
           aria-readonly={readonly || undefined}
         >
-          <div className="clock__center" />
-          <div className="clock__hand" style={indicatorStyle}>
-            <div className="clock__hand-tip" />
+          <div
+            className={["clock__center", centerClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={centerStyle}
+          />
+          <div
+            className={["clock__hand", indicatorClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={indicatorStyle}
+          >
+            <div
+              className={["clock__hand-tip", handTipClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={handTipStyle}
+            />
           </div>
-          <div className="clock__numbers">
+          <div
+            className={["clock__numbers", numbersClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={numbersStyle}
+          >
             <ClockNumbers
+              numberClassName={numberClassName}
               numberStyle={numberStyle}
               mode={mode}
               format={format}

@@ -3,6 +3,14 @@ import "./Checkbox.styles.css";
 import { CheckboxProps } from "./Checkbox.types";
 
 export const Checkbox = ({
+  checkboxClassName,
+  className,
+  iconClassName,
+  iconStyle,
+  inputClassName,
+  inputStyle,
+  labelClassName,
+  style,
   name,
   value,
   label,
@@ -22,9 +30,17 @@ export const Checkbox = ({
   ];
 
   return (
-    <label className={classes.filter(Boolean).join(" ")}>
+    <label
+      className={[classes.filter(Boolean).join(" "), className]
+        .filter(Boolean)
+        .join(" ")}
+      style={style}
+    >
       <input
-        className="checkbox__input"
+        className={["checkbox__input", inputClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={inputStyle}
         type="checkbox"
         name={name}
         value={value}
@@ -35,11 +51,27 @@ export const Checkbox = ({
         }}
         onChange={(e) => !disabled && onChange?.(e.target.checked)}
       />
-      <span className="checkbox__box" style={checkboxStyle} aria-hidden>
-        <Icon className="checkbox__icon" />
+      <span
+        className={["checkbox__box", checkboxClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={checkboxStyle}
+        aria-hidden
+      >
+        <Icon
+          className={["checkbox__icon", iconClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={iconStyle}
+        />
       </span>
       {label && (
-        <span className="checkbox__label" style={labelStyle}>
+        <span
+          className={["checkbox__label", labelClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={labelStyle}
+        >
           {label}
         </span>
       )}

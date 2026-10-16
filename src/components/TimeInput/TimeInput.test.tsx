@@ -1,6 +1,14 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent as fireCustomization,
+  fireEvent,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { TimeInput } from "./TimeInput";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { TimeInput as CustomizationComponent, TimeInput } from "./TimeInput";
 
 afterEach(() => {
   cleanup();
@@ -157,7 +165,7 @@ describe("TimeInput", () => {
   describe("hidden input", () => {
     it("renders hidden input when name is provided", () => {
       const { container } = renderTimeInput({ name: "start-time" });
-      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const hiddenInput = container.querySelector("input[type=\"hidden\"]");
       expect(hiddenInput).toBeInTheDocument();
       expect(hiddenInput).toHaveAttribute("name", "start-time");
     });
@@ -165,13 +173,13 @@ describe("TimeInput", () => {
     it("does not render hidden input when name is not provided", () => {
       const { container } = renderTimeInput();
       expect(
-        container.querySelector('input[type="hidden"]'),
+        container.querySelector("input[type=\"hidden\"]"),
       ).not.toBeInTheDocument();
     });
 
     it("sets required attribute on hidden input when required", () => {
       const { container } = renderTimeInput({ name: "time", required: true });
-      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const hiddenInput = container.querySelector("input[type=\"hidden\"]");
       expect(hiddenInput).toHaveAttribute("required");
     });
   });
@@ -220,7 +228,7 @@ describe("TimeInput", () => {
         value: { hours: 14, minutes: 30 },
         format: "12h",
       });
-      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const hiddenInput = container.querySelector("input[type=\"hidden\"]");
       expect(hiddenInput).toHaveAttribute("value", "14:30");
     });
   });
@@ -266,7 +274,7 @@ describe("time selection", () => {
     fireEvent.click(screen.getByRole("button", { name: /^Start/ }));
     fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowUp" });
     expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 30 });
-    expect(container.querySelector('input[name="start"]')).toHaveValue("11:30");
+    expect(container.querySelector("input[name=\"start\"]")).toHaveValue("11:30");
     fireEvent.click(screen.getByRole("button", { name: "Minutos" }));
     fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" });
     expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 31 });
@@ -288,7 +296,7 @@ describe("time selection", () => {
     fireEvent.click(screen.getByRole("button", { name: /^Start/ }));
     fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowUp" });
     expect(onChange).toHaveBeenCalledWith({ hours: 11, minutes: 30 });
-    expect(container.querySelector('input[name="start"]')).toHaveValue("10:30");
+    expect(container.querySelector("input[name=\"start\"]")).toHaveValue("10:30");
     expect(screen.getByRole("dialog")).toHaveStyle({ padding: "8px" });
     rerender(
       <TimeInput
@@ -298,6 +306,123 @@ describe("time selection", () => {
         onChange={onChange}
       />,
     );
-    expect(container.querySelector('input[name="start"]')).toHaveValue("");
+    expect(container.querySelector("input[name=\"start\"]")).toHaveValue("");
   });
+});
+
+describe("TimeInput part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "style",
+      base: "picker-field",
+      phase: "open",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "picker-field__label",
+      phase: "open",
+    },
+    {
+      cls: "requiredClassName",
+      sty: "requiredStyle",
+      base: "picker-field__required",
+      phase: "open",
+    },
+    {
+      cls: "containerClassName",
+      sty: "containerStyle",
+      base: "picker-field__container",
+      phase: "open",
+    },
+    {
+      cls: "fieldClassName",
+      sty: "fieldStyle",
+      base: "picker-field__field",
+      phase: "open",
+    },
+    {
+      cls: "valueClassName",
+      sty: "valueStyle",
+      base: "picker-field__value",
+      phase: "open",
+    },
+    {
+      cls: "placeholderClassName",
+      sty: "placeholderStyle",
+      base: "picker-field__placeholder",
+      phase: "placeholder",
+    },
+    {
+      cls: "iconClassName",
+      sty: "iconStyle",
+      base: "picker-field__icon",
+      phase: "open",
+    },
+    {
+      cls: "panelClassName",
+      sty: "panelStyle",
+      base: "picker-field__popover",
+      phase: "open",
+    },
+    {
+      cls: "dropdownClassName",
+      sty: "dropdownStyle",
+      base: "time-input__dropdown",
+      phase: "open",
+    },
+    {
+      cls: "errorClassName",
+      sty: "errorStyle",
+      base: "picker-field__error",
+      phase: "open",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Time"
+            required
+            error="Invalid"
+            defaultValue={
+              phase === "placeholder" ? undefined : { hours: 9, minutes: 30 }
+            }
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      fireCustomization.click(
+        view.container.querySelector(".picker-field__field")!,
+      );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Time"
+            required
+            error="Invalid"
+            defaultValue={
+              phase === "placeholder" ? undefined : { hours: 9, minutes: 30 }
+            }
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

@@ -1,127 +1,119 @@
 # Neus UI
 
-Neus UI is a production-ready React component library built with TypeScript and
-dynamic theming.
+A React 19+ component library with TypeScript, 30 public components and sections, two layout
+templates, and six design systems driven by scoped CSS tokens.
 
-## Documentation
-
-Project guides are available in [`docs/`](./docs/README.md) as Markdown files:
-
-**[Open the documentation index](./docs/README.md)**
-
-The guides cover installation, theming, components, development, and testing.
-Read them directly in GitHub or a Markdown editor.
-
-## Project Overview
-
-Neus UI helps teams build consistent React interfaces with reusable components,
-typed APIs, CSS variable theming, and ready-made layout templates.
-
-### What is included
-
-| Area           | Details                                                                                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Components     | 30 public components and sections including Button, composable Card and Modal sections, DataTable, Select, Calendar, Sidebar, Stepper, and WeekCalendar |
-| Templates      | `AppTemplate` for application shells and `FormTemplate` for validated forms                                                                             |
-| Theming        | Runtime theme updates with `ThemeProvider`, `useTheme`, `useColors`, and CSS variables                                                                  |
-| Design systems | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel themes; recipes for every public component family and both templates                  |
-| Testing        | Vitest, React Testing Library, Storybook integration, and coverage reporting                                                                            |
-
-### Project structure
-
-```text
-src/
-├── components/        # Reusable UI components
-├── templates/         # AppTemplate and FormTemplate
-├── hooks/             # Shared hooks such as useResponsive
-├── providers/         # Providers with their own context, types, and hooks
-├── design-systems/    # DESIGN.md sources, generated palettes/recipes and shared tests
-├── css/               # Global CSS variables and base styles
-├── utils/             # Utility functions
-└── services/          # Auxiliary services
-
-docs/                  # Markdown guides and reference
-.storybook/            # Interactive component catalog configuration
-```
-
-Each family keeps its owned subcomponents in `ComponentName/components/`.
-Public sections remain available as named imports from `neus-ui`.
-See [Development](./docs/development.md#code-style-guidelines) for the file layout.
-
-### Installation
-
-Install directly from GitHub:
+## Get started
 
 ```bash
 pnpm add git+https://github.com/KazmerMaximiliano/neus-ui.git
 ```
 
-Import the CSS bundle once and wrap your app with `ThemeProvider`:
-
 ```tsx
-import "neus-ui/dist/neus-ui.css";
 import { Button, ThemeProvider } from "neus-ui";
+import "neus-ui/dist/neus-ui.css";
 
-function App() {
-  return (
-    <ThemeProvider initialTheme={{ primaryColor: "#3975C2" }}>
-      <Button
-        label="Get started"
-        variant="solid"
-        color="primary"
-        size="medium"
-      />
-    </ThemeProvider>
-  );
-}
+export const App = () => (
+  <ThemeProvider designSystem="carbon" initialColorScheme="light">
+    <Button label="Get started" variant="solid" />
+  </ThemeProvider>
+);
 ```
 
-### Design systems
+Select Neus UI, Apple, Carbon, Material, Neobrutalism or Vercel through ThemeProvider.
+Customize action colors at runtime, override CSS tokens for shared appearance, or target
+individual parts with classes and style props.
 
-Select a design system at the provider boundary. Neus UI remains the default:
+## Documentation
 
-```tsx
-<ThemeProvider designSystem="carbon" colorScheme="dark">
-  <Button label="Continue" />
-</ThemeProvider>
-```
+**[Open the documentation](./docs/README.md)**
 
-Nested providers create isolated scopes. Button's `buttonStyle`, `labelStyle`, and
-`loaderStyle` remain available for individual overrides. Card, CardHeader,
-CardMedia, CardContent and CardFooter each accept `className` and nullable `style`.
-Card composes its content through children; see the
-[Card composition guide](./docs/components/Card.md). See the
-[design-system architecture guide](docs/design-systems.md) for coverage and how
-to add components or systems.
+| Guide | Contents |
+| --- | --- |
+| [Installation](./docs/getting-started/installation.md) | Package, stylesheet, provider and TypeScript setup |
+| [Design systems](./docs/design/systems.md) | Six systems, scope behavior and visual specifications |
+| [ThemeProvider](./docs/design/theme-provider.md) | Color modes, runtime palette updates, hooks and isolated scopes |
+| [Customization](./docs/design/customization.md) | Tokens, root/part classes, style props and CSS cascade |
+| [Components](./docs/components/README.md) | All 30 public components/sections, complete props, anatomy and token references |
+| [Templates](./docs/templates/README.md) | AppTemplate and FormTemplate composition and responsive layouts |
+| [Contributing](./docs/contributing/README.md) | Development, testing and DESIGN.md authoring |
 
-Sidebar preserves the NEUS curves over custom page backgrounds and adapts to all six systems. It provides a compact tablet rail and a floating mobile menu; AppTemplate uses the same navigation without duplicate controls. See the [Sidebar guide](./docs/components/Sidebar.md).
+Documentation is plain Markdown and needs no server. Storybook provides the interactive
+catalog; both template stories include local design selection and inherit the global system
+by default.
+
+## Component roadmap
+
+The following public component families are pending development. This proposed backlog
+targets broad coverage of application interfaces; completeness depends on the products
+using the library. Priorities indicate a suggested implementation order, without release
+commitments: **P1** for core interactions, **P2** for broader composition, and **P3** for
+advanced navigation.
+
+Some behaviors already exist inside other components. Those rows describe the missing
+reusable public API and should reuse the existing implementation where appropriate.
+
+| Priority | Component family | Category | Intended scope and current gap |
+| --- | --- | --- | --- |
+| P1 | Textarea | Forms | Multiline text entry, optional auto-resize, labels, help text and error states. |
+| P1 | RadioGroup / Radio | Forms | One choice from a visible set, with grouped labels and keyboard navigation. |
+| P1 | Switch | Forms | Immediate on/off settings with an accessible checked state. |
+| P1 | Combobox / Autocomplete | Forms | Editable text with suggestions, async results and optional custom values; Select currently searches predefined options. |
+| P1 | Tooltip | Overlays | Reusable descriptions on hover and focus; the current tooltip belongs to WeekCalendarRow. |
+| P1 | Popover | Overlays | Anchored arbitrary content with positioning, dismissal and focus handling; current popovers belong to menus and pickers. |
+| P1 | Alert | Feedback | Inline informational, success, warning and error messages with optional actions. |
+| P1 | Toast / ToastProvider | Feedback | Transient notifications with a queue, dismissal, configurable duration and live announcements. |
+| P1 | Spinner | Feedback | Standalone indeterminate loading indicator; Button currently embeds its own loader. |
+| P1 | Progress | Feedback | Determinate and indeterminate progress, accessible values and optional labels. |
+| P1 | Skeleton | Feedback | Loading placeholders for text, media and component layouts. |
+| P1 | Tabs | Navigation | Associated tab panels, keyboard navigation and controlled or uncontrolled selection. |
+| P1 | Accordion | Disclosure | Expandable sections with single or multiple open items and keyboard support. |
+| P1 | Breadcrumbs | Navigation | Hierarchical page links with a current-page indicator and overflow handling. |
+| P1 | Pagination | Navigation | Reusable page navigation and page-size selection independent of DataTable. |
+| P2 | NumberInput | Forms | Numeric stepping, precision and formatting beyond the existing native Input type="number". |
+| P2 | Slider / RangeSlider | Forms | Single-value or interval selection with bounds, steps and keyboard controls. |
+| P2 | ToggleGroup / Toggle | Forms | Pressed-state buttons and single or multiple selection for compact controls. |
+| P2 | Drawer / Sheet | Overlays | General-purpose edge panels with focus management; Sidebar's mobile drawer is tied to navigation. |
+| P2 | Avatar / AvatarGroup | Data display | Images, initials, fallbacks and grouped identities with overflow counts. |
+| P2 | Chip / Tag | Data display | Standalone removable or selectable tokens; MultiSelect currently owns its selected tags, while Badge displays status. |
+| P2 | Typography | Content | Token-based text and heading primitives with semantic element selection. |
+| P2 | Separator | Layout | Horizontal or vertical dividers with decorative and semantic modes. |
+| P2 | EmptyState | Feedback | Reusable empty views with a title, description, illustration and actions; DataTable has its own empty view. |
+| P2 | FormField / Fieldset | Forms | Shared labels, descriptions, errors and accessible grouping for composed controls; validation and submission remain application concerns. |
+| P2 | Box / Stack / Grid | Layout | Responsive layout primitives for spacing, alignment and wrapping beyond the existing templates. |
+| P2 | List / ListItem | Data display | Structured static content with leading/trailing elements and descriptions, separate from action menus. |
+| P3 | TreeView / TreeItem | Navigation | Hierarchical expansion and selection with roving focus and keyboard navigation. |
+| P3 | CommandPalette | Navigation | Searchable commands with shortcuts, grouping, keyboard selection and empty/loading states. |
+| P3 | NavigationMenu | Navigation | Horizontal or nested application navigation with active links and responsive overflow, complementing Sidebar. |
+
+Each family must include recipes for all six design systems and both color modes,
+accessible interactions, responsive behavior where applicable, per-part customization,
+typed exports, one interactive story per public component, tests and documentation.
+Update this table and the [component catalog](./docs/components/README.md) when a family
+becomes available. Domain-specific additions such as charts, rich text editors or media
+players should be scoped separately when a product needs them.
 
 ## Development
 
 ```bash
 pnpm install
 pnpm storybook
-pnpm build
-pnpm test:unit
 pnpm lint
+pnpm test:unit
+pnpm build
 ```
 
-See [Development](./docs/development.md) for all commands and code conventions,
-and [Testing](./docs/testing.md) for browser tests and coverage.
+Use the pnpm version in package.json. [Development](./docs/contributing/development.md)
+explains file conventions and commands; [Testing](./docs/contributing/testing.md) covers
+browser checks and coverage. Agent instructions live in [AGENTS.md](./AGENTS.md).
 
-## Useful links
+Source families live in src/components, layouts in src/templates, and scoped
+recipes/specifications in src/design-systems. Internal and public sections live under their
+owning family's components directory. Public imports remain named exports from neus-ui.
 
-| Resource                 | Link                                                                                     |
-| ------------------------ | ---------------------------------------------------------------------------------------- |
-| Documentation            | [Index](./docs/README.md)                                                                |
-| Components and templates | [Component reference](./docs/components.md)                                              |
-| Design specifications    | [Six systems: visual principles, token sources and generation](./docs/design-systems.md) |
-| Storybook                | [Interactive catalog](https://kazmermaximiliano.github.io/neus-ui/storybook/)            |
-| Repository               | [GitHub](https://github.com/KazmerMaximiliano/neus-ui)                                   |
+## Links and license
 
-## License
+[Storybook](https://kazmermaximiliano.github.io/neus-ui/storybook/) ·
+[Repository](https://github.com/KazmerMaximiliano/neus-ui) · [Apache License 2.0](./LICENSE)
 
 Copyright 2026 Maximiliano Kazmer
-
-Licensed under the Apache License, Version 2.0. See [LICENSE](./LICENSE) for
-the full license text.

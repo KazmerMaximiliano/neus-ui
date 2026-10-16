@@ -13,6 +13,18 @@ const meta: Meta<IconButtonStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    className: {
+      control: "text",
+      description: "Additional CSS classes for class name",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    loaderClassName: {
+      control: "text",
+      description: "Additional classes for loader",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -75,6 +87,9 @@ const meta: Meta<IconButtonStoryArgs> = {
 
 export const IconButton: StoryObj<IconButtonStoryArgs> = {
   args: {
+    className: undefined,
+    iconClassName: undefined,
+    loaderClassName: undefined,
     designSystem: "neus",
     icon: Pencil,
     label: "Edit",

@@ -1,7 +1,14 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent as fireCustomization,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Calendar } from "../Calendar";
+import { ThemeProvider as CustomizationThemeProvider } from "../../../providers";
+import { Calendar, Calendar as CustomizationComponent } from "../Calendar";
 import { CalendarProps } from "../Calendar.types";
 
 afterEach(() => {
@@ -87,7 +94,7 @@ describe("Calendar", () => {
   describe("hidden input", () => {
     it("renders hidden input when name is provided", () => {
       const { container } = renderCalendar({ name: "date-field" });
-      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const hiddenInput = container.querySelector("input[type=\"hidden\"]");
       expect(hiddenInput).toBeInTheDocument();
       expect(hiddenInput).toHaveAttribute("name", "date-field");
     });
@@ -95,7 +102,7 @@ describe("Calendar", () => {
     it("does not render hidden input when name is not provided", () => {
       const { container } = renderCalendar();
       expect(
-        container.querySelector('input[type="hidden"]'),
+        container.querySelector("input[type=\"hidden\"]"),
       ).not.toBeInTheDocument();
     });
 
@@ -104,7 +111,7 @@ describe("Calendar", () => {
         name: "date-field",
         required: true,
       });
-      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const hiddenInput = container.querySelector("input[type=\"hidden\"]");
       expect(hiddenInput).toHaveAttribute("required");
     });
   });
@@ -199,11 +206,11 @@ describe("typed selection behavior", () => {
     const { container, rerender } = render(
       <Calendar value={date} name="date" />,
     );
-    expect(container.querySelector('input[type="hidden"]')).toHaveValue(
+    expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue(
       date.toISOString(),
     );
     rerender(<Calendar value={undefined} name="date" />);
-    expect(container.querySelector('input[type="hidden"]')).toHaveValue("");
+    expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue("");
   });
   it.each([true, false])(
     "honors required=%s in multiple mode",
@@ -237,15 +244,15 @@ it("allows switching an uncontrolled calendar between selection modes", async ()
     <Calendar defaultValue={date} name="mode" />,
   );
   rerender(<Calendar mode="multiple" name="mode" />);
-  expect(container.querySelector('input[type="hidden"]')).toHaveValue("");
+  expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue("");
   await userEvent.click(
     screen.getByRole("button", { name: /October 15, 2026/ }),
   );
-  expect(container.querySelector('input[type="hidden"]')).toHaveValue(
+  expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue(
     date.toISOString(),
   );
   rerender(<Calendar mode="range" name="mode" />);
-  expect(container.querySelector('input[type="hidden"]')).toHaveValue("");
+  expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue("");
 });
 
 describe("native date localization", () => {
@@ -311,7 +318,7 @@ describe("native date localization", () => {
       ).toBeInTheDocument();
       await userEvent.click(
         container.querySelector<HTMLButtonElement>(
-          '.rdp-day[data-day="2026-01-20"] button',
+          ".rdp-day[data-day=\"2026-01-20\"] button",
         )!,
       );
       expect(onChange).toHaveBeenLastCalledWith(new Date(2026, 0, 20));
@@ -328,7 +335,7 @@ describe("native date localization", () => {
     expect(
       screen.getByRole("button", { name: "octubre", pressed: true }),
     ).toBeInTheDocument();
-    expect(container.querySelector('input[type="hidden"]')).toHaveValue(
+    expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue(
       selected.toISOString(),
     );
     await userEvent.keyboard("{Escape}");
@@ -336,7 +343,7 @@ describe("native date localization", () => {
       screen.getByRole("button", { name: "octubre de 2026" }),
     ).toBeInTheDocument();
     expect(
-      container.querySelector('.rdp-day[data-day="2026-10-15"]'),
+      container.querySelector(".rdp-day[data-day=\"2026-10-15\"]"),
     ).toHaveAttribute("aria-selected", "true");
   });
 
@@ -353,6 +360,151 @@ describe("native date localization", () => {
       expect(
         screen.getByRole("button", { name: "October 2026" }),
       ).toBeInTheDocument();
+    },
+  );
+});
+
+describe("Calendar part customization", () => {
+  it.each([
+    {
+      cls: "overlayYearIconClassName",
+      sty: "overlayYearIconStyle",
+      base: "calendar__overlay-year-icon",
+      phase: "month",
+    },
+
+    {
+      cls: "labelWrapperClassName",
+      sty: "labelWrapperStyle",
+      base: "calendar__label-wrapper",
+      phase: "default",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "calendar__label",
+      phase: "default",
+    },
+    {
+      cls: "requiredClassName",
+      sty: "requiredStyle",
+      base: "calendar__required",
+      phase: "default",
+    },
+    {
+      cls: "dayPickerClassName",
+      sty: "dayPickerStyle",
+      base: "calendar__day-picker",
+      phase: "default",
+    },
+    {
+      cls: "overlayClassName",
+      sty: "overlayStyle",
+      base: "calendar__overlay",
+      phase: "month",
+    },
+    {
+      cls: "overlayHeaderClassName",
+      sty: "overlayHeaderStyle",
+      base: "calendar__overlay-header",
+      phase: "month",
+    },
+    {
+      cls: "overlayYearBtnClassName",
+      sty: "overlayYearBtnStyle",
+      base: "calendar__overlay-year-btn",
+      phase: "month",
+    },
+    {
+      cls: "monthGridClassName",
+      sty: "monthGridStyle",
+      base: "calendar__month-grid",
+      phase: "month",
+    },
+    {
+      cls: "monthItemClassName",
+      sty: "monthItemStyle",
+      base: "calendar__month-item",
+      phase: "month",
+    },
+    {
+      cls: "yearListClassName",
+      sty: "yearListStyle",
+      base: "calendar__year-list",
+      phase: "year",
+    },
+    {
+      cls: "yearItemClassName",
+      sty: "yearItemStyle",
+      base: "calendar__year-item",
+      phase: "year",
+    },
+    {
+      cls: "infoClassName",
+      sty: "infoStyle",
+      base: "calendar__info",
+      phase: "default",
+    },
+    {
+      cls: "errorClassName",
+      sty: "errorStyle",
+      base: "calendar__error-message",
+      phase: "default",
+    },
+    {
+      cls: "captionClassName",
+      sty: "captionStyle",
+      base: "rdp-caption_label",
+      phase: "default",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Date"
+            required
+            error="Invalid"
+            defaultValue={new Date(2026, 9, 16)}
+            language="en-US"
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      if (phase === "month" || phase === "year")
+        fireCustomization.click(
+          view.container.querySelector(".rdp-caption_label")!,
+        );
+      if (phase === "year")
+        fireCustomization.click(
+          view.container.querySelector(".calendar__overlay-year-btn")!,
+        );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Date"
+            required
+            error="Invalid"
+            defaultValue={new Date(2026, 9, 16)}
+            language="en-US"
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
     },
   );
 });

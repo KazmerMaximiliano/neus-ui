@@ -1,6 +1,9 @@
 import { StepperProps } from "../Stepper.types";
 
 export const StepperSimple = ({
+  dotClassName,
+  trackClassName,
+  trackStyle,
   currentStep,
   totalSteps,
   dotStyle,
@@ -9,7 +12,8 @@ export const StepperSimple = ({
 
   return (
     <div
-      className="stepper__track"
+      className={["stepper__track", trackClassName].filter(Boolean).join(" ")}
+      style={trackStyle}
       role="progressbar"
       aria-label="Progress"
       aria-valuenow={currentStep + 1}
@@ -20,9 +24,13 @@ export const StepperSimple = ({
       {steps.map((index) => (
         <div
           key={index}
-          className={`stepper__simple-dot${index <= currentStep ? " stepper__simple-dot--active" : ""}${
-            index === currentStep ? " stepper__simple-dot--current" : ""
-          }`}
+          className={[
+            `stepper__simple-dot${index <= currentStep ? " stepper__simple-dot--active" : ""}${index === currentStep ? " stepper__simple-dot--current" : ""
+            }`,
+            dotClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
           style={dotStyle}
         />
       ))}

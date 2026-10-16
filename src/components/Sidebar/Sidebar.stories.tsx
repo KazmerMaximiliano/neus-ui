@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Files, House, LogOut, Settings, User } from "lucide-react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import "../../templates/AppTemplate/AppTemplate.styles.css";
 import { Sidebar as SidebarComponent } from "./Sidebar";
+import "../../templates/AppTemplate/AppTemplate.styles.css";
 import "./Sidebar.stories.css";
 import type { SidebarStoryArgs } from "./Sidebar.types";
 
@@ -13,6 +13,83 @@ const meta: Meta<SidebarStoryArgs> = {
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],
   argTypes: {
+    closeIconClassName: {
+      control: "text",
+      description: "Customization for closeIcon",
+    },
+    closeIconStyle: {
+      control: "object",
+      description: "Customization for closeIcon",
+    },
+    toggleIconClassName: {
+      control: "text",
+      description: "Customization for toggleIcon",
+    },
+    toggleIconStyle: {
+      control: "object",
+      description: "Customization for toggleIcon",
+    },
+    avatarClassName: {
+      control: "text",
+      description: "Additional classes for avatar",
+    },
+    avatarStyle: {
+      control: "object",
+      description: "Style override for avatar",
+    },
+    bodyClassName: {
+      control: "text",
+      description: "Additional classes for body",
+    },
+    closeButtonClassName: {
+      control: "text",
+      description: "Additional classes for closeButton",
+    },
+    dialogClassName: {
+      control: "text",
+      description: "Additional classes for dialog",
+    },
+    dialogStyle: {
+      control: "object",
+      description: "Style override for dialog",
+    },
+    headerClassName: {
+      control: "text",
+      description: "Additional classes for header",
+    },
+    headerInnerClassName: {
+      control: "text",
+      description: "Additional classes for headerInner",
+    },
+    headerInnerStyle: {
+      control: "object",
+      description: "Style override for headerInner",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    itemClassName: {
+      control: "text",
+      description: "Additional classes for item",
+    },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    panelClassName: {
+      control: "text",
+      description: "Additional classes for panel",
+    },
+    panelStyle: { control: "object", description: "Style override for panel" },
+    titleClassName: {
+      control: "text",
+      description: "Additional classes for title",
+    },
+    toggleClassName: {
+      control: "text",
+      description: "Additional classes for toggle",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -84,6 +161,26 @@ const meta: Meta<SidebarStoryArgs> = {
 
 export const Sidebar: StoryObj<SidebarStoryArgs> = {
   args: {
+    closeIconClassName: undefined,
+    closeIconStyle: undefined,
+    toggleIconClassName: undefined,
+    toggleIconStyle: undefined,
+    avatarClassName: undefined,
+    avatarStyle: undefined,
+    bodyClassName: undefined,
+    closeButtonClassName: undefined,
+    dialogClassName: undefined,
+    dialogStyle: undefined,
+    headerClassName: undefined,
+    headerInnerClassName: undefined,
+    headerInnerStyle: undefined,
+    iconClassName: undefined,
+    itemClassName: undefined,
+    labelClassName: undefined,
+    panelClassName: undefined,
+    panelStyle: undefined,
+    titleClassName: undefined,
+    toggleClassName: undefined,
     designSystem: "neus",
     background: "theme",
     title: "Navigation",

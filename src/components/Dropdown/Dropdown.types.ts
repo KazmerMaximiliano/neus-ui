@@ -6,6 +6,19 @@ import type { MenuItem } from "../Menu";
 export type DropdownItem = MenuItem;
 
 export type DropdownProps = {
+  itemClassName?: string;
+  menuClassName?: string;
+  avatarClassName?: string;
+  avatarIconClassName?: string;
+  avatarIconStyle?: CSSProperties;
+  avatarStyle?: CSSProperties;
+  caretClassName?: string;
+  caretStyle?: CSSProperties;
+  className?: string;
+  nameClassName?: string;
+  nameStyle?: CSSProperties;
+  style?: CSSProperties;
+  triggerClassName?: string;
   icon?: IconButtonIcon;
   name?: string;
   items: DropdownItem[];

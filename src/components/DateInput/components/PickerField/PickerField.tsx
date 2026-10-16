@@ -5,6 +5,24 @@ import "./PickerField.styles.css";
 import type { PickerFieldProps } from "./PickerField.types";
 
 export const PickerField = ({
+  placeholderClassName,
+  placeholderStyle,
+  className,
+  containerClassName,
+  containerStyle,
+  dropdownClassName,
+  dropdownStyle,
+  errorClassName,
+  fieldClassName,
+  iconClassName,
+  iconStyle,
+  labelClassName,
+  panelClassName,
+  requiredClassName,
+  requiredStyle,
+  style,
+  valueClassName,
+  valueStyle,
   variant = "auto",
   labelPlacement = "auto",
   size = "medium",
@@ -42,7 +60,13 @@ export const PickerField = ({
 
   return (
     <div
-      className={`picker-field field-presentation ${prefix}__wrapper`}
+      className={[
+        `picker-field field-presentation ${prefix}__wrapper`,
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={style}
       data-variant={variant}
       data-label-placement={labelPlacement}
       data-size={size}
@@ -52,16 +76,27 @@ export const PickerField = ({
           id={labelId}
           htmlFor={fieldId}
           className={[
-            "picker-field__label",
-            `${prefix}__label`,
-            ...states(`${prefix}__label`),
-          ].join(" ")}
+            [
+              "picker-field__label",
+              `${prefix}__label`,
+              ...states(`${prefix}__label`),
+            ].join(" "),
+            labelClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
           style={labelStyle}
         >
           {label}
           {required && (
             <span
-              className={`picker-field__required ${prefix}__required`}
+              className={[
+                `picker-field__required ${prefix}__required`,
+                requiredClassName,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              style={requiredStyle}
               aria-hidden
             >
               *
@@ -70,17 +105,30 @@ export const PickerField = ({
         </label>
       )}
 
-      <div className={`picker-field__container ${prefix}__container`}>
+      <div
+        className={[
+          `picker-field__container ${prefix}__container`,
+          containerClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        style={containerStyle}
+      >
         <button
           ref={triggerRef}
           id={fieldId}
           type="button"
           className={[
-            "picker-field__field",
-            `${prefix}__field`,
-            ...states(`${prefix}__field`),
-            displayValue && `${prefix}__field--has-value`,
-            open && "picker-field__field--open",
+            [
+              "picker-field__field",
+              `${prefix}__field`,
+              ...states(`${prefix}__field`),
+              displayValue && `${prefix}__field--has-value`,
+              open && "picker-field__field--open",
+            ]
+              .filter(Boolean)
+              .join(" "),
+            fieldClassName,
           ]
             .filter(Boolean)
             .join(" ")}
@@ -98,13 +146,25 @@ export const PickerField = ({
         >
           <span
             id={valueId}
-            className={
-              displayValue ? "picker-field__value" : "picker-field__placeholder"
-            }
+            className={[
+              displayValue
+                ? "picker-field__value"
+                : "picker-field__placeholder",
+              displayValue ? valueClassName : placeholderClassName,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            style={displayValue ? valueStyle : placeholderStyle}
           >
             {displayValue || placeholder}
           </span>
-          <Icon className="picker-field__icon" aria-hidden />
+          <Icon
+            className={["picker-field__icon", iconClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={iconStyle}
+            aria-hidden
+          />
         </button>
 
         <div
@@ -113,11 +173,18 @@ export const PickerField = ({
           popover="manual"
           role="dialog"
           aria-label={pickerLabel}
-          className="picker-field__popover"
+          className={["picker-field__popover", panelClassName]
+            .filter(Boolean)
+            .join(" ")}
           style={panelStyle}
         >
           {open && (
-            <div className={`${prefix}__dropdown`}>
+            <div
+              className={[`${prefix}__dropdown`, dropdownClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={dropdownStyle}
+            >
               {children(() => hide(true))}
             </div>
           )}
@@ -136,7 +203,12 @@ export const PickerField = ({
       {error && (
         <div
           id={errorId}
-          className={`picker-field__error ${prefix}__error-message`}
+          className={[
+            `picker-field__error ${prefix}__error-message`,
+            errorClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
           style={errorStyle}
         >
           {error}

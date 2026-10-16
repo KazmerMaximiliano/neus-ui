@@ -12,6 +12,14 @@ const meta: Meta<BadgeStoryArgs> = {
     layout: "centered",
   },
   argTypes: {
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    dotClassName: {
+      control: "text",
+      description: "Additional classes for dot",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -44,6 +52,8 @@ const meta: Meta<BadgeStoryArgs> = {
 
 export const Badge: StoryObj<BadgeStoryArgs> = {
   args: {
+    className: undefined,
+    dotClassName: undefined,
     designSystem: "neus",
     label: "Active",
     variant: "solid",

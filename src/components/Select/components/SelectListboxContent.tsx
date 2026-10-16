@@ -1,10 +1,31 @@
 import { Check } from "lucide-react";
 import { useMemo, useState, type KeyboardEvent } from "react";
 import { focusMenuItem } from "../../../hooks/usePopover";
-import { OPTION } from "../Select.consts";
 import type { SelectListboxContentProps } from "./SelectListboxContent.types";
+import { OPTION } from "../Select.consts";
 
 export const SelectListboxContent = ({
+  boxClassName,
+  boxStyle,
+  checkboxClassName,
+  checkboxStyle,
+  emptyClassName,
+  emptyStyle,
+  iconClassName,
+  iconStyle,
+  listContentClassName,
+  listContentStyle,
+  optionCheckClassName,
+  optionCheckStyle,
+  optionClassName,
+  optionLabelClassName,
+  optionLabelStyle,
+  panelClassName,
+  panelStyle,
+  searchClassName,
+  searchInputClassName,
+  searchInputStyle,
+  searchStyle,
   id,
   panel,
   hide,
@@ -42,12 +63,17 @@ export const SelectListboxContent = ({
   };
 
   return (
-    <div className="select__panel" onKeyDown={onKeyDown}>
+    <div
+      className={["select__panel", panelClassName].filter(Boolean).join(" ")}
+      style={panelStyle}
+      onKeyDown={onKeyDown}
+    >
       {viewSearchBar && (
-        <div className="select__search">
+        <div className={["select__search", searchClassName].filter(Boolean).join(" ")} style={searchStyle}>
           <input
             type="search"
-            className="select__search-input"
+            className={["select__search-input", searchInputClassName].filter(Boolean).join(" ")}
+            style={searchInputStyle}
             placeholder={searchBarPlaceholder}
             aria-label={searchBarPlaceholder}
             aria-controls={id}
@@ -61,7 +87,8 @@ export const SelectListboxContent = ({
         role="listbox"
         aria-label={label}
         aria-multiselectable={multiple || undefined}
-        className="select__list"
+        className={["select__list", listContentClassName].filter(Boolean).join(" ")}
+        style={listContentStyle}
       >
         {filtered.map((option) => {
           const value = option.value ?? "";
@@ -72,7 +99,7 @@ export const SelectListboxContent = ({
               role="option"
               tabIndex={-1}
               aria-selected={selected}
-              className={`select__option${selected ? " select__option--selected" : ""}`}
+              className={[`select__option${selected ? " select__option--selected" : ""}`, optionClassName].filter(Boolean).join(" ")}
               style={optionStyle}
               onClick={() => choose(value)}
               onKeyDown={(event) => {
@@ -84,23 +111,31 @@ export const SelectListboxContent = ({
             >
               {multiple && (
                 <span
-                  className={`checkbox${selected ? " checkbox--checked" : ""}`}
+                  className={[`checkbox${selected ? " checkbox--checked" : ""}`, checkboxClassName].filter(Boolean).join(" ")}
+                  style={checkboxStyle}
                   aria-hidden
                 >
-                  <span className="checkbox__box">
-                    <Check className="checkbox__icon" />
+                  <span className={["checkbox__box", boxClassName].filter(Boolean).join(" ")} style={boxStyle}>
+                    <Check className={["checkbox__icon", iconClassName].filter(Boolean).join(" ")} style={iconStyle} />
                   </span>
                 </span>
               )}
-              <span className="select__option-label">{option.label}</span>
+              <span
+                className={["select__option-label", optionLabelClassName].filter(Boolean).join(" ")}
+                style={optionLabelStyle}
+              >{option.label}</span>
               {!multiple && selected && (
-                <Check className="select__option-check" aria-hidden />
+                <Check
+                  className={["select__option-check", optionCheckClassName].filter(Boolean).join(" ")}
+                  style={optionCheckStyle}
+                  aria-hidden
+                />
               )}
             </div>
           );
         })}
         {filtered.length === 0 && (
-          <div className="select__empty">Sin resultados</div>
+          <div className={["select__empty", emptyClassName].filter(Boolean).join(" ")} style={emptyStyle}>Sin resultados</div>
         )}
       </div>
     </div>

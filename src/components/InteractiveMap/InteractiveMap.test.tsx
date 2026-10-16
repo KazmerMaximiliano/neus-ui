@@ -8,12 +8,17 @@ import {
   cleanup,
   fireEvent,
   render,
+  render as renderCustomization,
   screen,
   waitFor,
 } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
 import { reverseGeocode } from "../../services/geocoding";
-import { InteractiveMap } from "./InteractiveMap";
+import {
+  InteractiveMap as CustomizationComponent,
+  InteractiveMap,
+} from "./InteractiveMap";
 import type { InteractiveMapProps } from "./InteractiveMap.types";
 import { parseCoordinates } from "./InteractiveMap.utils";
 
@@ -76,6 +81,19 @@ afterEach(() => {
 });
 
 describe("InteractiveMap", () => {
+  it("forwards and removes the map container class/style through the SDK", () => {
+    const view = renderMap({
+      mapClassName: "consumer-map",
+      mapStyle: { height: 320 },
+    });
+    expect(sdk.map.mapContainerClassName).toBe(
+      "interactive-map__map consumer-map",
+    );
+    expect(sdk.map.mapContainerStyle).toEqual({ height: 320 });
+    view.rerender(<InteractiveMap googleMapsApiKey="test-key" />);
+    expect(sdk.map.mapContainerClassName).toBe("interactive-map__map");
+    expect(sdk.map.mapContainerStyle).toBeUndefined();
+  });
   it("renders search, map, instructions and initial marker", () => {
     renderMap({
       initialCoordinates: "-31,-64",
@@ -250,4 +268,75 @@ describe("InteractiveMap", () => {
     expect(parseCoordinates("-90, 180")).toEqual({ lat: -90, lng: 180 });
     expect(parseCoordinates(" , ")).toBeNull();
   });
+});
+
+describe("InteractiveMap part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "style",
+      base: "interactive-map",
+      phase: "default",
+    },
+    {
+      cls: "errorClassName",
+      sty: "errorStyle",
+      base: "interactive-map__error",
+      phase: "error",
+    },
+    {
+      cls: "loadingClassName",
+      sty: "loadingStyle",
+      base: "interactive-map__loading",
+      phase: "loading",
+    },
+    {
+      cls: "searchClassName",
+      sty: "searchStyle",
+      base: "interactive-map__search-box",
+      phase: "default",
+    },
+    {
+      cls: "instructionsClassName",
+      sty: "instructionsStyle",
+      base: "interactive-map__info",
+      phase: "default",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      sdk.loaded = phase !== "loading";
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            googleMapsApiKey={phase === "error" ? "" : "test-key"}
+            initialCoordinates="-31,-64"
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            googleMapsApiKey={phase === "error" ? "" : "test-key"}
+            initialCoordinates="-31,-64"
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

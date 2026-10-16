@@ -1,11 +1,24 @@
 import { ChevronDown } from "lucide-react";
 import { usePopover } from "../../hooks/usePopover";
-import "../Menu/Menu.styles.css";
 import { MenuItems } from "../Menu/components/MenuItems";
+import "../Menu/Menu.styles.css";
 import "./Dropdown.styles.css";
 import { DropdownProps } from "./Dropdown.types";
 
 export const Dropdown = ({
+  itemClassName,
+  menuClassName,
+  avatarClassName,
+  avatarIconClassName,
+  avatarIconStyle,
+  avatarStyle,
+  caretClassName,
+  caretStyle,
+  className,
+  nameClassName,
+  nameStyle,
+  style,
+  triggerClassName,
   icon: Icon,
   name,
   items,
@@ -14,17 +27,25 @@ export const Dropdown = ({
   itemStyle,
 }: DropdownProps) => {
   const popover = usePopover({
-    initialFocus: '[role="menuitem"]:not(:disabled)',
+    initialFocus: "[role=\"menuitem\"]:not(:disabled)",
   });
   const { id, open, triggerRef, toggle } = popover;
   const label = name || "Menú";
 
   return (
-    <div className="dropdown">
+    <div
+      className={["dropdown", className].filter(Boolean).join(" ")}
+      style={style}
+    >
       <button
         ref={triggerRef}
         type="button"
-        className={`dropdown__trigger${open ? " dropdown__trigger--open" : ""}`}
+        className={[
+          `dropdown__trigger${open ? " dropdown__trigger--open" : ""}`,
+          triggerClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         style={triggerStyle}
         aria-label={label}
         aria-haspopup="menu"
@@ -32,12 +53,35 @@ export const Dropdown = ({
         aria-controls={id}
         onClick={toggle}
       >
-        <span className="dropdown__avatar" aria-hidden>
-          {Icon ? <Icon className="dropdown__avatar-icon" /> : label[0]}
+        <span
+          className={["dropdown__avatar", avatarClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={avatarStyle}
+          aria-hidden
+        >
+          {Icon ? (
+            <Icon
+              className={["dropdown__avatar-icon", avatarIconClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={avatarIconStyle}
+            />
+          ) : (
+            label[0]
+          )}
         </span>
-        <ChevronDown className="dropdown__caret" aria-hidden />
+        <ChevronDown
+          className={["dropdown__caret", caretClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={caretStyle}
+          aria-hidden
+        />
       </button>
       <MenuItems
+        menuClassName={menuClassName}
+        itemClassName={itemClassName}
         popover={popover}
         label={label}
         items={items}
@@ -45,7 +89,13 @@ export const Dropdown = ({
         itemStyle={itemStyle}
         header={
           name && (
-            <div className="dropdown__name" role="none">
+            <div
+              className={["dropdown__name", nameClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={nameStyle}
+              role="none"
+            >
               {name}
             </div>
           )

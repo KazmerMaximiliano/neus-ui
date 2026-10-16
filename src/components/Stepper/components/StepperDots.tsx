@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 import { Fragment } from "react";
-import { STEP_STATE_TEXT } from "../Stepper.consts";
 import { StepperProps } from "../Stepper.types";
+import { STEP_STATE_TEXT } from "../Stepper.consts";
 import {
   getConnectorClasses,
   getDotClasses,
@@ -10,6 +10,17 @@ import {
 } from "../Stepper.utils";
 
 export const StepperDots = ({
+  checkClassName,
+  checkStyle,
+  connectorClassName,
+  dotClassName,
+  labelClassName,
+  srOnlyClassName,
+  srOnlyStyle,
+  stepClassName,
+  stepStyle,
+  trackClassName,
+  trackStyle,
   currentStep,
   totalSteps,
   size = "small",
@@ -24,7 +35,11 @@ export const StepperDots = ({
   const steps = Array.from({ length: totalSteps }, (_, i) => i);
 
   return (
-    <nav className="stepper__track" aria-label="Progress">
+    <nav
+      className={["stepper__track", trackClassName].filter(Boolean).join(" ")}
+      style={trackStyle}
+      aria-label="Progress"
+    >
       {steps.map((index) => {
         const state = getStepState(index, currentStep);
         const isDone = state === "done";
@@ -35,9 +50,19 @@ export const StepperDots = ({
 
         return (
           <Fragment key={index}>
-            <div className="stepper__step">
+            <div
+              className={["stepper__step", stepClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={stepStyle}
+            >
               <Dot
-                className={getDotClasses(state, size, isClickable)}
+                className={[
+                  getDotClasses(state, size, isClickable),
+                  dotClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 style={dotStyle}
                 aria-current={state === "active" ? "step" : undefined}
                 {...(isClickable && {
@@ -46,15 +71,34 @@ export const StepperDots = ({
                 })}
               >
                 <span aria-hidden>
-                  {isDone ? <Check className="stepper__check" /> : index + 1}
+                  {isDone ? (
+                    <Check
+                      className={["stepper__check", checkClassName]
+                        .filter(Boolean)
+                        .join(" ")}
+                      style={checkStyle}
+                    />
+                  ) : (
+                    index + 1
+                  )}
                 </span>
-                <span className="stepper__sr-only">
+                <span
+                  className={["stepper__sr-only", srOnlyClassName]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={srOnlyStyle}
+                >
                   {`Step ${index + 1}${label && !visibleLabel ? `: ${label}` : ""}, ${STEP_STATE_TEXT[state]}`}
                 </span>
               </Dot>
               {visibleLabel && (
                 <span
-                  className={`${getLabelClasses(state)} stepper__label--${size}`}
+                  className={[
+                    `${getLabelClasses(state)} stepper__label--${size}`,
+                    labelClassName,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                   style={labelStyle}
                 >
                   {label}
@@ -63,7 +107,12 @@ export const StepperDots = ({
             </div>
             {showConnectors !== false && index < totalSteps - 1 && (
               <div
-                className={getConnectorClasses(isDone, size)}
+                className={[
+                  getConnectorClasses(isDone, size),
+                  connectorClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 style={connectorStyle}
                 aria-hidden="true"
               />

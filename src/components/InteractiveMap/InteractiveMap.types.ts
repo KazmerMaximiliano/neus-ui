@@ -11,6 +11,11 @@ export type LocationData = {
 export type MapCoordinates = { lat: number; lng: number; };
 
 export type InteractiveMapProps = {
+  errorClassName?: string;
+  instructionsClassName?: string;
+  loadingClassName?: string;
+  mapClassName?: string;
+  searchClassName?: string;
   className?: string;
   style?: CSSProperties;
   mapStyle?: CSSProperties;

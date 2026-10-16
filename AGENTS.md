@@ -175,7 +175,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Checkbox        | src/components/Checkbox/        | STABLE | Indeterminate state                             |
 | Clock           | src/components/Clock/           | STABLE | Time picker                                     |
 | DataTable       | src/components/DataTable/       | STABLE | Sorting, pagination, filtering                  |
-| DateInput       | src/components/DateInput/       | STABLE | Date validation                                 |
+| DateInput       | src/components/DateInput/       | STABLE | Calendar picker field                                 |
 | Dropdown        | src/components/Dropdown/        | STABLE | Dropdown menu                                   |
 | FileUploader    | src/components/FileUploader/    | STABLE | Drag and drop                                   |
 | IconButton      | src/components/IconButton/      | STABLE | Icon containers                                 |
@@ -190,7 +190,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | MultiSelect     | src/components/MultiSelect/     | STABLE | Multiple selection                              |
 | Select          | src/components/Select/          | STABLE | Single selection                                |
 | Sidebar         | src/components/Sidebar/         | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer |
-| TimeInput       | src/components/TimeInput/       | STABLE | Time validation                                 |
+| TimeInput       | src/components/TimeInput/       | STABLE | Clock picker field                                 |
 | WeekCalendar    | src/components/WeekCalendar/    | STABLE | Weekly view, event categories, navigation       |
 | WeekCalendarRow | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
 | Stepper         | src/components/Stepper/         | STABLE | Dots/linear/simple variants, labels, step click |
@@ -200,7 +200,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | NAME         | FILE_PATH                   | STATUS | PURPOSE                                    |
 | ------------ | --------------------------- | ------ | ------------------------------------------ |
 | AppTemplate  | src/templates/AppTemplate/  | STABLE | Full application layout                    |
-| FormTemplate | src/templates/FormTemplate/ | STABLE | Form layout with validation and submission |
+| FormTemplate | src/templates/FormTemplate/ | STABLE | Responsive field/action layout; consumer owns form validation and submission |
 
 ## COMMAND REFERENCE
 
@@ -288,6 +288,9 @@ export const ComponentName = ({
 ```
 
 ### Import Order MUST be
+
+Keep imports contiguous: do not insert blank lines between import declarations,
+including between the categories below. Multiline import declarations are allowed.
 
 1. React and external dependencies
 2. Internal components and hooks
@@ -490,7 +493,7 @@ When agents need to implement new components, use this checklist:
 - [ ] Verify `pnpm test:coverage` shows 70%+ coverage
 - [ ] Verify component works in Storybook
 - [ ] Create docs/components/ComponentName.md with props and usage example
-- [ ] Update docs/components.md index table with the new component
+- [ ] Update docs/components/README.md index table with the new component
 - [ ] Update AGENTS.md COMPONENT INVENTORY if adding new component
 - [ ] Update README.md if component is user-facing
 
@@ -532,7 +535,7 @@ ReactDOM 19+
 ag-grid-community (DataTable)
 ag-grid-react (DataTable)
 react-day-picker (Calendar)
-react-icons (Icon components)
+lucide-react (Icon components)
 react-spinners (Loading indicators)
 @react-google-maps/api (InteractiveMap)
 ```
@@ -540,8 +543,8 @@ react-spinners (Loading indicators)
 ### Development Dependencies (Build/Test)
 
 ```
-TypeScript 5+
-Vite 7+
+TypeScript 6+
+Vite 8+
 Vitest 4+
 React Testing Library
 @testing-library/jest-dom
@@ -615,17 +618,21 @@ Each component MUST export a single Story that exposes all props as editable con
 
 For agents needing additional information:
 
-| QUESTION                    | SOURCE                             | LOCATION                      |
-| --------------------------- | ---------------------------------- | ----------------------------- |
-| Component usage?            | README.md                          | /README.md                    |
-| Documentation index?       | docs/README.md                    | /docs/README.md              |
-| Component index?            | docs/components.md                | /docs/components.md          |
-| Component props + examples? | docs/components/ComponentName.md  | /docs/components/            |
-| Design system / theming?    | docs/design-system.md, docs/theming.md | /docs/                    |
-| Visual identity / token source? | DESIGN.md per system, indexed in docs/design-systems.md | src/design-systems/<id>/DESIGN.md |
-| Type definitions?           | Component.types.ts                 | src/components/ComponentName/ |
-| Test examples?              | ComponentName.test.tsx; grouped tests when multiple | src/components/ComponentName/ or src/components/ComponentName/tests/ |
-| Styling reference?          | Component.styles.css               | src/components/ComponentName/ |
+| Question | Source |
+| --- | --- |
+| Start here | [Documentation index](./docs/README.md) |
+| Installation and onboarding | [Getting started](./docs/getting-started/README.md) |
+| Components and public sections | [Component catalog](./docs/components/README.md); individual docs/components/ComponentName.md guides |
+| Application and form layouts | [Templates](./docs/templates/README.md) |
+| Provider, scopes and runtime colors | [ThemeProvider](./docs/design/theme-provider.md) |
+| Per-part classes/styles and CSS cascade | [Customization](./docs/design/customization.md) |
+| Shared CSS variables | [Token reference](./docs/design/tokens.md) |
+| Six visual specifications | [Design systems](./docs/design/systems.md) |
+| Component conventions and commands | [Development](./docs/contributing/development.md) |
+| Validation and coverage | [Testing](./docs/contributing/testing.md) |
+| DESIGN.md schema and generation | [Authoring design systems](./docs/contributing/design-system-authoring.md) |
+| Exact props and style destinations | ComponentName.types.ts, ComponentName.tsx and ComponentName.styles.css in the owning family |
+
 
 Project guides live in `docs/` as Markdown; the root `README.md` provides the
 overview, `AGENTS.md` defines repository instructions, and visual specifications
@@ -650,6 +657,30 @@ Documentation can be read directly in the repository or a Markdown editor;
 it does not require a development server or build step. Storybook provides the
 interactive component catalog separately.
 
+## DOCUMENTATION AND CUSTOMIZATION MAINTENANCE
+
+- Start at [docs/README.md](./docs/README.md). Consumer guides live in
+  getting-started/ and design/; API references live in components/ and templates/;
+  maintainer workflows live in contributing/. Every folder has a README index.
+- Keep documentation in English. Add/update the relevant catalog and all relative
+  links when moving files. Do not leave obsolete flat documentation paths.
+- Every public component/section and template needs a guide with usage, complete
+  props/defaults/callbacks, behavior/accessibility, anatomy, class/style destinations,
+  states, complete applicable token inventories and practical customization examples.
+- Keep public types, implementation, single story, tests and documentation in sync.
+  Preserve existing style destinations. Add root className where missing; parts use
+  individual partStyle/partClassName props. Append consumer classes and merge consumer
+  styles after internal defaults. Removing a hook must restore default styling.
+- Repeated parts share their hook; absent parts stay absent. Keep internal part
+  forwarding in PickerField, MenuItems and SelectListbox. Public Card/Modal sections
+  own their hooks. Integrated public children and third-party internals use their
+  existing APIs or documented CSS; do not add new deep forwarding APIs.
+- Use [customization](./docs/design/customization.md) for CSS cascade/scope guidance,
+  [ThemeProvider](./docs/design/theme-provider.md) for runtime behavior and
+  [authoring](./docs/contributing/design-system-authoring.md) for DESIGN.md generation.
+- Storybook templates reuse the shared local design selector, initialize it to
+  global, and inherit the toolbar color scheme. Preview args are not component props.
+
 ## CURRENT PUBLIC API CONTRACTS
 
 All public families and both templates have six scoped recipes. Button supports
@@ -658,5 +689,5 @@ auto/filled/outlined/elevated. Input and picker fields share variant, size and
 label-placement controls. Calendar is discriminated
 by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
 renderMobileCard. DataTable actions are composed by consumers with buttons or menus,
-as demonstrated in Storybook. See the [component reference](./docs/components.md)
+as demonstrated in Storybook. See the [component reference](./docs/components/README.md)
 for the current APIs and usage examples.

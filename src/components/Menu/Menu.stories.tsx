@@ -14,6 +14,43 @@ const meta: Meta<MenuStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    buttonLabelClassName: {
+      control: "text",
+      description: "Additional classes for buttonLabel",
+    },
+    buttonLabelStyle: {
+      control: "object",
+      description: "Style override for buttonLabel",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    iconButtonIconClassName: {
+      control: "text",
+      description: "Additional classes for iconButtonIcon",
+    },
+    iconButtonIconStyle: {
+      control: "object",
+      description: "Style override for iconButtonIcon",
+    },
+    itemClassName: {
+      control: "text",
+      description: "Additional classes for item",
+    },
+    menuClassName: {
+      control: "text",
+      description: "Additional classes for menu",
+    },
+    style: { control: "object", description: "Style override for style" },
+    triggerClassName: {
+      control: "text",
+      description: "Additional classes for trigger",
+    },
+    triggerStyle: {
+      control: "object",
+      description: "Style override for trigger",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -49,6 +86,16 @@ const meta: Meta<MenuStoryArgs> = {
 
 export const Menu: StoryObj<MenuStoryArgs> = {
   args: {
+    buttonLabelClassName: undefined,
+    buttonLabelStyle: undefined,
+    className: undefined,
+    iconButtonIconClassName: undefined,
+    iconButtonIconStyle: undefined,
+    itemClassName: undefined,
+    menuClassName: undefined,
+    style: undefined,
+    triggerClassName: undefined,
+    triggerStyle: undefined,
     designSystem: "neus",
     icon: EllipsisVertical,
     text: "Row actions",

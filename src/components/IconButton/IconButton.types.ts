@@ -17,6 +17,9 @@ export type IconButtonIcon = ForwardRefExoticComponent<
 >;
 
 export type IconButtonProps = {
+  className?: string;
+  iconClassName?: string;
+  loaderClassName?: string;
   icon: IconButtonIcon;
   label: string;
   type?: IconButtonType;

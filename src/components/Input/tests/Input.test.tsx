@@ -1,9 +1,17 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { ThemeProvider as CustomizationThemeProvider } from "../../../providers";
 import { FormTemplate } from "../../../templates/FormTemplate/FormTemplate";
-import type { InputProps } from "../index";
 import { Input } from "../index";
+import { Input as CustomizationComponent } from "../Input";
+import type { InputProps } from "../index";
 
 afterEach(() => {
   cleanup();
@@ -172,7 +180,7 @@ describe("Input", () => {
 
     it("renders password type", () => {
       renderInput({ type: "password" });
-      const input = document.querySelector('input[type="password"]');
+      const input = document.querySelector("input[type=\"password\"]");
       expect(input).toBeInTheDocument();
     });
 
@@ -193,7 +201,7 @@ describe("Input", () => {
 
     it("renders color type", () => {
       renderInput({ type: "color" });
-      const input = document.querySelector('input[type="color"]');
+      const input = document.querySelector("input[type=\"color\"]");
       expect(input).toBeInTheDocument();
       expect(input).toHaveClass("input--color");
     });
@@ -456,4 +464,104 @@ describe("field presentation and adornments", () => {
     expect(screen.getByText("S")).toHaveStyle({ opacity: 0.8 });
     expect(screen.getByText("!")).toHaveStyle({ opacity: 0.9 });
   });
+});
+
+describe("Input part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "wrapperStyle",
+      base: "input__wrapper",
+      phase: "default",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "input__label",
+      phase: "default",
+    },
+    {
+      cls: "requiredClassName",
+      sty: "requiredStyle",
+      base: "input__required",
+      phase: "default",
+    },
+    {
+      cls: "controlClassName",
+      sty: "controlStyle",
+      base: "input__control",
+      phase: "default",
+    },
+    {
+      cls: "prefixClassName",
+      sty: "prefixStyle",
+      base: "input__prefix",
+      phase: "default",
+    },
+    {
+      cls: "inputClassName",
+      sty: "inputStyle",
+      base: "input",
+      phase: "default",
+    },
+    {
+      cls: "suffixClassName",
+      sty: "suffixStyle",
+      base: "input__suffix",
+      phase: "default",
+    },
+    {
+      cls: "errorIconClassName",
+      sty: "errorIconStyle",
+      base: "input__error-icon",
+      phase: "default",
+    },
+    {
+      cls: "errorClassName",
+      sty: "errorStyle",
+      base: "input__error-message",
+      phase: "default",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Email"
+            required
+            error="Invalid"
+            prefix="@"
+            suffix=".com"
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Email"
+            required
+            error="Invalid"
+            prefix="@"
+            suffix=".com"
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

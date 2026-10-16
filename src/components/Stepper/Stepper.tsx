@@ -5,11 +5,18 @@ import "./Stepper.styles.css";
 import { StepperProps } from "./Stepper.types";
 
 export const Stepper = ({
+  className,
+  style,
   variant = "dots",
   size = "small",
   ...props
 }: StepperProps) => (
-  <div className={`stepper stepper--${variant} stepper--${size}`}>
+  <div
+    className={[`stepper stepper--${variant} stepper--${size}`, className]
+      .filter(Boolean)
+      .join(" ")}
+    style={style}
+  >
     {variant === "dots" && <StepperDots size={size} {...props} />}
     {variant === "linear" && <StepperLinear {...props} />}
     {variant === "simple" && <StepperSimple {...props} />}

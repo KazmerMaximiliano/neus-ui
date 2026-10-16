@@ -12,6 +12,58 @@ const meta: Meta<StepperStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    barClassName: {
+      control: "text",
+      description: "Additional classes for bar",
+    },
+    barFillClassName: {
+      control: "text",
+      description: "Additional classes for barFill",
+    },
+    barFillStyle: {
+      control: "object",
+      description: "Style override for barFill",
+    },
+    checkClassName: {
+      control: "text",
+      description: "Additional classes for check",
+    },
+    checkStyle: { control: "object", description: "Style override for check" },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    connectorClassName: {
+      control: "text",
+      description: "Additional classes for connector",
+    },
+    dotClassName: {
+      control: "text",
+      description: "Additional classes for dot",
+    },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    srOnlyClassName: {
+      control: "text",
+      description: "Additional classes for srOnly",
+    },
+    srOnlyStyle: {
+      control: "object",
+      description: "Style override for srOnly",
+    },
+    stepClassName: {
+      control: "text",
+      description: "Additional classes for step",
+    },
+    stepStyle: { control: "object", description: "Style override for step" },
+    style: { control: "object", description: "Style override for style" },
+    trackClassName: {
+      control: "text",
+      description: "Additional classes for track",
+    },
+    trackStyle: { control: "object", description: "Style override for track" },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -74,6 +126,22 @@ const meta: Meta<StepperStoryArgs> = {
 
 export const Stepper: StoryObj<StepperStoryArgs> = {
   args: {
+    barClassName: undefined,
+    barFillClassName: undefined,
+    barFillStyle: undefined,
+    checkClassName: undefined,
+    checkStyle: undefined,
+    className: undefined,
+    connectorClassName: undefined,
+    dotClassName: undefined,
+    labelClassName: undefined,
+    srOnlyClassName: undefined,
+    srOnlyStyle: undefined,
+    stepClassName: undefined,
+    stepStyle: undefined,
+    style: undefined,
+    trackClassName: undefined,
+    trackStyle: undefined,
     designSystem: "neus",
     currentStep: 1,
     totalSteps: 3,

@@ -11,10 +11,10 @@ export const InteractiveMap = (props: InteractiveMapProps) => {
       !props.googleMapsApiKey.trim()
         ? new Error("A Google Maps API key is required")
         : props.initialCoordinates !== undefined &&
-            !parseCoordinates(props.initialCoordinates)
+          !parseCoordinates(props.initialCoordinates)
           ? new Error(
-              "Coordinates must contain latitude (-90…90) and longitude (-180…180)",
-            )
+            "Coordinates must contain latitude (-90…90) and longitude (-180…180)",
+          )
           : null,
     [props.googleMapsApiKey, props.initialCoordinates],
   );
@@ -29,7 +29,9 @@ export const InteractiveMap = (props: InteractiveMapProps) => {
       {error ? (
         <div
           role="alert"
-          className="interactive-map__error"
+          className={["interactive-map__error", props.errorClassName]
+            .filter(Boolean)
+            .join(" ")}
           style={props.errorStyle}
         >
           {error.message}

@@ -17,6 +17,26 @@ import {
 } from "./Sidebar.utils";
 
 export const Sidebar = ({
+  closeIconClassName,
+  closeIconStyle,
+  toggleIconClassName,
+  toggleIconStyle,
+  avatarClassName,
+  avatarStyle,
+  bodyClassName,
+  closeButtonClassName,
+  dialogClassName,
+  dialogStyle,
+  headerClassName,
+  headerInnerClassName,
+  headerInnerStyle,
+  iconClassName,
+  itemClassName,
+  labelClassName,
+  panelClassName,
+  panelStyle,
+  titleClassName,
+  toggleClassName,
   title,
   items,
   children,
@@ -74,7 +94,10 @@ export const Sidebar = ({
     children ??
     (isTablet || isMobile ? (title || navigationLabel).charAt(0) : title);
   const brandContent = (
-    <span className="sidebar__title" style={titleStyle}>
+    <span
+      className={["sidebar__title", titleClassName].filter(Boolean).join(" ")}
+      style={titleStyle}
+    >
       {brand}
     </span>
   );
@@ -97,14 +120,34 @@ export const Sidebar = ({
   }, [isMobile, open]);
 
   const panel = (
-    <div className="sidebar__panel">
-      <div className="sidebar__header" style={headerStyle}>
-        <div className="sidebar__header-inner">
+    <div
+      className={["sidebar__panel", panelClassName].filter(Boolean).join(" ")}
+      style={panelStyle}
+    >
+      <div
+        className={["sidebar__header", headerClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={headerStyle}
+      >
+        <div
+          className={["sidebar__header-inner", headerInnerClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={headerInnerStyle}
+        >
           {!isTablet &&
             brand != null &&
             brand !== false &&
             (isMobile ? (
-              <div className="sidebar__avatar">{brandContent}</div>
+              <div
+                className={["sidebar__avatar", avatarClassName]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={avatarStyle}
+              >
+                {brandContent}
+              </div>
             ) : (
               brandContent
             ))}
@@ -112,18 +155,28 @@ export const Sidebar = ({
             <button
               ref={closeRef}
               type="button"
-              className="sidebar__close"
+              className={["sidebar__close", closeButtonClassName]
+                .filter(Boolean)
+                .join(" ")}
               aria-label={labels?.close ?? "Cerrar menú"}
               style={closeButtonStyle}
               onClick={closeMenu}
             >
-              <X aria-hidden="true" />
+              <X
+                aria-hidden="true"
+                className={["sidebar__close-icon", closeIconClassName]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={closeIconStyle}
+              />
             </button>
           )}
           {isTablet && (
             <button
               type="button"
-              className="sidebar__expand sidebar__avatar"
+              className={["sidebar__expand sidebar__avatar", toggleClassName]
+                .filter(Boolean)
+                .join(" ")}
               aria-label={
                 pinned
                   ? (labels?.collapse ?? "Contraer navegación")
@@ -143,7 +196,7 @@ export const Sidebar = ({
       </div>
       <nav
         id={navigationId}
-        className="sidebar__body"
+        className={["sidebar__body", bodyClassName].filter(Boolean).join(" ")}
         aria-label={navigationLabel}
         style={bodyStyle}
       >
@@ -155,7 +208,12 @@ export const Sidebar = ({
                 type="button"
                 aria-label={item.label}
                 aria-current={item.active ? "page" : undefined}
-                className={`sidebar__button${item.active ? " sidebar__button--active" : ""}`}
+                className={[
+                  `sidebar__button${item.active ? " sidebar__button--active" : ""}`,
+                  itemClassName,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
                 style={itemStyle}
                 onClick={() => {
                   if (isMobile) closeMenu();
@@ -164,20 +222,32 @@ export const Sidebar = ({
               >
                 {item.icon ? (
                   <item.icon
-                    className="sidebar__button-icon"
+                    className={["sidebar__button-icon", iconClassName]
+                      .filter(Boolean)
+                      .join(" ")}
                     aria-hidden="true"
                     style={iconStyle}
                   />
                 ) : (
                   <span
-                    className="sidebar__button-icon sidebar__button-initial"
+                    className={[
+                      "sidebar__button-icon sidebar__button-initial",
+                      iconClassName,
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
                     aria-hidden="true"
                     style={iconStyle}
                   >
                     {item.label.charAt(0)}
                   </span>
                 )}
-                <span className="sidebar__button-label" style={labelStyle}>
+                <span
+                  className={["sidebar__button-label", labelClassName]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={labelStyle}
+                >
                   {item.label}
                 </span>
               </button>
@@ -219,19 +289,30 @@ export const Sidebar = ({
           <button
             ref={toggleRef}
             type="button"
-            className="sidebar__toggle"
+            className={["sidebar__toggle", toggleClassName]
+              .filter(Boolean)
+              .join(" ")}
             aria-label={labels?.open ?? "Abrir menú"}
             aria-expanded={open}
             aria-controls={dialogId}
             style={toggleStyle}
             onClick={() => setState((current) => ({ ...current, open: true }))}
           >
-            <Menu aria-hidden="true" />
+            <Menu
+              aria-hidden="true"
+              className={["sidebar__toggle-icon", toggleIconClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={toggleIconStyle}
+            />
           </button>
           <dialog
             ref={dialogRef}
             id={dialogId}
-            className="sidebar__dialog"
+            className={["sidebar__dialog", dialogClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={dialogStyle}
             aria-label={navigationLabel}
             onKeyDown={(event) => {
               if (event.key !== "Tab") return;

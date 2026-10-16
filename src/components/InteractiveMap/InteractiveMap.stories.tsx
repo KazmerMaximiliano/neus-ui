@@ -12,6 +12,26 @@ const meta: Meta<typeof InteractiveMapComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    instructionsClassName: {
+      control: "text",
+      description: "Additional classes for instructions",
+    },
+    loadingClassName: {
+      control: "text",
+      description: "Additional classes for loading",
+    },
+    mapClassName: {
+      control: "text",
+      description: "Additional classes for map",
+    },
+    searchClassName: {
+      control: "text",
+      description: "Additional classes for search",
+    },
     className: { control: "text", description: "className override" },
     style: { control: "object", description: "style override" },
     mapStyle: { control: "object", description: "mapStyle override" },
@@ -60,6 +80,11 @@ type Story = StoryObj<typeof meta>;
 
 export const InteractiveMap: Story = {
   args: {
+    errorClassName: undefined,
+    instructionsClassName: undefined,
+    loadingClassName: undefined,
+    mapClassName: undefined,
+    searchClassName: undefined,
     className: undefined,
     style: {},
     mapStyle: {},

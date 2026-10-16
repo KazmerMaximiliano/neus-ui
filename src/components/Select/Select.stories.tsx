@@ -12,6 +12,112 @@ const meta: Meta<SelectStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    placeholderClassName: {
+      control: "text",
+      description: "Additional CSS classes for placeholder",
+    },
+    placeholderStyle: {
+      control: "object",
+      description: "Inline CSS override for placeholder",
+    },
+    caretClassName: {
+      control: "text",
+      description: "Additional classes for caret",
+    },
+    caretStyle: { control: "object", description: "Style override for caret" },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    emptyClassName: {
+      control: "text",
+      description: "Additional classes for empty",
+    },
+    emptyStyle: { control: "object", description: "Style override for empty" },
+    errorMessageClassName: {
+      control: "text",
+      description: "Additional classes for errorMessage",
+    },
+    errorMessageStyle: {
+      control: "object",
+      description: "Style override for errorMessage",
+    },
+    fieldClassName: {
+      control: "text",
+      description: "Additional classes for field",
+    },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    labelStyle: { control: "object", description: "Style override for label" },
+    listClassName: {
+      control: "text",
+      description: "Additional classes for list",
+    },
+    listContentClassName: {
+      control: "text",
+      description: "Additional classes for listContent",
+    },
+    listContentStyle: {
+      control: "object",
+      description: "Style override for listContent",
+    },
+    optionCheckClassName: {
+      control: "text",
+      description: "Additional classes for optionCheck",
+    },
+    optionCheckStyle: {
+      control: "object",
+      description: "Style override for optionCheck",
+    },
+    optionClassName: {
+      control: "text",
+      description: "Additional classes for option",
+    },
+    optionLabelClassName: {
+      control: "text",
+      description: "Additional classes for optionLabel",
+    },
+    optionLabelStyle: {
+      control: "object",
+      description: "Style override for optionLabel",
+    },
+    panelClassName: {
+      control: "text",
+      description: "Additional classes for panel",
+    },
+    panelStyle: { control: "object", description: "Style override for panel" },
+    searchClassName: {
+      control: "text",
+      description: "Additional classes for search",
+    },
+    searchInputClassName: {
+      control: "text",
+      description: "Additional classes for searchInput",
+    },
+    searchInputStyle: {
+      control: "object",
+      description: "Style override for searchInput",
+    },
+    searchStyle: {
+      control: "object",
+      description: "Style override for search",
+    },
+    valueClassName: {
+      control: "text",
+      description: "Additional classes for select",
+    },
+    valueStyle: { control: "object", description: "Style override for select" },
+    style: { control: "object", description: "Style override for style" },
+    triggerClassName: {
+      control: "text",
+      description: "Additional classes for trigger",
+    },
+    triggerStyle: {
+      control: "object",
+      description: "Style override for trigger",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -57,6 +163,37 @@ const meta: Meta<SelectStoryArgs> = {
 
 export const Select: StoryObj<SelectStoryArgs> = {
   args: {
+    placeholderClassName: undefined,
+    placeholderStyle: undefined,
+    caretClassName: undefined,
+    caretStyle: undefined,
+    className: undefined,
+    emptyClassName: undefined,
+    emptyStyle: undefined,
+    errorMessageClassName: undefined,
+    errorMessageStyle: undefined,
+    fieldClassName: undefined,
+    labelClassName: undefined,
+    labelStyle: undefined,
+    listClassName: undefined,
+    listContentClassName: undefined,
+    listContentStyle: undefined,
+    optionCheckClassName: undefined,
+    optionCheckStyle: undefined,
+    optionClassName: undefined,
+    optionLabelClassName: undefined,
+    optionLabelStyle: undefined,
+    panelClassName: undefined,
+    panelStyle: undefined,
+    searchClassName: undefined,
+    searchInputClassName: undefined,
+    searchInputStyle: undefined,
+    searchStyle: undefined,
+    valueClassName: undefined,
+    valueStyle: undefined,
+    style: undefined,
+    triggerClassName: undefined,
+    triggerStyle: undefined,
     designSystem: "neus",
     label: "Country",
     placeholder: "Select a country",

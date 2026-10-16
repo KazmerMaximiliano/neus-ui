@@ -1,7 +1,17 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent as fireCustomization,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { MultiSelect } from "./MultiSelect";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import {
+  MultiSelect as CustomizationComponent,
+  MultiSelect,
+} from "./MultiSelect";
 import type { MultiSelectProps } from "./MultiSelect.types";
 
 afterEach(cleanup);
@@ -35,7 +45,7 @@ describe("MultiSelect", () => {
 
     it("renders one hidden input per selected value", () => {
       const { container } = renderMulti({ defaultValue: ["red", "blue"] });
-      const hidden = container.querySelectorAll('input[type="hidden"]');
+      const hidden = container.querySelectorAll("input[type=\"hidden\"]");
       expect([...hidden].map((input) => input.getAttribute("name"))).toEqual([
         "colors[0]",
         "colors[1]",
@@ -139,4 +149,199 @@ describe("MultiSelect", () => {
       });
     });
   });
+});
+
+describe("MultiSelect part customization", () => {
+  it.each([
+    {
+      cls: "tagRemoveIconClassName",
+      sty: "tagRemoveIconStyle",
+      base: "multiselect__tag-remove-icon",
+      phase: "open",
+    },
+
+    {
+      cls: "className",
+      sty: "style",
+      base: "select__wrapper",
+      phase: "open",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "select__label",
+      phase: "open",
+    },
+    {
+      cls: "fieldClassName",
+      sty: "fieldStyle",
+      base: "select__field",
+      phase: "open",
+    },
+    {
+      cls: "tagClassName",
+      sty: "tagStyle",
+      base: "multiselect__tag",
+      phase: "open",
+    },
+    {
+      cls: "tagRemoveClassName",
+      sty: "tagRemoveStyle",
+      base: "multiselect__tag-remove",
+      phase: "open",
+    },
+    {
+      cls: "triggerClassName",
+      sty: "triggerStyle",
+      base: "select__trigger",
+      phase: "open",
+    },
+    {
+      cls: "placeholderClassName",
+      sty: "placeholderStyle",
+      base: "select__placeholder",
+      phase: "placeholder",
+    },
+    {
+      cls: "srOnlyClassName",
+      sty: "srOnlyStyle",
+      base: "select__sr-only",
+      phase: "open",
+    },
+    {
+      cls: "caretClassName",
+      sty: "caretStyle",
+      base: "select__caret",
+      phase: "open",
+    },
+    {
+      cls: "errorMessageClassName",
+      sty: "errorMessageStyle",
+      base: "select__error-message",
+      phase: "open",
+    },
+    {
+      cls: "listClassName",
+      sty: "listStyle",
+      base: "select__popover",
+      phase: "open",
+    },
+    {
+      cls: "panelClassName",
+      sty: "panelStyle",
+      base: "select__panel",
+      phase: "open",
+    },
+    {
+      cls: "searchClassName",
+      sty: "searchStyle",
+      base: "select__search",
+      phase: "open",
+    },
+    {
+      cls: "searchInputClassName",
+      sty: "searchInputStyle",
+      base: "select__search-input",
+      phase: "open",
+    },
+    {
+      cls: "listContentClassName",
+      sty: "listContentStyle",
+      base: "select__list",
+      phase: "open",
+    },
+    {
+      cls: "optionClassName",
+      sty: "optionStyle",
+      base: "select__option",
+      phase: "open",
+    },
+    {
+      cls: "checkboxClassName",
+      sty: "checkboxStyle",
+      base: "checkbox",
+      phase: "open",
+    },
+    {
+      cls: "boxClassName",
+      sty: "boxStyle",
+      base: "checkbox__box",
+      phase: "open",
+    },
+    {
+      cls: "iconClassName",
+      sty: "iconStyle",
+      base: "checkbox__icon",
+      phase: "open",
+    },
+    {
+      cls: "optionLabelClassName",
+      sty: "optionLabelStyle",
+      base: "select__option-label",
+      phase: "open",
+    },
+    {
+      cls: "emptyClassName",
+      sty: "emptyStyle",
+      base: "select__empty",
+      phase: "empty",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            name="roles"
+            label="Roles"
+            error="Invalid"
+            options={[
+              { value: "a", label: "Alpha" },
+              { value: "b", label: "Beta" },
+            ]}
+            defaultValue={phase === "placeholder" ? [] : ["a", "b"]}
+            placeholder="Choose"
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      fireCustomization.click(
+        view.container.querySelector("[role=\"combobox\"]")!,
+      );
+      if (phase === "empty")
+        fireCustomization.change(
+          view.container.querySelector("input[type=\"search\"]")!,
+          { target: { value: "unmatched-query" } },
+        );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            name="roles"
+            label="Roles"
+            error="Invalid"
+            options={[
+              { value: "a", label: "Alpha" },
+              { value: "b", label: "Beta" },
+            ]}
+            defaultValue={phase === "placeholder" ? [] : ["a", "b"]}
+            placeholder="Choose"
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

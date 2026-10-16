@@ -13,6 +13,29 @@ const meta: Meta<CheckboxStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    checkboxClassName: {
+      control: "text",
+      description: "Additional classes for checkbox",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    iconStyle: { control: "object", description: "Style override for icon" },
+    inputClassName: {
+      control: "text",
+      description: "Additional classes for input",
+    },
+    inputStyle: { control: "object", description: "Style override for input" },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    style: { control: "object", description: "Style override for style" },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -59,6 +82,14 @@ const meta: Meta<CheckboxStoryArgs> = {
 
 export const Checkbox: StoryObj<CheckboxStoryArgs> = {
   args: {
+    checkboxClassName: undefined,
+    className: undefined,
+    iconClassName: undefined,
+    iconStyle: undefined,
+    inputClassName: undefined,
+    inputStyle: undefined,
+    labelClassName: undefined,
+    style: undefined,
     designSystem: "neus",
     label: "Accept terms",
     name: "terms",

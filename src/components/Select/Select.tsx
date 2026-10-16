@@ -1,11 +1,42 @@
 import { ChevronDown } from "lucide-react";
 import { useId, useState } from "react";
 import { usePopover } from "../../hooks/usePopover";
+import { SelectListbox } from "./components/SelectListbox";
 import "./Select.styles.css";
 import { SelectProps } from "./Select.types";
-import { SelectListbox } from "./components/SelectListbox";
 
 export const Select = ({
+  placeholderClassName,
+  placeholderStyle,
+  emptyClassName,
+  emptyStyle,
+  listClassName,
+  listContentClassName,
+  listContentStyle,
+  optionCheckClassName,
+  optionCheckStyle,
+  optionClassName,
+  optionLabelClassName,
+  optionLabelStyle,
+  panelClassName,
+  panelStyle,
+  searchClassName,
+  searchInputClassName,
+  searchInputStyle,
+  searchStyle,
+  caretClassName,
+  caretStyle,
+  className,
+  errorMessageClassName,
+  errorMessageStyle,
+  fieldClassName,
+  labelClassName,
+  labelStyle,
+  valueClassName,
+  valueStyle,
+  style,
+  triggerClassName,
+  triggerStyle,
   name,
   value,
   defaultValue,
@@ -33,8 +64,8 @@ export const Select = ({
     initialFocus: viewSearchBar
       ? ".select__search-input"
       : selectedLabel
-        ? '[role="option"][aria-selected="true"]'
-        : '[role="option"]',
+        ? "[role=\"option\"][aria-selected=\"true\"]"
+        : "[role=\"option\"]",
   });
   const { id, open, triggerRef, anchorRef, toggle } = popover;
 
@@ -44,13 +75,21 @@ export const Select = ({
   };
 
   return (
-    <div className="select__wrapper">
+    <div
+      className={["select__wrapper", className].filter(Boolean).join(" ")}
+      style={style}
+    >
       {displayLabel && (
         <label
           htmlFor={fieldId}
-          className={`select__label${error ? " select__label--error" : ""}${
-            disabled ? " select__label--disabled" : ""
-          }`}
+          className={[
+            `select__label${error ? " select__label--error" : ""}${disabled ? " select__label--disabled" : ""
+            }`,
+            labelClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          style={labelStyle}
         >
           {displayLabel}
         </label>
@@ -58,9 +97,13 @@ export const Select = ({
       {name && <input type="hidden" name={name} value={selectedValue} />}
       <div
         ref={anchorRef}
-        className={`select__field${error ? " select__field--error" : ""}${
-          disabled ? " select__field--disabled" : ""
-        }${open ? " select__field--open" : ""}`}
+        className={[
+          `select__field${error ? " select__field--error" : ""}${disabled ? " select__field--disabled" : ""
+          }${open ? " select__field--open" : ""}`,
+          fieldClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         style={fieldStyle}
       >
         <button
@@ -68,7 +111,10 @@ export const Select = ({
           id={fieldId}
           type="button"
           role="combobox"
-          className="select__trigger"
+          className={["select__trigger", triggerClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={triggerStyle}
           disabled={disabled}
           aria-haspopup="listbox"
           aria-expanded={open}
@@ -79,14 +125,42 @@ export const Select = ({
           onClick={toggle}
         >
           <span
-            className={selectedLabel ? "select__value" : "select__placeholder"}
+            className={[
+              selectedLabel ? "select__value" : "select__placeholder",
+              selectedLabel ? valueClassName : placeholderClassName,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            style={selectedLabel ? valueStyle : placeholderStyle}
           >
             {selectedLabel || placeholder || "Selecciona una opción..."}
           </span>
         </button>
-        <ChevronDown className="select__caret" aria-hidden />
+        <ChevronDown
+          className={["select__caret", caretClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={caretStyle}
+          aria-hidden
+        />
       </div>
       <SelectListbox
+        listClassName={listClassName}
+        panelClassName={panelClassName}
+        panelStyle={panelStyle}
+        searchClassName={searchClassName}
+        searchStyle={searchStyle}
+        searchInputClassName={searchInputClassName}
+        searchInputStyle={searchInputStyle}
+        listContentClassName={listContentClassName}
+        listContentStyle={listContentStyle}
+        optionClassName={optionClassName}
+        optionLabelClassName={optionLabelClassName}
+        optionLabelStyle={optionLabelStyle}
+        optionCheckClassName={optionCheckClassName}
+        optionCheckStyle={optionCheckStyle}
+        emptyClassName={emptyClassName}
+        emptyStyle={emptyStyle}
         popover={popover}
         label={displayLabel || "Opciones"}
         options={options}
@@ -98,7 +172,13 @@ export const Select = ({
         optionStyle={optionStyle}
       />
       {error && (
-        <div id={errorId} className="select__error-message">
+        <div
+          id={errorId}
+          className={["select__error-message", errorMessageClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={errorMessageStyle}
+        >
           {error}
         </div>
       )}

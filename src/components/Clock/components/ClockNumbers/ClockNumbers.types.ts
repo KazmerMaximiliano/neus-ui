@@ -6,6 +6,7 @@ export type TimeValue = {
 };
 
 export type ClockNumbersProps = {
+  numberClassName?: string;
   numberStyle?: CSSProperties;
   mode: "hours" | "minutes";
   format: "12h" | "24h";

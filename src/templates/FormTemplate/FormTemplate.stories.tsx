@@ -1,15 +1,21 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { designSystemControl, withDesignSystem } from "../../../.storybook/designSystem";
 import { Input } from "../../components";
 import { FormTemplate as FormTemplateComponent } from "./FormTemplate";
+import type { DesignSystemPreviewArgs } from "../../../.storybook/designSystem.types";
+import type { FormTemplateProps } from "./FormTemplate.types";
 
-const meta: Meta<typeof FormTemplateComponent> = {
+const meta: Meta<FormTemplateProps & DesignSystemPreviewArgs> = {
   title: "Templates/FormTemplate",
   component: FormTemplateComponent,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
+  decorators: [withDesignSystem],
   argTypes: {
+    designSystem: designSystemControl,
+    actionsClassName: { control: "text", description: "Additional classes for actions" },
     actions: { control: false, description: "Composed custom actions" },
     className: { control: "text", description: "className override" },
     style: { control: "object", description: "style override" },
@@ -41,6 +47,8 @@ type Story = StoryObj<typeof meta>;
 
 export const FormTemplate: Story = {
   args: {
+    designSystem: "global",
+    actionsClassName: undefined,
     actions: undefined,
     className: undefined,
     style: {},

@@ -12,6 +12,69 @@ const meta: Meta<TimeInputStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    placeholderClassName: {
+      control: "text",
+      description: "Additional CSS classes for placeholder",
+    },
+    placeholderStyle: {
+      control: "object",
+      description: "Inline CSS override for placeholder",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    containerClassName: {
+      control: "text",
+      description: "Additional classes for container",
+    },
+    containerStyle: {
+      control: "object",
+      description: "Style override for container",
+    },
+    dropdownClassName: {
+      control: "text",
+      description: "Additional classes for dropdown",
+    },
+    dropdownStyle: {
+      control: "object",
+      description: "Style override for dropdown",
+    },
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    fieldClassName: {
+      control: "text",
+      description: "Additional classes for field",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    iconStyle: { control: "object", description: "Style override for icon" },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    panelClassName: {
+      control: "text",
+      description: "Additional classes for panel",
+    },
+    requiredClassName: {
+      control: "text",
+      description: "Additional classes for required",
+    },
+    requiredStyle: {
+      control: "object",
+      description: "Style override for required",
+    },
+    style: { control: "object", description: "Style override for style" },
+    valueClassName: {
+      control: "text",
+      description: "Additional classes for value",
+    },
+    valueStyle: { control: "object", description: "Style override for value" },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -109,8 +172,8 @@ const meta: Meta<TimeInputStoryArgs> = {
       options: ["12h", "24h"],
       description: "Time display format (12-hour or 24-hour)",
       table: {
-        type: { summary: '"12h" | "24h"' },
-        defaultValue: { summary: '"24h"' },
+        type: { summary: "\"12h\" | \"24h\"" },
+        defaultValue: { summary: "\"24h\"" },
       },
     },
     onChange: {
@@ -129,6 +192,24 @@ type Story = StoryObj<typeof meta>;
 
 export const TimeInput: Story = {
   args: {
+    placeholderClassName: undefined,
+    placeholderStyle: undefined,
+    className: undefined,
+    containerClassName: undefined,
+    containerStyle: undefined,
+    dropdownClassName: undefined,
+    dropdownStyle: undefined,
+    errorClassName: undefined,
+    fieldClassName: undefined,
+    iconClassName: undefined,
+    iconStyle: undefined,
+    labelClassName: undefined,
+    panelClassName: undefined,
+    requiredClassName: undefined,
+    requiredStyle: undefined,
+    style: undefined,
+    valueClassName: undefined,
+    valueStyle: undefined,
     designSystem: "neus",
     variant: "auto",
     labelPlacement: "auto",

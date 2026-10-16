@@ -1,188 +1,291 @@
 # Sidebar
 
-[Component catalog](../components.md) · [Design systems](../design-systems.md)
+[Component index](./README.md) · [Documentation](../README.md) ·
+[Customization](../design/customization.md)
 
-Sidebar owns navigation structure and responsive interaction. Its six CSS recipes
-select appearance through ThemeProvider; the application owns which item is active
-and what each action does.
+Responsive navigation with desktop panel, tablet rail and mobile dialog.
+
+## Usage
 
 ```tsx
-import { Sidebar, ThemeProvider, type SidebarItem } from "neus-ui";
+import { ThemeProvider, Sidebar } from "neus-ui";
 import "neus-ui/dist/neus-ui.css";
-import { House } from "lucide-react";
 
-const items: SidebarItem[] = [
-  { label: "Inicio", icon: House, active: true, onClick: () => navigate("/") },
-  { label: "Configuración", onClick: () => navigate("/settings") },
-];
-
-export const Navigation = () => (
-  <ThemeProvider designSystem="neus" colorScheme="light">
-    <Sidebar title="Mi aplicación" items={items} />
-  </ThemeProvider>
-);
+export const Example = () => {
+  return (
+    <ThemeProvider designSystem="neus">
+      <Sidebar title="Workspace" items={[{ label: "Home", active: true }, { label: "Settings", onClick: () => window.alert("Settings") }]} />
+    </ThemeProvider>
+  );
+};
 ```
 
-`navigate` is supplied by your application or router. Sidebar does not import a
-router or change `active` after an action. Actions are native `type="button"`
-buttons; they do not submit surrounding forms. Items without icons display an
-initial, and `visible: false` omits an item altogether.
+## Behavior and accessibility
 
-## Props and customization
+Desktop begins at 1024px. Tablet spans 768–1023px and uses a compact rail that expands on
+pointer hover, focus or pinning. Below 768px a floating trigger opens a modal drawer with a
+close control, Escape/backdrop dismissal, focus containment, focus restoration and scroll
+locking. The dialog stays in the provider scope.
 
-| Prop | Type / destination | Default |
+Items with visible false are omitted; active items expose aria-current page. Mobile
+selection closes navigation before calling the item callback. Missing icons use initials.
+`children` replaces title/brand content. Labels can customize
+navigation/open/close/expand/collapse accessible text. `sidebarStyle` targets the root.
+`toggleStyle` covers both the mobile trigger and tablet expand button. Neus concave
+decorations are transparent pseudo-elements; style them with tokens/CSS rather than props.
+
+## Props
+
+See [the type source](../../src/components/Sidebar/Sidebar.types.ts) and
+[implementation](../../src/components/Sidebar/Sidebar.tsx) for the exact contract. All
+customization props are optional and default to undefined unless noted; section style props
+retain their nullable default.
+
+| Prop | Type | Default / requirement | Purpose |
+| --- | --- | --- | --- |
+| `closeIconClassName` | `string` | Omitted | Additional classes on `.sidebar__close-icon` |
+| `closeIconStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__close-icon` |
+| `toggleIconClassName` | `string` | Omitted | Additional classes for toggle icon |
+| `toggleIconStyle` | `CSSProperties` | Omitted | Inline styles for toggle icon |
+| `avatarClassName` | `string` | Omitted | Additional classes on `.sidebar__avatar` |
+| `avatarStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__avatar` |
+| `bodyClassName` | `string` | Omitted | Additional classes on `.sidebar__body` |
+| `closeButtonClassName` | `string` | Omitted | Additional classes on `.sidebar__close` |
+| `dialogClassName` | `string` | Omitted | Additional classes on `.sidebar__dialog` |
+| `dialogStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__dialog` |
+| `headerClassName` | `string` | Omitted | Additional classes on `.sidebar__header` |
+| `headerInnerClassName` | `string` | Omitted | Additional classes on `.sidebar__header-inner` |
+| `headerInnerStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__header-inner` |
+| `iconClassName` | `string` | Omitted | Additional classes on `.sidebar__button-icon`, `.sidebar__button-icon.sidebar__button-initial` |
+| `itemClassName` | `string` | Omitted | Additional classes on `.sidebar__button` |
+| `labelClassName` | `string` | Omitted | Additional classes on `.sidebar__button-label` |
+| `panelClassName` | `string` | Omitted | Additional classes on `.sidebar__panel` |
+| `panelStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__panel` |
+| `titleClassName` | `string` | Omitted | Additional classes on `.sidebar__title` |
+| `toggleClassName` | `string` | Omitted | Additional classes on `.sidebar__expand.sidebar__avatar`, `.sidebar__toggle` |
+| `items` | `SidebarItem[]` | Required | Navigation actions with optional icons, active and visible flags |
+| `title` | `string` | Omitted | App name: full title on desktop, avatar initial in narrow layouts |
+| `children` | `ReactNode` | Omitted | Custom non-interactive branding in the header/avatar; replaces the default title or initial |
+| `className` | `string` | Omitted | Additional classes on `.sidebar` |
+| `labels` | `SidebarLabels` | Omitted | Accessible names for navigation, open, close, expand and collapse |
+| `sidebarStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar` |
+| `headerStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__header` |
+| `titleStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__title` |
+| `bodyStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__body` |
+| `itemStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__button` |
+| `iconStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__button-icon`, `.sidebar__button-icon.sidebar__button-initial` |
+| `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__button-label` |
+| `toggleStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__expand.sidebar__avatar`, `.sidebar__toggle` |
+| `closeButtonStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__close` |
+
+### Supporting types
+
+These types describe the named values used above; package exports are defined by the [family
+entry point](../../src/components/Sidebar/index.ts). A type shown here is not necessarily a
+package export.
+
+```ts
+type SidebarItem = {
+  label: string;
+  icon?: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+  onClick?: () => void;
+  active?: boolean;
+  visible?: boolean;
+};
+
+type SidebarLabels = {
+  navigation?: string;
+  open?: string;
+  close?: string;
+  expand?: string;
+  collapse?: string;
+};
+
+type SidebarViewport = "mobile" | "tablet" | "desktop";
+
+type SidebarScrollLock = { count: number; hadClass: boolean };
+```
+
+## Anatomy and per-part customization
+
+Classes are appended to the built-in classes. Style props apply directly to their listed
+elements; repeated parts receive the same override. Omitting a hook on a later render
+removes that override. Hooks do not create a part whose rendering condition is false.
+
+| Base class / part | Element | Class prop | Style prop | Rendering condition |
+| --- | --- | --- | --- | --- |
+| `.sidebar__title` | `span` | `titleClassName` | `titleStyle` | `Always` |
+| `.sidebar__panel` | `div` | `panelClassName` | `panelStyle` | `Always` |
+| `.sidebar__header` | `div` | `headerClassName` | `headerStyle` | `Always` |
+| `.sidebar__header-inner` | `div` | `headerInnerClassName` | `headerInnerStyle` | `Always` |
+| `.sidebar__avatar` | `div` | `avatarClassName` | `avatarStyle` | `isMobile` |
+| `.sidebar__close` | `button` | `closeButtonClassName` | `closeButtonStyle` | `isMobile` |
+| `.sidebar__close-icon` | `X` | `closeIconClassName` | `closeIconStyle` | `isMobile` |
+| `.sidebar__expand .sidebar__avatar` | `button` | `toggleClassName` | `toggleStyle` | `isTablet` |
+| `.sidebar__body` | `nav` | `bodyClassName` | `bodyStyle` | `Always` |
+| `.sidebar__button` | `button` | `itemClassName` | `itemStyle` | `item.visible !== false` |
+| `.sidebar__button-icon` | `item.icon` | `iconClassName` | `iconStyle` | `item.icon` |
+| `.sidebar__button-icon .sidebar__button-initial` | `span` | `iconClassName` | `iconStyle` | `item.visible !== false` |
+| `.sidebar__button-label` | `span` | `labelClassName` | `labelStyle` | `item.visible !== false` |
+| `.sidebar` | `div` | `className` | `sidebarStyle` | `Always` |
+| `.sidebar__toggle` | `button` | `toggleClassName` | `toggleStyle` | `isMobile` |
+| `.sidebar__dialog` | `dialog` | `dialogClassName` | `dialogStyle` | `isMobile` |
+
+State/variant selectors: `.sidebar__button--active`.
+
+Use the [stylesheet](../../src/components/Sidebar/Sidebar.styles.css) for pseudo-elements
+and state selectors. For shared field/listbox parts, also inspect the shared styles linked
+from the implementation. Consumer content and third-party generated internals retain their
+own customization APIs.
+
+### Instance styles and classes
+
+Use these props in the usage example above (keep its imports and local state):
+
+```tsx
+<Sidebar titleClassName="example-sidebar" titleStyle={{ outlineOffset: 4 }} title="Workspace" items={[{ label: "Home", active: true }, { label: "Settings", onClick: () => window.alert("Settings") }]} />
+```
+
+```css
+.example-sidebar {
+  outline-offset: 4px;
+}
+.example-sidebar:focus-visible {
+  outline: 2px solid var(--color-focus);
+}
+```
+
+Style props win over ordinary stylesheet declarations for the same property. Use a
+stylesheet for hover, focus, disabled states and pseudo-elements. Custom properties still
+follow CSS inheritance, scope resets and specificity; see [the cascade
+guide](../design/customization.md).
+
+## CSS token reference
+
+All six systems supply scoped recipes in light/dark modes. Values below show the Neus
+baseline; system and mode overrides can differ. Runtime CSS expressions remain live
+dependencies. Do not edit generated files.
+
+- [sidebar baseline recipe](../../src/design-systems/neus/generated/recipes/sidebar.css)
+
+### Geometry and layout
+
+| Token | Purpose | Neus baseline |
 | --- | --- | --- |
-| `items` | Required `SidebarItem[]`: `label`, optional Lucide `icon`, `onClick`, `active`, `visible` | — |
-| `title` | App name: full title on desktop, avatar initial on tablet/mobile | Absent |
-| `children` | Optional non-interactive header content replacing the default title/initial | Absent |
-| `className` | Additional classes on `.sidebar` | Absent |
-| `labels` | Optional `SidebarLabels` with `navigation`, `open`, `close`, `expand`, `collapse` | Spanish labels below |
-| `sidebarStyle` | `CSSProperties` on the fixed root | `undefined` |
-| `headerStyle` | Header containing title and controls | `undefined` |
-| `titleStyle` | Brand content wrapper (title, initial or children) | `undefined` |
-| `bodyStyle` | Scrollable `nav` | `undefined` |
-| `itemStyle` | Every navigation button | `undefined` |
-| `iconStyle` | Every Lucide icon or fallback initial | `undefined` |
-| `labelStyle` | Every option label | `undefined` |
-| `toggleStyle` | Mobile opener or tablet expansion button | `undefined` |
-| `closeButtonStyle` | Mobile close button | `undefined` |
+| `--sidebar-avatar-radius` | sidebar avatar radius | `50%` |
+| `--sidebar-body-gap` | sidebar body gap | `16px` |
+| `--sidebar-body-padding` | sidebar body padding | `24px 16px` |
+| `--sidebar-body-padding-bottom` | sidebar body padding bottom | `24px` |
+| `--sidebar-body-padding-left` | sidebar body padding left | `16px` |
+| `--sidebar-compact-width` | sidebar compact width | `100px` |
+| `--sidebar-concave-radius` | sidebar concave radius | `32px` |
+| `--sidebar-control-icon-size` | sidebar control icon size | `20px` |
+| `--sidebar-control-radius` | sidebar control radius | `50%` |
+| `--sidebar-control-size` | sidebar control size | `44px` |
+| `--sidebar-convex-radius` | sidebar convex radius | `32px` |
+| `--sidebar-decoration-display` | sidebar decoration display | `block` |
+| `--sidebar-floating-offset` | sidebar floating offset | `16px` |
+| `--sidebar-header-gap` | sidebar header gap | `8px` |
+| `--sidebar-header-height` | sidebar header height | `10dvh` |
+| `--sidebar-header-min-height` | sidebar header min height | `80px` |
+| `--sidebar-header-padding` | sidebar header padding | `16px` |
+| `--sidebar-icon-size` | sidebar icon size | `16px` |
+| `--sidebar-item-gap` | sidebar item gap | `12px` |
+| `--sidebar-item-min-height` | sidebar item min height | `44px` |
+| `--sidebar-item-padding` | sidebar item padding | `16px 24px` |
+| `--sidebar-item-radius` | sidebar item radius | `3em` |
+| `--sidebar-item-size` | sidebar item size | `11px` |
+| `--sidebar-item-spacing` | sidebar item spacing | `0.25em` |
+| `--sidebar-item-transform` | sidebar item transform | `uppercase` |
+| `--sidebar-mobile-width` | sidebar mobile width | `320px` |
+| `--sidebar-radius` | sidebar radius | `0px` |
+| `--sidebar-title-size` | sidebar title size | `16px` |
+| `--sidebar-title-spacing` | sidebar title spacing | `0px` |
+| `--sidebar-transition` | sidebar transition | `0.2s ease` |
+| `--sidebar-width` | sidebar width | `250px` |
+| `--sidebar-z-index` | sidebar z index | `1000` |
 
-Default labels are `Navegación principal`, `Abrir menú`, `Cerrar menú`,
-`Expandir navegación`, and `Contraer navegación`. Partial overrides retain the
-other defaults. Exported public types are `SidebarProps`, `SidebarItem` and
-`SidebarLabels`; Storybook-only types remain internal.
+### Surface and color
+
+| Token | Purpose | Neus baseline |
+| --- | --- | --- |
+| `--sidebar-backdrop-background` | sidebar backdrop background | `var(--color-overlay)` |
+| `--sidebar-background` | sidebar background | `var(--color-primary)` |
+| `--sidebar-border-color` | sidebar border color | `var(--color-border-subtle)` |
+| `--sidebar-border-width` | sidebar border width | `0px` |
+| `--sidebar-color` | sidebar color | `var(--color-text-on-primary)` |
+| `--sidebar-control-background` | sidebar control background | `var(--color-primary)` |
+| `--sidebar-control-border-color` | sidebar control border color | `var(--color-border-subtle)` |
+| `--sidebar-control-border-width` | sidebar control border width | `0px` |
+| `--sidebar-control-color` | sidebar control color | `var(--color-text-on-primary)` |
+| `--sidebar-control-shadow` | sidebar control shadow | `0 2px 8px var(--color-shadow)` |
+| `--sidebar-header-background` | sidebar header background | `transparent` |
+| `--sidebar-header-border-width` | sidebar header border width | `0px` |
+| `--sidebar-item-background` | sidebar item background | `transparent` |
+| `--sidebar-item-border-color` | sidebar item border color | `transparent` |
+| `--sidebar-item-border-width` | sidebar item border width | `0px` |
+| `--sidebar-item-color` | sidebar item color | `color-mix( in srgb, var(--sidebar-color) 80%, transparent )` |
+| `--sidebar-shadow` | sidebar shadow | `none` |
+| `--sidebar-title-color` | sidebar title color | `var(--color-primary)` |
+
+### States
+
+| Token | Purpose | Neus baseline |
+| --- | --- | --- |
+| `--sidebar-control-focus-color` | sidebar control focus color | `var(--color-focus)` |
+| `--sidebar-control-focus-offset` | sidebar control focus offset | `3px` |
+| `--sidebar-control-hover-background` | sidebar control hover background | `var(--color-primary-dark)` |
+| `--sidebar-focus-offset` | sidebar focus offset | `2px` |
+| `--sidebar-focus-width` | sidebar focus width | `2px` |
+| `--sidebar-item-active-background` | sidebar item active background | `color-mix( in srgb, var(--sidebar-color) 25%, transparent )` |
+| `--sidebar-item-active-color` | sidebar item active color | `var(--sidebar-color)` |
+| `--sidebar-item-focus-color` | sidebar item focus color | `var(--sidebar-color)` |
+| `--sidebar-item-hover-background` | sidebar item hover background | `color-mix( in srgb, var(--sidebar-color) 15%, transparent )` |
+| `--sidebar-item-hover-color` | sidebar item hover color | `var(--sidebar-color)` |
+
+### Typography and text
+
+| Token | Purpose | Neus baseline |
+| --- | --- | --- |
+| `--sidebar-font-family` | sidebar font family | `var(--font-body)` |
+| `--sidebar-item-line-height` | sidebar item line height | `normal` |
+| `--sidebar-item-weight` | sidebar item weight | `700` |
+| `--sidebar-title-line-height` | sidebar title line height | `1.3` |
+| `--sidebar-title-weight` | sidebar title weight | `700` |
+
+### Shared dependencies and runtime values
+
+`--sidebar-current-width`.
+
+Semantic/foundation tokens are described in [the shared token
+reference](../design/tokens.md). Component dependencies belong to their own linked recipe.
+Position, size, category and progress variables set by the implementation are runtime
+values, not provider configuration fields.
+
+### Scoped recipe override
+
+Wrap the usage example in a local provider with a class:
 
 ```tsx
-<Sidebar
-  title="Workspace"
-  items={items}
-  className="workspace-sidebar"
-  labels={{ navigation: "Workspace routes", open: "Open navigation", close: "Close navigation" }}
-  itemStyle={{ minHeight: 48 }}
-  labelStyle={{ letterSpacing: "0.02em" }}
-/>
+<ThemeProvider scope="local" designSystem="vercel" className="example-scope">
+  {/* Place the component usage here. */}
+</ThemeProvider>
 ```
 
-Use CSS tokens for coordinated geometry and colors. Per-part objects apply only
-to their documented element; omitting them again restores CSS defaults. A
-`bodyStyle.background` changes only the body, so use `--sidebar-background` to
-change both the body and its concave decoration.
-
 ```css
-.workspace-sidebar {
-  --sidebar-background: #056249;
-  --sidebar-color: #fff;
-  --sidebar-concave-radius: 40px;
-  --sidebar-convex-radius: 40px;
+/* Import after neus-ui/dist/neus-ui.css. */
+[data-design-system].example-scope {
+  --sidebar-avatar-radius: 12px;
 }
 ```
 
-NEUS's header is transparent. Its lower-left concave wedge is a masked
-pseudoelement painted with `--sidebar-background`, joining the body's convex
-upper-right corner. Transparent areas reveal the actual page: solid colors,
-gradients and images work without an additional background-color prop. The
-content and focus outlines are never masked.
+Nested provider boundaries reset recipe tokens. Apply overrides to the boundary or component
+that should own them, rather than relying on an ancestor override crossing a nested scope.
 
-Custom branding uses `children`, CSS classes and the existing style overrides;
-there are no dedicated logo or image props. Children replace the default content
-in all layouts, inside the avatar on tablet and mobile and in the title area on
-desktop. Keep this content non-interactive because the tablet avatar is itself a
-button. For example, the application can supply its own image:
+## Storybook and related guides
 
-```tsx
-<Sidebar title="Workspace" items={items}>
-  <img className="app-brand-image" src="/brand.svg" alt="Workspace" />
-</Sidebar>
-```
+The single Sidebar story exposes props as controls. Design selection is preview
+configuration; applications select it through ThemeProvider.
 
-```css
-.app-brand-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-height: 44px;
-  object-fit: contain;
-}
-```
-
-`titleStyle` targets the content wrapper and `toggleStyle` targets the tablet
-avatar button. `--sidebar-avatar-radius` controls the avatar shape independently
-of the hamburger and close controls. The mobile opener remains a hamburger;
-the opened drawer shows the brand avatar and its separate close button. The
-floating opener is hidden while the drawer is open, so it cannot show through
-the transparent NEUS header; closing restores its visibility and focus.
-
-## Token contract
-
-The editable defaults live in `x-neus.recipes.sidebar` in the
-[Neus design document](../../src/design-systems/neus/DESIGN.md). They reset
-at `:root` and every `[data-design-system]`. All other recipes override variables
-only. Apple uses soft corners, Carbon square options and separators, Material
-rounded selection and elevation, Neobrutalism strong borders and hard shadows,
-and Vercel neutral surfaces and subtle borders. These five recipes disable the
-concave decoration; they remain project adaptations rather than complete copies
-of external libraries.
-
-| Group | Tokens (`--sidebar-` prefix) |
-| --- | --- |
-| Surface and layout | `background`, `color`, `font-family`, `width`, `compact-width`, `mobile-width`, `z-index`, `border-width`, `border-color`, `radius`, `shadow`, `transition` |
-| Header and curves | `header-height`, `header-min-height`, `header-padding`, `header-gap`, `header-background`, `header-border-width`, `decoration-display`, `concave-radius`, `convex-radius` |
-| Title | `title-color`, `title-size`, `title-weight`, `title-line-height`, `title-spacing` |
-| Navigation | `body-padding`, `body-gap`, `body-padding-bottom`, `body-padding-left` |
-| Items | `item-padding`, `item-gap`, `item-min-height`, `item-radius`, `item-border-width`, `item-border-color`, `item-background`, `item-color`, `item-size`, `item-weight`, `item-line-height`, `item-spacing`, `item-transform`, `icon-size` |
-| States | `item-hover-background`, `item-hover-color`, `item-active-background`, `item-active-color`, `item-focus-color`, `focus-width`, `focus-offset`, `control-focus-offset` |
-| Controls | `control-size`, `avatar-radius`, `control-icon-size`, `control-radius`, `control-background`, `control-color`, `control-border-width`, `control-border-color`, `control-shadow`, `control-hover-background`, `control-focus-color`, `floating-offset`, `backdrop-background` |
-
-Set `--sidebar-decoration-display: none` to remove the concave wedge and
-`--sidebar-convex-radius: 0px` to remove the body's convex corner. Set
-`--sidebar-header-background: var(--sidebar-background)` for a continuous
-rectangular panel. The geometric `--sidebar-current-width` variable is derived
-internally from the viewport and expansion state.
-
-## Responsive behavior and accessibility
-
-| Viewport | Behavior |
-| --- | --- |
-| `<768px` | Floating hamburger at the upper left; menu initially closed |
-| `768–1023px` | 100px compact rail, expanding to 250px |
-| `≥1024px` | 250px full sidebar |
-
-The boundaries are fixed; width tokens customize dimensions. On tablet,
-hover-capable devices expand on hover, keyboard focus expands while inside, and
-the avatar button pins expansion for touch. The avatar contains the first letter
-of `title`, without a separate letter or arrow; its accessible action name and
-`aria-expanded` still expose the expansion behavior. Unpinning returns to the rail once
-focus and hover leave it. Option buttons always retain their label as an accessible name. Without a title,
-the avatar uses the navigation label's first letter.
-
-The mobile drawer is up to 320px wide, limited to the available viewport. It uses
-`100dvh`, safe-area insets, and a scrollable body. Native `<dialog>.showModal()`
-keeps it in the theme's DOM scope and places it in the browser's top layer.
-Outside content is inert while open. Initial focus goes to the close button;
-Escape, the close button, a backdrop click, or selecting an item closes it and
-returns focus to the opener. A drag starting inside the drawer does not dismiss
-it when released over the backdrop.
-
-Scroll locking uses a temporary root class, preserving existing inline scroll
-styles. Closing, unmounting or leaving mobile releases the lock. Returning to
-mobile starts closed; leaving tablet resets pinned expansion. Motion is disabled
-when the user prefers reduced motion. Each instance has unique control IDs.
-
-## AppTemplate integration
-
-AppTemplate supplies Sidebar and reserves space using its width tokens.
-Use `routes`, `menu` and `children` to compose the layout. It delegates mobile opening,
-overlay and closing to Sidebar and follows tablet hover/focus/pinned expansion.
-
-For standalone Sidebar use, reserve page space yourself: zero on mobile,
-`--sidebar-compact-width` on tablet, and `--sidebar-width` on desktop. When using
-AppTemplate, put width overrides on its enclosing theme scope so both components
-inherit the same values.
-
-Use `title`, `items` and callbacks to configure navigation, and `.sidebar__*`
-classes for styling. Navigation items render as buttons. Sidebar owns its mobile
-menu trigger, overlay and display toggles; opening and expansion are internal states.
-
-Storybook provides one fullscreen story with local design selection, per-part
-controls and solid/gradient/image backgrounds. The toolbar selects light/dark;
-resize the viewport to explore the responsive modes.
+[ThemeProvider](../design/theme-provider.md) · [Design systems](../design/systems.md) ·
+[Customization](../design/customization.md)

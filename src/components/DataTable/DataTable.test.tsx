@@ -1,8 +1,14 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { AgGridReactProps } from "ag-grid-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { DataTable } from "./DataTable";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { DataTable as CustomizationComponent, DataTable } from "./DataTable";
 import type { DataTableSampleRow } from "./DataTable.types";
 
 const grid = vi.hoisted(() => ({
@@ -168,4 +174,117 @@ describe("DataTable consumer composition", () => {
       opacity: 0.8,
     });
   });
+});
+
+describe("DataTable part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "style",
+      base: "data-table",
+      phase: "default",
+    },
+    {
+      cls: "cardsClassName",
+      sty: "cardsStyle",
+      base: "data-table__cards",
+      phase: "cards",
+    },
+    {
+      cls: "cardClassName",
+      sty: "cardStyle",
+      base: "data-table__card",
+      phase: "cards",
+    },
+    {
+      cls: "gridClassName",
+      sty: "gridStyle",
+      base: "data-table__grid",
+      phase: "default",
+    },
+    {
+      cls: "paginationClassName",
+      sty: "paginationStyle",
+      base: "data-table__pagination",
+      phase: "default",
+    },
+    {
+      cls: "paginationInfoClassName",
+      sty: "paginationInfoStyle",
+      base: "data-table__pagination-info",
+      phase: "default",
+    },
+    {
+      cls: "emptyStateClassName",
+      sty: "emptyStateStyle",
+      base: "data-table__no-rows",
+      phase: "empty",
+    },
+    {
+      cls: "noRowsTitleClassName",
+      sty: "noRowsTitleStyle",
+      base: "data-table__no-rows-title",
+      phase: "empty",
+    },
+    {
+      cls: "noRowsDescriptionClassName",
+      sty: "noRowsDescriptionStyle",
+      base: "data-table__no-rows-description",
+      phase: "empty",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      grid.mobile = phase === "cards";
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            data={phase === "empty" ? [] : [{ id: 1, name: "Ada" }]}
+            columnDefs={[{ field: "name" }]}
+            pagination={{
+              current_page: 1,
+              last_page: 2,
+              per_page: 10,
+              total: 12,
+            }}
+            noDataTitle="Empty"
+            noDataDescription="Add rows"
+            renderMobileCard={(row) => <span>{row.name}</span>}
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            data={phase === "empty" ? [] : [{ id: 1, name: "Ada" }]}
+            columnDefs={[{ field: "name" }]}
+            pagination={{
+              current_page: 1,
+              last_page: 2,
+              per_page: 10,
+              total: 12,
+            }}
+            noDataTitle="Empty"
+            noDataDescription="Add rows"
+            renderMobileCard={(row) => <span>{row.name}</span>}
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

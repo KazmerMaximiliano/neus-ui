@@ -13,6 +13,143 @@ const meta: Meta<FileUploaderStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    uploadHintValueClassName: { control: "text", description: "Additional classes for format and size values in hints" },
+    uploadHintValueStyle: { control: "object", description: "Styles for format and size values in hints" },
+    areaClassName: {
+      control: "text",
+      description: "Additional classes for area",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    contentClassName: {
+      control: "text",
+      description: "Additional classes for content",
+    },
+    contentStyle: {
+      control: "object",
+      description: "Style override for content",
+    },
+    detailsClassName: {
+      control: "text",
+      description: "Additional classes for details",
+    },
+    detailsStyle: {
+      control: "object",
+      description: "Style override for details",
+    },
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    fileCountClassName: {
+      control: "text",
+      description: "Additional classes for fileCount",
+    },
+    fileCountStyle: {
+      control: "object",
+      description: "Style override for fileCount",
+    },
+    fileInfoClassName: {
+      control: "text",
+      description: "Additional classes for fileInfo",
+    },
+    fileInfoStyle: {
+      control: "object",
+      description: "Style override for fileInfo",
+    },
+    fileNameClassName: {
+      control: "text",
+      description: "Additional classes for fileName",
+    },
+    fileNameStyle: {
+      control: "object",
+      description: "Style override for fileName",
+    },
+    fileSizeClassName: {
+      control: "text",
+      description: "Additional classes for fileSize",
+    },
+    fileSizeStyle: {
+      control: "object",
+      description: "Style override for fileSize",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    iconContainerClassName: {
+      control: "text",
+      description: "Additional classes for iconContainer",
+    },
+    iconContainerStyle: {
+      control: "object",
+      description: "Style override for iconContainer",
+    },
+    iconStyle: { control: "object", description: "Style override for icon" },
+    inputClassName: {
+      control: "text",
+      description: "Additional classes for input",
+    },
+    inputStyle: { control: "object", description: "Style override for input" },
+    previewClassName: {
+      control: "text",
+      description: "Additional classes for preview",
+    },
+    previewImageClassName: {
+      control: "text",
+      description: "Additional classes for previewImage",
+    },
+    previewImageStyle: {
+      control: "object",
+      description: "Style override for previewImage",
+    },
+    previewStyle: {
+      control: "object",
+      description: "Style override for preview",
+    },
+    selectedClassName: {
+      control: "text",
+      description: "Additional classes for selected",
+    },
+    selectedStyle: {
+      control: "object",
+      description: "Style override for selected",
+    },
+    style: { control: "object", description: "Style override for style" },
+    totalSizeClassName: {
+      control: "text",
+      description: "Additional classes for totalSize",
+    },
+    totalSizeStyle: {
+      control: "object",
+      description: "Style override for totalSize",
+    },
+    uploadHintClassName: {
+      control: "text",
+      description: "Additional classes for uploadHint",
+    },
+    uploadHintStyle: {
+      control: "object",
+      description: "Style override for uploadHint",
+    },
+    uploadIconClassName: {
+      control: "text",
+      description: "Additional classes for uploadIcon",
+    },
+    uploadIconStyle: {
+      control: "object",
+      description: "Style override for uploadIcon",
+    },
+    uploadTextClassName: {
+      control: "text",
+      description: "Additional classes for uploadText",
+    },
+    uploadTextStyle: {
+      control: "object",
+      description: "Style override for uploadText",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -63,6 +200,44 @@ const meta: Meta<FileUploaderStoryArgs> = {
 
 export const FileUploader: StoryObj<FileUploaderStoryArgs> = {
   args: {
+    uploadHintValueClassName: undefined,
+    uploadHintValueStyle: undefined,
+    areaClassName: undefined,
+    className: undefined,
+    contentClassName: undefined,
+    contentStyle: undefined,
+    detailsClassName: undefined,
+    detailsStyle: undefined,
+    errorClassName: undefined,
+    fileCountClassName: undefined,
+    fileCountStyle: undefined,
+    fileInfoClassName: undefined,
+    fileInfoStyle: undefined,
+    fileNameClassName: undefined,
+    fileNameStyle: undefined,
+    fileSizeClassName: undefined,
+    fileSizeStyle: undefined,
+    iconClassName: undefined,
+    iconContainerClassName: undefined,
+    iconContainerStyle: undefined,
+    iconStyle: undefined,
+    inputClassName: undefined,
+    inputStyle: undefined,
+    previewClassName: undefined,
+    previewImageClassName: undefined,
+    previewImageStyle: undefined,
+    previewStyle: undefined,
+    selectedClassName: undefined,
+    selectedStyle: undefined,
+    style: undefined,
+    totalSizeClassName: undefined,
+    totalSizeStyle: undefined,
+    uploadHintClassName: undefined,
+    uploadHintStyle: undefined,
+    uploadIconClassName: undefined,
+    uploadIconStyle: undefined,
+    uploadTextClassName: undefined,
+    uploadTextStyle: undefined,
     designSystem: "neus",
     allowedTypes: [
       FileType.JPG,

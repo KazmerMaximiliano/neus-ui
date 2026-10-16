@@ -28,6 +28,23 @@ export type CalendarEvent = {
 };
 
 export type WeekCalendarRowProps = {
+  categoryClassName?: string;
+  categoryInfoClassName?: string;
+  categoryInfoStyle?: CSSProperties;
+  categoryNameClassName?: string;
+  categoryNameStyle?: CSSProperties;
+  dayCellClassName?: string;
+  dayCellStyle?: CSSProperties;
+  eventAvatarClassName?: string;
+  eventAvatarStyle?: CSSProperties;
+  eventClassName?: string;
+  eventDescriptionClassName?: string;
+  eventDescriptionStyle?: CSSProperties;
+  eventInfoClassName?: string;
+  eventInfoStyle?: CSSProperties;
+  eventTitleClassName?: string;
+  eventTitleStyle?: CSSProperties;
+  tooltipClassName?: string;
   className?: string;
   style?: CSSProperties;
   categoryStyle?: CSSProperties;
@@ -42,8 +59,6 @@ export type WeekCalendarRowProps = {
 
 export type EventTooltip = { x: number; y: number; event: CalendarEvent; };
 
-
-/** Preview controls for the single WeekCalendarRow story; not additional component props. */
 export type WeekCalendarRowStoryArgs = WeekCalendarRowProps & {
   designSystem: DesignSystemId;
 };

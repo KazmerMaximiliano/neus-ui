@@ -20,6 +20,83 @@ const meta: Meta<WeekCalendarStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    categoryClassName: {
+      control: "text",
+      description: "Additional CSS classes for category",
+    },
+    dateRangeClassName: {
+      control: "text",
+      description: "Additional CSS classes for date range",
+    },
+    dateRangeStyle: {
+      control: "object",
+      description: "Inline CSS override for date range",
+    },
+    eventClassName: {
+      control: "text",
+      description: "Additional CSS classes for event",
+    },
+    tooltipClassName: {
+      control: "text",
+      description: "Additional CSS classes for tooltip",
+    },
+    dayNameClassName: {
+      control: "text",
+      description: "Additional classes for dayName",
+    },
+    dayNameStyle: {
+      control: "object",
+      description: "Style override for dayName",
+    },
+    dayNumberClassName: {
+      control: "text",
+      description: "Additional classes for dayNumber",
+    },
+    dayNumberStyle: {
+      control: "object",
+      description: "Style override for dayNumber",
+    },
+    gridClassName: {
+      control: "text",
+      description: "Additional classes for grid",
+    },
+    headerCategoryCellClassName: {
+      control: "text",
+      description: "Additional classes for headerCategoryCell",
+    },
+    headerCategoryCellStyle: {
+      control: "object",
+      description: "Style override for headerCategoryCell",
+    },
+    headerClassName: {
+      control: "text",
+      description: "Additional classes for header",
+    },
+    headerDayCellClassName: {
+      control: "text",
+      description: "Additional classes for headerDayCell",
+    },
+    headerDayCellStyle: {
+      control: "object",
+      description: "Style override for headerDayCell",
+    },
+    headerRowClassName: {
+      control: "text",
+      description: "Additional classes for headerRow",
+    },
+    headerRowStyle: {
+      control: "object",
+      description: "Style override for headerRow",
+    },
+    navigationClassName: {
+      control: "text",
+      description: "Additional classes for navigation",
+    },
+    titleClassName: {
+      control: "text",
+      description: "Additional classes for title",
+    },
+    titleStyle: { control: "object", description: "Style override for title" },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -28,7 +105,10 @@ const meta: Meta<WeekCalendarStoryArgs> = {
     className: { control: "text", description: "className override" },
     style: { control: "object", description: "style override" },
     headerStyle: { control: "object", description: "headerStyle override" },
-    navigationStyle: { control: "object", description: "navigationStyle override" },
+    navigationStyle: {
+      control: "object",
+      description: "navigationStyle override",
+    },
     gridStyle: { control: "object", description: "gridStyle override" },
     categoryStyle: { control: "object", description: "categoryStyle override" },
     eventStyle: { control: "object", description: "eventStyle override" },
@@ -64,6 +144,26 @@ type Story = StoryObj<typeof meta>;
 
 export const WeekCalendar: Story = {
   args: {
+    categoryClassName: undefined,
+    dateRangeClassName: undefined,
+    dateRangeStyle: undefined,
+    eventClassName: undefined,
+    tooltipClassName: undefined,
+    dayNameClassName: undefined,
+    dayNameStyle: undefined,
+    dayNumberClassName: undefined,
+    dayNumberStyle: undefined,
+    gridClassName: undefined,
+    headerCategoryCellClassName: undefined,
+    headerCategoryCellStyle: undefined,
+    headerClassName: undefined,
+    headerDayCellClassName: undefined,
+    headerDayCellStyle: undefined,
+    headerRowClassName: undefined,
+    headerRowStyle: undefined,
+    navigationClassName: undefined,
+    titleClassName: undefined,
+    titleStyle: undefined,
     designSystem: "neus",
     className: undefined,
     style: {},

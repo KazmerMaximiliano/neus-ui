@@ -4,6 +4,24 @@ import { TimeValue } from "../Clock/Clock.types";
 import type { FieldPresentationProps } from "../Input/Input.types";
 
 export type TimeInputProps = FieldPresentationProps & {
+  placeholderClassName?: string;
+  placeholderStyle?: CSSProperties;
+  className?: string;
+  containerClassName?: string;
+  containerStyle?: CSSProperties;
+  dropdownClassName?: string;
+  dropdownStyle?: CSSProperties;
+  errorClassName?: string;
+  fieldClassName?: string;
+  iconClassName?: string;
+  iconStyle?: CSSProperties;
+  labelClassName?: string;
+  panelClassName?: string;
+  requiredClassName?: string;
+  requiredStyle?: CSSProperties;
+  style?: CSSProperties;
+  valueClassName?: string;
+  valueStyle?: CSSProperties;
   panelStyle?: CSSProperties;
   value?: TimeValue;
   defaultValue?: TimeValue;

@@ -66,6 +66,46 @@ const meta: Meta<InputStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    controlClassName: {
+      control: "text",
+      description: "Additional classes for control",
+    },
+    controlStyle: {
+      control: "object",
+      description: "Style override for control",
+    },
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    errorIconClassName: {
+      control: "text",
+      description: "Additional classes for errorIcon",
+    },
+    inputClassName: {
+      control: "text",
+      description: "Additional classes for input",
+    },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    prefixClassName: {
+      control: "text",
+      description: "Additional classes for prefix",
+    },
+    requiredClassName: {
+      control: "text",
+      description: "Additional classes for required",
+    },
+    suffixClassName: {
+      control: "text",
+      description: "Additional classes for suffix",
+    },
     variant: {
       control: "select",
       options: ["auto", "filled", "outlined"],
@@ -245,6 +285,16 @@ const meta: Meta<InputStoryArgs> = {
 
 export const Input: StoryObj<typeof meta> = {
   args: {
+    className: undefined,
+    controlClassName: undefined,
+    controlStyle: undefined,
+    errorClassName: undefined,
+    errorIconClassName: undefined,
+    inputClassName: undefined,
+    labelClassName: undefined,
+    prefixClassName: undefined,
+    requiredClassName: undefined,
+    suffixClassName: undefined,
     designSystem: "neus",
     variant: "auto",
     labelPlacement: "auto",

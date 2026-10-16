@@ -8,6 +8,16 @@ export type FieldPresentationProps = {
 };
 
 export type InputProps = FieldPresentationProps & {
+  className?: string;
+  controlClassName?: string;
+  controlStyle?: CSSProperties;
+  errorClassName?: string;
+  errorIconClassName?: string;
+  inputClassName?: string;
+  labelClassName?: string;
+  prefixClassName?: string;
+  requiredClassName?: string;
+  suffixClassName?: string;
   prefix?: ReactNode;
   suffix?: ReactNode;
   errorIcon?: ReactNode;

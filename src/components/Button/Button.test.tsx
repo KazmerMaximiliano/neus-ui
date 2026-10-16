@@ -1,9 +1,18 @@
 import { composeStories } from "@storybook/react";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { DESIGN_SYSTEMS } from "../../design-systems";
-import { ThemeProvider } from "../../providers";
-import { Button } from "./Button";
+import {
+  ThemeProvider as CustomizationThemeProvider,
+  ThemeProvider,
+} from "../../providers";
+import { Button, Button as CustomizationComponent } from "./Button";
 import * as stories from "./Button.stories";
 import type { ButtonProps } from "./Button.types";
 import { getButtonClasses } from "./Button.utils";
@@ -342,6 +351,61 @@ describe("shared action hierarchy", () => {
       expect(button).toBeDisabled();
       expect(button).toHaveAttribute("aria-busy", "true");
       expect(button).toHaveAccessibleName("Save changes");
+    },
+  );
+});
+
+describe("Button part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "buttonStyle",
+      base: "button",
+      phase: "default",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "button-label",
+      phase: "default",
+    },
+    {
+      cls: "loaderClassName",
+      sty: "loaderStyle",
+      base: "button-loader",
+      phase: "loading",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Save"
+            loading={phase === "loading"}
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent label="Save" loading={phase === "loading"} />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
     },
   );
 });

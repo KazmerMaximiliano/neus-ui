@@ -12,6 +12,18 @@ const meta: Meta<ButtonStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    loaderClassName: {
+      control: "text",
+      description: "Additional classes for loader",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -75,6 +87,9 @@ const meta: Meta<ButtonStoryArgs> = {
 
 export const Button: StoryObj<ButtonStoryArgs> = {
   args: {
+    className: undefined,
+    labelClassName: undefined,
+    loaderClassName: undefined,
     designSystem: "neus",
     label: "Click Me",
     type: "button",

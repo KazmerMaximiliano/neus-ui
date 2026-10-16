@@ -1,7 +1,15 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent as fireCustomization,
+  fireEvent,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Select } from "./Select";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { Select as CustomizationComponent, Select } from "./Select";
 import type { SelectProps } from "./Select.types";
 
 afterEach(cleanup);
@@ -44,11 +52,11 @@ describe("Select", () => {
         name: "country",
         defaultValue: "br",
       });
-      expect(container.querySelector('input[type="hidden"]')).toHaveAttribute(
+      expect(container.querySelector("input[type=\"hidden\"]")).toHaveAttribute(
         "name",
         "country",
       );
-      expect(container.querySelector('input[type="hidden"]')).toHaveValue("br");
+      expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue("br");
     });
 
     it("shows the controlled value and otherwise the default value", () => {
@@ -189,4 +197,166 @@ describe("Select", () => {
       });
     });
   });
+});
+
+describe("Select part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "style",
+      base: "select__wrapper",
+      phase: "open",
+    },
+    {
+      cls: "labelClassName",
+      sty: "labelStyle",
+      base: "select__label",
+      phase: "open",
+    },
+    {
+      cls: "fieldClassName",
+      sty: "fieldStyle",
+      base: "select__field",
+      phase: "open",
+    },
+    {
+      cls: "triggerClassName",
+      sty: "triggerStyle",
+      base: "select__trigger",
+      phase: "open",
+    },
+    {
+      cls: "valueClassName",
+      sty: "valueStyle",
+      base: "select__value",
+      phase: "open",
+    },
+    {
+      cls: "placeholderClassName",
+      sty: "placeholderStyle",
+      base: "select__placeholder",
+      phase: "placeholder",
+    },
+    {
+      cls: "caretClassName",
+      sty: "caretStyle",
+      base: "select__caret",
+      phase: "open",
+    },
+    {
+      cls: "errorMessageClassName",
+      sty: "errorMessageStyle",
+      base: "select__error-message",
+      phase: "open",
+    },
+    {
+      cls: "listClassName",
+      sty: "listStyle",
+      base: "select__popover",
+      phase: "open",
+    },
+    {
+      cls: "panelClassName",
+      sty: "panelStyle",
+      base: "select__panel",
+      phase: "open",
+    },
+    {
+      cls: "searchClassName",
+      sty: "searchStyle",
+      base: "select__search",
+      phase: "open",
+    },
+    {
+      cls: "searchInputClassName",
+      sty: "searchInputStyle",
+      base: "select__search-input",
+      phase: "open",
+    },
+    {
+      cls: "listContentClassName",
+      sty: "listContentStyle",
+      base: "select__list",
+      phase: "open",
+    },
+    {
+      cls: "optionClassName",
+      sty: "optionStyle",
+      base: "select__option",
+      phase: "open",
+    },
+    {
+      cls: "optionLabelClassName",
+      sty: "optionLabelStyle",
+      base: "select__option-label",
+      phase: "open",
+    },
+    {
+      cls: "optionCheckClassName",
+      sty: "optionCheckStyle",
+      base: "select__option-check",
+      phase: "open",
+    },
+    {
+      cls: "emptyClassName",
+      sty: "emptyStyle",
+      base: "select__empty",
+      phase: "empty",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Role"
+            error="Invalid"
+            options={[
+              { value: "a", label: "Alpha" },
+              { value: "b", label: "Beta" },
+            ]}
+            defaultValue={phase === "placeholder" ? undefined : "a"}
+            placeholder="Choose"
+            {...overrides}
+          />
+        </CustomizationThemeProvider>,
+      );
+      fireCustomization.click(
+        view.container.querySelector("[role=\"combobox\"]")!,
+      );
+      if (phase === "empty")
+        fireCustomization.change(
+          view.container.querySelector("input[type=\"search\"]")!,
+          { target: { value: "unmatched-query" } },
+        );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent
+            label="Role"
+            error="Invalid"
+            options={[
+              { value: "a", label: "Alpha" },
+              { value: "b", label: "Beta" },
+            ]}
+            defaultValue={phase === "placeholder" ? undefined : "a"}
+            placeholder="Choose"
+          />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

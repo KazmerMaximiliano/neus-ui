@@ -12,6 +12,119 @@ const meta: Meta<CalendarStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    overlayYearIconClassName: {
+      control: "text",
+      description: "Customization for overlayYearIcon",
+    },
+    overlayYearIconStyle: {
+      control: "object",
+      description: "Customization for overlayYearIcon",
+    },
+    captionClassName: {
+      control: "text",
+      description: "Additional CSS classes for the month caption button",
+    },
+    captionStyle: {
+      control: "object",
+      description: "Inline CSS override for the month caption button",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    dayPickerClassName: {
+      control: "text",
+      description: "Additional classes for dayPicker",
+    },
+    dayPickerStyle: {
+      control: "object",
+      description: "Style override for dayPicker",
+    },
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    infoClassName: {
+      control: "text",
+      description: "Additional classes for info",
+    },
+    infoStyle: { control: "object", description: "Style override for info" },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    labelWrapperClassName: {
+      control: "text",
+      description: "Additional classes for labelWrapper",
+    },
+    labelWrapperStyle: {
+      control: "object",
+      description: "Style override for labelWrapper",
+    },
+    monthGridClassName: {
+      control: "text",
+      description: "Additional classes for monthGrid",
+    },
+    monthGridStyle: {
+      control: "object",
+      description: "Style override for monthGrid",
+    },
+    monthItemClassName: {
+      control: "text",
+      description: "Additional classes for monthItem",
+    },
+    monthItemStyle: {
+      control: "object",
+      description: "Style override for monthItem",
+    },
+    overlayClassName: {
+      control: "text",
+      description: "Additional classes for overlay",
+    },
+    overlayHeaderClassName: {
+      control: "text",
+      description: "Additional classes for overlayHeader",
+    },
+    overlayHeaderStyle: {
+      control: "object",
+      description: "Style override for overlayHeader",
+    },
+    overlayStyle: {
+      control: "object",
+      description: "Style override for overlay",
+    },
+    overlayYearBtnClassName: {
+      control: "text",
+      description: "Additional classes for overlayYearBtn",
+    },
+    overlayYearBtnStyle: {
+      control: "object",
+      description: "Style override for overlayYearBtn",
+    },
+    requiredClassName: {
+      control: "text",
+      description: "Additional classes for required",
+    },
+    requiredStyle: {
+      control: "object",
+      description: "Style override for required",
+    },
+    yearItemClassName: {
+      control: "text",
+      description: "Additional classes for yearItem",
+    },
+    yearItemStyle: {
+      control: "object",
+      description: "Style override for yearItem",
+    },
+    yearListClassName: {
+      control: "text",
+      description: "Additional classes for yearList",
+    },
+    yearListStyle: {
+      control: "object",
+      description: "Style override for yearList",
+    },
     language: {
       control: "text",
       description:
@@ -127,6 +240,35 @@ const meta: Meta<CalendarStoryArgs> = {
 
 export const Calendar = {
   args: {
+    overlayYearIconClassName: undefined,
+    overlayYearIconStyle: undefined,
+    captionClassName: undefined,
+    captionStyle: undefined,
+    className: undefined,
+    dayPickerClassName: undefined,
+    dayPickerStyle: undefined,
+    errorClassName: undefined,
+    infoClassName: undefined,
+    infoStyle: undefined,
+    labelClassName: undefined,
+    labelWrapperClassName: undefined,
+    labelWrapperStyle: undefined,
+    monthGridClassName: undefined,
+    monthGridStyle: undefined,
+    monthItemClassName: undefined,
+    monthItemStyle: undefined,
+    overlayClassName: undefined,
+    overlayHeaderClassName: undefined,
+    overlayHeaderStyle: undefined,
+    overlayStyle: undefined,
+    overlayYearBtnClassName: undefined,
+    overlayYearBtnStyle: undefined,
+    requiredClassName: undefined,
+    requiredStyle: undefined,
+    yearItemClassName: undefined,
+    yearItemStyle: undefined,
+    yearListClassName: undefined,
+    yearListStyle: undefined,
     language: "en-US",
     designSystem: "neus",
     mode: "single",

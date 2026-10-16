@@ -1,12 +1,11 @@
 import { APPLE_METADATA, APPLE_PALETTE } from "./apple/generated/apple.consts";
 import { CARBON_METADATA, CARBON_PALETTE } from "./carbon/generated/carbon.consts";
+import type { DesignSystem, DesignSystemId, DesignSystemPalette } from "./design-systems.types";
 import { MATERIAL_METADATA, MATERIAL_PALETTE } from "./material/generated/material.consts";
 import { NEOBRUTALISM_METADATA, NEOBRUTALISM_PALETTE } from "./neobrutalism/generated/neobrutalism.consts";
 import { NEUS_METADATA, NEUS_PALETTE } from "./neus/generated/neus.consts";
 import { VERCEL_METADATA, VERCEL_PALETTE } from "./vercel/generated/vercel.consts";
-import type { DesignSystem, DesignSystemId, DesignSystemPalette } from "./design-systems.types";
 
-/** Public families sharing the complete Neus token contract. */
 export const ADAPTED_COMPONENTS = [
   "Badge", "Button", "Calendar", "Card", "Checkbox", "Clock", "DateInput", "Dropdown",
   "FileUploader", "IconButton", "Input", "Link", "Menu", "Modal", "MultiSelect", "Select",

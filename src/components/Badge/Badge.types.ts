@@ -5,6 +5,8 @@ type BadgeVariant = "solid" | "dot";
 export type BadgeColor = "primary" | "success" | "error" | "info" | "neutral";
 
 export type BadgeProps = {
+  className?: string;
+  dotClassName?: string;
   label: string;
   variant?: BadgeVariant;
   color?: BadgeColor;

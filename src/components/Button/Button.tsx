@@ -4,6 +4,9 @@ import { ButtonProps } from "./Button.types";
 import { getButtonClasses } from "./Button.utils";
 
 export const Button = ({
+  className,
+  labelClassName,
+  loaderClassName,
   label,
   type = "button",
   variant = "solid",
@@ -21,7 +24,7 @@ export const Button = ({
 
   return (
     <button
-      className={buttonClasses}
+      className={[buttonClasses, className].filter(Boolean).join(" ")}
       style={buttonStyle}
       onClick={(e) => onClick?.(e)}
       type={type}
@@ -30,7 +33,7 @@ export const Button = ({
       aria-label={loading ? label : undefined}
     >
       <span
-        className="button-label"
+        className={["button-label", labelClassName].filter(Boolean).join(" ")}
         style={labelStyle}
         aria-hidden={loading || undefined}
       >
@@ -38,7 +41,9 @@ export const Button = ({
       </span>
       {loading && (
         <BeatLoader
-          className="button-loader"
+          className={["button-loader", loaderClassName]
+            .filter(Boolean)
+            .join(" ")}
           size="1em"
           margin="0.333333em"
           color="currentColor"

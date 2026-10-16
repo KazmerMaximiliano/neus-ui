@@ -1,6 +1,9 @@
+import { render as renderCustomization, fireEvent as fireCustomization } from "@testing-library/react";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { DateInput as CustomizationComponent } from "../DateInput";
+import { ThemeProvider as CustomizationThemeProvider } from "../../../providers";
 import { DateInput } from "../DateInput";
 
 afterEach(() => {
@@ -151,7 +154,7 @@ describe("DateInput", () => {
   describe("hidden input", () => {
     it("renders hidden input when name is provided", () => {
       const { container } = renderDateInput({ name: "birth-date" });
-      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const hiddenInput = container.querySelector("input[type=\"hidden\"]");
       expect(hiddenInput).toBeInTheDocument();
       expect(hiddenInput).toHaveAttribute("name", "birth-date");
     });
@@ -159,13 +162,13 @@ describe("DateInput", () => {
     it("does not render hidden input when name is not provided", () => {
       const { container } = renderDateInput();
       expect(
-        container.querySelector('input[type="hidden"]'),
+        container.querySelector("input[type=\"hidden\"]"),
       ).not.toBeInTheDocument();
     });
 
     it("sets required attribute on hidden input when required", () => {
       const { container } = renderDateInput({ name: "date", required: true });
-      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const hiddenInput = container.querySelector("input[type=\"hidden\"]");
       expect(hiddenInput).toHaveAttribute("required");
     });
   });
@@ -282,7 +285,7 @@ describe("picker selection and serialization", () => {
       screen.getByRole("button", { name: /October 16, 2026/ }),
     );
     expect(onChange).toHaveBeenLastCalledWith(new Date(2026, 9, 16));
-    expect(container.querySelector('input[name="birthday"]')).toHaveValue(
+    expect(container.querySelector("input[name=\"birthday\"]")).toHaveValue(
       new Date(2026, 9, 16).toISOString(),
     );
     expect(field).toHaveAttribute("aria-expanded", "false");
@@ -311,7 +314,7 @@ describe("picker selection and serialization", () => {
         onChange={onChange}
       />,
     );
-    expect(container.querySelector('input[name="birthday"]')).toHaveValue("");
+    expect(container.querySelector("input[name=\"birthday\"]")).toHaveValue("");
   });
   it("keeps range selection open and exposes shared presentation and panel styles", async () => {
     const onChange = vi.fn();
@@ -346,4 +349,105 @@ describe("picker selection and serialization", () => {
     );
     expect(container.querySelectorAll(".rdp-month")).toHaveLength(2);
   });
+});
+
+
+describe("DateInput part customization", () => {
+  it.each([
+    {
+      "cls": "className",
+      "sty": "style",
+      "base": "picker-field",
+      "phase": "open"
+    },
+    {
+      "cls": "labelClassName",
+      "sty": "labelStyle",
+      "base": "picker-field__label",
+      "phase": "open"
+    },
+    {
+      "cls": "requiredClassName",
+      "sty": "requiredStyle",
+      "base": "picker-field__required",
+      "phase": "open"
+    },
+    {
+      "cls": "containerClassName",
+      "sty": "containerStyle",
+      "base": "picker-field__container",
+      "phase": "open"
+    },
+    {
+      "cls": "fieldClassName",
+      "sty": "fieldStyle",
+      "base": "picker-field__field",
+      "phase": "open"
+    },
+    {
+      "cls": "valueClassName",
+      "sty": "valueStyle",
+      "base": "picker-field__value",
+      "phase": "open"
+    },
+    {
+      "cls": "placeholderClassName",
+      "sty": "placeholderStyle",
+      "base": "picker-field__placeholder",
+      "phase": "placeholder"
+    },
+    {
+      "cls": "iconClassName",
+      "sty": "iconStyle",
+      "base": "picker-field__icon",
+      "phase": "open"
+    },
+    {
+      "cls": "panelClassName",
+      "sty": "panelStyle",
+      "base": "picker-field__popover",
+      "phase": "open"
+    },
+    {
+      "cls": "dropdownClassName",
+      "sty": "dropdownStyle",
+      "base": "date-input__dropdown",
+      "phase": "open"
+    },
+    {
+      "cls": "errorClassName",
+      "sty": "errorStyle",
+      "base": "picker-field__error",
+      "phase": "open"
+    }
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base, phase }) => {
+      const overrides = { [cls]: "consumer-part", [sty]: { outlineOffset: "7px" } };
+      const view = renderCustomization(<CustomizationThemeProvider scope="local"><CustomizationComponent
+        label="Date"
+        required
+        error="Invalid"
+        defaultValue={phase === "placeholder" ? undefined : new Date(2026, 9, 16)}
+        {...overrides}
+      /></CustomizationThemeProvider>);
+      fireCustomization.click(view.container.querySelector(".picker-field__field")!);
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(<CustomizationThemeProvider scope="local"><CustomizationComponent
+        label="Date"
+        required
+        error="Invalid"
+        defaultValue={phase === "placeholder" ? undefined : new Date(2026, 9, 16)}
+      /></CustomizationThemeProvider>);
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

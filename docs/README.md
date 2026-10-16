@@ -1,42 +1,33 @@
 # Neus UI documentation
 
-Neus UI is a React component library with TypeScript, CSS variable theming,
-reusable components, and application templates.
+Neus UI provides 30 public React components and sections, two layout templates, and six
+design systems driven by scoped CSS tokens. These guides are Markdown; read them in GitHub
+or an editor without starting a server.
 
-The main guides are Markdown files in this directory; individual design
-specifications live beside their recipes under `src/design-systems/`. Read them
-directly in GitHub or a Markdown editor; no server or build step is required.
+## Start building
 
-## Getting started
+1. [Introduction](./getting-started/introduction.md): capabilities and mental model.
+2. [Installation](./getting-started/installation.md): package, stylesheet and provider.
+3. [Design systems](./design/systems.md): select a system and explore its recipes.
+4. [ThemeProvider](./design/theme-provider.md): modes, colors, runtime updates and scopes.
+5. [Customization](./design/customization.md): tokens, classes and styles by part.
 
-1. [Introduction](./introduction.md): project overview and first component.
-2. [Installation](./installation.md): install the package, import styles, and set up the provider.
-3. [Components](./components.md): component and template catalog, imports, and interactive examples.
+## Reference
 
-## Guides and reference
-
-| Guide | Contents |
+| Reference | Contents |
 | --- | --- |
-| [Theming](./theming.md) | ThemeProvider, light/dark modes, scopes, hooks, and runtime color changes |
-| [Design system](./design-system.md) | Color tokens, typography, spacing, and component styling conventions |
-| [Design systems and specifications](./design-systems.md) | Six DESIGN.md sources: visual identity, YAML tokens, generated recipes, validation and references |
-| [Input](./components/Input.md) | Props, accessibility, CSS tokens, six recipes and per-part customization |
-| [Card composition](./components/Card.md) | Card, Header, Media, Content and Footer props, themes and examples |
-| [Sidebar](./components/Sidebar.md) | Responsive navigation, transparent curves, six recipes and AppTemplate integration |
-| [Development](./development.md) | Repository commands, component/subcomponent layout, code style, and documentation maintenance |
-| [Testing](./testing.md) | Unit tests, browser tests, coverage, and Storybook type checking |
-| [AppTemplate](./templates/AppTemplate.md) | Application shell, responsive navigation and layout customization |
-| [FormTemplate](./templates/FormTemplate.md) | Form layout, columns and action customization |
+| [Components](./components/README.md) | All 30 components/sections, props, anatomy, states and complete token inventories |
+| [Templates](./templates/README.md) | AppTemplate and FormTemplate composition, responsive behavior and styling |
+| [CSS tokens](./design/tokens.md) | Shared foundations, semantic roles and runtime palette variables |
+| [Design guide index](./design/README.md) | Consumer theming and customization guides |
 
-## Interactive component catalog
+## Maintain the library
 
-Run Storybook locally to explore component states and prop controls:
+[Contributor index](./contributing/README.md) links development conventions, testing and
+design-system authoring. Visual specifications remain in each system's `DESIGN.md`; the
+[systems guide](./design/systems.md) indexes all six.
 
-```bash
-pnpm install
-pnpm storybook
-```
+Run `pnpm storybook` for interactive examples and prop controls. Both templates include a
+local design selector that inherits the toolbar selection by default.
 
-See [Components](./components.md#storybook) for more details.
-
-[Back to the project overview](../README.md)
+[Project overview](../README.md) · [Agent instructions](../AGENTS.md)

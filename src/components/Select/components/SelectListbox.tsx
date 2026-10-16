@@ -2,6 +2,7 @@ import { SelectListboxContent } from "./SelectListboxContent";
 import type { SelectListboxProps } from "./SelectListbox.types";
 
 export const SelectListbox = ({
+  listClassName,
   popover: { id, open, popoverRef, hide },
   listStyle,
   ...props
@@ -9,7 +10,7 @@ export const SelectListbox = ({
   <div
     ref={popoverRef}
     popover="manual"
-    className="select__popover"
+    className={["select__popover", listClassName].filter(Boolean).join(" ")}
     style={listStyle}
   >
     {open && (

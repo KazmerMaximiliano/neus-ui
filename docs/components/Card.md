@@ -1,139 +1,159 @@
 # Card
 
-[Component catalog](../components.md) · [Design systems](../design-systems.md)
+[Component index](./README.md) · [Documentation](../README.md) ·
+[Customization](../design/customization.md)
 
-Card is a passive surface composed with optional sections. Import all components
-and their prop types from `neus-ui`:
+Composable surface for arbitrary content and actions.
+
+## Usage
 
 ```tsx
-import {
-  Button, Card, CardHeader, CardMedia, CardContent, CardFooter,
-  type CardProps, type CardMediaProps,
-} from "neus-ui";
+import { ThemeProvider, Button, Card, CardHeader, CardContent, CardFooter } from "neus-ui";
 import "neus-ui/dist/neus-ui.css";
 
-export const Product = () => (
-  <Card className="product-card" style={null}>
-    <CardHeader><h2>Mountain retreat</h2></CardHeader>
-    <CardMedia src="/mountains.jpg" alt="Mountains at sunrise" />
-    <CardContent><p>A quiet place to discover.</p></CardContent>
-    <CardFooter>
-      <Button label="Explore" />
-      <a href="/saved">Saved places</a>
-    </CardFooter>
-  </Card>
-);
+export const Example = () => {
+  return (
+    <ThemeProvider designSystem="neus">
+      <Card variant="outlined"><CardHeader><h2>Project</h2></CardHeader><CardContent>Project details</CardContent><CardFooter><Button label="Open" /></CardFooter></Card>
+    </ThemeProvider>
+  );
+};
 ```
 
-## Props and composition
+## Behavior and accessibility
 
-| Component | Element | Component-specific props |
-| --- | --- | --- |
-| Card | `div` | `children?: ReactNode` |
-| [CardHeader](./CardHeader.md) | `div` | `children?: ReactNode` |
-| [CardMedia](./CardMedia.md) | `img` by default | `component?: ElementType`; inferred native/custom props and ref |
-| [CardContent](./CardContent.md) | `div` | `children?: ReactNode` |
-| [CardFooter](./CardFooter.md) | `div` | `children?: ReactNode` |
+Compose CardHeader, CardMedia, CardContent and CardFooter explicitly. Card adds no implicit
+header, padding, click behavior or interactive semantics. Use native div attributes and refs
+where needed. `variant="auto"` follows the recipe; filled, outlined and elevated request a
+surface treatment. Each public section owns its own `className` and nullable `style`;
+children supply their own heading and action semantics.
 
-All five accept `className?: string` and `style?: CSSProperties | null`.
-Styles default to `null`; omitted/null styles leave CSS tokens in control.
-Classes are appended to the element's base class. A style object affects only
-that element, while inherited CSS properties such as color follow normal CSS
-inheritance. Returning to `null` removes prior inline overrides.
+## Props
 
-Native DOM attributes, accessibility attributes, data attributes and correctly
-typed refs are forwarded. Card excludes the native names `title`, `color` and
-`onClick`; compose headings and actions in its children. Media retains its own native
-attributes, such as iframe `title` and video `onPlay`.
+See [the type source](../../src/components/Card/Card.types.ts) and
+[implementation](../../src/components/Card/Card.tsx) for the exact contract. All
+customization props are optional and default to undefined unless noted; section style props
+retain their nullable default.
 
-Sections are independent and optional. Card renders its children directly,
-without inserting sections, validating their order or requiring context:
+| Prop | Type | Default / requirement | Purpose |
+| --- | --- | --- | --- |
+| `className` | `string` | Omitted | Additional classes on `.card` |
+| `children` | `ReactNode` | Omitted | Free-form JSX, including any combination of the optional Card subcomponents |
+| `variant` | `"outlined" \| "elevated" \| "auto" \| "filled"` | `"auto"` | Surface treatment; auto follows the system |
+| `style` | `CSSProperties \| null` | `null` | Inline styles on `.card` |
+| Native attributes and ref | React props for a div | Optional | Forwarded to the root; the type source lists excluded/replaced fields |
+
+## Anatomy and per-part customization
+
+Classes are appended to the built-in classes. Style props apply directly to their listed
+elements; repeated parts receive the same override. Omitting a hook on a later render
+removes that override. Hooks do not create a part whose rendering condition is false.
+
+| Base class / part | Element | Class prop | Style prop | Rendering condition |
+| --- | --- | --- | --- | --- |
+| `.card` | `div` | `className` | `style` | `Always` |
+
+Interaction states use native pseudo-classes and ARIA/data attributes where present.
+
+Use the [stylesheet](../../src/components/Card/Card.styles.css) for pseudo-elements and
+state selectors. For shared field/listbox parts, also inspect the shared styles linked from
+the implementation. Consumer content and third-party generated internals retain their own
+customization APIs.
+
+### Instance styles and classes
+
+Use these props in the usage example above (keep its imports and local state):
 
 ```tsx
-<Card><p className="custom-content">Entirely custom content</p></Card>
-
-<Card>
-  <CardContent>Only a content section</CardContent>
-</Card>
+<Card className="example-card" style={{ outlineOffset: 4 }} variant="outlined"><CardHeader><h2>Project</h2></CardHeader><CardContent>Project details</CardContent><CardFooter><Button label="Open" /></CardFooter></Card>
 ```
-
-Card has no padding or gap. Header and Content have 16px padding; Footer has 8px
-padding and an 8px gap. Header aligns children horizontally with space between
-them. Footer wraps its children when space runs out. Media reaches the inside
-edge of the card border; images and video keep their natural proportions.
-Card clips overflowing content to its rounded corners. Typography and heading
-semantics belong to the children.
-
-## Media and actions
-
-```tsx
-<Card>
-  <CardMedia component="video" controls poster="/preview.jpg">
-    <source src="/tour.webm" type="video/webm" />
-    <track kind="captions" src="/tour.vtt" srcLang="en" label="English" />
-    Your browser does not support video.
-  </CardMedia>
-  <CardFooter>
-    <button type="button" onClick={save} disabled={saving}>Save</button>
-    <a href="/tour">Tour details</a>
-  </CardFooter>
-</Card>
-```
-
-Card adds no click handler, tab stop, selected/disabled behavior or hover motion.
-Use native links/buttons or library controls for actions. Provide image `alt`,
-iframe `title`, and captions for video as appropriate.
-
-## Themes and overrides
-
-Use `ThemeProvider` to select Neus, Apple, Carbon, Material, Neobrutalism or Vercel.
-There is no `designSystem` prop on Card. The same components work in light and
-dark modes, nested scopes, and runtime theme changes.
-
-Neus uses a themed surface, 1px border, 16px default radius and header
-divider. Other systems adapt their geometry through scoped tokens; they do not
-change the component structure. Spacing follows the
-[Material Cards content-block guidance](https://m1.material.io/components/cards.html).
-These are project adaptations, not complete implementations of external libraries.
-
-For reusable overrides, use CSS classes:
 
 ```css
-.product-card {
-  --card-background: var(--color-surface-secondary);
-  --card-radius: 24px;
-  --card-content-padding: 24px;
+.example-card {
+  outline-offset: 4px;
+}
+.example-card:focus-visible {
+  outline: 2px solid var(--color-focus);
 }
 ```
 
-For one instance, use `style={{ borderRadius: 24 }}`. Section styles are passed
-directly to the section, for example `<CardHeader style={{ gap: 16 }}>`.
+Style props win over ordinary stylesheet declarations for the same property. Use a
+stylesheet for hover, focus, disabled states and pseudo-elements. Custom properties still
+follow CSS inheritance, scope resets and specificity; see [the cascade
+guide](../design/customization.md).
 
-Public tokens: `--card-radius`, `--card-background`, `--card-color`,
-`--card-font-family`, `--card-border-width`, `--card-border-color`,
-`--card-shadow`, `--card-header-padding`, `--card-header-gap`,
-`--card-header-border-width`, `--card-header-border-color`,
-`--card-content-padding`, `--card-footer-padding`, `--card-footer-gap`,
-`--card-media-object-fit` and `--card-media-object-position`.
+## CSS token reference
 
-The base classes are `card`, `card-header`, `card-media`, `card-content` and
-`card-footer`. Free-form children provide their own spacing or use CardContent.
+All six systems supply scoped recipes in light/dark modes. Values below show the Neus
+baseline; system and mode overrides can differ. Runtime CSS expressions remain live
+dependencies. Do not edit generated files.
 
-## Storybook
+- [card baseline recipe](../../src/design-systems/neus/generated/recipes/card.css)
 
-Storybook has one story per component. The main Card story demonstrates the
-complete composition; section stories expose their own controls. Each has a local
-design-system selector and inherits the toolbar's light/dark mode. JSX children
-are documented with controls disabled; serializable children and CSS objects can
-be edited in their controls. CardMedia provides image, video, audio and iframe
-previews without fetching remote demo assets.
+### Surface and color
 
+| Token | Purpose | Neus baseline |
+| --- | --- | --- |
+| `--card-background` | card background | `var(--color-surface)` |
+| `--card-border-color` | card border color | `var(--color-border-input)` |
+| `--card-border-width` | card border width | `1px` |
+| `--card-color` | card color | `var(--color-text-primary)` |
+| `--card-elevated-background` | card elevated background | `var(--color-surface)` |
+| `--card-elevated-shadow` | card elevated shadow | `var(--elevation-floating)` |
+| `--card-filled-background` | card filled background | `var(--color-surface-secondary)` |
+| `--card-filled-border-width` | card filled border width | `0px` |
+| `--card-header-border-color` | card header border color | `var(--card-border-color)` |
+| `--card-header-border-width` | card header border width | `1px` |
+| `--card-nested-background` | card nested background | `var(--card-background)` |
+| `--card-outlined-background` | card outlined background | `var(--color-surface)` |
+| `--card-outlined-border-width` | card outlined border width | `1px` |
+| `--card-shadow` | card shadow | `none` |
 
-## Presentation
+### Geometry and layout
 
-| API | Behavior |
-| --- | --- |
-| `variant` | auto (default), filled, outlined, elevated |
+| Token | Purpose | Neus baseline |
+| --- | --- | --- |
+| `--card-content-padding` | card content padding | `16px` |
+| `--card-footer-gap` | card footer gap | `8px` |
+| `--card-footer-padding` | card footer padding | `8px` |
+| `--card-header-gap` | card header gap | `8px` |
+| `--card-header-padding` | card header padding | `16px` |
+| `--card-media-object-fit` | card media object fit | `cover` |
+| `--card-media-object-position` | card media object position | `center` |
+| `--card-radius` | card radius | `var(--radius-default)` |
 
-Uses all six recipes through ThemeProvider in light and dark mode. See
-[Theming](../theming.md) for provider setup and scoped customization.
+### Typography and text
+
+| Token | Purpose | Neus baseline |
+| --- | --- | --- |
+| `--card-font-family` | card font family | `var(--font-body)` |
+
+### Scoped recipe override
+
+Wrap the usage example in a local provider with a class:
+
+```tsx
+<ThemeProvider scope="local" designSystem="vercel" className="example-scope">
+  {/* Place the component usage here. */}
+</ThemeProvider>
+```
+
+```css
+/* Import after neus-ui/dist/neus-ui.css. */
+[data-design-system].example-scope {
+  --card-content-padding: 12px;
+}
+```
+
+Nested provider boundaries reset recipe tokens. Apply overrides to the boundary or component
+that should own them, rather than relying on an ancestor override crossing a nested scope.
+
+## Storybook and related guides
+
+The single Card story exposes props as controls. Design selection is preview configuration;
+applications select it through ThemeProvider. Public sections:
+[CardHeader](./CardHeader.md), [CardMedia](./CardMedia.md), [CardContent](./CardContent.md),
+[CardFooter](./CardFooter.md).
+
+[ThemeProvider](../design/theme-provider.md) · [Design systems](../design/systems.md) ·
+[Customization](../design/customization.md)

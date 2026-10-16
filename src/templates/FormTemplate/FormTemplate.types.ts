@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 
 export type FormTemplateProps = {
+  actionsClassName?: string;
   children: ReactNode;
   submitLabel: string;
   loading?: boolean;

@@ -4,13 +4,27 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useResponsive } from "../../hooks/useResponsive";
 import { IconButton } from "../IconButton/IconButton";
 import { NoRowsOverlay } from "./components/NoRowsOverlay";
-import { DATA_TABLE_THEME } from "./DataTable.consts";
 import "./DataTable.styles.css";
 import type { DataTableProps } from "./DataTable.types";
+import { DATA_TABLE_THEME } from "./DataTable.consts";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 export const DataTable = <T extends object>({
+  cardClassName,
+  cardStyle,
+  emptyStateClassName,
+  noRowsDescriptionClassName,
+  noRowsDescriptionStyle,
+  noRowsTitleClassName,
+  noRowsTitleStyle,
+  cardsClassName,
+  cardsStyle,
+  gridClassName,
+  gridStyle,
+  paginationClassName,
+  paginationInfoClassName,
+  paginationInfoStyle,
   data,
   columnDefs,
   pagination,
@@ -37,20 +51,43 @@ export const DataTable = <T extends object>({
     >
       {isMobile && renderMobileCard ? (
         data.length ? (
-          <div className="data-table__cards">
+          <div
+            className={["data-table__cards", cardsClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={cardsStyle}
+          >
             {data.map((row, index) => (
-              <div key={index}>{renderMobileCard(row)}</div>
+              <div
+                key={index}
+                className={["data-table__card", cardClassName]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={cardStyle}
+              >
+                {renderMobileCard(row)}
+              </div>
             ))}
           </div>
         ) : (
           <NoRowsOverlay
+            emptyStateClassName={emptyStateClassName}
+            noRowsTitleClassName={noRowsTitleClassName}
+            noRowsTitleStyle={noRowsTitleStyle}
+            noRowsDescriptionClassName={noRowsDescriptionClassName}
+            noRowsDescriptionStyle={noRowsDescriptionStyle}
             noDataTitle={noDataTitle}
             noDataDescription={noDataDescription}
             emptyStateStyle={emptyStateStyle}
           />
         )
       ) : (
-        <div className="data-table__grid">
+        <div
+          className={["data-table__grid", gridClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={gridStyle}
+        >
           <AgGridReact<T>
             theme={DATA_TABLE_THEME}
             rowData={data}
@@ -68,6 +105,11 @@ export const DataTable = <T extends object>({
             suppressScrollOnNewData
             noRowsOverlayComponent={NoRowsOverlay}
             noRowsOverlayComponentParams={{
+              emptyStateClassName,
+              noRowsTitleClassName,
+              noRowsTitleStyle,
+              noRowsDescriptionClassName,
+              noRowsDescriptionStyle,
               noDataTitle,
               noDataDescription,
               emptyStateStyle,
@@ -75,7 +117,12 @@ export const DataTable = <T extends object>({
           />
         </div>
       )}
-      <div className="data-table__pagination" style={paginationStyle}>
+      <div
+        className={["data-table__pagination", paginationClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={paginationStyle}
+      >
         <IconButton
           disabled={current_page <= 1}
           onClick={() => paginate(current_page - 1)}
@@ -84,7 +131,13 @@ export const DataTable = <T extends object>({
           size="small"
           variant="text"
         />
-        <span className="data-table__pagination-info" aria-live="polite">
+        <span
+          className={["data-table__pagination-info", paginationInfoClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={paginationInfoStyle}
+          aria-live="polite"
+        >
           {current_page} / {Math.max(1, last_page)}
         </span>
         <IconButton

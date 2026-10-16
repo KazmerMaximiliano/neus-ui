@@ -2,6 +2,8 @@ import { focusMenuItem } from "../../../hooks/usePopover";
 import type { MenuItemsProps } from "../Menu.types";
 
 export const MenuItems = ({
+  itemClassName,
+  menuClassName,
   popover: { id, open, popoverRef, hide },
   label,
   items,
@@ -15,7 +17,7 @@ export const MenuItems = ({
     popover="manual"
     role="menu"
     aria-label={label}
-    className="menu__panel"
+    className={["menu__panel", menuClassName].filter(Boolean).join(" ")}
     style={menuStyle}
     onKeyDown={(event) => {
       if (focusMenuItem(popoverRef.current, event.key)) event.preventDefault();
@@ -31,7 +33,7 @@ export const MenuItems = ({
             type="button"
             role="menuitem"
             tabIndex={-1}
-            className="menu__item"
+            className={["menu__item", itemClassName].filter(Boolean).join(" ")}
             style={itemStyle}
             disabled={item.disabled}
             onClick={() => {

@@ -4,6 +4,9 @@ import { IconButtonProps } from "./IconButton.types";
 import { getIconButtonClasses } from "./IconButton.utils";
 
 export const IconButton = ({
+  className,
+  iconClassName,
+  loaderClassName,
   icon: Icon,
   label,
   type = "button",
@@ -18,7 +21,9 @@ export const IconButton = ({
   onClick,
 }: IconButtonProps) => (
   <button
-    className={getIconButtonClasses(variant, color, size)}
+    className={[getIconButtonClasses(variant, color, size), className]
+      .filter(Boolean)
+      .join(" ")}
     style={buttonStyle}
     onClick={(e) => onClick?.(e)}
     type={type}
@@ -28,7 +33,9 @@ export const IconButton = ({
   >
     {loading ? (
       <BeatLoader
-        className="icon-button-loader"
+        className={["icon-button-loader", loaderClassName]
+          .filter(Boolean)
+          .join(" ")}
         size="0.3em"
         margin="0.08em"
         color="currentColor"
@@ -36,7 +43,13 @@ export const IconButton = ({
         style={loaderStyle}
       />
     ) : (
-      <Icon className="icon-button-icon" style={iconStyle} aria-hidden />
+      <Icon
+        className={["icon-button-icon", iconClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={iconStyle}
+        aria-hidden
+      />
     )}
   </button>
 );

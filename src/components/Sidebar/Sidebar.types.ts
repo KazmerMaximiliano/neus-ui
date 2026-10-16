@@ -19,6 +19,26 @@ export type SidebarLabels = {
 };
 
 export type SidebarProps = {
+  closeIconClassName?: string;
+  closeIconStyle?: CSSProperties;
+  toggleIconClassName?: string;
+  toggleIconStyle?: CSSProperties;
+  avatarClassName?: string;
+  avatarStyle?: CSSProperties;
+  bodyClassName?: string;
+  closeButtonClassName?: string;
+  dialogClassName?: string;
+  dialogStyle?: CSSProperties;
+  headerClassName?: string;
+  headerInnerClassName?: string;
+  headerInnerStyle?: CSSProperties;
+  iconClassName?: string;
+  itemClassName?: string;
+  labelClassName?: string;
+  panelClassName?: string;
+  panelStyle?: CSSProperties;
+  titleClassName?: string;
+  toggleClassName?: string;
   items: SidebarItem[];
   title?: string;
   children?: ReactNode;

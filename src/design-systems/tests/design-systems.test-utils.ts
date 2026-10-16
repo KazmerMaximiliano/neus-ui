@@ -1,4 +1,3 @@
-/** Resolve semantic colors through the browser instead of comparing CSS syntax. */
 export const resolveColor = (element: HTMLElement, token: string) => {
   const probe = document.createElement("span");
   probe.style.color = `var(${token})`;
@@ -8,7 +7,6 @@ export const resolveColor = (element: HTMLElement, token: string) => {
   return value;
 };
 
-/** Read `rgb()`, `rgba()` and the `color(srgb …)` form Chromium returns for color-mix. */
 const channels = (color: string) => {
   const [r, g, b, a = 1] = color.match(/[\d.]+/g)!.map(Number);
   const scale = color.startsWith("color(") ? 255 : 1;
@@ -24,7 +22,6 @@ const luminance = (color: string) => {
   return 0.2126 * lr + 0.7152 * lg + 0.0722 * lb;
 };
 
-/** Flatten a translucent computed color over an opaque one. */
 export const flatten = (color: string, backdrop: string) => {
   const top = channels(color);
   const bottom = channels(backdrop);
@@ -32,7 +29,6 @@ export const flatten = (color: string, backdrop: string) => {
   return `rgb(${mix(top.r, bottom.r)}, ${mix(top.g, bottom.g)}, ${mix(top.b, bottom.b)})`;
 };
 
-/** WCAG 2 contrast ratio between two computed `rgb()`/`rgba()` colors. */
 export const contrastRatio = (foreground: string, background: string) => {
   const [high, low] = [luminance(foreground), luminance(background)].sort(
     (a, b) => b - a,

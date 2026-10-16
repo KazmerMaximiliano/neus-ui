@@ -1,14 +1,14 @@
+import { lint } from "@google/design.md/linter";
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, unlinkSync, unwatchFile, watchFile, writeFileSync } from "node:fs";
 import path from "node:path";
-import { lint } from "@google/design.md/linter";
 import { parseDocument } from "yaml";
-import type { DesignDocument, GenerationResult, ModeDeclarations, TokenValue } from "./design-systems.types";
 import {
   COLOR_MODES, COMPONENT_KEYS, DIMENSION_GROUPS, DIMENSION_PATTERN, DOCUMENT_KEYS,
   EXTENSION_KEYS, MODES, PALETTE_KEYS, RECIPE_NAMES, REFERENCE_PATTERN,
   SECTION_NAMES, SYSTEM_IDS, TEXT_KEYS, TOKEN_GROUPS, TYPOGRAPHY_DIMENSIONS, TYPOGRAPHY_KEYS,
   WATCH_DEBOUNCE_MS, WATCH_INTERVAL_MS,
 } from "./design-systems.consts";
+import type { DesignDocument, GenerationResult, ModeDeclarations, TokenValue } from "./design-systems.types";
 
 const object = (value: unknown, location: string): Record<string, unknown> => {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
@@ -31,7 +31,6 @@ const scalar = (value: unknown, location: string): TokenValue => {
   return value as TokenValue;
 };
 
-/** Resolve document references; CSS var() dependencies deliberately stay dynamic. */
 export const resolveReference = (
   document: unknown,
   value: TokenValue,
@@ -61,7 +60,6 @@ const modes = (value: unknown, location: string, document: unknown) => {
   }
 };
 
-/** Parse and validate both the Google document and the scoped Neus extension. */
 export const parseDesignDocument = (markdown: string, id: string): DesignDocument => {
   const frontmatter = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
   if (!frontmatter) throw new Error(`${id}: missing YAML front matter`);
@@ -156,7 +154,6 @@ const renderModes = (document: DesignDocument, values: ModeDeclarations, foundat
   }).join("\n");
 };
 
-/** Build every artifact in memory before any file can be changed. */
 export const collectArtifacts = (root: string): GenerationResult => {
   const artifacts = new Map<string, string>();
   const warnings: string[] = [];
@@ -192,7 +189,6 @@ const generatedFiles = (directory: string): string[] => existsSync(directory)
   ? readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory()
     ? generatedFiles(path.join(directory, entry.name)) : [path.join(directory, entry.name)]) : [];
 
-/** Check mode is read-only; generation only owns files inside generated directories. */
 export const generateDesignSystems = (root: string, check = false): GenerationResult => {
   const result = collectArtifacts(root);
   const changed = [...result.artifacts].filter(([file, content]) => !existsSync(path.join(root, file)) ||
@@ -216,7 +212,6 @@ export const generateDesignSystems = (root: string, check = false): GenerationRe
   return result;
 };
 
-/** Poll six paths to support atomic saves and volumes without native file events. */
 export const watchDesignDocuments = (root: string, onChange: () => void): (() => void) => {
   let timer: ReturnType<typeof setTimeout>;
   const listeners = SYSTEM_IDS.map(id => {

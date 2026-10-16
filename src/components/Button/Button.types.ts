@@ -7,6 +7,9 @@ export type ButtonColor = "primary" | "success" | "error" | "info" | "white";
 type ButtonSize = "small" | "medium" | "large";
 
 export type ButtonProps = {
+  className?: string;
+  labelClassName?: string;
+  loaderClassName?: string;
   label: string;
   type?: ButtonType;
   variant?: ButtonVariant;

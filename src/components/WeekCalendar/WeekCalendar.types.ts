@@ -3,6 +3,26 @@ import type { DesignSystemId } from "../../design-systems";
 import { CalendarEvent, EventsByCategory } from "./components/WeekCalendarRow/WeekCalendarRow.types";
 
 export type WeekCalendarProps = {
+  dateRangeClassName?: string;
+  dateRangeStyle?: CSSProperties;
+  categoryClassName?: string;
+  eventClassName?: string;
+  tooltipClassName?: string;
+  dayNameClassName?: string;
+  dayNameStyle?: CSSProperties;
+  dayNumberClassName?: string;
+  dayNumberStyle?: CSSProperties;
+  gridClassName?: string;
+  headerCategoryCellClassName?: string;
+  headerCategoryCellStyle?: CSSProperties;
+  headerClassName?: string;
+  headerDayCellClassName?: string;
+  headerDayCellStyle?: CSSProperties;
+  headerRowClassName?: string;
+  headerRowStyle?: CSSProperties;
+  navigationClassName?: string;
+  titleClassName?: string;
+  titleStyle?: CSSProperties;
   className?: string;
   style?: CSSProperties;
   headerStyle?: CSSProperties;
@@ -17,8 +37,6 @@ export type WeekCalendarProps = {
   onEventClick?: (event: CalendarEvent) => void;
   onDayChange?: (weekStart: Date, weekEnd: Date) => void;
 };
-
-/** Preview controls for the single WeekCalendar story; not additional component props. */
 export type WeekCalendarStoryArgs = WeekCalendarProps & {
   designSystem: DesignSystemId;
 };
