@@ -21,19 +21,18 @@ export const SaveAction = () => (
 
 | ID | Design specification | Component adaptations |
 | --- | --- | --- |
-| `neus` | [Neus UI (default)](../src/design-systems/neus/DESIGN.md) | Original library design; token recipes for Button, Card, Input, Sidebar |
-| `apple` | [Apple HIG — sober surfaces](../src/design-systems/apple/DESIGN.md) | Button, Card, Input, Sidebar |
-| `carbon` | [IBM Carbon](../src/design-systems/carbon/DESIGN.md) | Button, Card, Input, Sidebar |
-| `material` | [Material 3 base](../src/design-systems/material/DESIGN.md) | Button, Card, Input, Sidebar |
-| `neobrutalism` | [Neobrutalism — Neus vocabulary](../src/design-systems/neobrutalism/DESIGN.md) | Button, Card, Input, Sidebar |
-| `vercel` | [Vercel Geist](../src/design-systems/vercel/DESIGN.md) | Button, Card, Input, Sidebar |
+| `neus` | [Neus UI (default)](../src/design-systems/neus/DESIGN.md) | All public component families and both templates |
+| `apple` | [Apple HIG — sober surfaces](../src/design-systems/apple/DESIGN.md) | All public component families and both templates |
+| `carbon` | [IBM Carbon](../src/design-systems/carbon/DESIGN.md) | All public component families and both templates |
+| `material` | [Material 3 base](../src/design-systems/material/DESIGN.md) | All public component families and both templates |
+| `neobrutalism` | [Neobrutalism — Neus vocabulary](../src/design-systems/neobrutalism/DESIGN.md) | All public component families and both templates |
+| `vercel` | [Vercel Geist](../src/design-systems/vercel/DESIGN.md) | All public component families and both templates |
 
 External systems are project adaptations of their design references,
 with illustrative choices where a reference leaves details unspecified. They are
 not complete implementations of the original libraries. Fonts use local fallbacks.
-Button, Input, Sidebar and the composable Card family have component-specific adaptations.
-Other components receive shared theme colors but retain their existing structure
-and styles. See the [Input guide](./components/Input.md) for its token contract and
+Base, Navigation, Date & Time, Location, DataTable and both templates have
+component-specific recipes. Actions is documented consumer composition. See the [Input guide](./components/Input.md) for its token contract and
 per-part customization.
 `DESIGN_SYSTEMS` and `DesignSystemId` are public exports for application selectors.
 
@@ -188,3 +187,8 @@ container's CSS tokens even though React context still follows its original
 parent. Portal-aware local theming is outside the current Button coverage.
 On the server, local scopes include their attributes and palette variables in
 the markup. Global providers apply document variables when mounted in the client.
+
+
+All public families and both templates now have scoped recipes. See the
+[migration and validation guide](./refactor-migration.md) for current public contracts,
+including shared presentations and the AG Grid bridge.

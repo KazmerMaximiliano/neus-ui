@@ -2,6 +2,8 @@
   --font-body: "Inter", Arial, sans-serif;
   --font-display: var(--font-body);
   --font-mono: "JetBrains Mono", monospace;
+  /* Yellow is a fill, not legible text: quiet primary actions use ink instead. */
+  --color-primary-text: var(--color-text-primary);
 }
 
 [data-design-system="neobrutalism"][data-color-scheme="light"] {

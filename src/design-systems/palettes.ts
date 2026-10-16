@@ -7,7 +7,7 @@ export const DESIGN_SYSTEM_PALETTES: Record<DesignSystemId, DesignSystemPalette>
   },
   apple: {
     light: { primary: "#0071e3", onPrimary: "#ffffff" },
-    dark: { primary: "#2997ff", onPrimary: "#161616" },
+    dark: { primary: "#2997ff", onPrimary: "#161616", hover: "#4aa8ff" },
   },
   carbon: {
     light: {
@@ -21,8 +21,8 @@ export const DESIGN_SYSTEM_PALETTES: Record<DesignSystemId, DesignSystemPalette>
     dark: { primary: "#c8b3fd", onPrimary: "#161616" },
   },
   neobrutalism: {
-    light: { primary: "#fdc800", onPrimary: "#1c293c", focus: "#432dd7" },
-    dark: { primary: "#fdc800", onPrimary: "#1c293c", focus: "#c8b3fd" },
+    light: { primary: "#fdc800", onPrimary: "#1c293c", focus: "#432dd7", error: "#e11d48" },
+    dark: { primary: "#fdc800", onPrimary: "#1c293c", focus: "#c8b3fd", error: "#ff6b6b" },
   },
   vercel: {
     light: { primary: "#171717", onPrimary: "#ffffff", focus: "#0072f5" },

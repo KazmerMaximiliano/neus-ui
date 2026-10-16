@@ -1,0 +1,30 @@
+/* Public Checkbox token contract. Recipes override values, never component selectors. */
+:root,
+[data-design-system] {
+  --checkbox-font-family: var(--font-body);
+  --checkbox-size: 18px;
+  --checkbox-radius: 4px;
+  --checkbox-gap: 8px;
+  --checkbox-border-width: 2px;
+  --checkbox-border-color: var(--color-primary-dark);
+  --checkbox-hover-border-color: var(--color-primary);
+  --checkbox-background: var(--color-surface);
+  --checkbox-shadow: none;
+  --checkbox-checked-background: var(--color-primary);
+  --checkbox-checked-border-color: var(--color-primary);
+  --checkbox-checked-shadow: 0 4px 12px -4px var(--color-focus-ring);
+  --checkbox-check-color: var(--color-text-on-primary);
+  --checkbox-icon-size: 12px;
+  --checkbox-icon-stroke: 3;
+  --checkbox-label-color: var(--color-text-primary);
+  --checkbox-label-font-size: var(--fs-base);
+  --checkbox-label-line-height: 20px;
+  --checkbox-focus-width: 2px;
+  --checkbox-focus-color: var(--color-focus);
+  --checkbox-focus-offset: 2px;
+  --checkbox-disabled-background: var(--color-surface-disabled);
+  --checkbox-disabled-border-color: var(--color-border-subtle);
+  --checkbox-disabled-color: var(--color-text-disabled);
+  --checkbox-transition: background-color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}

@@ -1,29 +1,24 @@
-import { ColDef, ColGroupDef } from "ag-grid-community";
+import type { ColDef, ColGroupDef } from "ag-grid-community";
+import type { CSSProperties, ReactNode } from "react";
 
-export interface PaginationInfo {
-  current_page: number;
-  last_page: number;
-  per_page: number;
-  total: number;
-}
-
-export interface PaginationChangeParams {
-  currentPage: number;
-  pageSize: number;
-}
-
-export type DataTableProps<T extends object = object> = {
-  data: T[];
-  pagination: PaginationInfo;
-  onEdit?: (rowData: T) => void;
-  onDelete?: (rowData: T) => void;
-  onInfo?: (rowData: T) => void;
-  onPaginationChange?: (params: PaginationChangeParams) => void;
-  columnLabels?: Record<string, string>;
-  useCardLayout?: boolean;
+export type PaginationInfo = { current_page: number; last_page: number; per_page: number; total: number; };
+export type PaginationChangeParams = { currentPage: number; pageSize: number; };
+export type DataTableColDef<T extends object = object> = ColDef<T> | ColGroupDef<T>;
+export type DataTableEmptyProps = {
   noDataTitle?: string;
   noDataDescription?: string;
-  hiddenColumns?: string[];
-}
+  emptyStateStyle?: CSSProperties;
+};
 
-export type DataTableColDef = ColDef | ColGroupDef;
+export type DataTableProps<T extends object = object> = DataTableEmptyProps & {
+  data: T[];
+  columnDefs: DataTableColDef<T>[];
+  pagination: PaginationInfo;
+  renderMobileCard?: (row: T) => ReactNode;
+  onPaginationChange?: (params: PaginationChangeParams) => void;
+  className?: string;
+  style?: CSSProperties;
+  paginationStyle?: CSSProperties;
+};
+
+export type DataTableSampleRow = { id: number; name: string; email: string; };

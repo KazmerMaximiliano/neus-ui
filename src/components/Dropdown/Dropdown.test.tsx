@@ -1,139 +1,94 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { User } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Dropdown } from "./Dropdown";
 
-afterEach(() => {
-  cleanup();
-});
+afterEach(cleanup);
 
-const defaultItems = [
+const items = () => [
   { label: "Profile", onClick: vi.fn() },
-  { label: "Settings", onClick: vi.fn() },
-  { label: "Logout", onClick: vi.fn() },
+  { label: "Sign out", onClick: vi.fn() },
 ];
-
-const renderDropdown = (props = {}) => {
-  return render(<Dropdown items={defaultItems} {...props} />);
-};
 
 describe("Dropdown", () => {
   describe("rendering", () => {
-    it("renders dropdown container", () => {
-      const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown")).toBeInTheDocument();
+    it("names the trigger after the account and announces a menu", () => {
+      render(<Dropdown name="Ada" items={items()} />);
+      const trigger = screen.getByRole("button", { name: "Ada" });
+      expect(trigger).toHaveAttribute("aria-haspopup", "menu");
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
     });
 
-    it("renders avatar container", () => {
-      const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown__avatar")).toBeInTheDocument();
-    });
-
-    it("renders X when no icon provided", () => {
-      const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown__avatar")).toHaveTextContent(
-        "X",
+    it("shows the name initial without an icon and the icon otherwise", () => {
+      const { rerender } = render(<Dropdown name="Ada" items={items()} />);
+      expect(document.querySelector(".dropdown__avatar")).toHaveTextContent(
+        "A",
       );
-    });
-
-    it("renders icon when provided", () => {
-      const { container } = renderDropdown({ icon: User });
+      rerender(<Dropdown name="Ada" icon={User} items={items()} />);
       expect(
-        container.querySelector(".dropdown__avatar svg"),
+        document.querySelector(".dropdown__avatar svg"),
       ).toBeInTheDocument();
     });
 
-    it("renders caret indicator", () => {
-      const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown__caret")).toBeInTheDocument();
+    it("falls back to a default label without a name", () => {
+      render(<Dropdown items={items()} />);
+      expect(screen.getByRole("button", { name: "Menú" })).toBeInTheDocument();
     });
   });
 
-  describe("panel", () => {
-    it("does not show panel by default", () => {
-      const { container } = renderDropdown();
-      expect(container.querySelector(".dropdown__panel")).not.toHaveClass(
-        "dropdown__panel--open",
+  describe("interactions", () => {
+    it("opens with the name header and rotates the caret", async () => {
+      render(<Dropdown name="Ada" items={items()} />);
+      const trigger = screen.getByRole("button", { name: "Ada" });
+      await userEvent.click(trigger);
+      expect(trigger).toHaveClass("dropdown__trigger--open");
+      expect(screen.getByRole("menu", { name: "Ada" })).toHaveTextContent(
+        "Ada",
       );
+      expect(screen.getByRole("menuitem", { name: "Profile" })).toHaveFocus();
     });
 
-    it("opens panel on click", () => {
-      const { container } = renderDropdown();
-      const dropdown = container.querySelector(".dropdown");
-      fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown__panel")).toHaveClass(
-        "dropdown__panel--open",
-      );
+    it("runs item actions and closes", async () => {
+      const list = items();
+      render(<Dropdown name="Ada" items={list} />);
+      await userEvent.click(screen.getByRole("button", { name: "Ada" }));
+      await userEvent.click(screen.getByRole("menuitem", { name: "Sign out" }));
+      expect(list[1].onClick).toHaveBeenCalledOnce();
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument();
     });
 
-    it("closes panel on second click", () => {
-      const { container } = renderDropdown();
-      const dropdown = container.querySelector(".dropdown");
-      fireEvent.click(dropdown!);
-      fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown__panel")).not.toHaveClass(
-        "dropdown__panel--open",
-      );
-    });
-
-    it("shows name in panel when provided", () => {
-      const { container } = renderDropdown({ name: "John Doe" });
-      const dropdown = container.querySelector(".dropdown");
-      fireEvent.click(dropdown!);
-      expect(screen.getByText("John Doe")).toBeInTheDocument();
-    });
-
-    it("shows all dropdown items", () => {
-      const { container } = renderDropdown();
-      const dropdown = container.querySelector(".dropdown");
-      fireEvent.click(dropdown!);
-      expect(screen.getByText("Profile")).toBeInTheDocument();
-      expect(screen.getByText("Settings")).toBeInTheDocument();
-      expect(screen.getByText("Logout")).toBeInTheDocument();
-    });
-
-    it("adds open class to caret when panel is open", () => {
-      const { container } = renderDropdown();
-      const dropdown = container.querySelector(".dropdown");
-      fireEvent.click(dropdown!);
-      expect(
-        container.querySelector(".dropdown__caret--open"),
-      ).toBeInTheDocument();
-    });
-
-    it("closes panel on outside click", () => {
-      const { container } = renderDropdown();
-      const dropdown = container.querySelector(".dropdown");
-      fireEvent.click(dropdown!);
-      expect(container.querySelector(".dropdown__panel")).toHaveClass(
-        "dropdown__panel--open",
-      );
+    it("closes on outside clicks and Escape", async () => {
+      render(<Dropdown name="Ada" items={items()} />);
+      const trigger = screen.getByRole("button", { name: "Ada" });
+      await userEvent.click(trigger);
       fireEvent.mouseDown(document.body);
-      expect(container.querySelector(".dropdown__panel")).not.toHaveClass(
-        "dropdown__panel--open",
-      );
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+      await userEvent.click(trigger);
+      await userEvent.keyboard("{Escape}");
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+      expect(trigger).toHaveFocus();
     });
   });
 
-  describe("dropdown items", () => {
-    it("calls item onClick when clicked", () => {
-      const onClick = vi.fn();
-      const items = [{ label: "Click me", onClick }];
-      const { container } = render(<Dropdown items={items} />);
-      const dropdown = container.querySelector(".dropdown");
-      fireEvent.click(dropdown!);
-      fireEvent.click(screen.getByText("Click me"));
-      expect(onClick).toHaveBeenCalledTimes(1);
-    });
-
-    it("renders items with clickable class", () => {
-      const { container } = renderDropdown();
-      const dropdown = container.querySelector(".dropdown");
-      fireEvent.click(dropdown!);
-      const clickableItems = container.querySelectorAll(
-        ".dropdown__item--clickable",
+  describe("customization", () => {
+    it("applies each style object to its part", async () => {
+      render(
+        <Dropdown
+          name="Ada"
+          items={items()}
+          triggerStyle={{ borderRadius: 2 }}
+          menuStyle={{ minWidth: 280 }}
+          itemStyle={{ paddingLeft: 30 }}
+        />,
       );
-      expect(clickableItems).toHaveLength(3);
+      const trigger = screen.getByRole("button", { name: "Ada" });
+      expect(trigger).toHaveStyle({ borderRadius: "2px" });
+      await userEvent.click(trigger);
+      expect(screen.getByRole("menu")).toHaveStyle({ minWidth: "280px" });
+      expect(screen.getByRole("menuitem", { name: "Profile" })).toHaveStyle({
+        paddingLeft: "30px",
+      });
     });
   });
 });

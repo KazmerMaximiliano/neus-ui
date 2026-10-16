@@ -11,6 +11,14 @@ const meta: Meta<typeof AppTemplateComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    title: { control: "text", description: "title override" },
+    className: { control: "text", description: "className override" },
+    style: { control: "object", description: "style override" },
+    headerStyle: { control: "object", description: "headerStyle override" },
+    sidebarStyle: { control: "object", description: "sidebarStyle override" },
+    contentStyle: { control: "object", description: "contentStyle override" },
+    contentContainerStyle: { control: "object", description: "contentContainerStyle override" },
+
     children: {
       control: false,
       description: "Content to display in the main area",
@@ -76,8 +84,16 @@ const menuItems = [
 
 export const AppTemplate: Story = {
   args: {
+    title: undefined,
+    className: undefined,
+    style: {},
+    headerStyle: {},
+    sidebarStyle: {},
+    contentStyle: {},
+    contentContainerStyle: {},
+
     children: (
-      <div style={{ padding: "2rem" }}>
+      <div>
         <h1>Welcome to the Application</h1>
         <br />
         <p>

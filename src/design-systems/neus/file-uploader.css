@@ -1,0 +1,46 @@
+/* Public FileUploader token contract. Recipes override values, never selectors. */
+:root,
+[data-design-system] {
+  --file-uploader-font-family: var(--font-body);
+  --file-uploader-min-height: 200px;
+  --file-uploader-padding: 16px;
+  --file-uploader-gap: 8px;
+  --file-uploader-radius: var(--radius-default);
+  --file-uploader-border-width: 2px;
+  --file-uploader-border-style: dashed;
+  --file-uploader-border-color: var(--color-border-input-hover);
+  --file-uploader-background: var(--color-surface);
+  --file-uploader-color: var(--color-text-primary);
+  --file-uploader-shadow: none;
+  --file-uploader-hover-border-color: var(--color-primary);
+  --file-uploader-hover-background: var(--color-surface-hover);
+  --file-uploader-focus-color: var(--color-focus);
+  --file-uploader-drag-border-color: var(--color-primary);
+  --file-uploader-drag-background: var(--color-primary-light);
+  --file-uploader-drag-transform: scale(1.02);
+  --file-uploader-success-border-color: var(--color-success);
+  --file-uploader-icon-size: 48px;
+  --file-uploader-title-size: var(--fs-md);
+  --file-uploader-title-weight: 600;
+  --file-uploader-hint-size: var(--fs-base);
+  --file-uploader-hint-color: var(--color-text-secondary);
+  --file-uploader-media-radius: var(--radius-sm);
+  --file-uploader-badge-size: 60px;
+  --file-uploader-badge-radius: 50%;
+  --file-uploader-badge-border-width: 0px;
+  --file-uploader-badge-background: var(--color-primary-light);
+  --file-uploader-badge-color: var(--color-primary-text);
+  --file-uploader-error-color: var(--color-error);
+  /* Raw error red is below 4.5:1 as text; mix it toward the mode's text color. */
+  --file-uploader-error-text-color: color-mix(in srgb, var(--color-error) 65%, var(--color-text-primary));
+  --file-uploader-error-background: var(--color-error-light);
+  --file-uploader-error-area-background: var(--file-uploader-error-background);
+  --file-uploader-error-border-width: 1px;
+  --file-uploader-error-padding: 8px 16px;
+  --file-uploader-error-radius: var(--radius-sm);
+  --file-uploader-disabled-background: var(--color-surface-disabled);
+  --file-uploader-disabled-border-color: var(--color-border-subtle);
+  --file-uploader-disabled-color: var(--color-text-disabled);
+  --file-uploader-transition: border-color 0.3s ease, background-color 0.3s ease,
+    transform 0.3s ease;
+}

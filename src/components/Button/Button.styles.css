@@ -1,5 +1,6 @@
-/* Layout and states belong to Button. All design choices are token-driven. */
 .button {
+  --button-accent-text: var(--button-accent);
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: var(--button-justify);
@@ -36,18 +37,30 @@
   color: inherit;
 }
 
+.button-loader > * {
+  flex-shrink: 0;
+}
+
+.button[aria-busy="true"] .button-label {
+  visibility: hidden;
+}
+
 .button-loader {
+  position: absolute;
+  inset: 0;
+  padding: inherit;
   display: inline-flex;
   align-items: center;
+  justify-content: var(--button-justify);
   gap: var(--button-loader-gap);
   font-size: var(--button-loader-size);
   color: inherit;
   line-height: 1;
 }
 
-/* Color is independent of design system, variant and size. */
 .button--primary {
   --button-accent: var(--color-primary);
+  --button-accent-text: var(--color-primary-text);
   --button-accent-hover: var(--color-primary-dark);
   --button-accent-active: var(--color-primary-active);
   --button-accent-subtle: var(--color-primary-light);
@@ -59,7 +72,7 @@
   --button-accent-hover: var(--color-success-dark);
   --button-accent-active: var(--color-success-dark);
   --button-accent-subtle: var(--color-success-light);
-  --button-on-accent: var(--color-black);
+  --button-on-accent: var(--color-text-on-success);
 }
 
 .button--error {
@@ -67,7 +80,7 @@
   --button-accent-hover: var(--color-error-dark);
   --button-accent-active: var(--color-error-dark);
   --button-accent-subtle: var(--color-error-light);
-  --button-on-accent: var(--color-white);
+  --button-on-accent: var(--color-text-on-error);
 }
 
 .button--info {
@@ -75,12 +88,16 @@
   --button-accent-hover: var(--color-info-dark);
   --button-accent-active: var(--color-info-dark);
   --button-accent-subtle: var(--color-info-light);
-  --button-on-accent: var(--color-text-on-primary);
+  --button-on-accent: var(--color-text-on-info);
 }
 
 .button--white {
   --button-accent: var(--color-white);
-  --button-accent-hover: color-mix(in srgb, var(--color-white) 90%, var(--color-black));
+  --button-accent-hover: color-mix(
+    in srgb,
+    var(--color-white) 90%,
+    var(--color-black)
+  );
   --button-accent-active: var(--button-accent-hover);
   --button-accent-subtle: var(--color-white-100);
   --button-on-accent: var(--color-black);
@@ -103,14 +120,14 @@
 
 .button--outlined {
   background-color: transparent;
-  color: var(--button-accent);
+  color: var(--button-accent-text);
   border-width: var(--button-outlined-border-width);
   border-color: currentColor;
 }
 
 .button--text {
   background-color: transparent;
-  color: var(--button-accent);
+  color: var(--button-accent-text);
   border-width: 0;
   box-shadow: none;
 }
@@ -133,13 +150,23 @@
 }
 
 .button:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 3px;
+  outline: var(--button-focus-width) solid var(--button-focus-color);
+  outline-offset: var(--button-focus-offset);
+}
+
+.button:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: var(--button-focus-width);
+  border-radius: inherit;
+  box-shadow: var(--button-focus-inner-shadow);
+  pointer-events: none;
 }
 
 .button:disabled {
   cursor: not-allowed;
   opacity: var(--button-disabled-opacity);
+  box-shadow: var(--button-disabled-shadow);
 }
 
 .button--solid:disabled {
@@ -164,4 +191,86 @@
   .button {
     transition: none;
   }
+
+  .button:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+.button--secondary,
+.button--tonal,
+.button--elevated {
+  border-width: var(--button-border-width);
+  border-color: var(--button-border-color);
+}
+.button--secondary {
+  background: var(--button-secondary-background);
+  color: var(--button-secondary-color);
+}
+.button--secondary:hover:not(:disabled),
+.button--secondary:active:not(:disabled) {
+  background: var(--button-secondary-hover);
+}
+.button--tonal {
+  background: var(--button-tonal-background);
+  color: var(--button-tonal-color);
+}
+.button--tonal:hover:not(:disabled),
+.button--tonal:active:not(:disabled) {
+  background: color-mix(
+    in srgb,
+    var(--button-tonal-background) 90%,
+    var(--button-tonal-color)
+  );
+}
+.button--elevated {
+  background: var(--button-elevated-background);
+  color: var(--button-elevated-color);
+  box-shadow: var(--button-elevated-shadow);
+}
+.button--elevated:hover:not(:disabled),
+.button--elevated:active:not(:disabled) {
+  background: color-mix(
+    in srgb,
+    var(--button-elevated-background) 92%,
+    var(--button-elevated-color)
+  );
+  box-shadow: var(--button-elevated-shadow-hover);
+}
+.button--secondary:disabled,
+.button--tonal:disabled,
+.button--elevated:disabled {
+  background: var(--button-disabled-background);
+  color: var(--button-disabled-color);
+  box-shadow: var(--button-disabled-shadow);
+}
+
+.button--primary {
+  --button-on-hover: var(--color-text-on-primary-hover);
+  --button-on-active: var(--color-text-on-primary-active);
+}
+.button--success {
+  --button-on-hover: var(--color-text-on-success-hover);
+  --button-on-active: var(--color-text-on-success-active);
+  --button-accent-text: var(--color-success-text);
+}
+.button--error {
+  --button-on-hover: var(--color-text-on-error-hover);
+  --button-on-active: var(--color-text-on-error-active);
+  --button-accent-text: var(--color-error-text);
+}
+.button--info {
+  --button-on-hover: var(--color-text-on-info-hover);
+  --button-on-active: var(--color-text-on-info-active);
+  --button-accent-text: var(--color-info-text);
+}
+.button--white {
+  --button-on-hover: var(--color-black);
+  --button-on-active: var(--color-black);
+}
+.button--solid:hover:not(:disabled) {
+  color: var(--button-on-hover);
+}
+.button--solid:active:not(:disabled) {
+  color: var(--button-on-active);
 }

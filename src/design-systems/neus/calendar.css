@@ -1,0 +1,45 @@
+/* Public Calendar token contract. Recipes override values, never component selectors. */
+:root,
+[data-design-system] {
+  --calendar-font-family: var(--font-body);
+  --calendar-min-width: 325px;
+  --calendar-multiple-min-width: 625px;
+  --calendar-background: var(--color-surface);
+  --calendar-color: var(--color-text-primary);
+  --calendar-border-width: 1px;
+  --calendar-border-color: var(--color-border-input);
+  --calendar-radius: var(--radius-default);
+  --calendar-shadow: none;
+  --calendar-divider-width: 1px;
+  --calendar-divider-color: var(--color-border-subtle);
+  --calendar-header-padding: 16px 24px;
+  --calendar-label-color: var(--color-control-text);
+  --calendar-label-size: 1em;
+  --calendar-label-weight: 500;
+  --calendar-caption-color: var(--color-primary-text);
+  --calendar-caption-size: 15px;
+  --calendar-caption-weight: 700;
+  --calendar-nav-color: var(--color-primary-text);
+  --calendar-weekday-color: var(--color-text-secondary);
+  --calendar-weekday-size: var(--fs-sm);
+  --calendar-day-size: 36px;
+  --calendar-day-font-size: var(--fs-sm);
+  --calendar-day-radius: 50%;
+  --calendar-item-radius: 6px;
+  --calendar-day-hover-background: var(--color-surface-hover);
+  --calendar-accent: var(--color-primary);
+  --calendar-selected-background: var(--color-primary-light);
+  --calendar-selected-color: var(--color-primary-text);
+  --calendar-selected-weight: 700;
+  --calendar-selected-shadow: none;
+  --calendar-range-edge-background: var(--color-primary);
+  --calendar-range-edge-color: var(--color-text-on-primary);
+  --calendar-range-middle-background: var(--color-primary-light);
+  --calendar-range-middle-color: var(--color-text-primary);
+  --calendar-today-color: var(--color-primary-text);
+  --calendar-today-weight: 700;
+  --calendar-today-ring: inset 0 0 0 1px var(--color-primary);
+  --calendar-focus-color: var(--color-focus);
+  --calendar-error-color: color-mix(in srgb, var(--color-error) 65%, var(--color-text-primary));
+  --calendar-disabled-opacity: 0.6;
+}

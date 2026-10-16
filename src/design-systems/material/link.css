@@ -1,0 +1,5 @@
+/* Inline links stay underlined so they are not identified by color alone. */
+[data-design-system="material"] {
+  --link-decoration: underline;
+  --link-underline-offset: 0.15em;
+}

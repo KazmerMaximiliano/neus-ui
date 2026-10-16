@@ -231,7 +231,7 @@ El tipo genérico `CardMediaProps<C>` usa `ComponentPropsWithRef` y
 ampliarse accidentalmente por otros atributos. Por ejemplo, `controls` requiere
 elegir video o audio; no es válido en la imagen predeterminada. Los elementos
 vacíos como `img` rechazan children. Ver el
-[tipo completo](./src/components/Card/CardMedia/CardMedia.types.ts).
+[tipo completo](./src/components/Card/components/CardMedia/CardMedia.types.ts).
 
 El polimorfismo resuelve una necesidad específica de Media. Evaluarlo por
 componente, junto con sus atributos, referencias y semántica, antes de añadirlo
@@ -244,7 +244,8 @@ a otras APIs.
 | `avatarImage`, `avatarAlt` | Un `img` u otro componente como child de CardHeader |
 | `leading`, `trailing` | Children explícitos de CardHeader |
 | `icon`, `title`, `description` | Iconos, encabezados y texto colocados en las secciones |
-| `variant`, `fill`, `color`, `highlighted`, `selected` | Clases, tokens o estilos de la aplicación |
+| Combinaciones antiguas de `variant` y `fill` | Variante actual auto/filled/outlined/elevated |
+| `color`, `highlighted`, `selected` | Clases, tokens o composición de children |
 | `disabled`, `onClick` | Estado y eventos en botones, enlaces u otros children interactivos |
 
 El reemplazo rompe compatibilidad con esas props y elimina `CardColor` y
@@ -351,14 +352,49 @@ ComponentName/
 ├── ComponentName.styles.css
 ├── ComponentName.test.tsx
 ├── ComponentName.stories.tsx
+├── ComponentName.consts.ts         # si se declaran constantes
 ├── ComponentName.utils.ts          # opcional
-└── ComponentSection/               # si existe una sección pública
-    ├── ComponentSection.tsx
-    ├── ComponentSection.types.ts
-    ├── ComponentSection.styles.css
-    ├── ComponentSection.test.tsx
-    └── ComponentSection.stories.tsx
+└── components/                     # subcomponentes internos y públicos
+    ├── InternalPart.tsx            # pieza interna simple, como StepperDots
+    └── ComponentSection/           # sección con archivos propios
+        ├── ComponentSection.tsx
+        ├── ComponentSection.types.ts
+        ├── ComponentSection.styles.css
+        ├── ComponentSection.test.tsx
+        └── ComponentSection.stories.tsx
 ```
+
+El árbol muestra el caso de un único archivo de tests. Si un componente necesita
+varios archivos, todos deben agruparse en `ComponentName/tests/`, conservando
+nombres como `ComponentName.test.tsx`, `ComponentName.utils.test.ts` y
+`ComponentName.types.test.tsx`. No mezclar tests en la raíz y dentro de `tests/`.
+Cada subcomponente aplica esta regla dentro de su propia carpeta. Las suites
+compartidas de navegador en `src/design-systems/` mantienen su ubicación.
+
+Todos los subcomponentes de renderizado, internos o públicos, deben estar en
+`ComponentName/components/`, siguiendo el patrón de Stepper. Las piezas simples
+pueden ser archivos directos y reutilizar tipos, estilos y pruebas del padre;
+las piezas con archivos propios conservan una carpeta con su nombre dentro de
+`components/`. No agregar CSS vacío ni historias públicas para piezas internas.
+Los tipos siempre permanecen en archivos `.types.ts` separados.
+
+Las piezas compartidas mantienen una sola familia propietaria: PickerField en
+DateInput, MenuItems en Menu y SelectListbox en Select. Sus consumidores internos
+las importan directamente. Los contextos, hooks, utilidades y constantes mantienen
+sus archivos dedicados. Esta regla también se aplica a los templates si añaden
+subcomponentes propios.
+
+Las secciones públicas se reexportan desde el índice de la familia. Por ejemplo,
+WeekCalendarRow vive en `WeekCalendar/components/WeekCalendarRow/`, pero se sigue
+importando desde `neus-ui`. Reorganizar archivos no cambia la API pública.
+
+Las constantes estáticas (listas, valores predeterminados, mapas de teclas y
+configuración estable) se declaran en `ComponentName.consts.ts`, con exports
+nombrados en UPPER_SNAKE_CASE. Usar el sufijo `.consts.ts`, no `.constants.ts`.
+Los tipos permanecen en `.types.ts` y las funciones auxiliares en `.utils.ts`.
+Los hooks, contextos, valores derivados y registros mutables de ejecución no son
+constantes de configuración. Los nombres de meses deben generarse según el idioma
+o admitir configuración del consumidor, en lugar de quedar fijados a un idioma.
 
 Cada sección exportada tiene sus propios archivos. Usar exports nombrados,
 tipos separados, importaciones ES y las convenciones de
@@ -494,8 +530,8 @@ export type { ButtonProps, ButtonColor } from "./Button.types";
 // Fragmento de src/components/Card/index.ts
 export { Card } from "./Card";
 export type { CardProps } from "./Card.types";
-export { CardHeader } from "./CardHeader/CardHeader";
-export type { CardHeaderProps } from "./CardHeader/CardHeader.types";
+export { CardHeader } from "./components/CardHeader/CardHeader";
+export type { CardHeaderProps } from "./components/CardHeader/CardHeader.types";
 // El mismo patrón se aplica a CardMedia, CardContent y CardFooter.
 ```
 
@@ -613,7 +649,7 @@ Referencias existentes:
 
 - [Button.test.tsx](./src/components/Button/Button.test.tsx).
 - [Card.test.tsx](./src/components/Card/Card.test.tsx) y pruebas de sus secciones.
-- [CardMedia.test.tsx](./src/components/Card/CardMedia/CardMedia.test.tsx).
+- [CardMedia.test.tsx](./src/components/Card/components/CardMedia/CardMedia.test.tsx).
 - [Pruebas de diseños de Button](./src/design-systems/design-systems.browser.test.tsx).
 - [Pruebas de diseños de Card](./src/design-systems/card.browser.test.tsx).
 
@@ -735,3 +771,14 @@ de la aplicación. Ver [Sidebar](./docs/components/Sidebar.md),
 - [Convenciones de desarrollo](./docs/development.md).
 - [Pruebas y comprobación de tipos](./docs/testing.md).
 - [Índice de documentación](./docs/README.md).
+
+
+## Ampliación de contratos (2026-10-15)
+
+La API actual incorpora variantes de Button y Card y presentaciones compartidas de
+Input/PickerField. Calendar usa una unión discriminada y numberOfMonths. Todas las
+familias públicas y ambos templates tienen contratos Neus y cinco recetas; Actions
+se elimina en favor de composición del consumidor de DataTable. El [documento de
+migración](./docs/refactor-migration.md) detalla los contratos finales, ejemplos,
+pruebas y límites. Sus secciones de migración reemplazan los ejemplos históricos
+que todavía describen la API anterior. Los valores siguen en CSS/TypeScript.

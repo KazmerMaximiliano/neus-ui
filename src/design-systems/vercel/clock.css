@@ -1,0 +1,14 @@
+[data-design-system="vercel"] {
+  --clock-radius: 12px;
+  --clock-border-color: var(--color-border-subtle);
+  --clock-header-padding: 16px 20px;
+  --clock-header-border-width: 1px;
+  --clock-header-background: var(--color-surface);
+  --clock-header-color: var(--color-text-primary);
+  --clock-display-font-size: 36px;
+  --clock-segment-padding: 0 6px;
+  --clock-segment-radius: 6px;
+  --clock-segment-inactive-opacity: 1;
+  --clock-segment-active-background: var(--color-surface-secondary);
+  --clock-face-background: var(--color-surface-secondary);
+}

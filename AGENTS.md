@@ -28,9 +28,11 @@ Neus UI is a production-ready React component library that provides:
 2. **File Structure MUST match pattern**: Each component follows ComponentName/ directory structure
 3. **Export Strategy MUST be named exports**: All components use `export const` pattern
 4. **Props MUST be in separate .types.ts**: Type definitions separated from implementation
-5. **Tests MUST be co-located**: .test.tsx files in same directory as component
+5. **Tests MUST stay inside the component directory**: one test file lives beside the implementation; multiple test files MUST all live in its `tests/` subdirectory
 6. **Styles MUST use CSS files**: Separate .styles.css files with CSS variables
 7. **No default exports**: Only use named exports throughout the project
+8. **Component constants MUST use a dedicated file**: Static data and configuration belong in `ComponentName.consts.ts`, using named UPPER_SNAKE_CASE exports
+9. **Subcomponents MUST live in `components/`**: Every internal or public part belongs in `ComponentName/components/`, following the Stepper pattern
 
 ### Restricted Operations
 
@@ -87,26 +89,89 @@ ComponentName/
 ├── ComponentName.tsx            [REQUIRED] Component implementation
 ├── ComponentName.types.ts       [REQUIRED] Type definitions
 ├── ComponentName.styles.css     [REQUIRED] Component styles
-├── ComponentName.test.tsx       [REQUIRED] Unit tests
+├── ComponentName.test.tsx       [REQUIRED if there is only one test file]
+├── ComponentName.consts.ts      [REQUIRED when declaring static constants]
 ├── ComponentName.utils.ts       [OPTIONAL] Utility functions
-└── ComponentName.stories.tsx    [REQUIRED] Storybook documentation
+├── ComponentName.stories.tsx    [REQUIRED] Storybook documentation
+└── components/                 [WHEN NEEDED] Internal and public subcomponents
 ```
+
+Keep at most one test file at the component root. If the component needs two or
+more test files (behavior, utilities, types or stories), move **all** of them into
+`ComponentName/tests/`; never mix root-level tests with grouped tests:
+
+```text
+ComponentName/
+├── ComponentName.tsx
+├── ComponentName.types.ts
+├── ComponentName.styles.css
+├── ComponentName.stories.tsx
+├── ComponentName.consts.ts      [WHEN NEEDED]
+├── ComponentName.utils.ts       [OPTIONAL]
+└── tests/
+    ├── ComponentName.test.tsx
+    ├── ComponentName.utils.test.ts
+    └── ComponentName.types.test.tsx
+```
+
+Retain descriptive filenames. Public subcomponents apply the same rule within
+their own directories. Shared browser suites in `src/design-systems/` and tests of
+standalone utilities are separate from this component layout rule.
+
+### Subcomponent structure
+
+All rendering parts owned by a component live in its `components/` directory,
+including parts previously declared inside the main implementation. A small
+internal part can be a direct file, as in Stepper; a part with its own styles,
+utilities, tests or stories uses a named directory inside `components/`:
+
+```text
+ComponentName/
+├── index.ts
+├── ComponentName.tsx
+├── ComponentName.types.ts
+├── ComponentName.styles.css
+├── ComponentName.test.tsx
+└── components/
+    ├── InternalPart.tsx
+    └── PublicSection/
+        ├── PublicSection.tsx
+        ├── PublicSection.types.ts
+        ├── PublicSection.styles.css
+        ├── PublicSection.test.tsx
+        └── PublicSection.stories.tsx
+```
+
+Public sections follow the full component conventions, including the `tests/`
+rule when multiple test files are needed. Small internal parts may reuse their
+parent's separate types, styles and behavioral tests; do not create empty files
+or public stories for internal implementation details. Dedicated internal types
+still belong in `.types.ts`, never inside the implementation.
+
+Shared internal parts keep one owning family: PickerField belongs to DateInput,
+MenuItems to Menu, and SelectListbox to Select. Sibling families import these
+implementations directly rather than duplicating them. Contexts, hooks, constants
+and utilities are not rendering subcomponents and keep their dedicated files.
+Templates follow the same rule if they introduce owned subcomponents.
+
+Expose public sections through the owning family's `index.ts`; moving source
+files must not change imports from `neus-ui` or expose internal parts. For example,
+WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components (28 total)
+### Implemented Components and Public Subcomponents (30 total)
 
 | NAME            | FILE_PATH                       | STATUS | FEATURES                                        |
 | --------------- | ------------------------------- | ------ | ----------------------------------------------- |
-| Actions         | src/components/Actions/         | STABLE | Action grouping                                 |
 | Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
 | Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state |
 | Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
 | Card            | src/components/Card/            | STABLE | Composable themed surface, className and style |
-| CardHeader      | src/components/Card/CardHeader/ | STABLE | Free-form header content and actions |
-| CardMedia       | src/components/Card/CardMedia/  | STABLE | Polymorphic media with native/custom props and refs |
-| CardContent     | src/components/Card/CardContent/ | STABLE | Content spacing with arbitrary children |
-| CardFooter      | src/components/Card/CardFooter/ | STABLE | Wrapping footer content and actions |
+| CardHeader      | src/components/Card/components/CardHeader/ | STABLE | Free-form header content and actions |
+| CardMedia       | src/components/Card/components/CardMedia/  | STABLE | Polymorphic media with native/custom props and refs |
+| CardContent     | src/components/Card/components/CardContent/ | STABLE | Content spacing with arbitrary children |
+| CardFooter      | src/components/Card/components/CardFooter/ | STABLE | Wrapping footer content and actions |
 | Checkbox        | src/components/Checkbox/        | STABLE | Indeterminate state                             |
 | Clock           | src/components/Clock/           | STABLE | Time picker                                     |
 | DataTable       | src/components/DataTable/       | STABLE | Sorting, pagination, filtering                  |
@@ -119,12 +184,15 @@ ComponentName/
 | Link            | src/components/Link/            | STABLE | Styled links                                    |
 | Menu            | src/components/Menu/            | STABLE | Actions menu                                    |
 | Modal           | src/components/Modal/           | STABLE | Dialog boxes                                    |
+| ModalHeader     | src/components/Modal/components/ModalHeader/ | STABLE | Dialog title and header composition |
+| ModalContent    | src/components/Modal/components/ModalContent/ | STABLE | Dialog body composition |
+| ModalFooter     | src/components/Modal/components/ModalFooter/ | STABLE | Dialog action composition |
 | MultiSelect     | src/components/MultiSelect/     | STABLE | Multiple selection                              |
 | Select          | src/components/Select/          | STABLE | Single selection                                |
 | Sidebar         | src/components/Sidebar/         | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer |
 | TimeInput       | src/components/TimeInput/       | STABLE | Time validation                                 |
 | WeekCalendar    | src/components/WeekCalendar/    | STABLE | Weekly view, event categories, navigation       |
-| WeekCalendarRow | src/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
+| WeekCalendarRow | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
 | Stepper         | src/components/Stepper/         | STABLE | Dots/linear/simple variants, labels, step click |
 
 ### Implemented Templates (2 total)
@@ -222,7 +290,8 @@ export const ComponentName = ({
 2. Internal components and hooks
 3. CSS files
 4. Type definitions
-5. Utility functions
+5. Local constants from ComponentName.consts.ts
+6. Utility functions
 
 CORRECT ORDER EXAMPLE:
 
@@ -241,12 +310,22 @@ import { validateInput } from "./Input.utils";
 | ITEM_TYPE         | PATTERN          | EXAMPLES                     |
 | ----------------- | ---------------- | ---------------------------- |
 | Component files   | PascalCase       | Button.tsx, Modal.tsx        |
+| Constant modules  | ComponentName.consts.ts | Calendar.consts.ts |
 | Component exports | PascalCase       | Button, Modal                |
 | Functions         | camelCase        | handleClick, getData         |
 | Variables         | camelCase        | isLoading, errorMessage      |
 | Constants         | UPPER_SNAKE_CASE | MAX_WIDTH, DEFAULT_COLOR     |
 | CSS classes       | kebab-case       | button-primary, modal-header |
 | Type names        | PascalCase       | ButtonProps, ComponentColor  |
+
+Static module data (arrays, defaults, key maps, selectors and stable configuration
+objects) MUST be declared in `ComponentName.consts.ts`, not inside `.tsx` or
+`.utils.ts` files. Use `.consts.ts` consistently, not `.constants.ts`. Import these
+values into the implementation or utilities. Types remain in `.types.ts`; helper
+functions remain in `.utils.ts`. This rule does not move components, hooks,
+contexts, refs, derived render values or mutable runtime registries into a
+constants module. Consumer-facing language must be configurable or generated from
+locale data rather than fixed to the developer's language.
 
 ### Code Formatting Rules
 
@@ -286,8 +365,8 @@ MUST use CSS variables from theme system:
 
 TEST_FILE MUST:
 
-- Be located in same directory as component
-- Use .test.tsx extension
+- Live beside the component when it has a single test file; when it has multiple files, all MUST be in its `tests/` subdirectory
+- Use `.test.tsx` for component/JSX tests or `.test.ts` for tests without JSX
 - Export from vitest framework
 - Cover rendering, interactions, and edge cases
 
@@ -393,8 +472,10 @@ When agents need to implement new components, use this checklist:
 - [ ] Create ComponentName.types.ts with props interface
 - [ ] Create ComponentName.tsx with export const
 - [ ] Create ComponentName.styles.css using CSS variables
+- [ ] Create ComponentName.consts.ts for static data/configuration
 - [ ] Create ComponentName.utils.ts if needed
-- [ ] Create ComponentName.test.tsx with 100% coverage
+- [ ] Put owned subcomponents in ComponentName/components/; expose public sections through the family index
+- [ ] Create ComponentName.test.tsx with 100% coverage; if adding multiple test files, place all of them in ComponentName/tests/
 - [ ] Create ComponentName.stories.tsx for Storybook
 - [ ] Run `pnpm lint` - must pass
 - [ ] Run `pnpm test:unit` - must pass
@@ -483,7 +564,7 @@ Storybook
 
 1. Create .types.ts file for components
 2. Create .styles.css file for components
-3. Create .test.tsx file for components
+3. Create tests for components: one file at the component root, or all files in tests/ when there are multiple
 4. Include descriptive JSDoc comments
 5. Use TypeScript strict mode
 6. Test all interactive features
@@ -540,7 +621,7 @@ For agents needing additional information:
 | Design system / theming?    | docs/design-system.md, docs/theming.md | /docs/                    |
 | Visual identity / refactor target? | DESIGN.md per system, indexed in docs/design-systems.md | src/design-systems/<id>/DESIGN.md |
 | Type definitions?           | Component.types.ts                 | src/components/ComponentName/ |
-| Test examples?              | Component.test.tsx                 | src/components/ComponentName/ |
+| Test examples?              | ComponentName.test.tsx; grouped tests when multiple | src/components/ComponentName/ or src/components/ComponentName/tests/ |
 | Styling reference?          | Component.styles.css               | src/components/ComponentName/ |
 
 Project documentation lives in `docs/` as Markdown, with explicit exceptions for
@@ -558,3 +639,13 @@ explicit `.md` extensions and keep `docs/README.md` up to date when adding guide
 Documentation can be read directly in the repository or a Markdown editor;
 it does not require a development server or build step. Storybook provides the
 interactive component catalog separately.
+
+## Refactor implementation update — 2026-10-15
+
+All public families and both templates have six scoped recipes. Button adds
+secondary/tonal/elevated; Card adds auto/filled/outlined/elevated. Input and picker
+fields share variant, size and label-placement controls. Calendar is discriminated
+by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
+renderMobileCard; Actions is removed and documented as consumer composition in
+Storybook. See [migration](./docs/refactor-migration.md). Preserve these final APIs
+and do not reintroduce removed adapters.

@@ -32,3 +32,8 @@
   --sidebar-control-border-color: var(--color-text-primary);
   --sidebar-control-shadow: 3px 3px 0 var(--color-text-primary);
 }
+
+/* Keep the heavy frame on the panel; rows use a quieter outline on dark surfaces. */
+[data-design-system="neobrutalism"][data-color-scheme="dark"] {
+  --sidebar-item-border-color: var(--color-border-input-hover);
+}

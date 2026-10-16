@@ -1,100 +1,55 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { Button } from "../Button/Button";
-import { IconButton } from "../IconButton/IconButton";
+import { usePopover } from "../../hooks/usePopover";
+import "../Button/Button.styles.css";
+import { getButtonClasses } from "../Button/Button.utils";
+import "../IconButton/IconButton.styles.css";
+import { getIconButtonClasses } from "../IconButton/IconButton.utils";
 import "./Menu.styles.css";
 import { MenuProps } from "./Menu.types";
+import { MenuItems } from "./components/MenuItems";
 
 export const Menu = ({
   icon: Icon,
   text,
   size = "medium",
   items,
+  menuStyle,
+  itemStyle,
 }: MenuProps) => {
-  const menuRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>(null);
-
-  const [openMenu, setOpenMenu] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
-
-  const updatePosition = useCallback(() => {
-    if (triggerRef.current) {
-      const rect = triggerRef.current.getBoundingClientRect();
-      setPosition({
-        top: rect.bottom + 8,
-        left: rect.right,
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node) &&
-        triggerRef.current &&
-        !triggerRef.current.contains(event.target as Node)
-      ) {
-        setOpenMenu(false);
-      }
-    };
-
-    if (openMenu) {
-      document.addEventListener("mousedown", handleClickOutside);
-      window.addEventListener("scroll", () => setOpenMenu(false), true);
-      window.addEventListener("resize", () => setOpenMenu(false));
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      window.removeEventListener("scroll", () => setOpenMenu(false), true);
-      window.removeEventListener("resize", () => setOpenMenu(false));
-    };
-  }, [openMenu]);
-
-  const handleToggle = () => {
-    if (!openMenu) {
-      updatePosition();
-    }
-    setOpenMenu(!openMenu);
-  };
+  const popover = usePopover({
+    initialFocus: '[role="menuitem"]:not(:disabled)',
+  });
+  const { id, open, triggerRef, toggle } = popover;
+  const name = text || "Menú";
 
   return (
-    <div className="menu" ref={triggerRef}>
-      {Icon ? (
-        <IconButton
-          icon={Icon}
-          variant="text"
-          onClick={handleToggle}
-          size={size}
-        />
-      ) : (
-        <Button label={text || ""} variant="text" onClick={handleToggle} />
-      )}
-      {createPortal(
-        <div
-          className={`menu__dropdown${openMenu ? " menu__dropdown--open" : ""}`}
-          ref={menuRef}
-          style={{
-            top: position.top,
-            left: position.left,
-          }}
-        >
-          {items.map((item, index) => (
-            <div
-              key={index}
-              className="menu__item menu__item--clickable"
-              onClick={() => {
-                item.onClick();
-                setOpenMenu(false);
-              }}
-            >
-              {item.label}
-            </div>
-          ))}
-        </div>,
-        document.body,
-      )}
+    <div className="menu">
+      <button
+        ref={triggerRef}
+        type="button"
+        className={
+          Icon
+            ? getIconButtonClasses("text", "primary", size)
+            : getButtonClasses("text", "primary", size, false)
+        }
+        aria-label={Icon ? name : undefined}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={toggle}
+      >
+        {Icon ? (
+          <Icon className="icon-button-icon" aria-hidden />
+        ) : (
+          <span className="button-label">{name}</span>
+        )}
+      </button>
+      <MenuItems
+        popover={popover}
+        label={name}
+        items={items}
+        menuStyle={menuStyle}
+        itemStyle={itemStyle}
+      />
     </div>
   );
 };

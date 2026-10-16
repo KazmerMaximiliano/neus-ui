@@ -1,0 +1,11 @@
+/* Label-chip mapping: 8px corners and label-small typography. */
+[data-design-system="material"] {
+  --badge-font-size: 12px;
+  --badge-font-weight: 500;
+  --badge-letter-spacing: 0.5px;
+  --badge-text-transform: none;
+  --badge-line-height: 16px;
+  --badge-padding: 4px 8px;
+  --badge-radius: 8px;
+  --badge-dot-font-size: 12px;
+}

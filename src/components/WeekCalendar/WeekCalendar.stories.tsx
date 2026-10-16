@@ -1,5 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { WeekCalendar as WeekCalendarComponent } from "./WeekCalendar";
+import type { WeekCalendarStoryArgs } from "./WeekCalendar.types";
 
 const today = new Date();
 const tomorrow = new Date(today);
@@ -9,7 +12,7 @@ dayAfterTomorrow.setDate(dayAfterTomorrow.getDate() + 2);
 const threeDaysLater = new Date(today);
 threeDaysLater.setDate(threeDaysLater.getDate() + 3);
 
-const meta: Meta<typeof WeekCalendarComponent> = {
+const meta: Meta<WeekCalendarStoryArgs> = {
   title: "Date & Time/WeekCalendar",
   component: WeekCalendarComponent,
   parameters: {
@@ -17,6 +20,20 @@ const meta: Meta<typeof WeekCalendarComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the WeekCalendar",
+    },
+    className: { control: "text", description: "className override" },
+    style: { control: "object", description: "style override" },
+    headerStyle: { control: "object", description: "headerStyle override" },
+    navigationStyle: { control: "object", description: "navigationStyle override" },
+    gridStyle: { control: "object", description: "gridStyle override" },
+    categoryStyle: { control: "object", description: "categoryStyle override" },
+    eventStyle: { control: "object", description: "eventStyle override" },
+    tooltipStyle: { control: "object", description: "tooltipStyle override" },
+
     title: {
       control: "text",
       description: "The title displayed in the calendar header",
@@ -47,20 +64,21 @@ type Story = StoryObj<typeof meta>;
 
 export const WeekCalendar: Story = {
   args: {
+    designSystem: "neus",
+    className: undefined,
+    style: {},
+    headerStyle: {},
+    navigationStyle: {},
+    gridStyle: {},
+    categoryStyle: {},
+    eventStyle: {},
+    tooltipStyle: {},
+
     title: "Events",
     hoverContent: (event) => (
-      <div
-        style={{
-          padding: "8px 12px",
-          backgroundColor: "#fff",
-          border: "1px solid #e0e0e0",
-          borderRadius: "8px",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-          fontSize: "13px",
-        }}
-      >
+      <div>
         <strong>{event.title}</strong>
-        {event.description && <p style={{ margin: "4px 0 0" }}>{event.description}</p>}
+        {event.description && <p>{event.description}</p>}
       </div>
     ),
     events: [
@@ -90,6 +108,11 @@ export const WeekCalendar: Story = {
       },
     ],
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <WeekCalendarComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

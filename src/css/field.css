@@ -1,0 +1,80 @@
+.field-presentation {
+  --field-placeholder-opacity: var(--input-placeholder-rest-opacity);
+  --field-height: var(--input-control-height-medium);
+  --field-label-position: var(--input-label-position);
+  --field-label-top: calc(var(--field-height) / 2);
+  --field-label-left: var(--input-label-left);
+  --field-label-translate: var(--input-label-translate);
+  --field-label-background: var(--input-label-background);
+  --field-label-padding: var(--input-label-padding);
+  --field-label-size: var(--input-label-rest-size);
+  --field-label-raised-top: 0px;
+  --field-label-raised-translate: var(--input-label-raised-translate);
+  --field-label-raised-size: var(--input-label-raised-size);
+  position: relative;
+  min-width: 0;
+}
+.field-presentation[data-size="small"] {
+  --field-height: var(--input-control-height-small);
+  --input-padding: var(--input-small-padding);
+}
+.field-presentation[data-size="large"] {
+  --field-height: var(--input-control-height-large);
+  --input-padding: var(--input-large-padding);
+}
+.field-presentation[data-variant="filled"] {
+  --input-background: var(--input-filled-background);
+  --input-border-width: var(--input-filled-border-width);
+}
+.field-presentation[data-variant="outlined"] {
+  --input-border-width: var(--input-outlined-border-width);
+}
+.field-presentation[data-label-placement="floating"] {
+  --field-placeholder-opacity: 0;
+  --field-label-position: absolute;
+  --field-label-top: calc(var(--field-height) / 2);
+  --field-label-left: 12px;
+  --field-label-translate: translateY(-50%);
+  --field-label-background: var(--input-background);
+  --field-label-padding: 0 4px;
+  --field-label-size: var(--input-font-size);
+  --field-label-raised-top: 0px;
+  --field-label-raised-translate: translateY(-50%);
+  --field-label-raised-size: 12px;
+}
+.field-presentation[data-label-placement="external"] {
+  --field-placeholder-opacity: 1;
+  --field-label-position: static;
+  --field-label-top: auto;
+  --field-label-left: auto;
+  --field-label-translate: none;
+  --field-label-background: transparent;
+  --field-label-padding: 0px;
+  --field-label-size: var(--input-label-font-size);
+  --field-label-raised-top: auto;
+  --field-label-raised-translate: none;
+  --field-label-raised-size: var(--input-label-font-size);
+}
+.field-presentation > :is(.input__label, .picker-field__label) {
+  position: var(--field-label-position);
+  top: var(--field-label-top);
+  left: var(--field-label-left);
+  transform: var(--field-label-translate);
+  background: var(--field-label-background);
+  padding: var(--field-label-padding);
+  font-size: var(--field-label-size);
+  z-index: 1;
+  max-width: calc(100% - 32px);
+}
+.field-presentation:has(
+  :focus,
+  input:not([type="hidden"]):not(:placeholder-shown),
+  .picker-field__value,
+  .picker-field__field--open,
+  .input__prefix
+),
+.field-presentation[data-native-color] {
+  --field-label-top: var(--field-label-raised-top);
+  --field-label-translate: var(--field-label-raised-translate);
+  --field-label-size: var(--field-label-raised-size);
+}

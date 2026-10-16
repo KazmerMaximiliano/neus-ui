@@ -10,10 +10,20 @@
   --card-header-padding: 16px;
   --card-header-gap: 8px;
   --card-header-border-width: 1px;
-  --card-header-border-color: var(--color-white-100);
+  --card-header-border-color: var(--card-border-color);
+  --card-nested-background: var(--card-background);
   --card-content-padding: 16px;
   --card-footer-padding: 8px;
   --card-footer-gap: 8px;
   --card-media-object-fit: cover;
   --card-media-object-position: center;
+}
+
+:root, [data-design-system] {
+  --card-filled-background: var(--color-surface-secondary);
+  --card-filled-border-width: 0px;
+  --card-outlined-background: var(--color-surface);
+  --card-outlined-border-width: 1px;
+  --card-elevated-background: var(--color-surface);
+  --card-elevated-shadow: var(--elevation-floating);
 }

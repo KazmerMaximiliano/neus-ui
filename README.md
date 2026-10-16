@@ -25,10 +25,10 @@ typed APIs, CSS variable theming, and ready-made layout templates.
 
 | Area | Details |
 | --- | --- |
-| Components | 28 reusable UI components including Button, composable Card sections, DataTable, Modal, Select, Calendar, Sidebar, Stepper, and WeekCalendar |
+| Components | 30 public components and sections including Button, composable Card and Modal sections, DataTable, Select, Calendar, Sidebar, Stepper, and WeekCalendar |
 | Templates | `AppTemplate` for application shells and `FormTemplate` for validated forms |
 | Theming | Runtime theme updates with `ThemeProvider`, `useTheme`, `useColors`, and CSS variables |
-| Design systems | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel themes; Button, Input, Card and Sidebar adaptations |
+| Design systems | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel themes; recipes for every public component family and both templates |
 | Testing | Vitest, React Testing Library, Storybook integration, and coverage reporting |
 | AI-first workflow | `neus-designer` orchestrates project intake and invokes Neus UI skills to generate typed `.tsx` UI artifacts |
 
@@ -48,6 +48,10 @@ src/
 docs/                  # Markdown guides and reference
 .storybook/            # Interactive component catalog configuration
 ```
+
+Each family keeps its owned subcomponents in `ComponentName/components/`.
+Public sections remain available as named imports from `neus-ui`.
+See [Development](./docs/development.md#code-style-guidelines) for the file layout.
 
 ### Installation
 
@@ -123,3 +127,5 @@ Copyright 2026 Maximiliano Kazmer
 
 Licensed under the Apache License, Version 2.0. See [LICENSE](./LICENSE) for
 the full license text.
+
+See the [component migration guide](./docs/refactor-migration.md) for the six-system presentation APIs and voluntary DataTable actions.

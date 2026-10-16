@@ -1,0 +1,30 @@
+/* Public Modal family token contract. Recipes override values, never selectors. */
+:root,
+[data-design-system] {
+  --modal-width: 500px;
+  --modal-viewport-margin: 16px;
+  --modal-background: var(--color-surface);
+  --modal-color: var(--color-text-primary);
+  --modal-font-family: var(--font-body);
+  --modal-border-width: 0px;
+  --modal-border-color: transparent;
+  --modal-radius: var(--radius-default);
+  --elevation-dialog: 0 4px 20px var(--color-shadow);
+  --modal-shadow: var(--elevation-dialog);
+  --modal-backdrop: var(--color-overlay);
+  --modal-divider-width: 1px;
+  --modal-divider-color: var(--color-border-subtle);
+  --modal-header-padding: 24px;
+  --modal-header-gap: 8px;
+  --modal-title-font-family: var(--font-display);
+  --modal-title-size: var(--fs-xl);
+  --modal-title-weight: 600;
+  --modal-title-line-height: 1.3;
+  --modal-content-padding: 24px;
+  --modal-content-color: var(--color-text-secondary);
+  --modal-content-line-height: 1.5;
+  --modal-footer-padding: 16px 24px;
+  --modal-footer-gap: 12px;
+  --modal-footer-justify: flex-end;
+  --modal-footer-item-flex: 0 1 auto;
+}

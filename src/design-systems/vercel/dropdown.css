@@ -1,0 +1,13 @@
+[data-design-system="vercel"] {
+  --dropdown-padding: 4px 8px 4px 4px;
+  --dropdown-radius: 6px;
+  --dropdown-border-color: var(--color-border-subtle);
+  --dropdown-hover-border-color: var(--color-text-placeholder);
+  --dropdown-avatar-size: 28px;
+  --dropdown-caret-size: 16px;
+  --dropdown-caret-stroke: 2;
+  --dropdown-caret-color: var(--color-text-secondary);
+  --dropdown-name-color: var(--color-text-primary);
+  --dropdown-name-weight: 500;
+  --dropdown-name-transform: none;
+}

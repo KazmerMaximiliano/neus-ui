@@ -3,4 +3,5 @@
   --card-background: var(--color-surface-secondary);
   --card-border-width: 0px;
   --card-header-border-width: 0px;
+  --card-nested-background: var(--color-layer-02);
 }

@@ -14,3 +14,22 @@
   font-family: var(--card-font-family);
   box-shadow: var(--card-shadow);
 }
+
+.card .card {
+  --card-background: var(--card-nested-background);
+}
+
+.card[data-variant="filled"] {
+  background: var(--card-filled-background);
+  border-width: var(--card-filled-border-width);
+  box-shadow: none;
+}
+.card[data-variant="outlined"] {
+  background: var(--card-outlined-background);
+  border-width: var(--card-outlined-border-width);
+  box-shadow: none;
+}
+.card[data-variant="elevated"] {
+  background: var(--card-elevated-background);
+  box-shadow: var(--card-elevated-shadow);
+}

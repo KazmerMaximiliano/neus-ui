@@ -1,7 +1,10 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { Stepper as StepperComponent } from "./Stepper";
+import type { StepperStoryArgs } from "./Stepper.types";
 
-const meta: Meta<typeof StepperComponent> = {
+const meta: Meta<StepperStoryArgs> = {
   title: "Navigation/Stepper",
   component: StepperComponent,
   parameters: {
@@ -9,6 +12,11 @@ const meta: Meta<typeof StepperComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the stepper",
+    },
     currentStep: {
       control: "number",
       description: "Current active step (0-indexed)",
@@ -21,34 +29,52 @@ const meta: Meta<typeof StepperComponent> = {
       control: "select",
       options: ["dots", "linear", "simple"],
       description:
-        "Visual style: dots (numbered circles), linear (progress bar), simple (small dots)",
+        "Visual style: dots (numbered markers), linear (progress bar), simple (compact markers)",
     },
     size: {
       control: "select",
       options: ["small", "medium", "large"],
       description: "Size of the dot indicators (dots variant only)",
     },
+    labels: {
+      control: "object",
+      description: "Step names; announced even when not shown",
+    },
     showLabels: {
       control: "boolean",
-      description:
-        "Show step labels below dots (dots/simple) or step counter (linear)",
+      description: "Show step labels (dots) or the step counter (linear)",
     },
     showConnectors: {
       control: "boolean",
       description: "Show connector lines between dots (dots variant only)",
     },
+    dotStyle: {
+      control: "object",
+      description: "CSS properties applied to every step marker",
+    },
+    labelStyle: {
+      control: "object",
+      description: "CSS properties applied to labels and the linear counter",
+    },
+    connectorStyle: {
+      control: "object",
+      description: "CSS properties applied to every connector",
+    },
+    barStyle: {
+      control: "object",
+      description: "CSS properties applied to the linear track",
+    },
     onStepClick: {
       action: "stepClicked",
       description:
-        "Callback when a completed step dot is clicked. Receives step index (0-indexed).",
+        "Makes completed steps buttons; receives the step index (0-indexed)",
     },
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Stepper: Story = {
+export const Stepper: StoryObj<StepperStoryArgs> = {
   args: {
+    designSystem: "neus",
     currentStep: 1,
     totalSteps: 3,
     variant: "dots",
@@ -56,7 +82,18 @@ export const Stepper: Story = {
     labels: ["Profile", "Goals", "Done"],
     showLabels: true,
     showConnectors: true,
+    dotStyle: {},
+    labelStyle: {},
+    connectorStyle: {},
+    barStyle: {},
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <div style={{ width: 420 }}>
+        <StepperComponent {...args} />
+      </div>
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

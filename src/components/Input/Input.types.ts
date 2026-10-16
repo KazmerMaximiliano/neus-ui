@@ -1,7 +1,19 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { DesignSystemId } from "../../design-systems";
 
-export type InputProps = {
+export type FieldPresentationProps = {
+  variant?: "auto" | "filled" | "outlined";
+  labelPlacement?: "auto" | "external" | "floating";
+  size?: "small" | "medium" | "large";
+};
+
+export type InputProps = FieldPresentationProps & {
+  prefix?: ReactNode;
+  suffix?: ReactNode;
+  errorIcon?: ReactNode;
+  prefixStyle?: CSSProperties;
+  suffixStyle?: CSSProperties;
+  errorIconStyle?: CSSProperties;
   id?: string;
   "aria-label"?: string;
   name?: string;

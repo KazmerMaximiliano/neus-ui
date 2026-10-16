@@ -86,9 +86,43 @@ describe("Checkbox", () => {
 
     it("works without onChange handler", () => {
       renderCheckbox();
-      expect(() =>
-        fireEvent.click(screen.getByRole("checkbox")),
-      ).not.toThrow();
+      expect(() => fireEvent.click(screen.getByRole("checkbox"))).not.toThrow();
     });
+  });
+});
+
+describe("Checkbox label, mixed state and parts", () => {
+  it("names the native checkbox with its visible label", () => {
+    renderCheckbox({ label: "Accept terms" });
+    expect(
+      screen.getByRole("checkbox", { name: "Accept terms" }),
+    ).toBeInTheDocument();
+  });
+
+  it("exposes the indeterminate state on the native input", () => {
+    renderCheckbox({ indeterminate: true });
+    const input = screen.getByRole("checkbox") as HTMLInputElement;
+    expect(input.indeterminate).toBe(true);
+    expect(input).toBePartiallyChecked();
+    expect(document.querySelector(".checkbox")).toHaveClass(
+      "checkbox--indeterminate",
+    );
+  });
+
+  it("applies checkboxStyle to the box and labelStyle to the text", () => {
+    renderCheckbox({
+      label: "Label",
+      checkboxStyle: { borderRadius: 7 },
+      labelStyle: { fontSize: 19 },
+    });
+    expect(document.querySelector(".checkbox__box")).toHaveStyle({
+      borderRadius: "7px",
+    });
+    expect(screen.getByText("Label")).toHaveStyle({ fontSize: "19px" });
+  });
+
+  it("submits its value with a form", () => {
+    renderCheckbox({ name: "terms", value: "yes", checked: true });
+    expect(screen.getByRole("checkbox")).toHaveAttribute("value", "yes");
   });
 });

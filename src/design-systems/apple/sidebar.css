@@ -9,7 +9,8 @@
   --sidebar-item-hover-background: var(--color-surface-hover);
   --sidebar-item-hover-color: var(--color-text-primary);
   --sidebar-item-active-background: var(--color-primary-light);
-  --sidebar-item-active-color: var(--color-primary);
+  /* Label stays primary text; the accent tint marks the location. */
+  --sidebar-item-active-color: var(--color-text-primary);
   --sidebar-item-focus-color: var(--color-focus);
   --sidebar-item-size: 14px;
   --sidebar-item-weight: 500;

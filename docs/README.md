@@ -25,7 +25,7 @@ GitHub or a Markdown editor; no server or build step is required.
 | [Input](./components/Input.md) | Props, accessibility, CSS tokens, six recipes and per-part customization |
 | [Card composition and migration](./components/Card.md) | Card, Header, Media, Content and Footer props, themes and examples |
 | [Sidebar](./components/Sidebar.md) | Responsive navigation, transparent curves, six recipes and AppTemplate integration |
-| [Development](./development.md) | Repository commands, code style, and documentation maintenance |
+| [Development](./development.md) | Repository commands, component/subcomponent layout, code style, and documentation maintenance |
 | [Testing](./testing.md) | Unit tests, browser tests, coverage, and Storybook type checking |
 | [AI-first workflow](./ai-first.md) | Overview of the Neus Design workflow |
 | [Neus Design reference](./neus-design.md) | Skill catalog, orchestrator, and extension conventions |
@@ -42,3 +42,8 @@ pnpm storybook
 See [Components](./components.md#storybook) for more details.
 
 [Back to the project overview](../README.md)
+
+
+- [Component refactor migration and validation](./refactor-migration.md)
+- [AppTemplate](./templates/AppTemplate.md)
+- [FormTemplate](./templates/FormTemplate.md)

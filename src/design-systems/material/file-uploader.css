@@ -1,0 +1,12 @@
+[data-design-system="material"] {
+  --file-uploader-radius: 12px;
+  --file-uploader-border-width: 1px;
+  --file-uploader-border-color: var(--color-text-secondary);
+  --file-uploader-background: var(--color-surface-container-low);
+  --file-uploader-drag-transform: none;
+  --file-uploader-title-weight: 500;
+  --file-uploader-badge-radius: 16px;
+  --file-uploader-badge-background: var(--color-secondary-container);
+  --file-uploader-badge-color: var(--color-on-secondary-container);
+  --file-uploader-error-radius: 4px;
+}

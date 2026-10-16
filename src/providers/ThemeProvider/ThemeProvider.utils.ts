@@ -1,6 +1,6 @@
+import type { DesignSystemId } from "../../design-systems";
 import { DESIGN_SYSTEM_PALETTES } from "../../design-systems/palettes";
 import { getDarkenColor, hexToRgb } from "../../utils";
-import type { DesignSystemId } from "../../design-systems";
 import type { ColorScheme, ColorVariants, ThemeColors, ThemeConfig } from "./ThemeProvider.types";
 
 const colorVariants = (color: string, scheme: ColorScheme): ColorVariants => {
@@ -12,7 +12,17 @@ const colorVariants = (color: string, scheme: ColorScheme): ColorVariants => {
   };
 };
 
-/** Resolve a palette once for the context and the DOM, including user overrides. */
+const onColor = (color: string, fallback: string): string => {
+  const rgb = hexToRgb(color);
+  if (!rgb) return fallback;
+  const linear = [rgb.r, rgb.g, rgb.b].map((channel) => {
+    const c = channel / 255;
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  const luminance = linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+  return (luminance + 0.05) / 0.05 >= 1.05 / (luminance + 0.05) ? "#000000" : "#ffffff";
+};
+
 export const resolveTheme = (
   designSystem: DesignSystemId,
   scheme: ColorScheme,
@@ -38,23 +48,30 @@ export const resolveTheme = (
   };
 
   const variables: Record<string, string> = {
-    "--color-text-on-primary": palette.onPrimary,
+    "--color-text-on-primary": overrides.primaryColor ? onColor(primary.main, palette.onPrimary) : palette.onPrimary,
     "--color-primary-active": overrides.primaryColor ? primary.dark : palette.active ?? primary.dark,
-    "--color-focus": overrides.primaryColor ?? palette.focus ?? primary.main,
+    "--color-focus": overrides.primaryColor ? "color-mix(in srgb, var(--color-primary) 25%, var(--color-text-primary))" : palette.focus ?? primary.main,
     "--color-border-light": colors.borderLight,
     "--color-shadow": colors.shadow,
   };
+
+  if (overrides.primaryColor) variables["--color-primary-text"] = "color-mix(in srgb, var(--color-primary) 25%, var(--color-text-primary))";
 
   for (const name of ["primary", "success", "error", "info"] as const) {
     variables[`--color-${name}`] = colors[name].main;
     variables[`--color-${name}-light`] = colors[name].light;
     variables[`--color-${name}-dark`] = colors[name].dark;
+    if (name !== "primary") variables[`--color-text-on-${name}`] = onColor(colors[name].main, palette.onPrimary);
+    variables[`--color-text-on-${name}-hover`] = onColor(colors[name].dark, palette.onPrimary);
+    variables[`--color-text-on-${name}-active`] = onColor(
+      name === "primary" ? variables["--color-primary-active"] : colors[name].dark,
+      palette.onPrimary,
+    );
   }
 
   return { colors, variables };
 };
 
-/** Apply owned properties only, restoring the previous DOM state on cleanup. */
 export const applyTheme = (
   element: HTMLElement,
   designSystem: DesignSystemId,

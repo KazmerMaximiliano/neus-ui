@@ -1,7 +1,7 @@
 import type { SidebarScrollLock, SidebarViewport } from "./Sidebar.types";
+import { SCROLL_LOCK_CLASS } from "./Sidebar.consts";
 
 const SCROLL_LOCKS = new WeakMap<Document, SidebarScrollLock>();
-const SCROLL_LOCK_CLASS = "sidebar-scroll-locked";
 
 export const getSidebarViewport = (): SidebarViewport => {
   if (typeof window === "undefined") return "desktop";

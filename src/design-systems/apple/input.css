@@ -9,6 +9,9 @@
   --input-label-offset: 0px;
   --input-error-offset: 0px;
   --input-focus-border-color: var(--color-focus);
-  --input-focus-shadow: 0 0 0 2px var(--color-focus-ring);
-  --input-error-focus-shadow: 0 0 0 2px var(--color-focus-ring-error);
+  --input-focus-shadow: 0 0 0 3px var(--color-focus-ring);
+  --input-error-focus-shadow: 0 0 0 3px var(--color-focus-ring-error);
+  --input-readonly-background: var(--color-surface-secondary);
+  --input-readonly-border-style: solid;
+  --input-readonly-border-color: transparent;
 }

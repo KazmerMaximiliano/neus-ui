@@ -1,0 +1,68 @@
+.clock__number {
+  --clock-tip-local-x: calc(
+    50% + var(--clock-tip-x) - var(--clock-ring-radius) *
+      sin(var(--clock-number-angle))
+  );
+  --clock-tip-local-y: calc(
+    50% + var(--clock-tip-y) + var(--clock-ring-radius) *
+      cos(var(--clock-number-angle))
+  );
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--clock-number-size);
+  height: var(--clock-number-size);
+  margin-top: calc(var(--clock-number-size) / -2);
+  margin-left: calc(var(--clock-number-size) / -2);
+  border-radius: var(--clock-number-radius);
+  color: var(--clock-number-color);
+  font-size: var(--clock-number-font-size);
+  font-weight: 500;
+  transform: rotate(var(--clock-number-angle))
+    translateY(calc(-1 * var(--clock-ring-radius)))
+    rotate(calc(-1 * var(--clock-number-angle)));
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.clock__number--inner {
+  --clock-ring-radius: var(--clock-inner-ring-radius);
+  color: var(--clock-inner-number-color);
+  font-size: var(--clock-inner-number-font-size);
+}
+
+.clock__number--selected,
+.clock__number--inner.clock__number--selected {
+  z-index: 2;
+  background-color: var(--clock-selected-background);
+  color: var(--clock-selected-color);
+}
+
+.clock__number::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clock-hand-text-color);
+  clip-path: inset(
+    calc(var(--clock-tip-local-y) - var(--clock-number-size) / 2)
+      calc(100% - var(--clock-tip-local-x) - var(--clock-number-size) / 2)
+      calc(100% - var(--clock-tip-local-y) - var(--clock-number-size) / 2)
+      calc(var(--clock-tip-local-x) - var(--clock-number-size) / 2) round
+      var(--clock-number-radius)
+  );
+}
+
+.clock__number--selected::after {
+  color: var(--clock-selected-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clock__number {
+    transition: none;
+  }
+}

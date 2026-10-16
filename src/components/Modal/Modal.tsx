@@ -1,43 +1,62 @@
-import { Button } from "../Button/Button";
+import { useCallback, useEffect, useId, useRef } from "react";
 import "./Modal.styles.css";
-import { ModalProps } from "./Modal.types";
+import type { ModalProps } from "./Modal.types";
+import { ModalTitleContext } from "./ModalContext";
 
 export const Modal = ({
   isOpen = false,
-  title,
+  onClose,
   children,
-  onConfirm,
-  onCancel,
-  confirmText = "Confirmar",
-  cancelText = "Cancelar",
-  confirmButtonColor = "primary",
+  className,
+  style = null,
+  ref,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  ...props
 }: ModalProps) => {
-  if (!isOpen) return null;
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+
+  const setRef = useCallback(
+    (node: HTMLDialogElement | null) => {
+      dialogRef.current = node;
+      if (typeof ref === "function") return ref(node);
+      if (ref) ref.current = node;
+    },
+    [ref],
+  );
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!isOpen || !dialog) return;
+    const opener = dialog.ownerDocument.activeElement as HTMLElement | null;
+    dialog.showModal();
+    return () => {
+      if (dialog.open) dialog.close();
+      if (opener?.isConnected) opener.focus();
+    };
+  }, [isOpen]);
 
   return (
-    <div className="modal__backdrop" onClick={onCancel}>
-      <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-        {title && (
-          <div className="modal__header">
-            <h3>{title}</h3>
-          </div>
-        )}
-
-        {children && <div className="modal__body">{children}</div>}
-
-        {(onConfirm || onCancel) && (
-          <div className="modal__footer">
-            {onCancel && <Button label={cancelText} onClick={onCancel} />}
-            {onConfirm && (
-              <Button
-                color={confirmButtonColor}
-                label={confirmText}
-                onClick={onConfirm}
-              />
-            )}
-          </div>
-        )}
-      </div>
-    </div>
+    <dialog
+      {...props}
+      ref={setRef}
+      className={["modal", className].filter(Boolean).join(" ")}
+      style={style ?? undefined}
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabel ? ariaLabelledBy : (ariaLabelledBy ?? titleId)}
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose?.();
+      }}
+      onClick={(event) => {
+        props.onClick?.(event);
+        if (event.target === event.currentTarget) onClose?.();
+      }}
+    >
+      <ModalTitleContext.Provider value={titleId}>
+        {isOpen && children}
+      </ModalTitleContext.Provider>
+    </dialog>
   );
 };

@@ -8,9 +8,10 @@ decoration is restrained. This project's chosen web direction uses sober, opaque
 surfaces. Liquid Glass is not a requirement; this is a deliberate local choice,
 not a claim to reproduce every current Apple platform.
 
-**Current implementation.** Button, Card, Input, and Sidebar have Apple-inspired
-recipes. They are React web components, not native Apple controls. The rest of the
-library retains existing structure and styles with shared theme colors.
+**Current implementation.** All public component families and both templates now
+have scoped CSS token contracts and six-system recipes. Button, Card and Input
+share the expanded presentation API described below. This is the project's web
+mapping, not full feature parity with an external component framework.
 
 Format: [Google DESIGN.md](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
 (alpha, prose only). Sources consulted 2026-10-14: Apple's
@@ -31,15 +32,15 @@ action. Light and dark palettes must preserve meaning and legibility; color must
 not be the only way to identify an error or selection. These principles follow
 [HIG color guidance](https://developer.apple.com/design/human-interface-guidelines/color).
 
-**Current implementation.** The palette supplies blue actions for each mode.
-Light-mode tokens supply white/soft-gray surfaces and dark neutral text. Dark
-surfaces, muted text, and most feedback colors come from Neus defaults.
+**Current implementation.** Semantic surfaces, text, selection, field/layer and feedback roles are
+mapped in the scoped tokens and palettes. Light/dark values preserve role pairs.
+Solid action foregrounds are resolved per state; custom six-digit hex primary
+accents also receive readable text/focus mappings. These local roles do not provide
+a complete external theme matrix or a full dynamic tonal color engine.
+Apple uses opaque grouped dark surfaces and neutral control text.
 
-**Refactor gaps.** Define Apple-oriented dark surface and feedback pairs; do not
-describe the inherited dark palette as Apple's system colors. Audit
-`--color-focus-ring` and `--color-focus-ring-error`, which currently retain shared
-values, separately from `--color-focus`. Custom accents do not automatically
-produce new readable on-accent colors.
+**Validation boundary.** Consumer-supplied CSS foreground/background overrides and arbitrary non-hex
+accent formats are outside the automatic contrast contract.
 
 ## Typography
 
@@ -48,13 +49,13 @@ label, and supporting-text roles. Preserve natural label casing and modest
 weight differences. Let text wrap and respect browser zoom; a web fallback must
 remain usable when SF fonts are unavailable. This is the project's web policy.
 
-**Current implementation.** `--font-body` prefers SF Pro Text and Apple/system
-fallbacks; `--font-display` prefers SF Pro Display. Buttons use regular-weight,
-untransformed labels; navigation uses medium weight. The size scale is inherited.
-Selecting the system does not load fonts or enable native Dynamic Type.
+**Current implementation.** Font stacks remain declared locally without downloaded assets. Body,
+heading, label and caption roles include size, weight, line height and tracking.
+Component-specific sizes remain deliberate local mappings, not a claim that the
+entire external typography catalog has been implemented.
 
-**Refactor gaps.** Define semantic type roles and review fallback metrics. Avoid
-presenting the shared pixel scale as an Apple platform type specification.
+**Validation boundary.** Use local fallback fonts and review application content at zoom and with
+long translations; font asset loading belongs to the consuming application.
 
 ## Layout
 
@@ -65,12 +66,14 @@ Buttons need clear separation and a usable activation area, consistent with
 For this web adaptation, use 44 CSS pixels as the touch-target review goal rather
 than copying native point units into CSS.
 
-**Current implementation.** Control padding is recipe-specific; Card spacing and
-Sidebar's desktop/rail/mobile behavior are inherited from Neus. Input retains
-the shared minimum width. Breakpoints are library choices, not HIG specifications.
+**Current implementation.** AppTemplate and FormTemplate now map page-region spacing and responsive
+columns through recipes. AppTemplate follows Sidebar at 768/1024px; FormTemplate
+uses 2/2/1 columns by default with independent gap/region overrides. Components keep
+readable internal geometry; week grids and tables retain horizontal navigation
+where their data cannot fit a narrow viewport.
 
-**Refactor gaps.** Review small controls for touch use, long text, and narrow form
-containers. A compact visual control can require a larger activation area.
+**Validation boundary.** The shared breakpoints are Neus web choices. Application page compositions
+and specialized external grid systems remain consumer decisions.
 
 ## Elevation & Depth
 
@@ -78,12 +81,14 @@ containers. A compact visual control can require a larger activation area.
 only where they clarify grouping or floating content. Opaque surfaces are the
 local default. Avoid applying blur or translucency merely to signal “Apple.”
 
-**Current implementation.** Card and Sidebar have soft shadows. Button has no
-resting shadow and uses a slight scale change on press. Inputs gain a focus ring.
+**Current implementation.** Floating and dialog elevation roles map the existing overlay and modal
+recipes. Ordinary surfaces and action variants have separate treatments; Card
+stays passive, Button reserves elevation for its explicit treatment where required,
+and reduced-motion rules suppress nonessential transitions. Neobrutalism retains
+hard shadows with clearance in fields, cards and template spacing.
 
-**Refactor gaps.** Validate shadow separation on inherited dark surfaces. The
-shared reduced-motion rule removes transitions, but the pressed scale remains;
-review whether nonessential transforms should also be suppressed.
+**Validation boundary.** Nested surfaces and custom scroll containers must preserve focus and shadow
+clearance; the library cannot control clipping imposed by consumer overflow rules.
 
 ## Shapes
 
@@ -91,11 +96,13 @@ review whether nonessential transforms should also be suppressed.
 softer containers. Keep related controls consistent; preserve circles for avatars.
 These web radii are project choices, not universal Apple dimensions.
 
-**Current implementation.** Button/Input use 8px corners, Card 12px, and Sidebar
-items 10px. The Neus concave navigation decoration is disabled.
+**Current implementation.** Every adapted family has its own radius/border contract, including nested
+selectors, calendars, overlays, maps and tables. Neus keeps its navigation curves;
+other systems disable that decoration. Media clipping and focus remain separate
+from surface geometry. Explicit presentation variants have recipes in all systems.
 
-**Refactor gaps.** Extend this shape hierarchy to remaining components instead of
-allowing inherited pills to define unrelated controls accidentally.
+**Validation boundary.** Recipe geometry expresses the documented local web target. Native platform
+rendering and additional interactive surface types are separate capabilities.
 
 ## Components
 
@@ -106,13 +113,14 @@ similarly sized, and provide a recognizable press response. Use concise action
 labels. These priorities follow [HIG buttons](https://developer.apple.com/design/human-interface-guidelines/buttons).
 Local web requirements: retain visible keyboard focus and a readable loading state.
 
-**Current implementation.** [Button recipe](./button.css): rounded rectangle,
-regular labels, subtle pressed scale. Shared behavior provides solid/outlined/text
-variants, hover colors, focus outline, disabled treatment, and a busy dot loader.
+**Current implementation.** [Button recipe](./button.css) maps solid, secondary, tonal, elevated,
+outlined and text actions. Carbon uses primary/secondary/tertiary/ghost hierarchy
+for solid/secondary/outlined/text; Material reserves resting elevation for elevated.
+The shared implementation reserves the idle label box while busy. Semantic and
+custom hex accent foregrounds are resolved for resting, hover and pressed fills.
 
-**Refactor gaps.** Validate dark and custom-accent foreground pairs, touch sizes,
-and stable loading geometry. Shared variants and disabled colors are still Neus
-API choices rather than native Apple button styles.
+**Refactor boundaries.** Six shared variants express the supported action hierarchy. System-specific
+native APIs and additional interaction patterns remain outside this contract.
 
 ### Card
 
@@ -120,12 +128,13 @@ API choices rather than native Apple button styles.
 Content and embedded controls carry meaning; the container remains passive.
 This Card composition is a local web convention.
 
-**Current implementation.** [Card recipe](./card.css): 12px radius, subtle border,
-soft shadow, no header divider. Header/Content/Footer own padding; media clips
-inside the surface. Both modes use semantic background/text tokens.
+**Current implementation.** [Card recipe](./card.css) keeps the root passive. `variant="auto"`
+uses this system's existing treatment; filled, outlined and elevated can be chosen
+explicitly in all six systems. Header/Content/Footer keep independent spacing;
+media clips inside the surface and child controls own interactions.
 
-**Refactor gaps.** Review the combined border and shadow on dark surfaces. Focus,
-loading, and error feedback belong to child controls or content, not the Card root.
+**Refactor boundaries.** The root remains passive. Selection, expansion, loading, errors and keyboard
+actions belong to meaningful child content and controls.
 
 ### Input
 
@@ -133,13 +142,15 @@ loading, and error feedback belong to child controls or content, not the Card ro
 Use a clear focus boundary, explicit error text, and a quieter disabled surface.
 Preserve read-only text readability. These are local web form requirements.
 
-**Current implementation.** [Input recipe](./input.css): 8px corners, neutral text,
-aligned external labels, subtle border, blue focus border and shared focus shadow.
-Errors change the border, value, label, and message; native read-only is supported.
+**Current implementation.** [Input recipe](./input.css) supplies field geometry and state roles.
+The shared anatomy supports auto/filled/outlined, small/medium/large,
+auto/external/floating labels, prefix/suffix content and an optional error icon.
+Auto uses a floating outlined field in Material and external labels elsewhere.
+Focused, populated, prefixed and native color fields keep floating labels raised.
+Errors stay associated with the native input; readonly remains distinct from disabled.
 
-**Refactor gaps.** Define theme-matched focus/error rings and review invalid-focus
-visibility in both modes. Read-only has no separate visual treatment. The external
-label is intentional; no native text-field parity is implied.
+**Refactor boundaries.** Prefixes/suffixes and floating labels do not introduce masks, autocomplete
+providers or other application behavior. Native input semantics remain in use.
 
 ### Sidebar
 
@@ -148,24 +159,33 @@ current location. Adapt or collapse it when content needs the space, following
 [HIG sidebar principles](https://developer.apple.com/design/human-interface-guidelines/sidebars).
 Opaque panels, a tablet rail, and a mobile dialog are this project's web mapping.
 
-**Current implementation.** [Sidebar recipe](./sidebar.css): neutral panel,
-rounded items, subtle hover, tinted selection, blue focus, soft shadow, no curves.
-The shared component manages rail expansion and mobile dialog interactions.
+**Current implementation.** [Sidebar recipe](./sidebar.css): neutral panel, rounded
+items, subtle hover, accent-tinted selection with primary text (4.5:1 asserted in
+both modes), blue focus, soft shadow, no curves. The shared component manages rail
+expansion and mobile dialog interactions.
 
-**Refactor gaps.** Audit selection/focus contrast in dark mode and with custom
-accents. Grouped hierarchy and native sidebar customization are not implemented
-by the visual recipe. Errors and progress should be explicit content, not a
-replacement for the current-location indication.
+**Refactor boundaries.** Desktop/rail/mobile behavior is shared Neus navigation. Native-platform grouped
+sidebars and external framework navigation parity are separate capabilities.
 
-### Extension to other families — pending adaptation
+### Other component families and templates
 
-- Selection and date/time controls: carry over neutral fields, clear labels, and
-  restrained blue selection without copying native platform behavior blindly.
-- DataTable and calendars: favor readable rows, quiet separators, and aligned values.
-- Modal and menus: use opaque floating surfaces, restrained shadows, and clear
-  focus; translucency is optional future work, not a baseline requirement.
-- Badge and Stepper: keep status readable through labels and shape as well as color.
-- Templates: preserve content space and navigation discoverability at narrow widths.
+- Base and Navigation retain their interaction APIs and have explicit recipes for
+  fields, nested controls, feedback, floating surfaces, keyboard focus and selection.
+- Calendar separates single/range/multiple values; `numberOfMonths` controls visible
+  months. Clock keeps the period synchronized with controlled time. Dial labels
+  stay above the hand, with contrasting ink clipped to the indicator tip for
+  partially covered marks. DateInput and TimeInput share field presentations and
+  offer panel overrides.
+- WeekCalendar and WeekCalendarRow share a token family, a seven-day window with
+  one-day navigation, keyboard event activation and tooltips on focus or hover.
+- InteractiveMap adapts the Neus interface; `mapOptions` configures Google cartography.
+  Readonly blocks selection and marker changes. Maps SDK and geocoding failures
+  surface as errors; obsolete asynchronous responses are ignored.
+- DataTable preserves AG Grid Community. A stable theme bridge resolves
+  `--data-table-*` in the nearest provider. Columns and optional mobile cards belong
+  to the consumer; actions are documented composition rather than a public component.
+- AppTemplate shares Sidebar's breakpoints; its regions use layout tokens.
+  FormTemplate exposes responsive columns and gaps and accepts arbitrary children.
 
 ## Do's and Don'ts
 
@@ -175,3 +195,9 @@ replacement for the current-location indication.
 - Don't turn every surface into glass or every action into a prominent blue button.
 - Don't claim native system colors, Dynamic Type, or complete Apple parity.
 - Don't treat a documented target as permission to silently change public APIs.
+
+Local implementation update: 2026-10-15. See the
+[migration and validation guide](../../../docs/refactor-migration.md) for public
+API changes, test coverage and limits of this web adaptation. Visual review is
+against these local target rules; claims of native or complete framework parity
+remain outside the contract.

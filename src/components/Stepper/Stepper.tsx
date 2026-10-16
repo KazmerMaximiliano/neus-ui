@@ -1,42 +1,17 @@
-import "./Stepper.styles.css";
 import { StepperDots } from "./components/StepperDots";
 import { StepperLinear } from "./components/StepperLinear";
 import { StepperSimple } from "./components/StepperSimple";
+import "./Stepper.styles.css";
 import { StepperProps } from "./Stepper.types";
 
 export const Stepper = ({
-  currentStep,
-  totalSteps,
   variant = "dots",
   size = "small",
-  labels,
-  showLabels = false,
-  showConnectors = true,
-  onStepClick,
-}: StepperProps) => {
-  return (
-    <div className={`stepper stepper--${variant}`}>
-      {variant === "dots" && (
-        <StepperDots
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          size={size}
-          labels={labels}
-          showLabels={showLabels}
-          showConnectors={showConnectors}
-          onStepClick={onStepClick}
-        />
-      )}
-      {variant === "linear" && (
-        <StepperLinear
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          showLabels={showLabels}
-        />
-      )}
-      {variant === "simple" && (
-        <StepperSimple currentStep={currentStep} totalSteps={totalSteps} />
-      )}
-    </div>
-  );
-};
+  ...props
+}: StepperProps) => (
+  <div className={`stepper stepper--${variant} stepper--${size}`}>
+    {variant === "dots" && <StepperDots size={size} {...props} />}
+    {variant === "linear" && <StepperLinear {...props} />}
+    {variant === "simple" && <StepperSimple {...props} />}
+  </div>
+);

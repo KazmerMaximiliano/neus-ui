@@ -1,360 +1,142 @@
-import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-
-import { ThemeProvider } from "../../providers";
 import { MultiSelect } from "./MultiSelect";
+import type { MultiSelectProps } from "./MultiSelect.types";
 
-afterEach(() => {
-  cleanup();
-});
+afterEach(cleanup);
 
-const defaultOptions = [
-  { value: "option1", label: "Option 1" },
-  { value: "option2", label: "Option 2" },
-  { value: "option3", label: "Option 3" },
+const OPTIONS = [
+  { value: "red", label: "Red" },
+  { value: "green", label: "Green" },
+  { value: "blue", label: "Blue" },
 ];
 
-const renderMultiSelect = (
-  props: Partial<React.ComponentProps<typeof MultiSelect>> = {},
-) => {
-  return render(
-    <ThemeProvider>
-      <MultiSelect
-        name="test-select"
-        options={defaultOptions}
-        placeholder="Select options"
-        {...props}
-      />
-    </ThemeProvider>,
+const renderMulti = (props: Partial<MultiSelectProps> = {}) =>
+  render(
+    <MultiSelect name="colors" label="Colors" options={OPTIONS} {...props} />,
   );
-};
+
+const combobox = () => screen.getByRole("combobox", { name: "Colors" });
 
 describe("MultiSelect", () => {
-  describe("Rendering", () => {
-    it("renders with placeholder when no value is selected", () => {
-      const { container } = renderMultiSelect();
-      const placeholder = container.querySelector(".multiselect__placeholder");
-      expect(placeholder).toBeInTheDocument();
-      expect(placeholder).toHaveTextContent("Select options");
+  describe("rendering", () => {
+    it("renders a labelled combobox with its placeholder", () => {
+      renderMulti({ placeholder: "Pick colors" });
+      expect(combobox()).toHaveTextContent("Pick colors");
     });
 
-    it("renders with label", () => {
-      const { container } = renderMultiSelect({
-        label: "Choose items",
-      });
-      const label = container.querySelector(".multiselect__label");
-      expect(label).toBeInTheDocument();
-      expect(label).toHaveTextContent("Choose items");
-    });
-
-    it("uses placeholder as label when label prop is not provided", () => {
-      const { container } = renderMultiSelect({
-        placeholder: "Select multiple items",
-        label: undefined,
-      });
-      const label = container.querySelector(".multiselect__label");
-      expect(label).toHaveTextContent("Select multiple items");
-    });
-
-    it("renders hidden inputs for each selected value", () => {
-      const { container } = renderMultiSelect({
-        value: ["option1", "option2"],
-      });
-
-      const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
-      expect(hiddenInputs).toHaveLength(2);
-      expect(hiddenInputs[0]).toHaveValue("option1");
-      expect(hiddenInputs[1]).toHaveValue("option2");
-    });
-
-    it("renders error state when error prop is provided", () => {
-      const { container } = renderMultiSelect({
-        error: "This field is required",
-      });
-      const errorElement = container.querySelector(".multiselect__error-message");
-      expect(errorElement).toHaveTextContent("This field is required");
-    });
-  });
-
-  describe("Dropdown functionality", () => {
-    it("opens dropdown when clicked", async () => {
-      const { container } = renderMultiSelect();
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-
+    it("uses the placeholder as label without a label", () => {
+      render(<MultiSelect name="c" placeholder="Pick" options={OPTIONS} />);
       expect(
-        container.querySelector(".multiselect__dropdown"),
-      ).not.toHaveClass("multiselect__dropdown--open");
-
-      fireEvent.click(multiSelectElement);
-
-      await waitFor(() => {
-        expect(
-          container.querySelector(".multiselect__dropdown"),
-        ).toHaveClass("multiselect__dropdown--open");
-      });
+        screen.getByRole("combobox", { name: "Pick" }),
+      ).toBeInTheDocument();
     });
 
-    it("toggles dropdown visibility", async () => {
-      const { container } = renderMultiSelect();
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-
-      fireEvent.click(multiSelectElement);
-      await waitFor(() => {
-        expect(
-          container.querySelector(".multiselect__dropdown"),
-        ).toHaveClass("multiselect__dropdown--open");
-      });
-
-      fireEvent.click(multiSelectElement);
-      await waitFor(() => {
-        expect(
-          container.querySelector(".multiselect__dropdown"),
-        ).not.toHaveClass("multiselect__dropdown--open");
-      });
-    });
-
-    it("does not open dropdown when disabled", () => {
-      const { container } = renderMultiSelect({
-        disabled: true,
-      });
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-
-      fireEvent.click(multiSelectElement);
-
+    it("renders one hidden input per selected value", () => {
+      const { container } = renderMulti({ defaultValue: ["red", "blue"] });
+      const hidden = container.querySelectorAll('input[type="hidden"]');
+      expect([...hidden].map((input) => input.getAttribute("name"))).toEqual([
+        "colors[0]",
+        "colors[1]",
+      ]);
       expect(
-        container.querySelector(".multiselect__dropdown"),
-      ).not.toHaveClass("multiselect__dropdown--open");
+        [...hidden].map((input) => (input as HTMLInputElement).value),
+      ).toEqual(["red", "blue"]);
+    });
+
+    it("shows selected values as tags and in the combobox value text", () => {
+      renderMulti({ value: ["green"] });
+      expect(document.querySelector(".multiselect__tag")).toHaveTextContent(
+        "Green",
+      );
+      expect(combobox()).toHaveTextContent("Green");
+    });
+
+    it("associates the error message", () => {
+      renderMulti({ error: "Pick at least one" });
+      expect(combobox()).toHaveAttribute("aria-invalid", "true");
+      expect(combobox()).toHaveAccessibleDescription("Pick at least one");
     });
   });
 
-  describe("Selection functionality", () => {
-    it("selects an option when clicked", async () => {
-      const handleChange = vi.fn();
-      const { container } = renderMultiSelect({
-        onChange: handleChange,
-      });
-
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-      fireEvent.click(multiSelectElement);
-
-      await waitFor(() => {
-        expect(
-          container.querySelector(".multiselect__dropdown"),
-        ).toHaveClass("multiselect__dropdown--open");
-      });
-
-      const firstOption = container.querySelector(
-        ".multiselect__option",
-      ) as HTMLElement;
-      fireEvent.click(firstOption);
-
-      expect(handleChange).toHaveBeenCalledWith(["option1"]);
+  describe("interactions", () => {
+    it("opens a multiselectable listbox and stays open while toggling", async () => {
+      const onChange = vi.fn();
+      renderMulti({ onChange });
+      await userEvent.click(combobox());
+      const listbox = screen.getByRole("listbox", { name: "Colors" });
+      expect(listbox).toHaveAttribute("aria-multiselectable", "true");
+      await userEvent.click(screen.getByRole("option", { name: "Red" }));
+      await userEvent.click(screen.getByRole("option", { name: "Blue" }));
+      expect(onChange).toHaveBeenLastCalledWith(["red", "blue"]);
+      expect(screen.getByRole("option", { name: "Red" })).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
+      await userEvent.click(screen.getByRole("option", { name: "Red" }));
+      expect(onChange).toHaveBeenLastCalledWith(["blue"]);
+      expect(screen.getByRole("listbox")).toBeInTheDocument();
     });
 
-    it("displays selected values as tags", async () => {
-      const { container } = renderMultiSelect({
-        value: ["option1", "option2"],
-      });
-
-      const tags = container.querySelectorAll(".multiselect__tag");
-      expect(tags).toHaveLength(2);
+    it("toggles options from the keyboard", async () => {
+      const onChange = vi.fn();
+      renderMulti({ onChange, viewSearchBar: false });
+      await userEvent.click(combobox());
+      expect(screen.getByRole("option", { name: "Red" })).toHaveFocus();
+      await userEvent.keyboard("{ArrowDown} ");
+      expect(onChange).toHaveBeenLastCalledWith(["green"]);
     });
 
-    it("deselects an option when clicked again", async () => {
-      const handleChange = vi.fn();
-      const { container } = renderMultiSelect({
-        value: ["option1"],
-        onChange: handleChange,
-      });
-
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-      fireEvent.click(multiSelectElement);
-
-      await waitFor(() => {
-        expect(
-          container.querySelector(".multiselect__dropdown"),
-        ).toHaveClass("multiselect__dropdown--open");
-      });
-
-      const firstOption = container.querySelector(
-        ".multiselect__option",
-      ) as HTMLElement;
-      fireEvent.click(firstOption);
-
-      expect(handleChange).toHaveBeenCalledWith([]);
-    });
-
-    it("selects multiple options", async () => {
-      const handleChange = vi.fn();
-      const { container } = renderMultiSelect({
-        onChange: handleChange,
-      });
-
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-      fireEvent.click(multiSelectElement);
-
-      await waitFor(() => {
-        expect(
-          container.querySelector(".multiselect__dropdown"),
-        ).toHaveClass("multiselect__dropdown--open");
-      });
-
-      const options = container.querySelectorAll(".multiselect__option");
-      fireEvent.click(options[0]);
-      fireEvent.click(options[1]);
-
-      expect(handleChange).toHaveBeenLastCalledWith(["option1", "option2"]);
-    });
-
-    it("removes a tag when the remove button is clicked", async () => {
-      const handleChange = vi.fn();
-      const { container } = renderMultiSelect({
-        value: ["option1", "option2"],
-        onChange: handleChange,
-      });
-
-      const removeTags = container.querySelectorAll(".multiselect__tag-remove");
-      fireEvent.click(removeTags[0]);
-
-      expect(handleChange).toHaveBeenCalledWith(["option2"]);
-    });
-
-    it("does not select option when disabled", async () => {
-      const handleChange = vi.fn();
-      const { container } = renderMultiSelect({
-        disabled: true,
-        onChange: handleChange,
-      });
-
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-      fireEvent.click(multiSelectElement);
-
-      expect(handleChange).not.toHaveBeenCalled();
+    it("removes a tag through its named button", async () => {
+      const onChange = vi.fn();
+      renderMulti({ defaultValue: ["red", "green"], onChange });
+      await userEvent.click(screen.getByRole("button", { name: "Quitar Red" }));
+      expect(onChange).toHaveBeenLastCalledWith(["green"]);
       expect(
-        container.querySelector(".multiselect__dropdown"),
-      ).not.toHaveClass("multiselect__dropdown--open");
+        screen.queryByRole("button", { name: "Quitar Red" }),
+      ).not.toBeInTheDocument();
     });
 
-    it("does not remove tag when disabled", () => {
-      const { container } = renderMultiSelect({
-        value: ["option1"],
-        disabled: true,
-      });
-
-      const removeTag = container.querySelector(".multiselect__tag-remove");
-      expect(removeTag).not.toBeInTheDocument();
-    });
-  });
-
-  describe("Controlled vs Uncontrolled", () => {
-    it("uses defaultValue for uncontrolled component", () => {
-      const { container } = renderMultiSelect({
-        defaultValue: ["option1"],
-        value: undefined,
-      });
-
-      const tags = container.querySelectorAll(".multiselect__tag");
-      expect(tags).toHaveLength(1);
+    it("disables the trigger and hides tag removal", async () => {
+      renderMulti({ disabled: true, defaultValue: ["red"] });
+      expect(combobox()).toBeDisabled();
+      expect(
+        screen.queryByRole("button", { name: /Quitar/ }),
+      ).not.toBeInTheDocument();
+      await userEvent.click(combobox());
+      expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
     });
 
-    it("initializes with value prop", () => {
-      const { container } = renderMultiSelect({
-        value: ["option1"],
-      });
-
-      const tags = container.querySelectorAll(".multiselect__tag");
-      expect(tags).toHaveLength(1);
-    });
-
-    it("can be updated by user interactions", async () => {
-      const handleChange = vi.fn();
-      const { container } = renderMultiSelect({
-        value: ["option1"],
-        onChange: handleChange,
-      });
-
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-      fireEvent.click(multiSelectElement);
-
-      await waitFor(() => {
-        expect(
-          container.querySelector(".multiselect__dropdown"),
-        ).toHaveClass("multiselect__dropdown--open");
-      });
-
-      const options = container.querySelectorAll(".multiselect__option");
-      fireEvent.click(options[1]); // Seleccionar option2
-
-      expect(handleChange).toHaveBeenCalledWith(["option1", "option2"]);
+    it("ignores options without a value", async () => {
+      const onChange = vi.fn();
+      render(
+        <MultiSelect
+          name="c"
+          label="Colors"
+          options={[{ value: null, label: "None" }]}
+          onChange={onChange}
+        />,
+      );
+      await userEvent.click(combobox());
+      await userEvent.click(screen.getByRole("option", { name: "None" }));
+      expect(onChange).not.toHaveBeenCalled();
     });
   });
 
-  describe("Accessibility", () => {
-    it("has tabIndex for keyboard navigation when enabled", () => {
-      const { container } = renderMultiSelect({
-        disabled: false,
+  describe("customization", () => {
+    it("applies fieldStyle and tagStyle", () => {
+      const { container } = renderMulti({
+        defaultValue: ["red"],
+        fieldStyle: { borderRadius: 3 },
+        tagStyle: { fontSize: 17 },
       });
-      const multiSelectElement = container.querySelector(".multiselect");
-
-      expect(multiSelectElement).toHaveAttribute("tabIndex", "0");
-    });
-
-    it("has tabIndex -1 when disabled", () => {
-      const { container } = renderMultiSelect({
-        disabled: true,
+      expect(container.querySelector(".select__field")).toHaveStyle({
+        borderRadius: "3px",
       });
-      const multiSelectElement = container.querySelector(".multiselect");
-
-      expect(multiSelectElement).toHaveAttribute("tabIndex", "-1");
-    });
-  });
-
-  describe("Empty and edge cases", () => {
-    it("renders with empty options array", () => {
-      const { container } = renderMultiSelect({
-        options: [],
+      expect(container.querySelector(".multiselect__tag")).toHaveStyle({
+        fontSize: "17px",
       });
-
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-      fireEvent.click(multiSelectElement);
-
-      const options = container.querySelectorAll(".multiselect__option");
-      expect(options.length).toBe(0);
-    });
-
-    it("handles options with null value", () => {
-      const { container } = renderMultiSelect({
-        options: [
-          { value: null, label: "Option with null value" },
-          { value: "option1", label: "Option 1" },
-        ],
-      });
-
-      const multiSelectElement = container.querySelector(
-        ".multiselect",
-      ) as HTMLElement;
-      fireEvent.click(multiSelectElement);
-
-      const options = container.querySelectorAll(".multiselect__option");
-      expect(options.length).toBe(2);
     });
   });
 });

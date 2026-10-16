@@ -1,0 +1,5 @@
+[data-design-system="apple"] {
+  --week-calendar-radius: 12px;
+  --week-calendar-padding: 20px;
+  --week-calendar-event-radius: 8px;
+}

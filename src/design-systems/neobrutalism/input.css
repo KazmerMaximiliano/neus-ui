@@ -13,4 +13,7 @@
   --input-label-offset: 0px;
   --input-error-offset: 0px;
   --input-focus-border-color: var(--color-focus);
+  --input-readonly-border-color: var(--color-text-primary);
 }
+
+[data-design-system="neobrutalism"] { --input-filled-border-width: 3px; }

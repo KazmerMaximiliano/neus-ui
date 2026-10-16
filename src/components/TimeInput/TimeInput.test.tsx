@@ -21,9 +21,7 @@ describe("TimeInput", () => {
 
     it("renders time input field button", () => {
       const { container } = renderTimeInput();
-      expect(
-        container.querySelector(".time-input__field"),
-      ).toBeInTheDocument();
+      expect(container.querySelector(".time-input__field")).toBeInTheDocument();
     });
 
     it("renders placeholder when no value", () => {
@@ -251,5 +249,55 @@ describe("TimeInput", () => {
       );
       expect(screen.getByText("15:45")).toBeInTheDocument();
     });
+  });
+});
+
+describe("time selection", () => {
+  it("updates and serializes uncontrolled time via the real Clock keyboard controls", () => {
+    const onChange = vi.fn();
+    const { container } = render(
+      <TimeInput
+        label="Start"
+        name="start"
+        defaultValue={{ hours: 10, minutes: 30 }}
+        onChange={onChange}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: /^Start/ }));
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowUp" });
+    expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 30 });
+    expect(container.querySelector('input[name="start"]')).toHaveValue("11:30");
+    fireEvent.click(screen.getByRole("button", { name: "Minutos" }));
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" });
+    expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 31 });
+  });
+  it("leaves controlled time with the consumer and clears an explicit undefined", () => {
+    const onChange = vi.fn();
+    const { rerender, container } = render(
+      <TimeInput
+        label="Start"
+        name="start"
+        value={{ hours: 10, minutes: 30 }}
+        onChange={onChange}
+        panelStyle={{ padding: 8 }}
+        variant="filled"
+        labelPlacement="floating"
+        size="large"
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: /^Start/ }));
+    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowUp" });
+    expect(onChange).toHaveBeenCalledWith({ hours: 11, minutes: 30 });
+    expect(container.querySelector('input[name="start"]')).toHaveValue("10:30");
+    expect(screen.getByRole("dialog")).toHaveStyle({ padding: "8px" });
+    rerender(
+      <TimeInput
+        label="Start"
+        name="start"
+        value={undefined}
+        onChange={onChange}
+      />,
+    );
+    expect(container.querySelector('input[name="start"]')).toHaveValue("");
   });
 });

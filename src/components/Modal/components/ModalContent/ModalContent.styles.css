@@ -1,0 +1,7 @@
+.modal-content {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: var(--modal-content-padding);
+  color: var(--modal-content-color);
+  line-height: var(--modal-content-line-height);
+}

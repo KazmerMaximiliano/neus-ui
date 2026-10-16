@@ -1,0 +1,14 @@
+[data-design-system="apple"] {
+  --stepper-dot-border-width: 1.5px;
+  --stepper-dot-font-weight: 600;
+  --stepper-dot-done-color: var(--color-text-primary);
+  --stepper-label-font-size-small: 12px;
+  --stepper-label-font-size-medium: 13px;
+  --stepper-counter-transform: none;
+  --stepper-counter-spacing: normal;
+  --stepper-bar-height: 6px;
+  --stepper-bar-radius: 3px;
+  --stepper-bar-fill-radius: 3px;
+  --stepper-simple-size: 8px;
+  --stepper-simple-current-width: 8px;
+}

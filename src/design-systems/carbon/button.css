@@ -11,4 +11,14 @@
   --button-label-transform: none;
   --button-justify: flex-start;
   --button-loader-gap: 4px;
+  /* Carbon focus sits inside the button: a 2px focus border plus a 1px inset ring. */
+  --button-focus-offset: -2px;
+  --button-focus-inner-shadow: inset 0 0 0 1px var(--color-surface);
+}
+
+[data-design-system="carbon"] {
+  --button-secondary-background: #393939;
+  --button-secondary-color: #ffffff;
+  --button-secondary-hover: #474747;
+  --button-elevated-shadow: var(--elevation-floating);
 }

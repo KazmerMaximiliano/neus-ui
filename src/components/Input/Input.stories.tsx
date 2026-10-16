@@ -66,6 +66,37 @@ const meta: Meta<InputStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    variant: {
+      control: "select",
+      options: ["auto", "filled", "outlined"],
+      description: "Field surface",
+    },
+    labelPlacement: {
+      control: "select",
+      options: ["auto", "external", "floating"],
+      description: "Label presentation",
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Field size",
+    },
+    prefix: {
+      control: "text",
+      description: "Content for prefix; JSX supported in application code",
+    },
+    suffix: {
+      control: "text",
+      description: "Content for suffix; JSX supported in application code",
+    },
+    errorIcon: {
+      control: "text",
+      description: "Content for errorIcon; JSX supported in application code",
+    },
+    prefixStyle: { control: "object", description: "Styles for prefix" },
+    suffixStyle: { control: "object", description: "Styles for suffix" },
+    errorIconStyle: { control: "object", description: "Styles for errorIcon" },
+
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -215,6 +246,15 @@ const meta: Meta<InputStoryArgs> = {
 export const Input: StoryObj<typeof meta> = {
   args: {
     designSystem: "neus",
+    variant: "auto",
+    labelPlacement: "auto",
+    size: "medium",
+    prefix: undefined,
+    suffix: undefined,
+    errorIcon: undefined,
+    prefixStyle: {},
+    suffixStyle: {},
+    errorIconStyle: {},
     id: undefined,
     "aria-label": undefined,
     name: "example-input",

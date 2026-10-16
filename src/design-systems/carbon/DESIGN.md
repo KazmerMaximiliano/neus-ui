@@ -7,8 +7,10 @@ hierarchy, precise alignment, square geometry, and purposeful color. Prioritize
 repeated data and form workflows. Use the official Carbon foundations and Core
 component specifications as the visual target, preserving Neus UI's React API.
 
-**Current implementation.** Four recipes approximate Carbon: Button, Card, Input,
-and Sidebar. They do not implement Carbon's complete theme or component system.
+**Current implementation.** All public component families and both templates now
+have scoped CSS token contracts and six-system recipes. Button, Card and Input
+share the expanded presentation API described below. This is the project's web
+mapping, not full feature parity with an external component framework.
 
 Format: [Google DESIGN.md](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
 (alpha, prose only). Primary references consulted 2026-10-14:
@@ -31,14 +33,15 @@ provides the reference. Use White as the initial light target and Gray 100 as th
 dark target; these are local choices among Carbon's
 [themes](https://www.carbondesignsystem.com/building-blocks/foundations/themes/overview).
 
-**Current implementation.** Light tokens supply white/gray surfaces and neutral
-text. The action palette supplies blue actions and Carbon-oriented error colors.
-Dark surfaces and most feedback/disabled roles still inherit Neus. Two shared
-surface tokens do not implement Carbon's nested layer model.
+**Current implementation.** Semantic surfaces, text, selection, field/layer and feedback roles are
+mapped in the scoped tokens and palettes. Light/dark values preserve role pairs.
+Solid action foregrounds are resolved per state; custom six-digit hex primary
+accents also receive readable text/focus mappings. These local roles do not provide
+a complete external theme matrix or a full dynamic tonal color engine.
+Carbon maps White and Gray 100, including nested layer-02 surfaces.
 
-**Refactor gaps.** Introduce mapped layer/field/border roles during future work;
-review foregrounds, focus, hover, active, and disabled pairs in each mode. Do not
-equate the inherited dark theme with Gray 100 or advertise all four Carbon themes.
+**Validation boundary.** Consumer-supplied CSS foreground/background overrides and arbitrary non-hex
+accent formats are outside the automatic contrast contract.
 
 ## Typography
 
@@ -47,12 +50,13 @@ identifiers, with local fallbacks. Favor the task-oriented hierarchy described i
 [Carbon typography](https://www.carbondesignsystem.com/building-blocks/foundations/typography/overview).
 Use natural sentence case, clear labels, and consistent alignment for repeated data.
 
-**Current implementation.** Font stacks are supplied, not downloaded. Button uses
-regular-weight 14px medium labels; Input also uses 14px values. Sidebar overrides
-Neus uppercase/tracking. Other text sizes remain on the shared scale.
+**Current implementation.** Font stacks remain declared locally without downloaded assets. Body,
+heading, label and caption roles include size, weight, line height and tracking.
+Component-specific sizes remain deliberate local mappings, not a claim that the
+entire external typography catalog has been implemented.
 
-**Refactor gaps.** Map semantic body, heading, label, and helper roles, including
-line height. Do not call the shared numerical scale Carbon's complete type scale.
+**Validation boundary.** Use local fallback fonts and review application content at zoom and with
+long translations; font asset loading belongs to the consuming application.
 
 ## Layout
 
@@ -61,13 +65,14 @@ Use deliberate section spacing and compact, readable controls. Field widths shou
 reflect expected content while fitting the responsive layout, as recommended in
 [Carbon forms](https://www.carbondesignsystem.com/building-blocks/core/patterns/forms).
 
-**Current implementation.** The shared four-pixel spacing scale and Card padding
-remain. Buttons have asymmetric horizontal padding and left-aligned labels.
-Sidebar uses the library's desktop, tablet rail, and mobile drawer breakpoints.
+**Current implementation.** AppTemplate and FormTemplate now map page-region spacing and responsive
+columns through recipes. AppTemplate follows Sidebar at 768/1024px; FormTemplate
+uses 2/2/1 columns by default with independent gap/region overrides. Components keep
+readable internal geometry; week grids and tables retain horizontal navigation
+where their data cannot fit a narrow viewport.
 
-**Refactor gaps.** Establish a template-level column/grid mapping and consistent
-field heights. Shared breakpoints and paddings are local approximations, not an
-implementation of the full Carbon layout system.
+**Validation boundary.** The shared breakpoints are Neus web choices. Application page compositions
+and specialized external grid systems remain consumer decisions.
 
 ## Elevation & Depth
 
@@ -75,12 +80,14 @@ implementation of the full Carbon layout system.
 Reserve floating depth for menus and dialogs. A focused control must remain
 recognizable against the surface beneath it.
 
-**Current implementation.** Button and Card are flat. Card uses the secondary
-surface; Sidebar uses separators and square items. The floating sidebar control
-still inherits a shared shadow.
+**Current implementation.** Floating and dialog elevation roles map the existing overlay and modal
+recipes. Ordinary surfaces and action variants have separate treatments; Card
+stays passive, Button reserves elevation for its explicit treatment where required,
+and reduced-motion rules suppress nonessential transitions. Neobrutalism retains
+hard shadows with clearance in fields, cards and template spacing.
 
-**Refactor gaps.** Review floating controls as a separate elevation role. Nested
-layer contrast must work in dark mode without adding arbitrary shadows to tiles.
+**Validation boundary.** Nested surfaces and custom scroll containers must preserve focus and shadow
+clearance; the library cannot control clipping imposed by consumer overflow rules.
 
 ## Shapes
 
@@ -88,11 +95,13 @@ layer contrast must work in dark mode without adding arbitrary shadows to tiles.
 navigation rows. Keep circles for intrinsically circular content such as avatars.
 Avoid mixing rounded Neus controls into a Carbon form.
 
-**Current implementation.** All four recipes remove their main rounded geometry;
-Sidebar also disables the Neus decorative curve.
+**Current implementation.** Every adapted family has its own radius/border contract, including nested
+selectors, calendars, overlays, maps and tables. Neus keeps its navigation curves;
+other systems disable that decoration. Media clipping and focus remain separate
+from surface geometry. Explicit presentation variants have recipes in all systems.
 
-**Refactor gaps.** Remaining components need explicit shape adaptation. A square
-outer wrapper alone does not adapt an embedded selector or calendar.
+**Validation boundary.** Recipe geometry expresses the documented local web target. Native platform
+rendering and additional interactive surface types are separate capabilities.
 
 ## Components
 
@@ -103,14 +112,14 @@ outer wrapper alone does not adapt an embedded selector or calendar.
 Use separate hover, active, focus, and disabled treatments; focus needs a boundary
 that remains visible against the button fill.
 
-**Current implementation.** [Button recipe](./button.css): square, asymmetric
-padding, regular labels, flat surface. The light palette defines distinct blue
-hover/active colors. Shared CSS supplies an external focus outline and three
-variants; loading substitutes dots and disables activation.
+**Current implementation.** [Button recipe](./button.css) maps solid, secondary, tonal, elevated,
+outlined and text actions. Carbon uses primary/secondary/tertiary/ghost hierarchy
+for solid/secondary/outlined/text; Material reserves resting elevation for elevated.
+The shared implementation reserves the idle label box while busy. Semantic and
+custom hex accent foregrounds are resolved for resting, hover and pressed fills.
 
-**Refactor gaps.** The external focus outline differs from Carbon's border/inset
-focus treatment. Secondary/tertiary/ghost hierarchy and disabled roles are not a
-one-to-one mapping of Neus variants. Review dark-state pairs and loading geometry.
+**Refactor boundaries.** Six shared variants express the supported action hierarchy. System-specific
+native APIs and additional interaction patterns remain outside this contract.
 
 ### Card
 
@@ -118,12 +127,13 @@ one-to-one mapping of Neus variants. Review dark-state pairs and loading geometr
 related information. Consult [Carbon tile specifications](https://www.carbondesignsystem.com/building-blocks/core/components/tile/specifications)
 for the visual reference; interactive tile types require separate behavior design.
 
-**Current implementation.** [Card recipe](./card.css): square, borderless secondary
-surface with no shadow or header divider. Content and footer spacing are inherited.
+**Current implementation.** [Card recipe](./card.css) keeps the root passive. `variant="auto"`
+uses this system's existing treatment; filled, outlined and elevated can be chosen
+explicitly in all six systems. Header/Content/Footer keep independent spacing;
+media clips inside the surface and child controls own interactions.
 
-**Refactor gaps.** Correct nested surface layering in both themes. Do not add
-selectable, expandable, hover, or loading states to the passive root merely because
-Carbon offers other tile types. Child controls own focus and errors.
+**Refactor boundaries.** The root remains passive. Selection, expansion, loading, errors and keyboard
+actions belong to meaningful child content and controls.
 
 ### Input
 
@@ -132,14 +142,15 @@ for field geometry and focus, and [validation guidance](https://www.carbondesign
 for invalid feedback. Keep labels and messages aligned; distinguish read-only,
 disabled, invalid, and focused states.
 
-**Current implementation.** [Input recipe](./input.css): square field, secondary
-surface, external label, full perimeter border, and shared focus/error shadows.
-The component has error text and native read-only behavior, but no error icon.
+**Current implementation.** [Input recipe](./input.css) supplies field geometry and state roles.
+The shared anatomy supports auto/filled/outlined, small/medium/large,
+auto/external/floating labels, prefix/suffix content and an optional error icon.
+Auto uses a floating outlined field in Material and external labels elsewhere.
+Focused, populated, prefixed and native color fields keep floating labels raised.
+Errors stay associated with the native input; readonly remains distinct from disabled.
 
-**Refactor gaps.** The full border and generic ring differ from Carbon's field
-underline/focus treatment. Layer-aware field colors, error icon treatment,
-read-only styling, and Carbon size roles remain pending. Verify invalid focus
-and disabled contrast in both themes.
+**Refactor boundaries.** Prefixes/suffixes and floating labels do not introduce masks, autocomplete
+providers or other application behavior. Native input semantics remain in use.
 
 ### Sidebar
 
@@ -151,21 +162,28 @@ Keep keyboard focus distinct from selection and hover.
 row/header separators, solid blue selected row, on-primary selected text, and
 square controls. Shared behavior supplies the rail and mobile dialog.
 
-**Refactor gaps.** Review selected-state emphasis against Carbon shell patterns
-before claiming parity. Shared dimensions, mobile behavior, and solid selection
-are local choices. Validate focus on selected rows in light/dark; communicate
-errors/progress separately from navigation selection.
+**Refactor boundaries.** Desktop/rail/mobile behavior is shared Neus navigation. Native-platform grouped
+sidebars and external framework navigation parity are separate capabilities.
 
-### Extension to other families — pending adaptation
+### Other component families and templates
 
-- Selection and date/time controls: share field layers, square geometry, and
-  explicit invalid/read-only states with Input.
-- DataTable and calendars: prioritize aligned data, compact rows, and distinct
-  selection, hover, and focus; preserve third-party grid behavior.
-- Modal and menus: map floating layers and focus boundaries rather than adding
-  rounded cards with generic shadows.
-- Badge and Stepper: communicate status using labels/icons and restrained color.
-- Templates: align headings, form regions, tables, and action groups consistently.
+- Base and Navigation retain their interaction APIs and have explicit recipes for
+  fields, nested controls, feedback, floating surfaces, keyboard focus and selection.
+- Calendar separates single/range/multiple values; `numberOfMonths` controls visible
+  months. Clock keeps the period synchronized with controlled time. Dial labels
+  stay above the hand, with contrasting ink clipped to the indicator tip for
+  partially covered marks. DateInput and TimeInput share field presentations and
+  offer panel overrides.
+- WeekCalendar and WeekCalendarRow share a token family, a seven-day window with
+  one-day navigation, keyboard event activation and tooltips on focus or hover.
+- InteractiveMap adapts the Neus interface; `mapOptions` configures Google cartography.
+  Readonly blocks selection and marker changes. Maps SDK and geocoding failures
+  surface as errors; obsolete asynchronous responses are ignored.
+- DataTable preserves AG Grid Community. A stable theme bridge resolves
+  `--data-table-*` in the nearest provider. Columns and optional mobile cards belong
+  to the consumer; actions are documented composition rather than a public component.
+- AppTemplate shares Sidebar's breakpoints; its regions use layout tokens.
+  FormTemplate exposes responsive columns and gaps and accepts arbitrary children.
 
 ## Do's and Don'ts
 
@@ -175,3 +193,9 @@ errors/progress separately from navigation selection.
 - Don't describe a blue accent and square corners as complete Carbon support.
 - Don't map Neus variants to Carbon names without checking their behavior and roles.
 - Don't add new public states or Carbon dependencies as an incidental visual change.
+
+Local implementation update: 2026-10-15. See the
+[migration and validation guide](../../../docs/refactor-migration.md) for public
+API changes, test coverage and limits of this web adaptation. Visual review is
+against these local target rules; claims of native or complete framework parity
+remain outside the contract.

@@ -4,3 +4,8 @@
   --card-shadow: 0 2px 8px var(--color-shadow);
   --card-header-border-width: 0px;
 }
+
+/* On dark surfaces the border carries the separation; a black shadow adds nothing. */
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --card-shadow: none;
+}

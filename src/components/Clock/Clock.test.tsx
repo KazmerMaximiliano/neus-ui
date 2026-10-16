@@ -178,3 +178,87 @@ describe("Clock", () => {
     });
   });
 });
+
+describe("controlled period", () => {
+  it("updates AM/PM with the controlled value", () => {
+    const { rerender } = render(<Clock value={{ hours: 9, minutes: 0 }} />);
+    expect(screen.getByRole("button", { name: "AM" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    rerender(<Clock value={{ hours: 21, minutes: 0 }} />);
+    expect(screen.getByRole("button", { name: "PM" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+  });
+  it("applies styles independently to segments, periods, labels and hand", () => {
+    const { container } = render(
+      <Clock
+        segmentStyle={{ color: "red" }}
+        periodStyle={{ color: "blue" }}
+        numberStyle={{ opacity: 0.7 }}
+        indicatorStyle={{ opacity: 0.8 }}
+      />,
+    );
+    expect(screen.getByRole("button", { name: "Horas" })).toHaveStyle({
+      color: "rgb(255, 0, 0)",
+    });
+    expect(container.querySelector(".clock__number")).toHaveStyle({
+      opacity: 0.7,
+    });
+    expect(container.querySelector(".clock__hand")).toHaveStyle({
+      opacity: 0.8,
+    });
+  });
+});
+
+describe("pointer time selection", () => {
+  it.each([
+    { format: "24h" as const, x: 100, y: 10, hours: 12 },
+    { format: "24h" as const, x: 130, y: 100, hours: 3 },
+    { format: "24h" as const, x: 100, y: 70, hours: 0 },
+    { format: "24h" as const, x: 190, y: 100, hours: 15 },
+    { format: "12h" as const, x: 190, y: 100, hours: 15 },
+    { format: "12h" as const, x: 100, y: 10, hours: 12 },
+  ])("selects $hours from $format dial geometry", ({ format, x, y, hours }) => {
+    const onChange = vi.fn();
+    render(<Clock format={format} onChange={onChange} />);
+    const dial = screen.getByRole("slider");
+    vi.spyOn(dial, "getBoundingClientRect").mockReturnValue({
+      left: 0,
+      top: 0,
+      width: 200,
+      height: 200,
+      right: 200,
+      bottom: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    });
+    fireEvent.click(dial, { clientX: x, clientY: y });
+    expect(onChange).toHaveBeenLastCalledWith({ hours, minutes: 0 });
+    fireEvent.click(dial, { clientX: 190, clientY: 100 });
+    expect(onChange).toHaveBeenLastCalledWith({ hours, minutes: 15 });
+  });
+  it("uses AM for morning selections and respects period changes", () => {
+    const onChange = vi.fn();
+    render(<Clock value={{ hours: 9, minutes: 0 }} onChange={onChange} />);
+    fireEvent.click(screen.getByRole("button", { name: "PM" }));
+    expect(onChange).toHaveBeenLastCalledWith({ hours: 21, minutes: 0 });
+    const dial = screen.getByRole("slider");
+    vi.spyOn(dial, "getBoundingClientRect").mockReturnValue({
+      left: 0,
+      top: 0,
+      width: 200,
+      height: 200,
+      right: 200,
+      bottom: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    });
+    fireEvent.click(dial, { clientX: 100, clientY: 10 });
+    expect(onChange).toHaveBeenLastCalledWith({ hours: 0, minutes: 0 });
+  });
+});

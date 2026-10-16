@@ -28,7 +28,7 @@ const meta: Meta<ButtonStoryArgs> = {
     },
     variant: {
       control: "select",
-      options: ["solid", "outlined", "text"],
+      options: ["solid", "outlined", "text", "secondary", "tonal", "elevated"],
       description: "The visual style variant of the button",
     },
     color: {
@@ -63,7 +63,8 @@ const meta: Meta<ButtonStoryArgs> = {
     },
     loaderStyle: {
       control: "object",
-      description: "CSS properties applied to the BeatLoader container (not its individual dots)",
+      description:
+        "CSS properties applied to the BeatLoader container (not its individual dots)",
     },
     onClick: {
       action: "clicked",

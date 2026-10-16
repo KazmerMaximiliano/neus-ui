@@ -148,3 +148,13 @@ scheme. Typing updates the `value` control in controlled mode. Clear/remove the
 No props or CSS classes were removed. `designSystem` is not an Input prop: use
 ThemeProvider in applications. See [Theming](../theming.md) and
 [Design systems](../design-systems.md).
+
+
+## Presentation contract (2026-10-15)
+
+| API | Behavior |
+| --- | --- |
+| `variant / labelPlacement / size` | auto/filled/outlined; auto/external/floating; small/medium/large |
+
+Uses all six recipes through ThemeProvider in light and dark mode. See the
+[migration guide](../refactor-migration.md) for examples and breaking changes.

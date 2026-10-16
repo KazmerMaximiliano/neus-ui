@@ -1,8 +1,12 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { User } from "lucide-react";
+import { fn } from "storybook/test";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { Dropdown as DropdownComponent } from "./Dropdown";
+import type { DropdownStoryArgs } from "./Dropdown.types";
 
-const meta: Meta<typeof DropdownComponent> = {
+const meta: Meta<DropdownStoryArgs> = {
   title: "Base/Dropdown",
   component: DropdownComponent,
   parameters: {
@@ -10,44 +14,58 @@ const meta: Meta<typeof DropdownComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the dropdown",
+    },
     icon: {
-      description: "Icon displayed in the dropdown avatar",
+      control: false,
+      description: "Avatar icon; without it the avatar shows the name initial",
     },
     name: {
-      description: "Name displayed at the top of the dropdown panel",
       control: "text",
+      description:
+        "Account name shown in the menu header and used as trigger label",
     },
     items: {
-      description: "Array of dropdown items with labels and onClick functions",
+      control: "object",
+      description: "Menu items with label, onClick and optional disabled",
+    },
+    triggerStyle: {
+      control: "object",
+      description: "CSS properties applied to the avatar trigger",
+    },
+    menuStyle: {
+      control: "object",
+      description: "CSS properties applied to the floating menu panel",
+    },
+    itemStyle: {
+      control: "object",
+      description: "CSS properties applied to every menu item",
     },
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Dropdown: Story = {
+export const Dropdown: StoryObj<DropdownStoryArgs> = {
   args: {
+    designSystem: "neus",
     icon: User,
-    name: "John Doe",
+    name: "Ada Lovelace",
     items: [
-      {
-        label: "My Profile",
-        onClick: () => alert("Navigating to profile"),
-      },
-      {
-        label: "Settings",
-        onClick: () => alert("Opening settings"),
-      },
-      {
-        label: "Help",
-        onClick: () => alert("Showing help"),
-      },
-      {
-        label: "Sign Out",
-        onClick: () => alert("Signing out"),
-      },
+      { label: "Profile", onClick: fn() },
+      { label: "Settings", onClick: fn() },
+      { label: "Sign out", onClick: fn() },
     ],
+    triggerStyle: {},
+    menuStyle: {},
+    itemStyle: {},
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <DropdownComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

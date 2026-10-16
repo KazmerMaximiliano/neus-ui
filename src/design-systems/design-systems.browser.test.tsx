@@ -1,9 +1,12 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import type {} from "@vitest/browser-playwright";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { page } from "vitest/browser";
 import { Button } from "../components/Button/Button";
 import { ThemeProvider } from "../providers";
 import "../css/app.css";
+import { contrastRatio, resolveColor } from "./design-systems.test-utils";
 
 afterEach(cleanup);
 
@@ -12,7 +15,12 @@ const SYSTEM_CASES = [
   { id: "apple", light: "rgb(0, 113, 227)", dark: "rgb(41, 151, 255)" },
   { id: "carbon", light: "rgb(15, 98, 254)", dark: "rgb(120, 169, 255)" },
   { id: "material", light: "rgb(100, 66, 214)", dark: "rgb(200, 179, 253)" },
-  { id: "neobrutalism", light: "rgb(253, 200, 0)", dark: "rgb(253, 200, 0)" },
+  {
+    id: "neobrutalism",
+    light: "rgb(253, 200, 0)",
+    dark: "rgb(253, 200, 0)",
+    quiet: { light: "rgb(28, 41, 60)", dark: "rgb(226, 232, 240)" },
+  },
   { id: "vercel", light: "rgb(23, 23, 23)", dark: "rgb(237, 237, 237)" },
 ] as const;
 
@@ -35,7 +43,8 @@ describe.each(["light", "dark"] as const)("Design systems in %s mode", (scheme) 
     expect(getComputedStyle(primary).backgroundColor).toBe(system[scheme]);
     const outline = getComputedStyle(screen.getByRole("button", { name: "Outline" }));
     expect(outline.backgroundColor).toBe("rgba(0, 0, 0, 0)");
-    expect(outline.color).toBe(system[scheme]);
+    const quiet = "quiet" in system ? system.quiet[scheme] : system[scheme];
+    expect(outline.color).toBe(quiet);
     expect(parseFloat(outline.borderTopWidth)).toBeGreaterThan(0);
     const text = getComputedStyle(screen.getByRole("button", { name: "Text" }));
     expect(text.borderTopWidth).toBe("0px");
@@ -125,6 +134,11 @@ describe("Theme scope isolation and state styles", () => {
     expect(getComputedStyle(button).outlineStyle).toBe("solid");
     expect(getComputedStyle(button).outlineWidth).toBe("2px");
     expect(getComputedStyle(button).outlineColor).toBe("rgb(15, 98, 254)");
+    // Carbon draws focus inside the button: inset outline plus a 1px surface ring.
+    expect(getComputedStyle(button).outlineOffset).toBe("-2px");
+    expect(getComputedStyle(button, "::after").boxShadow).toBe(
+      "rgb(255, 255, 255) 0px 0px 0px 1px inset",
+    );
     await user.keyboard("{Enter}");
     expect(onClick).toHaveBeenCalledOnce();
     fireEvent.click(screen.getByRole("button", { name: "Disabled button" }));
@@ -132,5 +146,55 @@ describe("Theme scope isolation and state styles", () => {
     expect(onClick).toHaveBeenCalledOnce();
     await user.tab();
     expect(screen.getByRole("button", { name: "Next action" })).toHaveFocus();
+  });
+});
+
+describe.each(["light", "dark"] as const)("Button state contract in %s mode", (scheme) => {
+  it.each(SYSTEM_CASES)("keeps $id loading geometry, legible pairs and flat disabled state", async (system) => {
+    render(
+      <ThemeProvider scope="local" designSystem={system.id} colorScheme={scheme}>
+        <Button label="Save changes" />
+        <Button label="Save changes" loading />
+        <Button label="Quiet" variant="outlined" />
+        <Button label="Disabled" disabled />
+      </ThemeProvider>,
+    );
+    const [idle, busy] = screen.getAllByRole("button", { name: "Save changes" });
+    const idleBox = idle.getBoundingClientRect();
+    const busyBox = busy.getBoundingClientRect();
+    expect(busyBox.width).toBeCloseTo(idleBox.width, 1);
+    expect(busyBox.height).toBeCloseTo(idleBox.height, 1);
+
+    const solid = getComputedStyle(idle);
+    expect(contrastRatio(solid.color, solid.backgroundColor)).toBeGreaterThanOrEqual(4.5);
+    // Resolve outside waitFor: the probe mutates the DOM and would retrigger it.
+    const hoverBackground = resolveColor(idle.parentElement!, "--color-primary-dark");
+    await page.elementLocator(idle).hover();
+    await waitFor(() => expect(getComputedStyle(idle).backgroundColor).toBe(hoverBackground));
+    const hovered = getComputedStyle(idle);
+    expect(contrastRatio(hovered.color, hovered.backgroundColor)).toBeGreaterThanOrEqual(4.5);
+
+    const surface = resolveColor(idle.parentElement!, "--color-surface");
+    const quiet = getComputedStyle(screen.getByRole("button", { name: "Quiet" }));
+    expect(contrastRatio(quiet.color, surface)).toBeGreaterThanOrEqual(4.5);
+    expect(getComputedStyle(screen.getByRole("button", { name: "Disabled" })).boxShadow).toBe("none");
+  });
+});
+
+describe("Button motion preferences", () => {
+  it("drops the pressed transform under reduced motion", () => {
+    // CSSOM check: a synthetic :active press is not reliable in headless Chromium.
+    const rules = [...document.styleSheets].flatMap((sheet) => [...sheet.cssRules]);
+    const reduced = rules.filter(
+      (rule): rule is CSSMediaRule =>
+        rule instanceof CSSMediaRule && rule.conditionText.includes("prefers-reduced-motion"),
+    );
+    const pressed = reduced
+      .flatMap((rule) => [...rule.cssRules])
+      .find(
+        (rule): rule is CSSStyleRule =>
+          rule instanceof CSSStyleRule && rule.selectorText === ".button:active:not(:disabled)",
+      );
+    expect(pressed?.style.transform).toBe("none");
   });
 });

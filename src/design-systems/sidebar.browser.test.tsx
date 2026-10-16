@@ -12,6 +12,11 @@ import { cdp, page, userEvent } from "vitest/browser";
 import { Sidebar } from "../components/Sidebar";
 import "../components/Sidebar/Sidebar.stories.css";
 import "../css/app.css";
+import {
+  contrastRatio,
+  flatten,
+  resolveColor,
+} from "./design-systems.test-utils";
 import { ThemeProvider } from "../providers";
 import { AppTemplate } from "../templates/AppTemplate/AppTemplate";
 
@@ -27,15 +32,6 @@ const SYSTEMS = [
   { id: "neobrutalism", radius: "4px", border: "3px" },
   { id: "vercel", radius: "6px", border: "1px" },
 ] as const;
-
-const resolveColor = (element: HTMLElement, token: string) => {
-  const probe = document.createElement("span");
-  probe.style.color = `var(${token})`;
-  element.append(probe);
-  const color = getComputedStyle(probe).color;
-  probe.remove();
-  return color;
-};
 
 beforeEach(async () => {
   await page.viewport(1280, 800);
@@ -104,6 +100,18 @@ describe.each(["light", "dark"] as const)("Sidebar designs in %s", (scheme) => {
       await userEvent.tab();
       expect(home).toHaveFocus();
       expect(getComputedStyle(home).outlineStyle).toBe("solid");
+      // Current location and keyboard focus stay legible together.
+      const navBackground = getComputedStyle(nav).backgroundColor;
+      const active = getComputedStyle(home);
+      expect(
+        contrastRatio(
+          active.color,
+          flatten(active.backgroundColor, navBackground),
+        ),
+      ).toBeGreaterThanOrEqual(4.5);
+      expect(
+        contrastRatio(active.outlineColor, navBackground),
+      ).toBeGreaterThanOrEqual(3);
       if (import.meta.env.VITE_SIDEBAR_VISUAL_QA === "true") {
         await page.screenshot({
           path: `__screenshots__/sidebar-${system.id}-${scheme}.png`,
@@ -151,7 +159,7 @@ describe("Sidebar theme boundaries and transparent curves", () => {
     ).toBe("none");
     expect(
       getComputedStyle(screen.getByRole("navigation")).backgroundColor,
-    ).toBe("rgb(42, 42, 61)");
+    ).toBe("rgb(38, 38, 38)");
     rerender(
       <ThemeProvider scope="local" designSystem="neus" colorScheme="light">
         <Sidebar title="Inner" items={ITEMS} />
@@ -429,7 +437,7 @@ describe("Sidebar responsive integration", () => {
     expect(dialog.closest('[data-design-system="carbon"]')).not.toBeNull();
     expect(
       getComputedStyle(screen.getByRole("navigation")).backgroundColor,
-    ).toBe("rgb(42, 42, 61)");
+    ).toBe("rgb(38, 38, 38)");
     expect(screen.getByRole("button", { name: "Cerrar menú" })).toHaveFocus();
     expect(getComputedStyle(document.documentElement).overflow).toBe("hidden");
     await userEvent.tab({ shift: true });

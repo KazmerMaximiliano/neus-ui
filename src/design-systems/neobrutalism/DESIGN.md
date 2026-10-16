@@ -8,9 +8,10 @@ feel energetic and tangible while remaining orderly enough for forms and data.
 All aesthetic rules here are Neus UI project decisions. This recipe does not claim
 an official or universal neobrutalism standard.
 
-**Current implementation.** Button, Card, Input, and Sidebar share a yellow accent,
-dark ink in light mode, strong borders, small radii, and hard shadows. Other
-components retain existing styles and are not yet adapted to this vocabulary.
+**Current implementation.** All public component families and both templates now
+have scoped CSS token contracts and six-system recipes. Button, Card and Input
+share the expanded presentation API described below. This is the project's web
+mapping, not full feature parity with an external component framework.
 
 Format reference, consulted 2026-10-14:
 [Google DESIGN.md](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
@@ -26,16 +27,14 @@ dark on-accent text. Keep content surfaces quiet so saturated accents remain
 meaningful. Use a contrasting focus color distinct from selection. Errors need
 explicit text and a boundary change, not color alone.
 
-**Current implementation.** The yellow primary and dark on-primary pair are shared
-across modes. Light surfaces are off-white with dark blue-gray text. Focus is
-purple, with a lighter dark-mode alternative. Dark surfaces, neutral text, and
-most status roles inherit Neus. Borders and hard shadows often use
-`--color-text-primary`, becoming light in dark mode.
+**Current implementation.** Semantic surfaces, text, selection, field/layer and feedback roles are
+mapped in the scoped tokens and palettes. Light/dark values preserve role pairs.
+Solid action foregrounds are resolved per state; custom six-digit hex primary
+accents also receive readable text/focus mappings. These local roles do not provide
+a complete external theme matrix or a full dynamic tonal color engine.
 
-**Refactor gaps.** Review yellow outlined/text buttons on light surfaces and every
-semantic action pair; a legible solid button does not guarantee a legible text
-variant. Audit dark-mode outlines/shadows as deliberate contrast, not accidental
-glow. Custom accents do not automatically recalculate the on-accent pair.
+**Validation boundary.** Consumer-supplied CSS foreground/background overrides and arbitrary non-hex
+accent formats are outside the automatic contrast contract.
 
 ## Typography
 
@@ -44,14 +43,13 @@ JetBrains Mono for code and identifiers. Use heavy labels for short actions, but
 regular text for paragraphs, values, and dense data. Keep headings concise and
 avoid making every text element uppercase.
 
-**Current implementation.** Font stacks are declared without loading fonts.
-Button uses weight 800 and retains uppercase labels, with normal tracking.
-Sidebar uses weight 700 and natural case. Input values use regular 14px text.
-The remaining size scale is shared.
+**Current implementation.** Font stacks remain declared locally without downloaded assets. Body,
+heading, label and caption roles include size, weight, line height and tracking.
+Component-specific sizes remain deliberate local mappings, not a claim that the
+entire external typography catalog has been implemented.
 
-**Refactor gaps.** Define heading/body/caption roles and review heavy-weight fallback
-metrics. Validate long button labels, zoom, and compact navigation without squeezing
-text or introducing arbitrary font sizes.
+**Validation boundary.** Use local fallback fonts and review application content at zoom and with
+long translations; font asset loading belongs to the consuming application.
 
 ## Layout
 
@@ -60,13 +58,14 @@ independent objects. Budget space for offset shadows so adjacent controls do not
 collide. Keep dense data internally calm; the surrounding structure supplies the
 visual energy. Wrap action groups before reducing readable content.
 
-**Current implementation.** Shared spacing primitives and Card slot padding remain.
-Button sizes have proportional padding; Sidebar uses shared desktop/rail/mobile
-behavior. Hard shadows extend beyond component bounds without reserving layout space.
+**Current implementation.** AppTemplate and FormTemplate now map page-region spacing and responsive
+columns through recipes. AppTemplate follows Sidebar at 768/1024px; FormTemplate
+uses 2/2/1 columns by default with independent gap/region overrides. Components keep
+readable internal geometry; week grids and tables retain horizontal navigation
+where their data cannot fit a narrow viewport.
 
-**Refactor gaps.** Check shadow clearance in forms, Card footers, scroll containers,
-and narrow viewports. Input still has the shared minimum width. Responsive spacing
-must account for decorative extents as well as the border box.
+**Validation boundary.** The shared breakpoints are Neus web choices. Application page compositions
+and specialized external grid systems remain consumer decisions.
 
 ## Elevation & Depth
 
@@ -75,13 +74,14 @@ gradient lighting. Pressing an action should visibly reduce its apparent lift.
 Do not animate passive content simply because it has a shadow. Preserve focus
 independently of shadow and suppress nonessential motion when requested.
 
-**Current implementation.** Button/Card/Input and the navigation panel use hard
-offset shadows. A pressed button translates toward a smaller shadow. Focus on an
-Input keeps a hard shadow rather than adding a soft halo.
+**Current implementation.** Floating and dialog elevation roles map the existing overlay and modal
+recipes. Ordinary surfaces and action variants have separate treatments; Card
+stays passive, Button reserves elevation for its explicit treatment where required,
+and reduced-motion rules suppress nonessential transitions. Neobrutalism retains
+hard shadows with clearance in fields, cards and template spacing.
 
-**Refactor gaps.** Shared reduced-motion CSS removes transitions, not the Button
-pressed translation. Decide that suppression in the future shared state contract.
-Check clipping and contrast of the hard shadow in dark mode and nested surfaces.
+**Validation boundary.** Nested surfaces and custom scroll containers must preserve focus and shadow
+clearance; the library cannot control clipping imposed by consumer overflow rules.
 
 ## Shapes
 
@@ -89,12 +89,13 @@ Check clipping and contrast of the hard shadow in dark mode and nested surfaces.
 strong edges, and clear internal padding. Reserve circles for avatars or inherent
 symbols. Avoid Neus pill controls and ornamental concave curves in this system.
 
-**Current implementation.** The four adapted component families use 4px main
-radii; Button, Card, Input, and the sidebar panel have strong borders. Navigation
-rows have a thinner border than the outer panel. Neus decoration is disabled.
+**Current implementation.** Every adapted family has its own radius/border contract, including nested
+selectors, calendars, overlays, maps and tables. Neus keeps its navigation curves;
+other systems disable that decoration. Media clipping and focus remain separate
+from surface geometry. Explicit presentation variants have recipes in all systems.
 
-**Refactor gaps.** Adapt the remaining selectors and feedback components explicitly.
-Maintain inner media clipping without adding a second heavy border at every seam.
+**Validation boundary.** Recipe geometry expresses the documented local web target. Native platform
+rendering and additional interactive surface types are separate capabilities.
 
 ## Components
 
@@ -105,14 +106,14 @@ for supporting actions without sacrificing legibility. Keep keyboard focus visib
 outside the heavy frame. Pressed feedback changes depth, and loading must remain
 identifiable without layout jumps.
 
-**Current implementation.** [Button recipe](./button.css): 3px border, 4px radius,
-hard shadow, bold uppercase label, and pressed translation. The shared text variant
-removes border/shadow; the outlined variant uses its accent as the border color.
-Shared behavior supplies focus, disabled styling, and a busy dot loader.
+**Current implementation.** [Button recipe](./button.css) maps solid, secondary, tonal, elevated,
+outlined and text actions. Carbon uses primary/secondary/tertiary/ghost hierarchy
+for solid/secondary/outlined/text; Material reserves resting elevation for elevated.
+The shared implementation reserves the idle label box while busy. Semantic and
+custom hex accent foregrounds are resolved for resting, hover and pressed fills.
 
-**Refactor gaps.** Text/outlined primary contrast, semantic colors, loading size,
-and reduced-motion translation need review. Disabled buttons retain geometry and
-shadow with shared muted colors/opacity; verify they no longer suggest availability.
+**Refactor boundaries.** Six shared variants express the supported action hierarchy. System-specific
+native APIs and additional interaction patterns remain outside this contract.
 
 ### Card
 
@@ -120,13 +121,13 @@ shadow with shared muted colors/opacity; verify they no longer suggest availabil
 offset shadow. Keep internal content uncluttered; do not add another heavy frame
 around every slot. The surface stays passive even when it resembles a physical tile.
 
-**Current implementation.** [Card recipe](./card.css): 3px border, 4px corners,
-hard shadow, and no header divider. Shared semantic text/background support both
-modes; slot spacing and clipped media remain unchanged.
+**Current implementation.** [Card recipe](./card.css) keeps the root passive. `variant="auto"`
+uses this system's existing treatment; filled, outlined and elevated can be chosen
+explicitly in all six systems. Header/Content/Footer keep independent spacing;
+media clips inside the surface and child controls own interactions.
 
-**Refactor gaps.** Check outer-shadow clipping and border contrast in dark mode.
-Hover, error, loading, and focus belong to meaningful children rather than invented
-Card states. Footer controls need enough separation for their own shadows.
+**Refactor boundaries.** The root remains passive. Selection, expansion, loading, errors and keyboard
+actions belong to meaningful child content and controls.
 
 ### Input
 
@@ -134,14 +135,15 @@ Card states. Footer controls need enough separation for their own shadows.
 text calm and legible. Focus changes a recognizable boundary; error text explains
 the problem while focus remains apparent. Read-only must remain readable.
 
-**Current implementation.** [Input recipe](./input.css): 3px border, 4px radius,
-hard shadow, neutral values, purple focus border, and error border/message. Invalid
-focus changes the hard shadow to the error color. Native disabled/read-only
-behavior comes from the shared component; disabled styling removes the shadow.
+**Current implementation.** [Input recipe](./input.css) supplies field geometry and state roles.
+The shared anatomy supports auto/filled/outlined, small/medium/large,
+auto/external/floating labels, prefix/suffix content and an optional error icon.
+Auto uses a floating outlined field in Material and external labels elsewhere.
+Focused, populated, prefixed and native color fields keep floating labels raised.
+Errors stay associated with the native input; readonly remains distinct from disabled.
 
-**Refactor gaps.** Review the combined error/focus appearance in both modes.
-Read-only lacks a dedicated recipe, and semantic error colors still inherit Neus.
-Avoid letting the strong border outweigh the value or error message.
+**Refactor boundaries.** Prefixes/suffixes and floating labels do not introduce masks, autocomplete
+providers or other application behavior. Native input semantics remain in use.
 
 ### Sidebar
 
@@ -151,22 +153,31 @@ focus outline. Keep hover quieter than selection.
 
 **Current implementation.** [Sidebar recipe](./sidebar.css): heavy outer border,
 hard shadow, bordered rows, bold natural-case labels, yellow selection with dark
-text, and square-ish controls. Shared rail and mobile dialog behavior remains.
+text, and square-ish controls. In dark mode rows use a quieter outline so the panel
+frame stays dominant. Shared rail and mobile dialog behavior remains.
 
-**Refactor gaps.** Check rail focus clearance, mobile shadow clipping, and dark-mode
-outline intensity. Keep loading/error content separate from current-location
-state; do not indicate a failure by recoloring the selected destination alone.
+**Refactor boundaries.** Desktop/rail/mobile behavior is shared Neus navigation. Native-platform grouped
+sidebars and external framework navigation parity are separate capabilities.
 
-### Extension to other families — pending adaptation
+### Other component families and templates
 
-- Selection and date/time controls: use strong frames and explicit check/selection
-  marks; preserve legible values and clear invalid focus.
-- DataTable and calendars: emphasize the outer boundary and selected cells; avoid
-  adding thick borders and offset shadows to every data cell.
-- Modal and menus: use hard-edged floating surfaces, with enough room for shadows
-  and visible focus inside overlays.
-- Badge and Stepper: combine bold shape with readable text or state symbols.
-- Templates: balance expressive boundaries with a stable grid and quiet reading areas.
+- Base and Navigation retain their interaction APIs and have explicit recipes for
+  fields, nested controls, feedback, floating surfaces, keyboard focus and selection.
+- Calendar separates single/range/multiple values; `numberOfMonths` controls visible
+  months. Clock keeps the period synchronized with controlled time. Dial labels
+  stay above the hand, with contrasting ink clipped to the indicator tip for
+  partially covered marks. DateInput and TimeInput share field presentations and
+  offer panel overrides.
+- WeekCalendar and WeekCalendarRow share a token family, a seven-day window with
+  one-day navigation, keyboard event activation and tooltips on focus or hover.
+- InteractiveMap adapts the Neus interface; `mapOptions` configures Google cartography.
+  Readonly blocks selection and marker changes. Maps SDK and geocoding failures
+  surface as errors; obsolete asynchronous responses are ignored.
+- DataTable preserves AG Grid Community. A stable theme bridge resolves
+  `--data-table-*` in the nearest provider. Columns and optional mobile cards belong
+  to the consumer; actions are documented composition rather than a public component.
+- AppTemplate shares Sidebar's breakpoints; its regions use layout tokens.
+  FormTemplate exposes responsive columns and gaps and accepts arbitrary children.
 
 ## Do's and Don'ts
 
@@ -176,3 +187,9 @@ state; do not indicate a failure by recoloring the selected destination alone.
 - Don't use blur, glossy gradients, or rounded pills as default treatments.
 - Don't apply a thick border and shadow to every nested object.
 - Don't present this project vocabulary as a canonical external standard.
+
+Local implementation update: 2026-10-15. See the
+[migration and validation guide](../../../docs/refactor-migration.md) for public
+API changes, test coverage and limits of this web adaptation. Visual review is
+against these local target rules; claims of native or complete framework parity
+remain outside the contract.

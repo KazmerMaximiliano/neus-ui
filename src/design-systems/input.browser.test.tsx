@@ -11,6 +11,11 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cdp, page } from "vitest/browser";
 import { Input } from "../components/Input";
 import "../css/app.css";
+import {
+  contrastRatio,
+  flatten,
+  resolveColor,
+} from "./design-systems.test-utils";
 import { ThemeProvider } from "../providers";
 import { FormTemplate } from "../templates/FormTemplate/FormTemplate";
 
@@ -25,7 +30,7 @@ const INPUT_SYSTEM_CASES = [
     shadow: false,
   },
   { id: "apple", radius: 8, padding: [12, 16], border: "1px", shadow: false },
-  { id: "carbon", radius: 0, padding: [12, 16], border: "1px", shadow: false },
+  { id: "carbon", radius: 0, padding: [12, 16], border: "0px", shadow: false },
   {
     id: "material",
     radius: 4,
@@ -42,16 +47,6 @@ const INPUT_SYSTEM_CASES = [
   },
   { id: "vercel", radius: 6, padding: [8, 12], border: "1px", shadow: false },
 ] as const;
-
-/** Resolve semantic colors through the browser instead of comparing CSS syntax. */
-const resolveColor = (element: HTMLElement, token: string) => {
-  const probe = document.createElement("span");
-  probe.style.color = `var(${token})`;
-  element.append(probe);
-  const value = getComputedStyle(probe).color;
-  probe.remove();
-  return value;
-};
 
 describe.each(["light", "dark"] as const)(
   "Input designs in %s mode",
@@ -89,7 +84,7 @@ describe.each(["light", "dark"] as const)(
           });
         }
         const input = screen.getByRole("textbox", { name: "Name" });
-        const wrapper = input.parentElement!;
+        const wrapper = input.closest<HTMLElement>(".input__wrapper")!;
         const styles = getComputedStyle(input);
         expect(parseFloat(styles.borderRadius)).toBeCloseTo(system.radius, 2);
         expect(parseFloat(styles.paddingTop)).toBeCloseTo(system.padding[0], 2);
@@ -98,6 +93,9 @@ describe.each(["light", "dark"] as const)(
           2,
         );
         expect(styles.borderTopWidth).toBe(system.border);
+        expect(styles.borderBottomWidth).toBe(
+          system.id === "carbon" ? "1px" : system.border,
+        );
         expect(styles.boxShadow !== "none").toBe(system.shadow);
         expect(styles.minWidth).toBe("200px");
         expect(getComputedStyle(wrapper).gap).toBe("8px");
@@ -121,7 +119,7 @@ describe.each(["light", "dark"] as const)(
           resolveColor(wrapper, "--color-text-placeholder"),
         );
 
-        const hoverColor = resolveColor(wrapper, "--color-border-input-hover");
+        const hoverColor = resolveColor(wrapper, "--input-hover-border-color");
         const focusColor = resolveColor(
           wrapper,
           system.id === "neus" ? "--color-info-300" : "--color-focus",
@@ -156,7 +154,9 @@ describe.each(["light", "dark"] as const)(
           resolveColor(wrapper, "--color-text-disabled"),
         );
         expect(getComputedStyle(disabled).borderTopColor).toBe(
-          resolveColor(wrapper, "--color-border-subtle"),
+          system.id === "carbon"
+            ? "rgba(0, 0, 0, 0)"
+            : resolveColor(wrapper, "--color-border-subtle"),
         );
         expect(getComputedStyle(disabled).backgroundColor).toBe(
           resolveColor(wrapper, "--color-surface-disabled"),
@@ -164,9 +164,11 @@ describe.each(["light", "dark"] as const)(
         expect(getComputedStyle(screen.getByText("Disabled")).color).toBe(
           resolveColor(wrapper, "--color-text-disabled"),
         );
-        expect(getComputedStyle(screen.getByText("Still invalid")).color).toBe(
-          resolveColor(wrapper, "--color-error"),
-        );
+        const message = getComputedStyle(screen.getByText("Still invalid")).color;
+        expect(message).toBe(resolveColor(wrapper, "--input-error-color"));
+        expect(
+          contrastRatio(message, resolveColor(wrapper, "--color-surface")),
+        ).toBeGreaterThanOrEqual(4.5);
         await userEvent.tab();
         const readonly = screen.getByRole("textbox", { name: "Read only" });
         expect(readonly).toHaveFocus();
@@ -177,11 +179,67 @@ describe.each(["light", "dark"] as const)(
         expect(getComputedStyle(color).padding).toBe("0px");
         expect(getComputedStyle(color).borderRadius).toBe(styles.borderRadius);
         expect(parseFloat(getComputedStyle(color).height)).toBeCloseTo(
-          parseFloat(getComputedStyle(color).fontSize) * 3.5,
+          Math.max(48, parseFloat(getComputedStyle(color).fontSize) * 3.5),
           1,
         );
         fireEvent.change(color, { target: { value: "#abcdef" } });
         expect(onChange).toHaveBeenLastCalledWith("#abcdef");
+      },
+    );
+  },
+);
+
+describe.each(["light", "dark"] as const)(
+  "Input state contract in %s mode",
+  (scheme) => {
+    it.each(INPUT_SYSTEM_CASES)(
+      "distinguishes $id invalid focus, read-only and disabled fields",
+      async (system) => {
+        render(
+          <ThemeProvider
+            scope="local"
+            designSystem={system.id}
+            colorScheme={scheme}
+          >
+            <Input label="Invalid" error="Check this value" />
+            <Input label="Read only" readonly defaultValue="Original" />
+            <Input label="Disabled" disabled defaultValue="Original" />
+          </ThemeProvider>,
+        );
+        const invalid = screen.getByRole("textbox", { name: "Invalid" });
+        const rest = getComputedStyle(invalid);
+        const restState = [rest.boxShadow, rest.borderBottomColor].join();
+        invalid.focus();
+        await waitFor(() => {
+          const focused = getComputedStyle(invalid);
+          expect([focused.boxShadow, focused.borderBottomColor].join()).not.toBe(
+            restState,
+          );
+        });
+
+        const readonly = screen.getByRole("textbox", { name: "Read only" });
+        const disabled = screen.getByRole("textbox", { name: "Disabled" });
+        const surface = resolveColor(readonly.parentElement!, "--color-surface");
+        const r = getComputedStyle(readonly);
+        const d = getComputedStyle(disabled);
+        expect(r.color).not.toBe(d.color);
+        expect(
+          [r.backgroundColor, r.borderBottomStyle, r.borderBottomColor].join(),
+        ).not.toBe(
+          [d.backgroundColor, d.borderBottomStyle, d.borderBottomColor].join(),
+        );
+        expect(
+          contrastRatio(r.color, flatten(r.backgroundColor, surface)),
+        ).toBeGreaterThanOrEqual(4.5);
+
+        const readonlyRest = [r.boxShadow, r.borderBottomColor].join();
+        readonly.focus();
+        await waitFor(() => {
+          const focused = getComputedStyle(readonly);
+          expect([focused.boxShadow, focused.borderBottomColor].join()).not.toBe(
+            readonlyRest,
+          );
+        });
       },
     );
   },
@@ -287,7 +345,7 @@ describe("Input scopes and customization", () => {
       </ThemeProvider>,
     );
     const input = screen.getByRole("textbox", { name: "Name" });
-    const wrapper = input.parentElement!;
+    const wrapper = input.closest<HTMLElement>(".input__wrapper")!;
     wrapper.style.setProperty("--input-radius", "18px");
     expect(getComputedStyle(input).borderRadius).toBe("25px");
     expect(getComputedStyle(wrapper).gap).toBe("20px");
@@ -315,8 +373,9 @@ describe("Input scopes and customization", () => {
     );
     const wrapper = screen.getByRole("textbox", {
       name: "Name",
-    }).parentElement!;
-    expect(getComputedStyle(wrapper).gridColumnStart).toBe("span 1");
+    }).closest<HTMLElement>(".input__wrapper")!;
+    expect(getComputedStyle(wrapper.parentElement!).display).toBe("grid");
+    expect(getComputedStyle(wrapper).gridColumnStart).toBe("auto");
     expect(wrapper.getBoundingClientRect().width).toBeGreaterThanOrEqual(200);
   });
 });

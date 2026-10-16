@@ -125,7 +125,8 @@ This is a breaking replacement with no compatibility adapter. `CardColor` and
 | --- | --- |
 | `title`, `description`, `icon` | Explicit headings, text and icons in children |
 | `avatarImage`, `avatarAlt`, `leading`, `trailing` | Images and content composed inside CardHeader |
-| `variant`, `fill`, `color`, `highlighted`, `selected` | Classes, CSS tokens, or style overrides |
+| Legacy `variant`/`fill` combinations | Use current `variant="auto" / "filled" / "outlined" / "elevated"` |
+| `color`, `highlighted`, `selected` | Classes, CSS tokens, or child composition |
 | `disabled`, `onClick` | Disabled state and handlers on interactive children |
 
 `card__*` and `card--*` selectors are removed. The new base classes are
@@ -139,3 +140,13 @@ design-system selector and inherits the toolbar's light/dark mode. JSX children
 are documented with controls disabled; serializable children and CSS objects can
 be edited in their controls. CardMedia provides image, video, audio and iframe
 previews without fetching remote demo assets.
+
+
+## Presentation contract (2026-10-15)
+
+| API | Behavior |
+| --- | --- |
+| `variant` | auto (default), filled, outlined, elevated |
+
+Uses all six recipes through ThemeProvider in light and dark mode. See the
+[migration guide](../refactor-migration.md) for examples and breaking changes.

@@ -7,9 +7,10 @@ surfaces, clear text hierarchy, compact controls, and purposeful emphasis. The
 design should support developer tools, settings, and data workflows without
 requiring promotional graphics to establish identity.
 
-**Current implementation.** Button, Card, Input, and Sidebar have Geist-inspired
-recipes. Small radii and monochrome actions are a starting point, not full Geist
-coverage. Other components retain their current styles.
+**Current implementation.** All public component families and both templates now
+have scoped CSS token contracts and six-system recipes. Button, Card and Input
+share the expanded presentation API described below. This is the project's web
+mapping, not full feature parity with an external component framework.
 
 Format: [Google DESIGN.md](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
 (alpha, prose only). Primary references consulted 2026-10-14:
@@ -32,14 +33,15 @@ opaque gray from gray-alpha used where the background should show through;
 avoid doubling translucent borders at intersections.
 Reference: [Geist colors](https://vercel.com/geist/colors).
 
-**Current implementation.** The palette switches primary actions from dark-on-light
-to light-on-dark with a matching on-primary color; focus is blue. Light text and
-surface values are overridden. Dark surfaces and most status/disabled colors still
-come from Neus, so the full neutral Geist hierarchy is not implemented.
+**Current implementation.** Semantic surfaces, text, selection, field/layer and feedback roles are
+mapped in the scoped tokens and palettes. Light/dark values preserve role pairs.
+Solid action foregrounds are resolved per state; custom six-digit hex primary
+accents also receive readable text/focus mappings. These local roles do not provide
+a complete external theme matrix or a full dynamic tonal color engine.
+Vercel maps neutral dark backgrounds and borders rather than inheriting indigo surfaces.
 
-**Refactor gaps.** Map dark neutral surfaces, interactive states, and feedback
-pairs. Input's shared focus-ring color is independent of the blue focus border.
-Audit custom accent overrides rather than assuming the on-primary pair recalculates.
+**Validation boundary.** Consumer-supplied CSS foreground/background overrides and arbitrary non-hex
+accent formats are outside the automatic contrast contract.
 
 ## Typography
 
@@ -49,13 +51,13 @@ copy needs more leading than a compact label. Reference:
 [Geist typography](https://vercel.com/geist/typography).
 Local policy: avoid uppercase styling for ordinary actions and navigation.
 
-**Current implementation.** The system declares Geist/Geist Mono with fallbacks,
-without loading font files. Buttons use medium-weight 14px text; Input also uses
-14px values. The remaining numerical type scale is inherited from Neus.
+**Current implementation.** Font stacks remain declared locally without downloaded assets. Body,
+heading, label and caption roles include size, weight, line height and tracking.
+Component-specific sizes remain deliberate local mappings, not a claim that the
+entire external typography catalog has been implemented.
 
-**Refactor gaps.** Add semantic type-role mappings with line-height and tracking.
-Fallback font metrics and aligned numeric data require review; the existing stack
-does not automatically implement every Geist text style.
+**Validation boundary.** Use local fallback fonts and review application content at zoom and with
+long translations; font asset loading belongs to the consuming application.
 
 ## Layout
 
@@ -64,13 +66,14 @@ form fields, and economical spacing. Keep dense metadata readable and separate
 sections through headings and spacing. Marketing grids and large display text
 must not determine the density of routine application controls.
 
-**Current implementation.** Input uses compact padding; Card slots and the shared
-four-pixel spacing scale remain. Sidebar uses Neus's desktop panel, tablet rail,
-and mobile dialog. These breakpoints are not a Geist layout contract.
+**Current implementation.** AppTemplate and FormTemplate now map page-region spacing and responsive
+columns through recipes. AppTemplate follows Sidebar at 768/1024px; FormTemplate
+uses 2/2/1 columns by default with independent gap/region overrides. Components keep
+readable internal geometry; week grids and tables retain horizontal navigation
+where their data cannot fit a narrow viewport.
 
-**Refactor gaps.** Map form/table density consistently and review narrow containers,
-wrapping action groups, long identifiers, and touch targets. Do not solve overflow
-by shrinking all interface text.
+**Validation boundary.** The shared breakpoints are Neus web choices. Application page compositions
+and specialized external grid systems remain consumer decisions.
 
 ## Elevation & Depth
 
@@ -79,13 +82,14 @@ resting content, raised content, and floating overlays have different needs.
 Choose the least elevation that remains legible and preserve separation in dark
 mode. Reference: [Geist materials](https://vercel.com/geist/materials).
 
-**Current implementation.** Button and Card have no resting shadow. Card and
-Sidebar rely on subtle borders; sidebar controls remove the inherited shadow.
-Input adds a shared focus shadow.
+**Current implementation.** Floating and dialog elevation roles map the existing overlay and modal
+recipes. Ordinary surfaces and action variants have separate treatments; Card
+stays passive, Button reserves elevation for its explicit treatment where required,
+and reduced-motion rules suppress nonessential transitions. Neobrutalism retains
+hard shadows with clearance in fields, cards and template spacing.
 
-**Refactor gaps.** Establish explicit floating material mappings for menus and
-dialogs. Do not infer a complete material hierarchy from the current flat Card.
-Focus and overlay semantics remain responsibilities of the shared components.
+**Validation boundary.** Nested surfaces and custom scroll containers must preserve focus and shadow
+clearance; the library cannot control clipping imposed by consumer overflow rules.
 
 ## Shapes
 
@@ -94,12 +98,13 @@ floating surfaces can use a different material radius. Geist's material presets
 combine radius with fill, stroke, and shadow, rather than choosing each in isolation.
 Reference: [Geist materials](https://vercel.com/geist/materials).
 
-**Current implementation.** Button, Card, Input, and Sidebar items use 6px corners;
-the Neus sidebar decoration is disabled. This uniform baseline covers only the
-currently adapted components.
+**Current implementation.** Every adapted family has its own radius/border contract, including nested
+selectors, calendars, overlays, maps and tables. Neus keeps its navigation curves;
+other systems disable that decoration. Media clipping and focus remain separate
+from surface geometry. Explicit presentation variants have recipes in all systems.
 
-**Refactor gaps.** Map overlay and larger-surface geometry when adapting them.
-Do not force the 6px control radius onto every future dialog or menu.
+**Validation boundary.** Recipe geometry expresses the documented local web target. Native platform
+rendering and additional interactive surface types are separate capabilities.
 
 ## Components
 
@@ -110,14 +115,14 @@ use a strong neutral solid action, quieter outlined/text alternatives, concise
 labels, and consistent sizes. Keep hover, press, keyboard focus, disabled, and
 loading states legible without decorative motion.
 
-**Current implementation.** [Button recipe](./button.css): 6px corners, medium
-natural-case label, no shadow. Shared CSS provides variant state colors, blue
-focus outline, and disabled treatment. Loading disables activation and replaces
-the label with busy dots. The primary fill/text pair changes with the mode.
+**Current implementation.** [Button recipe](./button.css) maps solid, secondary, tonal, elevated,
+outlined and text actions. Carbon uses primary/secondary/tertiary/ghost hierarchy
+for solid/secondary/outlined/text; Material reserves resting elevation for elevated.
+The shared implementation reserves the idle label box while busy. Semantic and
+custom hex accent foregrounds are resolved for resting, hover and pressed fills.
 
-**Refactor gaps.** Review derived dark hover/active colors, semantic variants,
-disabled roles, and loading width. Neus variants and size names do not establish
-complete Geist Button API or visual parity.
+**Refactor boundaries.** Six shared variants express the supported action hierarchy. System-specific
+native APIs and additional interaction patterns remain outside this contract.
 
 ### Card
 
@@ -125,13 +130,13 @@ complete Geist Button API or visual parity.
 and deliberate internal spacing. Let headers, body text, and child actions provide
 hierarchy. Choose elevation only when the surrounding layout requires it.
 
-**Current implementation.** [Card recipe](./card.css): 6px corners, subtle border,
-no shadow or header divider. Shared slots supply spacing and clipped media; semantic
-foreground/background follow the selected mode.
+**Current implementation.** [Card recipe](./card.css) keeps the root passive. `variant="auto"`
+uses this system's existing treatment; filled, outlined and elevated can be chosen
+explicitly in all six systems. Header/Content/Footer keep independent spacing;
+media clips inside the surface and child controls own interactions.
 
-**Refactor gaps.** Dark-mode surfaces still inherit Neus rather than a mapped Geist
-material. Card remains passive: focus, errors, and loading belong to content or
-child controls, not a container-wide interaction state.
+**Refactor boundaries.** The root remains passive. Selection, expansion, loading, errors and keyboard
+actions belong to meaningful child content and controls.
 
 ### Input
 
@@ -139,14 +144,15 @@ child controls, not a container-wide interaction state.
 keep compact geometry, a clear label/value hierarchy, a quiet resting border,
 visible focus, and explicit validation feedback. Read-only values remain readable.
 
-**Current implementation.** [Input recipe](./input.css): 6px corners, compact
-padding, neutral values, aligned labels, subtle border, and blue focus border with
-a shared shadow. The component supplies associated error text and native disabled
-and read-only behavior.
+**Current implementation.** [Input recipe](./input.css) supplies field geometry and state roles.
+The shared anatomy supports auto/filled/outlined, small/medium/large,
+auto/external/floating labels, prefix/suffix content and an optional error icon.
+Auto uses a floating outlined field in Material and external labels elsewhere.
+Focused, populated, prefixed and native color fields keep floating labels raised.
+Errors stay associated with the native input; readonly remains distinct from disabled.
 
-**Refactor gaps.** Map focus/error rings and disabled surfaces to both Geist modes.
-Read-only has no dedicated recipe. Input prefixes, suffixes, and other Geist features
-are not supplied by this visual adaptation; API additions require separate work.
+**Refactor boundaries.** Prefixes/suffixes and floating labels do not introduce masks, autocomplete
+providers or other application behavior. Native input semantics remain in use.
 
 ### Sidebar
 
@@ -158,20 +164,28 @@ Keyboard focus must be identifiable even on a selected item.
 rounded rows, header separator, tinted selection, and blue focus. Shared behavior
 provides the rail and mobile dialog; controls have no shadow.
 
-**Refactor gaps.** Review selected-state contrast and inherited dark surfaces.
-The component is Neus navigation styled toward Geist, not an official Geist Sidebar
-implementation. Keep errors/progress separate from current-location state.
+**Refactor boundaries.** Desktop/rail/mobile behavior is shared Neus navigation. Native-platform grouped
+sidebars and external framework navigation parity are separate capabilities.
 
-### Extension to other families — pending adaptation
+### Other component families and templates
 
-- Selection and date/time controls: use compact neutral fields, clear selection,
-  and explicit focus/error states consistent with Input.
-- DataTable and calendars: align labels and values, reserve mono for technical
-  content, and distinguish muted metadata from disabled information.
-- Modal and menus: choose a floating material and appropriate focus treatment;
-  do not copy a flat Card unchanged into every overlay.
-- Badge and Stepper: use restrained semantic accents with text or shape cues.
-- Templates: compose clear product regions without importing marketing decoration.
+- Base and Navigation retain their interaction APIs and have explicit recipes for
+  fields, nested controls, feedback, floating surfaces, keyboard focus and selection.
+- Calendar separates single/range/multiple values; `numberOfMonths` controls visible
+  months. Clock keeps the period synchronized with controlled time. Dial labels
+  stay above the hand, with contrasting ink clipped to the indicator tip for
+  partially covered marks. DateInput and TimeInput share field presentations and
+  offer panel overrides.
+- WeekCalendar and WeekCalendarRow share a token family, a seven-day window with
+  one-day navigation, keyboard event activation and tooltips on focus or hover.
+- InteractiveMap adapts the Neus interface; `mapOptions` configures Google cartography.
+  Readonly blocks selection and marker changes. Maps SDK and geocoding failures
+  surface as errors; obsolete asynchronous responses are ignored.
+- DataTable preserves AG Grid Community. A stable theme bridge resolves
+  `--data-table-*` in the nearest provider. Columns and optional mobile cards belong
+  to the consumer; actions are documented composition rather than a public component.
+- AppTemplate shares Sidebar's breakpoints; its regions use layout tokens.
+  FormTemplate exposes responsive columns and gaps and accepts arbitrary children.
 
 ## Do's and Don'ts
 
@@ -181,3 +195,9 @@ implementation. Keep errors/progress separate from current-location state.
 - Don't equate monochrome controls and 6px corners with full Geist support.
 - Don't use promotional gradients or display typography as default product chrome.
 - Don't claim unimplemented component APIs or a complete material/token scale.
+
+Local implementation update: 2026-10-15. See the
+[migration and validation guide](../../../docs/refactor-migration.md) for public
+API changes, test coverage and limits of this web adaptation. Visual review is
+against these local target rules; claims of native or complete framework parity
+remain outside the contract.

@@ -3,47 +3,54 @@
   display: inline-block;
 }
 
-.menu__dropdown {
+.menu__panel {
   position: fixed;
-  transform: translateX(-100%) translateY(-0.5em);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border-input);
-  border-radius: var(--radius-default);
-  box-shadow: 0 4px 8px var(--color-shadow);
-  z-index: 1000;
-  min-width: 11em;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.menu__dropdown--open {
-  opacity: 1;
-  transform: translateX(-100%) translateY(0);
-  pointer-events: auto;
+  inset: auto;
+  top: calc(var(--popover-top) + var(--overlay-offset));
+  right: var(--popover-right);
+  margin: 0;
+  box-sizing: border-box;
+  min-width: var(--overlay-min-width);
+  padding: var(--overlay-padding);
+  border: var(--overlay-border-width) solid var(--overlay-border-color);
+  border-radius: var(--overlay-radius);
+  background-color: var(--overlay-background);
+  color: var(--overlay-color);
+  box-shadow: var(--overlay-shadow);
+  font-family: var(--overlay-font-family);
+  overflow: hidden;
 }
 
 .menu__item {
-  padding: 1em var(--radius-default);
-  cursor: pointer;
-  transition: background-color 0.2s ease;
   display: flex;
   align-items: center;
-  font-size: 0.95em;
-  font-weight: 500;
-  color: var(--color-text-primary);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--overlay-item-min-height);
+  padding: var(--overlay-item-padding);
+  border: 0;
+  border-radius: var(--overlay-item-radius);
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--overlay-item-font-size);
+  font-weight: var(--overlay-item-font-weight);
+  text-align: start;
+  cursor: pointer;
+}
 
-  &:first-child {
-    border-top-left-radius: var(--radius-default);
-    border-top-right-radius: var(--radius-default);
-  }
+.menu__item:hover:not(:disabled),
+.menu__item:focus-visible {
+  background-color: var(--overlay-item-hover-background);
+  color: var(--overlay-item-hover-color);
+}
 
-  &:last-child {
-    border-bottom-left-radius: var(--radius-default);
-    border-bottom-right-radius: var(--radius-default);
-  }
+.menu__item:focus-visible {
+  outline: 2px solid var(--overlay-focus-color);
+  outline-offset: -2px;
+}
 
-  &.menu__item--clickable:hover {
-    background-color: var(--color-surface-hover);
-  }
+.menu__item:disabled {
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
 }

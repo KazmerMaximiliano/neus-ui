@@ -1,0 +1,7 @@
+[data-design-system="vercel"] {
+  --select-caret-size: 16px;
+  --select-caret-gap: 12px;
+  --select-caret-color: var(--color-text-secondary);
+  --select-search-radius: 6px;
+  --select-tag-radius: 6px;
+}

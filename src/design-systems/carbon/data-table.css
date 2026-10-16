@@ -1,0 +1,8 @@
+[data-design-system="carbon"] {
+  --data-table-radius: 0px;
+  --data-table-control-radius: 0px;
+  --data-table-spacing: 6px;
+  --data-table-row-height: 40px;
+  --data-table-header-height: 40px;
+  --data-table-background: var(--color-layer-01);
+}

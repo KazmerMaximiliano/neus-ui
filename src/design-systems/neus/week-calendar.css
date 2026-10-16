@@ -1,0 +1,23 @@
+:root, [data-design-system] {
+  --week-calendar-background: var(--color-surface);
+  --week-calendar-color: var(--color-text-primary);
+  --week-calendar-muted: var(--color-text-secondary);
+  --week-calendar-border-width: 1px;
+  --week-calendar-border-color: var(--color-border-subtle);
+  --week-calendar-radius: var(--radius-default);
+  --week-calendar-gap: 16px;
+  --week-calendar-padding: 20px 24px;
+  --week-calendar-title-size: 18px;
+  --week-calendar-shadow: none;
+  --week-calendar-grid-padding: 3px;
+  --week-calendar-grid-min-width: 720px;
+  --week-calendar-cell-border-width: 1px;
+  --week-calendar-cell-height: 56px;
+  --week-calendar-event-height: 46px;
+  --week-calendar-event-radius: 50%;
+  --week-calendar-event-color: var(--color-text-primary);
+  --week-calendar-avatar-background: var(--color-surface);
+  --week-calendar-today-background: var(--color-selection);
+  --week-calendar-today-color: var(--color-on-selection);
+  --week-calendar-today-ring: inset 0 0 0 1px var(--color-primary-text);
+}

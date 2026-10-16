@@ -1,0 +1,13 @@
+/* Today is accent text; selection is a filled accent circle. */
+[data-design-system="apple"] {
+  --calendar-radius: 12px;
+  --calendar-border-color: var(--color-border-subtle);
+  --calendar-label-color: var(--color-text-primary);
+  --calendar-caption-weight: 600;
+  --calendar-weekday-size: 11px;
+  --calendar-selected-background: var(--color-primary);
+  --calendar-selected-color: var(--color-text-on-primary);
+  --calendar-selected-weight: 600;
+  --calendar-today-ring: none;
+  --calendar-item-radius: 8px;
+}

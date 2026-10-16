@@ -1,0 +1,8 @@
+[data-design-system="carbon"] {
+  --week-calendar-radius: 0px;
+  --week-calendar-padding: 16px;
+  --week-calendar-event-radius: 0px;
+  --week-calendar-title-size: 16px;
+  --week-calendar-cell-height: 48px;
+  --week-calendar-event-height: 40px;
+}

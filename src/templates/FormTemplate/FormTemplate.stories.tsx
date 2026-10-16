@@ -10,6 +10,15 @@ const meta: Meta<typeof FormTemplateComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    actions: { control: false, description: "Composed custom actions" },
+    className: { control: "text", description: "className override" },
+    style: { control: "object", description: "style override" },
+    actionsStyle: { control: "object", description: "actionsStyle override" },
+    columns: { control: "number", description: "columns override" },
+    tabletColumns: { control: "number", description: "tabletColumns override" },
+    mobileColumns: { control: "number", description: "mobileColumns override" },
+    gap: { control: "text", description: "gap override" },
+
     children: {
       control: false,
       description: "Content to display in the main area",
@@ -32,6 +41,15 @@ type Story = StoryObj<typeof meta>;
 
 export const FormTemplate: Story = {
   args: {
+    actions: undefined,
+    className: undefined,
+    style: {},
+    actionsStyle: {},
+    columns: 2,
+    tabletColumns: 2,
+    mobileColumns: 1,
+    gap: undefined,
+
     children: (
       <>
         <Input placeholder="Enter your username" />

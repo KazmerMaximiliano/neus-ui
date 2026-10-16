@@ -1,2 +1,2 @@
-export * from "./AppTemplate/AppTemplate";
-export * from "./FormTemplate/FormTemplate";
+export * from "./AppTemplate";
+export * from "./FormTemplate";

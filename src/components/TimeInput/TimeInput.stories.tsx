@@ -1,7 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { TimeInput as TimeInputComponent } from "./TimeInput";
+import type { TimeInputStoryArgs } from "./TimeInput.types";
 
-const meta: Meta<typeof TimeInputComponent> = {
+const meta: Meta<TimeInputStoryArgs> = {
   title: "Date & Time/TimeInput",
   component: TimeInputComponent,
   parameters: {
@@ -9,6 +12,31 @@ const meta: Meta<typeof TimeInputComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the TimeInput",
+    },
+    variant: {
+      control: "select",
+      options: ["auto", "filled", "outlined"],
+      description: "Shared field variant",
+    },
+    labelPlacement: {
+      control: "select",
+      options: ["auto", "external", "floating"],
+      description: "Shared field labelPlacement",
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Shared field size",
+    },
+    fieldStyle: { control: "object", description: "fieldStyle override" },
+    labelStyle: { control: "object", description: "labelStyle override" },
+    errorStyle: { control: "object", description: "errorStyle override" },
+    panelStyle: { control: "object", description: "panelStyle override" },
+
     value: {
       control: false,
       description: "The current selected time(s)",
@@ -86,7 +114,7 @@ const meta: Meta<typeof TimeInputComponent> = {
       },
     },
     onChange: {
-      control: false,
+      action: "changed",
       description: "Callback when time selection changes",
       table: {
         type: {
@@ -101,6 +129,15 @@ type Story = StoryObj<typeof meta>;
 
 export const TimeInput: Story = {
   args: {
+    designSystem: "neus",
+    variant: "auto",
+    labelPlacement: "auto",
+    size: "medium",
+    fieldStyle: {},
+    labelStyle: {},
+    errorStyle: {},
+    panelStyle: {},
+
     label: "Select a time",
     name: "time-input",
     placeholder: "Pick a time...",
@@ -110,6 +147,11 @@ export const TimeInput: Story = {
     error: undefined,
     format: "24h",
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <TimeInputComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

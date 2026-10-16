@@ -1,3 +1,6 @@
+import type { CSSProperties } from "react";
+import type { DesignSystemId } from "../../design-systems";
+
 export enum FileType {
   IMAGE = 'image/*',
   JPG = '.jpg,.jpeg',
@@ -36,5 +39,12 @@ export type FileUploaderProps = {
   deleteFilesText?: string;
   disabled?: boolean;
   name?: string;
+  label?: string;
+  areaStyle?: CSSProperties;
+  errorStyle?: CSSProperties;
   onChange: (data: FileUploadData | null, error?: FileUploadError) => void;
 }
+
+export type FileUploaderStoryArgs = FileUploaderProps & {
+  designSystem: DesignSystemId;
+};

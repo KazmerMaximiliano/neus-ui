@@ -12,6 +12,19 @@ const meta: Meta<typeof InteractiveMapComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    className: { control: "text", description: "className override" },
+    style: { control: "object", description: "style override" },
+    mapStyle: { control: "object", description: "mapStyle override" },
+    searchStyle: { control: "object", description: "searchStyle override" },
+    instructionsStyle: {
+      control: "object",
+      description: "instructionsStyle override",
+    },
+    loadingStyle: { control: "object", description: "loadingStyle override" },
+    errorStyle: { control: "object", description: "errorStyle override" },
+    mapOptions: { control: "object", description: "mapOptions override" },
+    onError: { action: "onError", description: "Reports map errors" },
+
     googleMapsApiKey: {
       control: "text",
       description: "Google Maps API key for map functionality",
@@ -45,16 +58,20 @@ const meta: Meta<typeof InteractiveMapComponent> = {
 
 type Story = StoryObj<typeof meta>;
 
-const mockOnLocationSelect = (location: Record<string, unknown>) => {
-  console.log("Location selected:", location);
-};
-
 export const InteractiveMap: Story = {
   args: {
+    className: undefined,
+    style: {},
+    mapStyle: {},
+    searchStyle: {},
+    instructionsStyle: {},
+    loadingStyle: {},
+    errorStyle: {},
+    mapOptions: {},
+
     googleMapsApiKey: "",
     initialCoordinates: "-31.4201,-64.1888",
     initialAddress: "Plaza San Martín, Córdoba, Argentina",
-    onLocationSelect: mockOnLocationSelect,
   },
 };
 

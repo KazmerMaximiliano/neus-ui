@@ -1,0 +1,143 @@
+.picker-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--input-gap);
+  width: 100%;
+  font-family: var(--input-font-family);
+}
+
+.picker-field__label {
+  margin-left: var(--input-label-offset);
+  color: var(--input-label-color);
+  font-size: var(--input-label-font-size);
+  font-weight: var(--input-label-weight);
+}
+
+.picker-field__required {
+  margin-left: var(--input-required-gap);
+  color: var(--input-required-color);
+}
+
+.picker-field__label.date-input__label--error,
+.picker-field__label.time-input__label--error {
+  color: var(--input-error-color);
+}
+
+.picker-field__label.date-input__label--disabled,
+.picker-field__label.time-input__label--disabled {
+  color: var(--input-disabled-color);
+}
+
+.picker-field__container {
+  position: relative;
+  width: 100%;
+}
+
+.picker-field__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: var(--input-min-width);
+  padding: var(--input-padding);
+  border-style: solid;
+  border-width: var(--input-border-width);
+  border-color: var(--input-border-color);
+  border-radius: var(--input-radius);
+  background-color: var(--input-background);
+  box-shadow: var(--input-shadow);
+  color: var(--input-color);
+  font-family: inherit;
+  font-size: var(--input-font-size);
+  font-weight: var(--input-font-weight);
+  line-height: var(--input-line-height);
+  text-align: start;
+  cursor: pointer;
+  transition: var(--input-transition);
+}
+
+.picker-field__field:hover:not(:disabled):not([aria-invalid]) {
+  border-color: var(--input-hover-border-color);
+}
+
+.picker-field__field:focus-visible,
+.picker-field__field--open {
+  outline: none;
+  border-color: var(--input-focus-border-color);
+  box-shadow: var(--input-focus-shadow);
+}
+
+.picker-field__field[aria-invalid] {
+  border-color: var(--input-error-border-color);
+  box-shadow: var(--input-error-shadow);
+}
+
+.picker-field__field[aria-invalid]:focus-visible,
+.picker-field__field[aria-invalid].picker-field__field--open {
+  box-shadow: var(--input-error-focus-shadow);
+}
+
+.picker-field__field:disabled {
+  border-color: var(--input-disabled-border-color);
+  background-color: var(--input-disabled-background);
+  box-shadow: var(--input-disabled-shadow);
+  color: var(--input-disabled-color);
+  cursor: not-allowed;
+}
+
+.picker-field__field.date-input__field--readonly,
+.picker-field__field.time-input__field--readonly {
+  border-style: var(--input-readonly-border-style);
+  border-color: var(--input-readonly-border-color);
+  background-color: var(--input-readonly-background);
+  cursor: default;
+}
+
+.picker-field__placeholder {
+  color: var(--input-placeholder-color);
+  opacity: var(--field-placeholder-opacity);
+}
+
+/* Floating labels cover the empty field until focus or an open picker raises them. */
+.picker-field:not(:has(> .picker-field__label)),
+.picker-field:focus-within,
+.picker-field:has(.picker-field__field--open) {
+  --field-placeholder-opacity: var(--input-placeholder-opacity);
+}
+
+.picker-field__icon {
+  flex-shrink: 0;
+  width: var(--select-caret-size);
+  height: var(--select-caret-size);
+  color: var(--select-caret-color);
+}
+
+.picker-field__error {
+  margin-left: var(--input-error-offset);
+  color: var(--input-error-color);
+  font-size: var(--input-error-font-size);
+}
+
+.picker-field__popover {
+  position: fixed;
+  inset: auto;
+  top: calc(var(--popover-top) + var(--overlay-offset));
+  left: var(--popover-left);
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.picker-field__popover :is(.calendar, .clock__container) {
+  box-shadow: var(--overlay-shadow);
+}
+
+.picker-field__field {
+  min-height: var(--field-height);
+  max-width: 100%;
+}

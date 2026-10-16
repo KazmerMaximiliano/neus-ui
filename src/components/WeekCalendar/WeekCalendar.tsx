@@ -1,13 +1,15 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { IconButton } from "../IconButton/IconButton";
-import { WeekCalendarRow } from "../WeekCalendarRow/WeekCalendarRow";
-import { CATEGORY_COLORS, DAY_NAMES } from "./WeekCalendar.constants";
+import { WeekCalendarRow } from "./components/WeekCalendarRow/WeekCalendarRow";
 import "./WeekCalendar.styles.css";
 import { WeekCalendarProps } from "./WeekCalendar.types";
+import { CATEGORY_COLORS, DAY_NAMES } from "./WeekCalendar.consts";
 import { formatDate, getCenterDate, getWeekDays } from "./WeekCalendar.utils";
 
 export const WeekCalendar = ({
+  className, style, headerStyle, navigationStyle, gridStyle,
+  categoryStyle, eventStyle, tooltipStyle,
   title = "Calendar",
   events = [],
   hoverContent,
@@ -25,38 +27,26 @@ export const WeekCalendar = ({
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const goToPreviousDay = () => {
-    setWeekStart((prev) => {
-      const d = new Date(prev);
-      d.setDate(d.getDate() - 1);
-      const end = new Date(d);
-      end.setDate(end.getDate() + 6);
-      onDayChange?.(d, end);
-      return d;
-    });
-  };
-
-  const goToNextDay = () => {
-    setWeekStart((prev) => {
-      const d = new Date(prev);
-      d.setDate(d.getDate() + 1);
-      const end = new Date(d);
-      end.setDate(end.getDate() + 6);
-      onDayChange?.(d, end);
-      return d;
-    });
+  const navigate = (offset: number) => {
+    const next = new Date(weekStart);
+    next.setDate(next.getDate() + offset);
+    const end = new Date(next);
+    end.setDate(end.getDate() + 6);
+    setWeekStart(next);
+    onDayChange?.(next, end);
   };
 
   return (
-    <div className="week-calendar">
-      <div className="week-calendar__header">
+    <div className={["week-calendar", className].filter(Boolean).join(" ")} style={style}>
+      <div className="week-calendar__header" style={headerStyle}>
         <div className="week-calendar__title">{title}</div>
-        <div className="week-calendar__selector">
+        <div className="week-calendar__selector" style={navigationStyle}>
           <IconButton
             size="small"
             variant="text"
             icon={ChevronLeft}
-            onClick={goToPreviousDay}
+            label="Anterior"
+            onClick={() => navigate(-1)}
           />
           <span>
             {formatDate(weekStart)} - {formatDate(weekEnd)}
@@ -65,17 +55,19 @@ export const WeekCalendar = ({
             size="small"
             variant="text"
             icon={ChevronRight}
-            onClick={goToNextDay}
+            label="Siguiente"
+            onClick={() => navigate(1)}
           />
         </div>
       </div>
-      <div className="week-calendar__grid">
+      <div className="week-calendar__grid" style={gridStyle}>
         <div className="week-calendar-row">
           <div className="week-calendar-row__category-cell"></div>
           {days.map((day) => {
             const isToday = day.getTime() === today.getTime();
             return (
               <div
+                aria-current={isToday ? "date" : undefined}
                 key={day.toISOString()}
                 className={`week-calendar-row__day-cell${isToday ? " week-calendar__day-cell--today" : ""}`}
               >
@@ -91,6 +83,9 @@ export const WeekCalendar = ({
         </div>
         {events.map((entry, index) => (
           <WeekCalendarRow
+            categoryStyle={categoryStyle}
+            eventStyle={eventStyle}
+            tooltipStyle={tooltipStyle}
             key={entry.category.title}
             entry={entry}
             days={days}

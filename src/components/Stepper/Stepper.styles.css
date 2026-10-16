@@ -1,192 +1,202 @@
-/* ---- Stepper base ---- */
 .stepper {
+  --stepper-dot-size: var(--stepper-dot-size-small);
+  --stepper-dot-font-size: var(--stepper-dot-font-size-small);
+  --stepper-label-font-size: var(--stepper-label-font-size-small);
   display: flex;
-  flex-direction: column;
   width: 100%;
+  font-family: var(--stepper-font-family);
 }
 
-/* ================================================================
-   DOTS VARIANT
-   ================================================================ */
+.stepper--medium {
+  --stepper-dot-size: var(--stepper-dot-size-medium);
+  --stepper-dot-font-size: var(--stepper-dot-font-size-medium);
+  --stepper-label-font-size: var(--stepper-label-font-size-medium);
+}
 
-/*
-  Track = flex row. Direct children: __step (shrink-0) and __connector (flex: 1).
-  Connector must be a sibling of __step — not nested inside it —
-  so flex: 1 stretches it between dots.
-*/
+.stepper--large {
+  --stepper-dot-size: var(--stepper-dot-size-large);
+  --stepper-dot-font-size: var(--stepper-dot-font-size-large);
+  --stepper-label-font-size: var(--stepper-label-font-size-large);
+}
+
+.stepper__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .stepper--dots .stepper__track {
   display: flex;
-  flex-direction: row;
   align-items: flex-start;
   width: 100%;
 }
 
-.stepper--dots .stepper__step {
+.stepper__step {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
   flex-shrink: 0;
+  align-items: center;
+  gap: var(--stepper-gap);
 }
 
-/* ---- Dot ---- */
 .stepper__dot {
-  border-radius: 50%;
-  border: 2px solid var(--color-gray-200);
-  background: var(--color-white);
+  position: relative;
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  color: var(--color-gray-400);
-  transition:
-    border-color 0.2s ease,
-    background 0.2s ease,
-    color 0.2s ease;
-  flex-shrink: 0;
+  box-sizing: border-box;
+  width: var(--stepper-dot-size);
+  height: var(--stepper-dot-size);
+  padding: 0;
+  border: var(--stepper-dot-border-width) solid var(--stepper-dot-border-color);
+  border-radius: var(--stepper-dot-radius);
+  background-color: var(--stepper-dot-background);
+  color: var(--stepper-dot-color);
+  font-family: inherit;
+  font-size: var(--stepper-dot-font-size);
+  font-weight: var(--stepper-dot-font-weight);
+  transition: var(--stepper-transition);
 }
 
-.stepper__dot--small {
-  width: 28px;
-  height: 28px;
-  font-size: 0.7rem;
-}
-.stepper__dot--medium {
-  width: 36px;
-  height: 36px;
-  font-size: 0.8125rem;
-}
-.stepper__dot--large {
-  width: 48px;
-  height: 48px;
-  font-size: 1rem;
+.stepper__check {
+  display: block;
+  width: calc(var(--stepper-dot-size) * 0.45);
+  height: calc(var(--stepper-dot-size) * 0.45);
+  stroke-width: 2.5;
 }
 
 .stepper__dot--active {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: var(--color-white);
+  border-color: var(--stepper-dot-active-border-color);
+  background-color: var(--stepper-dot-active-background);
+  box-shadow: var(--stepper-dot-active-shadow);
+  color: var(--stepper-dot-active-color);
 }
 
 .stepper__dot--done {
-  border-color: var(--color-primary);
-  background: var(--color-primary-light);
-  color: var(--color-primary);
+  border-color: var(--stepper-dot-done-border-color);
+  background-color: var(--stepper-dot-done-background);
+  color: var(--stepper-dot-done-color);
 }
 
 .stepper__dot--clickable {
   cursor: pointer;
 }
+
 .stepper__dot--clickable:hover {
-  opacity: 0.85;
+  background-color: var(--stepper-dot-hover-background);
 }
 
-/* ---- Label — scales with dot size ---- */
+.stepper__dot:focus-visible {
+  outline: 2px solid var(--stepper-focus-color);
+  outline-offset: 2px;
+}
+
 .stepper__label {
-  font-weight: 500;
-  color: var(--color-gray-400);
-  white-space: nowrap;
+  color: var(--stepper-label-color);
+  font-size: var(--stepper-label-font-size);
+  font-weight: var(--stepper-label-weight);
   text-align: center;
-}
-
-.stepper__label--small {
-  font-size: 0.6875rem;
-}
-.stepper__label--medium {
-  font-size: 0.8rem;
-}
-.stepper__label--large {
-  font-size: 0.9375rem;
+  white-space: nowrap;
 }
 
 .stepper__label--active {
-  color: var(--color-primary);
-  font-weight: 600;
-}
-.stepper__label--done {
-  color: var(--color-gray-500);
-}
-.stepper__label--inactive {
-  color: var(--color-gray-400);
+  color: var(--stepper-label-active-color);
+  font-weight: var(--stepper-label-active-weight);
 }
 
-/* ---- Connector — direct sibling of __step in the track row ---- */
+.stepper__label--done {
+  color: var(--stepper-label-done-color);
+}
+
 .stepper__connector {
   flex: 1;
-  min-width: 24px;
-  height: 2px;
-  background: var(--color-gray-200);
-  transition: background 0.2s ease;
   align-self: flex-start;
-}
-
-/* margin-top = half dot height so line bisects the circle */
-.stepper__connector--size-small {
-  margin-top: 14px;
-}
-.stepper__connector--size-medium {
-  margin-top: 18px;
-}
-.stepper__connector--size-large {
-  margin-top: 24px;
+  min-width: var(--stepper-connector-min-width);
+  height: var(--stepper-connector-thickness);
+  margin-top: calc(
+    (var(--stepper-dot-size) - var(--stepper-connector-thickness)) / 2
+  );
+  background-color: var(--stepper-connector-color);
+  transition: var(--stepper-transition);
 }
 
 .stepper__connector--done {
-  background: var(--color-primary);
+  background-color: var(--stepper-connector-done-color);
 }
 
-/* ================================================================
-   LINEAR VARIANT
-   ================================================================ */
 .stepper--linear .stepper__track {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--stepper-gap);
   width: 100%;
 }
 
 .stepper__counter {
-  font-size: 0.8rem;
-  color: var(--color-gray-500);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 500;
+  color: var(--stepper-counter-color);
+  font-size: var(--stepper-counter-font-size);
+  font-weight: var(--stepper-counter-weight);
+  letter-spacing: var(--stepper-counter-spacing);
+  text-transform: var(--stepper-counter-transform);
 }
 
 .stepper__bar {
-  height: 4px;
-  background: var(--color-gray-200);
-  border-radius: 2px;
+  box-sizing: border-box;
   width: 100%;
+  height: var(--stepper-bar-height);
   overflow: hidden;
+  border: var(--stepper-bar-border-width) solid var(--stepper-bar-border-color);
+  border-radius: var(--stepper-bar-radius);
+  background-color: var(--stepper-bar-background);
 }
 
 .stepper__bar-fill {
+  width: calc(var(--stepper-progress, 0) * 100%);
   height: 100%;
-  background: var(--color-primary);
-  border-radius: 2px;
+  border-radius: var(--stepper-bar-fill-radius);
+  background-color: var(--stepper-bar-fill);
   transition: width 0.3s ease;
 }
 
-/* ================================================================
-   SIMPLE VARIANT
-   ================================================================ */
+/* Simple */
 .stepper--simple .stepper__track {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
   align-items: center;
+  justify-content: center;
+  gap: var(--stepper-gap);
+  width: 100%;
 }
 
 .stepper__simple-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--color-gray-200);
-  transition: background 0.2s ease;
   flex-shrink: 0;
+  box-sizing: border-box;
+  width: var(--stepper-simple-size);
+  height: var(--stepper-simple-size);
+  border: var(--stepper-simple-border-width) solid
+    var(--stepper-simple-border-color);
+  border-radius: var(--stepper-simple-radius);
+  background-color: var(--stepper-simple-background);
+  transition:
+    var(--stepper-transition),
+    width 0.2s ease;
 }
 
 .stepper__simple-dot--active {
-  background: var(--color-primary);
+  background-color: var(--stepper-simple-active-background);
+}
+
+.stepper__simple-dot--current {
+  width: var(--stepper-simple-current-width);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stepper__dot,
+  .stepper__connector,
+  .stepper__bar-fill,
+  .stepper__simple-dot {
+    transition: none;
+  }
 }

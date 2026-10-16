@@ -1,0 +1,13 @@
+:root, [data-design-system] {
+  --interactive-map-background: var(--color-surface);
+  --interactive-map-color: var(--color-text-primary);
+  --interactive-map-muted: var(--color-text-secondary);
+  --interactive-map-border-color: var(--color-border-subtle);
+  --interactive-map-border-width: 1px;
+  --interactive-map-radius: var(--radius-default);
+  --interactive-map-shadow: none;
+  --interactive-map-padding: 16px;
+  --interactive-map-height: 400px;
+  --interactive-map-state-padding: 32px;
+  --interactive-map-state-height: 120px;
+}

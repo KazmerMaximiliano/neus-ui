@@ -1,8 +1,10 @@
-import { Meta, StoryObj } from "@storybook/react";
-import type { DateRange } from "react-day-picker";
+import type { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { Calendar as CalendarComponent } from "./Calendar";
+import type { CalendarStoryArgs } from "./Calendar.types";
 
-const meta: Meta<typeof CalendarComponent> = {
+const meta: Meta<CalendarStoryArgs> = {
   title: "Date & Time/Calendar",
   component: CalendarComponent,
   parameters: {
@@ -10,6 +12,16 @@ const meta: Meta<typeof CalendarComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    language: {
+      control: "text",
+      description:
+        "BCP 47 language tag for Gregorian months, weekdays and date labels; uses native Intl, with en-US fallback",
+    },
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the Calendar",
+    },
     value: {
       control: false,
       description: "The current selected date(s)",
@@ -54,13 +66,9 @@ const meta: Meta<typeof CalendarComponent> = {
         defaultValue: { summary: "false" },
       },
     },
-    multiple: {
-      control: "boolean",
-      description: "Allows selection of multiple dates",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" },
-      },
+    numberOfMonths: {
+      control: "number",
+      description: "Number of visible months; independent of selection mode",
     },
     error: {
       control: "text",
@@ -70,7 +78,7 @@ const meta: Meta<typeof CalendarComponent> = {
       },
     },
     onChange: {
-      control: false,
+      action: "date-changed",
       description: "Callback when date selection changes",
       table: {
         type: {
@@ -94,13 +102,6 @@ const meta: Meta<typeof CalendarComponent> = {
         defaultValue: { summary: "false" },
       },
     },
-    selected: {
-      control: false,
-      description: "The selected date(s) (from DayPicker)",
-      table: {
-        type: { summary: "Date | DateRange | Date[]" },
-      },
-    },
     yearRange: {
       control: "object",
       description: "Range of years available in the year picker",
@@ -109,33 +110,44 @@ const meta: Meta<typeof CalendarComponent> = {
         defaultValue: { summary: "currentYear - 50 to currentYear + 10" },
       },
     },
+    calendarStyle: {
+      control: "object",
+      description: "CSS properties applied to the calendar surface",
+    },
+    labelStyle: {
+      control: "object",
+      description: "CSS properties applied to the label text",
+    },
+    errorStyle: {
+      control: "object",
+      description: "CSS properties applied to the error message",
+    },
   },
 };
 
-type Story = StoryObj<
-  typeof CalendarComponent &
-    (
-      | { mode: "single"; selected: Date; required?: boolean }
-      | { mode: "range"; selected: DateRange; required: true }
-      | { mode: "multiple"; selected: Date[]; required: true }
-    )
->;
-
-export const Calendar: Story = {
+export const Calendar = {
   args: {
+    language: "en-US",
+    designSystem: "neus",
     mode: "single",
-    selected: new Date(),
     required: false,
     label: "Select a date",
     name: "calendar",
     disabled: false,
     readonly: false,
-    multiple: false,
+    numberOfMonths: 1,
     error: undefined,
-    value: undefined,
     defaultValue: undefined,
     yearRange: { from: 1970, to: 2040 },
+    calendarStyle: {},
+    labelStyle: {},
+    errorStyle: {},
   },
-};
+  render: ({ designSystem, ...args }: CalendarStoryArgs) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <CalendarComponent {...args} />
+    </ThemeProvider>
+  ),
+} satisfies StoryObj<CalendarStoryArgs>;
 
 export default meta;

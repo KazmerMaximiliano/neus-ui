@@ -45,6 +45,22 @@ export const getHandLength = ({
   return 100;
 };
 
+export const stepTime = (
+  value: TimeValue,
+  mode: "hours" | "minutes",
+  format: "12h" | "24h",
+  delta: number,
+): TimeValue => {
+  if (mode === "minutes") {
+    return { ...value, minutes: (value.minutes + delta + 60) % 60 };
+  }
+  if (format === "24h") {
+    return { ...value, hours: (value.hours + delta + 24) % 24 };
+  }
+  const base = value.hours >= 12 ? 12 : 0;
+  return { ...value, hours: base + ((value.hours % 12) + delta + 12) % 12 };
+};
+
 export const serializeTimeValue = (time: TimeValue): string => {
   const hours = time.hours.toString().padStart(2, "0");
   const minutes = time.minutes.toString().padStart(2, "0");

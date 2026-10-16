@@ -5,10 +5,12 @@ export const Card = ({
   children,
   className,
   style = null,
+  variant = "auto",
   ...props
 }: CardProps) => (
   <div
     {...props}
+    data-variant={variant}
     className={["card", className].filter(Boolean).join(" ")}
     style={style ?? undefined}
   >

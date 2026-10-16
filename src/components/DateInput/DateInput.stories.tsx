@@ -1,7 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { DateInput as DateInputComponent } from "./DateInput";
+import type { DateInputStoryArgs } from "./DateInput.types";
 
-const meta: Meta<typeof DateInputComponent> = {
+const meta: Meta<DateInputStoryArgs> = {
   title: "Date & Time/DateInput",
   component: DateInputComponent,
   parameters: {
@@ -9,6 +12,31 @@ const meta: Meta<typeof DateInputComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the DateInput",
+    },
+    variant: {
+      control: "select",
+      options: ["auto", "filled", "outlined"],
+      description: "Shared field variant",
+    },
+    labelPlacement: {
+      control: "select",
+      options: ["auto", "external", "floating"],
+      description: "Shared field labelPlacement",
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Shared field size",
+    },
+    fieldStyle: { control: "object", description: "fieldStyle override" },
+    labelStyle: { control: "object", description: "labelStyle override" },
+    errorStyle: { control: "object", description: "errorStyle override" },
+    panelStyle: { control: "object", description: "panelStyle override" },
+
     value: {
       control: false,
       description: "The current selected date(s)",
@@ -86,7 +114,7 @@ const meta: Meta<typeof DateInputComponent> = {
       },
     },
     onChange: {
-      control: false,
+      action: "changed",
       description: "Callback when date selection changes",
       table: {
         type: {
@@ -101,6 +129,15 @@ type Story = StoryObj<typeof meta>;
 
 export const DateInput: Story = {
   args: {
+    designSystem: "neus",
+    variant: "auto",
+    labelPlacement: "auto",
+    size: "medium",
+    fieldStyle: {},
+    labelStyle: {},
+    errorStyle: {},
+    panelStyle: {},
+
     mode: "single",
     label: "Select a date",
     name: "date-input",
@@ -110,6 +147,11 @@ export const DateInput: Story = {
     required: false,
     error: undefined,
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <DateInputComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

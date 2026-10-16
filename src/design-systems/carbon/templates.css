@@ -1,0 +1,7 @@
+[data-design-system="carbon"] {
+  --app-template-content-padding: 32px;
+  --app-template-max-width: 1584px;
+  --app-template-header-height: 48px;
+  --app-template-header-border-width: 1px;
+  --form-template-gap: 24px;
+}

@@ -4,10 +4,58 @@
   --theme-color-scheme: light;
   --color-focus: var(--color-primary);
   --color-primary-active: var(--color-primary-dark);
-  --color-control-text: var(--color-primary);
+  --color-control-text: var(--color-primary-text);
+  /* Primary used as text or border on a surface; systems with light accents override it. */
+  --color-primary-text: var(--color-primary);
+  /* Rings follow the resolved focus/error colors of the active system and mode. */
+  --color-focus-ring: color-mix(in srgb, var(--color-focus) 25%, transparent);
+  --color-focus-ring-error: color-mix(in srgb, var(--color-error) 25%, transparent);
 }
 
 [data-color-scheme="dark"] {
   --theme-color-scheme: dark;
   --color-control-text: var(--color-text-primary);
+}
+
+:root, [data-design-system] {
+  --type-body-size: var(--fs-base);
+  --type-body-weight: 400;
+  --type-body-line-height: 1.5;
+  --type-body-tracking: 0em;
+  --type-heading-size: 1.5rem;
+  --type-heading-weight: 700;
+  --type-heading-line-height: 1.3;
+  --type-heading-tracking: -0.01em;
+  --type-label-size: var(--fs-sm);
+  --type-label-weight: 500;
+  --type-label-line-height: 1.4;
+  --type-label-tracking: 0em;
+  --type-caption-size: var(--fs-xs);
+  --type-caption-weight: 400;
+  --type-caption-line-height: 1.4;
+  --type-caption-tracking: 0em;
+  --color-layer-01: var(--color-surface-secondary);
+  --color-layer-02: var(--color-surface);
+  --color-field: var(--color-surface);
+  --color-selection: var(--color-primary-light);
+  --color-on-selection: var(--color-primary-text);
+  --color-secondary-container: var(--color-surface-secondary);
+  --color-on-secondary-container: var(--color-text-primary);
+  --color-surface-container-lowest: var(--color-surface);
+  --color-surface-container-low: var(--color-surface-secondary);
+  --color-surface-container-high: var(--color-surface-secondary);
+  --color-surface-container-highest: var(--color-surface-secondary);
+  --color-tertiary: var(--color-info);
+  --color-on-tertiary: var(--color-text-on-info);
+  --elevation-floating: 0 4px 16px var(--color-shadow);
+  --elevation-dialog: 0 12px 40px var(--color-shadow);
+}
+
+:root, [data-design-system] {
+  --color-text-on-success: #000000;
+  --color-text-on-error: #000000;
+  --color-text-on-info: var(--color-text-on-primary);
+  --color-success-text: color-mix(in srgb, var(--color-success) 25%, var(--color-text-primary));
+  --color-error-text: color-mix(in srgb, var(--color-error) 25%, var(--color-text-primary));
+  --color-info-text: color-mix(in srgb, var(--color-info) 25%, var(--color-text-primary));
 }

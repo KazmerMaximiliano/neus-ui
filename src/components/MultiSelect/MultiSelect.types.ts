@@ -1,8 +1,8 @@
-export type SelectOption = {
-  value?: string | null;
-  label: string;
-};
-export interface MultiSelectProps {
+import type { CSSProperties } from "react";
+import type { DesignSystemId } from "../../design-systems";
+import type { SelectOption } from "../Select";
+
+export type MultiSelectProps = {
   name: string;
   options: SelectOption[];
   error?: string;
@@ -13,5 +13,13 @@ export interface MultiSelectProps {
   disabled?: boolean;
   viewSearchBar?: boolean;
   searchBarPlaceholder?: string;
+  fieldStyle?: CSSProperties;
+  tagStyle?: CSSProperties;
+  listStyle?: CSSProperties;
+  optionStyle?: CSSProperties;
   onChange?: (values: string[]) => void;
-}
+};
+
+export type MultiSelectStoryArgs = MultiSelectProps & {
+  designSystem: DesignSystemId;
+};

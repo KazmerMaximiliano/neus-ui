@@ -1,0 +1,6 @@
+[data-design-system="vercel"] {
+  --app-template-content-padding: 24px;
+  --app-template-header-height: 64px;
+  --app-template-header-border-width: 1px;
+  --form-template-gap: 16px;
+}

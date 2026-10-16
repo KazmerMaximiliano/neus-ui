@@ -1,46 +1,56 @@
-import { useEffect, useRef, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { usePopover } from "../../hooks/usePopover";
+import "../Menu/Menu.styles.css";
+import { MenuItems } from "../Menu/components/MenuItems";
 import "./Dropdown.styles.css";
 import { DropdownProps } from "./Dropdown.types";
 
-export const Dropdown = ({ icon: Icon, name, items }: DropdownProps) => {
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const [openDropdown, setOpenDropdown] = useState(false);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setOpenDropdown(false);
-      }
-    };
-
-    if (openDropdown) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [openDropdown]);
+export const Dropdown = ({
+  icon: Icon,
+  name,
+  items,
+  triggerStyle,
+  menuStyle,
+  itemStyle,
+}: DropdownProps) => {
+  const popover = usePopover({
+    initialFocus: '[role="menuitem"]:not(:disabled)',
+  });
+  const { id, open, triggerRef, toggle } = popover;
+  const label = name || "Menú";
 
   return (
-    <div className="dropdown" ref={dropdownRef} onClick={() => setOpenDropdown(!openDropdown)}>
-      <div className="dropdown__avatar">{Icon ? <Icon /> : "X"}</div>
-      <div className={`dropdown__caret${openDropdown ? " dropdown__caret--open" : ""}`} />
-      <div className={`dropdown__panel${openDropdown ? " dropdown__panel--open" : ""}`}>
-        <div className="dropdown__item">
-          <span className="dropdown__name">{name || ""}</span>
-        </div>
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className="dropdown__item dropdown__item--clickable"
-            onClick={item.onClick}
-          >
-            {item.label}
-          </div>
-        ))}
-      </div>
+    <div className="dropdown">
+      <button
+        ref={triggerRef}
+        type="button"
+        className={`dropdown__trigger${open ? " dropdown__trigger--open" : ""}`}
+        style={triggerStyle}
+        aria-label={label}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={toggle}
+      >
+        <span className="dropdown__avatar" aria-hidden>
+          {Icon ? <Icon className="dropdown__avatar-icon" /> : label[0]}
+        </span>
+        <ChevronDown className="dropdown__caret" aria-hidden />
+      </button>
+      <MenuItems
+        popover={popover}
+        label={label}
+        items={items}
+        menuStyle={menuStyle}
+        itemStyle={itemStyle}
+        header={
+          name && (
+            <div className="dropdown__name" role="none">
+              {name}
+            </div>
+          )
+        }
+      />
     </div>
   );
 };

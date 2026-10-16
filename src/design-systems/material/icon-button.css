@@ -1,0 +1,9 @@
+/* M3 icon buttons stay circular; 40px standard container with a 24px icon. */
+[data-design-system="material"] {
+  --icon-button-size-small: 32px;
+  --icon-button-size-medium: 40px;
+  --icon-button-size-large: 56px;
+  --icon-button-icon-size-small: 18px;
+  --icon-button-icon-size-medium: 24px;
+  --icon-button-icon-size-large: 28px;
+}

@@ -2,6 +2,7 @@ import { CloudUpload, File, Image } from "lucide-react";
 import React, {
   forwardRef,
   useCallback,
+  useId,
   useImperativeHandle,
   useRef,
   useState,
@@ -22,6 +23,9 @@ export const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
       placeholder = "Click to upload or drag and drop files here",
       disabled = false,
       name,
+      label = "Upload files",
+      areaStyle,
+      errorStyle,
       onChange,
     },
     ref,
@@ -32,6 +36,9 @@ export const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
     const [dragActive, setDragActive] = useState(false);
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const inputId = useId();
+    const hintId = useId();
+    const errorId = useId();
 
     const isImageFile = (file: File) => {
       return file.type.startsWith("image/");
@@ -137,11 +144,6 @@ export const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
       }
     };
 
-    const handleClick = () => {
-      if (disabled) return;
-      fileInputRef.current?.click();
-    };
-
     const clearFiles = () => {
       setSelectedFiles([]);
       setPreviewUrl(null);
@@ -163,9 +165,9 @@ export const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
       if (selectedFiles.length === 0) {
         return (
           <div className="file-uploader__content">
-            <CloudUpload className="file-uploader__upload-icon" />
+            <CloudUpload className="file-uploader__upload-icon" aria-hidden />
             <p className="file-uploader__upload-text">{placeholder}</p>
-            <p className="file-uploader__upload-hint">
+            <p id={hintId} className="file-uploader__upload-hint">
               Supported formats:{" "}
               <span>
                 {allowedTypes.map((type) => type.replace("*", "")).join(", ")}
@@ -209,9 +211,9 @@ export const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
         <div className="file-uploader__selected">
           <div className="file-uploader__icon-container">
             {isImageFile(selectedFiles[0]) ? (
-              <Image className="file-uploader__icon" />
+              <Image className="file-uploader__icon" aria-hidden />
             ) : (
-              <File className="file-uploader__icon" />
+              <File className="file-uploader__icon" aria-hidden />
             )}
           </div>
           <div className="file-uploader__details">
@@ -250,34 +252,53 @@ export const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
       );
     };
 
+    const isEmpty = selectedFiles.length === 0;
+
+    const Area = isEmpty ? "label" : "div";
+
     return (
       <div className="file-uploader">
         <input
           ref={fileInputRef}
+          id={inputId}
           type="file"
           name={name}
           multiple={multiple}
           accept={getAcceptString()}
+          disabled={disabled}
+          aria-label={label}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={
+            [isEmpty && hintId, error && errorId].filter(Boolean).join(" ") ||
+            undefined
+          }
           onChange={handleInputChange}
           className="file-uploader__input"
-          style={{ display: "none" }}
         />
-        <div
+        <Area
+          {...(isEmpty && { htmlFor: inputId })}
           className={`file-uploader__area${dragActive ? " file-uploader__area--drag-active" : ""}${
             error ? " file-uploader__area--error" : ""
-          }${selectedFiles.length > 0 ? " file-uploader__area--has-files" : ""}${
+          }${isEmpty ? "" : " file-uploader__area--has-files"}${
             disabled ? " file-uploader__area--disabled" : ""
           }`}
-          {...(!disabled &&
-            selectedFiles.length === 0 && { onClick: handleClick })}
+          style={areaStyle}
           onDragEnter={!disabled ? handleDragIn : undefined}
           onDragLeave={!disabled ? handleDragOut : undefined}
           onDragOver={!disabled ? handleDrag : undefined}
           onDrop={!disabled ? handleDrop : undefined}
         >
           {renderContent()}
-        </div>
-        {error && <div className="file-uploader__error-message">{error}</div>}
+        </Area>
+        {error && (
+          <div
+            id={errorId}
+            className="file-uploader__error-message"
+            style={errorStyle}
+          >
+            {error}
+          </div>
+        )}
       </div>
     );
   },

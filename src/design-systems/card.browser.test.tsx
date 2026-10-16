@@ -4,12 +4,13 @@ import { createRef } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Card } from "../components/Card/Card";
 import previewImage from "../components/Card/Card.stories.svg";
-import { CardContent } from "../components/Card/CardContent/CardContent";
-import { CardFooter } from "../components/Card/CardFooter/CardFooter";
-import { CardHeader } from "../components/Card/CardHeader/CardHeader";
-import { CardMedia } from "../components/Card/CardMedia/CardMedia";
+import { CardContent } from "../components/Card/components/CardContent/CardContent";
+import { CardFooter } from "../components/Card/components/CardFooter/CardFooter";
+import { CardHeader } from "../components/Card/components/CardHeader/CardHeader";
+import { CardMedia } from "../components/Card/components/CardMedia/CardMedia";
 import "../css/app.css";
 import { ThemeProvider } from "../providers";
+import { resolveColor } from "./design-systems.test-utils";
 
 afterEach(cleanup);
 
@@ -18,43 +19,49 @@ const CARD_SYSTEM_CASES = [
     id: "neus",
     radius: "16px",
     border: "1px",
-    shadow: false,
-    secondary: false,
+    shadow: [],
+    surface: "--color-surface",
+    footer: "8px",
   },
   {
     id: "apple",
     radius: "12px",
     border: "1px",
-    shadow: true,
-    secondary: false,
+    shadow: ["light"],
+    surface: "--color-surface",
+    footer: "8px",
   },
   {
     id: "carbon",
     radius: "0px",
     border: "0px",
-    shadow: false,
-    secondary: true,
+    shadow: [],
+    surface: "--color-surface-secondary",
+    footer: "8px",
   },
   {
     id: "material",
     radius: "12px",
     border: "0px",
-    shadow: true,
-    secondary: true,
+    shadow: ["light", "dark"],
+    surface: "--color-surface-container-low",
+    footer: "8px",
   },
   {
     id: "neobrutalism",
     radius: "4px",
     border: "3px",
-    shadow: true,
-    secondary: false,
+    shadow: ["light", "dark"],
+    surface: "--color-surface",
+    footer: "12px",
   },
   {
     id: "vercel",
     radius: "6px",
     border: "1px",
-    shadow: false,
-    secondary: false,
+    shadow: [],
+    surface: "--color-surface",
+    footer: "8px",
   },
 ] as const;
 
@@ -89,20 +96,11 @@ describe.each(["light", "dark"] as const)(
         const styles = getComputedStyle(card);
         expect(styles.borderRadius).toBe(system.radius);
         expect(styles.borderTopWidth).toBe(system.border);
-        expect(styles.boxShadow === "none").toBe(!system.shadow);
-        expect(styles.backgroundColor).toBe(
-          system.secondary
-            ? scheme === "dark"
-              ? "rgb(42, 42, 61)"
-              : system.id === "carbon"
-                ? "rgb(244, 244, 244)"
-                : "rgb(249, 250, 251)"
-            : scheme === "dark"
-              ? "rgb(30, 30, 46)"
-              : system.id === "neobrutalism"
-                ? "rgb(251, 251, 249)"
-                : "rgb(255, 255, 255)",
+        expect(styles.boxShadow === "none").toBe(
+          !(system.shadow as readonly string[]).includes(scheme),
         );
+        expect(styles.backgroundColor).toBe(resolveColor(card, system.surface));
+        expect(styles.backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
         expect(styles.padding).toBe("0px");
         expect(styles.gap).toBe("0px");
         expect(styles.flexDirection).toBe("column");
@@ -122,8 +120,8 @@ describe.each(["light", "dark"] as const)(
         const footer = getComputedStyle(
           screen.getByRole("button", { name: "Save" }).parentElement!,
         );
-        expect(footer.padding).toBe("8px");
-        expect(footer.gap).toBe("8px");
+        expect(footer.padding).toBe(system.footer);
+        expect(footer.gap).toBe(system.footer);
         expect(footer.flexWrap).toBe("wrap");
 
         const media = screen.getByRole("img") as HTMLImageElement;
@@ -206,7 +204,52 @@ describe("Card theme boundaries and overrides", () => {
     expect(getComputedStyle(card).borderRadius).toBe("0px");
     expect(getComputedStyle(card).borderTopWidth).toBe("0px");
     expect(getComputedStyle(card).boxShadow).toBe("none");
-    expect(getComputedStyle(card).backgroundColor).toBe("rgb(42, 42, 61)");
+    expect(getComputedStyle(card).backgroundColor).toBe("rgb(38, 38, 38)");
+  });
+
+  it.each([
+    ["light", "rgb(244, 244, 244)", "rgb(255, 255, 255)"],
+    ["dark", "rgb(38, 38, 38)", "rgb(57, 57, 57)"],
+  ] as const)("layers nested Carbon cards in %s mode", (scheme, outer, inner) => {
+    render(
+      <ThemeProvider scope="local" designSystem="carbon" colorScheme={scheme}>
+        <Card>
+          <CardContent>
+            Outer
+            <Card>
+              <CardContent>Inner</CardContent>
+            </Card>
+          </CardContent>
+        </Card>
+      </ThemeProvider>,
+    );
+    const outerCard = screen.getByText("Outer").closest(".card")!;
+    const innerCard = screen.getByText("Inner").closest(".card")!;
+    expect(getComputedStyle(outerCard).backgroundColor).toBe(outer);
+    expect(getComputedStyle(innerCard).backgroundColor).toBe(inner);
+  });
+
+  it("keeps the Neus header divider visible in both modes", () => {
+    render(
+      <>
+        <ThemeProvider scope="local" colorScheme="light">
+          <Card>
+            <CardHeader>Light</CardHeader>
+          </Card>
+        </ThemeProvider>
+        <ThemeProvider scope="local" colorScheme="dark">
+          <Card>
+            <CardHeader>Dark</CardHeader>
+          </Card>
+        </ThemeProvider>
+      </>,
+    );
+    for (const name of ["Light", "Dark"]) {
+      const header = screen.getByText(name);
+      expect(getComputedStyle(header).borderBottomColor).toBe(
+        getComputedStyle(header.closest(".card")!).borderTopColor,
+      );
+    }
   });
 
   it("honors each element's style and restores theme values after clearing it", () => {
@@ -231,7 +274,7 @@ describe("Card theme boundaries and overrides", () => {
     expect(getComputedStyle(screen.getByText("Header")).padding).toBe("23px");
     expect(getComputedStyle(screen.getByText("Content")).padding).toBe("27px");
     expect(getComputedStyle(screen.getByText("Footer")).gap).toBe("19px");
-    expect(getComputedStyle(screen.getByText("Footer")).padding).toBe("8px");
+    expect(getComputedStyle(screen.getByText("Footer")).padding).toBe("12px");
     expect(getComputedStyle(screen.getByRole("img")).height).toBe("80px");
     expect(getComputedStyle(screen.getByRole("img")).objectFit).toBe("contain");
     rerender(
@@ -250,7 +293,7 @@ describe("Card theme boundaries and overrides", () => {
     ).toBe("4px");
     expect(getComputedStyle(screen.getByText("Header")).padding).toBe("16px");
     expect(getComputedStyle(screen.getByText("Content")).padding).toBe("16px");
-    expect(getComputedStyle(screen.getByText("Footer")).gap).toBe("8px");
+    expect(getComputedStyle(screen.getByText("Footer")).gap).toBe("12px");
     expect(getComputedStyle(screen.getByRole("img")).objectFit).toBe("cover");
   });
 

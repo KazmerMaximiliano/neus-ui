@@ -1,0 +1,8 @@
+[data-design-system="vercel"] {
+  --checkbox-size: 16px;
+  --checkbox-border-width: 1px;
+  --checkbox-border-color: var(--color-text-placeholder);
+  --checkbox-hover-border-color: var(--color-text-primary);
+  --checkbox-checked-shadow: none;
+  --checkbox-icon-size: 12px;
+}

@@ -1,0 +1,13 @@
+.modal-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--modal-header-gap);
+  padding: var(--modal-header-padding);
+  border-bottom: var(--modal-divider-width) solid var(--modal-divider-color);
+  font-family: var(--modal-title-font-family);
+  font-size: var(--modal-title-size);
+  font-weight: var(--modal-title-weight);
+  line-height: var(--modal-title-line-height);
+}

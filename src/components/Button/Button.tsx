@@ -3,7 +3,6 @@ import "./Button.styles.css";
 import { ButtonProps } from "./Button.types";
 import { getButtonClasses } from "./Button.utils";
 
-/** A token-driven action with independent variants, colors and sizes. */
 export const Button = ({
   label,
   type = "button",
@@ -30,7 +29,14 @@ export const Button = ({
       aria-busy={loading || undefined}
       aria-label={loading ? label : undefined}
     >
-      {loading ? (
+      <span
+        className="button-label"
+        style={labelStyle}
+        aria-hidden={loading || undefined}
+      >
+        {label}
+      </span>
+      {loading && (
         <BeatLoader
           className="button-loader"
           size="1em"
@@ -39,8 +45,6 @@ export const Button = ({
           speedMultiplier={0.5}
           style={loaderStyle}
         />
-      ) : (
-        <span className="button-label" style={labelStyle}>{label}</span>
       )}
     </button>
   );

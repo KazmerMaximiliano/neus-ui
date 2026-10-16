@@ -6,10 +6,10 @@ import { Card as CardComponent } from "./Card";
 import "./Card.stories.css";
 import previewImage from "./Card.stories.svg";
 import type { CardStoryArgs } from "./Card.types";
-import { CardContent } from "./CardContent/CardContent";
-import { CardFooter } from "./CardFooter/CardFooter";
-import { CardHeader } from "./CardHeader/CardHeader";
-import { CardMedia } from "./CardMedia/CardMedia";
+import { CardContent } from "./components/CardContent/CardContent";
+import { CardFooter } from "./components/CardFooter/CardFooter";
+import { CardHeader } from "./components/CardHeader/CardHeader";
+import { CardMedia } from "./components/CardMedia/CardMedia";
 
 const meta: Meta<CardStoryArgs> = {
   title: "Base/Card",
@@ -17,6 +17,7 @@ const meta: Meta<CardStoryArgs> = {
   parameters: { layout: "centered" },
   tags: ["autodocs"],
   argTypes: {
+    variant: { control: "select", options: ["auto", "filled", "outlined", "elevated"], description: "Surface treatment; auto follows the system" },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -42,6 +43,7 @@ const meta: Meta<CardStoryArgs> = {
 export const Card: StoryObj<CardStoryArgs> = {
   args: {
     designSystem: "neus",
+    variant: "auto",
     className: "",
     style: null,
     children: (

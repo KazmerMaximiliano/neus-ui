@@ -57,9 +57,9 @@ _Require AppTemplate + sidebar. Data comes as props, never hardcoded._
 
 | Skill                 | Trigger                                    | Generates                                          |
 | --------------------- | ------------------------------------------ | -------------------------------------------------- |
-| `neus-page-list`      | "list of X", "table of X", "listing"       | DataTable + filters + Actions + confirmation Modal |
+| `neus-page-list`      | "list of X", "table of X", "listing"       | DataTable + filters + consumer actions + confirmation Modal |
 | `neus-page-form`      | "form for X", "create X", "edit X"         | FormTemplate + typed inputs + submit               |
-| `neus-page-detail`    | "detail of X", "view X", "show X"          | Card + fields + Actions + confirmation Modal       |
+| `neus-page-detail`    | "detail of X", "view X", "show X"          | Card + fields + consumer actions + confirmation Modal       |
 | `neus-page-dashboard` | "dashboard", "control panel", "metrics"    | KPI Cards + DataTable + actions                    |
 | `neus-page-settings`  | "settings", "configuration", "preferences" | Grouped sections + inputs + save                   |
 
@@ -271,3 +271,5 @@ docs/neus-design.md              # This file
 ```
 
 **Critical constraint:** `neus-designer` is a sub-agent, not a skill. Sub-agents cannot spawn other sub-agents. The orchestrator invokes **skills** via the `Skill` tool — skills run within the orchestrator's context.
+
+See the [component migration guide](./refactor-migration.md) for the six-system presentation APIs and voluntary DataTable actions.

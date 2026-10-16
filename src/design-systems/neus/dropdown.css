@@ -1,0 +1,23 @@
+/* Public Dropdown trigger contract; the panel uses the shared overlay tokens. */
+:root,
+[data-design-system] {
+  --dropdown-padding: 0.5em 0.75em 0.5em 0.5em;
+  --dropdown-gap: 0.5em;
+  --dropdown-radius: var(--radius-default);
+  --dropdown-border-width: 1px;
+  --dropdown-border-color: var(--color-border-input);
+  --dropdown-hover-border-color: var(--color-border-input-hover);
+  --dropdown-background: var(--color-surface);
+  --dropdown-shadow: none;
+  --dropdown-avatar-size: 36px;
+  --dropdown-avatar-radius: 50%;
+  --dropdown-avatar-background: var(--color-primary);
+  --dropdown-avatar-color: var(--color-text-on-primary);
+  --dropdown-caret-size: 20px;
+  --dropdown-caret-stroke: 3;
+  --dropdown-caret-color: var(--color-primary-text);
+  --dropdown-name-color: var(--color-primary-text);
+  --dropdown-name-weight: 700;
+  --dropdown-name-transform: uppercase;
+  --dropdown-transition: border-color 0.2s ease;
+}

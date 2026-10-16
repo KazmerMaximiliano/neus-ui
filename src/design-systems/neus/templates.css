@@ -1,0 +1,20 @@
+:root, [data-design-system] {
+  --app-template-background: var(--color-surface);
+  --app-template-color: var(--color-text-primary);
+  --app-template-header-background: var(--color-surface);
+  --app-template-header-height: 80px;
+  --app-template-header-padding: 16px;
+  --app-template-header-border-width: 0px;
+  --app-template-content-padding: 24px;
+  --app-template-max-width: 1200px;
+  --form-template-columns: 2;
+  --form-template-tablet-columns: 2;
+  --form-template-mobile-columns: 1;
+  --form-template-gap: 16px;
+  --form-template-padding: 0px;
+  --form-template-margin-top: 16px;
+  --form-template-background: transparent;
+  --form-template-color: var(--color-text-primary);
+  --form-template-action-gap: 12px;
+  --form-template-action-padding: 8px;
+}

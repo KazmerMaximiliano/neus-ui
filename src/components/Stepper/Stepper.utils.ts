@@ -1,4 +1,4 @@
-type StepState = "inactive" | "active" | "done";
+import type { StepState } from "./Stepper.types";
 
 export const getStepState = (index: number, currentStep: number): StepState => {
   if (index < currentStep) return "done";

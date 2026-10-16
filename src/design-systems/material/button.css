@@ -14,3 +14,14 @@
   --button-shadow-active: 0 1px 2px var(--color-shadow);
   --button-loader-gap: 3px;
 }
+
+[data-design-system="material"] {
+  --button-shadow: none;
+  --button-shadow-hover: none;
+  --button-shadow-active: none;
+  --button-disabled-opacity: 1;
+  --button-disabled-background: color-mix(in srgb, var(--color-text-primary) 12%, var(--color-surface));
+  --button-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, var(--color-surface));
+  --button-elevated-shadow: 0 1px 3px var(--color-shadow);
+  --button-elevated-shadow-hover: 0 2px 6px var(--color-shadow);
+}

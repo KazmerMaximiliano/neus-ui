@@ -155,7 +155,7 @@ describe("Card", () => {
     expectTypeOf<CardHeaderProps>().toHaveProperty("style");
     expectTypeOf<CardContentProps>().toHaveProperty("className");
     expectTypeOf<CardFooterProps>().toHaveProperty("ref");
-    expectTypeOf<CardProps>().not.toHaveProperty("variant");
+    expectTypeOf<CardProps>().toHaveProperty("variant");
     expectTypeOf<CardProps>().not.toHaveProperty("avatarImage");
     expectTypeOf<CardProps>().not.toHaveProperty("avatarAlt");
     expectTypeOf<CardProps>().not.toHaveProperty("leading");
@@ -185,7 +185,12 @@ describe("Card story", () => {
       DESIGN_SYSTEMS.map(({ id }) => id),
     );
     expect(stories.Card.args?.style).toBeNull();
-    expect(stories.default.argTypes).not.toHaveProperty("variant");
+    expect(stories.default.argTypes).toHaveProperty("variant.options", [
+      "auto",
+      "filled",
+      "outlined",
+      "elevated",
+    ]);
   });
 
   it("previews the full composition and changes only its local design", () => {
@@ -223,4 +228,23 @@ describe("Card story", () => {
       screen.getByRole("heading").closest("[data-design-system]"),
     ).toHaveAttribute("data-design-system", "material");
   });
+});
+
+describe("surface variants", () => {
+  it.each(["auto", "filled", "outlined", "elevated"] as const)(
+    "keeps %s passive and preserves composition",
+    (variant) => {
+      const { container } = render(
+        <Card variant={variant}>
+          <button>Child action</button>
+        </Card>,
+      );
+      expect(container.querySelector(".card")).toHaveAttribute(
+        "data-variant",
+        variant,
+      );
+      expect(screen.getAllByRole("button")).toHaveLength(1);
+      expect(screen.getByRole("button")).toHaveTextContent("Child action");
+    },
+  );
 });

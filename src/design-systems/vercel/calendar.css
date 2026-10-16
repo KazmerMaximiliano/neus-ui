@@ -1,0 +1,22 @@
+/* Neutral surface; today uses the blue interactive color, selection the solid action. */
+[data-design-system="vercel"] {
+  --calendar-radius: 12px;
+  --calendar-border-color: var(--color-border-subtle);
+  --calendar-label-color: var(--color-text-primary);
+  --calendar-caption-color: var(--color-text-primary);
+  --calendar-caption-weight: 600;
+  --calendar-nav-color: var(--color-text-primary);
+  --calendar-day-radius: 6px;
+  --calendar-item-radius: 6px;
+  --calendar-day-hover-background: var(--color-surface-secondary);
+  --calendar-selected-background: var(--color-primary);
+  --calendar-selected-color: var(--color-text-on-primary);
+  --calendar-selected-weight: 500;
+  --calendar-range-middle-background: var(--color-surface-secondary);
+  --calendar-today-color: #0068d6;
+  --calendar-today-ring: none;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --calendar-today-color: #52a8ff;
+}

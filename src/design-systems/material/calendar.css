@@ -1,0 +1,24 @@
+/* M3 date picker: 16px docked container, 40px circular days, today as a 1px outline. */
+[data-design-system="material"] {
+  --calendar-background: var(--color-surface-secondary);
+  --calendar-border-width: 0px;
+  --calendar-radius: 16px;
+  --calendar-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --calendar-divider-color: var(--color-border-subtle);
+  --calendar-label-color: var(--color-text-secondary);
+  --calendar-label-weight: 500;
+  --calendar-caption-color: var(--color-text-secondary);
+  --calendar-caption-weight: 500;
+  --calendar-nav-color: var(--color-text-secondary);
+  --calendar-weekday-color: var(--color-text-primary);
+  --calendar-day-size: 40px;
+  --calendar-item-radius: 999px;
+  --calendar-day-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  --calendar-selected-background: var(--color-primary);
+  --calendar-selected-color: var(--color-text-on-primary);
+  --calendar-selected-weight: 500;
+  --calendar-range-middle-background: var(--color-secondary-container);
+  --calendar-range-middle-color: var(--color-on-secondary-container);
+  --calendar-today-color: var(--color-primary-text);
+  --calendar-today-weight: 500;
+}

@@ -120,12 +120,23 @@
   --space-16: 64px;
 
   /* Gradients */
-  --gradient-brand: linear-gradient(135deg, #22d3ee 0%, #6366f1 45%, #d946ef 100%);
-  --gradient-brand-soft: linear-gradient(135deg, rgba(34, 211, 238, 0.18) 0%, rgba(99, 102, 241, 0.18) 45%, rgba(217, 70, 239, 0.18) 100%);
+  --gradient-brand: linear-gradient(
+    135deg,
+    #22d3ee 0%,
+    #6366f1 45%,
+    #d946ef 100%
+  );
+  --gradient-brand-soft: linear-gradient(
+    135deg,
+    rgba(34, 211, 238, 0.18) 0%,
+    rgba(99, 102, 241, 0.18) 45%,
+    rgba(217, 70, 239, 0.18) 100%
+  );
 
   /* Glows */
   --glow-brand: 0 0 40px rgba(99, 102, 241, 0.35);
-  --glow-brand-strong: 0 0 60px rgba(99, 102, 241, 0.5), 0 0 100px rgba(217, 70, 239, 0.25);
+  --glow-brand-strong:
+    0 0 60px rgba(99, 102, 241, 0.5), 0 0 100px rgba(217, 70, 239, 0.25);
   --glow-cyan: 0 0 30px rgba(34, 211, 238, 0.4);
 }
 

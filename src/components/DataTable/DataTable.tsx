@@ -1,293 +1,97 @@
-import {
-  AllCommunityModule,
-  ICellRendererParams,
-  ModuleRegistry,
-  themeQuartz,
-} from "ag-grid-community";
+import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { useResponsive } from "../../hooks/useResponsive";
-import { Actions } from "../Actions/Actions";
 import { IconButton } from "../IconButton/IconButton";
-import { useColors, useColorScheme } from "../theme";
+import { NoRowsOverlay } from "./components/NoRowsOverlay";
+import { DATA_TABLE_THEME } from "./DataTable.consts";
 import "./DataTable.styles.css";
-import { DataTableColDef, DataTableProps } from "./DataTable.types";
+import type { DataTableProps } from "./DataTable.types";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const NoRowsOverlay = ({
-  noDataTitle = "No data to show",
-  noDataDescription = "No records found matching the search criteria",
-}: {
-  noDataTitle?: string;
-  noDataDescription?: string;
-}) => {
-  return (
-    <div className="data-table__no-rows">
-      <div className="data-table__no-rows-content">
-        <h3 className="data-table__no-rows-title">{noDataTitle}</h3>
-        <p className="data-table__no-rows-description">{noDataDescription}</p>
-      </div>
-    </div>
-  );
-};
-
-const DataTableComponent = <T extends object>({
+export const DataTable = <T extends object>({
   data,
+  columnDefs,
   pagination,
-  onEdit,
-  onDelete,
-  onInfo,
+  renderMobileCard,
   onPaginationChange,
-  columnLabels,
-  useCardLayout = true,
   noDataTitle,
   noDataDescription,
-  hiddenColumns = [],
+  className,
+  style,
+  paginationStyle,
+  emptyStateStyle,
 }: DataTableProps<T>) => {
-  const { isMobile, isTablet } = useResponsive();
-  const colors = useColors();
-  const colorScheme = useColorScheme();
-
+  const { isMobile } = useResponsive();
   const { current_page, last_page, per_page } = pagination;
-
-  const [rowData, setRowData] = useState(data);
-  const [colDefs, setColDefs] = useState<DataTableColDef[]>([]);
-
-  const memoizedColumnLabels = useMemo(
-    () => columnLabels || {},
-    [columnLabels],
-  );
-
-  const memoizedHiddenColumns = useMemo(
-    () => hiddenColumns || [],
-    [hiddenColumns],
-  );
-
-  const responsiveTheme = useMemo(() => {
-    const isDark = colorScheme === "dark";
-    return themeQuartz.withParams({
-      accentColor: colors.primary.main,
-      borderRadius: 6,
-      browserColorScheme: isDark ? "dark" : "light",
-      columnBorder: false,
-      fontFamily: ["Arial", "sans-serif"],
-      fontSize: isMobile ? 14 : isTablet ? 15 : 16,
-      headerFontSize: isMobile ? 14 : isTablet ? 15 : 16,
-      spacing: isMobile ? 4 : isTablet ? 6 : 8,
-      wrapperBorderRadius: 16,
-      ...(isDark && {
-        backgroundColor: "#1e1e2e",
-        foregroundColor: "#e2e8f0",
-        headerBackgroundColor: "#2a2a3d",
-        headerTextColor: "#e2e8f0",
-        borderColor: "rgba(255,255,255,0.1)",
-        rowHoverColor: "rgba(255,255,255,0.04)",
-        oddRowBackgroundColor: "#1e1e2e",
-        chromeBackgroundColor: "#1e1e2e",
-      }),
-    });
-  }, [isMobile, isTablet, colors.primary.main, colorScheme]);
-
-  const renderActions = useCallback(
-    (params: ICellRendererParams) => {
-      const rowData = params.data;
-
-      if (!rowData) {
-        return null;
-      }
-
-      return (
-        <Actions
-          onInfo={onInfo ? () => onInfo(rowData) : undefined}
-          onEdit={onEdit ? () => onEdit(rowData) : undefined}
-          onDelete={onDelete ? () => onDelete(rowData) : undefined}
-        />
-      );
-    },
-    [onInfo, onEdit, onDelete],
-  );
-
-  const defineColumnsByData = useCallback(() => {
-    if (data.length === 0) {
-      setColDefs([]);
+  const paginate = (page: number) => {
+    if (page === current_page || page < 1 || page > Math.max(1, last_page))
       return;
-    }
-
-    const columns: DataTableColDef[] = Object.keys(data[0])
-      .filter((key) => !memoizedHiddenColumns.includes(key))
-      .map((key) => ({
-        field: key,
-        headerName: memoizedColumnLabels?.[key] || key,
-      }));
-
-    if (onEdit || onDelete || onInfo) {
-      columns.push({
-        field: "actions",
-        headerName: "",
-        cellRenderer: renderActions,
-        sortable: false,
-        filter: false,
-        resizable: false,
-        pinned: "right",
-        cellClass: "data-table__actions-cell",
-        headerClass: "data-table__actions-header",
-        cellStyle: {
-          borderLeft: "none",
-          borderRight: "none",
-        },
-      });
-    }
-
-    setColDefs(columns);
-  }, [
-    data,
-    memoizedHiddenColumns,
-    memoizedColumnLabels,
-    onEdit,
-    onDelete,
-    onInfo,
-    renderActions,
-  ]);
-
-  const handlePaginate = useCallback(
-    (current: number, size: number) => {
-      if (current_page === current && per_page === size) {
-        return;
-      }
-
-      if (onPaginationChange) {
-        onPaginationChange({
-          currentPage: current,
-          pageSize: size,
-        });
-      }
-    },
-    [current_page, per_page, onPaginationChange],
-  );
-
-  const renderCardLayout = useCallback(() => {
-    if (rowData.length === 0) {
-      return (
-        <NoRowsOverlay
-          noDataTitle={noDataTitle}
-          noDataDescription={noDataDescription}
-        />
-      );
-    }
-
-    return (
-      <div className="data-table__cards">
-        {rowData.map((row, index) => {
-          const rowObject = row as Record<string, unknown>;
-          return (
-            <div key={index} className="data-table__card">
-              <div className="data-table__card-content">
-                {Object.entries(rowObject)
-                  .filter(([key]) => !memoizedHiddenColumns.includes(key))
-                  .map(([key, value]) => (
-                    <div key={key} className="data-table__card-row">
-                      <strong className="data-table__card-label">
-                        {memoizedColumnLabels?.[key] || key}:
-                      </strong>
-                      <span className="data-table__card-value">{String(value)}</span>
-                    </div>
-                  ))}
-              </div>
-              {(onEdit || onDelete || onInfo) && (
-                <div className="data-table__card-actions">
-                  <Actions
-                    onInfo={onInfo ? () => onInfo(row) : undefined}
-                    onEdit={onEdit ? () => onEdit(row) : undefined}
-                    onDelete={onDelete ? () => onDelete(row) : undefined}
-                  />
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    );
-  }, [
-    rowData,
-    memoizedColumnLabels,
-    memoizedHiddenColumns,
-    noDataTitle,
-    noDataDescription,
-    onEdit,
-    onDelete,
-    onInfo,
-  ]);
-
-  const handlePreviousPage = useCallback(() => {
-    handlePaginate(current_page - 1, per_page);
-  }, [current_page, per_page, handlePaginate]);
-
-  const handleNextPage = useCallback(() => {
-    handlePaginate(current_page + 1, per_page);
-  }, [current_page, per_page, handlePaginate]);
-
-  useEffect(() => {
-    setRowData(data);
-  }, [data]);
-
-  useEffect(() => {
-    defineColumnsByData();
-  }, [defineColumnsByData]);
-
+    onPaginationChange?.({ currentPage: page, pageSize: per_page });
+  };
   return (
-    <div className="data-table">
-      {isMobile && useCardLayout ? (
-        renderCardLayout()
+    <div
+      className={["data-table", className].filter(Boolean).join(" ")}
+      style={style}
+    >
+      {isMobile && renderMobileCard ? (
+        data.length ? (
+          <div className="data-table__cards">
+            {data.map((row, index) => (
+              <div key={index}>{renderMobileCard(row)}</div>
+            ))}
+          </div>
+        ) : (
+          <NoRowsOverlay
+            noDataTitle={noDataTitle}
+            noDataDescription={noDataDescription}
+            emptyStateStyle={emptyStateStyle}
+          />
+        )
       ) : (
-        <AgGridReact
-          theme={responsiveTheme}
-          rowData={rowData}
-          columnDefs={colDefs}
-          pagination={false}
-          paginationPageSize={per_page || 10}
-          suppressPaginationPanel={false}
-          paginationAutoPageSize={false}
-          suppressScrollOnNewData={true}
-          maintainColumnOrder={true}
-          suppressColumnVirtualisation={isMobile}
-          suppressHorizontalScroll={false}
-          alwaysShowHorizontalScroll={false}
-          suppressMenuHide={isMobile}
-          suppressNoRowsOverlay={false}
-          suppressRowHoverHighlight={false}
-          rowHeight={isMobile ? 48 : undefined}
-          headerHeight={isMobile ? 40 : undefined}
-          domLayout="autoHeight"
-          autoSizeStrategy={{
-            type: "fitGridWidth",
-            defaultMinWidth: 100,
-          }}
-          noRowsOverlayComponent={() => (
-            <NoRowsOverlay
-              noDataTitle={noDataTitle}
-              noDataDescription={noDataDescription}
-            />
-          )}
-        />
+        <div className="data-table__grid">
+          <AgGridReact<T>
+            theme={DATA_TABLE_THEME}
+            rowData={data}
+            columnDefs={columnDefs}
+            defaultColDef={{
+              sortable: true,
+              filter: true,
+              resizable: true,
+              minWidth: 100,
+              flex: 1,
+            }}
+            pagination={false}
+            domLayout="autoHeight"
+            maintainColumnOrder
+            suppressScrollOnNewData
+            noRowsOverlayComponent={NoRowsOverlay}
+            noRowsOverlayComponentParams={{
+              noDataTitle,
+              noDataDescription,
+              emptyStateStyle,
+            }}
+          />
+        </div>
       )}
-
-      <div className="data-table__pagination">
+      <div className="data-table__pagination" style={paginationStyle}>
         <IconButton
-          disabled={current_page === 1}
-          onClick={handlePreviousPage}
+          disabled={current_page <= 1}
+          onClick={() => paginate(current_page - 1)}
           icon={ChevronLeft}
+          label="Página anterior"
           size="small"
           variant="text"
         />
-        <span className="data-table__pagination-info">
-          {`${current_page} / ${last_page}`}
+        <span className="data-table__pagination-info" aria-live="polite">
+          {current_page} / {Math.max(1, last_page)}
         </span>
         <IconButton
-          disabled={current_page === last_page}
-          onClick={handleNextPage}
+          disabled={current_page >= Math.max(1, last_page)}
+          onClick={() => paginate(current_page + 1)}
           icon={ChevronRight}
+          label="Página siguiente"
           size="small"
           variant="text"
         />
@@ -295,5 +99,3 @@ const DataTableComponent = <T extends object>({
     </div>
   );
 };
-
-export const DataTable = DataTableComponent as typeof DataTableComponent;

@@ -59,17 +59,28 @@ ComponentName/
 ├── ComponentName.styles.css
 ├── ComponentName.test.tsx
 ├── ComponentName.stories.tsx
-└── ComponentName.utils.ts   # optional
+├── ComponentName.consts.ts  # required when declaring constants
+├── ComponentName.utils.ts   # optional
+└── components/             # owned internal and public parts, when needed
 ```
+
+The tree above shows the single-file case. For multiple test files, replace the
+root test file with a `tests/` directory containing all tests for that component.
+See [Testing](./testing.md#test-structure) for both layouts.
 
 Core rules:
 
 - Use named exports for components. Storybook metadata uses a default export.
-- Button, Input and Card group their public components and types in a local `index.ts`;
+- Each family groups its public components and types in a local `index.ts`;
   `src/components/index.ts` re-exports each family through that entry point.
+- Put all owned rendering subcomponents in `ComponentName/components/`, following Stepper. Small internal parts can be direct files; parts with their own supporting files use `components/PartName/`. Public sections (CardHeader, ModalHeader, WeekCalendarRow) follow the full component conventions in those directories and remain exported from the family index.
+- Shared internal parts keep one owner: TimeInput reuses DateInput's PickerField, Dropdown reuses MenuItems, and MultiSelect reuses SelectListbox. Contexts, hooks, types, constants and utilities keep their dedicated files outside `components/`.
 - Keep props and shared types in `ComponentName.types.ts`.
 - Keep styles in `ComponentName.styles.css`; use theme CSS variables.
-- Keep tests co-located in `ComponentName.test.tsx`.
+- Declare static arrays, defaults, selectors, key maps and stable configuration in `ComponentName.consts.ts`, with named UPPER_SNAKE_CASE exports. Use `.consts.ts`, not `.constants.ts`. Derived values, hooks, contexts and mutable runtime state stay with their owning logic.
+- Generate localized date text with native Intl or expose consumer configuration; do not hardcode user-facing month names in one language.
+- Keep a single test file beside the component. When multiple test files are needed, place all of them in `ComponentName/tests/`, retaining descriptive filenames.
+- Public sections have their own tests and stories. Small internal parts can reuse parent styles and types and be exercised by the parent's tests without exposing extra public stories.
 - Use ES module imports and follow the project import order.
 - Prefer semantic React Testing Library queries over implementation details.
 - Keep components typed, focused, and compatible with React 19+.

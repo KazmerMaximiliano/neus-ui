@@ -2,7 +2,7 @@
 
 [Documentation index](./README.md)
 
-Neus UI uses **Vitest** + **React Testing Library**. Test files live next to their components (`.test.tsx`).
+Neus UI uses **Vitest** + **React Testing Library**. A single test file lives next to its component. When a component has multiple test files, all of them live in its `tests/` subdirectory.
 
 ## Run Tests
 
@@ -44,8 +44,43 @@ src/components/Button/
 ```
 
 Button's tests are consolidated in `Button.test.tsx`, including `getButtonClasses`
-and the existing story's design-system controls. Keep related cases grouped with
-`describe` blocks instead of adding a separate `tests/` directory.
+and the existing story's design-system controls. A component with a single test
+file keeps it beside the implementation and groups cases with `describe` blocks.
+
+When a component has multiple test files, group **all** of them in `tests/`:
+
+```text
+src/components/Calendar/
+├── Calendar.tsx
+├── Calendar.types.ts
+├── Calendar.utils.ts
+└── tests/
+    ├── Calendar.test.tsx
+    ├── Calendar.types.test.tsx
+    └── Calendar.utils.test.ts
+```
+
+Do not mix root-level test files with files inside `tests/`. Keep descriptive
+filenames and adjust relative imports when moving tests. Use `.test.tsx` for
+component/JSX tests and `.test.ts` for tests without JSX. Subcomponents follow the
+same rule within their own directories. Shared browser suites remain in
+`src/design-systems/`; standalone utility tests remain beside their utilities.
+
+Owned subcomponents live in `ComponentName/components/`. Public sections keep
+their tests next to their implementation (for example,
+`Card/components/CardHeader/CardHeader.test.tsx`), or use their own `tests/`
+directory when needed. Small internal parts such as StepperDots, MenuItems and
+SelectListbox can be covered through their parent's behavior tests. Moving a part
+must preserve those tests and update their imports; it does not require duplicate
+tests that only check the new file location.
+
+Vitest already discovers both layouts through `src/**/*.test.{ts,tsx}`. Library
+builds exclude these filenames recursively, so moving them does not change the
+published package.
+
+```bash
+pnpm test:unit src/components/Calendar/tests/
+```
 
 ## Basic Test Pattern
 

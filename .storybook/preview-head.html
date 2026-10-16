@@ -1,17 +1,11 @@
 <style>
-  /* Canvas toolbar (zoom buttons strip) — scoped tightly to toolbar only */
-  html[data-color-scheme="dark"] [role="toolbar"] {
-    background-color: #2a2a3d !important;
-    border-bottom-color: rgba(255,255,255,0.08) !important;
+  /* Only Storybook's toolbar chrome; component toolbars keep their own recipes. */
+  html[data-color-scheme="dark"] .sb-bar[role="toolbar"] {
+    background-color: var(--color-surface-secondary) !important;
+    border-bottom-color: var(--color-border-subtle) !important;
   }
 
-  html[data-color-scheme="dark"] [role="toolbar"] button,
-  html[data-color-scheme="dark"] [role="toolbar"] a {
-    background-color: transparent !important;
-    color: #e2e8f0 !important;
-  }
-
-  html[data-color-scheme="dark"] [role="toolbar"] svg {
-    color: #e2e8f0 !important;
+  html[data-color-scheme="dark"] .sb-bar[role="toolbar"] :is(button, a, svg) {
+    color: var(--color-text-primary) !important;
   }
 </style>

@@ -1,0 +1,18 @@
+/* Geist menu material: 12px radius, subtle stroke, layered soft shadow. */
+[data-design-system="vercel"] {
+  --overlay-border-color: var(--color-border-subtle);
+  --overlay-radius: 12px;
+  --elevation-floating: 0 4px 8px -4px rgba(0, 0, 0, 0.04), 0 16px 24px -8px rgba(0, 0, 0, 0.06);
+  --overlay-shadow: var(--elevation-floating);
+  --overlay-offset: 4px;
+  --overlay-padding: 8px;
+  --overlay-item-padding: 8px;
+  --overlay-item-min-height: 40px;
+  --overlay-item-radius: 6px;
+  --overlay-item-font-weight: 400;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --elevation-floating: 0 0 0 1px var(--color-border-subtle), 0 16px 24px -8px rgba(0, 0, 0, 0.5);
+  --overlay-shadow: var(--elevation-floating);
+}

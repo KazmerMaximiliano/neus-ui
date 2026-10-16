@@ -1,125 +1,118 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { User } from "lucide-react";
+import userEvent from "@testing-library/user-event";
+import { MoreVertical } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider } from "../../providers/ThemeProvider";
 import { Menu } from "./Menu";
 
-afterEach(() => {
-  cleanup();
-});
+afterEach(cleanup);
 
-const defaultItems = [
-  { label: "Profile", onClick: vi.fn() },
-  { label: "Settings", onClick: vi.fn() },
-  { label: "Logout", onClick: vi.fn() },
+const items = () => [
+  { label: "Edit", onClick: vi.fn() },
+  { label: "Archive", onClick: vi.fn(), disabled: true },
+  { label: "Delete", onClick: vi.fn() },
 ];
-
-const renderMenu = (props = {}) => {
-  return render(
-    <ThemeProvider>
-      <Menu items={defaultItems} {...props} />
-    </ThemeProvider>,
-  );
-};
 
 describe("Menu", () => {
   describe("rendering", () => {
-    it("renders menu container", () => {
-      const { container } = renderMenu();
-      expect(container.querySelector(".menu")).toBeInTheDocument();
+    it("renders a text trigger that announces a menu", () => {
+      render(<Menu text="Options" items={items()} />);
+      const trigger = screen.getByRole("button", { name: "Options" });
+      expect(trigger).toHaveAttribute("aria-haspopup", "menu");
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+      expect(trigger).toHaveClass("button", "button--text");
     });
 
-    it("renders a Button with text when text prop is provided", () => {
-      renderMenu({ text: "Options" });
-      expect(screen.getByText("Options")).toBeInTheDocument();
+    it("renders an icon trigger named by text or a default label", () => {
+      const { rerender } = render(
+        <Menu icon={MoreVertical} text="Row actions" items={items()} />,
+      );
+      const trigger = screen.getByRole("button", { name: "Row actions" });
+      expect(trigger).toHaveClass("icon-button", "icon-button--text");
+      expect(trigger.querySelector("svg")).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      );
+      rerender(<Menu icon={MoreVertical} items={items()} />);
+      expect(screen.getByRole("button", { name: "Menú" })).toBeInTheDocument();
     });
 
-    it("renders an IconButton when icon prop is provided", () => {
-      const { container } = renderMenu({ icon: User });
-      expect(container.querySelector("svg")).toBeInTheDocument();
-    });
-
-    it("renders a Button with empty label when no icon or text provided", () => {
-      const { container } = renderMenu();
-      const button = container.querySelector("button");
-      expect(button).toBeInTheDocument();
+    it("keeps items out of the DOM while closed", () => {
+      render(<Menu text="Options" items={items()} />);
+      expect(screen.queryByRole("menuitem")).not.toBeInTheDocument();
     });
   });
 
-  describe("dropdown", () => {
-    it("does not show dropdown by default", () => {
-      renderMenu();
-      expect(document.querySelector(".menu__dropdown")).not.toHaveClass(
-        "menu__dropdown--open",
-      );
+  describe("interactions", () => {
+    it("opens, focuses the first item and closes on a second click", async () => {
+      render(<Menu text="Options" items={items()} />);
+      const trigger = screen.getByRole("button", { name: "Options" });
+      await userEvent.click(trigger);
+      expect(trigger).toHaveAttribute("aria-expanded", "true");
+      expect(screen.getByRole("menu", { name: "Options" })).toBeInTheDocument();
+      expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveFocus();
+      await userEvent.click(trigger);
+      expect(screen.queryByRole("menuitem")).not.toBeInTheDocument();
     });
 
-    it("opens dropdown on click with text trigger", () => {
-      renderMenu({ text: "Options" });
-      fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu__dropdown")).toHaveClass(
-        "menu__dropdown--open",
-      );
+    it("moves focus with arrow keys and skips disabled items", async () => {
+      render(<Menu text="Options" items={items()} />);
+      await userEvent.click(screen.getByRole("button", { name: "Options" }));
+      await userEvent.keyboard("{ArrowDown}");
+      expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus();
+      await userEvent.keyboard("{ArrowDown}");
+      expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveFocus();
+      await userEvent.keyboard("{End}");
+      expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus();
+      await userEvent.keyboard("{Home}");
+      expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveFocus();
     });
 
-    it("closes dropdown on second click", () => {
-      renderMenu({ text: "Options" });
-      fireEvent.click(screen.getByText("Options"));
-      fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu__dropdown")).not.toHaveClass(
-        "menu__dropdown--open",
-      );
+    it("runs the item action, closes and returns focus to the trigger", async () => {
+      const list = items();
+      render(<Menu text="Options" items={list} />);
+      const trigger = screen.getByRole("button", { name: "Options" });
+      await userEvent.click(trigger);
+      await userEvent.click(screen.getByRole("menuitem", { name: "Delete" }));
+      expect(list[2].onClick).toHaveBeenCalledOnce();
+      expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+      expect(trigger).toHaveFocus();
     });
 
-    it("opens dropdown when icon trigger is clicked", () => {
-      renderMenu({ icon: User });
-      const button = document.querySelector("button");
-      fireEvent.click(button!);
-      expect(document.querySelector(".menu__dropdown")).toHaveClass(
-        "menu__dropdown--open",
-      );
-    });
-
-    it("shows all menu items when open", () => {
-      renderMenu({ text: "Options" });
-      fireEvent.click(screen.getByText("Options"));
-      expect(screen.getByText("Profile")).toBeInTheDocument();
-      expect(screen.getByText("Settings")).toBeInTheDocument();
-      expect(screen.getByText("Logout")).toBeInTheDocument();
-    });
-
-    it("closes dropdown on outside click", () => {
-      renderMenu({ text: "Options" });
-      fireEvent.click(screen.getByText("Options"));
-      expect(document.querySelector(".menu__dropdown")).toHaveClass(
-        "menu__dropdown--open",
-      );
+    it("closes on Escape with focus restored and on outside clicks", async () => {
+      render(<Menu text="Options" items={items()} />);
+      const trigger = screen.getByRole("button", { name: "Options" });
+      await userEvent.click(trigger);
+      await userEvent.keyboard("{Escape}");
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+      expect(trigger).toHaveFocus();
+      await userEvent.click(trigger);
       fireEvent.mouseDown(document.body);
-      expect(document.querySelector(".menu__dropdown")).not.toHaveClass(
-        "menu__dropdown--open",
-      );
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+    });
+
+    it("closes when focus leaves with Tab", async () => {
+      render(<Menu text="Options" items={items()} />);
+      await userEvent.click(screen.getByRole("button", { name: "Options" }));
+      await userEvent.tab();
+      expect(screen.queryByRole("menuitem")).not.toBeInTheDocument();
     });
   });
 
-  describe("menu items", () => {
-    it("calls item onClick when clicked", () => {
-      const onClick = vi.fn();
-      const items = [{ label: "Click me", onClick }];
+  describe("customization", () => {
+    it("applies menuStyle and itemStyle to their parts", async () => {
       render(
-        <ThemeProvider>
-          <Menu items={items} text="Options" />
-        </ThemeProvider>,
+        <Menu
+          text="Options"
+          items={items()}
+          menuStyle={{ minWidth: 300 }}
+          itemStyle={{ paddingLeft: 30 }}
+        />,
       );
-      fireEvent.click(screen.getByText("Options"));
-      fireEvent.click(screen.getByText("Click me"));
-      expect(onClick).toHaveBeenCalledTimes(1);
-    });
-
-    it("renders items with clickable class", () => {
-      renderMenu({ text: "Options" });
-      fireEvent.click(screen.getByText("Options"));
-      const clickableItems = document.querySelectorAll(".menu__item--clickable");
-      expect(clickableItems).toHaveLength(3);
+      await userEvent.click(screen.getByRole("button", { name: "Options" }));
+      expect(screen.getByRole("menu")).toHaveStyle({ minWidth: "300px" });
+      expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveStyle({
+        paddingLeft: "30px",
+      });
     });
   });
 });

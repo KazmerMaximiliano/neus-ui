@@ -1,0 +1,24 @@
+:root, [data-design-system] {
+  --data-table-accent: var(--color-primary);
+  --data-table-background: var(--color-surface);
+  --data-table-color: var(--color-text-primary);
+  --data-table-muted: var(--color-text-secondary);
+  --data-table-header-background: var(--color-surface-secondary);
+  --data-table-header-color: var(--color-text-primary);
+  --data-table-border-color: var(--color-border-subtle);
+  --data-table-hover-background: var(--color-surface-hover);
+  --data-table-selection-background: var(--color-selection);
+  --data-table-font-family: var(--font-body);
+  --data-table-font-size: var(--type-body-size);
+  --data-table-header-font-size: var(--type-label-size);
+  --data-table-spacing: 8px;
+  --data-table-radius: var(--radius-default);
+  --data-table-control-radius: var(--radius-sm);
+  --data-table-row-height: 48px;
+  --data-table-header-height: 44px;
+  --data-table-gap: 16px;
+  --data-table-shadow: none;
+  --data-table-empty-padding: 24px;
+  --data-table-empty-height: 150px;
+  --data-table-empty-title-size: 18px;
+}

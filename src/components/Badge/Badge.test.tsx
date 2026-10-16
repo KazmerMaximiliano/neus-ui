@@ -55,7 +55,13 @@ describe("Badge", () => {
   });
 
   describe("color", () => {
-    const colors: BadgeColor[] = ["primary", "success", "error", "info", "neutral"];
+    const colors: BadgeColor[] = [
+      "primary",
+      "success",
+      "error",
+      "info",
+      "neutral",
+    ];
 
     it.each(colors)("applies %s color class", (color) => {
       render(<Badge label="Label" color={color} />);
@@ -87,5 +93,29 @@ describe("Badge", () => {
       expect(badge).toHaveClass("badge--error");
       expect(document.querySelector(".badge__dot")).not.toBeInTheDocument();
     });
+  });
+});
+
+describe("Badge customization", () => {
+  it("applies badgeStyle to the badge and dotStyle to the dot", () => {
+    render(
+      <Badge
+        label="Online"
+        variant="dot"
+        badgeStyle={{ gap: 9 }}
+        dotStyle={{ width: 11 }}
+      />,
+    );
+    const badge = screen.getByText("Online");
+    expect(badge).toHaveStyle({ gap: "9px" });
+    expect(badge.querySelector(".badge__dot")).toHaveStyle({ width: "11px" });
+  });
+
+  it("hides the decorative dot from assistive technology", () => {
+    render(<Badge label="Online" variant="dot" />);
+    expect(document.querySelector(".badge__dot")).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
   });
 });

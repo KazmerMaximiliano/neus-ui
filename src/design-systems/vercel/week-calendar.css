@@ -1,0 +1,6 @@
+[data-design-system="vercel"] {
+  --week-calendar-radius: 6px;
+  --week-calendar-padding: 16px;
+  --week-calendar-event-radius: 6px;
+  --week-calendar-title-size: 16px;
+}

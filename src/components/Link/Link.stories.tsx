@@ -1,7 +1,10 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { Link as LinkComponent } from "./Link";
+import type { LinkStoryArgs } from "./Link.types";
 
-const meta: Meta<typeof LinkComponent> = {
+const meta: Meta<LinkStoryArgs> = {
   title: "Base/Link",
   component: LinkComponent,
   parameters: {
@@ -9,43 +12,62 @@ const meta: Meta<typeof LinkComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the link",
+    },
     label: {
-      control: { type: "text" },
+      control: "text",
       description: "The text content of the link",
-      table: {
-        type: { summary: "string" },
-        category: "Props",
-      },
     },
     type: {
-      control: { type: "select" },
+      control: "select",
       options: ["primary", "secondary"],
       description: "The visual style variant of the link",
-      table: {
-        type: { summary: "'primary' | 'secondary'" },
-        category: "Props",
-        defaultValue: { summary: "'primary'" },
-      },
     },
     href: {
-      control: { type: "text" },
+      control: "text",
       description: "The URL or path the link points to",
-      table: {
-        type: { summary: "string" },
-        category: "Props",
-      },
+    },
+    target: {
+      control: "select",
+      options: [undefined, "_self", "_blank"],
+      description: "Native target attribute",
+    },
+    rel: {
+      control: "text",
+      description: "Native rel attribute; use noopener with _blank",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes",
+    },
+    style: {
+      control: "object",
+      description: "Styles applied to this link",
+    },
+    onClick: {
+      action: "clicked",
+      description: "Native click handler",
     },
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Link: Story = {
+export const Link: StoryObj<LinkStoryArgs> = {
   args: {
-    label: "Click here",
+    designSystem: "neus",
+    label: "Read the documentation",
     type: "primary",
     href: "#",
+    className: "",
+    style: null,
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <LinkComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

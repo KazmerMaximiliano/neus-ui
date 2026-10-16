@@ -7,9 +7,10 @@ semantic color pairs, tonal surfaces, purposeful shapes, and legible type roles.
 The goal is a coherent product interface across forms, navigation, and content.
 Material 3 Expressive is outside this baseline.
 
-**Current implementation.** Button, Card, Input, and Sidebar have Material-inspired
-recipes. Purple actions, rounded controls, and shadows are an approximation, not
-a complete Material 3 implementation. Other components retain their existing styles.
+**Current implementation.** All public component families and both templates now
+have scoped CSS token contracts and six-system recipes. Button, Card and Input
+share the expanded presentation API described below. This is the project's web
+mapping, not full feature parity with an external component framework.
 
 Format: [Google DESIGN.md](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
 (alpha, prose only). Primary sources consulted 2026-10-14:
@@ -31,15 +32,15 @@ levels to express grouping. Light and dark schemes must preserve these role
 relationships rather than invert colors mechanically. Reference:
 [M3 color roles](https://m3.material.io/styles/color/the-color-system/key-colors-tones).
 
-**Current implementation.** `--color-primary` and `--color-text-on-primary` provide
-the primary pair. Purple palettes differ by mode, but most neutrals, feedback,
-focus-ring values, and dark surfaces are inherited from Neus. Shared
-`--color-surface-secondary` is not Material's secondary accent role.
+**Current implementation.** Semantic surfaces, text, selection, field/layer and feedback roles are
+mapped in the scoped tokens and palettes. Light/dark values preserve role pairs.
+Solid action foregrounds are resolved per state; custom six-digit hex primary
+accents also receive readable text/focus mappings. These local roles do not provide
+a complete external theme matrix or a full dynamic tonal color engine.
+Material includes tertiary/on-tertiary and the surface-container hierarchy.
 
-**Refactor gaps.** Secondary/tertiary container pairs and a full tonal surface
-hierarchy need future token mappings. Generated hover shades and alpha tints do
-not implement a Material tonal palette or dynamic color. Audit runtime accent
-overrides separately; they do not regenerate all foreground pairs.
+**Validation boundary.** Consumer-supplied CSS foreground/background overrides and arbitrary non-hex
+accent formats are outside the automatic contrast contract.
 
 ## Typography
 
@@ -49,13 +50,13 @@ following [M3 applying type](https://m3.material.io/styles/typography/applying-t
 Local baseline: prefer Roboto for both body and display, with sans-serif fallbacks;
 keep labels in natural case and preserve hierarchy at narrow widths.
 
-**Current implementation.** Display prefers Roboto, but body prefers Inter before
-Roboto. Buttons use medium-weight 14px labels; Input values use 14px. Font stacks
-are declared without loading assets; the numerical size scale is shared with Neus.
+**Current implementation.** Font stacks remain declared locally without downloaded assets. Body,
+heading, label and caption roles include size, weight, line height and tracking.
+Component-specific sizes remain deliberate local mappings, not a claim that the
+entire external typography catalog has been implemented.
 
-**Refactor gaps.** Align the font priority with the target and map complete type
-roles, including weight, tracking, and line height. Do not identify the inherited
-scale as the Material 3 type scale.
+**Validation boundary.** Use local fallback fonts and review application content at zoom and with
+long translations; font asset loading belongs to the consuming application.
 
 ## Layout
 
@@ -64,13 +65,14 @@ groups, and let content determine responsive composition. Preserve usable target
 and text before reducing whitespace. Navigation may change presentation with
 available width while retaining the same destinations.
 
-**Current implementation.** The shared four-pixel scale, Card slot padding, Input
-minimum width, and Sidebar desktop/rail/mobile breakpoints remain in use. These
-are Neus implementation choices rather than Material window-size classes.
+**Current implementation.** AppTemplate and FormTemplate now map page-region spacing and responsive
+columns through recipes. AppTemplate follows Sidebar at 768/1024px; FormTemplate
+uses 2/2/1 columns by default with independent gap/region overrides. Components keep
+readable internal geometry; week grids and tables retain horizontal navigation
+where their data cannot fit a narrow viewport.
 
-**Refactor gaps.** Establish a template-level adaptive layout mapping and review
-control sizes for touch use. Do not silently replace library breakpoints while
-adjusting a component's visual recipe.
+**Validation boundary.** The shared breakpoints are Neus web choices. Application page compositions
+and specialized external grid systems remain consumer decisions.
 
 ## Elevation & Depth
 
@@ -81,13 +83,14 @@ than giving every action a shadow. References:
 [color roles](https://m3.material.io/styles/color/the-color-system/key-colors-tones)
 and [Material Web buttons](https://github.com/material-components/material-web/blob/main/docs/components/button.md).
 
-**Current implementation.** Button has resting/hover/pressed shadow tokens; Card
-and Sidebar use small shadows and the shared secondary surface. There is no
-dedicated elevation-role scale or state-layer implementation.
+**Current implementation.** Floating and dialog elevation roles map the existing overlay and modal
+recipes. Ordinary surfaces and action variants have separate treatments; Card
+stays passive, Button reserves elevation for its explicit treatment where required,
+and reduced-motion rules suppress nonessential transitions. Neobrutalism retains
+hard shadows with clearance in fields, cards and template spacing.
 
-**Refactor gaps.** Replace generic shadow application with role-appropriate
-treatment. Verify surface separation in dark mode and define reduced-motion
-behavior when adding state effects.
+**Validation boundary.** Nested surfaces and custom scroll containers must preserve focus and shadow
+clearance; the library cannot control clipping imposed by consumer overflow rules.
 
 ## Shapes
 
@@ -95,12 +98,13 @@ behavior when adding state effects.
 moderately rounded content surfaces, and restrained field corners. Shape should
 identify a component's role; one radius should not be imposed on everything.
 
-**Current implementation.** Buttons use 20px corners, Card 12px, Input 4px, and
-Sidebar items 28px. Neus navigation curves are disabled. These values describe
-the approximation, not a complete Material shape scale.
+**Current implementation.** Every adapted family has its own radius/border contract, including nested
+selectors, calendars, overlays, maps and tables. Neus keeps its navigation curves;
+other systems disable that decoration. Media clipping and focus remain separate
+from surface geometry. Explicit presentation variants have recipes in all systems.
 
-**Refactor gaps.** Map each component to the relevant base M3 shape role during
-refactoring. Preserve nested media clipping and independent keyboard focus.
+**Validation boundary.** Recipe geometry expresses the documented local web target. Native platform
+rendering and additional interactive surface types are separate capabilities.
 
 ## Components
 
@@ -111,45 +115,45 @@ by emphasis. Use filled for important completion actions and lower emphasis for
 supporting actions, following [Material Web buttons](https://github.com/material-components/material-web/blob/main/docs/components/button.md).
 Local requirement: loading must keep the action understandable and visually stable.
 
-**Current implementation.** [Button recipe](./button.css): rounded shape, medium
-label, generic shadows. Neus exposes solid/outlined/text, shared hover/active colors,
-an offset focus outline, disabled colors, and a busy dot loader.
+**Current implementation.** [Button recipe](./button.css) maps solid, secondary, tonal, elevated,
+outlined and text actions. Carbon uses primary/secondary/tertiary/ghost hierarchy
+for solid/secondary/outlined/text; Material reserves resting elevation for elevated.
+The shared implementation reserves the idle label box while busy. Semantic and
+custom hex accent foregrounds are resolved for resting, hover and pressed fills.
 
-**Refactor gaps.** Tonal/elevated roles are not distinct public variants; existing
-shadows do not establish that distinction. State layers and theme-specific disabled
-roles are pending. Keep API changes explicit; check both schemes and loading width.
+**Refactor boundaries.** Six shared variants express the supported action hierarchy. System-specific
+native APIs and additional interaction patterns remain outside this contract.
 
 ### Card
 
 **Target rules.** Local mapping: a quiet rounded container whose surface treatment
 reflects its place in the tonal hierarchy. Keep the root passive; use child actions
-for interaction. The desired filled/outlined/elevated distinctions require future
-design work rather than being inferred from a generic shadow.
+for interaction. Filled, outlined and elevated treatments are explicit shared variants.
 
-**Current implementation.** [Card recipe](./card.css): 12px radius, secondary
-surface, small shadow, no border or header divider. Slot spacing is inherited;
-media stays within the rounded edge.
+**Current implementation.** [Card recipe](./card.css) keeps the root passive. `variant="auto"`
+uses this system's existing treatment; filled, outlined and elevated can be chosen
+explicitly in all six systems. Header/Content/Footer keep independent spacing;
+media clips inside the surface and child controls own interactions.
 
-**Refactor gaps.** Choose and map a specific base M3 card treatment before claiming
-parity. Theme-aware container roles are incomplete. The root has no focus, error,
-or loading state; those responsibilities remain with content and child controls.
+**Refactor boundaries.** The root remains passive. Selection, expansion, loading, errors and keyboard
+actions belong to meaningful child content and controls.
 
 ### Input
 
 **Target rules.** Material distinguishes filled and outlined fields and supports
-floating or external labels and supporting/error text. For the future Neus M3
-mapping, prefer integrated floating labels as an explicit local target. Keep invalid
+floating or external labels and supporting/error text. The Neus M3 mapping uses integrated floating labels by default. Keep invalid
 and focused treatments recognizable. Reference:
 [Material Web text fields](https://github.com/material-components/material-web/blob/main/docs/components/text-field.md).
 
-**Current implementation.** [Input recipe](./input.css): a rounded outlined native
-input, external label, 16px padding, shared focus shadow, and associated error text.
-Disabled and read-only behavior comes from the shared native input.
+**Current implementation.** [Input recipe](./input.css) supplies field geometry and state roles.
+The shared anatomy supports auto/filled/outlined, small/medium/large,
+auto/external/floating labels, prefix/suffix content and an optional error icon.
+Auto uses a floating outlined field in Material and external labels elsewhere.
+Focused, populated, prefixed and native color fields keep floating labels raised.
+Errors stay associated with the native input; readonly remains distinct from disabled.
 
-**Refactor gaps.** Neither a filled-field anatomy nor an integrated/floating label
-is implemented. Label positioning cannot be claimed through token changes alone.
-Review read-only styling, invalid focus, helper space, and dark-state colors before
-introducing any new shared anatomy or API.
+**Refactor boundaries.** Prefixes/suffixes and floating labels do not introduce masks, autocomplete
+providers or other application behavior. Native input semantics remain in use.
 
 ### Sidebar
 
@@ -157,24 +161,35 @@ introducing any new shared anatomy or API.
 indicators, readable labels, and clearly separate hover, current-location, and focus
 states. Preserve destinations when changing between expanded and compact layouts.
 
-**Current implementation.** [Sidebar recipe](./sidebar.css): secondary surface,
-rounded items, primary-tinted selection, no border, and a small shadow. Shared
-behavior provides a desktop panel, tablet rail, and mobile dialog.
+**Current implementation.** [Sidebar recipe](./sidebar.css): surface-container
+panel, rounded items, secondary-container selection with its on-color, no border,
+and a small shadow. Shared behavior provides a desktop panel, tablet rail, and
+mobile dialog.
 
-**Refactor gaps.** Map selection to the intended M3 container/on-container pair;
-the current primary tint is an approximation. The tablet rail and mobile drawer
-are not complete Material navigation components. Verify selected/focused states
-in both modes; show errors or progress without overwriting location state.
+**Refactor boundaries.** Desktop/rail/mobile behavior is shared Neus navigation. Native-platform grouped
+sidebars and external framework navigation parity are separate capabilities.
 
-### Extension to other families — pending adaptation
+### Other component families and templates
 
-- Selection and date/time controls: map selected, unselected, focused, and invalid
-  states to semantic pairs; do not reuse primary tint for every role.
-- DataTable and calendars: use readable body/label roles and restrained surfaces;
-  distinguish range selection, current date, and keyboard focus.
-- Modal and menus: map container elevation and scrim roles with clear focus handling.
-- Badge and Stepper: use feedback/selection roles and non-color state cues.
-- Templates: compose adaptive regions without embedding system checks in components.
+- Base and Navigation retain their interaction APIs and have explicit recipes for
+  fields, nested controls, feedback, floating surfaces, keyboard focus and selection.
+- Calendar separates single/range/multiple values; `numberOfMonths` controls visible
+  months. Clock keeps the period synchronized with controlled time. Dial labels
+  stay above the hand, with contrasting ink clipped to the indicator tip for
+  partially covered marks. DateInput and TimeInput share field presentations and
+  offer panel overrides. Empty floating fields hide the placeholder at rest;
+  focusing or opening the picker raises the label and reveals it. External labels
+  and fields without labels retain visible placeholders.
+- WeekCalendar and WeekCalendarRow share a token family, a seven-day window with
+  one-day navigation, keyboard event activation and tooltips on focus or hover.
+- InteractiveMap adapts the Neus interface; `mapOptions` configures Google cartography.
+  Readonly blocks selection and marker changes. Maps SDK and geocoding failures
+  surface as errors; obsolete asynchronous responses are ignored.
+- DataTable preserves AG Grid Community. A stable theme bridge resolves
+  `--data-table-*` in the nearest provider. Columns and optional mobile cards belong
+  to the consumer; actions are documented composition rather than a public component.
+- AppTemplate shares Sidebar's breakpoints; its regions use layout tokens.
+  FormTemplate exposes responsive columns and gaps and accepts arbitrary children.
 
 ## Do's and Don'ts
 
@@ -184,3 +199,9 @@ in both modes; show errors or progress without overwriting location state.
 - Don't equate purple, rounded corners, and shadows with complete Material 3.
 - Don't confuse the shared secondary surface with Material's secondary accent.
 - Don't introduce Expressive motion or shapes into this base target by default.
+
+Local implementation update: 2026-10-15. See the
+[migration and validation guide](../../../docs/refactor-migration.md) for public
+API changes, test coverage and limits of this web adaptation. Visual review is
+against these local target rules; claims of native or complete framework parity
+remain outside the contract.

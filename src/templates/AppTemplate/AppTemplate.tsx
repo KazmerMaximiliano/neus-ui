@@ -5,14 +5,14 @@ import type { AppTemplateProps } from "./AppTemplate.types";
 const APP_NAME = import.meta.env.VITE_APP_NAME || "NEUS UI";
 
 /** Application shell; Sidebar owns its responsive navigation and modal state. */
-export const AppTemplate = ({ children, routes, menu }: AppTemplateProps) => (
-  <div className="app-template">
-    <div className="app-template__header">{menu}</div>
+export const AppTemplate = ({ children, routes, menu, title = APP_NAME, className, style, headerStyle, sidebarStyle, contentStyle, contentContainerStyle }: AppTemplateProps) => (
+  <div className={["app-template", className].filter(Boolean).join(" ")} style={style}>
+    <header className="app-template__header" style={headerStyle}>{menu}</header>
     <div className="app-template__sidebar">
-      <Sidebar title={APP_NAME} items={routes} />
+      <Sidebar title={title} items={routes} sidebarStyle={sidebarStyle} />
     </div>
-    <div className="app-template__content">
-      <div className="app-template__content-container">{children}</div>
-    </div>
+    <main className="app-template__content" style={contentStyle}>
+      <div className="app-template__content-container" style={contentContainerStyle}>{children}</div>
+    </main>
   </div>
 );

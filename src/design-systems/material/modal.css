@@ -1,0 +1,16 @@
+/* M3 basic dialog: 28px corners, surface-container-high, elevation 3. */
+[data-design-system="material"] {
+  --modal-width: 560px;
+  --modal-radius: 28px;
+  --modal-background: var(--color-surface-secondary);
+  --elevation-dialog: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --modal-shadow: var(--elevation-dialog);
+  --modal-backdrop: rgba(0, 0, 0, 0.32);
+  --modal-divider-width: 0px;
+  --modal-header-padding: 24px 24px 16px;
+  --modal-title-size: 24px;
+  --modal-title-weight: 400;
+  --modal-content-padding: 0 24px;
+  --modal-footer-padding: 24px;
+  --modal-footer-gap: 8px;
+}

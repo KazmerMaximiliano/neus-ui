@@ -1,0 +1,9 @@
+/* Carbon dropdown: 16px chevron in text-primary, square search, tag pills. */
+[data-design-system="carbon"] {
+  --select-caret-size: 16px;
+  --select-caret-gap: 16px;
+  --select-caret-color: var(--color-text-primary);
+  --select-search-radius: 0px;
+  --select-tag-radius: 24px;
+  --select-tag-padding: 2px 4px 2px 8px;
+}

@@ -1,501 +1,171 @@
-import { describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import type { AgGridReactProps } from "ag-grid-react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { DataTable } from "./DataTable";
-import { DataTableProps, PaginationInfo } from "./DataTable.types";
+import type { DataTableSampleRow } from "./DataTable.types";
 
-interface TestRowData {
-  id: number;
-  name: string;
-  email: string;
-  status: string;
-}
-
-const defaultPagination: PaginationInfo = {
-  current_page: 1,
-  per_page: 10,
-  last_page: 10,
-  total: 100,
-};
-
-describe("DataTable - Component Definition & Props", () => {
-  it("component is defined and exported", () => {
-    expect(DataTable).toBeDefined();
-    expect(typeof DataTable).toBe("function");
-  });
-
-  it("accepts required props", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "John Doe",
-        email: "john@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-    };
-
-    expect(props).toBeDefined();
-    expect(props.data).toBeDefined();
-    expect(props.pagination).toBeDefined();
-  });
-
-  it("accepts optional props", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "John Doe",
-        email: "john@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      columnLabels: {
-        id: "ID",
-        name: "Name",
-        email: "Email",
-        status: "Status",
-      },
-      hiddenColumns: ["email"],
-      useCardLayout: true,
-      onEdit: vi.fn(),
-      onDelete: vi.fn(),
-      onInfo: vi.fn(),
-    };
-
-    expect(props.columnLabels).toBeDefined();
-    expect(props.hiddenColumns).toBeDefined();
-    expect(props.useCardLayout).toBe(true);
-    expect(props.onEdit).toBeDefined();
-    expect(props.onDelete).toBeDefined();
-    expect(props.onInfo).toBeDefined();
-  });
-
-  it("handles empty data array", () => {
-    const props: DataTableProps<TestRowData> = {
-      data: [],
-      pagination: defaultPagination,
-    };
-
-    expect(props.data).toHaveLength(0);
-    expect(Array.isArray(props.data)).toBe(true);
-  });
-
-  it("handles data with various string lengths", () => {
-    const longData: TestRowData[] = [
-      {
-        id: 1,
-        name: "a".repeat(200),
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: longData,
-      pagination: defaultPagination,
-    };
-
-    expect(props.data[0].name.length).toBe(200);
-  });
-
-  it("handles special characters in data", () => {
-    const specialData: TestRowData[] = [
-      {
-        id: 1,
-        name: "John <Doe> & Co.",
-        email: "john+test@example.com",
-        status: "Active/Pending",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: specialData,
-      pagination: defaultPagination,
-    };
-
-    expect(props.data[0].name).toContain("<");
-    expect(props.data[0].email).toContain("+");
-  });
-
-  it("handles unicode characters in data", () => {
-    const unicodeData: TestRowData[] = [
-      {
-        id: 1,
-        name: "José García 🎉",
-        email: "jose@example.com",
-        status: "Activo",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: unicodeData,
-      pagination: defaultPagination,
-    };
-
-    expect(props.data[0].name).toContain("é");
-    expect(props.data[0].name).toContain("🎉");
-  });
+const grid = vi.hoisted(() => ({
+  props: {} as AgGridReactProps<DataTableSampleRow>,
+  mobile: false,
+}));
+vi.mock("../../hooks/useResponsive", () => ({
+  useResponsive: () => ({ isMobile: grid.mobile }),
+}));
+vi.mock("ag-grid-react", () => ({
+  AgGridReact: (props: AgGridReactProps<DataTableSampleRow>) => {
+    grid.props = props;
+    const Empty = props.noRowsOverlayComponent;
+    return (
+      <div data-testid="grid">
+        {props.rowData?.length ? (
+          props.rowData.map((row) => <span key={row.id}>{row.name}</span>)
+        ) : (
+          <Empty {...props.noRowsOverlayComponentParams} />
+        )}
+      </div>
+    );
+  },
+}));
+afterEach(() => {
+  cleanup();
+  grid.mobile = false;
 });
+const data = [{ id: 1, name: "Ana", email: "ana@example.com" }];
+const columnDefs = [
+  { field: "name" as const, headerName: "User", hide: false },
+];
+const pagination = { current_page: 1, last_page: 3, per_page: 10, total: 25 };
 
-describe("DataTable - Data Validation", () => {
-  it("validates pagination prop structure", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const pagination: PaginationInfo = {
-      current_page: 5,
-      per_page: 25,
-      last_page: 20,
-      total: 500,
-    };
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination,
-    };
-
-    expect(props.pagination.current_page).toBe(5);
-    expect(props.pagination.per_page).toBe(25);
-    expect(props.pagination.last_page).toBe(20);
-    expect(props.pagination.total).toBe(500);
+describe("DataTable consumer composition", () => {
+  it("forwards typed columns and updates rows without derived state", () => {
+    const { rerender } = render(
+      <DataTable data={data} columnDefs={columnDefs} pagination={pagination} />,
+    );
+    expect(grid.props.columnDefs).toBe(columnDefs);
+    expect(screen.getByText("Ana")).toBeInTheDocument();
+    rerender(
+      <DataTable
+        data={[{ ...data[0], name: "Bea" }]}
+        columnDefs={columnDefs}
+        pagination={pagination}
+      />,
+    );
+    expect(screen.queryByText("Ana")).not.toBeInTheDocument();
+    expect(screen.getByText("Bea")).toBeInTheDocument();
   });
-
-  it("handles multiple data rows", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "John",
-        email: "john@example.com",
-        status: "Active",
-      },
-      {
-        id: 2,
-        name: "Jane",
-        email: "jane@example.com",
-        status: "Inactive",
-      },
-      {
-        id: 3,
-        name: "Bob",
-        email: "bob@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-    };
-
-    expect(props.data).toHaveLength(3);
-    expect(props.data[0].name).toBe("John");
-    expect(props.data[2].name).toBe("Bob");
+  it("keeps mobile grid without a card renderer", () => {
+    grid.mobile = true;
+    render(
+      <DataTable data={data} columnDefs={columnDefs} pagination={pagination} />,
+    );
+    expect(screen.getByTestId("grid")).toBeInTheDocument();
   });
-
-  it("validates columnLabels object structure", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const columnLabels = {
-      id: "ID",
-      name: "Name",
-      email: "Email",
-      status: "Status",
-    };
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      columnLabels,
-    };
-
-    expect(props.columnLabels).toBeDefined();
-    if (props.columnLabels) {
-      expect(Object.keys(props.columnLabels)).toHaveLength(4);
-      expect(Object.values(props.columnLabels)).toContain("Name");
-    }
+  it("uses consumer cards and actions only on mobile", async () => {
+    grid.mobile = true;
+    const action = vi.fn();
+    render(
+      <DataTable
+        data={data}
+        columnDefs={columnDefs}
+        pagination={pagination}
+        renderMobileCard={(row) => (
+          <button onClick={() => action(row)}>Open {row.name}</button>
+        )}
+      />,
+    );
+    expect(screen.queryByTestId("grid")).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Open Ana" }));
+    expect(action).toHaveBeenCalledWith(data[0]);
   });
-
-  it("validates hiddenColumns array", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      hiddenColumns: ["email", "status"],
-    };
-
-    expect(Array.isArray(props.hiddenColumns)).toBe(true);
-    expect(props.hiddenColumns).toHaveLength(2);
-    expect(props.hiddenColumns).toContain("email");
+  it.each([false, true])(
+    "shows an accessible empty state (mobile %s)",
+    (mobile) => {
+      grid.mobile = mobile;
+      render(
+        <DataTable<(typeof data)[number]>
+          data={[]}
+          columnDefs={columnDefs}
+          pagination={pagination}
+          renderMobileCard={(row) => row.name}
+          noDataTitle="Nothing here"
+          noDataDescription="Change filters"
+          emptyStateStyle={{ padding: 12 }}
+        />,
+      );
+      expect(screen.getByRole("status")).toHaveTextContent("Nothing here");
+      expect(screen.getByRole("status")).toHaveTextContent("Change filters");
+      expect(screen.getByRole("status")).toHaveStyle({ padding: "12px" });
+    },
+  );
+  it("requests pages without mutating controlled pagination", async () => {
+    const onPaginationChange = vi.fn();
+    const { rerender } = render(
+      <DataTable
+        data={data}
+        columnDefs={columnDefs}
+        pagination={pagination}
+        onPaginationChange={onPaginationChange}
+      />,
+    );
+    expect(
+      screen.getByRole("button", { name: "Página anterior" }),
+    ).toBeDisabled();
+    await userEvent.click(
+      screen.getByRole("button", { name: "Página siguiente" }),
+    );
+    expect(onPaginationChange).toHaveBeenCalledWith({
+      currentPage: 2,
+      pageSize: 10,
+    });
+    expect(screen.getByText("1 / 3")).toBeInTheDocument();
+    rerender(
+      <DataTable
+        data={data}
+        columnDefs={columnDefs}
+        pagination={{ ...pagination, current_page: 3 }}
+        onPaginationChange={onPaginationChange}
+      />,
+    );
+    expect(
+      screen.getByRole("button", { name: "Página siguiente" }),
+    ).toBeDisabled();
+    await userEvent.click(
+      screen.getByRole("button", { name: "Página anterior" }),
+    );
+    expect(onPaginationChange).toHaveBeenLastCalledWith({
+      currentPage: 2,
+      pageSize: 10,
+    });
   });
-});
-
-describe("DataTable - Boolean Props", () => {
-  it("accepts useCardLayout boolean", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      useCardLayout: true,
-    };
-
-    expect(typeof props.useCardLayout).toBe("boolean");
-    expect(props.useCardLayout).toBe(true);
+  it("treats an empty pagination range as a single page", () => {
+    render(
+      <DataTable<(typeof data)[number]>
+        data={[]}
+        columnDefs={columnDefs}
+        pagination={{ ...pagination, last_page: 0 }}
+      />,
+    );
+    expect(screen.getByText("1 / 1")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Página siguiente" }),
+    ).toBeDisabled();
   });
-
-  it("accepts noDataTitle and noDataDescription", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      noDataTitle: "Sin datos",
-      noDataDescription: "No hay registros disponibles",
-    };
-
-    expect(typeof props.noDataTitle).toBe("string");
-    expect(props.noDataTitle).toBe("Sin datos");
-    expect(props.noDataDescription).toBe("No hay registros disponibles");
-  });
-
-  it("accepts edit, delete and info callbacks", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const mockEdit = vi.fn();
-    const mockDelete = vi.fn();
-    const mockInfo = vi.fn();
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      onEdit: mockEdit,
-      onDelete: mockDelete,
-      onInfo: mockInfo,
-    };
-
-    expect(typeof props.onEdit).toBe("function");
-    expect(typeof props.onDelete).toBe("function");
-    expect(typeof props.onInfo).toBe("function");
-  });
-
-  it("defaults to undefined when optional props omitted", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-    };
-
-    expect(props.useCardLayout).toBeUndefined();
-    expect(props.onEdit).toBeUndefined();
-    expect(props.onDelete).toBeUndefined();
-  });
-});
-
-describe("DataTable - Callback Props", () => {
-  it("accepts onPaginationChange callback", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const mockCallback = vi.fn();
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      onPaginationChange: mockCallback,
-    };
-
-    expect(props.onPaginationChange).toBeDefined();
-    expect(typeof props.onPaginationChange).toBe("function");
-  });
-
-  it("accepts multiple action callbacks together", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const mockEdit = vi.fn();
-    const mockDelete = vi.fn();
-    const mockInfo = vi.fn();
-    const mockPaginationChange = vi.fn();
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      onEdit: mockEdit,
-      onDelete: mockDelete,
-      onInfo: mockInfo,
-      onPaginationChange: mockPaginationChange,
-    };
-
-    expect(props.onEdit).toBeDefined();
-    expect(props.onDelete).toBeDefined();
-    expect(props.onInfo).toBeDefined();
-    expect(props.onPaginationChange).toBeDefined();
-  });
-});
-
-describe("DataTable - Edge Cases", () => {
-  it("handles very large pagination numbers", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const pagination: PaginationInfo = {
-      current_page: 9999,
-      per_page: 5000,
-      last_page: 10000,
-      total: 50000000,
-    };
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination,
-    };
-
-    expect(props.pagination.current_page).toBe(9999);
-    expect(props.pagination.per_page).toBe(5000);
-  });
-
-  it("handles single row in data", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Only One",
-        email: "one@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-    };
-
-    expect(props.data).toHaveLength(1);
-    expect(props.data[0].id).toBe(1);
-  });
-
-  it("handles null/undefined in optional columns list", () => {
-    const testData: TestRowData[] = [
-      {
-        id: 1,
-        name: "Test",
-        email: "test@example.com",
-        status: "Active",
-      },
-    ];
-
-    const props: DataTableProps<TestRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-      hiddenColumns: [],
-    };
-
-    expect(props.hiddenColumns).toHaveLength(0);
-  });
-
-  it("handles mixed data types in single column", () => {
-    interface MixedRowData {
-      id: number;
-      value: string;
-      metadata?: string;
-    }
-
-    const testData: MixedRowData[] = [
-      {
-        id: 1,
-        value: "text",
-        metadata: "extra",
-      },
-      {
-        id: 2,
-        value: "123",
-        metadata: "123",
-      },
-      {
-        id: 3,
-        value: "true",
-      },
-    ];
-
-    const props: DataTableProps<MixedRowData> = {
-      data: testData,
-      pagination: defaultPagination,
-    };
-
-    expect(props.data).toHaveLength(3);
-    expect(props.data[2].metadata).toBeUndefined();
+  it("applies root and pagination styles independently", () => {
+    const { container } = render(
+      <DataTable
+        data={data}
+        columnDefs={columnDefs}
+        pagination={pagination}
+        className="custom"
+        style={{ gap: 12 }}
+        paginationStyle={{ opacity: 0.8 }}
+      />,
+    );
+    expect(container.querySelector(".data-table")).toHaveClass("custom");
+    expect(container.querySelector(".data-table")).toHaveStyle({ gap: "12px" });
+    expect(container.querySelector(".data-table__pagination")).toHaveStyle({
+      opacity: 0.8,
+    });
   });
 });

@@ -5,6 +5,8 @@ export type CardProps = Omit<
   ComponentPropsWithRef<"div">,
   "style" | "title" | "color" | "onClick"
 > & {
+  /** Surface treatment; auto uses the current system recipe. */
+  variant?: "auto" | "filled" | "outlined" | "elevated";
   style?: CSSProperties | null;
 };
 

@@ -66,10 +66,14 @@ describe("Button", () => {
   });
 
   describe("loading state", () => {
-    it("shows loader when loading is true", () => {
+    it("shows loader and hides the reserved label when loading is true", () => {
       renderButton({ loading: true });
       const button = screen.getByRole("button");
-      expect(button).not.toHaveTextContent("Test Button");
+      expect(button.querySelector(".button-loader")).toBeInTheDocument();
+      expect(button.querySelector(".button-label")).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      );
     });
 
     it("shows label when loading is false", () => {
@@ -132,7 +136,9 @@ describe("Button", () => {
 describe("Button accessibility", () => {
   it("preserves its accessible name while loading and restores the label afterward", () => {
     const { rerender } = render(<Button label="Save changes" loading />);
-    expect(screen.getByRole("button", { name: "Save changes" })).toHaveAttribute("aria-busy", "true");
+    expect(
+      screen.getByRole("button", { name: "Save changes" }),
+    ).toHaveAttribute("aria-busy", "true");
     expect(screen.getByRole("button")).toBeDisabled();
 
     rerender(<Button label="Save changes" />);
@@ -152,8 +158,14 @@ describe("Button Storybook design systems", () => {
       </ThemeProvider>,
     );
     const button = screen.getByRole("button", { name: "Click Me" });
-    expect(button.closest("[data-design-system]")).toHaveAttribute("data-design-system", "neus");
-    expect(button.closest("[data-color-scheme]")).toHaveAttribute("data-color-scheme", "dark");
+    expect(button.closest("[data-design-system]")).toHaveAttribute(
+      "data-design-system",
+      "neus",
+    );
+    expect(button.closest("[data-color-scheme]")).toHaveAttribute(
+      "data-color-scheme",
+      "dark",
+    );
     expect(button).not.toHaveAttribute("designSystem");
 
     rerender(
@@ -161,59 +173,103 @@ describe("Button Storybook design systems", () => {
         <ButtonStory />
       </ThemeProvider>,
     );
-    expect(button.closest("[data-design-system]")).toHaveAttribute("data-design-system", "neus");
-    expect(button.closest("[data-color-scheme]")).toHaveAttribute("data-color-scheme", "light");
+    expect(button.closest("[data-design-system]")).toHaveAttribute(
+      "data-design-system",
+      "neus",
+    );
+    expect(button.closest("[data-color-scheme]")).toHaveAttribute(
+      "data-color-scheme",
+      "light",
+    );
   });
 
-  it.each(DESIGN_SYSTEMS)("previews $name independently of the toolbar selection", ({ id }) => {
-    render(
-      <ThemeProvider scope="local" designSystem="neus" colorScheme="dark">
-        <ButtonStory designSystem={id} label="Continue" />
-      </ThemeProvider>,
-    );
-    const button = screen.getByRole("button", { name: "Continue" });
-    expect(button.closest("[data-design-system]")).toHaveAttribute("data-design-system", id);
-    expect(button.closest("[data-color-scheme]")).toHaveAttribute("data-color-scheme", "dark");
-  });
+  it.each(DESIGN_SYSTEMS)(
+    "previews $name independently of the toolbar selection",
+    ({ id }) => {
+      render(
+        <ThemeProvider scope="local" designSystem="neus" colorScheme="dark">
+          <ButtonStory designSystem={id} label="Continue" />
+        </ThemeProvider>,
+      );
+      const button = screen.getByRole("button", { name: "Continue" });
+      expect(button.closest("[data-design-system]")).toHaveAttribute(
+        "data-design-system",
+        id,
+      );
+      expect(button.closest("[data-color-scheme]")).toHaveAttribute(
+        "data-color-scheme",
+        "dark",
+      );
+    },
+  );
 
   it("applies the controls and click handler to the selected system", () => {
     const onClick = vi.fn();
     render(
       <ThemeProvider scope="local" colorScheme="dark">
-        <ButtonStory designSystem="carbon" label="Save" variant="outlined" color="error"
-          size="large" fullWidth onClick={onClick} />
+        <ButtonStory
+          designSystem="carbon"
+          label="Save"
+          variant="outlined"
+          color="error"
+          size="large"
+          fullWidth
+          onClick={onClick}
+        />
       </ThemeProvider>,
     );
     const button = screen.getByRole("button", { name: "Save" });
-    expect(button).toHaveClass("button--outlined", "button--error", "button--large", "button--full-width");
-    expect(button.closest("[data-design-system]")).toHaveAttribute("data-design-system", "carbon");
-    expect(button.closest("[data-color-scheme]")).toHaveAttribute("data-color-scheme", "dark");
+    expect(button).toHaveClass(
+      "button--outlined",
+      "button--error",
+      "button--large",
+      "button--full-width",
+    );
+    expect(button.closest("[data-design-system]")).toHaveAttribute(
+      "data-design-system",
+      "carbon",
+    );
+    expect(button.closest("[data-color-scheme]")).toHaveAttribute(
+      "data-color-scheme",
+      "dark",
+    );
     fireEvent.click(button);
     expect(onClick).toHaveBeenCalledOnce();
   });
 
-  it.each(["loading", "disabled"] as const)("applies the %s control to the preview", (state) => {
-    const onClick = vi.fn();
-    render(<ButtonStory label="Save" {...{ [state]: true }} onClick={onClick} />);
-    const button = screen.getByRole("button", { name: "Save" });
-    expect(button).toBeDisabled();
-    if (state === "loading") expect(button).toHaveAttribute("aria-busy", "true");
-    fireEvent.click(button);
-    expect(onClick).not.toHaveBeenCalled();
-  });
+  it.each(["loading", "disabled"] as const)(
+    "applies the %s control to the preview",
+    (state) => {
+      const onClick = vi.fn();
+      render(
+        <ButtonStory label="Save" {...{ [state]: true }} onClick={onClick} />,
+      );
+      const button = screen.getByRole("button", { name: "Save" });
+      expect(button).toBeDisabled();
+      if (state === "loading")
+        expect(button).toHaveAttribute("aria-busy", "true");
+      fireEvent.click(button);
+      expect(onClick).not.toHaveBeenCalled();
+    },
+  );
 
   it("switches systems without changing the document theme", () => {
-    const previousSystem = document.documentElement.getAttribute("data-design-system");
+    const previousSystem =
+      document.documentElement.getAttribute("data-design-system");
     const previousStyles = document.documentElement.style.cssText;
     const { rerender } = render(<ButtonStory />);
-    expect(screen.getByRole("button").closest("[data-design-system]"))
-      .toHaveAttribute("data-design-system", "neus");
+    expect(
+      screen.getByRole("button").closest("[data-design-system]"),
+    ).toHaveAttribute("data-design-system", "neus");
 
     rerender(<ButtonStory designSystem="carbon" />);
     expect(screen.getAllByRole("button")).toHaveLength(1);
-    expect(screen.getByRole("button").closest("[data-design-system]"))
-      .toHaveAttribute("data-design-system", "carbon");
-    expect(document.documentElement.getAttribute("data-design-system")).toBe(previousSystem);
+    expect(
+      screen.getByRole("button").closest("[data-design-system]"),
+    ).toHaveAttribute("data-design-system", "carbon");
+    expect(document.documentElement.getAttribute("data-design-system")).toBe(
+      previousSystem,
+    );
     expect(document.documentElement.style.cssText).toBe(previousStyles);
   });
 });
@@ -240,14 +296,13 @@ describe("getButtonClasses", () => {
     expect(result).not.toContain("button--full-width");
   });
 
-  it.each([
-    ["small"],
-    ["medium"],
-    ["large"],
-  ])("includes size class button--%s", (size) => {
-    const result = getButtonClasses("solid", "primary", size, false);
-    expect(result).toContain(`button--${size}`);
-  });
+  it.each([["small"], ["medium"], ["large"]])(
+    "includes size class button--%s",
+    (size) => {
+      const result = getButtonClasses("solid", "primary", size, false);
+      expect(result).toContain(`button--${size}`);
+    },
+  );
 
   it.each([
     ["solid", "primary"],
@@ -272,4 +327,21 @@ describe("getButtonClasses", () => {
     const result = getButtonClasses("solid", "primary", "medium", false);
     expect(result).not.toMatch(/\s{2,}/);
   });
+});
+
+describe("shared action hierarchy", () => {
+  it.each(["secondary", "tonal", "elevated"] as const)(
+    "supports %s including loading semantics",
+    (variant) => {
+      const { rerender } = render(
+        <Button label="Save changes" variant={variant} />,
+      );
+      const button = screen.getByRole("button", { name: "Save changes" });
+      expect(button).toHaveClass(`button--${variant}`);
+      rerender(<Button label="Save changes" variant={variant} loading />);
+      expect(button).toBeDisabled();
+      expect(button).toHaveAttribute("aria-busy", "true");
+      expect(button).toHaveAccessibleName("Save changes");
+    },
+  );
 });

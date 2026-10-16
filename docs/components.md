@@ -11,7 +11,6 @@ are available in
 
 | Component | Description |
 | --- | --- |
-| Actions | Action group for edit, delete, and info flows |
 | Badge | Small status indicator with semantic color variants |
 | Button | Button with variants, sizes (small/medium/large), colors, loading, and disabled states |
 | Calendar | Date picker for single, range, or multiple selection |
@@ -59,7 +58,7 @@ documentation.
 
 ### Design-system selection
 
-The single **Components / Button / Button** story includes a `designSystem`
+The single **Base / Button / Button** story includes a `designSystem`
 control for **Neus UI** (default), **Apple**, **Carbon**, **Material**,
 **Neobrutalism**, and **Vercel**. It previews one button in the selected system,
 independently of the toolbar's design-system selection.
@@ -106,3 +105,5 @@ import { Button, Input, Checkbox, Modal } from "neus-ui";
 ```tsx
 import { AppTemplate, FormTemplate } from "neus-ui";
 ```
+
+See the [component migration guide](./refactor-migration.md) for the six-system presentation APIs and voluntary DataTable actions.
