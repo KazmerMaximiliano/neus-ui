@@ -25,4 +25,9 @@ interface; `mapOptions` configures Google cartography.
 ```
 
 Invalid configuration is reported before calling the SDK. Later selections supersede
-pending reverse-geocoding requests. See [migration and validation](../refactor-migration.md).
+pending reverse-geocoding requests. Coordinate strings must contain two finite,
+bounded numbers. Changes to initial coordinates or address restart the map's
+initial state; readonly changes preserve the current marker.
+
+Storybook renders the configuration state without a credential. To use the live
+map, provide a valid Google Maps API key with the required Google services enabled.

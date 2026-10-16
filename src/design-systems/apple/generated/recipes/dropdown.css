@@ -1,0 +1,13 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --dropdown-padding: 4px 8px 4px 4px;
+  --dropdown-radius: 10px;
+  --dropdown-border-color: var(--color-border-subtle);
+  --dropdown-avatar-size: 32px;
+  --dropdown-caret-size: 16px;
+  --dropdown-caret-stroke: 2;
+  --dropdown-caret-color: var(--color-text-secondary);
+  --dropdown-name-color: var(--color-text-primary);
+  --dropdown-name-weight: 600;
+  --dropdown-name-transform: none;
+}

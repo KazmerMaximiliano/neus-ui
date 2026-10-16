@@ -1,9 +1,0 @@
-/* Geist links use blue-900 rather than the neutral action color. */
-[data-design-system="vercel"] {
-  --link-color: #0068d6;
-  --link-underline-offset: 0.15em;
-}
-
-[data-design-system="vercel"][data-color-scheme="dark"] {
-  --link-color: #52a8ff;
-}

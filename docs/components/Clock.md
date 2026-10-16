@@ -1,14 +1,21 @@
 # Clock
 
+```tsx
+<Clock value={time} onChange={setTime} format="12h" />
+```
 
-## Presentation contract (2026-10-15)
+`value` contains `hours` and `minutes`. The AM/PM state follows controlled values;
+the dial supports keyboard interaction. Use `disabled` or `readonly` to prevent
+time changes.
+
+## Presentation
 
 | API | Behavior |
 | --- | --- |
 | `segmentStyle / periodStyle / numberStyle / indicatorStyle` | independent CSSProperties overrides |
 
-Uses all six recipes through ThemeProvider in light and dark mode. See the
-[migration guide](../refactor-migration.md) for examples and breaking changes.
+Uses all six recipes through ThemeProvider in light and dark mode. See
+[Theming](../theming.md) for provider setup and scoped customization.
 
 In Storybook, `designSystem` follows the same pattern as Button: a select with
 the six design systems, defaulting to **Neus**, applied through a local

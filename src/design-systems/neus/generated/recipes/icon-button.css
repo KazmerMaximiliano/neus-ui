@@ -1,0 +1,28 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --icon-button-radius: 50%;
+  --icon-button-size-small: 40px;
+  --icon-button-size-medium: 54px;
+  --icon-button-size-large: 68px;
+  --icon-button-icon-size-small: 16px;
+  --icon-button-icon-size-medium: 20px;
+  --icon-button-icon-size-large: 24px;
+  --icon-button-icon-stroke: 2;
+  --icon-button-border-width: 0px;
+  --icon-button-border-color: transparent;
+  --icon-button-outlined-border-width: 1px;
+  --icon-button-shadow: none;
+  --icon-button-shadow-hover: none;
+  --icon-button-shadow-active: none;
+  --icon-button-active-transform: none;
+  --icon-button-focus-width: 2px;
+  --icon-button-focus-color: var(--color-focus);
+  --icon-button-focus-offset: 3px;
+  --icon-button-focus-inner-shadow: none;
+  --icon-button-disabled-opacity: 0.6;
+  --icon-button-disabled-background: var(--color-gray-400);
+  --icon-button-disabled-color: var(--color-white);
+  --icon-button-disabled-shadow: none;
+  --icon-button-transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}

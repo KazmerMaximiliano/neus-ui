@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check generated design systems
+        run: pnpm design:check
+
       - name: Build library
         run: pnpm run build
 

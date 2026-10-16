@@ -114,7 +114,8 @@ the transparent NEUS header; closing restores its visibility and focus.
 
 ## Token contract
 
-The complete defaults live in `src/design-systems/neus/sidebar.css`. They reset
+The editable defaults live in `x-neus.recipes.sidebar` in the
+[Neus design document](../../src/design-systems/neus/DESIGN.md). They reset
 at `:root` and every `[data-design-system]`. All other recipes override variables
 only. Apple uses soft corners, Carbon square options and separators, Material
 rounded selection and elevation, Neobrutalism strong borders and hard shadows,
@@ -167,10 +168,10 @@ styles. Closing, unmounting or leaving mobile releases the lock. Returning to
 mobile starts closed; leaving tablet resets pinned expansion. Motion is disabled
 when the user prefers reduced motion. Each instance has unique control IDs.
 
-## AppTemplate and migration
+## AppTemplate integration
 
-AppTemplate already supplies Sidebar and reserves space using its width tokens.
-Its `routes`, `menu` and `children` API is preserved. It delegates mobile opening,
+AppTemplate supplies Sidebar and reserves space using its width tokens.
+Use `routes`, `menu` and `children` to compose the layout. It delegates mobile opening,
 overlay and closing to Sidebar and follows tablet hover/focus/pinned expansion.
 
 For standalone Sidebar use, reserve page space yourself: zero on mobile,
@@ -178,10 +179,9 @@ For standalone Sidebar use, reserve page space yourself: zero on mobile,
 AppTemplate, put width overrides on its enclosing theme scope so both components
 inherit the same values.
 
-Existing `title`, `items`, callbacks and `.sidebar__*` classes remain available.
-Navigation items now render as buttons, so application selectors targeting `div`
-must be updated. Remove external mobile hamburgers, overlays and display toggles:
-Sidebar now owns those behaviors. Opening and expansion are internal states.
+Use `title`, `items` and callbacks to configure navigation, and `.sidebar__*`
+classes for styling. Navigation items render as buttons. Sidebar owns its mobile
+menu trigger, overlay and display toggles; opening and expansion are internal states.
 
 Storybook provides one fullscreen story with local design selection, per-part
 controls and solid/gradient/image backgrounds. The toolbar selects light/dark;

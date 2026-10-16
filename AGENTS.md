@@ -115,7 +115,7 @@ ComponentName/
 ```
 
 Retain descriptive filenames. Public subcomponents apply the same rule within
-their own directories. Shared browser suites in `src/design-systems/` and tests of
+their own directories. Shared browser suites in `src/design-systems/tests/` and tests of
 standalone utilities are separate from this component layout rule.
 
 ### Subcomponent structure
@@ -212,6 +212,9 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | `pnpm dev`       | Start Vite dev server        | NO       |
 | `pnpm storybook` | Start Storybook on port 6006 | NO       |
 | `pnpm preview`   | Preview production build     | NO       |
+| `pnpm design:generate` | Generate palettes and CSS from DESIGN.md | YES |
+| `pnpm design:check` | Validate documents and check generated artifacts without writing | YES |
+| `pnpm design:watch` | Regenerate when a DESIGN.md changes | NO |
 
 ### Build Commands
 
@@ -415,7 +418,7 @@ describe("ComponentName", () => {
 | Edge cases    | Required    | disabled, loading, error states |
 | Line coverage | 70% minimum | For each component              |
 
-### Test Commands - AI REFERENCE
+### Test Commands
 
 | INTENT                | COMMAND                              | WATCH_MODE |
 | --------------------- | ------------------------------------ | ---------- |
@@ -619,33 +622,41 @@ For agents needing additional information:
 | Component index?            | docs/components.md                | /docs/components.md          |
 | Component props + examples? | docs/components/ComponentName.md  | /docs/components/            |
 | Design system / theming?    | docs/design-system.md, docs/theming.md | /docs/                    |
-| Visual identity / refactor target? | DESIGN.md per system, indexed in docs/design-systems.md | src/design-systems/<id>/DESIGN.md |
+| Visual identity / token source? | DESIGN.md per system, indexed in docs/design-systems.md | src/design-systems/<id>/DESIGN.md |
 | Type definitions?           | Component.types.ts                 | src/components/ComponentName/ |
 | Test examples?              | ComponentName.test.tsx; grouped tests when multiple | src/components/ComponentName/ or src/components/ComponentName/tests/ |
 | Styling reference?          | Component.styles.css               | src/components/ComponentName/ |
 
-Project documentation lives in `docs/` as Markdown, with explicit exceptions for
-the root component refactor guide and `src/design-systems/<id>/DESIGN.md`. The six
-design specifications live beside their CSS recipes so that visual intent and
-implementation can be reviewed together. Read the relevant specification before
-adding or adapting component recipes. Follow its target rules, verify its current
-implementation against code, and treat refactor gaps as future work rather than
-implemented behavior. Update the document when a refactor closes or changes a gap.
-CSS and TypeScript remain the source of implemented token values; do not duplicate
-them into YAML or infer API changes from design targets. Keep external source links
-and consultation dates in each specification, distinguishing local decisions from
-official guidance. Use relative links with
+Project guides live in `docs/` as Markdown; the root `README.md` provides the
+overview, `AGENTS.md` defines repository instructions, and visual specifications
+live in `src/design-systems/<id>/DESIGN.md`. The six design specifications are the
+editable source for tokens, action palettes and all
+component recipes. Follow Google's DESIGN.md alpha format: standard YAML token
+groups, the validated `x-neus` extension, and the eight ordered prose sections.
+Describe visual identity and usage; keep implementation reports and pending-work
+lists out of these documents. Read the relevant specification before adapting a
+recipe. Edit its YAML and run `pnpm design:generate`; never hand-edit files under
+`src/design-systems/<id>/generated/`. Commit generated artifacts with their source.
+Run `pnpm design:check` to validate without writing. Neus owns shared foundations
+and complete per-scope resets; sibling systems override those defaults. Preserve
+CSS variable names, runtime var() dependencies, scope isolation and public APIs.
+The generator and its tests live in `src/design-systems/tooling/`; browser suites and
+fixtures live in `src/design-systems/tests/`. See the architecture guide for the
+extension schema, generation commands and official-linter warning policy.
+Keep external source links and consultation dates in each specification,
+distinguishing local decisions from official guidance. Use relative links with
 explicit `.md` extensions and keep `docs/README.md` up to date when adding guides.
 Documentation can be read directly in the repository or a Markdown editor;
 it does not require a development server or build step. Storybook provides the
 interactive component catalog separately.
 
-## Refactor implementation update — 2026-10-15
+## CURRENT PUBLIC API CONTRACTS
 
-All public families and both templates have six scoped recipes. Button adds
-secondary/tonal/elevated; Card adds auto/filled/outlined/elevated. Input and picker
-fields share variant, size and label-placement controls. Calendar is discriminated
+All public families and both templates have six scoped recipes. Button supports
+solid/secondary/tonal/elevated/outlined/text; Card supports
+auto/filled/outlined/elevated. Input and picker fields share variant, size and
+label-placement controls. Calendar is discriminated
 by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
-renderMobileCard; Actions is removed and documented as consumer composition in
-Storybook. See [migration](./docs/refactor-migration.md). Preserve these final APIs
-and do not reintroduce removed adapters.
+renderMobileCard. DataTable actions are composed by consumers with buttons or menus,
+as demonstrated in Storybook. See the [component reference](./docs/components.md)
+for the current APIs and usage examples.

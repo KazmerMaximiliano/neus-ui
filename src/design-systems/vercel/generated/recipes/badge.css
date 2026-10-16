@@ -1,0 +1,10 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --badge-font-size: 12px;
+  --badge-font-weight: 500;
+  --badge-letter-spacing: normal;
+  --badge-text-transform: none;
+  --badge-line-height: 16px;
+  --badge-padding: 2px 10px;
+  --badge-dot-font-size: 12px;
+}

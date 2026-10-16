@@ -36,27 +36,90 @@ component-specific recipes. Actions is documented consumer composition. See the 
 per-part customization.
 `DESIGN_SYSTEMS` and `DesignSystemId` are public exports for application selectors.
 
-## Design intent and implementation
+## Editing a design system
 
-Each system has a `DESIGN.md` beside its CSS recipes, following the eight prose
-sections of [Google's DESIGN.md format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
-(alpha; consulted 2026-10-14). YAML is intentionally omitted: CSS and TypeScript
-remain the source of implemented values. The documents explain how to apply those
-values and what future adaptations should achieve.
+Each `DESIGN.md` is the editable source for its system's tokens, action palettes
+and component recipes. It follows [Google's DESIGN.md format](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
+(alpha; consulted 2026-10-15): YAML tokens followed by Overview, Colors,
+Typography, Layout, Elevation & Depth, Shapes, Components, and Do's and Don'ts.
+The prose explains visual identity and usage; component guides document APIs.
 
-- **Target rules** define visual direction. External systems aim toward their
-  primary references; local web mappings are identified explicitly.
-- **Current implementation** describes the existing recipes and inherited defaults.
-- **Refactor gaps** identify differences and missing roles, anatomy, or behavior.
-  They are future work, not implemented capabilities or automatic API changes.
+Edit a document, run `pnpm design:generate`, and commit both the document and its
+generated files. `pnpm design:check` validates all six documents and checks the
+committed outputs without writing. It fails on missing, edited or stale artifacts.
+Development and build scripts generate before starting. For continuous editing,
+run `pnpm design:watch` in another terminal alongside Vite or Storybook. The watcher
+reports invalid documents, retains the last valid artifacts and recovers on the
+next valid edit, including an editor's atomic replacement of `DESIGN.md`.
+It polls those six paths every 250ms, avoiding native watcher limits and
+supporting volumes whose filesystem events are unreliable.
 
-Read the relevant specification before adapting a component, then inspect its
-recipe, shared defaults, and actual states. Add any missing token to the complete
-Neus reset contract before overriding it in another system. Update the current
-implementation and gaps when a refactor lands; update source links and consultation
-dates when revisiting external guidance. A source update does not silently change
-the chosen target: Apple uses sober surfaces without requiring Liquid Glass, and
-Material uses M3 base rather than Expressive.
+Read the relevant specification before adapting a component. Add new tokens to
+the complete Neus reset contract before overriding them in another system. Keep
+source links and consultation dates with the visual guidance. Apple uses sober
+opaque surfaces; Material follows the M3 base vocabulary.
+
+### YAML and the Neus extension
+
+Standard groups are `colors`, `typography`, `rounded`, `spacing` and `components`.
+Names without a mode suffix describe light mode; dark color names end in `-dark`.
+References use `{path.to.token}`, including scalar typography properties such as
+`{typography.body-md.fontSize}`. Standard groups also describe resolved inherited
+roles, while the Neus extension explicitly controls which values override defaults.
+
+`x-neus` is a local extension to Google's format, validated by our generator:
+
+| Field | Meaning |
+| --- | --- |
+| `id` | The directory's typed system identifier |
+| `palette.light`, `palette.dark` | `primary` and `onPrimary`, plus optional hover, active, focus, success, error and info colors |
+| `foundations` | Shared variable defaults; only the Neus document owns these |
+| `tokens` | Semantic colors, typography, elevation and other system-wide variables |
+| `recipes.<family>` | Component-specific CSS variable declarations |
+
+Foundations, tokens and recipes contain `base`, `light` and/or `dark` mappings
+from existing `--variable-names` to scalar values or token references. All twenty
+recipe families must be present; an empty mapping intentionally inherits Neus.
+Palettes resolve to six-digit hex colors for the existing runtime color utilities.
+
+```yaml
+x-neus:
+  id: apple
+  palette:
+    light:
+      primary: "{colors.primary}"
+      onPrimary: "{colors.on-primary}"
+    dark:
+      primary: "{colors.primary-dark}"
+      onPrimary: "{colors.on-primary-dark}"
+  tokens:
+    base:
+      --font-body: "{typography.body-md.fontFamily}"
+  recipes:
+    button:
+      base:
+        --button-radius: "{rounded.button}"
+    # The document also supplies the remaining recipe families.
+```
+
+Document references are resolved during generation. CSS `var()`, `calc()` and
+`color-mix()` expressions retain their runtime dependencies, including consumer
+overrides. Do not replace a dynamic variable with its current computed value.
+Neus emits complete resets on `:root` and `[data-design-system]`; other systems
+emit scoped overrides, with mode selectors retaining their original specificity.
+General elevation roles belong in `tokens`; recipes reference those roles.
+
+The generator first validates all documents in memory, including duplicate keys,
+types, references, cycles, IDs, modes and extension keys. It then writes changed
+artifacts and removes obsolete files inside its owned `generated/` directories.
+Identical output is left untouched. Generated files contain no timestamps.
+
+Google's official linter runs during generation and checks. Its errors fail the
+command. Warnings remain visible: `orphaned-tokens` does not see consumers inside
+`x-neus`, and `token-like-ignored` identifies that local extension. Review a full
+report with `pnpm exec designmd lint src/design-systems/<id>/DESIGN.md`; keep
+actual contrast checks in the browser suites rather than changing visual values
+to silence those extension-related warnings.
 
 `DESIGN_SYSTEMS.source` contains repository-relative paths to these documents,
 not application URLs or package subpath exports. The documents are available in
@@ -68,28 +131,32 @@ describe shared mechanics; they do not replace each system's visual specificatio
 
 ```text
 src/design-systems/
-├── design-systems.types.ts   # IDs and metadata contracts
-├── registry.ts              # Names, references, and component coverage
-├── palettes.ts              # Light/dark action colors for CSS and useColors
-├── design-systems.css       # Ordered CSS entry point
-├── neus/
-│   ├── DESIGN.md             # Design intent, current implementation, and gaps
-│   ├── tokens.css           # Default semantic tokens
-│   ├── button.css           # Complete Button token contract
-│   ├── card.css             # Complete Card token contract
-│   ├── input.css            # Complete Input token contract
-│   └── sidebar.css          # Complete Sidebar token contract
+├── index.ts                 # Public registry and type exports
+├── design-systems.types.ts  # IDs and metadata contracts
+├── design-systems.consts.ts # Typed metadata/palette aggregation and public families
+├── design-systems.css       # Foundations, then six system entry points
+├── tooling/                 # Node-only generator, validation, watcher and tests
+├── tests/                   # Shared browser suites and helpers
+│   └── fixtures/            # Test-only CSS
 └── <system>/
-    ├── DESIGN.md             # Reference-based target and local adaptation decisions
-    ├── tokens.css           # Shared visual tokens
-    ├── button.css           # Button token overrides
-    ├── card.css             # Card family token overrides
-    ├── input.css            # Input token overrides
-    └── sidebar.css          # Sidebar token overrides
+    ├── DESIGN.md            # Editable tokens and visual guidance
+    └── generated/           # Versioned output; never edit manually
+        ├── index.css
+        ├── tokens.css
+        ├── <system>.consts.ts
+        ├── foundations.css  # Neus only
+        └── recipes/
+            ├── button.css
+            └── ...
 
+src/css/variables.css        # Compatibility import for generated Neus foundations
 src/providers/ThemeProvider/ # Scope, palette resolution, context, and cleanup
 src/components/Button/Button.stories.tsx # Single preview with a design-system selector
 ```
+
+The `tooling/` directory is checked by `tsconfig.node.json` and tested in the
+`design-system-generator` Node project. Application, component-test and library
+TypeScript configurations exclude it; its files are not emitted into `dist/`.
 
 `ThemeProvider` owns theme selection. It resolves one action palette for both
 the context and CSS, adds `data-design-system` and `data-color-scheme`, and applies
@@ -117,8 +184,7 @@ Card, CardHeader, CardMedia, CardContent and CardFooter each accept `className`
 and `style?: CSSProperties | null`, defaulting to null. Card is a passive container
 with no padding; Header/Content use 16px, Footer uses 8px with an 8px gap, and Media
 reaches the inside border. Every Card token resets at each provider boundary.
-See the [Card guide](./components/Card.md) for the public tokens, examples and
-breaking migration from the previous slot/state props.
+See the [Card guide](./components/Card.md) for public tokens, composition and examples.
 
 Card recipes preserve the original Neus surface and header divider, with geometry
 adaptations for all other systems. Their missing layout details use
@@ -149,29 +215,26 @@ Sidebar keeps its mobile dialog inside the provider scope, preserving inherited 
 ## Adding a component
 
 1. Read each relevant `DESIGN.md`. Keep behavior and props independent of the
-   selected system; distinguish visual gaps from changes requiring shared anatomy
-   or a separately designed public API.
+   selected system.
 2. Replace visual constants in its stylesheet with component-prefixed tokens.
-3. Define every token's Neus default in `neus/<component>.css`, resetting it on
-   both `:root` and `[data-design-system]`.
-4. Add optional overrides in each system's `<component>.css` and import those
-   files in `design-systems.css`, after the Neus contract.
-5. Update the registry's coverage metadata. Integrate a design-system selector into
+3. Define every token's Neus default in `x-neus.recipes.<family>.base`. Add a new
+   family to the generator's recipe list when needed.
+4. Add overrides to each system's document and run `pnpm design:generate`.
+5. Update the aggregator's family metadata. Integrate a design-system selector into
    the component's existing story using a local provider scope. Keep
    story argument types in the component's `.types.ts` file.
 6. Test behavior in the component's unit tests and computed styles, nested scope
    resets, and light/dark states in the browser project.
-7. Update each affected specification's current implementation and remaining gaps.
+7. Update the visual guidance and component usage documentation.
 
 ## Adding a system
 
-1. Write its `DESIGN.md` using the same eight sections, source/date attribution,
-   and target/current/gaps distinction. Add its typed ID, registry metadata with a
-   repository-relative document path, and light/dark action palette.
-2. Create its `tokens.css` and component recipe files. Use a scope selector such
-   as `[data-design-system="example"]`; avoid descendant overrides and `!important`.
-3. Import its CSS after the Neus baseline and list only implemented adaptations
-   in the registry. Missing recipes intentionally use the Neus token defaults.
+1. Write its `DESIGN.md` with standard tokens, the eight prose sections,
+   source/date attribution, and its `x-neus` palette and variable mappings.
+2. Add the typed ID and generator system ID, then generate its artifacts.
+   Keep recipes limited to variable overrides; inherit the complete Neus baseline.
+3. Add its generated metadata and palette to the aggregator, and import its CSS
+   entry after Neus in `design-systems.css`.
 4. Add browser cases for its palettes and distinctive geometry. The Storybook
    toolbar and Button story's selector populate from the registry automatically.
 
@@ -189,6 +252,6 @@ On the server, local scopes include their attributes and palette variables in
 the markup. Global providers apply document variables when mounted in the client.
 
 
-All public families and both templates now have scoped recipes. See the
-[migration and validation guide](./refactor-migration.md) for current public contracts,
-including shared presentations and the AG Grid bridge.
+All public families and both templates have scoped recipes. See the
+[component reference](./components.md) for public APIs and usage examples,
+including shared presentations and DataTable customization.

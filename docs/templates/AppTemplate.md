@@ -26,4 +26,5 @@ tablet rail and mobile drawer; the template follows the same 768/1024px boundari
 ```
 
 Use `--app-template-*` for reusable region sizing and spacing; Sidebar's width tokens
-remain the source of navigation offsets. See [migration](../refactor-migration.md).
+remain the source of navigation offsets. See [Sidebar](../components/Sidebar.md)
+for responsive navigation behavior.

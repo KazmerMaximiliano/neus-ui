@@ -1,0 +1,11 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --card-radius: 12px;
+  --card-border-color: var(--color-border-subtle);
+  --card-shadow: 0 2px 8px var(--color-shadow);
+  --card-header-border-width: 0px;
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --card-shadow: none;
+}

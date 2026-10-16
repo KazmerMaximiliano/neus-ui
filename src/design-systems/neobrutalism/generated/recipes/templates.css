@@ -1,0 +1,6 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --app-template-content-padding: 32px;
+  --form-template-gap: 24px;
+  --form-template-action-padding: 12px;
+}

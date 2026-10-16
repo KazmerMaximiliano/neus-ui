@@ -1,6 +1,0 @@
-[data-design-system="apple"] {
-  --checkbox-radius: 5px;
-  --checkbox-border-width: 1px;
-  --checkbox-border-color: var(--color-text-placeholder);
-  --checkbox-checked-shadow: none;
-}

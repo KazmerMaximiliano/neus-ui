@@ -1,0 +1,9 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --week-calendar-border-width: 3px;
+  --week-calendar-radius: 4px;
+  --week-calendar-padding: 24px;
+  --week-calendar-event-radius: 4px;
+  --week-calendar-shadow: 4px 4px 0 var(--color-text-primary);
+  --week-calendar-border-color: var(--color-text-primary);
+}

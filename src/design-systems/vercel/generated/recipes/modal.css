@@ -1,0 +1,17 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --modal-width: 540px;
+  --modal-radius: 12px;
+  --modal-border-width: 1px;
+  --modal-border-color: var(--color-border-subtle);
+  --modal-shadow: var(--elevation-dialog);
+  --modal-backdrop: rgba(0, 0, 0, 0.3);
+  --modal-divider-width: 0px;
+  --modal-title-size: 24px;
+  --modal-content-padding: 0 24px 24px;
+  --modal-footer-padding: 16px 24px;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --modal-background: var(--color-surface-secondary);
+}

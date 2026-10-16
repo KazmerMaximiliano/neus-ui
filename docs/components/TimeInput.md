@@ -1,14 +1,21 @@
 # TimeInput
 
+```tsx
+<TimeInput label="Start time" name="startTime" variant="outlined" size="medium" />
+```
 
-## Presentation contract (2026-10-15)
+Choose `variant` from auto/filled/outlined, `labelPlacement` from
+auto/external/floating, and `size` from small/medium/large. Use `panelStyle` for
+the popover and `fieldStyle`, `labelStyle`, or `errorStyle` for individual parts.
+
+## Presentation
 
 | API | Behavior |
 | --- | --- |
 | `variant / labelPlacement / size / panelStyle` | shared Input presentation and picker panel styles |
 
-Uses all six recipes through ThemeProvider in light and dark mode. See the
-[migration guide](../refactor-migration.md) for examples and breaking changes.
+Uses all six recipes through ThemeProvider in light and dark mode. See
+[Theming](../theming.md) for provider setup and scoped customization.
 
 With a floating label (Material's default), an empty field hides its placeholder
 at rest to avoid overlapping text. Focusing the field or opening the picker raises

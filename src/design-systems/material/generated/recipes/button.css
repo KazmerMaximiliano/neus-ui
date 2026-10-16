@@ -1,0 +1,22 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --button-radius: 20px;
+  --button-padding-small: 8px 16px;
+  --button-padding-medium: 10px 24px;
+  --button-padding-large: 14px 28px;
+  --button-font-size-medium: 14px;
+  --button-font-size-large: 16px;
+  --button-line-height: 20px;
+  --button-label-weight: 500;
+  --button-label-spacing: 0.1px;
+  --button-label-transform: none;
+  --button-shadow: none;
+  --button-shadow-hover: none;
+  --button-shadow-active: none;
+  --button-loader-gap: 3px;
+  --button-disabled-opacity: 1;
+  --button-disabled-background: color-mix(in srgb, var(--color-text-primary) 12%, var(--color-surface));
+  --button-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, var(--color-surface));
+  --button-elevated-shadow: 0 1px 3px var(--color-shadow);
+  --button-elevated-shadow-hover: 0 2px 6px var(--color-shadow);
+}

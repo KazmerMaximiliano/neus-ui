@@ -1,8 +1,7 @@
 # Neus UI
 
-Neus UI is a production-ready React component library built with TypeScript,
-dynamic theming, co-located tests, Storybook, and an AI-first UI generation
-workflow powered by project skills and the `neus-designer` subagent.
+Neus UI is a production-ready React component library built with TypeScript and
+dynamic theming.
 
 ## Documentation
 
@@ -10,11 +9,8 @@ Project guides are available in [`docs/`](./docs/README.md) as Markdown files:
 
 **[Open the documentation index](./docs/README.md)**
 
-The [component refactor guide](./REFACTOR_GUIDE.md) at the repository root
-documents the Button, Input, Card and Sidebar patterns for design systems and modular customization.
-
-The guides cover installation, theming, components, development, testing, and
-the Neus Design workflow. Read them directly in GitHub or a Markdown editor.
+The guides cover installation, theming, components, development, and testing.
+Read them directly in GitHub or a Markdown editor.
 
 ## Project Overview
 
@@ -23,14 +19,13 @@ typed APIs, CSS variable theming, and ready-made layout templates.
 
 ### What is included
 
-| Area | Details |
-| --- | --- |
-| Components | 30 public components and sections including Button, composable Card and Modal sections, DataTable, Select, Calendar, Sidebar, Stepper, and WeekCalendar |
-| Templates | `AppTemplate` for application shells and `FormTemplate` for validated forms |
-| Theming | Runtime theme updates with `ThemeProvider`, `useTheme`, `useColors`, and CSS variables |
-| Design systems | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel themes; recipes for every public component family and both templates |
-| Testing | Vitest, React Testing Library, Storybook integration, and coverage reporting |
-| AI-first workflow | `neus-designer` orchestrates project intake and invokes Neus UI skills to generate typed `.tsx` UI artifacts |
+| Area           | Details                                                                                                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Components     | 30 public components and sections including Button, composable Card and Modal sections, DataTable, Select, Calendar, Sidebar, Stepper, and WeekCalendar |
+| Templates      | `AppTemplate` for application shells and `FormTemplate` for validated forms                                                                             |
+| Theming        | Runtime theme updates with `ThemeProvider`, `useTheme`, `useColors`, and CSS variables                                                                  |
+| Design systems | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel themes; recipes for every public component family and both templates                  |
+| Testing        | Vitest, React Testing Library, Storybook integration, and coverage reporting                                                                            |
 
 ### Project structure
 
@@ -40,7 +35,7 @@ src/
 ├── templates/         # AppTemplate and FormTemplate
 ├── hooks/             # Shared hooks such as useResponsive
 ├── providers/         # Providers with their own context, types, and hooks
-├── design-systems/    # Shared palettes and per-component CSS tokens
+├── design-systems/    # DESIGN.md sources, generated palettes/recipes and shared tests
 ├── css/               # Global CSS variables and base styles
 ├── utils/             # Utility functions
 └── services/          # Auxiliary services
@@ -70,7 +65,12 @@ import { Button, ThemeProvider } from "neus-ui";
 function App() {
   return (
     <ThemeProvider initialTheme={{ primaryColor: "#3975C2" }}>
-      <Button label="Get started" variant="solid" color="primary" size="medium" />
+      <Button
+        label="Get started"
+        variant="solid"
+        color="primary"
+        size="medium"
+      />
     </ThemeProvider>
   );
 }
@@ -89,8 +89,8 @@ Select a design system at the provider boundary. Neus UI remains the default:
 Nested providers create isolated scopes. Button's `buttonStyle`, `labelStyle`, and
 `loaderStyle` remain available for individual overrides. Card, CardHeader,
 CardMedia, CardContent and CardFooter each accept `className` and nullable `style`.
-The new Card API replaces content slots and state props with children; see the
-[Card composition and migration guide](./docs/components/Card.md). See the
+Card composes its content through children; see the
+[Card composition guide](./docs/components/Card.md). See the
 [design-system architecture guide](docs/design-systems.md) for coverage and how
 to add components or systems.
 
@@ -111,15 +111,13 @@ and [Testing](./docs/testing.md) for browser tests and coverage.
 
 ## Useful links
 
-| Resource | Link |
-| --- | --- |
-| Documentation | [Index](./docs/README.md) |
-| Components and templates | [Component reference](./docs/components.md) |
-| Design specifications | [Six systems: principles, implementation, and refactor targets](./docs/design-systems.md) |
-| AI-first workflow | [Workflow guide](./docs/ai-first.md) |
-| Neus Design | [Detailed reference](./docs/neus-design.md) |
-| Storybook | [Interactive catalog](https://kazmermaximiliano.github.io/neus-ui/storybook/) |
-| Repository | [GitHub](https://github.com/KazmerMaximiliano/neus-ui) |
+| Resource                 | Link                                                                                     |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| Documentation            | [Index](./docs/README.md)                                                                |
+| Components and templates | [Component reference](./docs/components.md)                                              |
+| Design specifications    | [Six systems: visual principles, token sources and generation](./docs/design-systems.md) |
+| Storybook                | [Interactive catalog](https://kazmermaximiliano.github.io/neus-ui/storybook/)            |
+| Repository               | [GitHub](https://github.com/KazmerMaximiliano/neus-ui)                                   |
 
 ## License
 
@@ -127,5 +125,3 @@ Copyright 2026 Maximiliano Kazmer
 
 Licensed under the Apache License, Version 2.0. See [LICENSE](./LICENSE) for
 the full license text.
-
-See the [component migration guide](./docs/refactor-migration.md) for the six-system presentation APIs and voluntary DataTable actions.

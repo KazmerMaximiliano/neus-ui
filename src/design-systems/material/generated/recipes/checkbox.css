@@ -1,0 +1,9 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --checkbox-radius: 2px;
+  --checkbox-border-color: var(--color-text-secondary);
+  --checkbox-hover-border-color: var(--color-text-primary);
+  --checkbox-checked-shadow: none;
+  --checkbox-icon-size: 14px;
+  --checkbox-gap: 12px;
+}

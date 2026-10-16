@@ -1,0 +1,12 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --select-caret-size: 24px;
+  --select-caret-gap: 12px;
+  --select-caret-color: var(--color-text-secondary);
+  --select-search-radius: 4px;
+  --select-tag-radius: 8px;
+  --select-tag-background: transparent;
+  --select-tag-border-width: 1px;
+  --select-tag-border-color: var(--color-border-subtle);
+  --select-tag-color: var(--color-text-secondary);
+}

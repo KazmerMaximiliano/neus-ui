@@ -1,0 +1,5 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --data-table-radius: 12px;
+  --data-table-control-radius: 8px;
+}

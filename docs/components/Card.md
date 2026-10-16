@@ -42,8 +42,8 @@ that element, while inherited CSS properties such as color follow normal CSS
 inheritance. Returning to `null` removes prior inline overrides.
 
 Native DOM attributes, accessibility attributes, data attributes and correctly
-typed refs are forwarded. Card excludes the retired props listed below, including
-the native names `title`, `color` and `onClick`. Media retains its own native
+typed refs are forwarded. Card excludes the native names `title`, `color` and
+`onClick`; compose headings and actions in its children. Media retains its own native
 attributes, such as iframe `title` and video `onPlay`.
 
 Sections are independent and optional. Card renders its children directly,
@@ -90,7 +90,7 @@ Use `ThemeProvider` to select Neus, Apple, Carbon, Material, Neobrutalism or Ver
 There is no `designSystem` prop on Card. The same components work in light and
 dark modes, nested scopes, and runtime theme changes.
 
-Neus retains the previous surface, 1px border, 16px default radius and header
+Neus uses a themed surface, 1px border, 16px default radius and header
 divider. Other systems adapt their geometry through scoped tokens; they do not
 change the component structure. Spacing follows the
 [Material Cards content-block guidance](https://m1.material.io/components/cards.html).
@@ -116,23 +116,10 @@ Public tokens: `--card-radius`, `--card-background`, `--card-color`,
 `--card-content-padding`, `--card-footer-padding`, `--card-footer-gap`,
 `--card-media-object-fit` and `--card-media-object-position`.
 
-## Migration from the previous API
+The base classes are `card`, `card-header`, `card-media`, `card-content` and
+`card-footer`. Free-form children provide their own spacing or use CardContent.
 
-This is a breaking replacement with no compatibility adapter. `CardColor` and
-`CardVariant` are removed.
-
-| Retired props | Replacement |
-| --- | --- |
-| `title`, `description`, `icon` | Explicit headings, text and icons in children |
-| `avatarImage`, `avatarAlt`, `leading`, `trailing` | Images and content composed inside CardHeader |
-| Legacy `variant`/`fill` combinations | Use current `variant="auto" / "filled" / "outlined" / "elevated"` |
-| `color`, `highlighted`, `selected` | Classes, CSS tokens, or child composition |
-| `disabled`, `onClick` | Disabled state and handlers on interactive children |
-
-`card__*` and `card--*` selectors are removed. The new base classes are
-`card`, `card-header`, `card-media`, `card-content` and `card-footer`.
-The previous body wrapper is gone. Free-form children must now provide their own
-spacing or be wrapped in CardContent. No prefixed style props are introduced.
+## Storybook
 
 Storybook has one story per component. The main Card story demonstrates the
 complete composition; section stories expose their own controls. Each has a local
@@ -142,11 +129,11 @@ be edited in their controls. CardMedia provides image, video, audio and iframe
 previews without fetching remote demo assets.
 
 
-## Presentation contract (2026-10-15)
+## Presentation
 
 | API | Behavior |
 | --- | --- |
 | `variant` | auto (default), filled, outlined, elevated |
 
-Uses all six recipes through ThemeProvider in light and dark mode. See the
-[migration guide](../refactor-migration.md) for examples and breaking changes.
+Uses all six recipes through ThemeProvider in light and dark mode. See
+[Theming](../theming.md) for provider setup and scoped customization.

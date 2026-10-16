@@ -1,0 +1,4 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --interactive-map-radius: 0px;
+}

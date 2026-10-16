@@ -34,6 +34,22 @@ Stories remain excluded from the library build.
 pnpm exec tsc --project tsconfig.storybook.json --noEmit
 ```
 
+## Visual validation
+
+Browser tests cover all six systems in both color schemes, computed states and
+contrast, nested providers, runtime changes, field anatomy, and AG Grid/DayPicker
+behavior. To generate visual captures from the shared browser fixture:
+
+```bash
+VITE_REFACTOR_VISUAL_QA=true pnpm test:design-systems
+```
+
+Inspect the generated PNGs for clipping, alignment, and readability. Tests use
+fallback fonts; selecting a design system does not load branded assets.
+Google Maps and geocoding tests use mocks. Checking the live SDK requires a valid
+consumer-provided API key and enabled Google services; Storybook renders the
+configuration state without a credential.
+
 ## Test Structure
 
 ```
@@ -64,7 +80,9 @@ Do not mix root-level test files with files inside `tests/`. Keep descriptive
 filenames and adjust relative imports when moving tests. Use `.test.tsx` for
 component/JSX tests and `.test.ts` for tests without JSX. Subcomponents follow the
 same rule within their own directories. Shared browser suites remain in
-`src/design-systems/`; standalone utility tests remain beside their utilities.
+`src/design-systems/tests/`; standalone utility tests remain beside their utilities.
+Generator validation and synchronization tests live in
+`src/design-systems/tooling/tests/` and run with `pnpm test:unit` in the Node project.
 
 Owned subcomponents live in `ComponentName/components/`. Public sections keep
 their tests next to their implementation (for example,
@@ -194,7 +212,7 @@ Card browser tests also cover the six designs in light/dark mode, section paddin
 media proportions and edge alignment, nested/sibling scopes, runtime switching,
 per-element overrides, and keyboard navigation of child actions. The co-located
 Card tests cover composition, media types, custom players, refs and public exports.
-Negative type assertions reject retired Card props and invalid media attributes,
+Negative type assertions reject unsupported Card props and invalid media attributes,
 refs and children. Run them through the existing test TypeScript project:
 
 ```bash

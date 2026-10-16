@@ -23,4 +23,4 @@ import { CardHeader } from "neus-ui";
 The header uses 16px padding, an 8px gap, centered alignment and space-between
 horizontal distribution. Neus retains its header divider; other designs omit it.
 Typography and semantics belong to the children. See the Card guide for themes,
-CSS tokens, style precedence and migration.
+CSS tokens and style precedence.

@@ -101,7 +101,7 @@ Use a theme scope for reusable changes:
 ```
 
 Load application CSS after the library stylesheet. All tokens are declared in
-[the Neus contract](../../src/design-systems/neus/input.css) and reset at each
+[the generated Neus contract](../../src/design-systems/neus/generated/recipes/input.css) and reset at each
 `[data-design-system]` boundary, so nested and sibling themes remain isolated.
 Recipes contain only variable overrides; the component owns all state selectors.
 
@@ -145,16 +145,16 @@ scheme. Typing updates the `value` control in controlled mode. Clear/remove the
 `defaultValue`. Switching modes remounts the preview field; changing
 `defaultValue` alone does not reset an already edited uncontrolled field.
 
-No props or CSS classes were removed. `designSystem` is not an Input prop: use
+`designSystem` is not an Input prop: use
 ThemeProvider in applications. See [Theming](../theming.md) and
 [Design systems](../design-systems.md).
 
 
-## Presentation contract (2026-10-15)
+## Presentation
 
 | API | Behavior |
 | --- | --- |
 | `variant / labelPlacement / size` | auto/filled/outlined; auto/external/floating; small/medium/large |
 
-Uses all six recipes through ThemeProvider in light and dark mode. See the
-[migration guide](../refactor-migration.md) for examples and breaking changes.
+Uses all six recipes through ThemeProvider in light and dark mode. See
+[Theming](../theming.md) for provider setup and scoped customization.

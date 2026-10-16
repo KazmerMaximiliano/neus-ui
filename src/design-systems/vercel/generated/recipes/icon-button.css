@@ -1,0 +1,10 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --icon-button-radius: 6px;
+  --icon-button-size-small: 32px;
+  --icon-button-size-medium: 40px;
+  --icon-button-size-large: 48px;
+  --icon-button-icon-size-small: 16px;
+  --icon-button-icon-size-medium: 16px;
+  --icon-button-icon-size-large: 20px;
+}

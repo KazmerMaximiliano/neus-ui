@@ -24,9 +24,8 @@ DataTable fills its container. Flexible columns share the available width;
 horizontal scrolling stays inside the grid when column minimum widths exceed it.
 Without a mobile renderer the grid remains available on narrow screens.
 Sorting and filtering operate on supplied rows. Voluntary action columns use
-`cellRenderer`; combine IconButton or Menu in consumer code. See the
-[migration guide](../refactor-migration.md#datatable-and-voluntary-actions) and
-Storybook's `Others/Integrations/DataTable actions` for the complete example.
+`cellRenderer`; combine IconButton or Menu in consumer code. See
+Storybook's `Others/Integrations/DataTable actions` for a complete example.
 
 In Storybook, `designSystem` is a preview control with six systems and the default
 **Heredar global** option. It follows the toolbar until explicitly overridden;

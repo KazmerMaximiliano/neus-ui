@@ -1,0 +1,33 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --stepper-dot-radius: 4px;
+  --stepper-dot-border-width: 3px;
+  --stepper-dot-border-color: var(--color-text-primary);
+  --stepper-dot-color: var(--color-text-primary);
+  --stepper-dot-font-weight: 800;
+  --stepper-dot-active-border-color: var(--color-text-primary);
+  --stepper-dot-active-shadow: 3px 3px 0 var(--color-text-primary);
+  --stepper-dot-done-border-color: var(--color-text-primary);
+  --stepper-dot-done-background: var(--color-surface);
+  --stepper-dot-hover-background: var(--color-primary-light);
+  --stepper-label-weight: 700;
+  --stepper-label-active-weight: 800;
+  --stepper-label-color: var(--color-text-primary);
+  --stepper-connector-thickness: 3px;
+  --stepper-connector-color: var(--color-border-input-hover);
+  --stepper-connector-done-color: var(--color-text-primary);
+  --stepper-counter-color: var(--color-text-primary);
+  --stepper-counter-weight: 800;
+  --stepper-bar-height: 16px;
+  --stepper-bar-radius: 4px;
+  --stepper-bar-fill-radius: 0px;
+  --stepper-bar-border-width: 3px;
+  --stepper-bar-border-color: var(--color-text-primary);
+  --stepper-bar-background: var(--color-surface);
+  --stepper-simple-size: 14px;
+  --stepper-simple-current-width: 32px;
+  --stepper-simple-radius: 2px;
+  --stepper-simple-border-width: 2px;
+  --stepper-simple-border-color: var(--color-text-primary);
+  --stepper-simple-background: var(--color-surface);
+}

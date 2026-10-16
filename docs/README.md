@@ -4,9 +4,8 @@ Neus UI is a React component library with TypeScript, CSS variable theming,
 reusable components, and application templates.
 
 The main guides are Markdown files in this directory; individual design
-specifications live beside their recipes under `src/design-systems/`, and the
-component refactor guide lives at the repository root. Read them directly in
-GitHub or a Markdown editor; no server or build step is required.
+specifications live beside their recipes under `src/design-systems/`. Read them
+directly in GitHub or a Markdown editor; no server or build step is required.
 
 ## Getting started
 
@@ -20,15 +19,14 @@ GitHub or a Markdown editor; no server or build step is required.
 | --- | --- |
 | [Theming](./theming.md) | ThemeProvider, light/dark modes, scopes, hooks, and runtime color changes |
 | [Design system](./design-system.md) | Color tokens, typography, spacing, and component styling conventions |
-| [Design systems and specifications](./design-systems.md) | Six DESIGN.md guides: visual targets, current adaptations, refactor gaps, and source references |
-| [Component refactor guide](../REFACTOR_GUIDE.md) | Button, Input, Card and Sidebar patterns, design tokens, modular customization, exports and migration workflow |
+| [Design systems and specifications](./design-systems.md) | Six DESIGN.md sources: visual identity, YAML tokens, generated recipes, validation and references |
 | [Input](./components/Input.md) | Props, accessibility, CSS tokens, six recipes and per-part customization |
-| [Card composition and migration](./components/Card.md) | Card, Header, Media, Content and Footer props, themes and examples |
+| [Card composition](./components/Card.md) | Card, Header, Media, Content and Footer props, themes and examples |
 | [Sidebar](./components/Sidebar.md) | Responsive navigation, transparent curves, six recipes and AppTemplate integration |
 | [Development](./development.md) | Repository commands, component/subcomponent layout, code style, and documentation maintenance |
 | [Testing](./testing.md) | Unit tests, browser tests, coverage, and Storybook type checking |
-| [AI-first workflow](./ai-first.md) | Overview of the Neus Design workflow |
-| [Neus Design reference](./neus-design.md) | Skill catalog, orchestrator, and extension conventions |
+| [AppTemplate](./templates/AppTemplate.md) | Application shell, responsive navigation and layout customization |
+| [FormTemplate](./templates/FormTemplate.md) | Form layout, columns and action customization |
 
 ## Interactive component catalog
 
@@ -42,8 +40,3 @@ pnpm storybook
 See [Components](./components.md#storybook) for more details.
 
 [Back to the project overview](../README.md)
-
-
-- [Component refactor migration and validation](./refactor-migration.md)
-- [AppTemplate](./templates/AppTemplate.md)
-- [FormTemplate](./templates/FormTemplate.md)

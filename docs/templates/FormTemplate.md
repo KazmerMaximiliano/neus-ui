@@ -24,4 +24,4 @@ owns its form element, validation and submission.
 ```
 
 Column counts are finite positive integers; invalid values use a safe default.
-Use `--form-template-*` for recipe overrides. See [migration](../refactor-migration.md).
+Use `--form-template-*` for recipe overrides.

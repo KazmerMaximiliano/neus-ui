@@ -29,5 +29,6 @@
     "src/**/*.test.tsx",
     "src/mock/**/*",
     "vitest.setup.ts"
-  ]
+  ],
+  "exclude": ["src/design-systems/tooling/**"]
 }

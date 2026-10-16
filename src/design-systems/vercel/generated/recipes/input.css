@@ -1,0 +1,18 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --input-radius: 6px;
+  --input-padding: 8px 12px;
+  --input-border-color: var(--color-border-subtle);
+  --input-font-size: 14px;
+  --input-line-height: 20px;
+  --input-color: var(--color-text-primary);
+  --input-label-color: var(--color-text-primary);
+  --input-label-offset: 0px;
+  --input-error-offset: 0px;
+  --input-focus-border-color: var(--color-focus);
+  --input-focus-shadow: 0 0 0 3px var(--color-focus-ring);
+  --input-error-focus-shadow: 0 0 0 3px var(--color-focus-ring-error);
+  --input-readonly-background: var(--color-surface-secondary);
+  --input-readonly-border-style: solid;
+  --input-readonly-border-color: var(--color-border-subtle);
+}

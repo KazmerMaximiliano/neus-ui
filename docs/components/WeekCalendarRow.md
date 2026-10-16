@@ -5,14 +5,18 @@ styles, types, tests and story live in
 `src/components/WeekCalendar/components/WeekCalendarRow/`; applications keep
 importing `WeekCalendarRow` and its public types from `neus-ui`.
 
-## Presentation contract (2026-10-15)
+Event cells support Enter/Space activation and show tooltip details on focus;
+Escape dismisses details. See [WeekCalendar](./WeekCalendar.md) for navigation
+and event display behavior.
+
+## Presentation
 
 | API | Behavior |
 | --- | --- |
 | `style / categoryStyle / eventStyle / tooltipStyle` | row and per-part CSSProperties; optional className |
 
-Uses all six recipes through ThemeProvider in light and dark mode. See the
-[migration guide](../refactor-migration.md) for examples and breaking changes.
+Uses all six recipes through ThemeProvider in light and dark mode. See
+[Theming](../theming.md) for provider setup and scoped customization.
 
 In Storybook, `designSystem` follows the same pattern as Button: a select with
 the six design systems, defaulting to **Neus**, applied through a local

@@ -36,6 +36,20 @@ pnpm build-storybook
 The static catalog is written to `storybook-static/`. Written documentation
 lives in this directory as Markdown and has no build step.
 
+### Design-system sources
+
+```bash
+pnpm design:generate
+pnpm design:check
+pnpm design:watch
+```
+
+Edit the six `src/design-systems/<id>/DESIGN.md` documents and commit their
+generated artifacts. Development and build commands generate before starting.
+Run the watcher in a second terminal for continuous editing; CI checks committed
+outputs before building. See [Design systems](./design-systems.md) for the YAML
+extension, scoped resets and validation policy.
+
 ### Tests and quality
 
 ```bash

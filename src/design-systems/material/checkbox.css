@@ -1,9 +1,0 @@
-/* M3 checkbox: 18px, 2px corners, on-surface-variant outline. */
-[data-design-system="material"] {
-  --checkbox-radius: 2px;
-  --checkbox-border-color: var(--color-text-secondary);
-  --checkbox-hover-border-color: var(--color-text-primary);
-  --checkbox-checked-shadow: none;
-  --checkbox-icon-size: 14px;
-  --checkbox-gap: 12px;
-}

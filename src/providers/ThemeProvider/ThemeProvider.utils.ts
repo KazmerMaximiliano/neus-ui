@@ -1,5 +1,5 @@
 import type { DesignSystemId } from "../../design-systems";
-import { DESIGN_SYSTEM_PALETTES } from "../../design-systems/palettes";
+import { DESIGN_SYSTEM_PALETTES } from "../../design-systems/design-systems.consts";
 import { getDarkenColor, hexToRgb } from "../../utils";
 import type { ColorScheme, ColorVariants, ThemeColors, ThemeConfig } from "./ThemeProvider.types";
 

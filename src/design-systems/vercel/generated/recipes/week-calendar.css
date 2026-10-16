@@ -1,0 +1,7 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --week-calendar-radius: 6px;
+  --week-calendar-padding: 16px;
+  --week-calendar-event-radius: 6px;
+  --week-calendar-title-size: 16px;
+}

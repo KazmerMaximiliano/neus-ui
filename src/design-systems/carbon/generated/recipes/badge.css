@@ -1,0 +1,12 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --badge-font-size: 12px;
+  --badge-font-weight: 400;
+  --badge-letter-spacing: 0.32px;
+  --badge-text-transform: none;
+  --badge-line-height: 16px;
+  --badge-padding: 4px 8px;
+  --badge-radius: 24px;
+  --badge-dot-font-size: 12px;
+  --badge-dot-size: 8px;
+}

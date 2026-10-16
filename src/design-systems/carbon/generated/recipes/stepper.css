@@ -1,0 +1,28 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --stepper-dot-size-small: 24px;
+  --stepper-dot-size-medium: 32px;
+  --stepper-dot-size-large: 40px;
+  --stepper-dot-border-width: 1px;
+  --stepper-dot-border-color: var(--color-text-secondary);
+  --stepper-dot-font-weight: 400;
+  --stepper-dot-done-background: var(--color-surface);
+  --stepper-dot-hover-background: var(--color-surface-secondary);
+  --stepper-label-font-size-small: 14px;
+  --stepper-label-font-size-medium: 14px;
+  --stepper-label-font-size-large: 16px;
+  --stepper-label-weight: 400;
+  --stepper-label-active-weight: 400;
+  --stepper-label-active-color: var(--color-text-primary);
+  --stepper-connector-thickness: 1px;
+  --stepper-connector-done-color: var(--color-focus);
+  --stepper-counter-transform: none;
+  --stepper-counter-spacing: 0.16px;
+  --stepper-counter-weight: 400;
+  --stepper-bar-height: 8px;
+  --stepper-bar-radius: 0px;
+  --stepper-bar-fill-radius: 0px;
+  --stepper-simple-radius: 0px;
+  --stepper-simple-size: 8px;
+  --stepper-simple-current-width: 24px;
+}

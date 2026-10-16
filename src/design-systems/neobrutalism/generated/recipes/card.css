@@ -1,0 +1,13 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --card-radius: 4px;
+  --card-border-width: 3px;
+  --card-border-color: var(--color-text-primary);
+  --card-shadow: 4px 4px 0 var(--color-text-primary);
+  --card-header-border-width: 0px;
+  --card-footer-padding: 12px;
+  --card-footer-gap: 12px;
+  --card-filled-border-width: 3px;
+  --card-outlined-border-width: 3px;
+  --card-elevated-shadow: 4px 4px 0 var(--color-text-primary);
+}

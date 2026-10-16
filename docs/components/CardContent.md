@@ -23,4 +23,4 @@ import { CardContent } from "neus-ui";
 Content uses normal document flow with 16px padding. It does not generate titles,
 descriptions, icons or additional wrappers.
 Typography and semantics belong to the children. See the Card guide for themes,
-CSS tokens, style precedence and migration.
+CSS tokens and style precedence.

@@ -43,8 +43,16 @@ export default defineConfig({
           name: 'unit',
           environment: 'jsdom',
           include: ['src/**/*.test.{ts,tsx}'],
-          exclude: ['src/**/*.browser.test.tsx'],
+          exclude: ['src/**/*.browser.test.tsx', 'src/design-systems/tooling/**'],
           setupFiles: ['./vitest.setup.ts']
+        }
+      },
+      {
+        extends: true,
+        test: {
+          name: 'design-system-generator',
+          environment: 'node',
+          include: ['src/design-systems/tooling/tests/**/*.test.ts']
         }
       },
       {

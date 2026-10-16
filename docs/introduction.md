@@ -9,21 +9,22 @@
 | Feature | Description |
 | --- | --- |
 | **Dynamic Theming** | Real-time color switching via `ThemeProvider` — no page reload |
-| **24+ Components** | Button, DataTable, Calendar, Modal, Select, Sidebar, Stepper, WeekCalendar, and more |
+| **30 Public Components and Sections** | Button, DataTable, Calendar, Modal, Select, Sidebar, Stepper, WeekCalendar, and more |
 | **TypeScript First** | Full type definitions on every component and hook |
 | **CSS Variables** | Deep integration with CSS custom properties for easy overrides |
 | **Custom Hooks** | `useTheme`, `useColors`, `useResponsive` for maximum flexibility |
 | **Ready-Made Templates** | Pre-built layouts: `AppTemplate`, `FormTemplate` |
-| **AI-First Workflow** | Neus Design skills and the `neus-designer` subagent generate typed UI from product intent |
+| **Six Design Systems** | Scoped Neus UI, Apple, Carbon, Material, Neobrutalism, and Vercel recipes for every public component family and both templates |
 
 ## Project Structure
 
 ```
 src/
-├── components/    # 24+ reusable UI components
+├── components/    # 30 public components and sections
 ├── templates/     # Pre-built layouts (AppTemplate, FormTemplate)
 ├── hooks/         # Shared hooks such as useResponsive
 ├── providers/     # Providers with their own context, types, and hooks
+├── design-systems/ # DESIGN.md sources, generated palettes/recipes and shared tests
 ├── css/           # Global CSS variables
 ├── utils/         # Color utilities
 └── services/      # Auxiliary services
@@ -74,7 +75,6 @@ function MyPage() {
 - [Installation](./installation.md) — full install guide, peer deps, CSS setup
 - [Theming](./theming.md) — ThemeProvider API, CSS variables, custom colors
 - [Components](./components.md) — component and template reference
-- [AI-First Workflow](./ai-first.md) — Neus Design, skills, subagents, and anti-slop rules
 - [Design System](./design-system.md) — color system, spacing, typography
 - [Design Systems](./design-systems.md) — theme recipes and extension steps
 - [Testing](./testing.md) — Vitest setup, test patterns, coverage

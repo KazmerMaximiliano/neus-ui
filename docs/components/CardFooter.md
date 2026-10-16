@@ -23,4 +23,4 @@ import { CardFooter } from "neus-ui";
 The footer uses a wrapping flex row with centered alignment, 8px padding and an
 8px gap. Its children provide all actions and interaction states.
 Typography and semantics belong to the children. See the Card guide for themes,
-CSS tokens, style precedence and migration.
+CSS tokens and style precedence.

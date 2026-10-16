@@ -1,0 +1,7 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --interactive-map-radius: 4px;
+  --interactive-map-border-width: 3px;
+  --interactive-map-border-color: var(--color-text-primary);
+  --interactive-map-shadow: 4px 4px 0 var(--color-text-primary);
+}

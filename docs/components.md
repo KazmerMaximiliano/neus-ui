@@ -82,7 +82,7 @@ system. Card and its four subcomponents also have one story each with the same
 local design selector. Card exposes `className` and `style` on every component;
 the main example composes all sections, while their stories expose independent
 controls. CardMedia previews images, video, audio and iframes.
-See the [Card guide](./components/Card.md) for the new API and migration.
+See the [Card guide](./components/Card.md) for composition and styling.
 Input now has six token-driven recipes and per-part style overrides, while preserving its existing behavior. See the [Input guide](./components/Input.md). See
 [Design systems](./design-systems.md) for architecture and extension steps.
 
@@ -106,4 +106,5 @@ import { Button, Input, Checkbox, Modal } from "neus-ui";
 import { AppTemplate, FormTemplate } from "neus-ui";
 ```
 
-See the [component migration guide](./refactor-migration.md) for the six-system presentation APIs and voluntary DataTable actions.
+See [Design systems](./design-systems.md) for scoped recipes and
+[DataTable](./components/DataTable.md) for consumer-composed actions.

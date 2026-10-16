@@ -1,183 +1,483 @@
-# Neobrutalism — Neus UI design
+---
+version: alpha
+name: Neobrutalism
+description: Bright yellow, thick borders, and hard shadows.
+colors:
+  primary: "#fdc800"
+  on-primary: "#1c293c"
+  focus: "#432dd7"
+  error: "#e11d48"
+  primary-dark: "#fdc800"
+  on-primary-dark: "#1c293c"
+  focus-dark: "#c8b3fd"
+  error-dark: "#ff6b6b"
+  surface: "#fbfbf9"
+  text-primary: "#1c293c"
+typography:
+  body-md:
+    fontFamily: '"Inter", Arial, sans-serif'
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: 0em
+  heading:
+    fontFamily: '"Inter", Arial, sans-serif'
+    fontSize: 1.5rem
+    fontWeight: 700
+    lineHeight: 1.3
+    letterSpacing: -0.01em
+  label:
+    fontFamily: '"Inter", Arial, sans-serif'
+    fontSize: 13px
+    fontWeight: 500
+    lineHeight: 1.4
+    letterSpacing: 0em
+  caption:
+    fontFamily: '"Inter", Arial, sans-serif'
+    fontSize: 12px
+    fontWeight: 400
+    lineHeight: 1.4
+    letterSpacing: 0em
+rounded:
+  default: 16px
+  sm: 8px
+  md: 12px
+  pill: 3em
+  button: 4px
+  card: 4px
+  input: 4px
+  sidebar: 0px
+spacing:
+  step-1: 4px
+  step-2: 8px
+  step-3: 12px
+  step-4: 16px
+  step-6: 24px
+  step-8: 32px
+  step-12: 48px
+  step-16: 64px
+components:
+  button-primary:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.button}"
+  button-primary-hover:
+    backgroundColor: "{colors.primary}"
+  input-field:
+    rounded: "{rounded.input}"
+    typography: "{typography.body-md}"
+  card:
+    rounded: "{rounded.card}"
+x-neus:
+  id: neobrutalism
+  palette:
+    light:
+      primary: "{colors.primary}"
+      onPrimary: "{colors.on-primary}"
+      focus: "{colors.focus}"
+      error: "{colors.error}"
+    dark:
+      primary: "{colors.primary-dark}"
+      onPrimary: "{colors.on-primary-dark}"
+      focus: "{colors.focus-dark}"
+      error: "{colors.error-dark}"
+  tokens:
+    base:
+      --font-body: "{typography.body-md.fontFamily}"
+      --font-display: var(--font-body)
+      --font-mono: '"JetBrains Mono", monospace'
+      --color-primary-text: var(--color-text-primary)
+      --elevation-dialog: 8px 8px 0 var(--color-text-primary)
+      --elevation-floating: 4px 4px 0 var(--color-text-primary)
+    light:
+      --color-surface: "{colors.surface}"
+      --color-text-primary: "{colors.text-primary}"
+  recipes:
+    badge:
+      base:
+        --badge-font-size: 12px
+        --badge-font-weight: "800"
+        --badge-letter-spacing: normal
+        --badge-line-height: 16px
+        --badge-padding: 2px 8px
+        --badge-radius: 4px
+        --badge-border-width: 2px
+        --badge-border-color: var(--color-text-primary)
+        --badge-text-mix: 0%
+        --badge-dot-size: 10px
+        --badge-dot-radius: 2px
+        --badge-dot-border-width: 2px
+        --badge-dot-font-size: 12px
+        --badge-dot-font-weight: "700"
+    button:
+      base:
+        --button-radius: "{rounded.button}"
+        --button-padding-small: 8px 16px
+        --button-padding-medium: 12px 24px
+        --button-padding-large: 16px 32px
+        --button-font-size-medium: 15px
+        --button-font-size-large: 17px
+        --button-line-height: 20px
+        --button-label-weight: "800"
+        --button-label-spacing: normal
+        --button-border-width: 3px
+        --button-border-color: var(--color-text-primary)
+        --button-outlined-border-width: 3px
+        --button-shadow: 4px 4px 0 var(--color-text-primary)
+        --button-shadow-hover: 4px 4px 0 var(--color-text-primary)
+        --button-shadow-active: 2px 2px 0 var(--color-text-primary)
+        --button-active-transform: translate(2px, 2px)
+        --button-loader-gap: 4px
+        --button-loader-size: 7px
+        --button-focus-offset: 6px
+        --button-elevated-shadow: 4px 4px 0 var(--color-text-primary)
+        --button-elevated-shadow-hover: 6px 6px 0 var(--color-text-primary)
+    calendar:
+      base:
+        --calendar-border-width: 3px
+        --calendar-border-color: var(--color-text-primary)
+        --calendar-radius: 4px
+        --calendar-shadow: 4px 4px 0 var(--color-text-primary)
+        --calendar-divider-width: 3px
+        --calendar-divider-color: var(--color-text-primary)
+        --calendar-label-color: var(--color-text-primary)
+        --calendar-label-weight: "800"
+        --calendar-caption-color: var(--color-text-primary)
+        --calendar-caption-weight: "800"
+        --calendar-nav-color: var(--color-text-primary)
+        --calendar-weekday-color: var(--color-text-primary)
+        --calendar-day-radius: 4px
+        --calendar-item-radius: 4px
+        --calendar-day-hover-background: var(--color-primary-light)
+        --calendar-selected-background: var(--color-primary)
+        --calendar-selected-color: var(--color-text-on-primary)
+        --calendar-selected-weight: "800"
+        --calendar-selected-shadow: inset 0 0 0 2px var(--color-text-primary)
+        --calendar-range-edge-color: var(--color-text-on-primary)
+        --calendar-today-color: var(--color-text-primary)
+        --calendar-today-ring: inset 0 0 0 2px var(--color-text-primary)
+        --calendar-today-weight: "800"
+    card:
+      base:
+        --card-radius: "{rounded.card}"
+        --card-border-width: 3px
+        --card-border-color: var(--color-text-primary)
+        --card-shadow: 4px 4px 0 var(--color-text-primary)
+        --card-header-border-width: 0px
+        --card-footer-padding: 12px
+        --card-footer-gap: 12px
+        --card-filled-border-width: 3px
+        --card-outlined-border-width: 3px
+        --card-elevated-shadow: 4px 4px 0 var(--color-text-primary)
+    checkbox:
+      base:
+        --checkbox-size: 22px
+        --checkbox-border-width: 3px
+        --checkbox-border-color: var(--color-text-primary)
+        --checkbox-hover-border-color: var(--color-text-primary)
+        --checkbox-shadow: 2px 2px 0 var(--color-text-primary)
+        --checkbox-checked-border-color: var(--color-text-primary)
+        --checkbox-checked-shadow: 2px 2px 0 var(--color-text-primary)
+        --checkbox-icon-size: 14px
+        --checkbox-icon-stroke: "3.5"
+        --checkbox-focus-offset: 4px
+        --checkbox-label-color: var(--color-text-primary)
+    clock:
+      base:
+        --clock-border-width: 3px
+        --clock-border-color: var(--color-text-primary)
+        --clock-radius: 4px
+        --clock-shadow: 4px 4px 0 var(--color-text-primary)
+        --clock-header-border-width: 3px
+        --clock-header-color: var(--color-text-on-primary)
+        --clock-segment-inactive-opacity: "0.75"
+        --clock-face-background: var(--color-surface)
+        --clock-face-border-width: 3px
+        --clock-hand-color: var(--color-text-primary)
+        --clock-hand-text-color: var(--color-surface)
+        --clock-hand-width: 3px
+        --clock-number-radius: 4px
+        --clock-selected-color: var(--color-text-on-primary)
+    dropdown:
+      base:
+        --dropdown-radius: 4px
+        --dropdown-border-width: 3px
+        --dropdown-border-color: var(--color-text-primary)
+        --dropdown-hover-border-color: var(--color-text-primary)
+        --dropdown-shadow: 4px 4px 0 var(--color-text-primary)
+        --dropdown-avatar-color: var(--color-text-on-primary)
+        --dropdown-caret-color: var(--color-text-primary)
+        --dropdown-name-color: var(--color-text-primary)
+        --dropdown-name-weight: "800"
+    file-uploader:
+      base:
+        --file-uploader-radius: 4px
+        --file-uploader-border-width: 3px
+        --file-uploader-border-color: var(--color-text-primary)
+        --file-uploader-shadow: 4px 4px 0 var(--color-text-primary)
+        --file-uploader-hover-border-color: var(--color-text-primary)
+        --file-uploader-hover-background: var(--color-primary-light)
+        --file-uploader-drag-border-color: var(--color-text-primary)
+        --file-uploader-drag-background: var(--color-primary)
+        --file-uploader-drag-transform: translate(-2px, -2px)
+        --file-uploader-success-border-color: var(--color-text-primary)
+        --file-uploader-title-weight: "800"
+        --file-uploader-hint-color: var(--color-text-primary)
+        --file-uploader-media-radius: 4px
+        --file-uploader-badge-radius: 4px
+        --file-uploader-badge-border-width: 2px
+        --file-uploader-badge-background: var(--color-primary)
+        --file-uploader-badge-color: var(--color-text-on-primary)
+        --file-uploader-error-border-width: 3px
+        --file-uploader-error-radius: 4px
+        --file-uploader-error-text-color: var(--color-text-primary)
+    icon-button:
+      base:
+        --icon-button-radius: 4px
+        --icon-button-size-small: 40px
+        --icon-button-size-medium: 48px
+        --icon-button-size-large: 60px
+        --icon-button-icon-stroke: "2.5"
+        --icon-button-border-width: 3px
+        --icon-button-border-color: var(--color-text-primary)
+        --icon-button-outlined-border-width: 3px
+        --icon-button-shadow: 4px 4px 0 var(--color-text-primary)
+        --icon-button-shadow-hover: 4px 4px 0 var(--color-text-primary)
+        --icon-button-shadow-active: 2px 2px 0 var(--color-text-primary)
+        --icon-button-active-transform: translate(2px, 2px)
+        --icon-button-focus-offset: 6px
+    input:
+      base:
+        --input-radius: "{rounded.input}"
+        --input-padding: 12px 16px
+        --input-border-width: 3px
+        --input-border-color: var(--color-text-primary)
+        --input-shadow: 4px 4px 0 var(--color-text-primary)
+        --input-focus-shadow: 4px 4px 0 var(--color-text-primary)
+        --input-error-focus-shadow: 4px 4px 0 var(--color-error)
+        --input-font-size: 14px
+        --input-line-height: 20px
+        --input-color: var(--color-text-primary)
+        --input-label-color: var(--color-text-primary)
+        --input-label-offset: 0px
+        --input-error-offset: 0px
+        --input-focus-border-color: var(--color-focus)
+        --input-readonly-border-color: var(--color-text-primary)
+        --input-filled-border-width: 3px
+    link:
+      base:
+        --link-font-weight: "700"
+        --link-decoration: underline
+        --link-decoration-thickness: 2px
+        --link-underline-offset: 3px
+        --link-hover-background: var(--color-primary)
+        --link-hover-primary-color: var(--color-text-on-primary)
+        --link-padding: 0 2px
+        --link-radius: 0px
+    modal:
+      base:
+        --modal-radius: 4px
+        --modal-border-width: 3px
+        --modal-border-color: var(--color-text-primary)
+        --modal-shadow: var(--elevation-dialog)
+        --modal-backdrop: rgba(28, 41, 60, 0.6)
+        --modal-divider-width: 2px
+        --modal-divider-color: var(--color-text-primary)
+        --modal-title-weight: "800"
+        --modal-content-color: var(--color-text-primary)
+        --modal-footer-gap: 16px
+    overlay:
+      base:
+        --overlay-border-width: 3px
+        --overlay-border-color: var(--color-text-primary)
+        --overlay-radius: 4px
+        --overlay-shadow: var(--elevation-floating)
+        --overlay-offset: 8px
+        --overlay-item-font-weight: "700"
+        --overlay-item-hover-background: var(--color-primary)
+        --overlay-item-hover-color: var(--color-text-on-primary)
+        --overlay-item-selected-background: var(--color-primary)
+        --overlay-item-selected-color: var(--color-text-on-primary)
+        --overlay-divider-color: var(--color-text-primary)
+    select:
+      base:
+        --select-caret-size: 20px
+        --select-caret-gap: 14px
+        --select-caret-color: var(--color-text-primary)
+        --select-search-radius: 4px
+        --select-tag-radius: 4px
+        --select-tag-background: var(--color-primary)
+        --select-tag-color: var(--color-text-on-primary)
+        --select-tag-border-width: 2px
+        --select-tag-border-color: var(--color-text-primary)
+        --select-tag-remove-color: var(--color-text-on-primary)
+    sidebar:
+      base:
+        --sidebar-background: var(--color-surface)
+        --sidebar-color: var(--color-text-primary)
+        --sidebar-header-background: var(--sidebar-background)
+        --sidebar-decoration-display: none
+        --sidebar-convex-radius: 0px
+        --sidebar-title-color: var(--color-text-primary)
+        --sidebar-item-color: var(--color-text-secondary)
+        --sidebar-item-hover-background: var(--color-surface-hover)
+        --sidebar-item-hover-color: var(--color-text-primary)
+        --sidebar-item-active-background: var(--color-primary)
+        --sidebar-item-active-color: var(--color-text-on-primary)
+        --sidebar-item-focus-color: var(--color-focus)
+        --sidebar-item-size: 14px
+        --sidebar-item-weight: "700"
+        --sidebar-item-spacing: 0px
+        --sidebar-item-transform: none
+        --sidebar-item-padding: 12px 16px
+        --sidebar-body-gap: 8px
+        --sidebar-border-width: 3px
+        --sidebar-item-radius: 4px
+        --sidebar-border-color: var(--color-text-primary)
+        --sidebar-item-border-width: 2px
+        --sidebar-item-border-color: var(--color-text-primary)
+        --sidebar-shadow: 4px 4px 0 var(--color-text-primary)
+        --sidebar-control-radius: 4px
+        --sidebar-control-border-width: 3px
+        --sidebar-control-border-color: var(--color-text-primary)
+        --sidebar-control-shadow: 3px 3px 0 var(--color-text-primary)
+      dark:
+        --sidebar-item-border-color: var(--color-border-input-hover)
+    stepper:
+      base:
+        --stepper-dot-radius: 4px
+        --stepper-dot-border-width: 3px
+        --stepper-dot-border-color: var(--color-text-primary)
+        --stepper-dot-color: var(--color-text-primary)
+        --stepper-dot-font-weight: "800"
+        --stepper-dot-active-border-color: var(--color-text-primary)
+        --stepper-dot-active-shadow: 3px 3px 0 var(--color-text-primary)
+        --stepper-dot-done-border-color: var(--color-text-primary)
+        --stepper-dot-done-background: var(--color-surface)
+        --stepper-dot-hover-background: var(--color-primary-light)
+        --stepper-label-weight: "700"
+        --stepper-label-active-weight: "800"
+        --stepper-label-color: var(--color-text-primary)
+        --stepper-connector-thickness: 3px
+        --stepper-connector-color: var(--color-border-input-hover)
+        --stepper-connector-done-color: var(--color-text-primary)
+        --stepper-counter-color: var(--color-text-primary)
+        --stepper-counter-weight: "800"
+        --stepper-bar-height: 16px
+        --stepper-bar-radius: 4px
+        --stepper-bar-fill-radius: 0px
+        --stepper-bar-border-width: 3px
+        --stepper-bar-border-color: var(--color-text-primary)
+        --stepper-bar-background: var(--color-surface)
+        --stepper-simple-size: 14px
+        --stepper-simple-current-width: 32px
+        --stepper-simple-radius: 2px
+        --stepper-simple-border-width: 2px
+        --stepper-simple-border-color: var(--color-text-primary)
+        --stepper-simple-background: var(--color-surface)
+    week-calendar:
+      base:
+        --week-calendar-border-width: 3px
+        --week-calendar-radius: 4px
+        --week-calendar-padding: 24px
+        --week-calendar-event-radius: 4px
+        --week-calendar-shadow: 4px 4px 0 var(--color-text-primary)
+        --week-calendar-border-color: var(--color-text-primary)
+    interactive-map:
+      base:
+        --interactive-map-radius: 4px
+        --interactive-map-border-width: 3px
+        --interactive-map-border-color: var(--color-text-primary)
+        --interactive-map-shadow: 4px 4px 0 var(--color-text-primary)
+    data-table:
+      base:
+        --data-table-radius: 4px
+        --data-table-control-radius: 4px
+        --data-table-border-color: var(--color-text-primary)
+        --data-table-shadow: 4px 4px 0 var(--color-text-primary)
+    templates:
+      base:
+        --app-template-content-padding: 32px
+        --form-template-gap: 24px
+        --form-template-action-padding: 12px
+---
+
+# Neobrutalism
 
 ## Overview
 
-**Target rules.** Make structure visible: strong outlines, flat vivid accents,
+Make structure visible: strong outlines, flat vivid accents,
 hard offset shadows, bold action labels, and direct feedback. The interface should
 feel energetic and tangible while remaining orderly enough for forms and data.
 All aesthetic rules here are Neus UI project decisions. This recipe does not claim
 an official or universal neobrutalism standard.
 
-**Current implementation.** All public component families and both templates now
-have scoped CSS token contracts and six-system recipes. Button, Card and Input
-share the expanded presentation API described below. This is the project's web
-mapping, not full feature parity with an external component framework.
-
-Format reference, consulted 2026-10-14:
-[Google DESIGN.md](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md)
-(alpha, prose only). Primary design evidence is this repository's
-[tokens](./tokens.css), [palettes](../palettes.ts), and component recipes linked
-below, reviewed 2026-10-14. [Shared defaults](../../css/variables.css) remain the
-fallback. See the [architecture guide](../../../docs/design-systems.md).
+Format: [Google DESIGN.md](https://github.com/google-labs-code/design.md/blob/main/docs/spec.md) (alpha; consulted 2026-10-15).
 
 ## Colors
 
-**Target rules.** Use yellow for important actions and selected navigation, with
+Use yellow for important actions and selected navigation, with
 dark on-accent text. Keep content surfaces quiet so saturated accents remain
 meaningful. Use a contrasting focus color distinct from selection. Errors need
 explicit text and a boundary change, not color alone.
 
-**Current implementation.** Semantic surfaces, text, selection, field/layer and feedback roles are
-mapped in the scoped tokens and palettes. Light/dark values preserve role pairs.
-Solid action foregrounds are resolved per state; custom six-digit hex primary
-accents also receive readable text/focus mappings. These local roles do not provide
-a complete external theme matrix or a full dynamic tonal color engine.
-
-**Validation boundary.** Consumer-supplied CSS foreground/background overrides and arbitrary non-hex
-accent formats are outside the automatic contrast contract.
-
 ## Typography
 
-**Target rules.** Use Inter with sans-serif fallbacks for interface text; reserve
+Use Inter with sans-serif fallbacks for interface text; reserve
 JetBrains Mono for code and identifiers. Use heavy labels for short actions, but
 regular text for paragraphs, values, and dense data. Keep headings concise and
 avoid making every text element uppercase.
 
-**Current implementation.** Font stacks remain declared locally without downloaded assets. Body,
-heading, label and caption roles include size, weight, line height and tracking.
-Component-specific sizes remain deliberate local mappings, not a claim that the
-entire external typography catalog has been implemented.
-
-**Validation boundary.** Use local fallback fonts and review application content at zoom and with
-long translations; font asset loading belongs to the consuming application.
-
 ## Layout
 
-**Target rules.** Use a regular alignment grid and generous separation between
+Use a regular alignment grid and generous separation between
 independent objects. Budget space for offset shadows so adjacent controls do not
 collide. Keep dense data internally calm; the surrounding structure supplies the
 visual energy. Wrap action groups before reducing readable content.
 
-**Current implementation.** AppTemplate and FormTemplate now map page-region spacing and responsive
-columns through recipes. AppTemplate follows Sidebar at 768/1024px; FormTemplate
-uses 2/2/1 columns by default with independent gap/region overrides. Components keep
-readable internal geometry; week grids and tables retain horizontal navigation
-where their data cannot fit a narrow viewport.
-
-**Validation boundary.** The shared breakpoints are Neus web choices. Application page compositions
-and specialized external grid systems remain consumer decisions.
-
 ## Elevation & Depth
 
-**Target rules.** Use crisp offset shadows to imply physical layers; avoid blur and
+Use crisp offset shadows to imply physical layers; avoid blur and
 gradient lighting. Pressing an action should visibly reduce its apparent lift.
 Do not animate passive content simply because it has a shadow. Preserve focus
 independently of shadow and suppress nonessential motion when requested.
 
-**Current implementation.** Floating and dialog elevation roles map the existing overlay and modal
-recipes. Ordinary surfaces and action variants have separate treatments; Card
-stays passive, Button reserves elevation for its explicit treatment where required,
-and reduced-motion rules suppress nonessential transitions. Neobrutalism retains
-hard shadows with clearance in fields, cards and template spacing.
-
-**Validation boundary.** Nested surfaces and custom scroll containers must preserve focus and shadow
-clearance; the library cannot control clipping imposed by consumer overflow rules.
-
 ## Shapes
 
-**Target rules.** Use nearly square rectangles with a small consistent radius,
+Use nearly square rectangles with a small consistent radius,
 strong edges, and clear internal padding. Reserve circles for avatars or inherent
 symbols. Avoid Neus pill controls and ornamental concave curves in this system.
-
-**Current implementation.** Every adapted family has its own radius/border contract, including nested
-selectors, calendars, overlays, maps and tables. Neus keeps its navigation curves;
-other systems disable that decoration. Media clipping and focus remain separate
-from surface geometry. Explicit presentation variants have recipes in all systems.
-
-**Validation boundary.** Recipe geometry expresses the documented local web target. Native platform
-rendering and additional interactive surface types are separate capabilities.
 
 ## Components
 
 ### Button
 
-**Target rules.** A solid yellow action is the primary affordance; reduce emphasis
+A solid yellow action is the primary affordance; reduce emphasis
 for supporting actions without sacrificing legibility. Keep keyboard focus visible
 outside the heavy frame. Pressed feedback changes depth, and loading must remain
 identifiable without layout jumps.
 
-**Current implementation.** [Button recipe](./button.css) maps solid, secondary, tonal, elevated,
-outlined and text actions. Carbon uses primary/secondary/tertiary/ghost hierarchy
-for solid/secondary/outlined/text; Material reserves resting elevation for elevated.
-The shared implementation reserves the idle label box while busy. Semantic and
-custom hex accent foregrounds are resolved for resting, hover and pressed fills.
-
-**Refactor boundaries.** Six shared variants express the supported action hierarchy. System-specific
-native APIs and additional interaction patterns remain outside this contract.
-
 ### Card
 
-**Target rules.** Frame a coherent content group with one strong outline and hard
+Frame a coherent content group with one strong outline and hard
 offset shadow. Keep internal content uncluttered; do not add another heavy frame
 around every slot. The surface stays passive even when it resembles a physical tile.
 
-**Current implementation.** [Card recipe](./card.css) keeps the root passive. `variant="auto"`
-uses this system's existing treatment; filled, outlined and elevated can be chosen
-explicitly in all six systems. Header/Content/Footer keep independent spacing;
-media clips inside the surface and child controls own interactions.
-
-**Refactor boundaries.** The root remains passive. Selection, expansion, loading, errors and keyboard
-actions belong to meaningful child content and controls.
-
 ### Input
 
-**Target rules.** Use a framed field with a persistent, aligned label. Keep entered
+Use a framed field with a persistent, aligned label. Keep entered
 text calm and legible. Focus changes a recognizable boundary; error text explains
 the problem while focus remains apparent. Read-only must remain readable.
 
-**Current implementation.** [Input recipe](./input.css) supplies field geometry and state roles.
-The shared anatomy supports auto/filled/outlined, small/medium/large,
-auto/external/floating labels, prefix/suffix content and an optional error icon.
-Auto uses a floating outlined field in Material and external labels elsewhere.
-Focused, populated, prefixed and native color fields keep floating labels raised.
-Errors stay associated with the native input; readonly remains distinct from disabled.
-
-**Refactor boundaries.** Prefixes/suffixes and floating labels do not introduce masks, autocomplete
-providers or other application behavior. Native input semantics remain in use.
-
 ### Sidebar
 
-**Target rules.** Present navigation as a clearly framed region with compact,
+Present navigation as a clearly framed region with compact,
 outlined rows. Use a filled yellow item for current location and preserve a separate
 focus outline. Keep hover quieter than selection.
 
-**Current implementation.** [Sidebar recipe](./sidebar.css): heavy outer border,
-hard shadow, bordered rows, bold natural-case labels, yellow selection with dark
-text, and square-ish controls. In dark mode rows use a quieter outline so the panel
-frame stays dominant. Shared rail and mobile dialog behavior remains.
+### Supporting controls and content
 
-**Refactor boundaries.** Desktop/rail/mobile behavior is shared Neus navigation. Native-platform grouped
-sidebars and external framework navigation parity are separate capabilities.
-
-### Other component families and templates
-
-- Base and Navigation retain their interaction APIs and have explicit recipes for
-  fields, nested controls, feedback, floating surfaces, keyboard focus and selection.
-- Calendar separates single/range/multiple values; `numberOfMonths` controls visible
-  months. Clock keeps the period synchronized with controlled time. Dial labels
-  stay above the hand, with contrasting ink clipped to the indicator tip for
-  partially covered marks. DateInput and TimeInput share field presentations and
-  offer panel overrides.
-- WeekCalendar and WeekCalendarRow share a token family, a seven-day window with
-  one-day navigation, keyboard event activation and tooltips on focus or hover.
-- InteractiveMap adapts the Neus interface; `mapOptions` configures Google cartography.
-  Readonly blocks selection and marker changes. Maps SDK and geocoding failures
-  surface as errors; obsolete asynchronous responses are ignored.
-- DataTable preserves AG Grid Community. A stable theme bridge resolves
-  `--data-table-*` in the nearest provider. Columns and optional mobile cards belong
-  to the consumer; actions are documented composition rather than a public component.
-- AppTemplate shares Sidebar's breakpoints; its regions use layout tokens.
-  FormTemplate exposes responsive columns and gaps and accepts arbitrary children.
+Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
 
 ## Do's and Don'ts
 
@@ -187,9 +487,3 @@ sidebars and external framework navigation parity are separate capabilities.
 - Don't use blur, glossy gradients, or rounded pills as default treatments.
 - Don't apply a thick border and shadow to every nested object.
 - Don't present this project vocabulary as a canonical external standard.
-
-Local implementation update: 2026-10-15. See the
-[migration and validation guide](../../../docs/refactor-migration.md) for public
-API changes, test coverage and limits of this web adaptation. Visual review is
-against these local target rules; claims of native or complete framework parity
-remain outside the contract.

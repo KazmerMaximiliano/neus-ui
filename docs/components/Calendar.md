@@ -21,10 +21,9 @@ independent visible-month and selection controls.
 <Calendar mode="multiple" defaultValue={dates} required />
 ```
 
-The former `selected` and `multiple` props are removed. Explicit `value={undefined}`
-clears a controlled selection. Changing mode normalizes an incompatible prior value
+Explicit `value={undefined}` clears a controlled selection.
+Changing mode normalizes an incompatible prior value
 before passing it to DayPicker. On narrow screens multi-month grids can scroll.
-See [migration](../refactor-migration.md#calendar-clock-and-picker-fields).
 
 In Storybook, `designSystem` follows the same pattern as Button: a select with
 the six design systems, defaulting to **Neus**, applied through a local

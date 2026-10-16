@@ -1,6 +1,0 @@
-/* Carbon links: underline on hover, 1px focus outline without offset. */
-[data-design-system="carbon"] {
-  --link-radius: 0px;
-  --link-focus-width: 1px;
-  --link-focus-offset: 0px;
-}

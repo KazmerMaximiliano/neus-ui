@@ -1,7 +1,0 @@
-[data-design-system="material"] {
-  --week-calendar-radius: 12px;
-  --week-calendar-padding: 24px;
-  --week-calendar-event-radius: 12px;
-  --week-calendar-today-background: var(--color-secondary-container);
-  --week-calendar-today-color: var(--color-on-secondary-container);
-}
