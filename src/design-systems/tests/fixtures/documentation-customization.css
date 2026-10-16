@@ -1,0 +1,27 @@
+[data-design-system].documentation-theme {
+  --input-radius: 10px;
+  --input-focus-border-color: rgb(24 86 144);
+  --input-disabled-color: rgb(99 102 106);
+}
+
+.documentation-field .documentation-label {
+  letter-spacing: 0.02em;
+}
+
+.documentation-field .documentation-input:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.documentation-field .documentation-input:disabled {
+  cursor: not-allowed;
+}
+
+.documentation-menu-item:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -3px;
+}
+
+.documentation-dialog::backdrop {
+  background: rgb(0 0 0 / 65%);
+}

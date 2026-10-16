@@ -1,8 +1,42 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { useId, useState } from "react";
+import { usePopover } from "../../hooks/usePopover";
+import { SelectListbox } from "./components/SelectListbox";
 import "./Select.styles.css";
 import { SelectProps } from "./Select.types";
 
 export const Select = ({
+  placeholderClassName,
+  placeholderStyle,
+  emptyClassName,
+  emptyStyle,
+  listClassName,
+  listContentClassName,
+  listContentStyle,
+  optionCheckClassName,
+  optionCheckStyle,
+  optionClassName,
+  optionLabelClassName,
+  optionLabelStyle,
+  panelClassName,
+  panelStyle,
+  searchClassName,
+  searchInputClassName,
+  searchInputStyle,
+  searchStyle,
+  caretClassName,
+  caretStyle,
+  className,
+  errorMessageClassName,
+  errorMessageStyle,
+  fieldClassName,
+  labelClassName,
+  labelStyle,
+  valueClassName,
+  valueStyle,
+  style,
+  triggerClassName,
+  triggerStyle,
   name,
   value,
   defaultValue,
@@ -13,108 +47,141 @@ export const Select = ({
   viewSearchBar = true,
   searchBarPlaceholder = "Buscar...",
   options,
+  fieldStyle,
+  listStyle,
+  optionStyle,
   onChange,
 }: SelectProps) => {
-  const [internalValue, setInternalValue] = useState<string>(
-    defaultValue ?? "",
-  );
+  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
   const selectedValue = value ? value : internalValue;
-  const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const containerRef = useRef<HTMLDivElement>(null);
-  const displayLabel = label || placeholder;
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-        setSearchQuery("");
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const filteredOptions = useMemo(() => {
-    if (!searchQuery) return options;
-    return options.filter((option) =>
-      option.label.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
-  }, [options, searchQuery]);
-
   const selectedLabel = options.find(
     (option) => option.value === selectedValue,
   )?.label;
+  const displayLabel = label || placeholder;
+  const fieldId = useId();
+  const errorId = useId();
+  const popover = usePopover({
+    initialFocus: viewSearchBar
+      ? ".select__search-input"
+      : selectedLabel
+        ? "[role=\"option\"][aria-selected=\"true\"]"
+        : "[role=\"option\"]",
+  });
+  const { id, open, triggerRef, anchorRef, toggle } = popover;
 
   const handleSelect = (optionValue: string) => {
-    if (disabled) return;
     setInternalValue(optionValue);
     onChange?.(optionValue);
-    setIsOpen(false);
-    setSearchQuery("");
   };
 
   return (
-    <div className="select__wrapper" ref={containerRef}>
+    <div
+      className={["select__wrapper", className].filter(Boolean).join(" ")}
+      style={style}
+    >
       {displayLabel && (
         <label
-          className={`select__label${error ? " select__label--error" : ""}${
-            disabled ? " select__label--disabled" : ""
-          }`}
+          htmlFor={fieldId}
+          className={[
+            `select__label${error ? " select__label--error" : ""}${disabled ? " select__label--disabled" : ""
+            }`,
+            labelClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          style={labelStyle}
         >
           {displayLabel}
         </label>
       )}
-      {name && (
-        <input type="hidden" name={name} value={selectedValue} />
-      )}
-      <div className={`select__container${isOpen && !disabled ? " select__container--open" : ""}`}>
-        <div
-          className={`select${error ? " select--error" : ""}${
-            disabled ? " select--disabled" : ""
-          }`}
-          onClick={() => {
-            if (!disabled) {
-              if (isOpen) setSearchQuery("");
-              setIsOpen(!isOpen);
-            }
-          }}
-          tabIndex={disabled ? -1 : 0}
+      {name && <input type="hidden" name={name} value={selectedValue} />}
+      <div
+        ref={anchorRef}
+        className={[
+          `select__field${error ? " select__field--error" : ""}${disabled ? " select__field--disabled" : ""
+          }${open ? " select__field--open" : ""}`,
+          fieldClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        style={fieldStyle}
+      >
+        <button
+          ref={triggerRef}
+          id={fieldId}
+          type="button"
+          role="combobox"
+          className={["select__trigger", triggerClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={triggerStyle}
+          disabled={disabled}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-controls={id}
+          aria-label={displayLabel ? undefined : "Selecciona una opción"}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
+          onClick={toggle}
         >
-          <span className={selectedLabel ? "" : "select__placeholder"}>
+          <span
+            className={[
+              selectedLabel ? "select__value" : "select__placeholder",
+              selectedLabel ? valueClassName : placeholderClassName,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            style={selectedLabel ? valueStyle : placeholderStyle}
+          >
             {selectedLabel || placeholder || "Selecciona una opción..."}
           </span>
-        </div>
-
-        <div className={`select__dropdown${isOpen && !disabled ? " select__dropdown--open" : ""}`}>
-          {viewSearchBar && (
-            <div className="select__search">
-              <input
-                type="text"
-                className="select__search-input"
-                placeholder={searchBarPlaceholder}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onClick={(e) => e.stopPropagation()}
-              />
-            </div>
-          )}
-          {filteredOptions.map((option) => (
-            <div
-              key={option.value}
-              className={`select__option${option.value === selectedValue ? " select__option--selected" : ""}`}
-              onClick={() => handleSelect(option.value ?? "")}
-            >
-              {option.label}
-            </div>
-          ))}
-        </div>
+        </button>
+        <ChevronDown
+          className={["select__caret", caretClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={caretStyle}
+          aria-hidden
+        />
       </div>
-      {error && <div className="select__error-message">{error}</div>}
+      <SelectListbox
+        listClassName={listClassName}
+        panelClassName={panelClassName}
+        panelStyle={panelStyle}
+        searchClassName={searchClassName}
+        searchStyle={searchStyle}
+        searchInputClassName={searchInputClassName}
+        searchInputStyle={searchInputStyle}
+        listContentClassName={listContentClassName}
+        listContentStyle={listContentStyle}
+        optionClassName={optionClassName}
+        optionLabelClassName={optionLabelClassName}
+        optionLabelStyle={optionLabelStyle}
+        optionCheckClassName={optionCheckClassName}
+        optionCheckStyle={optionCheckStyle}
+        emptyClassName={emptyClassName}
+        emptyStyle={emptyStyle}
+        popover={popover}
+        label={displayLabel || "Opciones"}
+        options={options}
+        isSelected={(optionValue) => optionValue === selectedValue}
+        onSelect={handleSelect}
+        viewSearchBar={viewSearchBar}
+        searchBarPlaceholder={searchBarPlaceholder}
+        listStyle={listStyle}
+        optionStyle={optionStyle}
+      />
+      {error && (
+        <div
+          id={errorId}
+          className={["select__error-message", errorMessageClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={errorMessageStyle}
+        >
+          {error}
+        </div>
+      )}
     </div>
   );
 };

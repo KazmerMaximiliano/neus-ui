@@ -1,221 +1,46 @@
-import {
-  GoogleMap,
-  Marker,
-  StandaloneSearchBox,
-  useJsApiLoader,
-} from "@react-google-maps/api";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { BeatLoader } from "react-spinners";
-import { reverseGeocode } from "../../services/geocoding";
-import { Input } from "../Input/Input";
-import { useColors } from "../theme";
+import { useEffect, useMemo } from "react";
+import { MapRuntime } from "./components/MapRuntime";
 import "./InteractiveMap.styles.css";
-import { InteractiveMapProps } from "./InteractiveMap.types";
+import type { InteractiveMapProps } from "./InteractiveMap.types";
+import { parseCoordinates } from "./InteractiveMap.utils";
 
-const GOOGLE_MAPS_LIBRARIES: "places"[] = ["places"];
-
-export const InteractiveMap = ({
-  googleMapsApiKey,
-  initialCoordinates,
-  initialAddress,
-  searchBoxPlaceholder,
-  instructionsText,
-  readonly = false,
-  onLocationSelect,
-}: InteractiveMapProps) => {
-  const colors = useColors();
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey,
-    libraries: GOOGLE_MAPS_LIBRARIES,
-  });
-
-  const handleMapClickRef = useRef<(lat: number, lng: number) => Promise<void>>(
-    async () => {},
+export const InteractiveMap = (props: InteractiveMapProps) => {
+  const { onError } = props;
+  const error = useMemo(
+    () =>
+      !props.googleMapsApiKey.trim()
+        ? new Error("A Google Maps API key is required")
+        : props.initialCoordinates !== undefined &&
+          !parseCoordinates(props.initialCoordinates)
+          ? new Error(
+            "Coordinates must contain latitude (-90…90) and longitude (-180…180)",
+          )
+          : null,
+    [props.googleMapsApiKey, props.initialCoordinates],
   );
-
-  const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [markerPosition, setMarkerPosition] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
-  const [searchBox, setSearchBox] =
-    useState<google.maps.places.SearchBox | null>(null);
-  const [userLocation, setUserLocation] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
-  const [searchValue, setSearchValue] = useState(initialAddress || "");
-
-  const defaultCenter = useMemo(() => {
-    if (initialCoordinates) {
-      const [lat, lng] = initialCoordinates.split(",").map(Number);
-      return { lat, lng };
-    }
-    if (userLocation) {
-      return userLocation;
-    }
-    return { lat: -31.4201, lng: -64.1888 };
-  }, [initialCoordinates, userLocation]);
-
-  // Set initial marker position if coordinates are provided
   useEffect(() => {
-    if (initialCoordinates) {
-      const [lat, lng] = initialCoordinates.split(",").map(Number);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setMarkerPosition({ lat, lng });
-    }
-  }, [initialCoordinates]);
-
-  const onLoad = useCallback((map: google.maps.Map) => {
-    setMap(map);
-  }, []);
-
-  const onUnmount = useCallback(() => {
-    setMap(null);
-  }, []);
-
-  const onSearchBoxLoad = useCallback((ref: google.maps.places.SearchBox) => {
-    setSearchBox(ref);
-  }, []);
-
-  const updateLocationFromCoordinates = useCallback(
-    async (lat: number, lng: number) => {
-      try {
-        const locationData = await reverseGeocode(lat, lng, googleMapsApiKey);
-
-        if (onLocationSelect) {
-          onLocationSelect({
-            coordinates: `${lat},${lng}`,
-            address: locationData.address,
-            country: locationData.country,
-            state: locationData.state,
-            city: locationData.city,
-          });
-        }
-      } catch (error) {
-        console.error("Error en reverse geocoding:", error);
-      }
-    },
-    [onLocationSelect, googleMapsApiKey],
-  );
-
-  const onPlacesChanged = useCallback(async () => {
-    if (!searchBox) return;
-
-    const places = searchBox.getPlaces();
-    if (!places || places.length === 0) return;
-
-    const place = places[0];
-    if (!place.geometry?.location) return;
-
-    const lat = place.geometry.location.lat();
-    const lng = place.geometry.location.lng();
-
-    await handleMapClickRef.current(lat, lng);
-  }, [searchBox]);
-
-  useEffect(() => {
-    handleMapClickRef.current = async (lat: number, lng: number) => {
-      if (!map) return;
-
-      setMarkerPosition({ lat, lng });
-
-      map.setCenter({ lat, lng });
-      map.setZoom(15);
-
-      await updateLocationFromCoordinates(lat, lng);
-    };
-  }, [map, updateLocationFromCoordinates]);
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => {
-          if (import.meta.env.DEV) {
-            console.debug("Geolocation error:", error.message);
-          }
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 300000,
-        },
-      );
-    }
-  }, []);
-
-  if (!isLoaded) {
-    return (
-      <div className="interactive-map__loading">
-        <BeatLoader color={colors.primary.main} speedMultiplier={0.5} />
-      </div>
-    );
-  }
-
+    if (error) onError?.(error);
+  }, [error, onError]);
   return (
-    <div className="interactive-map">
-      {!readonly && (
-        <div className="interactive-map__search-box">
-          <StandaloneSearchBox
-            onLoad={onSearchBoxLoad}
-            onPlacesChanged={onPlacesChanged}
-          >
-            <Input
-              type="text"
-              placeholder={searchBoxPlaceholder || "Find location..."}
-              value={searchValue}
-              onChange={(value) => setSearchValue(value)}
-            ></Input>
-          </StandaloneSearchBox>
+    <div
+      className={["interactive-map", props.className].filter(Boolean).join(" ")}
+      style={props.style}
+    >
+      {error ? (
+        <div
+          role="alert"
+          className={["interactive-map__error", props.errorClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={props.errorStyle}
+        >
+          {error.message}
         </div>
-      )}
-
-      <GoogleMap
-        mapContainerClassName="interactive-map__map"
-        center={defaultCenter}
-        zoom={initialCoordinates ? 15 : 12}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        onClick={(e) => {
-          if (e.latLng) {
-            handleMapClickRef.current(e.latLng.lat(), e.latLng.lng());
-          }
-        }}
-      >
-        {markerPosition && (
-          <Marker
-            position={markerPosition}
-            draggable={true}
-            onDragEnd={(e) => {
-              if (e.latLng) {
-                const lat = e.latLng.lat();
-                const lng = e.latLng.lng();
-                setMarkerPosition({ lat, lng });
-                updateLocationFromCoordinates(lat, lng);
-              }
-            }}
-          />
-        )}
-      </GoogleMap>
-
-      {!readonly && (
-        <div className="interactive-map__info">
-          {instructionsText ? (
-            <p>{instructionsText}</p>
-          ) : (
-            <p>
-              Click on the map or search for a location to place a pin <br />
-              You can drag the marker to adjust the location
-            </p>
-          )}
-        </div>
+      ) : (
+        <MapRuntime
+          key={`${props.googleMapsApiKey}:${props.initialCoordinates ?? ""}:${props.initialAddress ?? ""}`}
+          {...props}
+        />
       )}
     </div>
   );

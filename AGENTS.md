@@ -28,9 +28,11 @@ Neus UI is a production-ready React component library that provides:
 2. **File Structure MUST match pattern**: Each component follows ComponentName/ directory structure
 3. **Export Strategy MUST be named exports**: All components use `export const` pattern
 4. **Props MUST be in separate .types.ts**: Type definitions separated from implementation
-5. **Tests MUST be co-located**: .test.tsx files in same directory as component
+5. **Tests MUST stay inside the component directory**: one test file lives beside the implementation; multiple test files MUST all live in its `tests/` subdirectory
 6. **Styles MUST use CSS files**: Separate .styles.css files with CSS variables
 7. **No default exports**: Only use named exports throughout the project
+8. **Component constants MUST use a dedicated file**: Static data and configuration belong in `ComponentName.consts.ts`, using named UPPER_SNAKE_CASE exports
+9. **Subcomponents MUST live in `components/`**: Every internal or public part belongs in `ComponentName/components/`, following the Stepper pattern
 
 ### Restricted Operations
 
@@ -87,40 +89,110 @@ ComponentName/
 ├── ComponentName.tsx            [REQUIRED] Component implementation
 ├── ComponentName.types.ts       [REQUIRED] Type definitions
 ├── ComponentName.styles.css     [REQUIRED] Component styles
-├── ComponentName.test.tsx       [REQUIRED] Unit tests
+├── ComponentName.test.tsx       [REQUIRED if there is only one test file]
+├── ComponentName.consts.ts      [REQUIRED when declaring static constants]
 ├── ComponentName.utils.ts       [OPTIONAL] Utility functions
-└── ComponentName.stories.tsx    [REQUIRED] Storybook documentation
+├── ComponentName.stories.tsx    [REQUIRED] Storybook documentation
+└── components/                 [WHEN NEEDED] Internal and public subcomponents
 ```
+
+Keep at most one test file at the component root. If the component needs two or
+more test files (behavior, utilities, types or stories), move **all** of them into
+`ComponentName/tests/`; never mix root-level tests with grouped tests:
+
+```text
+ComponentName/
+├── ComponentName.tsx
+├── ComponentName.types.ts
+├── ComponentName.styles.css
+├── ComponentName.stories.tsx
+├── ComponentName.consts.ts      [WHEN NEEDED]
+├── ComponentName.utils.ts       [OPTIONAL]
+└── tests/
+    ├── ComponentName.test.tsx
+    ├── ComponentName.utils.test.ts
+    └── ComponentName.types.test.tsx
+```
+
+Retain descriptive filenames. Public subcomponents apply the same rule within
+their own directories. Shared browser suites in `src/design-systems/tests/` and tests of
+standalone utilities are separate from this component layout rule.
+
+### Subcomponent structure
+
+All rendering parts owned by a component live in its `components/` directory,
+including parts previously declared inside the main implementation. A small
+internal part can be a direct file, as in Stepper; a part with its own styles,
+utilities, tests or stories uses a named directory inside `components/`:
+
+```text
+ComponentName/
+├── index.ts
+├── ComponentName.tsx
+├── ComponentName.types.ts
+├── ComponentName.styles.css
+├── ComponentName.test.tsx
+└── components/
+    ├── InternalPart.tsx
+    └── PublicSection/
+        ├── PublicSection.tsx
+        ├── PublicSection.types.ts
+        ├── PublicSection.styles.css
+        ├── PublicSection.test.tsx
+        └── PublicSection.stories.tsx
+```
+
+Public sections follow the full component conventions, including the `tests/`
+rule when multiple test files are needed. Small internal parts may reuse their
+parent's separate types, styles and behavioral tests; do not create empty files
+or public stories for internal implementation details. Dedicated internal types
+still belong in `.types.ts`, never inside the implementation.
+
+Shared internal parts keep one owning family: PickerField belongs to DateInput,
+MenuItems to Menu, and SelectListbox to Select. Sibling families import these
+implementations directly rather than duplicating them. Contexts, hooks, constants
+and utilities are not rendering subcomponents and keep their dedicated files.
+Templates follow the same rule if they introduce owned subcomponents.
+
+Expose public sections through the owning family's `index.ts`; moving source
+files must not change imports from `neus-ui` or expose internal parts. For example,
+WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components (24 total)
+### Implemented Components and Public Subcomponents (30 total)
 
 | NAME            | FILE_PATH                       | STATUS | FEATURES                                        |
 | --------------- | ------------------------------- | ------ | ----------------------------------------------- |
-| Actions         | src/components/Actions/         | STABLE | Action grouping                                 |
 | Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
 | Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state |
 | Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
-| Card            | src/components/Card/            | STABLE | Avatar, header, color variants, fill mode       |
+| Card            | src/components/Card/            | STABLE | Composable themed surface, className and style |
+| CardHeader      | src/components/Card/components/CardHeader/ | STABLE | Free-form header content and actions |
+| CardMedia       | src/components/Card/components/CardMedia/  | STABLE | Polymorphic media with native/custom props and refs |
+| CardContent     | src/components/Card/components/CardContent/ | STABLE | Content spacing with arbitrary children |
+| CardFooter      | src/components/Card/components/CardFooter/ | STABLE | Wrapping footer content and actions |
 | Checkbox        | src/components/Checkbox/        | STABLE | Indeterminate state                             |
 | Clock           | src/components/Clock/           | STABLE | Time picker                                     |
 | DataTable       | src/components/DataTable/       | STABLE | Sorting, pagination, filtering                  |
-| DateInput       | src/components/DateInput/       | STABLE | Date validation                                 |
+| DateInput       | src/components/DateInput/       | STABLE | Calendar picker field                                 |
 | Dropdown        | src/components/Dropdown/        | STABLE | Dropdown menu                                   |
 | FileUploader    | src/components/FileUploader/    | STABLE | Drag and drop                                   |
 | IconButton      | src/components/IconButton/      | STABLE | Icon containers                                 |
-| Input           | src/components/Input/           | STABLE | Text validation                                 |
+| Input           | src/components/Input/           | STABLE | Seven native types, accessible errors, per-part styles, six token recipes |
 | InteractiveMap  | src/components/InteractiveMap/  | STABLE | Google Maps integration                         |
 | Link            | src/components/Link/            | STABLE | Styled links                                    |
 | Menu            | src/components/Menu/            | STABLE | Actions menu                                    |
 | Modal           | src/components/Modal/           | STABLE | Dialog boxes                                    |
+| ModalHeader     | src/components/Modal/components/ModalHeader/ | STABLE | Dialog title and header composition |
+| ModalContent    | src/components/Modal/components/ModalContent/ | STABLE | Dialog body composition |
+| ModalFooter     | src/components/Modal/components/ModalFooter/ | STABLE | Dialog action composition |
 | MultiSelect     | src/components/MultiSelect/     | STABLE | Multiple selection                              |
 | Select          | src/components/Select/          | STABLE | Single selection                                |
-| Sidebar         | src/components/Sidebar/         | STABLE | Navigation panel                                |
-| TimeInput       | src/components/TimeInput/       | STABLE | Time validation                                 |
+| Sidebar         | src/components/Sidebar/         | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer |
+| TimeInput       | src/components/TimeInput/       | STABLE | Clock picker field                                 |
 | WeekCalendar    | src/components/WeekCalendar/    | STABLE | Weekly view, event categories, navigation       |
-| WeekCalendarRow | src/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
+| WeekCalendarRow | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
 | Stepper         | src/components/Stepper/         | STABLE | Dots/linear/simple variants, labels, step click |
 
 ### Implemented Templates (2 total)
@@ -128,7 +200,7 @@ ComponentName/
 | NAME         | FILE_PATH                   | STATUS | PURPOSE                                    |
 | ------------ | --------------------------- | ------ | ------------------------------------------ |
 | AppTemplate  | src/templates/AppTemplate/  | STABLE | Full application layout                    |
-| FormTemplate | src/templates/FormTemplate/ | STABLE | Form layout with validation and submission |
+| FormTemplate | src/templates/FormTemplate/ | STABLE | Responsive field/action layout; consumer owns form validation and submission |
 
 ## COMMAND REFERENCE
 
@@ -140,6 +212,9 @@ ComponentName/
 | `pnpm dev`       | Start Vite dev server        | NO       |
 | `pnpm storybook` | Start Storybook on port 6006 | NO       |
 | `pnpm preview`   | Preview production build     | NO       |
+| `pnpm design:generate` | Generate palettes and CSS from DESIGN.md | YES |
+| `pnpm design:check` | Validate documents and check generated artifacts without writing | YES |
+| `pnpm design:watch` | Regenerate when a DESIGN.md changes | NO |
 
 ### Build Commands
 
@@ -148,7 +223,6 @@ ComponentName/
 | `pnpm build`           | dist/ folder with compiled code | 5-10s  |
 | `pnpm build:types`     | TypeScript declaration files    | 3-5s   |
 | `pnpm build-storybook` | Static Storybook site           | 15-30s |
-| `pnpm build-docs`      | Documentation in docs/          | 15-30s |
 
 ### Testing Commands
 
@@ -215,11 +289,15 @@ export const ComponentName = ({
 
 ### Import Order MUST be
 
+Keep imports contiguous: do not insert blank lines between import declarations,
+including between the categories below. Multiline import declarations are allowed.
+
 1. React and external dependencies
 2. Internal components and hooks
 3. CSS files
 4. Type definitions
-5. Utility functions
+5. Local constants from ComponentName.consts.ts
+6. Utility functions
 
 CORRECT ORDER EXAMPLE:
 
@@ -238,12 +316,22 @@ import { validateInput } from "./Input.utils";
 | ITEM_TYPE         | PATTERN          | EXAMPLES                     |
 | ----------------- | ---------------- | ---------------------------- |
 | Component files   | PascalCase       | Button.tsx, Modal.tsx        |
+| Constant modules  | ComponentName.consts.ts | Calendar.consts.ts |
 | Component exports | PascalCase       | Button, Modal                |
 | Functions         | camelCase        | handleClick, getData         |
 | Variables         | camelCase        | isLoading, errorMessage      |
 | Constants         | UPPER_SNAKE_CASE | MAX_WIDTH, DEFAULT_COLOR     |
 | CSS classes       | kebab-case       | button-primary, modal-header |
 | Type names        | PascalCase       | ButtonProps, ComponentColor  |
+
+Static module data (arrays, defaults, key maps, selectors and stable configuration
+objects) MUST be declared in `ComponentName.consts.ts`, not inside `.tsx` or
+`.utils.ts` files. Use `.consts.ts` consistently, not `.constants.ts`. Import these
+values into the implementation or utilities. Types remain in `.types.ts`; helper
+functions remain in `.utils.ts`. This rule does not move components, hooks,
+contexts, refs, derived render values or mutable runtime registries into a
+constants module. Consumer-facing language must be configurable or generated from
+locale data rather than fixed to the developer's language.
 
 ### Code Formatting Rules
 
@@ -283,8 +371,8 @@ MUST use CSS variables from theme system:
 
 TEST_FILE MUST:
 
-- Be located in same directory as component
-- Use .test.tsx extension
+- Live beside the component when it has a single test file; when it has multiple files, all MUST be in its `tests/` subdirectory
+- Use `.test.tsx` for component/JSX tests or `.test.ts` for tests without JSX
 - Export from vitest framework
 - Cover rendering, interactions, and edge cases
 
@@ -333,7 +421,7 @@ describe("ComponentName", () => {
 | Edge cases    | Required    | disabled, loading, error states |
 | Line coverage | 70% minimum | For each component              |
 
-### Test Commands - AI REFERENCE
+### Test Commands
 
 | INTENT                | COMMAND                              | WATCH_MODE |
 | --------------------- | ------------------------------------ | ---------- |
@@ -379,6 +467,7 @@ When agents need to implement new components, use this checklist:
 ### Pre-implementation
 
 - [ ] Read component requirements
+- [ ] Read the relevant `src/design-systems/<id>/DESIGN.md` before adapting a component
 - [ ] Check existing similar components for patterns
 - [ ] Plan component props interface
 - [ ] Identify required CSS variables
@@ -389,8 +478,10 @@ When agents need to implement new components, use this checklist:
 - [ ] Create ComponentName.types.ts with props interface
 - [ ] Create ComponentName.tsx with export const
 - [ ] Create ComponentName.styles.css using CSS variables
+- [ ] Create ComponentName.consts.ts for static data/configuration
 - [ ] Create ComponentName.utils.ts if needed
-- [ ] Create ComponentName.test.tsx with 100% coverage
+- [ ] Put owned subcomponents in ComponentName/components/; expose public sections through the family index
+- [ ] Create ComponentName.test.tsx with 100% coverage; if adding multiple test files, place all of them in ComponentName/tests/
 - [ ] Create ComponentName.stories.tsx for Storybook
 - [ ] Run `pnpm lint` - must pass
 - [ ] Run `pnpm test:unit` - must pass
@@ -401,8 +492,8 @@ When agents need to implement new components, use this checklist:
 - [ ] Verify `pnpm build` succeeds
 - [ ] Verify `pnpm test:coverage` shows 70%+ coverage
 - [ ] Verify component works in Storybook
-- [ ] Create guides/components/ComponentName.md with props and usage example
-- [ ] Update guides/COMPONENTS.md index table with the new component
+- [ ] Create docs/components/ComponentName.md with props and usage example
+- [ ] Update docs/components/README.md index table with the new component
 - [ ] Update AGENTS.md COMPONENT INVENTORY if adding new component
 - [ ] Update README.md if component is user-facing
 
@@ -444,7 +535,7 @@ ReactDOM 19+
 ag-grid-community (DataTable)
 ag-grid-react (DataTable)
 react-day-picker (Calendar)
-react-icons (Icon components)
+lucide-react (Icon components)
 react-spinners (Loading indicators)
 @react-google-maps/api (InteractiveMap)
 ```
@@ -452,8 +543,8 @@ react-spinners (Loading indicators)
 ### Development Dependencies (Build/Test)
 
 ```
-TypeScript 5+
-Vite 7+
+TypeScript 6+
+Vite 8+
 Vitest 4+
 React Testing Library
 @testing-library/jest-dom
@@ -479,7 +570,7 @@ Storybook
 
 1. Create .types.ts file for components
 2. Create .styles.css file for components
-3. Create .test.tsx file for components
+3. Create tests for components: one file at the component root, or all files in tests/ when there are multiple
 4. Include descriptive JSDoc comments
 5. Use TypeScript strict mode
 6. Test all interactive features
@@ -527,12 +618,76 @@ Each component MUST export a single Story that exposes all props as editable con
 
 For agents needing additional information:
 
-| QUESTION                    | SOURCE                             | LOCATION                      |
-| --------------------------- | ---------------------------------- | ----------------------------- |
-| Component usage?            | README.md                          | /README.md                    |
-| Component index?            | guides/COMPONENTS.md               | /guides/COMPONENTS.md         |
-| Component props + examples? | guides/components/ComponentName.md | /guides/components/           |
-| Design system / theming?    | guides/DESING_SYSTEM.md            | /guides/DESING_SYSTEM.md      |
-| Type definitions?           | Component.types.ts                 | src/components/ComponentName/ |
-| Test examples?              | Component.test.tsx                 | src/components/ComponentName/ |
-| Styling reference?          | Component.styles.css               | src/components/ComponentName/ |
+| Question | Source |
+| --- | --- |
+| Start here | [Documentation index](./docs/README.md) |
+| Installation and onboarding | [Getting started](./docs/getting-started/README.md) |
+| Components and public sections | [Component catalog](./docs/components/README.md); individual docs/components/ComponentName.md guides |
+| Application and form layouts | [Templates](./docs/templates/README.md) |
+| Provider, scopes and runtime colors | [ThemeProvider](./docs/design/theme-provider.md) |
+| Per-part classes/styles and CSS cascade | [Customization](./docs/design/customization.md) |
+| Shared CSS variables | [Token reference](./docs/design/tokens.md) |
+| Six visual specifications | [Design systems](./docs/design/systems.md) |
+| Component conventions and commands | [Development](./docs/contributing/development.md) |
+| Validation and coverage | [Testing](./docs/contributing/testing.md) |
+| DESIGN.md schema and generation | [Authoring design systems](./docs/contributing/design-system-authoring.md) |
+| Exact props and style destinations | ComponentName.types.ts, ComponentName.tsx and ComponentName.styles.css in the owning family |
+
+
+Project guides live in `docs/` as Markdown; the root `README.md` provides the
+overview, `AGENTS.md` defines repository instructions, and visual specifications
+live in `src/design-systems/<id>/DESIGN.md`. The six design specifications are the
+editable source for tokens, action palettes and all
+component recipes. Follow Google's DESIGN.md alpha format: standard YAML token
+groups, the validated `x-neus` extension, and the eight ordered prose sections.
+Describe visual identity and usage; keep implementation reports and pending-work
+lists out of these documents. Read the relevant specification before adapting a
+recipe. Edit its YAML and run `pnpm design:generate`; never hand-edit files under
+`src/design-systems/<id>/generated/`. Commit generated artifacts with their source.
+Run `pnpm design:check` to validate without writing. Neus owns shared foundations
+and complete per-scope resets; sibling systems override those defaults. Preserve
+CSS variable names, runtime var() dependencies, scope isolation and public APIs.
+The generator and its tests live in `src/design-systems/tooling/`; browser suites and
+fixtures live in `src/design-systems/tests/`. See the architecture guide for the
+extension schema, generation commands and official-linter warning policy.
+Keep external source links and consultation dates in each specification,
+distinguishing local decisions from official guidance. Use relative links with
+explicit `.md` extensions and keep `docs/README.md` up to date when adding guides.
+Documentation can be read directly in the repository or a Markdown editor;
+it does not require a development server or build step. Storybook provides the
+interactive component catalog separately.
+
+## DOCUMENTATION AND CUSTOMIZATION MAINTENANCE
+
+- Start at [docs/README.md](./docs/README.md). Consumer guides live in
+  getting-started/ and design/; API references live in components/ and templates/;
+  maintainer workflows live in contributing/. Every folder has a README index.
+- Keep documentation in English. Add/update the relevant catalog and all relative
+  links when moving files. Do not leave obsolete flat documentation paths.
+- Every public component/section and template needs a guide with usage, complete
+  props/defaults/callbacks, behavior/accessibility, anatomy, class/style destinations,
+  states, complete applicable token inventories and practical customization examples.
+- Keep public types, implementation, single story, tests and documentation in sync.
+  Preserve existing style destinations. Add root className where missing; parts use
+  individual partStyle/partClassName props. Append consumer classes and merge consumer
+  styles after internal defaults. Removing a hook must restore default styling.
+- Repeated parts share their hook; absent parts stay absent. Keep internal part
+  forwarding in PickerField, MenuItems and SelectListbox. Public Card/Modal sections
+  own their hooks. Integrated public children and third-party internals use their
+  existing APIs or documented CSS; do not add new deep forwarding APIs.
+- Use [customization](./docs/design/customization.md) for CSS cascade/scope guidance,
+  [ThemeProvider](./docs/design/theme-provider.md) for runtime behavior and
+  [authoring](./docs/contributing/design-system-authoring.md) for DESIGN.md generation.
+- Storybook templates reuse the shared local design selector, initialize it to
+  global, and inherit the toolbar color scheme. Preview args are not component props.
+
+## CURRENT PUBLIC API CONTRACTS
+
+All public families and both templates have six scoped recipes. Button supports
+solid/secondary/tonal/elevated/outlined/text; Card supports
+auto/filled/outlined/elevated. Input and picker fields share variant, size and
+label-placement controls. Calendar is discriminated
+by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
+renderMobileCard. DataTable actions are composed by consumers with buttons or menus,
+as demonstrated in Storybook. See the [component reference](./docs/components/README.md)
+for the current APIs and usage examples.

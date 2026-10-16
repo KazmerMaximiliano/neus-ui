@@ -1,0 +1,14 @@
+.modal-footer {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: var(--modal-footer-justify);
+  gap: var(--modal-footer-gap);
+  padding: var(--modal-footer-padding);
+  border-top: var(--modal-divider-width) solid var(--modal-divider-color);
+}
+
+.modal-footer > * {
+  flex: var(--modal-footer-item-flex);
+}

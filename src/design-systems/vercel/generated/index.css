@@ -1,0 +1,22 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+@import "./tokens.css";
+@import "./recipes/badge.css";
+@import "./recipes/button.css";
+@import "./recipes/calendar.css";
+@import "./recipes/card.css";
+@import "./recipes/checkbox.css";
+@import "./recipes/clock.css";
+@import "./recipes/dropdown.css";
+@import "./recipes/file-uploader.css";
+@import "./recipes/icon-button.css";
+@import "./recipes/input.css";
+@import "./recipes/link.css";
+@import "./recipes/modal.css";
+@import "./recipes/overlay.css";
+@import "./recipes/select.css";
+@import "./recipes/sidebar.css";
+@import "./recipes/stepper.css";
+@import "./recipes/week-calendar.css";
+@import "./recipes/interactive-map.css";
+@import "./recipes/data-table.css";
+@import "./recipes/templates.css";

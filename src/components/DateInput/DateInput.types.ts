@@ -1,6 +1,28 @@
+import type { CSSProperties } from "react";
 import type { DateRange } from "react-day-picker";
+import type { DesignSystemId } from "../../design-systems";
+import type { FieldPresentationProps } from "../Input/Input.types";
 
-export type DateInputProps = {
+export type DateInputProps = FieldPresentationProps & {
+  placeholderClassName?: string;
+  placeholderStyle?: CSSProperties;
+  className?: string;
+  containerClassName?: string;
+  containerStyle?: CSSProperties;
+  dropdownClassName?: string;
+  dropdownStyle?: CSSProperties;
+  errorClassName?: string;
+  fieldClassName?: string;
+  iconClassName?: string;
+  iconStyle?: CSSProperties;
+  labelClassName?: string;
+  panelClassName?: string;
+  requiredClassName?: string;
+  requiredStyle?: CSSProperties;
+  style?: CSSProperties;
+  valueClassName?: string;
+  valueStyle?: CSSProperties;
+  panelStyle?: CSSProperties;
   value?: Date | DateRange;
   defaultValue?: Date | DateRange;
   name?: string;
@@ -11,5 +33,12 @@ export type DateInputProps = {
   required?: boolean;
   error?: string;
   mode?: "single" | "range";
+  fieldStyle?: CSSProperties;
+  labelStyle?: CSSProperties;
+  errorStyle?: CSSProperties;
   onChange?: (value: Date | DateRange | undefined) => void;
+};
+
+export type DateInputStoryArgs = DateInputProps & {
+  designSystem: DesignSystemId;
 };

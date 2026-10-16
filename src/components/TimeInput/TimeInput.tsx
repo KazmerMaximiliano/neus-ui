@@ -1,125 +1,96 @@
-import { useEffect, useRef, useState } from "react";
-
+import { Clock3 } from "lucide-react";
+import { useState } from "react";
 import { Clock } from "../Clock/Clock";
+import { PickerField } from "../DateInput/components/PickerField/PickerField";
 import { TimeValue } from "../Clock/Clock.types";
-import "./TimeInput.styles.css";
 import { TimeInputProps } from "./TimeInput.types";
 import { serializeTimeValue } from "./TimeInput.utils";
 
-export const TimeInput = ({
-  label,
-  name,
-  error,
-  disabled,
-  placeholder,
-  readonly,
-  value,
-  defaultValue,
-  required,
-  format = "24h",
-  onChange,
-}: TimeInputProps) => {
-  const isControlled = value !== undefined;
-
+export const TimeInput = (props: TimeInputProps) => {
+  const {
+    variant,
+    labelPlacement,
+    size,
+    panelStyle,
+    label,
+    name,
+    error,
+    disabled,
+    placeholder,
+    readonly,
+    value,
+    defaultValue,
+    required,
+    format = "24h",
+    fieldStyle,
+    labelStyle,
+    errorStyle,
+    onChange,
+  } = props;
+  const isControlled = Object.prototype.hasOwnProperty.call(props, "value");
   const [selectedTime, setSelectedTime] = useState<TimeValue | undefined>(
     isControlled ? value : defaultValue,
   );
 
-  const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
   const currentValue = isControlled ? value : selectedTime;
-  const displayValue = serializeTimeValue(currentValue, format);
 
   const handleSelect = (newValue: TimeValue | undefined) => {
-    if (!disabled && !readonly) {
-      if (!isControlled) {
-        setSelectedTime(newValue);
-      }
-      if (onChange) {
-        onChange(newValue);
-      }
-    }
+    if (disabled || readonly) return;
+    if (!isControlled) setSelectedTime(newValue);
+    onChange?.(newValue);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }
-  }, [isOpen]);
-
-  // Sync internal state when controlled prop changes
-  useEffect(() => {
-    if (isControlled) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSelectedTime(value);
-    }
-  }, [value, isControlled]);
-
   return (
-    <div className="time-input__wrapper" ref={containerRef}>
-      {label && (
-        <label
-          className={`time-input__label${error ? " time-input__label--error" : ""}${
-            disabled ? " time-input__label--disabled" : ""
-          }`}
-        >
-          {label}
-          {required && <span className="time-input__required">*</span>}
-        </label>
-      )}
-
-      <div className="time-input__container">
-        <button
-          ref={buttonRef}
-          className={`time-input__field${error ? " time-input__field--error" : ""}${
-            disabled ? " time-input__field--disabled" : ""
-          }`}
-          onClick={() => !disabled && !readonly && setIsOpen(!isOpen)}
+    <PickerField
+      placeholderClassName={props.placeholderClassName}
+      placeholderStyle={props.placeholderStyle}
+      className={props.className}
+      style={props.style}
+      labelClassName={props.labelClassName}
+      requiredClassName={props.requiredClassName}
+      requiredStyle={props.requiredStyle}
+      containerClassName={props.containerClassName}
+      containerStyle={props.containerStyle}
+      fieldClassName={props.fieldClassName}
+      valueClassName={props.valueClassName}
+      valueStyle={props.valueStyle}
+      iconClassName={props.iconClassName}
+      iconStyle={props.iconStyle}
+      panelClassName={props.panelClassName}
+      dropdownClassName={props.dropdownClassName}
+      dropdownStyle={props.dropdownStyle}
+      errorClassName={props.errorClassName}
+      variant={variant}
+      labelPlacement={labelPlacement}
+      size={size}
+      panelStyle={panelStyle}
+      prefix="time-input"
+      icon={Clock3}
+      label={label}
+      placeholder={placeholder}
+      displayValue={serializeTimeValue(currentValue, format)}
+      pickerLabel={label ? `${label}: reloj` : "Reloj"}
+      error={error}
+      disabled={disabled}
+      readonly={readonly}
+      required={required}
+      name={name}
+      hiddenValue={serializeTimeValue(currentValue, "24h")}
+      fieldStyle={fieldStyle}
+      labelStyle={labelStyle}
+      errorStyle={errorStyle}
+    >
+      {() => (
+        <Clock
+          value={currentValue}
+          onChange={(newValue) =>
+            handleSelect(newValue as TimeValue | undefined)
+          }
           disabled={disabled}
-          type="button"
-        >
-          {displayValue || placeholder}
-        </button>
-
-        {isOpen && (
-          <div className="time-input__dropdown">
-            <Clock
-              value={currentValue}
-              onChange={(newValue) =>
-                handleSelect(newValue as TimeValue | undefined)
-              }
-              disabled={disabled}
-              readonly={readonly}
-              format={format}
-            />
-          </div>
-        )}
-      </div>
-
-      {name && (
-        <input
-          type="hidden"
-          name={name}
-          value={serializeTimeValue(currentValue, "24h")}
-          required={required}
+          readonly={readonly}
+          format={format}
         />
       )}
-
-      {error && <div className="time-input__error-message">{error}</div>}
-    </div>
+    </PickerField>
   );
 };

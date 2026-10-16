@@ -1,0 +1,11 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --icon-button-radius: 8px;
+  --icon-button-size-small: 32px;
+  --icon-button-size-medium: 44px;
+  --icon-button-size-large: 56px;
+  --icon-button-icon-size-small: 16px;
+  --icon-button-icon-size-medium: 20px;
+  --icon-button-icon-size-large: 24px;
+  --icon-button-active-transform: scale(0.96);
+}

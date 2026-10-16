@@ -1,0 +1,19 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --link-color: var(--color-primary-text);
+  --link-secondary-color: var(--color-text-secondary);
+  --link-hover-primary-color: var(--link-color);
+  --link-hover-background: transparent;
+  --link-font-weight: inherit;
+  --link-decoration: none;
+  --link-hover-decoration: underline;
+  --link-decoration-thickness: from-font;
+  --link-underline-offset: auto;
+  --link-padding: 0;
+  --link-radius: 2px;
+  --link-focus-width: 2px;
+  --link-focus-color: var(--color-focus);
+  --link-focus-offset: 2px;
+  --link-transition: color 0.2s ease, background-color 0.2s ease;
+}

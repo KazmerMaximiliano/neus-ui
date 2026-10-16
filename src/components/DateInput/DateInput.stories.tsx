@@ -1,14 +1,105 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { DateInput as DateInputComponent } from "./DateInput";
+import type { DateInputStoryArgs } from "./DateInput.types";
 
-const meta: Meta<typeof DateInputComponent> = {
-  title: "Components/DateInput",
+const meta: Meta<DateInputStoryArgs> = {
+  title: "Date & Time/DateInput",
   component: DateInputComponent,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
   argTypes: {
+    placeholderClassName: {
+      control: "text",
+      description: "Additional CSS classes for placeholder",
+    },
+    placeholderStyle: {
+      control: "object",
+      description: "Inline CSS override for placeholder",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    containerClassName: {
+      control: "text",
+      description: "Additional classes for container",
+    },
+    containerStyle: {
+      control: "object",
+      description: "Style override for container",
+    },
+    dropdownClassName: {
+      control: "text",
+      description: "Additional classes for dropdown",
+    },
+    dropdownStyle: {
+      control: "object",
+      description: "Style override for dropdown",
+    },
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    fieldClassName: {
+      control: "text",
+      description: "Additional classes for field",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    iconStyle: { control: "object", description: "Style override for icon" },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    panelClassName: {
+      control: "text",
+      description: "Additional classes for panel",
+    },
+    requiredClassName: {
+      control: "text",
+      description: "Additional classes for required",
+    },
+    requiredStyle: {
+      control: "object",
+      description: "Style override for required",
+    },
+    style: { control: "object", description: "Style override for style" },
+    valueClassName: {
+      control: "text",
+      description: "Additional classes for value",
+    },
+    valueStyle: { control: "object", description: "Style override for value" },
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the DateInput",
+    },
+    variant: {
+      control: "select",
+      options: ["auto", "filled", "outlined"],
+      description: "Shared field variant",
+    },
+    labelPlacement: {
+      control: "select",
+      options: ["auto", "external", "floating"],
+      description: "Shared field labelPlacement",
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Shared field size",
+    },
+    fieldStyle: { control: "object", description: "fieldStyle override" },
+    labelStyle: { control: "object", description: "labelStyle override" },
+    errorStyle: { control: "object", description: "errorStyle override" },
+    panelStyle: { control: "object", description: "panelStyle override" },
+
     value: {
       control: false,
       description: "The current selected date(s)",
@@ -86,7 +177,7 @@ const meta: Meta<typeof DateInputComponent> = {
       },
     },
     onChange: {
-      control: false,
+      action: "changed",
       description: "Callback when date selection changes",
       table: {
         type: {
@@ -101,6 +192,33 @@ type Story = StoryObj<typeof meta>;
 
 export const DateInput: Story = {
   args: {
+    placeholderClassName: undefined,
+    placeholderStyle: undefined,
+    className: undefined,
+    containerClassName: undefined,
+    containerStyle: undefined,
+    dropdownClassName: undefined,
+    dropdownStyle: undefined,
+    errorClassName: undefined,
+    fieldClassName: undefined,
+    iconClassName: undefined,
+    iconStyle: undefined,
+    labelClassName: undefined,
+    panelClassName: undefined,
+    requiredClassName: undefined,
+    requiredStyle: undefined,
+    style: undefined,
+    valueClassName: undefined,
+    valueStyle: undefined,
+    designSystem: "neus",
+    variant: "auto",
+    labelPlacement: "auto",
+    size: "medium",
+    fieldStyle: {},
+    labelStyle: {},
+    errorStyle: {},
+    panelStyle: {},
+
     mode: "single",
     label: "Select a date",
     name: "date-input",
@@ -110,6 +228,11 @@ export const DateInput: Story = {
     required: false,
     error: undefined,
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <DateInputComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

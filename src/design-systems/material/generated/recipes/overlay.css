@@ -1,0 +1,15 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --overlay-background: var(--color-surface-secondary);
+  --overlay-border-width: 0px;
+  --overlay-radius: 4px;
+  --overlay-shadow: var(--elevation-floating);
+  --overlay-offset: 4px;
+  --overlay-padding: 8px 0;
+  --overlay-item-padding: 12px;
+  --overlay-item-min-height: 48px;
+  --overlay-item-font-weight: 400;
+  --overlay-item-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  --overlay-item-selected-background: var(--color-secondary-container);
+  --overlay-item-selected-color: var(--color-on-secondary-container);
+}

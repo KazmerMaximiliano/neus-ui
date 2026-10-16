@@ -1,0 +1,15 @@
+.card-media {
+  box-sizing: border-box;
+  display: block;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0;
+}
+
+.card-media:where(img, video) {
+  height: auto;
+  object-fit: var(--card-media-object-fit);
+  object-position: var(--card-media-object-position);
+}

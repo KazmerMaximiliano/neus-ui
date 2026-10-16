@@ -1,0 +1,9 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --link-color: #0068d6;
+  --link-underline-offset: 0.15em;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --link-color: #52a8ff;
+}

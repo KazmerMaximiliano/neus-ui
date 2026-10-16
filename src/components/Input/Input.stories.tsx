@@ -1,14 +1,169 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
+import { useArgs } from "storybook/preview-api";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { Input as InputComponent } from "./Input";
+import type {
+  InputStoryArgs,
+  InputStoryPreviewProps,
+  InputStoryState,
+} from "./Input.types";
 
-const meta: Meta<typeof InputComponent> = {
-  title: "Components/Input",
+const InputPreview = ({
+  designSystem,
+  updateArgs,
+  ...args
+}: InputStoryPreviewProps) => {
+  const controlled = args.value !== undefined;
+  const [preview, setPreview] = useState<InputStoryState>({
+    value: args.value,
+    argsValue: args.value,
+    pendingValues: [],
+  });
+
+  if (args.value !== preview.argsValue) {
+    const pendingIndex =
+      typeof args.value === "string"
+        ? preview.pendingValues.indexOf(args.value)
+        : -1;
+    setPreview({
+      argsValue: args.value,
+      value: pendingIndex < 0 ? args.value : preview.value,
+      pendingValues:
+        pendingIndex < 0 ? [] : preview.pendingValues.slice(pendingIndex + 1),
+    });
+  }
+
+  return (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <InputComponent
+        {...args}
+        key={controlled ? "controlled" : "uncontrolled"}
+        value={controlled ? preview.value : undefined}
+        defaultValue={controlled ? undefined : args.defaultValue}
+        onChange={(value) => {
+          args.onChange?.(value);
+          if (controlled) {
+            setPreview((current) => ({
+              ...current,
+              value,
+              pendingValues: [...current.pendingValues, value],
+            }));
+            updateArgs({ value });
+          }
+        }}
+      />
+    </ThemeProvider>
+  );
+};
+
+const meta: Meta<InputStoryArgs> = {
+  title: "Base/Input",
   component: InputComponent,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
   argTypes: {
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    controlClassName: {
+      control: "text",
+      description: "Additional classes for control",
+    },
+    controlStyle: {
+      control: "object",
+      description: "Style override for control",
+    },
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    errorIconClassName: {
+      control: "text",
+      description: "Additional classes for errorIcon",
+    },
+    inputClassName: {
+      control: "text",
+      description: "Additional classes for input",
+    },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    prefixClassName: {
+      control: "text",
+      description: "Additional classes for prefix",
+    },
+    requiredClassName: {
+      control: "text",
+      description: "Additional classes for required",
+    },
+    suffixClassName: {
+      control: "text",
+      description: "Additional classes for suffix",
+    },
+    variant: {
+      control: "select",
+      options: ["auto", "filled", "outlined"],
+      description: "Field surface",
+    },
+    labelPlacement: {
+      control: "select",
+      options: ["auto", "external", "floating"],
+      description: "Label presentation",
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Field size",
+    },
+    prefix: {
+      control: "text",
+      description: "Content for prefix; JSX supported in application code",
+    },
+    suffix: {
+      control: "text",
+      description: "Content for suffix; JSX supported in application code",
+    },
+    errorIcon: {
+      control: "text",
+      description: "Content for errorIcon; JSX supported in application code",
+    },
+    prefixStyle: { control: "object", description: "Styles for prefix" },
+    suffixStyle: { control: "object", description: "Styles for suffix" },
+    errorIconStyle: { control: "object", description: "Styles for errorIcon" },
+
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "Design system used for this local preview",
+    },
+    id: { control: "text", description: "Field ID; generated when omitted" },
+    "aria-label": {
+      control: "text",
+      description: "Accessible name for a field without a visible label",
+    },
+    wrapperStyle: {
+      control: "object",
+      description: "Styles for the outer container",
+    },
+    inputStyle: {
+      control: "object",
+      description: "Styles for the native input",
+    },
+    labelStyle: { control: "object", description: "Styles for the label" },
+    requiredStyle: {
+      control: "object",
+      description: "Styles for the required marker",
+    },
+    errorStyle: {
+      control: "object",
+      description: "Styles for the error message",
+    },
     name: {
       control: { type: "text" },
       description: "The name attribute for the input element",
@@ -71,7 +226,7 @@ const meta: Meta<typeof InputComponent> = {
     },
     min: {
       control: { type: "text" },
-      description: "The minimum value (for number, date, time types)",
+      description: "The minimum value (for number inputs)",
       table: {
         type: { summary: "string | number" },
         category: "Props",
@@ -79,7 +234,7 @@ const meta: Meta<typeof InputComponent> = {
     },
     max: {
       control: { type: "text" },
-      description: "The maximum value (for number, date, time types)",
+      description: "The maximum value (for number inputs)",
       table: {
         type: { summary: "string | number" },
         category: "Props",
@@ -87,7 +242,7 @@ const meta: Meta<typeof InputComponent> = {
     },
     step: {
       control: { type: "text" },
-      description: "The step increment (for number, date, time types)",
+      description: "The step increment (for number inputs)",
       table: {
         type: { summary: "string | number" },
         category: "Props",
@@ -128,11 +283,38 @@ const meta: Meta<typeof InputComponent> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Input: Story = {
+export const Input: StoryObj<typeof meta> = {
   args: {
+    className: undefined,
+    controlClassName: undefined,
+    controlStyle: undefined,
+    errorClassName: undefined,
+    errorIconClassName: undefined,
+    inputClassName: undefined,
+    labelClassName: undefined,
+    prefixClassName: undefined,
+    requiredClassName: undefined,
+    suffixClassName: undefined,
+    designSystem: "neus",
+    variant: "auto",
+    labelPlacement: "auto",
+    size: "medium",
+    prefix: undefined,
+    suffix: undefined,
+    errorIcon: undefined,
+    prefixStyle: {},
+    suffixStyle: {},
+    errorIconStyle: {},
+    id: undefined,
+    "aria-label": undefined,
     name: "example-input",
+    defaultValue: undefined,
+    readonly: false,
+    wrapperStyle: {},
+    inputStyle: {},
+    labelStyle: {},
+    requiredStyle: {},
+    errorStyle: {},
     placeholder: "Enter text here...",
     label: "Example Input",
     type: "text",
@@ -143,7 +325,10 @@ export const Input: Story = {
     step: "",
     disabled: false,
     required: false,
-    onChange: (value: string) => console.log("Input changed:", value),
+  },
+  render: function Render(args) {
+    const [, updateArgs] = useArgs<InputStoryArgs>();
+    return <InputPreview {...args} updateArgs={updateArgs} />;
   },
 };
 

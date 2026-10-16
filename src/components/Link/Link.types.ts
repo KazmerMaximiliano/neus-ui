@@ -1,8 +1,17 @@
-type LinkType = 'primary' | 'secondary';
+import type { ComponentPropsWithRef, CSSProperties } from "react";
+import type { DesignSystemId } from "../../design-systems";
 
-export type LinkProps = {
+type LinkType = "primary" | "secondary";
+
+export type LinkProps = Omit<
+  ComponentPropsWithRef<"a">,
+  "type" | "children" | "style"
+> & {
   label: string;
   type?: LinkType;
-  href?: string;
-  onClick?: () => void;
+  style?: CSSProperties | null;
+};
+
+export type LinkStoryArgs = LinkProps & {
+  designSystem: DesignSystemId;
 };

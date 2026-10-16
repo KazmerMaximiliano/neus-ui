@@ -1,0 +1,14 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --font-body: "Inter", Arial, sans-serif;
+  --font-display: var(--font-body);
+  --font-mono: "JetBrains Mono", monospace;
+  --color-primary-text: var(--color-text-primary);
+  --elevation-dialog: 8px 8px 0 var(--color-text-primary);
+  --elevation-floating: 4px 4px 0 var(--color-text-primary);
+}
+
+[data-design-system="neobrutalism"][data-color-scheme="light"] {
+  --color-surface: #fbfbf9;
+  --color-text-primary: #1c293c;
+}

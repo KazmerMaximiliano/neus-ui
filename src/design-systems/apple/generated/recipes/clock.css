@@ -1,0 +1,14 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --clock-radius: 14px;
+  --clock-border-color: var(--color-border-subtle);
+  --clock-header-padding: 16px 20px;
+  --clock-header-border-width: 1px;
+  --clock-header-background: var(--color-surface);
+  --clock-header-color: var(--color-text-primary);
+  --clock-display-font-size: 40px;
+  --clock-segment-padding: 0 6px;
+  --clock-segment-radius: 8px;
+  --clock-segment-inactive-opacity: 1;
+  --clock-segment-active-background: var(--color-surface-secondary);
+}

@@ -1,0 +1,23 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --badge-font-family: var(--font-body);
+  --badge-font-size: 0.65em;
+  --badge-font-weight: 700;
+  --badge-letter-spacing: 0.08em;
+  --badge-text-transform: uppercase;
+  --badge-line-height: normal;
+  --badge-padding: 0.3em 0.8em;
+  --badge-gap: 0.4em;
+  --badge-radius: 2em;
+  --badge-border-width: 0px;
+  --badge-border-color: transparent;
+  --badge-shadow: none;
+  --badge-text-mix: 55%;
+  --badge-dot-size: 6px;
+  --badge-dot-radius: 50%;
+  --badge-dot-border-width: 0px;
+  --badge-dot-font-size: 0.75em;
+  --badge-dot-font-weight: 400;
+  --badge-dot-label-color: var(--color-text-secondary);
+}

@@ -1,8 +1,48 @@
-export type SelectOption = {
-  value?: string | null;
-  label: string;
-};
-export interface MultiSelectProps {
+import type { CSSProperties } from "react";
+import type { DesignSystemId } from "../../design-systems";
+import type { SelectOption } from "../Select";
+
+export type MultiSelectProps = {
+  tagRemoveIconClassName?: string;
+  tagRemoveIconStyle?: CSSProperties;
+  boxClassName?: string;
+  boxStyle?: CSSProperties;
+  checkboxClassName?: string;
+  checkboxStyle?: CSSProperties;
+  emptyClassName?: string;
+  emptyStyle?: CSSProperties;
+  iconClassName?: string;
+  iconStyle?: CSSProperties;
+  listClassName?: string;
+  listContentClassName?: string;
+  listContentStyle?: CSSProperties;
+  optionClassName?: string;
+  optionLabelClassName?: string;
+  optionLabelStyle?: CSSProperties;
+  panelClassName?: string;
+  panelStyle?: CSSProperties;
+  searchClassName?: string;
+  searchInputClassName?: string;
+  searchInputStyle?: CSSProperties;
+  searchStyle?: CSSProperties;
+  caretClassName?: string;
+  caretStyle?: CSSProperties;
+  className?: string;
+  errorMessageClassName?: string;
+  errorMessageStyle?: CSSProperties;
+  fieldClassName?: string;
+  labelClassName?: string;
+  labelStyle?: CSSProperties;
+  placeholderClassName?: string;
+  placeholderStyle?: CSSProperties;
+  srOnlyClassName?: string;
+  srOnlyStyle?: CSSProperties;
+  style?: CSSProperties;
+  tagClassName?: string;
+  tagRemoveClassName?: string;
+  tagRemoveStyle?: CSSProperties;
+  triggerClassName?: string;
+  triggerStyle?: CSSProperties;
   name: string;
   options: SelectOption[];
   error?: string;
@@ -13,5 +53,13 @@ export interface MultiSelectProps {
   disabled?: boolean;
   viewSearchBar?: boolean;
   searchBarPlaceholder?: string;
+  fieldStyle?: CSSProperties;
+  tagStyle?: CSSProperties;
+  listStyle?: CSSProperties;
+  optionStyle?: CSSProperties;
   onChange?: (values: string[]) => void;
-}
+};
+
+export type MultiSelectStoryArgs = MultiSelectProps & {
+  designSystem: DesignSystemId;
+};

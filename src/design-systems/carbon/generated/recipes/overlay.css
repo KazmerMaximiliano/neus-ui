@@ -1,0 +1,14 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --overlay-background: var(--color-surface-secondary);
+  --overlay-border-width: 0px;
+  --overlay-radius: 0px;
+  --overlay-shadow: var(--elevation-floating);
+  --overlay-offset: 2px;
+  --overlay-item-padding: 10px 16px;
+  --overlay-item-min-height: 40px;
+  --overlay-item-font-weight: 400;
+  --overlay-item-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  --overlay-item-selected-background: color-mix(in srgb, var(--color-text-primary) 14%, transparent);
+  --overlay-item-selected-color: var(--color-text-primary);
+}

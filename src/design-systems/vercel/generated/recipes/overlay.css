@@ -1,0 +1,16 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --overlay-border-color: var(--color-border-subtle);
+  --overlay-radius: 12px;
+  --overlay-shadow: var(--elevation-floating);
+  --overlay-offset: 4px;
+  --overlay-padding: 8px;
+  --overlay-item-padding: 8px;
+  --overlay-item-min-height: 40px;
+  --overlay-item-radius: 6px;
+  --overlay-item-font-weight: 400;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --overlay-shadow: var(--elevation-floating);
+}

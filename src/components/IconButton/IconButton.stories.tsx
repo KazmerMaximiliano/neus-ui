@@ -1,18 +1,42 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Pencil } from "lucide-react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { IconButton as IconButtonComponent } from "./IconButton";
+import type { IconButtonStoryArgs } from "./IconButton.types";
 
-const meta: Meta<typeof IconButtonComponent> = {
-  title: "Components/IconButton",
+const meta: Meta<IconButtonStoryArgs> = {
+  title: "Base/IconButton",
   component: IconButtonComponent,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
   argTypes: {
+    className: {
+      control: "text",
+      description: "Additional CSS classes for class name",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    loaderClassName: {
+      control: "text",
+      description: "Additional classes for loader",
+    },
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the icon button",
+    },
     icon: {
       control: false,
-      description: "The icon component to display inside the button",
+      description: "The lucide icon component rendered inside the button",
+    },
+    label: {
+      control: "text",
+      description: "Accessible name announced for the icon-only action",
     },
     type: {
       control: "select",
@@ -40,7 +64,19 @@ const meta: Meta<typeof IconButtonComponent> = {
     },
     loading: {
       control: "boolean",
-      description: "Shows a loading spinner when true",
+      description: "Replaces the icon with a busy loader when true",
+    },
+    buttonStyle: {
+      control: "object",
+      description: "CSS properties applied to the button element",
+    },
+    iconStyle: {
+      control: "object",
+      description: "CSS properties applied to the icon SVG",
+    },
+    loaderStyle: {
+      control: "object",
+      description: "CSS properties applied to the BeatLoader container",
     },
     onClick: {
       action: "clicked",
@@ -49,18 +85,29 @@ const meta: Meta<typeof IconButtonComponent> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const IconButton: Story = {
+export const IconButton: StoryObj<IconButtonStoryArgs> = {
   args: {
+    className: undefined,
+    iconClassName: undefined,
+    loaderClassName: undefined,
+    designSystem: "neus",
     icon: Pencil,
+    label: "Edit",
     type: "button",
     variant: "solid",
     color: "primary",
     size: "medium",
     disabled: false,
     loading: false,
+    buttonStyle: {},
+    iconStyle: {},
+    loaderStyle: {},
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <IconButtonComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

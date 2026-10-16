@@ -6,7 +6,15 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["dist", "coverage", "docs", "storybook-docs", ".vitepress"]),
+  globalIgnores(["dist", "coverage", "storybook-static"]),
+  {
+    rules: {
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "never", prev: "import", next: "import" },
+      ],
+    },
+  },
   {
     files: ["**/*.{ts,tsx}"],
     extends: [

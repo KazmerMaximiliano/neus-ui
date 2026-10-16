@@ -1,156 +1,145 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { createRef, useState } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider } from "../../providers/ThemeProvider";
 import { Modal } from "./Modal";
+import { ModalContent } from "./components/ModalContent/ModalContent";
+import { ModalFooter } from "./components/ModalFooter/ModalFooter";
+import { ModalHeader } from "./components/ModalHeader/ModalHeader";
 
-afterEach(() => {
-  cleanup();
-});
+afterEach(cleanup);
 
-const renderModal = (props = {}) => {
-  return render(
-    <ThemeProvider>
-      <Modal {...props} />
-    </ThemeProvider>,
+const Example = ({ onClose = vi.fn() }: { onClose?: () => void }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>Open</button>
+      <Modal
+        isOpen={open}
+        onClose={() => {
+          onClose();
+          setOpen(false);
+        }}
+      >
+        <ModalHeader>Delete project</ModalHeader>
+        <ModalContent>Body</ModalContent>
+        <ModalFooter>
+          <button onClick={() => setOpen(false)}>Cancel</button>
+        </ModalFooter>
+      </Modal>
+    </>
   );
 };
 
 describe("Modal", () => {
   describe("rendering", () => {
-    it("renders nothing when isOpen is false", () => {
-      const { container } = renderModal({ isOpen: false });
-      expect(container.querySelector(".modal__backdrop")).not.toBeInTheDocument();
+    it("keeps a closed dialog without children out of the accessibility tree", () => {
+      render(
+        <Modal>
+          <ModalContent>Body</ModalContent>
+        </Modal>,
+      );
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      expect(screen.queryByText("Body")).not.toBeInTheDocument();
     });
 
-    it("renders nothing when isOpen is not provided", () => {
-      const { container } = renderModal();
-      expect(container.querySelector(".modal__backdrop")).not.toBeInTheDocument();
+    it("opens as a modal dialog named by its header", () => {
+      const showModal = vi.spyOn(HTMLDialogElement.prototype, "showModal");
+      render(
+        <Modal isOpen>
+          <ModalHeader>Delete project</ModalHeader>
+          <ModalContent>Body</ModalContent>
+        </Modal>,
+      );
+      expect(showModal).toHaveBeenCalledOnce();
+      expect(
+        screen.getByRole("dialog", { name: "Delete project" }),
+      ).toHaveClass("modal");
+      showModal.mockRestore();
     });
 
-    it("renders backdrop when isOpen is true", () => {
-      const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal__backdrop")).toBeInTheDocument();
+    it("prefers an explicit aria-label or aria-labelledby", () => {
+      const { rerender } = render(
+        <Modal isOpen aria-label="Settings">
+          <ModalHeader>Ignored</ModalHeader>
+        </Modal>,
+      );
+      expect(
+        screen.getByRole("dialog", { name: "Settings" }),
+      ).toBeInTheDocument();
+      rerender(
+        <>
+          <h2 id="custom">Custom title</h2>
+          <Modal isOpen aria-labelledby="custom" />
+        </>,
+      );
+      expect(
+        screen.getByRole("dialog", { name: "Custom title" }),
+      ).toBeInTheDocument();
     });
 
-    it("renders modal content when isOpen is true", () => {
-      const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal__content")).toBeInTheDocument();
-    });
-  });
-
-  describe("title", () => {
-    it("renders title when provided", () => {
-      renderModal({ isOpen: true, title: "Test Title" });
-      expect(screen.getByText("Test Title")).toBeInTheDocument();
-    });
-
-    it("does not render header when title is not provided", () => {
-      const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal__header")).not.toBeInTheDocument();
-    });
-
-    it("renders header with title", () => {
-      const { container } = renderModal({ isOpen: true, title: "Test Title" });
-      expect(container.querySelector(".modal__header")).toBeInTheDocument();
-    });
-  });
-
-  describe("children", () => {
-    it("renders children when provided", () => {
-      renderModal({
-        isOpen: true,
-        children: <div data-testid="modal-child">Child Content</div>,
-      });
-      expect(screen.getByTestId("modal-child")).toBeInTheDocument();
-    });
-
-    it("does not render body when children are not provided", () => {
-      const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal__body")).not.toBeInTheDocument();
-    });
-
-    it("renders body with children", () => {
-      const { container } = renderModal({
-        isOpen: true,
-        children: <span>Content</span>,
-      });
-      expect(container.querySelector(".modal__body")).toBeInTheDocument();
-    });
-  });
-
-  describe("buttons", () => {
-    it("renders confirm button when onConfirm is provided", () => {
-      renderModal({ isOpen: true, onConfirm: vi.fn() });
-      expect(screen.getByText("Confirmar")).toBeInTheDocument();
-    });
-
-    it("renders cancel button when onCancel is provided", () => {
-      renderModal({ isOpen: true, onCancel: vi.fn() });
-      expect(screen.getByText("Cancelar")).toBeInTheDocument();
-    });
-
-    it("renders custom confirm text", () => {
-      renderModal({
-        isOpen: true,
-        onConfirm: vi.fn(),
-        confirmText: "Yes, delete",
-      });
-      expect(screen.getByText("Yes, delete")).toBeInTheDocument();
-    });
-
-    it("renders custom cancel text", () => {
-      renderModal({
-        isOpen: true,
-        onCancel: vi.fn(),
-        cancelText: "No, go back",
-      });
-      expect(screen.getByText("No, go back")).toBeInTheDocument();
-    });
-
-    it("does not render footer when no handlers provided", () => {
-      const { container } = renderModal({ isOpen: true });
-      expect(container.querySelector(".modal__footer")).not.toBeInTheDocument();
-    });
-
-    it("renders footer when handlers are provided", () => {
-      const { container } = renderModal({
-        isOpen: true,
-        onConfirm: vi.fn(),
-        onCancel: vi.fn(),
-      });
-      expect(container.querySelector(".modal__footer")).toBeInTheDocument();
+    it("forwards classes, styles, native attributes and the dialog ref", () => {
+      const ref = createRef<HTMLDialogElement>();
+      const { rerender } = render(
+        <Modal
+          isOpen
+          ref={ref}
+          aria-label="Info"
+          className="extra"
+          style={{ width: 320 }}
+          data-testid="dialog"
+        />,
+      );
+      const dialog = screen.getByTestId("dialog");
+      expect(ref.current).toBe(dialog);
+      expect(dialog).toHaveClass("modal", "extra");
+      expect(dialog).toHaveStyle({ width: "320px" });
+      rerender(
+        <Modal isOpen aria-label="Info" style={null} data-testid="dialog" />,
+      );
+      expect(screen.getByTestId("dialog").getAttribute("style") ?? "").toBe("");
     });
   });
 
-  describe("click handling", () => {
-    it("calls onConfirm when confirm button is clicked", () => {
-      const onConfirm = vi.fn();
-      renderModal({ isOpen: true, onConfirm });
-      fireEvent.click(screen.getByText("Confirmar"));
-      expect(onConfirm).toHaveBeenCalledTimes(1);
+  describe("interactions", () => {
+    it("asks to close on Escape (cancel) without closing by itself", () => {
+      const onClose = vi.fn();
+      render(<Modal isOpen aria-label="Info" onClose={onClose} />);
+      const dialog = screen.getByRole("dialog");
+      const cancel = new Event("cancel", { cancelable: true });
+      fireEvent(dialog, cancel);
+      expect(onClose).toHaveBeenCalledOnce();
+      expect(cancel.defaultPrevented).toBe(true);
+      expect(dialog).toHaveAttribute("open");
     });
 
-    it("calls onCancel when cancel button is clicked", () => {
-      const onCancel = vi.fn();
-      renderModal({ isOpen: true, onCancel });
-      fireEvent.click(screen.getByText("Cancelar"));
-      expect(onCancel).toHaveBeenCalledTimes(1);
+    it("asks to close on backdrop clicks but not on content clicks", () => {
+      const onClose = vi.fn();
+      const onClick = vi.fn();
+      render(
+        <Modal isOpen aria-label="Info" onClose={onClose} onClick={onClick}>
+          <ModalContent>Body</ModalContent>
+        </Modal>,
+      );
+      fireEvent.click(screen.getByText("Body"));
+      expect(onClose).not.toHaveBeenCalled();
+      fireEvent.click(screen.getByRole("dialog"));
+      expect(onClose).toHaveBeenCalledOnce();
+      expect(onClick).toHaveBeenCalledTimes(2);
     });
 
-    it("calls onCancel when backdrop is clicked", () => {
-      const onCancel = vi.fn();
-      const { container } = renderModal({ isOpen: true, onCancel });
-      const backdrop = container.querySelector(".modal__backdrop");
-      fireEvent.click(backdrop!);
-      expect(onCancel).toHaveBeenCalledTimes(1);
-    });
-
-    it("does not call onCancel when modal content is clicked", () => {
-      const onCancel = vi.fn();
-      const { container } = renderModal({ isOpen: true, onCancel });
-      const content = container.querySelector(".modal__content");
-      fireEvent.click(content!);
-      expect(onCancel).not.toHaveBeenCalled();
+    it("closes from a child action and returns focus to the opener", async () => {
+      const onClose = vi.fn();
+      render(<Example onClose={onClose} />);
+      const opener = screen.getByRole("button", { name: "Open" });
+      await userEvent.click(opener);
+      expect(
+        screen.getByRole("dialog", { name: "Delete project" }),
+      ).toBeInTheDocument();
+      await userEvent.click(screen.getByRole("button", { name: "Cancel" }));
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      expect(onClose).not.toHaveBeenCalled();
+      expect(opener).toHaveFocus();
     });
   });
 });

@@ -1,0 +1,17 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --clock-border-width: 3px;
+  --clock-border-color: var(--color-text-primary);
+  --clock-radius: 4px;
+  --clock-shadow: 4px 4px 0 var(--color-text-primary);
+  --clock-header-border-width: 3px;
+  --clock-header-color: var(--color-text-on-primary);
+  --clock-segment-inactive-opacity: 0.75;
+  --clock-face-background: var(--color-surface);
+  --clock-face-border-width: 3px;
+  --clock-hand-color: var(--color-text-primary);
+  --clock-hand-text-color: var(--color-surface);
+  --clock-hand-width: 3px;
+  --clock-number-radius: 4px;
+  --clock-selected-color: var(--color-text-on-primary);
+}

@@ -1,14 +1,105 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { TimeInput as TimeInputComponent } from "./TimeInput";
+import type { TimeInputStoryArgs } from "./TimeInput.types";
 
-const meta: Meta<typeof TimeInputComponent> = {
-  title: "Components/TimeInput",
+const meta: Meta<TimeInputStoryArgs> = {
+  title: "Date & Time/TimeInput",
   component: TimeInputComponent,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
   argTypes: {
+    placeholderClassName: {
+      control: "text",
+      description: "Additional CSS classes for placeholder",
+    },
+    placeholderStyle: {
+      control: "object",
+      description: "Inline CSS override for placeholder",
+    },
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    containerClassName: {
+      control: "text",
+      description: "Additional classes for container",
+    },
+    containerStyle: {
+      control: "object",
+      description: "Style override for container",
+    },
+    dropdownClassName: {
+      control: "text",
+      description: "Additional classes for dropdown",
+    },
+    dropdownStyle: {
+      control: "object",
+      description: "Style override for dropdown",
+    },
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    fieldClassName: {
+      control: "text",
+      description: "Additional classes for field",
+    },
+    iconClassName: {
+      control: "text",
+      description: "Additional classes for icon",
+    },
+    iconStyle: { control: "object", description: "Style override for icon" },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    panelClassName: {
+      control: "text",
+      description: "Additional classes for panel",
+    },
+    requiredClassName: {
+      control: "text",
+      description: "Additional classes for required",
+    },
+    requiredStyle: {
+      control: "object",
+      description: "Style override for required",
+    },
+    style: { control: "object", description: "Style override for style" },
+    valueClassName: {
+      control: "text",
+      description: "Additional classes for value",
+    },
+    valueStyle: { control: "object", description: "Style override for value" },
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the TimeInput",
+    },
+    variant: {
+      control: "select",
+      options: ["auto", "filled", "outlined"],
+      description: "Shared field variant",
+    },
+    labelPlacement: {
+      control: "select",
+      options: ["auto", "external", "floating"],
+      description: "Shared field labelPlacement",
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Shared field size",
+    },
+    fieldStyle: { control: "object", description: "fieldStyle override" },
+    labelStyle: { control: "object", description: "labelStyle override" },
+    errorStyle: { control: "object", description: "errorStyle override" },
+    panelStyle: { control: "object", description: "panelStyle override" },
+
     value: {
       control: false,
       description: "The current selected time(s)",
@@ -81,12 +172,12 @@ const meta: Meta<typeof TimeInputComponent> = {
       options: ["12h", "24h"],
       description: "Time display format (12-hour or 24-hour)",
       table: {
-        type: { summary: '"12h" | "24h"' },
-        defaultValue: { summary: '"24h"' },
+        type: { summary: "\"12h\" | \"24h\"" },
+        defaultValue: { summary: "\"24h\"" },
       },
     },
     onChange: {
-      control: false,
+      action: "changed",
       description: "Callback when time selection changes",
       table: {
         type: {
@@ -101,6 +192,33 @@ type Story = StoryObj<typeof meta>;
 
 export const TimeInput: Story = {
   args: {
+    placeholderClassName: undefined,
+    placeholderStyle: undefined,
+    className: undefined,
+    containerClassName: undefined,
+    containerStyle: undefined,
+    dropdownClassName: undefined,
+    dropdownStyle: undefined,
+    errorClassName: undefined,
+    fieldClassName: undefined,
+    iconClassName: undefined,
+    iconStyle: undefined,
+    labelClassName: undefined,
+    panelClassName: undefined,
+    requiredClassName: undefined,
+    requiredStyle: undefined,
+    style: undefined,
+    valueClassName: undefined,
+    valueStyle: undefined,
+    designSystem: "neus",
+    variant: "auto",
+    labelPlacement: "auto",
+    size: "medium",
+    fieldStyle: {},
+    labelStyle: {},
+    errorStyle: {},
+    panelStyle: {},
+
     label: "Select a time",
     name: "time-input",
     placeholder: "Pick a time...",
@@ -110,6 +228,11 @@ export const TimeInput: Story = {
     error: undefined,
     format: "24h",
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <TimeInputComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;

@@ -1,0 +1,13 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --modal-radius: 4px;
+  --modal-border-width: 3px;
+  --modal-border-color: var(--color-text-primary);
+  --modal-shadow: var(--elevation-dialog);
+  --modal-backdrop: rgba(28, 41, 60, 0.6);
+  --modal-divider-width: 2px;
+  --modal-divider-color: var(--color-text-primary);
+  --modal-title-weight: 800;
+  --modal-content-color: var(--color-text-primary);
+  --modal-footer-gap: 16px;
+}

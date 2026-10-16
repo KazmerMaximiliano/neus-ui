@@ -1,0 +1,17 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --badge-font-size: 12px;
+  --badge-font-weight: 800;
+  --badge-letter-spacing: normal;
+  --badge-line-height: 16px;
+  --badge-padding: 2px 8px;
+  --badge-radius: 4px;
+  --badge-border-width: 2px;
+  --badge-border-color: var(--color-text-primary);
+  --badge-text-mix: 0%;
+  --badge-dot-size: 10px;
+  --badge-dot-radius: 2px;
+  --badge-dot-border-width: 2px;
+  --badge-dot-font-size: 12px;
+  --badge-dot-font-weight: 700;
+}

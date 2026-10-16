@@ -1,0 +1,5 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --link-decoration: underline;
+  --link-underline-offset: 0.15em;
+}

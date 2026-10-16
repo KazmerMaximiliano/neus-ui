@@ -1,20 +1,39 @@
 import { StepperProps } from "../Stepper.types";
 
-export const StepperSimple = ({ currentStep, totalSteps }: StepperProps) => {
+export const StepperSimple = ({
+  dotClassName,
+  trackClassName,
+  trackStyle,
+  currentStep,
+  totalSteps,
+  dotStyle,
+}: StepperProps) => {
   const steps = Array.from({ length: totalSteps }, (_, i) => i);
 
   return (
-    <div className="stepper__track" aria-label="Progress">
-      {steps.map((index) => {
-        const isActive = index <= currentStep;
-        return (
-          <div
-            key={index}
-            className={`stepper__simple-dot${isActive ? " stepper__simple-dot--active" : ""}`}
-            aria-current={index === currentStep ? "step" : undefined}
-          />
-        );
-      })}
+    <div
+      className={["stepper__track", trackClassName].filter(Boolean).join(" ")}
+      style={trackStyle}
+      role="progressbar"
+      aria-label="Progress"
+      aria-valuenow={currentStep + 1}
+      aria-valuemin={1}
+      aria-valuemax={totalSteps}
+      aria-valuetext={`Step ${currentStep + 1} of ${totalSteps}`}
+    >
+      {steps.map((index) => (
+        <div
+          key={index}
+          className={[
+            `stepper__simple-dot${index <= currentStep ? " stepper__simple-dot--active" : ""}${index === currentStep ? " stepper__simple-dot--current" : ""
+            }`,
+            dotClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          style={dotStyle}
+        />
+      ))}
     </div>
   );
 };

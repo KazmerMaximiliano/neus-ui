@@ -1,32 +1,47 @@
 .link {
   display: inline;
-  background: transparent;
-  border: none;
-  padding: 0;
-  text-transform: none;
-  font-weight: inherit;
-  letter-spacing: normal;
+  padding: var(--link-padding);
+  border-radius: var(--link-radius);
+  font-family: inherit;
   font-size: inherit;
+  font-weight: var(--link-font-weight);
   line-height: inherit;
-  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+  text-decoration-line: var(--link-decoration);
+  text-decoration-thickness: var(--link-decoration-thickness);
+  text-underline-offset: var(--link-underline-offset);
+  transition: var(--link-transition);
   cursor: pointer;
-  text-decoration: none;
 }
 
 .link--primary {
-  color: var(--color-primary);
-}
-
-.link--primary:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--color-primary);
+  color: var(--link-color);
 }
 
 .link--secondary {
-  color: var(--color-gray-500);
+  color: var(--link-secondary-color);
+}
+
+.link:hover {
+  background-color: var(--link-hover-background);
+  color: var(--link-hover-color, inherit);
+  text-decoration-line: var(--link-hover-decoration);
+}
+
+.link--primary:hover {
+  --link-hover-color: var(--link-hover-primary-color);
 }
 
 .link--secondary:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--color-gray-500);
+  --link-hover-color: var(--link-secondary-color);
+}
+
+.link:focus-visible {
+  outline: var(--link-focus-width) solid var(--link-focus-color);
+  outline-offset: var(--link-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
 }

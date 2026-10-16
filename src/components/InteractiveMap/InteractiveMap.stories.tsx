@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { InteractiveMap as InteractiveMapComponent } from "./InteractiveMap";
 
 const meta: Meta<typeof InteractiveMapComponent> = {
-  title: "Components/InteractiveMap",
+  title: "Location/InteractiveMap",
   component: InteractiveMapComponent,
   parameters: {
     layout: "centered",
@@ -12,6 +12,39 @@ const meta: Meta<typeof InteractiveMapComponent> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    errorClassName: {
+      control: "text",
+      description: "Additional classes for error",
+    },
+    instructionsClassName: {
+      control: "text",
+      description: "Additional classes for instructions",
+    },
+    loadingClassName: {
+      control: "text",
+      description: "Additional classes for loading",
+    },
+    mapClassName: {
+      control: "text",
+      description: "Additional classes for map",
+    },
+    searchClassName: {
+      control: "text",
+      description: "Additional classes for search",
+    },
+    className: { control: "text", description: "className override" },
+    style: { control: "object", description: "style override" },
+    mapStyle: { control: "object", description: "mapStyle override" },
+    searchStyle: { control: "object", description: "searchStyle override" },
+    instructionsStyle: {
+      control: "object",
+      description: "instructionsStyle override",
+    },
+    loadingStyle: { control: "object", description: "loadingStyle override" },
+    errorStyle: { control: "object", description: "errorStyle override" },
+    mapOptions: { control: "object", description: "mapOptions override" },
+    onError: { action: "onError", description: "Reports map errors" },
+
     googleMapsApiKey: {
       control: "text",
       description: "Google Maps API key for map functionality",
@@ -45,16 +78,25 @@ const meta: Meta<typeof InteractiveMapComponent> = {
 
 type Story = StoryObj<typeof meta>;
 
-const mockOnLocationSelect = (location: Record<string, unknown>) => {
-  console.log("Location selected:", location);
-};
-
 export const InteractiveMap: Story = {
   args: {
+    errorClassName: undefined,
+    instructionsClassName: undefined,
+    loadingClassName: undefined,
+    mapClassName: undefined,
+    searchClassName: undefined,
+    className: undefined,
+    style: {},
+    mapStyle: {},
+    searchStyle: {},
+    instructionsStyle: {},
+    loadingStyle: {},
+    errorStyle: {},
+    mapOptions: {},
+
     googleMapsApiKey: "",
     initialCoordinates: "-31.4201,-64.1888",
     initialAddress: "Plaza San Martín, Córdoba, Argentina",
-    onLocationSelect: mockOnLocationSelect,
   },
 };
 

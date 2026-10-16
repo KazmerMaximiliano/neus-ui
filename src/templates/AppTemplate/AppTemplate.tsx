@@ -1,42 +1,68 @@
-import { useState } from "react";
-
-import { Menu } from "lucide-react";
-import { IconButton, Sidebar } from "../../components";
+import { Sidebar } from "../../components";
 import "./AppTemplate.styles.css";
-import { AppTemplateProps } from "./AppTemplate.types";
+import type { AppTemplateProps } from "./AppTemplate.types";
+import { APP_NAME } from "./AppTemplate.consts";
 
-const appName = import.meta.env.VITE_APP_NAME || "NEUS UI";
-
-export const AppTemplate = ({ children, routes, menu }: AppTemplateProps) => {
-  const [showSidebar, setShowSidebar] = useState(false);
-
-  const handleCloseSidebar = () => {
-    setShowSidebar(false);
-  };
-
-  return (
-    <div className="app-template">
-      <div className="app-template__header">
-        <IconButton icon={Menu} onClick={() => setShowSidebar(!showSidebar)} />
-        {menu}
-      </div>
-
-      {showSidebar && (
-        <div className="app-template__overlay" onClick={handleCloseSidebar} />
-      )}
-
-      <div
-        className={`app-template__sidebar${
-          showSidebar ? " app-template__sidebar--active" : ""
-        }`}
-        onClick={handleCloseSidebar}
-      >
-        <Sidebar title={appName} items={routes} />
-      </div>
-
-      <div className="app-template__content">
-        <div className="app-template__content-container">{children}</div>
-      </div>
+export const AppTemplate = ({
+  sidebarClassName,
+  contentClassName,
+  contentContainerClassName,
+  headerClassName,
+  sidebarContainerClassName,
+  sidebarContainerStyle,
+  children,
+  routes,
+  menu,
+  title = APP_NAME,
+  className,
+  style,
+  headerStyle,
+  sidebarStyle,
+  contentStyle,
+  contentContainerStyle,
+}: AppTemplateProps) => (
+  <div
+    className={["app-template", className].filter(Boolean).join(" ")}
+    style={style}
+  >
+    <header
+      className={["app-template__header", headerClassName]
+        .filter(Boolean)
+        .join(" ")}
+      style={headerStyle}
+    >
+      {menu}
+    </header>
+    <div
+      className={["app-template__sidebar", sidebarContainerClassName]
+        .filter(Boolean)
+        .join(" ")}
+      style={sidebarContainerStyle}
+    >
+      <Sidebar
+        className={sidebarClassName}
+        title={title}
+        items={routes}
+        sidebarStyle={sidebarStyle}
+      />
     </div>
-  );
-};
+    <main
+      className={["app-template__content", contentClassName]
+        .filter(Boolean)
+        .join(" ")}
+      style={contentStyle}
+    >
+      <div
+        className={[
+          "app-template__content-container",
+          contentContainerClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        style={contentContainerStyle}
+      >
+        {children}
+      </div>
+    </main>
+  </div>
+);

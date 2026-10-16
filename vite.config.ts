@@ -1,7 +1,6 @@
 /// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-
 // https://vite.dev/config/
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
@@ -43,6 +42,29 @@ export default defineConfig({
           name: 'unit',
           environment: 'jsdom',
           include: ['src/**/*.test.{ts,tsx}'],
+          exclude: ['src/**/*.browser.test.tsx', 'src/design-systems/tooling/**'],
+          setupFiles: ['./vitest.setup.ts']
+        }
+      },
+      {
+        extends: true,
+        test: {
+          name: 'design-system-generator',
+          environment: 'node',
+          include: ['src/design-systems/tooling/tests/**/*.test.ts']
+        }
+      },
+      {
+        extends: true,
+        test: {
+          name: 'design-systems',
+          include: ['src/design-systems/**/*.browser.test.tsx'],
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright({}),
+            instances: [{ browser: 'chromium' }]
+          },
           setupFiles: ['./vitest.setup.ts']
         }
       },

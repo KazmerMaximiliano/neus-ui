@@ -1,0 +1,13 @@
+.card-story {
+  width: min(400px, calc(100vw - 48px));
+}
+
+.card-story-heading {
+  font-size: var(--fs-lg);
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.card-story p {
+  line-height: 1.6;
+}

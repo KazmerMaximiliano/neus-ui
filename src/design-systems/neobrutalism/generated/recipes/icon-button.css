@@ -1,0 +1,16 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --icon-button-radius: 4px;
+  --icon-button-size-small: 40px;
+  --icon-button-size-medium: 48px;
+  --icon-button-size-large: 60px;
+  --icon-button-icon-stroke: 2.5;
+  --icon-button-border-width: 3px;
+  --icon-button-border-color: var(--color-text-primary);
+  --icon-button-outlined-border-width: 3px;
+  --icon-button-shadow: 4px 4px 0 var(--color-text-primary);
+  --icon-button-shadow-hover: 4px 4px 0 var(--color-text-primary);
+  --icon-button-shadow-active: 2px 2px 0 var(--color-text-primary);
+  --icon-button-active-transform: translate(2px, 2px);
+  --icon-button-focus-offset: 6px;
+}

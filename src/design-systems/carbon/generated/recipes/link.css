@@ -1,0 +1,6 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --link-radius: 0px;
+  --link-focus-width: 1px;
+  --link-focus-offset: 0px;
+}

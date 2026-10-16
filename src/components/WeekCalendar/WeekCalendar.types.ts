@@ -1,9 +1,42 @@
-import { CalendarEvent, EventsByCategory } from "../WeekCalendarRow/WeekCalendarRow.types";
+import type { CSSProperties } from "react";
+import type { DesignSystemId } from "../../design-systems";
+import { CalendarEvent, EventsByCategory } from "./components/WeekCalendarRow/WeekCalendarRow.types";
 
 export type WeekCalendarProps = {
+  dateRangeClassName?: string;
+  dateRangeStyle?: CSSProperties;
+  categoryClassName?: string;
+  eventClassName?: string;
+  tooltipClassName?: string;
+  dayNameClassName?: string;
+  dayNameStyle?: CSSProperties;
+  dayNumberClassName?: string;
+  dayNumberStyle?: CSSProperties;
+  gridClassName?: string;
+  headerCategoryCellClassName?: string;
+  headerCategoryCellStyle?: CSSProperties;
+  headerClassName?: string;
+  headerDayCellClassName?: string;
+  headerDayCellStyle?: CSSProperties;
+  headerRowClassName?: string;
+  headerRowStyle?: CSSProperties;
+  navigationClassName?: string;
+  titleClassName?: string;
+  titleStyle?: CSSProperties;
+  className?: string;
+  style?: CSSProperties;
+  headerStyle?: CSSProperties;
+  navigationStyle?: CSSProperties;
+  gridStyle?: CSSProperties;
+  categoryStyle?: CSSProperties;
+  eventStyle?: CSSProperties;
+  tooltipStyle?: CSSProperties;
   title?: string;
   events?: EventsByCategory[];
   hoverContent?: (event: CalendarEvent) => React.ReactNode;
   onEventClick?: (event: CalendarEvent) => void;
   onDayChange?: (weekStart: Date, weekEnd: Date) => void;
+};
+export type WeekCalendarStoryArgs = WeekCalendarProps & {
+  designSystem: DesignSystemId;
 };

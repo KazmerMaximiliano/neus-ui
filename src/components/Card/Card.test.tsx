@@ -1,289 +1,250 @@
+import { composeStories } from "@storybook/react";
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { Card } from "./Card";
-import { CardProps } from "./Card.types";
+import { createRef } from "react";
+import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import type {
+  CardContentProps,
+  CardFooterProps,
+  CardHeaderProps,
+  CardProps,
+} from "../../index";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardMedia,
+} from "../../index";
+import { ThemeProvider } from "../../providers";
+import * as stories from "./Card.stories";
 
-afterEach(() => {
-  cleanup();
-});
+afterEach(cleanup);
 
-const renderCard = (props: CardProps = {}) => {
-  return render(<Card {...props} />);
-};
+const { Card: CardStory } = composeStories(stories);
 
 describe("Card", () => {
-  describe("rendering", () => {
-    it("renders card element", () => {
-      renderCard();
-      expect(document.querySelector(".card")).toBeInTheDocument();
-    });
-
-    it("renders with children", () => {
-      render(<Card>Card content</Card>);
-      expect(screen.getByText("Card content")).toBeInTheDocument();
-    });
-
-    it("renders children inside card-body", () => {
-      render(<Card>Body text</Card>);
-      const body = document.querySelector(".card__body");
-      expect(body).toBeInTheDocument();
-      expect(body).toHaveTextContent("Body text");
-    });
-
-    it("renders ReactNode children", () => {
-      render(
-        <Card>
-          <span data-testid="custom">Custom</span>
-        </Card>,
-      );
-      expect(screen.getByTestId("custom")).toBeInTheDocument();
-    });
-
-    it("renders as div by default", () => {
-      renderCard();
-      expect(document.querySelector("div.card")).toBeInTheDocument();
-    });
-
-    it("renders as button when onClick is provided", () => {
-      renderCard({ onClick: vi.fn() });
-      expect(document.querySelector("button.card")).toBeInTheDocument();
-    });
+  it("renders an empty passive div without generated sections or inline styles", () => {
+    const { container } = render(<Card />);
+    expect(container.firstElementChild?.tagName).toBe("DIV");
+    expect(container.firstElementChild).toHaveClass("card");
+    expect(container.firstElementChild).toBeEmptyDOMElement();
+    expect(container.firstElementChild).not.toHaveAttribute("style");
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 
-  describe("avatar", () => {
-    it("does not render avatar-wrapper when no avatar props provided", () => {
-      render(<Card>No avatar</Card>);
-      expect(document.querySelector(".card__avatar-wrapper")).not.toBeInTheDocument();
-    });
-
-    it("renders avatar image when avatarImage is provided", () => {
-      renderCard({
-        avatarImage: "https://example.com/avatar.png",
-        avatarAlt: "User",
-      });
-      const img = screen.getByAltText("User");
-      expect(img).toBeInTheDocument();
-      expect(img).toHaveAttribute("src", "https://example.com/avatar.png");
-      expect(img).toHaveClass("avatar");
-    });
-
-    it("renders avatar placeholder when only avatarAlt is provided", () => {
-      renderCard({ avatarAlt: "Max" });
-      const placeholder = document.querySelector(".card__avatar-placeholder");
-      expect(placeholder).toBeInTheDocument();
-      expect(placeholder).toHaveTextContent("M");
-    });
-
-    it("renders uppercase first letter of avatarAlt in placeholder", () => {
-      renderCard({ avatarAlt: "john" });
-      const placeholder = document.querySelector(".card__avatar-placeholder");
-      expect(placeholder).toHaveTextContent("J");
-    });
-
-    it("does not render avatar-wrapper when avatarAlt is empty string", () => {
-      renderCard({ avatarAlt: "" });
-      expect(document.querySelector(".card__avatar-wrapper")).not.toBeInTheDocument();
-    });
-
-    it("renders avatar-wrapper when avatarImage is provided without avatarAlt", () => {
-      renderCard({ avatarImage: "https://example.com/avatar.png" });
-      const img = document.querySelector(".avatar");
-      expect(img).toBeInTheDocument();
-      expect(img).toHaveAttribute("src", "https://example.com/avatar.png");
-    });
+  it("renders free-form children directly, including zero and fragments", () => {
+    const { container } = render(
+      <Card>
+        Plain text{0}
+        <>
+          <span>Nested text</span>
+        </>
+      </Card>,
+    );
+    expect(container.firstElementChild).toHaveTextContent(
+      "Plain text0Nested text",
+    );
+    expect(screen.getByText("Nested text").parentElement).toBe(
+      container.firstElementChild,
+    );
+    expect(container.querySelector(".card-content")).not.toBeInTheDocument();
   });
 
-  describe("header", () => {
-    it("does not render header when leading and trailing are not provided", () => {
-      render(<Card>No header</Card>);
-      expect(document.querySelector(".card__header")).not.toBeInTheDocument();
-    });
-
-    it("renders header with leading content", () => {
-      renderCard({ leading: "Title" });
-      const leading = document.querySelector(".card__header-leading");
-      expect(leading).toBeInTheDocument();
-      expect(leading).toHaveTextContent("Title");
-    });
-
-    it("renders header with trailing content", () => {
-      renderCard({ trailing: "Action" });
-      const trailing = document.querySelector(".card__header-trailing");
-      expect(trailing).toBeInTheDocument();
-      expect(trailing).toHaveTextContent("Action");
-    });
-
-    it("renders header with both leading and trailing", () => {
-      renderCard({ leading: "Title", trailing: "Button" });
-      expect(document.querySelector(".card__header-leading")).toHaveTextContent("Title");
-      expect(document.querySelector(".card__header-trailing")).toHaveTextContent("Button");
-    });
-
-    it("renders ReactNode in header leading", () => {
-      renderCard({ leading: <span data-testid="lead">Lead</span> });
-      expect(screen.getByTestId("lead")).toBeInTheDocument();
-    });
-
-    it("renders ReactNode in header trailing", () => {
-      renderCard({ trailing: <button data-testid="action">X</button> });
-      expect(screen.getByTestId("action")).toBeInTheDocument();
-    });
-  });
-
-  describe("slots (icon, title, description)", () => {
-    it("does not render slots section when no slot props provided", () => {
-      renderCard();
-      expect(document.querySelector(".card__slots")).not.toBeInTheDocument();
-    });
-
-    it("renders icon slot", () => {
-      renderCard({ icon: <span data-testid="icon">★</span> });
-      expect(screen.getByTestId("icon")).toBeInTheDocument();
-      expect(document.querySelector(".card__slot-icon")).toBeInTheDocument();
-    });
-
-    it("renders title slot", () => {
-      renderCard({ title: "Feature Title" });
-      expect(screen.getByText("Feature Title")).toBeInTheDocument();
-      expect(document.querySelector(".card__slot-title")).toBeInTheDocument();
-    });
-
-    it("renders description slot", () => {
-      renderCard({ description: "Feature description text" });
-      expect(screen.getByText("Feature description text")).toBeInTheDocument();
-      expect(document.querySelector(".card__slot-description")).toBeInTheDocument();
-    });
-
-    it("renders all slots together", () => {
-      renderCard({
-        icon: <span data-testid="icon">★</span>,
-        title: "Fast Invoicing",
-        description: "Create invoices in seconds",
-      });
-      expect(screen.getByTestId("icon")).toBeInTheDocument();
-      expect(screen.getByText("Fast Invoicing")).toBeInTheDocument();
-      expect(screen.getByText("Create invoices in seconds")).toBeInTheDocument();
-    });
-
-    it("does not render icon element when icon is not provided", () => {
-      renderCard({ title: "No icon" });
-      expect(document.querySelector(".card__slot-icon")).not.toBeInTheDocument();
-    });
-  });
-
-  describe("fill", () => {
-    it("does not apply fill class by default", () => {
-      renderCard();
-      expect(document.querySelector(".card")).not.toHaveClass("card--fill");
-    });
-
-    it("applies fill class when fill is true", () => {
-      renderCard({ fill: true });
-      expect(document.querySelector(".card")).toHaveClass("card--fill");
-    });
-
-    it("does not apply fill class when fill is false", () => {
-      renderCard({ fill: false });
-      expect(document.querySelector(".card")).not.toHaveClass("card--fill");
-    });
-  });
-
-  describe("color", () => {
-    it("does not apply color class by default", () => {
-      renderCard();
-      const card = document.querySelector(".card");
-      expect(card).not.toHaveClass("card--purple");
-      expect(card).not.toHaveClass("card--pink");
-      expect(card).not.toHaveClass("card--red");
-      expect(card).not.toHaveClass("card--yellow");
-      expect(card).not.toHaveClass("card--blue");
-      expect(card).not.toHaveClass("card--green");
-    });
-
-    it.each(["purple", "pink", "red", "yellow", "blue", "green"] as const)(
-      "applies %s color class when specified",
-      (color) => {
-        renderCard({ color, fill: true });
-        expect(document.querySelector(".card")).toHaveClass(`card--${color}`);
-      },
+  it("preserves complete composition and caller order without additional wrappers", () => {
+    const { container } = render(
+      <Card>
+        <CardHeader>
+          <h2>Product</h2>
+        </CardHeader>
+        <CardMedia src="/product.png" alt="Product preview" />
+        <CardContent>Description</CardContent>
+        <CardFooter>
+          <a href="#details">Details</a>
+        </CardFooter>
+      </Card>,
+    );
+    expect(
+      Array.from(
+        container.firstElementChild!.children,
+        (child) => child.className,
+      ),
+    ).toEqual(["card-header", "card-media", "card-content", "card-footer"]);
+    expect(
+      screen.getByRole("heading", { name: "Product" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: "Product preview" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Details" })).toHaveAttribute(
+      "href",
+      "#details",
     );
   });
 
-  describe("behavioral modifiers", () => {
-    it("applies card--highlighted class when highlighted is true", () => {
-      renderCard({ highlighted: true });
-      expect(document.querySelector(".card")).toHaveClass("card--highlighted");
-    });
-
-    it("does not apply card--highlighted class by default", () => {
-      renderCard();
-      expect(document.querySelector(".card")).not.toHaveClass("card--highlighted");
-    });
-
-    it("applies card--selected class when selected is true", () => {
-      renderCard({ selected: true });
-      expect(document.querySelector(".card")).toHaveClass("card--selected");
-    });
-
-    it("does not apply card--selected class by default", () => {
-      renderCard();
-      expect(document.querySelector(".card")).not.toHaveClass("card--selected");
-    });
-
-    it("applies card--disabled class when disabled is true", () => {
-      renderCard({ disabled: true });
-      expect(document.querySelector(".card")).toHaveClass("card--disabled");
-    });
-
-    it("does not apply card--disabled class by default", () => {
-      renderCard();
-      expect(document.querySelector(".card")).not.toHaveClass("card--disabled");
-    });
-
-    it("applies card--interactive class when onClick is provided", () => {
-      renderCard({ onClick: vi.fn() });
-      expect(document.querySelector(".card")).toHaveClass("card--interactive");
-    });
-
-    it("calls onClick when card is clicked", async () => {
-      const handleClick = vi.fn();
-      renderCard({ onClick: handleClick });
-      await userEvent.click(document.querySelector("button.card")!);
-      expect(handleClick).toHaveBeenCalledOnce();
-    });
-
-    it("does not call onClick when disabled", async () => {
-      const handleClick = vi.fn();
-      renderCard({ onClick: handleClick, disabled: true });
-      const btn = document.querySelector("button.card")!;
-      await userEvent.click(btn);
-      expect(handleClick).not.toHaveBeenCalled();
-    });
+  it("permits partial, reordered and repeated sections", () => {
+    const { container } = render(
+      <Card>
+        <CardFooter>First</CardFooter>
+        <CardContent>Second</CardContent>
+        <CardContent>Third</CardContent>
+      </Card>,
+    );
+    expect(container.firstElementChild).toHaveTextContent("FirstSecondThird");
+    expect(container.querySelector(".card-header")).toBeNull();
+    expect(container.querySelector(".card-media")).toBeNull();
   });
 
-  describe("combined props", () => {
-    it("renders full card with all default props", () => {
-      render(
-        <Card
-          avatarImage="https://example.com/avatar.png"
-          avatarAlt="User"
-          leading="Title"
-          trailing="Close"
-          fill
-          color="blue"
-        >
-          Full content
+  it("merges classes, forwards attributes/ref and applies only its own style", () => {
+    const ref = createRef<HTMLDivElement>();
+    render(
+      <Card
+        ref={ref}
+        id="product"
+        role="group"
+        aria-label="Product"
+        data-product="one"
+        className="custom-card"
+        style={{ borderRadius: 7 }}
+      >
+        <CardContent style={{ padding: 23 }}>Details</CardContent>
+      </Card>,
+    );
+    const card = screen.getByRole("group", { name: "Product" });
+    expect(ref.current).toBe(card);
+    expect(card).toHaveClass("card", "custom-card");
+    expect(card).toHaveAttribute("id", "product");
+    expect(card).toHaveAttribute("data-product", "one");
+    expect(card).toHaveStyle({ borderRadius: "7px" });
+    expect(screen.getByText("Details")).toHaveStyle({ padding: "23px" });
+    expect(screen.getByText("Details").style.borderRadius).toBe("");
+  });
+
+  it("removes prior inline overrides when style returns to null", () => {
+    const { container, rerender } = render(<Card style={{ padding: 12 }} />);
+    rerender(<Card style={null} />);
+    expect((container.firstElementChild as HTMLElement).style.padding).toBe("");
+  });
+
+  it("keeps actions in children independently clickable and keyboard accessible", async () => {
+    const onClick = vi.fn();
+    const user = userEvent.setup();
+    render(
+      <Card>
+        <CardContent>Content</CardContent>
+        <CardFooter>
+          <button onClick={onClick}>Save</button>
+          <a href="#details">Details</a>
+        </CardFooter>
+      </Card>,
+    );
+    await user.click(screen.getByText("Content"));
+    expect(onClick).not.toHaveBeenCalled();
+    await user.tab();
+    expect(screen.getByRole("button", { name: "Save" })).toHaveFocus();
+    await user.keyboard("{Enter}");
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    expect(onClick).toHaveBeenCalledTimes(2);
+    await user.tab();
+    expect(screen.getByRole("link")).toHaveFocus();
+  });
+
+  it("exports public props and rejects the retired API at type checking", () => {
+    expectTypeOf<CardProps>().toHaveProperty("children");
+    expectTypeOf<CardHeaderProps>().toHaveProperty("style");
+    expectTypeOf<CardContentProps>().toHaveProperty("className");
+    expectTypeOf<CardFooterProps>().toHaveProperty("ref");
+    expectTypeOf<CardProps>().toHaveProperty("variant");
+    expectTypeOf<CardProps>().not.toHaveProperty("avatarImage");
+    expectTypeOf<CardProps>().not.toHaveProperty("avatarAlt");
+    expectTypeOf<CardProps>().not.toHaveProperty("leading");
+    expectTypeOf<CardProps>().not.toHaveProperty("trailing");
+    expectTypeOf<CardProps>().not.toHaveProperty("fill");
+    expectTypeOf<CardProps>().not.toHaveProperty("color");
+    expectTypeOf<CardProps>().not.toHaveProperty("icon");
+    expectTypeOf<CardProps>().not.toHaveProperty("title");
+    expectTypeOf<CardProps>().not.toHaveProperty("description");
+    expectTypeOf<CardProps>().not.toHaveProperty("highlighted");
+    expectTypeOf<CardProps>().not.toHaveProperty("selected");
+    expectTypeOf<CardProps>().not.toHaveProperty("disabled");
+    expectTypeOf<CardProps>().not.toHaveProperty("onClick");
+    // @ts-expect-error Card no longer accepts a click behavior.
+    void (<Card onClick={() => undefined} />);
+    // @ts-expect-error Card's style must be a CSS object, not a string.
+    void (<Card style="padding: 1rem" />);
+  });
+});
+
+describe("Card story", () => {
+  it("exports one story with all systems and the new controls", () => {
+    expect(Object.keys(stories).filter((key) => key !== "default")).toEqual([
+      "Card",
+    ]);
+    expect(stories.default.argTypes?.designSystem?.options).toEqual(
+      DESIGN_SYSTEMS.map(({ id }) => id),
+    );
+    expect(stories.Card.args?.style).toBeNull();
+    expect(stories.default.argTypes).toHaveProperty("variant.options", [
+      "auto",
+      "filled",
+      "outlined",
+      "elevated",
+    ]);
+  });
+
+  it("previews the full composition and changes only its local design", () => {
+    const { rerender } = render(
+      <ThemeProvider scope="local" designSystem="carbon" colorScheme="dark">
+        <CardStory />
+      </ThemeProvider>,
+    );
+    const card = screen.getByRole("heading").closest(".card")!;
+    expect(card.closest("[data-design-system]")).toHaveAttribute(
+      "data-design-system",
+      "neus",
+    );
+    expect(card.closest("[data-color-scheme]")).toHaveAttribute(
+      "data-color-scheme",
+      "dark",
+    );
+    expect(card.querySelector(".card-media")).toBeInTheDocument();
+    expect(card.querySelector(".card-content")).toBeInTheDocument();
+    expect(card.querySelector(".card-footer")).toBeInTheDocument();
+    rerender(
+      <CardStory
+        designSystem="material"
+        className="story-override"
+        style={{ padding: 5 }}
+      />,
+    );
+    expect(screen.getByRole("heading").closest(".card")).toHaveClass(
+      "story-override",
+    );
+    expect(screen.getByRole("heading").closest(".card")).toHaveStyle({
+      padding: "5px",
+    });
+    expect(
+      screen.getByRole("heading").closest("[data-design-system]"),
+    ).toHaveAttribute("data-design-system", "material");
+  });
+});
+
+describe("surface variants", () => {
+  it.each(["auto", "filled", "outlined", "elevated"] as const)(
+    "keeps %s passive and preserves composition",
+    (variant) => {
+      const { container } = render(
+        <Card variant={variant}>
+          <button>Child action</button>
         </Card>,
       );
-
-      const card = document.querySelector(".card");
-      expect(card).toHaveClass("card--fill");
-      expect(card).toHaveClass("card--blue");
-      expect(screen.getByAltText("User")).toBeInTheDocument();
-      expect(document.querySelector(".card__header-leading")).toHaveTextContent("Title");
-      expect(document.querySelector(".card__header-trailing")).toHaveTextContent("Close");
-      expect(screen.getByText("Full content")).toBeInTheDocument();
-    });
-  });
+      expect(container.querySelector(".card")).toHaveAttribute(
+        "data-variant",
+        variant,
+      );
+      expect(screen.getAllByRole("button")).toHaveLength(1);
+      expect(screen.getByRole("button")).toHaveTextContent("Child action");
+    },
+  );
 });

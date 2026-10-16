@@ -1,6 +1,12 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  render,
+  render as renderCustomization,
+  screen,
+} from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { Badge } from "./Badge";
+import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { Badge, Badge as CustomizationComponent } from "./Badge";
 import { BadgeColor } from "./Badge.types";
 
 afterEach(() => {
@@ -55,7 +61,13 @@ describe("Badge", () => {
   });
 
   describe("color", () => {
-    const colors: BadgeColor[] = ["primary", "success", "error", "info", "neutral"];
+    const colors: BadgeColor[] = [
+      "primary",
+      "success",
+      "error",
+      "info",
+      "neutral",
+    ];
 
     it.each(colors)("applies %s color class", (color) => {
       render(<Badge label="Label" color={color} />);
@@ -88,4 +100,73 @@ describe("Badge", () => {
       expect(document.querySelector(".badge__dot")).not.toBeInTheDocument();
     });
   });
+});
+
+describe("Badge customization", () => {
+  it("applies badgeStyle to the badge and dotStyle to the dot", () => {
+    render(
+      <Badge
+        label="Online"
+        variant="dot"
+        badgeStyle={{ gap: 9 }}
+        dotStyle={{ width: 11 }}
+      />,
+    );
+    const badge = screen.getByText("Online");
+    expect(badge).toHaveStyle({ gap: "9px" });
+    expect(badge.querySelector(".badge__dot")).toHaveStyle({ width: "11px" });
+  });
+
+  it("hides the decorative dot from assistive technology", () => {
+    render(<Badge label="Online" variant="dot" />);
+    expect(document.querySelector(".badge__dot")).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
+  });
+});
+
+describe("Badge part customization", () => {
+  it.each([
+    {
+      cls: "className",
+      sty: "badgeStyle",
+      base: "badge",
+      phase: "default",
+    },
+    {
+      cls: "dotClassName",
+      sty: "dotStyle",
+      base: "badge__dot",
+      phase: "default",
+    },
+  ])(
+    "applies and removes $cls / $sty ($phase) while preserving base classes",
+    async ({ cls, sty, base }) => {
+      const overrides = {
+        [cls]: "consumer-part",
+        [sty]: { outlineOffset: "7px" },
+      };
+      const view = renderCustomization(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent label="Status" variant="dot" {...overrides} />
+        </CustomizationThemeProvider>,
+      );
+      const targets = view.container.querySelectorAll(".consumer-part");
+      expect(targets.length).toBeGreaterThan(0);
+      for (const target of targets) {
+        expect(target).toHaveClass(base);
+        expect(target).toHaveStyle({ outlineOffset: "7px" });
+      }
+      view.rerender(
+        <CustomizationThemeProvider scope="local">
+          <CustomizationComponent label="Status" variant="dot" />
+        </CustomizationThemeProvider>,
+      );
+      expect(view.container.querySelector(".consumer-part")).toBeNull();
+      for (const target of view.container.querySelectorAll("." + base)) {
+        expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");
+      }
+    },
+  );
 });

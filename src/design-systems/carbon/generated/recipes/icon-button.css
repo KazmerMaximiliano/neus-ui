@@ -1,0 +1,12 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --icon-button-radius: 0px;
+  --icon-button-size-small: 32px;
+  --icon-button-size-medium: 40px;
+  --icon-button-size-large: 48px;
+  --icon-button-icon-size-small: 16px;
+  --icon-button-icon-size-medium: 16px;
+  --icon-button-icon-size-large: 20px;
+  --icon-button-focus-offset: -2px;
+  --icon-button-focus-inner-shadow: inset 0 0 0 1px var(--color-surface);
+}

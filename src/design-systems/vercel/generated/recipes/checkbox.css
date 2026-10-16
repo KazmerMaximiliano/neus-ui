@@ -1,0 +1,9 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --checkbox-size: 16px;
+  --checkbox-border-width: 1px;
+  --checkbox-border-color: var(--color-text-placeholder);
+  --checkbox-hover-border-color: var(--color-text-primary);
+  --checkbox-checked-shadow: none;
+  --checkbox-icon-size: 12px;
+}

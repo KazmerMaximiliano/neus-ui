@@ -1,9 +1,53 @@
-import { useEffect, useRef, useState, useMemo } from "react";
-import { Checkbox } from "../Checkbox/Checkbox";
+import { ChevronDown, X } from "lucide-react";
+import { useId, useState } from "react";
+import { usePopover } from "../../hooks/usePopover";
+import { SelectListbox } from "../Select/components/SelectListbox";
+import "../Checkbox/Checkbox.styles.css";
+import "../Select/Select.styles.css";
 import "./MultiSelect.styles.css";
 import { MultiSelectProps } from "./MultiSelect.types";
 
 export const MultiSelect = ({
+  tagRemoveIconClassName,
+  tagRemoveIconStyle,
+  boxClassName,
+  boxStyle,
+  checkboxClassName,
+  checkboxStyle,
+  emptyClassName,
+  emptyStyle,
+  iconClassName,
+  iconStyle,
+  listClassName,
+  listContentClassName,
+  listContentStyle,
+  optionClassName,
+  optionLabelClassName,
+  optionLabelStyle,
+  panelClassName,
+  panelStyle,
+  searchClassName,
+  searchInputClassName,
+  searchInputStyle,
+  searchStyle,
+  caretClassName,
+  caretStyle,
+  className,
+  errorMessageClassName,
+  errorMessageStyle,
+  fieldClassName,
+  labelClassName,
+  labelStyle,
+  placeholderClassName,
+  placeholderStyle,
+  srOnlyClassName,
+  srOnlyStyle,
+  style,
+  tagClassName,
+  tagRemoveClassName,
+  tagRemoveStyle,
+  triggerClassName,
+  triggerStyle,
   name,
   placeholder,
   label,
@@ -14,150 +58,208 @@ export const MultiSelect = ({
   disabled = false,
   viewSearchBar = true,
   searchBarPlaceholder = "Buscar...",
+  fieldStyle,
+  tagStyle,
+  listStyle,
+  optionStyle,
   onChange,
 }: MultiSelectProps) => {
   const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
   const selectedValues = value.length > 0 ? value : internalValues;
-  const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const containerRef = useRef<HTMLDivElement>(null);
-  const displayLabel = label || placeholder;
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-        setSearchQuery("");
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleToggleOption = (value?: string | null) => {
-    if (disabled) return;
-    if (value) {
-      const newValues = selectedValues.includes(value)
-        ? selectedValues.filter((v) => v !== value)
-        : [...selectedValues, value];
-
-      setInternalValues(newValues);
-      onChange?.(newValues);
-    }
-  };
-
-  const handleRemoveTag = (valueToRemove: string) => {
-    if (disabled) return;
-
-    const newValues = selectedValues.filter((v) => v !== valueToRemove);
-    setInternalValues(newValues);
-    onChange?.(newValues);
-  };
-
-  const filteredOptions = useMemo(() => {
-    if (!searchQuery) return options;
-    return options.filter((option) =>
-      option.label.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
-  }, [options, searchQuery]);
-
-  const selectedLabels = selectedValues.map(
-    (value) => options.find((option) => option.value === value)?.label || value,
+  const selectedOptions = selectedValues.map(
+    (selected) =>
+      options.find((option) => option.value === selected) ?? {
+        value: selected,
+        label: selected,
+      },
   );
+  const displayLabel = label || placeholder;
+  const fieldId = useId();
+  const errorId = useId();
+  const popover = usePopover({
+    initialFocus: viewSearchBar ? ".select__search-input" : "[role=\"option\"]",
+  });
+  const { id, open, triggerRef, anchorRef, toggle } = popover;
+
+  const update = (next: string[]) => {
+    setInternalValues(next);
+    onChange?.(next);
+  };
+
+  const toggleValue = (optionValue: string) => {
+    if (!optionValue) return;
+    update(
+      selectedValues.includes(optionValue)
+        ? selectedValues.filter((v) => v !== optionValue)
+        : [...selectedValues, optionValue],
+    );
+  };
 
   return (
-    <div className="multiselect__wrapper">
+    <div
+      className={["select__wrapper multiselect", className]
+        .filter(Boolean)
+        .join(" ")}
+      style={style}
+    >
       {displayLabel && (
         <label
-          className={`multiselect__label${error ? " multiselect__label--error" : ""}${
-            disabled ? " multiselect__label--disabled" : ""
-          }`}
+          htmlFor={fieldId}
+          className={[
+            `select__label${error ? " select__label--error" : ""}${disabled ? " select__label--disabled" : ""
+            }`,
+            labelClassName,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+          style={labelStyle}
         >
           {displayLabel}
         </label>
       )}
-      {selectedValues.map((value, index) => (
+      {selectedValues.map((selected, index) => (
         <input
           key={index}
           type="hidden"
           name={`${name}[${index}]`}
-          value={value}
+          value={selected}
         />
       ))}
-
       <div
-        className={`multiselect__container${isOpen && !disabled ? " multiselect__container--open" : ""}`}
+        ref={anchorRef}
+        className={[
+          `select__field${error ? " select__field--error" : ""}${disabled ? " select__field--disabled" : ""
+          }${open ? " select__field--open" : ""}`,
+          fieldClassName,
+        ]
+          .filter(Boolean)
+          .join(" ")}
+        style={fieldStyle}
       >
-        <div
-          className={`multiselect${error ? " multiselect--error" : ""}${
-            disabled ? " multiselect--disabled" : ""
-          }`}
-          onClick={() => {
-            if (!disabled) {
-              if (isOpen) setSearchQuery("");
-              setIsOpen(!isOpen);
-            }
-          }}
-          tabIndex={disabled ? -1 : 0}
+        {selectedOptions.map((option) => (
+          <span
+            key={option.value}
+            className={["multiselect__tag", tagClassName]
+              .filter(Boolean)
+              .join(" ")}
+            style={tagStyle}
+          >
+            {option.label}
+            {!disabled && (
+              <button
+                type="button"
+                className={["multiselect__tag-remove", tagRemoveClassName]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={tagRemoveStyle}
+                aria-label={`Quitar ${option.label}`}
+                onClick={() =>
+                  update(selectedValues.filter((v) => v !== option.value))
+                }
+              >
+                <X
+                  aria-hidden
+                  className={[
+                    "multiselect__tag-remove-icon",
+                    tagRemoveIconClassName,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  style={tagRemoveIconStyle}
+                />
+              </button>
+            )}
+          </span>
+        ))}
+        <button
+          ref={triggerRef}
+          id={fieldId}
+          type="button"
+          role="combobox"
+          className={["select__trigger", triggerClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={triggerStyle}
+          disabled={disabled}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          aria-controls={id}
+          aria-label={displayLabel ? undefined : "Selecciona opciones"}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
+          onClick={toggle}
         >
-          {selectedValues.length === 0 ? (
-            <span className="multiselect__placeholder">{placeholder}</span>
-          ) : (
-            selectedLabels.map((label, index) => (
-              <span key={index} className="multiselect__tag">
-                {label}
-                {!disabled && (
-                  <span
-                    className="multiselect__tag-remove"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRemoveTag(selectedValues[index]);
-                    }}
-                  >
-                    ×
-                  </span>
-                )}
-              </span>
-            ))
-          )}
-        </div>
-
-        <div
-          className={`multiselect__dropdown${isOpen && !disabled ? " multiselect__dropdown--open" : ""}`}
-        >
-          {viewSearchBar && (
-            <div className="multiselect__search">
-              <input
-                type="text"
-                className="multiselect__search-input"
-                placeholder={searchBarPlaceholder}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onClick={(e) => e.stopPropagation()}
-              />
-            </div>
-          )}
-          {filteredOptions.map((option) => (
-            <div
-              key={option.value}
-              className="multiselect__option"
-              onClick={() => handleToggleOption(option.value)}
+          {selectedOptions.length === 0 ? (
+            <span
+              className={["select__placeholder", placeholderClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={placeholderStyle}
             >
-              <Checkbox
-                checked={selectedValues.includes(option.value ?? "")}
-                onChange={() => handleToggleOption(option.value)}
-              />
-              <span>{option.label}</span>
-            </div>
-          ))}
-        </div>
+              {placeholder}
+            </span>
+          ) : (
+            <span
+              className={["select__sr-only", srOnlyClassName]
+                .filter(Boolean)
+                .join(" ")}
+              style={srOnlyStyle}
+            >
+              {selectedOptions.map((option) => option.label).join(", ")}
+            </span>
+          )}
+        </button>
+        <ChevronDown
+          className={["select__caret", caretClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={caretStyle}
+          aria-hidden
+        />
       </div>
-
-      <div className="multiselect__error-message">{error}</div>
+      <SelectListbox
+        listClassName={listClassName}
+        panelClassName={panelClassName}
+        panelStyle={panelStyle}
+        searchClassName={searchClassName}
+        searchStyle={searchStyle}
+        searchInputClassName={searchInputClassName}
+        searchInputStyle={searchInputStyle}
+        listContentClassName={listContentClassName}
+        listContentStyle={listContentStyle}
+        optionClassName={optionClassName}
+        checkboxClassName={checkboxClassName}
+        checkboxStyle={checkboxStyle}
+        boxClassName={boxClassName}
+        boxStyle={boxStyle}
+        iconClassName={iconClassName}
+        iconStyle={iconStyle}
+        optionLabelClassName={optionLabelClassName}
+        optionLabelStyle={optionLabelStyle}
+        emptyClassName={emptyClassName}
+        emptyStyle={emptyStyle}
+        popover={popover}
+        label={displayLabel || "Opciones"}
+        options={options}
+        multiple
+        isSelected={(optionValue) => selectedValues.includes(optionValue)}
+        onSelect={toggleValue}
+        viewSearchBar={viewSearchBar}
+        searchBarPlaceholder={searchBarPlaceholder}
+        listStyle={listStyle}
+        optionStyle={optionStyle}
+      />
+      {error && (
+        <div
+          id={errorId}
+          className={["select__error-message", errorMessageClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={errorMessageStyle}
+        >
+          {error}
+        </div>
+      )}
     </div>
   );
 };

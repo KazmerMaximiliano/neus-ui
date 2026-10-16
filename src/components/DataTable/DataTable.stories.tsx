@@ -1,162 +1,197 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import type { ICellRendererParams } from "ag-grid-community";
+import { Eye, Pencil, Trash2 } from "lucide-react";
+import { action } from "storybook/actions";
+import {
+  designSystemControl,
+  withDesignSystem,
+} from "../../../.storybook/designSystem";
+import { Card, CardContent, CardFooter, IconButton } from "../index";
 import { DataTable as DataTableComponent } from "./DataTable";
+import "./DataTable.stories.css";
+import type { DesignSystemPreviewArgs } from "../../../.storybook/designSystem.types";
+import type { DataTableProps, DataTableSampleRow } from "./DataTable.types";
 
-// Sample data for the story
-const sampleData = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role: "Admin",
-    status: "Active",
-    created_at: "2024-01-15",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    role: "User",
-    status: "Active",
-    created_at: "2024-01-16",
-  },
-  {
-    id: 3,
-    name: "Bob Johnson",
-    email: "bob.johnson@example.com",
-    role: "Moderator",
-    status: "Inactive",
-    created_at: "2024-01-17",
-  },
-  {
-    id: 4,
-    name: "Alice Brown",
-    email: "alice.brown@example.com",
-    role: "User",
-    status: "Active",
-    created_at: "2024-01-18",
-  },
-  {
-    id: 5,
-    name: "Charlie Wilson",
-    email: "charlie.wilson@example.com",
-    role: "User",
-    status: "Active",
-    created_at: "2024-01-19",
-  },
+const sampleData: DataTableSampleRow[] = [
+  { id: 1, name: "Ana Pérez", email: "ana@example.com" },
+  { id: 2, name: "Juan Díaz", email: "juan@example.com" },
 ];
 
-type SampleDataType = (typeof sampleData)[number];
+const renderActions = (row: DataTableSampleRow) => (
+  <div className="data-table-story-actions">
+    <IconButton
+      icon={Eye}
+      label={`View ${row.name}`}
+      variant="text"
+      size="small"
+      onClick={() => action("row-view")(row)}
+    />
+    <IconButton
+      icon={Pencil}
+      label={`Edit ${row.name}`}
+      variant="text"
+      size="small"
+      onClick={() => action("row-edit")(row)}
+    />
+    <IconButton
+      icon={Trash2}
+      label={`Delete ${row.name}`}
+      variant="text"
+      size="small"
+      color="error"
+      onClick={() => action("row-delete")(row)}
+    />
+  </div>
+);
 
-const meta: Meta<typeof DataTableComponent<SampleDataType>> = {
-  title: "Components/DataTable",
+const meta: Meta<DataTableProps<DataTableSampleRow> & DesignSystemPreviewArgs> =
+{
+  title: "Base/DataTable",
   component: DataTableComponent,
-  parameters: {
-    layout: "centered",
-  },
   tags: ["autodocs"],
+  parameters: { layout: "padded" },
+  decorators: [withDesignSystem],
   argTypes: {
-    data: {
+    cardClassName: {
+      control: "text",
+      description: "Additional CSS classes for card",
+    },
+    cardStyle: {
+      control: "object",
+      description: "Inline CSS override for card",
+    },
+    cardsClassName: {
+      control: "text",
+      description: "Additional classes for cards",
+    },
+    cardsStyle: {
+      control: "object",
+      description: "Style override for cards",
+    },
+    emptyStateClassName: {
+      control: "text",
+      description: "Additional classes for emptyState",
+    },
+    gridClassName: {
+      control: "text",
+      description: "Additional classes for grid",
+    },
+    gridStyle: { control: "object", description: "Style override for grid" },
+    noRowsDescriptionClassName: {
+      control: "text",
+      description: "Additional classes for noRowsDescription",
+    },
+    noRowsDescriptionStyle: {
+      control: "object",
+      description: "Style override for noRowsDescription",
+    },
+    noRowsTitleClassName: {
+      control: "text",
+      description: "Additional classes for noRowsTitle",
+    },
+    noRowsTitleStyle: {
+      control: "object",
+      description: "Style override for noRowsTitle",
+    },
+    paginationClassName: {
+      control: "text",
+      description: "Additional classes for pagination",
+    },
+    paginationInfoClassName: {
+      control: "text",
+      description: "Additional classes for paginationInfo",
+    },
+    paginationInfoStyle: {
+      control: "object",
+      description: "Style override for paginationInfo",
+    },
+    designSystem: designSystemControl,
+    data: { control: "object", description: "Rows for the current page" },
+    columnDefs: {
+      control: "object",
+      description: "Typed AG Grid definitions, including custom cells",
+    },
+    pagination: { control: "object", description: "Controlled pagination" },
+    renderMobileCard: {
       control: false,
-      description: "Array of data objects to display in the table",
-    },
-    pagination: {
-      control: false,
-      description: "Pagination information object",
-    },
-    onEdit: {
-      action: "edited",
-      description: "Callback function when edit action is clicked",
-    },
-    onDelete: {
-      action: "deleted",
-      description: "Callback function when delete action is clicked",
-    },
-    onInfo: {
-      action: "info",
-      description: "Callback function when info action is clicked",
+      description: "Consumer card renderer; absent keeps the mobile grid",
     },
     onPaginationChange: {
       action: "page-changed",
-      description: "Callback function when pagination changes",
+      description: "Requests a page; consumer supplies data",
     },
-    columnLabels: {
+    noDataTitle: { control: "text", description: "Empty title" },
+    noDataDescription: { control: "text", description: "Empty description" },
+    className: { control: "text", description: "Root classes" },
+    style: { control: "object", description: "Root override" },
+    paginationStyle: {
       control: "object",
-      description: "Object mapping column fields to display labels",
+      description: "Pagination override",
     },
-    useCardLayout: {
-      control: "boolean",
-      description: "Enable card layout on mobile devices",
-    },
-    noDataTitle: {
-      control: "text",
-      description: "Title to show when no data is available",
-    },
-    noDataDescription: {
-      control: "text",
-      description: "Description to show when no data is available",
-    },
-    hiddenColumns: {
+    emptyStateStyle: {
       control: "object",
-      description: "Array of column field names to hide",
+      description: "Empty content override",
     },
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-const samplePagination = {
-  current_page: 1,
-  last_page: 3,
-  per_page: 5,
-  total: 15,
-};
-
-const columnLabels = {
-  id: "ID",
-  name: "Full Name",
-  email: "Email Address",
-  role: "User Role",
-  status: "Account Status",
-  created_at: "Registration Date",
-};
-
-export const DataTable: Story = {
+export const DataTable: StoryObj<typeof meta> = {
   args: {
+    cardClassName: undefined,
+    cardStyle: undefined,
+    cardsClassName: undefined,
+    cardsStyle: undefined,
+    emptyStateClassName: undefined,
+    gridClassName: undefined,
+    gridStyle: undefined,
+    noRowsDescriptionClassName: undefined,
+    noRowsDescriptionStyle: undefined,
+    noRowsTitleClassName: undefined,
+    noRowsTitleStyle: undefined,
+    paginationClassName: undefined,
+    paginationInfoClassName: undefined,
+    paginationInfoStyle: undefined,
+    designSystem: "global",
     data: sampleData,
-    pagination: samplePagination,
-    columnLabels,
-    useCardLayout: true,
-    noDataTitle: "No users found",
-    hiddenColumns: [],
-    noDataDescription: "Try adjusting your search criteria or add new users",
-    onEdit: (rowData: SampleDataType) => {
-      console.log("Edit user:", rowData);
-    },
-    onDelete: (rowData: SampleDataType) => {
-      console.log("Delete user:", rowData);
-    },
-    onInfo: (rowData: SampleDataType) => {
-      console.log("View user info:", rowData);
-    },
-    onPaginationChange: (params: { currentPage: number; pageSize: number }) => {
-      console.log("Pagination changed:", params);
-    },
-  },
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          width: "60vw",
-          padding: "1rem",
-          display: "flex",
-          flexDirection: "column",
-          boxSizing: "border-box",
-        }}
-      >
-        <Story />
-      </div>
+    columnDefs: [
+      { field: "name", headerName: "Name" },
+      { field: "email", headerName: "Email" },
+      {
+        colId: "actions",
+        headerName: "Actions",
+        width: 160,
+        minWidth: 160,
+        maxWidth: 160,
+        flex: 0,
+        resizable: false,
+        sortable: false,
+        filter: false,
+        cellRenderer: ({ data }: ICellRendererParams<DataTableSampleRow>) =>
+          data ? renderActions(data) : null,
+      },
+    ],
+    pagination: { current_page: 1, last_page: 3, per_page: 2, total: 6 },
+    renderMobileCard: (row) => (
+      <Card>
+        <CardContent>
+          {row.name}
+          <p>{row.email}</p>
+        </CardContent>
+        <CardFooter>{renderActions(row)}</CardFooter>
+      </Card>
     ),
-  ],
+    noDataTitle: "No users found",
+    noDataDescription: "Try adjusting your search",
+    className: "",
+    style: {},
+    paginationStyle: {},
+    emptyStateStyle: {},
+  },
+  render: (args) => (
+    <div className="data-table-story">
+      <DataTableComponent {...args} />
+    </div>
+  ),
 };
 
 export default meta;

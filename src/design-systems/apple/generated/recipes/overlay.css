@@ -1,0 +1,14 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --overlay-border-color: var(--color-border-subtle);
+  --overlay-radius: 12px;
+  --overlay-shadow: var(--elevation-floating);
+  --overlay-padding: 5px;
+  --overlay-item-padding: 6px 10px;
+  --overlay-item-min-height: 32px;
+  --overlay-item-radius: 6px;
+  --overlay-item-font-weight: 400;
+  --overlay-item-hover-background: var(--color-primary);
+  --overlay-item-hover-color: var(--color-text-on-primary);
+  --overlay-item-selected-color: var(--color-text-primary);
+}

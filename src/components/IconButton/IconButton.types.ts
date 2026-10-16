@@ -1,18 +1,39 @@
-import { LucideProps } from "lucide-react";
-import { ForwardRefExoticComponent, RefAttributes } from "react";
+import type { LucideProps } from "lucide-react";
+import type {
+  CSSProperties,
+  ForwardRefExoticComponent,
+  MouseEvent,
+  RefAttributes,
+} from "react";
+import type { DesignSystemId } from "../../design-systems";
 
-type ButtonType = 'button' | 'submit' | 'reset';
-type ButtonVariant = 'outlined' | 'text' | 'solid';
-type ButtonColor = 'primary' | 'success' | 'error' | 'info';
-type ButtonSize = 'small' | 'medium' | 'large';
+type IconButtonType = "button" | "submit" | "reset";
+type IconButtonVariant = "outlined" | "text" | "solid";
+export type IconButtonColor = "primary" | "success" | "error" | "info";
+type IconButtonSize = "small" | "medium" | "large";
 
-export type ButtonProps = {
-  icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
-  type?: ButtonType;
-  variant?: ButtonVariant;
-  color?: ButtonColor;
-  size?: ButtonSize;
+export type IconButtonIcon = ForwardRefExoticComponent<
+  Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+>;
+
+export type IconButtonProps = {
+  className?: string;
+  iconClassName?: string;
+  loaderClassName?: string;
+  icon: IconButtonIcon;
+  label: string;
+  type?: IconButtonType;
+  variant?: IconButtonVariant;
+  color?: IconButtonColor;
+  size?: IconButtonSize;
   disabled?: boolean;
   loading?: boolean;
-  onClick?: () => void;
+  buttonStyle?: CSSProperties;
+  iconStyle?: CSSProperties;
+  loaderStyle?: CSSProperties;
+  onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
+};
+
+export type IconButtonStoryArgs = IconButtonProps & {
+  designSystem: DesignSystemId;
 };

@@ -1,27 +1,14 @@
-export type CardColor = "purple" | "pink" | "red" | "yellow" | "blue" | "green";
+import type { ComponentPropsWithRef, CSSProperties } from "react";
+import type { DesignSystemId } from "../../design-systems";
 
-export type CardVariant = "default" | "glass";
+export type CardProps = Omit<
+  ComponentPropsWithRef<"div">,
+  "style" | "title" | "color" | "onClick"
+> & {
+  variant?: "auto" | "filled" | "outlined" | "elevated";
+  style?: CSSProperties | null;
+};
 
-export type CardProps = {
-  children?: React.ReactNode;
-
-  // default variant props
-  variant?: CardVariant;
-  avatarImage?: string;
-  avatarAlt?: string;
-  leading?: React.ReactNode;
-  trailing?: React.ReactNode;
-  fill?: boolean;
-  color?: CardColor;
-
-  // optional content slots
-  icon?: React.ReactNode;
-  title?: string;
-  description?: string;
-
-  // behavioral modifiers (style only — no layout change)
-  highlighted?: boolean;
-  selected?: boolean;
-  disabled?: boolean;
-  onClick?: () => void;
+export type CardStoryArgs = CardProps & {
+  designSystem: DesignSystemId;
 };

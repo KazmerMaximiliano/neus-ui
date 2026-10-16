@@ -1,0 +1,5 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --app-template-content-padding: 24px;
+  --form-template-gap: 20px;
+}

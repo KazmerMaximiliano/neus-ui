@@ -1,14 +1,34 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { DESIGN_SYSTEMS } from "../../design-systems";
+import { ThemeProvider } from "../../providers";
 import { Button as ButtonComponent } from "./Button";
+import type { ButtonStoryArgs } from "./Button.types";
 
-const meta: Meta<typeof ButtonComponent> = {
-  title: "Components/Button",
+const meta: Meta<ButtonStoryArgs> = {
+  title: "Base/Button",
   component: ButtonComponent,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
   argTypes: {
+    className: {
+      control: "text",
+      description: "Additional classes for className",
+    },
+    labelClassName: {
+      control: "text",
+      description: "Additional classes for label",
+    },
+    loaderClassName: {
+      control: "text",
+      description: "Additional classes for loader",
+    },
+    designSystem: {
+      control: "select",
+      options: DESIGN_SYSTEMS.map(({ id }) => id),
+      description: "The design system used to preview the button",
+    },
     label: {
       control: "text",
       description: "The text displayed inside the button",
@@ -20,12 +40,12 @@ const meta: Meta<typeof ButtonComponent> = {
     },
     variant: {
       control: "select",
-      options: ["solid", "outlined", "text"],
+      options: ["solid", "outlined", "text", "secondary", "tonal", "elevated"],
       description: "The visual style variant of the button",
     },
     color: {
       control: "select",
-      options: ["primary", "success", "error", "info"],
+      options: ["primary", "success", "error", "info", "white"],
       description: "The color scheme of the button",
     },
     size: {
@@ -45,6 +65,19 @@ const meta: Meta<typeof ButtonComponent> = {
       control: "boolean",
       description: "Shows a loading spinner when true",
     },
+    buttonStyle: {
+      control: "object",
+      description: "CSS properties applied to the button element",
+    },
+    labelStyle: {
+      control: "object",
+      description: "CSS properties applied to the label span",
+    },
+    loaderStyle: {
+      control: "object",
+      description:
+        "CSS properties applied to the BeatLoader container (not its individual dots)",
+    },
     onClick: {
       action: "clicked",
       description: "Callback function triggered on button click",
@@ -52,10 +85,12 @@ const meta: Meta<typeof ButtonComponent> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Button: Story = {
+export const Button: StoryObj<ButtonStoryArgs> = {
   args: {
+    className: undefined,
+    labelClassName: undefined,
+    loaderClassName: undefined,
+    designSystem: "neus",
     label: "Click Me",
     type: "button",
     variant: "solid",
@@ -64,7 +99,15 @@ export const Button: Story = {
     disabled: false,
     fullWidth: false,
     loading: false,
+    buttonStyle: {},
+    labelStyle: {},
+    loaderStyle: {},
   },
+  render: ({ designSystem, ...args }) => (
+    <ThemeProvider scope="local" designSystem={designSystem}>
+      <ButtonComponent {...args} />
+    </ThemeProvider>
+  ),
 };
 
 export default meta;
