@@ -18,7 +18,8 @@ before using it.
 Exhaust these first. Examples: Button `variant` (`solid`, `secondary`,
 `tonal`, `elevated`, `outlined`, `text`), `color` (`primary`, `success`,
 `error`, `info`, `white`) and `size`; Card `variant` (`auto`, `filled`,
-`outlined`, `elevated`); Input and picker fields `variant`, `size` and
+`outlined`, `elevated`) and `as` (`div`, `article`, `li`, `figure`,
+`section`); Input and picker fields `variant`, `size` and
 `labelPlacement`; Badge `variant` and `color`. One solid primary action per
 view; the rest use `secondary`, `tonal`, `outlined` or `text`.
 

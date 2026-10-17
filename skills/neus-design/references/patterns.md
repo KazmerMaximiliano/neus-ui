@@ -178,12 +178,10 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
           <h2 id="features-title" className="landing-title">Not another audio library.</h2>
           <ul className="landing-grid">
             {FEATURES.map(({ icon: Icon, title, text }) => (
-              <li key={title}>
-                <Card>
-                  <CardHeader><Icon aria-hidden size={24} /><h3>{title}</h3></CardHeader>
-                  <CardContent><p>{text}</p></CardContent>
-                </Card>
-              </li>
+              <Card as="li" key={title}>
+                <CardHeader><Icon aria-hidden size={24} /><h3>{title}</h3></CardHeader>
+                <CardContent><p>{text}</p></CardContent>
+              </Card>
             ))}
           </ul>
         </div>
@@ -193,12 +191,10 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
           <h2 id="voices-title" className="landing-title">Used in the gaps of a full calendar.</h2>
           <ul className="landing-grid">
             {QUOTES.map(({ quote, name, role }) => (
-              <li key={name}>
-                <Card>
-                  <CardContent><blockquote><p>{quote}</p></blockquote></CardContent>
-                  <CardFooter><strong>{name}</strong>, {role}</CardFooter>
-                </Card>
-              </li>
+              <Card as="li" key={name}>
+                <CardContent><blockquote><p>{quote}</p></blockquote></CardContent>
+                <CardFooter><strong>{name}</strong>, {role}</CardFooter>
+              </Card>
             ))}
           </ul>
         </div>
@@ -243,9 +239,9 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
 - Every section the brief lists exists; the dealt composition decides its
   layout (features as `cards`, `grid` or `list`; testimonials as `card`,
   `plain` or `featured`).
-- Feature and testimonial groups are lists of `Card` with the default
-  `variant="auto"`: the system decides border, fill or flat. Never a Card
-  inside a Card.
+- Feature and testimonial groups are lists of `Card as="li"` with the
+  default `variant="auto"`: the system decides border, fill or flat. Never a
+  Card inside a Card.
 - One solid action per viewport: the header action is `outlined`.
 - Testimonials the brief asks for are marked `SAMPLE:` and listed in the
   delivery; prices, trials and metrics appear only when the brief gives them.

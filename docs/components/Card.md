@@ -20,11 +20,26 @@ export const Example = () => {
 };
 ```
 
+Use `as` to keep the document's semantics: a feature list is a `ul` of `Card as="li"`, a
+testimonial is a `Card as="figure"` with its quote and caption.
+
+```tsx
+<ul className="feature-grid">
+  {features.map((feature) => (
+    <Card as="li" key={feature.title}>
+      <CardHeader><h3>{feature.title}</h3></CardHeader>
+      <CardContent><p>{feature.text}</p></CardContent>
+    </Card>
+  ))}
+</ul>
+```
+
 ## Behavior and accessibility
 
 Compose CardHeader, CardMedia, CardContent and CardFooter explicitly. Card adds no implicit
-header, padding, click behavior or interactive semantics. Use native div attributes and refs
-where needed. `variant="auto"` follows the recipe; filled, outlined and elevated request a
+header, padding, click behavior or interactive semantics. `as` selects a passive container
+element (`div`, `article`, `li`, `figure` or `section`); native attributes and the ref follow
+the selected element. `variant="auto"` follows the recipe; filled, outlined and elevated request a
 surface treatment. Each public section owns its own `className` and nullable `style`;
 children supply their own heading and action semantics.
 
@@ -37,11 +52,12 @@ retain their nullable default.
 
 | Prop | Type | Default / requirement | Purpose |
 | --- | --- | --- | --- |
+| `as` | `"div" \| "article" \| "li" \| "figure" \| "section"` | `"div"` | Rendered element; place `li` inside a `ul` or `ol` |
 | `className` | `string` | Omitted | Additional classes on `.card` |
 | `children` | `ReactNode` | Omitted | Free-form JSX, including any combination of the optional Card subcomponents |
 | `variant` | `"outlined" \| "elevated" \| "auto" \| "filled"` | `"auto"` | Surface treatment; auto follows the system |
 | `style` | `CSSProperties \| null` | `null` | Inline styles on `.card` |
-| Native attributes and ref | React props for a div | Optional | Forwarded to the root; the type source lists excluded/replaced fields |
+| Native attributes and ref | React props for the `as` element | Optional | Forwarded to the root; the type source lists excluded/replaced fields |
 
 ## Anatomy and per-part customization
 
@@ -51,7 +67,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 
 | Base class / part | Element | Class prop | Style prop | Rendering condition |
 | --- | --- | --- | --- | --- |
-| `.card` | `div` | `className` | `style` | `Always` |
+| `.card` | `as` element (`div`) | `className` | `style` | `Always` |
 
 Interaction states use native pseudo-classes and ARIA/data attributes where present.
 

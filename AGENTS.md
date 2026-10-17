@@ -172,7 +172,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
 | Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state |
 | Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
-| Card            | src/components/Card/            | STABLE | Composable themed surface, className and style |
+| Card            | src/components/Card/            | STABLE | Composable themed surface, semantic `as`, className and style |
 | CardHeader      | src/components/Card/components/CardHeader/ | STABLE | Free-form header content and actions |
 | CardMedia       | src/components/Card/components/CardMedia/  | STABLE | Polymorphic media with native/custom props and refs |
 | CardContent     | src/components/Card/components/CardContent/ | STABLE | Content spacing with arbitrary children |

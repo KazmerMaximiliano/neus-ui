@@ -132,8 +132,8 @@ component's guide.
 
 | Need | Component |
 | --- | --- |
-| Feature with icon, title and text | `Card` + `CardHeader` + `CardContent`, one per `<li>` of a `<ul>` grid |
-| Testimonial | `Card` + `CardContent` (quote) + `CardFooter` (name, role) |
+| Feature with icon, title and text | `Card as="li"` + `CardHeader` + `CardContent`, inside a `<ul>` grid |
+| Testimonial | `Card as="figure"` (or `as="li"` in a list) + `CardContent` (quote) + `CardFooter` (name, role) |
 | Container of a widget, demo or summary | `Card` |
 | Signup, contact or create form | `<form>` + `FormTemplate` + `Input` (`Select`, `Checkbox`, `DateInput`…), inside a `Card` on public pages |
 | Primary or secondary action | `Button` with `variant`; `IconButton` for icon-only actions |
