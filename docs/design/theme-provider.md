@@ -106,8 +106,9 @@ behaviors. Removing the controlled prop exposes local state, then inherited/defa
 
 ## Global and local scopes
 
-A global root provider adds no wrapper. After client mount it sets data-design-system,
-data-color-scheme and runtime palette variables on document.documentElement. Cleanup
+A global root provider adds no wrapper. In a layout effect, before the first client paint,
+it sets data-design-system, data-color-scheme and runtime palette variables on
+document.documentElement. Cleanup
 restores the attributes and properties it changed. Use a single global owner for a document.
 
 ```tsx
@@ -143,9 +144,10 @@ a corresponding theme boundary at that destination. Native popovers and dialogs 
 DOM inheritance when promoted to the browser top layer.
 
 Local scope attributes and palette variables are included in server markup. Global document
-mutations happen only in the client effect. A server-rendered global dark/non-Neus page can
-therefore initially use CSS defaults until mount; server integration must establish the
-desired document attributes separately if that initial appearance matters.
+mutations happen only on the client. Server-rendered pages therefore set the attributes on
+`<html>` themselves: the library CSS carries every system's palette, and `buildThemeCss` from
+`neus-ui/theme` emits custom colors as static CSS. See
+[Frameworks](../getting-started/frameworks.md).
 
 CSS token overrides do not update useColors; the hook reflects the provider's resolved
 palette. For shared palette changes use the provider; for recipe shape, spacing and instance

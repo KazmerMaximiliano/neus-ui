@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
+import { buildThemeCss } from "../../theme";
 import { ThemeProvider, useTheme } from "../index";
 
 afterEach(cleanup);
@@ -109,5 +110,14 @@ describe("ThemeProvider", () => {
     expect(html).toContain('data-design-system="apple"');
     expect(html).toContain("--color-primary:#0071e3");
     expect(html).toContain("Content");
+  });
+
+  it("builds the global palette as static CSS for both color schemes", () => {
+    const css = buildThemeCss("vercel", { primaryColor: "#0f766e" });
+    expect(css).toContain(':root[data-design-system="vercel"][data-color-scheme="light"] {');
+    expect(css).toContain(':root[data-design-system="vercel"][data-color-scheme="dark"] {');
+    expect(css).toContain("--color-primary: #0f766e;");
+    expect(css).toContain("--color-text-on-primary: #ffffff;");
+    expect(buildThemeCss("carbon")).toContain("--color-primary: #0f62fe;");
   });
 });

@@ -78,6 +78,11 @@ those APIs to target generated grid content; Neus part props target its own grid
 cards, empty overlay and pagination. Style consumer mobile-card content through its own
 components.
 
+DataTable registers only the AG Grid Community modules its own options need: client-side
+rows, text/number/date filters and cell styles. Register any other module your column
+definitions use (for example `TooltipModule`) with `ModuleRegistry.registerModules` from
+`ag-grid-community`, which the application installs itself.
+
 ### Supporting types
 
 These types describe the named values used above; package exports are defined by the [family

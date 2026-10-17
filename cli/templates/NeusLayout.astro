@@ -1,0 +1,36 @@
+---
+// Created by `npx neus init`; this file is yours. Running `npx neus init`
+// again only updates data-design-system and data-color-scheme below.
+import "neus-ui/dist/neus-ui.css";
+import "{{STYLES}}/neus.theme.css";
+import "{{STYLES}}/neus.overrides.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="{{LANG}}" data-design-system="{{SYSTEM}}" data-color-scheme="{{SCHEME}}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    {{FONTS}}
+    <script is:inline>
+      // Applies the saved color scheme before the first paint.
+      try {
+        const saved = localStorage.getItem("{{STORAGE_KEY}}");
+        if (saved === "light" || saved === "dark") {
+          document.documentElement.dataset.colorScheme = saved;
+        }
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

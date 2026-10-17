@@ -1,6 +1,6 @@
 import {
   useContext,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type CSSProperties,
@@ -38,7 +38,8 @@ export const ThemeProvider = ({
     [designSystem, colorScheme, overrides],
   );
 
-  useEffect(() => {
+  // Layout effect: the global attributes land before the first paint (no-op on the server).
+  useLayoutEffect(() => {
     if (!isLocal) {
       return applyTheme(
         document.documentElement,

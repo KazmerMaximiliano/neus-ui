@@ -8,9 +8,11 @@ or an editor without starting a server.
 
 1. [Introduction](./getting-started/introduction.md): capabilities and mental model.
 2. [Installation](./getting-started/installation.md): package, stylesheet and provider.
-3. [Design systems](./design/systems.md): select a system and explore its recipes.
-4. [ThemeProvider](./design/theme-provider.md): modes, colors, runtime updates and scopes.
-5. [Customization](./design/customization.md): tokens, classes and styles by part.
+3. [Frameworks](./getting-started/frameworks.md): Vite, Next.js, Astro and server rendering.
+4. [Design with AI](./getting-started/ai-design.md): `neus init`, skills and review for Claude Code and Codex.
+5. [Design systems](./design/systems.md): select a system and explore its recipes.
+6. [ThemeProvider](./design/theme-provider.md): modes, colors, runtime updates and scopes.
+7. [Customization](./design/customization.md): tokens, classes and styles by part.
 
 ## Reference
 

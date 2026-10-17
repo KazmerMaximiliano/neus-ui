@@ -70,7 +70,12 @@ neus-ui/
 │   ├── css/                     [DIRECTORY] Global styles and variables
 │   ├── utils/                   [DIRECTORY] Utility functions
 │   ├── services/                [DIRECTORY] Auxiliary services
-│   └── index.ts                 [FILE] Library entry point
+│   ├── tests/                   [DIRECTORY] Cross-library suites (server rendering)
+│   ├── index.ts                 [FILE] Library entry point (`neus-ui`)
+│   └── theme.ts                 [FILE] Server-safe entry (`neus-ui/theme`), no React or CSS
+├── cli/                         [DIRECTORY] `neus init` CLI and the project templates it writes
+├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus init`
+├── agents/                      [DIRECTORY] neus-reviewer subagent for Claude Code (.md) and Codex (.toml)
 ├── .storybook/                  [DIRECTORY] Storybook configuration
 ├── package.json                 [FILE] Dependencies and scripts
 ├── vite.config.ts               [FILE] Build and test configuration
@@ -529,10 +534,14 @@ CHECK: All files have correct exports, no circular imports
 
 ### Runtime Dependencies (Production)
 
+React and ReactDOM are peer dependencies. The build keeps one file per source module,
+leaves every dependency external, adds `"use client"` to modules that import React, and
+loads no fonts. Never add build, Storybook or test tooling to `dependencies`.
+
 ```
-React 19+
-ReactDOM 19+
-ag-grid-community (DataTable)
+React 19+ (peer)
+ReactDOM 19+ (peer)
+ag-grid-community (DataTable; register only the modules DataTable uses)
 ag-grid-react (DataTable)
 react-day-picker (Calendar)
 lucide-react (Icon components)
@@ -656,6 +665,22 @@ explicit `.md` extensions and keep `docs/README.md` up to date when adding guide
 Documentation can be read directly in the repository or a Markdown editor;
 it does not require a development server or build step. Storybook provides the
 interactive component catalog separately.
+
+## AI DESIGN KIT MAINTENANCE
+
+- `skills/`, `agents/` and `cli/templates/` are copied into consumer projects by
+  `npx neus init`; they are product code. Keep them in English and in sync with public
+  props, docs and DESIGN.md files: when a prop, part, token or component changes, update
+  `skills/neus-design/references/patterns.md`, `customization.md` and the audit's
+  `references/neus-rules.md` (Library section) in the same change.
+- Skills follow the Agent Skills specification: `name` equals the directory, only
+  `name`, `description`, `license`, `compatibility`, `metadata` and `allowed-tools` in
+  frontmatter, references one level deep. Validate with
+  `uvx --from skills-ref agentskills validate skills/<name>`.
+- Skills must not depend on commands the `neus` CLI does not provide; they read files from
+  `node_modules/neus-ui/` and run their own `scripts/`.
+- Server rendering is covered by `src/tests/stories.ssr.test.tsx`: every story must render
+  with `renderToString` in Node.
 
 ## DOCUMENTATION AND CUSTOMIZATION MAINTENANCE
 

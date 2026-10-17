@@ -1,0 +1,62 @@
+{
+  "palettes": [
+    { "name": "Ink and signal orange", "ground": "#F7F5F0", "ink": "#1C1B19", "accent": "#C2410C", "darkAccent": "#FB923C" },
+    { "name": "Deep teal on paper", "ground": "#F6F7F4", "ink": "#14201F", "accent": "#0F5F5A", "darkAccent": "#5EC4BA" },
+    { "name": "Forest and brass", "ground": "#F4F2EA", "ink": "#1D2A20", "accent": "#2F5D3A", "darkAccent": "#8FBF96" },
+    { "name": "Oxblood editorial", "ground": "#FAF7F2", "ink": "#221A17", "accent": "#7A1F2B", "darkAccent": "#E28A95" },
+    { "name": "Cobalt precision", "ground": "#FFFFFF", "ink": "#0E1525", "accent": "#1F4FD8", "darkAccent": "#7FA2FF" },
+    { "name": "Sand and terracotta", "ground": "#F5EFE6", "ink": "#2A211B", "accent": "#A8471F", "darkAccent": "#E8936B" },
+    { "name": "Slate and saffron", "ground": "#F3F4F6", "ink": "#111827", "accent": "#A16207", "darkAccent": "#FACC15" },
+    { "name": "Monochrome with one red", "ground": "#FFFFFF", "ink": "#111111", "accent": "#B91C1C", "darkAccent": "#F87171" },
+    { "name": "Ocean mineral", "ground": "#F2F6F7", "ink": "#0B1F2A", "accent": "#146C94", "darkAccent": "#6CC3E8" },
+    { "name": "Moss neutral", "ground": "#F5F5F0", "ink": "#1F2318", "accent": "#55652F", "darkAccent": "#B5C98A" }
+  ],
+  "typePairings": [
+    { "name": "Inter Tight + JetBrains Mono", "display": "Inter Tight", "body": "Inter Tight", "mono": "JetBrains Mono", "class": "neo-grotesque" },
+    { "name": "Instrument Sans + Instrument Serif", "display": "Instrument Serif", "body": "Instrument Sans", "mono": "IBM Plex Mono", "class": "serif display on grotesque" },
+    { "name": "Source Serif 4 + Source Sans 3", "display": "Source Serif 4", "body": "Source Sans 3", "mono": "Source Code Pro", "class": "editorial serif" },
+    { "name": "Space Grotesk + Space Mono", "display": "Space Grotesk", "body": "Space Grotesk", "mono": "Space Mono", "class": "technical grotesque" },
+    { "name": "Public Sans + IBM Plex Mono", "display": "Public Sans", "body": "Public Sans", "mono": "IBM Plex Mono", "class": "neutral civic" },
+    { "name": "Fraunces + Inter", "display": "Fraunces", "body": "Inter", "mono": "JetBrains Mono", "class": "soft serif display" },
+    { "name": "DM Sans + DM Mono", "display": "DM Sans", "body": "DM Sans", "mono": "DM Mono", "class": "geometric" },
+    { "name": "Archivo + Archivo Narrow", "display": "Archivo Narrow", "body": "Archivo", "mono": "IBM Plex Mono", "class": "condensed display" },
+    { "name": "Newsreader + Work Sans", "display": "Newsreader", "body": "Work Sans", "mono": "IBM Plex Mono", "class": "news serif" },
+    { "name": "Schibsted Grotesk + Spline Sans Mono", "display": "Schibsted Grotesk", "body": "Schibsted Grotesk", "mono": "Spline Sans Mono", "class": "humanist grotesque" }
+  ],
+  "shapes": [
+    { "name": "Square", "controls": "0-2px", "cards": "2px", "note": "Only avatars are round" },
+    { "name": "Crisp", "controls": "4px", "cards": "6px", "note": "Small consistent radii" },
+    { "name": "Soft", "controls": "8px", "cards": "12px", "note": "Friendly but not pill" },
+    { "name": "Round", "controls": "999px", "cards": "16px", "note": "Pill controls, generous cards" }
+  ],
+  "densities": [
+    { "name": "Compact", "note": "32px controls, 8px rhythm; tables and operations" },
+    { "name": "Standard", "note": "40px controls, 12px rhythm" },
+    { "name": "Relaxed", "note": "48px controls, 16px rhythm; onboarding and reading" }
+  ],
+  "elevations": [
+    { "name": "Rings", "note": "Depth from a 1px ring in the border tone; no shadows" },
+    { "name": "Hairlines", "note": "Hairline dividers between regions; surfaces share one tone" },
+    { "name": "Layered", "note": "Two soft shadow steps: resting cards and floating layers" },
+    { "name": "Tonal", "note": "Depth from surface tone steps; no borders, no shadows" },
+    { "name": "Hard offset", "note": "Solid ink offset shadow on floating layers only" }
+  ],
+  "productMoves": [
+    "Tabular figures set in the mono face for every number in tables and summaries",
+    "One accent bar marks the active navigation item and the selected row; nothing else uses the accent at rest",
+    "Section titles in the display face one step larger, separated by space instead of dividers",
+    "Inverted ink sidebar against a light content ground",
+    "Status as a colored leading dot plus text, never colored backgrounds",
+    "Strict content column with titles hanging into a wide left gutter",
+    "Toolbars share the table's surface tone, so a list reads as one object",
+    "The accent focus ring, offset 3px, is the only bright color on forms"
+  ],
+  "marketingMoves": [
+    "Oversized headline set tight in the display face, one line on desktop",
+    "The real product interface, cropped edge to edge, as the main image",
+    "Every section starts on a full-width 1px ink rule, with no labels above titles",
+    "The subject's own numbers set very large in the mono face as the visual anchor",
+    "Two-column editorial layout with a serif display face and wide margins",
+    "One full-bleed accent section; every other section sits on the ground"
+  ]
+}

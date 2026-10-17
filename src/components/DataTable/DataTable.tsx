@@ -1,4 +1,4 @@
-import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
+import { ModuleRegistry } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useResponsive } from "../../hooks/useResponsive";
@@ -6,9 +6,9 @@ import { IconButton } from "../IconButton/IconButton";
 import { NoRowsOverlay } from "./components/NoRowsOverlay";
 import "./DataTable.styles.css";
 import type { DataTableProps } from "./DataTable.types";
-import { DATA_TABLE_THEME } from "./DataTable.consts";
+import { DATA_TABLE_GRID_MODULES, DATA_TABLE_THEME } from "./DataTable.consts";
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules(DATA_TABLE_GRID_MODULES);
 
 export const DataTable = <T extends object>({
   cardClassName,
