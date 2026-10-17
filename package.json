@@ -103,5 +103,8 @@
     "vite": "^8.2.2",
     "vitest": "^4.1.11",
     "yaml": "^2.9.1"
+  },
+  "optionalDependencies": {
+    "playwright-core": "^1.63.0"
   }
 }

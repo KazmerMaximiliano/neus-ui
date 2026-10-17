@@ -73,7 +73,7 @@ neus-ui/
 │   ├── tests/                   [DIRECTORY] Cross-library suites (server rendering)
 │   ├── index.ts                 [FILE] Library entry point (`neus-ui`)
 │   └── theme.ts                 [FILE] Server-safe entry (`neus-ui/theme`), no React or CSS
-├── cli/                         [DIRECTORY] `neus init` CLI and the project templates it writes
+├── cli/                         [DIRECTORY] `neus` CLI (init, shot) and the project templates it writes
 ├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus init`
 ├── agents/                      [DIRECTORY] neus-reviewer subagent for Claude Code (.md) and Codex (.toml)
 ├── .storybook/                  [DIRECTORY] Storybook configuration
@@ -537,6 +537,8 @@ CHECK: All files have correct exports, no circular imports
 React and ReactDOM are peer dependencies. The build keeps one file per source module,
 leaves every dependency external, adds `"use client"` to modules that import React, and
 loads no fonts. Never add build, Storybook or test tooling to `dependencies`.
+`playwright-core` is an `optionalDependencies` entry used only by `neus shot` at runtime; it
+downloads no browser.
 
 ```
 React 19+ (peer)

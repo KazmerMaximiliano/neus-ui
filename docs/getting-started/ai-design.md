@@ -62,6 +62,26 @@ The `neus-design` skill runs in the main conversation, where it can ask and iter
    independent review of new pages and flows, and takes at most one round of screenshots
    when a dev server is running.
 
+## Screenshots: `neus shot`
+
+```bash
+npx neus shot /                       # starts the dev script if needed
+npx neus shot / /pricing --widths 1440,768,390
+npx neus shot / --url http://localhost:3000 --json
+npx neus shot --stop                  # stops the server neus shot started
+```
+
+`neus shot` captures every route full page at each width into `.neus/shots/<route>-<width>.png`
+and reports horizontal scroll, console errors, the smallest running-text size, fonts that did
+not load, solid buttons per viewport and the active system, scheme and primary color. Without
+`--url` it runs the project's `dev` script, reads the URL it prints and leaves it running for
+the next round. `.neus/` ignores itself in git.
+
+It uses an installed Chrome, Edge or Chromium (or `--browser <path>`) through
+`playwright-core`, an optional dependency of neus-ui, and never downloads a browser. When it
+finds none it exits with code 2, and the skill says so instead of claiming it reviewed the
+render.
+
 ## Quality layers
 
 | Layer | What it does |
