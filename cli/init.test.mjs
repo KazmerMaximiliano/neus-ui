@@ -111,4 +111,15 @@ describe("deal-directions", () => {
     expect(deal("--seed", "7").directions).toEqual(directions);
     expect(deal("--seed", "7", "--surface", "marketing").directions[0].signature).not.toBe(directions[0].signature);
   });
+
+  it("deals only the composition when the system is locked", () => {
+    const keep = ["--keep", "palette,type,shape,density,elevation"];
+    const { directions } = deal("--seed", "7", "--surface", "marketing", ...keep);
+    expect(Object.keys(directions[0])).toEqual(["signature", "hero", "features", "testimonials", "cta"]);
+    expect(new Set(directions.map((direction) => direction.hero.name))).toEqual(new Set(["split", "centered", "media-first"]));
+    expect(deal("--seed", "7", "--surface", "marketing").directions.map(({ hero }) => hero)).toEqual(directions.map(({ hero }) => hero));
+    expect(deal("--seed", "7", ...keep).directions[0]).not.toHaveProperty("hero");
+    expect(() => execFileSync(process.execPath, [path.resolve("skills/neus-design/scripts/deal-directions.mjs"), "--keep", "hero"],
+      { stdio: "pipe" })).toThrow(/Unknown axis: hero/);
+  });
 });

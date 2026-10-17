@@ -58,9 +58,9 @@ The `neus-design` skill runs in the main conversation, where it can ask and iter
    continues in the same direction.
 5. **Build.** Composes Neus components, choosing the lowest step of the customization
    ladder: props, palette, tokens, part classes, part styles.
-6. **Verify.** Runs the `neus-audit` skill, then asks the `neus-reviewer` subagent for an
-   independent review of new pages and flows, and takes at most one round of screenshots
-   when a dev server is running.
+6. **Verify.** Runs the `neus-audit` skill, looks at the render with `neus shot` (up to
+   three rounds of screenshots and fixes), then asks the `neus-reviewer` subagent for an
+   independent review of new pages and flows.
 
 ## Screenshots: `neus shot`
 
@@ -86,8 +86,8 @@ render.
 
 | Layer | What it does |
 | --- | --- |
-| Taste | Product-screen and public-page rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy), adapted from taste-skill and Open Design |
-| Directions | `scripts/deal-directions.mjs` deals palette, type pairing, shape, density, elevation and a signature move, so the agent does not default to the category average |
+| Taste | Product-screen rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy) and, for public pages, substance rules (display headline, 16px text, wide container, an anchor per section) and a sample-content policy, adapted from taste-skill and Open Design |
+| Directions | `scripts/deal-directions.mjs` deals palette, type pairing, shape, density, elevation, a signature move and, for public pages, the hero, features, testimonials and call-to-action layouts. With a locked system it deals only the composition, so the system's palette and type stay intact |
 | Inspiration | An index of the VoltAgent/awesome-design-md analyses; the agent takes concepts, never identities |
 | Audit | Type checks, deterministic searches, the Vercel Web Interface Guidelines and the design contract, reported as `file:line` with P0/P1/P2 |
 | Review | The `neus-reviewer` subagent judges the result against the spec without the conversation that produced it |

@@ -15,14 +15,17 @@ When the active DESIGN.md defines a device that appears below as a tell (the
 Neus pill buttons with tracked uppercase labels, its brand gradient tokens,
 a purple Material primary), that is a brand decision: keep it where the
 components use it. Do not amplify it in your own markup, and never add a
-tell the system does not define. When `designSystem.base` is set (a derived
-system), these rules also apply to the system you are writing.
+tell the system does not define. Its Do's and Don'ts decide which devices
+your own markup may use (overlines above titles, bordered cards, gradients,
+uppercase); when they are silent, leave the device out. When `derivedSystem`
+is set (base: `designSystem`), these rules also apply to the system you are
+writing.
 
 ## Product screens (apps, dashboards, back-office, settings)
 
 | Tell | Instead |
 | --- | --- |
-| Every block wrapped in a bordered, shadowed card; cards inside cards | Sections separated by space and one tone step; a Card only where the content is a discrete object |
+| Every block wrapped in a bordered, shadowed card; cards inside cards | Sections separated by space and one tone step; a Card only where the content is a discrete object (a record, a widget, a group of settings), never a Card inside a Card |
 | A row of four KPI tiles with icons and invented percentage deltas at the top of every dashboard | The two or three numbers this user acts on, with their real source and period; or no tiles |
 | An icon beside every heading and nav item | Icons only where they speed recognition (navigation, row actions) |
 | Two or more solid buttons for the same action in one view | One solid primary; the rest `secondary`, `tonal`, `outlined` or `text` |
@@ -54,41 +57,77 @@ system), these rules also apply to the system you are writing.
 
 ## Public pages (landing, marketing, product pages)
 
-Neus targets application screens. For a public page, the composition carries
-the result more than the components do. Follow this order:
+For a public page, the composition carries the result more than any single
+component. Follow this order:
 
 1. **Inventory the subject.** Eight to twelve facts that belong to this
    product and no competitor: its name, its numbers, its constraint, its
-   materials, its real interface.
-2. **Write the argument.** One claim per section with its proof. A section
-   without a claim is deleted, which is how you avoid the stock sequence of
-   hero, logos, three features, testimonial, pricing and call to action.
-3. **Deal a direction, do not pick one.** If the `design-taste-frontend`
-   skill (taste-skill) is installed, use its direction step and map the
-   neus tokens onto its roles. Otherwise run
-   `node <this skill>/scripts/deal-directions.mjs --surface marketing --options 3`
-   and choose the one that can carry something only this subject has.
-   Record why.
+   materials, its real interface. Take them from the brief and the product,
+   never from imagination.
+2. **Write the argument.** One claim per section with its proof. When the
+   brief lists sections, build every one of them: the inventory and the
+   argument decide how each section is executed, never whether it exists.
+   Without a list, a section with no claim is cut, which is how you avoid the
+   stock sequence of hero, logos, three features, testimonial, pricing and
+   call to action.
+3. **Deal the composition, do not pick it.** With a locked system
+   (`derivedSystem` is `null`), palette, type, shape, density and elevation
+   belong to the system; deal only the composition and the signature move:
+
+   ```sh
+   node <this skill>/scripts/deal-directions.mjs --surface marketing --options 3 --keep palette,type,shape,density,elevation
+   ```
+
+   Each option names a curated layout for the hero, the features, the
+   testimonials and the call to action. Choose the one that can carry
+   something only this subject has, and record why. Palette and type are
+   dealt only in None mode, while deriving the system
+   ([system-derivation.md](system-derivation.md)). If the
+   `design-taste-frontend` skill (taste-skill) is installed you may use its
+   layout step instead, never its palette or fonts over a locked system.
 4. **Write the idea sentence**: "On this page, [something only this subject
    has] becomes [the device the direction calls for]". If the sentence still
    works with the nearest competitor's name in it, it is a category idea:
    find another.
 5. **Write the copy deck before markup.** Headlines fit in two lines at every
-   width; one primary action named for what it does; full content in every
-   section. Never invent proof: no customers, quotes, logos or statistics.
-6. **Build, look once.** Take one round of screenshots at 390, 768 and
-   1440 px (see neus-audit), look at them and fix the three worst problems.
+   width; one primary action named for what it does, with microcopy beside it
+   (what happens next, what it asks of the user); full content in every
+   section. Proof follows the sample-content policy in SKILL.md: realistic
+   social proof marked `SAMPLE:` in the code, business facts only from the
+   brief.
+6. **Build, then look.** Run the visual loop in SKILL.md Phase 5
+   (`npx neus shot`) and judge the screenshots against the substance rules
+   below.
 
-### House rules for public pages
+### Substance rules for public pages
 
-- Headlines two lines or fewer at every width; five type sizes at most.
-- One ground, one ink, one accent; the accent on the action and at most one
-  other thing.
-- No eyebrows, pill badges above headlines, index numbering (01 / 02 / 03),
-  icon-topped feature card rows, hairline grids, glass navigation, gradient
-  blobs or fake dashboards built from grey bars.
-- Real pictures of the subject or its real interface, never generic stock
+A page that loses decoration and gains nothing in its place looks poor: in
+blind comparisons people prefer the richer page even when it has a tell or
+two. For every device you leave out, something must take its place.
+
+- **Scale.** A headline at the top of the system's type scale (`--fs-4xl` or
+  `--fs-5xl` on desktop, at least `--fs-3xl` on phones), a lead paragraph one
+  step above the body, running text of at least 16px. Five type sizes at
+  most; headlines in two lines or fewer at every width.
+- **Width.** Content 1120 to 1280px wide on a 1440px screen, with responsive
+  side margins; never one narrow column in the middle of a wide screen.
+- **Anchor.** Every section has a visual anchor: a group of cards, a real
+  picture or interface, or large type.
+- **Bands.** Separate sections with alternating background bands one tone
+  step apart and generous vertical space, not with rules.
+- **Groups.** Features and testimonials as `Card variant="auto"` in a list:
+  the system decides whether a card looks bordered, filled or flat. What
+  reads as generated is nesting cards or wrapping every block in one.
+- **Content.** Every section complete, with microcopy beside the primary
+  action. One ground, one ink, one accent; the accent on the action and at
+  most one other thing.
+- **Pictures.** Real pictures of the subject or its real interface, never
+  generic stock, gradient blobs or fake dashboards built from grey bars
   standing in for the product. Every image local, sized and credited when it
   is not the client's own.
-- Motion explains a change or performs the idea; `transform` and `opacity`
-  only, with a `prefers-reduced-motion` fallback.
+- **Motion.** Motion explains a change or performs the idea; `transform` and
+  `opacity` only, with a `prefers-reduced-motion` fallback.
+
+The active DESIGN.md's Do's and Don'ts decide every other device: overlines
+above titles, index numbering, glass navigation, gradients, uppercase. When
+they are silent, leave the device out.
