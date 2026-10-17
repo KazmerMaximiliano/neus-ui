@@ -17,3 +17,9 @@ export const SYSTEM_FONTS = {
   neobrutalism: "family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500",
   vercel: "family=Geist:wght@400;500;600;700&family=Geist+Mono",
 };
+
+// Subcommands of the `neus` bin; each module exports run(argv, root).
+export const COMMANDS = {
+  init: { module: "./init.mjs", summary: "Set up neus-ui, its theme files, skills and subagents" },
+  shot: { module: "./shot.mjs", summary: "Screenshot routes of the app and report basic problems" },
+};

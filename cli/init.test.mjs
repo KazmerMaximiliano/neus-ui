@@ -1,10 +1,11 @@
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import * as theme from "../src/theme";
-import { detectProject, syncAttributes, upsertBlock, writeProject } from "./init.mjs";
+import { syncAttributes, upsertBlock, writeProject } from "./init.mjs";
+import { detectProject } from "./neus.utils.mjs";
 
 const project = (pkg, dirs = []) => {
   const root = mkdtempSync(path.join(tmpdir(), "neus-init-"));
@@ -81,6 +82,21 @@ describe("neus init", () => {
     expect(layout).toContain('data-design-system="carbon"');
     expect(layout).toContain("family=IBM+Plex+Sans");
     expect(layout).not.toContain("{{");
+  });
+});
+
+describe("neus bin", () => {
+  const neus = (...args) => spawnSync(process.execPath, [path.resolve("cli/neus.mjs"), ...args], { encoding: "utf8" });
+
+  it("finds the command after leading flags", () => {
+    expect(neus("--system", "carbon", "init", "--help")).toMatchObject({ status: 0, stdout: expect.stringContaining("npx neus init") });
+    expect(neus("-y", "init", "--help").status).toBe(0);
+  });
+
+  it("prints the command list, failing only for unknown commands", () => {
+    expect(neus()).toMatchObject({ status: 0, stdout: expect.stringContaining("shot") });
+    expect(neus("--help").status).toBe(0);
+    expect(neus("nope").status).toBe(1);
   });
 });
 
