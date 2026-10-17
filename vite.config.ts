@@ -6,30 +6,32 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import packageJson from './package.json' with { type: 'json' };
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+const EXTERNAL_PACKAGES = Object.keys({ ...packageJson.dependencies, ...packageJson.peerDependencies });
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: path.resolve(dirname, 'src/index.ts'),
-      name: 'NeusUI',
+      entry: {
+        index: path.resolve(dirname, 'src/index.ts'),
+        theme: path.resolve(dirname, 'src/theme.ts'),
+      },
       formats: ['es'],
-      fileName: () => 'index.js'
+      cssFileName: 'neus-ui'
     },
-    rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+    rolldownOptions: {
+      // Dependencies stay external so apps only download what they import;
+      // their stylesheets are still bundled into neus-ui.css.
+      external: (id) => !id.endsWith('.css') && EXTERNAL_PACKAGES.some((name) => id === name || id.startsWith(`${name}/`)),
       output: {
-        globals: {
-          'react': 'React',
-          'react-dom': 'ReactDOM',
-          'react/jsx-runtime': 'react/jsx-runtime'
-        },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'index.css';
-          return assetInfo.name || '';
-        }
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        // Modules that import React are client modules for React Server Components;
+        // data modules (DESIGN_SYSTEMS, resolveTheme) stay usable on the server.
+        banner: (chunk) => chunk.imports.some((id) => /^react(-dom)?($|\/)/.test(id)) ? '"use client";' : ''
       }
     },
     cssCodeSplit: false
@@ -42,8 +44,24 @@ export default defineConfig({
           name: 'unit',
           environment: 'jsdom',
           include: ['src/**/*.test.{ts,tsx}'],
-          exclude: ['src/**/*.browser.test.tsx', 'src/design-systems/tooling/**'],
+          exclude: ['src/**/*.browser.test.tsx', 'src/**/*.ssr.test.tsx', 'src/design-systems/tooling/**'],
           setupFiles: ['./vitest.setup.ts']
+        }
+      },
+      {
+        extends: true,
+        test: {
+          name: 'ssr',
+          environment: 'node',
+          include: ['src/**/*.ssr.test.tsx']
+        }
+      },
+      {
+        extends: true,
+        test: {
+          name: 'cli',
+          environment: 'node',
+          include: ['cli/**/*.test.mjs']
         }
       },
       {

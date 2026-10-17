@@ -115,6 +115,8 @@ describe("artifact generation", () => {
     expect(result.artifacts.get("src/design-systems/apple/generated/recipes/button.css")).toContain("--button-radius: 10px;");
     expect(result.artifacts.get("src/design-systems/neus/generated/recipes/button.css")).toContain(":root,\n[data-design-system]");
     expect(result.artifacts.get("src/design-systems/apple/generated/tokens.css")).toContain('[data-design-system="apple"][data-color-scheme="dark"]');
+    expect(result.artifacts.get("src/design-systems/apple/generated/tokens.css")).toContain("--color-primary: #123456;");
+    expect(result.artifacts.get("src/design-systems/neus/generated/tokens.css")).not.toContain("--color-primary:");
   });
 
   it("generates deterministically, preserves timestamps and checks without writing", () => {

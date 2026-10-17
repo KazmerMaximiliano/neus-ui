@@ -4,21 +4,26 @@
 
 ## Install and import
 
-Use React and ReactDOM 19+ in the consuming application. The package contains TypeScript
-declarations and ES module named exports. Install from GitHub:
+Use React and ReactDOM 19+ in the consuming application; they are peer dependencies. The
+package contains TypeScript declarations and ES module named exports. Install from GitHub,
+then let `neus init` set up the theme and the AI design tools:
 
 ```bash
 pnpm add git+https://github.com/KazmerMaximiliano/neus-ui.git
+npx neus init
 ```
+
+See [Design with AI](./ai-design.md) for what `neus init` writes, and
+[Frameworks](./frameworks.md) for Next.js, Astro and other server-rendered hosts.
 
 Git installation can run the package's build preparation. For repository development, use
 the pnpm version recorded in package.json and a compatible Node.js version; see
 [Development](../contributing/development.md).
 
 Import the exported CSS bundle once at the application entry point. It includes the
-component styles, foundations and design-system recipes. It also supplies a global
-box-sizing/reset and body defaults. The stylesheet requests its baseline fonts from Google
-Fonts; font stacks provide local fallbacks.
+component styles, foundations, design-system recipes and palettes. It also supplies a
+global box-sizing/reset and body defaults. It loads no fonts: load the active system's faces
+in your document ([Fonts](./frameworks.md#fonts)); font stacks provide local fallbacks.
 
 ```tsx
 import { Button, ThemeProvider } from "neus-ui";
@@ -49,9 +54,8 @@ const button: ButtonProps = { label: "Continue", variant: "secondary" };
 ```
 
 Your React application still needs the normal React/ReactDOM typings. No separate Neus UI
-typings package is required. The current manifest declares React and ReactDOM as
-dependencies; the library build externalizes both. Do not assume that they are declared as
-peerDependencies.
+typings package is required. Server code and build scripts can import design-system data
+and theme helpers without React from `neus-ui/theme`.
 
 ## Explore and troubleshoot
 

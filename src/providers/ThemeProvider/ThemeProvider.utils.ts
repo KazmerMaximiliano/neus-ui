@@ -1,76 +1,25 @@
 import type { DesignSystemId } from "../../design-systems";
 import { DESIGN_SYSTEM_PALETTES } from "../../design-systems/design-systems.consts";
-import { getDarkenColor, hexToRgb } from "../../utils";
-import type { ColorScheme, ColorVariants, ThemeColors, ThemeConfig } from "./ThemeProvider.types";
-
-const colorVariants = (color: string, scheme: ColorScheme): ColorVariants => {
-  const rgb = hexToRgb(color);
-  return {
-    main: color,
-    light: rgb ? `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${scheme === "dark" ? 0.15 : 0.1})` : color,
-    dark: rgb ? getDarkenColor(color, 15) : color,
-  };
-};
-
-const onColor = (color: string, fallback: string): string => {
-  const rgb = hexToRgb(color);
-  if (!rgb) return fallback;
-  const linear = [rgb.r, rgb.g, rgb.b].map((channel) => {
-    const c = channel / 255;
-    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-  });
-  const luminance = linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
-  return (luminance + 0.05) / 0.05 >= 1.05 / (luminance + 0.05) ? "#000000" : "#ffffff";
-};
+import { resolvePalette } from "../../utils/resolvePalette";
+import type { ColorScheme, ThemeConfig } from "./ThemeProvider.types";
 
 export const resolveTheme = (
   designSystem: DesignSystemId,
   scheme: ColorScheme,
   overrides: ThemeConfig,
-) => {
-  const palette = DESIGN_SYSTEM_PALETTES[designSystem][scheme];
-  const isDark = scheme === "dark";
-  const primary = colorVariants(overrides.primaryColor ?? palette.primary, scheme);
-  if (!overrides.primaryColor && palette.hover) primary.dark = palette.hover;
+) => resolvePalette(DESIGN_SYSTEM_PALETTES[designSystem][scheme], scheme, overrides);
 
-  const colors: ThemeColors = {
-    primary,
-    success: colorVariants(overrides.successColor ?? palette.success ?? (isDark ? "#66bb6a" : "#4caf50"), scheme),
-    error: colorVariants(overrides.errorColor ?? palette.error ?? (isDark ? "#ef5350" : "#f44336"), scheme),
-    info: colorVariants(overrides.infoColor ?? palette.info ?? primary.main, scheme),
-    white: "#ffffff",
-    black: "#000000",
-    gray: isDark
-      ? { 900: "#e2e8f0", 700: "#94a3b8", 600: "#64748b", 500: "#475569", 400: "#64748b", 300: "#334155", 200: "#1e293b", 150: "#1a2235", 100: "#2a2a3d" }
-      : { 900: "#333333", 700: "#475569", 600: "#666666", 500: "#64748b", 400: "#6b7280", 300: "#cbd5e1", 200: "#e0e0e0", 150: "#e5e7eb", 100: "#f9fafb" },
-    borderLight: isDark ? "rgba(255, 255, 255, 0.1)" : primary.light,
-    shadow: `rgba(0, 0, 0, ${isDark ? 0.4 : 0.1})`,
-  };
-
-  const variables: Record<string, string> = {
-    "--color-text-on-primary": overrides.primaryColor ? onColor(primary.main, palette.onPrimary) : palette.onPrimary,
-    "--color-primary-active": overrides.primaryColor ? primary.dark : palette.active ?? primary.dark,
-    "--color-focus": overrides.primaryColor ? "color-mix(in srgb, var(--color-primary) 25%, var(--color-text-primary))" : palette.focus ?? primary.main,
-    "--color-border-light": colors.borderLight,
-    "--color-shadow": colors.shadow,
-  };
-
-  if (overrides.primaryColor) variables["--color-primary-text"] = "color-mix(in srgb, var(--color-primary) 25%, var(--color-text-primary))";
-
-  for (const name of ["primary", "success", "error", "info"] as const) {
-    variables[`--color-${name}`] = colors[name].main;
-    variables[`--color-${name}-light`] = colors[name].light;
-    variables[`--color-${name}-dark`] = colors[name].dark;
-    if (name !== "primary") variables[`--color-text-on-${name}`] = onColor(colors[name].main, palette.onPrimary);
-    variables[`--color-text-on-${name}-hover`] = onColor(colors[name].dark, palette.onPrimary);
-    variables[`--color-text-on-${name}-active`] = onColor(
-      name === "primary" ? variables["--color-primary-active"] : colors[name].dark,
-      palette.onPrimary,
-    );
-  }
-
-  return { colors, variables };
-};
+/**
+ * Static equivalent of a global ThemeProvider: the resolved palette for both
+ * color schemes as CSS, for server-rendered pages that set
+ * `data-design-system` and `data-color-scheme` on `<html>` themselves.
+ */
+export const buildThemeCss = (designSystem: DesignSystemId, overrides: ThemeConfig = {}) =>
+  (["light", "dark"] as const).map((scheme) => {
+    const { variables } = resolveTheme(designSystem, scheme, overrides);
+    const declarations = Object.entries(variables).map(([name, value]) => `  ${name}: ${value};`).join("\n");
+    return `:root[data-design-system="${designSystem}"][data-color-scheme="${scheme}"] {\n${declarations}\n}\n`;
+  }).join("\n");
 
 export const applyTheme = (
   element: HTMLElement,

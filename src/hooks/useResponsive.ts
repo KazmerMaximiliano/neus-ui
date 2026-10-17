@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 interface UseResponsiveReturn {
   isMobile: boolean;
@@ -7,21 +7,15 @@ interface UseResponsiveReturn {
   screenWidth: number;
 }
 
+const subscribeResize = (notify: () => void) => {
+  window.addEventListener('resize', notify);
+  return () => window.removeEventListener('resize', notify);
+};
+
 export const useResponsive = (): UseResponsiveReturn => {
-  const [screenWidth, setScreenWidth] = useState<number>(
-    typeof window !== 'undefined' ? window.innerWidth : 1024
-  );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }
-  }, []);
+  // The server snapshot is also used during hydration, so the first client
+  // render matches the server HTML before switching to the real width.
+  const screenWidth = useSyncExternalStore(subscribeResize, () => window.innerWidth, () => 1024);
 
   const isMobile = screenWidth < 768;
   const isTablet = screenWidth >= 768 && screenWidth < 1024;

@@ -196,7 +196,7 @@ pnpm test -- -t "Button"
 ## Configuration
 
 - **`vitest.setup.ts`** — imports `@testing-library/jest-dom/vitest` matchers
-- **`vite.config.ts`** — defines `unit` (jsdom), `design-system-generator` (Node), `design-systems` (computed CSS and interactions in Chromium), and `storybook` (stories in Chromium)
+- **`vite.config.ts`** — defines `unit` (jsdom), `ssr` (every story rendered with `renderToString` in Node, `*.ssr.test.tsx`), `cli` (`neus init` and the skill scripts, `cli/**/*.test.mjs`), `design-system-generator` (Node), `design-systems` (computed CSS and interactions in Chromium), and `storybook` (stories in Chromium)
 
 Design-system browser tests verify all six palettes in both color schemes, independent
 Button variants and sizes, nested scope resets, runtime switching, loader overrides,

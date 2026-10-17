@@ -1,4 +1,23 @@
-import { themeQuartz } from "ag-grid-community";
+import {
+  CellStyleModule,
+  ClientSideRowModelModule,
+  DateFilterModule,
+  NumberFilterModule,
+  TextFilterModule,
+  themeQuartz,
+} from "ag-grid-community";
+
+/**
+ * Only the AG Grid modules DataTable's own options need. Projects whose
+ * columnDefs use other grid features register those modules themselves.
+ */
+export const DATA_TABLE_GRID_MODULES = [
+  ClientSideRowModelModule,
+  TextFilterModule,
+  NumberFilterModule,
+  DateFilterModule,
+  CellStyleModule,
+];
 
 export const DATA_TABLE_THEME = themeQuartz.withParams({
   accentColor: "var(--data-table-accent)",

@@ -32,7 +32,8 @@ export const App = () => (
 );
 ```
 
-`DESIGN_SYSTEMS` and `DesignSystemId` are public exports for application selectors. Changing
+`DESIGN_SYSTEMS` and `DesignSystemId` are public exports for application selectors, also
+available without React from `neus-ui/theme`. Changing
 designSystem updates the recipe and default palette while retaining the provider's explicit
 color overrides. `DESIGN_SYSTEMS.source` is a repository-relative specification path, not a
 deployed URL or package export.

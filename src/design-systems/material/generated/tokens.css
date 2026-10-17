@@ -14,6 +14,34 @@
 }
 
 [data-design-system="material"][data-color-scheme="light"] {
+  --color-text-on-primary: #ffffff;
+  --color-primary-active: #5538b6;
+  --color-focus: #6442d6;
+  --color-border-light: rgba(100, 66, 214, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-primary: #6442d6;
+  --color-primary-light: rgba(100, 66, 214, 0.1);
+  --color-primary-dark: #5538b6;
+  --color-text-on-primary-hover: #ffffff;
+  --color-text-on-primary-active: #ffffff;
+  --color-success: #4caf50;
+  --color-success-light: rgba(76, 175, 80, 0.1);
+  --color-success-dark: #419544;
+  --color-text-on-success: #000000;
+  --color-text-on-success-hover: #000000;
+  --color-text-on-success-active: #000000;
+  --color-error: #f44336;
+  --color-error-light: rgba(244, 67, 54, 0.1);
+  --color-error-dark: #cf392e;
+  --color-text-on-error: #000000;
+  --color-text-on-error-hover: #ffffff;
+  --color-text-on-error-active: #ffffff;
+  --color-info: #6442d6;
+  --color-info-light: rgba(100, 66, 214, 0.1);
+  --color-info-dark: #5538b6;
+  --color-text-on-info: #ffffff;
+  --color-text-on-info-hover: #ffffff;
+  --color-text-on-info-active: #ffffff;
   --color-surface: #fef7ff;
   --color-surface-secondary: #f3edf7;
   --color-surface-container-low: #f7f2fa;
@@ -34,6 +62,34 @@
 }
 
 [data-design-system="material"][data-color-scheme="dark"] {
+  --color-text-on-primary: #161616;
+  --color-primary-active: #aa98d7;
+  --color-focus: #c8b3fd;
+  --color-border-light: rgba(255, 255, 255, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-primary: #c8b3fd;
+  --color-primary-light: rgba(200, 179, 253, 0.15);
+  --color-primary-dark: #aa98d7;
+  --color-text-on-primary-hover: #000000;
+  --color-text-on-primary-active: #000000;
+  --color-success: #66bb6a;
+  --color-success-light: rgba(102, 187, 106, 0.15);
+  --color-success-dark: #579f5a;
+  --color-text-on-success: #000000;
+  --color-text-on-success-hover: #000000;
+  --color-text-on-success-active: #000000;
+  --color-error: #ef5350;
+  --color-error-light: rgba(239, 83, 80, 0.15);
+  --color-error-dark: #cb4744;
+  --color-text-on-error: #000000;
+  --color-text-on-error-hover: #ffffff;
+  --color-text-on-error-active: #ffffff;
+  --color-info: #c8b3fd;
+  --color-info-light: rgba(200, 179, 253, 0.15);
+  --color-info-dark: #aa98d7;
+  --color-text-on-info: #000000;
+  --color-text-on-info-hover: #000000;
+  --color-text-on-info-active: #000000;
   --color-surface: #141218;
   --color-surface-secondary: #211f26;
   --color-surface-container-low: #1d1b20;

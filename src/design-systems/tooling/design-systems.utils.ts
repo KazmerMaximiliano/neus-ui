@@ -2,6 +2,8 @@ import { lint } from "@google/design.md/linter";
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, unlinkSync, unwatchFile, watchFile, writeFileSync } from "node:fs";
 import path from "node:path";
 import { parseDocument } from "yaml";
+import { resolvePalette } from "../../utils/resolvePalette";
+import type { ActionPalette } from "../design-systems.types";
 import {
   COLOR_MODES, COMPONENT_KEYS, DIMENSION_GROUPS, DIMENSION_PATTERN, DOCUMENT_KEYS,
   EXTENSION_KEYS, MODES, PALETTE_KEYS, RECIPE_NAMES, REFERENCE_PATTERN,
@@ -168,16 +170,21 @@ export const collectArtifacts = (root: string): GenerationResult => {
     const directory = `src/design-systems/${id}/generated`;
     const header = `/* Generated from ${source}. Edit the document, then run pnpm design:generate. */\n`;
     const extension = document["x-neus"];
+    const palette = Object.fromEntries(Object.entries(extension.palette).map(([mode, entries]) => [mode,
+      Object.fromEntries(Object.entries(entries).map(([name, value]) => [name, resolveReference(document, value)])),
+    ])) as Record<typeof COLOR_MODES[number], ActionPalette>;
+    // Siblings ship their resolved action palette as CSS so static pages render it without ThemeProvider.
+    const tokens: ModeDeclarations = { ...extension.tokens };
+    if (id !== "neus") for (const mode of COLOR_MODES) {
+      tokens[mode] = { ...resolvePalette(palette[mode], mode, {}).variables, ...extension.tokens?.[mode] };
+    }
     if (extension.foundations) artifacts.set(`${directory}/foundations.css`, header + renderModes(document, extension.foundations, true));
-    artifacts.set(`${directory}/tokens.css`, header + renderModes(document, extension.tokens));
+    artifacts.set(`${directory}/tokens.css`, header + renderModes(document, tokens));
     for (const name of RECIPE_NAMES) {
       artifacts.set(`${directory}/recipes/${name}.css`, header + renderModes(document, extension.recipes[name]));
     }
     artifacts.set(`${directory}/index.css`, header + ["tokens", ...RECIPE_NAMES.map(name => `recipes/${name}`)]
       .map(name => `@import "./${name}.css";`).join("\n") + "\n");
-    const palette = Object.fromEntries(Object.entries(extension.palette).map(([mode, entries]) => [mode,
-      Object.fromEntries(Object.entries(entries).map(([name, value]) => [name, resolveReference(document, value)])),
-    ]));
     artifacts.set(`${directory}/${id}.consts.ts`, `${header}import type { DesignSystemPalette } from "../../design-systems.types";\n\n` +
       `export const ${id.toUpperCase()}_METADATA = ${JSON.stringify({ id, name: document.name, description: document.description, source }, null, 2)} as const;\n\n` +
       `export const ${id.toUpperCase()}_PALETTE: DesignSystemPalette = ${JSON.stringify(palette, null, 2)};\n`);
