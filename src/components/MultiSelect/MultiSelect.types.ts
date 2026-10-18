@@ -1,8 +1,9 @@
 import type { CSSProperties } from "react";
 import type { DesignSystemId } from "../../design-systems";
+import type { FieldDescriptionProps } from "../Input/Input.types";
 import type { SelectOption } from "../Select";
 
-export type MultiSelectProps = {
+export type MultiSelectProps = FieldDescriptionProps & {
   tagRemoveIconClassName?: string;
   tagRemoveIconStyle?: CSSProperties;
   boxClassName?: string;

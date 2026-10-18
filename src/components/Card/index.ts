@@ -1,5 +1,5 @@
 export { Card } from "./Card";
-export type { CardProps } from "./Card.types";
+export type { CardElement, CardProps } from "./Card.types";
 export { CardHeader } from "./components/CardHeader/CardHeader";
 export type { CardHeaderProps } from "./components/CardHeader/CardHeader.types";
 export { CardMedia } from "./components/CardMedia/CardMedia";

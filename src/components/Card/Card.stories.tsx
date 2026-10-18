@@ -18,6 +18,11 @@ const meta: Meta<CardStoryArgs> = {
   tags: ["autodocs"],
   argTypes: {
     variant: { control: "select", options: ["auto", "filled", "outlined", "elevated"], description: "Surface treatment; auto follows the system" },
+    as: {
+      control: "select",
+      options: ["div", "article", "li", "figure", "section"],
+      description: "Rendered element; li inside a ul for feature or quote lists, figure for a quote with its author",
+    },
     designSystem: {
       control: "select",
       options: DESIGN_SYSTEMS.map(({ id }) => id),
@@ -44,6 +49,7 @@ export const Card: StoryObj<CardStoryArgs> = {
   args: {
     designSystem: "neus",
     variant: "auto",
+    as: "div",
     className: "",
     style: null,
     children: (
@@ -71,7 +77,13 @@ export const Card: StoryObj<CardStoryArgs> = {
   render: ({ designSystem, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>
       <div className="card-story">
-        <CardComponent {...args} />
+        {args.as === "li" ? (
+          <ul>
+            <CardComponent {...args} />
+          </ul>
+        ) : (
+          <CardComponent {...args} />
+        )}
       </div>
     </ThemeProvider>
   ),

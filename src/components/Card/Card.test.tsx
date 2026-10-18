@@ -121,6 +121,25 @@ describe("Card", () => {
     expect(screen.getByText("Details").style.borderRadius).toBe("");
   });
 
+  it("renders as a list item, article, figure or section with a matching ref", () => {
+    const ref = createRef<HTMLLIElement>();
+    render(
+      <ul>
+        <Card as="li" ref={ref} variant="outlined">
+          Feature
+        </Card>
+      </ul>,
+    );
+    const item = screen.getByRole("listitem");
+    expect(ref.current).toBe(item);
+    expect(item).toHaveClass("card");
+    expect(item).toHaveAttribute("data-variant", "outlined");
+    for (const element of ["article", "figure", "section"] as const) {
+      const { container } = render(<Card as={element}>Content</Card>);
+      expect(container.firstElementChild?.tagName).toBe(element.toUpperCase());
+    }
+  });
+
   it("removes prior inline overrides when style returns to null", () => {
     const { container, rerender } = render(<Card style={{ padding: 12 }} />);
     rerender(<Card style={null} />);
@@ -173,6 +192,14 @@ describe("Card", () => {
     void (<Card onClick={() => undefined} />);
     // @ts-expect-error Card's style must be a CSS object, not a string.
     void (<Card style="padding: 1rem" />);
+    expectTypeOf<CardProps<"li">>().toHaveProperty("value");
+    expectTypeOf<CardProps>().not.toHaveProperty("value");
+    // @ts-expect-error Card renders only passive container elements.
+    void (<Card as="button" />);
+    // @ts-expect-error The ref must match the selected element.
+    void (<Card as="li" ref={createRef<HTMLDivElement>()} />);
+    // @ts-expect-error The default div infers a div ref.
+    void (<Card ref={createRef<HTMLLIElement>()} />);
   });
 });
 
@@ -190,6 +217,13 @@ describe("Card story", () => {
       "filled",
       "outlined",
       "elevated",
+    ]);
+    expect(stories.default.argTypes).toHaveProperty("as.options", [
+      "div",
+      "article",
+      "li",
+      "figure",
+      "section",
     ]);
   });
 

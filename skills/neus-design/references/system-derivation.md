@@ -102,9 +102,9 @@ Fix every error. Warnings are acceptable when you can say why.
 Build a specimen route (for example `/neus-specimen`) from the skeletons in
 [patterns.md](patterns.md): an app shell, a form, a data list, a dialog,
 buttons in every variant, badges and cards, in light and dark. Ask the user
-to open it. With a dev server running, take one round of screenshots (see
-neus-audit) and fix contrast or overflow in the tokens, not in component
-CSS. Iterate until the user approves, then record the system in the feature
+to open it. Run `npx neus shot /neus-specimen`, open its screenshots and
+fix contrast, overflow and fonts that did not load in the tokens, not in
+component CSS. Iterate until the user approves, then record the system in the feature
 spec and move on to screens.
 
 ## Limits

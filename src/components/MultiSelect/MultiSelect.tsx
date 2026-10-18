@@ -4,6 +4,7 @@ import { usePopover } from "../../hooks/usePopover";
 import { SelectListbox } from "../Select/components/SelectListbox";
 import "../Checkbox/Checkbox.styles.css";
 import "../Select/Select.styles.css";
+import "../../css/field.css";
 import "./MultiSelect.styles.css";
 import { MultiSelectProps } from "./MultiSelect.types";
 
@@ -51,6 +52,9 @@ export const MultiSelect = ({
   name,
   placeholder,
   label,
+  description,
+  descriptionClassName,
+  descriptionStyle,
   error,
   options,
   value = [],
@@ -76,8 +80,9 @@ export const MultiSelect = ({
   const displayLabel = label || placeholder;
   const fieldId = useId();
   const errorId = useId();
+  const descriptionId = useId();
   const popover = usePopover({
-    initialFocus: viewSearchBar ? ".select__search-input" : "[role=\"option\"]",
+    initialFocus: viewSearchBar ? ".select__search-input" : '[role="option"]',
   });
   const { id, open, triggerRef, anchorRef, toggle } = popover;
 
@@ -106,7 +111,8 @@ export const MultiSelect = ({
         <label
           htmlFor={fieldId}
           className={[
-            `select__label${error ? " select__label--error" : ""}${disabled ? " select__label--disabled" : ""
+            `select__label${error ? " select__label--error" : ""}${
+              disabled ? " select__label--disabled" : ""
             }`,
             labelClassName,
           ]
@@ -128,7 +134,8 @@ export const MultiSelect = ({
       <div
         ref={anchorRef}
         className={[
-          `select__field${error ? " select__field--error" : ""}${disabled ? " select__field--disabled" : ""
+          `select__field${error ? " select__field--error" : ""}${
+            disabled ? " select__field--disabled" : ""
           }${open ? " select__field--open" : ""}`,
           fieldClassName,
         ]
@@ -186,7 +193,11 @@ export const MultiSelect = ({
           aria-controls={id}
           aria-label={displayLabel ? undefined : "Selecciona opciones"}
           aria-invalid={error ? true : undefined}
-          aria-describedby={error ? errorId : undefined}
+          aria-describedby={
+            [description != null && descriptionId, error && errorId]
+              .filter(Boolean)
+              .join(" ") || undefined
+          }
           onClick={toggle}
         >
           {selectedOptions.length === 0 ? (
@@ -249,6 +260,17 @@ export const MultiSelect = ({
         listStyle={listStyle}
         optionStyle={optionStyle}
       />
+      {description != null && (
+        <div
+          id={descriptionId}
+          className={["field__description", descriptionClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={descriptionStyle}
+        >
+          {description}
+        </div>
+      )}
       {error && (
         <div
           id={errorId}

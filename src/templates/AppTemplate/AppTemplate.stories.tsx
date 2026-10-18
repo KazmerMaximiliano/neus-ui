@@ -38,7 +38,11 @@ const meta: Meta<AppTemplateProps & DesignSystemPreviewArgs> = {
     },
     routes: {
       control: "object",
-      description: "Sidebar navigation items",
+      description: "Sidebar navigation items; an item with href renders a link",
+    },
+    linkComponent: {
+      control: false,
+      description: "Router link component (for example Next.js Link) passed to Sidebar for routes with href",
     },
     menu: {
       control: false,
@@ -81,6 +85,7 @@ export const AppTemplate: Story = {
       </div>
     ),
     routes: DEFAULT_ROUTES,
+    linkComponent: undefined,
     menu: <Dropdown items={MENU_ITEMS} name="User" icon={User} />,
   },
 };

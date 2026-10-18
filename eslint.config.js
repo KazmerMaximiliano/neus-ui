@@ -16,7 +16,7 @@ export default defineConfig([
     },
   },
   {
-    files: ["cli/**/*.mjs", "skills/**/*.mjs"],
+    files: ["cli/**/*.mjs", "skills/**/*.mjs", "eval/**/*.mjs"],
     extends: [js.configs.recommended],
     languageOptions: {
       ecmaVersion: 2022,

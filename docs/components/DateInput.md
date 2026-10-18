@@ -76,6 +76,9 @@ retain their nullable default.
 | `readonly` | `boolean` | `false` | Makes the input read-only |
 | `required` | `boolean` | `false` | Whether a date selection is required |
 | `error` | `string` | Omitted | Error message to display |
+| `description` | `ReactNode` | Omitted | Help text below the field, linked with `aria-describedby` before the error |
+| `descriptionClassName` | `string` | Omitted | Additional classes on `.field__description` |
+| `descriptionStyle` | `CSSProperties` | Omitted | Inline styles on `.field__description` |
 | `mode` | `"single" \| "range"` | `"single"` | Date selection mode |
 | `fieldStyle` | `CSSProperties` | Omitted | Inline styles on `.picker-field__field` |
 | `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.picker-field__label` |
@@ -99,6 +102,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.picker-field__icon` | `Icon` | `iconClassName` | `iconStyle` | `Always` |
 | `.picker-field__popover` | `div` | `panelClassName` | `panelStyle` | `Always` |
 | `.date-input__dropdown` | `div` | `dropdownClassName` | `dropdownStyle` | `open` |
+| `.field__description` | `div` | `descriptionClassName` | `descriptionStyle` | `description` |
 | `.picker-field__error` | `div` | `errorClassName` | `errorStyle` | `error` |
 
 State/variant selectors: `.date-input__field--readonly`, `.date-input__label--disabled`,

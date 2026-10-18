@@ -102,8 +102,8 @@ Codex, keeps the same direction.
 
 ## Phase 4: build
 
-- Compose neus-ui components first; your own markup only for what the
-  catalog lacks, styled with neus tokens.
+- Compose neus-ui components first (table below); your own markup only for
+  what the catalog lacks, styled with neus tokens.
 - Choose the lowest level of the customization ladder for every visual
   change ([references/customization.md](references/customization.md)).
 - Start from a skeleton in [references/patterns.md](references/patterns.md).
@@ -112,32 +112,81 @@ Codex, keeps the same direction.
   landing and marketing pages.
 - Implement every state in the spec. Every control does real work or calls a
   clearly named handler.
-- Real, specific copy. No lorem ipsum, stock names or invented metrics; a
-  labelled placeholder when a value is unknown.
+- Real, specific copy in the domain's language. No lorem ipsum or stock names.
+- Sample content. Social proof the brief asks for (testimonials, names,
+  roles) is written as realistic examples, marked in the code with a
+  `// SAMPLE:` comment (`{/* SAMPLE: */}` inside JSX) above each block and
+  listed in the delivery summary; the page itself shows no notice. Business
+  facts (prices, trial days, guarantees, metrics, customer counts) appear
+  only when the brief gives them: otherwise leave them out or ask. Never
+  invent them.
 - Pass user-facing defaults in the project's `language` (Select
   `searchBarPlaceholder`, FileUploader texts, Sidebar `labels`, DataTable
   empty texts).
 - On refinement turns, change only what the user named. Edit in place.
 
+### Need → component
+
+Before writing an element yourself, find the need here and read the
+component's guide.
+
+| Need | Component |
+| --- | --- |
+| Feature with icon, title and text | `Card as="li"` + `CardHeader` + `CardContent`, inside a `<ul>` grid |
+| Testimonial | `Card as="figure"` (or `as="li"` in a list) + `CardContent` (quote) + `CardFooter` (name, role) |
+| Container of a widget, demo or summary | `Card` |
+| Signup, contact or create form | `<form>` + `FormTemplate` + `Input` (`Select`, `Checkbox`, `DateInput`…), inside a `Card` on public pages |
+| Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
+| Icon-only action | `IconButton` |
+| Text navigation | `Link` |
+| Help text under a field | `description` on Input, Select, MultiSelect, DateInput or TimeInput |
+| Status or label | `Badge` |
+| Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
+| Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
+| Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
+| Records in a table | `DataTable` |
+| Steps of a flow | `Stepper` |
+| Files | `FileUploader` |
+| Map | `InteractiveMap` |
+| Application shell and navigation | `AppTemplate`, `Sidebar` |
+
+Headings, paragraphs and page layout have no components yet: use semantic
+HTML (`h1`–`h3`, `p`, `section`, `ul`) styled with the system's type roles
+and `--space-*` tokens.
+
 ## Phase 5: verify
 
 1. Run the deterministic checks and the review in the `neus-audit` skill on
    the changed files. Fix every P0 and the P1 items in scope.
-2. For a new page or a multi-screen flow, delegate a fresh-eyes review to
+2. Look at the render. This is mandatory for every new or redesigned page or
+   screen:
+   1. After the first complete render, run `npx neus shot <route>` from the
+      project root. It starts the dev script when no server is running,
+      saves full-page PNGs at 1440 and 390 px and prints the problems it
+      measured (overflow, console errors, small running text, fonts not
+      loaded, solid buttons per viewport, active theme).
+   2. Open the 1440 and 390 px screenshots with your image-reading tool.
+   3. Write down the three most visible problems: scale, empty areas,
+      contrast, overflow, alignment, plus anything `neus shot` reported.
+   4. Fix them and run `npx neus shot <route>` again. Stop after three
+      rounds or when nothing serious is left.
+   5. If `neus shot` exits with code 2 (no browser or playwright-core), say
+      so in the delivery and ask the user to install Chrome, Edge or
+      Chromium. Never claim you reviewed the render.
+3. For a new page or a multi-screen flow, delegate a fresh-eyes review to
    the `neus-reviewer` subagent with the spec path, the changed files and
    the route. Fix its P0 findings.
-3. When a dev server is running, take at most one round of screenshots at
-   390, 768 and 1440 px (see neus-audit), look at them and fix the three
-   worst problems.
 
 Never claim a check you did not run.
 
 ## Phase 6: deliver
 
 Summarize: files created or changed, how to open the result (route and dev
-command), the design decisions and their source (system DESIGN.md, spec,
-inspiration reference, dealt direction, or assumption), audit results, and
-anything left open. Do not paste full source into the reply.
+command; the server `neus shot` started keeps running until
+`npx neus shot --stop`), the design decisions and their source (system
+DESIGN.md, spec, inspiration reference, dealt composition, or assumption),
+the `SAMPLE:` content to replace, audit and screenshot results, and anything
+left open. Do not paste full source into the reply.
 
 ## Several independent screens
 

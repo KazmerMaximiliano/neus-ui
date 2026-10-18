@@ -104,7 +104,11 @@ const meta: Meta<SidebarStoryArgs> = {
     items: {
       control: "object",
       description:
-        "Navigation actions with optional icons, active and visible flags",
+        "Navigation items with optional icons, href (renders a link), onClick, active and visible flags",
+    },
+    linkComponent: {
+      control: false,
+      description: "Router link component (for example Next.js Link) rendered for items with href instead of <a>",
     },
     title: {
       control: "text",
@@ -202,12 +206,13 @@ export const Sidebar: StoryObj<SidebarStoryArgs> = {
     labelStyle: undefined,
     toggleStyle: undefined,
     closeButtonStyle: undefined,
+    linkComponent: undefined,
     items: [
       { label: "Dashboard", icon: House, active: true },
       { label: "Profile", icon: User },
       { label: "Documents", icon: Files },
       { label: "Settings", icon: Settings },
-      { label: "Help" },
+      { label: "Help", href: "#help" },
       { label: "Logout", icon: LogOut },
     ],
   },

@@ -1,12 +1,13 @@
 import type { CSSProperties } from "react";
 import type { DesignSystemId } from "../../design-systems";
+import type { FieldDescriptionProps } from "../Input/Input.types";
 
 export type SelectOption = {
   value?: string | null;
   label: string;
 };
 
-export type SelectProps = {
+export type SelectProps = FieldDescriptionProps & {
   placeholderClassName?: string;
   placeholderStyle?: CSSProperties;
   caretClassName?: string;

@@ -42,8 +42,15 @@ the project wrote.
 - Modal is a native `<dialog>`: focus trapping and Escape come from the
   browser.
 - Field components (Input, Select, MultiSelect, DateInput, TimeInput) render
-  their own `<label>` from `label` and wire errors to `aria-describedby`.
-  Flag a field only when it has neither `label` nor `aria-label`.
+  their own `<label>` from `label` and wire `description` and errors to
+  `aria-describedby`. Flag a field only when it has neither `label` nor
+  `aria-label`.
+- Input forwards native attributes (`autoComplete`, `inputMode`,
+  `spellCheck`, `pattern`…): flag a missing one on Input like on a raw
+  `<input>`.
+- Button, Sidebar and AppTemplate items with `href` render links with
+  `aria-current="page"` on the active item. Flag navigation built with
+  `onClick` and `window.location` where an `href` would do.
 - Buttons and fields ship hover, focus-visible and disabled styles through
   recipe tokens. Flag project CSS or `*Style` props that remove or override
   them.
@@ -68,11 +75,5 @@ the project wrote.
 
 ## Library limitations (report once, tag `library`)
 
-- Sidebar and AppTemplate `routes` items have `onClick` and no `href`, so
-  navigation renders buttons, not links: no Cmd/Ctrl+click, middle-click or
-  "open in new tab".
-- Input does not accept `autoComplete`, `inputMode` or `spellCheck`, and
-  does not pass through other native attributes, so the guidelines' form
-  rules for those attributes cannot be met with neus Input.
 - Button labels in the Neus system are uppercase with wide tracking by
   design; this is a system decision, not a project finding.

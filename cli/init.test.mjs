@@ -1,10 +1,11 @@
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import * as theme from "../src/theme";
-import { detectProject, syncAttributes, upsertBlock, writeProject } from "./init.mjs";
+import { syncAttributes, upsertBlock, writeProject } from "./init.mjs";
+import { detectProject } from "./neus.utils.mjs";
 
 const project = (pkg, dirs = []) => {
   const root = mkdtempSync(path.join(tmpdir(), "neus-init-"));
@@ -84,6 +85,21 @@ describe("neus init", () => {
   });
 });
 
+describe("neus bin", () => {
+  const neus = (...args) => spawnSync(process.execPath, [path.resolve("cli/neus.mjs"), ...args], { encoding: "utf8" });
+
+  it("finds the command after leading flags", () => {
+    expect(neus("--system", "carbon", "init", "--help")).toMatchObject({ status: 0, stdout: expect.stringContaining("npx neus init") });
+    expect(neus("-y", "init", "--help").status).toBe(0);
+  });
+
+  it("prints the command list, failing only for unknown commands", () => {
+    expect(neus()).toMatchObject({ status: 0, stdout: expect.stringContaining("shot") });
+    expect(neus("--help").status).toBe(0);
+    expect(neus("nope").status).toBe(1);
+  });
+});
+
 describe("deal-directions", () => {
   const deal = (...args) => JSON.parse(execFileSync(process.execPath,
     [path.resolve("skills/neus-design/scripts/deal-directions.mjs"), ...args], { encoding: "utf8" }));
@@ -94,5 +110,16 @@ describe("deal-directions", () => {
     expect(new Set(directions.map((direction) => direction.type.name)).size).toBe(3);
     expect(deal("--seed", "7").directions).toEqual(directions);
     expect(deal("--seed", "7", "--surface", "marketing").directions[0].signature).not.toBe(directions[0].signature);
+  });
+
+  it("deals only the composition when the system is locked", () => {
+    const keep = ["--keep", "palette,type,shape,density,elevation"];
+    const { directions } = deal("--seed", "7", "--surface", "marketing", ...keep);
+    expect(Object.keys(directions[0])).toEqual(["signature", "hero", "features", "testimonials", "cta"]);
+    expect(new Set(directions.map((direction) => direction.hero.name))).toEqual(new Set(["split", "centered", "media-first"]));
+    expect(deal("--seed", "7", "--surface", "marketing").directions.map(({ hero }) => hero)).toEqual(directions.map(({ hero }) => hero));
+    expect(deal("--seed", "7", ...keep).directions[0]).not.toHaveProperty("hero");
+    expect(() => execFileSync(process.execPath, [path.resolve("skills/neus-design/scripts/deal-directions.mjs"), "--keep", "hero"],
+      { stdio: "pipe" })).toThrow(/Unknown axis: hero/);
   });
 });

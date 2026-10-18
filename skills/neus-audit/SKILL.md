@@ -55,22 +55,26 @@ project's language, and some can only be fixed in the library.
 - The feature spec in `design/specs/` when one covers these files: every
   screen, state and primary action it lists exists.
 
-### 4. Rendered check (only with a running dev server)
+### 4. Rendered check
 
-Do not start servers or install browsers without asking. When the user
-gave a route, or the spec names one, and the server answers, take **one
-round** of screenshots at 390, 768 and 1440 px wide: with the host's
-browser tool when it has one, otherwise with Playwright if the project
-already has it (`npx --no-install playwright --version` succeeds):
+When the user gave a route, or the spec names one, run from the project
+root:
 
 ```sh
-npx --no-install playwright screenshot --full-page --viewport-size "390,844" <url> design/audits/shots/<slug>-390.png
+npx neus shot <route> --widths 1440,768,390 --json
 ```
 
-Open the images and judge them: overflow and horizontal scroll at 390,
-tap targets, contrast, focus visibility, more than one solid primary per
-view, broken dark mode. A problem visible in a screenshot is real whatever
-the code says.
+It reuses the dev server a previous run left, or starts the project's
+`dev` script, and saves full-page screenshots in `.neus/shots/`. It never
+installs browsers. Every entry in its `problems` list is a `render` finding:
+horizontal scroll and console errors are P0; running text under 16px,
+fonts not loaded and more than one solid button per viewport are P1. Then
+open the images and judge what it cannot measure: tap targets, contrast,
+focus visibility, alignment, empty areas, broken dark mode. A problem
+visible in a screenshot is real whatever the code says.
+
+If it exits with code 2 (no browser or playwright-core), skip this pass and
+say so in the report; never describe a render you did not see.
 
 ## Severity
 

@@ -30,6 +30,8 @@
   --input-error-border-color: var(--color-error);
   --input-error-font-size: 0.85em;
   --input-error-offset: 1em;
+  --input-description-color: var(--color-text-secondary);
+  --input-description-font-size: var(--input-error-font-size);
   --input-error-shadow: var(--input-shadow);
   --input-error-focus-shadow: 0 0 0 3px var(--color-focus-ring-error);
   --input-readonly-background: transparent;

@@ -73,7 +73,7 @@ neus-ui/
 │   ├── tests/                   [DIRECTORY] Cross-library suites (server rendering)
 │   ├── index.ts                 [FILE] Library entry point (`neus-ui`)
 │   └── theme.ts                 [FILE] Server-safe entry (`neus-ui/theme`), no React or CSS
-├── cli/                         [DIRECTORY] `neus init` CLI and the project templates it writes
+├── cli/                         [DIRECTORY] `neus` CLI (init, shot) and the project templates it writes
 ├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus init`
 ├── agents/                      [DIRECTORY] neus-reviewer subagent for Claude Code (.md) and Codex (.toml)
 ├── .storybook/                  [DIRECTORY] Storybook configuration
@@ -170,9 +170,9 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | NAME            | FILE_PATH                       | STATUS | FEATURES                                        |
 | --------------- | ------------------------------- | ------ | ----------------------------------------------- |
 | Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
-| Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state |
+| Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links |
 | Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
-| Card            | src/components/Card/            | STABLE | Composable themed surface, className and style |
+| Card            | src/components/Card/            | STABLE | Composable themed surface, semantic `as`, className and style |
 | CardHeader      | src/components/Card/components/CardHeader/ | STABLE | Free-form header content and actions |
 | CardMedia       | src/components/Card/components/CardMedia/  | STABLE | Polymorphic media with native/custom props and refs |
 | CardContent     | src/components/Card/components/CardContent/ | STABLE | Content spacing with arbitrary children |
@@ -184,7 +184,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Dropdown        | src/components/Dropdown/        | STABLE | Dropdown menu                                   |
 | FileUploader    | src/components/FileUploader/    | STABLE | Drag and drop                                   |
 | IconButton      | src/components/IconButton/      | STABLE | Icon containers                                 |
-| Input           | src/components/Input/           | STABLE | Seven native types, accessible errors, per-part styles, six token recipes |
+| Input           | src/components/Input/           | STABLE | Seven native types, native attributes, description, accessible errors, per-part styles, six token recipes |
 | InteractiveMap  | src/components/InteractiveMap/  | STABLE | Google Maps integration                         |
 | Link            | src/components/Link/            | STABLE | Styled links                                    |
 | Menu            | src/components/Menu/            | STABLE | Actions menu                                    |
@@ -194,7 +194,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | ModalFooter     | src/components/Modal/components/ModalFooter/ | STABLE | Dialog action composition |
 | MultiSelect     | src/components/MultiSelect/     | STABLE | Multiple selection                              |
 | Select          | src/components/Select/          | STABLE | Single selection                                |
-| Sidebar         | src/components/Sidebar/         | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer |
+| Sidebar         | src/components/Sidebar/         | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer, href items with linkComponent |
 | TimeInput       | src/components/TimeInput/       | STABLE | Clock picker field                                 |
 | WeekCalendar    | src/components/WeekCalendar/    | STABLE | Weekly view, event categories, navigation       |
 | WeekCalendarRow | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
@@ -537,6 +537,8 @@ CHECK: All files have correct exports, no circular imports
 React and ReactDOM are peer dependencies. The build keeps one file per source module,
 leaves every dependency external, adds `"use client"` to modules that import React, and
 loads no fonts. Never add build, Storybook or test tooling to `dependencies`.
+`playwright-core` is an `optionalDependencies` entry used only by `neus shot` at runtime; it
+downloads no browser.
 
 ```
 React 19+ (peer)

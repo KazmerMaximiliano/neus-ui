@@ -41,6 +41,27 @@
     { "name": "Tonal", "note": "Depth from surface tone steps; no borders, no shadows" },
     { "name": "Hard offset", "note": "Solid ink offset shadow on floating layers only" }
   ],
+  "composition": {
+    "hero": [
+      { "name": "split", "note": "Headline, lead and the primary action in one column; the real interface, a live demo or a real picture beside it. On phones the text comes first." },
+      { "name": "centered", "note": "Centered headline, lead and action; the visual anchor sits below them, wide: a demo in a Card or a real picture." },
+      { "name": "media-first", "note": "A large real picture or interface opens the page; the headline, lead and action follow beneath it, aligned to the start." }
+    ],
+    "features": [
+      { "name": "grid", "note": "Three or four items in a grid of plain blocks: icon, short title, one or two sentences; no surfaces, space separates them." },
+      { "name": "list", "note": "One item per row: title at the start, explanation beside it, separated by space; reads like a specification." },
+      { "name": "cards", "note": "Each item a Card variant=\"auto\" (CardHeader with icon and title, CardContent) in a <ul> grid; the system decides border, fill or flat." }
+    ],
+    "testimonials": [
+      { "name": "plain", "note": "Quotes set as running text in columns, name and role below each; no surfaces." },
+      { "name": "card", "note": "Each quote a Card variant=\"auto\": the quote in CardContent, name and role in CardFooter." },
+      { "name": "featured", "note": "One large quote in the display face carries the section; at most two short ones beside or below it." }
+    ],
+    "cta": [
+      { "name": "band", "note": "A full-width band one tone step off the ground, with a headline and one action; a form, if any, sits in a Card inside it." },
+      { "name": "split", "note": "Headline and reassurance copy on one side, the form in a Card on the other; stacked on phones." }
+    ]
+  },
   "productMoves": [
     "Tabular figures set in the mono face for every number in tables and summaries",
     "One accent bar marks the active navigation item and the selected row; nothing else uses the accent at rest",

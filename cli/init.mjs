@@ -1,14 +1,13 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { createInterface } from "node:readline/promises";
-import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import {
   AGENT_TARGETS, BLOCK_END, BLOCK_START, COLOR_KEYS, COLOR_PATTERN, CONFIG_FILE,
   DERIVED_SYSTEM_FILE, SCHEME_STORAGE_KEY, SKILLS, SYSTEM_FONTS,
 } from "./neus.consts.mjs";
+import { PACKAGE_ROOT, detectProject, readJson, toPosix } from "./neus.utils.mjs";
 
-const PACKAGE_ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const TEMPLATES = path.join(PACKAGE_ROOT, "cli/templates");
 // Root documents whose existing theme attributes `neus init` keeps in sync.
 const ROOT_DOCUMENTS = ["app/layout.tsx", "src/app/layout.tsx", "pages/_document.tsx", "src/pages/_document.tsx", "app/root.tsx", "src/layouts/NeusLayout.astro"];
@@ -30,29 +29,11 @@ Options:
   --styles <dir>            Folder for neus.theme.css and neus.overrides.css
   -h, --help                Show this help`;
 
-const readJson = (file) => existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : null;
-const toPosix = (value) => value.split(path.sep).join("/");
 const importPath = (fromDir, file) => {
   const relative = toPosix(path.relative(fromDir, file));
   return relative.startsWith(".") ? relative : `./${relative}`;
 };
 const fill = (template, values) => template.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => values[key] ?? "");
-
-/** Detects the host framework and how it renders from the project's package.json. */
-export const detectProject = (root) => {
-  const pkg = readJson(path.join(root, "package.json")) ?? {};
-  const deps = { ...pkg.dependencies, ...pkg.devDependencies };
-  if (deps.next) {
-    const appRouter = existsSync(path.join(root, "app")) || existsSync(path.join(root, "src/app"));
-    return { framework: "next", rendering: appRouter ? "rsc" : "ssr" };
-  }
-  if (deps.astro) return { framework: "astro", rendering: "islands" };
-  if (deps["@react-router/dev"]) return { framework: "react-router", rendering: "ssr" };
-  if (deps["@tanstack/react-start"]) return { framework: "tanstack-start", rendering: "ssr" };
-  if (deps["@remix-run/react"]) return { framework: "remix", rendering: "ssr" };
-  if (deps.vite) return { framework: "vite", rendering: "spa" };
-  return null;
-};
 
 /** Replaces the managed block in AGENTS.md, or appends it. */
 export const upsertBlock = (text, block) => {
@@ -320,10 +301,9 @@ export const nextSteps = (root, config) => {
 };
 
 export const run = async (argv, root = process.cwd()) => {
-  const [command] = argv.filter((arg) => !arg.startsWith("-"));
-  if (argv.includes("-h") || argv.includes("--help") || command !== "init") {
+  if (argv.includes("-h") || argv.includes("--help")) {
     process.stdout.write(`${HELP}\n`);
-    return command === "init" || !command ? 0 : 1;
+    return 0;
   }
   if (!existsSync(path.join(root, "package.json"))) throw new Error("Run `npx neus init` in the project root (no package.json here).");
   const theme = await import(new URL("../dist/theme.js", import.meta.url).href);

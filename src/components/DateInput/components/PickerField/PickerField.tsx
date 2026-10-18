@@ -33,6 +33,9 @@ export const PickerField = ({
   placeholder,
   displayValue,
   pickerLabel,
+  description,
+  descriptionClassName,
+  descriptionStyle,
   error,
   disabled = false,
   readonly = false,
@@ -48,6 +51,7 @@ export const PickerField = ({
   const labelId = useId();
   const valueId = useId();
   const errorId = useId();
+  const descriptionId = useId();
   const { id, open, triggerRef, popoverRef, toggle, hide } = usePopover({
     initialFocus: ".rdp-day_button[tabindex='0'], [role='slider']",
   });
@@ -140,7 +144,11 @@ export const PickerField = ({
           aria-labelledby={label ? `${labelId} ${valueId}` : undefined}
           aria-label={label ? undefined : pickerLabel}
           aria-invalid={error ? true : undefined}
-          aria-describedby={error ? errorId : undefined}
+          aria-describedby={
+            [description != null && descriptionId, error && errorId]
+              .filter(Boolean)
+              .join(" ") || undefined
+          }
           aria-required={required || undefined}
           onClick={() => !readonly && toggle()}
         >
@@ -200,6 +208,17 @@ export const PickerField = ({
         />
       )}
 
+      {description != null && (
+        <div
+          id={descriptionId}
+          className={["field__description", descriptionClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={descriptionStyle}
+        >
+          {description}
+        </div>
+      )}
       {error && (
         <div
           id={errorId}

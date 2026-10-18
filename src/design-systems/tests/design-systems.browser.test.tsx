@@ -181,6 +181,28 @@ describe.each(["light", "dark"] as const)("Button state contract in %s mode", (s
   });
 });
 
+describe("Button links", () => {
+  it.each(SYSTEM_CASES.map(({ id }) => id))("renders %s links like buttons, disabled included", (id) => {
+    render(
+      <ThemeProvider scope="local" designSystem={id}>
+        <Button label="Go" />
+        <Button label="Go" href="/go" />
+        <Button label="Go" disabled />
+        <Button label="Go" href="/go" disabled />
+      </ThemeProvider>,
+    );
+    const [button, link, disabledButton, disabledLink] = [...document.querySelectorAll(".button")].map((element) =>
+      getComputedStyle(element));
+    for (const property of ["backgroundColor", "color", "borderRadius", "paddingTop", "fontSize", "textTransform"] as const) {
+      expect(link[property], property).toBe(button[property]);
+      expect(disabledLink[property], `disabled ${property}`).toBe(disabledButton[property]);
+    }
+    expect(link.textDecorationLine).toBe("none");
+    expect(disabledLink.opacity).toBe(disabledButton.opacity);
+    expect(disabledLink.cursor).toBe("not-allowed");
+  });
+});
+
 describe("Button motion preferences", () => {
   it("drops the pressed transform under reduced motion", () => {
     // CSSOM check: a synthetic :active press is not reliable in headless Chromium.
@@ -193,7 +215,8 @@ describe("Button motion preferences", () => {
       .flatMap((rule) => [...rule.cssRules])
       .find(
         (rule): rule is CSSStyleRule =>
-          rule instanceof CSSStyleRule && rule.selectorText === ".button:active:not(:disabled)",
+          rule instanceof CSSStyleRule &&
+          rule.selectorText === '.button:active:not(:disabled, [aria-disabled="true"])',
       );
     expect(pressed?.style.transform).toBe("none");
   });

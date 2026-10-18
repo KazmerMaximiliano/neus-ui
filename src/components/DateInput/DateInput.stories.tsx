@@ -160,6 +160,12 @@ const meta: Meta<DateInputStoryArgs> = {
         defaultValue: { summary: "false" },
       },
     },
+    description: {
+      control: "text",
+      description: "Help text below the field, announced through aria-describedby; JSX supported in application code",
+    },
+    descriptionClassName: { control: "text", description: "Additional classes for the description" },
+    descriptionStyle: { control: "object", description: "Styles for the description" },
     error: {
       control: "text",
       description: "Error message to display",
@@ -226,6 +232,9 @@ export const DateInput: Story = {
     disabled: false,
     readonly: false,
     required: false,
+    description: undefined,
+    descriptionClassName: undefined,
+    descriptionStyle: undefined,
     error: undefined,
   },
   render: ({ designSystem, ...args }) => (

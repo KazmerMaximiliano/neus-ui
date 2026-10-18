@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
 import type { DesignSystemId } from "../../design-systems";
 import { TimeValue } from "../Clock/Clock.types";
-import type { FieldPresentationProps } from "../Input/Input.types";
+import type { FieldDescriptionProps, FieldPresentationProps } from "../Input/Input.types";
 
-export type TimeInputProps = FieldPresentationProps & {
+export type TimeInputProps = FieldPresentationProps & FieldDescriptionProps & {
   placeholderClassName?: string;
   placeholderStyle?: CSSProperties;
   className?: string;

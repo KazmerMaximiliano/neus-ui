@@ -40,8 +40,10 @@ not on its name. `<styles>` below means `paths.styles`.
   provider. A nested ThemeProvider is always local; use one only for an
   isolated preview or a feature with its own token scope.
 - Dark mode toggles call `useTheme().setColorScheme(...)` under the root.
-- Sidebar and AppTemplate `routes` use `onClick`: call the router's navigate
-  function there and set `active` from the current location.
+- Sidebar and AppTemplate `routes` take `href` and render links; pass the
+  router's link as `linkComponent` (React Router `Link` needs `to`, so wrap
+  it: `({ href, ...props }) => <Link to={href} {...props} />`) and set
+  `active` from the current location.
 
 ## ssr
 
@@ -72,8 +74,10 @@ and the stylesheet imports, plus:
   in the page.
 - Server code that needs data (`DESIGN_SYSTEMS`, `resolveTheme`) imports it
   from `"neus-ui/theme"`.
-- Navigation: `useRouter().push(href)` inside `onClick`; `active` from
-  `usePathname()`.
+- Navigation: `href` on Button and on Sidebar/AppTemplate routes, with
+  `linkComponent={Link}` from `next/link`; `active` from `usePathname()`.
+  Routes with only `href` are serializable, but `linkComponent` is a
+  function: keep the shell in a Client Component.
 - Prefer `next/font` in the root layout for the system's faces; expose each
   one as a CSS variable and map `--font-*` to it in `neus.overrides.css`.
 
@@ -89,9 +93,8 @@ Everything in `ssr`, plus:
   only for interactive regions. App screens (shell, tables, forms, dialogs)
   are one React component per page, rendered with one client directive.
 - Props from `.astro` to a hydrated island must be serializable. Build
-  `routes` with handlers inside the island; pass
-  `currentPath={Astro.url.pathname}`; navigate with
-  `window.location.assign(href)`.
+  `routes` inside the island; pass `currentPath={Astro.url.pathname}`;
+  navigate with plain `href` links (no `linkComponent` needed).
 - A React component without a client directive renders to static HTML with
   no JavaScript, which suits Badge, Card or Link with no handlers.
 - Directives: `client:load` above the fold, `client:visible` below,

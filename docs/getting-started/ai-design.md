@@ -58,16 +58,36 @@ The `neus-design` skill runs in the main conversation, where it can ask and iter
    continues in the same direction.
 5. **Build.** Composes Neus components, choosing the lowest step of the customization
    ladder: props, palette, tokens, part classes, part styles.
-6. **Verify.** Runs the `neus-audit` skill, then asks the `neus-reviewer` subagent for an
-   independent review of new pages and flows, and takes at most one round of screenshots
-   when a dev server is running.
+6. **Verify.** Runs the `neus-audit` skill, looks at the render with `neus shot` (up to
+   three rounds of screenshots and fixes), then asks the `neus-reviewer` subagent for an
+   independent review of new pages and flows.
+
+## Screenshots: `neus shot`
+
+```bash
+npx neus shot /                       # starts the dev script if needed
+npx neus shot / /pricing --widths 1440,768,390
+npx neus shot / --url http://localhost:3000 --json
+npx neus shot --stop                  # stops the server neus shot started
+```
+
+`neus shot` captures every route full page at each width into `.neus/shots/<route>-<width>.png`
+and reports horizontal scroll, console errors, the smallest running-text size, fonts that did
+not load, solid buttons per viewport and the active system, scheme and primary color. Without
+`--url` it runs the project's `dev` script, reads the URL it prints and leaves it running for
+the next round. `.neus/` ignores itself in git.
+
+It uses an installed Chrome, Edge or Chromium (or `--browser <path>`) through
+`playwright-core`, an optional dependency of neus-ui, and never downloads a browser. When it
+finds none it exits with code 2, and the skill says so instead of claiming it reviewed the
+render.
 
 ## Quality layers
 
 | Layer | What it does |
 | --- | --- |
-| Taste | Product-screen and public-page rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy), adapted from taste-skill and Open Design |
-| Directions | `scripts/deal-directions.mjs` deals palette, type pairing, shape, density, elevation and a signature move, so the agent does not default to the category average |
+| Taste | Product-screen rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy) and, for public pages, substance rules (display headline, 16px text, wide container, an anchor per section) and a sample-content policy, adapted from taste-skill and Open Design |
+| Directions | `scripts/deal-directions.mjs` deals palette, type pairing, shape, density, elevation, a signature move and, for public pages, the hero, features, testimonials and call-to-action layouts. With a locked system it deals only the composition, so the system's palette and type stay intact |
 | Inspiration | An index of the VoltAgent/awesome-design-md analyses; the agent takes concepts, never identities |
 | Audit | Type checks, deterministic searches, the Vercel Web Interface Guidelines and the design contract, reported as `file:line` with P0/P1/P2 |
 | Review | The `neus-reviewer` subagent judges the result against the spec without the conversation that produced it |

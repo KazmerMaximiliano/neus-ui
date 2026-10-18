@@ -25,6 +25,19 @@ const renderSelect = (props: Partial<SelectProps> = {}) =>
 
 const combobox = () => screen.getByRole("combobox", { name: "Country" });
 
+describe("Select description", () => {
+  it("renders help text and announces it before the error", () => {
+    const { rerender } = render(<Select label="Plan" options={[{ value: "pro", label: "Pro" }]} description="You can change it later." />);
+    const trigger = screen.getByRole("combobox");
+    expect(screen.getByText("You can change it later.")).toHaveClass("field__description");
+    expect(trigger).toHaveAccessibleDescription("You can change it later.");
+    rerender(<Select label="Plan" options={[{ value: "pro", label: "Pro" }]} description="You can change it later." error="Choose a plan" />);
+    expect(trigger).toHaveAccessibleDescription("You can change it later. Choose a plan");
+    rerender(<Select label="Plan" options={[{ value: "pro", label: "Pro" }]} />);
+    expect(trigger).not.toHaveAttribute("aria-describedby");
+  });
+});
+
 describe("Select", () => {
   describe("rendering", () => {
     it("renders a combobox named by its visible label", () => {

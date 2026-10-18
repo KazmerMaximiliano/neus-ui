@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, ElementType, ReactNode } from "react";
 import type { SidebarItem } from "../../components/Sidebar";
 
 export type AppTemplateProps = {
@@ -10,6 +10,8 @@ export type AppTemplateProps = {
   sidebarContainerStyle?: CSSProperties;
   children: ReactNode;
   routes: SidebarItem[];
+  /** Router link component for routes with href, passed to Sidebar. */
+  linkComponent?: ElementType;
   menu?: ReactNode;
   title?: string;
   className?: string;

@@ -8,6 +8,8 @@ export const Input = ({
   className,
   controlClassName,
   controlStyle,
+  descriptionClassName,
+  descriptionStyle,
   errorClassName,
   errorIconClassName,
   inputClassName,
@@ -31,6 +33,7 @@ export const Input = ({
   defaultValue,
   placeholder,
   label,
+  description,
   error,
   disabled = false,
   readonly = false,
@@ -45,10 +48,13 @@ export const Input = ({
   requiredStyle,
   errorStyle,
   onChange,
+  "aria-describedby": describedBy,
+  ...native
 }: InputProps) => {
   const generatedId = useId();
   const inputId = id ?? generatedId;
   const errorId = `${inputId}-error`;
+  const descriptionId = `${inputId}-description`;
 
   return (
     <div
@@ -66,7 +72,8 @@ export const Input = ({
           htmlFor={inputId}
           style={labelStyle}
           className={[
-            `input__label${error ? " input__label--error" : ""}${disabled ? " input__label--disabled" : ""
+            `input__label${error ? " input__label--error" : ""}${
+              disabled ? " input__label--disabled" : ""
             }`,
             labelClassName,
           ]
@@ -104,13 +111,23 @@ export const Input = ({
           </span>
         )}
         <input
+          {...native}
           id={inputId}
           aria-label={ariaLabel}
           aria-invalid={error ? true : undefined}
-          aria-describedby={error ? errorId : undefined}
+          aria-describedby={
+            [
+              describedBy,
+              description != null && descriptionId,
+              error && errorId,
+            ]
+              .filter(Boolean)
+              .join(" ") || undefined
+          }
           style={inputStyle}
           className={[
-            `input input--${type}${error ? " input--error" : ""}${disabled ? " input--disabled" : ""
+            `input input--${type}${error ? " input--error" : ""}${
+              disabled ? " input--disabled" : ""
             }`,
             inputClassName,
           ]
@@ -151,6 +168,17 @@ export const Input = ({
           </span>
         )}
       </div>
+      {description != null && (
+        <div
+          id={descriptionId}
+          className={["field__description", descriptionClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={descriptionStyle}
+        >
+          {description}
+        </div>
+      )}
       {error && (
         <div
           id={errorId}

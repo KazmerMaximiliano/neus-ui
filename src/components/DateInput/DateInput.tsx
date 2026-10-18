@@ -64,6 +64,9 @@ export const DateInput = (props: DateInputProps) => {
       dropdownClassName={props.dropdownClassName}
       dropdownStyle={props.dropdownStyle}
       errorClassName={props.errorClassName}
+      description={props.description}
+      descriptionClassName={props.descriptionClassName}
+      descriptionStyle={props.descriptionStyle}
       variant={variant}
       labelPlacement={labelPlacement}
       size={size}

@@ -112,6 +112,65 @@ describe("Input", () => {
     });
   });
 
+  describe("native attributes and description", () => {
+    it("forwards native input attributes that Input does not replace", () => {
+      renderInput({
+        autoComplete: "email",
+        inputMode: "email",
+        spellCheck: false,
+        pattern: "[^@]+@[^@]+",
+        maxLength: 80,
+        autoFocus: true,
+        enterKeyHint: "send",
+        "data-testid": "email",
+      } as InputProps);
+      const input = screen.getByTestId("email");
+      expect(input).toHaveAttribute("autocomplete", "email");
+      expect(input).toHaveAttribute("inputmode", "email");
+      expect(input).toHaveAttribute("spellcheck", "false");
+      expect(input).toHaveAttribute("pattern", "[^@]+@[^@]+");
+      expect(input).toHaveAttribute("maxlength", "80");
+      expect(input).toHaveAttribute("enterkeyhint", "send");
+      expect(input).toHaveFocus();
+    });
+
+    it("keeps its own wiring over forwarded attributes and handlers", () => {
+      const onChange = vi.fn();
+      const onBlur = vi.fn();
+      renderInput({ label: "Name", disabled: true, onChange, onBlur });
+      const input = screen.getByRole("textbox", { name: "Name" });
+      fireEvent.change(input, { target: { value: "Ana" } });
+      fireEvent.blur(input);
+      expect(onChange).not.toHaveBeenCalled();
+      expect(onBlur).toHaveBeenCalledOnce();
+      expect(input).toHaveAttribute("placeholder", " ");
+    });
+
+    it("renders a description and announces it with the error and the caller's ids", () => {
+      const { rerender } = render(
+        <Input id="email" label="Email" description="We only use it to send your receipt." aria-describedby="hint" />,
+      );
+      const input = screen.getByRole("textbox", { name: "Email" });
+      expect(screen.getByText("We only use it to send your receipt.")).toHaveAttribute("id", "email-description");
+      expect(screen.getByText("We only use it to send your receipt.")).toHaveClass("field__description");
+      expect(input).toHaveAttribute("aria-describedby", "hint email-description");
+      rerender(<Input id="email" label="Email" description="Receipt only." error="Add an @" />);
+      expect(input).toHaveAttribute("aria-describedby", "email-description email-error");
+      expect(input).toHaveAccessibleDescription("Receipt only. Add an @");
+      rerender(<Input id="email" label="Email" />);
+      expect(input).not.toHaveAttribute("aria-describedby");
+    });
+
+    it("rejects attributes that clash with Input's own API at type checking", () => {
+      // @ts-expect-error Input reports the value, not the change event.
+      void (<Input onChange={(event: React.ChangeEvent<HTMLInputElement>) => event} />);
+      // @ts-expect-error size selects the control size, not a character count.
+      void (<Input size={20} />);
+      // @ts-expect-error Use readonly, Input's own prop.
+      void (<Input readOnly />);
+    });
+  });
+
   describe("disabled state", () => {
     it("is disabled when disabled prop is true", () => {
       renderInput({ disabled: true });

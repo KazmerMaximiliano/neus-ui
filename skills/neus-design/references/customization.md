@@ -17,9 +17,14 @@ before using it.
 
 Exhaust these first. Examples: Button `variant` (`solid`, `secondary`,
 `tonal`, `elevated`, `outlined`, `text`), `color` (`primary`, `success`,
-`error`, `info`, `white`) and `size`; Card `variant` (`auto`, `filled`,
-`outlined`, `elevated`); Input and picker fields `variant`, `size` and
-`labelPlacement`; Badge `variant` and `color`. One solid primary action per
+`error`, `info`, `white`), `size` and `href` (a link with the button's
+look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`,
+`outlined`, `elevated`) and `as` (`div`, `article`, `li`, `figure`,
+`section`); Input and picker fields `variant`, `size`,
+`labelPlacement` and `description` (help text wired to
+`aria-describedby`), plus native attributes such as `autoComplete`,
+`inputMode` and `spellCheck` on Input; Sidebar and AppTemplate routes
+`href` with `linkComponent`; Badge `variant` and `color`. One solid primary action per
 view; the rest use `secondary`, `tonal`, `outlined` or `text`.
 
 ## Level 1: global action palette

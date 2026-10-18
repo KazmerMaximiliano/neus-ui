@@ -23,6 +23,14 @@ it("keeps Sidebar hooks independent from the shell's sidebar container", () => {
   expect(view.container.querySelector(".navigation-root, .navigation-container")).toBeNull();
 });
 
+it("passes linkComponent to Sidebar for routes with href", () => {
+  const RouterLink = ({ href, ...props }: { href: string }) => <a data-router="yes" href={href} {...props} />;
+  render(<AppTemplate routes={[{ label: "Orders", href: "/orders", active: true }]} linkComponent={RouterLink}>Content</AppTemplate>);
+  const link = screen.getByRole("link", { name: "Orders" });
+  expect(link).toHaveAttribute("data-router", "yes");
+  expect(link).toHaveAttribute("aria-current", "page");
+});
+
 describe("AppTemplate responsive integration", () => {
   it("delegates the only mobile menu to Sidebar and preserves routes, menu and children", () => {
     act(() => {

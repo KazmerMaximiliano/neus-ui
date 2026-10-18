@@ -2,6 +2,7 @@ import { ChevronDown } from "lucide-react";
 import { useId, useState } from "react";
 import { usePopover } from "../../hooks/usePopover";
 import { SelectListbox } from "./components/SelectListbox";
+import "../../css/field.css";
 import "./Select.styles.css";
 import { SelectProps } from "./Select.types";
 
@@ -42,6 +43,9 @@ export const Select = ({
   defaultValue,
   placeholder,
   label,
+  description,
+  descriptionClassName,
+  descriptionStyle,
   error,
   disabled = false,
   viewSearchBar = true,
@@ -60,12 +64,13 @@ export const Select = ({
   const displayLabel = label || placeholder;
   const fieldId = useId();
   const errorId = useId();
+  const descriptionId = useId();
   const popover = usePopover({
     initialFocus: viewSearchBar
       ? ".select__search-input"
       : selectedLabel
-        ? "[role=\"option\"][aria-selected=\"true\"]"
-        : "[role=\"option\"]",
+        ? '[role="option"][aria-selected="true"]'
+        : '[role="option"]',
   });
   const { id, open, triggerRef, anchorRef, toggle } = popover;
 
@@ -83,7 +88,8 @@ export const Select = ({
         <label
           htmlFor={fieldId}
           className={[
-            `select__label${error ? " select__label--error" : ""}${disabled ? " select__label--disabled" : ""
+            `select__label${error ? " select__label--error" : ""}${
+              disabled ? " select__label--disabled" : ""
             }`,
             labelClassName,
           ]
@@ -98,7 +104,8 @@ export const Select = ({
       <div
         ref={anchorRef}
         className={[
-          `select__field${error ? " select__field--error" : ""}${disabled ? " select__field--disabled" : ""
+          `select__field${error ? " select__field--error" : ""}${
+            disabled ? " select__field--disabled" : ""
           }${open ? " select__field--open" : ""}`,
           fieldClassName,
         ]
@@ -121,7 +128,11 @@ export const Select = ({
           aria-controls={id}
           aria-label={displayLabel ? undefined : "Selecciona una opción"}
           aria-invalid={error ? true : undefined}
-          aria-describedby={error ? errorId : undefined}
+          aria-describedby={
+            [description != null && descriptionId, error && errorId]
+              .filter(Boolean)
+              .join(" ") || undefined
+          }
           onClick={toggle}
         >
           <span
@@ -171,6 +182,17 @@ export const Select = ({
         listStyle={listStyle}
         optionStyle={optionStyle}
       />
+      {description != null && (
+        <div
+          id={descriptionId}
+          className={["field__description", descriptionClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={descriptionStyle}
+        >
+          {description}
+        </div>
+      )}
       {error && (
         <div
           id={errorId}

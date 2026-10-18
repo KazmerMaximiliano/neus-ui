@@ -16,6 +16,12 @@ One or two sentences: who does what, and what success looks like.
 ## Audience and context
 Internal or customer-facing, device priority, frequency of use.
 
+## Public page (landing and marketing pages only)
+Inventory: eight to twelve facts only this subject has (from the brief).
+Argument: section → claim → proof; every section the brief lists.
+Composition: dealt option and seed → hero / features / testimonials / cta → why.
+Idea sentence: On this page, <something only this subject has> becomes <device>.
+
 ## Screens and flow
 1. <Screen> — route `<path>` — primary task — primary action label
 2. ...
