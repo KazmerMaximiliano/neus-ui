@@ -1,0 +1,5 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --text-overline-tracking: 0em;
+  --text-overline-transform: none;
+}

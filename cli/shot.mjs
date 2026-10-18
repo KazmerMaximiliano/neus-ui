@@ -1,4 +1,4 @@
-/* global document, window, getComputedStyle, NodeFilter */
+/* global document, window, location, getComputedStyle, NodeFilter */
 import { spawn, spawnSync } from "node:child_process";
 import { closeSync, existsSync, mkdirSync, openSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -16,7 +16,7 @@ import { detectProject, readJson, toPosix } from "./neus.utils.mjs";
 const HELP = `Usage: npx neus shot [routes...] [options]
 
 Screenshots each route (default /) full page at every width into ${NEUS_DIR}/shots/ and
-reports horizontal overflow, console errors, the smallest running-text size, fonts
+reports horizontal overflow, content cut off by overflow: hidden, console errors, the smallest running-text size, fonts
 that did not load and solid buttons per viewport. Without --url it starts the
 project's dev script and leaves it running for the next round.
 
@@ -175,14 +175,38 @@ export const measure = (systemFonts) => {
   const root = document.documentElement;
   const width = root.clientWidth;
   const overflows = (element) => element.getBoundingClientRect().right > width + 1;
+  const label = (element) => element.tagName.toLowerCase() + (element.classList[0] ? `.${element.classList[0]}` : "");
 
   // Innermost elements past the right edge: the cause, not the wrappers around it.
   const offenders = root.scrollWidth > width
     ? [...document.body.querySelectorAll("*")]
       .filter((element) => overflows(element) && visible(element) && ![...element.children].some(overflows))
       .slice(0, 5)
-      .map((element) => element.tagName.toLowerCase() + (element.classList[0] ? `.${element.classList[0]}` : ""))
+      .map(label)
     : [];
+
+  // Content an overflow: hidden/clip box cuts off without scrolling the page. Ellipsis is deliberate,
+  // and positioned descendants are skipped with their subtree: they are decoration or visually hidden labels.
+  // ponytail: an overflow: hidden carousel reports its track; carousels that scroll are not affected.
+  const clipped = [];
+  const inFlow = { acceptNode: (element) => ["absolute", "fixed"].includes(getComputedStyle(element).position) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT };
+  for (const box of document.querySelectorAll("body, body *")) {
+    const style = getComputedStyle(box);
+    if (clipped.length === 5 || !["hidden", "clip"].includes(style.overflowX) || style.textOverflow === "ellipsis" ||
+      box.clientWidth <= 1 || box.scrollWidth <= box.clientWidth + 1 || !visible(box)) continue;
+    const edge = box.getBoundingClientRect().right;
+    const walker = document.createTreeWalker(box, NodeFilter.SHOW_ELEMENT, inFlow);
+    for (let element = walker.nextNode(); element; element = walker.nextNode()) {
+      const past = Math.round(element.getBoundingClientRect().right - edge);
+      if (past > 1 && visible(element)) {
+        clipped.push(`${label(element)} inside ${label(box)} (${past}px)`);
+        break;
+      }
+    }
+  }
+  // Chrome paints frames from other origins only while they are on screen, so full-page shots show them blank.
+  const blankFrames = [...document.querySelectorAll("iframe[src]")]
+    .filter((frame) => visible(frame) && new URL(frame.src, location.href).origin !== location.origin).length;
 
   let minFontPx = null;
   let minBodyFontPx = null;
@@ -220,6 +244,8 @@ export const measure = (systemFonts) => {
   const scope = document.querySelector("[data-design-system]") ?? root;
   return {
     overflow: root.scrollWidth > width ? { scrollWidth: root.scrollWidth, offenders } : null,
+    clipped,
+    blankFrames,
     minFontPx,
     minBodyFontPx,
     missingFonts: [...new Set(missing)],
@@ -267,10 +293,11 @@ export const shoot = async ({ chromium, executablePath, url, routes, widths, out
 };
 
 /** Human-readable problems found in the measured pages. */
-export const problems = (pages) => pages.flatMap(({ route, width, overflow, consoleErrors, minBodyFontPx, missingFonts, solidCtas }) => {
+export const problems = (pages) => pages.flatMap(({ route, width, overflow, clipped, consoleErrors, minBodyFontPx, missingFonts, solidCtas }) => {
   const at = `${route} at ${width}px`;
   return [
     overflow && `${at}: horizontal scroll (${overflow.scrollWidth}px wide) from ${overflow.offenders.join(", ") || "the page"}`,
+    clipped.length && `${at}: content cut off: ${clipped.join(", ")}`,
     consoleErrors.length && `${at}: ${consoleErrors.length} console error(s), first: ${consoleErrors[0]}`,
     minBodyFontPx !== null && minBodyFontPx < SHOT_LIMITS.minBodyFontPx &&
       `${at}: running text at ${minBodyFontPx}px (minimum ${SHOT_LIMITS.minBodyFontPx}px)`,
@@ -288,6 +315,9 @@ const formatReport = ({ url, pages, problems: found }, managed) => {
       .filter(Boolean).join(" · ")}`,
     found.length ? "Problems:" : "No problems found.",
     ...found.map((problem) => `  - ${problem}`),
+    ...(pages.some(({ blankFrames }) => blankFrames)
+      ? ["Note: iframes from other origins (maps, video) show blank in full-page shots; Chrome paints them only on screen."]
+      : []),
     ...(managed ? ["The dev server keeps running for the next round; stop it with npx neus shot --stop."] : []),
   ].join("\n");
 };

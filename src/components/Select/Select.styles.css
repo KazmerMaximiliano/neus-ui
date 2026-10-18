@@ -4,6 +4,8 @@
   align-items: stretch;
   gap: var(--input-gap);
   width: 100%;
+  /* A long selected label truncates instead of widening a grid or flex parent. */
+  min-width: 0;
   font-family: var(--input-font-family);
 }
 

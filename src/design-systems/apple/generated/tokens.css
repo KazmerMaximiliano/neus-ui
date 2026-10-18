@@ -1,5 +1,17 @@
 /* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="apple"] {
+  --type-display-size: clamp(2.5rem, 1.57rem + 3.81vw, 5rem);
+  --type-display-weight: 600;
+  --type-display-line-height: 1.05;
+  --type-display-tracking: -0.015em;
+  --type-headline-size: clamp(2rem, 1.44rem + 2.29vw, 3.5rem);
+  --type-headline-weight: 600;
+  --type-headline-line-height: 1.07;
+  --type-headline-tracking: -0.005em;
+  --type-lead-size: clamp(1.1875rem, 1.14rem + 0.19vw, 1.3125rem);
+  --type-lead-weight: 400;
+  --type-lead-line-height: 1.381;
+  --type-lead-tracking: 0.011em;
   --font-body: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "SF Pro Display", var(--font-body);
   --elevation-dialog: 0 10px 40px rgba(0, 0, 0, 0.2);

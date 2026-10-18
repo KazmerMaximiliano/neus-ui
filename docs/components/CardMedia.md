@@ -62,6 +62,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 
 | Base class / part | Element | Class prop | Style prop | Rendering condition |
 | --- | --- | --- | --- | --- |
+| `.card-media` | `component` element (`img`) | `className` | `style` | `Always` |
 
 Interaction states use native pseudo-classes and ARIA/data attributes where present.
 

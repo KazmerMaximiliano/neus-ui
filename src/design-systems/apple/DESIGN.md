@@ -49,6 +49,27 @@ typography:
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: 0em
+  display:
+    fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+      Helvetica, Arial, sans-serif'
+    fontSize: 5rem
+    fontWeight: 600
+    lineHeight: 1.05
+    letterSpacing: -0.015em
+  headline:
+    fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+      Helvetica, Arial, sans-serif'
+    fontSize: 3.5rem
+    fontWeight: 600
+    lineHeight: 1.07
+    letterSpacing: -0.005em
+  lead:
+    fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial,
+      sans-serif'
+    fontSize: 1.3125rem
+    fontWeight: 400
+    lineHeight: 1.381
+    letterSpacing: 0.011em
 rounded:
   default: 16px
   sm: 8px
@@ -91,6 +112,18 @@ x-neus:
       hover: "{colors.hover-dark}"
   tokens:
     base:
+      --type-display-size: "clamp(2.5rem, 1.57rem + 3.81vw, {typography.display.fontSize})"
+      --type-display-weight: "{typography.display.fontWeight}"
+      --type-display-line-height: "{typography.display.lineHeight}"
+      --type-display-tracking: "{typography.display.letterSpacing}"
+      --type-headline-size: "clamp(2rem, 1.44rem + 2.29vw, {typography.headline.fontSize})"
+      --type-headline-weight: "{typography.headline.fontWeight}"
+      --type-headline-line-height: "{typography.headline.lineHeight}"
+      --type-headline-tracking: "{typography.headline.letterSpacing}"
+      --type-lead-size: "clamp(1.1875rem, 1.14rem + 0.19vw, {typography.lead.fontSize})"
+      --type-lead-weight: "{typography.lead.fontWeight}"
+      --type-lead-line-height: "{typography.lead.lineHeight}"
+      --type-lead-tracking: "{typography.lead.letterSpacing}"
       --font-body: "{typography.body-md.fontFamily}"
       --font-display: '"SF Pro Display", var(--font-body)'
       --elevation-dialog: 0 10px 40px rgba(0, 0, 0, 0.2)
@@ -313,6 +346,11 @@ x-neus:
       base:
         --app-template-content-padding: 24px
         --form-template-gap: 20px
+    typography:
+      base:
+        --text-overline-tracking: 0em
+        --text-overline-transform: none
+    layout: {}
 ---
 
 # Apple

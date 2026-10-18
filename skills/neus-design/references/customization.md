@@ -2,8 +2,7 @@
 
 Pick the lowest level that expresses the change. Each level up costs more
 maintenance and is easier to get wrong. Confirm every prop, part and token
-name in the component's guide (`node_modules/neus-ui/docs/components/<Name>.md`)
-before using it.
+name in the component's guide (`npx neus docs <Name>`) before using it.
 
 | Level | Use it for | Where it lives |
 | --- | --- | --- |
@@ -24,8 +23,12 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 `labelPlacement` and `description` (help text wired to
 `aria-describedby`), plus native attributes such as `autoComplete`,
 `inputMode` and `spellCheck` on Input; Sidebar and AppTemplate routes
-`href` with `linkComponent`; Badge `variant` and `color`. One solid primary action per
-view; the rest use `secondary`, `tonal`, `outlined` or `text`.
+`href` with `linkComponent`; Badge `variant` and `color`; Heading `as` and
+`size`; Text `variant`, `tone`, `weight`, `measure`, `lines` and `numeric`;
+Section `tone`, `spacing` and `container`; Container `size` and `gutter`;
+Stack and Grid `gap`, `direction` and `columns`, per breakpoint with
+`{ base, md, lg }`. One solid primary action per view; the rest use
+`secondary`, `tonal`, `outlined` or `text`.
 
 ## Level 1: global action palette
 
@@ -97,7 +100,9 @@ components a background or color set here overrides every state.
 
 ## Your own markup
 
-Layout wrappers, sections and text you write yourself use the same tokens:
+Headings, text, bands, page width, rows and columns are components: Heading,
+Text, Section, Container, Stack and Grid. Markup you still write yourself (a
+`blockquote`, a `nav` landmark, a decorative shape) uses the same tokens:
 spacing from `--space-*`, type from `--font-*` and the `--type-*` roles,
 surfaces and text from the semantic `--color-*` roles. The global helpers
 `.neus-eyebrow`, `.neus-mono` and `.neus-gradient-text` exist; use the

@@ -80,3 +80,5 @@ devdocs/
 new_design/
 .agents/examples/
 .serena/
+
+eval/runs/*

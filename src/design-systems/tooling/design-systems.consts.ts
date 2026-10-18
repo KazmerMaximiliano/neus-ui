@@ -19,6 +19,7 @@ export const RECIPE_NAMES = [
   "badge", "button", "calendar", "card", "checkbox", "clock", "dropdown",
   "file-uploader", "icon-button", "input", "link", "modal", "overlay", "select",
   "sidebar", "stepper", "week-calendar", "interactive-map", "data-table", "templates",
+  "typography", "layout",
 ] as const;
 
 export const SECTION_NAMES = [

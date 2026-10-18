@@ -114,8 +114,8 @@ the primary action label specific ("Continue to billing", not "Next").
 
 Group related settings in `Card` sections (`CardHeader`, `CardContent`,
 `CardFooter`). Use `variant="outlined"` for dense pages and `elevated` only
-for content that floats above the page. Lay cards out with your own CSS grid
-using `--space-*` gaps.
+for content that floats above the page. Lay cards out with `Grid` (for example
+`<Grid minItemWidth="20rem">`) and page titles with `Heading` and `Text`.
 
 ## 6. Scheduling
 
@@ -125,21 +125,26 @@ event and category shapes before modelling data.
 
 ## 7. Content page in Astro
 
-Keep the page in `.astro` with semantic HTML and token-based CSS. Add neus
-components as static renders (no client directive) when they have no
-handlers, and as islands only where users interact. For promotional
+Render Heading, Text, Section, Container, Stack and Grid statically from the
+`.astro` page (no client directive): they have no handlers. Add interactive
+neus components as islands only where users interact. For promotional
 sections, follow pattern 8 and the system DESIGN.md's do's and don'ts.
 
 ## 8. Landing page
 
 Use for product, launch and signup pages. Build the sections the brief
 lists, each with the layout the dealt composition names (taste.md), and
-apply the substance rules: display-scale headline, 16px running text, wide
-container, alternating bands, one anchor per section.
+apply the substance rules: display headline, a lead, 16px running text,
+alternating Section bands, one anchor per section. Heading, Text, Section,
+Grid and Stack carry the scale, widths and rhythm of the active system; the
+page CSS only places what they cannot.
 
 ```tsx
 import { MessageSquareText, Timer } from "lucide-react";
-import { Button, Card, CardContent, CardFooter, CardHeader, FormTemplate, Input, Link } from "neus-ui";
+import {
+  Button, Card, CardContent, CardFooter, CardHeader, Container, FormTemplate, Grid, Heading, Input, Link, Section,
+  Stack, Text,
+} from "neus-ui";
 import "./LandingPage.css";
 
 const FEATURES = [
@@ -155,55 +160,59 @@ const QUOTES = [
 export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }) => (
   <>
     <a className="skip-link" href="#main">Skip to content</a>
-    <header className="landing-header landing-container">
-      <span className="landing-brand">AuraFlow</span>
-      <nav aria-label="Main"><Link href="#features" label="How it works" /></nav>
-      <Button label="Create my account" href="#signup" variant="outlined" size="small" />
-    </header>
+    <Container as="header" size="xl">
+      <Stack direction="row" align="center" justify="between" gap={6} className="landing-header">
+        <Text as="span" weight="semibold">AuraFlow</Text>
+        <Stack as="nav" direction="row" align="center" gap={6} aria-label="Main">
+          <Link href="#features" label="How it works" />
+          <Button label="Create my account" href="#signup" variant="outlined" size="small" />
+        </Stack>
+      </Stack>
+    </Container>
     <main id="main">
-      <section className="landing-section" aria-labelledby="hero-title">
-        <div className="landing-container landing-split">
-          <div>
-            <h1 id="hero-title" className="landing-display">A pause that fits your day.</h1>
-            <p className="landing-lead">Tell AuraFlow how you arrive in one sentence and get a one-to-ten-minute session for that moment.</p>
+      <Section aria-labelledby="hero-title">
+        <Grid columns={{ base: 1, lg: 2 }} gap={12} className="landing-split">
+          <Stack gap={6} align="start">
+            <Heading id="hero-title" as="h1" size="display">A pause that fits your day.</Heading>
+            <Text variant="lead">Tell AuraFlow how you arrive in one sentence and get a one-to-ten-minute session for that moment.</Text>
             <Button label="Create my account" href="#signup" size="large" />
-            <p className="landing-note">Two fields, then your first session.</p>
-          </div>
+            <Text variant="small" tone="muted">Two fields, then your first session.</Text>
+          </Stack>
           <Card>{/* The real interface or a live demo: the section's anchor. */}</Card>
-        </div>
-      </section>
-      <section id="features" className="landing-section landing-band" aria-labelledby="features-title">
-        <div className="landing-container">
-          <h2 id="features-title" className="landing-title">Not another audio library.</h2>
-          <ul className="landing-grid">
+        </Grid>
+      </Section>
+      <Section id="features" tone="subtle" aria-labelledby="features-title">
+        <Stack gap={12}>
+          <Heading id="features-title">Not another audio library.</Heading>
+          <Grid as="ul">
             {FEATURES.map(({ icon: Icon, title, text }) => (
               <Card as="li" key={title}>
-                <CardHeader><Icon aria-hidden size={24} /><h3>{title}</h3></CardHeader>
-                <CardContent><p>{text}</p></CardContent>
+                <CardHeader><Icon aria-hidden size={24} /><Heading as="h3" size="sm">{title}</Heading></CardHeader>
+                <CardContent><Text>{text}</Text></CardContent>
               </Card>
             ))}
-          </ul>
-        </div>
-      </section>
-      <section className="landing-section" aria-labelledby="voices-title">
-        <div className="landing-container">
-          <h2 id="voices-title" className="landing-title">Used in the gaps of a full calendar.</h2>
-          <ul className="landing-grid">
+          </Grid>
+        </Stack>
+      </Section>
+      <Section aria-labelledby="voices-title">
+        <Stack gap={12}>
+          <Heading id="voices-title">Used in the gaps of a full calendar.</Heading>
+          <Grid as="ul">
             {QUOTES.map(({ quote, name, role }) => (
               <Card as="li" key={name}>
-                <CardContent><blockquote><p>{quote}</p></blockquote></CardContent>
-                <CardFooter><strong>{name}</strong>, {role}</CardFooter>
+                <CardContent><blockquote><Text variant="lead">{quote}</Text></blockquote></CardContent>
+                <CardFooter><Text as="span" variant="small"><strong>{name}</strong>, {role}</Text></CardFooter>
               </Card>
             ))}
-          </ul>
-        </div>
-      </section>
-      <section id="signup" className="landing-section landing-band" aria-labelledby="signup-title">
-        <div className="landing-container landing-split">
-          <div>
-            <h2 id="signup-title" className="landing-title">Start today.</h2>
-            <p className="landing-lead">We only ask for your name and email.</p>
-          </div>
+          </Grid>
+        </Stack>
+      </Section>
+      <Section id="signup" tone="accent" aria-labelledby="signup-title">
+        <Grid columns={{ base: 1, lg: 2 }} gap={12} className="landing-split">
+          <Stack gap={4}>
+            <Heading id="signup-title">Start today.</Heading>
+            <Text variant="lead">We only ask for your name and email.</Text>
+          </Stack>
           <Card>
             <CardContent>
               <form onSubmit={(event) => { event.preventDefault(); onSignup(new FormData(event.currentTarget)); }}>
@@ -215,34 +224,35 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
               </form>
             </CardContent>
           </Card>
-        </div>
-      </section>
+        </Grid>
+      </Section>
     </main>
-    <footer className="landing-container landing-footer">© 2026 AuraFlow</footer>
+    <Container as="footer" size="xl">
+      <Text variant="small" tone="muted" className="landing-footer">© 2026 AuraFlow</Text>
+    </Container>
   </>
 );
 ```
 
 ```css
-.landing-container { max-width: 1200px; margin-inline: auto; padding-inline: clamp(var(--space-4), 4vw, var(--space-8)); }
-.landing-section { padding-block: clamp(var(--space-12), 8vw, var(--space-16)); }
-.landing-band { background: var(--color-surface-container-low); }
-.landing-split { display: grid; gap: var(--space-8); align-items: center; }
-.landing-grid { display: grid; gap: var(--space-6); padding: 0; list-style: none; }
-.landing-display { font: 700 clamp(var(--fs-3xl), 5vw, var(--fs-5xl)) / 1.05 var(--font-display); text-wrap: balance; }
-.landing-title { font: 700 clamp(var(--fs-2xl), 3vw, var(--fs-4xl)) / 1.15 var(--font-display); text-wrap: balance; }
-.landing-lead { font-size: var(--fs-lg); max-width: 60ch; }
-@media (width >= 768px) { .landing-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); } }
-@media (width >= 1024px) { .landing-split { grid-template-columns: 1.1fr 1fr; } }
+.landing-header { padding-block: var(--space-6); }
+.landing-split { align-items: center; }
+.landing-footer { padding-block: var(--space-8); }
+.skip-link { position: absolute; inset-inline-start: var(--space-4); inset-block-start: calc(-1 * var(--space-16)); }
+.skip-link:focus { inset-block-start: var(--space-4); }
 ```
 
 - Every section the brief lists exists; the dealt composition decides its
   layout (features as `cards`, `grid` or `list`; testimonials as `card`,
   `plain` or `featured`).
-- Feature and testimonial groups are lists of `Card as="li"` with the
-  default `variant="auto"`: the system decides border, fill or flat. Never a
-  Card inside a Card.
+- One `h1` (`size="display"`); section titles are the default `h2`, item
+  titles `h3` at `size="sm"`. Alternate `default` and `subtle` Section tones;
+  `accent` once, on the final call to action.
+- Feature and testimonial groups are `Grid as="ul"` of `Card as="li"` with
+  the default `variant="auto"`: the system decides border, fill or flat.
+  Never a Card inside a Card.
 - One solid action per viewport: the header action is `outlined`.
 - Testimonials the brief asks for are marked `SAMPLE:` and listed in the
   delivery; prices, trials and metrics appear only when the brief gives them.
-- Run the visual loop (`npx neus shot /`) after the first render.
+- Run `npx neus lint` and the visual loop (`npx neus shot /`) after the first
+  render.

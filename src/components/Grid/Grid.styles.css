@@ -1,0 +1,38 @@
+/* Every grid declares all its layout properties, so a nested grid never inherits its parent's inline values. */
+.grid {
+  --grid-columns: 1;
+  --grid-columns-md: 2;
+  --grid-columns-lg: 3;
+  --grid-gap: var(--space-6);
+  --grid-gap-md: var(--space-6);
+  --grid-gap-lg: var(--space-6);
+  --grid-min-item-width: 16rem;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: var(--grid-gap);
+  min-width: 0;
+}
+
+@media (width >= 768px) {
+  .grid {
+    grid-template-columns: repeat(var(--grid-columns-md), minmax(0, 1fr));
+    gap: var(--grid-gap-md);
+  }
+}
+
+@media (width >= 1024px) {
+  .grid {
+    grid-template-columns: repeat(var(--grid-columns-lg), minmax(0, 1fr));
+    gap: var(--grid-gap-lg);
+  }
+}
+
+.grid[data-auto] {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min-item-width)), 1fr));
+}
+
+.grid:is(ul, ol) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

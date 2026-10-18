@@ -48,6 +48,24 @@ typography:
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: 0em
+  display:
+    fontFamily: '"Geist", Arial, sans-serif'
+    fontSize: 4.5rem
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: -0.06em
+  headline:
+    fontFamily: '"Geist", Arial, sans-serif'
+    fontSize: 2.5rem
+    fontWeight: 600
+    lineHeight: 1.2
+    letterSpacing: -0.05em
+  lead:
+    fontFamily: '"Geist", Arial, sans-serif'
+    fontSize: 1.25rem
+    fontWeight: 400
+    lineHeight: 1.8
+    letterSpacing: 0em
 rounded:
   default: 16px
   sm: 8px
@@ -91,6 +109,18 @@ x-neus:
       focus: "{colors.focus-dark}"
   tokens:
     base:
+      --type-display-size: "clamp(2.5rem, 1.76rem + 3.05vw, {typography.display.fontSize})"
+      --type-display-weight: "{typography.display.fontWeight}"
+      --type-display-line-height: "{typography.display.lineHeight}"
+      --type-display-tracking: "{typography.display.letterSpacing}"
+      --type-headline-size: "clamp(2rem, 1.81rem + 0.76vw, {typography.headline.fontSize})"
+      --type-headline-weight: "{typography.headline.fontWeight}"
+      --type-headline-line-height: "{typography.headline.lineHeight}"
+      --type-headline-tracking: "{typography.headline.letterSpacing}"
+      --type-lead-size: "{typography.lead.fontSize}"
+      --type-lead-weight: "{typography.lead.fontWeight}"
+      --type-lead-line-height: "{typography.lead.lineHeight}"
+      --type-lead-tracking: "{typography.lead.letterSpacing}"
       --font-body: "{typography.body-md.fontFamily}"
       --font-display: var(--font-body)
       --font-mono: '"Geist Mono", monospace'
@@ -350,6 +380,11 @@ x-neus:
         --app-template-header-height: 64px
         --app-template-header-border-width: 1px
         --form-template-gap: 16px
+    typography:
+      base:
+        --text-overline-tracking: 0em
+        --text-overline-transform: none
+    layout: {}
 ---
 
 # Vercel

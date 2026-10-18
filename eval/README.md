@@ -42,8 +42,11 @@ against Claude Design. Nothing here ships in the npm package.
    ```
 
    It runs `neus shot` on the brief's route (reusing the server the session left,
-   or starting the project's dev script), stops the server, and saves the
-   screenshots, the metrics and a copy of the code in `runs/baseline/01/`.
+   or starting the project's dev script), stops the server, runs `neus lint` for
+   the P0 count and the component coverage, and saves the screenshots, the
+   metrics and a copy of the code in `runs/baseline/01/`. Runs saved before
+   `neus lint` existed are linted from their copied code when the summary is
+   rebuilt.
 
 5. Open the screenshots, fill `runs/baseline/01/scores.json` following `rubric.md`,
    and rebuild the summary:

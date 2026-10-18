@@ -20,5 +20,11 @@ export * from "./TimeInput";
 export * from "./WeekCalendar";
 export * from "./Stepper";
 export * from "./Badge";
+export * from "./Heading";
+export * from "./Text";
+export * from "./Container";
+export * from "./Stack";
+export * from "./Grid";
+export * from "./Section";
 
 export { useColors } from "./theme";

@@ -138,6 +138,24 @@ typography:
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: 0em
+  display:
+    fontFamily: '"Manrope", system-ui, sans-serif'
+    fontSize: 4rem
+    fontWeight: 700
+    lineHeight: 1.05
+    letterSpacing: -0.03em
+  headline:
+    fontFamily: '"Manrope", system-ui, sans-serif'
+    fontSize: 3rem
+    fontWeight: 700
+    lineHeight: 1.1
+    letterSpacing: -0.025em
+  lead:
+    fontFamily: '"Manrope", system-ui, sans-serif'
+    fontSize: 1.25rem
+    fontWeight: 400
+    lineHeight: 1.6
+    letterSpacing: 0em
 rounded:
   default: 16px
   sm: 8px
@@ -353,6 +371,18 @@ x-neus:
       --type-caption-weight: "{typography.caption.fontWeight}"
       --type-caption-line-height: "{typography.caption.lineHeight}"
       --type-caption-tracking: "{typography.caption.letterSpacing}"
+      --type-display-size: "clamp(2.5rem, 1.94rem + 2.29vw, {typography.display.fontSize})"
+      --type-display-weight: "{typography.display.fontWeight}"
+      --type-display-line-height: "{typography.display.lineHeight}"
+      --type-display-tracking: "{typography.display.letterSpacing}"
+      --type-headline-size: "clamp(2rem, 1.63rem + 1.52vw, {typography.headline.fontSize})"
+      --type-headline-weight: "{typography.headline.fontWeight}"
+      --type-headline-line-height: "{typography.headline.lineHeight}"
+      --type-headline-tracking: "{typography.headline.letterSpacing}"
+      --type-lead-size: "clamp(1.125rem, 1.08rem + 0.19vw, {typography.lead.fontSize})"
+      --type-lead-weight: "{typography.lead.fontWeight}"
+      --type-lead-line-height: "{typography.lead.lineHeight}"
+      --type-lead-tracking: "{typography.lead.letterSpacing}"
       --color-layer-01: var(--color-surface-secondary)
       --color-layer-02: var(--color-surface)
       --color-field: var(--color-surface)
@@ -1018,6 +1048,77 @@ x-neus:
         --form-template-color: var(--color-text-primary)
         --form-template-action-gap: 12px
         --form-template-action-padding: 8px
+    typography:
+      base:
+        --heading-font-family: var(--font-display)
+        --heading-color: currentColor
+        --heading-display-size: var(--type-display-size)
+        --heading-display-weight: var(--type-display-weight)
+        --heading-display-line-height: var(--type-display-line-height)
+        --heading-display-tracking: var(--type-display-tracking)
+        --heading-xl-size: var(--type-headline-size)
+        --heading-xl-weight: var(--type-headline-weight)
+        --heading-xl-line-height: var(--type-headline-line-height)
+        --heading-xl-tracking: var(--type-headline-tracking)
+        --heading-lg-size: calc((var(--type-heading-size) + var(--type-headline-size)) / 2)
+        --heading-lg-weight: var(--type-headline-weight)
+        --heading-lg-line-height: var(--type-headline-line-height)
+        --heading-lg-tracking: var(--type-headline-tracking)
+        --heading-md-size: var(--type-heading-size)
+        --heading-md-weight: var(--type-heading-weight)
+        --heading-md-line-height: var(--type-heading-line-height)
+        --heading-md-tracking: var(--type-heading-tracking)
+        --heading-sm-size: var(--fs-xl)
+        --heading-sm-weight: var(--type-heading-weight)
+        --heading-sm-line-height: var(--type-heading-line-height)
+        --heading-sm-tracking: var(--type-heading-tracking)
+        --heading-xs-size: var(--fs-lg)
+        --heading-xs-weight: var(--type-heading-weight)
+        --heading-xs-line-height: var(--type-heading-line-height)
+        --heading-xs-tracking: var(--type-heading-tracking)
+        --text-font-family: var(--font-body)
+        --text-measure: 65ch
+        --text-muted-color: var(--color-text-secondary)
+        --text-weight-regular: 400
+        --text-weight-medium: 500
+        --text-weight-semibold: 600
+        --text-lead-size: var(--type-lead-size)
+        --text-lead-weight: var(--type-lead-weight)
+        --text-lead-line-height: var(--type-lead-line-height)
+        --text-lead-tracking: var(--type-lead-tracking)
+        --text-body-size: var(--fs-md)
+        --text-body-weight: var(--type-body-weight)
+        --text-body-line-height: 1.6
+        --text-body-tracking: var(--type-body-tracking)
+        --text-small-size: var(--fs-base)
+        --text-small-weight: var(--type-body-weight)
+        --text-small-line-height: var(--type-body-line-height)
+        --text-small-tracking: var(--type-body-tracking)
+        --text-caption-size: var(--type-caption-size)
+        --text-caption-weight: var(--type-caption-weight)
+        --text-caption-line-height: var(--type-caption-line-height)
+        --text-caption-tracking: var(--type-caption-tracking)
+        --text-overline-size: var(--fs-xs)
+        --text-overline-weight: 600
+        --text-overline-line-height: var(--type-caption-line-height)
+        --text-overline-tracking: 0.08em
+        --text-overline-transform: uppercase
+    layout:
+      base:
+        --container-sm-max-width: 640px
+        --container-md-max-width: 768px
+        --container-lg-max-width: 1120px
+        --container-xl-max-width: 1280px
+        --container-gutter: clamp(16px, 4vw, 32px)
+        --section-sm-padding-block: clamp(var(--space-6), 4vw, var(--space-8))
+        --section-md-padding-block: clamp(var(--space-8), 6vw, var(--space-16))
+        --section-lg-padding-block: clamp(var(--space-12), 8vw, 96px)
+        --section-default-background: transparent
+        --section-default-color: currentColor
+        --section-subtle-background: var(--color-surface-container-low)
+        --section-subtle-color: currentColor
+        --section-accent-background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface))
+        --section-accent-color: var(--color-text-primary)
 ---
 
 # Neus UI
@@ -1046,13 +1147,16 @@ Use Manrope for interface text, with system sans-serif fallbacks;
 reserve monospace for code and identifiers. Establish hierarchy through size,
 weight, and spacing before color. Keep prose and field labels in natural case.
 Use the spaced uppercase treatment only for short action and navigation labels.
+Public pages open with one display headline and a lead; running text stays at
+16px or more. The overline is the one uppercase text style.
 
 ## Layout
 
 Build spacing from the shared four-pixel rhythm. Group related
 fields closely and separate sections more generously. Align labels, inputs, and
-actions; allow wrapping instead of shrinking text. Page grids belong to templates
-or applications, not to individual component recipes.
+actions; allow wrapping instead of shrinking text. Pages sit in a Container
+(1120px by default) and are divided into Section bands: alternate the default and
+subtle tones instead of drawing rules, and keep the accent tone for one band.
 
 ## Elevation & Depth
 

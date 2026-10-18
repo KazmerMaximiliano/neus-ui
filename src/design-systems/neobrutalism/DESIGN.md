@@ -38,6 +38,24 @@ typography:
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: 0em
+  display:
+    fontFamily: '"Inter", Arial, sans-serif'
+    fontSize: 4.5rem
+    fontWeight: 800
+    lineHeight: 1
+    letterSpacing: -0.03em
+  headline:
+    fontFamily: '"Inter", Arial, sans-serif'
+    fontSize: 3rem
+    fontWeight: 800
+    lineHeight: 1.05
+    letterSpacing: -0.02em
+  lead:
+    fontFamily: '"Inter", Arial, sans-serif'
+    fontSize: 1.25rem
+    fontWeight: 500
+    lineHeight: 1.5
+    letterSpacing: 0em
 rounded:
   default: 16px
   sm: 8px
@@ -83,6 +101,18 @@ x-neus:
       error: "{colors.error-dark}"
   tokens:
     base:
+      --type-display-size: "clamp(2.5rem, 1.76rem + 3.05vw, {typography.display.fontSize})"
+      --type-display-weight: "{typography.display.fontWeight}"
+      --type-display-line-height: "{typography.display.lineHeight}"
+      --type-display-tracking: "{typography.display.letterSpacing}"
+      --type-headline-size: "clamp(2rem, 1.63rem + 1.52vw, {typography.headline.fontSize})"
+      --type-headline-weight: "{typography.headline.fontWeight}"
+      --type-headline-line-height: "{typography.headline.lineHeight}"
+      --type-headline-tracking: "{typography.headline.letterSpacing}"
+      --type-lead-size: "clamp(1.125rem, 1.08rem + 0.19vw, {typography.lead.fontSize})"
+      --type-lead-weight: "{typography.lead.fontWeight}"
+      --type-lead-line-height: "{typography.lead.lineHeight}"
+      --type-lead-tracking: "{typography.lead.letterSpacing}"
       --font-body: "{typography.body-md.fontFamily}"
       --font-display: var(--font-body)
       --font-mono: '"JetBrains Mono", monospace'
@@ -400,6 +430,11 @@ x-neus:
         --app-template-content-padding: 32px
         --form-template-gap: 24px
         --form-template-action-padding: 12px
+    typography:
+      base:
+        --text-overline-tracking: 0em
+        --text-overline-transform: none
+    layout: {}
 ---
 
 # Neobrutalism

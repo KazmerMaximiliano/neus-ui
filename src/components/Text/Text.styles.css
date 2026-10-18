@@ -1,0 +1,101 @@
+.text {
+  margin: 0;
+  font-family: var(--text-font-family);
+  text-align: start;
+}
+
+.text[data-variant="lead"] {
+  font-size: var(--text-lead-size);
+  font-weight: var(--text-lead-weight);
+  line-height: var(--text-lead-line-height);
+  letter-spacing: var(--text-lead-tracking);
+}
+
+.text[data-variant="body"] {
+  font-size: var(--text-body-size);
+  font-weight: var(--text-body-weight);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-tracking);
+}
+
+.text[data-variant="small"] {
+  font-size: var(--text-small-size);
+  font-weight: var(--text-small-weight);
+  line-height: var(--text-small-line-height);
+  letter-spacing: var(--text-small-tracking);
+}
+
+.text[data-variant="caption"] {
+  font-size: var(--text-caption-size);
+  font-weight: var(--text-caption-weight);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-tracking);
+}
+
+.text[data-variant="overline"] {
+  font-size: var(--text-overline-size);
+  font-weight: var(--text-overline-weight);
+  line-height: var(--text-overline-line-height);
+  letter-spacing: var(--text-overline-tracking);
+  text-transform: var(--text-overline-transform);
+}
+
+.text[data-weight="regular"] {
+  font-weight: var(--text-weight-regular);
+}
+
+.text[data-weight="medium"] {
+  font-weight: var(--text-weight-medium);
+}
+
+.text[data-weight="semibold"] {
+  font-weight: var(--text-weight-semibold);
+}
+
+.text[data-tone="muted"] {
+  color: var(--text-muted-color);
+}
+
+.text[data-tone="primary"] {
+  color: var(--color-primary-text);
+}
+
+.text[data-tone="success"] {
+  color: var(--color-success-text);
+}
+
+.text[data-tone="error"] {
+  color: var(--color-error-text);
+}
+
+.text[data-align="center"] {
+  text-align: center;
+}
+
+.text[data-align="end"] {
+  text-align: end;
+}
+
+.text[data-measure] {
+  max-inline-size: var(--text-measure);
+}
+
+.text[data-measure][data-align="center"] {
+  margin-inline: auto;
+}
+
+.text[data-measure][data-align="end"] {
+  margin-inline-start: auto;
+}
+
+.text[data-numeric] {
+  font-variant-numeric: tabular-nums;
+}
+
+.text[data-lines] {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--text-lines);
+  line-clamp: var(--text-lines);
+}

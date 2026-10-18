@@ -32,22 +32,25 @@ instructions.
 
 ## Step 0: load the contract (every run)
 
-Read `neus.config.json`. Then read, from the installed package
-(`node_modules/neus-ui/`):
+Run from the project root:
 
-| Need                                          | File                                                                       |
-| --------------------------------------------- | -------------------------------------------------------------------------- |
-| Active system: identity, do's and don'ts      | `src/design-systems/<designSystem>/DESIGN.md`, or `derivedSystem` when set |
-| Catalog of components and templates           | `docs/components/README.md`, `docs/templates/README.md`                    |
-| One component: props, parts, tokens, examples | `docs/components/<Name>.md` (templates: `docs/templates/<Name>.md`)        |
-| Exact prop types                              | `dist/components/<Name>/<Name>.types.d.ts`                                 |
-| Shared tokens                                 | `docs/design/tokens.md`                                                    |
+1. `npx neus context` (`npx neus context --for page` for a landing or
+   marketing page): the active system's identity and do's and don'ts, the
+   key tokens, the component catalog and the need → component table below.
+2. `npx neus docs <Name>` for every component you will use: usage,
+   behavior, props and parts. `--full` adds its CSS tokens, needed only to
+   override one.
+
+Exact prop types are in `node_modules/neus-ui/dist/components/<Name>/<Name>.types.d.ts`,
+the full system in `node_modules/neus-ui/src/design-systems/<designSystem>/DESIGN.md`
+(or `derivedSystem` when set) and every shared token in
+`node_modules/neus-ui/docs/design/tokens.md`.
 
 Then read `<styles>/neus.overrides.css` (`<styles>` is `paths.styles`) and
 the `design/specs/*.md` that cover the area you will touch. `<this skill>`
 in the references means this skill's directory: `.claude/skills/neus-design`
-in Claude Code, `.agents/skills/neus-design` in Codex. Read a component's guide before using
-it. Never guess a prop, part or token name.
+in Claude Code, `.agents/skills/neus-design` in Codex. Read a component's guide
+(`npx neus docs <Name>`) before using it. Never guess a prop, part or token name.
 
 Read [references/frameworks.md](references/frameworks.md) for the
 project's `rendering` value before writing any file. If the project is not
@@ -132,7 +135,13 @@ component's guide.
 
 | Need | Component |
 | --- | --- |
-| Feature with icon, title and text | `Card as="li"` + `CardHeader` + `CardContent`, inside a `<ul>` grid |
+| Page or section title | `Heading` (`as` for the level, `size` for the look; `size="display"` for the main headline of a public page) |
+| Paragraph, lead, caption, label text | `Text` (`variant`, `tone`; `numeric` for figures) |
+| Page band with its own background | `Section` (`tone`, `id` for links, `aria-labelledby`) |
+| Page width and side margins outside a Section | `Container` |
+| Items in a row or column | `Stack` (`direction`, `gap`; `{ base, md, lg }` per breakpoint) |
+| Columns of cards or items | `Grid` (`columns` or `minItemWidth`; `as="ul"` with `Card as="li"`) |
+| Feature with icon, title and text | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
 | Testimonial | `Card as="figure"` (or `as="li"` in a list) + `CardContent` (quote) + `CardFooter` (name, role) |
 | Container of a widget, demo or summary | `Card` |
 | Signup, contact or create form | `<form>` + `FormTemplate` + `Input` (`Select`, `Checkbox`, `DateInput`…), inside a `Card` on public pages |
@@ -150,14 +159,15 @@ component's guide.
 | Map | `InteractiveMap` |
 | Application shell and navigation | `AppTemplate`, `Sidebar` |
 
-Headings, paragraphs and page layout have no components yet: use semantic
-HTML (`h1`–`h3`, `p`, `section`, `ul`) styled with the system's type roles
-and `--space-*` tokens.
+Write your own element only for what no row covers (a `blockquote`, a `nav`
+landmark, an inline `strong`), styled with neus tokens.
 
 ## Phase 5: verify
 
-1. Run the deterministic checks and the review in the `neus-audit` skill on
-   the changed files. Fix every P0 and the P1 items in scope.
+1. Run `npx neus lint` on the changed files: it reports contract breaks (P0),
+   raw elements a neus component replaces (P1) and the component coverage.
+   Fix every P0 and replace the raw elements it lists. Then run the review in
+   the `neus-audit` skill and fix its P0 and the P1 items in scope.
 2. Look at the render. This is mandatory for every new or redesigned page or
    screen:
    1. After the first complete render, run `npx neus shot <route>` from the
@@ -185,7 +195,7 @@ Summarize: files created or changed, how to open the result (route and dev
 command; the server `neus shot` started keeps running until
 `npx neus shot --stop`), the design decisions and their source (system
 DESIGN.md, spec, inspiration reference, dealt composition, or assumption),
-the `SAMPLE:` content to replace, audit and screenshot results, and anything
+the `SAMPLE:` content to replace, lint coverage, audit and screenshot results, and anything
 left open. Do not paste full source into the reply.
 
 ## Several independent screens

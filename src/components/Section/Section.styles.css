@@ -1,0 +1,24 @@
+.section {
+  box-sizing: border-box;
+  padding-block: var(--section-lg-padding-block);
+  background: var(--section-default-background);
+  color: var(--section-default-color);
+}
+
+.section[data-spacing="sm"] {
+  padding-block: var(--section-sm-padding-block);
+}
+
+.section[data-spacing="md"] {
+  padding-block: var(--section-md-padding-block);
+}
+
+.section[data-tone="subtle"] {
+  background: var(--section-subtle-background);
+  color: var(--section-subtle-color);
+}
+
+.section[data-tone="accent"] {
+  background: var(--section-accent-background);
+  color: var(--section-accent-color);
+}

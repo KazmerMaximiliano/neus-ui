@@ -53,6 +53,24 @@ typography:
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: 0em
+  display:
+    fontFamily: '"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif'
+    fontSize: 4.75rem
+    fontWeight: 300
+    lineHeight: 1.17
+    letterSpacing: 0em
+  headline:
+    fontFamily: '"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif'
+    fontSize: 3.75rem
+    fontWeight: 300
+    lineHeight: 1.19
+    letterSpacing: 0em
+  lead:
+    fontFamily: '"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif'
+    fontSize: 2rem
+    fontWeight: 300
+    lineHeight: 1.28
+    letterSpacing: 0em
 rounded:
   default: 16px
   sm: 8px
@@ -98,6 +116,18 @@ x-neus:
       error: "{colors.error-dark}"
   tokens:
     base:
+      --type-display-size: "clamp(2.625rem, 2.09rem + 2.69vw, {typography.display.fontSize})"
+      --type-display-weight: "{typography.display.fontWeight}"
+      --type-display-line-height: "{typography.display.lineHeight}"
+      --type-display-tracking: "{typography.display.letterSpacing}"
+      --type-headline-size: "clamp(2rem, 1.56rem + 2.22vw, {typography.headline.fontSize})"
+      --type-headline-weight: "{typography.headline.fontWeight}"
+      --type-headline-line-height: "{typography.headline.lineHeight}"
+      --type-headline-tracking: "{typography.headline.letterSpacing}"
+      --type-lead-size: "clamp(1.5rem, 1.37rem + 0.63vw, {typography.lead.fontSize})"
+      --type-lead-weight: "{typography.lead.fontWeight}"
+      --type-lead-line-height: "{typography.lead.lineHeight}"
+      --type-lead-tracking: "{typography.lead.letterSpacing}"
       --font-body: "{typography.body-md.fontFamily}"
       --font-display: var(--font-body)
       --font-mono: '"IBM Plex Mono", Menlo, monospace'
@@ -410,6 +440,11 @@ x-neus:
         --app-template-header-height: 48px
         --app-template-header-border-width: 1px
         --form-template-gap: 24px
+    typography:
+      base:
+        --text-overline-tracking: 0em
+        --text-overline-transform: none
+    layout: {}
 ---
 
 # Carbon
