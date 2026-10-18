@@ -26,9 +26,6 @@ reusable public API and should reuse the existing implementation where appropria
 | P1       | Accordion               | Disclosure   | Expandable sections with single or multiple open items and keyboard support.                                                              |
 | P1       | Breadcrumbs             | Navigation   | Hierarchical page links with a current-page indicator and overflow handling.                                                              |
 | P1       | Pagination              | Navigation   | Reusable page navigation and page-size selection independent of DataTable.                                                                |
-| P1       | Heading / Text          | Content      | Token-based text primitives: semantic level separate from visual size, a display scale for public pages, measure and line clamp.          |
-| P1       | Container / Section     | Layout       | Page-width containers with responsive gutters, and full-width bands with tone and vertical rhythm for public pages.                       |
-| P1       | Stack / Grid            | Layout       | Responsive layout primitives for spacing, alignment, wrapping and columns, switched in CSS at the Sidebar breakpoints.                    |
 | P1       | Avatar / AvatarGroup    | Data display | Images, initials, fallbacks and grouped identities with overflow counts.                                                                  |
 | P2       | NumberInput             | Forms        | Numeric stepping, precision and formatting beyond the existing native Input type="number".                                                |
 | P2       | Slider / RangeSlider    | Forms        | Single-value or interval selection with bounds, steps and keyboard controls.                                                              |

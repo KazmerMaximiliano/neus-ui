@@ -3,8 +3,19 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 30 components and public sections. Import each by name from `neus-ui`.
+The package exports 36 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
+
+## Typography and layout
+
+| Component | Purpose |
+| --- | --- |
+| [Heading](./Heading.md) | Heading with independent document level and visual size, display to xs. |
+| [Text](./Text.md) | Running text in lead, body, small, caption and overline steps with semantic tones. |
+| [Container](./Container.md) | Centered maximum width with responsive side padding. |
+| [Stack](./Stack.md) | Column or row with space-scale gaps that can change at 768px and 1024px. |
+| [Grid](./Grid.md) | Equal responsive columns or auto-fit items of a minimum width. |
+| [Section](./Section.md) | Full-width page band with tone, vertical rhythm and an inner Container. |
 
 ## Actions and status
 

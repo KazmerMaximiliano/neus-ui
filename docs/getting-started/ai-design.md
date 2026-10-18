@@ -50,15 +50,16 @@ in `AGENTS.md` outside the `neus-ui` markers. Commit all of them.
 
 The `neus-design` skill runs in the main conversation, where it can ask and iterate:
 
-1. **Contract.** Reads `neus.config.json`, the active DESIGN.md and the guides of the
-   components it will use, from `node_modules/neus-ui`.
+1. **Contract.** Runs `npx neus context` (the active system, key tokens, catalog and
+   which component answers which need) and `npx neus docs <Name>` for each component it
+   will use.
 2. **One round of questions**, only when the brief leaves something open.
 3. **System derivation**, in None mode only (below).
 4. **Spec.** Writes `design/specs/<slug>.md`, so another session, in Claude Code or Codex,
    continues in the same direction.
 5. **Build.** Composes Neus components, choosing the lowest step of the customization
    ladder: props, palette, tokens, part classes, part styles.
-6. **Verify.** Runs the `neus-audit` skill, looks at the render with `neus shot` (up to
+6. **Verify.** Runs `neus lint` and the `neus-audit` skill, looks at the render with `neus shot` (up to
    three rounds of screenshots and fixes), then asks the `neus-reviewer` subagent for an
    independent review of new pages and flows.
 
@@ -82,14 +83,36 @@ It uses an installed Chrome, Edge or Chromium (or `--browser <path>`) through
 finds none it exits with code 2, and the skill says so instead of claiming it reviewed the
 render.
 
+## Context, guides and lint
+
+```bash
+npx neus context                      # system, key tokens, catalog, need → component
+npx neus context --for page           # adds the system's guidance for public pages
+npx neus docs Button                  # usage, behavior, props and parts of one guide
+npx neus docs Button --full           # the whole guide, with its CSS tokens
+npx neus lint                         # src, app, pages and components
+npx neus lint src/pages --json
+```
+
+`neus context` and `neus docs` read the DESIGN.md and guides shipped in the package, or the
+project's derived system, so they always match the installed version. `neus lint` checks
+the code against the contract with per-line patterns, no type checker needed. P0 findings
+are unknown tokens, raw colors outside `neus.overrides.css`, hand-written palette
+variables, inline colors on interactive components, private neus classes, `!important`,
+deep imports and theme owners the rendering mode does not allow. P1 findings are raw
+elements a neus component replaces (headings, paragraphs, sections, lists, buttons, fields,
+links), filler copy, emoji and selectors on third-party internals. It also reports
+component coverage: neus component tags over neus tags plus those raw elements. It exits
+with 1 when it finds a P0.
+
 ## Quality layers
 
 | Layer | What it does |
 | --- | --- |
-| Taste | Product-screen rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy) and, for public pages, substance rules (display headline, 16px text, wide container, an anchor per section) and a sample-content policy, adapted from taste-skill and Open Design |
+| Taste | Product-screen rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy) and, for public pages, substance rules (Heading display, 16px Text, Section bands at the system's width, an anchor per section) and a sample-content policy, adapted from taste-skill and Open Design |
 | Directions | `scripts/deal-directions.mjs` deals palette, type pairing, shape, density, elevation, a signature move and, for public pages, the hero, features, testimonials and call-to-action layouts. With a locked system it deals only the composition, so the system's palette and type stay intact |
 | Inspiration | An index of the VoltAgent/awesome-design-md analyses; the agent takes concepts, never identities |
-| Audit | Type checks, deterministic searches, the Vercel Web Interface Guidelines and the design contract, reported as `file:line` with P0/P1/P2 |
+| Audit | Type checks, `neus lint`, the Vercel Web Interface Guidelines and the design contract, reported as `file:line` with P0/P1/P2 |
 | Review | The `neus-reviewer` subagent judges the result against the spec without the conversation that produced it |
 
 ## None: a system of your own

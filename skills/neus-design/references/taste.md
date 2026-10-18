@@ -42,11 +42,11 @@ writing.
 
 ### Craft for product screens
 
-- Hierarchy from two or three type sizes per view, weight and space. Borders
-  and boxes are the last resort.
+- Hierarchy from two or three type sizes per view (`Heading` sizes and `Text`
+  variants), weight and space. Borders and boxes are the last resort.
 - Density follows the task: tables and forms compact, settings standard,
   onboarding relaxed. Pick one per screen and keep it.
-- Numbers: tabular figures, right-aligned in columns, formatted with
+- Numbers: tabular figures (`Text numeric`), right-aligned in columns, formatted with
   `Intl.NumberFormat` / `Intl.DateTimeFormat` in the project's locale.
 - Color: the accent marks actions and selection; status colors always come
   with text or an icon.
@@ -105,17 +105,19 @@ A page that loses decoration and gains nothing in its place looks poor: in
 blind comparisons people prefer the richer page even when it has a tell or
 two. For every device you leave out, something must take its place.
 
-- **Scale.** A headline at the top of the system's type scale (`--fs-4xl` or
-  `--fs-5xl` on desktop, at least `--fs-3xl` on phones), a lead paragraph one
-  step above the body, running text of at least 16px. Five type sizes at
-  most; headlines in two lines or fewer at every width.
-- **Width.** Content 1120 to 1280px wide on a 1440px screen, with responsive
-  side margins; never one narrow column in the middle of a wide screen.
+- **Scale.** One `Heading as="h1" size="display"`, a `Text variant="lead"`
+  under it, running text as `Text` (16px or more in every system). Section
+  titles keep the default `h2`. Five type sizes at most; headlines in two
+  lines or fewer at every width.
+- **Width.** `Section` and `Container` hold content at the system's page
+  width (1120px in Neus) with responsive side margins; never one narrow
+  column in the middle of a wide screen.
 - **Anchor.** Every section has a visual anchor: a group of cards, a real
   picture or interface, or large type.
-- **Bands.** Separate sections with alternating background bands one tone
-  step apart and generous vertical space, not with rules.
-- **Groups.** Features and testimonials as `Card variant="auto"` in a list:
+- **Bands.** Separate sections by alternating `Section tone="default"` and
+  `tone="subtle"`, not with rules; `tone="accent"` once at most.
+- **Groups.** Features and testimonials as `Card variant="auto"` in a
+  `Grid as="ul"`:
   the system decides whether a card looks bordered, filled or flat. What
   reads as generated is nesting cards or wrapping every block in one.
 - **Content.** Every section complete, with microcopy beside the primary

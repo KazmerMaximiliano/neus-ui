@@ -1,0 +1,28 @@
+/* Not .container: Tailwind generates that utility whenever the word appears in a project, and Bootstrap ships one. */
+.layout-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--container-lg-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter);
+}
+
+.layout-container[data-size="sm"] {
+  max-width: var(--container-sm-max-width);
+}
+
+.layout-container[data-size="md"] {
+  max-width: var(--container-md-max-width);
+}
+
+.layout-container[data-size="xl"] {
+  max-width: var(--container-xl-max-width);
+}
+
+.layout-container[data-size="full"] {
+  max-width: none;
+}
+
+.layout-container[data-gutter="false"] {
+  padding-inline: 0;
+}

@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 21+ reusable UI components
+- 36 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -63,7 +63,7 @@ PERMITTED operations:
 ```
 neus-ui/
 ├── src/
-│   ├── components/              [DIRECTORY] 21+ UI components
+│   ├── components/              [DIRECTORY] UI components and public sections
 │   ├── templates/               [DIRECTORY] Pre-built layouts
 │   ├── hooks/                   [DIRECTORY] Custom React hooks
 │   ├── providers/               [DIRECTORY] Context providers
@@ -73,7 +73,7 @@ neus-ui/
 │   ├── tests/                   [DIRECTORY] Cross-library suites (server rendering)
 │   ├── index.ts                 [FILE] Library entry point (`neus-ui`)
 │   └── theme.ts                 [FILE] Server-safe entry (`neus-ui/theme`), no React or CSS
-├── cli/                         [DIRECTORY] `neus` CLI (init, shot) and the project templates it writes
+├── cli/                         [DIRECTORY] `neus` CLI (init, shot, context, docs, lint) and the project templates it writes
 ├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus init`
 ├── agents/                      [DIRECTORY] neus-reviewer subagent for Claude Code (.md) and Codex (.toml)
 ├── .storybook/                  [DIRECTORY] Storybook configuration
@@ -165,7 +165,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (30 total)
+### Implemented Components and Public Subcomponents (36 total)
 
 | NAME            | FILE_PATH                       | STATUS | FEATURES                                        |
 | --------------- | ------------------------------- | ------ | ----------------------------------------------- |
@@ -199,6 +199,12 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | WeekCalendar    | src/components/WeekCalendar/    | STABLE | Weekly view, event categories, navigation       |
 | WeekCalendarRow | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
 | Stepper         | src/components/Stepper/         | STABLE | Dots/linear/simple variants, labels, step click |
+| Heading         | src/components/Heading/         | STABLE | h1–h6 level independent of display/xl/lg/md/sm/xs size, fluid display scale |
+| Text            | src/components/Text/            | STABLE | Lead/body/small/caption/overline, tones, measure, line clamp, tabular figures |
+| Container       | src/components/Container/       | STABLE | Max-width sizes, responsive gutter, landmark element |
+| Stack           | src/components/Stack/           | STABLE | Responsive direction and space-scale gap, list semantics |
+| Grid            | src/components/Grid/            | STABLE | Responsive columns or auto-fit minimum width |
+| Section         | src/components/Section/         | STABLE | Page band tones, vertical rhythm, inner Container |
 
 ### Implemented Templates (2 total)
 
@@ -369,6 +375,12 @@ MUST use CSS variables from theme system:
   cursor: not-allowed;
 }
 ```
+
+Responsive layout props write prefixed custom properties inline, never CSS properties:
+Stack, Grid and FormTemplate set values such as `--stack-gap-md: var(--space-8)` that their
+stylesheet reads inside 768px and 1024px media queries. They are CSS variables, so the
+inline-style restriction does not apply; keep the layout in CSS so it works in server
+rendering and islands.
 
 ## TESTING REQUIREMENTS
 

@@ -1,0 +1,57 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --heading-font-family: var(--font-display);
+  --heading-color: currentColor;
+  --heading-display-size: var(--type-display-size);
+  --heading-display-weight: var(--type-display-weight);
+  --heading-display-line-height: var(--type-display-line-height);
+  --heading-display-tracking: var(--type-display-tracking);
+  --heading-xl-size: var(--type-headline-size);
+  --heading-xl-weight: var(--type-headline-weight);
+  --heading-xl-line-height: var(--type-headline-line-height);
+  --heading-xl-tracking: var(--type-headline-tracking);
+  --heading-lg-size: calc((var(--type-heading-size) + var(--type-headline-size)) / 2);
+  --heading-lg-weight: var(--type-headline-weight);
+  --heading-lg-line-height: var(--type-headline-line-height);
+  --heading-lg-tracking: var(--type-headline-tracking);
+  --heading-md-size: var(--type-heading-size);
+  --heading-md-weight: var(--type-heading-weight);
+  --heading-md-line-height: var(--type-heading-line-height);
+  --heading-md-tracking: var(--type-heading-tracking);
+  --heading-sm-size: var(--fs-xl);
+  --heading-sm-weight: var(--type-heading-weight);
+  --heading-sm-line-height: var(--type-heading-line-height);
+  --heading-sm-tracking: var(--type-heading-tracking);
+  --heading-xs-size: var(--fs-lg);
+  --heading-xs-weight: var(--type-heading-weight);
+  --heading-xs-line-height: var(--type-heading-line-height);
+  --heading-xs-tracking: var(--type-heading-tracking);
+  --text-font-family: var(--font-body);
+  --text-measure: 65ch;
+  --text-muted-color: var(--color-text-secondary);
+  --text-weight-regular: 400;
+  --text-weight-medium: 500;
+  --text-weight-semibold: 600;
+  --text-lead-size: var(--type-lead-size);
+  --text-lead-weight: var(--type-lead-weight);
+  --text-lead-line-height: var(--type-lead-line-height);
+  --text-lead-tracking: var(--type-lead-tracking);
+  --text-body-size: var(--fs-md);
+  --text-body-weight: var(--type-body-weight);
+  --text-body-line-height: 1.6;
+  --text-body-tracking: var(--type-body-tracking);
+  --text-small-size: var(--fs-base);
+  --text-small-weight: var(--type-body-weight);
+  --text-small-line-height: var(--type-body-line-height);
+  --text-small-tracking: var(--type-body-tracking);
+  --text-caption-size: var(--type-caption-size);
+  --text-caption-weight: var(--type-caption-weight);
+  --text-caption-line-height: var(--type-caption-line-height);
+  --text-caption-tracking: var(--type-caption-tracking);
+  --text-overline-size: var(--fs-xs);
+  --text-overline-weight: 600;
+  --text-overline-line-height: var(--type-caption-line-height);
+  --text-overline-tracking: 0.08em;
+  --text-overline-transform: uppercase;
+}

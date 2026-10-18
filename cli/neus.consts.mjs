@@ -22,6 +22,9 @@ export const SYSTEM_FONTS = {
 export const COMMANDS = {
   init: { module: "./init.mjs", summary: "Set up neus-ui, its theme files, skills and subagents" },
   shot: { module: "./shot.mjs", summary: "Screenshot routes of the app and report basic problems" },
+  context: { module: "./context.mjs", summary: "Print the active system, catalog and rules to read before designing" },
+  docs: { module: "./docs.mjs", summary: "Print the guide of one component or template" },
+  lint: { module: "./lint.mjs", summary: "Check UI code against the neus contract and measure component coverage" },
 };
 
 // neus shot: working folder (self-ignored), viewports and problem thresholds.
@@ -45,3 +48,22 @@ export const BROWSER_PATHS = {
 export const SYSTEM_FONT_FAMILIES = ["serif", "sans-serif", "monospace", "cursive", "fantasy", "system-ui", "ui-sans-serif",
   "ui-serif", "ui-monospace", "ui-rounded", "-apple-system", "BlinkMacSystemFont", "emoji", "math", "fangsong",
   "SF Pro Display", "SF Pro Text", "Segoe UI"];
+
+// neus lint: what it reads by default and which raw elements a neus component replaces.
+export const LINT_PATHS = ["src", "app", "pages", "components"];
+export const LINT_IGNORED_DIRS = ["node_modules", "dist", "build", ".next", ".astro", ".neus", "generated", "coverage"];
+export const LINT_EXTENSIONS = [".tsx", ".jsx", ".ts", ".js", ".mjs", ".css", ".astro"];
+export const JSX_EXTENSIONS = [".tsx", ".jsx"];
+// Written by neus init: the palette lives here, so they are never linted.
+export const THEME_FILES = ["neus.theme.css", "neus.theme.ts"];
+export const OVERRIDES_FILE = "neus.overrides.css";
+export const LIBRARY_STYLESHEET = "neus-ui/dist/neus-ui.css";
+export const RAW_TO_COMPONENT = {
+  button: "Button or IconButton", input: "Input or Checkbox", select: "Select", dialog: "Modal",
+  a: "Link, or Button with href", p: "Text", section: "Section", ul: "Grid or Stack as=\"ul\"", ol: "Stack as=\"ol\"",
+  h1: "Heading", h2: "Heading", h3: "Heading", h4: "Heading", h5: "Heading", h6: "Heading",
+};
+export const INTERACTIVE_ELEMENTS = ["Button", "IconButton", "Input", "Select", "MultiSelect", "Checkbox", "DateInput",
+  "TimeInput", "Link", "Menu", "Dropdown", "button", "input", "select", "textarea", "a"];
+export const FILLER_PATTERN =
+  /lorem ipsum|\bacme\b|john doe|jane doe|feature (one|two|1|2)\b|elevate your|seamless|unlock the power|welcome back/i;

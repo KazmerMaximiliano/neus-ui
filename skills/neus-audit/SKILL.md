@@ -21,11 +21,12 @@ Run all four, in order. Record findings as you go; deduplicate at the end.
 ### 1. Deterministic checks
 
 - Types: `npx tsc --noEmit`; in Astro, `npx astro check`.
-- The searches in [references/neus-rules.md](references/neus-rules.md),
-  over the audited files. Every hit is a candidate: confirm it by reading
-  the line before you report it.
+- `npx neus lint <files> --json` over the audited files, read with
+  [references/neus-rules.md](references/neus-rules.md). Every hit is a
+  candidate: confirm it by reading the line before you report it.
 
-Every type error and confirmed hit is a finding with its own severity.
+Every type error and confirmed hit is a finding with its own severity. Report
+the lint coverage in the summary.
 
 ### 2. Web interface guidelines
 

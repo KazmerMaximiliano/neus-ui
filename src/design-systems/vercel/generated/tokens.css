@@ -1,5 +1,17 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
+  --type-display-size: clamp(2.5rem, 1.76rem + 3.05vw, 4.5rem);
+  --type-display-weight: 600;
+  --type-display-line-height: 1;
+  --type-display-tracking: -0.06em;
+  --type-headline-size: clamp(2rem, 1.81rem + 0.76vw, 2.5rem);
+  --type-headline-weight: 600;
+  --type-headline-line-height: 1.2;
+  --type-headline-tracking: -0.05em;
+  --type-lead-size: 1.25rem;
+  --type-lead-weight: 400;
+  --type-lead-line-height: 1.8;
+  --type-lead-tracking: 0em;
   --font-body: "Geist", Arial, sans-serif;
   --font-display: var(--font-body);
   --font-mono: "Geist Mono", monospace;

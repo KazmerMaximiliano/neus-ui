@@ -8,6 +8,8 @@ The UI uses neus-ui on {{SYSTEM}}. The design contract is `neus.config.json`.
   `/neus-audit`; Codex: `$neus-design`, `$neus-audit`).
 - After building a new page or a multi-screen flow, delegate a fresh-eyes
   review to the `neus-reviewer` subagent.
+- Any UI change: `npx neus context` and `npx neus docs <Name>` before
+  writing, `npx neus lint` after (no P0).
 - System and palette: `npx neus init`. Shared look:
   `{{STYLES}}/neus.overrides.css`. Feature specs: `design/specs/`.
 - Never edit `node_modules/neus-ui`, copy component source, or write the

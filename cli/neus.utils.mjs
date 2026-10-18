@@ -22,3 +22,25 @@ export const detectProject = (root) => {
   if (deps.vite) return { framework: "vite", rendering: "spa" };
   return null;
 };
+
+/**
+ * The section under `heading` (a full heading line such as "## Usage"), heading included, up to the
+ * next heading of the same or a higher level outside a code fence. Null when the heading is absent.
+ */
+export const markdownSection = (text, heading) => {
+  const lines = text.split("\n");
+  const start = lines.indexOf(heading);
+  if (start === -1) return null;
+  const level = heading.indexOf(" ");
+  let fenced = false;
+  let end = lines.length;
+  for (let index = start + 1; index < lines.length; index += 1) {
+    if (lines[index].startsWith("```")) fenced = !fenced;
+    const hashes = lines[index].match(/^(#+) /)?.[1].length;
+    if (!fenced && hashes && hashes <= level) {
+      end = index;
+      break;
+    }
+  }
+  return lines.slice(start, end).join("\n").trim();
+};

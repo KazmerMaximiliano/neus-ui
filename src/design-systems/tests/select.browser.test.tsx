@@ -97,4 +97,19 @@ describe("Select interaction in the browser", () => {
     const hit = document.elementFromPoint(box.right - 4, box.top + box.height / 2);
     expect(hit).toBe(screen.getByRole("combobox", { name: "Country" }));
   });
+
+  it("shrinks a long value to its grid column instead of widening it", () => {
+    const options = [{ value: "long", label: "Con la cabeza a mil antes de una reunión importante" }];
+    render(
+      <ThemeProvider scope="local">
+        <div style={{ display: "grid", width: 240 }}>
+          <Select label="Mood" options={options} defaultValue="long" />
+          <MultiSelect name="m" label="Moods" options={options} defaultValue={["long"]} />
+        </div>
+      </ThemeProvider>,
+    );
+    for (const name of ["Mood", "Moods"]) {
+      expect(field(name).getBoundingClientRect().width).toBeLessThanOrEqual(240);
+    }
+  });
 });

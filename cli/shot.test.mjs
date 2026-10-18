@@ -41,11 +41,14 @@ describe("neus shot helpers", () => {
   });
 
   it("turns measurements into problems", () => {
-    const page = { route: "/", width: 390, consoleErrors: [], minBodyFontPx: 16, missingFonts: [], overflow: null, solidCtas: { maxPerViewport: 1 } };
+    const page = {
+      route: "/", width: 390, consoleErrors: [], minBodyFontPx: 16, missingFonts: [], overflow: null, clipped: [], solidCtas: { maxPerViewport: 1 },
+    };
     expect(problems([page])).toEqual([]);
-    expect(problems([{ ...page, overflow: { scrollWidth: 600, offenders: ["div.wide"] }, consoleErrors: ["boom"],
-      minBodyFontPx: 14, missingFonts: ["Manrope"], solidCtas: { maxPerViewport: 3 } }])).toEqual([
+    expect(problems([{ ...page, overflow: { scrollWidth: 600, offenders: ["div.wide"] }, clipped: ["div.field inside div.card (50px)"],
+      consoleErrors: ["boom"], minBodyFontPx: 14, missingFonts: ["Manrope"], solidCtas: { maxPerViewport: 3 } }])).toEqual([
       "/ at 390px: horizontal scroll (600px wide) from div.wide",
+      "/ at 390px: content cut off: div.field inside div.card (50px)",
       "/ at 390px: 1 console error(s), first: boom",
       "/ at 390px: running text at 14px (minimum 16px)",
       "/ at 390px: fonts not loaded: Manrope",
@@ -64,9 +67,15 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
 <head><style>
   body { margin: 0; font: 16px/1.5 sans-serif; }
   .wide { width: 600px; } .small { font-size: 12px; } .ghost { font-family: NoSuchFont, serif; }
+  .card { overflow: hidden; width: 200px; position: relative; } .field { width: 250px; } .card i { position: absolute; left: 150px; width: 300px; }
+  .cut { overflow: hidden; width: 100px; white-space: nowrap; text-overflow: ellipsis; }
 </style></head>
 <body>
   <div class="wide">A block wider than a phone</div>
+  <div class="card"><div class="field">Field wider than its card</div><i>decoration</i></div>
+  <div class="card"><i>Only decoration overflows this card</i></div>
+  <p class="cut">Deliberately truncated with an ellipsis</p>
+  <iframe src="http://localhost:9/"></iframe>
   <p class="small">This paragraph is set far too small for running text on a phone.</p>
   <button class="button--solid">Start</button><button class="button--solid">Buy</button>
   <p class="ghost">Declared in a font face that exists nowhere at all.</p>
@@ -87,11 +96,13 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
     const [result] = await shoot({ chromium: playwright.chromium, executablePath, url, routes: ["/"], widths: [390], outDir });
     expect(result.file).toBe(path.join(outDir, "index-390.png"));
     expect(result.overflow.offenders).toContain("div.wide");
+    expect(result.clipped).toEqual(["div.field inside div.card (50px)"]);
+    expect(result.blankFrames).toBe(1);
     expect(result.consoleErrors).toEqual(["boom"]);
     expect(result.minBodyFontPx).toBe(12);
     expect(result.missingFonts).toEqual(["NoSuchFont"]);
     expect(result.solidCtas).toEqual({ aboveFold: 2, maxPerViewport: 2 });
     expect(result.theme).toEqual({ designSystem: "neus", colorScheme: "light", primary: "#283593", font: "sans-serif" });
-    expect(problems([result])).toHaveLength(5);
+    expect(problems([result])).toHaveLength(6);
   }, 30_000);
 });

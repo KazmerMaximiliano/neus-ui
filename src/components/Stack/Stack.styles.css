@@ -1,0 +1,73 @@
+/* Every stack declares all its layout properties, so a nested stack never inherits its parent's inline values. */
+.stack {
+  --stack-direction: column;
+  --stack-direction-md: column;
+  --stack-direction-lg: column;
+  --stack-gap: var(--space-4);
+  --stack-gap-md: var(--space-4);
+  --stack-gap-lg: var(--space-4);
+  display: flex;
+  flex-direction: var(--stack-direction);
+  gap: var(--stack-gap);
+  min-width: 0;
+}
+
+@media (width >= 768px) {
+  .stack {
+    flex-direction: var(--stack-direction-md);
+    gap: var(--stack-gap-md);
+  }
+}
+
+@media (width >= 1024px) {
+  .stack {
+    flex-direction: var(--stack-direction-lg);
+    gap: var(--stack-gap-lg);
+  }
+}
+
+.stack:is(ul, ol) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack[data-wrap] {
+  flex-wrap: wrap;
+}
+
+.stack[data-align="start"] {
+  align-items: flex-start;
+}
+
+.stack[data-align="center"] {
+  align-items: center;
+}
+
+.stack[data-align="end"] {
+  align-items: flex-end;
+}
+
+.stack[data-align="stretch"] {
+  align-items: stretch;
+}
+
+.stack[data-align="baseline"] {
+  align-items: baseline;
+}
+
+.stack[data-justify="start"] {
+  justify-content: flex-start;
+}
+
+.stack[data-justify="center"] {
+  justify-content: center;
+}
+
+.stack[data-justify="end"] {
+  justify-content: flex-end;
+}
+
+.stack[data-justify="between"] {
+  justify-content: space-between;
+}

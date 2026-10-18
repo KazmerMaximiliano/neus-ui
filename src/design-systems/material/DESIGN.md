@@ -66,6 +66,24 @@ typography:
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: 0.4px
+  display:
+    fontFamily: '"Roboto", Arial, sans-serif'
+    fontSize: 3.5625rem
+    fontWeight: 400
+    lineHeight: 1.12
+    letterSpacing: -0.25px
+  headline:
+    fontFamily: '"Roboto", Arial, sans-serif'
+    fontSize: 2rem
+    fontWeight: 400
+    lineHeight: 1.25
+    letterSpacing: 0em
+  lead:
+    fontFamily: '"Roboto", Arial, sans-serif'
+    fontSize: 1.375rem
+    fontWeight: 400
+    lineHeight: 1.27
+    letterSpacing: 0em
 rounded:
   default: 16px
   sm: 8px
@@ -107,6 +125,18 @@ x-neus:
       onPrimary: "{colors.on-primary-dark}"
   tokens:
     base:
+      --type-display-size: "clamp(2.25rem, 1.76rem + 2vw, {typography.display.fontSize})"
+      --type-display-weight: "{typography.display.fontWeight}"
+      --type-display-line-height: "{typography.display.lineHeight}"
+      --type-display-tracking: "{typography.display.letterSpacing}"
+      --type-headline-size: "clamp(1.5rem, 1.31rem + 0.76vw, {typography.headline.fontSize})"
+      --type-headline-weight: "{typography.headline.fontWeight}"
+      --type-headline-line-height: "{typography.headline.lineHeight}"
+      --type-headline-tracking: "{typography.headline.letterSpacing}"
+      --type-lead-size: "{typography.lead.fontSize}"
+      --type-lead-weight: "{typography.lead.fontWeight}"
+      --type-lead-line-height: "{typography.lead.lineHeight}"
+      --type-lead-tracking: "{typography.lead.letterSpacing}"
       --font-body: "{typography.body-md.fontFamily}"
       --font-display: var(--font-body)
       --type-body-size: "{typography.body-md.fontSize}"
@@ -413,6 +443,11 @@ x-neus:
         --app-template-header-height: 64px
         --app-template-header-background: var(--color-surface-container-low)
         --form-template-gap: 24px
+    typography:
+      base:
+        --text-overline-tracking: 0em
+        --text-overline-transform: none
+    layout: {}
 ---
 
 # Material

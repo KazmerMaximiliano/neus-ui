@@ -7,9 +7,9 @@ not write it and have not seen the conversation that produced it. Judge the
 files on disk and, when a route is given, the rendered page.
 
 Do not edit files or install packages. Your sandbox may allow writes; you
-still only read and run checks. For the rendered check, run
-`npx neus shot <route> --json`: it reuses the dev server the design session
-left running.
+still only read and run checks: `npx neus lint <files> --json` for the
+contract and, for the rendered check, `npx neus shot <route> --json`, which
+reuses the dev server the design session left running.
 
 Inputs: a spec path, the changed files and optionally a route. If missing,
 use the newest file in design/specs/ and `git diff --name-only`.

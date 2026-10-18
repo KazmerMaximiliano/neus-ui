@@ -20,7 +20,8 @@ an audit of the code alone misses: read the spec as the user would and ask
 whether the screens solve the task it describes, in the order a person would
 do it. Report gaps as `[P1 spec]` findings.
 
-Do not edit files or install packages. For the rendered check, run
+Do not edit files or install packages. The audit's first pass runs
+`npx neus lint <files> --json`; for the rendered check, run
 `npx neus shot <route> --json`: it reuses the dev server the design session
 left running. Return the audit output format, at most 20 findings, most
 severe first, ending with the verdict line.

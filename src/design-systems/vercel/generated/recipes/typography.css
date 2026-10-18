@@ -1,0 +1,5 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --text-overline-tracking: 0em;
+  --text-overline-transform: none;
+}

@@ -1,6 +1,6 @@
 # Neus UI
 
-A React 19+ component library with TypeScript, 30 public components and sections, two layout
+A React 19+ component library with TypeScript, 36 public components and sections, two layout
 templates, and six design systems driven by scoped CSS tokens.
 
 ## Get started
@@ -47,7 +47,7 @@ terminal with `/neus-design` or `$neus-design`.
 | [Design systems](./docs/design/systems.md)             | Six systems, scope behavior and visual specifications                           |
 | [ThemeProvider](./docs/design/theme-provider.md)       | Color modes, runtime palette updates, hooks and isolated scopes                 |
 | [Customization](./docs/design/customization.md)        | Tokens, root/part classes, style props and CSS cascade                          |
-| [Components](./docs/components/README.md)              | All 30 public components/sections, complete props, anatomy and token references |
+| [Components](./docs/components/README.md)              | All 36 public components/sections, complete props, anatomy and token references |
 | [Templates](./docs/templates/README.md)                | AppTemplate and FormTemplate composition and responsive layouts                 |
 | [Contributing](./docs/contributing/README.md)          | Development, testing and DESIGN.md authoring                                    |
 

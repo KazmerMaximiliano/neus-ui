@@ -204,6 +204,18 @@ specification](../../src/design-systems/neus/DESIGN.md)
 | `--type-caption-weight` | type caption weight | `400` | `:root, [data-design-system]` |
 | `--type-caption-line-height` | type caption line height | `1.4` | `:root, [data-design-system]` |
 | `--type-caption-tracking` | type caption tracking | `0em` | `:root, [data-design-system]` |
+| `--type-display-size` | type display size | `clamp(2.5rem, 1.94rem + 2.29vw, 4rem)` | `:root, [data-design-system]` |
+| `--type-display-weight` | type display weight | `700` | `:root, [data-design-system]` |
+| `--type-display-line-height` | type display line height | `1.05` | `:root, [data-design-system]` |
+| `--type-display-tracking` | type display tracking | `-0.03em` | `:root, [data-design-system]` |
+| `--type-headline-size` | type headline size | `clamp(2rem, 1.63rem + 1.52vw, 3rem)` | `:root, [data-design-system]` |
+| `--type-headline-weight` | type headline weight | `700` | `:root, [data-design-system]` |
+| `--type-headline-line-height` | type headline line height | `1.1` | `:root, [data-design-system]` |
+| `--type-headline-tracking` | type headline tracking | `-0.025em` | `:root, [data-design-system]` |
+| `--type-lead-size` | type lead size | `clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem)` | `:root, [data-design-system]` |
+| `--type-lead-weight` | type lead weight | `400` | `:root, [data-design-system]` |
+| `--type-lead-line-height` | type lead line height | `1.6` | `:root, [data-design-system]` |
+| `--type-lead-tracking` | type lead tracking | `0em` | `:root, [data-design-system]` |
 | `--color-layer-01` | color layer 01 | `var(--color-surface-secondary)` | `:root, [data-design-system]` |
 | `--color-layer-02` | color layer 02 | `var(--color-surface)` | `:root, [data-design-system]` |
 | `--color-field` | color field | `var(--color-surface)` | `:root, [data-design-system]` |
@@ -227,6 +239,33 @@ specification](../../src/design-systems/neus/DESIGN.md)
 | `--color-info-text` | color info text | `color-mix(in srgb, var(--color-info) 25%, var(--color-text-primary))` | `:root, [data-design-system]` |
 | `--theme-color-scheme` | theme color scheme | `dark` | `[data-color-scheme="dark"]` |
 | `--color-control-text` | color control text | `var(--color-text-primary)` | `[data-color-scheme="dark"]` |
+
+The display, headline and lead roles serve public pages through Heading and Text. Each
+system sets its own values: Neus, Apple and Neobrutalism are local decisions, Carbon follows
+its fluid display and heading styles, Material its display and headline scale and Vercel the
+Geist heading classes. Sizes grow with the viewport between 390px and 1440px.
+
+## Key tokens
+
+The short list for page and component CSS. Prefer a component prop when one exists.
+
+| Token | Use |
+| --- | --- |
+| `--color-primary`, `--color-primary-text` | Brand fill; brand-colored text and icons on surfaces |
+| `--color-text-on-primary` | Text on a primary fill |
+| `--color-surface`, `--color-surface-container-low` | Page and raised band backgrounds |
+| `--color-text-primary`, `--color-text-secondary` | Body ink and supporting text |
+| `--color-border-subtle` | Dividers and quiet outlines |
+| `--color-success-text`, `--color-error-text`, `--color-info-text` | Status text on surfaces |
+| `--color-focus` | Focus indicators |
+| `--font-display`, `--font-body`, `--font-mono` | Font families |
+| `--type-display-size`, `--type-headline-size`, `--type-lead-size` | Fluid page type (prefer Heading and Text) |
+| `--fs-sm`, `--fs-md`, `--fs-lg` | Fixed text sizes; running text is `--fs-md` or larger |
+| `--space-1` … `--space-16` | Spacing scale (1, 2, 3, 4, 6, 8, 12, 16) |
+| `--radius-sm`, `--radius-md`, `--radius-default`, `--radius-pill` | Corner radii |
+| `--elevation-floating`, `--elevation-dialog` | Shadows for floating layers |
+| `--container-lg-max-width`, `--container-gutter` | Page width and side padding (prefer Container) |
+| `--text-measure` | Comfortable line length (prefer Text) |
 
 ## Runtime action palette
 
