@@ -1,8 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { IconButtonIcon } from "../../../IconButton";
-import type { FieldPresentationProps } from "../../../Input/Input.types";
+import type { FieldDescriptionProps, FieldPresentationProps } from "../../../Input/Input.types";
 
-export type PickerFieldProps = FieldPresentationProps & {
+export type PickerFieldProps = FieldPresentationProps & FieldDescriptionProps & {
   placeholderClassName?: string;
   placeholderStyle?: CSSProperties;
   className?: string;

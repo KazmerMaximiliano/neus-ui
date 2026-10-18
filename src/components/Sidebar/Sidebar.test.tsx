@@ -98,6 +98,28 @@ describe("Sidebar navigation", () => {
     ).toHaveAttribute("aria-hidden", "true");
   });
 
+  it("renders items with href as links, through a router link component when given", () => {
+    const { rerender } = render(
+      <Sidebar
+        items={[
+          { label: "Orders", href: "/orders", active: true },
+          { label: "Reload", onClick: vi.fn() },
+        ]}
+      />,
+    );
+    const orders = screen.getByRole("link", { name: "Orders" });
+    expect(orders).toHaveAttribute("href", "/orders");
+    expect(orders).toHaveAttribute("aria-current", "page");
+    expect(orders).toHaveClass("sidebar__button", "sidebar__button--active");
+    expect(orders).not.toHaveAttribute("type");
+    expect(screen.getByRole("button", { name: "Reload" })).toHaveAttribute("type", "button");
+
+    const RouterLink = ({ href, ...props }: { href: string }) => <a data-router="yes" href={`/app${href}`} {...props} />;
+    rerender(<Sidebar items={[{ label: "Orders", href: "/orders" }]} linkComponent={RouterLink} />);
+    expect(screen.getByRole("link", { name: "Orders" })).toHaveAttribute("href", "/app/orders");
+    expect(screen.getByRole("link", { name: "Orders" })).toHaveAttribute("data-router", "yes");
+  });
+
   it("supports empty navigation, absent title and missing callbacks", async () => {
     const { rerender, container } = render(<Sidebar items={[]} />);
     expect(screen.getByRole("navigation")).toBeEmptyDOMElement();
@@ -337,6 +359,22 @@ describe("Sidebar mobile", () => {
     const dialog = screen.getByRole("dialog") as HTMLDialogElement;
     dialog.removeAttribute("open");
     fireEvent(dialog, new Event("close"));
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("closes after following a link item and keeps links in the focus trap", async () => {
+    const onClick = vi.fn((event?: unknown) => event);
+    render(<Sidebar items={[{ label: "Home", href: "#home", onClick }, { label: "Settings", href: "#settings" }]} />);
+    const user = userEvent.setup();
+    const toggle = screen.getByRole("button", { name: "Abrir menú" });
+    await user.click(toggle);
+    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+    const settings = screen.getByRole("link", { name: "Settings" });
+    settings.focus();
+    await user.tab();
+    expect(screen.getByRole("button", { name: "Cerrar menú" })).toHaveFocus();
+    await user.click(screen.getByRole("link", { name: "Home" }));
+    expect(onClick).toHaveBeenCalledOnce();
     expect(toggle).toHaveAttribute("aria-expanded", "false");
   });
 

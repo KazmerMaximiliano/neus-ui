@@ -6,7 +6,7 @@ import type { ButtonStoryArgs } from "./Button.types";
 
 const meta: Meta<ButtonStoryArgs> = {
   title: "Base/Button",
-  component: ButtonComponent,
+  // No `component`: the controls are one flat shape, while Button's props are an action/link union.
   parameters: {
     layout: "centered",
   },
@@ -36,7 +36,24 @@ const meta: Meta<ButtonStoryArgs> = {
     type: {
       control: "select",
       options: ["button", "submit", "reset"],
-      description: "The HTML button type",
+      description: "The HTML button type; ignored with href",
+    },
+    href: {
+      control: "text",
+      description: "Destination; renders a link with the button's look instead of a button",
+    },
+    target: {
+      control: "select",
+      options: [undefined, "_blank", "_self"],
+      description: "Link target; only with href",
+    },
+    rel: {
+      control: "text",
+      description: "Link relationship; only with href",
+    },
+    linkComponent: {
+      control: false,
+      description: "Router link component (for example Next.js Link) rendered instead of <a>; only with href",
     },
     variant: {
       control: "select",
@@ -80,7 +97,7 @@ const meta: Meta<ButtonStoryArgs> = {
     },
     onClick: {
       action: "clicked",
-      description: "Callback function triggered on button click",
+      description: "Callback triggered on click; receives the anchor event with href",
     },
   },
 };
@@ -93,6 +110,10 @@ export const Button: StoryObj<ButtonStoryArgs> = {
     designSystem: "neus",
     label: "Click Me",
     type: "button",
+    href: undefined,
+    target: undefined,
+    rel: undefined,
+    linkComponent: undefined,
     variant: "solid",
     color: "primary",
     size: "medium",
@@ -103,9 +124,13 @@ export const Button: StoryObj<ButtonStoryArgs> = {
     labelStyle: {},
     loaderStyle: {},
   },
-  render: ({ designSystem, ...args }) => (
+  render: ({ designSystem, type, href, target, rel, linkComponent, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>
-      <ButtonComponent {...args} />
+      {href ? (
+        <ButtonComponent {...args} href={href} target={target} rel={rel} linkComponent={linkComponent} />
+      ) : (
+        <ButtonComponent {...args} type={type} />
+      )}
     </ThemeProvider>
   ),
 };

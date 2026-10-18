@@ -5,8 +5,8 @@ composition and the required props; check every other prop in the
 component's guide (`node_modules/neus-ui/docs/components/<Name>.md`). The interactive skeletons are client code: in
 Next.js App Router they are `"use client"` files rendered by the page, and in
 Astro they are rendered from an `.astro` page with one client directive (see
-frameworks.md). Swap `window.location.assign` for the host router's
-navigation where one exists.
+frameworks.md). Navigation uses `href` on Button and Sidebar routes; pass
+the host router's link as `linkComponent` where one exists.
 
 Icons for Sidebar items and IconButton are lucide-react components, and
 custom DataTable cells use AG Grid types. Add `lucide-react` or
@@ -24,10 +24,9 @@ import { AppTemplate, Badge, Button, DataTable } from "neus-ui";
 import type { Order, OrdersPageProps } from "./OrdersPage.types";
 
 export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps) => {
-  const go = (href: string) => () => window.location.assign(href);
   const routes = [
-    { label: "Orders", active: currentPath.startsWith("/orders"), onClick: go("/orders") },
-    { label: "Customers", active: currentPath.startsWith("/customers"), onClick: go("/customers") },
+    { label: "Orders", href: "/orders", active: currentPath.startsWith("/orders") },
+    { label: "Customers", href: "/customers", active: currentPath.startsWith("/customers") },
   ];
 
   return (
@@ -70,7 +69,8 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
   <form onSubmit={(event) => { event.preventDefault(); onSubmit(new FormData(event.currentTarget)); }}>
     <FormTemplate submitLabel="Create client" columns={2} mobileColumns={1} gap={24}>
       <Input name="name" label="Legal name" required />
-      <Input name="email" label="Billing email" type="email" required />
+      <Input name="email" label="Billing email" type="email" autoComplete="email" spellCheck={false}
+        description="Invoices are sent here." required />
       <Select
         name="plan"
         label="Plan"
@@ -151,7 +151,6 @@ const QUOTES = [
   { quote: "I open it in the lift before the daily.", name: "Lucía", role: "Product designer" },
   { quote: "I wrote that I could not sleep. It gave me five minutes for that.", name: "Martín", role: "Financial analyst" },
 ];
-const goToSignup = () => window.location.assign("#signup");
 
 export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }) => (
   <>
@@ -159,7 +158,7 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
     <header className="landing-header landing-container">
       <span className="landing-brand">AuraFlow</span>
       <nav aria-label="Main"><Link href="#features" label="How it works" /></nav>
-      <Button label="Create my account" variant="outlined" size="small" onClick={goToSignup} />
+      <Button label="Create my account" href="#signup" variant="outlined" size="small" />
     </header>
     <main id="main">
       <section className="landing-section" aria-labelledby="hero-title">
@@ -167,7 +166,7 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
           <div>
             <h1 id="hero-title" className="landing-display">A pause that fits your day.</h1>
             <p className="landing-lead">Tell AuraFlow how you arrive in one sentence and get a one-to-ten-minute session for that moment.</p>
-            <Button label="Create my account" size="large" onClick={goToSignup} />
+            <Button label="Create my account" href="#signup" size="large" />
             <p className="landing-note">Two fields, then your first session.</p>
           </div>
           <Card>{/* The real interface or a live demo: the section's anchor. */}</Card>
@@ -209,8 +208,9 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
             <CardContent>
               <form onSubmit={(event) => { event.preventDefault(); onSignup(new FormData(event.currentTarget)); }}>
                 <FormTemplate submitLabel="Create my account" columns={1} tabletColumns={1} mobileColumns={1}>
-                  <Input name="name" label="Name" required />
-                  <Input name="email" label="Email" type="email" required />
+                  <Input name="name" label="Name" autoComplete="name" required />
+                  <Input name="email" label="Email" type="email" autoComplete="email" spellCheck={false}
+                    description="Only to create your account." required />
                 </FormTemplate>
               </form>
             </CardContent>

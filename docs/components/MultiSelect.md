@@ -86,6 +86,9 @@ props retain their nullable default.
 | `name` | `string` | Required | Name of the hidden form input |
 | `options` | `SelectOption[]` | Required | Options with value and label |
 | `error` | `string` | Omitted | Error message linked to the field |
+| `description` | `ReactNode` | Omitted | Help text below the field, linked with `aria-describedby` before the error |
+| `descriptionClassName` | `string` | Omitted | Additional classes on `.field__description` |
+| `descriptionStyle` | `CSSProperties` | Omitted | Inline styles on `.field__description` |
 | `placeholder` | `string` | Omitted | Text shown without a value |
 | `label` | `string` | Omitted | Visible label naming the combobox |
 | `value` | `string[]` | `[]` | Controlled values |
@@ -117,6 +120,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.select__placeholder` | `span` | `placeholderClassName` | `placeholderStyle` | `selectedOptions.length === 0` |
 | `.select__sr-only` | `span` | `srOnlyClassName` | `srOnlyStyle` | `Always` |
 | `.select__caret` | `ChevronDown` | `caretClassName` | `caretStyle` | `Always` |
+| `.field__description` | `div` | `descriptionClassName` | `descriptionStyle` | `description` |
 | `.select__error-message` | `div` | `errorMessageClassName` | `errorMessageStyle` | `error` |
 | `.select__popover` | `div` | `listClassName` | `listStyle` | `Always` |
 | `.select__panel` | `div` | `panelClassName` | `panelStyle` | `Always` |

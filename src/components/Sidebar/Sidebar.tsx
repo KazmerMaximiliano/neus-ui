@@ -39,6 +39,7 @@ export const Sidebar = ({
   toggleClassName,
   title,
   items,
+  linkComponent = "a",
   children,
   className,
   labels,
@@ -200,59 +201,62 @@ export const Sidebar = ({
         aria-label={navigationLabel}
         style={bodyStyle}
       >
-        {items.map(
-          (item, index) =>
-            item.visible !== false && (
-              <button
-                key={index}
-                type="button"
-                aria-label={item.label}
-                aria-current={item.active ? "page" : undefined}
-                className={[
-                  `sidebar__button${item.active ? " sidebar__button--active" : ""}`,
-                  itemClassName,
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-                style={itemStyle}
-                onClick={() => {
-                  if (isMobile) closeMenu();
-                  item.onClick?.();
-                }}
-              >
-                {item.icon ? (
-                  <item.icon
-                    className={["sidebar__button-icon", iconClassName]
-                      .filter(Boolean)
-                      .join(" ")}
-                    aria-hidden="true"
-                    style={iconStyle}
-                  />
-                ) : (
-                  <span
-                    className={[
-                      "sidebar__button-icon sidebar__button-initial",
-                      iconClassName,
-                    ]
-                      .filter(Boolean)
-                      .join(" ")}
-                    aria-hidden="true"
-                    style={iconStyle}
-                  >
-                    {item.label.charAt(0)}
-                  </span>
-                )}
-                <span
-                  className={["sidebar__button-label", labelClassName]
+        {items.map((item, index) => {
+          if (item.visible === false) return null;
+          const Item = item.href === undefined ? "button" : linkComponent;
+          return (
+            <Item
+              key={index}
+              {...(item.href === undefined
+                ? { type: "button" }
+                : { href: item.href })}
+              aria-label={item.label}
+              aria-current={item.active ? "page" : undefined}
+              className={[
+                `sidebar__button${item.active ? " sidebar__button--active" : ""}`,
+                itemClassName,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              style={itemStyle}
+              onClick={() => {
+                if (isMobile) closeMenu();
+                item.onClick?.();
+              }}
+            >
+              {item.icon ? (
+                <item.icon
+                  className={["sidebar__button-icon", iconClassName]
                     .filter(Boolean)
                     .join(" ")}
-                  style={labelStyle}
+                  aria-hidden="true"
+                  style={iconStyle}
+                />
+              ) : (
+                <span
+                  className={[
+                    "sidebar__button-icon sidebar__button-initial",
+                    iconClassName,
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  aria-hidden="true"
+                  style={iconStyle}
                 >
-                  {item.label}
+                  {item.label.charAt(0)}
                 </span>
-              </button>
-            ),
-        )}
+              )}
+              <span
+                className={["sidebar__button-label", labelClassName]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={labelStyle}
+              >
+                {item.label}
+              </span>
+            </Item>
+          );
+        })}
       </nav>
     </div>
   );
@@ -317,12 +321,13 @@ export const Sidebar = ({
             onKeyDown={(event) => {
               if (event.key !== "Tab") return;
               const buttons = Array.from(
-                event.currentTarget.querySelectorAll<HTMLButtonElement>(
-                  "button",
+                event.currentTarget.querySelectorAll<HTMLElement>(
+                  "button, a[href]",
                 ),
               ).filter(
                 (button) =>
-                  !button.disabled && button.getClientRects().length > 0,
+                  !button.matches(":disabled") &&
+                  button.getClientRects().length > 0,
               );
               const first = buttons[0];
               const last = buttons[buttons.length - 1];

@@ -12,6 +12,7 @@ export const AppTemplate = ({
   sidebarContainerStyle,
   children,
   routes,
+  linkComponent,
   menu,
   title = APP_NAME,
   className,
@@ -43,6 +44,7 @@ export const AppTemplate = ({
         className={sidebarClassName}
         title={title}
         items={routes}
+        linkComponent={linkComponent}
         sidebarStyle={sidebarStyle}
       />
     </div>

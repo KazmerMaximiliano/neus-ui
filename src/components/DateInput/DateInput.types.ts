@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
 import type { DateRange } from "react-day-picker";
 import type { DesignSystemId } from "../../design-systems";
-import type { FieldPresentationProps } from "../Input/Input.types";
+import type { FieldDescriptionProps, FieldPresentationProps } from "../Input/Input.types";
 
-export type DateInputProps = FieldPresentationProps & {
+export type DateInputProps = FieldPresentationProps & FieldDescriptionProps & {
   placeholderClassName?: string;
   placeholderStyle?: CSSProperties;
   className?: string;

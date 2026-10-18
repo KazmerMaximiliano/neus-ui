@@ -28,8 +28,10 @@ always receives a string, including numeric values and the empty string. `readon
 native readOnly. Native min/max/step/required retain browser behavior; `error` is supplied
 by the consumer.
 
-A generated or supplied id associates the label. Nonempty errors set aria-invalid and
-aria-describedby. Required markers and the error icon are decorative. Supply a label or
+A generated or supplied id associates the label. Nonempty errors set aria-invalid;
+`description` and the error are linked through aria-describedby, after any id the caller
+passes. Native attributes such as `autoComplete`, `inputMode` and `spellCheck` reach the
+`<input>`; Input's own wiring (id, label, state and value handling) takes precedence. Required markers and the error icon are decorative. Supply a label or
 aria-label. Prefix and suffix render when non-null. Error icons render only with an error
 and can be suppressed with `errorIcon={null}`. Field presentation uses variant, size and
 labelPlacement data attributes. `wrapperStyle` targets the root; `inputStyle` targets the
@@ -71,6 +73,9 @@ retain their nullable default.
 | `placeholder` | `string` | Omitted | Placeholder text for the input |
 | `label` | `string` | Omitted | Label text for the input |
 | `error` | `string` | Omitted | Error message to display |
+| `description` | `ReactNode` | Omitted | Help text below the field, linked with `aria-describedby` before the error |
+| `descriptionClassName` | `string` | Omitted | Additional classes on `.field__description` |
+| `descriptionStyle` | `CSSProperties` | Omitted | Inline styles on `.field__description` |
 | `disabled` | `boolean` | `false` | Whether the input is disabled |
 | `readonly` | `boolean` | `false` | Whether the input is read-only |
 | `required` | `boolean` | `false` | Whether the input is required (shows red asterisk) |
@@ -84,6 +89,7 @@ retain their nullable default.
 | `requiredStyle` | `CSSProperties` | Omitted | Inline styles on `.input__required` |
 | `errorStyle` | `CSSProperties` | Omitted | Inline styles on `.input__error-message` |
 | `onChange` | `((value: string) => void)` | Omitted | Callback function triggered when input value changes |
+| Native attributes | `InputHTMLAttributes<HTMLInputElement>` | Optional | Forwarded to the native `<input>` (`autoComplete`, `inputMode`, `spellCheck`, `pattern`, `maxLength`, `onBlur`, `aria-*`, `data-*`…), except `size`, `prefix`, `type`, `value`, `defaultValue`, `onChange`, `readOnly` and `style`, which Input replaces |
 
 ## Anatomy and per-part customization
 
@@ -101,6 +107,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.input` | `input` | `inputClassName` | `inputStyle` | `Always` |
 | `.input__suffix` | `span` | `suffixClassName` | `suffixStyle` | `suffix != null` |
 | `.input__error-icon` | `span` | `errorIconClassName` | `errorIconStyle` | `error && errorIcon !== null` |
+| `.field__description` | `div` | `descriptionClassName` | `descriptionStyle` | `description` |
 | `.input__error-message` | `div` | `errorClassName` | `errorStyle` | `error` |
 
 State/variant selectors: `.input--color`, `.input--disabled`, `.input--error`,
@@ -208,6 +215,8 @@ dependencies. Do not edit generated files.
 | `--input-error-color` | input error color | `var(--color-error-text)` |
 | `--input-error-focus-shadow` | input error focus shadow | `0 0 0 3px var(--color-focus-ring-error)` |
 | `--input-error-font-size` | input error font size | `0.85em` |
+| `--input-description-color` | input description color | `var(--color-text-secondary)` |
+| `--input-description-font-size` | input description font size | `var(--input-error-font-size)` |
 | `--input-error-offset` | input error offset | `1em` |
 | `--input-error-shadow` | input error shadow | `var(--input-shadow)` |
 | `--input-focus-border-color` | input focus border color | `var(--color-info-300)` |

@@ -44,7 +44,8 @@ props retain their nullable default.
 | `sidebarContainerClassName` | `string` | Omitted | Additional classes on `.app-template__sidebar` |
 | `sidebarContainerStyle` | `CSSProperties` | Omitted | Inline styles on `.app-template__sidebar` |
 | `children` | `ReactNode` | Required | Content to display in the main area |
-| `routes` | `SidebarItem[]` | Required | Sidebar navigation items |
+| `routes` | `SidebarItem[]` | Required | Sidebar navigation items; an item with `href` renders a link |
+| `linkComponent` | `ElementType` | Omitted | Router link passed to Sidebar for routes with `href` |
 | `menu` | `ReactNode` | Omitted | Optional menu component for the header |
 | `title` | `string` | `APP_NAME` | title override |
 | `className` | `string` | Omitted | Additional classes on `.app-template` |

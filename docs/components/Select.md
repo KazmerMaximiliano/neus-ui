@@ -82,6 +82,9 @@ retain their nullable default.
 | `placeholder` | `string` | Omitted | Text shown without a value |
 | `label` | `string` | Omitted | Visible label naming the combobox |
 | `error` | `string` | Omitted | Error message linked to the field |
+| `description` | `ReactNode` | Omitted | Help text below the field, linked with `aria-describedby` before the error |
+| `descriptionClassName` | `string` | Omitted | Additional classes on `.field__description` |
+| `descriptionStyle` | `CSSProperties` | Omitted | Inline styles on `.field__description` |
 | `disabled` | `boolean` | `false` | Disables the field |
 | `viewSearchBar` | `boolean` | `true` | Shows the search box |
 | `searchBarPlaceholder` | `string` | `"Buscar..."` | Placeholder and accessible name of the search box |
@@ -117,6 +120,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.select__trigger` | `button` | `triggerClassName` | `triggerStyle` | `Always` |
 | `.select__value .select__placeholder` | `span` | `valueClassName`, `placeholderClassName` | `valueStyle`, `placeholderStyle` | `Always` |
 | `.select__caret` | `ChevronDown` | `caretClassName` | `caretStyle` | `Always` |
+| `.field__description` | `div` | `descriptionClassName` | `descriptionStyle` | `description` |
 | `.select__error-message` | `div` | `errorMessageClassName` | `errorMessageStyle` | `error` |
 | `.select__popover` | `div` | `listClassName` | `listStyle` | `Always` |
 | `.select__panel` | `div` | `panelClassName` | `panelStyle` | `Always` |

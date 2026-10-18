@@ -22,7 +22,10 @@ export const Example = () => {
 
 ## Behavior and accessibility
 
-`type` defaults to `button`. `loading` disables interaction, sets `aria-busy`, keeps the
+`type` defaults to `button`. With `href`, Button renders a link with the same look:
+`linkComponent` swaps `<a>` for a router link (Next.js `Link`, a wrapped React Router `Link`)
+and receives `href`, `target`, `rel`, the class, style and click handler. A disabled or
+loading link drops its `href`, reports `aria-disabled` and ignores clicks. `loading` disables interaction, sets `aria-busy`, keeps the
 accessible name and hides the label visually while preserving its space. `disabled` also
 blocks native button activation. The label remains in the DOM during loading. `loaderStyle`
 and `loaderClassName` target the BeatLoader container; dots use `currentColor`, and their
@@ -41,7 +44,7 @@ retain their nullable default.
 | `labelClassName` | `string` | Omitted | Additional classes on `.button-label` |
 | `loaderClassName` | `string` | Omitted | Additional classes on `.button-loader` |
 | `label` | `string` | Required | The text displayed inside the button |
-| `type` | `ButtonType` | `"button"` | The HTML button type |
+| `type` | `ButtonType` | `"button"` | The HTML button type |; ignored with `href`
 | `variant` | `ButtonVariant` | `"solid"` | The visual style variant of the button |
 | `color` | `ButtonColor` | `"primary"` | The color scheme of the button |
 | `size` | `ButtonSize` | `"medium"` | The size of the button |
@@ -51,7 +54,11 @@ retain their nullable default.
 | `buttonStyle` | `CSSProperties` | Omitted | Inline styles on `.button` |
 | `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.button-label` |
 | `loaderStyle` | `CSSProperties` | Omitted | Inline styles on `.button-loader` |
-| `onClick` | `((e?: MouseEvent<HTMLButtonElement>) => void)` | Omitted | Callback function triggered on button click |
+| `onClick` | `((e?: MouseEvent<HTMLButtonElement>) => void)`; with `href`, `MouseEvent<HTMLAnchorElement>` | Omitted | Callback function triggered on button click |
+| `href` | `string` | Omitted | Destination; renders a link with the button\'s look instead of a `<button>` |
+| `linkComponent` | `ElementType` | `"a"` | Router link rendered instead of `<a>`; only with `href` |
+| `target` | `HTMLAttributeAnchorTarget` | Omitted | Link target; only with `href` |
+| `rel` | `string` | Omitted | Link relationship; only with `href` |
 
 ### Supporting types
 
@@ -77,7 +84,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 
 | Base class / part | Element | Class prop | Style prop | Rendering condition |
 | --- | --- | --- | --- | --- |
-| `.button` | `button` | `className` | `buttonStyle` | `Always` |
+| `.button` | `button`, or `a` / `linkComponent` with `href` | `className` | `buttonStyle` | `Always` |
 | `.button-label` | `span` | `labelClassName` | `labelStyle` | `Always` |
 | `.button-loader` | `BeatLoader` | `loaderClassName` | `loaderStyle` | `loading` |
 

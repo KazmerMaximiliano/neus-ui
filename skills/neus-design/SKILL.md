@@ -136,8 +136,10 @@ component's guide.
 | Testimonial | `Card as="figure"` (or `as="li"` in a list) + `CardContent` (quote) + `CardFooter` (name, role) |
 | Container of a widget, demo or summary | `Card` |
 | Signup, contact or create form | `<form>` + `FormTemplate` + `Input` (`Select`, `Checkbox`, `DateInput`…), inside a `Card` on public pages |
-| Primary or secondary action | `Button` with `variant`; `IconButton` for icon-only actions |
+| Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
+| Icon-only action | `IconButton` |
 | Text navigation | `Link` |
+| Help text under a field | `description` on Input, Select, MultiSelect, DateInput or TimeInput |
 | Status or label | `Badge` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |

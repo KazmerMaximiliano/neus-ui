@@ -14,14 +14,14 @@ import {
 } from "../../providers";
 import { Button, Button as CustomizationComponent } from "./Button";
 import * as stories from "./Button.stories";
-import type { ButtonProps } from "./Button.types";
+import type { ButtonActionProps } from "./Button.types";
 import { getButtonClasses } from "./Button.utils";
 
 afterEach(cleanup);
 
 const { Button: ButtonStory } = composeStories(stories);
 
-const renderButton = (props: Partial<ButtonProps> = {}) => {
+const renderButton = (props: Partial<ButtonActionProps> = {}) => {
   return render(
     <ThemeProvider>
       <Button label="Test Button" {...props} />
@@ -116,6 +116,57 @@ describe("Button", () => {
     it("works without onClick handler", () => {
       renderButton();
       expect(() => fireEvent.click(screen.getByRole("button"))).not.toThrow();
+    });
+  });
+
+  describe("link", () => {
+    it("renders a link with the button's classes and label", () => {
+      let clicked: EventTarget | null = null;
+      const onClick = vi.fn((event?: React.MouseEvent<HTMLAnchorElement>) => {
+        event?.preventDefault();
+        clicked = event?.currentTarget ?? null;
+      });
+      render(<Button label="Read the guide" href="/guide" target="_blank" rel="noreferrer" variant="outlined" onClick={onClick} />);
+      const link = screen.getByRole("link", { name: "Read the guide" });
+      expect(link).toHaveAttribute("href", "/guide");
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noreferrer");
+      expect(link).toHaveClass("button", "button--outlined", "button--primary");
+      expect(link).not.toHaveAttribute("type");
+      expect(screen.queryByRole("button")).not.toBeInTheDocument();
+      fireEvent.click(link);
+      expect(onClick).toHaveBeenCalledTimes(1);
+      expect(clicked).toBe(link);
+    });
+
+    it("renders a router link component with the same props", () => {
+      const RouterLink = ({ href, ...props }: { href: string }) => <a data-router="yes" href={`/app${href}`} {...props} />;
+      render(<Button label="Settings" href="/settings" linkComponent={RouterLink} />);
+      const link = screen.getByRole("link", { name: "Settings" });
+      expect(link).toHaveAttribute("data-router", "yes");
+      expect(link).toHaveAttribute("href", "/app/settings");
+      expect(link).toHaveClass("button");
+    });
+
+    it.each([{ disabled: true }, { loading: true }])("drops the href and blocks clicks when %o", (state) => {
+      const onClick = vi.fn();
+      const RouterLink = vi.fn((props: object) => <a {...props} />);
+      render(<Button label="Pay" href="/pay" linkComponent={RouterLink} onClick={onClick} {...state} />);
+      const link = screen.getByRole("link", { name: "Pay" });
+      expect(link).not.toHaveAttribute("href");
+      expect(link).toHaveAttribute("aria-disabled", "true");
+      expect(RouterLink).not.toHaveBeenCalled();
+      fireEvent.click(link);
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it("rejects button-only and link-only props on the other element at type checking", () => {
+      // @ts-expect-error A link has no button type.
+      void (<Button label="Go" href="/go" type="submit" />);
+      // @ts-expect-error linkComponent needs an href.
+      void (<Button label="Go" linkComponent="a" />);
+      // @ts-expect-error A button handler receives a button event.
+      void (<Button label="Go" onClick={(event?: React.MouseEvent<HTMLAnchorElement>) => event} />);
     });
   });
 

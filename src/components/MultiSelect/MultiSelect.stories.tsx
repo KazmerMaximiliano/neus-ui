@@ -168,6 +168,12 @@ const meta: Meta<MultiSelectStoryArgs> = {
       description: "Initial uncontrolled values",
     },
     options: { control: "object", description: "Options with value and label" },
+    description: {
+      control: "text",
+      description: "Help text below the field, announced through aria-describedby; JSX supported in application code",
+    },
+    descriptionClassName: { control: "text", description: "Additional classes for the description" },
+    descriptionStyle: { control: "object", description: "Styles for the description" },
     error: {
       control: "text",
       description: "Error message linked to the field",
@@ -255,6 +261,9 @@ export const MultiSelect: StoryObj<MultiSelectStoryArgs> = {
       { value: "cl", label: "Chile" },
       { value: "uy", label: "Uruguay" },
     ],
+    description: undefined,
+    descriptionClassName: undefined,
+    descriptionStyle: undefined,
     error: "",
     disabled: false,
     viewSearchBar: true,

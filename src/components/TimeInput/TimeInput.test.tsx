@@ -18,6 +18,13 @@ const renderTimeInput = (props = {}) => {
   return render(<TimeInput {...props} />);
 };
 
+describe("TimeInput description", () => {
+  it("passes help text to the picker field and announces it", () => {
+    render(<TimeInput label="Start" description="Clinic opens at 9." />);
+    expect(screen.getByRole("button", { name: /^Start/ })).toHaveAccessibleDescription("Clinic opens at 9.");
+  });
+});
+
 describe("TimeInput", () => {
   describe("rendering", () => {
     it("renders time input wrapper", () => {

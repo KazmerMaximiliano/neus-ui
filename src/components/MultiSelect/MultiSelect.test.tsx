@@ -29,6 +29,16 @@ const renderMulti = (props: Partial<MultiSelectProps> = {}) =>
 
 const combobox = () => screen.getByRole("combobox", { name: "Colors" });
 
+describe("MultiSelect description", () => {
+  it("renders help text and announces it before the error", () => {
+    const { rerender } = renderMulti({ description: "Pick up to three.", descriptionClassName: "hint" });
+    expect(screen.getByText("Pick up to three.")).toHaveClass("field__description", "hint");
+    expect(combobox()).toHaveAccessibleDescription("Pick up to three.");
+    rerender(<MultiSelect name="colors" label="Colors" options={OPTIONS} description="Pick up to three." error="Pick one" />);
+    expect(combobox()).toHaveAccessibleDescription("Pick up to three. Pick one");
+  });
+});
+
 describe("MultiSelect", () => {
   describe("rendering", () => {
     it("renders a labelled combobox with its placeholder", () => {

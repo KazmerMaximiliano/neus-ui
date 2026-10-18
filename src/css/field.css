@@ -78,3 +78,8 @@
   --field-label-translate: var(--field-label-raised-translate);
   --field-label-size: var(--field-label-raised-size);
 }
+.field__description {
+  margin-left: var(--input-error-offset);
+  color: var(--input-description-color);
+  font-size: var(--input-description-font-size);
+}

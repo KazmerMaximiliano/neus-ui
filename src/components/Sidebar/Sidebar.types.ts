@@ -1,10 +1,12 @@
 import type { LucideProps } from "lucide-react";
-import type { CSSProperties, ForwardRefExoticComponent, ReactNode, RefAttributes } from "react";
+import type { CSSProperties, ElementType, ForwardRefExoticComponent, ReactNode, RefAttributes } from "react";
 import type { DesignSystemId } from "../../design-systems";
 
 export type SidebarItem = {
   label: string;
   icon?: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+  /** Destination; the item renders a link (Cmd/Ctrl+click and "open in new tab" work) instead of a button. */
+  href?: string;
   onClick?: () => void;
   active?: boolean;
   visible?: boolean;
@@ -40,6 +42,8 @@ export type SidebarProps = {
   titleClassName?: string;
   toggleClassName?: string;
   items: SidebarItem[];
+  /** Router link component (for example Next.js Link) rendered for items with href instead of <a>. */
+  linkComponent?: ElementType;
   title?: string;
   children?: ReactNode;
   className?: string;

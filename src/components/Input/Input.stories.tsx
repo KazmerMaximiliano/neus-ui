@@ -78,6 +78,14 @@ const meta: Meta<InputStoryArgs> = {
       control: "object",
       description: "Style override for control",
     },
+    descriptionClassName: {
+      control: "text",
+      description: "Additional classes for the description",
+    },
+    descriptionStyle: {
+      control: "object",
+      description: "Styles for the description",
+    },
     errorClassName: {
       control: "text",
       description: "Additional classes for error",
@@ -204,6 +212,14 @@ const meta: Meta<InputStoryArgs> = {
         category: "Props",
       },
     },
+    description: {
+      control: { type: "text" },
+      description: "Help text below the field, announced through aria-describedby; JSX supported in application code",
+      table: {
+        type: { summary: "ReactNode" },
+        category: "Props",
+      },
+    },
     error: {
       control: { type: "text" },
       description: "Error message to display",
@@ -288,6 +304,8 @@ export const Input: StoryObj<typeof meta> = {
     className: undefined,
     controlClassName: undefined,
     controlStyle: undefined,
+    descriptionClassName: undefined,
+    descriptionStyle: {},
     errorClassName: undefined,
     errorIconClassName: undefined,
     inputClassName: undefined,
@@ -319,6 +337,7 @@ export const Input: StoryObj<typeof meta> = {
     label: "Example Input",
     type: "text",
     value: "",
+    description: undefined,
     error: "",
     min: "",
     max: "",

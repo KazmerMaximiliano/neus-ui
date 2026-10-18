@@ -14,6 +14,15 @@ const renderDateInput = (props = {}) => {
   return render(<DateInput {...props} />);
 };
 
+describe("DateInput description", () => {
+  it("passes help text to the picker field and announces it", () => {
+    render(<DateInput label="Birthday" description="Used only for your discount." descriptionStyle={{ marginTop: 3 }} error="Pick a date" />);
+    const field = screen.getByRole("button", { name: /^Birthday/ });
+    expect(screen.getByText("Used only for your discount.")).toHaveStyle({ marginTop: "3px" });
+    expect(field).toHaveAccessibleDescription("Used only for your discount. Pick a date");
+  });
+});
+
 describe("DateInput", () => {
   describe("rendering", () => {
     it("renders date input wrapper", () => {

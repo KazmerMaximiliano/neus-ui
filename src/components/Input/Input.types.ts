@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, InputHTMLAttributes, ReactNode } from "react";
 import type { DesignSystemId } from "../../design-systems";
 
 export type FieldPresentationProps = {
@@ -7,7 +7,14 @@ export type FieldPresentationProps = {
   size?: "small" | "medium" | "large";
 };
 
-export type InputProps = FieldPresentationProps & {
+/** Help text below a field, announced with it through aria-describedby. */
+export type FieldDescriptionProps = {
+  description?: ReactNode;
+  descriptionClassName?: string;
+  descriptionStyle?: CSSProperties;
+};
+
+type InputOwnProps = FieldPresentationProps & FieldDescriptionProps & {
   className?: string;
   controlClassName?: string;
   controlStyle?: CSSProperties;
@@ -46,6 +53,14 @@ export type InputProps = FieldPresentationProps & {
   errorStyle?: CSSProperties;
   onChange?: (value: string) => void;
 };
+
+/** Native `<input>` attributes (autoComplete, inputMode, spellCheck, pattern, aria-*, data-*…) not replaced by Input's own API. */
+type InputNativeProps = Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  keyof InputOwnProps | "style" | "readOnly" | "children" | "dangerouslySetInnerHTML"
+>;
+
+export type InputProps = InputOwnProps & InputNativeProps;
 
 export type InputStoryArgs = InputProps & {
   designSystem: DesignSystemId;

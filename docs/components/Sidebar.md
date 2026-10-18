@@ -27,7 +27,9 @@ pointer hover, focus or pinning. Below 768px a floating trigger opens a modal dr
 close control, Escape/backdrop dismissal, focus containment, focus restoration and scroll
 locking. The dialog stays in the provider scope.
 
-Items with visible false are omitted; active items expose aria-current page. Mobile
+Items with visible false are omitted; active items expose aria-current page. An item with
+`href` renders a link (Cmd/Ctrl+click and "open in new tab" work); `linkComponent` swaps
+`<a>` for a router link. Items without `href` stay buttons. Mobile
 selection closes navigation before calling the item callback. Missing icons use initials.
 `children` replaces title/brand content. Labels can customize
 navigation/open/close/expand/collapse accessible text. `sidebarStyle` targets the root.
@@ -63,7 +65,8 @@ retain their nullable default.
 | `panelStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__panel` |
 | `titleClassName` | `string` | Omitted | Additional classes on `.sidebar__title` |
 | `toggleClassName` | `string` | Omitted | Additional classes on `.sidebar__expand.sidebar__avatar`, `.sidebar__toggle` |
-| `items` | `SidebarItem[]` | Required | Navigation actions with optional icons, active and visible flags |
+| `items` | `SidebarItem[]` | Required | Navigation items with optional icons, `href` (renders a link), `onClick`, active and visible flags |
+| `linkComponent` | `ElementType` | `"a"` | Router link rendered for items with `href` instead of `<a>` |
 | `title` | `string` | Omitted | App name: full title on desktop, avatar initial in narrow layouts |
 | `children` | `ReactNode` | Omitted | Custom non-interactive branding in the header/avatar; replaces the default title or initial |
 | `className` | `string` | Omitted | Additional classes on `.sidebar` |
@@ -88,6 +91,7 @@ package export.
 type SidebarItem = {
   label: string;
   icon?: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+  href?: string;
   onClick?: () => void;
   active?: boolean;
   visible?: boolean;
@@ -123,7 +127,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.sidebar__close-icon` | `X` | `closeIconClassName` | `closeIconStyle` | `isMobile` |
 | `.sidebar__expand .sidebar__avatar` | `button` | `toggleClassName` | `toggleStyle` | `isTablet` |
 | `.sidebar__body` | `nav` | `bodyClassName` | `bodyStyle` | `Always` |
-| `.sidebar__button` | `button` | `itemClassName` | `itemStyle` | `item.visible !== false` |
+| `.sidebar__button` | `button`, or `a` / `linkComponent` with `item.href` | `itemClassName` | `itemStyle` | `item.visible !== false` |
 | `.sidebar__button-icon` | `item.icon` | `iconClassName` | `iconStyle` | `item.icon` |
 | `.sidebar__button-icon .sidebar__button-initial` | `span` | `iconClassName` | `iconStyle` | `item.visible !== false` |
 | `.sidebar__button-label` | `span` | `labelClassName` | `labelStyle` | `item.visible !== false` |

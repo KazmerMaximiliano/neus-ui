@@ -134,6 +134,7 @@
   letter-spacing: var(--sidebar-item-spacing);
   text-transform: var(--sidebar-item-transform);
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
   transition:
     background-color var(--sidebar-transition),
