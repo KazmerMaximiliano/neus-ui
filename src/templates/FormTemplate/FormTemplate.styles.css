@@ -13,6 +13,8 @@
   align-items: start;
 }
 .form-template > * { min-width: 0; }
+/* A field that spans every column: a long hint, a textarea, a consent checkbox. */
+.form-template > .form-template__full { grid-column: 1 / -1; }
 .form-template__submit { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--form-template-action-gap); justify-content: flex-end; padding-top: var(--form-template-action-padding); }
 @media (768px <= width < 1024px) {
   .form-template { grid-template-columns: repeat(var(--form-template-tablet-columns), minmax(0, 1fr)); }

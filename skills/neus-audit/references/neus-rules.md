@@ -39,8 +39,9 @@ the project wrote.
 - Modal is a native `<dialog>`: focus trapping and Escape come from the
   browser.
 - Field components (Input, Select, MultiSelect, DateInput, TimeInput) render
-  their own `<label>` from `label` and wire `description` and errors to
-  `aria-describedby`. Flag a field only when it has neither `label` nor
+  their own `<label>` from `label`, mark `required` with an asterisk and
+  `aria-required`, and wire `description` and errors to `aria-describedby`.
+  Flag "Required" or "Obligatorio" written as a hint instead of `required`. Flag a field only when it has neither `label` nor
   `aria-label`.
 - Input forwards native attributes (`autoComplete`, `inputMode`,
   `spellCheck`, `pattern`…): flag a missing one on Input like on a raw

@@ -32,6 +32,13 @@ root style overrides. Every direct child can shrink, and the action region spans
 columns. Below 768px actions expand to full width. Use the child components own hooks to
 customize fields and buttons.
 
+Rows take the height of their tallest field, so a hint (`description`) or a two-line label on
+only one field of a row leaves a gap under its neighbours. Give every field of a row a hint or
+none, keep hints to one line (put examples in `placeholder`), and give a field with a long
+hint, a textarea or a consent checkbox its own row with `className="form-template__full"`,
+which spans every column. `npx neus shot` reports rows whose fields differ by more than
+20px.
+
 ## Props
 
 Column counts are set inline from the corresponding props. Use those props or root `style`
@@ -69,6 +76,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | --- | --- | --- | --- | --- |
 | `.form-template` | `div` | `className` | `style` | `Always` |
 | `.form-template__submit` | `div` | `actionsClassName` | `actionsStyle` | `Always` |
+| `.form-template__full` | Your field's root | Add it to the field's `className` | None | When you add it |
 
 Interaction states use native pseudo-classes and ARIA/data attributes where present.
 

@@ -30,6 +30,8 @@ describe("Testimonial", () => {
     expect(item).toHaveAttribute("data-variant-item", "plain");
     rerender(<TestimonialList variant="card"><Testimonial quote="Q" name="N" /></TestimonialList>);
     expect(screen.getByRole("listitem")).toHaveClass("card", "testimonial");
+    rerender(<TestimonialList variant="featured"><Testimonial quote="Q" name="N" /><Testimonial quote="R" name="M" /></TestimonialList>);
+    for (const item of screen.getAllByRole("listitem")) expect(item).toHaveClass("card", "testimonial");
   });
 
   it("renders the avatar, omits an absent role and forwards every part hook", () => {

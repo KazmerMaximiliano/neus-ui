@@ -112,7 +112,7 @@ dependencies. Do not edit generated files.
 | --- | --- | --- |
 | `--card-content-padding` | card content padding | `16px` |
 | `--card-footer-gap` | card footer gap | `8px` |
-| `--card-footer-padding` | card footer padding | `8px` |
+| `--card-footer-padding` | card footer padding | `8px 16px 16px` |
 | `--card-header-gap` | card header gap | `8px` |
 | `--card-header-padding` | card header padding | `16px` |
 | `--card-media-object-fit` | card media object fit | `cover` |

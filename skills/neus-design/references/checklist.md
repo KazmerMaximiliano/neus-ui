@@ -12,7 +12,8 @@ checks the items marked (lint); check the rest by reading your diff.
 - [ ] No tell from taste.md that the active system does not define.
 - [ ] One solid primary action per view. Destructive actions use `color="error"` and confirm first.
 - [ ] Every state in the spec exists: loading, empty, error, disabled and success where they apply.
-- [ ] Forms: visible labels, field-level `error` messages that say how to fix it, real submit handling or a named handler.
+- [ ] Forms: visible labels, `required` on required fields (never "Required" as a hint), field-level `error` messages that say how to fix it, real submit handling or a named handler.
+- [ ] Form rows are even: every field of a row has a hint or none, hints fit one line (examples go in `placeholder`), a long one gets its own row (`className="form-template__full"`); `neus shot` reports no uneven form row.
 - [ ] Copy is real and specific. No lorem ipsum, no "Feature one" (lint finds common filler).
 - [ ] Sample social proof is marked `SAMPLE:` in the code and listed in the delivery; no prices, trials, guarantees or metrics the brief did not give.
 - [ ] No emoji as functional icons; icons come from one family (lucide-react) (lint).

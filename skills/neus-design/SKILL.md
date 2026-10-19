@@ -87,9 +87,23 @@ Pick the mode before Phase 1 and say which one in a line:
 For a new page, screen, flow or product, ask **one round** of two to four
 questions before the spec, the way a designer opens a project, even when the
 brief looks complete. Skip the round only when the user already said to start
-without questions, or for a refinement or local change. Use AskUserQuestion
-(or the host's question tool); without one, ask a short numbered list and
-wait. Each question has two to four options, your recommended one first.
+without questions, or for a refinement or local change.
+
+Ask through the host's question tool, so the user picks with the arrow keys
+instead of typing; never write the questions as text when the tool exists:
+
+- Claude Code: `AskUserQuestion`. It may not be loaded yet (it is a deferred
+  tool): first call `ToolSearch` with `select:AskUserQuestion`, then ask.
+- One call with up to four questions, each with a short header and two to
+  four options. Put your recommended option first and say so in its label,
+  in the user's language. The tool adds a free-text answer, so do not add
+  "Other" yourself.
+- Facts only the user can give (a phone, prices, a URL) are a question too:
+  "I will type them" and "Leave them out" as options; the user types them
+  in the free-text answer.
+- Only when the host has no question tool, ask a short numbered list and
+  wait for the reply.
+
 Choose the questions that change the result:
 
 - **Brand**, when `brand` is `null`: two or three directions built for this
@@ -183,7 +197,9 @@ component's guide.
 | Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
 | Icon-only action | `IconButton` |
 | Text navigation | `Link` |
-| Help text under a field | `description` on Input, Select, MultiSelect, DateInput or TimeInput |
+| Help text under a field | `description` on Input, Select, MultiSelect, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
+| Required field | `required` on Input, Select, MultiSelect, DateInput or TimeInput (asterisk and `aria-required`) |
+| Field that needs the whole row (long hint, textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
 | Status or label | `Badge` |
 | Message about the page or a form (saved, failed, trial ending) | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
@@ -211,7 +227,7 @@ landmark, an inline `strong`), styled with neus tokens.
    1. After the first complete render, run `npx neus shot <route>` from the
       project root. It starts the dev script when no server is running,
       saves full-page PNGs at 1440 and 390 px and prints the problems it
-      measured (overflow, clipped content, console errors, body text under 16px, fonts not
+      measured (overflow, clipped content, uneven form rows, console errors, body text under 16px, fonts not
       loaded, solid buttons per viewport, active theme).
    2. Open the 1440 and 390 px screenshots with your image-reading tool.
    3. Write down the three most visible problems: scale, empty areas,

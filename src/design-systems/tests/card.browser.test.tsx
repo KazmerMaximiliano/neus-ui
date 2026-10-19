@@ -21,7 +21,8 @@ const CARD_SYSTEM_CASES = [
     border: "1px",
     shadow: [],
     surface: "--color-surface",
-    footer: "8px",
+    footer: "8px 16px 16px",
+    footerGap: "8px",
   },
   {
     id: "apple",
@@ -29,7 +30,8 @@ const CARD_SYSTEM_CASES = [
     border: "1px",
     shadow: ["light"],
     surface: "--color-surface",
-    footer: "8px",
+    footer: "8px 16px 16px",
+    footerGap: "8px",
   },
   {
     id: "carbon",
@@ -37,7 +39,8 @@ const CARD_SYSTEM_CASES = [
     border: "0px",
     shadow: [],
     surface: "--color-surface-secondary",
-    footer: "8px",
+    footer: "8px 16px 16px",
+    footerGap: "8px",
   },
   {
     id: "material",
@@ -45,7 +48,8 @@ const CARD_SYSTEM_CASES = [
     border: "0px",
     shadow: ["light", "dark"],
     surface: "--color-surface-container-low",
-    footer: "8px",
+    footer: "8px 16px 16px",
+    footerGap: "8px",
   },
   {
     id: "neobrutalism",
@@ -53,7 +57,8 @@ const CARD_SYSTEM_CASES = [
     border: "3px",
     shadow: ["light", "dark"],
     surface: "--color-surface",
-    footer: "12px",
+    footer: "12px 16px 16px",
+    footerGap: "12px",
   },
   {
     id: "vercel",
@@ -61,7 +66,8 @@ const CARD_SYSTEM_CASES = [
     border: "1px",
     shadow: [],
     surface: "--color-surface",
-    footer: "8px",
+    footer: "8px 16px 16px",
+    footerGap: "8px",
   },
 ] as const;
 
@@ -121,7 +127,7 @@ describe.each(["light", "dark"] as const)(
           screen.getByRole("button", { name: "Save" }).parentElement!,
         );
         expect(footer.padding).toBe(system.footer);
-        expect(footer.gap).toBe(system.footer);
+        expect(footer.gap).toBe(system.footerGap);
         expect(footer.flexWrap).toBe("wrap");
 
         const media = screen.getByRole("img") as HTMLImageElement;
@@ -274,7 +280,7 @@ describe("Card theme boundaries and overrides", () => {
     expect(getComputedStyle(screen.getByText("Header")).padding).toBe("23px");
     expect(getComputedStyle(screen.getByText("Content")).padding).toBe("27px");
     expect(getComputedStyle(screen.getByText("Footer")).gap).toBe("19px");
-    expect(getComputedStyle(screen.getByText("Footer")).padding).toBe("12px");
+    expect(getComputedStyle(screen.getByText("Footer")).padding).toBe("12px 16px 16px");
     expect(getComputedStyle(screen.getByRole("img")).height).toBe("80px");
     expect(getComputedStyle(screen.getByRole("img")).objectFit).toBe("contain");
     rerender(

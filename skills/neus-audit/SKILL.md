@@ -68,7 +68,7 @@ npx neus shot <route> --widths 1440,768,390 --json
 It reuses the dev server a previous run left, or starts the project's
 `dev` script, and saves full-page screenshots in `.neus/shots/`. It never
 installs browsers. Every entry in its `problems` list is a `render` finding:
-horizontal scroll, clipped content and console errors are P0; body text under 16px,
+horizontal scroll, clipped content and console errors are P0; body text under 16px, uneven form rows,
 fonts not loaded and more than one solid button per viewport are P1. Then
 open the images and judge what it cannot measure: tap targets, contrast,
 focus visibility, alignment, empty areas, broken dark mode. A problem

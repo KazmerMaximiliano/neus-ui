@@ -21,7 +21,8 @@ One quote with its author: a figure, inside a list item when it belongs to a Tes
 The quote is a `figure`: the words in a `blockquote` wrapped in `q`, which adds the quotation
 marks of the document's language (pass the words without marks), and the author in a
 `figcaption`. Inside a [TestimonialList](./TestimonialList.md) the root is a list item and the
-list's variant applies; alone, `variant` decides (`card` by default). Give the avatar `alt=""`:
+list's variant applies; alone, `variant` decides (`card` by default). `card` and `featured`
+render a Card; `plain` draws a rule beside the quote instead. Give the avatar `alt=""`:
 the name is written beside it. Mark example quotes `SAMPLE:` in the code.
 
 ## Props
@@ -51,7 +52,7 @@ whose rendering condition is false.
 
 | Base class / part | Element | Class prop | Style prop | Rendering condition |
 | --- | --- | --- | --- | --- |
-| `.testimonial` | `li` or `div`; Card in card | `className` | `style` | `Always` |
+| `.testimonial` | `li` or `div`; a Card in card and featured | `className` | `style` | `Always` |
 | `.testimonial__figure` | `figure` | None | None | `Always` |
 | `.testimonial__quote` | `blockquote` | `quoteClassName` | `quoteStyle` | `Always` |
 | `.testimonial__caption` | `figcaption` | `captionClassName` | `captionStyle` | `Always` |

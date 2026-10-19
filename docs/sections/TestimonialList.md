@@ -26,9 +26,11 @@ export const Reviews = () => (
 ## Behavior and accessibility
 
 TestimonialList is a `ul` ([Grid](../components/Grid.md)) of [Testimonial](./Testimonial.md) list
-items. `variant` reaches every quote through context: `plain` sets the quotes as running text
-with wide gaps, `card` puts each in a Card, `featured` spans the first quote across the row in
-the display face and lays the rest out below. `columns` defaults to 1, 2 from 768px and 3 from
+items. `variant` reaches every quote through context: `card` puts each quote in a Card with its
+author, the clearest reading; `featured` makes the first card span the row with a larger
+quote in the display face and lays the rest out below as cards; `plain` sets the quotes as
+running text with a rule beside each quote that ties it to its author, for systems that favor
+no surfaces. `columns` defaults to 1, 2 from 768px and 3 from
 1024px.
 
 ## Props
@@ -70,6 +72,8 @@ baseline; system and mode overrides can differ. Do not edit generated files.
 | `--testimonial-quote-line-height` | testimonial quote line height | `1.55` |
 | `--testimonial-featured-quote-size` | testimonial featured quote size | `var(--heading-md-size)` |
 | `--testimonial-name-weight` | testimonial name weight | `600` |
+| `--testimonial-rule-width` | testimonial rule width | `3px` |
+| `--testimonial-rule-color` | testimonial rule color | `color-mix(in srgb, var(--color-primary) 45%, var(--color-surface))` |
 | `--testimonial-gap` | testimonial gap | `var(--space-4)` |
 
 ## Storybook and related guides

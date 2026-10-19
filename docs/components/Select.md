@@ -56,6 +56,9 @@ retain their nullable default.
 | `fieldClassName` | `string` | Omitted | Additional classes on `.select__field` |
 | `labelClassName` | `string` | Omitted | Additional classes on `.select__label` |
 | `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.select__label` |
+| `required` | `boolean` | `false` | Asterisk after the label and `aria-required` on the trigger; the application validates |
+| `requiredClassName` | `string` | Omitted | Additional classes on `.select__required` |
+| `requiredStyle` | `CSSProperties` | Omitted | Inline styles on `.select__required` |
 | `listClassName` | `string` | Omitted | Additional classes on `.select__popover` |
 | `listContentClassName` | `string` | Omitted | Additional classes on `.select__list` |
 | `listContentStyle` | `CSSProperties` | Omitted | Inline styles on `.select__list` |
@@ -116,6 +119,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | --- | --- | --- | --- | --- |
 | `.select__wrapper` | `div` | `className` | `style` | `Always` |
 | `.select__label` | `label` | `labelClassName` | `labelStyle` | `displayLabel` |
+| `.select__required` | `span` | `requiredClassName` | `requiredStyle` | `displayLabel && required` |
 | `.select__field` | `div` | `fieldClassName` | `fieldStyle` | `Always` |
 | `.select__trigger` | `button` | `triggerClassName` | `triggerStyle` | `Always` |
 | `.select__value .select__placeholder` | `span` | `valueClassName`, `placeholderClassName` | `valueStyle`, `placeholderStyle` | `Always` |

@@ -29,6 +29,14 @@ const renderMulti = (props: Partial<MultiSelectProps> = {}) =>
 
 const combobox = () => screen.getByRole("combobox", { name: "Colors" });
 
+describe("MultiSelect required", () => {
+  it("marks the label and the trigger", () => {
+    render(<MultiSelect name="pets" label="Mascotas" required options={[{ value: "a", label: "A" }]} />);
+    expect(screen.getByRole("combobox", { name: "Mascotas" })).toHaveAttribute("aria-required", "true");
+    expect(document.querySelector(".select__required")).toHaveTextContent("*");
+  });
+});
+
 describe("MultiSelect description", () => {
   it("renders help text and announces it before the error", () => {
     const { rerender } = renderMulti({ description: "Pick up to three.", descriptionClassName: "hint" });

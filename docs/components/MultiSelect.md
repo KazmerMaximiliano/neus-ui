@@ -73,6 +73,9 @@ props retain their nullable default.
 | `fieldClassName` | `string` | Omitted | Additional classes on `.select__field` |
 | `labelClassName` | `string` | Omitted | Additional classes on `.select__label` |
 | `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.select__label` |
+| `required` | `boolean` | `false` | Asterisk after the label and `aria-required` on the trigger; the application validates |
+| `requiredClassName` | `string` | Omitted | Additional classes on `.select__required` |
+| `requiredStyle` | `CSSProperties` | Omitted | Inline styles on `.select__required` |
 | `placeholderClassName` | `string` | Omitted | Additional classes on `.select__placeholder` |
 | `placeholderStyle` | `CSSProperties` | Omitted | Inline styles on `.select__placeholder` |
 | `srOnlyClassName` | `string` | Omitted | Additional classes on `.select__sr-only` |
@@ -112,6 +115,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | --- | --- | --- | --- | --- |
 | `.select__wrapper .multiselect` | `div` | `className` | `style` | `Always` |
 | `.select__label` | `label` | `labelClassName` | `labelStyle` | `displayLabel` |
+| `.select__required` | `span` | `requiredClassName` | `requiredStyle` | `displayLabel && required` |
 | `.select__field` | `div` | `fieldClassName` | `fieldStyle` | `Always` |
 | `.multiselect__tag` | `span` | `tagClassName` | `tagStyle` | `Always` |
 | `.multiselect__tag-remove` | `button` | `tagRemoveClassName` | `tagRemoveStyle` | `!disabled` |

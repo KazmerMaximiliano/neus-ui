@@ -2,10 +2,10 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
-import { Button, MediaPlaceholder } from "../../components";
+import { Avatar, Button, Card, CardContent, CardFooter, MediaPlaceholder } from "../../components";
 import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { CallToAction, FeatureItem, FeatureList, Hero, SiteFooter, SiteHeader } from "../../sections";
+import { CallToAction, FeatureItem, FeatureList, Hero, SiteFooter, SiteHeader, Testimonial, TestimonialList } from "../../sections";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
 import { contrastRatio } from "./design-systems.test-utils";
 
@@ -66,5 +66,48 @@ describe.each(DESIGN_SYSTEMS)("Page sections in $id", ({ id }) => {
     expect(contrastRatio(solid.backgroundColor, band)).toBeGreaterThanOrEqual(3);
     expect(contrastRatio(solid.color, solid.backgroundColor)).toBeGreaterThanOrEqual(4.5);
     expect(contrastRatio(getComputedStyle(screen.getByRole("button", { name: "Ver horarios" })).color, band)).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it.each(["plain", "card", "featured"] as const)("ties each %s quote to its author", async (variant) => {
+    await page.viewport(1440, 900);
+    render(
+      <ThemeProvider scope="local" designSystem={id}>
+        <TestimonialList variant={variant}>
+          <Testimonial quote="Nos atendieron un sábado sin turno." name="Graciela P." role="Bruno, labrador" avatar={<Avatar name="Graciela P." alt="" />} />
+          <Testimonial quote="Llevamos a Tola desde cachorra." name="Silvina M." role="Tola, mestiza" />
+        </TestimonialList>
+      </ThemeProvider>,
+    );
+    for (const item of screen.getAllByRole("listitem")) {
+      const quote = item.querySelector(".testimonial__quote")!.getBoundingClientRect();
+      const author = item.querySelector(".testimonial__name")!.getBoundingClientRect();
+      expect(author.top).toBeGreaterThan(quote.bottom - 1);
+      expect(author.top - quote.bottom).toBeLessThan(48);
+      const style = getComputedStyle(item);
+      const framed = variant === "plain"
+        ? parseFloat(getComputedStyle(item.querySelector(".testimonial__figure")!).borderInlineStartWidth) > 0
+        : item.classList.contains("card");
+      expect(framed, `${variant} quote has a frame`).toBe(true);
+      expect(style.display).not.toBe("contents");
+    }
+  });
+
+  it("keeps a full-width card action inside the content inset", async () => {
+    await page.viewport(1440, 900);
+    render(
+      <ThemeProvider scope="local" designSystem={id}>
+        <div style={{ width: 360 }}>
+          <Card>
+            <CardContent>General · $ 45.000</CardContent>
+            <CardFooter><Button label="Comprar" fullWidth /></CardFooter>
+          </Card>
+        </div>
+      </ThemeProvider>,
+    );
+    const button = screen.getByRole("button", { name: "Comprar" }).getBoundingClientRect();
+    const card = screen.getByRole("button", { name: "Comprar" }).closest(".card")!.getBoundingClientRect();
+    expect(button.left - card.left).toBeGreaterThanOrEqual(16);
+    expect(card.right - button.right).toBeGreaterThanOrEqual(16);
+    expect(card.bottom - button.bottom).toBeGreaterThanOrEqual(16);
   });
 });

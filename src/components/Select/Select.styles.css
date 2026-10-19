@@ -16,6 +16,11 @@
   font-weight: var(--input-label-weight);
 }
 
+.select__required {
+  margin-left: var(--input-required-gap);
+  color: var(--input-required-color);
+}
+
 .select__label--error {
   color: var(--input-error-color);
 }

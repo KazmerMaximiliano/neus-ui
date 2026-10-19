@@ -171,7 +171,7 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
       </Section>
       <Section id="voices" aria-labelledby="voices-title">
         <SectionHeader titleId="voices-title" title="Used in the gaps of a full calendar." />
-        <TestimonialList variant="plain">
+        <TestimonialList variant="card">
           {QUOTES.map(({ quote, name, role }) => (
             <Testimonial key={name} quote={quote} name={name} role={role} avatar={<Avatar name={name} alt="" />} />
           ))}
@@ -186,7 +186,7 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
                 <FormTemplate submitLabel="Create my account" columns={1} tabletColumns={1} mobileColumns={1}>
                   <Input name="name" label="Name" autoComplete="name" required />
                   <Input name="email" label="Email" type="email" autoComplete="email" spellCheck={false}
-                    description="Only to create your account." required />
+                    placeholder="you@example.com" required />
                 </FormTemplate>
               </form>
             </CardContent>

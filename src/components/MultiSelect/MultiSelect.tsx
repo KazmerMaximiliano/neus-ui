@@ -60,6 +60,9 @@ export const MultiSelect = ({
   value = [],
   defaultValue = [],
   disabled = false,
+  required = false,
+  requiredClassName,
+  requiredStyle,
   viewSearchBar = true,
   searchBarPlaceholder = "Buscar...",
   fieldStyle,
@@ -121,6 +124,15 @@ export const MultiSelect = ({
           style={labelStyle}
         >
           {displayLabel}
+          {required && (
+            <span
+              className={["select__required", requiredClassName].filter(Boolean).join(" ")}
+              style={requiredStyle}
+              aria-hidden="true"
+            >
+              *
+            </span>
+          )}
         </label>
       )}
       {selectedValues.map((selected, index) => (
@@ -193,6 +205,7 @@ export const MultiSelect = ({
           aria-controls={id}
           aria-label={displayLabel ? undefined : "Selecciona opciones"}
           aria-invalid={error ? true : undefined}
+          aria-required={required || undefined}
           aria-describedby={
             [description != null && descriptionId, error && errorId]
               .filter(Boolean)
