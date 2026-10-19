@@ -173,7 +173,7 @@ landmark, an inline `strong`), styled with neus tokens.
    1. After the first complete render, run `npx neus shot <route>` from the
       project root. It starts the dev script when no server is running,
       saves full-page PNGs at 1440 and 390 px and prints the problems it
-      measured (overflow, console errors, small running text, fonts not
+      measured (overflow, clipped content, console errors, body text under 16px, fonts not
       loaded, solid buttons per viewport, active theme).
    2. Open the 1440 and 390 px screenshots with your image-reading tool.
    3. Write down the three most visible problems: scale, empty areas,

@@ -9,8 +9,8 @@ against Claude Design. Nothing here ships in the npm package.
 | `briefs/` | The prompts, pasted verbatim into the agent. Front matter: `id`, `surface` (page or app) and the `route` to capture |
 | `rubric.md` | Scoring axes, the head-to-head comparison and the cut of each phase |
 | `score.mjs` | Captures a finished project with `neus shot`, copies its code and builds the summary |
-| `reference/<brief>/` | Claude Design screenshots for each brief, added by hand |
-| `runs/<label>/<brief>/` | One run: `metrics.json`, `shots/`, `code/` and the hand-written `scores.json` |
+| `references/` | One Claude Design screenshot per brief, added by hand and kept out of git |
+| `runs/<label>/<brief>/` | One run: `metrics.json`, `shots/`, `code/` and the hand-written `scores.json`, kept out of git |
 | `runs/<label>/summary.md` | One row per brief, rebuilt by `score.mjs` |
 
 ## Run one brief
@@ -56,6 +56,6 @@ against Claude Design. Nothing here ships in the npm package.
    ```
 
 Use one label per run of the five briefs, for example `baseline`, `phase-1`,
-`phase-2`. Runs are committed so later phases can be compared, and re-scored once
-new checks such as `neus lint` exist. To measure a version that predates a change,
+`phase-2`. Runs stay on disk, outside git, so later phases can be compared and
+re-scored when new checks exist. To measure a version that predates a change,
 pack that commit instead.

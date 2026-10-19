@@ -82,3 +82,4 @@ new_design/
 .serena/
 
 eval/runs/*
+eval/references/

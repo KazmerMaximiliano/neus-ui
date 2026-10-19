@@ -20,8 +20,8 @@ Judge the 1440 and 390 px screenshots first, the code second.
 ## Head to head (`versus`)
 
 Put the two 1440 px screenshots side by side, hiding which one is ours:
-`runs/<label>/<brief>/shots/index-1440.png` and the Claude Design capture in
-`reference/<brief>/`. Pick the page you would ship. Record `"win"`, `"tie"` or
+`runs/<label>/<brief>/shots/index-1440.png` and the Claude Design capture of
+that brief in `references/`. Pick the page you would ship. Record `"win"`, `"tie"` or
 `"loss"` for our run.
 
 ## Other fields
@@ -35,6 +35,6 @@ Put the two 1440 px screenshots side by side, hiding which one is ours:
 | Phase | Passes when |
 | --- | --- |
 | 1 · Skill and visual loop | Brief 01 renders with `data-design-system="neus"`, `--color-primary` #283593 and Manrope, and every run has `readScreenshots: true` |
-| 2 · Foundations | Every brief: component coverage of 80% or more, no P0 from `neus lint`, smallest running text of 16px or more |
+| 2 · Foundations | Every brief: component coverage of 80% or more and no P0 from `neus lint`; public pages: body text of 16px or more (the size that carries most of the running text) |
 | 3 · Sections and feedback | `win` or `tie` in at least 2 of the 3 public pages (01, 04, 05) |
 | 4 · None mode | All five briefs pass the phase 2 cut and score `versus` win or tie with `--system none` |

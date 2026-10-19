@@ -32,7 +32,7 @@ export const NEUS_DIR = ".neus";
 export const SHOT_WIDTHS = "1440,390";
 export const SHOT_TIMEOUT_S = "60";
 export const SHOT_VIEWPORT = { phoneMaxWidth: 480, phoneHeight: 844, height: 900 };
-export const SHOT_LIMITS = { minBodyFontPx: 16, solidCtasPerViewport: 1 };
+export const SHOT_LIMITS = { bodyFontPx: 16, solidCtasPerViewport: 1 };
 // Dev servers print their URL; these ports are probed only when the log shows none.
 export const FRAMEWORK_PORTS = { next: 3000, astro: 4321, "tanstack-start": 3000, "react-router": 5173, vite: 5173 };
 export const PORT_FALLBACK_AFTER_MS = 10_000;
