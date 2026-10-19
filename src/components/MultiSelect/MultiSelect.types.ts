@@ -34,6 +34,10 @@ export type MultiSelectProps = FieldDescriptionProps & {
   fieldClassName?: string;
   labelClassName?: string;
   labelStyle?: CSSProperties;
+  /** Marks the field as required: an asterisk after the label and aria-required. The app validates. */
+  required?: boolean;
+  requiredClassName?: string;
+  requiredStyle?: CSSProperties;
   placeholderClassName?: string;
   placeholderStyle?: CSSProperties;
   srOnlyClassName?: string;

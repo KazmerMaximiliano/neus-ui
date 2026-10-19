@@ -48,6 +48,9 @@ export const Select = ({
   descriptionStyle,
   error,
   disabled = false,
+  required = false,
+  requiredClassName,
+  requiredStyle,
   viewSearchBar = true,
   searchBarPlaceholder = "Buscar...",
   options,
@@ -98,6 +101,15 @@ export const Select = ({
           style={labelStyle}
         >
           {displayLabel}
+          {required && (
+            <span
+              className={["select__required", requiredClassName].filter(Boolean).join(" ")}
+              style={requiredStyle}
+              aria-hidden="true"
+            >
+              *
+            </span>
+          )}
         </label>
       )}
       {name && <input type="hidden" name={name} value={selectedValue} />}
@@ -128,6 +140,7 @@ export const Select = ({
           aria-controls={id}
           aria-label={displayLabel ? undefined : "Selecciona una opción"}
           aria-invalid={error ? true : undefined}
+          aria-required={required || undefined}
           aria-describedby={
             [description != null && descriptionId, error && errorId]
               .filter(Boolean)

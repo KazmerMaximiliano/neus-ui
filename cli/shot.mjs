@@ -168,7 +168,7 @@ const stopServer = (root) => {
 };
 
 /** Runs inside the page, so it must stay self-contained. */
-export const measure = (systemFonts) => {
+export const measure = ({ systemFonts, formRowSlackPx }) => {
   const ignored = new Set(systemFonts);
   const visible = (element) => element.getClientRects().length > 0 && getComputedStyle(element).visibility !== "hidden";
   const firstFamily = (style) => style.fontFamily.split(",")[0].trim().replace(/^["']|["']$/g, "");
@@ -202,6 +202,20 @@ export const measure = (systemFonts) => {
         clipped.push(`${label(element)} inside ${label(box)} (${past}px)`);
         break;
       }
+    }
+  }
+  // Fields of one FormTemplate row whose heights differ: a hint or a two-line label on only some of them.
+  const unevenForms = [];
+  for (const form of document.querySelectorAll(".form-template")) {
+    const rows = {};
+    for (const cell of form.children) {
+      if (cell.classList.contains("form-template__submit") || !visible(cell)) continue;
+      const box = cell.getBoundingClientRect();
+      (rows[Math.round(box.top)] ??= []).push({ height: box.height, name: cell.querySelector("label")?.textContent.replace(/\*\s*$/, "").trim() || label(cell) });
+    }
+    for (const cells of Object.values(rows)) {
+      const [low, high] = [cells.reduce((a, b) => a.height <= b.height ? a : b), cells.reduce((a, b) => a.height >= b.height ? a : b)];
+      if (high.height - low.height > formRowSlackPx) unevenForms.push({ taller: high.name, shorter: low.name, px: Math.round(high.height - low.height) });
     }
   }
   // Chrome paints frames from other origins only while they are on screen, so full-page shots show them blank.
@@ -245,6 +259,7 @@ export const measure = (systemFonts) => {
   return {
     overflow: root.scrollWidth > width ? { scrollWidth: root.scrollWidth, offenders } : null,
     clipped,
+    unevenForms,
     blankFrames,
     minFontPx,
     // The size that carries most of the running text: help text and footnotes may be smaller, the body may not.
@@ -280,7 +295,7 @@ export const shoot = async ({ chromium, executablePath, url, routes, widths, out
         await page.evaluate(async () => {
           await document.fonts.ready;
         });
-        const metrics = await page.evaluate(measure, SYSTEM_FONT_FAMILIES);
+        const metrics = await page.evaluate(measure, { systemFonts: SYSTEM_FONT_FAMILIES, formRowSlackPx: SHOT_LIMITS.formRowSlackPx });
         const file = path.join(outDir, `${routeSlug(route)}-${width}.png`);
         await page.screenshot({ path: file, fullPage: true });
         await page.close();
@@ -294,11 +309,13 @@ export const shoot = async ({ chromium, executablePath, url, routes, widths, out
 };
 
 /** Human-readable problems found in the measured pages. */
-export const problems = (pages) => pages.flatMap(({ route, width, overflow, clipped, consoleErrors, bodyFontPx, missingFonts, solidCtas }) => {
+export const problems = (pages) => pages.flatMap(({ route, width, overflow, clipped, unevenForms = [], consoleErrors, bodyFontPx, missingFonts, solidCtas }) => {
   const at = `${route} at ${width}px`;
   return [
     overflow && `${at}: horizontal scroll (${overflow.scrollWidth}px wide) from ${overflow.offenders.join(", ") || "the page"}`,
     clipped.length && `${at}: content cut off: ${clipped.join(", ")}`,
+    ...unevenForms.map(({ taller, shorter, px }) => `${at}: uneven form row: "${taller}" is ${px}px taller than "${shorter}"; ` +
+      "give both fields a hint or neither, keep hints to one line, or put the long one on its own row (form-template__full)"),
     consoleErrors.length && `${at}: ${consoleErrors.length} console error(s), first: ${consoleErrors[0]}`,
     bodyFontPx !== null && bodyFontPx < SHOT_LIMITS.bodyFontPx &&
       `${at}: body text at ${bodyFontPx}px (minimum ${SHOT_LIMITS.bodyFontPx}px)`,

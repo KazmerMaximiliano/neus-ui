@@ -1,6 +1,9 @@
 .testimonial-list[data-variant="featured"] > :first-child {
   grid-column: 1 / -1;
-  max-width: 56rem;
+}
+
+.testimonial-list[data-variant="featured"] > :first-child .testimonial__figure {
+  padding: calc(var(--card-content-padding) * 1.5);
 }
 
 .testimonial-list[data-variant="featured"] > :first-child .testimonial__quote {

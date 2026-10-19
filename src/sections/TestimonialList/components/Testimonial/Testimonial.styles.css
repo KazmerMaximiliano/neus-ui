@@ -11,9 +11,14 @@
   margin: 0;
 }
 
-.testimonial[data-variant-item="card"] .testimonial__figure {
+.testimonial:is([data-variant-item="card"], [data-variant-item="featured"]) .testimonial__figure {
   box-sizing: border-box;
   padding: var(--card-content-padding);
+}
+
+.testimonial[data-variant-item="plain"] .testimonial__figure {
+  padding-inline-start: var(--space-5);
+  border-inline-start: var(--testimonial-rule-width) solid var(--testimonial-rule-color);
 }
 
 .testimonial__quote {

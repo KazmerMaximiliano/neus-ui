@@ -123,6 +123,10 @@ two. For every device you leave out, something must take its place.
   `tone="subtle"`, not with rules. One or two bands of strong color
   (`tone="brand"` or `tone="inverse"`) give the page its rhythm: the agenda,
   the services, the final call to action.
+- **Quotes.** Every testimonial reads as one unit with its author: avatar,
+  name and role next to the quote, in a card (`TestimonialList variant="card"`
+  or `"featured"`). `plain` only when the system's DESIGN.md favors no
+  surfaces.
 - **Groups.** Features and testimonials as `Card variant="auto"` in a
   `Grid as="ul"`:
   the system decides whether a card looks bordered, filled or flat. What

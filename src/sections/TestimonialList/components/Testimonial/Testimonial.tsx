@@ -40,6 +40,7 @@ export const Testimonial = ({
     </figure>
   );
   const root = { className: join("testimonial", className), style, "data-variant-item": variant };
-  if (variant === "card") return <Card as={listVariant ? "li" : "div"} {...root}>{figure}</Card>;
+  // Cards make each quote one unit with its author; plain keeps that unit with a rule beside the quote.
+  if (variant !== "plain") return <Card as={listVariant ? "li" : "div"} {...root}>{figure}</Card>;
   return listVariant ? <li {...root}>{figure}</li> : <div {...root}>{figure}</div>;
 };

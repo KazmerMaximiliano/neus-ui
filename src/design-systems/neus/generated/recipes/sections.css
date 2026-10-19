@@ -28,6 +28,8 @@
   --testimonial-quote-line-height: 1.55;
   --testimonial-featured-quote-size: var(--heading-md-size);
   --testimonial-name-weight: 600;
+  --testimonial-rule-width: 3px;
+  --testimonial-rule-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-surface));
   --testimonial-gap: var(--space-4);
   --call-to-action-gap: var(--space-8);
   --site-footer-background: var(--color-surface);

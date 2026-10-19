@@ -69,6 +69,8 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
   .wide { width: 600px; } .small { font-size: 12px; } .ghost { font-family: NoSuchFont, serif; }
   .card { overflow: hidden; width: 200px; position: relative; } .field { width: 250px; } .card i { position: absolute; left: 150px; width: 300px; }
   .cut { overflow: hidden; width: 100px; white-space: nowrap; text-overflow: ellipsis; }
+  .form-template { display: grid; grid-template-columns: 1fr 1fr; align-items: start; width: 360px; }
+  .form-template > div { height: 60px; } .form-template > .tall { height: 100px; } .form-template > .near { height: 70px; }
 </style></head>
 <body>
   <div class="wide">A block wider than a phone</div>
@@ -76,6 +78,11 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
   <div class="card"><i>Only decoration overflows this card</i></div>
   <p class="cut">Deliberately truncated with an ellipsis</p>
   <iframe src="http://localhost:9/"></iframe>
+  <div class="form-template">
+    <div><label>Nombre</label></div><div class="tall"><label>Teléfono<span aria-hidden="true">*</span></label></div>
+    <div><label>Mascota</label></div><div class="near"><label>Motivo</label></div>
+    <div class="form-template__submit tall">Enviar</div>
+  </div>
   <p class="small">This paragraph is set far too small for running text on a phone.</p>
   <p class="small">A second small paragraph, so small text carries most of the page.</p>
   <p>A single comfortable paragraph at the default size of the page.</p>
@@ -87,7 +94,7 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
   let url;
 
   beforeAll(async () => {
-    server = createServer((request, response) => response.writeHead(200, { "content-type": "text/html" }).end(page));
+    server = createServer((request, response) => response.writeHead(200, { "content-type": "text/html; charset=utf-8" }).end(page));
     await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
     url = `http://127.0.0.1:${server.address().port}`;
   });
@@ -100,11 +107,15 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
     expect(result.overflow.offenders).toContain("div.wide");
     expect(result.clipped).toEqual(["div.field inside div.card (50px)"]);
     expect(result.blankFrames).toBe(1);
+    expect(result.unevenForms).toEqual([{ taller: "Teléfono", shorter: "Nombre", px: 40 }]);
     expect(result.consoleErrors).toEqual(["boom"]);
     expect(result.bodyFontPx).toBe(12);
     expect(result.missingFonts).toEqual(["NoSuchFont"]);
     expect(result.solidCtas).toEqual({ aboveFold: 2, maxPerViewport: 2 });
     expect(result.theme).toEqual({ designSystem: "neus", colorScheme: "light", primary: "#283593", font: "sans-serif" });
-    expect(problems([result])).toHaveLength(6);
+    expect(problems([result])).toHaveLength(7);
+    expect(problems([result])).toContain(
+      '/ at 390px: uneven form row: "Teléfono" is 40px taller than "Nombre"; give both fields a hint or neither, keep hints to one line, or put the long one on its own row (form-template__full)',
+    );
   }, 30_000);
 });

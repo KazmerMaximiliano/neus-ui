@@ -53,9 +53,9 @@
       { "name": "cards", "note": "Each item a Card variant=\"auto\" (CardHeader with icon and title, CardContent) in a <ul> grid; the system decides border, fill or flat." }
     ],
     "testimonials": [
-      { "name": "plain", "note": "Quotes set as running text in columns, name and role below each; no surfaces." },
-      { "name": "card", "note": "Each quote a Card variant=\"auto\": the quote in CardContent, name and role in CardFooter." },
-      { "name": "featured", "note": "One large quote in the display face carries the section; at most two short ones beside or below it." }
+      { "name": "plain", "note": "TestimonialList variant=\"plain\": quotes as running text, a rule beside each quote ties it to its author. Only when the system's DESIGN.md favors no surfaces." },
+      { "name": "card", "note": "TestimonialList variant=\"card\": each quote in a card with the author's avatar, name and role. The clearest reading; the default." },
+      { "name": "featured", "note": "TestimonialList variant=\"featured\": one large quote card spans the row, the rest are cards below it." }
     ],
     "cta": [
       { "name": "band", "note": "A full-width band one tone step off the ground, with a headline and one action; a form, if any, sits in a Card inside it." },

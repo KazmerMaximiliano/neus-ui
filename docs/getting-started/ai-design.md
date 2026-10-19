@@ -80,7 +80,7 @@ npx neus shot --stop                  # stops the server neus shot started
 ```
 
 `neus shot` captures every route full page at each width into `.neus/shots/<route>-<width>.png`
-and reports horizontal scroll, content cut off by `overflow: hidden`, console errors, the body text size, fonts that did
+and reports horizontal scroll, content cut off by `overflow: hidden`, FormTemplate rows with fields of uneven height, console errors, the body text size, fonts that did
 not load, solid buttons per viewport and the active system, scheme and primary color. Without
 `--url` it runs the project's `dev` script, reads the URL it prints and leaves it running for
 the next round. `.neus/` ignores itself in git.

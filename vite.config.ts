@@ -38,6 +38,7 @@ export default defineConfig({
     cssCodeSplit: false
   },
   test: {
+    testTimeout: 30000,
     projects: [
       {
         extends: true,

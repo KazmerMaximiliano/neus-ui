@@ -547,7 +547,7 @@ x-neus:
         --card-header-border-color: var(--card-border-color)
         --card-nested-background: var(--card-background)
         --card-content-padding: 16px
-        --card-footer-padding: 8px
+        --card-footer-padding: 8px 16px 16px
         --card-footer-gap: 8px
         --card-media-object-fit: cover
         --card-media-object-position: center
@@ -1219,6 +1219,8 @@ x-neus:
         --testimonial-quote-line-height: 1.55
         --testimonial-featured-quote-size: var(--heading-md-size)
         --testimonial-name-weight: 600
+        --testimonial-rule-width: 3px
+        --testimonial-rule-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-surface))
         --testimonial-gap: var(--space-4)
         --call-to-action-gap: var(--space-8)
         --site-footer-background: var(--color-surface)
@@ -1294,6 +1296,8 @@ progress without losing the action's accessible name or causing disruptive resiz
 
 A Card groups related content; its children own actions. Keep
 media inside the rounded surface and place spacing in Header, Content, and Footer.
+Footer actions keep the content's side and bottom inset; a full-width action never
+touches the card edge.
 Do not make a passive surface look clickable through hover elevation.
 
 ### Input
@@ -1318,7 +1322,7 @@ Cards with a tinted icon tile and a short title, three per row on desktop; a pla
 
 ### Testimonial
 
-Plain quotes or cards with an initials avatar and the person's role. Never stars or ratings the brief did not give.
+Cards with an initials avatar, the name and the role, so every quote reads with its author; a featured card for one strong quote. Never stars or ratings the brief did not give.
 
 ### Supporting controls and content
 

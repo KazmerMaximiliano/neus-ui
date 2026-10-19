@@ -198,7 +198,7 @@ x-neus:
         --card-border-color: var(--color-text-primary)
         --card-shadow: 4px 4px 0 var(--color-text-primary)
         --card-header-border-width: 0px
-        --card-footer-padding: 12px
+        --card-footer-padding: 12px 16px 16px
         --card-footer-gap: 12px
         --card-filled-border-width: 3px
         --card-outlined-border-width: 3px

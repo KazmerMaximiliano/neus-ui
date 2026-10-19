@@ -25,6 +25,21 @@ const renderSelect = (props: Partial<SelectProps> = {}) =>
 
 const combobox = () => screen.getByRole("combobox", { name: "Country" });
 
+describe("Select required", () => {
+  it("marks the label and the trigger, and forwards the asterisk hooks", () => {
+    const { rerender } = render(<Select label="Motivo" options={[{ value: "a", label: "A" }]} />);
+    expect(screen.getByRole("combobox", { name: "Motivo" })).not.toHaveAttribute("aria-required");
+    expect(document.querySelector(".select__required")).not.toBeInTheDocument();
+    rerender(<Select label="Motivo" required requiredClassName="star" requiredStyle={{ color: "red" }} options={[{ value: "a", label: "A" }]} />);
+    expect(screen.getByRole("combobox", { name: "Motivo" })).toHaveAttribute("aria-required", "true");
+    const star = document.querySelector(".select__required")!;
+    expect(star).toHaveTextContent("*");
+    expect(star).toHaveAttribute("aria-hidden", "true");
+    expect(star).toHaveClass("star");
+    expect(star).toHaveStyle({ color: "rgb(255, 0, 0)" });
+  });
+});
+
 describe("Select description", () => {
   it("renders help text and announces it before the error", () => {
     const { rerender } = render(<Select label="Plan" options={[{ value: "pro", label: "Pro" }]} description="You can change it later." />);
