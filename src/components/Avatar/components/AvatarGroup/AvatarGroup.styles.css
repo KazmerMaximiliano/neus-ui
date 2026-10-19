@@ -1,0 +1,18 @@
+.avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.avatar-group > .avatar {
+  box-shadow: 0 0 0 var(--avatar-group-ring-width) var(--avatar-group-ring-color);
+}
+
+.avatar-group > .avatar + .avatar {
+  margin-inline-start: calc(-1 * var(--avatar-size) * var(--avatar-group-overlap));
+}
+
+.avatar-group__more {
+  background: var(--color-surface-container-high);
+  color: var(--color-text-secondary);
+  font-size: calc(var(--avatar-size) * 0.32);
+}

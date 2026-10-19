@@ -1,0 +1,11 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --media-placeholder-background: var(--color-surface-container-low);
+  --media-placeholder-stripe: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+  --media-placeholder-color: var(--color-text-secondary);
+  --media-placeholder-radius: var(--radius-default);
+  --media-placeholder-font-family: var(--font-mono);
+  --media-placeholder-font-size: var(--fs-xs);
+  --media-placeholder-padding: var(--space-4);
+}

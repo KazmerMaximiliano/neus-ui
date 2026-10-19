@@ -4,9 +4,9 @@ import { renderToString } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ThemeProvider } from "../providers";
 
-// Every public component and template has one story with complete args.
+// Every public component, section and template has one story with complete args.
 const STORY_MODULES = import.meta.glob<Parameters<typeof composeStories>[0]>(
-  "../{components,templates}/**/*.stories.tsx",
+  "../{components,templates,sections}/**/*.stories.tsx",
   { eager: true },
 );
 const STORIES = Object.entries(STORY_MODULES).flatMap(([file, module]) =>
@@ -15,7 +15,7 @@ const STORIES = Object.entries(STORY_MODULES).flatMap(([file, module]) =>
 
 describe("server rendering", () => {
   it("finds the stories", () => {
-    expect(STORIES.length).toBeGreaterThanOrEqual(30);
+    expect(STORIES.length).toBeGreaterThanOrEqual(50);
   });
 
   it.each(STORIES)("renders $name ($file) without a DOM", ({ Story }) => {

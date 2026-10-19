@@ -19,7 +19,7 @@ npx neus init
 
 1. **Design system**: one of the six, or **None** to let the agent derive one for the project.
 2. **Color scheme**: light or dark.
-3. **Action colors**: keep the system's, or choose primary, success, error and info.
+3. **Action colors**: keep the system's, or choose primary, success, error, info and warning.
 4. **Language** of user-facing copy.
 5. **Agents**: Claude Code, Codex or both.
 
@@ -48,12 +48,19 @@ in `AGENTS.md` outside the `neus-ui` markers. Commit all of them.
 
 ## How a design session runs
 
-The `neus-design` skill runs in the main conversation, where it can ask and iterate:
+The `neus-design` skill runs in the main conversation, where it can ask and iterate. It
+works in full mode for new public pages, new products and multi-screen flows, and in quick
+mode for one screen, a widget or a change: quick mode skips the spec file, the audit and the
+reviewer, and keeps the brand question, `neus lint` and the screenshots.
 
 1. **Contract.** Runs `npx neus context` (the active system, key tokens, catalog and
    which component answers which need) and `npx neus docs <Name>` for each component it
    will use.
-2. **One round of questions**, only when the brief leaves something open.
+2. **One round of questions** for every new page, screen or product: the brand when it was
+   never decided (two or three directions built for the subject, or the system as it is),
+   the composition of a public page, pictures and missing facts. The chosen brand is applied
+   with `npx neus init --primary <hex> --brand "..."` and a block of ground, ink and font
+   tokens in `neus.overrides.css`, and recorded in `neus.config.json`.
 3. **System derivation**, in None mode only (below).
 4. **Spec.** Writes `design/specs/<slug>.md`, so another session, in Claude Code or Codex,
    continues in the same direction.
@@ -73,7 +80,7 @@ npx neus shot --stop                  # stops the server neus shot started
 ```
 
 `neus shot` captures every route full page at each width into `.neus/shots/<route>-<width>.png`
-and reports horizontal scroll, console errors, the smallest running-text size, fonts that did
+and reports horizontal scroll, content cut off by `overflow: hidden`, console errors, the body text size, fonts that did
 not load, solid buttons per viewport and the active system, scheme and primary color. Without
 `--url` it runs the project's `dev` script, reads the URL it prints and leaves it running for
 the next round. `.neus/` ignores itself in git.

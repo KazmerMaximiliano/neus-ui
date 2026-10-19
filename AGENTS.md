@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 36 reusable UI components and public sections
+- 40 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -64,6 +64,7 @@ PERMITTED operations:
 neus-ui/
 ├── src/
 │   ├── components/              [DIRECTORY] UI components and public sections
+│   ├── sections/                [DIRECTORY] Public page sections (`neus-ui/sections` entry)
 │   ├── templates/               [DIRECTORY] Pre-built layouts
 │   ├── hooks/                   [DIRECTORY] Custom React hooks
 │   ├── providers/               [DIRECTORY] Context providers
@@ -72,6 +73,7 @@ neus-ui/
 │   ├── services/                [DIRECTORY] Auxiliary services
 │   ├── tests/                   [DIRECTORY] Cross-library suites (server rendering)
 │   ├── index.ts                 [FILE] Library entry point (`neus-ui`)
+│   ├── sections.ts              [FILE] Sections entry (`neus-ui/sections`)
 │   └── theme.ts                 [FILE] Server-safe entry (`neus-ui/theme`), no React or CSS
 ├── cli/                         [DIRECTORY] `neus` CLI (init, shot, context, docs, lint) and the project templates it writes
 ├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus init`
@@ -165,10 +167,13 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (36 total)
+### Implemented Components and Public Subcomponents (40 total)
 
 | NAME            | FILE_PATH                       | STATUS | FEATURES                                        |
 | --------------- | ------------------------------- | ------ | ----------------------------------------------- |
+| Alert           | src/components/Alert/           | STABLE | Info/success/warning/error, live roles, actions, labelled dismiss |
+| Avatar          | src/components/Avatar/          | STABLE | Picture or initials, pre-hydration failure fallback, sizes and shapes |
+| AvatarGroup     | src/components/Avatar/components/AvatarGroup/ | STABLE | Overlap, size for its avatars, +N count |
 | Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
 | Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links |
 | Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
@@ -204,7 +209,26 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Container       | src/components/Container/       | STABLE | Max-width sizes, responsive gutter, landmark element |
 | Stack           | src/components/Stack/           | STABLE | Responsive direction and space-scale gap, list semantics |
 | Grid            | src/components/Grid/            | STABLE | Responsive columns or auto-fit minimum width |
-| Section         | src/components/Section/         | STABLE | Page band tones, vertical rhythm, inner Container |
+| Section         | src/components/Section/         | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container |
+| MediaPlaceholder | src/components/MediaPlaceholder/ | STABLE | Sized stand-in for a missing picture, labelled with what it will show |
+
+### Implemented Sections (9 total, `neus-ui/sections`)
+
+Sections follow the component file structure inside `src/sections/`; owned items live in
+their family's `components/` (FeatureItem in FeatureList, Testimonial in TestimonialList),
+and the list variant reaches its items through a `.context.ts` file.
+
+| NAME            | FILE_PATH                         | STATUS | FEATURES                                          |
+| --------------- | --------------------------------- | ------ | ------------------------------------------------- |
+| SiteHeader      | src/sections/SiteHeader/          | STABLE | Native popover phone menu, skip link, sticky, linkComponent |
+| Hero            | src/sections/Hero/                | STABLE | Split/centered/media-first, display title, note, media |
+| SectionHeader   | src/sections/SectionHeader/       | STABLE | Eyebrow, title, description, side actions         |
+| FeatureList     | src/sections/FeatureList/         | STABLE | Grid/list/cards variants through context          |
+| FeatureItem     | src/sections/FeatureList/components/FeatureItem/ | STABLE | Icon tile, title, text, action |
+| TestimonialList | src/sections/TestimonialList/     | STABLE | Plain/card/featured variants through context      |
+| Testimonial     | src/sections/TestimonialList/components/Testimonial/ | STABLE | Figure, localized quotes, avatar |
+| CallToAction    | src/sections/CallToAction/        | STABLE | Band/split, tone, aside form                      |
+| SiteFooter      | src/sections/SiteFooter/          | STABLE | Columns as labelled navigation, legal line, linkComponent |
 
 ### Implemented Templates (2 total)
 
@@ -461,6 +485,7 @@ Theme colors with automatic variants:
 | `--color-success`      | main, light, dark | Success state                               |
 | `--color-error`        | main, light, dark | Error state                                 |
 | `--color-info`         | main, light, dark | Info state                                  |
+| `--color-warning`      | main, light, dark | Warning state                               |
 | `--color-white`        | base only         | White                                       |
 | `--color-black`        | base only         | Black                                       |
 | `--color-gray-*`       | base only         | 900, 700, 600, 500, 400, 300, 200, 150, 100 |
@@ -646,6 +671,7 @@ For agents needing additional information:
 | Start here | [Documentation index](./docs/README.md) |
 | Installation and onboarding | [Getting started](./docs/getting-started/README.md) |
 | Components and public sections | [Component catalog](./docs/components/README.md); individual docs/components/ComponentName.md guides |
+| Public page sections (`neus-ui/sections`) | [Sections](./docs/sections/README.md) |
 | Application and form layouts | [Templates](./docs/templates/README.md) |
 | Provider, scopes and runtime colors | [ThemeProvider](./docs/design/theme-provider.md) |
 | Per-part classes/styles and CSS cascade | [Customization](./docs/design/customization.md) |

@@ -23,6 +23,7 @@ export type ActionPalette = {
   success?: string;
   error?: string;
   info?: string;
+  warning?: string;
 };
 
 export type DesignSystemPalette = {

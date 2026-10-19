@@ -1,0 +1,39 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --site-header-height: 64px;
+  --site-header-background: var(--color-surface);
+  --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  --site-header-border-color: var(--color-border-subtle);
+  --site-header-brand-font-family: var(--font-display);
+  --site-header-brand-font-size: var(--fs-lg);
+  --site-header-brand-font-weight: 700;
+  --site-header-link-color: var(--color-text-secondary);
+  --site-header-link-active-color: var(--color-text-primary);
+  --site-header-link-font-size: var(--fs-base);
+  --site-header-link-gap: var(--space-6);
+  --site-header-menu-background: var(--color-surface);
+  --hero-gap: var(--space-12);
+  --hero-body-gap: var(--space-6);
+  --hero-media-radius: var(--radius-default);
+  --section-header-gap: var(--space-3);
+  --section-header-margin-block-end: var(--space-12);
+  --feature-icon-size: 40px;
+  --feature-icon-glyph-size: 20px;
+  --feature-icon-radius: var(--radius-md);
+  --feature-icon-background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface));
+  --feature-icon-color: var(--color-primary-text);
+  --feature-gap: var(--space-3);
+  --testimonial-quote-size: var(--fs-lg);
+  --testimonial-quote-line-height: 1.55;
+  --testimonial-featured-quote-size: var(--heading-md-size);
+  --testimonial-name-weight: 600;
+  --testimonial-gap: var(--space-4);
+  --call-to-action-gap: var(--space-8);
+  --site-footer-background: var(--color-surface);
+  --site-footer-border-color: var(--color-border-subtle);
+  --site-footer-padding-block: var(--space-12);
+  --site-footer-link-color: var(--color-text-secondary);
+  --site-footer-title-color: var(--color-text-primary);
+  --site-footer-font-size: var(--fs-base);
+}

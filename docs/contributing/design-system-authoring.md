@@ -39,14 +39,14 @@ while the Neus extension explicitly controls which values override defaults.
 | Field | Meaning |
 | --- | --- |
 | `id` | The directory's typed system identifier |
-| `palette.light`, `palette.dark` | `primary` and `onPrimary`, plus optional hover, active, focus, success, error and info colors |
+| `palette.light`, `palette.dark` | `primary` and `onPrimary`, plus optional hover, active, focus, success, error, info and warning colors |
 | `foundations` | Shared variable defaults; only the Neus document owns these |
 | `tokens` | Semantic colors, typography, elevation and other system-wide variables |
 | `recipes.<family>` | Component-specific CSS variable declarations |
 
 Foundations, tokens and recipes contain `base`, `light` and/or `dark` mappings from existing
-`--variable-names` to scalar values or token references. All twenty recipe families must be
-present; an empty mapping intentionally inherits Neus. Palettes resolve to six-digit hex
+`--variable-names` to scalar values or token references. All twenty-six recipe families
+(`RECIPE_NAMES` in `src/design-systems/tooling/design-systems.consts.ts`) must be present; an empty mapping intentionally inherits Neus. Palettes resolve to six-digit hex
 colors for the existing runtime color utilities.
 
 ```yaml

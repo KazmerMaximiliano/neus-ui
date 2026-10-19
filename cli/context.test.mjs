@@ -40,9 +40,15 @@ describe("neus context", () => {
     expect(text).toContain("## Do's and Don'ts");
     expect(text).toContain("- Heading: ");
     expect(text).toContain("- FormTemplate: ");
-    expect(text).toContain("| Feature with icon, title and text |");
+    expect(text).toContain("- Hero: ");
+    expect(text).toContain("| Features or services |");
     expect(text).toContain("`--space-1`");
     expect(text).not.toMatch(/^Format:/m);
+  });
+
+  it("tells whether the brand is still to be decided", () => {
+    expect(contextFor(project({}))).toContain("Brand: not decided.");
+    expect(contextFor(project({ brand: "Forest and cream: #1f5130, cream ground, Fraunces" }))).toContain("Brand: Forest and cream");
   });
 
   it("adds the layout guidance for public pages only", () => {

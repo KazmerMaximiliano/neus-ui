@@ -12,7 +12,11 @@ const NEUS = path.join(EVAL, "../cli/neus.mjs");
 const AXES = ["hierarchy", "composition", "fidelity", "substance", "responsive", "polish"];
 // Project files that hold what the session wrote, copied for later re-scoring.
 const CODE = ["src", "app", "pages", "design", "index.html", "neus.config.json"];
-const PHASE_1 = { designSystem: "neus", primary: "#283593", font: "Manrope" };
+
+// The primary a run must render: the project's chosen color, else its system's light palette.
+const expectedPrimary = (config) => config.colors?.primaryColor ??
+  readFileSync(path.join(EVAL, `../src/design-systems/${config.designSystem}/generated/${config.designSystem}.consts.ts`), "utf8")
+    .match(/"light": \{\s*"primary": "(#[0-9a-f]{6})"/i)?.[1];
 
 const readJson = (file) => existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : null;
 const fail = (message) => {
@@ -90,21 +94,26 @@ const summarize = (label) => {
 
   const rows = runs.map(({ id, brief, metrics, scores }) => {
     const { theme } = metrics.pages[0];
-    const minBody = Math.min(...metrics.pages.map((page) => page.minBodyFontPx ?? Infinity));
+    // Runs measured before bodyFontPx existed carry the older minBodyFontPx.
+    const minBody = Math.min(...metrics.pages.map((page) => page.bodyFontPx ?? page.minBodyFontPx ?? Infinity));
     const axes = AXES.map((axis) => scores.axes?.[axis]).filter(Number.isFinite);
     const { p0, coverage } = lintSummary(metrics.lint);
-    return [id, brief.surface, [theme.designSystem, theme.primary, theme.font].join(" · "), Number.isFinite(minBody) ? `${minBody}px` : "–",
+    return [id, brief.surface, [theme.designSystem, theme.primary, theme.font].join(" · "), Number.isFinite(minBody) ? `${+minBody.toFixed(1)}px` : "–",
       `${coverage ?? "–"}%`, p0, metrics.problems.length, axes.length ? (axes.reduce((sum, value) => sum + value, 0) / axes.length).toFixed(1) : "–",
       scores.versus ?? "–", scores.readScreenshots ?? "–"];
   });
-  const first = runs.find(({ id }) => id === "01");
-  const theme = first?.metrics.pages[0].theme;
-  const phase1 = first && theme.designSystem === PHASE_1.designSystem && theme.primary?.toLowerCase() === PHASE_1.primary &&
-    theme.font === PHASE_1.font && runs.every(({ scores }) => scores.readScreenshots === true);
-  // A run without running text (a dashboard of figures) has nothing under 16px.
-  const phase2 = runs.every(({ metrics }) => {
+  // Every run renders the contract it was set up with: its system and its chosen (or the system's) primary.
+  const faithful = runs.every(({ id, metrics }) => {
+    const config = readJson(path.join(root, id, "code", "neus.config.json"));
+    const { theme } = metrics.pages[0];
+    return config && theme.designSystem === config.designSystem && theme.primary?.toLowerCase() === expectedPrimary(config)?.toLowerCase();
+  });
+  const phase1 = faithful && runs.every(({ scores }) => scores.readScreenshots === true);
+  // The 16px body is a public-page rule; app screens keep the system's 14px controls scale.
+  const phase2 = runs.every(({ brief, metrics }) => {
     const { p0, coverage } = lintSummary(metrics.lint);
-    return coverage >= 80 && p0 === 0 && metrics.pages.every(({ minBodyFontPx }) => (minBodyFontPx ?? 16) >= 16);
+    return coverage >= 80 && p0 === 0 && (brief.surface !== "page" ||
+      metrics.pages.every((page) => (page.bodyFontPx ?? page.minBodyFontPx ?? 16) >= 16));
   });
   const pages = runs.filter(({ brief }) => brief.surface === "page");
   const wins = pages.filter(({ scores }) => ["win", "tie"].includes(scores.versus)).length;
@@ -112,12 +121,12 @@ const summarize = (label) => {
   const summary = [
     `# Evaluation run: ${label}`,
     "",
-    "| Brief | Surface | System · primary · font | Smallest text | Coverage | P0 | Problems | Axes (avg) | vs Claude Design | Read shots |",
+    "| Brief | Surface | System · primary · font | Body text | Coverage | P0 | Problems | Axes (avg) | vs Claude Design | Read shots |",
     "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ...rows.map((row) => `| ${row.join(" | ")} |`),
     "",
-    `- Phase 1 cut: ${phase1 ? "pass" : "not met"} (brief 01 on ${Object.values(PHASE_1).join(" · ")}, every run read its screenshots).`,
-    `- Phase 2 cut: ${phase2 ? "pass" : "not met"} (every brief: coverage of 80% or more, no P0, running text of 16px or more).`,
+    `- Phase 1 cut: ${phase1 ? "pass" : "not met"} (every run renders its configured system and primary, and read its screenshots).`,
+    `- Phase 2 cut: ${phase2 ? "pass" : "not met"} (every brief: coverage of 80% or more, no P0; public pages: body text of 16px or more).`,
     `- Phase 3 cut: ${wins} of ${pages.length} public pages win or tie (needs 2 of 3).`,
     "",
     "Problems measured by neus shot:",

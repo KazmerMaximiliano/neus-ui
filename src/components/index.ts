@@ -26,5 +26,8 @@ export * from "./Container";
 export * from "./Stack";
 export * from "./Grid";
 export * from "./Section";
+export * from "./MediaPlaceholder";
+export * from "./Alert";
+export * from "./Avatar";
 
 export { useColors } from "./theme";

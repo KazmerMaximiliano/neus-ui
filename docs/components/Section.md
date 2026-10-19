@@ -25,7 +25,8 @@ export const Example = () => {
 ```
 
 Alternate `default` and `subtle` between consecutive sections instead of drawing rules; keep
-`accent` for one band, such as the final call to action.
+`accent`, `brand` or `inverse` for one or two bands, such as the agenda or the final call to
+action.
 
 ## Behavior and accessibility
 
@@ -33,8 +34,13 @@ Section renders a `section` element; with an accessible name (`aria-labelledby` 
 its heading) it becomes a region landmark. `id` makes it a link destination, for example a
 Button with `href="#features"`. `tone` sets the band background: `default` is transparent,
 `subtle` uses the system's low surface container and `accent` tints the surface with 8% of
-the primary color while keeping the normal ink, so primary buttons inside stay legible. An
-inverse band is not offered: it needs a local ThemeProvider with the opposite color scheme.
+the primary color while keeping the normal ink, so primary buttons inside stay legible.
+`brand` fills the band with the primary color and `inverse` with the ink, switching the text to
+the matching foreground; muted Text follows. On `brand`, primary buttons swap fill and ink
+(a solid button takes the band's text color with the primary color as its label), so keep
+the default `color`. Put links and fields inside a Card, which keeps its own surface, muted
+color and button colors. The color scheme does not change: for a dark band whose
+fields and cards are dark too, see the dark band pattern in [ThemeProvider](../design/theme-provider.md).
 `spacing` sets the vertical padding (`lg` grows from 48px to 96px in Neus). `container`
 wraps the children in a Container of that size; `false` renders them directly and drops
 `contentClassName` and `contentStyle`.
@@ -48,7 +54,7 @@ optional and default to undefined unless noted.
 | Prop | Type | Default / requirement | Purpose |
 | --- | --- | --- | --- |
 | `as` | `"section" \| "div" \| "header" \| "footer" \| "aside"` | `"section"` | Rendered element |
-| `tone` | `"default" \| "subtle" \| "accent"` | `"default"` | Band background |
+| `tone` | `"default" \| "subtle" \| "accent" \| "brand" \| "inverse"` | `"default"` | Band background |
 | `spacing` | `"sm" \| "md" \| "lg"` | `"lg"` | Vertical padding |
 | `container` | `ContainerSize \| false` | `"lg"` | Container around the content |
 | `children` | `ReactNode` | Omitted | Content |
@@ -109,6 +115,12 @@ dependencies. Do not edit generated files.
 | `--section-subtle-color` | section subtle color | `currentColor` |
 | `--section-accent-background` | section accent background | `color-mix(in srgb, var(--color-primary) 8%, var(--color-surface))` |
 | `--section-accent-color` | section accent color | `var(--color-text-primary)` |
+| `--section-brand-background` | section brand background | `var(--color-primary)` |
+| `--section-brand-color` | section brand color | `var(--color-text-on-primary)` |
+| `--section-brand-muted-color` | section brand muted color | `var(--color-text-on-primary)` |
+| `--section-inverse-background` | section inverse background | `var(--color-text-primary)` |
+| `--section-inverse-color` | section inverse color | `var(--color-surface)` |
+| `--section-inverse-muted-color` | section inverse muted color | `color-mix(in srgb, var(--color-surface) 75%, transparent)` |
 
 ### Geometry and layout
 

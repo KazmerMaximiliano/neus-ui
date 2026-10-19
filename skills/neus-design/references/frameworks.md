@@ -13,6 +13,12 @@ not on its name. `<styles>` below means `paths.styles`.
 
 ## Shared facts
 
+- A dark band on a light page: `Section tone="inverse"` in every rendering
+  mode. When the band's own fields and cards must be dark too, wrap it in
+  `<ThemeProvider scope="local" colorScheme="dark" initialTheme={neusConfig.colors}>`
+  with `neusConfig` imported from `neus.config.json` (the ThemeProvider guide
+  in `node_modules/neus-ui/docs/design/theme-provider.md`).
+
 - Component modules ship with `"use client"`. Their look comes from CSS:
   the nearest `data-design-system` / `data-color-scheme` attributes and the
   variables on that boundary. Only `useTheme()` and `useColors()` need a
@@ -96,7 +102,10 @@ Everything in `ssr`, plus:
   `routes` inside the island; pass `currentPath={Astro.url.pathname}`;
   navigate with plain `href` links (no `linkComponent` needed).
 - A React component without a client directive renders to static HTML with
-  no JavaScript, which suits Badge, Card or Link with no handlers.
+  no JavaScript, which suits Badge, Card or Link with no handlers, the
+  layout components and every section from `neus-ui/sections`: the
+  SiteHeader phone menu uses the native Popover API and needs no
+  hydration. Hydrate only the parts with handlers, such as a form.
 - Directives: `client:load` above the fold, `client:visible` below,
   `client:only="react"` for a component that fails in server rendering.
 - Verify with `npx astro check`.

@@ -11,11 +11,13 @@ export const APPLE_METADATA = {
 export const APPLE_PALETTE: DesignSystemPalette = {
   "light": {
     "primary": "#0071e3",
-    "onPrimary": "#ffffff"
+    "onPrimary": "#ffffff",
+    "warning": "#ff9500"
   },
   "dark": {
     "primary": "#2997ff",
     "onPrimary": "#161616",
-    "hover": "#4aa8ff"
+    "hover": "#4aa8ff",
+    "warning": "#ff9f0a"
   }
 };

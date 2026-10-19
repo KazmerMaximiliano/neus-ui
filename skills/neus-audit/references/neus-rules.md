@@ -48,6 +48,12 @@ the project wrote.
 - Button, Sidebar and AppTemplate items with `href` render links with
   `aria-current="page"` on the active item. Flag navigation built with
   `onClick` and `window.location` where an `href` would do.
+- SiteHeader renders a `banner`, a labelled `nav`, a skip link and a native
+  popover menu that closes on Escape and on a followed link; SiteFooter a
+  `contentinfo` with one labelled `nav` per column; Hero, CallToAction and
+  Section with `aria-labelledby` are named regions; Testimonial is a
+  `figure` with `blockquote` and `q`. Check `labels` are in the project's
+  language.
 - Heading separates the document level (`as`) from the look (`size`): judge
   heading order by `as`. Section with `aria-labelledby` is a region landmark;
   Text with `lines` keeps the full text in the DOM.
@@ -70,6 +76,9 @@ the project wrote.
   documented parts, only public entries (`"neus-ui"`, `"neus-ui/theme"`, the
   stylesheet).
 - Palette variables are never written by hand; `npx neus init` owns them.
+- The brand block in `neus.overrides.css` sets only ground, ink, border,
+  font and button-label tokens (the neus-design skill's `references/brand.md`),
+  in light and dark, with ink at 4.5:1 or more on both grounds.
 - No inline background, color or border on interactive components.
 - One global theme owner per document (see the neus-design skill's
   `references/frameworks.md`).

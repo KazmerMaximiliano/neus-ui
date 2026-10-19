@@ -14,11 +14,13 @@ export const CARBON_PALETTE: DesignSystemPalette = {
     "onPrimary": "#ffffff",
     "hover": "#0353e9",
     "active": "#002d9c",
-    "error": "#da1e28"
+    "error": "#da1e28",
+    "warning": "#f1c21b"
   },
   "dark": {
     "primary": "#78a9ff",
     "onPrimary": "#161616",
-    "error": "#ff8389"
+    "error": "#ff8389",
+    "warning": "#f1c21b"
   }
 };

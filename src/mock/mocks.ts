@@ -23,6 +23,11 @@ export const mockThemeColors: ThemeColors = {
     light: "rgba(40, 53, 147, 0.1)",
     dark: "#1a237e",
   },
+  warning: {
+    main: "#ed6c02",
+    light: "rgba(237, 108, 2, 0.1)",
+    dark: "#c95c02",
+  },
   gray: {
     900: "#333333",
     700: "#475569",

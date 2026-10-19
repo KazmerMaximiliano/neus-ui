@@ -42,6 +42,7 @@ export const resolvePalette = (
     success: colorVariants(overrides.successColor ?? palette.success ?? (isDark ? "#66bb6a" : "#4caf50"), scheme),
     error: colorVariants(overrides.errorColor ?? palette.error ?? (isDark ? "#ef5350" : "#f44336"), scheme),
     info: colorVariants(overrides.infoColor ?? palette.info ?? primary.main, scheme),
+    warning: colorVariants(overrides.warningColor ?? palette.warning ?? (isDark ? "#ffa726" : "#ed6c02"), scheme),
     white: "#ffffff",
     black: "#000000",
     gray: isDark
@@ -61,7 +62,7 @@ export const resolvePalette = (
 
   if (overrides.primaryColor) variables["--color-primary-text"] = "color-mix(in srgb, var(--color-primary) 25%, var(--color-text-primary))";
 
-  for (const name of ["primary", "success", "error", "info"] as const) {
+  for (const name of ["primary", "success", "error", "info", "warning"] as const) {
     variables[`--color-${name}`] = colors[name].main;
     variables[`--color-${name}-light`] = colors[name].light;
     variables[`--color-${name}-dark`] = colors[name].dark;

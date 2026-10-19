@@ -9,12 +9,16 @@ Adapted from taste-skill (MIT, github.com/Leonxlnx/taste-skill), the
 OpenDesign craft rules (Apache 2.0) and the neus systems' own do's and
 don'ts.
 
-## The system decides first
+## The system and the brand decide first
 
-When the active DESIGN.md defines a device that appears below as a tell (the
-Neus pill buttons with tracked uppercase labels, its brand gradient tokens,
-a purple Material primary), that is a brand decision: keep it where the
-components use it. Do not amplify it in your own markup, and never add a
+The active DESIGN.md decides how components are built; the brand in
+`neus.config.json` (see [brand.md](brand.md)) decides the action color, the
+ground, the display face and the button case on top of it. When the brand is
+`"system"`, or a direction keeps one of the system's devices, the system's
+look stands. When the active DESIGN.md defines a device that appears below as
+a tell (the Neus pill buttons with tracked uppercase labels, its brand
+gradient tokens, a purple Material primary), keep it where the components use
+it unless the brand changed it. Do not amplify it in your own markup, and never add a
 tell the system does not define. Its Do's and Don'ts decide which devices
 your own markup may use (overlines above titles, bordered cards, gradients,
 uppercase); when they are silent, leave the device out. When `derivedSystem`
@@ -79,8 +83,9 @@ component. Follow this order:
    ```
 
    Each option names a curated layout for the hero, the features, the
-   testimonials and the call to action. Choose the one that can carry
-   something only this subject has, and record why. Palette and type are
+   testimonials and the call to action. Offer them in the Phase 1 question
+   (SKILL.md) with the one that can carry something only this subject has
+   recommended, and record the choice and why. Palette and type are
    dealt only in None mode, while deriving the system
    ([system-derivation.md](system-derivation.md)). If the
    `design-taste-frontend` skill (taste-skill) is installed you may use its
@@ -115,7 +120,9 @@ two. For every device you leave out, something must take its place.
 - **Anchor.** Every section has a visual anchor: a group of cards, a real
   picture or interface, or large type.
 - **Bands.** Separate sections by alternating `Section tone="default"` and
-  `tone="subtle"`, not with rules; `tone="accent"` once at most.
+  `tone="subtle"`, not with rules. One or two bands of strong color
+  (`tone="brand"` or `tone="inverse"`) give the page its rhythm: the agenda,
+  the services, the final call to action.
 - **Groups.** Features and testimonials as `Card variant="auto"` in a
   `Grid as="ul"`:
   the system decides whether a card looks bordered, filled or flat. What
@@ -126,7 +133,10 @@ two. For every device you leave out, something must take its place.
 - **Pictures.** Real pictures of the subject or its real interface, never
   generic stock, gradient blobs or fake dashboards built from grey bars
   standing in for the product. Every image local, sized and credited when it
-  is not the client's own.
+  is not the client's own. Without them, a `MediaPlaceholder` labelled with
+  the exact shot (the vet with a dog in the consulting room, the team on
+  stage) holds the place, marked `SAMPLE:`. A page about people or a place
+  needs pictures.
 - **Motion.** Motion explains a change or performs the idea; `transform` and
   `opacity` only, with a `prefers-reduced-motion` fallback.
 

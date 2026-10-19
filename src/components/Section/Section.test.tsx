@@ -70,8 +70,8 @@ describe("Section", () => {
 
   it("types tones and container sizes", () => {
     expectTypeOf<SectionProps>().toHaveProperty("contentStyle");
-    // @ts-expect-error inverse bands need a local ThemeProvider
-    void (<Section tone="inverse" />);
+    // @ts-expect-error tones are named roles, not colors
+    void (<Section tone="primary" />);
     // @ts-expect-error container takes a size or false
     void (<Section container />);
   });

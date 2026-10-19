@@ -15,4 +15,10 @@
   --section-subtle-color: currentColor;
   --section-accent-background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
   --section-accent-color: var(--color-text-primary);
+  --section-brand-background: var(--color-primary);
+  --section-brand-color: var(--color-text-on-primary);
+  --section-brand-muted-color: var(--color-text-on-primary);
+  --section-inverse-background: var(--color-text-primary);
+  --section-inverse-color: var(--color-surface);
+  --section-inverse-muted-color: color-mix(in srgb, var(--color-surface) 75%, transparent);
 }

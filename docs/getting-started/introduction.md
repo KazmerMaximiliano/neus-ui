@@ -2,7 +2,7 @@
 
 [Getting started](./README.md) · [Documentation](../README.md)
 
-Neus UI is a React 19+ component library with named TypeScript exports, 36 public components
+Neus UI is a React 19+ component library with named TypeScript exports, 40 public components
 and sections, and two layout templates. Components own structure, accessibility and
 interactions. CSS tokens provide appearance through six scoped systems: Neus UI, Apple,
 Carbon, Material, Neobrutalism and Vercel.

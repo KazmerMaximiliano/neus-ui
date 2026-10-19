@@ -7,8 +7,8 @@ name in the component's guide (`npx neus docs <Name>`) before using it.
 | Level | Use it for | Where it lives |
 | --- | --- | --- |
 | 0. Props and variants | Hierarchy and intent: primary vs secondary action, outlined card, small field | The component's props |
-| 1. Global action palette | Brand primary, success, error and info colors | `npx neus init`, which rewrites `neus.config.json` and the generated theme file |
-| 2. Reusable tokens | Radius, padding, typography or surfaces for the whole app or a feature | `<styles>/neus.overrides.css` |
+| 1. Global action palette | Brand primary, success, error, info and warning colors | `npx neus init` (`--primary`, `--brand`), which rewrites `neus.config.json` and the generated theme file |
+| 2. Reusable tokens | The brand's ground, ink and faces ([brand.md](brand.md)); radius, padding or typography for the whole app or a feature | `<styles>/neus.overrides.css` |
 | 3. Part classes + CSS | Hover, focus, disabled, pseudo-elements, layout of one part | `*ClassName` props + a project stylesheet |
 | 4. Part styles | One static property on one rendered part | `*Style` props |
 
@@ -27,7 +27,8 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 `size`; Text `variant`, `tone`, `weight`, `measure`, `lines` and `numeric`;
 Section `tone`, `spacing` and `container`; Container `size` and `gutter`;
 Stack and Grid `gap`, `direction` and `columns`, per breakpoint with
-`{ base, md, lg }`. One solid primary action per view; the rest use
+`{ base, md, lg }`; the `neus-ui/sections` variants (Hero, FeatureList,
+TestimonialList, CallToAction) and `labels` (SiteHeader). One solid primary action per view; the rest use
 `secondary`, `tonal`, `outlined` or `text`.
 
 ## Level 1: global action palette
@@ -50,8 +51,8 @@ Write overrides in `<styles>/neus.overrides.css` (`paths.styles` in
 `neus.config.json`), which loads after the library stylesheet. Target the boundary that should own the change:
 
 ```css
-/* Whole app, active system only. */
-:root[data-design-system="carbon"] {
+/* Whole app, active system only; also reaches local providers of the same system. */
+[data-design-system="carbon"] {
   --button-radius: 4px;
   --input-padding: 12px 16px;
 }

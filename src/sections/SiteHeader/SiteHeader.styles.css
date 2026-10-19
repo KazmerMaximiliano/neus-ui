@@ -1,0 +1,149 @@
+.site-header {
+  position: relative;
+  z-index: 10;
+  border-block-end: 1px solid var(--site-header-border-color);
+  background: var(--site-header-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+}
+
+.site-header[data-variant="sticky"] {
+  position: sticky;
+  inset-block-start: 0;
+  background: var(--site-header-sticky-background);
+  backdrop-filter: saturate(1.4) blur(12px);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--site-header-link-gap);
+  min-height: var(--site-header-height);
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: inherit;
+  font-family: var(--site-header-brand-font-family);
+  font-size: var(--site-header-brand-font-size);
+  font-weight: var(--site-header-brand-font-weight);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header__menu-button {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-inline-end: calc(-1 * var(--space-2));
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.site-header__menu-button:focus-visible,
+.site-header__link:focus-visible,
+.site-header__brand:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Phone: an open popover drops below the bar. */
+.site-header__menu:popover-open {
+  position: fixed;
+  inset: var(--site-header-height) 0 auto;
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--space-6);
+  width: 100%;
+  max-height: calc(100dvh - var(--site-header-height));
+  margin: 0;
+  padding: var(--space-6) var(--container-gutter);
+  overflow: auto;
+  border: 0;
+  border-block-end: 1px solid var(--site-header-border-color);
+  background: var(--site-header-menu-background);
+  color: var(--color-text-primary);
+  box-shadow: var(--elevation-floating);
+}
+
+.site-header__menu:popover-open .site-header__nav {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.site-header__menu:popover-open .site-header__link {
+  font-size: var(--fs-lg);
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--site-header-link-gap);
+}
+
+.site-header__link {
+  color: var(--site-header-link-color);
+  font-size: var(--site-header-link-font-size);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header__link:hover,
+.site-header__link[aria-current="page"] {
+  color: var(--site-header-link-active-color);
+}
+
+.site-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+@media (width >= 768px) {
+  .site-header__menu-button {
+    display: none;
+  }
+
+  /* The popover element is the inline bar here: author styles win over the closed popover's display: none. */
+  .site-header__menu,
+  .site-header__menu:popover-open {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: var(--site-header-link-gap);
+    width: auto;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    background: none;
+    color: inherit;
+    box-shadow: none;
+  }
+}
+
+.site-header__skip {
+  position: absolute;
+  inset-inline-start: var(--space-4);
+  inset-block-start: var(--space-2);
+  z-index: 1;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  transform: translateY(-200%);
+}
+
+.site-header__skip:focus {
+  transform: none;
+}

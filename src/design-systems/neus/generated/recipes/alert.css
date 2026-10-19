@@ -1,0 +1,27 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --alert-radius: var(--card-radius);
+  --alert-padding: var(--space-4);
+  --alert-gap: var(--space-3);
+  --alert-border-width: 1px;
+  --alert-font-family: var(--font-body);
+  --alert-font-size: var(--fs-base);
+  --alert-line-height: 1.5;
+  --alert-color: var(--color-text-primary);
+  --alert-title-weight: 600;
+  --alert-icon-size: 20px;
+  --alert-actions-gap: var(--space-2);
+  --alert-info-background: color-mix(in srgb, var(--color-info) 8%, var(--color-surface));
+  --alert-info-border-color: color-mix(in srgb, var(--color-info) 35%, var(--color-surface));
+  --alert-info-icon-color: var(--color-info-text);
+  --alert-success-background: color-mix(in srgb, var(--color-success) 8%, var(--color-surface));
+  --alert-success-border-color: color-mix(in srgb, var(--color-success) 35%, var(--color-surface));
+  --alert-success-icon-color: var(--color-success-text);
+  --alert-warning-background: color-mix(in srgb, var(--color-warning) 10%, var(--color-surface));
+  --alert-warning-border-color: color-mix(in srgb, var(--color-warning) 45%, var(--color-surface));
+  --alert-warning-icon-color: var(--color-warning-text);
+  --alert-error-background: color-mix(in srgb, var(--color-error) 8%, var(--color-surface));
+  --alert-error-border-color: color-mix(in srgb, var(--color-error) 35%, var(--color-surface));
+  --alert-error-icon-color: var(--color-error-text);
+}

@@ -15,7 +15,7 @@ const project = (pkg, dirs = []) => {
 };
 const read = (root, file) => readFileSync(path.join(root, file), "utf8");
 const config = (overrides) => ({
-  framework: "next", rendering: "rsc", designSystem: "vercel", derivedSystem: null, colorScheme: "light",
+  framework: "next", rendering: "rsc", designSystem: "vercel", derivedSystem: null, colorScheme: "light", brand: null,
   colors: {}, language: "es", agents: ["claude", "codex"], paths: { styles: "src/styles" }, ...overrides,
 });
 
@@ -50,6 +50,7 @@ describe("neus init", () => {
     writeProject(root, config({ colors: { primaryColor: "#0f766e" } }), theme);
 
     expect(read(root, "src/styles/neus.theme.css")).toContain("--color-primary: #0f766e;");
+    expect(read(root, "src/styles/neus.overrides.css")).toContain('\n[data-design-system="vercel"] {\n}');
     expect(read(root, "app/layout.tsx")).toContain('data-design-system="vercel"');
     expect(read(root, "AGENTS.md")).toMatch(/^# Team rules\n\n<!-- neus-ui:start/);
     expect(read(root, "CLAUDE.md")).toBe("@AGENTS.md\n");
@@ -82,6 +83,26 @@ describe("neus init", () => {
     expect(layout).toContain('data-design-system="carbon"');
     expect(layout).toContain("family=IBM+Plex+Sans");
     expect(layout).not.toContain("{{");
+  });
+});
+
+describe("neus init flags", () => {
+  const init = (root, ...args) => spawnSync(process.execPath, [path.resolve("cli/neus.mjs"), "init", "--yes", ...args],
+    { cwd: root, encoding: "utf8" });
+
+  it("records and clears the brand direction, keeping it across runs", () => {
+    const root = project({ devDependencies: { vite: "8" } }, ["src"]);
+    expect(init(root, "--agents", "codex").status).toBe(0);
+    expect(JSON.parse(read(root, "neus.config.json")).brand).toBeNull();
+    init(root, "--primary", "#1f5130", "--warning", "#B45309", "--brand", "Forest and cream: green actions, cream ground, serif display");
+    expect(JSON.parse(read(root, "neus.config.json"))).toMatchObject({
+      brand: "Forest and cream: green actions, cream ground, serif display", colors: { primaryColor: "#1f5130", warningColor: "#b45309" },
+    });
+    expect(read(root, "src/neus/neus.theme.ts")).toContain('"warningColor": "#b45309"');
+    init(root);
+    expect(JSON.parse(read(root, "neus.config.json")).brand).toMatch(/^Forest and cream/);
+    init(root, "--brand", "");
+    expect(JSON.parse(read(root, "neus.config.json")).brand).toBeNull();
   });
 });
 

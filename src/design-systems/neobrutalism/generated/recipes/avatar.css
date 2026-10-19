@@ -1,0 +1,5 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --avatar-background: var(--color-primary);
+  --avatar-color: var(--color-text-on-primary);
+}

@@ -3,10 +3,10 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 36 components and public sections. Import each by name from `neus-ui`.
+The package exports 40 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
-## Typography and layout
+## Typography, layout and media
 
 | Component | Purpose |
 | --- | --- |
@@ -16,11 +16,15 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Stack](./Stack.md) | Column or row with space-scale gaps that can change at 768px and 1024px. |
 | [Grid](./Grid.md) | Equal responsive columns or auto-fit items of a minimum width. |
 | [Section](./Section.md) | Full-width page band with tone, vertical rhythm and an inner Container. |
+| [Avatar](./Avatar.md) | Picture or initials of a person or organization, with an image-failure fallback. |
+| [AvatarGroup](./AvatarGroup.md) | Overlapping avatars with a +N count. |
+| [MediaPlaceholder](./MediaPlaceholder.md) | Sized frame that stands in for a picture not taken yet and says what it will show. |
 
 ## Actions and status
 
 | Component | Purpose |
 | --- | --- |
+| [Alert](./Alert.md) | Inline info, success, warning or error message with actions and an optional close button. |
 | [Badge](./Badge.md) | Status indicator with solid and dot variants. |
 | [Button](./Button.md) | Semantic button with six variants, three sizes and loading feedback. |
 | [IconButton](./IconButton.md) | Accessible icon-only button with loading feedback. |

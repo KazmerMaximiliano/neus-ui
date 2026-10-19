@@ -28,6 +28,8 @@ colors:
   text-placeholder-dark: "#a8a8a8"
   border-subtle-dark: "#393939"
   border-strong-dark: "#6f6f6f"
+  warning: "#f1c21b"
+  warning-dark-mode: "#f1c21b"
 typography:
   body-md:
     fontFamily: '"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif'
@@ -110,10 +112,12 @@ x-neus:
       hover: "{colors.hover}"
       active: "{colors.active}"
       error: "{colors.error}"
+      warning: "{colors.warning}"
     dark:
       primary: "{colors.primary-dark}"
       onPrimary: "{colors.on-primary-dark}"
       error: "{colors.error-dark}"
+      warning: "{colors.warning-dark-mode}"
   tokens:
     base:
       --type-display-size: "clamp(2.625rem, 2.09rem + 2.69vw, {typography.display.fontSize})"
@@ -445,6 +449,10 @@ x-neus:
         --text-overline-tracking: 0em
         --text-overline-transform: none
     layout: {}
+    media-placeholder: {}
+    alert: {}
+    avatar: {}
+    sections: {}
 ---
 
 # Carbon
@@ -470,6 +478,8 @@ provides the reference. Use White as the initial light target and Gray 100 as th
 dark target; these are local choices among Carbon's
 [themes](https://www.carbondesignsystem.com/building-blocks/foundations/themes/overview).
 
+Warning is the support-warning yellow of both themes ([Carbon themes](https://www.carbondesignsystem.com/building-blocks/foundations/themes/overview)); it always takes dark text.
+
 ## Typography
 
 Use IBM Plex Sans for interface text and Plex Mono for code or
@@ -483,6 +493,8 @@ Align forms, data regions, and action groups to consistent columns.
 Use deliberate section spacing and compact, readable controls. Field widths should
 reflect expected content while fitting the responsive layout, as recommended in
 [Carbon forms](https://www.carbondesignsystem.com/building-blocks/core/patterns/forms).
+
+Public pages keep the 2x grid: start-aligned text, hairlines between rows, and inverse bands for emphasis.
 
 ## Elevation & Depth
 
@@ -524,6 +536,18 @@ Local mapping: build an orderly, quiet navigation shell with
 square rows, consistent label alignment, and a persistent current-location cue.
 Keep keyboard focus distinct from selection and hover.
 
+### Hero
+
+Light fluid display in IBM Plex Sans, start-aligned, with a primary button; often on an inverse band.
+
+### Feature list
+
+A list or grid separated by hairlines, square tiles, pictograms over icons; no rounded cards.
+
+### Testimonial
+
+Plain start-aligned quotes, or one featured quote in the display weight.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -535,3 +559,4 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 - Do verify all states in light/dark and nested provider scopes.
 - Don't map Neus variants to Carbon names without checking their behavior and roles.
 - Don't add new public states or Carbon dependencies as an incidental visual change.
+- Do use inverse bands, hairlines and square geometry on public pages; do not round, shadow or tint their surfaces.

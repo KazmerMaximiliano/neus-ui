@@ -9,6 +9,7 @@ export type ThemeColors = {
   success: ColorVariants;
   error: ColorVariants;
   info: ColorVariants;
+  warning: ColorVariants;
   white: string;
   black: string;
   gray: Record<900 | 700 | 600 | 500 | 400 | 300 | 200 | 150 | 100, string>;
@@ -21,6 +22,7 @@ export type ThemeConfig = {
   successColor?: string;
   errorColor?: string;
   infoColor?: string;
+  warningColor?: string;
 };
 
 export type ThemeContextValue = {

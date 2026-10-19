@@ -68,7 +68,7 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
       for (const [, token] of line.matchAll(/var\(\s*(--[\w-]+)\s*\)/g)) {
         if (!tokens.has(token) && !declared.has(token)) report(file, at, "P0", "unknown-token", `${token} is not a neus-ui token and is not declared in the project`);
       }
-      if (/--color-(primary|success|error|info)[a-z-]*["']?\s*:|--color-(text-on-[a-z-]+|focus)["']?\s*:/.test(line)) {
+      if (/--color-(primary|success|error|info|warning)[a-z-]*["']?\s*:|--color-(text-on-[a-z-]+|focus)["']?\s*:/.test(line)) {
         report(file, at, "P0", "palette", "palette variables belong to neus.theme.css and npx neus init");
       }
       if (line.includes("!important")) report(file, at, "P0", "important", "!important breaks the token cascade");
@@ -87,6 +87,7 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
         report(file, at, "P1", "emoji", "emoji used as an icon; use a lucide-react icon");
       }
       if (/(\/\/|\{\/\*|\/\*)\s*SAMPLE:/.test(line)) samples.push({ file, line: at, text: line.trim() });
+      if (!isCss(file) && /role=["']alert["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"alert\": use Alert");
       if (isCss(file)) {
         if (/\.(ag|rdp|gm|pac)-[a-z]/.test(line)) report(file, at, "P1", "third-party", "selector on third-party internals; use the component's documented parts");
         const selector = line.includes("{") ? line.slice(0, line.indexOf("{")) : null;
@@ -97,7 +98,7 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
     });
 
     if (JSX_EXTENSIONS.includes(path.extname(file))) {
-      const neusNames = [...text.matchAll(/import\s*(?:type\s*)?\{([^}]*)\}\s*from\s*["']neus-ui["']/g)]
+      const neusNames = [...text.matchAll(/import\s*(?:type\s*)?\{([^}]*)\}\s*from\s*["']neus-ui(?:\/sections)?["']/g)]
         .flatMap(([, names]) => names.split(",").map((name) => name.trim().split(/\s+as\s+/).at(-1)))
         .filter((name) => /^[A-Z]/.test(name) && name !== "ThemeProvider");
       const neus = neusNames.reduce((sum, name) => sum + (text.match(new RegExp(`<${name}[\\s>/]`, "g"))?.length ?? 0), 0);
@@ -178,7 +179,7 @@ export const run = async (argv, root = process.cwd()) => {
     process.stderr.write(`${missing ? `${missing} does not exist` : "No source folder found"}. Pass the paths to lint.\n`);
     return 2;
   }
-  const docs = ["docs/components", "docs/templates", "docs/design"].flatMap((folder) =>
+  const docs = ["docs/components", "docs/sections", "docs/templates", "docs/design"].flatMap((folder) =>
     readdirSync(path.join(PACKAGE_ROOT, folder)).filter((file) => file.endsWith(".md"))
       .map((file) => readFileSync(path.join(PACKAGE_ROOT, folder, file), "utf8"))).join("\n");
   const exportsMap = readJson(path.join(PACKAGE_ROOT, "package.json")).exports;

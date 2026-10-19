@@ -42,15 +42,15 @@ describe("neus shot helpers", () => {
 
   it("turns measurements into problems", () => {
     const page = {
-      route: "/", width: 390, consoleErrors: [], minBodyFontPx: 16, missingFonts: [], overflow: null, clipped: [], solidCtas: { maxPerViewport: 1 },
+      route: "/", width: 390, consoleErrors: [], bodyFontPx: 16, missingFonts: [], overflow: null, clipped: [], solidCtas: { maxPerViewport: 1 },
     };
     expect(problems([page])).toEqual([]);
     expect(problems([{ ...page, overflow: { scrollWidth: 600, offenders: ["div.wide"] }, clipped: ["div.field inside div.card (50px)"],
-      consoleErrors: ["boom"], minBodyFontPx: 14, missingFonts: ["Manrope"], solidCtas: { maxPerViewport: 3 } }])).toEqual([
+      consoleErrors: ["boom"], bodyFontPx: 14, missingFonts: ["Manrope"], solidCtas: { maxPerViewport: 3 } }])).toEqual([
       "/ at 390px: horizontal scroll (600px wide) from div.wide",
       "/ at 390px: content cut off: div.field inside div.card (50px)",
       "/ at 390px: 1 console error(s), first: boom",
-      "/ at 390px: running text at 14px (minimum 16px)",
+      "/ at 390px: body text at 14px (minimum 16px)",
       "/ at 390px: fonts not loaded: Manrope",
       "/ at 390px: 3 solid buttons in one viewport",
     ]);
@@ -77,6 +77,8 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
   <p class="cut">Deliberately truncated with an ellipsis</p>
   <iframe src="http://localhost:9/"></iframe>
   <p class="small">This paragraph is set far too small for running text on a phone.</p>
+  <p class="small">A second small paragraph, so small text carries most of the page.</p>
+  <p>A single comfortable paragraph at the default size of the page.</p>
   <button class="button--solid">Start</button><button class="button--solid">Buy</button>
   <p class="ghost">Declared in a font face that exists nowhere at all.</p>
   <script>console.error("boom")</script>
@@ -99,7 +101,7 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
     expect(result.clipped).toEqual(["div.field inside div.card (50px)"]);
     expect(result.blankFrames).toBe(1);
     expect(result.consoleErrors).toEqual(["boom"]);
-    expect(result.minBodyFontPx).toBe(12);
+    expect(result.bodyFontPx).toBe(12);
     expect(result.missingFonts).toEqual(["NoSuchFont"]);
     expect(result.solidCtas).toEqual({ aboveFold: 2, maxPerViewport: 2 });
     expect(result.theme).toEqual({ designSystem: "neus", colorScheme: "light", primary: "#283593", font: "sans-serif" });

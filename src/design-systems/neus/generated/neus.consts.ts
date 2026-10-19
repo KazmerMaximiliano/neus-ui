@@ -12,11 +12,13 @@ export const NEUS_PALETTE: DesignSystemPalette = {
   "light": {
     "primary": "#283593",
     "onPrimary": "#ffffff",
-    "hover": "#1c258c"
+    "hover": "#1c258c",
+    "warning": "#ed6c02"
   },
   "dark": {
     "primary": "#a5b4fc",
     "onPrimary": "#161616",
-    "hover": "#c7d2fe"
+    "hover": "#c7d2fe",
+    "warning": "#ffa726"
   }
 };

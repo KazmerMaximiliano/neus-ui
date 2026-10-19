@@ -22,3 +22,39 @@
   background: var(--section-accent-background);
   color: var(--section-accent-color);
 }
+
+.section[data-tone="brand"] {
+  --text-muted-color: var(--section-brand-muted-color);
+  background: var(--section-brand-background);
+  color: var(--section-brand-color);
+}
+
+.section[data-tone="inverse"] {
+  --text-muted-color: var(--section-inverse-muted-color);
+  background: var(--section-inverse-background);
+  color: var(--section-inverse-color);
+}
+
+/* Primary buttons swap fill and ink on the brand band, so the action reads in every system and mode. */
+.section[data-tone="brand"] .button--primary {
+  --button-accent: var(--color-text-on-primary);
+  --button-accent-text: var(--color-text-on-primary);
+  --button-accent-hover: color-mix(in srgb, var(--color-text-on-primary) 85%, var(--color-primary));
+  --button-accent-active: var(--button-accent-hover);
+  --button-accent-subtle: color-mix(in srgb, var(--color-text-on-primary) 15%, transparent);
+  --button-on-accent: var(--color-primary);
+}
+
+/* A Card keeps its own surface inside a filled band: its muted text and buttons return to the system's. */
+.section:is([data-tone="brand"], [data-tone="inverse"]) .card {
+  --text-muted-color: var(--color-text-secondary);
+}
+
+.section[data-tone="brand"] .card .button--primary {
+  --button-accent: var(--color-primary);
+  --button-accent-text: var(--color-primary-text);
+  --button-accent-hover: var(--color-primary-dark);
+  --button-accent-active: var(--color-primary-active);
+  --button-accent-subtle: var(--color-primary-light);
+  --button-on-accent: var(--color-text-on-primary);
+}

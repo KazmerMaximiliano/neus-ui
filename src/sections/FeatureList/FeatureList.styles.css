@@ -1,0 +1,12 @@
+.feature-list[data-variant="list"] {
+  gap: 0;
+}
+
+.feature-list[data-variant="list"] > .feature-item {
+  padding-block: var(--space-6);
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+.feature-list[data-variant="list"] > .feature-item:last-child {
+  border-block-end: 1px solid var(--color-border-subtle);
+}

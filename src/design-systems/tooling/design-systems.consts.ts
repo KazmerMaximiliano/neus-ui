@@ -19,7 +19,7 @@ export const RECIPE_NAMES = [
   "badge", "button", "calendar", "card", "checkbox", "clock", "dropdown",
   "file-uploader", "icon-button", "input", "link", "modal", "overlay", "select",
   "sidebar", "stepper", "week-calendar", "interactive-map", "data-table", "templates",
-  "typography", "layout",
+  "typography", "layout", "media-placeholder", "alert", "avatar", "sections",
 ] as const;
 
 export const SECTION_NAMES = [
@@ -28,7 +28,7 @@ export const SECTION_NAMES = [
 ] as const;
 
 export const PALETTE_KEYS = [
-  "primary", "onPrimary", "hover", "active", "focus", "success", "error", "info",
+  "primary", "onPrimary", "hover", "active", "focus", "success", "error", "info", "warning",
 ] as const;
 
 export const TYPOGRAPHY_KEYS = [

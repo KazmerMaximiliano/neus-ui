@@ -16,7 +16,7 @@ import { detectProject, readJson, toPosix } from "./neus.utils.mjs";
 const HELP = `Usage: npx neus shot [routes...] [options]
 
 Screenshots each route (default /) full page at every width into ${NEUS_DIR}/shots/ and
-reports horizontal overflow, content cut off by overflow: hidden, console errors, the smallest running-text size, fonts
+reports horizontal overflow, content cut off by overflow: hidden, console errors, the body text size, fonts
 that did not load and solid buttons per viewport. Without --url it starts the
 project's dev script and leaves it running for the next round.
 
@@ -209,7 +209,7 @@ export const measure = (systemFonts) => {
     .filter((frame) => visible(frame) && new URL(frame.src, location.href).origin !== location.origin).length;
 
   let minFontPx = null;
-  let minBodyFontPx = null;
+  const runningText = {};
   const families = new Set();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -219,8 +219,8 @@ export const measure = (systemFonts) => {
     const style = getComputedStyle(parent);
     const size = parseFloat(style.fontSize);
     minFontPx = Math.min(minFontPx ?? size, size);
-    // ponytail: running text = a visible text node of 40+ characters; short paragraphs split by inline tags slip through.
-    if (text.length >= 40) minBodyFontPx = Math.min(minBodyFontPx ?? size, size);
+    // ponytail: running text = visible text nodes of 40+ characters; short paragraphs split by inline tags slip through.
+    if (text.length >= 40) runningText[size] = (runningText[size] ?? 0) + text.length;
     families.add(firstFamily(style));
   }
 
@@ -247,7 +247,8 @@ export const measure = (systemFonts) => {
     clipped,
     blankFrames,
     minFontPx,
-    minBodyFontPx,
+    // The size that carries most of the running text: help text and footnotes may be smaller, the body may not.
+    bodyFontPx: Number(Object.entries(runningText).sort(([, a], [, b]) => b - a)[0]?.[0] ?? NaN) || null,
     missingFonts: [...new Set(missing)],
     solidCtas: { aboveFold: perViewport[0] ?? 0, maxPerViewport: Math.max(0, ...Object.values(perViewport)) },
     theme: {
@@ -293,14 +294,14 @@ export const shoot = async ({ chromium, executablePath, url, routes, widths, out
 };
 
 /** Human-readable problems found in the measured pages. */
-export const problems = (pages) => pages.flatMap(({ route, width, overflow, clipped, consoleErrors, minBodyFontPx, missingFonts, solidCtas }) => {
+export const problems = (pages) => pages.flatMap(({ route, width, overflow, clipped, consoleErrors, bodyFontPx, missingFonts, solidCtas }) => {
   const at = `${route} at ${width}px`;
   return [
     overflow && `${at}: horizontal scroll (${overflow.scrollWidth}px wide) from ${overflow.offenders.join(", ") || "the page"}`,
     clipped.length && `${at}: content cut off: ${clipped.join(", ")}`,
     consoleErrors.length && `${at}: ${consoleErrors.length} console error(s), first: ${consoleErrors[0]}`,
-    minBodyFontPx !== null && minBodyFontPx < SHOT_LIMITS.minBodyFontPx &&
-      `${at}: running text at ${minBodyFontPx}px (minimum ${SHOT_LIMITS.minBodyFontPx}px)`,
+    bodyFontPx !== null && bodyFontPx < SHOT_LIMITS.bodyFontPx &&
+      `${at}: body text at ${bodyFontPx}px (minimum ${SHOT_LIMITS.bodyFontPx}px)`,
     missingFonts.length && `${at}: fonts not loaded: ${missingFonts.join(", ")}`,
     solidCtas.maxPerViewport > SHOT_LIMITS.solidCtasPerViewport && `${at}: ${solidCtas.maxPerViewport} solid buttons in one viewport`,
   ].filter(Boolean);
