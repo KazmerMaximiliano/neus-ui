@@ -133,86 +133,53 @@ sections, follow pattern 8 and the system DESIGN.md's do's and don'ts.
 ## 8. Landing page
 
 Use for product, launch and signup pages. Build the sections the brief
-lists, each with the layout the dealt composition names (taste.md), and
-apply the substance rules: display headline, a lead, 16px running text,
-alternating Section bands, one anchor per section. Heading, Text, Section,
-Grid and Stack carry the scale, widths and rhythm of the active system; the
-page CSS only places what they cannot.
+lists, each with the variant the dealt composition names (taste.md), and
+apply the substance rules. The page sections from `neus-ui/sections` carry
+the structure, scale and rhythm of the active system; Heading, Text,
+Section, Grid and Card cover what they do not (an agenda, prices, a team).
 
 ```tsx
 import { MessageSquareText, Timer } from "lucide-react";
+import { Avatar, Button, Card, CardContent, FormTemplate, Input, Section } from "neus-ui";
 import {
-  Button, Card, CardContent, CardFooter, CardHeader, Container, FormTemplate, Grid, Heading, Input, Link, Section,
-  Stack, Text,
-} from "neus-ui";
-import "./LandingPage.css";
+  CallToAction, FeatureItem, FeatureList, Hero, SectionHeader, SiteFooter, SiteHeader, Testimonial, TestimonialList,
+} from "neus-ui/sections";
 
-const FEATURES = [
-  { icon: MessageSquareText, title: "Tell it how you arrive", text: "One sentence is enough; the session adapts its breathing and length." },
-  { icon: Timer, title: "Sessions that fit a lift ride", text: "One to ten minutes, at your desk or between meetings." },
-];
 // SAMPLE: realistic quotes; replace with real ones before launch.
 const QUOTES = [
-  { quote: "I open it in the lift before the daily.", name: "Lucía", role: "Product designer" },
-  { quote: "I wrote that I could not sleep. It gave me five minutes for that.", name: "Martín", role: "Financial analyst" },
+  { quote: "I open it in the lift before the daily.", name: "Lucía Ferreyra", role: "Product designer" },
+  { quote: "I wrote that I could not sleep. It gave me five minutes for that.", name: "Martín Ibarra", role: "Financial analyst" },
 ];
 
 export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }) => (
   <>
-    <a className="skip-link" href="#main">Skip to content</a>
-    <Container as="header" size="xl">
-      <Stack direction="row" align="center" justify="between" gap={6} className="landing-header">
-        <Text as="span" weight="semibold">AuraFlow</Text>
-        <Stack as="nav" direction="row" align="center" gap={6} aria-label="Main">
-          <Link href="#features" label="How it works" />
-          <Button label="Create my account" href="#signup" variant="outlined" size="small" />
-        </Stack>
-      </Stack>
-    </Container>
+    <SiteHeader brand="AuraFlow" skipLinkTarget="#main" variant="sticky"
+      links={[{ label: "How it works", href: "#features" }, { label: "Stories", href: "#voices" }]}
+      actions={<Button label="Create my account" href="#signup" variant="outlined" size="small" />} />
     <main id="main">
-      <Section aria-labelledby="hero-title">
-        <Grid columns={{ base: 1, lg: 2 }} gap={12} className="landing-split">
-          <Stack gap={6} align="start">
-            <Heading id="hero-title" as="h1" size="display">A pause that fits your day.</Heading>
-            <Text variant="lead">Tell AuraFlow how you arrive in one sentence and get a one-to-ten-minute session for that moment.</Text>
-            <Button label="Create my account" href="#signup" size="large" />
-            <Text variant="small" tone="muted">Two fields, then your first session.</Text>
-          </Stack>
-          <Card>{/* The real interface or a live demo: the section's anchor. */}</Card>
-        </Grid>
-      </Section>
+      <Hero variant="split" title="A pause that fits your day."
+        lead="Tell AuraFlow how you arrive in one sentence and get a one-to-ten-minute session for that moment."
+        actions={<Button label="Create my account" href="#signup" size="large" />}
+        note="Two fields, then your first session."
+        media={<Card>{/* The real interface or a live demo: the hero's anchor. */}</Card>} />
       <Section id="features" tone="subtle" aria-labelledby="features-title">
-        <Stack gap={12}>
-          <Heading id="features-title">Not another audio library.</Heading>
-          <Grid as="ul">
-            {FEATURES.map(({ icon: Icon, title, text }) => (
-              <Card as="li" key={title}>
-                <CardHeader><Icon aria-hidden size={24} /><Heading as="h3" size="sm">{title}</Heading></CardHeader>
-                <CardContent><Text>{text}</Text></CardContent>
-              </Card>
-            ))}
-          </Grid>
-        </Stack>
+        <SectionHeader titleId="features-title" title="Not another audio library." />
+        <FeatureList variant="cards">
+          <FeatureItem icon={<MessageSquareText />} title="Tell it how you arrive">One sentence is enough; the session adapts its breathing and length.</FeatureItem>
+          <FeatureItem icon={<Timer />} title="Sessions that fit a lift ride">One to ten minutes, at your desk or between meetings.</FeatureItem>
+        </FeatureList>
       </Section>
-      <Section aria-labelledby="voices-title">
-        <Stack gap={12}>
-          <Heading id="voices-title">Used in the gaps of a full calendar.</Heading>
-          <Grid as="ul">
-            {QUOTES.map(({ quote, name, role }) => (
-              <Card as="li" key={name}>
-                <CardContent><blockquote><Text variant="lead">{quote}</Text></blockquote></CardContent>
-                <CardFooter><Text as="span" variant="small"><strong>{name}</strong>, {role}</Text></CardFooter>
-              </Card>
-            ))}
-          </Grid>
-        </Stack>
+      <Section id="voices" aria-labelledby="voices-title">
+        <SectionHeader titleId="voices-title" title="Used in the gaps of a full calendar." />
+        <TestimonialList variant="plain">
+          {QUOTES.map(({ quote, name, role }) => (
+            <Testimonial key={name} quote={quote} name={name} role={role} avatar={<Avatar name={name} alt="" />} />
+          ))}
+        </TestimonialList>
       </Section>
-      <Section id="signup" tone="accent" aria-labelledby="signup-title">
-        <Grid columns={{ base: 1, lg: 2 }} gap={12} className="landing-split">
-          <Stack gap={4}>
-            <Heading id="signup-title">Start today.</Heading>
-            <Text variant="lead">We only ask for your name and email.</Text>
-          </Stack>
+      <CallToAction id="signup" variant="split" tone="brand" title="Start today."
+        text="We only ask for your name and email."
+        aside={
           <Card>
             <CardContent>
               <form onSubmit={(event) => { event.preventDefault(); onSignup(new FormData(event.currentTarget)); }}>
@@ -224,34 +191,26 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
               </form>
             </CardContent>
           </Card>
-        </Grid>
-      </Section>
+        } />
     </main>
-    <Container as="footer" size="xl">
-      <Text variant="small" tone="muted" className="landing-footer">© 2026 AuraFlow</Text>
-    </Container>
+    <SiteFooter brand="AuraFlow" legal="© 2026 AuraFlow" />
   </>
 );
 ```
 
-```css
-.landing-header { padding-block: var(--space-6); }
-.landing-split { align-items: center; }
-.landing-footer { padding-block: var(--space-8); }
-.skip-link { position: absolute; inset-inline-start: var(--space-4); inset-block-start: calc(-1 * var(--space-16)); }
-.skip-link:focus { inset-block-start: var(--space-4); }
-```
-
-- Every section the brief lists exists; the dealt composition decides its
-  layout (features as `cards`, `grid` or `list`; testimonials as `card`,
-  `plain` or `featured`).
-- One `h1` (`size="display"`); section titles are the default `h2`, item
-  titles `h3` at `size="sm"`. Alternate `default` and `subtle` Section tones;
-  `accent` once, on the final call to action.
-- Feature and testimonial groups are `Grid as="ul"` of `Card as="li"` with
-  the default `variant="auto"`: the system decides border, fill or flat.
-  Never a Card inside a Card.
-- One solid action per viewport: the header action is `outlined`.
+- Every section the brief lists exists; the dealt composition picks each
+  variant (Hero `split`, `centered`, `media-first`; FeatureList `grid`,
+  `list`, `cards`; TestimonialList `plain`, `card`, `featured`;
+  CallToAction `band`, `split`).
+- One `h1` (the Hero's); section titles are SectionHeader `h2`s, item titles
+  `h3`s. Alternate `default` and `subtle` Section tones; one or two bands of
+  strong color (`tone="brand"` or `"inverse"`).
+- Lists of other things (agenda, prices, team) are `Grid as="ul"` of
+  `Card as="li"` with the default `variant="auto"`. Never a Card inside a Card.
+- One solid action per viewport: the header action is `outlined`. On a
+  `brand` band primary buttons adapt by themselves.
+- A page about people or a place shows them: real pictures, or a
+  `MediaPlaceholder` per shot marked `SAMPLE:`.
 - Testimonials the brief asks for are marked `SAMPLE:` and listed in the
   delivery; prices, trials and metrics appear only when the brief gives them.
 - Run `npx neus lint` and the visual loop (`npx neus shot /`) after the first

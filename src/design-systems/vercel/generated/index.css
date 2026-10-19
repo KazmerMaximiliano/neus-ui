@@ -22,3 +22,7 @@
 @import "./recipes/templates.css";
 @import "./recipes/typography.css";
 @import "./recipes/layout.css";
+@import "./recipes/media-placeholder.css";
+@import "./recipes/alert.css";
+@import "./recipes/avatar.css";
+@import "./recipes/sections.css";

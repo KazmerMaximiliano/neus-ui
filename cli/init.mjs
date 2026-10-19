@@ -23,7 +23,8 @@ Options:
   --system <id|none>        neus, apple, carbon, material, neobrutalism, vercel, or none to derive one with AI
   --base <id>               Base of a derived system; keeps derived mode
   --scheme <light|dark>     Initial color scheme
-  --primary, --success, --error, --info <#rrggbb>   Action colors ("" restores the system's)
+  --primary, --success, --error, --info, --warning <#rrggbb>   Action colors ("" restores the system's)
+  --brand <text>            Records the brand direction chosen with the neus-design skill ("" clears it)
   --language <code>         Language of user-facing copy, for example es or en
   --agents <list>           claude, codex or claude,codex
   --styles <dir>            Folder for neus.theme.css and neus.overrides.css
@@ -84,6 +85,8 @@ const resolveOptions = async (argv, root, theme) => {
       success: { type: "string" },
       error: { type: "string" },
       info: { type: "string" },
+      warning: { type: "string" },
+      brand: { type: "string" },
       language: { type: "string" },
       agents: { type: "string" },
       styles: { type: "string" },
@@ -100,6 +103,8 @@ const resolveOptions = async (argv, root, theme) => {
     derivedSystem: previous.derivedSystem ?? null,
     colorScheme: previous.colorScheme ?? "light",
     colors: { ...previous.colors },
+    // null until the brand is decided with the user; "system" keeps the system's own identity.
+    brand: previous.brand ?? null,
     language: previous.language ?? locale ?? "en",
     agents: previous.agents ?? [...AGENT_TARGETS],
     paths: { styles: previous.paths?.styles ?? (existsSync(path.join(root, "src")) ? "src/styles" : "styles") },
@@ -121,12 +126,14 @@ const resolveOptions = async (argv, root, theme) => {
     if (!["light", "dark"].includes(values.scheme)) fail("--scheme must be light or dark.");
     config.colorScheme = values.scheme;
   }
-  for (const [flag, key] of [["primary", "primaryColor"], ["success", "successColor"], ["error", "errorColor"], ["info", "infoColor"]]) {
+  for (const key of COLOR_KEYS) {
+    const flag = key.replace("Color", "");
     if (values[flag] === undefined) continue;
     if (values[flag] === "") delete config.colors[key];
     else if (COLOR_PATTERN.test(values[flag])) config.colors[key] = values[flag].toLowerCase();
     else fail(`--${flag} must be a six-digit hex color such as #0f766e.`);
   }
+  if (values.brand !== undefined) config.brand = values.brand.trim() || null;
   if (values.language) config.language = values.language;
   if (values.agents) {
     config.agents = values.agents.split(",").map((agent) => agent.trim()).filter(Boolean);
@@ -158,7 +165,7 @@ const resolveOptions = async (argv, root, theme) => {
       ], config.colorScheme);
       const keep = await askChoice(rl, "Action colors:", [
         { value: "system", label: "Keep the system's colors (or the current ones)" },
-        { value: "custom", label: "Choose primary, success, error and info" },
+        { value: "custom", label: "Choose primary, success, error, info and warning" },
       ], "system");
       if (keep === "custom") {
         for (const key of COLOR_KEYS) {
@@ -219,7 +226,8 @@ export const writeProject = (root, config, theme) => {
   }
   write(root, `${styles}/neus.overrides.css`, `/* Project-wide neus token overrides. Loaded after neus-ui.css and neus.theme.css.\n` +
     `   Use the token names in node_modules/neus-ui/docs; never write palette variables here. */\n` +
-    `:root[data-design-system="${config.designSystem}"] {\n}\n\n:root[data-design-system="${config.designSystem}"][data-color-scheme="dark"] {\n}\n`, report, { keep: true });
+    // No :root, so the overrides also reach local ThemeProvider boundaries such as a dark band.
+    `[data-design-system="${config.designSystem}"] {\n}\n\n[data-design-system="${config.designSystem}"][data-color-scheme="dark"] {\n}\n`, report, { keep: true });
 
   if (config.rendering === "islands") {
     const fonts = fontHref(config.designSystem);

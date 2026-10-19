@@ -1,0 +1,22 @@
+.media-placeholder {
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: var(--media-placeholder-ratio);
+  padding: var(--media-placeholder-padding);
+  border-radius: var(--media-placeholder-radius);
+  background:
+    repeating-linear-gradient(135deg, var(--media-placeholder-stripe) 0 10px, transparent 10px 20px),
+    var(--media-placeholder-background);
+  color: var(--media-placeholder-color);
+  overflow: hidden;
+}
+
+.media-placeholder__label {
+  max-width: 32ch;
+  font-family: var(--media-placeholder-font-family);
+  font-size: var(--media-placeholder-font-size);
+  line-height: 1.5;
+  text-align: center;
+}

@@ -448,6 +448,10 @@ x-neus:
         --text-overline-tracking: 0em
         --text-overline-transform: none
     layout: {}
+    media-placeholder: {}
+    alert: {}
+    avatar: {}
+    sections: {}
 ---
 
 # Material
@@ -471,6 +475,8 @@ levels to express grouping. Light and dark schemes must preserve these role
 relationships rather than invert colors mechanically. Reference:
 [M3 color roles](https://m3.material.io/styles/color/the-color-system/key-colors-tones).
 
+M3 defines no warning role; warning uses the Neus orange, a local decision.
+
 ## Typography
 
 Organize text into display, headline, title, body, and label
@@ -485,6 +491,8 @@ Local web mapping: use a consistent spacing rhythm, align field
 groups, and let content determine responsive composition. Preserve usable targets
 and text before reducing whitespace. Navigation may change presentation with
 available width while retaining the same destinations.
+
+Public pages separate sections with surface-container tones and keep content in a centered container.
 
 ## Elevation & Depth
 
@@ -529,6 +537,18 @@ Local mapping: a tonal navigation container with rounded selected
 indicators, readable labels, and clearly separate hover, current-location, and focus
 states. Preserve destinations when changing between expanded and compact layouts.
 
+### Hero
+
+Display large in Roboto regular, a filled button and a tonal or text secondary; the anchor sits on a container surface.
+
+### Feature list
+
+Cards on container tones with the system radius, or a plain grid; icons in tonal circles.
+
+### Testimonial
+
+Cards on surface-container-low with an avatar and the author's role.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -540,3 +560,4 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 - Don't equate purple, rounded corners, and shadows with complete Material 3.
 - Don't confuse the shared secondary surface with Material's secondary accent.
 - Don't introduce Expressive motion or shapes into this base target by default.
+- Do use tonal surfaces and container roles for bands; do not use gradients or more than one primary-filled band per page.

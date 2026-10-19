@@ -120,4 +120,13 @@ describe("ThemeProvider", () => {
     expect(css).toContain("--color-text-on-primary: #ffffff;");
     expect(buildThemeCss("carbon")).toContain("--color-primary: #0f62fe;");
   });
+
+  it("resolves warning from the system, its default or an override, with a legible foreground", () => {
+    expect(buildThemeCss("carbon")).toContain("--color-warning: #f1c21b;");
+    expect(buildThemeCss("material")).toMatch(/light"\] \{[^}]*--color-warning: #ed6c02;[^}]*--color-text-on-warning: #000000;/);
+    expect(buildThemeCss("material")).toMatch(/dark"\] \{[^}]*--color-warning: #ffa726;/);
+    const css = buildThemeCss("neus", { warningColor: "#7c2d12" });
+    expect(css).toContain("--color-warning: #7c2d12;");
+    expect(css).toContain("--color-text-on-warning: #ffffff;");
+  });
 });

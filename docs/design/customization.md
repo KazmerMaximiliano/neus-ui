@@ -41,9 +41,11 @@ ordinary recipe declarations. A nested provider resets its own recipe tokens, so
 on its ancestor do not automatically cross that reset. Target the nested boundary explicitly
 when it should receive the same overrides.
 
-For global changes, target the actual document boundary, for example
-`:root[data-design-system="neus"]`. Root overrides do not automatically customize
-independent local providers. Palette variables supplied inline by ThemeProvider need
+For global changes, target the active system, for example `[data-design-system="neus"]`
+and `[data-design-system="neus"][data-color-scheme="dark"]` (the selectors `npx neus init`
+writes in `neus.overrides.css`). Without `:root`, the overrides also reach local providers of
+the same system, such as a dark band; `:root[data-design-system="neus"]` limits them to the
+document. Palette variables supplied inline by ThemeProvider need
 provider color configuration rather than a competing ordinary CSS rule.
 
 ## Classes and styles by part

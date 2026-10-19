@@ -1,0 +1,44 @@
+.avatar {
+  --avatar-size: var(--avatar-size-medium);
+  box-sizing: border-box;
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  overflow: hidden;
+  border-radius: var(--avatar-radius);
+  background: var(--avatar-background);
+  color: var(--avatar-color);
+  font-family: var(--avatar-font-family);
+  font-size: calc(var(--avatar-size) * 0.4);
+  font-weight: var(--avatar-font-weight);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.avatar[data-size="small"] {
+  --avatar-size: var(--avatar-size-small);
+}
+
+.avatar[data-size="large"] {
+  --avatar-size: var(--avatar-size-large);
+}
+
+.avatar[data-shape="circle"] {
+  border-radius: 50%;
+}
+
+.avatar[data-shape="rounded"] {
+  border-radius: var(--avatar-rounded-radius);
+}
+
+.avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar__initials {
+  user-select: none;
+}

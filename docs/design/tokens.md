@@ -37,6 +37,9 @@ specification](../../src/design-systems/neus/DESIGN.md)
 | `--color-error` | color error | `#f44336` | `:root, [data-design-system]` |
 | `--color-error-light` | color error light | `rgba(244, 67, 54, 0.1)` | `:root, [data-design-system]` |
 | `--color-error-dark` | color error dark | `#d32f2f` | `:root, [data-design-system]` |
+| `--color-warning` | color warning | `#ed6c02` | `:root, [data-design-system]` |
+| `--color-warning-light` | color warning light | `rgba(237, 108, 2, 0.1)` | `:root, [data-design-system]` |
+| `--color-warning-dark` | color warning dark | `#c95c02` | `:root, [data-design-system]` |
 | `--color-info` | color info | `#283593` | `:root, [data-design-system]` |
 | `--color-info-light` | color info light | `rgba(40, 53, 147, 0.1)` | `:root, [data-design-system]` |
 | `--color-info-dark` | color info dark | `#1a237e` | `:root, [data-design-system]` |
@@ -173,6 +176,9 @@ specification](../../src/design-systems/neus/DESIGN.md)
 | `--color-error` | color error | `#ef5350` | `[data-color-scheme="dark"]` |
 | `--color-error-light` | color error light | `rgba(239, 83, 80, 0.15)` | `[data-color-scheme="dark"]` |
 | `--color-error-dark` | color error dark | `#e57373` | `[data-color-scheme="dark"]` |
+| `--color-warning` | color warning | `#ffa726` | `[data-color-scheme="dark"]` |
+| `--color-warning-light` | color warning light | `rgba(255, 167, 38, 0.15)` | `[data-color-scheme="dark"]` |
+| `--color-warning-dark` | color warning dark | `#d98e20` | `[data-color-scheme="dark"]` |
 
 ### System roles
 
@@ -233,9 +239,11 @@ specification](../../src/design-systems/neus/DESIGN.md)
 | `--elevation-dialog` | elevation dialog | `0 4px 20px var(--color-shadow)` | `:root, [data-design-system]` |
 | `--color-text-on-success` | color text on success | `#000000` | `:root, [data-design-system]` |
 | `--color-text-on-error` | color text on error | `#000000` | `:root, [data-design-system]` |
+| `--color-text-on-warning` | color text on warning | `#000000` | `:root, [data-design-system]` |
 | `--color-text-on-info` | color text on info | `var(--color-text-on-primary)` | `:root, [data-design-system]` |
 | `--color-success-text` | color success text | `color-mix(in srgb, var(--color-success) 25%, var(--color-text-primary))` | `:root, [data-design-system]` |
 | `--color-error-text` | color error text | `color-mix(in srgb, var(--color-error) 25%, var(--color-text-primary))` | `:root, [data-design-system]` |
+| `--color-warning-text` | color warning text | `color-mix(in srgb, var(--color-warning) 25%, var(--color-text-primary))` | `:root, [data-design-system]` |
 | `--color-info-text` | color info text | `color-mix(in srgb, var(--color-info) 25%, var(--color-text-primary))` | `:root, [data-design-system]` |
 | `--theme-color-scheme` | theme color scheme | `dark` | `[data-color-scheme="dark"]` |
 | `--color-control-text` | color control text | `var(--color-text-primary)` | `[data-color-scheme="dark"]` |
@@ -256,7 +264,7 @@ The short list for page and component CSS. Prefer a component prop when one exis
 | `--color-surface`, `--color-surface-container-low` | Page and raised band backgrounds |
 | `--color-text-primary`, `--color-text-secondary` | Body ink and supporting text |
 | `--color-border-subtle` | Dividers and quiet outlines |
-| `--color-success-text`, `--color-error-text`, `--color-info-text` | Status text on surfaces |
+| `--color-success-text`, `--color-error-text`, `--color-info-text`, `--color-warning-text` | Status text on surfaces |
 | `--color-focus` | Focus indicators |
 | `--font-display`, `--font-body`, `--font-mono` | Font families |
 | `--type-display-size`, `--type-headline-size`, `--type-lead-size` | Fluid page type (prefer Heading and Text) |
@@ -274,9 +282,9 @@ ordinary stylesheet declarations on that same element:
 
 | Variables | Meaning |
 | --- | --- |
-| `--color-primary`, `--color-success`, `--color-error`, `--color-info` | Main system or consumer-supplied action colors |
+| `--color-primary`, `--color-success`, `--color-error`, `--color-info`, `--color-warning` | Main system or consumer-supplied action colors |
 | Corresponding `-light` and `-dark` suffixes | Translucent and darker action variants |
-| `--color-text-on-primary`, `--color-text-on-success`, `--color-text-on-error`, `--color-text-on-info` | Foregrounds for action fills |
+| `--color-text-on-primary`, `--color-text-on-success`, `--color-text-on-error`, `--color-text-on-info`, `--color-text-on-warning` | Foregrounds for action fills |
 | Corresponding `-hover` and `-active` foreground suffixes | Foregrounds for hover/active action fills |
 | `--color-primary-active` | Primary active fill |
 | `--color-focus` | Focus role derived from the selected palette/primary override |

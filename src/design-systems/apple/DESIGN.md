@@ -20,6 +20,8 @@ colors:
   text-muted-dark: "#a1a1a6"
   text-placeholder-dark: "#8e8e93"
   border-subtle-dark: rgba(255, 255, 255, 0.16)
+  warning: "#ff9500"
+  warning-dark-mode: "#ff9f0a"
 typography:
   body-md:
     fontFamily: '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial,
@@ -106,10 +108,12 @@ x-neus:
     light:
       primary: "{colors.primary}"
       onPrimary: "{colors.on-primary}"
+      warning: "{colors.warning}"
     dark:
       primary: "{colors.primary-dark}"
       onPrimary: "{colors.on-primary-dark}"
       hover: "{colors.hover-dark}"
+      warning: "{colors.warning-dark-mode}"
   tokens:
     base:
       --type-display-size: "clamp(2.5rem, 1.57rem + 3.81vw, {typography.display.fontSize})"
@@ -351,6 +355,10 @@ x-neus:
         --text-overline-tracking: 0em
         --text-overline-transform: none
     layout: {}
+    media-placeholder: {}
+    alert: {}
+    avatar: {}
+    sections: {}
 ---
 
 # Apple
@@ -375,6 +383,8 @@ action. Light and dark palettes must preserve meaning and legibility; color must
 not be the only way to identify an error or selection. These principles follow
 [HIG color guidance](https://developer.apple.com/design/human-interface-guidelines/color).
 
+Warning is the HIG system orange in each appearance ([HIG color](https://developer.apple.com/design/human-interface-guidelines/color)).
+
 ## Typography
 
 Use the local system sans-serif stack with clear title, body,
@@ -390,6 +400,8 @@ Buttons need clear separation and a usable activation area, consistent with
 [HIG buttons](https://developer.apple.com/design/human-interface-guidelines/buttons).
 For this web adaptation, use 44 CSS pixels as the touch-target review goal rather
 than copying native point units into CSS.
+
+Public pages center generous content in a wide container and let whitespace, not bands, separate sections.
 
 ## Elevation & Depth
 
@@ -431,6 +443,18 @@ current location. Adapt or collapse it when content needs the space, following
 [HIG sidebar principles](https://developer.apple.com/design/human-interface-guidelines/sidebars).
 Opaque panels, a tablet rail, and a mobile dialog are this project's web mapping.
 
+### Hero
+
+Large-title scale in SF Pro Display semibold, centered or split, with one filled action and a text link as the secondary. Product imagery is the anchor.
+
+### Feature list
+
+A plain grid without surfaces, or large-radius cards on the secondary surface; pictures carry the section more than icons.
+
+### Testimonial
+
+Sparse: one featured quote or plain columns, no card chrome.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -441,3 +465,4 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 - Do review light/dark, keyboard focus, touch areas, zoom, and fallback fonts.
 - Do use emphasis sparingly and keep supporting text legible.
 - Don't turn every surface into glass or every action into a prominent blue button.
+- Do let scale, imagery and whitespace carry public pages; leave out overlines, icon tiles and tinted bands.

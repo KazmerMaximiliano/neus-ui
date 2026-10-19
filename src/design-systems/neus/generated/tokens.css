@@ -53,9 +53,11 @@
   --elevation-dialog: 0 4px 20px var(--color-shadow);
   --color-text-on-success: #000000;
   --color-text-on-error: #000000;
+  --color-text-on-warning: #000000;
   --color-text-on-info: var(--color-text-on-primary);
   --color-success-text: color-mix(in srgb, var(--color-success) 25%, var(--color-text-primary));
   --color-error-text: color-mix(in srgb, var(--color-error) 25%, var(--color-text-primary));
+  --color-warning-text: color-mix(in srgb, var(--color-warning) 25%, var(--color-text-primary));
   --color-info-text: color-mix(in srgb, var(--color-info) 25%, var(--color-text-primary));
 }
 

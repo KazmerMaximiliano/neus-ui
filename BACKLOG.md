@@ -17,16 +17,16 @@ reusable public API and should reuse the existing implementation where appropria
 | P1       | Combobox / Autocomplete | Forms        | Editable text with suggestions, async results and optional custom values; Select currently searches predefined options.                   |
 | P1       | Tooltip                 | Overlays     | Reusable descriptions on hover and focus; the current tooltip belongs to WeekCalendarRow.                                                 |
 | P1       | Popover                 | Overlays     | Anchored arbitrary content with positioning, dismissal and focus handling; current popovers belong to menus and pickers.                  |
-| P1       | Alert                   | Feedback     | Inline informational, success, warning and error messages with optional actions.                                                          |
 | P1       | Toast / ToastProvider   | Feedback     | Transient notifications with a queue, dismissal, configurable duration and live announcements.                                            |
 | P1       | Spinner                 | Feedback     | Standalone indeterminate loading indicator; Button currently embeds its own loader.                                                       |
 | P1       | Progress                | Feedback     | Determinate and indeterminate progress, accessible values and optional labels.                                                            |
 | P1       | Skeleton                | Feedback     | Loading placeholders for text, media and component layouts.                                                                               |
 | P1       | Tabs                    | Navigation   | Associated tab panels, keyboard navigation and controlled or uncontrolled selection.                                                      |
 | P1       | Accordion               | Disclosure   | Expandable sections with single or multiple open items and keyboard support.                                                              |
+| P1       | PricingCard / PricingTable | Sections  | Plans with price, period, features and the action, for public pages; today composed from Card. |
+| P1       | FAQ                     | Sections     | Questions and answers on public pages on native details/summary, with a single-open option.                                              |
 | P1       | Breadcrumbs             | Navigation   | Hierarchical page links with a current-page indicator and overflow handling.                                                              |
 | P1       | Pagination              | Navigation   | Reusable page navigation and page-size selection independent of DataTable.                                                                |
-| P1       | Avatar / AvatarGroup    | Data display | Images, initials, fallbacks and grouped identities with overflow counts.                                                                  |
 | P2       | NumberInput             | Forms        | Numeric stepping, precision and formatting beyond the existing native Input type="number".                                                |
 | P2       | Slider / RangeSlider    | Forms        | Single-value or interval selection with bounds, steps and keyboard controls.                                                              |
 | P2       | ToggleGroup / Toggle    | Forms        | Pressed-state buttons and single or multiple selection for compact controls.                                                              |

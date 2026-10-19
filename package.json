@@ -17,6 +17,10 @@
       "types": "./dist/theme.d.ts",
       "import": "./dist/theme.js"
     },
+    "./sections": {
+      "types": "./dist/sections.d.ts",
+      "import": "./dist/sections.js"
+    },
     "./dist/neus-ui.css": "./dist/neus-ui.css",
     "./package.json": "./package.json"
   },

@@ -89,8 +89,8 @@ Fix every error. Warnings are acceptable when you can say why.
    `--success`, `--error`, `--info` when the system defines them). This
    regenerates the theme file.
 2. Tokens: write the rest in `<styles>/neus.overrides.css`, under
-   `:root[data-design-system="<base>"]` (light and shared values) and
-   `:root[data-design-system="<base>"][data-color-scheme="dark"]`. Use only
+   `[data-design-system="<base>"]` (light and shared values) and
+   `[data-design-system="<base>"][data-color-scheme="dark"]`. Use only
    token names from the component guides and `docs/design/tokens.md`: the
    `--font-*` and `--type-*` roles, `--radius-*` and recipe radii,
    `--space-*`, `--elevation-*`, surfaces and text roles. Start each block

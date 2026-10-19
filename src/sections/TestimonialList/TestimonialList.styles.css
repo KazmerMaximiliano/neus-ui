@@ -1,0 +1,10 @@
+.testimonial-list[data-variant="featured"] > :first-child {
+  grid-column: 1 / -1;
+  max-width: 56rem;
+}
+
+.testimonial-list[data-variant="featured"] > :first-child .testimonial__quote {
+  font-family: var(--font-display);
+  font-size: var(--testimonial-featured-quote-size);
+  line-height: 1.3;
+}

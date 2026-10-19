@@ -5,14 +5,14 @@ import { PACKAGE_ROOT, markdownSection } from "./neus.utils.mjs";
 
 const HELP = `Usage: npx neus docs <Name> [--full]
 
-Prints the usage, behavior and accessibility, props and anatomy of one component or
-template guide. --full prints the whole guide, including its CSS token tables.
+Prints the usage, behavior and accessibility, props and anatomy of one component, section
+or template guide. --full prints the whole guide, including its CSS token tables.
 
 Options:
   --full       Print the whole guide
   -h, --help   Show this help`;
 
-const FOLDERS = ["docs/components", "docs/templates"];
+const FOLDERS = ["docs/components", "docs/sections", "docs/templates"];
 const SECTIONS = ["## Usage", "## Behavior and accessibility", "## Props", "## Anatomy and per-part customization"];
 
 /** Names of every component and template guide. */

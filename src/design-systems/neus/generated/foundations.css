@@ -10,6 +10,9 @@
   --color-error: #f44336;
   --color-error-light: rgba(244, 67, 54, 0.1);
   --color-error-dark: #d32f2f;
+  --color-warning: #ed6c02;
+  --color-warning-light: rgba(237, 108, 2, 0.1);
+  --color-warning-dark: #c95c02;
   --color-info: #283593;
   --color-info-light: rgba(40, 53, 147, 0.1);
   --color-info-dark: #1a237e;
@@ -149,4 +152,7 @@
   --color-error: #ef5350;
   --color-error-light: rgba(239, 83, 80, 0.15);
   --color-error-dark: #e57373;
+  --color-warning: #ffa726;
+  --color-warning-light: rgba(255, 167, 38, 0.15);
+  --color-warning-dark: #d98e20;
 }

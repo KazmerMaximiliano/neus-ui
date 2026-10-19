@@ -13,12 +13,14 @@ export const NEOBRUTALISM_PALETTE: DesignSystemPalette = {
     "primary": "#fdc800",
     "onPrimary": "#1c293c",
     "focus": "#432dd7",
-    "error": "#e11d48"
+    "error": "#e11d48",
+    "warning": "#ff6b00"
   },
   "dark": {
     "primary": "#fdc800",
     "onPrimary": "#1c293c",
     "focus": "#c8b3fd",
-    "error": "#ff6b6b"
+    "error": "#ff6b6b",
+    "warning": "#ff9a3c"
   }
 };

@@ -18,8 +18,8 @@ before application overrides.
 | `scope` | `"global" \| "local"` | Global at a root; any nested provider is always local |
 | `className` | `string` | Applied only to the local scope wrapper |
 
-ThemeConfig contains optional `primaryColor`, `successColor`, `errorColor` and `infoColor`
-strings. Use six-digit hex colors to support all variant and contrast utilities. These are
+ThemeConfig contains optional `primaryColor`, `successColor`, `errorColor`, `infoColor` and
+`warningColor` strings. Use six-digit hex colors to support all variant and contrast utilities. These are
 action color overrides, not a general token/style object. The provider does not accept a
 style prop or arbitrary component tokens.
 
@@ -134,6 +134,29 @@ Nested providers inherit omitted system and mode choices, not the parent's
 initialTheme/updateTheme overrides. Each resolves its own palette. Inline palette values on
 the boundary also take precedence over ordinary stylesheet declarations of those same
 variables there; use initialTheme/updateTheme for those colors.
+
+### Dark band on a light page
+
+`Section tone="inverse"` darkens one band without changing the color scheme: cards and fields
+inside keep their light surfaces. When the band's own fields and cards must be dark too, wrap
+the Section in a local provider with the dark scheme. A nested provider does not inherit the
+parent's colors, so pass the project's colors from `neus.config.json`:
+
+```tsx
+import { Section, ThemeProvider } from "neus-ui";
+import neusConfig from "../neus.config.json";
+
+export const SignupBand = ({ children }: { children: React.ReactNode }) => (
+  <ThemeProvider scope="local" colorScheme="dark" initialTheme={neusConfig.colors}>
+    <Section tone="subtle">{children}</Section>
+  </ThemeProvider>
+);
+```
+
+The wrapper has no box, so the Section paints the band. Project overrides written with
+`[data-design-system="<id>"][data-color-scheme="dark"]` (the selectors `npx neus init` writes,
+without `:root`) reach the boundary, so a brand's dark surfaces apply inside it. The same
+code renders on the server in every rendering mode.
 
 ## CSS, portals and server rendering
 

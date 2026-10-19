@@ -13,6 +13,8 @@ colors:
   error-dark: "#ff6b6b"
   surface: "#fbfbf9"
   text-primary: "#1c293c"
+  warning: "#ff6b00"
+  warning-dark-mode: "#ff9a3c"
 typography:
   body-md:
     fontFamily: '"Inter", Arial, sans-serif'
@@ -94,11 +96,13 @@ x-neus:
       onPrimary: "{colors.on-primary}"
       focus: "{colors.focus}"
       error: "{colors.error}"
+      warning: "{colors.warning}"
     dark:
       primary: "{colors.primary-dark}"
       onPrimary: "{colors.on-primary-dark}"
       focus: "{colors.focus-dark}"
       error: "{colors.error-dark}"
+      warning: "{colors.warning-dark-mode}"
   tokens:
     base:
       --type-display-size: "clamp(2.5rem, 1.76rem + 3.05vw, {typography.display.fontSize})"
@@ -435,6 +439,13 @@ x-neus:
         --text-overline-tracking: 0em
         --text-overline-transform: none
     layout: {}
+    media-placeholder: {}
+    alert: {}
+    avatar:
+      base:
+        --avatar-background: var(--color-primary)
+        --avatar-color: var(--color-text-on-primary)
+    sections: {}
 ---
 
 # Neobrutalism
@@ -456,6 +467,8 @@ dark on-accent text. Keep content surfaces quiet so saturated accents remain
 meaningful. Use a contrasting focus color distinct from selection. Errors need
 explicit text and a boundary change, not color alone.
 
+Warning is a saturated orange, a local decision that stays distinct from the yellow primary.
+
 ## Typography
 
 Use Inter with sans-serif fallbacks for interface text; reserve
@@ -469,6 +482,8 @@ Use a regular alignment grid and generous separation between
 independent objects. Budget space for offset shadows so adjacent controls do not
 collide. Keep dense data internally calm; the surrounding structure supplies the
 visual energy. Wrap action groups before reducing readable content.
+
+Public pages stack bold bands with thick borders between them; give offset shadows room at section edges.
 
 ## Elevation & Depth
 
@@ -510,6 +525,18 @@ Present navigation as a clearly framed region with compact,
 outlined rows. Use a filled yellow item for current location and preserve a separate
 focus outline. Keep hover quieter than selection.
 
+### Hero
+
+Heavy Inter display in ink, a yellow solid action with its hard shadow, and a bordered media frame.
+
+### Feature list
+
+Bordered cards with hard shadows, numbered or iconed, with yellow accents on the tiles.
+
+### Testimonial
+
+Bordered cards with bold quotes; a featured quote can sit on a yellow band.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -522,3 +549,4 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 - Don't use blur, glossy gradients, or rounded pills as default treatments.
 - Don't apply a thick border and shadow to every nested object.
 - Don't present this project vocabulary as a canonical external standard.
+- Do use thick borders, hard shadows and yellow bands on public pages, with uppercase labels sparingly; never blur or soft gradients.

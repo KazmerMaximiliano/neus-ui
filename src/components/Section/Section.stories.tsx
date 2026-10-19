@@ -25,8 +25,8 @@ const meta: Meta<SectionStoryArgs> = {
     },
     tone: {
       control: "select",
-      options: ["default", "subtle", "accent"],
-      description: "Band background; alternate default and subtle between sections",
+      options: ["default", "subtle", "accent", "brand", "inverse"],
+      description: "Band background; alternate default and subtle, brand and inverse once or twice per page",
     },
     spacing: {
       control: "select",

@@ -9,6 +9,10 @@ later session, or another agent, continue the same design.
 Status: draft | building | delivered
 Framework: react | next | astro · Rendering: spa | ssr | rsc | islands
 Design system: <id from neus.config.json> · Color scheme: light | dark | both
+Brand: <brand from neus.config.json> · chosen from: <the directions offered>
+
+## Answers
+The Phase 1 questions and the option the user chose for each.
 
 ## Goal
 One or two sentences: who does what, and what success looks like.
@@ -42,8 +46,8 @@ placeholders: `[pending: refund policy text]`.
 
 ## Customization decisions
 - Level 0 (variants): ...
-- Level 1 (palette): unchanged | changed with `npx neus init --yes --primary ...`
-- Level 2 (tokens in neus.overrides.css): token → value → reason
+- Level 1 (palette): unchanged | `npx neus init --yes --primary <hex> --brand "..."`
+- Level 2 (tokens in neus.overrides.css): the brand block (brand.md); other token → value → reason
 - Level 3/4 (part classes/styles): part → reason
 
 ## Assumptions and open questions

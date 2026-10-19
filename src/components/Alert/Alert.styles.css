@@ -1,0 +1,84 @@
+.alert {
+  --alert-background: var(--alert-info-background);
+  --alert-border-color: var(--alert-info-border-color);
+  --alert-icon-color: var(--alert-info-icon-color);
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--alert-gap);
+  width: 100%;
+  padding: var(--alert-padding);
+  border: var(--alert-border-width) solid var(--alert-border-color);
+  border-radius: var(--alert-radius);
+  background: var(--alert-background);
+  color: var(--alert-color);
+  font-family: var(--alert-font-family);
+  font-size: var(--alert-font-size);
+  line-height: var(--alert-line-height);
+}
+
+.alert[data-status="success"] {
+  --alert-background: var(--alert-success-background);
+  --alert-border-color: var(--alert-success-border-color);
+  --alert-icon-color: var(--alert-success-icon-color);
+}
+
+.alert[data-status="warning"] {
+  --alert-background: var(--alert-warning-background);
+  --alert-border-color: var(--alert-warning-border-color);
+  --alert-icon-color: var(--alert-warning-icon-color);
+}
+
+.alert[data-status="error"] {
+  --alert-background: var(--alert-error-background);
+  --alert-border-color: var(--alert-error-border-color);
+  --alert-icon-color: var(--alert-error-icon-color);
+}
+
+.alert__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--alert-icon-color);
+  /* Centers the icon on the first line of text. */
+  margin-block-start: calc((1lh - var(--alert-icon-size)) / 2);
+}
+
+.alert__icon svg {
+  width: var(--alert-icon-size);
+  height: var(--alert-icon-size);
+}
+
+.alert__body {
+  display: grid;
+  flex: 1;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.alert__title {
+  margin: 0;
+  font-weight: var(--alert-title-weight);
+}
+
+.alert__content > :first-child {
+  margin-block-start: 0;
+}
+
+.alert__content > :last-child {
+  margin-block-end: 0;
+}
+
+.alert__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--alert-actions-gap);
+  margin-block-start: var(--space-2);
+}
+
+.alert .alert__dismiss {
+  --icon-button-accent-text: var(--color-text-secondary);
+  --icon-button-accent-subtle: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  margin-block: calc(-1 * var(--space-1));
+  margin-inline-end: calc(-1 * var(--space-1));
+}

@@ -42,6 +42,9 @@ export const contextFor = (root, surface = "app") => {
       ` · styles in ${config.paths?.styles ?? "?"}`,
     config.derivedSystem && !derived
       ? `\nNone mode: ${config.derivedSystem} does not exist yet. Derive the system before any screen.` : null,
+    config.derivedSystem ? null : config.brand
+      ? `Brand: ${config.brand}${config.brand === "system" ? " (the system's own identity)" : ""}`
+      : "Brand: not decided. Ask for it before the first page (neus-design skill, references/brand.md).",
     "",
     ...sections.map((heading) => withoutSources(markdownSection(design, heading))).filter(Boolean).flatMap((text) => [text, ""]),
     markdownSection(read("docs/design/tokens.md"), "## Key tokens"),
@@ -50,6 +53,10 @@ export const contextFor = (root, surface = "app") => {
     "",
     ...catalog("docs/components/README.md"),
     ...catalog("docs/templates/README.md"),
+    "",
+    "## Sections (`neus-ui/sections`)",
+    "",
+    ...catalog("docs/sections/README.md"),
     "",
     need?.replace("### Need → component", "## Need → component"),
     "",

@@ -1,0 +1,16 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --avatar-size-small: 32px;
+  --avatar-size-medium: 40px;
+  --avatar-size-large: 56px;
+  --avatar-radius: 50%;
+  --avatar-rounded-radius: var(--radius-md);
+  --avatar-background: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface));
+  --avatar-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-text-primary));
+  --avatar-font-family: var(--font-body);
+  --avatar-font-weight: 600;
+  --avatar-group-overlap: 0.25;
+  --avatar-group-ring-width: 2px;
+  --avatar-group-ring-color: var(--color-surface);
+}

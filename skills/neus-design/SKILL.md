@@ -59,28 +59,54 @@ reference describes.
 
 `neus.config.json` tells you which mode you are in:
 
-- `derivedSystem` is `null`: the visual direction is locked. Go to Phase 1.
+- `derivedSystem` is `null`: the system is locked (components, shape,
+  density). The brand on top of it is `brand`: `null` means it was never
+  decided, and Phase 1 asks for it. Go to Phase 1.
 - `derivedSystem` names a file that does not exist yet: the user chose None.
   Run Phase 1, then derive the system in Phase 2 before any screen.
 - `derivedSystem` names an existing file: it is the active system; read it
   together with its base (`designSystem`).
 
-## Phase 1: brief and clarification
+## Quick or full
 
-Skip questions when the brief is enough, when the user says to start, or
-for a local change. Otherwise ask **one round** of at most three questions,
-each with your recommended answer (AskUserQuestion or the host's question
-tool when available, otherwise a short numbered list). Ask only what changes
-the result:
+Pick the mode before Phase 1 and say which one in a line:
 
-- Which screens or flow, and the primary task on each.
-- Who uses it, how often, on which device.
-- The data: shape, volume, and its empty, loading and error states.
-- Where it lives: route or page file.
+- **Full**: a new public page, a new product, a multi-screen flow, or when
+  the user asks for a spec or a review. Every phase below: questions, spec,
+  build, then `neus lint`, the visual loop, the `neus-audit` skill and the
+  `neus-reviewer` subagent.
+- **Quick**: everything else, such as one app screen, a widget, a
+  refinement or a local change. Ask only the brand question when `brand` is
+  `null` (and what the brief truly leaves open), skip the spec file and
+  record the decisions in the delivery, build, then verify with the type
+  check, `neus lint` and the visual loop. Run `neus-audit` and the reviewer
+  only when the user asks.
 
-With a locked system, do not ask about style, brand or palette; changing
-them is `npx neus init` (palette) or a token override. In None mode you may
-ask one question about tone or existing brand material.
+## Phase 1: brief and questions
+
+For a new page, screen, flow or product, ask **one round** of two to four
+questions before the spec, the way a designer opens a project, even when the
+brief looks complete. Skip the round only when the user already said to start
+without questions, or for a refinement or local change. Use AskUserQuestion
+(or the host's question tool); without one, ask a short numbered list and
+wait. Each question has two to four options, your recommended one first.
+Choose the questions that change the result:
+
+- **Brand**, when `brand` is `null`: two or three directions built for this
+  subject, plus keeping the system as it is. Follow
+  [references/brand.md](references/brand.md).
+- **Composition**, for a public page: the options dealt in taste.md step 3,
+  each named by its hero and features layout.
+- **Pictures**: real photos the user can supply, or placeholders
+  (`MediaPlaceholder`) labelled with the shot to replace later.
+- **Facts the page needs and the brief does not give** (phone, prices,
+  dates): the user supplies them, or the page leaves them out.
+- For app screens, only when unclear: the primary task, the data and its
+  states, the device.
+
+Never ask what the brief already answers. With `brand` set, do not ask about
+palette or type. In None mode, the brand question becomes the system
+derivation in Phase 2. Record every answer in the spec.
 
 ## Phase 2: derive the system (None mode only)
 
@@ -90,9 +116,10 @@ traits, base system, inspiration
 directions, the derived DESIGN.md, its translation to tokens, a specimen
 route and iteration until the user approves. Then continue with Phase 3.
 
-## Phase 3: write the spec before code
+## Phase 3: write the spec before code (full mode)
 
-Create or update `design/specs/<slug>.md` from
+Apply the chosen brand first ([references/brand.md](references/brand.md)),
+then create or update `design/specs/<slug>.md` from
 [references/spec-template.md](references/spec-template.md): goal, screens,
 component map, states, real copy, customization decisions, assumptions.
 For a public page, the spec also holds the subject inventory, the argument
@@ -141,15 +168,25 @@ component's guide.
 | Page width and side margins outside a Section | `Container` |
 | Items in a row or column | `Stack` (`direction`, `gap`; `{ base, md, lg }` per breakpoint) |
 | Columns of cards or items | `Grid` (`columns` or `minItemWidth`; `as="ul"` with `Card as="li"`) |
-| Feature with icon, title and text | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
-| Testimonial | `Card as="figure"` (or `as="li"` in a list) + `CardContent` (quote) + `CardFooter` (name, role) |
+| Header of a public page (brand, links, action) | `SiteHeader` from `neus-ui/sections` (`labels` in the project's language) |
+| Opening of a public page | `Hero` (`variant` from the dealt composition: `split`, `centered`, `media-first`) |
+| Title block of a section | `SectionHeader` (`titleId` + the Section's `aria-labelledby`) |
+| Features or services | `FeatureList` + `FeatureItem` (`variant`: `grid`, `list`, `cards`) |
+| Testimonials or reviews | `TestimonialList` + `Testimonial` (`variant`: `plain`, `card`, `featured`), marked `SAMPLE:` |
+| Closing call to action, with or without a form | `CallToAction` (`variant`: `band`, `split` with the form in `aside`) |
+| Footer of a public page | `SiteFooter` |
+| Any other group of items (agenda, prices, team) | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
 | Container of a widget, demo or summary | `Card` |
+| Band of strong color (agenda, final call to action) | `Section tone="brand"` (action color) or `tone="inverse"` (ink); primary buttons adapt, links and fields go in a Card |
+| Picture the project does not have yet | `MediaPlaceholder` with the shot as `label`, marked `SAMPLE:` |
 | Signup, contact or create form | `<form>` + `FormTemplate` + `Input` (`Select`, `Checkbox`, `DateInput`…), inside a `Card` on public pages |
 | Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
 | Icon-only action | `IconButton` |
 | Text navigation | `Link` |
 | Help text under a field | `description` on Input, Select, MultiSelect, DateInput or TimeInput |
 | Status or label | `Badge` |
+| Message about the page or a form (saved, failed, trial ending) | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
+| Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
 | Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
@@ -164,10 +201,11 @@ landmark, an inline `strong`), styled with neus tokens.
 
 ## Phase 5: verify
 
-1. Run `npx neus lint` on the changed files: it reports contract breaks (P0),
-   raw elements a neus component replaces (P1) and the component coverage.
-   Fix every P0 and replace the raw elements it lists. Then run the review in
-   the `neus-audit` skill and fix its P0 and the P1 items in scope.
+1. Run the type check and `npx neus lint` on the changed files: lint
+   reports contract breaks (P0), raw elements a neus component replaces (P1)
+   and the component coverage. Fix every P0 and replace the raw elements it
+   lists. In full mode, then run the review in the `neus-audit` skill and fix
+   its P0 and the P1 items in scope.
 2. Look at the render. This is mandatory for every new or redesigned page or
    screen:
    1. After the first complete render, run `npx neus shot <route>` from the
@@ -183,9 +221,9 @@ landmark, an inline `strong`), styled with neus tokens.
    5. If `neus shot` exits with code 2 (no browser or playwright-core), say
       so in the delivery and ask the user to install Chrome, Edge or
       Chromium. Never claim you reviewed the render.
-3. For a new page or a multi-screen flow, delegate a fresh-eyes review to
-   the `neus-reviewer` subagent with the spec path, the changed files and
-   the route. Fix its P0 findings.
+3. In full mode, delegate a fresh-eyes review to the `neus-reviewer`
+   subagent with the spec path, the changed files and the route. Fix its P0
+   findings.
 
 Never claim a check you did not run.
 
@@ -208,6 +246,7 @@ and keep the questions in the main conversation.
 ## References
 
 - [references/frameworks.md](references/frameworks.md): SPA, SSR, Next.js App Router and Astro rules.
+- [references/brand.md](references/brand.md): building, asking and applying the project's brand.
 - [references/customization.md](references/customization.md): the five-level ladder.
 - [references/taste.md](references/taste.md): tells to avoid, product-screen craft, public-page procedure.
 - [references/system-derivation.md](references/system-derivation.md): None mode.

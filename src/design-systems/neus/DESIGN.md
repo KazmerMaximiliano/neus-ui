@@ -19,6 +19,9 @@ colors:
   info: "#283593"
   info-light: rgba(40, 53, 147, 0.1)
   info-dark: "#1a237e"
+  warning: "#ed6c02"
+  warning-light: rgba(237, 108, 2, 0.1)
+  warning-dark: "#c95c02"
   white: "#ffffff"
   black: "#000000"
   white-100: rgba(255, 255, 255, 0.15)
@@ -113,6 +116,10 @@ colors:
   error-dark-dark: "#e57373"
   text-on-success: "#000000"
   text-on-error: "#000000"
+  text-on-warning: "#000000"
+  warning-dark-mode: "#ffa726"
+  warning-light-dark: rgba(255, 167, 38, 0.15)
+  warning-dark-dark: "#d98e20"
 typography:
   body-md:
     fontFamily: '"Manrope", system-ui, sans-serif'
@@ -193,10 +200,12 @@ x-neus:
       primary: "{colors.primary}"
       onPrimary: "{colors.on-primary}"
       hover: "{colors.hover}"
+      warning: "{colors.warning}"
     dark:
       primary: "{colors.primary-dark}"
       onPrimary: "{colors.on-primary-dark}"
       hover: "{colors.hover-dark}"
+      warning: "{colors.warning-dark-mode}"
   foundations:
     base:
       --color-primary: "{colors.primary}"
@@ -208,6 +217,9 @@ x-neus:
       --color-error: "{colors.error}"
       --color-error-light: "{colors.error-light}"
       --color-error-dark: "{colors.error-dark}"
+      --color-warning: "{colors.warning}"
+      --color-warning-light: "{colors.warning-light}"
+      --color-warning-dark: "{colors.warning-dark}"
       --color-info: "{colors.info}"
       --color-info-light: "{colors.info-light}"
       --color-info-dark: "{colors.info-dark}"
@@ -346,6 +358,9 @@ x-neus:
       --color-error: "#ef5350"
       --color-error-light: "{colors.error-light-dark}"
       --color-error-dark: "{colors.error-dark-dark}"
+      --color-warning: "{colors.warning-dark-mode}"
+      --color-warning-light: "{colors.warning-light-dark}"
+      --color-warning-dark: "{colors.warning-dark-dark}"
   tokens:
     base:
       --theme-color-scheme: light
@@ -400,9 +415,11 @@ x-neus:
       --elevation-dialog: 0 4px 20px var(--color-shadow)
       --color-text-on-success: "{colors.text-on-success}"
       --color-text-on-error: "{colors.text-on-error}"
+      --color-text-on-warning: "{colors.text-on-warning}"
       --color-text-on-info: var(--color-text-on-primary)
       --color-success-text: color-mix(in srgb, var(--color-success) 25%, var(--color-text-primary))
       --color-error-text: color-mix(in srgb, var(--color-error) 25%, var(--color-text-primary))
+      --color-warning-text: color-mix(in srgb, var(--color-warning) 25%, var(--color-text-primary))
       --color-info-text: color-mix(in srgb, var(--color-info) 25%, var(--color-text-primary))
     dark:
       --theme-color-scheme: dark
@@ -1119,6 +1136,97 @@ x-neus:
         --section-subtle-color: currentColor
         --section-accent-background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface))
         --section-accent-color: var(--color-text-primary)
+        --section-brand-background: var(--color-primary)
+        --section-brand-color: var(--color-text-on-primary)
+        --section-brand-muted-color: var(--color-text-on-primary)
+        --section-inverse-background: var(--color-text-primary)
+        --section-inverse-color: var(--color-surface)
+        --section-inverse-muted-color: color-mix(in srgb, var(--color-surface) 75%, transparent)
+    media-placeholder:
+      base:
+        --media-placeholder-background: var(--color-surface-container-low)
+        --media-placeholder-stripe: color-mix(in srgb, var(--color-text-primary) 6%, transparent)
+        --media-placeholder-color: var(--color-text-secondary)
+        --media-placeholder-radius: var(--radius-default)
+        --media-placeholder-font-family: var(--font-mono)
+        --media-placeholder-font-size: var(--fs-xs)
+        --media-placeholder-padding: var(--space-4)
+    alert:
+      base:
+        --alert-radius: var(--card-radius)
+        --alert-padding: var(--space-4)
+        --alert-gap: var(--space-3)
+        --alert-border-width: 1px
+        --alert-font-family: var(--font-body)
+        --alert-font-size: var(--fs-base)
+        --alert-line-height: 1.5
+        --alert-color: var(--color-text-primary)
+        --alert-title-weight: 600
+        --alert-icon-size: 20px
+        --alert-actions-gap: var(--space-2)
+        --alert-info-background: color-mix(in srgb, var(--color-info) 8%, var(--color-surface))
+        --alert-info-border-color: color-mix(in srgb, var(--color-info) 35%, var(--color-surface))
+        --alert-info-icon-color: var(--color-info-text)
+        --alert-success-background: color-mix(in srgb, var(--color-success) 8%, var(--color-surface))
+        --alert-success-border-color: color-mix(in srgb, var(--color-success) 35%, var(--color-surface))
+        --alert-success-icon-color: var(--color-success-text)
+        --alert-warning-background: color-mix(in srgb, var(--color-warning) 10%, var(--color-surface))
+        --alert-warning-border-color: color-mix(in srgb, var(--color-warning) 45%, var(--color-surface))
+        --alert-warning-icon-color: var(--color-warning-text)
+        --alert-error-background: color-mix(in srgb, var(--color-error) 8%, var(--color-surface))
+        --alert-error-border-color: color-mix(in srgb, var(--color-error) 35%, var(--color-surface))
+        --alert-error-icon-color: var(--color-error-text)
+    avatar:
+      base:
+        --avatar-size-small: 32px
+        --avatar-size-medium: 40px
+        --avatar-size-large: 56px
+        --avatar-radius: 50%
+        --avatar-rounded-radius: var(--radius-md)
+        --avatar-background: color-mix(in srgb, var(--color-primary) 14%, var(--color-surface))
+        --avatar-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-text-primary))
+        --avatar-font-family: var(--font-body)
+        --avatar-font-weight: 600
+        --avatar-group-overlap: 0.25
+        --avatar-group-ring-width: 2px
+        --avatar-group-ring-color: var(--color-surface)
+    sections:
+      base:
+        --site-header-height: 64px
+        --site-header-background: var(--color-surface)
+        --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
+        --site-header-border-color: var(--color-border-subtle)
+        --site-header-brand-font-family: var(--font-display)
+        --site-header-brand-font-size: var(--fs-lg)
+        --site-header-brand-font-weight: 700
+        --site-header-link-color: var(--color-text-secondary)
+        --site-header-link-active-color: var(--color-text-primary)
+        --site-header-link-font-size: var(--fs-base)
+        --site-header-link-gap: var(--space-6)
+        --site-header-menu-background: var(--color-surface)
+        --hero-gap: var(--space-12)
+        --hero-body-gap: var(--space-6)
+        --hero-media-radius: var(--radius-default)
+        --section-header-gap: var(--space-3)
+        --section-header-margin-block-end: var(--space-12)
+        --feature-icon-size: 40px
+        --feature-icon-glyph-size: 20px
+        --feature-icon-radius: var(--radius-md)
+        --feature-icon-background: color-mix(in srgb, var(--color-primary) 10%, var(--color-surface))
+        --feature-icon-color: var(--color-primary-text)
+        --feature-gap: var(--space-3)
+        --testimonial-quote-size: var(--fs-lg)
+        --testimonial-quote-line-height: 1.55
+        --testimonial-featured-quote-size: var(--heading-md-size)
+        --testimonial-name-weight: 600
+        --testimonial-gap: var(--space-4)
+        --call-to-action-gap: var(--space-8)
+        --site-footer-background: var(--color-surface)
+        --site-footer-border-color: var(--color-border-subtle)
+        --site-footer-padding-block: var(--space-12)
+        --site-footer-link-color: var(--color-text-secondary)
+        --site-footer-title-color: var(--color-text-primary)
+        --site-footer-font-size: var(--fs-base)
 ---
 
 # Neus UI
@@ -1140,6 +1248,7 @@ for content, and separate success/error/information roles for feedback. Keep
 primary text distinct from supporting text and placeholders. Color must accompany
 a label, icon, border, or other recognizable state cue. In dark mode, preserve
 semantic roles while adjusting both foreground and background for legibility.
+Orange marks warnings: states that need attention but are not errors.
 
 ## Typography
 
@@ -1199,6 +1308,18 @@ Use the primary-colored panel to anchor navigation. Keep hover,
 current destination, and keyboard focus distinguishable. Preserve readable labels
 when a rail expands and keep the mobile close control discoverable.
 
+### Hero
+
+One display headline in Manrope bold, a lead in secondary ink, one solid pill action with its note beside or under it. Split with the real product or a picture; indigo stays on the action.
+
+### Feature list
+
+Cards with a tinted icon tile and a short title, three per row on desktop; a plain grid when the section already has a strong anchor.
+
+### Testimonial
+
+Plain quotes or cards with an initials avatar and the person's role. Never stars or ratings the brief did not give.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -1208,3 +1329,4 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 - Do check light/dark, nested scopes, keyboard focus, long content, and reduced motion.
 - Do preserve Neus defaults at every provider boundary when adding a token.
 - Don't use gradients, glows, or all-uppercase copy as a substitute for hierarchy.
+- Do use overlines, icon tiles, one or two brand or inverse bands and pill actions on public pages; never gradients, glows or glass.

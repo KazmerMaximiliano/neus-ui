@@ -32,8 +32,9 @@ against Claude Design. Nothing here ships in the npm package.
    ```
 
 3. Start a new agent session in that project and paste the brief body, without
-   adding instructions. When the skill asks questions, pick its recommended answer.
-   Do not intervene until it delivers.
+   adding instructions. Answer the skill's questions as you answered Claude
+   Design's for the same brief (brand, colors, pictures); where Claude Design did
+   not ask, pick the skill's recommended answer. Do not intervene until it delivers.
 
 4. Score it from this repository:
 

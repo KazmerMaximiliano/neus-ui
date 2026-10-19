@@ -23,6 +23,8 @@ colors:
   text-muted-dark: "#a1a1a1"
   text-placeholder-dark: "#8f8f8f"
   border-subtle-dark: "#2e2e2e"
+  warning: "#ffb200"
+  warning-dark-mode: "#ffb200"
 typography:
   body-md:
     fontFamily: '"Geist", Arial, sans-serif'
@@ -103,10 +105,12 @@ x-neus:
       primary: "{colors.primary}"
       onPrimary: "{colors.on-primary}"
       focus: "{colors.focus}"
+      warning: "{colors.warning}"
     dark:
       primary: "{colors.primary-dark}"
       onPrimary: "{colors.on-primary-dark}"
       focus: "{colors.focus-dark}"
+      warning: "{colors.warning-dark-mode}"
   tokens:
     base:
       --type-display-size: "clamp(2.5rem, 1.76rem + 3.05vw, {typography.display.fontSize})"
@@ -385,6 +389,10 @@ x-neus:
         --text-overline-tracking: 0em
         --text-overline-transform: none
     layout: {}
+    media-placeholder: {}
+    alert: {}
+    avatar: {}
+    sections: {}
 ---
 
 # Vercel
@@ -409,6 +417,8 @@ opaque gray from gray-alpha used where the background should show through;
 avoid doubling translucent borders at intersections.
 Reference: [Geist colors](https://vercel.com/geist/colors).
 
+Warning is Geist amber 700 in both themes ([Geist colors](https://vercel.com/geist/colors)).
+
 ## Typography
 
 Use Geist Sans for interface text and Geist Mono for code and
@@ -423,6 +433,8 @@ Local product-layout policy: use consistent columns, aligned
 form fields, and economical spacing. Keep dense metadata readable and separate
 sections through headings and spacing. Marketing grids and large display text
 must not determine the density of routine application controls.
+
+Public pages may use large display type and monochrome bands; routine controls keep their product density.
 
 ## Elevation & Depth
 
@@ -465,6 +477,18 @@ Local navigation mapping: a neutral panel with aligned labels,
 quiet separators, understated hover, and a clear current-location treatment.
 Keyboard focus must be identifiable even on a selected item.
 
+### Hero
+
+Geist display with tight negative tracking, centered, a solid black action and an outlined secondary; product UI or code is the anchor.
+
+### Feature list
+
+A grid inside one bordered frame with hairline dividers; small monochrome icons, no tinted tiles.
+
+### Testimonial
+
+Plain quotes with small avatars, or a row of customer names.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -475,3 +499,4 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 - Do verify neutral separation, selection, and focus in both themes.
 - Do draw shared boundaries once and preserve readable supporting text.
 - Don't use promotional gradients or display typography as default product chrome.
+- Do use hairline grids, inverse bands and real product screenshots on public pages; never colorful gradients or tinted icon tiles.
