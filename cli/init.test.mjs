@@ -90,6 +90,17 @@ describe("neus init flags", () => {
   const init = (root, ...args) => spawnSync(process.execPath, [path.resolve("cli/neus.mjs"), "init", "--yes", ...args],
     { cwd: root, encoding: "utf8" });
 
+  it("prepares the compiled system stylesheet in None mode and prints its import", () => {
+    const root = project({ devDependencies: { vite: "8" } }, ["src"]);
+    const result = init(root, "--system", "none", "--agents", "codex");
+    expect(result.status).toBe(0);
+    expect(read(root, "src/styles/neus.system.css")).toContain("npx neus design build");
+    expect(result.stdout).toContain('"./styles/neus.system.css", then "./styles/neus.overrides.css"');
+    writeFileSync(path.join(root, "src/styles/neus.system.css"), "/* built */");
+    init(root);
+    expect(read(root, "src/styles/neus.system.css")).toBe("/* built */");
+  });
+
   it("records and clears the brand direction, keeping it across runs", () => {
     const root = project({ devDependencies: { vite: "8" } }, ["src"]);
     expect(init(root, "--agents", "codex").status).toBe(0);

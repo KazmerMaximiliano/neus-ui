@@ -101,7 +101,7 @@ src/design-systems/
 ├── design-systems.types.ts  # IDs and metadata contracts
 ├── design-systems.consts.ts # Typed metadata/palette aggregation and public families
 ├── design-systems.css       # Foundations, then six system entry points
-├── tooling/                 # Node-only generator, validation, watcher and tests
+├── tooling/                 # Generator: pure core, Node-only file and lint layer, watcher and tests
 ├── tests/                   # Shared browser suites and helpers
 │   └── fixtures/            # Test-only CSS
 └── <system>/
@@ -121,8 +121,11 @@ src/components/Button/Button.stories.tsx # Single preview with a design-system s
 ```
 
 The `tooling/` directory is checked by `tsconfig.node.json` and tested in the
-`design-system-generator` Node project. Application, component-test and library TypeScript
-configurations exclude it; its files are not emitted into `dist/`.
+`design-system-generator` Node project. `design-systems.core.ts` holds the pure parsing,
+validation and rendering, without the file system or the Google linter; it is the only
+tooling module emitted into `dist/`, through the internal `src/design.ts` entry that
+`npx neus design build` uses to validate and compile a project's derived system
+(`x-neus.extends` plus optional `tokens` and `recipes`, no palette, id or foundations).
 
 `ThemeProvider` owns theme selection. It resolves one action palette for both the context
 and CSS, adds `data-design-system` and `data-color-scheme`, and applies runtime color

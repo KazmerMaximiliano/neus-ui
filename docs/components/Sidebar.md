@@ -36,6 +36,10 @@ navigation/open/close/expand/collapse accessible text. `sidebarStyle` targets th
 `toggleStyle` covers both the mobile trigger and tablet expand button. Neus concave
 decorations are transparent pseudo-elements; style them with tokens/CSS rather than props.
 
+For an application shell, use [AppTemplate](../templates/AppTemplate.md): it joins the
+sidebar's top block and the header in one band. Standalone, the top block is transparent and
+shows whatever sits behind the sidebar.
+
 ## Props
 
 See [the type source](../../src/components/Sidebar/Sidebar.types.ts) and

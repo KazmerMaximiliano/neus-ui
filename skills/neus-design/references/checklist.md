@@ -19,6 +19,7 @@ checks the items marked (lint); check the rest by reading your diff.
 - [ ] No emoji as functional icons; icons come from one family (lucide-react) (lint).
 - [ ] User-facing defaults are in the project's language (search placeholders, uploader texts, sidebar labels, empty-table texts).
 - [ ] Every section the brief lists exists.
+- [ ] Application shells use AppTemplate; no Sidebar with a hand-made header, no overridden sidebar color (lint `app-shell`).
 - [ ] `brand` in `neus.config.json` is decided (a direction or `"system"`); it is still `null` only when the user skipped the question, and the delivery says so.
 - [ ] Brand overrides set only the tokens in brand.md, in light and dark, with ink at 4.5:1 or more on both grounds.
 - [ ] `npx neus shot` ran after the last change and its 1440 and 390 px screenshots were opened, or the delivery says why it could not run.

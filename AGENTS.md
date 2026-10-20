@@ -75,7 +75,7 @@ neus-ui/
 │   ├── index.ts                 [FILE] Library entry point (`neus-ui`)
 │   ├── sections.ts              [FILE] Sections entry (`neus-ui/sections`)
 │   └── theme.ts                 [FILE] Server-safe entry (`neus-ui/theme`), no React or CSS
-├── cli/                         [DIRECTORY] `neus` CLI (init, shot, context, docs, lint) and the project templates it writes
+├── cli/                         [DIRECTORY] `neus` CLI (init, shot, context, docs, lint, design, specimen) and the project templates it writes
 ├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus init`
 ├── agents/                      [DIRECTORY] neus-reviewer subagent for Claude Code (.md) and Codex (.toml)
 ├── .storybook/                  [DIRECTORY] Storybook configuration
@@ -234,7 +234,7 @@ and the list variant reaches its items through a `.context.ts` file.
 
 | NAME         | FILE_PATH                   | STATUS | PURPOSE                                    |
 | ------------ | --------------------------- | ------ | ------------------------------------------ |
-| AppTemplate  | src/templates/AppTemplate/  | STABLE | Full application layout                    |
+| AppTemplate  | src/templates/AppTemplate/  | STABLE | Application shell: sidebar top block and header in one band, headerStart and menu, distinct content surface |
 | FormTemplate | src/templates/FormTemplate/ | STABLE | Responsive field/action layout; consumer owns form validation and submission |
 
 ## COMMAND REFERENCE
@@ -575,7 +575,9 @@ React and ReactDOM are peer dependencies. The build keeps one file per source mo
 leaves every dependency external, adds `"use client"` to modules that import React, and
 loads no fonts. Never add build, Storybook or test tooling to `dependencies`.
 `playwright-core` is an `optionalDependencies` entry used only by `neus shot` at runtime; it
-downloads no browser.
+downloads no browser. `yaml` is a runtime dependency because `neus design build` parses the
+project's derived DESIGN.md with the generator core (`src/design-systems/tooling/design-systems.core.ts`,
+built as the internal `dist/design.js`).
 
 ```
 React 19+ (peer)

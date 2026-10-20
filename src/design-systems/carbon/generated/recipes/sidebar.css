@@ -1,5 +1,8 @@
 /* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="carbon"] {
+  --sidebar-header-height: 48px;
+  --sidebar-header-min-height: 48px;
+  --sidebar-header-padding: 2px;
   --sidebar-background: var(--color-surface-secondary);
   --sidebar-color: var(--color-text-primary);
   --sidebar-header-background: var(--sidebar-background);

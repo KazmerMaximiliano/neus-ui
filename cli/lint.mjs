@@ -88,6 +88,9 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
       }
       if (/(\/\/|\{\/\*|\/\*)\s*SAMPLE:/.test(line)) samples.push({ file, line: at, text: line.trim() });
       if (!isCss(file) && /role=["']alert["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"alert\": use Alert");
+      if (/--sidebar-(header-)?background["']?\s*:/.test(line)) {
+        report(file, at, "P1", "app-shell", "the Sidebar keeps the system's panel color (the primary in Neus); change the brand's primary instead");
+      }
       if (isCss(file)) {
         if (/\.(ag|rdp|gm|pac)-[a-z]/.test(line)) report(file, at, "P1", "third-party", "selector on third-party internals; use the component's documented parts");
         const selector = line.includes("{") ? line.slice(0, line.indexOf("{")) : null;
@@ -110,6 +113,12 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
         report(file, lineAt(text, match.index), "P1", "raw-element", `<${match[1]}>: use ${component}`);
       }
       if (neus + raw) coverage[file] = { neus, raw };
+      // ponytail: file-level check; a header in a sibling file that wraps this Sidebar is not seen.
+      const sidebar = text.match(/<Sidebar[\s>/]/);
+      if (sidebar && /<header[\s>]|as=["']header["']/.test(text)) {
+        report(file, lineAt(text, sidebar.index), "P1", "app-shell",
+          "Sidebar with a hand-made header: use AppTemplate (title, routes, headerStart, menu) so the sidebar's top block and the header form one band");
+      }
       for (const match of text.matchAll(/<ThemeProvider\b([^>]*)>/g)) {
         if (!/scope=["']local["']/.test(match[1])) globalProviders.push({ file, line: lineAt(text, match.index) });
       }

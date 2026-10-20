@@ -1,7 +1,7 @@
 import { Sidebar } from "../../components";
+import { APP_NAME } from "./AppTemplate.consts";
 import "./AppTemplate.styles.css";
 import type { AppTemplateProps } from "./AppTemplate.types";
-import { APP_NAME } from "./AppTemplate.consts";
 
 export const AppTemplate = ({
   sidebarClassName,
@@ -14,6 +14,9 @@ export const AppTemplate = ({
   routes,
   linkComponent,
   menu,
+  headerStart,
+  headerStartClassName,
+  headerStartStyle,
   title = APP_NAME,
   className,
   style,
@@ -32,6 +35,16 @@ export const AppTemplate = ({
         .join(" ")}
       style={headerStyle}
     >
+      {headerStart != null && (
+        <div
+          className={["app-template__header-start", headerStartClassName]
+            .filter(Boolean)
+            .join(" ")}
+          style={headerStartStyle}
+        >
+          {headerStart}
+        </div>
+      )}
       {menu}
     </header>
     <div

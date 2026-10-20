@@ -1,5 +1,8 @@
 /* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="apple"] {
+  --sidebar-header-height: 52px;
+  --sidebar-header-min-height: 52px;
+  --sidebar-header-padding: 4px;
   --sidebar-background: var(--color-surface);
   --sidebar-color: var(--color-text-primary);
   --sidebar-header-background: var(--sidebar-background);

@@ -16,11 +16,16 @@ dependencies to the project.
 
 ## 1. App shell with a data list
 
-Use for back-office lists, admin tools and dashboards.
+Use for back-office lists, admin tools and dashboards. AppTemplate owns the
+shell: the sidebar's top block (the title) and the header form one band with a
+rule below, the curve of the Neus panel joins it, and the content sits on its
+own surface. Never rebuild it from a Sidebar and a hand-made header, and never
+override the sidebar's color: in Neus it is a solid panel in the primary color
+(the brand's primary when there is one), never the page white or black.
 
 ```tsx
 import type { ICellRendererParams } from "ag-grid-community";
-import { AppTemplate, Badge, Button, DataTable } from "neus-ui";
+import { AppTemplate, Avatar, Badge, Button, DataTable, Heading, Stack, Text } from "neus-ui";
 import type { Order, OrdersPageProps } from "./OrdersPage.types";
 
 export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps) => {
@@ -30,7 +35,16 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
   ];
 
   return (
-    <AppTemplate title="Kestrel Supply" routes={routes} menu={<Button label="New order" size="small" />}>
+    <AppTemplate
+      title="Kestrel Supply"
+      routes={routes}
+      headerStart={<Text variant="small" tone="muted">Northwind warehouse</Text>}
+      menu={<Avatar name="Ana Paz" size="small" />}
+    >
+      <Stack direction="row" justify="between" align="center" gap={4} className="orders-heading">
+        <Heading as="h1" size="lg">Orders</Heading>
+        <Button label="New order" />
+      </Stack>
       <DataTable
         data={orders}
         pagination={pagination}
@@ -54,7 +68,10 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
 };
 ```
 
-- One solid primary action in the header; row actions use Menu or text buttons.
+- The header holds context (`headerStart`: workspace, breadcrumb, search) and
+  global actions (`menu`: account, notifications). The page title and the
+  page's primary action open the content.
+- One solid primary action per page; row actions use Menu or text buttons.
 - Pagination is controlled: wire `onPaginationChange` to the data source.
 - Provide `renderMobileCard` for tables people use on phones.
 

@@ -4,9 +4,12 @@
   --app-template-background: var(--color-surface);
   --app-template-color: var(--color-text-primary);
   --app-template-header-background: var(--color-surface);
-  --app-template-header-height: 80px;
+  --app-template-header-height: calc(max(var(--sidebar-header-min-height), var(--sidebar-header-height)) + var(--sidebar-convex-radius) + var(--sidebar-border-width));
+  --app-template-mobile-header-height: calc(var(--sidebar-control-size) + 2 * var(--sidebar-floating-offset));
   --app-template-header-padding: 16px;
-  --app-template-header-border-width: 0px;
+  --app-template-header-border-width: 1px;
+  --app-template-header-border-color: var(--color-border-muted);
+  --app-template-content-background: var(--color-surface-secondary);
   --app-template-content-padding: 24px;
   --app-template-max-width: 1200px;
   --form-template-columns: 2;

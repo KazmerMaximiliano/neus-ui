@@ -8,6 +8,9 @@
   --button-font-size-large: var(--fs-base);
   --button-padding-small: 8px 14px;
   --button-padding-medium: 12px 22px;
+  --button-min-height-small: var(--input-control-height-small);
+  --button-min-height-medium: var(--input-control-height-medium);
+  --button-min-height-large: var(--input-control-height-large);
   --button-padding-large: 16px 28px;
   --button-line-height: 1;
   --button-label-weight: 700;

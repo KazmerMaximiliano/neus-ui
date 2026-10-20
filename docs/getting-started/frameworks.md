@@ -37,8 +37,8 @@ import { buildThemeCss } from "neus-ui/theme";
 const css = buildThemeCss("vercel", { primaryColor: "#0f766e" });
 ```
 
-Import order: `neus-ui/dist/neus-ui.css`, `neus.theme.css`, `neus.overrides.css`, then
-application styles. Do not mount a global ThemeProvider as well; wrap only subtrees that
+Import order: `neus-ui/dist/neus-ui.css`, `neus.system.css` (only in None mode, compiled by
+`npx neus design build`), `neus.theme.css`, `neus.overrides.css`, then application styles. Do not mount a global ThemeProvider as well; wrap only subtrees that
 need `useTheme()` in `<ThemeProvider scope="local">`.
 
 ## Vite and other client-only apps

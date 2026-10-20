@@ -23,7 +23,14 @@ export const Example = () => {
 ## Behavior and accessibility
 
 Sidebar owns responsive navigation; the shell adjusts content/header offsets for desktop,
-tablet expansion and mobile. Header menu and main children are consumer content. The title
+tablet expansion and mobile. Header menu and main children are consumer content.
+
+The sidebar's top block (the title) and the header form one band in the header color, with
+its border below; the header is as tall as that block plus the sidebar's curve, so the curve
+joins the panel to the band. The content area sits on `--app-template-content-background`.
+`headerStart` holds context at the start of the header (breadcrumb, workspace, search) and
+`menu` the global actions at its end; page titles and page actions belong in the content.
+Prefer this shell to a Sidebar with a hand-made header: the alignment comes from shared tokens. The title
 defaults to VITE_APP_NAME or NEUS UI. `sidebarStyle` and sidebarClassName target the
 composed public Sidebar root; sidebarContainerStyle/sidebarContainerClassName target the
 shell-owned sidebar container. Other Sidebar internals use its CSS classes and tokens.
@@ -46,7 +53,10 @@ props retain their nullable default.
 | `children` | `ReactNode` | Required | Content to display in the main area |
 | `routes` | `SidebarItem[]` | Required | Sidebar navigation items; an item with `href` renders a link |
 | `linkComponent` | `ElementType` | Omitted | Router link passed to Sidebar for routes with `href` |
-| `menu` | `ReactNode` | Omitted | Optional menu component for the header |
+| `menu` | `ReactNode` | Omitted | Global actions at the end of the header: user menu, notifications |
+| `headerStart` | `ReactNode` | Omitted | Context at the start of the header: breadcrumb, workspace, search |
+| `headerStartClassName` | `string` | Omitted | Additional classes on `.app-template__header-start` |
+| `headerStartStyle` | `CSSProperties` | Omitted | Inline styles on `.app-template__header-start` |
 | `title` | `string` | `APP_NAME` | title override |
 | `className` | `string` | Omitted | Additional classes on `.app-template` |
 | `style` | `CSSProperties` | Omitted | Inline styles on `.app-template` |
@@ -65,6 +75,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | --- | --- | --- | --- | --- |
 | `.app-template` | `div` | `className` | `style` | `Always` |
 | `.app-template__header` | `header` | `headerClassName` | `headerStyle` | `Always` |
+| `.app-template__header-start` | `div` | `headerStartClassName` | `headerStartStyle` | `headerStart` given |
 | `.app-template__sidebar` | `div` | `sidebarContainerClassName` | `sidebarContainerStyle` | `Always` |
 | `.app-template__content` | `main` | `contentClassName` | `contentStyle` | `Always` |
 | `.app-template__content-container` | `div` | `contentContainerClassName` | `contentContainerStyle` | `Always` |
@@ -113,22 +124,27 @@ dependencies. Do not edit generated files.
 | --- | --- | --- |
 | `--app-template-background` | app template background | `var(--color-surface)` |
 | `--app-template-color` | app template color | `var(--color-text-primary)` |
+| `--app-template-content-background` | app template content background | `var(--color-surface-secondary)` |
 | `--app-template-header-background` | app template header background | `var(--color-surface)` |
-| `--app-template-header-border-width` | app template header border width | `0px` |
+| `--app-template-header-border-color` | app template header border color | `var(--color-border-muted)` |
+| `--app-template-header-border-width` | app template header border width | `1px` |
 
 ### Geometry and layout
 
 | Token | Purpose | Neus baseline |
 | --- | --- | --- |
 | `--app-template-content-padding` | app template content padding | `24px` |
-| `--app-template-header-height` | app template header height | `80px` |
+| `--app-template-header-height` | app template header height | `calc(max(var(--sidebar-header-min-height), var(--sidebar-header-height)) + var(--sidebar-convex-radius))` |
 | `--app-template-header-padding` | app template header padding | `16px` |
 | `--app-template-max-width` | app template max width | `1200px` |
+| `--app-template-mobile-header-height` | app template mobile header height | `calc(var(--sidebar-control-size) + 2 * var(--sidebar-floating-offset))` |
 
 ### Shared dependencies and runtime values
 
-`--app-template-sidebar-width`, `--color-border-subtle`, `--font-body`,
-`--sidebar-compact-width`, `--sidebar-control-size`, `--sidebar-floating-offset`,
+`--app-template-sidebar-width` and `--app-template-header-size` (runtime: the header height for
+the current breakpoint), `--font-body`, `--space-3`, `--sidebar-compact-width`,
+`--sidebar-control-size`, `--sidebar-convex-radius`, `--sidebar-floating-offset`,
+`--sidebar-header-height`, `--sidebar-header-min-height`, `--sidebar-header-padding`,
 `--sidebar-transition`, `--sidebar-width`, `--sidebar-z-index`.
 
 Semantic/foundation tokens are described in [the shared token

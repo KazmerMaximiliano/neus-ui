@@ -46,8 +46,14 @@ const meta: Meta<AppTemplateProps & DesignSystemPreviewArgs> = {
     },
     menu: {
       control: false,
-      description: "Optional menu component for the header",
+      description: "Global actions at the end of the header: user menu, notifications",
     },
+    headerStart: {
+      control: false,
+      description: "Context at the start of the header: breadcrumb, workspace, search",
+    },
+    headerStartClassName: { control: "text", description: "Additional classes on the header start" },
+    headerStartStyle: { control: "object", description: "Inline styles on the header start" },
   },
 };
 
@@ -87,6 +93,9 @@ export const AppTemplate: Story = {
     routes: DEFAULT_ROUTES,
     linkComponent: undefined,
     menu: <Dropdown items={MENU_ITEMS} name="User" icon={User} />,
+    headerStart: undefined,
+    headerStartClassName: undefined,
+    headerStartStyle: undefined,
   },
 };
 

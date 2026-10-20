@@ -38,6 +38,8 @@
   box-sizing: border-box;
   width: 100%;
   min-width: var(--input-min-width);
+  /* Same height as a medium Input, so fields of one form line up. */
+  min-height: var(--input-control-height-medium);
   padding: var(--input-padding);
   padding-inline-end: calc(
     var(--select-caret-size) + var(--select-caret-gap) * 2

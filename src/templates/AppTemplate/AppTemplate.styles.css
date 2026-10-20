@@ -1,5 +1,6 @@
 .app-template {
   --app-template-sidebar-width: var(--sidebar-width);
+  --app-template-header-size: var(--app-template-header-height);
   background: var(--app-template-background);
   color: var(--app-template-color);
   font-family: var(--font-body);
@@ -9,7 +10,16 @@
   min-height: 100dvh;
   display: flex;
   margin-left: var(--app-template-sidebar-width);
-  transition: margin-left var(--sidebar-transition), width var(--sidebar-transition);
+  transition:
+    margin-left var(--sidebar-transition),
+    width var(--sidebar-transition);
+}
+
+/* The sidebar's top block and whatever its panel leaves transparent (the corner of its curve)
+   take the header color, so the top block and the header read as one band. */
+.app-template .sidebar {
+  --sidebar-header-background: var(--app-template-header-background);
+  background: var(--app-template-header-background);
 }
 
 .app-template__content {
@@ -18,6 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: var(--app-template-content-background);
 }
 
 .app-template__content-container {
@@ -25,7 +36,7 @@
   box-sizing: border-box;
   padding: var(--app-template-content-padding);
   max-width: var(--app-template-max-width);
-  margin-top: var(--app-template-header-height);
+  margin-top: var(--app-template-header-size);
 }
 
 .app-template__header {
@@ -34,34 +45,66 @@
   top: 0;
   left: var(--app-template-sidebar-width);
   width: calc(100% - var(--app-template-sidebar-width));
-  min-height: var(--app-template-header-height);
+  height: var(--app-template-header-size);
   padding: var(--app-template-header-padding);
   background: var(--app-template-header-background);
-  border-bottom: var(--app-template-header-border-width) solid var(--color-border-subtle);
+  border-bottom: var(--app-template-header-border-width) solid
+    var(--app-template-header-border-color);
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: var(--space-3);
   z-index: calc(var(--sidebar-z-index) - 1);
-  transition: left var(--sidebar-transition), width var(--sidebar-transition);
+  transition:
+    left var(--sidebar-transition),
+    width var(--sidebar-transition);
+}
+
+.app-template__header-start {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
 }
 
 @media (768px <= width < 1024px) {
-  .app-template { --app-template-sidebar-width: var(--sidebar-compact-width); }
+  .app-template {
+    --app-template-sidebar-width: var(--sidebar-compact-width);
+    /* The rail's top block grows to fit its expand control; the header grows with it. */
+    --app-template-header-size: max(
+      var(--app-template-header-height),
+      calc(2 * var(--sidebar-header-padding) + var(--sidebar-control-size) + var(--sidebar-convex-radius) + var(--sidebar-border-width))
+    );
+  }
   .app-template:has(.sidebar:focus-within),
-  .app-template:has(.sidebar[data-expanded="true"]) { --app-template-sidebar-width: var(--sidebar-width); }
+  .app-template:has(.sidebar[data-expanded="true"]) {
+    --app-template-sidebar-width: var(--sidebar-width);
+  }
 }
 
 @media (768px <= width < 1024px) and (hover: hover) {
-  .app-template:has(.sidebar:hover) { --app-template-sidebar-width: var(--sidebar-width); }
+  .app-template:has(.sidebar:hover) {
+    --app-template-sidebar-width: var(--sidebar-width);
+  }
 }
 
 @media (width < 768px) {
-  .app-template { --app-template-sidebar-width: 0px; }
+  .app-template {
+    --app-template-sidebar-width: 0px;
+    --app-template-header-size: calc(var(--app-template-mobile-header-height) + env(safe-area-inset-top, 0px));
+  }
   .app-template__header {
-    padding-left: calc(var(--sidebar-control-size) + 2 * var(--sidebar-floating-offset));
-    padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+    padding-left: calc(
+      var(--sidebar-control-size) + 2 * var(--sidebar-floating-offset)
+    );
+    padding-top: calc(var(--app-template-header-padding) + env(safe-area-inset-top, 0px));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .app-template, .app-template__header { transition: none; }
+  .app-template,
+  .app-template__header {
+    transition: none;
+  }
 }

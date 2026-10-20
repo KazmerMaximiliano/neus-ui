@@ -4,9 +4,9 @@ import { createInterface } from "node:readline/promises";
 import { parseArgs } from "node:util";
 import {
   AGENT_TARGETS, BLOCK_END, BLOCK_START, COLOR_KEYS, COLOR_PATTERN, CONFIG_FILE,
-  DERIVED_SYSTEM_FILE, SCHEME_STORAGE_KEY, SKILLS, SYSTEM_FONTS,
+  DERIVED_SYSTEM_FILE, SCHEME_STORAGE_KEY, SKILLS, SYSTEM_CSS_FILE, SYSTEM_FONTS,
 } from "./neus.consts.mjs";
-import { PACKAGE_ROOT, detectProject, readJson, toPosix } from "./neus.utils.mjs";
+import { PACKAGE_ROOT, detectProject, importPath, readJson, toPosix } from "./neus.utils.mjs";
 
 const TEMPLATES = path.join(PACKAGE_ROOT, "cli/templates");
 // Root documents whose existing theme attributes `neus init` keeps in sync.
@@ -30,10 +30,6 @@ Options:
   --styles <dir>            Folder for neus.theme.css and neus.overrides.css
   -h, --help                Show this help`;
 
-const importPath = (fromDir, file) => {
-  const relative = toPosix(path.relative(fromDir, file));
-  return relative.startsWith(".") ? relative : `./${relative}`;
-};
 const fill = (template, values) => template.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => values[key] ?? "");
 
 /** Replaces the managed block in AGENTS.md, or appends it. */
@@ -229,6 +225,12 @@ export const writeProject = (root, config, theme) => {
     // No :root, so the overrides also reach local ThemeProvider boundaries such as a dark band.
     `[data-design-system="${config.designSystem}"] {\n}\n\n[data-design-system="${config.designSystem}"][data-color-scheme="dark"] {\n}\n`, report, { keep: true });
 
+  // None mode: an empty system stylesheet, so the root can import it before the first build.
+  if (config.derivedSystem) {
+    write(root, `${styles}/${SYSTEM_CSS_FILE}`, `/* Compiled by npx neus design build from ${config.derivedSystem}; empty until the first build. */\n`,
+      report, { keep: true });
+  }
+
   if (config.rendering === "islands") {
     const fonts = fontHref(config.designSystem);
     const styleDir = importPath(path.join(root, "src/layouts"), path.join(root, styles));
@@ -237,6 +239,7 @@ export const writeProject = (root, config, theme) => {
       SYSTEM: config.designSystem,
       SCHEME: config.colorScheme,
       STYLES: styleDir,
+      SYSTEM_CSS: config.derivedSystem ? `import "${styleDir}/${SYSTEM_CSS_FILE}";\n` : "",
       STORAGE_KEY: SCHEME_STORAGE_KEY,
       FONTS: fonts ? `<link rel="stylesheet" href="${fonts}" />` : "",
     }), report, { keep: true });
@@ -284,9 +287,11 @@ export const nextSteps = (root, config) => {
   const fonts = fontHref(config.designSystem);
   const fontLine = fonts ? `  Fonts: <link rel="stylesheet" href="${fonts}" />` : "  Fonts: the system font stack; nothing to load";
   let steps;
+  const system = config.derivedSystem ? [SYSTEM_CSS_FILE] : [];
   if (config.rendering === "spa") {
+    const css = [...system, "neus.overrides.css"].map((file) => `"${importPath(path.join(root, "src"), path.join(root, styles, file))}"`);
     steps = [
-      `  Entry file (src/main.tsx): import "neus-ui/dist/neus-ui.css", then "${importPath(path.join(root, "src"), path.join(root, styles, "neus.overrides.css"))}"`,
+      `  Entry file (src/main.tsx): import "neus-ui/dist/neus-ui.css", then ${css.join(", then ")}`,
       "  Render <NeusRoot><App /></NeusRoot> from src/neus/NeusRoot.tsx",
       `${fontLine} in index.html`,
     ];
@@ -295,7 +300,7 @@ export const nextSteps = (root, config) => {
   } else {
     const document = rootDocument(root, config);
     const from = path.join(root, path.dirname(document));
-    const css = ["neus.theme.css", "neus.overrides.css"].map((file) => `"${importPath(from, path.join(root, styles, file))}"`);
+    const css = [...system, "neus.theme.css", "neus.overrides.css"].map((file) => `"${importPath(from, path.join(root, styles, file))}"`);
     steps = [
       `  ${document}${document.endsWith("_document.tsx") ? " (stylesheets in pages/_app.tsx)" : ""}:`,
       `    <html lang="${config.language}" data-design-system="${config.designSystem}" data-color-scheme="${config.colorScheme}">`,
@@ -304,7 +309,8 @@ export const nextSteps = (root, config) => {
     ];
   }
   const invoke = config.agents.map((agent) => agent === "claude" ? "/neus-design in Claude Code" : "$neus-design in Codex").join(" or ");
-  return ["", "Next steps:", ...steps, "", `Then design with ${invoke}${config.derivedSystem ? " (it starts by deriving your system)" : ""}.`,
+  return ["", "Next steps:", ...steps, "", `Then design with ${invoke}${config.derivedSystem
+    ? " (it starts by deriving your system and compiles it with npx neus design build)" : ""}.`,
     "The skill can finish this wiring for you."].join("\n");
 };
 
