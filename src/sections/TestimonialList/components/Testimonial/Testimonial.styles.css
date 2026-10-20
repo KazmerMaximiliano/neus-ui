@@ -17,7 +17,7 @@
 }
 
 .testimonial[data-variant-item="plain"] .testimonial__figure {
-  padding-inline-start: var(--space-5);
+  padding-inline-start: var(--space-4);
   border-inline-start: var(--testimonial-rule-width) solid var(--testimonial-rule-color);
 }
 

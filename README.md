@@ -1,7 +1,8 @@
 # Neus UI
 
-A React 19+ component library with TypeScript, 40 public components and sections, nine page
-sections for public pages (`neus-ui/sections`), two layout templates, and six design systems driven by scoped CSS tokens.
+A React 19+ component library with TypeScript: 40 components (counting public subcomponents
+such as CardHeader), nine page sections for public pages (`neus-ui/sections`), two layout
+templates, and six design systems driven by scoped CSS tokens.
 
 ## Get started
 
@@ -30,10 +31,20 @@ individual parts with classes and style props.
 npx neus init
 ```
 
-`neus init` picks a design system (or None, to derive your own), sets the palette, writes
-the theme files for Vite, Next.js or Astro, and installs the `neus-design` and `neus-audit`
-skills plus a `neus-reviewer` subagent for Claude Code and Codex. Then design from the
-terminal with `/neus-design` or `$neus-design`.
+`neus init` asks for a design system (or None, to derive your own), the color scheme, the
+action colors, the language and your coding agents. It writes the theme files for Vite,
+Next.js or Astro and installs the `neus-design` and `neus-audit` skills plus a
+`neus-reviewer` subagent. Then design from Claude Code with `/neus-design`, or from the Codex
+CLI with `$neus-design`. The skill asks about the brand, the composition and pictures before
+building, and checks its work with the commands below.
+
+| Command | Purpose |
+| --- | --- |
+| `npx neus init` | Set up or change the system, palette, theme files, skills and subagent |
+| `npx neus context` · `npx neus docs <Name>` | The active system, catalog and rules; one component's guide |
+| `npx neus lint` | Contract breaks (P0), raw elements a component replaces, component coverage |
+| `npx neus shot <route>` | Screenshots at 1440 and 390 px with the problems measured |
+| `npx neus design build` · `npx neus specimen` | None mode: compile the derived system; preview it |
 
 ## Documentation
 
@@ -50,6 +61,7 @@ terminal with `/neus-design` or `$neus-design`.
 | [Components](./docs/components/README.md)              | All 40 public components/sections, complete props, anatomy and token references |
 | [Sections](./docs/sections/README.md)                  | `neus-ui/sections`: header, hero, features, testimonials, call to action and footer for public pages |
 | [Templates](./docs/templates/README.md)                | AppTemplate and FormTemplate composition and responsive layouts                 |
+| [Examples](./docs/examples/README.md)                  | Five briefs to try the design skill, with the pages it produced and their code |
 | [Contributing](./docs/contributing/README.md)          | Development, testing and DESIGN.md authoring                                    |
 
 Documentation is plain Markdown and needs no server. Storybook provides the interactive
@@ -72,8 +84,9 @@ browser checks and coverage. Agent instructions live in [AGENTS.md](./AGENTS.md)
 
 Source families live in src/components, layouts in src/templates, and scoped
 recipes/specifications in src/design-systems. The `neus` CLI lives in cli/, and the agent
-skills and subagents it installs in skills/ and agents/. Internal and public sections live under their
-owning family's components directory. Public imports remain named exports from neus-ui.
+skills and subagents it installs in skills/ and agents/. Subcomponents live under their owning
+family's components directory and page sections in src/sections. Public imports are named
+exports from `neus-ui` and `neus-ui/sections`.
 
 ## Links and license
 

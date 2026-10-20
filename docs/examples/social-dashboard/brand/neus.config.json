@@ -1,0 +1,18 @@
+{
+  "framework": "vite",
+  "rendering": "spa",
+  "designSystem": "neus",
+  "derivedSystem": null,
+  "colorScheme": "light",
+  "colors": {
+    "primaryColor": "#047857"
+  },
+  "brand": "Esmeralda analítico: #047857 acción, azul #1F4FD8 en datos, blanco frío #F6F8F7, Schibsted Grotesk display",
+  "language": "es",
+  "agents": [
+    "claude"
+  ],
+  "paths": {
+    "styles": "src/styles"
+  }
+}

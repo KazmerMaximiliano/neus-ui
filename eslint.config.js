@@ -6,7 +6,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig([
-  globalIgnores(["dist", "coverage", "storybook-static"]),
+  globalIgnores(["dist", "coverage", "storybook-static", "docs/examples"]),
   {
     rules: {
       "padding-line-between-statements": [
@@ -16,7 +16,7 @@ export default defineConfig([
     },
   },
   {
-    files: ["cli/**/*.mjs", "skills/**/*.mjs", "eval/**/*.mjs"],
+    files: ["cli/**/*.mjs", "skills/**/*.mjs"],
     extends: [js.configs.recommended],
     languageOptions: {
       ecmaVersion: 2022,

@@ -2,8 +2,9 @@
 
 [Getting started](./README.md) · [Documentation](../README.md)
 
-Neus UI is a React 19+ component library with named TypeScript exports, 40 public components
-and sections, and two layout templates. Components own structure, accessibility and
+Neus UI is a React 19+ component library with named TypeScript exports: 40 components
+(counting public subcomponents), nine page sections in `neus-ui/sections` and two layout
+templates. Components own structure, accessibility and
 interactions. CSS tokens provide appearance through six scoped systems: Neus UI, Apple,
 Carbon, Material, Neobrutalism and Vercel.
 
@@ -26,8 +27,8 @@ export const App = () => (
 
 ## Customize appearance
 
-ThemeProvider selects a system/mode and supports runtime overrides for four semantic action
-colors. Stylesheets override shared or component-specific CSS tokens. Individual components
+ThemeProvider selects a system/mode and supports runtime overrides for five semantic action
+colors (primary, success, error, info and warning). Stylesheets override shared or component-specific CSS tokens. Individual components
 expose root classes and per-part style/class props; their guides identify the actual DOM
 destination of each hook.
 

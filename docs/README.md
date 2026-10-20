@@ -1,8 +1,8 @@
 # Neus UI documentation
 
-Neus UI provides 40 public React components and sections, two layout templates, and six
-design systems driven by scoped CSS tokens. These guides are Markdown; read them in GitHub
-or an editor without starting a server.
+Neus UI provides 40 React components (counting public subcomponents), nine page sections, two
+layout templates, and six design systems driven by scoped CSS tokens. These guides are
+Markdown; read them in GitHub or an editor without starting a server.
 
 ## Start building
 
@@ -18,9 +18,10 @@ or an editor without starting a server.
 
 | Reference | Contents |
 | --- | --- |
-| [Components](./components/README.md) | All 40 components/sections, props, anatomy, states and complete token inventories |
+| [Components](./components/README.md) | All 40 components and public subcomponents, props, anatomy, states and complete token inventories |
 | [Sections](./sections/README.md) | `neus-ui/sections`: SiteHeader, Hero, SectionHeader, FeatureList, TestimonialList, CallToAction and SiteFooter for public pages |
 | [Templates](./templates/README.md) | AppTemplate and FormTemplate composition, responsive behavior and styling |
+| [Examples](./examples/README.md) | Five briefs for the `neus-design` skill, how to run them, and the pages it produced with their code |
 | [CSS tokens](./design/tokens.md) | Shared foundations, semantic roles and runtime palette variables |
 | [Design guide index](./design/README.md) | Consumer theming and customization guides |
 

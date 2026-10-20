@@ -16,6 +16,11 @@
 /* A field that spans every column: a long hint, a textarea, a consent checkbox. */
 .form-template > .form-template__full { grid-column: 1 / -1; }
 .form-template__submit { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--form-template-action-gap); justify-content: flex-end; padding-top: var(--form-template-action-padding); }
+/* A single action takes the last column, as wide as the field above it; with one column it spans the
+   form. Several actions keep their natural widths, aligned to the end. */
+/* column-gap: inherit keeps the form's gutters; the subgrid's own gap would resize its columns. */
+.form-template__submit:has(> :only-child) { display: grid; grid-template-columns: subgrid; column-gap: inherit; }
+.form-template__submit > :only-child { grid-column: -2 / -1; width: 100%; }
 @media (768px <= width < 1024px) {
   .form-template { grid-template-columns: repeat(var(--form-template-tablet-columns), minmax(0, 1fr)); }
 }

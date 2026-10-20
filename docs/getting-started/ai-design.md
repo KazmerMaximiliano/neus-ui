@@ -5,8 +5,8 @@
 Neus UI ships the knowledge an AI coding agent needs to design with it: the six DESIGN.md
 specifications, the component guides, a design skill, an audit skill and a review
 subagent. `npx neus init` installs them in your project for Claude Code and Codex, so
-`/neus-design` (Claude Code) or `$neus-design` (Codex) designs screens from the terminal
-with your system, your components and your tokens.
+`/neus-design` in Claude Code, or `$neus-design` in the Codex CLI, designs screens with your
+system, your components and your tokens.
 
 ## Set up
 
@@ -15,11 +15,13 @@ pnpm add git+https://github.com/KazmerMaximiliano/neus-ui.git
 npx neus init
 ```
 
-`neus init` detects the framework and how it renders, then asks for:
+`neus init` detects the framework and how it renders, then asks, with arrow-key choices
+(↑/↓ to move, Enter to confirm, Ctrl+C to cancel without writing anything):
 
 1. **Design system**: one of the six, or **None** to let the agent derive one for the project.
 2. **Color scheme**: light or dark.
-3. **Action colors**: keep the system's, or choose primary, success, error, info and warning.
+3. **Action colors**: keep the system's (the `neus-design` skill can choose a brand later), or
+   type primary, success, error, info and warning.
 4. **Language** of user-facing copy.
 5. **Agents**: Claude Code, Codex or both.
 
@@ -33,10 +35,11 @@ root layout.
 
 | File | Owner | Purpose |
 | --- | --- | --- |
-| `neus.config.json` | `neus init` | Framework, rendering mode, system, scheme, colors, language, agents and paths |
+| `neus.config.json` | `neus init` | Framework, rendering mode, system, derived system, scheme, colors, brand, language, agents and paths |
 | `<styles>/neus.theme.css` | `neus init` | Custom action colors as static CSS (server-rendered hosts) |
 | `src/neus/neus.theme.ts` + `NeusRoot.tsx` | `neus init` / you | Global ThemeProvider values and root (client-only hosts) |
-| `<styles>/neus.overrides.css` | You | Project-wide token overrides |
+| `<styles>/neus.overrides.css` | You | Project-wide token overrides, including the brand's ground, ink and faces |
+| `<styles>/neus.system.css` | `neus design build` | None mode: the derived system, compiled from `design/system/DESIGN.md` |
 | `src/layouts/NeusLayout.astro` | You | Astro layout with theme attributes, fonts and stylesheets |
 | `.claude/skills/neus-design`, `.claude/skills/neus-audit` | `neus init` | Skills for Claude Code |
 | `.agents/skills/neus-design`, `.agents/skills/neus-audit` | `neus init` | The same skills for Codex |
@@ -117,7 +120,8 @@ with 1 when it finds a P0.
 | Layer | What it does |
 | --- | --- |
 | Taste | Product-screen rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy) and, for public pages, substance rules (Heading display, 16px Text, Section bands at the system's width, an anchor per section) and a sample-content policy, adapted from taste-skill and Open Design |
-| Directions | `scripts/deal-directions.mjs` deals palette, type pairing, shape, density, elevation, a signature move and, for public pages, the hero, features, testimonials and call-to-action layouts. With a locked system it deals only the composition, so the system's palette and type stay intact |
+| Brand | Two or three brand directions built for the subject (action color, ground, display face, button case), offered as a question with the system as it is; applied through `neus init` and `neus.overrides.css` |
+| Directions | `scripts/deal-directions.mjs` deals the hero, features, testimonials and call-to-action layouts of a public page; in None mode it also deals palette, type pairing, shape, density and elevation for the derived system |
 | Inspiration | An index of the VoltAgent/awesome-design-md analyses; the agent takes concepts, never identities |
 | Audit | Type checks, `neus lint`, the Vercel Web Interface Guidelines and the design contract, reported as `file:line` with P0/P1/P2 |
 | Review | The `neus-reviewer` subagent judges the result against the spec without the conversation that produced it |

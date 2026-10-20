@@ -10,6 +10,8 @@ import { DESIGN_SYSTEMS } from "../design-systems.consts";
 afterEach(cleanup);
 
 const box = (label: string) => screen.getByText(label, { selector: "label" }).parentElement!.getBoundingClientRect();
+// The bordered field box (the input sits inside it, inset by the border).
+const field = (name: string) => screen.getByRole("textbox", { name }).closest(".input__control")!.getBoundingClientRect();
 
 it("spans every column with form-template__full", async () => {
   await page.viewport(1280, 900);
@@ -52,4 +54,47 @@ it.each(DESIGN_SYSTEMS)("gives Select the height of a medium Input in $id", ({ i
     </ThemeProvider>,
   );
   expect(height(container.querySelector(".select__field")!)).toBe(height(screen.getByRole("textbox", { name: "Nombre" })));
+});
+
+describe.each(DESIGN_SYSTEMS)("FormTemplate actions in $id", ({ id }) => {
+  it("makes a single submit button as wide as the field above it", async () => {
+    await page.viewport(1280, 900);
+    render(
+      <ThemeProvider scope="local" designSystem={id}>
+        <div style={{ width: 480 }}>
+          <FormTemplate submitLabel="Pedir acceso anticipado">
+            <Input label="Nombre" />
+            <Input label="Email" />
+          </FormTemplate>
+        </div>
+      </ThemeProvider>,
+    );
+    const button = screen.getByRole("button", { name: "Pedir acceso anticipado" }).getBoundingClientRect();
+    const email = field("Email");
+    expect(Math.round(button.width)).toBe(Math.round(email.width));
+    expect(Math.round(button.left)).toBe(Math.round(email.left));
+  });
+
+  it("spans a one-column form and keeps several actions at their own widths", async () => {
+    await page.viewport(1280, 900);
+    render(
+      <ThemeProvider scope="local" designSystem={id}>
+        <div style={{ width: 480 }}>
+          <FormTemplate submitLabel="Enviar" columns={1} tabletColumns={1}>
+            <Input label="Nombre" />
+          </FormTemplate>
+          <FormTemplate submitLabel="Guardar" actions={<><Button label="Cancelar" variant="text" /><Button label="Guardar" /></>}>
+            <Input label="Ciudad" />
+            <Input label="País" />
+          </FormTemplate>
+        </div>
+      </ThemeProvider>,
+    );
+    expect(Math.round(screen.getByRole("button", { name: "Enviar" }).getBoundingClientRect().width))
+      .toBe(Math.round(field("Nombre").width));
+    const save = screen.getByRole("button", { name: "Guardar" }).getBoundingClientRect();
+    const country = field("País");
+    expect(save.width).toBeLessThan(country.width);
+    expect(Math.round(save.right)).toBe(Math.round(country.right));
+  });
 });

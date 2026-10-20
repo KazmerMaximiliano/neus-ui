@@ -1,0 +1,9 @@
+/* Signature: every section after the hero opens on a 1px ink rule. */
+.af-ruled {
+  border-block-start: 1px solid var(--color-text-primary);
+}
+
+.af-demo {
+  inline-size: 100%;
+  text-align: start;
+}

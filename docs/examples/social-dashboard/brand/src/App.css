@@ -1,0 +1,225 @@
+/* Dashboard feature styles. Neus tokens only; layout comes from Grid and Stack. */
+
+.dashboard {
+  inline-size: 100%;
+  max-inline-size: var(--container-lg-max-width);
+  margin-inline: auto;
+}
+
+/* Bento spans: md 2 columns, lg 4 columns. */
+@media (min-width: 768px) {
+  .bento__impressions,
+  .bento__chart,
+  .bento__top {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento__chart {
+    grid-column: span 3;
+  }
+  .bento__top {
+    grid-column: span 1;
+  }
+}
+
+/* Cards in a row share its height; their content fills it. */
+.bento .card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento .card-content > .stack {
+  flex: 1;
+}
+
+.bento .card-header {
+  flex-wrap: wrap;
+}
+
+.text.metric {
+  font-family: var(--font-display);
+  font-size: var(--type-headline-size);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+}
+
+/* Period tabs: a segmented control. */
+.period-tabs {
+  align-self: flex-start;
+  display: inline-flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-secondary);
+}
+
+@media (min-width: 768px) {
+  .period-tabs {
+    align-self: auto;
+  }
+}
+
+.period-tabs__tab {
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.period-tabs__tab:hover {
+  background: var(--color-surface);
+}
+
+.period-tabs__tab[aria-selected="true"] {
+  background: var(--color-surface);
+  color: var(--color-primary-text);
+  box-shadow: var(--elevation-floating);
+}
+
+.period-tabs__tab:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Impressions sparkline. */
+.sparkline {
+  display: block;
+  inline-size: 100%;
+  block-size: 4.5rem;
+  flex: 1;
+  margin-block-start: auto;
+}
+
+.bento__ctr .badge {
+  margin-block-start: auto;
+}
+
+.sparkline__line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+}
+
+.sparkline__area {
+  fill: color-mix(in srgb, var(--color-primary) 12%, transparent);
+}
+
+/* Followers by network. */
+.networks__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: var(--space-1);
+}
+
+.networks__bar {
+  grid-column: 1 / -1;
+  block-size: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--chart-series-2);
+}
+
+/* Stacked bar chart. */
+.legend {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.legend__swatch {
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.legend__swatch--organic,
+.chart__bar--organic {
+  background: var(--color-primary);
+}
+
+.legend__swatch--paid,
+.chart__bar--paid {
+  background: var(--chart-series-2);
+}
+
+.chart {
+  flex: 1;
+  display: flex;
+  gap: var(--space-2);
+  align-items: stretch;
+  min-block-size: 16rem;
+}
+
+@media (max-width: 767px) {
+  .chart__total {
+    display: none;
+  }
+}
+
+.chart__group {
+  flex: 1;
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chart__track {
+  flex: 1;
+  inline-size: min(100%, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  border-block-end: 1px solid var(--color-border-subtle);
+}
+
+.chart__bar {
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.chart__label {
+  text-align: center;
+}
+
+/* Top posts. */
+.top-posts__item + .top-posts__item {
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .period-tabs__tab {
+    transition: none;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "framework": "vite",
+  "rendering": "spa",
+  "designSystem": "neus",
+  "derivedSystem": null,
+  "colorScheme": "light",
+  "colors": {
+    "primaryColor": "#a8471f"
+  },
+  "brand": "Ladrillo de la Docta: terracota #A8471F, arena cálida, Space Grotesk",
+  "language": "es",
+  "agents": [
+    "claude"
+  ],
+  "paths": {
+    "styles": "src/styles"
+  }
+}

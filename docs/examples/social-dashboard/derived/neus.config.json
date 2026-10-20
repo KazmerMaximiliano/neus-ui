@@ -1,0 +1,19 @@
+{
+  "framework": "vite",
+  "rendering": "spa",
+  "designSystem": "neus",
+  "derivedSystem": "design/system/DESIGN.md",
+  "colorScheme": "light",
+  "colors": {
+    "primaryColor": "#047857",
+    "infoColor": "#1d4ed8"
+  },
+  "brand": "Bento tonal: #047857 emerald, #EEF2EF green-gray ground, Inter Tight",
+  "language": "es",
+  "agents": [
+    "claude"
+  ],
+  "paths": {
+    "styles": "src/styles"
+  }
+}

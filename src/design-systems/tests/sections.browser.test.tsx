@@ -84,8 +84,9 @@ describe.each(DESIGN_SYSTEMS)("Page sections in $id", ({ id }) => {
       expect(author.top).toBeGreaterThan(quote.bottom - 1);
       expect(author.top - quote.bottom).toBeLessThan(48);
       const style = getComputedStyle(item);
+      const figure = getComputedStyle(item.querySelector(".testimonial__figure")!);
       const framed = variant === "plain"
-        ? parseFloat(getComputedStyle(item.querySelector(".testimonial__figure")!).borderInlineStartWidth) > 0
+        ? parseFloat(figure.borderInlineStartWidth) > 0 && parseFloat(figure.paddingInlineStart) >= 12
         : item.classList.contains("card");
       expect(framed, `${variant} quote has a frame`).toBe(true);
       expect(style.display).not.toBe("contents");

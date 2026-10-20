@@ -1,0 +1,7 @@
+/* Project-wide neus token overrides. Loaded after neus-ui.css and neus.theme.css.
+   Use the token names in node_modules/neus-ui/docs; never write palette variables here. */
+:root[data-design-system="apple"] {
+}
+
+:root[data-design-system="apple"][data-color-scheme="dark"] {
+}
