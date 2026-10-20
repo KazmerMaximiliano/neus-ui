@@ -1,0 +1,18 @@
+{
+  "framework": "vite",
+  "rendering": "spa",
+  "designSystem": "apple",
+  "derivedSystem": "design/system/DESIGN.md",
+  "colorScheme": "light",
+  "colors": {
+    "primaryColor": "#55652f"
+  },
+  "brand": null,
+  "language": "es",
+  "agents": [
+    "claude"
+  ],
+  "paths": {
+    "styles": "src/styles"
+  }
+}

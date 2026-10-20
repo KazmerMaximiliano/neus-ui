@@ -1,0 +1,18 @@
+{
+  "framework": "vite",
+  "rendering": "spa",
+  "designSystem": "neus",
+  "derivedSystem": null,
+  "colorScheme": "light",
+  "colors": {
+    "primaryColor": "#a8471f"
+  },
+  "brand": "Hogar cálido: terracota #A8471F, crema, Fraunces",
+  "language": "es",
+  "agents": [
+    "claude"
+  ],
+  "paths": {
+    "styles": "src/styles"
+  }
+}

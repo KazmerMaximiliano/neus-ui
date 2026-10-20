@@ -37,7 +37,8 @@
     "agents",
     "docs",
     "src/design-systems/*/DESIGN.md",
-    "!cli/**/*.test.mjs"
+    "!cli/**/*.test.mjs",
+    "!docs/examples"
   ],
   "scripts": {
     "dev": "pnpm design:generate && vite",

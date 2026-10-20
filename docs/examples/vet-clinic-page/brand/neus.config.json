@@ -1,0 +1,18 @@
+{
+  "framework": "vite",
+  "rendering": "spa",
+  "designSystem": "neus",
+  "derivedSystem": null,
+  "colorScheme": "light",
+  "colors": {
+    "primaryColor": "#2f5d3a"
+  },
+  "brand": "Aromo y monte: verde bosque #2F5D3A, crema cálida, Fraunces",
+  "language": "es",
+  "agents": [
+    "claude"
+  ],
+  "paths": {
+    "styles": "src/styles"
+  }
+}

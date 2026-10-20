@@ -674,6 +674,7 @@ For agents needing additional information:
 | Installation and onboarding | [Getting started](./docs/getting-started/README.md) |
 | Components and public sections | [Component catalog](./docs/components/README.md); individual docs/components/ComponentName.md guides |
 | Public page sections (`neus-ui/sections`) | [Sections](./docs/sections/README.md) |
+| Briefs for the design skill and the pages it produced | [Examples](./docs/examples/README.md) |
 | Application and form layouts | [Templates](./docs/templates/README.md) |
 | Provider, scopes and runtime colors | [ThemeProvider](./docs/design/theme-provider.md) |
 | Per-part classes/styles and CSS cascade | [Customization](./docs/design/customization.md) |

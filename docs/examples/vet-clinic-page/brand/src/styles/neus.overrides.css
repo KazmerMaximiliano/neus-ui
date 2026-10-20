@@ -1,0 +1,24 @@
+/* Project-wide neus token overrides. Loaded after neus-ui.css and neus.theme.css.
+   Use the token names in node_modules/neus-ui/docs; never write palette variables here. */
+
+/* Brand: Aromo y monte (neus.config.json). */
+[data-design-system="neus"] {
+  --color-surface: #f8f5ec;
+  --color-surface-secondary: #efe9da;
+  --color-text-primary: #1d2a20;
+  --color-text-secondary: #4f5a4f;
+  --color-border-subtle: #e2dccb;
+  --color-border-input: #cdc5b0;
+  --font-display: "Fraunces", "Manrope", serif;
+  --button-label-transform: none;
+  --button-label-spacing: 0;
+}
+
+[data-design-system="neus"][data-color-scheme="dark"] {
+  --color-surface: #171c18;
+  --color-surface-secondary: #20271f;
+  --color-text-primary: #ece8dc;
+  --color-text-secondary: #b3b9a9;
+  --color-border-subtle: #333b31;
+  --color-border-input: #47503f;
+}

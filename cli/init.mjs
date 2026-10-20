@@ -1,12 +1,12 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { createInterface } from "node:readline/promises";
 import { parseArgs } from "node:util";
 import {
   AGENT_TARGETS, BLOCK_END, BLOCK_START, COLOR_KEYS, COLOR_PATTERN, CONFIG_FILE,
   DERIVED_SYSTEM_FILE, SCHEME_STORAGE_KEY, SKILLS, SYSTEM_CSS_FILE, SYSTEM_FONTS,
 } from "./neus.consts.mjs";
 import { PACKAGE_ROOT, detectProject, importPath, readJson, toPosix } from "./neus.utils.mjs";
+import { intro, outro, select, text } from "./prompts.mjs";
 
 const TEMPLATES = path.join(PACKAGE_ROOT, "cli/templates");
 // Root documents whose existing theme attributes `neus init` keeps in sync.
@@ -47,26 +47,6 @@ export const syncAttributes = (text, designSystem, colorScheme) => text
 
 export const fontHref = (designSystem) =>
   SYSTEM_FONTS[designSystem] ? `https://fonts.googleapis.com/css2?${SYSTEM_FONTS[designSystem]}&display=swap` : null;
-
-const askChoice = async (rl, question, choices, fallback) => {
-  const lines = choices.map((choice, index) => `  ${index + 1}. ${choice.label}${choice.value === fallback ? " (default)" : ""}`);
-  const answer = (await rl.question(`${question}\n${lines.join("\n")}\n> `)).trim();
-  if (!answer) return fallback;
-  const picked = choices[Number(answer) - 1] ?? choices.find((choice) => choice.value === answer);
-  if (picked) return picked.value;
-  process.stdout.write("Unknown option, keeping the default.\n");
-  return fallback;
-};
-
-const askColor = async (rl, label, fallback) => {
-  for (;;) {
-    const answer = (await rl.question(`${label} color (#rrggbb, empty for ${fallback ?? "the system's"}, "-" to reset): `)).trim();
-    if (!answer) return fallback;
-    if (answer === "-") return undefined;
-    if (COLOR_PATTERN.test(answer)) return answer.toLowerCase();
-    process.stdout.write("Use six-digit hex, for example #0f766e.\n");
-  }
-};
 
 const resolveOptions = async (argv, root, theme) => {
   const { values } = parseArgs({
@@ -139,46 +119,66 @@ const resolveOptions = async (argv, root, theme) => {
   if (values.styles) config.paths.styles = toPosix(values.styles);
 
   if (!values.yes && process.stdin.isTTY) {
-    const rl = createInterface({ input: process.stdin, output: process.stdout });
-    try {
-      if (!detectProject(root)) {
-        config.rendering = await askChoice(rl, "How does this project render?", [
-          { value: "spa", label: "Client-only React (Vite, SPA)" },
-          { value: "ssr", label: "Server rendering (Next.js Pages Router, React Router, TanStack Start)" },
-          { value: "rsc", label: "React Server Components (Next.js App Router)" },
-          { value: "islands", label: "Islands (Astro)" },
-        ], config.rendering);
+    intro("neus-ui");
+    if (!detectProject(root)) {
+      config.rendering = await select({
+        message: "How does this project render?",
+        initial: config.rendering,
+        options: [
+          { value: "spa", label: "Client-only React", hint: "Vite, SPA" },
+          { value: "ssr", label: "Server rendering", hint: "Next.js Pages Router, React Router, TanStack Start" },
+          { value: "rsc", label: "React Server Components", hint: "Next.js App Router" },
+          { value: "islands", label: "Islands", hint: "Astro" },
+        ],
+      });
+    }
+    const system = await select({
+      message: "Design system",
+      initial: config.derivedSystem ? "none" : config.designSystem,
+      options: [
+        ...theme.DESIGN_SYSTEMS.map((item) => ({ value: item.id, label: item.name, hint: item.description })),
+        { value: "none", label: "None", hint: "derive a system for this project with the neus-design skill" },
+      ],
+    });
+    if (system === "none") config.derivedSystem = DERIVED_SYSTEM_FILE;
+    else Object.assign(config, { designSystem: system, derivedSystem: null });
+    config.colorScheme = await select({
+      message: "Color scheme",
+      initial: config.colorScheme,
+      options: [{ value: "light", label: "Light" }, { value: "dark", label: "Dark" }],
+    });
+    const keep = await select({
+      message: "Action colors",
+      initial: "system",
+      options: [
+        { value: "system", label: "Keep the system's colors", hint: "or the current ones; the neus-design skill can choose a brand later" },
+        { value: "custom", label: "Choose them now", hint: "primary, success, error, info and warning" },
+      ],
+    });
+    if (keep === "custom") {
+      for (const key of COLOR_KEYS) {
+        const current = config.colors[key] ?? "";
+        const color = await text({
+          message: `${key.replace("Color", "")[0].toUpperCase()}${key.replace("Color", "").slice(1)} color`,
+          initial: current,
+          placeholder: current || "#rrggbb, empty keeps the system's",
+          validate: (value) => !value || value === "-" || COLOR_PATTERN.test(value) ? undefined : "Use six-digit hex, for example #0f766e, or - to reset.",
+        });
+        if (color && color !== "-") config.colors[key] = color.toLowerCase();
+        else delete config.colors[key];
       }
-      const system = await askChoice(rl, "Design system:", [
-        ...theme.DESIGN_SYSTEMS.map((item) => ({ value: item.id, label: `${item.name}: ${item.description}` })),
-        { value: "none", label: "None: derive a system for this project with the neus-design skill" },
-      ], config.derivedSystem ? "none" : config.designSystem);
-      if (system === "none") config.derivedSystem = DERIVED_SYSTEM_FILE;
-      else Object.assign(config, { designSystem: system, derivedSystem: null });
-      config.colorScheme = await askChoice(rl, "Color scheme:", [
-        { value: "light", label: "Light" },
-        { value: "dark", label: "Dark" },
-      ], config.colorScheme);
-      const keep = await askChoice(rl, "Action colors:", [
-        { value: "system", label: "Keep the system's colors (or the current ones)" },
-        { value: "custom", label: "Choose primary, success, error, info and warning" },
-      ], "system");
-      if (keep === "custom") {
-        for (const key of COLOR_KEYS) {
-          const color = await askColor(rl, key.replace("Color", ""), config.colors[key]);
-          if (color) config.colors[key] = color;
-          else delete config.colors[key];
-        }
-      }
-      config.language = (await rl.question(`Language of user-facing copy (${config.language}): `)).trim() || config.language;
-      config.agents = (await askChoice(rl, "Coding agents:", [
+    }
+    config.language = await text({ message: "Language of user-facing copy", initial: config.language, placeholder: config.language });
+    config.agents = (await select({
+      message: "Coding agents",
+      initial: config.agents.join(","),
+      options: [
         { value: "claude,codex", label: "Claude Code and Codex" },
         { value: "claude", label: "Claude Code" },
         { value: "codex", label: "Codex" },
-      ], config.agents.join(","))).split(",");
-    } finally {
-      rl.close();
-    }
+      ],
+    })).split(",");
+    outro("Writing the project files");
   }
   return config;
 };
@@ -308,7 +308,7 @@ export const nextSteps = (root, config) => {
       `  ${fontLine.trim()} in <head>`,
     ];
   }
-  const invoke = config.agents.map((agent) => agent === "claude" ? "/neus-design in Claude Code" : "$neus-design in Codex").join(" or ");
+  const invoke = config.agents.map((agent) => agent === "claude" ? "/neus-design in Claude Code" : "$neus-design in the Codex CLI").join(" or ");
   return ["", "Next steps:", ...steps, "", `Then design with ${invoke}${config.derivedSystem
     ? " (it starts by deriving your system and compiles it with npx neus design build)" : ""}.`,
     "The skill can finish this wiring for you."].join("\n");
@@ -321,7 +321,13 @@ export const run = async (argv, root = process.cwd()) => {
   }
   if (!existsSync(path.join(root, "package.json"))) throw new Error("Run `npx neus init` in the project root (no package.json here).");
   const theme = await import(new URL("../dist/theme.js", import.meta.url).href);
-  const config = await resolveOptions(argv, root, theme);
+  let config;
+  try {
+    config = await resolveOptions(argv, root, theme);
+  } catch (error) {
+    if (error.cancelled) return 130;
+    throw error;
+  }
   const report = writeProject(root, config, theme);
   process.stdout.write(`${report.join("\n")}\n${nextSteps(root, config)}\n`);
   return 0;

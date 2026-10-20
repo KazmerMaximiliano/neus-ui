@@ -1,0 +1,26 @@
+/* Project-wide neus token overrides. Loaded after neus-ui.css and neus.theme.css.
+   Use the token names in node_modules/neus-ui/docs; never write palette variables here. */
+
+/* Brand: Salvia y papel (neus.config.json). */
+[data-design-system="neus"] {
+  --color-surface: #f5f5f0;
+  --color-surface-secondary: #ebece3;
+  --color-text-primary: #1f2318;
+  --color-text-secondary: #4d5243;
+  --color-border-subtle: #dcded2;
+  --color-border-input: #b9bdab;
+  --color-border-muted: #e4e6db;
+  --font-display: "Fraunces", "Manrope", serif;
+  --button-label-transform: none;
+  --button-label-spacing: 0;
+}
+
+[data-design-system="neus"][data-color-scheme="dark"] {
+  --color-surface: #171914;
+  --color-surface-secondary: #20231c;
+  --color-text-primary: #eceee4;
+  --color-text-secondary: #b4b8a8;
+  --color-border-subtle: #33372d;
+  --color-border-input: #4a4f40;
+  --color-border-muted: #2a2d25;
+}

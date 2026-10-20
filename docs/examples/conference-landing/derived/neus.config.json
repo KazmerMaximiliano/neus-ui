@@ -1,0 +1,18 @@
+{
+  "framework": "vite",
+  "rendering": "spa",
+  "designSystem": "vercel",
+  "derivedSystem": "design/system/DESIGN.md",
+  "colorScheme": "light",
+  "colors": {
+    "primaryColor": "#c2410c"
+  },
+  "brand": "Programa: naranja señal #c2410c, papel #f7f5f0, Source Serif 4",
+  "language": "es",
+  "agents": [
+    "claude"
+  ],
+  "paths": {
+    "styles": "src/styles"
+  }
+}

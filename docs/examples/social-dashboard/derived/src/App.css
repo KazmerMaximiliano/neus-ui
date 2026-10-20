@@ -1,0 +1,265 @@
+/* Bento tonal dashboard (design/system/DESIGN.md). Tokens only; no raw colors. */
+
+.dashboard {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+/* Signature move: every figure in the mono face with tabular numerals. */
+.figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-value.kpi-value {
+  font-size: var(--fs-3xl);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.delta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Period tabs: segmented control on the ground tone. */
+.period-tabs {
+  display: inline-flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+}
+
+.period-tabs__tab {
+  min-height: 40px;
+  padding-inline: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-primary);
+  font: 500 var(--fs-base) / 1 var(--font-body);
+  cursor: pointer;
+}
+
+.period-tabs__tab:hover {
+  background: var(--color-surface-secondary);
+}
+
+.period-tabs__tab[aria-selected="true"] {
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.period-tabs__tab:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Bento: 12 columns on desktop, 2 on tablet, 1 on phones. */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.bento > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .bento__kpi { grid-column: span 6; }
+  .bento__kpi:last-of-type { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1024px) {
+  .bento__kpi,
+  .bento__kpi:last-of-type { grid-column: span 4; }
+  .bento__chart { grid-column: span 8; }
+  .bento__posts { grid-column: span 4; }
+}
+
+/* Chart: emerald current period, dashed blue previous period. */
+.chart {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.chart__legend {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.chart__legend li,
+.chart__tooltip-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chart__key {
+  width: 16px;
+  height: 0;
+  border-top: 3px solid var(--color-primary);
+}
+
+.chart__key--previous {
+  border-top: 2px dashed var(--color-info);
+}
+
+.chart__frame {
+  position: relative;
+}
+
+.chart__frame svg {
+  display: block;
+  overflow: visible;
+  touch-action: pan-y;
+}
+
+.chart__frame svg:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.chart__grid {
+  stroke: var(--color-border-subtle);
+}
+
+.chart__tick {
+  fill: var(--color-text-secondary);
+  font: 12px var(--font-mono);
+}
+
+.chart__line {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.chart__line--current {
+  stroke: var(--color-primary);
+  stroke-width: 2.5;
+}
+
+.chart__line--previous {
+  stroke: var(--color-info);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+}
+
+.chart__crosshair {
+  stroke: var(--color-border-input);
+}
+
+.chart__dot {
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+.chart__dot--current { fill: var(--color-primary); }
+.chart__dot--previous { fill: var(--color-info); }
+
+.chart__tooltip {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--elevation-floating);
+  color: var(--color-text-primary);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Top posts. */
+.post-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post-list__item + .post-list__item {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+/* Per-network table. */
+.network-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-md);
+}
+
+.network-table th,
+.network-table td {
+  padding: var(--space-3) var(--space-2);
+  text-align: end;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.network-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.network-table td {
+  white-space: nowrap;
+}
+
+.network-table th:first-child {
+  text-align: start;
+}
+
+.network-table thead th {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.network-table tbody th {
+  font-weight: 600;
+}
+
+.share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: end;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.share__bar {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-info);
+}
+
+@media (max-width: 767px) {
+  .network-table thead th:nth-child(3),
+  .network-table td:nth-child(3) {
+    display: none;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

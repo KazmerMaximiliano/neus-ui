@@ -1,0 +1,26 @@
+/* Project-wide neus token overrides. Loaded after neus-ui.css and neus.theme.css.
+   Use token names in node_modules/neus-ui/docs; never write palette variables here. */
+
+/* Brand: Hogar cálido (neus.config.json). */
+[data-design-system="neus"] {
+  --color-surface: #fbf7ef;
+  --color-surface-secondary: #f2eadb;
+  --color-text-primary: #2a211b;
+  --color-text-secondary: #5c5044;
+  --color-border-subtle: #e6dccd;
+  --color-border-input: #d3c4ae;
+  --color-border-muted: #ece4d7;
+  --font-display: "Fraunces", "Manrope", serif;
+  --button-label-transform: none;
+  --button-label-spacing: 0;
+}
+
+[data-design-system="neus"][data-color-scheme="dark"] {
+  --color-surface: #1c1915;
+  --color-surface-secondary: #26221d;
+  --color-text-primary: #f0e9dd;
+  --color-text-secondary: #bcb09e;
+  --color-border-subtle: #3b352d;
+  --color-border-input: #4c453a;
+  --color-border-muted: #312c25;
+}

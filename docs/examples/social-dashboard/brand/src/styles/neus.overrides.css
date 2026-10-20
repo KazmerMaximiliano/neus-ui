@@ -1,0 +1,27 @@
+/* Project-wide neus token overrides. Loaded after neus-ui.css and neus.theme.css.
+   Use token names in node_modules/neus-ui/docs; never write palette variables here. */
+
+/* Brand: Esmeralda analítico (neus.config.json). */
+[data-design-system="neus"] {
+  --color-surface: #f6f8f7;
+  --color-surface-secondary: #ebf0ee;
+  --color-text-primary: #0f1a17;
+  --color-text-secondary: #46544f;
+  --color-border-subtle: #dde5e2;
+  --color-border-input: #c4d0cb;
+  --font-display: "Schibsted Grotesk", "Manrope", sans-serif;
+  --button-label-transform: none;
+  --button-label-spacing: 0;
+  /* Second data series (blue) beside the emerald action color. */
+  --chart-series-2: #1f4fd8;
+}
+
+[data-design-system="neus"][data-color-scheme="dark"] {
+  --color-surface: #111816;
+  --color-surface-secondary: #19221f;
+  --color-text-primary: #e8efec;
+  --color-text-secondary: #a6b5af;
+  --color-border-subtle: #2a3632;
+  --color-border-input: #3a4843;
+  --chart-series-2: #7fa2ff;
+}

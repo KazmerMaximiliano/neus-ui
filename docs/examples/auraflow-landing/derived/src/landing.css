@@ -1,0 +1,17 @@
+/* The signup Card inside the brand band: wide enough for two fields, never wider than the band. */
+.signup-card {
+  inline-size: min(100%, 560px);
+  text-align: start;
+}
+
+.signup-card form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* The portrait placeholder stays a phone-sized frame when the hero stacks on tablets. */
+.hero-media {
+  max-inline-size: 480px;
+  inline-size: 100%;
+  justify-self: center;
+}

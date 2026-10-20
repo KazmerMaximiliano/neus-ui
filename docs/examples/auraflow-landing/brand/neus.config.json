@@ -1,0 +1,18 @@
+{
+  "framework": "vite",
+  "rendering": "spa",
+  "designSystem": "neus",
+  "derivedSystem": null,
+  "colorScheme": "light",
+  "colors": {
+    "primaryColor": "#55652f"
+  },
+  "brand": "Salvia y papel: musgo #55652F, fondo blanco cálido #F5F5F0, Fraunces en títulos",
+  "language": "es",
+  "agents": [
+    "claude"
+  ],
+  "paths": {
+    "styles": "src/styles"
+  }
+}

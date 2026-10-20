@@ -1,0 +1,22 @@
+/* Opening hours set like a door sign, in the display face. */
+.hours {
+  margin: 0;
+}
+
+.hours__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  padding-block: var(--space-4);
+  border-block-end: 1px solid var(--color-border-subtle);
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.hours__row dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}

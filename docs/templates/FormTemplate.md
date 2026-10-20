@@ -29,7 +29,10 @@ replaces it when non-null. Loading affects only that default Button.
 Columns default to 2/2/1 for desktop/tablet/mobile. Invalid column counts fall back to safe
 defaults; numeric gap values become pixels. Runtime column/gap variables are placed before
 root style overrides. Every direct child can shrink, and the action region spans all
-columns. Below 768px actions expand to full width. Use the child components own hooks to
+columns. A single action (the default submit Button or one custom element) sits in the last
+column with that column's width, so it lines up with the field above it; in a one-column form
+it spans the form. Several actions keep their natural widths, aligned to the end. Below 768px
+actions expand to full width. Use the child components own hooks to
 customize fields and buttons.
 
 Rows take the height of their tallest field, so a hint (`description`) or a two-line label on
