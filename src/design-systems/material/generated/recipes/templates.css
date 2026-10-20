@@ -1,7 +1,8 @@
 /* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="material"] {
   --app-template-content-padding: 24px;
-  --app-template-header-height: 64px;
   --app-template-header-background: var(--color-surface-container-low);
+  --app-template-header-border-width: 0px;
+  --app-template-content-background: var(--color-surface);
   --form-template-gap: 24px;
 }

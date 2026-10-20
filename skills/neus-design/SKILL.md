@@ -127,8 +127,9 @@ derivation in Phase 2. Record every answer in the spec.
 Follow [references/system-derivation.md](references/system-derivation.md):
 traits, base system, inspiration
 ([references/inspiration.md](references/inspiration.md)), three dealt
-directions, the derived DESIGN.md, its translation to tokens, a specimen
-route and iteration until the user approves. Then continue with Phase 3.
+directions, the derived DESIGN.md with its `x-neus` overrides compiled by
+`npx neus design build`, `npx neus specimen` with `npx neus shot`, and
+iteration until the user approves. Then continue with Phase 3.
 
 ## Phase 3: write the spec before code (full mode)
 
@@ -210,7 +211,7 @@ component's guide.
 | Steps of a flow | `Stepper` |
 | Files | `FileUploader` |
 | Map | `InteractiveMap` |
-| Application shell and navigation | `AppTemplate`, `Sidebar` |
+| Application shell with side navigation (dashboards, back-office) | `AppTemplate` (`title`, `routes`, `headerStart` for breadcrumb or search, `menu` for global actions); never a Sidebar with your own header |
 
 Write your own element only for what no row covers (a `blockquote`, a `nav`
 landmark, an inline `strong`), styled with neus tokens.

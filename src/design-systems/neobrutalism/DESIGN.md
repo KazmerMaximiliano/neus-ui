@@ -148,6 +148,9 @@ x-neus:
         --button-radius: "{rounded.button}"
         --button-padding-small: 8px 16px
         --button-padding-medium: 12px 24px
+        --button-min-height-small: 0px
+        --button-min-height-medium: 0px
+        --button-min-height-large: 0px
         --button-padding-large: 16px 32px
         --button-font-size-medium: 15px
         --button-font-size-large: 17px
@@ -432,6 +435,8 @@ x-neus:
     templates:
       base:
         --app-template-content-padding: 32px
+        --app-template-header-border-width: 3px
+        --app-template-header-border-color: var(--color-text-primary)
         --form-template-gap: 24px
         --form-template-action-padding: 12px
     typography:

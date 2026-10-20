@@ -2,6 +2,11 @@
 [data-design-system="vercel"] {
   --input-radius: 6px;
   --input-padding: 8px 12px;
+  --input-control-height-small: 32px;
+  --input-control-height-medium: 40px;
+  --input-control-height-large: 48px;
+  --input-small-padding: 5px 10px;
+  --input-large-padding: 13px 16px;
   --input-border-color: var(--color-border-subtle);
   --input-font-size: 14px;
   --input-line-height: 20px;

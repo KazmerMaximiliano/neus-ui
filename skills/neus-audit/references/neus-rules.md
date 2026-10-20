@@ -22,6 +22,7 @@ before reporting it, since the checks are per-line patterns. Its rules:
 | `deep-import` | P0 | An import from a `neus-ui/…` path that is not a public entry |
 | `theme-owner` | P0 | A global ThemeProvider the rendering mode does not allow |
 | `raw-element` | P1 | A raw element a neus component replaces |
+| `app-shell` | P1 | A Sidebar with a hand-made header, or an overridden sidebar background: use AppTemplate |
 | `filler`, `emoji` | P1 | Filler copy; emoji used as icons |
 | `third-party` | P1 | Selectors on AG Grid, react-day-picker or Google Maps internals |
 | `stylesheet` | P1 | The library stylesheet imported in more than one file |

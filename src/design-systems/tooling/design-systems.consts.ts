@@ -12,6 +12,9 @@ export const DOCUMENT_KEYS = [
   "version", "name", "description", ...TOKEN_GROUPS, "x-neus",
 ] as const;
 export const EXTENSION_KEYS = ["id", "palette", "foundations", "tokens", "recipes"] as const;
+export const DERIVED_EXTENSION_KEYS = ["extends", "tokens", "recipes"] as const;
+// Variables npx neus init owns: a derived system never writes them.
+export const PALETTE_VARIABLE_PATTERN = /^--color-(primary|success|error|info|warning)([a-z-]*)$|^--color-(text-on-[a-z-]+|focus)$/;
 export const WATCH_INTERVAL_MS = 250;
 export const WATCH_DEBOUNCE_MS = 100;
 

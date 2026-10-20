@@ -129,11 +129,26 @@ its first run the skill picks the closest built-in system as the base, gathers o
 references, deals three directions, asks you to choose, and writes the derived system:
 
 - `design/system/DESIGN.md` in Google's DESIGN.md format, validated with
-  `npx @google/design.md lint`;
+  `npx @google/design.md lint`, with an `x-neus` block that names the base (`extends`) and
+  overrides its tokens and component recipes;
 - the base and palette through `npx neus init --base <id> --primary …`;
-- every other change as tokens in `neus.overrides.css`.
+- `npx neus design build`, which validates that block and compiles it into
+  `<styles>/neus.system.css`, scoped to the base system's attribute so it applies at the root
+  and in every local provider.
 
-It then builds a specimen route and iterates with you before designing screens.
+It then runs `npx neus specimen`, which writes a page with the type scale, palette, buttons
+beside fields, fields, alerts, cards and section tones in light and dark, looks at it with
+`neus shot` and iterates with you before designing screens.
+
+```bash
+npx neus design build    # design/system/DESIGN.md → <styles>/neus.system.css
+npx neus specimen        # writes the specimen page and prints its route
+npx neus shot /neus-specimen.html
+```
+
+Load `neus.system.css` after `neus-ui/dist/neus-ui.css` and before `neus.theme.css`. The
+document attribute keeps the base system's id, so one derived system per project replaces
+its base everywhere.
 
 [Frameworks](./frameworks.md) · [Customization](../design/customization.md) ·
 [Design systems](../design/systems.md)

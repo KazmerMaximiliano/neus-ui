@@ -1,5 +1,8 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
+  --sidebar-header-height: 64px;
+  --sidebar-header-min-height: 64px;
+  --sidebar-header-padding: 10px;
   --sidebar-background: var(--color-surface);
   --sidebar-color: var(--color-text-primary);
   --sidebar-header-background: var(--sidebar-background);

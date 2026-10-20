@@ -7,6 +7,12 @@ export const PACKAGE_ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.
 export const readJson = (file) => existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : null;
 export const toPosix = (value) => value.split(path.sep).join("/");
 
+/** Relative import specifier from a directory to a file, always starting with "." */
+export const importPath = (fromDir, file) => {
+  const relative = toPosix(path.relative(fromDir, file));
+  return relative.startsWith(".") ? relative : `./${relative}`;
+};
+
 /** Detects the host framework and how it renders from the project's package.json. */
 export const detectProject = (root) => {
   const pkg = readJson(path.join(root, "package.json")) ?? {};

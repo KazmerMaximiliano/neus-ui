@@ -455,6 +455,9 @@ x-neus:
         --button-font-size-large: var(--fs-base)
         --button-padding-small: 8px 14px
         --button-padding-medium: 12px 22px
+        --button-min-height-small: var(--input-control-height-small)
+        --button-min-height-medium: var(--input-control-height-medium)
+        --button-min-height-large: var(--input-control-height-large)
         --button-padding-large: 16px 28px
         --button-line-height: "1"
         --button-label-weight: "700"
@@ -1050,9 +1053,12 @@ x-neus:
         --app-template-background: var(--color-surface)
         --app-template-color: var(--color-text-primary)
         --app-template-header-background: var(--color-surface)
-        --app-template-header-height: 80px
+        --app-template-header-height: calc(max(var(--sidebar-header-min-height), var(--sidebar-header-height)) + var(--sidebar-convex-radius) + var(--sidebar-border-width))
+        --app-template-mobile-header-height: calc(var(--sidebar-control-size) + 2 * var(--sidebar-floating-offset))
         --app-template-header-padding: 16px
-        --app-template-header-border-width: 0px
+        --app-template-header-border-width: 1px
+        --app-template-header-border-color: var(--color-border-muted)
+        --app-template-content-background: var(--color-surface-secondary)
         --app-template-content-padding: 24px
         --app-template-max-width: 1200px
         --form-template-columns: "2"
@@ -1288,7 +1294,8 @@ form controls.
 ### Button
 
 A solid button carries the main action; outlined and text actions
-provide lower emphasis. Keep size independent of importance. Hover and press must
+provide lower emphasis. Each button size is as tall as the field of the same size
+(36, 48 and 56px), so a button beside or under a field lines up with it. Keep size independent of importance. Hover and press must
 be visible, and keyboard focus must remain distinct. Loading must communicate
 progress without losing the action's accessible name or causing disruptive resizing.
 
@@ -1311,6 +1318,12 @@ value stays readable and distinct from an unavailable field.
 Use the primary-colored panel to anchor navigation. Keep hover,
 current destination, and keyboard focus distinguishable. Preserve readable labels
 when a rail expands and keep the mobile close control discoverable.
+
+The panel is always a solid color that differs from the page, the primary color by
+default, never the surface white or black. In an application shell its top block (the
+title) and the header beside it form one surface band with a hairline below, and the
+curve joins the panel to that band; the content area sits on a distinct secondary
+surface. Compose it with AppTemplate rather than a hand-made header.
 
 ### Hero
 

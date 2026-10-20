@@ -163,6 +163,9 @@ x-neus:
         --button-radius: "{rounded.button}"
         --button-padding-small: 6px 12px
         --button-padding-medium: 8px 16px
+        --button-min-height-small: 32px
+        --button-min-height-medium: 40px
+        --button-min-height-large: 48px
         --button-padding-large: 12px 24px
         --button-font-size-medium: 14px
         --button-font-size-large: 16px
@@ -260,6 +263,11 @@ x-neus:
       base:
         --input-radius: "{rounded.input}"
         --input-padding: 8px 12px
+        --input-control-height-small: 32px
+        --input-control-height-medium: 40px
+        --input-control-height-large: 48px
+        --input-small-padding: 5px 10px
+        --input-large-padding: 13px 16px
         --input-border-color: var(--color-border-subtle)
         --input-font-size: 14px
         --input-line-height: 20px
@@ -315,6 +323,9 @@ x-neus:
         --select-tag-radius: 6px
     sidebar:
       base:
+        --sidebar-header-height: 64px
+        --sidebar-header-min-height: 64px
+        --sidebar-header-padding: 10px
         --sidebar-background: var(--color-surface)
         --sidebar-color: var(--color-text-primary)
         --sidebar-header-background: var(--sidebar-background)
@@ -381,8 +392,7 @@ x-neus:
     templates:
       base:
         --app-template-content-padding: 24px
-        --app-template-header-height: 64px
-        --app-template-header-border-width: 1px
+        --app-template-header-border-color: var(--color-border-subtle)
         --form-template-gap: 16px
     typography:
       base:
@@ -456,8 +466,9 @@ Reference: [Geist materials](https://vercel.com/geist/materials).
 
 Local mapping informed by [Geist Button](https://vercel.com/geist/button):
 use a strong neutral solid action, quieter outlined/text alternatives, concise
-labels, and consistent sizes. Keep hover, press, keyboard focus, disabled, and
-loading states legible without decorative motion.
+labels, and consistent sizes: small, medium and large are 32, 40 and 48px tall,
+the same as inputs. Keep hover, press, keyboard focus, disabled, and loading
+states legible without decorative motion.
 
 ### Card
 

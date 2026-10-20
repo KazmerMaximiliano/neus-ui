@@ -50,6 +50,9 @@ writing.
   variants), weight and space. Borders and boxes are the last resort.
 - Density follows the task: tables and forms compact, settings standard,
   onboarding relaxed. Pick one per screen and keep it.
+- Shell: AppTemplate. The sidebar's top block and the header are one band, the
+  content its own surface, the Neus sidebar a solid primary panel. Context and
+  global actions in the header; page title and page actions in the content.
 - Numbers: tabular figures (`Text numeric`), right-aligned in columns, formatted with
   `Intl.NumberFormat` / `Intl.DateTimeFormat` in the project's locale.
 - Color: the accent marks actions and selection; status colors always come

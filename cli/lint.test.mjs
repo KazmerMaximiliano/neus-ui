@@ -59,6 +59,8 @@ export const Page = () => (
     ["raw-element", "a.tsx", "<button onClick={go}>Go</button>"],
     ["raw-element", "a.tsx", "<footer>© 2027</footer>"],
     ["raw-element", "a.tsx", `<div role="alert">Payment failed</div>`],
+    ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
+    ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
   ])("reports P1 %s", (rule, file, text) => {
     expect(rules(lint(file, text))).toContain(`P1 ${rule}`);
   });

@@ -1,7 +1,6 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
   --app-template-content-padding: 24px;
-  --app-template-header-height: 64px;
-  --app-template-header-border-width: 1px;
+  --app-template-header-border-color: var(--color-border-subtle);
   --form-template-gap: 16px;
 }

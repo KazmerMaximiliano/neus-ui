@@ -200,6 +200,9 @@ x-neus:
         --button-radius: "{rounded.button}"
         --button-padding-small: 8px 16px
         --button-padding-medium: 10px 24px
+        --button-min-height-small: 0px
+        --button-min-height-medium: 0px
+        --button-min-height-large: 0px
         --button-padding-large: 14px 28px
         --button-font-size-medium: 14px
         --button-font-size-large: 16px
@@ -382,6 +385,9 @@ x-neus:
         --select-tag-color: var(--color-text-secondary)
     sidebar:
       base:
+        --sidebar-header-height: 64px
+        --sidebar-header-min-height: 64px
+        --sidebar-header-padding: 10px
         --sidebar-background: var(--color-surface-secondary)
         --sidebar-color: var(--color-text-primary)
         --sidebar-header-background: var(--sidebar-background)
@@ -440,8 +446,9 @@ x-neus:
     templates:
       base:
         --app-template-content-padding: 24px
-        --app-template-header-height: 64px
         --app-template-header-background: var(--color-surface-container-low)
+        --app-template-header-border-width: 0px
+        --app-template-content-background: var(--color-surface)
         --form-template-gap: 24px
     typography:
       base:

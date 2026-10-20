@@ -12,7 +12,12 @@ export type AppTemplateProps = {
   routes: SidebarItem[];
   /** Router link component for routes with href, passed to Sidebar. */
   linkComponent?: ElementType;
+  /** Global actions at the end of the header: user menu, notifications, the primary action. */
   menu?: ReactNode;
+  /** Context at the start of the header: breadcrumb, workspace switcher or search. */
+  headerStart?: ReactNode;
+  headerStartClassName?: string;
+  headerStartStyle?: CSSProperties;
   title?: string;
   className?: string;
   style?: CSSProperties;

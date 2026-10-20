@@ -3,6 +3,9 @@
   --button-radius: 4px;
   --button-padding-small: 8px 16px;
   --button-padding-medium: 12px 24px;
+  --button-min-height-small: 0px;
+  --button-min-height-medium: 0px;
+  --button-min-height-large: 0px;
   --button-padding-large: 16px 32px;
   --button-font-size-medium: 15px;
   --button-font-size-large: 17px;

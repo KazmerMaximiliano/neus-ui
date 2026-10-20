@@ -20,6 +20,14 @@ export type DesignDocument = {
   };
 };
 
+export type DerivedDocument = Omit<DesignDocument, "x-neus"> & {
+  "x-neus": {
+    extends: string;
+    tokens?: ModeDeclarations;
+    recipes?: Record<string, ModeDeclarations>;
+  };
+};
+
 export type GenerationResult = {
   artifacts: Map<string, string>;
   warnings: string[];

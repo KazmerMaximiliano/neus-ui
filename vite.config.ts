@@ -19,6 +19,7 @@ export default defineConfig({
         index: path.resolve(dirname, 'src/index.ts'),
         theme: path.resolve(dirname, 'src/theme.ts'),
         sections: path.resolve(dirname, 'src/sections.ts'),
+        design: path.resolve(dirname, 'src/design.ts'),
       },
       formats: ['es'],
       cssFileName: 'neus-ui'

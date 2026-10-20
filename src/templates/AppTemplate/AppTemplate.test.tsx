@@ -31,6 +31,21 @@ it("passes linkComponent to Sidebar for routes with href", () => {
   expect(link).toHaveAttribute("aria-current", "page");
 });
 
+it("renders headerStart before the menu only when given, with its hooks", () => {
+  const view = render(<AppTemplate routes={[]} menu={<button>Account</button>}>Content</AppTemplate>);
+  expect(view.container.querySelector(".app-template__header-start")).toBeNull();
+  view.rerender(
+    <AppTemplate routes={[]} menu={<button>Account</button>} headerStart={<nav aria-label="Breadcrumb">Workspace</nav>}
+      headerStartClassName="crumbs" headerStartStyle={{ color: "red" }}>Content</AppTemplate>,
+  );
+  const start = view.container.querySelector(".app-template__header-start")!;
+  expect(start).toHaveClass("crumbs");
+  expect(start).toHaveStyle({ color: "rgb(255, 0, 0)" });
+  expect(start.parentElement).toHaveClass("app-template__header");
+  expect(start.nextElementSibling).toBe(screen.getByRole("button", { name: "Account" }));
+  expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toBeInTheDocument();
+});
+
 describe("AppTemplate responsive integration", () => {
   it("delegates the only mobile menu to Sidebar and preserves routes, menu and children", () => {
     act(() => {

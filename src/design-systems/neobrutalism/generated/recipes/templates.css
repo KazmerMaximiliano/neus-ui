@@ -1,6 +1,8 @@
 /* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="neobrutalism"] {
   --app-template-content-padding: 32px;
+  --app-template-header-border-width: 3px;
+  --app-template-header-border-color: var(--color-text-primary);
   --form-template-gap: 24px;
   --form-template-action-padding: 12px;
 }

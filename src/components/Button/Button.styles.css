@@ -1,6 +1,8 @@
 .button {
   --button-accent-text: var(--button-accent);
   position: relative;
+  box-sizing: border-box;
+  min-height: var(--button-min-height-medium);
   display: inline-flex;
   align-items: center;
   justify-content: var(--button-justify);
@@ -20,11 +22,13 @@
 }
 
 .button--small {
+  min-height: var(--button-min-height-small);
   padding: var(--button-padding-small);
   font-size: var(--button-font-size-small);
 }
 
 .button--large {
+  min-height: var(--button-min-height-large);
   padding: var(--button-padding-large);
   font-size: var(--button-font-size-large);
 }

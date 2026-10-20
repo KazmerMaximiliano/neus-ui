@@ -26,7 +26,8 @@ not on its name. `<styles>` below means `paths.styles`.
 - The library CSS carries every built-in palette. `neus.theme.css` (written by
   `neus init`) adds the project's own colors; it is empty when the project
   keeps the system's colors. Never write palette variables by hand.
-- Stylesheet order: `neus-ui/dist/neus-ui.css`, `neus.theme.css`,
+- Stylesheet order: `neus-ui/dist/neus-ui.css`, `neus.system.css` (None mode
+  only, compiled by `npx neus design build`), `neus.theme.css`,
   `neus.overrides.css`, then feature styles.
 - Fonts: the library loads none. Load the active system's faces once in the
   root document (the `<link>` that `neus init` printed, `next/font`, or
