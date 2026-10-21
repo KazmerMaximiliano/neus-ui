@@ -1157,6 +1157,9 @@ x-neus:
         --media-placeholder-font-family: var(--font-mono)
         --media-placeholder-font-size: var(--fs-xs)
         --media-placeholder-padding: var(--space-4)
+        --media-placeholder-credit-background: color-mix(in srgb, var(--color-black) 60%, transparent)
+        --media-placeholder-credit-color: var(--color-white)
+        --media-placeholder-transition: opacity 0.2s ease
     alert:
       base:
         --alert-radius: var(--card-radius)
@@ -1340,6 +1343,8 @@ Cards with an initials avatar, the name and the role, so every quote reads with 
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+A missing picture is a quiet striped frame in the low surface with its shot written in monospace. A stock photo previewed during design fades in over the frame with its author on a dark chip in the corner, the same in light and dark because the photo does not change.
 
 ## Do's and Don'ts
 

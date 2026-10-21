@@ -53,6 +53,8 @@ Inspect the generated PNGs for clipping, alignment, and readability. Tests use f
 fonts; selecting a design system does not load branded assets. Google Maps and geocoding
 tests use mocks. Checking the live SDK requires a valid consumer-provided API key and
 enabled Google services; Storybook renders the configuration state without a credential.
+Pixabay searches are mocked the same way; the MediaPlaceholder story has an empty
+`pixabayKey`, so no test or story reaches the network until a key is pasted into its control.
 
 ## Test Structure
 

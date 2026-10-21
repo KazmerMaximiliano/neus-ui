@@ -59,6 +59,10 @@ the project wrote.
 - Heading separates the document level (`as`) from the look (`size`): judge
   heading order by `as`. Section with `aria-labelledby` is a region landmark;
   Text with `lines` keeps the full text in the DOM.
+- MediaPlaceholder is one `role="img"` named by `label`, with the visible
+  label and the photo credit hidden from assistive technology. Its Pixabay
+  preview fetches only in the browser and keeps the placeholder while it
+  loads, when nothing matches and on errors.
 - Buttons and fields ship hover, focus-visible and disabled styles through
   recipe tokens. Flag project CSS or `*Style` props that remove or override
   them.
@@ -84,8 +88,14 @@ the project wrote.
 - No inline background, color or border on interactive components.
 - One global theme owner per document (see the neus-design skill's
   `references/frameworks.md`).
+- `pixabayKey` is the development-only expression `npx neus context` prints,
+  never a literal key or an unguarded variable: the key is visible in the
+  browser. A Pixabay preview is not a final picture; its MediaPlaceholder
+  stays marked `SAMPLE:`.
 
 ## Library limitations (report once, tag `library`)
 
 - Button labels in the Neus system are uppercase with wide tracking by
   design; this is a system decision, not a project finding.
+- MediaPlaceholder previews Pixabay's 640 px photo, which looks soft in wide
+  frames; it is a design-time preview, not the delivered picture.

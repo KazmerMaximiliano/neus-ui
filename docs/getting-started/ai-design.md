@@ -56,8 +56,9 @@ works in full mode for new public pages, new products and multi-screen flows, an
 mode for one screen, a widget or a change: quick mode skips the spec file, the audit and the
 reviewer, and keeps the brand question, `neus lint` and the screenshots.
 
-1. **Contract.** Runs `npx neus context` (the active system, key tokens, catalog and
-   which component answers which need) and `npx neus docs <Name>` for each component it
+1. **Contract.** Runs `npx neus context` (the active system, key tokens, catalog,
+   which component answers which need and, when an `.env` file has a Pixabay key, the
+   expression that turns on MediaPlaceholder photo previews) and `npx neus docs <Name>` for each component it
    will use.
 2. **One round of questions** for every new page, screen or product: the brand when it was
    never decided (two or three directions built for the subject, or the system as it is),

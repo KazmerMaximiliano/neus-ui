@@ -8,4 +8,7 @@
   --media-placeholder-font-family: var(--font-mono);
   --media-placeholder-font-size: var(--fs-xs);
   --media-placeholder-padding: var(--space-4);
+  --media-placeholder-credit-background: color-mix(in srgb, var(--color-black) 60%, transparent);
+  --media-placeholder-credit-color: var(--color-white);
+  --media-placeholder-transition: opacity 0.2s ease;
 }

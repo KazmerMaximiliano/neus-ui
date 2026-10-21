@@ -28,7 +28,9 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 Section `tone`, `spacing` and `container`; Container `size` and `gutter`;
 Stack and Grid `gap`, `direction` and `columns`, per breakpoint with
 `{ base, md, lg }`; the `neus-ui/sections` variants (Hero, FeatureList,
-TestimonialList, CallToAction) and `labels` (SiteHeader). One solid primary action per view; the rest use
+TestimonialList, CallToAction) and `labels` (SiteHeader); MediaPlaceholder `ratio`,
+`query` and `pixabayKey` (a stock photo preview during design, only through the
+expression `npx neus context` prints). One solid primary action per view; the rest use
 `secondary`, `tonal`, `outlined` or `text`.
 
 ## Level 1: global action palette

@@ -139,12 +139,16 @@ two. For every device you leave out, something must take its place.
   action. One ground, one ink, one accent; the accent on the action and at
   most one other thing.
 - **Pictures.** Real pictures of the subject or its real interface, never
-  generic stock, gradient blobs or fake dashboards built from grey bars
-  standing in for the product. Every image local, sized and credited when it
-  is not the client's own. Without them, a `MediaPlaceholder` labelled with
-  the exact shot (the vet with a dog in the consulting room, the team on
-  stage) holds the place, marked `SAMPLE:`. A page about people or a place
-  needs pictures.
+  generic stock as the final picture, gradient blobs or fake dashboards built
+  from grey bars standing in for the product. Every image local, sized and
+  credited when it is not the client's own. Without them, a `MediaPlaceholder`
+  labelled with the exact shot (the vet with a dog in the consulting room, the
+  team on stage) holds the place, marked `SAMPLE:`. When `npx neus context`
+  prints a photo preview line, give each one that `pixabayKey` expression and a
+  two- or three-word `query` in the page's language: a stock photo previews the
+  shot while the page is designed, and the block stays `SAMPLE:` to replace.
+  In islands, previews appear only inside a hydrated island. A page about
+  people or a place needs pictures.
 - **Motion.** Motion explains a change or performs the idea; `transform` and
   `opacity` only, with a `prefers-reduced-motion` fallback.
 

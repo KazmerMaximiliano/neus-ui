@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
-import { CONFIG_FILE } from "./neus.consts.mjs";
+import { CONFIG_FILE, ENV_FILES, PIXABAY_KEY_EXPRESSIONS, PIXABAY_KEY_PATTERN } from "./neus.consts.mjs";
 import { PACKAGE_ROOT, markdownSection, readJson } from "./neus.utils.mjs";
 
 const HELP = `Usage: npx neus context [--for app|page]
@@ -9,7 +9,8 @@ const HELP = `Usage: npx neus context [--for app|page]
 Prints what to know before designing in this project, in one short read: the active
 system's identity and rules, the key tokens, the component catalog, which component
 answers which need, and the next commands. --for page adds the system's guidance for
-public pages (layout, hero, features, testimonials).
+public pages (layout, hero, features, testimonials). A Pixabay key in an .env file is
+named (never printed) for MediaPlaceholder photo previews.
 
 Options:
   --for <surface>   app (default) or page
@@ -21,6 +22,12 @@ const withoutSources = (section) => section?.split("\n")
   .filter((line) => !/^(Format|Design references|Reference)\b/.test(line)).join("\n").trim();
 const catalog = (file) => [...read(file).matchAll(/^\| \[(\w+)\]\([^)]+\) \| (.+) \|$/gm)]
   .map(([, name, purpose]) => `- ${name}: ${purpose}`);
+// The variable and file of a Pixabay key, read only to name them.
+const pixabayKey = (root) => ENV_FILES.map((file) => {
+  const envFile = path.join(root, file);
+  const name = existsSync(envFile) ? readFileSync(envFile, "utf8").match(PIXABAY_KEY_PATTERN)?.[1] : undefined;
+  return name && { file, name };
+}).find(Boolean);
 
 /** The context text for a project root; throws when the project has no neus.config.json. */
 export const contextFor = (root, surface = "app") => {
@@ -34,6 +41,7 @@ export const contextFor = (root, surface = "app") => {
   const sections = ["## Overview", "## Typography", ...(surface === "page"
     ? ["## Layout", "### Hero", "### Feature list", "### Testimonial"] : []), "## Do's and Don'ts"];
   const need = markdownSection(read("skills/neus-design/SKILL.md"), "### Need → component");
+  const preview = pixabayKey(root);
 
   return [
     `# neus-ui context (${surface})`,
@@ -45,6 +53,8 @@ export const contextFor = (root, surface = "app") => {
     config.derivedSystem ? null : config.brand
       ? `Brand: ${config.brand}${config.brand === "system" ? " (the system's own identity)" : ""}`
       : "Brand: not decided. Ask for it before the first page (neus-design skill, references/brand.md).",
+    preview ? `Photo preview: ${preview.name} in ${preview.file}. Give each MediaPlaceholder` +
+      ` pixabayKey={${PIXABAY_KEY_EXPRESSIONS[preview.name]}} and a two- or three-word query in the page's language.` : null,
     "",
     ...sections.map((heading) => withoutSources(markdownSection(design, heading))).filter(Boolean).flatMap((text) => [text, ""]),
     markdownSection(read("docs/design/tokens.md"), "## Key tokens"),
