@@ -58,15 +58,20 @@ release, with the replacement in the changelog, and removed in the next major.
 Push a tag that matches the version. The [release workflow](../../.github/workflows/release.yml)
 checks that the tag matches `package.json`, runs the checks, publishes to npm with
 [provenance](https://docs.npmjs.com/generating-provenance-statements) and creates the GitHub
-release from the changelog section:
+release from the changelog section. It authenticates through
+[trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC), so there is no npm
+token in the repository:
 
 ```bash
 git tag v1.0.0
 git push origin v1.0.0
 ```
 
-The workflow needs a repository secret named `NPM_TOKEN` with publish rights for
-`neus-ui` (an npm granular access token). To publish by hand instead, run `npm login`, then
+On npmjs.com, the package's **Settings → Trusted publishing** lists GitHub Actions with user
+`KazmerMaximiliano`, repository `neus-ui`, workflow `release.yml`, no environment, and
+`npm publish` allowed. A new or recreated entry expires unless a publish uses it within two
+days, so create it right before pushing the tag. **Publishing access** is set to require
+two-factor authentication and disallow tokens. To publish by hand instead, run `npm login`, then
 `npm publish --access public` from a clean checkout of the tag; `prepublishOnly` builds the
 library first. Pushing the tag afterwards still creates the GitHub release: the workflow skips
 a version that is already on npm. Provenance is only available from CI.

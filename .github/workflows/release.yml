@@ -1,7 +1,8 @@
 name: Release
 
-# Publishes to npm when a version tag (v1.0.0) is pushed. Needs the NPM_TOKEN repository
-# secret: an npm automation or granular token with publish rights for neus-ui.
+# Publishes to npm when a version tag (v1.0.0) is pushed, through npm trusted publishing:
+# no token, OIDC from id-token: write. npmjs.com must list this repository and release.yml
+# as the package's trusted publisher, with npm publish allowed.
 on:
   push:
     tags:
@@ -24,8 +25,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: pnpm
+          node-version: 24
           registry-url: https://registry.npmjs.org
 
       - name: Check that the tag matches package.json
@@ -47,16 +47,14 @@ jobs:
           pnpm test:unit
           pnpm test:design-systems
 
-      # npm publish runs prepublishOnly (pnpm run build); --provenance links the package to this workflow run.
+      # npm publish runs prepublishOnly (pnpm run build). Trusted publishing adds provenance itself.
       - name: Publish to npm
         run: |
           if npm view "neus-ui@${GITHUB_REF_NAME#v}" version >/dev/null 2>&1; then
             echo "neus-ui@${GITHUB_REF_NAME#v} is already on npm; skipping publish."
           else
-            npm publish --provenance --access public
+            npm publish --access public
           fi
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create the GitHub release
         run: |
