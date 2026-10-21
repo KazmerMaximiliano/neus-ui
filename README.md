@@ -1,5 +1,9 @@
 # Neus UI
 
+[![npm](https://img.shields.io/npm/v/neus-ui)](https://www.npmjs.com/package/neus-ui)
+[![CI](https://github.com/KazmerMaximiliano/neus-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/KazmerMaximiliano/neus-ui/actions/workflows/ci.yml)
+[![License](https://img.shields.io/npm/l/neus-ui)](./LICENSE)
+
 A React 19+ component library with TypeScript: 40 components (counting public subcomponents
 such as CardHeader), nine page sections for public pages (`neus-ui/sections`), two layout
 templates, and six design systems driven by scoped CSS tokens.
@@ -7,7 +11,7 @@ templates, and six design systems driven by scoped CSS tokens.
 ## Get started
 
 ```bash
-pnpm add git+https://github.com/KazmerMaximiliano/neus-ui.git
+npm install neus-ui
 ```
 
 ```tsx
@@ -62,7 +66,7 @@ building, and checks its work with the commands below.
 | [Sections](./docs/sections/README.md)                  | `neus-ui/sections`: header, hero, features, testimonials, call to action and footer for public pages |
 | [Templates](./docs/templates/README.md)                | AppTemplate and FormTemplate composition and responsive layouts                 |
 | [Examples](./docs/examples/README.md)                  | Five briefs to try the design skill, with the pages it produced and their code |
-| [Contributing](./docs/contributing/README.md)          | Development, testing and DESIGN.md authoring                                    |
+| [Contributing](./docs/contributing/README.md)          | Development, testing, DESIGN.md authoring and releasing                         |
 
 Documentation is plain Markdown and needs no server. Storybook provides the interactive
 catalog; both template stories include local design selection and inherit the global system
@@ -93,6 +97,9 @@ exports from `neus-ui` and `neus-ui/sections`.
 ## Links and license
 
 [Storybook](https://kazmermaximiliano.github.io/neus-ui/storybook/) ·
-[Repository](https://github.com/KazmerMaximiliano/neus-ui) · [Apache License 2.0](./LICENSE)
+[Repository](https://github.com/KazmerMaximiliano/neus-ui) · [Changelog](./CHANGELOG.md) ·
+[Security](./SECURITY.md)
 
-Copyright 2026 Maximiliano Kazmer
+Copyright 2026 Maximiliano Kazmer. Licensed under the [Apache License 2.0](./LICENSE); see
+[NOTICE](./NOTICE). The AI design kit adapts MIT-licensed material from other projects, listed
+with their notices in [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).

@@ -1,9 +1,39 @@
 {
   "name": "neus-ui",
-  "private": false,
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "React 19 component library with six token-driven design systems, page sections, and an AI design kit (skills, CLI and review subagent) for Claude Code and Codex.",
+  "keywords": [
+    "react",
+    "react-components",
+    "component-library",
+    "design-system",
+    "design-tokens",
+    "css-variables",
+    "typescript",
+    "ui",
+    "theming",
+    "dark-mode",
+    "claude-code",
+    "codex",
+    "ai-design",
+    "agent-skills",
+    "storybook"
+  ],
+  "homepage": "https://github.com/KazmerMaximiliano/neus-ui#readme",
+  "bugs": {
+    "url": "https://github.com/KazmerMaximiliano/neus-ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KazmerMaximiliano/neus-ui.git"
+  },
   "license": "Apache-2.0",
+  "author": "Maximiliano Kazmer",
+  "private": false,
   "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": ">=22.13"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -28,7 +58,7 @@
     "**/*.css"
   ],
   "bin": {
-    "neus": "./cli/neus.mjs"
+    "neus": "cli/neus.mjs"
   },
   "files": [
     "dist",
@@ -37,6 +67,9 @@
     "agents",
     "docs",
     "src/design-systems/*/DESIGN.md",
+    "CHANGELOG.md",
+    "THIRD_PARTY_NOTICES.md",
+    "NOTICE",
     "!cli/**/*.test.mjs",
     "!docs/examples"
   ],
@@ -59,6 +92,9 @@
     "design:check": "node --import tsx src/design-systems/tooling/design-systems.ts --check",
     "design:watch": "node --import tsx src/design-systems/tooling/design-systems.ts --watch"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@react-google-maps/api": "^2.20.8",
     "ag-grid-community": "^36.1.0",
@@ -71,6 +107,9 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "optionalDependencies": {
+    "playwright-core": "^1.63.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.3.1",
@@ -108,8 +147,5 @@
     "typescript-eslint": "^8.69.0",
     "vite": "^8.2.2",
     "vitest": "^4.1.11"
-  },
-  "optionalDependencies": {
-    "playwright-core": "^1.63.0"
   }
 }

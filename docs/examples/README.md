@@ -23,7 +23,7 @@ system for the project. The questions the skill asked were answered as a designe
    ```bash
    pnpm create vite my-page --template react-ts
    cd my-page
-   pnpm add git+https://github.com/KazmerMaximiliano/neus-ui.git
+   pnpm add neus-ui
    ```
 
 2. Set it up. Choose a design system for the first variant, or None for the second:
