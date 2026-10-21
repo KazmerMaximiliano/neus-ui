@@ -18,7 +18,7 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Section](./Section.md) | Full-width page band with tone, vertical rhythm and an inner Container. |
 | [Avatar](./Avatar.md) | Picture or initials of a person or organization, with an image-failure fallback. |
 | [AvatarGroup](./AvatarGroup.md) | Overlapping avatars with a +N count. |
-| [MediaPlaceholder](./MediaPlaceholder.md) | Sized frame that stands in for a picture not taken yet and says what it will show. |
+| [MediaPlaceholder](./MediaPlaceholder.md) | Sized frame that stands in for a picture not taken yet and says what it will show; previews a Pixabay photo during design. |
 
 ## Actions and status
 

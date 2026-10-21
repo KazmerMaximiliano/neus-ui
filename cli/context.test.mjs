@@ -51,6 +51,17 @@ describe("neus context", () => {
     expect(contextFor(project({ brand: "Forest and cream: #1f5130, cream ground, Fraunces" }))).toContain("Brand: Forest and cream");
   });
 
+  it("names a Pixabay key for photo previews without printing its value", () => {
+    const text = contextFor(project({}, { ".env.development.local": "VITE_PIXABAY_KEY=abc123secret\n" }));
+    expect(text).toContain("Photo preview: VITE_PIXABAY_KEY in .env.development.local.");
+    expect(text).toContain("pixabayKey={import.meta.env.DEV ? import.meta.env.VITE_PIXABAY_KEY : undefined}");
+    expect(text).not.toContain("abc123secret");
+    expect(contextFor(project({}, { ".env": "export NEXT_PUBLIC_PIXABAY_KEY=\"x\"" })))
+      .toContain('process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_PIXABAY_KEY');
+    expect(contextFor(project({}, { ".env": "VITE_PIXABAY_KEY=\n# PUBLIC_PIXABAY_KEY=x" }))).not.toContain("Photo preview");
+    expect(contextFor(project({}))).not.toContain("Photo preview");
+  });
+
   it("adds the layout guidance for public pages only", () => {
     const root = project({});
     expect(contextFor(root, "page")).toContain("## Layout");

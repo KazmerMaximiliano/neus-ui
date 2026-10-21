@@ -36,7 +36,8 @@ Run from the project root:
 
 1. `npx neus context` (`npx neus context --for page` for a landing or
    marketing page): the active system's identity and do's and don'ts, the
-   key tokens, the component catalog and the need → component table below.
+   key tokens, the component catalog and the need → component table below,
+   plus a photo preview line when the project has a Pixabay key.
 2. `npx neus docs <Name>` for every component you will use: usage,
    behavior, props and parts. `--full` adds its CSS tokens, needed only to
    override one.
@@ -112,7 +113,8 @@ Choose the questions that change the result:
 - **Composition**, for a public page: the options dealt in taste.md step 3,
   each named by its hero and features layout.
 - **Pictures**: real photos the user can supply, or placeholders
-  (`MediaPlaceholder`) labelled with the shot to replace later.
+  (`MediaPlaceholder`) labelled with the shot to replace later; with a
+  Pixabay key they preview a stock photo until then.
 - **Facts the page needs and the brief does not give** (phone, prices,
   dates): the user supplies them, or the page leaves them out.
 - For app screens, only when unclear: the primary task, the data and its
@@ -193,7 +195,7 @@ component's guide.
 | Any other group of items (agenda, prices, team) | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
 | Container of a widget, demo or summary | `Card` |
 | Band of strong color (agenda, final call to action) | `Section tone="brand"` (action color) or `tone="inverse"` (ink); primary buttons adapt, links and fields go in a Card |
-| Picture the project does not have yet | `MediaPlaceholder` with the shot as `label`, marked `SAMPLE:` |
+| Picture the project does not have yet | `MediaPlaceholder` with the shot as `label`, marked `SAMPLE:`; with the context's photo preview line, its `pixabayKey` expression and a short `query` |
 | Signup, contact or create form | `<form>` + `FormTemplate` + `Input` (`Select`, `Checkbox`, `DateInput`…), inside a `Card` on public pages |
 | Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
 | Icon-only action | `IconButton` |

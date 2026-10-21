@@ -210,7 +210,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Stack           | src/components/Stack/           | STABLE | Responsive direction and space-scale gap, list semantics |
 | Grid            | src/components/Grid/            | STABLE | Responsive columns or auto-fit minimum width |
 | Section         | src/components/Section/         | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container |
-| MediaPlaceholder | src/components/MediaPlaceholder/ | STABLE | Sized stand-in for a missing picture, labelled with what it will show |
+| MediaPlaceholder | src/components/MediaPlaceholder/ | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
 
 ### Implemented Sections (9 total, `neus-ui/sections`)
 

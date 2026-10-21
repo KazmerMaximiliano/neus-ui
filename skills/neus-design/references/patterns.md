@@ -227,7 +227,8 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
 - One solid action per viewport: the header action is `outlined`. On a
   `brand` band primary buttons adapt by themselves.
 - A page about people or a place shows them: real pictures, or a
-  `MediaPlaceholder` per shot marked `SAMPLE:`.
+  `MediaPlaceholder` per shot marked `SAMPLE:` (previewing a stock photo when
+  the context prints a `pixabayKey` expression).
 - Testimonials the brief asks for are marked `SAMPLE:` and listed in the
   delivery; prices, trials and metrics appear only when the brief gives them.
 - Run `npx neus lint` and the visual loop (`npx neus shot /`) after the first

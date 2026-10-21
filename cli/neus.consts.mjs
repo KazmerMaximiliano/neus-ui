@@ -7,6 +7,15 @@ export const COLOR_PATTERN = /^#[0-9a-f]{6}$/i;
 export const BLOCK_START = "<!-- neus-ui:start";
 export const BLOCK_END = "<!-- neus-ui:end -->";
 export const SCHEME_STORAGE_KEY = "neus-color-scheme";
+// Env files a dev server reads; a Pixabay key in one turns on MediaPlaceholder photo previews.
+export const ENV_FILES = [".env", ".env.local", ".env.development", ".env.development.local"];
+export const PIXABAY_KEY_PATTERN = /^\s*(?:export\s+)?((?:VITE_|PUBLIC_|NEXT_PUBLIC_)PIXABAY_KEY)\s*=\s*["']?[^\s"'#]/m;
+// How each variable reaches the browser in development only, so production builds never carry it.
+export const PIXABAY_KEY_EXPRESSIONS = {
+  VITE_PIXABAY_KEY: "import.meta.env.DEV ? import.meta.env.VITE_PIXABAY_KEY : undefined",
+  PUBLIC_PIXABAY_KEY: "import.meta.env.DEV ? import.meta.env.PUBLIC_PIXABAY_KEY : undefined",
+  NEXT_PUBLIC_PIXABAY_KEY: 'process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_PIXABAY_KEY : undefined',
+};
 
 // Open-license faces of each system. Apple's SF Pro is proprietary: it uses the system font stack.
 export const SYSTEM_FONTS = {

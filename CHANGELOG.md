@@ -8,6 +8,31 @@ breaking change.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-21
+
+### Added
+
+- MediaPlaceholder previews a matching Pixabay photo while a page is designed: `pixabayKey`
+  (development only) and `query` props, the `.media-placeholder__image` and
+  `.media-placeholder__credit` parts with their class and style props, and the
+  `--media-placeholder-credit-background`, `--media-placeholder-credit-color` and
+  `--media-placeholder-transition` tokens. The placeholder stays while the photo loads, when
+  nothing matches and on errors; answers are cached for 24 hours without the key.
+- `npx neus context` names a Pixabay key found in the project's `.env` files (never its value)
+  and the development-only expression to pass as `pixabayKey`.
+
+### Changed
+
+- The neus-design skill and the MediaPlaceholder guide allow a stock photo as a design-time
+  preview and never as the final picture; previewed placeholders stay marked `SAMPLE:`. The
+  neus-audit skill flags a literal or unguarded `pixabayKey`.
+
+## [1.0.1] - 2026-10-21
+
+### Changed
+
+- Releases publish to npm through trusted publishing with provenance; no library changes.
+
 ## [1.0.0] - 2026-10-20
 
 First public release on npm.
@@ -60,5 +85,7 @@ First public release on npm.
 - Five reference examples with the pages the design skill produced, on a built-in system
   with a brand and on a derived system.
 
-[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.1...v1.1.0
+[1.0.1]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/KazmerMaximiliano/neus-ui/releases/tag/v1.0.0
