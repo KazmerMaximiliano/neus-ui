@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/neus-ui)](https://www.npmjs.com/package/neus-ui)
 [![CI](https://github.com/KazmerMaximiliano/neus-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/KazmerMaximiliano/neus-ui/actions/workflows/ci.yml)
-[![License](https://img.shields.io/npm/l/neus-ui)](./LICENSE)
+[![License](https://img.shields.io/github/license/KazmerMaximiliano/neus-ui)](./LICENSE)
 
 A React 19+ component library with TypeScript: 40 components (counting public subcomponents
 such as CardHeader), nine page sections for public pages (`neus-ui/sections`), two layout
