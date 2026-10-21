@@ -1,6 +1,6 @@
 name: Release
 
-# Publishes to npm when a version tag (v1.0.0) is pushed, through npm trusted publishing:
+# Publishes to npm when a version tag is pushed, through npm trusted publishing:
 # no token, OIDC from id-token: write. npmjs.com must list this repository and release.yml
 # as the package's trusted publisher, with npm publish allowed.
 on:

@@ -1,6 +1,6 @@
 {
   "name": "neus-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React 19 component library with six token-driven design systems, page sections, and an AI design kit (skills, CLI and review subagent) for Claude Code and Codex.",
   "keywords": [
     "react",
