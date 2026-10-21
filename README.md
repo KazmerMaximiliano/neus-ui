@@ -78,8 +78,10 @@ pnpm test:unit
 pnpm build
 ```
 
-Use the pnpm version in package.json. [Development](./docs/contributing/development.md)
-explains file conventions and commands; [Testing](./docs/contributing/testing.md) covers
+Use the pnpm version in package.json. To add a component, follow [Adding a
+component](./docs/contributing/adding-a-component.md): tokens in all six design systems,
+tests, the guide, and the skills, lint and specimen of the AI design kit.
+[Development](./docs/contributing/development.md) explains file conventions and commands; [Testing](./docs/contributing/testing.md) covers
 browser checks and coverage. Agent instructions live in [AGENTS.md](./AGENTS.md).
 
 Source families live in src/components, layouts in src/templates, and scoped
