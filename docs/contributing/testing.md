@@ -8,6 +8,9 @@ subdirectory.
 
 ## Run Tests
 
+The CLI tests run `neus init`, which imports the built `dist/theme.js`: run `pnpm build`
+once in a fresh clone before the tests.
+
 ```bash
 # Single run
 pnpm test

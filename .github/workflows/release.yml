@@ -43,6 +43,7 @@ jobs:
         run: |
           pnpm lint
           pnpm design:check
+          pnpm build
           pnpm test:unit
           pnpm test:design-systems
 

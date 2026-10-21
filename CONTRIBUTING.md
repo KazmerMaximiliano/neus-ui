@@ -10,8 +10,8 @@ Thanks for helping. Issues and pull requests are welcome on
   [authoring design systems](./docs/contributing/design-system-authoring.md) and
   [adding a component](./docs/contributing/adding-a-component.md). Coding agents read
   [AGENTS.md](./AGENTS.md).
-- **Before opening a pull request:** run `pnpm lint`, `pnpm design:check`, `pnpm test:unit`,
-  `pnpm test:design-systems` and `pnpm build`, and add an entry under `## [Unreleased]` in
+- **Before opening a pull request:** run `pnpm lint`, `pnpm design:check`, `pnpm build`,
+  `pnpm test:unit` and `pnpm test:design-systems` (the CLI tests use the build), and add an entry under `## [Unreleased]` in
   [CHANGELOG.md](./CHANGELOG.md) for user-visible changes.
 
 By contributing, you agree that your contribution is licensed under the

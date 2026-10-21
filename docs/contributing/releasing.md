@@ -44,9 +44,9 @@ release, with the replacement in the changelog, and removed in the next major.
    ```bash
    pnpm lint
    pnpm design:check
+   pnpm build              # first: the CLI tests import dist/theme.js
    pnpm test:unit
    pnpm test:design-systems
-   pnpm build
    npm pack --dry-run      # review the file list: dist, cli, skills, agents, docs, notices
    ```
 
