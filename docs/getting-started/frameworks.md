@@ -9,11 +9,11 @@ the remaining wiring; see [Design with AI](./ai-design.md).
 
 ## What the package provides
 
-| Entry | Contents | Where it runs |
-| --- | --- | --- |
-| `neus-ui` | Components, templates, ThemeProvider, hooks, `DESIGN_SYSTEMS`, color utilities | Component, hook and context modules carry `"use client"`; data modules do not |
-| `neus-ui/theme` | `DESIGN_SYSTEMS`, `DESIGN_SYSTEM_PALETTES`, `resolveTheme`, `buildThemeCss` and their types | Anywhere: no React, no CSS |
-| `neus-ui/dist/neus-ui.css` | Reset, foundations, the six systems with their palettes, and component recipes | Import once at the root |
+| Entry                      | Contents                                                                                    | Where it runs                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `neus-ui`                  | Components, templates, ThemeProvider, hooks, `DESIGN_SYSTEMS`, color utilities              | Component, hook and context modules carry `"use client"`; data modules do not |
+| `neus-ui/theme`            | `DESIGN_SYSTEMS`, `DESIGN_SYSTEM_PALETTES`, `resolveTheme`, `buildThemeCss` and their types | Anywhere: no React, no CSS                                                    |
+| `neus-ui/dist/neus-ui.css` | Reset, foundations, the six systems with their palettes, and component recipes              | Import once at the root                                                       |
 
 The build keeps one file per source module and leaves dependencies external, so an
 application only downloads what it imports: a page with a Badge does not load AG Grid,
@@ -25,7 +25,7 @@ Every built-in palette ships in `neus-ui.css`, so a server-rendered page is them
 first byte when `<html>` carries the attributes:
 
 ```html
-<html lang="en" data-design-system="vercel" data-color-scheme="light">
+<html lang="en" data-design-system="vercel" data-color-scheme="light"></html>
 ```
 
 Custom action colors come from `buildThemeCss`, which emits the same variables a global
@@ -54,7 +54,11 @@ import "./styles/neus.overrides.css";
 import { App } from "./App";
 import { NeusRoot } from "./neus/NeusRoot";
 
-createRoot(document.getElementById("root")!).render(<NeusRoot><App /></NeusRoot>);
+createRoot(document.getElementById("root")!).render(
+  <NeusRoot>
+    <App />
+  </NeusRoot>,
+);
 ```
 
 ## Next.js App Router
@@ -111,7 +115,7 @@ Use React through `@astrojs/react`. A layout owns `<html>` and the stylesheets (
 writes `src/layouts/NeusLayout.astro`). Components without handlers render as static HTML
 with no client directive; interactive regions are islands:
 
-```astro
+```tsx
 ---
 import { Badge } from "neus-ui";
 import NeusLayout from "../layouts/NeusLayout.astro";
@@ -136,7 +140,8 @@ schemes.
 <script>
   try {
     const saved = localStorage.getItem("neus-color-scheme");
-    if (saved === "light" || saved === "dark") document.documentElement.dataset.colorScheme = saved;
+    if (saved === "light" || saved === "dark")
+      document.documentElement.dataset.colorScheme = saved;
   } catch {}
 </script>
 ```
@@ -146,14 +151,14 @@ schemes.
 Load the active system's faces once, in the root document, with a `<link>` (the URL
 `neus init` prints), `next/font` or Fontsource. Font tokens name the families:
 
-| System | Families | Notes |
-| --- | --- | --- |
-| `neus` | Manrope, JetBrains Mono | |
-| `apple` | SF Pro | Proprietary; falls back to the system font stack |
-| `carbon` | IBM Plex Sans, IBM Plex Mono | |
-| `material` | Roboto | |
-| `neobrutalism` | Inter, JetBrains Mono | |
-| `vercel` | Geist, Geist Mono | |
+| System         | Families                     | Notes                                            |
+| -------------- | ---------------------------- | ------------------------------------------------ |
+| `neus`         | Manrope, JetBrains Mono      |                                                  |
+| `apple`        | SF Pro                       | Proprietary; falls back to the system font stack |
+| `carbon`       | IBM Plex Sans, IBM Plex Mono |                                                  |
+| `material`     | Roboto                       |                                                  |
+| `neobrutalism` | Inter, JetBrains Mono        |                                                  |
+| `vercel`       | Geist, Geist Mono            |                                                  |
 
 When a loader exposes a different family name (such as `next/font` variables), point
 `--font-body`, `--font-display` and `--font-mono` at it in `neus.overrides.css`.

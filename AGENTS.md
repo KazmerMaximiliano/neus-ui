@@ -504,7 +504,10 @@ Theme colors with automatic variants:
 
 ## AGENT TASK CHECKLIST
 
-When agents need to implement new components, use this checklist:
+When agents need to implement new components, follow
+[Adding a component](./docs/contributing/adding-a-component.md) and this checklist. A component
+is done only when all six design systems style it through tokens and the AI design kit
+(skills, lint, specimen) knows it.
 
 ### Pre-implementation
 
@@ -512,7 +515,7 @@ When agents need to implement new components, use this checklist:
 - [ ] Read the relevant `src/design-systems/<id>/DESIGN.md` before adapting a component
 - [ ] Check existing similar components for patterns
 - [ ] Plan component props interface
-- [ ] Identify required CSS variables
+- [ ] Identify required CSS variables: every visual value is a `--<component>-*` token or a shared role
 
 ### Implementation
 
@@ -524,9 +527,14 @@ When agents need to implement new components, use this checklist:
 - [ ] Create ComponentName.utils.ts if needed
 - [ ] Put owned subcomponents in ComponentName/components/; expose public sections through the family index
 - [ ] Create ComponentName.test.tsx with 100% coverage; if adding multiple test files, place all of them in ComponentName/tests/
-- [ ] Create ComponentName.stories.tsx for Storybook
+- [ ] Create ComponentName.stories.tsx for Storybook, with a design-system control
+- [ ] Add the recipe family to `RECIPE_NAMES` and the component to `ADAPTED_COMPONENTS`
+- [ ] Declare the family in all six `src/design-systems/<id>/DESIGN.md` files: the complete baseline in Neus, `{}` or sourced overrides elsewhere; describe it in each document's prose
+- [ ] Run `pnpm design:generate` and keep the generated files with their sources
+- [ ] List any runtime custom property in `src/tests/css-tokens.test.ts`
+- [ ] Add a browser suite in `src/design-systems/tests/` for six systems in light and dark
 - [ ] Run `pnpm lint` - must pass
-- [ ] Run `pnpm test:unit` - must pass
+- [ ] Run `pnpm test:unit` and `pnpm test:design-systems` - must pass
 
 ### Post-implementation
 
@@ -536,8 +544,12 @@ When agents need to implement new components, use this checklist:
 - [ ] Verify component works in Storybook
 - [ ] Create docs/components/ComponentName.md with props and usage example
 - [ ] Update docs/components/README.md index table with the new component
-- [ ] Update AGENTS.md COMPONENT INVENTORY if adding new component
-- [ ] Update README.md if component is user-facing
+- [ ] Update AGENTS.md COMPONENT INVENTORY and the component counts in README.md, docs/README.md, docs/getting-started/introduction.md and docs/components/README.md
+- [ ] Remove its row from BACKLOG.md
+- [ ] Add a row to the "Need → component" table in `skills/neus-design/SKILL.md`
+- [ ] Update `skills/neus-design/references/customization.md` (Level 0), `patterns.md` where it changes a pattern, and the "Already handled" list in `skills/neus-audit/references/neus-rules.md`
+- [ ] Teach `neus lint` the raw element it replaces (`RAW_TO_COMPONENT` or a line check in `cli/lint.mjs`) and add it to `cli/templates/NeusSpecimen.tsx`
+- [ ] Validate both skills with `uvx --from skills-ref agentskills validate skills/<name>`
 
 ## ERROR HANDLING FOR AGENTS
 
@@ -716,6 +728,11 @@ interactive component catalog separately.
   props, docs and DESIGN.md files: when a prop, part, token or component changes, update
   `skills/neus-design/references/patterns.md`, `customization.md` and the audit's
   `references/neus-rules.md` (Library section) in the same change.
+- A new component is part of the kit too: a "Need → component" row in `SKILL.md`, its
+  raw-element hint in `neus lint`, a place in the specimen template and its guarantees in the
+  audit's "Already handled" list. `neus context`, `neus docs` and the lint class and token
+  checks pick it up from the catalog, the guide and the CSS. See
+  [Adding a component](./docs/contributing/adding-a-component.md).
 - Skills follow the Agent Skills specification: `name` equals the directory, only
   `name`, `description`, `license`, `compatibility`, `metadata` and `allowed-tools` in
   frontmatter, references one level deep. Validate with

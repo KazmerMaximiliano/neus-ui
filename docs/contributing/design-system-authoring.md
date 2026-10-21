@@ -142,6 +142,9 @@ inherit its thick borders or hard shadows.
 
 ## Adding a component
 
+[Adding a component](./adding-a-component.md) walks through the whole process, including
+tests, documentation and the AI design kit. The design-system part, in short:
+
 1. Read each relevant `DESIGN.md`. Keep behavior and props independent of the
    selected system.
 2. Replace visual constants in its stylesheet with component-prefixed tokens.
