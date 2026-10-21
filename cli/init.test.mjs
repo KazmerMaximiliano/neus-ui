@@ -125,6 +125,11 @@ describe("neus bin", () => {
     expect(neus("-y", "init", "--help").status).toBe(0);
   });
 
+  it("prints the package version", () => {
+    expect(neus("--version")).toMatchObject({ status: 0, stdout: `${JSON.parse(read(process.cwd(), "package.json")).version}\n` });
+    expect(neus("-v").status).toBe(0);
+  });
+
   it("prints the command list, failing only for unknown commands", () => {
     expect(neus()).toMatchObject({ status: 0, stdout: expect.stringContaining("shot") });
     expect(neus("--help").status).toBe(0);

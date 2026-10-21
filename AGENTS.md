@@ -695,6 +695,7 @@ For agents needing additional information:
 | Component conventions and commands | [Development](./docs/contributing/development.md) |
 | Validation and coverage | [Testing](./docs/contributing/testing.md) |
 | DESIGN.md schema and generation | [Authoring design systems](./docs/contributing/design-system-authoring.md) |
+| Versioning, changelog and npm releases | [Releasing](./docs/contributing/releasing.md) |
 | Exact props and style destinations | ComponentName.types.ts, ComponentName.tsx and ComponentName.styles.css in the owning family |
 
 
@@ -747,6 +748,9 @@ interactive component catalog separately.
 - Start at [docs/README.md](./docs/README.md). Consumer guides live in
   getting-started/ and design/; API references live in components/ and templates/;
   maintainer workflows live in contributing/. Every folder has a README index.
+- Record user-visible changes under `## [Unreleased]` in [CHANGELOG.md](./CHANGELOG.md).
+  The [versioning policy](./docs/contributing/releasing.md#versioning-policy) defines what
+  is breaking; material copied from other projects needs an entry in THIRD_PARTY_NOTICES.md.
 - Keep documentation in English. Add/update the relevant catalog and all relative
   links when moving files. Do not leave obsolete flat documentation paths.
 - Every public component/section and template needs a guide with usage, complete

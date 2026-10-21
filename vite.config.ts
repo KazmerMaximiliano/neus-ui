@@ -14,6 +14,8 @@ const EXTERNAL_PACKAGES = Object.keys({ ...packageJson.dependencies, ...packageJ
 export default defineConfig({
   plugins: [react()],
   build: {
+    // public/ holds repository assets; the library ships none of them.
+    copyPublicDir: false,
     lib: {
       entry: {
         index: path.resolve(dirname, 'src/index.ts'),

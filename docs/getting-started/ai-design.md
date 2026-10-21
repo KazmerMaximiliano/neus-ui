@@ -11,7 +11,7 @@ system, your components and your tokens.
 ## Set up
 
 ```bash
-pnpm add git+https://github.com/KazmerMaximiliano/neus-ui.git
+npm install neus-ui
 npx neus init
 ```
 
@@ -119,7 +119,7 @@ with 1 when it finds a P0.
 
 | Layer | What it does |
 | --- | --- |
-| Taste | Product-screen rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy) and, for public pages, substance rules (Heading display, 16px Text, Section bands at the system's width, an anchor per section) and a sample-content policy, adapted from taste-skill and Open Design |
+| Taste | Product-screen rules against the generated look (card-in-card layouts, invented KPI tiles, gradient chrome, filler copy) and, for public pages, substance rules (Heading display, 16px Text, Section bands at the system's width, an anchor per section) and a sample-content policy, adapted from taste-skill (MIT) and Open Design (Apache 2.0); see [third-party notices](../../THIRD_PARTY_NOTICES.md) |
 | Brand | Two or three brand directions built for the subject (action color, ground, display face, button case), offered as a question with the system as it is; applied through `neus init` and `neus.overrides.css` |
 | Directions | `scripts/deal-directions.mjs` deals the hero, features, testimonials and call-to-action layouts of a public page; in None mode it also deals palette, type pairing, shape, density and elevation for the derived system |
 | Inspiration | An index of the VoltAgent/awesome-design-md analyses; the agent takes concepts, never identities |

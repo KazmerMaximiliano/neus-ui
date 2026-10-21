@@ -29,7 +29,8 @@ Markdown; read them in GitHub or an editor without starting a server.
 
 [Contributor index](./contributing/README.md) links development conventions, testing,
 design-system authoring and [adding a component](./contributing/adding-a-component.md) end to
-end, from tokens in six systems to the AI design kit. Visual specifications remain in each system's `DESIGN.md`; the
+end, from tokens in six systems to the AI design kit. [Releasing](./contributing/releasing.md)
+covers the versioning policy and npm publishing. Visual specifications remain in each system's `DESIGN.md`; the
 [systems guide](./design/systems.md) indexes all six.
 
 Run `pnpm storybook` for interactive examples and prop controls. Both templates include a
