@@ -117,5 +117,7 @@ describe.skipIf(!executablePath)("neus shot in a browser", () => {
     expect(problems([result])).toContain(
       '/ at 390px: uneven form row: "Teléfono" is 40px taller than "Nombre"; give both fields a hint or neither, keep hints to one line, or put the long one on its own row (form-template__full)',
     );
-  }, 30_000);
+  // About 2 s alone; launching Chrome next to the whole unit suite on a CI runner can pass 30 s.
+  // Above Playwright's own 30 s navigation timeout, so a real hang reports where it stopped.
+  }, 120_000);
 });
