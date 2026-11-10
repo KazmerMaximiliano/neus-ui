@@ -124,7 +124,7 @@ import { OrdersScreen } from "../components/OrdersScreen";
 
 <NeusLayout title="Orders">
   <Badge label="Synced" color="success" />
-  <OrdersScreen client:load />
+  <OrdersScreen client:idle />
 </NeusLayout>
 ```
 

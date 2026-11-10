@@ -93,17 +93,17 @@ severity and source tag (`a11y`, `guidelines`, `neus`, `taste`, `spec`,
 `render`). Explain only when the fix is not obvious.
 
 ```text
-## app/orders/OrdersScreen.tsx
+## src/views/OrdersPage/OrdersPage.tsx
 
-app/orders/OrdersScreen.tsx:42 [P0 a11y] icon-only action without accessible name
-app/orders/OrdersScreen.tsx:57 [P1 guidelines] "..." → "…"
-app/orders/OrdersScreen.tsx:88 [P1 taste] four KPI tiles with invented deltas; show the two real figures
+src/views/OrdersPage/OrdersPage.tsx:42 [P0 a11y] icon-only action without accessible name
+src/views/OrdersPage/OrdersPage.tsx:57 [P1 guidelines] "..." → "…"
+src/views/OrdersPage/OrdersPage.tsx:88 [P1 taste] four KPI tiles with invented deltas; show the two real figures
 
-## app/neus.overrides.css
+## src/styles/neus.overrides.css
 
-app/neus.overrides.css:12 [P0 neus] --color-primary written by hand; use `npx neus init --primary`
+src/styles/neus.overrides.css:12 [P0 neus] --color-primary written by hand; use `npx neus init --primary`
 
-## app/orders/page.tsx
+## src/app/orders/page.tsx
 
 ✓ pass
 

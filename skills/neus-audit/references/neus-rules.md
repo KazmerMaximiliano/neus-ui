@@ -69,9 +69,9 @@ the project wrote.
 
 ## Project language overrides
 
-- "Title Case for headings and buttons" applies only when `language` in
-  `neus.config.json` is English. For Spanish and most other languages, use
-  sentence case.
+- Replace the guidelines' "Title Case for headings and buttons" with sentence
+  case in every language, English included: headings, buttons, labels and
+  menu items. Flag Title Case as a `guidelines` finding.
 - Typography rules (`…`, curly quotes, non-breaking spaces) apply in every
   language, with the quote marks of that language.
 - Dates, times, numbers and currency use `Intl.*` with the project's locale.

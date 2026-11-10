@@ -8,6 +8,21 @@ breaking change.
 
 ## [Unreleased]
 
+### Changed
+
+- The neus-design skill says how other skills in the session fit: general design skills such
+  as `frontend-design` apply through the brand and the customization ladder, and code-style
+  skills such as neus-react decide how the code is written. Its page patterns show
+  composition, not code conventions.
+- Astro islands above the fold hydrate with `client:idle` instead of `client:load`, which is
+  kept for islands that must respond the moment the page appears.
+- In Next.js App Router, the one Client Component per interactive screen lives where the
+  project's code conventions put it, no longer in `app/`.
+- The neus-audit skill asks for sentence case in every language, English included, instead of
+  Title Case for English projects.
+- The managed block that `npx neus init` writes in `AGENTS.md` states that neus-ui decides how
+  the interface looks and that other design guidance applies through it.
+
 ## [1.1.0] - 2026-10-21
 
 ### Added
