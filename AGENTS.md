@@ -292,9 +292,17 @@ export type ComponentProps = {
   readonly type?: ComponentType;
   readonly color?: ComponentColor;
   readonly disabled?: boolean;
+  readonly items?: readonly string[];
   readonly onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
+  readonly onSelect?: (selected: string[]) => void;
 };
 ```
+
+Every prop is `readonly`, and arrays the component receives are `readonly T[]`, which
+accepts mutable arrays, `readonly` arrays and `as const` tuples alike. Sort or filter a copy
+(`[...items].sort()`), never the received array. Arrays the component creates and passes to
+a callback stay `T[]` (`onSelect` above), so consumers can pass a state setter such as
+`setSelected`.
 
 #### Component Implementation MUST follow pattern
 
@@ -713,8 +721,9 @@ Describe visual identity and usage; keep implementation reports and pending-work
 lists out of these documents. Read the relevant specification before adapting a
 recipe. Edit its YAML and run `pnpm design:generate`; never hand-edit files under
 `src/design-systems/<id>/generated/`. Commit generated artifacts with their source.
-A change to how a component looks starts in these documents, even when a general design
-skill such as `frontend-design` suggests it: never as literal values in component CSS.
+A change to how a component looks starts in these documents, never as literal values in
+component CSS. A general design skill such as `frontend-design` adds criteria to that
+decision; it never supplies the values.
 Run `pnpm design:check` to validate without writing. Neus owns shared foundations
 and complete per-scope resets; sibling systems override those defaults. Preserve
 CSS variable names, runtime var() dependencies, scope isolation and public APIs.
@@ -746,9 +755,10 @@ interactive component catalog separately.
   `uvx --from skills-ref agentskills validate skills/<name>`.
 - Skills must not depend on commands the `neus` CLI does not provide; they read files from
   `node_modules/neus-ui/` and run their own `scripts/`.
-- Keep the kit's skills on visual ground. neus-design and neus-audit decide components,
-  palette, type, spacing, theme and composition, and they state how general design skills
-  such as `frontend-design` apply through the neus contract (brand, customization ladder).
+- Keep the kit's skills on visual ground. neus-design decides the system,
+  brand, components, palette, type, spacing, theme and composition. General design skills
+  such as `frontend-design` add criteria only: they never author a brand direction, feed a
+  derived system or override what the active system defines.
   How consumer code is written (files, names, types, tests, where copy lives) belongs to
   the project's AGENTS.md or a code-style skill such as neus-react: the skills' code
   samples show composition, not code conventions.
