@@ -43,7 +43,7 @@ writing.
 | Hover that makes text lighter | Hover moves the surface, not the ink |
 | Monospace for labels and captions | Monospace only for code, IDs and aligned figures (unless the system defines it) |
 | "Welcome back, John!", "Elevate your workflow", "Seamless", "Acme Corp", lorem ipsum | Plain, specific language from the domain; realistic names for this context |
-| Title Case Everywhere in Spanish | Sentence case; follow the project's language |
+| Title Case in headings, buttons or labels | Sentence case, in every language |
 
 ### Craft for product screens
 

@@ -76,9 +76,11 @@ and the stylesheet imports, plus:
 - Props from a Server Component to a neus component must be serializable:
   no functions. Anything with `onClick`, `onChange`, `routes` handlers,
   `cellRenderer` or `renderMobileCard` lives in a Client Component. Build
-  one Client Component per interactive screen (for example
-  `app/orders/OrdersScreen.tsx` with `"use client"`) and keep data loading
-  in the page.
+  one Client Component per interactive screen (for example an `OrdersScreen`
+  with `"use client"`, rendered by `app/orders/page.tsx`) and keep data
+  loading in the page. Where that file lives and what it is called follow the
+  project's code conventions (its AGENTS.md or a code-style skill such as
+  neus-react); this rule fixes only the boundary.
 - Server code that needs data (`DESIGN_SYSTEMS`, `resolveTheme`) imports it
   from `"neus-ui/theme"`.
 - Navigation: `href` on Button and on Sidebar/AppTemplate routes, with
@@ -107,6 +109,8 @@ Everything in `ssr`, plus:
   layout components and every section from `neus-ui/sections`: the
   SiteHeader phone menu uses the native Popover API and needs no
   hydration. Hydrate only the parts with handlers, such as a form.
-- Directives: `client:load` above the fold, `client:visible` below,
-  `client:only="react"` for a component that fails in server rendering.
+- Directives: `client:idle` above the fold, `client:visible` below,
+  `client:load` only for an island that must respond the moment the page
+  appears, and `client:only="react"` for a component that fails in server
+  rendering.
 - Verify with `npx astro check`.

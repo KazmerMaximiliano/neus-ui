@@ -8,6 +8,24 @@ breaking change.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-11
+
+### Changed
+
+- The neus-design skill says how other skills in the session fit: general design skills such
+  as `frontend-design` add criteria only, while the system, brand, palette, type and
+  composition stay neus-design's decisions; code-style skills such as neus-react decide how
+  the code is written. Its page patterns show composition, not code conventions.
+- Astro islands above the fold hydrate with `client:idle` instead of `client:load`, which is
+  kept for islands that must respond the moment the page appears.
+- In Next.js App Router, the one Client Component per interactive screen lives where the
+  project's code conventions put it, no longer in `app/`.
+- The neus-audit skill asks for sentence case in every language, English included, instead of
+  Title Case for English projects.
+- The managed block that `npx neus init` writes in `AGENTS.md` states that neus-ui decides how
+  the interface looks and that other design guidance only adds criteria, never a palette, a
+  font, a token or the brand.
+
 ## [1.1.0] - 2026-10-21
 
 ### Added
@@ -85,7 +103,8 @@ First public release on npm.
 - Five reference examples with the pages the design skill produced, on a built-in system
   with a brand and on a derived system.
 
-[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/KazmerMaximiliano/neus-ui/releases/tag/v1.0.0

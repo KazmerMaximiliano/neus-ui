@@ -181,7 +181,7 @@ Mock external network/SDK behavior instead of adding fixed sleep durations.
 | --- | --- |
 | Rendering | 100% of output paths |
 | Interactions | 100% of event handlers |
-| Props | All combinations |
+| Props | Every prop that changes output or behavior, not the Cartesian product |
 | Edge cases | disabled, loading, error, empty |
 | Line coverage | 70%+ per component |
 

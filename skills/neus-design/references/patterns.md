@@ -8,6 +8,12 @@ Astro they are rendered from an `.astro` page with one client directive (see
 frameworks.md). Navigation uses `href` on Button and Sidebar routes; pass
 the host router's link as `linkComponent` where one exists.
 
+The skeletons fit in one file to stay short. Take their composition and props,
+not their code shape: inline prop types, constant arrays such as `QUOTES` and
+literal copy go where the project's code conventions put them (its AGENTS.md
+or a code-style skill such as neus-react), and the copy in the project's
+language.
+
 Icons for Sidebar items and IconButton are lucide-react components, and
 custom DataTable cells use AG Grid types. Add `lucide-react` or
 `ag-grid-community` to the project's own dependencies before importing from

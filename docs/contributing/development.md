@@ -104,13 +104,13 @@ Core rules:
 Recommended import order:
 
 ```text
-import React, { useState } from "react";
+import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Button } from "../Button/Button";
 import { useColors } from "../theme";
-import "./ComponentName.styles.css";
 import type { ComponentNameProps } from "./ComponentName.types";
 import { getComponentClasses } from "./ComponentName.utils";
+import "./ComponentName.styles.css";
 ```
 
 Style components with CSS variables:

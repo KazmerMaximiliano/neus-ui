@@ -169,48 +169,48 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ### Implemented Components and Public Subcomponents (40 total)
 
-| NAME            | FILE_PATH                       | STATUS | FEATURES                                        |
-| --------------- | ------------------------------- | ------ | ----------------------------------------------- |
-| Alert           | src/components/Alert/           | STABLE | Info/success/warning/error, live roles, actions, labelled dismiss |
-| Avatar          | src/components/Avatar/          | STABLE | Picture or initials, pre-hydration failure fallback, sizes and shapes |
-| AvatarGroup     | src/components/Avatar/components/AvatarGroup/ | STABLE | Overlap, size for its avatars, +N count |
-| Badge           | src/components/Badge/           | STABLE | Solid/dot variants, 5 semantic colors           |
-| Button          | src/components/Button/          | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links |
-| Calendar        | src/components/Calendar/        | STABLE | Date picker                                     |
-| Card            | src/components/Card/            | STABLE | Composable themed surface, semantic `as`, className and style |
-| CardHeader      | src/components/Card/components/CardHeader/ | STABLE | Free-form header content and actions |
-| CardMedia       | src/components/Card/components/CardMedia/  | STABLE | Polymorphic media with native/custom props and refs |
-| CardContent     | src/components/Card/components/CardContent/ | STABLE | Content spacing with arbitrary children |
-| CardFooter      | src/components/Card/components/CardFooter/ | STABLE | Wrapping footer content and actions |
-| Checkbox        | src/components/Checkbox/        | STABLE | Indeterminate state                             |
-| Clock           | src/components/Clock/           | STABLE | Time picker                                     |
-| DataTable       | src/components/DataTable/       | STABLE | Sorting, pagination, filtering                  |
-| DateInput       | src/components/DateInput/       | STABLE | Calendar picker field                                 |
-| Dropdown        | src/components/Dropdown/        | STABLE | Dropdown menu                                   |
-| FileUploader    | src/components/FileUploader/    | STABLE | Drag and drop                                   |
-| IconButton      | src/components/IconButton/      | STABLE | Icon containers                                 |
-| Input           | src/components/Input/           | STABLE | Seven native types, native attributes, description, accessible errors, per-part styles, six token recipes |
-| InteractiveMap  | src/components/InteractiveMap/  | STABLE | Google Maps integration                         |
-| Link            | src/components/Link/            | STABLE | Styled links                                    |
-| Menu            | src/components/Menu/            | STABLE | Actions menu                                    |
-| Modal           | src/components/Modal/           | STABLE | Dialog boxes                                    |
-| ModalHeader     | src/components/Modal/components/ModalHeader/ | STABLE | Dialog title and header composition |
-| ModalContent    | src/components/Modal/components/ModalContent/ | STABLE | Dialog body composition |
-| ModalFooter     | src/components/Modal/components/ModalFooter/ | STABLE | Dialog action composition |
-| MultiSelect     | src/components/MultiSelect/     | STABLE | Multiple selection                              |
-| Select          | src/components/Select/          | STABLE | Single selection                                |
-| Sidebar         | src/components/Sidebar/         | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer, href items with linkComponent |
-| TimeInput       | src/components/TimeInput/       | STABLE | Clock picker field                                 |
-| WeekCalendar    | src/components/WeekCalendar/    | STABLE | Weekly view, event categories, navigation       |
-| WeekCalendarRow | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler     |
-| Stepper         | src/components/Stepper/         | STABLE | Dots/linear/simple variants, labels, step click |
-| Heading         | src/components/Heading/         | STABLE | h1–h6 level independent of display/xl/lg/md/sm/xs size, fluid display scale |
-| Text            | src/components/Text/            | STABLE | Lead/body/small/caption/overline, tones, measure, line clamp, tabular figures |
-| Container       | src/components/Container/       | STABLE | Max-width sizes, responsive gutter, landmark element |
-| Stack           | src/components/Stack/           | STABLE | Responsive direction and space-scale gap, list semantics |
-| Grid            | src/components/Grid/            | STABLE | Responsive columns or auto-fit minimum width |
-| Section         | src/components/Section/         | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container |
-| MediaPlaceholder | src/components/MediaPlaceholder/ | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
+| NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
+| ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
+| Alert            | src/components/Alert/                                   | STABLE | Info/success/warning/error, live roles, actions, labelled dismiss                                                       |
+| Avatar           | src/components/Avatar/                                  | STABLE | Picture or initials, pre-hydration failure fallback, sizes and shapes                                                   |
+| AvatarGroup      | src/components/Avatar/components/AvatarGroup/           | STABLE | Overlap, size for its avatars, +N count                                                                                 |
+| Badge            | src/components/Badge/                                   | STABLE | Solid/dot variants, 5 semantic colors                                                                                   |
+| Button           | src/components/Button/                                  | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links                                                |
+| Calendar         | src/components/Calendar/                                | STABLE | Date picker                                                                                                             |
+| Card             | src/components/Card/                                    | STABLE | Composable themed surface, semantic `as`, className and style                                                           |
+| CardHeader       | src/components/Card/components/CardHeader/              | STABLE | Free-form header content and actions                                                                                    |
+| CardMedia        | src/components/Card/components/CardMedia/               | STABLE | Polymorphic media with native/custom props and refs                                                                     |
+| CardContent      | src/components/Card/components/CardContent/             | STABLE | Content spacing with arbitrary children                                                                                 |
+| CardFooter       | src/components/Card/components/CardFooter/              | STABLE | Wrapping footer content and actions                                                                                     |
+| Checkbox         | src/components/Checkbox/                                | STABLE | Indeterminate state                                                                                                     |
+| Clock            | src/components/Clock/                                   | STABLE | Time picker                                                                                                             |
+| DataTable        | src/components/DataTable/                               | STABLE | Sorting, pagination, filtering                                                                                          |
+| DateInput        | src/components/DateInput/                               | STABLE | Calendar picker field                                                                                                   |
+| Dropdown         | src/components/Dropdown/                                | STABLE | Dropdown menu                                                                                                           |
+| FileUploader     | src/components/FileUploader/                            | STABLE | Drag and drop                                                                                                           |
+| IconButton       | src/components/IconButton/                              | STABLE | Icon containers                                                                                                         |
+| Input            | src/components/Input/                                   | STABLE | Seven native types, native attributes, description, accessible errors, per-part styles, six token recipes               |
+| InteractiveMap   | src/components/InteractiveMap/                          | STABLE | Google Maps integration                                                                                                 |
+| Link             | src/components/Link/                                    | STABLE | Styled links                                                                                                            |
+| Menu             | src/components/Menu/                                    | STABLE | Actions menu                                                                                                            |
+| Modal            | src/components/Modal/                                   | STABLE | Dialog boxes                                                                                                            |
+| ModalHeader      | src/components/Modal/components/ModalHeader/            | STABLE | Dialog title and header composition                                                                                     |
+| ModalContent     | src/components/Modal/components/ModalContent/           | STABLE | Dialog body composition                                                                                                 |
+| ModalFooter      | src/components/Modal/components/ModalFooter/            | STABLE | Dialog action composition                                                                                               |
+| MultiSelect      | src/components/MultiSelect/                             | STABLE | Multiple selection                                                                                                      |
+| Select           | src/components/Select/                                  | STABLE | Single selection                                                                                                        |
+| Sidebar          | src/components/Sidebar/                                 | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer, href items with linkComponent                     |
+| TimeInput        | src/components/TimeInput/                               | STABLE | Clock picker field                                                                                                      |
+| WeekCalendar     | src/components/WeekCalendar/                            | STABLE | Weekly view, event categories, navigation                                                                               |
+| WeekCalendarRow  | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler                                                                             |
+| Stepper          | src/components/Stepper/                                 | STABLE | Dots/linear/simple variants, labels, step click                                                                         |
+| Heading          | src/components/Heading/                                 | STABLE | h1–h6 level independent of display/xl/lg/md/sm/xs size, fluid display scale                                             |
+| Text             | src/components/Text/                                    | STABLE | Lead/body/small/caption/overline, tones, measure, line clamp, tabular figures                                           |
+| Container        | src/components/Container/                               | STABLE | Max-width sizes, responsive gutter, landmark element                                                                    |
+| Stack            | src/components/Stack/                                   | STABLE | Responsive direction and space-scale gap, list semantics                                                                |
+| Grid             | src/components/Grid/                                    | STABLE | Responsive columns or auto-fit minimum width                                                                            |
+| Section          | src/components/Section/                                 | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container                                             |
+| MediaPlaceholder | src/components/MediaPlaceholder/                        | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
 
 ### Implemented Sections (9 total, `neus-ui/sections`)
 
@@ -218,38 +218,38 @@ Sections follow the component file structure inside `src/sections/`; owned items
 their family's `components/` (FeatureItem in FeatureList, Testimonial in TestimonialList),
 and the list variant reaches its items through a `.context.ts` file.
 
-| NAME            | FILE_PATH                         | STATUS | FEATURES                                          |
-| --------------- | --------------------------------- | ------ | ------------------------------------------------- |
-| SiteHeader      | src/sections/SiteHeader/          | STABLE | Native popover phone menu, skip link, sticky, linkComponent |
-| Hero            | src/sections/Hero/                | STABLE | Split/centered/media-first, display title, note, media |
-| SectionHeader   | src/sections/SectionHeader/       | STABLE | Eyebrow, title, description, side actions         |
-| FeatureList     | src/sections/FeatureList/         | STABLE | Grid/list/cards variants through context          |
-| FeatureItem     | src/sections/FeatureList/components/FeatureItem/ | STABLE | Icon tile, title, text, action |
-| TestimonialList | src/sections/TestimonialList/     | STABLE | Plain/card/featured variants through context      |
-| Testimonial     | src/sections/TestimonialList/components/Testimonial/ | STABLE | Figure, localized quotes, avatar |
-| CallToAction    | src/sections/CallToAction/        | STABLE | Band/split, tone, aside form                      |
-| SiteFooter      | src/sections/SiteFooter/          | STABLE | Columns as labelled navigation, legal line, linkComponent |
+| NAME            | FILE_PATH                                            | STATUS | FEATURES                                                    |
+| --------------- | ---------------------------------------------------- | ------ | ----------------------------------------------------------- |
+| SiteHeader      | src/sections/SiteHeader/                             | STABLE | Native popover phone menu, skip link, sticky, linkComponent |
+| Hero            | src/sections/Hero/                                   | STABLE | Split/centered/media-first, display title, note, media      |
+| SectionHeader   | src/sections/SectionHeader/                          | STABLE | Eyebrow, title, description, side actions                   |
+| FeatureList     | src/sections/FeatureList/                            | STABLE | Grid/list/cards variants through context                    |
+| FeatureItem     | src/sections/FeatureList/components/FeatureItem/     | STABLE | Icon tile, title, text, action                              |
+| TestimonialList | src/sections/TestimonialList/                        | STABLE | Plain/card/featured variants through context                |
+| Testimonial     | src/sections/TestimonialList/components/Testimonial/ | STABLE | Figure, localized quotes, avatar                            |
+| CallToAction    | src/sections/CallToAction/                           | STABLE | Band/split, tone, aside form                                |
+| SiteFooter      | src/sections/SiteFooter/                             | STABLE | Columns as labelled navigation, legal line, linkComponent   |
 
 ### Implemented Templates (2 total)
 
-| NAME         | FILE_PATH                   | STATUS | PURPOSE                                    |
-| ------------ | --------------------------- | ------ | ------------------------------------------ |
+| NAME         | FILE_PATH                   | STATUS | PURPOSE                                                                                                     |
+| ------------ | --------------------------- | ------ | ----------------------------------------------------------------------------------------------------------- |
 | AppTemplate  | src/templates/AppTemplate/  | STABLE | Application shell: sidebar top block and header in one band, headerStart and menu, distinct content surface |
-| FormTemplate | src/templates/FormTemplate/ | STABLE | Responsive field/action layout; consumer owns form validation and submission |
+| FormTemplate | src/templates/FormTemplate/ | STABLE | Responsive field/action layout; consumer owns form validation and submission                                |
 
 ## COMMAND REFERENCE
 
 ### Development Commands
 
-| COMMAND          | PURPOSE                      | BLOCKING |
-| ---------------- | ---------------------------- | -------- |
-| `pnpm install`   | Install all dependencies     | YES      |
-| `pnpm dev`       | Start Vite dev server        | NO       |
-| `pnpm storybook` | Start Storybook on port 6006 | NO       |
-| `pnpm preview`   | Preview production build     | NO       |
-| `pnpm design:generate` | Generate palettes and CSS from DESIGN.md | YES |
-| `pnpm design:check` | Validate documents and check generated artifacts without writing | YES |
-| `pnpm design:watch` | Regenerate when a DESIGN.md changes | NO |
+| COMMAND                | PURPOSE                                                          | BLOCKING |
+| ---------------------- | ---------------------------------------------------------------- | -------- |
+| `pnpm install`         | Install all dependencies                                         | YES      |
+| `pnpm dev`             | Start Vite dev server                                            | NO       |
+| `pnpm storybook`       | Start Storybook on port 6006                                     | NO       |
+| `pnpm preview`         | Preview production build                                         | NO       |
+| `pnpm design:generate` | Generate palettes and CSS from DESIGN.md                         | YES      |
+| `pnpm design:check`    | Validate documents and check generated artifacts without writing | YES      |
+| `pnpm design:watch`    | Regenerate when a DESIGN.md changes                              | NO       |
 
 ### Build Commands
 
@@ -288,22 +288,30 @@ type ComponentType = "type1" | "type2";
 export type ComponentColor = "primary" | "success" | "error";
 
 export type ComponentProps = {
-  label: string;
-  type?: ComponentType;
-  color?: ComponentColor;
-  disabled?: boolean;
-  onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
+  readonly label: string;
+  readonly type?: ComponentType;
+  readonly color?: ComponentColor;
+  readonly disabled?: boolean;
+  readonly items?: readonly string[];
+  readonly onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
+  readonly onSelect?: (selected: string[]) => void;
 };
 ```
+
+Every prop is `readonly`, and arrays the component receives are `readonly T[]`, which
+accepts mutable arrays, `readonly` arrays and `as const` tuples alike. Sort or filter a copy
+(`[...items].sort()`), never the received array. Arrays the component creates and passes to
+a callback stay `T[]` (`onSelect` above), so consumers can pass a state setter such as
+`setSelected`.
 
 #### Component Implementation MUST follow pattern
 
 ```typescript
 // FILE: ComponentName.tsx
 import { useColors } from "../theme";
-import "./ComponentName.styles.css";
-import { ComponentProps } from "./ComponentName.types";
+import type { ComponentProps } from "./ComponentName.types";
 import { utilFunction } from "./ComponentName.utils";
+import "./ComponentName.styles.css";
 
 export const ComponentName = ({
   label,
@@ -329,35 +337,36 @@ including between the categories below. Multiline import declarations are allowe
 
 1. React and external dependencies
 2. Internal components and hooks
-3. CSS files
-4. Type definitions
-5. Local constants from ComponentName.consts.ts
-6. Utility functions
+3. Type definitions, always as `import type`
+4. Local constants from ComponentName.consts.ts
+5. Utility functions
+6. CSS files, with the component's own `.styles.css` last
 
 CORRECT ORDER EXAMPLE:
 
 ```typescript
-import React, { useState } from "react";
-import { FiIcon } from "react-icons/fi";
+import { useState } from "react";
+import { Plus } from "lucide-react";
 import { Button } from "../Button/Button";
 import { useColors } from "../theme";
-import "./Input.styles.css";
-import { InputProps } from "./Input.types";
+import type { InputProps } from "./Input.types";
+import { INPUT_TYPES } from "./Input.consts";
 import { validateInput } from "./Input.utils";
+import "./Input.styles.css";
 ```
 
 ### Naming Rules
 
-| ITEM_TYPE         | PATTERN          | EXAMPLES                     |
-| ----------------- | ---------------- | ---------------------------- |
-| Component files   | PascalCase       | Button.tsx, Modal.tsx        |
-| Constant modules  | ComponentName.consts.ts | Calendar.consts.ts |
-| Component exports | PascalCase       | Button, Modal                |
-| Functions         | camelCase        | handleClick, getData         |
-| Variables         | camelCase        | isLoading, errorMessage      |
-| Constants         | UPPER_SNAKE_CASE | MAX_WIDTH, DEFAULT_COLOR     |
-| CSS classes       | kebab-case       | button-primary, modal-header |
-| Type names        | PascalCase       | ButtonProps, ComponentColor  |
+| ITEM_TYPE         | PATTERN                 | EXAMPLES                     |
+| ----------------- | ----------------------- | ---------------------------- |
+| Component files   | PascalCase              | Button.tsx, Modal.tsx        |
+| Constant modules  | ComponentName.consts.ts | Calendar.consts.ts           |
+| Component exports | PascalCase              | Button, Modal                |
+| Functions         | camelCase               | handleClick, getData         |
+| Variables         | camelCase               | isLoading, errorMessage      |
+| Constants         | UPPER_SNAKE_CASE        | MAX_WIDTH, DEFAULT_COLOR     |
+| CSS classes       | kebab-case              | button-primary, modal-header |
+| Type names        | PascalCase              | ButtonProps, ComponentColor  |
 
 Static module data (arrays, defaults, key maps, selectors and stable configuration
 objects) MUST be declared in `ComponentName.consts.ts`, not inside `.tsx` or
@@ -380,22 +389,26 @@ locale data rather than fixed to the developer's language.
 
 ### CSS Rules
 
-MUST use CSS variables from theme system:
+MUST use CSS variables from theme system. Every visual value is a
+`--<component>-*` token (its value comes from the recipes generated from each
+DESIGN.md) or a shared role token; never a literal such as `8px 16px`. States
+use BEM modifiers, native pseudo-classes or ARIA attributes, never a generic
+class such as `.disabled`:
 
 ```css
 .component-name {
-  background-color: var(--color-primary);
-  border: 1px solid var(--color-border-light);
-  color: var(--color-white);
-  padding: 8px 16px;
+  padding: var(--component-name-padding);
+  border: 1px solid var(--component-name-border-color);
+  background-color: var(--component-name-background);
+  color: var(--component-name-color);
 }
 
-.component-name:hover {
-  background-color: var(--color-primary-light);
+.component-name:hover:not(:disabled, [aria-disabled="true"]) {
+  background-color: var(--component-name-background-hover);
 }
 
-.component-name.disabled {
-  opacity: 0.5;
+.component-name:is(:disabled, [aria-disabled="true"]) {
+  opacity: var(--component-name-disabled-opacity);
   cursor: not-allowed;
 }
 ```
@@ -454,13 +467,13 @@ describe("ComponentName", () => {
 
 ### Test Coverage Targets
 
-| SCOPE         | TARGET      | REQUIREMENT                     |
-| ------------- | ----------- | ------------------------------- |
-| Rendering     | 100%        | Must test all output paths      |
-| Interactions  | 100%        | Must test all event handlers    |
-| Props         | 100%        | Must test all prop combinations |
-| Edge cases    | Required    | disabled, loading, error states |
-| Line coverage | 70% minimum | For each component              |
+| SCOPE         | TARGET      | REQUIREMENT                                                                             |
+| ------------- | ----------- | --------------------------------------------------------------------------------------- |
+| Rendering     | 100%        | Must test all output paths                                                              |
+| Interactions  | 100%        | Must test all event handlers                                                            |
+| Props         | Each prop   | Test every prop that changes output or behavior; not the Cartesian product of all props |
+| Edge cases    | Required    | disabled, loading, error states                                                         |
+| Line coverage | 70% minimum | For each component                                                                      |
 
 ### Test Commands
 
@@ -633,7 +646,7 @@ Storybook
 1. Create .types.ts file for components
 2. Create .styles.css file for components
 3. Create tests for components: one file at the component root, or all files in tests/ when there are multiple
-4. Include descriptive JSDoc comments
+4. Write JSDoc only when it adds what the name and types do not say (a non-obvious why, a constraint consumers must know); no mandatory JSDoc
 5. Use TypeScript strict mode
 6. Test all interactive features
 7. Update documentation
@@ -680,24 +693,23 @@ Each component MUST export a single Story that exposes all props as editable con
 
 For agents needing additional information:
 
-| Question | Source |
-| --- | --- |
-| Start here | [Documentation index](./docs/README.md) |
-| Installation and onboarding | [Getting started](./docs/getting-started/README.md) |
-| Components and public sections | [Component catalog](./docs/components/README.md); individual docs/components/ComponentName.md guides |
-| Public page sections (`neus-ui/sections`) | [Sections](./docs/sections/README.md) |
-| Briefs for the design skill and the pages it produced | [Examples](./docs/examples/README.md) |
-| Application and form layouts | [Templates](./docs/templates/README.md) |
-| Provider, scopes and runtime colors | [ThemeProvider](./docs/design/theme-provider.md) |
-| Per-part classes/styles and CSS cascade | [Customization](./docs/design/customization.md) |
-| Shared CSS variables | [Token reference](./docs/design/tokens.md) |
-| Six visual specifications | [Design systems](./docs/design/systems.md) |
-| Component conventions and commands | [Development](./docs/contributing/development.md) |
-| Validation and coverage | [Testing](./docs/contributing/testing.md) |
-| DESIGN.md schema and generation | [Authoring design systems](./docs/contributing/design-system-authoring.md) |
-| Versioning, changelog and npm releases | [Releasing](./docs/contributing/releasing.md) |
-| Exact props and style destinations | ComponentName.types.ts, ComponentName.tsx and ComponentName.styles.css in the owning family |
-
+| Question                                              | Source                                                                                               |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| Start here                                            | [Documentation index](./docs/README.md)                                                              |
+| Installation and onboarding                           | [Getting started](./docs/getting-started/README.md)                                                  |
+| Components and public sections                        | [Component catalog](./docs/components/README.md); individual docs/components/ComponentName.md guides |
+| Public page sections (`neus-ui/sections`)             | [Sections](./docs/sections/README.md)                                                                |
+| Briefs for the design skill and the pages it produced | [Examples](./docs/examples/README.md)                                                                |
+| Application and form layouts                          | [Templates](./docs/templates/README.md)                                                              |
+| Provider, scopes and runtime colors                   | [ThemeProvider](./docs/design/theme-provider.md)                                                     |
+| Per-part classes/styles and CSS cascade               | [Customization](./docs/design/customization.md)                                                      |
+| Shared CSS variables                                  | [Token reference](./docs/design/tokens.md)                                                           |
+| Six visual specifications                             | [Design systems](./docs/design/systems.md)                                                           |
+| Component conventions and commands                    | [Development](./docs/contributing/development.md)                                                    |
+| Validation and coverage                               | [Testing](./docs/contributing/testing.md)                                                            |
+| DESIGN.md schema and generation                       | [Authoring design systems](./docs/contributing/design-system-authoring.md)                           |
+| Versioning, changelog and npm releases                | [Releasing](./docs/contributing/releasing.md)                                                        |
+| Exact props and style destinations                    | ComponentName.types.ts, ComponentName.tsx and ComponentName.styles.css in the owning family          |
 
 Project guides live in `docs/` as Markdown; the root `README.md` provides the
 overview, `AGENTS.md` defines repository instructions, and visual specifications
@@ -709,6 +721,9 @@ Describe visual identity and usage; keep implementation reports and pending-work
 lists out of these documents. Read the relevant specification before adapting a
 recipe. Edit its YAML and run `pnpm design:generate`; never hand-edit files under
 `src/design-systems/<id>/generated/`. Commit generated artifacts with their source.
+A change to how a component looks starts in these documents, never as literal values in
+component CSS. A general design skill such as `frontend-design` adds criteria to that
+decision; it never supplies the values.
 Run `pnpm design:check` to validate without writing. Neus owns shared foundations
 and complete per-scope resets; sibling systems override those defaults. Preserve
 CSS variable names, runtime var() dependencies, scope isolation and public APIs.
@@ -740,6 +755,13 @@ interactive component catalog separately.
   `uvx --from skills-ref agentskills validate skills/<name>`.
 - Skills must not depend on commands the `neus` CLI does not provide; they read files from
   `node_modules/neus-ui/` and run their own `scripts/`.
+- Keep the kit's skills on visual ground. neus-design decides the system,
+  brand, components, palette, type, spacing, theme and composition. General design skills
+  such as `frontend-design` add criteria only: they never author a brand direction, feed a
+  derived system or override what the active system defines.
+  How consumer code is written (files, names, types, tests, where copy lives) belongs to
+  the project's AGENTS.md or a code-style skill such as neus-react: the skills' code
+  samples show composition, not code conventions.
 - Server rendering is covered by `src/tests/stories.ssr.test.tsx`: every story must render
   with `renderToString` in Node.
 
