@@ -8,6 +8,8 @@ breaking change.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-11
+
 ### Changed
 
 - The neus-design skill says how other skills in the session fit: general design skills such
@@ -101,7 +103,8 @@ First public release on npm.
 - Five reference examples with the pages the design skill produced, on a built-in system
   with a brand and on a derived system.
 
-[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/KazmerMaximiliano/neus-ui/releases/tag/v1.0.0
