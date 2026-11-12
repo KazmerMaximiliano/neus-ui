@@ -72,7 +72,7 @@ reviewer, and keeps the brand question, `neus lint` and the screenshots.
    ladder: props, palette, tokens, part classes, part styles.
 6. **Verify.** Runs `neus lint` and the `neus-audit` skill, looks at the render with `neus shot` (up to
    three rounds of screenshots and fixes), then asks the `neus-reviewer` subagent for an
-   independent review of new pages and flows.
+   independent review of new public pages, products and multi-screen flows.
 
 ## Screenshots: `neus shot`
 

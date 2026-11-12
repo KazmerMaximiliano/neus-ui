@@ -9,7 +9,7 @@ not on its name. `<styles>` below means `paths.styles`.
 | `spa` | Vite + React | One global ThemeProvider in `src/neus/NeusRoot.tsx` | `"neus-ui"` anywhere |
 | `ssr` | Next.js Pages Router, React Router framework mode, TanStack Start | Attributes on `<html>` + `<styles>/neus.theme.css` | `"neus-ui"` anywhere |
 | `rsc` | Next.js App Router | Attributes on `<html>` + `<styles>/neus.theme.css` | `"neus-ui"` anywhere; `"neus-ui/theme"` for data in server code |
-| `islands` | Astro + React | `src/layouts/NeusLayout.astro` + `<styles>/neus.theme.css` | Only inside React components |
+| `islands` | Astro + React | `src/layouts/NeusLayout.astro` + `<styles>/neus.theme.css` | `.astro` files (static, no directive) and React islands; hooks only inside islands |
 
 ## Shared facts
 

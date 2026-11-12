@@ -121,7 +121,7 @@ the primary action label specific ("Continue to billing", not "Next").
 
 ```tsx
 <Modal isOpen={open} onClose={close}>
-  <ModalHeader><h2>Cancel order #1042?</h2></ModalHeader>
+  <ModalHeader>Cancel order #1042?</ModalHeader>
   <ModalContent>The customer is refunded and stock returns to inventory.</ModalContent>
   <ModalFooter>
     <Button label="Keep order" variant="text" onClick={close} />

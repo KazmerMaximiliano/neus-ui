@@ -8,13 +8,13 @@ Composable surface for arbitrary content and actions.
 ## Usage
 
 ```tsx
-import { ThemeProvider, Button, Card, CardHeader, CardContent, CardFooter } from "neus-ui";
+import { ThemeProvider, Button, Card, CardHeader, CardContent, CardFooter, Heading } from "neus-ui";
 import "neus-ui/dist/neus-ui.css";
 
 export const Example = () => {
   return (
     <ThemeProvider designSystem="neus">
-      <Card variant="outlined"><CardHeader><h2>Project</h2></CardHeader><CardContent>Project details</CardContent><CardFooter><Button label="Open" /></CardFooter></Card>
+      <Card variant="outlined"><CardHeader><Heading as="h2" size="sm">Project</Heading></CardHeader><CardContent>Project details</CardContent><CardFooter><Button label="Open" /></CardFooter></Card>
     </ThemeProvider>
   );
 };
@@ -81,7 +81,7 @@ customization APIs.
 Use these props in the usage example above (keep its imports and local state):
 
 ```tsx
-<Card className="example-card" style={{ outlineOffset: 4 }} variant="outlined"><CardHeader><h2>Project</h2></CardHeader><CardContent>Project details</CardContent><CardFooter><Button label="Open" /></CardFooter></Card>
+<Card className="example-card" style={{ outlineOffset: 4 }} variant="outlined"><CardHeader><Heading as="h2" size="sm">Project</Heading></CardHeader><CardContent>Project details</CardContent><CardFooter><Button label="Open" /></CardFooter></Card>
 ```
 
 ```css

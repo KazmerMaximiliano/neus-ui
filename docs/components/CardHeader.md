@@ -8,13 +8,13 @@ Free-form header region for Card composition.
 ## Usage
 
 ```tsx
-import { ThemeProvider, Button, CardHeader } from "neus-ui";
+import { ThemeProvider, Button, CardHeader, Heading } from "neus-ui";
 import "neus-ui/dist/neus-ui.css";
 
 export const Example = () => {
   return (
     <ThemeProvider designSystem="neus">
-      <CardHeader><h2>Project</h2><Button label="Edit" variant="text" /></CardHeader>
+      <CardHeader><Heading as="h2" size="sm">Project</Heading><Button label="Edit" variant="text" /></CardHeader>
     </ThemeProvider>
   );
 };
@@ -62,7 +62,7 @@ internals retain their own customization APIs.
 Use these props in the usage example above (keep its imports and local state):
 
 ```tsx
-<CardHeader className="example-card-header" style={{ outlineOffset: 4 }}><h2>Project</h2><Button label="Edit" variant="text" /></CardHeader>
+<CardHeader className="example-card-header" style={{ outlineOffset: 4 }}><Heading as="h2" size="sm">Project</Heading><Button label="Edit" variant="text" /></CardHeader>
 ```
 
 ```css

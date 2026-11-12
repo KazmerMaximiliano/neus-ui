@@ -14,7 +14,7 @@ import "neus-ui/dist/neus-ui.css";
 export const Example = () => {
   return (
     <ThemeProvider designSystem="neus">
-      <Modal aria-label="Project" isOpen={false}><ModalHeader><h2>Project</h2></ModalHeader></Modal>
+      <Modal aria-label="Project" isOpen={false}><ModalHeader>Project</ModalHeader></Modal>
     </ThemeProvider>
   );
 };
@@ -64,7 +64,7 @@ retain their own customization APIs.
 Use these props in the usage example above (keep its imports and local state):
 
 ```tsx
-<Modal aria-label="Project" isOpen={false}><ModalHeader className="example-modal-header" style={{ outlineOffset: 4 }}><h2>Project</h2></ModalHeader></Modal>
+<Modal aria-label="Project" isOpen={false}><ModalHeader className="example-modal-header" style={{ outlineOffset: 4 }}>Project</ModalHeader></Modal>
 ```
 
 ```css

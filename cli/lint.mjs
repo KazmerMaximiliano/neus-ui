@@ -42,17 +42,23 @@ export const cssVocabulary = (css) => ({
 export const documentedClasses = (markdown) => new Set([...markdown.matchAll(/`([^`\n]+)`/g)]
   .flatMap(([, code]) => [...code.matchAll(/\.([a-zA-Z_][\w-]*)/g)].map((match) => match[1])));
 
+/** Custom properties a file declares: CSS declarations and next/font's `variable: "--x"` option. */
+const declarations = (text) => [
+  ...[...text.matchAll(/["']?(--[\w-]+)["']?\s*:/g)].map((match) => match[1]),
+  ...[...text.matchAll(/\bvariable\s*:\s*["'](--[\w-]+)["']/g)].map((match) => match[1]),
+];
+
 /**
  * Lints files ({ file, text }, paths relative to the project) against the library vocabulary.
- * Pure: everything it needs comes in the arguments.
+ * `context` holds other project files whose declarations count (a next/font variable in the
+ * root layout when only neus.overrides.css is linted). Pure: everything comes in the arguments.
  */
-export const lintFiles = (files, { tokens, classes, documented, allowedImports, rendering }) => {
+export const lintFiles = (files, { tokens, classes, documented, allowedImports, rendering, context = [] }) => {
   const findings = [];
   const samples = [];
   const coverage = {};
   const report = (file, line, severity, rule, message) => findings.push({ file, line, severity, rule, message });
-  const declared = new Set(files.flatMap(({ text }) =>
-    [...text.matchAll(/["']?(--[\w-]+)["']?\s*:/g)].map((match) => match[1])));
+  const declared = new Set([...files, ...context].flatMap(({ text }) => declarations(text)));
   const globalProviders = [];
   const stylesheetImports = [];
 
@@ -192,9 +198,12 @@ export const run = async (argv, root = process.cwd()) => {
     readdirSync(path.join(PACKAGE_ROOT, folder)).filter((file) => file.endsWith(".md"))
       .map((file) => readFileSync(path.join(PACKAGE_ROOT, folder, file), "utf8"))).join("\n");
   const exportsMap = readJson(path.join(PACKAGE_ROOT, "package.json")).exports;
-  const files = targets.flatMap((target) => walk(path.join(root, target)))
+  const read = (target) => walk(path.join(root, target))
     .map((file) => ({ file: toPosix(path.relative(root, file)), text: readFileSync(file, "utf8") }));
+  const files = targets.flatMap(read);
+  const context = positionals.length ? LINT_PATHS.filter((entry) => existsSync(path.join(root, entry))).flatMap(read) : [];
   const result = lintFiles(files, {
+    context,
     ...cssVocabulary(readFileSync(cssFile, "utf8")),
     documented: documentedClasses(docs),
     allowedImports: Object.keys(exportsMap).filter((key) => key !== ".").map((key) => `neus-ui/${key.slice(2)}`),

@@ -8,6 +8,27 @@ breaking change.
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-11-11
+
+### Changed
+
+- The managed `AGENTS.md` block and the `neus-reviewer` subagent ask for a fresh-eyes review
+  after a new public page, product or multi-screen flow (neus-design's full mode), as the
+  skill does, instead of after any new page. Without a spec, the reviewer judges against the
+  request.
+- The neus-design framework rules say that Astro pages render neus components from `.astro`
+  files without a directive, as its page patterns already did. The dialog pattern and the
+  Modal, ModalHeader, Card and CardHeader guides no longer put a raw `<h2>` in the header:
+  ModalHeader takes the title text and CardHeader a `Heading`.
+
+### Fixed
+
+- `neus lint` accepts custom properties declared through `next/font`'s `variable` option,
+  also when only some files are linted, so the font mapping the skill recommends for
+  Next.js no longer reports P0 unknown tokens.
+- `neus shot` uses the dev server when the dev script starts it in the background and exits,
+  as Astro 7 does in agent sessions, instead of asking for `--url`.
+
 ## [1.2.0] - 2026-11-11
 
 ### Changed
@@ -103,7 +124,8 @@ First public release on npm.
 - Five reference examples with the pages the design skill produced, on a built-in system
   with a brand and on a derived system.
 
-[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.0...v1.0.1
