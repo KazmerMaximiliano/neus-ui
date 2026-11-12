@@ -1203,7 +1203,8 @@ x-neus:
       base:
         --site-header-height: 64px
         --site-header-background: var(--color-surface)
-        --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
+        --site-header-sticky-background: var(--color-surface)
+        --site-header-sticky-backdrop-filter: none
         --site-header-border-color: var(--color-border-subtle)
         --site-header-brand-font-family: var(--font-display)
         --site-header-brand-font-size: var(--fs-lg)

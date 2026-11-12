@@ -402,7 +402,10 @@ x-neus:
     media-placeholder: {}
     alert: {}
     avatar: {}
-    sections: {}
+    sections:
+      base:
+        --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
+        --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
 ---
 
 # Vercel

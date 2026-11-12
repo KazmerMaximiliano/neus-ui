@@ -65,6 +65,14 @@ export const Page = () => (
     expect(rules(lint(file, text))).toContain(`P1 ${rule}`);
   });
 
+  it("accepts next/font variables declared in the project, also when only the overrides are linted", () => {
+    const layout = { file: "src/app/layout.tsx", text: `const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });` };
+    const overrides = { file: "src/styles/neus.overrides.css", text: `[data-design-system="neus"] { --font-body: var(--font-manrope), sans-serif; }` };
+    expect(lintFiles([layout, overrides], vocabulary).findings).toEqual([]);
+    expect(lintFiles([overrides], { ...vocabulary, context: [layout] }).findings).toEqual([]);
+    expect(rules(lintFiles([overrides], vocabulary))).toEqual(["P0 unknown-token"]);
+  });
+
   it("allows raw colors in neus.overrides.css, skips neus init's theme files and ignores the copyright sign", () => {
     expect(lint("src/styles/neus.overrides.css", ":root { --font-body: x; color-scheme: light; background: #fff; }").findings).toEqual([]);
     expect(lint("src/styles/neus.theme.css", ":root { --color-primary: #ff0000 !important; }").findings).toEqual([]);

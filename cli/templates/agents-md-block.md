@@ -12,8 +12,9 @@ The UI uses neus-ui on {{SYSTEM}}. The design contract is `neus.config.json`.
 - To design, build or restyle any screen, use the `neus-design` skill; to
   review or audit UI, use `neus-audit` (Claude Code: `/neus-design`,
   `/neus-audit`; Codex: `$neus-design`, `$neus-audit`).
-- After building a new page or a multi-screen flow, delegate a fresh-eyes
-  review to the `neus-reviewer` subagent.
+- After building a new public page, a new product or a multi-screen flow
+  (neus-design's full mode), delegate a fresh-eyes review to the
+  `neus-reviewer` subagent. For any other change, only when the user asks.
 - Any UI change: `npx neus context` and `npx neus docs <Name>` before
   writing, `npx neus lint` after (no P0).
 - System and palette: `npx neus init`. Shared look:

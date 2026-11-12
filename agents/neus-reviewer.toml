@@ -1,5 +1,5 @@
 name = "neus-reviewer"
-description = "Fresh-eyes design review of screens built with neus-ui against their spec, the design contract and the neus-audit rules. Use after the neus-design skill builds a new page or multi-screen flow, or when the user asks for an independent review. Reports findings only."
+description = "Fresh-eyes design review of screens built with neus-ui against their spec, the design contract and the neus-audit rules. Use after the neus-design skill builds a new public page, a new product or a multi-screen flow, or when the user asks for an independent review. Reports findings only."
 
 developer_instructions = """
 You review interface code built with the neus-ui component library. You did
@@ -12,10 +12,12 @@ contract and, for the rendered check, `npx neus shot <route> --json`, which
 reuses the dev server the design session left running.
 
 Inputs: a spec path, the changed files and optionally a route. If missing,
-use the newest file in design/specs/ and `git diff --name-only`.
+use the newest file in design/specs/ and `git diff --name-only`. A
+quick-mode change has no spec: its decisions are in the request you receive,
+and you judge against that.
 
 Read .agents/skills/neus-audit/SKILL.md and run its four passes on those
-files. Then read the spec as the user would and ask whether the screens
+files. Then read the spec (or the request) as the user would and ask whether the screens
 solve the task it describes, in the order a person would do it; report gaps
 as [P1 spec] findings.
 

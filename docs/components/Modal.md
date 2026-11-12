@@ -16,7 +16,7 @@ export const Example = () => {
   const [open, setOpen] = useState(false);
   return (
     <ThemeProvider designSystem="neus">
-      <><Button label="Open dialog" onClick={() => setOpen(true)} /><Modal isOpen={open} onClose={() => setOpen(false)}><ModalHeader><h2>Confirm changes</h2></ModalHeader><ModalContent>Review the changes.</ModalContent><ModalFooter><Button label="Close" onClick={() => setOpen(false)} /></ModalFooter></Modal></>
+      <><Button label="Open dialog" onClick={() => setOpen(true)} /><Modal isOpen={open} onClose={() => setOpen(false)}><ModalHeader>Confirm changes</ModalHeader><ModalContent>Review the changes.</ModalContent><ModalFooter><Button label="Close" onClick={() => setOpen(false)} /></ModalFooter></Modal></>
     </ThemeProvider>
   );
 };
@@ -73,7 +73,7 @@ customization APIs.
 Use these props in the usage example above (keep its imports and local state):
 
 ```tsx
-<><Button label="Open dialog" onClick={() => setOpen(true)} /><Modal className="example-modal" style={{ outlineOffset: 4 }} isOpen={open} onClose={() => setOpen(false)}><ModalHeader><h2>Confirm changes</h2></ModalHeader><ModalContent>Review the changes.</ModalContent><ModalFooter><Button label="Close" onClick={() => setOpen(false)} /></ModalFooter></Modal></>
+<><Button label="Open dialog" onClick={() => setOpen(true)} /><Modal className="example-modal" style={{ outlineOffset: 4 }} isOpen={open} onClose={() => setOpen(false)}><ModalHeader>Confirm changes</ModalHeader><ModalContent>Review the changes.</ModalContent><ModalFooter><Button label="Close" onClick={() => setOpen(false)} /></ModalFooter></Modal></>
 ```
 
 ```css

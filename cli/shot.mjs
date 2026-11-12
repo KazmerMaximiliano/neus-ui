@@ -129,7 +129,9 @@ const devServer = async (root, url, timeoutMs) => {
   const dir = neusDir(root);
   const stateFile = path.join(dir, "dev.json");
   const state = readJson(stateFile);
-  if (state && alive(state.pid) && await responds(state.url)) return { url: state.url, managed: true };
+  if (state && (state.background || alive(state.pid)) && await responds(state.url)) {
+    return { url: state.url, managed: !state.background, background: Boolean(state.background) };
+  }
   if (!readJson(path.join(root, "package.json"))?.scripts?.dev) throw new Error("No dev script in package.json; start the server and pass --url.");
 
   const logFile = path.join(dir, "dev.log");
@@ -144,13 +146,21 @@ const devServer = async (root, url, timeoutMs) => {
   const started = Date.now();
   while (Date.now() - started < timeoutMs) {
     if (child.exitCode !== null || child.signalCode !== null) {
+      // Some dev scripts start the server in the background and exit (Astro 7 in agent sessions).
+      const background = child.exitCode === 0 ? parseDevUrl(readFileSync(logFile, "utf8")) : null;
+      if (background && await responds(background)) {
+        writeFileSync(stateFile, `${JSON.stringify({ url: background, background: true })}\n`);
+        return { url: background, managed: false, background: true };
+      }
       throw new Error(`The dev script exited:\n${logTail(logFile)}\nStart the server yourself and pass --url.`);
     }
     // The default port is probed late: before the log shows a URL it may belong to another project.
     const candidate = parseDevUrl(readFileSync(logFile, "utf8")) ?? (Date.now() - started > PORT_FALLBACK_AFTER_MS ? fallback : null);
     if (candidate && await responds(candidate)) {
-      writeFileSync(stateFile, `${JSON.stringify({ pid: child.pid, url: candidate })}\n`);
-      return { url: candidate, managed: true };
+      await sleep(500); // A script that hands the server to the background exits right after it answers.
+      const background = child.exitCode === 0;
+      writeFileSync(stateFile, `${JSON.stringify(background ? { url: candidate, background } : { pid: child.pid, url: candidate })}\n`);
+      return { url: candidate, managed: !background, background };
     }
     await sleep(250);
   }
@@ -162,8 +172,12 @@ const stopServer = (root) => {
   const stateFile = path.join(root, NEUS_DIR, "dev.json");
   const state = readJson(stateFile);
   if (!state) return "No dev server started by neus shot is running.";
-  killTree(state.pid);
   rmSync(stateFile, { force: true });
+  if (state.background) {
+    return `The dev server at ${state.url} was started in the background by the dev script; ` +
+      "stop it with the framework's own command (Astro: npx astro dev stop).";
+  }
+  killTree(state.pid);
   return `Stopped the dev server at ${state.url}.`;
 };
 
@@ -324,7 +338,10 @@ export const problems = (pages) => pages.flatMap(({ route, width, overflow, clip
   ].filter(Boolean);
 });
 
-const formatReport = ({ url, pages, problems: found }, managed) => {
+const BACKGROUND_NOTE = "The dev script runs the server in the background, so it keeps running after neus shot; " +
+  "stop it with the framework's own command (Astro: npx astro dev stop).";
+
+const formatReport = ({ url, pages, problems: found }, { managed, background }) => {
   const { theme } = pages[0];
   return [
     `Screenshots of ${url}:`,
@@ -337,6 +354,7 @@ const formatReport = ({ url, pages, problems: found }, managed) => {
       ? ["Note: iframes from other origins (maps, video) show blank in full-page shots; Chrome paints them only on screen."]
       : []),
     ...(managed ? ["The dev server keeps running for the next round; stop it with npx neus shot --stop."] : []),
+    ...(background ? [BACKGROUND_NOTE] : []),
   ].join("\n");
 };
 
@@ -389,6 +407,6 @@ export const run = async (argv, root = process.cwd()) => {
     pages: pages.map((page) => ({ ...page, file: toPosix(path.relative(root, page.file)) })),
     problems: problems(pages),
   };
-  process.stdout.write(`${values.json ? JSON.stringify(report, null, 2) : formatReport(report, server.managed)}\n`);
+  process.stdout.write(`${values.json ? JSON.stringify(report, null, 2) : formatReport(report, server)}\n`);
   return 0;
 };

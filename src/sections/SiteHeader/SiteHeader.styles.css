@@ -11,7 +11,7 @@
   position: sticky;
   inset-block-start: 0;
   background: var(--site-header-sticky-background);
-  backdrop-filter: saturate(1.4) blur(12px);
+  backdrop-filter: var(--site-header-sticky-backdrop-filter);
 }
 
 .site-header__inner {
