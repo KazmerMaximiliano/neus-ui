@@ -31,7 +31,8 @@ JavaScript and inside Astro islands: Escape and a click outside close it, and fo
 closes it too. The navigation is a `nav` landmark named by `labels.navigation`; the menu
 button is named by `labels.menu`. An `active` link gets `aria-current="page"`. With
 `skipLinkTarget`, a skip link is the first focusable element and appears on focus. `sticky`
-keeps the bar at the top with a translucent surface. `linkComponent` renders the brand and the
+keeps the bar at the top: opaque in Neus and Neobrutalism, whose specifications rule out
+glass and blur, and translucent with a blur in the other four systems. `linkComponent` renders the brand and the
 links with the host router's link (Next.js `Link` takes `href` directly).
 
 ## Props
@@ -92,7 +93,8 @@ baseline; system and mode overrides can differ. Do not edit generated files.
 | --- | --- | --- |
 | `--site-header-height` | site header height | `64px` |
 | `--site-header-background` | site header background | `var(--color-surface)` |
-| `--site-header-sticky-background` | site header sticky background | `color-mix(in srgb, var(--color-surface) 88%, transparent)` |
+| `--site-header-sticky-background` | site header sticky background | `var(--color-surface)` |
+| `--site-header-sticky-backdrop-filter` | site header sticky backdrop filter | `none` |
 | `--site-header-border-color` | site header border color | `var(--color-border-subtle)` |
 | `--site-header-brand-font-family` | site header brand font family | `var(--font-display)` |
 | `--site-header-brand-font-size` | site header brand font size | `var(--fs-lg)` |

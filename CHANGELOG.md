@@ -8,6 +8,19 @@ breaking change.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-11
+
+### Added
+
+- `--site-header-sticky-backdrop-filter`: the filter behind a `sticky` SiteHeader, now a token
+  of each system instead of a fixed blur.
+
+### Changed
+
+- A `sticky` SiteHeader is opaque with no blur in Neus and Neobrutalism, whose specifications
+  rule out glass and blur. Apple, Carbon, Material and Vercel keep the translucent, blurred
+  bar.
+
 ## [1.2.1] - 2026-11-11
 
 ### Changed
@@ -124,7 +137,8 @@ First public release on npm.
 - Five reference examples with the pages the design skill produced, on a built-in system
   with a brand and on a derived system.
 
-[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.0.1...v1.1.0
