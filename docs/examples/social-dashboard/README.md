@@ -23,7 +23,7 @@ Neus with the brand *Esmeralda analítico*: emerald `#047857` actions, blue for 
 
 AppTemplate shell, KPI cards with per-network bars, stacked daily bars, top posts list.
 
-Set up with `npx neus init --yes --system neus`, then the skill asked for a brand and applied it with `npx neus init --primary … --brand …` and a block of tokens in `src/styles/neus.overrides.css`. Code in [`brand/`](./brand/): `neus.config.json`, `index.html` (fonts), `src/` (the page, `src/neus/` root and theme, `src/styles/neus.overrides.css`) and `design/specs/` when the session wrote a spec.
+Set up with `npx neus-ui init --yes --system neus`, then the skill asked for a brand and applied it with `npx neus-ui init --primary … --brand …` and a block of tokens in `src/styles/neus.overrides.css`. Code in [`brand/`](./brand/): `neus.config.json`, `index.html` (fonts), `src/` (the page, `src/neus/` root and theme, `src/styles/neus.overrides.css`) and `design/specs/` when the session wrote a spec.
 
 ## With a derived system (None mode)
 
@@ -35,4 +35,4 @@ Derived system *Bento tonal* on Neus: emerald actions, blue data accent, green-g
 
 AppTemplate shell with the solid sidebar, line chart with the previous period, top posts and a per-network table.
 
-Set up with `npx neus init --yes --system none`, then the skill derived `design/system/DESIGN.md`, compiled it with `npx neus design build` into `src/styles/neus.system.css` and set the palette with `npx neus init --base … --primary …`. Code in [`derived/`](./derived/): `neus.config.json`, `index.html` (fonts), `design/system/DESIGN.md` (the derived system), `src/styles/neus.system.css` (compiled), `src/` and `design/specs/` when the session wrote a spec.
+Set up with `npx neus-ui init --yes --system none`, then the skill derived `design/system/DESIGN.md`, compiled it with `npx neus-ui design build` into `src/styles/neus.system.css` and set the palette with `npx neus-ui init --base … --primary …`. Code in [`derived/`](./derived/): `neus.config.json`, `index.html` (fonts), `design/system/DESIGN.md` (the derived system), `src/styles/neus.system.css` (compiled), `src/` and `design/specs/` when the session wrote a spec.

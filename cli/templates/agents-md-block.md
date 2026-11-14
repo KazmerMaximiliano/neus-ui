@@ -1,4 +1,4 @@
-<!-- neus-ui:start (managed by `npx neus init`; edit outside these markers) -->
+<!-- neus-ui:start (managed by `npx neus-ui init`; edit outside these markers) -->
 ## Interface with neus-ui
 
 The UI uses neus-ui on {{SYSTEM}}. The design contract is `neus.config.json`.
@@ -15,9 +15,9 @@ The UI uses neus-ui on {{SYSTEM}}. The design contract is `neus.config.json`.
 - After building a new public page, a new product or a multi-screen flow
   (neus-design's full mode), delegate a fresh-eyes review to the
   `neus-reviewer` subagent. For any other change, only when the user asks.
-- Any UI change: `npx neus context` and `npx neus docs <Name>` before
-  writing, `npx neus lint` after (no P0).
-- System and palette: `npx neus init`. Shared look:
+- Any UI change: `npx neus-ui context` and `npx neus-ui docs <Name>` before
+  writing, `npx neus-ui lint` after (no P0).
+- System and palette: `npx neus-ui init`. Shared look:
   `{{STYLES}}/neus.overrides.css`. Feature specs: `design/specs/`.
 - Never edit `node_modules/neus-ui`, copy component source, or write the
   palette variables (`--color-primary*` and similar) by hand.

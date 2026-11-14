@@ -17,7 +17,7 @@ with the affected version, steps to reproduce and the impact you expect.
 You will get a reply within seven days. Once a fix is released, the advisory is published
 with credit to the reporter, unless you ask otherwise.
 
-The `neus` CLI runs locally: `neus init` writes files into your project, and `neus shot` starts
+The `neus-ui` CLI runs locally: `neus-ui init` writes files into your project, and `neus-ui shot` starts
 your `dev` script and opens your pages in an installed browser. Reports about those commands
 writing outside the project, or running something other than the project's own scripts, are
 in scope.

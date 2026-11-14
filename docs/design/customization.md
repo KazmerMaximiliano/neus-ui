@@ -42,7 +42,7 @@ on its ancestor do not automatically cross that reset. Target the nested boundar
 when it should receive the same overrides.
 
 For global changes, target the active system, for example `[data-design-system="neus"]`
-and `[data-design-system="neus"][data-color-scheme="dark"]` (the selectors `npx neus init`
+and `[data-design-system="neus"][data-color-scheme="dark"]` (the selectors `npx neus-ui init`
 writes in `neus.overrides.css`). Without `:root`, the overrides also reach local providers of
 the same system, such as a dark band; `:root[data-design-system="neus"]` limits them to the
 document. Palette variables supplied inline by ThemeProvider need

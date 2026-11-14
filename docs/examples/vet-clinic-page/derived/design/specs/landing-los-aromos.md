@@ -85,7 +85,7 @@ opcional, no puede ser pasada ni domingo.
 ## Customization decisions
 
 - Level 0 (variants): ver component map.
-- Level 1 (palette): `npx neus init --yes --base neus --primary "#2F5D3A" --brand "..."`.
+- Level 1 (palette): `npx neus-ui init --yes --base neus --primary "#2F5D3A" --brand "..."`.
 - Level 2: sistema derivado en `design/system/DESIGN.md` → `src/styles/neus.system.css` (fondo, tinta, fuentes, radios, elevación, botones en caja normal).
 - Level 3/4: ninguno. Los horarios son un `Stack as="ul"` con `Text`; sin CSS propio.
 

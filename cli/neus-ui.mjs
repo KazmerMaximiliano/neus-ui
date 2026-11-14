@@ -2,15 +2,15 @@
 import { COMMANDS } from "./neus.consts.mjs";
 import { PACKAGE_ROOT, readJson } from "./neus.utils.mjs";
 
-const HELP = `Usage: npx neus <command> [options]
+const HELP = `Usage: npx neus-ui <command> [options]
 
 Commands:
 ${Object.entries(COMMANDS).map(([name, { summary }]) => `  ${name.padEnd(8)}${summary}`).join("\n")}
 
-Run npx neus <command> --help for its options; npx neus --version prints the version.`;
+Run npx neus-ui <command> --help for its options; npx neus-ui --version prints the version.`;
 
 const main = async (argv) => {
-  // The first known command wins, so flags may come before it (`neus -y init`).
+  // The first known command wins, so flags may come before it (`neus-ui -y init`).
   const index = argv.findIndex((arg) => Object.hasOwn(COMMANDS, arg));
   if (index === -1 && ["-v", "--version"].includes(argv[0])) {
     process.stdout.write(`${readJson(`${PACKAGE_ROOT}/package.json`).version}\n`);
@@ -27,6 +27,6 @@ const main = async (argv) => {
 main(process.argv.slice(2)).then((code) => {
   process.exitCode = code;
 }, (error) => {
-  process.stderr.write(`neus: ${error.message}\n`);
+  process.stderr.write(`neus-ui: ${error.message}\n`);
   process.exitCode = 1;
 });

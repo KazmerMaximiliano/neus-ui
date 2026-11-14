@@ -3,7 +3,7 @@ import path from "node:path";
 import { parseArgs } from "node:util";
 import { PACKAGE_ROOT, markdownSection } from "./neus.utils.mjs";
 
-const HELP = `Usage: npx neus docs <Name> [--full]
+const HELP = `Usage: npx neus-ui docs <Name> [--full]
 
 Prints the usage, behavior and accessibility, props and anatomy of one component, section
 or template guide. --full prints the whole guide, including its CSS token tables.

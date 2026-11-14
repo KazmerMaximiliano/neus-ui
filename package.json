@@ -58,7 +58,7 @@
     "**/*.css"
   ],
   "bin": {
-    "neus": "cli/neus.mjs"
+    "neus-ui": "cli/neus-ui.mjs"
   },
   "files": [
     "dist",

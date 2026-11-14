@@ -32,7 +32,7 @@ describe("markdownSection", () => {
   });
 });
 
-describe("neus context", () => {
+describe("neus-ui context", () => {
   it.each(SYSTEMS.flatMap((system) => [[system, "app"], [system, "page"]]))("stays under 3000 tokens for %s (%s)", (system, surface) => {
     const text = contextFor(project({ designSystem: system }), surface);
     expect(tokens(text)).toBeLessThan(3000);
@@ -76,12 +76,12 @@ describe("neus context", () => {
     expect(contextFor(project({ derivedSystem: "design/system/DESIGN.md" }))).toContain("None mode: design/system/DESIGN.md does not exist yet");
   });
 
-  it("asks for neus init without a config", () => {
-    expect(() => contextFor(mkdtempSync(path.join(tmpdir(), "neus-context-")))).toThrow("Run npx neus init first.");
+  it("asks for neus-ui init without a config", () => {
+    expect(() => contextFor(mkdtempSync(path.join(tmpdir(), "neus-context-")))).toThrow("Run npx neus-ui init first.");
   });
 });
 
-describe("neus docs", () => {
+describe("neus-ui docs", () => {
   it("lists every component and template guide", () => {
     expect(guideNames()).toEqual(expect.arrayContaining(["Button", "Heading", "Section", "AppTemplate", "FormTemplate"]));
     expect(guideNames()).not.toContain("README");

@@ -75,8 +75,8 @@ neus-ui/
 │   ├── index.ts                 [FILE] Library entry point (`neus-ui`)
 │   ├── sections.ts              [FILE] Sections entry (`neus-ui/sections`)
 │   └── theme.ts                 [FILE] Server-safe entry (`neus-ui/theme`), no React or CSS
-├── cli/                         [DIRECTORY] `neus` CLI (init, shot, context, docs, lint, design, specimen) and the project templates it writes
-├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus init`
+├── cli/                         [DIRECTORY] `neus-ui` CLI (init, shot, context, docs, lint, design, specimen) and the project templates it writes
+├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus-ui init`
 ├── agents/                      [DIRECTORY] neus-reviewer subagent for Claude Code (.md) and Codex (.toml)
 ├── .storybook/                  [DIRECTORY] Storybook configuration
 ├── package.json                 [FILE] Dependencies and scripts
@@ -561,7 +561,7 @@ is done only when all six design systems style it through tokens and the AI desi
 - [ ] Remove its row from BACKLOG.md
 - [ ] Add a row to the "Need → component" table in `skills/neus-design/SKILL.md`
 - [ ] Update `skills/neus-design/references/customization.md` (Level 0), `patterns.md` where it changes a pattern, and the "Already handled" list in `skills/neus-audit/references/neus-rules.md`
-- [ ] Teach `neus lint` the raw element it replaces (`RAW_TO_COMPONENT` or a line check in `cli/lint.mjs`) and add it to `cli/templates/NeusSpecimen.tsx`
+- [ ] Teach `neus-ui lint` the raw element it replaces (`RAW_TO_COMPONENT` or a line check in `cli/lint.mjs`) and add it to `cli/templates/NeusSpecimen.tsx`
 - [ ] Validate both skills with `uvx --from skills-ref agentskills validate skills/<name>`
 
 ## ERROR HANDLING FOR AGENTS
@@ -599,8 +599,8 @@ CHECK: All files have correct exports, no circular imports
 React and ReactDOM are peer dependencies. The build keeps one file per source module,
 leaves every dependency external, adds `"use client"` to modules that import React, and
 loads no fonts. Never add build, Storybook or test tooling to `dependencies`.
-`playwright-core` is an `optionalDependencies` entry used only by `neus shot` at runtime; it
-downloads no browser. `yaml` is a runtime dependency because `neus design build` parses the
+`playwright-core` is an `optionalDependencies` entry used only by `neus-ui shot` at runtime; it
+downloads no browser. `yaml` is a runtime dependency because `neus-ui design build` parses the
 project's derived DESIGN.md with the generator core (`src/design-systems/tooling/design-systems.core.ts`,
 built as the internal `dist/design.js`).
 
@@ -740,20 +740,20 @@ interactive component catalog separately.
 ## AI DESIGN KIT MAINTENANCE
 
 - `skills/`, `agents/` and `cli/templates/` are copied into consumer projects by
-  `npx neus init`; they are product code. Keep them in English and in sync with public
+  `npx neus-ui init`; they are product code. Keep them in English and in sync with public
   props, docs and DESIGN.md files: when a prop, part, token or component changes, update
   `skills/neus-design/references/patterns.md`, `customization.md` and the audit's
   `references/neus-rules.md` (Library section) in the same change.
 - A new component is part of the kit too: a "Need → component" row in `SKILL.md`, its
-  raw-element hint in `neus lint`, a place in the specimen template and its guarantees in the
-  audit's "Already handled" list. `neus context`, `neus docs` and the lint class and token
+  raw-element hint in `neus-ui lint`, a place in the specimen template and its guarantees in the
+  audit's "Already handled" list. `neus-ui context`, `neus-ui docs` and the lint class and token
   checks pick it up from the catalog, the guide and the CSS. See
   [Adding a component](./docs/contributing/adding-a-component.md).
 - Skills follow the Agent Skills specification: `name` equals the directory, only
   `name`, `description`, `license`, `compatibility`, `metadata` and `allowed-tools` in
   frontmatter, references one level deep. Validate with
   `uvx --from skills-ref agentskills validate skills/<name>`.
-- Skills must not depend on commands the `neus` CLI does not provide; they read files from
+- Skills must not depend on commands the `neus-ui` CLI does not provide; they read files from
   `node_modules/neus-ui/` and run their own `scripts/`.
 - Keep the kit's skills on visual ground. neus-design decides the system,
   brand, components, palette, type, spacing, theme and composition. General design skills

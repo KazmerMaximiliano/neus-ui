@@ -12,7 +12,7 @@ A derived system is three things, kept in sync:
 | --- | --- | --- |
 | Specification | `design/system/DESIGN.md` | Identity, tokens, do's and don'ts (Google DESIGN.md format) |
 | Base and palette | `neus.config.json` (`designSystem`, `colors`) | The built-in system it extends and the action colors |
-| Compiled tokens | `<styles>/neus.system.css` | Generated from the DESIGN.md's `x-neus` block by `npx neus design build` |
+| Compiled tokens | `<styles>/neus.system.css` | Generated from the DESIGN.md's `x-neus` block by `npx neus-ui design build` |
 
 ## 1. Read the brief as traits
 
@@ -71,7 +71,7 @@ Shapes, Components, Do's and Don'ts.
 - The derived system must differ from its base in palette **and**
   typography **and** at least one of shape scale, elevation style or
   density. If it only changes the primary color, it is not a new system:
-  keep the base and change the palette with `npx neus init`.
+  keep the base and change the palette with `npx neus-ui init`.
 - Do's and Don'ts list which taste-rule devices this system allows.
 - Fonts must be loadable: an open license or the project's own files.
 
@@ -85,7 +85,7 @@ Fix every error. Warnings are acceptable when you can say why.
 
 ## 6. Translate to the project
 
-1. Base and palette: `npx neus init --yes --base <base> --primary "#…"` (also
+1. Base and palette: `npx neus-ui init --yes --base <base> --primary "#…"` (also
    `--success`, `--error`, `--info`, `--warning` when the direction needs
    them). It keeps None mode, records the base and regenerates the palette
    file. Never write palette variables anywhere else.
@@ -117,25 +117,25 @@ Fix every error. Warnings are acceptable when you can say why.
            --button-label-transform: none
    ```
 
-3. Compile it: `npx neus design build`. It validates the document (known
+3. Compile it: `npx neus-ui design build`. It validates the document (known
    tokens only, no palette, scheme-dependent tokens in light and dark) and
    writes `<styles>/neus.system.css`, scoped to the base system. Fix every
    error it reports in the DESIGN.md, never in the generated file, and run it
    again after every change to the document.
 4. Wire it once: import `neus.system.css` after `neus-ui/dist/neus-ui.css`
    and before `neus.theme.css` and `neus.overrides.css` (frameworks.md);
-   `neus init` printed the exact line. `neus.overrides.css` stays for
+   `neus-ui init` printed the exact line. `neus.overrides.css` stays for
    project tweaks that are not part of the system.
 5. Fonts: load the new faces as frameworks.md describes.
 
 ## 7. Show and iterate
 
-Run `npx neus specimen`: it writes a page with the type scale, the palette and
+Run `npx neus-ui specimen`: it writes a page with the type scale, the palette and
 surfaces, every button variant beside a field of each size, fields with hints
 and errors, alerts, cards, avatars and the section tones, in light and dark.
-Then run `npx neus shot <route it printed>`, open the screenshots and fix
+Then run `npx neus-ui shot <route it printed>`, open the screenshots and fix
 contrast, overflow and fonts that did not load in the DESIGN.md, then
-`npx neus design build` again. The specimen shows many solid buttons on
+`npx neus-ui design build` again. The specimen shows many solid buttons on
 purpose: ignore that one count there. Ask the user to open it, iterate until
 they approve, record the system in the feature spec and move on to screens.
 The specimen files are generated; delete them before delivery if the user

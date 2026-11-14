@@ -21,11 +21,11 @@ AI design kit.
 | Recipe family | `RECIPE_NAMES`, `ADAPTED_COMPONENTS` | By hand |
 | Tests | Unit, browser suite across six systems, server rendering | By hand (SSR finds the story automatically) |
 | Guide and catalog | `docs/components/Slider.md`, `docs/components/README.md` | By hand |
-| `neus context`, `neus docs` | Read the catalog and the guide | Automatic |
-| `neus lint` documented classes, token checks | Read the guides and the library CSS | Automatic |
-| `neus design build` (None mode) | Validates against the published CSS | Automatic |
+| `neus-ui context`, `neus-ui docs` | Read the catalog and the guide | Automatic |
+| `neus-ui lint` documented classes, token checks | Read the guides and the library CSS | Automatic |
+| `neus-ui design build` (None mode) | Validates against the published CSS | Automatic |
 | Skills | `SKILL.md` need table, `customization.md`, `patterns.md`, audit `neus-rules.md` | By hand |
-| `neus lint` raw-element hint | `cli/neus.consts.mjs` or `cli/lint.mjs` | By hand, when a raw element is replaced |
+| `neus-ui lint` raw-element hint | `cli/neus.consts.mjs` or `cli/lint.mjs` | By hand, when a raw element is replaced |
 | Specimen | `cli/templates/NeusSpecimen.tsx` | By hand |
 | Inventory and counts | `AGENTS.md`, `README.md`, `docs/README.md`, introduction, `BACKLOG.md` | By hand |
 
@@ -164,24 +164,24 @@ describe.each(["light", "dark"] as const)("Slider in %s mode", (scheme) => {
 - `docs/components/Slider.md`, with the same sections as the other guides: Usage, Behavior
   and accessibility, Props, Anatomy and per-part customization (every part's class, class prop
   and style prop), CSS token reference (built from the generated Neus recipe), Storybook and
-  related guides. `npx neus docs Slider` prints the first four sections to agents, and
-  `neus lint` treats the classes in the anatomy table as public: a project stylesheet that
+  related guides. `npx neus-ui docs Slider` prints the first four sections to agents, and
+  `neus-ui lint` treats the classes in the anatomy table as public: a project stylesheet that
   targets a class missing from the table gets a `private-class` P0.
 - A row in the right table of `docs/components/README.md`: the name linked to its guide and
-  its purpose in one sentence. `npx neus context` builds the agents' catalog from these rows.
+  its purpose in one sentence. `npx neus-ui context` builds the agents' catalog from these rows.
 - Update the counts: the component count in `README.md`, `docs/README.md`,
   `docs/getting-started/introduction.md` and `docs/components/README.md`, plus the inventory
   table and the count in `AGENTS.md`. Remove the row from `BACKLOG.md`.
 
 ## 5. Teach it to the AI design kit
 
-`skills/`, `agents/` and `cli/templates/` are copied into every project by `npx neus init`.
+`skills/`, `agents/` and `cli/templates/` are copied into every project by `npx neus-ui init`.
 Update them in the same change as the component:
 
 - **`skills/neus-design/SKILL.md`, "Need → component" table.** Add the need in plain words
   so the agent finds it before writing markup:
   `| One value in a range (rooms, hours, volume) | Slider (min, max, step; label and visible value) |`.
-  `neus context` prints this table to the agent.
+  `neus-ui context` prints this table to the agent.
 - **`skills/neus-design/references/customization.md`, Level 0.** Add the props and variants
   that change its look, so the agent tries props before tokens.
 - **`skills/neus-design/references/patterns.md`.** Use it in the skeleton where it belongs (a
@@ -190,17 +190,17 @@ Update them in the same change as the component:
   components".** Say what the component guarantees (native range semantics, the label wired
   to the input, the focus ring), so the audit does not flag it as missing on the component
   and does flag it on hand-written markup.
-- **`neus lint`.** When the component replaces a raw element, teach the raw-element rule its
+- **`neus-ui lint`.** When the component replaces a raw element, teach the raw-element rule its
   name. Tags map in `RAW_TO_COMPONENT` (`cli/neus.consts.mjs`); an attribute variant such as
   `<input type="range">` needs a line check in `cli/lint.mjs`, next to the
   `role="alert"` check, with a test in `cli/lint.test.mjs`.
-- **`cli/templates/NeusSpecimen.tsx`.** Add it to the page `npx neus specimen` writes, so
+- **`cli/templates/NeusSpecimen.tsx`.** Add it to the page `npx neus-ui specimen` writes, so
   a derived system shows it in light and dark before any screen is built.
 - **`skills/neus-design/references/frameworks.md`.** Only when it needs something
   framework-specific, such as hydration in an Astro island because it holds state.
 
-No change is needed for `neus context`, `neus docs`, `neus lint`'s token and class checks or
-`neus design build`. They read the catalog, the guides and the published CSS. A derived
+No change is needed for `neus-ui context`, `neus-ui docs`, `neus-ui lint`'s token and class checks or
+`neus-ui design build`. They read the catalog, the guides and the published CSS. A derived
 system may override the new `slider` family in its `x-neus.recipes`; families are optional
 there.
 
@@ -221,10 +221,10 @@ uvx --from skills-ref agentskills validate skills/neus-audit
 ```
 
 Then try it the way a consumer would: run `pnpm build && pnpm pack`, install the tarball in
-a fresh Vite project and run `npx neus init`. Ask `/neus-design` for a screen that needs the
+a fresh Vite project and run `npx neus-ui init`. Ask `/neus-design` for a screen that needs the
 component, for example the energy calculator in the [examples](../examples/README.md).
 Check that the agent picks the Slider instead of writing `<input type="range">`, that
-`npx neus lint` reports no P0, and that `npx neus shot /` shows it correctly at 1440 and
+`npx neus-ui lint` reports no P0, and that `npx neus-ui shot /` shows it correctly at 1440 and
 390 px.
 
 ## Checklist

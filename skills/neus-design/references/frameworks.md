@@ -1,7 +1,7 @@
 # Framework rules
 
 Read `framework`, `rendering` and `paths.styles` in `neus.config.json`.
-`neus init` detects them; the rules below depend on how the host renders,
+`neus-ui init` detects them; the rules below depend on how the host renders,
 not on its name. `<styles>` below means `paths.styles`.
 
 | `rendering` | Hosts | Theme owner | Library import |
@@ -24,13 +24,13 @@ not on its name. `<styles>` below means `paths.styles`.
   variables on that boundary. Only `useTheme()` and `useColors()` need a
   ThemeProvider, and they throw without one.
 - The library CSS carries every built-in palette. `neus.theme.css` (written by
-  `neus init`) adds the project's own colors; it is empty when the project
+  `neus-ui init`) adds the project's own colors; it is empty when the project
   keeps the system's colors. Never write palette variables by hand.
 - Stylesheet order: `neus-ui/dist/neus-ui.css`, `neus.system.css` (None mode
-  only, compiled by `npx neus design build`), `neus.theme.css`,
+  only, compiled by `npx neus-ui design build`), `neus.theme.css`,
   `neus.overrides.css`, then feature styles.
 - Fonts: the library loads none. Load the active system's faces once in the
-  root document (the `<link>` that `neus init` printed, `next/font`, or
+  root document (the `<link>` that `neus-ui init` printed, `next/font`, or
   Fontsource) and, when the family name differs, point `--font-body`,
   `--font-display` and `--font-mono` at it in `neus.overrides.css`.
 - Pass `title` to AppTemplate explicitly; its default is "NEUS UI".

@@ -237,5 +237,5 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
   the context prints a `pixabayKey` expression).
 - Testimonials the brief asks for are marked `SAMPLE:` and listed in the
   delivery; prices, trials and metrics appear only when the brief gives them.
-- Run `npx neus lint` and the visual loop (`npx neus shot /`) after the first
+- Run `npx neus-ui lint` and the visual loop (`npx neus-ui shot /`) after the first
   render.

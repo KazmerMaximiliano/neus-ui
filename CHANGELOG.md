@@ -8,6 +8,14 @@ breaking change.
 
 ## [Unreleased]
 
+### Removed
+
+- **Breaking:** the CLI's `neus` bin is now `neus-ui`, matching the package name, so
+  `npx neus-ui <command>` also works where neus-ui is not installed yet. The commands and
+  flags are unchanged. To migrate, replace `npx neus` with `npx neus-ui` in scripts and docs,
+  then run `npx neus-ui init` once: it rewrites the skills, the subagents and the `AGENTS.md`
+  block, whose instructions still call `npx neus`.
+
 ## [1.3.0] - 2026-11-11
 
 ### Added

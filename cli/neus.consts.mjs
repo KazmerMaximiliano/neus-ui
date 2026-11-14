@@ -27,7 +27,7 @@ export const SYSTEM_FONTS = {
   vercel: "family=Geist:wght@400;500;600;700&family=Geist+Mono",
 };
 
-// Subcommands of the `neus` bin; each module exports run(argv, root).
+// Subcommands of the `neus-ui` bin; each module exports run(argv, root).
 export const COMMANDS = {
   init: { module: "./init.mjs", summary: "Set up neus-ui, its theme files, skills and subagents" },
   shot: { module: "./shot.mjs", summary: "Screenshot routes of the app and report basic problems" },
@@ -38,12 +38,12 @@ export const COMMANDS = {
   specimen: { module: "./specimen.mjs", summary: "Write a page that shows every token and component of the active system" },
 };
 
-// neus design build: the compiled derived system and the root files that should import it.
+// neus-ui design build: the compiled derived system and the root files that should import it.
 export const SYSTEM_CSS_FILE = "neus.system.css";
 export const SYSTEM_CSS_ENTRIES = ["src/main.tsx", "src/main.jsx", "app/layout.tsx", "src/app/layout.tsx", "pages/_app.tsx",
   "src/pages/_app.tsx", "app/root.tsx", "src/routes/__root.tsx", "src/layouts/NeusLayout.astro"];
 
-// neus shot: working folder (self-ignored), viewports and problem thresholds.
+// neus-ui shot: working folder (self-ignored), viewports and problem thresholds.
 export const NEUS_DIR = ".neus";
 export const SHOT_WIDTHS = "1440,390";
 export const SHOT_TIMEOUT_S = "60";
@@ -66,7 +66,7 @@ export const SYSTEM_FONT_FAMILIES = ["serif", "sans-serif", "monospace", "cursiv
   "ui-serif", "ui-monospace", "ui-rounded", "-apple-system", "BlinkMacSystemFont", "emoji", "math", "fangsong",
   "SF Pro Display", "SF Pro Text", "Segoe UI"];
 
-// neus lint: what it reads by default and which raw elements a neus component replaces.
+// neus-ui lint: what it reads by default and which raw elements a neus component replaces.
 export const LINT_PATHS = ["src", "app", "pages", "components"];
 export const LINT_IGNORED_DIRS = ["node_modules", "dist", "build", ".next", ".astro", ".neus", "generated", "coverage"];
 export const LINT_EXTENSIONS = [".tsx", ".jsx", ".ts", ".js", ".mjs", ".css", ".astro"];
