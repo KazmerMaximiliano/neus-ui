@@ -5,11 +5,11 @@ export type ContainerElement = "div" | "section" | "header" | "footer" | "main";
 export type ContainerSize = "sm" | "md" | "lg" | "xl" | "full";
 
 export type ContainerProps<C extends ContainerElement = "div"> = ComponentPropsWithRef<NoInfer<C>> & {
-  as?: C;
+  readonly as?: C;
   /** Maximum width, from `--container-<size>-max-width`; full has none. */
-  size?: ContainerSize;
+  readonly size?: ContainerSize;
   /** Responsive side padding from `--container-gutter`. */
-  gutter?: boolean;
+  readonly gutter?: boolean;
 };
 
-export type ContainerStoryArgs = Omit<ContainerProps, "as"> & { as: ContainerElement; designSystem: DesignSystemId };
+export type ContainerStoryArgs = Omit<ContainerProps, "as"> & { readonly as: ContainerElement; readonly designSystem: DesignSystemId };

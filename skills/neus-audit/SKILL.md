@@ -4,7 +4,7 @@ description: Audit interface code built with neus-ui for accessibility, the Verc
 license: Apache-2.0
 metadata:
   source: neus-ui
-  managed-by: "neus init (rewritten on every run; put project rules in AGENTS.md)"
+  managed-by: "neus-ui init (rewritten on every run; put project rules in AGENTS.md)"
 ---
 
 # Neus audit
@@ -21,7 +21,7 @@ Run all four, in order. Record findings as you go; deduplicate at the end.
 ### 1. Deterministic checks
 
 - Types: `npx tsc --noEmit`; in Astro, `npx astro check`.
-- `npx neus lint <files> --json` over the audited files, read with
+- `npx neus-ui lint <files> --json` over the audited files, read with
   [references/neus-rules.md](references/neus-rules.md). Every hit is a
   candidate: confirm it by reading the line before you report it.
 
@@ -62,7 +62,7 @@ When the user gave a route, or the spec names one, run from the project
 root:
 
 ```sh
-npx neus shot <route> --widths 1440,768,390 --json
+npx neus-ui shot <route> --widths 1440,768,390 --json
 ```
 
 It reuses the dev server a previous run left, or starts the project's
@@ -101,7 +101,7 @@ src/views/OrdersPage/OrdersPage.tsx:88 [P1 taste] four KPI tiles with invented d
 
 ## src/styles/neus.overrides.css
 
-src/styles/neus.overrides.css:12 [P0 neus] --color-primary written by hand; use `npx neus init --primary`
+src/styles/neus.overrides.css:12 [P0 neus] --color-primary written by hand; use `npx neus-ui init --primary`
 
 ## src/app/orders/page.tsx
 

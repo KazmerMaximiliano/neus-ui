@@ -1,10 +1,10 @@
-import { ChevronDown } from "lucide-react";
 import { useId, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { usePopover } from "../../hooks/usePopover";
 import { SelectListbox } from "./components/SelectListbox";
+import type { SelectProps } from "./Select.types";
 import "../../css/field.css";
 import "./Select.styles.css";
-import { SelectProps } from "./Select.types";
 
 export const Select = ({
   placeholderClassName,

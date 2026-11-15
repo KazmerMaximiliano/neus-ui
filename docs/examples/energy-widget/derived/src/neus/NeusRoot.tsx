@@ -1,6 +1,6 @@
-// Created by `npx neus init`; this file is yours. Wrap the app once:
+// Created by `npx neus-ui init`; this file is yours. Wrap the app once:
 //   createRoot(el).render(<NeusRoot><App /></NeusRoot>);
-// The theme values come from ./neus.theme.ts, which `npx neus init` rewrites.
+// The theme values come from ./neus.theme.ts, which `npx neus-ui init` rewrites.
 import type { ReactNode } from "react";
 import { ThemeProvider } from "neus-ui";
 import { NEUS_THEME } from "./neus.theme";

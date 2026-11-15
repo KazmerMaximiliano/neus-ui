@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../components/Button";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { SiteHeader as SiteHeaderComponent } from "./SiteHeader";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { SiteHeaderStoryArgs } from "./SiteHeader.types";
 
 const PART = (part: string) => ({ control: "text" as const, description: `Additional classes on the ${part}` });

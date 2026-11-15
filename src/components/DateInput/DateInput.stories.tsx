@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { DateInput as DateInputComponent } from "./DateInput";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { DateInputStoryArgs } from "./DateInput.types";
 
 const meta: Meta<DateInputStoryArgs> = {
@@ -194,9 +194,7 @@ const meta: Meta<DateInputStoryArgs> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const DateInput: Story = {
+export const DateInput: StoryObj<DateInputStoryArgs> = {
   args: {
     placeholderClassName: undefined,
     placeholderStyle: undefined,

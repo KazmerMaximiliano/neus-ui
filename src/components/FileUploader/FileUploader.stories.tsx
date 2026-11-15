@@ -1,9 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { FileUploader as FileUploaderComponent } from "./FileUploader";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { FileUploaderStoryArgs } from "./FileUploader.types";
-import { FileType } from "./FileUploader.types";
+import { FILE_ACCEPT_PATTERNS } from "./FileUploader.consts";
+import "./FileUploader.stories.css";
 
 const meta: Meta<FileUploaderStoryArgs> = {
   title: "Base/FileUploader",
@@ -157,7 +158,7 @@ const meta: Meta<FileUploaderStoryArgs> = {
     },
     allowedTypes: {
       control: "multi-select",
-      options: Object.values(FileType),
+      options: Object.values(FILE_ACCEPT_PATTERNS),
       description: "Accepted file types",
     },
     maxWeight: {
@@ -240,11 +241,11 @@ export const FileUploader: StoryObj<FileUploaderStoryArgs> = {
     uploadTextStyle: undefined,
     designSystem: "neus",
     allowedTypes: [
-      FileType.JPG,
-      FileType.PNG,
-      FileType.SVG,
-      FileType.PDF,
-      FileType.DOC,
+      FILE_ACCEPT_PATTERNS.JPG,
+      FILE_ACCEPT_PATTERNS.PNG,
+      FILE_ACCEPT_PATTERNS.SVG,
+      FILE_ACCEPT_PATTERNS.PDF,
+      FILE_ACCEPT_PATTERNS.DOC,
     ],
     maxWeight: 5 * 1024 * 1024,
     multiple: false,
@@ -259,7 +260,7 @@ export const FileUploader: StoryObj<FileUploaderStoryArgs> = {
   },
   render: ({ designSystem, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>
-      <div style={{ width: 420 }}>
+      <div className="file-uploader-story">
         <FileUploaderComponent {...args} />
       </div>
     </ThemeProvider>

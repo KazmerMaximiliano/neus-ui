@@ -4,24 +4,24 @@ import type { TestimonialVariant } from "../../TestimonialList.types";
 
 export type TestimonialProps = {
   /** The words, without quotation marks: the component adds them in the page's language. */
-  quote: ReactNode;
-  name: ReactNode;
+  readonly quote: ReactNode;
+  readonly name: ReactNode;
   /** Role, company or relation, such as "Owner of Toto, 6". */
-  role?: ReactNode;
+  readonly role?: ReactNode;
   /** An Avatar with alt="" (the name is written beside it). */
-  avatar?: ReactNode;
+  readonly avatar?: ReactNode;
   /** Variant outside a TestimonialList; inside one, the list decides. */
-  variant?: TestimonialVariant;
-  className?: string;
-  style?: CSSProperties;
-  quoteClassName?: string;
-  quoteStyle?: CSSProperties;
-  captionClassName?: string;
-  captionStyle?: CSSProperties;
-  nameClassName?: string;
-  nameStyle?: CSSProperties;
-  roleClassName?: string;
-  roleStyle?: CSSProperties;
+  readonly variant?: TestimonialVariant;
+  readonly className?: string;
+  readonly style?: CSSProperties;
+  readonly quoteClassName?: string;
+  readonly quoteStyle?: CSSProperties;
+  readonly captionClassName?: string;
+  readonly captionStyle?: CSSProperties;
+  readonly nameClassName?: string;
+  readonly nameStyle?: CSSProperties;
+  readonly roleClassName?: string;
+  readonly roleStyle?: CSSProperties;
 };
 
-export type TestimonialStoryArgs = TestimonialProps & { designSystem: DesignSystemId };
+export type TestimonialStoryArgs = TestimonialProps & { readonly designSystem: DesignSystemId };

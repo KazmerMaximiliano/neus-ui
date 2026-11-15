@@ -8,6 +8,36 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-11-15
+
+The CLI is now `npx neus-ui`; see "Removed" for the one-step migration. Components, props,
+tokens and package entries are unchanged apart from the stricter types under "Changed".
+
+### Added
+
+- In a terminal, every `neus-ui` command opens with a short animated NEUS banner with `/ui`
+  beside it, followed by the version. Pipes, agents and `--json` get the output alone, as
+  before. The `init` prompts now open with "Set up this project".
+
+### Changed
+
+- Props types are now `readonly`, including the arrays and data a component receives
+  (`options: readonly SelectOption[]`, `SidebarItem`, `CalendarEvent`), so TypeScript reports
+  code that mutates them. Mutable arrays, `readonly` arrays and `as const` tuples are all
+  accepted, and callbacks still receive mutable arrays.
+- **Breaking (types only):** `FileType` is no longer an `enum`: it is an object of the same
+  values plus a union type of the same name, so `FileType.PNG` and `FileType[]` keep working
+  and plain strings such as `".png"` are now accepted. A member can no longer be used as a
+  type: replace `FileType.PNG` in a type position with `typeof FileType.PNG` or `".png"`.
+
+### Removed
+
+- **Breaking:** the CLI's `neus` bin is now `neus-ui`, matching the package name, so
+  `npx neus-ui <command>` also works where neus-ui is not installed yet. The commands and
+  flags are unchanged. To migrate, replace `npx neus` with `npx neus-ui` in scripts and docs,
+  then run `npx neus-ui init` once: it rewrites the skills, the subagents and the `AGENTS.md`
+  block, whose instructions still call `npx neus`.
+
 ## [1.3.0] - 2026-11-11
 
 ### Added
@@ -137,7 +167,8 @@ First public release on npm.
 - Five reference examples with the pages the design skill produced, on a built-in system
   with a brand and on a derived system.
 
-[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.3.0...v2.0.0
 [1.3.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.1.0...v1.2.0

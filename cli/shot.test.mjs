@@ -7,7 +7,7 @@ import { browserCandidates, findBrowser, packageManager, parseDevUrl, problems, 
 
 const tempDir = () => mkdtempSync(path.join(tmpdir(), "neus-shot-"));
 
-describe("neus shot helpers", () => {
+describe("neus-ui shot helpers", () => {
   it("names screenshots after the route", () => {
     expect(routeSlug("/")).toBe("index");
     expect(routeSlug("/pricing/")).toBe("pricing");
@@ -60,8 +60,8 @@ describe("neus shot helpers", () => {
 const playwright = await import("playwright-core").catch(() => null);
 const executablePath = playwright && findBrowser(undefined, playwright.chromium);
 
-// Runs where a browser is installed; skipped elsewhere, like neus shot itself exits with 2.
-describe.skipIf(!executablePath)("neus shot in a browser", () => {
+// Runs where a browser is installed; skipped elsewhere, like neus-ui shot itself exits with 2.
+describe.skipIf(!executablePath)("neus-ui shot in a browser", () => {
   const page = `<!doctype html>
 <html data-design-system="neus" data-color-scheme="light" style="--color-primary: #283593">
 <head><style>

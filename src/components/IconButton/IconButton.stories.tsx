@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { Pencil } from "lucide-react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { IconButton as IconButtonComponent } from "./IconButton";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { IconButtonStoryArgs } from "./IconButton.types";
 
 const meta: Meta<IconButtonStoryArgs> = {

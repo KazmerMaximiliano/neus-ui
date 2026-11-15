@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { CalendarClock, MessageSquareText, SlidersHorizontal } from "lucide-react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { FeatureItem } from "./components/FeatureItem/FeatureItem";
+import { FeatureItem } from "./components/FeatureItem";
 import { FeatureList as FeatureListComponent } from "./FeatureList";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { FeatureListStoryArgs } from "./FeatureList.types";
 
 const meta: Meta<FeatureListStoryArgs> = {

@@ -1,24 +1,20 @@
-import { composeStories } from "@storybook/react";
+import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createRef } from "react";
 import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
 import { DESIGN_SYSTEMS } from "../../design-systems";
-import type {
-  CardContentProps,
-  CardFooterProps,
-  CardHeaderProps,
-  CardProps,
-} from "../../index";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardMedia,
-} from "../../index";
 import { ThemeProvider } from "../../providers";
+import { Card } from "./Card";
+import { CardContent } from "./components/CardContent";
+import { CardFooter } from "./components/CardFooter";
+import { CardHeader } from "./components/CardHeader";
+import { CardMedia } from "./components/CardMedia";
 import * as stories from "./Card.stories";
+import type { CardContentProps } from "./components/CardContent";
+import type { CardFooterProps } from "./components/CardFooter";
+import type { CardHeaderProps } from "./components/CardHeader";
+import type { CardProps } from "./Card.types";
 
 afterEach(cleanup);
 

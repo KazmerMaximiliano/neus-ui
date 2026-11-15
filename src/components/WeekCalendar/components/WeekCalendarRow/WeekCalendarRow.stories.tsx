@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../../../design-systems";
 import { ThemeProvider } from "../../../../providers";
 import { WeekCalendarRow as WeekCalendarRowComponent } from "./WeekCalendarRow";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { WeekCalendarRowStoryArgs } from "./WeekCalendarRow.types";
 
 const days = Array.from(

@@ -1,12 +1,12 @@
-import { composeStories } from "@storybook/react";
-import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
-import type { MediaPlaceholderProps } from "../../index";
-import { MediaPlaceholder } from "../../index";
-import type { PixabayPhoto } from "../../services/pixabay";
 import { searchPixabayPhoto } from "../../services/pixabay";
+import { MediaPlaceholder } from "./MediaPlaceholder";
 import * as stories from "./MediaPlaceholder.stories";
+import type { MediaPlaceholderProps } from "./MediaPlaceholder.types";
+import type { PixabayPhoto } from "../../services/pixabay";
 
 vi.mock("../../services/pixabay", () => ({ searchPixabayPhoto: vi.fn() }));
 

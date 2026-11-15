@@ -5,15 +5,15 @@ type BadgeVariant = "solid" | "dot";
 export type BadgeColor = "primary" | "success" | "error" | "info" | "neutral";
 
 export type BadgeProps = {
-  className?: string;
-  dotClassName?: string;
-  label: string;
-  variant?: BadgeVariant;
-  color?: BadgeColor;
-  badgeStyle?: CSSProperties;
-  dotStyle?: CSSProperties;
+  readonly className?: string;
+  readonly dotClassName?: string;
+  readonly label: string;
+  readonly variant?: BadgeVariant;
+  readonly color?: BadgeColor;
+  readonly badgeStyle?: CSSProperties;
+  readonly dotStyle?: CSSProperties;
 };
 
 export type BadgeStoryArgs = BadgeProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };

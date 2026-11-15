@@ -1,13 +1,11 @@
-import { ChevronDown, ChevronUp } from "lucide-react";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { DayPicker, type DateRange } from "react-day-picker";
-import "react-day-picker/style.css";
 import {
   CalendarCaptionContext,
   OpenMonthViewContext,
 } from "./CalendarContext";
 import { CaptionButton } from "./components/CaptionButton";
-import "./Calendar.styles.css";
 import type {
   CalendarPickerView,
   CalendarProps,
@@ -18,6 +16,8 @@ import {
   YEAR_RANGE_PAST_OFFSET,
 } from "./Calendar.consts";
 import { getCalendarLocalization, serializeValue } from "./Calendar.utils";
+import "react-day-picker/style.css";
+import "./Calendar.styles.css";
 
 export const Calendar = (props: CalendarProps) => {
   const {
@@ -46,9 +46,8 @@ export const Calendar = (props: CalendarProps) => {
   const errorId = useId();
   const isControlled = Object.prototype.hasOwnProperty.call(props, "value");
   const initialValue = isControlled ? value : defaultValue;
-  const [selectedDate, setSelectedDate] = useState<
-    Date | DateRange | Date[] | undefined
-  >(initialValue);
+  const [selectedDate, setSelectedDate] =
+    useState<CalendarSelection>(initialValue);
 
   const currentYear = new Date().getFullYear();
 
@@ -89,6 +88,12 @@ export const Calendar = (props: CalendarProps) => {
           ? candidate
           : undefined;
 
+  // DayPicker types `selected` as a mutable array: copy the readonly value once per change.
+  const selectedDates = useMemo<Date[] | undefined>(
+    () => (Array.isArray(currentValue) ? [...currentValue] : undefined),
+    [currentValue],
+  );
+
   const dayPickerProps =
     props.mode === "range"
       ? {
@@ -100,7 +105,7 @@ export const Calendar = (props: CalendarProps) => {
       : props.mode === "multiple"
         ? {
           mode: "multiple" as const,
-          selected: currentValue as Date[] | undefined,
+          selected: selectedDates,
           required,
           onSelect: (v: Date[] | undefined) => handleSelect(v),
         }

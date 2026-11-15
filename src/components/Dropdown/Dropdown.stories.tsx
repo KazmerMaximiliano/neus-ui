@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { User } from "lucide-react";
 import { fn } from "storybook/test";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Dropdown as DropdownComponent } from "./Dropdown";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { DropdownStoryArgs } from "./Dropdown.types";
 
 const meta: Meta<DropdownStoryArgs> = {

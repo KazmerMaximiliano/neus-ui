@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Clock as ClockComponent } from "./Clock";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ClockStoryArgs } from "./Clock.types";
 
 const meta: Meta<ClockStoryArgs> = {
@@ -153,9 +153,7 @@ const meta: Meta<ClockStoryArgs> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const Clock: Story = {
+export const Clock: StoryObj<ClockStoryArgs> = {
   args: {
     centerClassName: undefined,
     centerStyle: undefined,

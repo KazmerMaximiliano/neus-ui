@@ -1,14 +1,14 @@
+import { useState } from "react";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useState } from "react";
 import { afterEach, describe, expect, it } from "vitest";
 import { userEvent as browserEvent } from "vitest/browser";
 import { Button } from "../../components/Button";
 import { Modal, ModalContent, ModalFooter, ModalHeader } from "../../components/Modal";
-import type { DesignSystemId } from "../../design-systems";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio } from "./design-systems.test-utils";
+import { contrastRatio } from "./colorContrast";
+import type { DesignSystemId } from "../design-systems.types";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -40,9 +40,10 @@ const Example = ({ system, scheme }: { system: DesignSystemId; scheme: "light" |
 
 describe.each(["light", "dark"] as const)("Modal designs in %s mode", (scheme) => {
   it.each(SYSTEMS)("opens a themed $id modal and restores focus on Escape", async (system) => {
+    const user = userEvent.setup();
     render(<Example system={system.id} scheme={scheme} />);
     const opener = screen.getByRole("button", { name: "Open" });
-    await userEvent.click(opener);
+    await user.click(opener);
     const dialog = screen.getByRole("dialog", { name: "Delete project" });
     expect(dialog.matches(":modal")).toBe(true);
     expect(dialog.closest(`[data-design-system="${system.id}"]`)).not.toBeNull();
@@ -65,19 +66,21 @@ describe.each(["light", "dark"] as const)("Modal designs in %s mode", (scheme) =
 
 describe("Modal behavior in the browser", () => {
   it("closes from a backdrop click but not from a content click", async () => {
+    const user = userEvent.setup();
     render(<Example system="neus" scheme="light" />);
-    await userEvent.click(screen.getByRole("button", { name: "Open" }));
+    await user.click(screen.getByRole("button", { name: "Open" }));
     const dialog = screen.getByRole("dialog");
-    await userEvent.click(screen.getByText("This cannot be undone."));
+    await user.click(screen.getByText("This cannot be undone."));
     expect(dialog).toHaveAttribute("open");
     const box = dialog.getBoundingClientRect();
-    await userEvent.pointer({ keys: "[MouseLeft]", coords: { clientX: box.left - 8, clientY: box.top - 8 }, target: dialog });
+    await user.pointer({ keys: "[MouseLeft]", coords: { clientX: box.left - 8, clientY: box.top - 8 }, target: dialog });
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
   });
 
   it("lays out Carbon footer actions edge to edge", async () => {
+    const user = userEvent.setup();
     render(<Example system="carbon" scheme="light" />);
-    await userEvent.click(screen.getByRole("button", { name: "Open" }));
+    await user.click(screen.getByRole("button", { name: "Open" }));
     const dialog = screen.getByRole("dialog").getBoundingClientRect();
     const cancel = screen.getByRole("button", { name: "Cancel" }).getBoundingClientRect();
     const remove = screen.getByRole("button", { name: "Delete" }).getBoundingClientRect();

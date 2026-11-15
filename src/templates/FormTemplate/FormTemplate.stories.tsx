@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { designSystemControl, withDesignSystem } from "../../../.storybook/designSystem";
 import { Input } from "../../components";
 import { FormTemplate as FormTemplateComponent } from "./FormTemplate";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { DesignSystemPreviewArgs } from "../../../.storybook/designSystem.types";
 import type { FormTemplateProps } from "./FormTemplate.types";
 
@@ -43,9 +43,7 @@ const meta: Meta<FormTemplateProps & DesignSystemPreviewArgs> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const FormTemplate: Story = {
+export const FormTemplate: StoryObj<FormTemplateProps & DesignSystemPreviewArgs> = {
   args: {
     designSystem: "global",
     actionsClassName: undefined,

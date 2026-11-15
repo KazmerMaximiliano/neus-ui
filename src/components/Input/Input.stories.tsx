@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { useArgs } from "storybook/preview-api";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Input as InputComponent } from "./Input";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type {
   InputStoryArgs,
   InputStoryPreviewProps,
@@ -16,6 +16,8 @@ const InputPreview = ({
   ...args
 }: InputStoryPreviewProps) => {
   const controlled = args.value !== undefined;
+  // updateArgs reaches the args a render later: this copy keeps fast typing from losing characters
+  // while the Controls panel catches up, and still follows values set from the panel.
   const [preview, setPreview] = useState<InputStoryState>({
     value: args.value,
     argsValue: args.value,

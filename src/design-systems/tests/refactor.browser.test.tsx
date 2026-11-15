@@ -1,11 +1,10 @@
 import {
   cleanup,
-  fireEvent,
   render,
   screen,
   waitFor,
 } from "@testing-library/react";
-import type {} from "@vitest/browser-playwright";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cdp, page } from "vitest/browser";
 import {
@@ -21,15 +20,16 @@ import {
   TimeInput,
   WeekCalendar,
 } from "../../components";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
 import { FormTemplate } from "../../templates";
-import { DESIGN_SYSTEMS } from "../design-systems.consts";
 import {
   contrastRatio,
   flatten,
   resolveColor,
-} from "./design-systems.test-utils";
+} from "./colorContrast";
+import type {} from "@vitest/browser-playwright";
+import { DESIGN_SYSTEMS } from "../design-systems.consts";
+import "../../css/app.css";
 import "./fixtures/refactor.test.css";
 
 afterEach(cleanup);
@@ -292,6 +292,7 @@ it("isolates new contracts inside nested scopes and switches grid themes at runt
 });
 
 it("keeps narrow forms usable and honors floating-label overrides", async () => {
+  const user = userEvent.setup();
   await page.viewport(320, 800);
   render(
     <ThemeProvider scope="local" designSystem="material">
@@ -316,13 +317,15 @@ it("keeps narrow forms usable and honors floating-label overrides", async () => 
   const resting = floating.getBoundingClientRect().top;
   field.focus();
   expect(floating.getBoundingClientRect().top).toBeLessThan(resting);
-  fireEvent.change(field, { target: { value: "Filled" } });
+  await user.clear(field);
+  await user.type(field, "Filled");
   field.blur();
   expect(floating.getBoundingClientRect().top).toBeLessThan(resting);
   expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(320);
 });
 
 it("supports real DayPicker selection and keyboard Clock interaction", async () => {
+  const user = userEvent.setup();
   await page.viewport(1000, 900);
   const onChange = vi.fn();
   render(
@@ -339,10 +342,14 @@ it("supports real DayPicker selection and keyboard Clock interaction", async () 
     ".rdp-day_button[tabindex='0']",
   )!;
   day.focus();
-  fireEvent.click(day);
+  await user.click(day);
   expect(onChange).toHaveBeenCalledWith(undefined);
   const dial = screen.getByRole("slider");
-  fireEvent.keyDown(dial, { key: "ArrowUp" });
+  await user.tab();
+  await user.tab();
+  await user.tab();
+  expect(dial).toHaveFocus();
+  await user.keyboard("{ArrowUp}");
   expect(onChange).toHaveBeenLastCalledWith({ hours: 14, minutes: 5 });
 });
 

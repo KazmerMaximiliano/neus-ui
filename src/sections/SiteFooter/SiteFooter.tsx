@@ -1,7 +1,7 @@
 import { useId } from "react";
-import { Container } from "../../components/Container/Container";
-import "./SiteFooter.styles.css";
+import { Container } from "../../components/Container";
 import type { SiteFooterProps } from "./SiteFooter.types";
+import "./SiteFooter.styles.css";
 
 const join = (...names: (string | undefined)[]) => names.filter(Boolean).join(" ");
 

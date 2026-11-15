@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { useArgs } from "storybook/preview-api";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { Modal as ModalComponent } from "./Modal";
+import { ModalContent } from "./components/ModalContent";
+import { ModalFooter } from "./components/ModalFooter";
+import { ModalHeader } from "./components/ModalHeader";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ModalStoryArgs } from "./Modal.types";
-import { ModalContent } from "./components/ModalContent/ModalContent";
-import { ModalFooter } from "./components/ModalFooter/ModalFooter";
-import { ModalHeader } from "./components/ModalHeader/ModalHeader";
 
 const meta: Meta<ModalStoryArgs> = {
   title: "Base/Modal",

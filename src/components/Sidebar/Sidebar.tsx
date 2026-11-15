@@ -1,4 +1,3 @@
-import { Menu, X } from "lucide-react";
 import {
   useEffect,
   useId,
@@ -6,7 +5,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import "./Sidebar.styles.css";
+import { Menu, X } from "lucide-react";
 import type { SidebarProps, SidebarState } from "./Sidebar.types";
 import {
   getSidebarServerViewport,
@@ -15,6 +14,7 @@ import {
   lockSidebarScroll,
   subscribeSidebarViewport,
 } from "./Sidebar.utils";
+import "./Sidebar.styles.css";
 
 export const Sidebar = ({
   closeIconClassName,

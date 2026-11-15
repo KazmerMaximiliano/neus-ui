@@ -4,7 +4,7 @@ description: Design and build interface screens with the neus-ui component libra
 license: Apache-2.0
 metadata:
   source: neus-ui
-  managed-by: "neus init (rewritten on every run; put project rules in AGENTS.md)"
+  managed-by: "neus-ui init (rewritten on every run; put project rules in AGENTS.md)"
 ---
 
 # Neus design
@@ -63,11 +63,11 @@ request:
 
 Run from the project root:
 
-1. `npx neus context` (`npx neus context --for page` for a landing or
+1. `npx neus-ui context` (`npx neus-ui context --for page` for a landing or
    marketing page): the active system's identity and do's and don'ts, the
    key tokens, the component catalog and the need → component table below,
    plus a photo preview line when the project has a Pixabay key.
-2. `npx neus docs <Name>` for every component you will use: usage,
+2. `npx neus-ui docs <Name>` for every component you will use: usage,
    behavior, props and parts. `--full` adds its CSS tokens, needed only to
    override one.
 
@@ -80,7 +80,7 @@ Then read `<styles>/neus.overrides.css` (`<styles>` is `paths.styles`) and
 the `design/specs/*.md` that cover the area you will touch. `<this skill>`
 in the references means this skill's directory: `.claude/skills/neus-design`
 in Claude Code, `.agents/skills/neus-design` in Codex. Read a component's guide
-(`npx neus docs <Name>`) before using it. Never guess a prop, part or token name.
+(`npx neus-ui docs <Name>`) before using it. Never guess a prop, part or token name.
 
 Read [references/frameworks.md](references/frameworks.md) for the
 project's `rendering` value before writing any file. If the project is not
@@ -103,13 +103,13 @@ Pick the mode before Phase 1 and say which one in a line:
 
 - **Full**: a new public page, a new product, a multi-screen flow, or when
   the user asks for a spec or a review. Every phase below: questions, spec,
-  build, then `neus lint`, the visual loop, the `neus-audit` skill and the
+  build, then `neus-ui lint`, the visual loop, the `neus-audit` skill and the
   `neus-reviewer` subagent.
 - **Quick**: everything else, such as one app screen, a widget, a
   refinement or a local change. Ask only the brand question when `brand` is
   `null` (and what the brief truly leaves open), skip the spec file and
   record the decisions in the delivery, build, then verify with the type
-  check, `neus lint` and the visual loop. Run `neus-audit` and the reviewer
+  check, `neus-ui lint` and the visual loop. Run `neus-audit` and the reviewer
   only when the user asks.
 
 ## Phase 1: brief and questions
@@ -159,7 +159,7 @@ Follow [references/system-derivation.md](references/system-derivation.md):
 traits, base system, inspiration
 ([references/inspiration.md](references/inspiration.md)), three dealt
 directions, the derived DESIGN.md with its `x-neus` overrides compiled by
-`npx neus design build`, `npx neus specimen` with `npx neus shot`, and
+`npx neus-ui design build`, `npx neus-ui specimen` with `npx neus-ui shot`, and
 iteration until the user approves. Then continue with Phase 3.
 
 ## Phase 3: write the spec before code (full mode)
@@ -249,24 +249,24 @@ landmark, an inline `strong`), styled with neus tokens.
 
 ## Phase 5: verify
 
-1. Run the type check and `npx neus lint` on the changed files: lint
+1. Run the type check and `npx neus-ui lint` on the changed files: lint
    reports contract breaks (P0), raw elements a neus component replaces (P1)
    and the component coverage. Fix every P0 and replace the raw elements it
    lists. In full mode, then run the review in the `neus-audit` skill and fix
    its P0 and the P1 items in scope.
 2. Look at the render. This is mandatory for every new or redesigned page or
    screen:
-   1. After the first complete render, run `npx neus shot <route>` from the
+   1. After the first complete render, run `npx neus-ui shot <route>` from the
       project root. It starts the dev script when no server is running,
       saves full-page PNGs at 1440 and 390 px and prints the problems it
       measured (overflow, clipped content, uneven form rows, console errors, body text under 16px, fonts not
       loaded, solid buttons per viewport, active theme).
    2. Open the 1440 and 390 px screenshots with your image-reading tool.
    3. Write down the three most visible problems: scale, empty areas,
-      contrast, overflow, alignment, plus anything `neus shot` reported.
-   4. Fix them and run `npx neus shot <route>` again. Stop after three
+      contrast, overflow, alignment, plus anything `neus-ui shot` reported.
+   4. Fix them and run `npx neus-ui shot <route>` again. Stop after three
       rounds or when nothing serious is left.
-   5. If `neus shot` exits with code 2 (no browser or playwright-core), say
+   5. If `neus-ui shot` exits with code 2 (no browser or playwright-core), say
       so in the delivery and ask the user to install Chrome, Edge or
       Chromium. Never claim you reviewed the render.
 3. In full mode, delegate a fresh-eyes review to the `neus-reviewer`
@@ -278,8 +278,8 @@ Never claim a check you did not run.
 ## Phase 6: deliver
 
 Summarize: files created or changed, how to open the result (route and dev
-command; the server `neus shot` started keeps running until
-`npx neus shot --stop`), the design decisions and their source (system
+command; the server `neus-ui shot` started keeps running until
+`npx neus-ui shot --stop`), the design decisions and their source (system
 DESIGN.md, spec, inspiration reference, dealt composition, or assumption),
 the `SAMPLE:` content to replace, lint coverage, audit and screenshot results, and anything
 left open. Do not paste full source into the reply.

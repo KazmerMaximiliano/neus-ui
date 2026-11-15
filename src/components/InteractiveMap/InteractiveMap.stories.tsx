@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { InteractiveMap as InteractiveMapComponent } from "./InteractiveMap";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta: Meta<typeof InteractiveMapComponent> = {
   title: "Location/InteractiveMap",
@@ -76,9 +76,7 @@ const meta: Meta<typeof InteractiveMapComponent> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const InteractiveMap: Story = {
+export const InteractiveMap: StoryObj<typeof InteractiveMapComponent> = {
   args: {
     errorClassName: undefined,
     instructionsClassName: undefined,

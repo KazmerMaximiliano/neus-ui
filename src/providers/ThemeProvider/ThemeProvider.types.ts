@@ -18,11 +18,11 @@ export type ThemeColors = {
 };
 
 export type ThemeConfig = {
-  primaryColor?: string;
-  successColor?: string;
-  errorColor?: string;
-  infoColor?: string;
-  warningColor?: string;
+  readonly primaryColor?: string;
+  readonly successColor?: string;
+  readonly errorColor?: string;
+  readonly infoColor?: string;
+  readonly warningColor?: string;
 };
 
 export type ThemeContextValue = {
@@ -34,11 +34,11 @@ export type ThemeContextValue = {
 };
 
 export type ThemeProviderProps = {
-  children: ReactNode;
-  designSystem?: DesignSystemId;
-  initialTheme?: ThemeConfig;
-  initialColorScheme?: ColorScheme;
-  colorScheme?: ColorScheme;
-  scope?: "global" | "local";
-  className?: string;
+  readonly children: ReactNode;
+  readonly designSystem?: DesignSystemId;
+  readonly initialTheme?: ThemeConfig;
+  readonly initialColorScheme?: ColorScheme;
+  readonly colorScheme?: ColorScheme;
+  readonly scope?: "global" | "local";
+  readonly className?: string;
 };

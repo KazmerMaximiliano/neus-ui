@@ -1,14 +1,8 @@
-import {
-  cleanup,
-  fireEvent as fireCustomization,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { TimeInput as CustomizationComponent, TimeInput } from "./TimeInput";
+import { ThemeProvider } from "../../providers";
+import { TimeInput } from "./TimeInput";
 
 afterEach(() => {
   cleanup();
@@ -104,10 +98,11 @@ describe("TimeInput", () => {
       ).toBeInTheDocument();
     });
 
-    it("does not open dropdown when disabled", () => {
+    it("does not open dropdown when disabled", async () => {
+      const user = userEvent.setup();
       const { container } = renderTimeInput({ disabled: true });
       const button = container.querySelector(".time-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".time-input__dropdown"),
       ).not.toBeInTheDocument();
@@ -115,10 +110,11 @@ describe("TimeInput", () => {
   });
 
   describe("readonly state", () => {
-    it("does not open dropdown when readonly", () => {
+    it("does not open dropdown when readonly", async () => {
+      const user = userEvent.setup();
       const { container } = renderTimeInput({ readonly: true });
       const button = container.querySelector(".time-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".time-input__dropdown"),
       ).not.toBeInTheDocument();
@@ -126,45 +122,49 @@ describe("TimeInput", () => {
   });
 
   describe("dropdown", () => {
-    it("opens dropdown on click", () => {
+    it("opens dropdown on click", async () => {
+      const user = userEvent.setup();
       const { container } = renderTimeInput();
       const button = container.querySelector(".time-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".time-input__dropdown"),
       ).toBeInTheDocument();
     });
 
-    it("closes dropdown on outside click", () => {
+    it("closes dropdown on outside click", async () => {
+      const user = userEvent.setup();
       const { container } = renderTimeInput();
       const button = container.querySelector(".time-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".time-input__dropdown"),
       ).toBeInTheDocument();
-      fireEvent.mouseDown(document.body);
+      await user.click(document.body);
       expect(
         container.querySelector(".time-input__dropdown"),
       ).not.toBeInTheDocument();
     });
 
-    it("toggles dropdown on click", () => {
+    it("toggles dropdown on click", async () => {
+      const user = userEvent.setup();
       const { container } = renderTimeInput();
       const button = container.querySelector(".time-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".time-input__dropdown"),
       ).toBeInTheDocument();
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".time-input__dropdown"),
       ).not.toBeInTheDocument();
     });
 
-    it("renders Clock component in dropdown", () => {
+    it("renders Clock component in dropdown", async () => {
+      const user = userEvent.setup();
       const { container } = renderTimeInput();
       const button = container.querySelector(".time-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(container.querySelector(".clock__wrapper")).toBeInTheDocument();
     });
   });
@@ -268,7 +268,8 @@ describe("TimeInput", () => {
 });
 
 describe("time selection", () => {
-  it("updates and serializes uncontrolled time via the real Clock keyboard controls", () => {
+  it("updates and serializes uncontrolled time via the real Clock keyboard controls", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const { container } = render(
       <TimeInput
@@ -278,15 +279,17 @@ describe("time selection", () => {
         onChange={onChange}
       />,
     );
-    fireEvent.click(screen.getByRole("button", { name: /^Start/ }));
-    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowUp" });
+    await user.click(screen.getByRole("button", { name: /^Start/ }));
+    await user.keyboard("{ArrowUp}");
     expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 30 });
     expect(container.querySelector("input[name=\"start\"]")).toHaveValue("11:30");
-    fireEvent.click(screen.getByRole("button", { name: "Minutos" }));
-    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowRight" });
+    await user.click(screen.getByRole("button", { name: "Minutos" }));
+    await user.tab();
+    await user.keyboard("{ArrowRight}");
     expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 31 });
   });
-  it("leaves controlled time with the consumer and clears an explicit undefined", () => {
+  it("leaves controlled time with the consumer and clears an explicit undefined", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const { rerender, container } = render(
       <TimeInput
@@ -300,8 +303,8 @@ describe("time selection", () => {
         size="large"
       />,
     );
-    fireEvent.click(screen.getByRole("button", { name: /^Start/ }));
-    fireEvent.keyDown(screen.getByRole("slider"), { key: "ArrowUp" });
+    await user.click(screen.getByRole("button", { name: /^Start/ }));
+    await user.keyboard("{ArrowUp}");
     expect(onChange).toHaveBeenCalledWith({ hours: 11, minutes: 30 });
     expect(container.querySelector("input[name=\"start\"]")).toHaveValue("10:30");
     expect(screen.getByRole("dialog")).toHaveStyle({ padding: "8px" });
@@ -388,13 +391,14 @@ describe("TimeInput part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <TimeInput
             label="Time"
             required
             error="Invalid"
@@ -403,9 +407,9 @@ describe("TimeInput part customization", () => {
             }
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
-      fireCustomization.click(
+      await user.click(
         view.container.querySelector(".picker-field__field")!,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
@@ -415,8 +419,8 @@ describe("TimeInput part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <TimeInput
             label="Time"
             required
             error="Invalid"
@@ -424,7 +428,7 @@ describe("TimeInput part customization", () => {
               phase === "placeholder" ? undefined : { hours: 9, minutes: 30 }
             }
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

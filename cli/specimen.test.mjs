@@ -16,7 +16,7 @@ const config = (overrides) => ({
 });
 const byFile = (result) => Object.fromEntries(result.files.map(({ file, content }) => [file, content]));
 
-describe("neus specimen", () => {
+describe("neus-ui specimen", () => {
   it("fills the component with the system, the name and the project's colors", () => {
     const component = byFile(specimenFiles(project(["src"]), config()))["src/neus/NeusSpecimen.tsx"];
     expect(component).toContain('const SYSTEM = "carbon" as DesignSystemId;');

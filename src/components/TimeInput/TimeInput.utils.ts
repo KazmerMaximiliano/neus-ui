@@ -1,4 +1,4 @@
-import { TimeValue } from "../Clock/Clock.types";
+import type { TimeValue } from "../Clock";
 
 export const serializeTimeValue = (
   value: TimeValue | undefined,

@@ -1,7 +1,7 @@
-import { Grid } from "../../components/Grid/Grid";
+import { Grid } from "../../components/Grid";
 import { TestimonialListContext } from "./TestimonialList.context";
-import "./TestimonialList.styles.css";
 import type { TestimonialListProps } from "./TestimonialList.types";
+import "./TestimonialList.styles.css";
 
 /** Quotes from customers or users, as running text, cards or one featured quote. */
 export const TestimonialList = ({ children, variant = "card", columns, className, ...props }: TestimonialListProps) => (

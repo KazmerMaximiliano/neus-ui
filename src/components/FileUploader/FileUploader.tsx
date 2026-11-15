@@ -1,4 +1,3 @@
-import { CloudUpload, File, Image } from "lucide-react";
 import React, {
   forwardRef,
   useCallback,
@@ -7,10 +6,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Button } from "../Button/Button";
-import "./FileUploader.styles.css";
-import { FileUploadData, FileUploaderProps } from "./FileUploader.types";
+import { CloudUpload, File, Image } from "lucide-react";
+import { Button } from "../Button";
+import type { FileUploadData, FileUploaderProps } from "./FileUploader.types";
 import { validateFiles } from "./FileUploader.utils";
+import "./FileUploader.styles.css";
 
 export const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
   (

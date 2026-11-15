@@ -108,7 +108,7 @@ The six DESIGN.md files describe local adaptations and cite their public sources
 Interface Guidelines, IBM Carbon, Material Design 3, Geist). Type scale values for Carbon and
 Material were taken from the published `@carbon/type` (Apache 2.0) and `@material/web`
 (Apache 2.0) packages. No fonts, icons or images from those systems are included; the
-`neus` CLI only prints links to openly licensed fonts.
+`neus-ui` CLI only prints links to openly licensed fonts.
 
 ## Runtime dependencies
 

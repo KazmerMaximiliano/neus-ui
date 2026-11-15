@@ -7,12 +7,12 @@ export type HeadingAlign = "start" | "center" | "end";
 
 export type HeadingProps = ComponentPropsWithRef<"h2"> & {
   /** Document level, independent of the visual size. */
-  as?: HeadingLevel;
+  readonly as?: HeadingLevel;
   /** Visual size; follows the level by default. `display` is for the main headline of a public page. */
-  size?: HeadingSize;
-  align?: HeadingAlign;
+  readonly size?: HeadingSize;
+  readonly align?: HeadingAlign;
   /** Evens out line lengths with `text-wrap: balance`. */
-  balance?: boolean;
+  readonly balance?: boolean;
 };
 
-export type HeadingStoryArgs = HeadingProps & { designSystem: DesignSystemId };
+export type HeadingStoryArgs = HeadingProps & { readonly designSystem: DesignSystemId };

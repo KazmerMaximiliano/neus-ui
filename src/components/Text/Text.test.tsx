@@ -1,10 +1,10 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, render, screen } from "@testing-library/react";
 import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, expectTypeOf, it } from "vitest";
-import type { TextProps } from "../../index";
-import { Text } from "../../index";
+import { Text } from "./Text";
 import * as stories from "./Text.stories";
+import type { TextProps } from "./Text.types";
 
 afterEach(cleanup);
 

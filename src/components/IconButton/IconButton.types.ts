@@ -17,23 +17,23 @@ export type IconButtonIcon = ForwardRefExoticComponent<
 >;
 
 export type IconButtonProps = {
-  className?: string;
-  iconClassName?: string;
-  loaderClassName?: string;
-  icon: IconButtonIcon;
-  label: string;
-  type?: IconButtonType;
-  variant?: IconButtonVariant;
-  color?: IconButtonColor;
-  size?: IconButtonSize;
-  disabled?: boolean;
-  loading?: boolean;
-  buttonStyle?: CSSProperties;
-  iconStyle?: CSSProperties;
-  loaderStyle?: CSSProperties;
-  onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
+  readonly className?: string;
+  readonly iconClassName?: string;
+  readonly loaderClassName?: string;
+  readonly icon: IconButtonIcon;
+  readonly label: string;
+  readonly type?: IconButtonType;
+  readonly variant?: IconButtonVariant;
+  readonly color?: IconButtonColor;
+  readonly size?: IconButtonSize;
+  readonly disabled?: boolean;
+  readonly loading?: boolean;
+  readonly buttonStyle?: CSSProperties;
+  readonly iconStyle?: CSSProperties;
+  readonly loaderStyle?: CSSProperties;
+  readonly onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
 };
 
 export type IconButtonStoryArgs = IconButtonProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };

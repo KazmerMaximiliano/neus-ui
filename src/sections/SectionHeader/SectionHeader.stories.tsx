@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { SectionHeader as SectionHeaderComponent } from "./SectionHeader";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { SectionHeaderStoryArgs } from "./SectionHeader.types";
 
 const PART = (part: string) => ({ control: "text" as const, description: `Additional classes on the ${part}` });

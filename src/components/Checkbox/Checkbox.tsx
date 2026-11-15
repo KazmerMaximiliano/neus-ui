@@ -1,6 +1,6 @@
 import { Check, Minus } from "lucide-react";
+import type { CheckboxProps } from "./Checkbox.types";
 import "./Checkbox.styles.css";
-import { CheckboxProps } from "./Checkbox.types";
 
 export const Checkbox = ({
   checkboxClassName,

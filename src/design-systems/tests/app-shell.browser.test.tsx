@@ -1,11 +1,11 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { AppTemplate } from "../../templates/AppTemplate/AppTemplate";
+import { AppTemplate } from "../../templates/AppTemplate";
+import { contrastRatio } from "./colorContrast";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
-import { contrastRatio } from "./design-systems.test-utils";
+import "../../css/app.css";
 
 afterEach(cleanup);
 

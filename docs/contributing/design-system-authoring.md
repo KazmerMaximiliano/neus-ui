@@ -124,7 +124,7 @@ The `tooling/` directory is checked by `tsconfig.node.json` and tested in the
 `design-system-generator` Node project. `design-systems.core.ts` holds the pure parsing,
 validation and rendering, without the file system or the Google linter; it is the only
 tooling module emitted into `dist/`, through the internal `src/design.ts` entry that
-`npx neus design build` uses to validate and compile a project's derived system
+`npx neus-ui design build` uses to validate and compile a project's derived system
 (`x-neus.extends` plus optional `tokens` and `recipes`, no palette, id or foundations).
 
 `ThemeProvider` owns theme selection. It resolves one action palette for both the context

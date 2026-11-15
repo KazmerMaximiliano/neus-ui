@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { Card } from "../../../../components/Card/Card";
+import { Card } from "../../../../components/Card";
 import { TestimonialListContext } from "../../TestimonialList.context";
-import "./Testimonial.styles.css";
 import type { TestimonialProps } from "./Testimonial.types";
+import "./Testimonial.styles.css";
 
 const join = (...names: (string | undefined)[]) => names.filter(Boolean).join(" ");
 

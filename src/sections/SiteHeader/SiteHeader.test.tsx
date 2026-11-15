@@ -1,11 +1,11 @@
-import { composeStories } from "@storybook/react";
+import { createRef, type AnchorHTMLAttributes } from "react";
+import { composeStories } from "@storybook/react-vite";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createRef, type AnchorHTMLAttributes } from "react";
 import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
-import type { SiteHeaderProps } from "../../sections";
-import { SiteHeader } from "../../sections";
+import { SiteHeader } from "./SiteHeader";
 import * as stories from "./SiteHeader.stories";
+import type { SiteHeaderProps } from "./SiteHeader.types";
 
 afterEach(cleanup);
 
@@ -36,11 +36,12 @@ describe("SiteHeader", () => {
   });
 
   it("closes the open menu when a link is followed", async () => {
+    const user = userEvent.setup();
     render(<SiteHeader brand="B" links={LINKS} />);
     const menu = document.querySelector<HTMLElement>("[popover]")!;
     vi.spyOn(menu, "matches").mockReturnValue(true);
     menu.hidePopover = vi.fn();
-    await userEvent.click(screen.getByRole("link", { name: "Servicios", hidden: true }));
+    await user.click(screen.getByRole("link", { name: "Servicios", hidden: true }));
     expect(menu.hidePopover).toHaveBeenCalledOnce();
   });
 

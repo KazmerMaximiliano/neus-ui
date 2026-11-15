@@ -1,7 +1,6 @@
-import { composeStories } from "@storybook/react";
+import { composeStories } from "@storybook/react-vite";
 import {
   cleanup,
-  fireEvent,
   render,
   screen,
   waitFor,
@@ -17,10 +16,10 @@ import * as dateStories from "../../components/DateInput/DateInput.stories";
 import * as timeStories from "../../components/TimeInput/TimeInput.stories";
 import * as weekStories from "../../components/WeekCalendar/WeekCalendar.stories";
 import * as rowStories from "../../components/WeekCalendar/components/WeekCalendarRow/WeekCalendarRow.stories";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
+import { resolveColor } from "./colorContrast";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
-import { resolveColor } from "./design-systems.test-utils";
+import "../../css/app.css";
 
 const { Calendar } = composeStories(calendarStories);
 const { Clock } = composeStories(clockStories);
@@ -106,6 +105,7 @@ describe.each(["light", "dark"] as const)(
     it.each(DESIGN_SYSTEMS)(
       "prevents picker placeholder overlap in $id",
       async ({ id }) => {
+        const user = userEvent.setup();
         await page.viewport(1200, 1100);
         for (const Story of [DateInput, TimeInput]) {
           for (const placement of ["auto", "floating", "external"] as const) {
@@ -146,7 +146,7 @@ describe.each(["light", "dark"] as const)(
               floating ? "0" : "1",
             );
             expect(label.getBoundingClientRect().top).toBe(restTop);
-            fireEvent.click(field);
+            await user.click(field);
             expect(field).toHaveAttribute("aria-expanded", "true");
             expect(getComputedStyle(placeholder).opacity).toBe("1");
             if (floating)
@@ -216,6 +216,7 @@ describe.each(["light", "dark"] as const)(
     it.each(DESIGN_SYSTEMS)(
       "fills the calendar and previews $id in real stories",
       async ({ id }) => {
+        const user = userEvent.setup();
         await page.viewport(1200, 1100);
         // Include real preview chrome so its selectors cannot silently override a recipe.
         const chrome = document.createElement("div");
@@ -281,7 +282,7 @@ describe.each(["light", "dark"] as const)(
         for (const field of previews.container.querySelectorAll<HTMLButtonElement>(
           ".picker-field__field",
         )) {
-          fireEvent.click(field);
+          await user.click(field);
           const panel = previews.container.querySelector<HTMLElement>(
             ".picker-field__popover:popover-open",
           )!;
@@ -299,7 +300,7 @@ describe.each(["light", "dark"] as const)(
           expect(getComputedStyle(surface).backgroundColor).toBe(
             resolveColor(surface, token),
           );
-          fireEvent.keyDown(document, { key: "Escape" });
+          await user.keyboard("{Escape}");
         }
         await waitFor(() =>
           expect(
@@ -439,6 +440,7 @@ it("activates independent row actions with the keyboard in the grid and mobile c
 it.each(["en-US", "es-AR", "fr-FR", "de-DE", "ja-JP", "ar-SA"])(
   "keeps localized Calendar readable and scroll-free in %s on narrow screens",
   async (language) => {
+    const user = userEvent.setup();
     await page.viewport(320, 800);
     const { container } = render(
       <ThemeProvider scope="local" colorScheme="dark">
@@ -458,7 +460,7 @@ it.each(["en-US", "es-AR", "fr-FR", "de-DE", "ja-JP", "ar-SA"])(
       year: "numeric",
       calendar: "gregory",
     });
-    fireEvent.click(
+    await user.click(
       screen.getByRole("button", {
         name: caption.format(new Date(2026, 9, 15)),
       }),
@@ -473,7 +475,7 @@ it.each(["en-US", "es-AR", "fr-FR", "de-DE", "ja-JP", "ar-SA"])(
         content.getBoundingClientRect().bottom + 1,
       );
     }
-    fireEvent.click(months[0]);
+    await user.click(months[0]);
     expect(
       screen.getByRole("button", {
         name: caption.format(new Date(2026, 0, 1)),

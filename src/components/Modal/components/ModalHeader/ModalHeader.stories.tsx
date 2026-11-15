@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../../../design-systems";
 import { ThemeProvider } from "../../../../providers";
-import "../../Modal.stories.css";
 import { ModalHeader as ModalHeaderComponent } from "./ModalHeader";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ModalHeaderStoryArgs } from "./ModalHeader.types";
+import "../../Modal.stories.css";
 
 const meta: Meta<ModalHeaderStoryArgs> = {
   title: "Base/Modal/ModalHeader",

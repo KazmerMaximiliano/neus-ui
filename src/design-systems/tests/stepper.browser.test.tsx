@@ -2,9 +2,9 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Stepper } from "../../components/Stepper";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio, flatten, resolveColor } from "./design-systems.test-utils";
+import { contrastRatio, flatten, resolveColor } from "./colorContrast";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -20,6 +20,7 @@ const SIZES = ["small", "medium", "large"] as const;
 
 describe.each(["light", "dark"] as const)("Stepper designs in %s mode", (scheme) => {
   it.each(SYSTEMS)("renders $id markers, centered connectors and legible states", async (system) => {
+    const user = userEvent.setup();
     const { container } = render(
       <ThemeProvider scope="local" designSystem={system.id} colorScheme={scheme}>
         {SIZES.map((size) => (
@@ -67,7 +68,7 @@ describe.each(["light", "dark"] as const)("Stepper designs in %s mode", (scheme)
       simple[0].getBoundingClientRect().width,
     );
 
-    await userEvent.tab();
+    await user.tab();
     const completed = screen.getAllByRole("button", { name: /completed/ })[0];
     expect(completed).toHaveFocus();
     expect(getComputedStyle(completed).outlineStyle).toBe("solid");

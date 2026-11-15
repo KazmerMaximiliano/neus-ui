@@ -3,11 +3,16 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { Avatar, Button, Card, CardContent, CardFooter, MediaPlaceholder } from "../../components";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { CallToAction, FeatureItem, FeatureList, Hero, SiteFooter, SiteHeader, Testimonial, TestimonialList } from "../../sections";
+import { CallToAction } from "../../sections/CallToAction";
+import { FeatureItem, FeatureList } from "../../sections/FeatureList";
+import { Hero } from "../../sections/Hero";
+import { SiteFooter } from "../../sections/SiteFooter";
+import { SiteHeader } from "../../sections/SiteHeader";
+import { Testimonial, TestimonialList } from "../../sections/TestimonialList";
+import { contrastRatio } from "./colorContrast";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
-import { contrastRatio } from "./design-systems.test-utils";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -26,17 +31,18 @@ const renderPage = (id: string) => render(
 
 describe.each(DESIGN_SYSTEMS)("Page sections in $id", ({ id }) => {
   it("opens the phone menu with the native popover and closes it from a link", async () => {
+    const user = userEvent.setup();
     await page.viewport(390, 844);
     renderPage(id);
     const button = screen.getByRole("button", { name: "Menu" });
     const menu = document.querySelector<HTMLElement>(".site-header__menu")!;
     expect(menu.matches(":popover-open")).toBe(false);
     expect(getComputedStyle(menu).display).toBe("none");
-    await userEvent.click(button);
+    await user.click(button);
     expect(menu.matches(":popover-open")).toBe(true);
     const link = menu.querySelector<HTMLElement>('a[href="#equipo"]')!;
     expect(link).toBeVisible();
-    await userEvent.click(link);
+    await user.click(link);
     expect(menu.matches(":popover-open")).toBe(false);
     expect(document.documentElement.scrollWidth).toBeLessThanOrEqual(390);
   });

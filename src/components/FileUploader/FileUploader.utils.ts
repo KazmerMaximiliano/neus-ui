@@ -1,4 +1,5 @@
-import { FileType, FileUploadError } from './FileUploader.types';
+import type { FileType, FileUploadError } from './FileUploader.types';
+import { FILE_ACCEPT_PATTERNS } from './FileUploader.consts';
 
 export const validateFileSize = (
   files: File[],
@@ -42,13 +43,13 @@ export const validateFileCount = (
 
 export const validateFileTypes = (
   files: File[],
-  allowedTypes: FileType[]
+  allowedTypes: readonly FileType[]
 ): { valid: boolean; error?: FileUploadError } => {
   for (const file of files) {
     const isValidType = allowedTypes.some((type) => {
-      if (type === FileType.IMAGE) return file.type.startsWith('image/');
-      if (type === FileType.VIDEO) return file.type.startsWith('video/');
-      if (type === FileType.AUDIO) return file.type.startsWith('audio/');
+      if (type === FILE_ACCEPT_PATTERNS.IMAGE) return file.type.startsWith('image/');
+      if (type === FILE_ACCEPT_PATTERNS.VIDEO) return file.type.startsWith('video/');
+      if (type === FILE_ACCEPT_PATTERNS.AUDIO) return file.type.startsWith('audio/');
 
       return type
         .split(',')
@@ -75,7 +76,7 @@ export const validateFileTypes = (
 
 export const validateFiles = (
   files: FileList | File[],
-  allowedTypes: FileType[],
+  allowedTypes: readonly FileType[],
   maxWeight: number,
   multiple: boolean
 ): { valid: boolean; error?: FileUploadError } => {

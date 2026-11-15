@@ -1,5 +1,5 @@
-import "./CardContent.styles.css";
 import type { CardContentProps } from "./CardContent.types";
+import "./CardContent.styles.css";
 
 export const CardContent = ({
   children,

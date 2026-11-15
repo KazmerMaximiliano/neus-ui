@@ -1,10 +1,11 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, render, screen } from "@testing-library/react";
 import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, expectTypeOf, it } from "vitest";
-import type { TestimonialListProps } from "../../sections";
-import { Testimonial, TestimonialList } from "../../sections";
+import { Testimonial } from "./components/Testimonial";
+import { TestimonialList } from "./TestimonialList";
 import * as stories from "./TestimonialList.stories";
+import type { TestimonialListProps } from "./TestimonialList.types";
 
 afterEach(cleanup);
 

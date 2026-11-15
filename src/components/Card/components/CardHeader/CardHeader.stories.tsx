@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../../../design-systems";
 import { ThemeProvider } from "../../../../providers";
 import { Card } from "../../Card";
-import "../../Card.stories.css";
 import { CardHeader as CardHeaderComponent } from "./CardHeader";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CardHeaderStoryArgs } from "./CardHeader.types";
+import "../../Card.stories.css";
 
 const meta: Meta<CardHeaderStoryArgs> = {
   title: "Base/Card/CardHeader",

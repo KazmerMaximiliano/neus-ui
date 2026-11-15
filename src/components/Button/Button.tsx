@@ -1,8 +1,8 @@
 import { createElement, type MouseEvent } from "react";
 import { BeatLoader } from "react-spinners";
-import "./Button.styles.css";
 import type { ButtonProps } from "./Button.types";
 import { getButtonClasses } from "./Button.utils";
+import "./Button.styles.css";
 
 export const Button = (props: ButtonProps) => {
   const {

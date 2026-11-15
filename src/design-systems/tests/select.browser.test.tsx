@@ -4,9 +4,9 @@ import { afterEach, describe, expect, it } from "vitest";
 import { Input } from "../../components/Input";
 import { MultiSelect } from "../../components/MultiSelect";
 import { Select } from "../../components/Select";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio, flatten } from "./design-systems.test-utils";
+import { contrastRatio, flatten } from "./colorContrast";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -21,6 +21,7 @@ const field = (name: string) =>
 
 describe.each(["light", "dark"] as const)("Select fields in %s mode", (scheme) => {
   it.each(SYSTEMS)("matches the %s Input recipe and the overlay list", async (system) => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider scope="local" designSystem={system} colorScheme={scheme}>
         <Input label="Name" />
@@ -38,7 +39,7 @@ describe.each(["light", "dark"] as const)("Select fields in %s mode", (scheme) =
     }
 
     const country = screen.getByRole("combobox", { name: "Country" });
-    await userEvent.click(country);
+    await user.click(country);
     const list = screen.getByRole("listbox", { name: "Country" });
     const popover = list.closest("[popover]") as HTMLElement;
     expect(popover.matches(":popover-open")).toBe(true);
@@ -55,7 +56,7 @@ describe.each(["light", "dark"] as const)("Select fields in %s mode", (scheme) =
       getComputedStyle(field("Country")).borderBottomColor,
     );
 
-    await userEvent.keyboard("{Escape}");
+    await user.keyboard("{Escape}");
     const tag = getComputedStyle(document.querySelector(".multiselect__tag")!);
     expect(
       contrastRatio(
@@ -68,6 +69,7 @@ describe.each(["light", "dark"] as const)("Select fields in %s mode", (scheme) =
 
 describe("Select interaction in the browser", () => {
   it("keeps tag removal clickable above the stretched trigger", async () => {
+    const user = userEvent.setup();
     const values: string[][] = [];
     render(
       <ThemeProvider scope="local">
@@ -83,7 +85,7 @@ describe("Select interaction in the browser", () => {
     const remove = screen.getByRole("button", { name: "Quitar Argentina" });
     const { x, y, width, height } = remove.getBoundingClientRect();
     expect(document.elementFromPoint(x + width / 2, y + height / 2)?.closest("button")).toBe(remove);
-    await userEvent.click(remove);
+    await user.click(remove);
     expect(values).toEqual([["br"]]);
   });
 

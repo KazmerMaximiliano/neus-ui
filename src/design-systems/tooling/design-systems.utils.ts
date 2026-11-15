@@ -2,10 +2,10 @@ import { lint } from "@google/design.md/linter";
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, unlinkSync, unwatchFile, watchFile, writeFileSync } from "node:fs";
 import path from "node:path";
 import { resolvePalette } from "../../utils/resolvePalette";
-import type { ActionPalette } from "../design-systems.types";
-import { COLOR_MODES, RECIPE_NAMES, SYSTEM_IDS, WATCH_DEBOUNCE_MS, WATCH_INTERVAL_MS } from "./design-systems.consts";
 import { parseDesignDocument, renderModes, resolveReference } from "./design-systems.core";
+import type { ActionPalette } from "../design-systems.types";
 import type { GenerationResult, ModeDeclarations } from "./design-systems.types";
+import { COLOR_MODES, RECIPE_NAMES, SYSTEM_IDS, WATCH_DEBOUNCE_MS, WATCH_INTERVAL_MS } from "./design-systems.consts";
 
 export { parseDesignDocument, resolveReference } from "./design-systems.core";
 

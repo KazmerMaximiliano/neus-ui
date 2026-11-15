@@ -1,6 +1,5 @@
 import type { CSSProperties } from "react";
-import "./ClockNumbers.styles.css";
-import { ClockNumbersProps, DialNumber } from "./ClockNumbers.types";
+import type { ClockNumbersProps, DialNumber } from "./ClockNumbers.types";
 import {
   HOURS_12,
   INNER_HOURS,
@@ -8,6 +7,7 @@ import {
   OUTER_HOURS,
 } from "./ClockNumbers.consts";
 import { getDisplayHours } from "./ClockNumbers.utils";
+import "./ClockNumbers.styles.css";
 
 export const ClockNumbers = ({
   numberClassName,

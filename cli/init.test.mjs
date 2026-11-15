@@ -19,7 +19,7 @@ const config = (overrides) => ({
   colors: {}, language: "es", agents: ["claude", "codex"], paths: { styles: "src/styles" }, ...overrides,
 });
 
-describe("neus init", () => {
+describe("neus-ui init", () => {
   it("detects the framework and how it renders", () => {
     expect(detectProject(project({ dependencies: { next: "16" } }, ["app"]))).toEqual({ framework: "next", rendering: "rsc" });
     expect(detectProject(project({ dependencies: { next: "16" } }, ["pages"]))).toEqual({ framework: "next", rendering: "ssr" });
@@ -86,15 +86,15 @@ describe("neus init", () => {
   });
 });
 
-describe("neus init flags", () => {
-  const init = (root, ...args) => spawnSync(process.execPath, [path.resolve("cli/neus.mjs"), "init", "--yes", ...args],
+describe("neus-ui init flags", () => {
+  const init = (root, ...args) => spawnSync(process.execPath, [path.resolve("cli/neus-ui.mjs"), "init", "--yes", ...args],
     { cwd: root, encoding: "utf8" });
 
   it("prepares the compiled system stylesheet in None mode and prints its import", () => {
     const root = project({ devDependencies: { vite: "8" } }, ["src"]);
     const result = init(root, "--system", "none", "--agents", "codex");
     expect(result.status).toBe(0);
-    expect(read(root, "src/styles/neus.system.css")).toContain("npx neus design build");
+    expect(read(root, "src/styles/neus.system.css")).toContain("npx neus-ui design build");
     expect(result.stdout).toContain('"./styles/neus.system.css", then "./styles/neus.overrides.css"');
     writeFileSync(path.join(root, "src/styles/neus.system.css"), "/* built */");
     init(root);
@@ -118,10 +118,10 @@ describe("neus init flags", () => {
 });
 
 describe("neus bin", () => {
-  const neus = (...args) => spawnSync(process.execPath, [path.resolve("cli/neus.mjs"), ...args], { encoding: "utf8" });
+  const neus = (...args) => spawnSync(process.execPath, [path.resolve("cli/neus-ui.mjs"), ...args], { encoding: "utf8" });
 
   it("finds the command after leading flags", () => {
-    expect(neus("--system", "carbon", "init", "--help")).toMatchObject({ status: 0, stdout: expect.stringContaining("npx neus init") });
+    expect(neus("--system", "carbon", "init", "--help")).toMatchObject({ status: 0, stdout: expect.stringContaining("npx neus-ui init") });
     expect(neus("-y", "init", "--help").status).toBe(0);
   });
 

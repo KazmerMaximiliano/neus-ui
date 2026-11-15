@@ -1,7 +1,7 @@
 import { useId, useState, type CSSProperties } from "react";
-import "./WeekCalendarRow.styles.css";
-import { EventTooltip, WeekCalendarRowProps } from "./WeekCalendarRow.types";
+import type { EventTooltip, WeekCalendarRowProps } from "./WeekCalendarRow.types";
 import { getDayCellInfo, resolveColor } from "./WeekCalendarRow.utils";
+import "./WeekCalendarRow.styles.css";
 
 export const WeekCalendarRow = ({
   categoryClassName,

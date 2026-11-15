@@ -1,11 +1,11 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { IconButton } from "../IconButton/IconButton";
-import { WeekCalendarRow } from "./components/WeekCalendarRow/WeekCalendarRow";
-import "./WeekCalendar.styles.css";
-import { WeekCalendarProps } from "./WeekCalendar.types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { IconButton } from "../IconButton";
+import { WeekCalendarRow } from "./components/WeekCalendarRow";
+import type { WeekCalendarProps } from "./WeekCalendar.types";
 import { CATEGORY_COLORS, DAY_NAMES } from "./WeekCalendar.consts";
 import { formatDate, getCenterDate, getWeekDays } from "./WeekCalendar.utils";
+import "./WeekCalendar.styles.css";
 
 export const WeekCalendar = ({
   dateRangeClassName,

@@ -1,13 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { Timer } from "lucide-react";
 import { DESIGN_SYSTEMS } from "../../../../design-systems";
 import { ThemeProvider } from "../../../../providers";
 import { FeatureList } from "../../FeatureList";
 import { FeatureItem as FeatureItemComponent } from "./FeatureItem";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { FeatureItemStoryArgs } from "./FeatureItem.types";
+import "./FeatureItem.stories.css";
 
 const meta: Meta<FeatureItemStoryArgs> = {
-  title: "Sections/FeatureItem",
+  title: "Sections/FeatureList/FeatureItem",
   component: FeatureItemComponent,
   tags: ["autodocs"],
   parameters: { layout: "padded" },
@@ -53,7 +54,7 @@ export const FeatureItem: StoryObj<FeatureItemStoryArgs> = {
   },
   render: ({ designSystem, variant, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>
-      <FeatureList variant={variant} columns={1} style={{ maxWidth: 420 }}>
+      <FeatureList variant={variant} columns={1} className="feature-item-story">
         <FeatureItemComponent {...args} />
       </FeatureList>
     </ThemeProvider>

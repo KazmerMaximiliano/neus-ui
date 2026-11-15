@@ -6,18 +6,18 @@ import {
   waitFor,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type {} from "@vitest/browser-playwright";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cdp, page } from "vitest/browser";
 import { Input } from "../../components/Input";
-import "../../css/app.css";
+import { ThemeProvider } from "../../providers";
+import { FormTemplate } from "../../templates/FormTemplate";
 import {
   contrastRatio,
   flatten,
   resolveColor,
-} from "./design-systems.test-utils";
-import { ThemeProvider } from "../../providers";
-import { FormTemplate } from "../../templates/FormTemplate/FormTemplate";
+} from "./colorContrast";
+import type {} from "@vitest/browser-playwright";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -54,6 +54,7 @@ describe.each(["light", "dark"] as const)(
     it.each(INPUT_SYSTEM_CASES)(
       "renders $id geometry, states and native color field",
       async (system) => {
+        const user = userEvent.setup();
         const onChange = vi.fn();
         render(
           <ThemeProvider
@@ -129,16 +130,16 @@ describe.each(["light", "dark"] as const)(
         await waitFor(() =>
           expect(getComputedStyle(input).borderTopColor).toBe(hoverColor),
         );
-        await userEvent.tab();
+        await user.tab();
         expect(input).toHaveFocus();
         await waitFor(() =>
           expect(getComputedStyle(input).borderTopColor).toBe(focusColor),
         );
-        await userEvent.type(input, "Ada");
+        await user.type(input, "Ada");
         expect(onChange).toHaveBeenLastCalledWith("Ada");
 
         const invalid = screen.getByRole("textbox", { name: "Invalid" });
-        await userEvent.click(invalid);
+        await user.click(invalid);
         await page
           .getByRole("textbox", { name: "Invalid", exact: true })
           .hover();
@@ -169,10 +170,10 @@ describe.each(["light", "dark"] as const)(
         expect(
           contrastRatio(message, resolveColor(wrapper, "--color-surface")),
         ).toBeGreaterThanOrEqual(4.5);
-        await userEvent.tab();
+        await user.tab();
         const readonly = screen.getByRole("textbox", { name: "Read only" });
         expect(readonly).toHaveFocus();
-        await userEvent.type(readonly, "X");
+        await user.type(readonly, "X");
         expect(readonly).toHaveValue("Original");
 
         const color = screen.getByLabelText("Color");
@@ -306,6 +307,7 @@ describe("Input scopes and customization", () => {
   });
 
   it("updates design and scheme without losing an uncontrolled value", async () => {
+    const user = userEvent.setup();
     const view = render(
       <ThemeProvider
         scope="local"
@@ -316,7 +318,7 @@ describe("Input scopes and customization", () => {
       </ThemeProvider>,
     );
     const input = screen.getByRole("textbox", { name: "Name" });
-    await userEvent.type(input, "Ada");
+    await user.type(input, "Ada");
     input.blur();
     view.rerender(
       <ThemeProvider scope="local" designSystem="carbon" colorScheme="light">

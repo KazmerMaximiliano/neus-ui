@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { TimeInput as TimeInputComponent } from "./TimeInput";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { TimeInputStoryArgs } from "./TimeInput.types";
 
 const meta: Meta<TimeInputStoryArgs> = {
@@ -194,9 +194,7 @@ const meta: Meta<TimeInputStoryArgs> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const TimeInput: Story = {
+export const TimeInput: StoryObj<TimeInputStoryArgs> = {
   args: {
     placeholderClassName: undefined,
     placeholderStyle: undefined,

@@ -1,18 +1,9 @@
-import {
-  cleanup,
-  fireEvent as fireCustomization,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../../../providers";
-import {
-  WeekCalendarRow as CustomizationComponent,
-  WeekCalendarRow,
-} from "./WeekCalendarRow";
-import { WeekCalendarRowProps } from "./WeekCalendarRow.types";
+import { ThemeProvider } from "../../../../providers";
+import { WeekCalendarRow } from "./WeekCalendarRow";
+import type { WeekCalendarRowProps } from "./WeekCalendarRow.types";
 
 afterEach(() => {
   cleanup();
@@ -122,24 +113,26 @@ describe("WeekCalendarRow", () => {
   });
 
   describe("onEventClick", () => {
-    it("calls onEventClick with event data when clicking an event cell", () => {
+    it("calls onEventClick with event data when clicking an event cell", async () => {
+      const user = userEvent.setup();
       const handleClick = vi.fn();
       const { container } = renderRow({ onEventClick: handleClick });
       const dayCells = container.querySelectorAll(
         ".week-calendar-row__day-cell",
       );
-      fireEvent.click(dayCells[0]);
+      await user.click(dayCells[0]);
       expect(handleClick).toHaveBeenCalledTimes(1);
       expect(handleClick).toHaveBeenCalledWith(mockEntry.events[0]);
     });
 
-    it("does not call onEventClick when clicking an empty cell", () => {
+    it("does not call onEventClick when clicking an empty cell", async () => {
+      const user = userEvent.setup();
       const handleClick = vi.fn();
       const { container } = renderRow({ onEventClick: handleClick });
       const dayCells = container.querySelectorAll(
         ".week-calendar-row__day-cell",
       );
-      fireEvent.click(dayCells[2]);
+      await user.click(dayCells[2]);
       expect(handleClick).not.toHaveBeenCalled();
     });
 
@@ -187,14 +180,15 @@ describe("WeekCalendarRow", () => {
       ).not.toBeInTheDocument();
     });
 
-    it("renders tooltip on mouse move over event cell", () => {
+    it("renders tooltip on mouse move over event cell", async () => {
+      const user = userEvent.setup();
       const { container } = renderRow({
         hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(
         ".week-calendar-row__day-cell",
       );
-      fireEvent.mouseMove(dayCells[0], { clientX: 100, clientY: 200 });
+      await user.hover(dayCells[0]);
       const tooltip = container.querySelector(
         ".week-calendar-row__hover-tooltip",
       );
@@ -202,7 +196,8 @@ describe("WeekCalendarRow", () => {
       expect(screen.getByText("Test Event")).toBeInTheDocument();
     });
 
-    it("renders tooltip with event data from hoverContent function", () => {
+    it("renders tooltip with event data from hoverContent function", async () => {
+      const user = userEvent.setup();
       const { container } = renderRow({
         hoverContent: (event) => (
           <span data-testid="desc">{event.description}</span>
@@ -211,18 +206,22 @@ describe("WeekCalendarRow", () => {
       const dayCells = container.querySelectorAll(
         ".week-calendar-row__day-cell",
       );
-      fireEvent.mouseMove(dayCells[0], { clientX: 100, clientY: 200 });
+      await user.hover(dayCells[0]);
       expect(screen.getByTestId("desc").textContent).toBe("A description");
     });
 
-    it("positions tooltip at cursor coordinates", () => {
+    it("positions tooltip at cursor coordinates", async () => {
+      const user = userEvent.setup();
       const { container } = renderRow({
         hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(
         ".week-calendar-row__day-cell",
       );
-      fireEvent.mouseMove(dayCells[0], { clientX: 150, clientY: 250 });
+      await user.pointer({
+        target: dayCells[0],
+        coords: { clientX: 150, clientY: 250 },
+      });
       const tooltip = container.querySelector(
         ".week-calendar-row__hover-tooltip",
       );
@@ -234,31 +233,33 @@ describe("WeekCalendarRow", () => {
       ).toBe("250px");
     });
 
-    it("hides tooltip on mouse leave", () => {
+    it("hides tooltip on mouse leave", async () => {
+      const user = userEvent.setup();
       const { container } = renderRow({
         hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(
         ".week-calendar-row__day-cell",
       );
-      fireEvent.mouseMove(dayCells[0], { clientX: 100, clientY: 200 });
+      await user.hover(dayCells[0]);
       expect(
         container.querySelector(".week-calendar-row__hover-tooltip"),
       ).toBeInTheDocument();
-      fireEvent.mouseLeave(dayCells[0]);
+      await user.unhover(dayCells[0]);
       expect(
         container.querySelector(".week-calendar-row__hover-tooltip"),
       ).not.toBeInTheDocument();
     });
 
-    it("does not show tooltip on mouse move over empty cell", () => {
+    it("does not show tooltip on mouse move over empty cell", async () => {
+      const user = userEvent.setup();
       const { container } = renderRow({
         hoverContent: (event) => <span>{event.title}</span>,
       });
       const dayCells = container.querySelectorAll(
         ".week-calendar-row__day-cell",
       );
-      fireEvent.mouseMove(dayCells[2], { clientX: 100, clientY: 200 });
+      await user.hover(dayCells[2]);
       expect(
         container.querySelector(".week-calendar-row__hover-tooltip"),
       ).not.toBeInTheDocument();
@@ -267,24 +268,28 @@ describe("WeekCalendarRow", () => {
 });
 
 describe("event keyboard access", () => {
-  it("exposes event details on focus, dismisses with Escape and activates with Enter/Space", () => {
+  it("exposes event details on focus, dismisses with Escape and activates with Enter/Space", async () => {
+    const user = userEvent.setup();
     const onEventClick = vi.fn();
     renderRow({
       onEventClick,
       hoverContent: (event) => <span>Details: {event.title}</span>,
     });
     const event = screen.getAllByRole("button")[0];
-    fireEvent.focus(event);
+    await user.tab();
+    expect(event).toHaveFocus();
     expect(screen.getByRole("tooltip")).toHaveTextContent(
       "Details: Test Event",
     );
-    fireEvent.keyDown(event, { key: "Escape" });
+    await user.keyboard("{Escape}");
     expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
-    fireEvent.keyDown(event, { key: "Enter" });
-    fireEvent.keyDown(event, { key: " " });
+    await user.keyboard("{Enter}");
+    await user.keyboard(" ");
     expect(onEventClick).toHaveBeenCalledTimes(2);
-    fireEvent.focus(event);
-    fireEvent.blur(event);
+    await user.tab({ shift: true });
+    await user.tab();
+    expect(screen.getByRole("tooltip")).toBeInTheDocument();
+    await user.tab({ shift: true });
     expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
   });
 });
@@ -366,13 +371,14 @@ describe("WeekCalendarRow part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <WeekCalendarRow
             entry={{
               category: { title: "Team", label: "Work" },
               events: [
@@ -393,12 +399,9 @@ describe("WeekCalendarRow part customization", () => {
             hoverContent={(event) => <span>{event.title}</span>}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
-      if (phase === "tooltip")
-        fireCustomization.focus(
-          view.container.querySelector("[tabindex=\"0\"]")!,
-        );
+      if (phase === "tooltip") await user.tab();
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
       for (const target of targets) {
@@ -412,8 +415,8 @@ describe("WeekCalendarRow part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <WeekCalendarRow
             entry={{
               category: { title: "Team", label: "Work" },
               events: [
@@ -433,7 +436,7 @@ describe("WeekCalendarRow part customization", () => {
             onEventClick={() => { }}
             hoverContent={(event) => <span>{event.title}</span>}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

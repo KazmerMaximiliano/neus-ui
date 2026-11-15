@@ -1,4 +1,4 @@
-import type { Decorator } from "@storybook/react";
+import type { Decorator } from "@storybook/react-vite";
 import { DESIGN_SYSTEMS } from "../src/design-systems";
 import { ThemeProvider } from "../src/providers";
 import type { DesignSystemPreviewArgs } from "./designSystem.types";

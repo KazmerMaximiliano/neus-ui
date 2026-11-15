@@ -2,9 +2,9 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 import { Checkbox } from "../../components/Checkbox";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio, resolveColor } from "./design-systems.test-utils";
+import { contrastRatio, resolveColor } from "./colorContrast";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -22,6 +22,7 @@ const box = (name: string) =>
 
 describe.each(["light", "dark"] as const)("Checkbox designs in %s mode", (scheme) => {
   it.each(SYSTEMS)("renders $id boxes, marks and a visible focus", async (system) => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider scope="local" designSystem={system.id} colorScheme={scheme}>
         <Checkbox label="Off" />
@@ -43,7 +44,7 @@ describe.each(["light", "dark"] as const)("Checkbox designs in %s mode", (scheme
     }
     expect(getComputedStyle(box("Off").querySelector("svg")!).opacity).toBe("0");
 
-    await userEvent.tab();
+    await user.tab();
     expect(screen.getByRole("checkbox", { name: "Off" })).toHaveFocus();
     expect(off.outlineStyle).toBe("solid");
     const label = getComputedStyle(screen.getByText("Off"));
@@ -53,14 +54,15 @@ describe.each(["light", "dark"] as const)("Checkbox designs in %s mode", (scheme
 
 describe("Checkbox interaction", () => {
   it("toggles through its label and keyboard", async () => {
+    const user = userEvent.setup();
     const changes: boolean[] = [];
     render(
       <ThemeProvider scope="local">
         <Checkbox label="Terms" onChange={(checked) => changes.push(checked)} />
       </ThemeProvider>,
     );
-    await userEvent.click(screen.getByText("Terms"));
-    await userEvent.keyboard(" ");
+    await user.click(screen.getByText("Terms"));
+    await user.keyboard(" ");
     expect(changes).toEqual([true, true]);
   });
 });

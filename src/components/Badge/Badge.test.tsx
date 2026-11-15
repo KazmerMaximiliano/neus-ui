@@ -1,13 +1,8 @@
-import {
-  cleanup,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { Badge, Badge as CustomizationComponent } from "./Badge";
-import { BadgeColor } from "./Badge.types";
+import { ThemeProvider } from "../../providers";
+import { Badge } from "./Badge";
+import type { BadgeColor } from "./Badge.types";
 
 afterEach(() => {
   cleanup();
@@ -147,10 +142,10 @@ describe("Badge part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent label="Status" variant="dot" {...overrides} />
-        </CustomizationThemeProvider>,
+      const view = render(
+        <ThemeProvider scope="local">
+          <Badge label="Status" variant="dot" {...overrides} />
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -159,9 +154,9 @@ describe("Badge part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent label="Status" variant="dot" />
-        </CustomizationThemeProvider>,
+        <ThemeProvider scope="local">
+          <Badge label="Status" variant="dot" />
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

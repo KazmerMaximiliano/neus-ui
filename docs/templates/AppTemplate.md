@@ -51,7 +51,7 @@ props retain their nullable default.
 | `sidebarContainerClassName` | `string` | Omitted | Additional classes on `.app-template__sidebar` |
 | `sidebarContainerStyle` | `CSSProperties` | Omitted | Inline styles on `.app-template__sidebar` |
 | `children` | `ReactNode` | Required | Content to display in the main area |
-| `routes` | `SidebarItem[]` | Required | Sidebar navigation items; an item with `href` renders a link |
+| `routes` | `readonly SidebarItem[]` | Required | Sidebar navigation items; an item with `href` renders a link |
 | `linkComponent` | `ElementType` | Omitted | Router link passed to Sidebar for routes with `href` |
 | `menu` | `ReactNode` | Omitted | Global actions at the end of the header: user menu, notifications |
 | `headerStart` | `ReactNode` | Omitted | Context at the start of the header: breadcrumb, workspace, search |

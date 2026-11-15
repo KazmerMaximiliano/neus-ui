@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { User } from "lucide-react";
 import { designSystemControl, withDesignSystem } from "../../../.storybook/designSystem";
-import { Dropdown } from "../../components/Dropdown/Dropdown";
+import { DEFAULT_ROUTES, MENU_ITEMS } from "../../../.storybook/fixtures/AppTemplate.consts";
+import { Dropdown } from "../../components/Dropdown";
 import { AppTemplate as AppTemplateComponent } from "./AppTemplate";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { DesignSystemPreviewArgs } from "../../../.storybook/designSystem.types";
 import type { AppTemplateProps } from "./AppTemplate.types";
-import { DEFAULT_ROUTES, MENU_ITEMS } from "../../../.storybook/fixtures/AppTemplate.consts";
 
 const meta: Meta<AppTemplateProps & DesignSystemPreviewArgs> = {
   title: "Templates/AppTemplate",
@@ -57,13 +57,7 @@ const meta: Meta<AppTemplateProps & DesignSystemPreviewArgs> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-
-
-
-
-export const AppTemplate: Story = {
+export const AppTemplate: StoryObj<AppTemplateProps & DesignSystemPreviewArgs> = {
   args: {
     sidebarContainerClassName: undefined,
     sidebarContainerStyle: undefined,

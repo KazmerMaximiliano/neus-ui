@@ -1,7 +1,9 @@
-import type { ActionPalette } from "../design-systems/design-systems.types";
-import type { ColorScheme, ColorVariants, ThemeColors, ThemeConfig } from "../providers/ThemeProvider/ThemeProvider.types";
 import { getDarkenColor } from "./getDarkenColor";
 import { hexToRgb } from "./hexToRgb";
+import type { ActionPalette } from "../design-systems";
+// From the types file, not the ThemeProvider barrel: the Node design-system generator shares this
+// module and must never reach React files.
+import type { ColorScheme, ColorVariants, ThemeColors, ThemeConfig } from "../providers/ThemeProvider/ThemeProvider.types";
 
 const colorVariants = (color: string, scheme: ColorScheme): ColorVariants => {
   const rgb = hexToRgb(color);

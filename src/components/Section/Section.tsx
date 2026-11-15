@@ -1,7 +1,7 @@
 import { createElement } from "react";
-import { Container } from "../Container/Container";
-import "./Section.styles.css";
+import { Container } from "../Container";
 import type { SectionElement, SectionProps } from "./Section.types";
+import "./Section.styles.css";
 
 /** A full-width band of the page with its own background and vertical rhythm. */
 export const Section = <C extends SectionElement = "section">({

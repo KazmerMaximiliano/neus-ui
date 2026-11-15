@@ -1,16 +1,16 @@
+import { createRef } from "react";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createRef } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Card } from "../../components/Card/Card";
+import { Card } from "../../components/Card";
 import previewImage from "../../components/Card/Card.stories.svg";
-import { CardContent } from "../../components/Card/components/CardContent/CardContent";
-import { CardFooter } from "../../components/Card/components/CardFooter/CardFooter";
-import { CardHeader } from "../../components/Card/components/CardHeader/CardHeader";
-import { CardMedia } from "../../components/Card/components/CardMedia/CardMedia";
-import "../../css/app.css";
+import { CardContent } from "../../components/Card/components/CardContent";
+import { CardFooter } from "../../components/Card/components/CardFooter";
+import { CardHeader } from "../../components/Card/components/CardHeader";
+import { CardMedia } from "../../components/Card/components/CardMedia";
 import { ThemeProvider } from "../../providers";
-import { resolveColor } from "./design-systems.test-utils";
+import { resolveColor } from "./colorContrast";
+import "../../css/app.css";
 
 afterEach(cleanup);
 

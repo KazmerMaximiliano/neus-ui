@@ -1,6 +1,6 @@
-import type { DesignSystemId } from "../../design-systems";
-import { DESIGN_SYSTEM_PALETTES } from "../../design-systems/design-systems.consts";
+import { DESIGN_SYSTEM_PALETTES } from "../../design-systems";
 import { resolvePalette } from "../../utils/resolvePalette";
+import type { DesignSystemId } from "../../design-systems";
 import type { ColorScheme, ThemeConfig } from "./ThemeProvider.types";
 
 export const resolveTheme = (

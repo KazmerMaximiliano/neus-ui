@@ -29,7 +29,7 @@ system for the project. The questions the skill asked were answered as a designe
 2. Set it up. Choose a design system for the first variant, or None for the second:
 
    ```bash
-   npx neus init
+   npx neus-ui init
    ```
 
    Wire the stylesheets, `NeusRoot` and the font link it prints, or let the skill do it.
@@ -41,8 +41,8 @@ system for the project. The questions the skill asked were answered as a designe
 4. When it delivers, check the result:
 
    ```bash
-   npx neus lint          # contract breaks, raw elements, component coverage
-   npx neus shot /        # screenshots at 1440 and 390 px in .neus/shots/
+   npx neus-ui lint          # contract breaks, raw elements, component coverage
+   npx neus-ui shot /        # screenshots at 1440 and 390 px in .neus/shots/
    ```
 
    Compare the screenshots with the reference pages here. Your page will differ: the skill
@@ -51,11 +51,11 @@ system for the project. The questions the skill asked were answered as a designe
 ## About the reference code
 
 Each variant folder holds the files the session wrote, as it wrote them: the page, the theme
-and root files `neus init` created, the overrides or derived system, and the spec. Example
+and root files `neus-ui init` created, the overrides or derived system, and the spec. Example
 content the brief did not give (testimonials, names, team members) is marked `SAMPLE:` in the
 code. To run one, copy its `src/`, `index.html`, `neus.config.json` and `design/` into a Vite
 project with neus-ui and `lucide-react` installed, then start the dev server.
 
-The screenshots were taken with `neus shot` conditions (full page, 1440 and 390 px wide) on the
+The screenshots were taken with `neus-ui shot` conditions (full page, 1440 and 390 px wide) on the
 library version in this repository. These folders are documentation only: they are not part of
 the npm package and are not linted with the library code.

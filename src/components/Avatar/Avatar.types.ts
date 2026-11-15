@@ -6,19 +6,19 @@ export type AvatarShape = "circle" | "rounded";
 
 export type AvatarProps = Omit<ComponentPropsWithRef<"span">, "children"> & {
   /** Person or organization; gives the initials and the accessible name. */
-  name: string;
+  readonly name: string;
   /** Picture; the initials show while it is missing or when it fails to load. */
-  src?: string;
+  readonly src?: string;
   /** Accessible name; defaults to name. Pass "" when the name is already written beside the avatar. */
-  alt?: string;
+  readonly alt?: string;
   /** Defaults to the enclosing AvatarGroup's size, then medium. */
-  size?: AvatarSize;
+  readonly size?: AvatarSize;
   /** Overrides the system's avatar shape. */
-  shape?: AvatarShape;
-  imageClassName?: string;
-  imageStyle?: CSSProperties;
-  initialsClassName?: string;
-  initialsStyle?: CSSProperties;
+  readonly shape?: AvatarShape;
+  readonly imageClassName?: string;
+  readonly imageStyle?: CSSProperties;
+  readonly initialsClassName?: string;
+  readonly initialsStyle?: CSSProperties;
 };
 
-export type AvatarStoryArgs = AvatarProps & { designSystem: DesignSystemId };
+export type AvatarStoryArgs = AvatarProps & { readonly designSystem: DesignSystemId };

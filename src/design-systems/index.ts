@@ -1,2 +1,7 @@
-export { DESIGN_SYSTEMS } from "./design-systems.consts";
-export type { DesignSystem, DesignSystemId } from "./design-systems.types";
+export { DESIGN_SYSTEMS, DESIGN_SYSTEM_PALETTES } from "./design-systems.consts";
+export type {
+  ActionPalette,
+  DesignSystem,
+  DesignSystemId,
+  DesignSystemPalette,
+} from "./design-systems.types";

@@ -69,7 +69,7 @@ tres características.
 ## Customization decisions
 
 - Level 0: variants above.
-- Level 1: `npx neus init --yes --primary "#A8471F" --brand "..."`.
+- Level 1: `npx neus-ui init --yes --primary "#A8471F" --brand "..."`.
 - Level 2: none in `neus.overrides.css`; ground, ink, faces, shapes and button case live in the derived DESIGN.md (`x-neus`).
 - Level 3: `.signup-card` width inside the band (page CSS).
 

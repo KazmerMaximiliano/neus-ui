@@ -68,6 +68,7 @@ must follow the established directory structure:
 
 ```text
 ComponentName/
+├── index.ts                 # named re-exports other modules import
 ├── ComponentName.tsx
 ├── ComponentName.types.ts
 ├── ComponentName.styles.css
@@ -85,19 +86,32 @@ file with a `tests/` directory containing all tests for that component. See
 Core rules:
 
 - Use named exports for components. Storybook metadata uses a default export.
-- Each family groups its public components and types in a local `index.ts`;
-  `src/components/index.ts` re-exports each family through that entry point.
-- Put all owned rendering subcomponents in `ComponentName/components/`, following Stepper. Small internal parts can be direct files; parts with their own supporting files use `components/PartName/`. Public sections (CardHeader, ModalHeader, WeekCalendarRow) follow the full component conventions in those directories and remain exported from the family index.
+- Every folder module has an `index.ts` that re-exports by name, never with `export *`.
+  Other modules import the folder (`../Button`, `./components/CardHeader`), never a file
+  inside it; files inside a folder import each other directly, never through their own or an
+  ancestor's `index.ts`.
+- A family `index.ts` exports its components, their public types and the internals a sibling
+  family needs (`FieldDescriptionProps`, `getButtonClasses`). `src/components/index.ts`,
+  `src/sections/index.ts` and `src/templates/index.ts` list the public names explicitly, so
+  those internals never reach the package. Add a new public name to both barrels.
+- Hooks, utilities and services stay one flat file until they gain types, constants or a
+  test; then they become a folder with an `index.ts` (`hooks/useResponsive/`,
+  `utils/hexToRgb/`).
+- Put all owned rendering subcomponents in `ComponentName/components/`, following Stepper. Small internal parts can be direct files; parts with their own supporting files (types included) use `components/PartName/` with an `index.ts`. Public sections (CardHeader, ModalHeader, WeekCalendarRow) follow the full component conventions in those directories and remain exported from the family index.
 - Shared internal parts keep one owner: TimeInput reuses DateInput's PickerField, Dropdown reuses MenuItems, and MultiSelect reuses SelectListbox. Contexts, hooks, types, constants and utilities keep their dedicated files outside `components/`.
-- Keep props and shared types in `ComponentName.types.ts`.
+- Keep props and shared types in `ComponentName.types.ts`. Use `type`, never `enum` or a
+  convenience `interface`; every prop is `readonly` and received arrays are `readonly T[]`.
+  Type-only imports use `import type`.
 - Keep styles in `ComponentName.styles.css`; use theme CSS variables.
 - Declare static arrays, defaults, selectors, key maps and stable configuration in `ComponentName.consts.ts`, with named UPPER_SNAKE_CASE exports. Use `.consts.ts`, not `.constants.ts`. Derived values, hooks, contexts and mutable runtime state stay with their owning logic.
 - Generate localized date text with native Intl or expose consumer configuration; do not hardcode user-facing month names in one language.
 - Keep a single test file beside the component. When multiple test files are needed, place all of them in `ComponentName/tests/`, retaining descriptive filenames.
 - Public sections have their own tests and stories. Small internal parts can reuse parent styles and types and be exercised by the parent's tests without exposing extra public stories.
-- Use ES module imports and follow the project import order. Keep the import block
-  contiguous, without blank lines between declarations or categories. Multiline
-  import declarations are allowed.
+- Use ES module imports and follow the project import order: React and external
+  packages, internal modules from the farthest relative path to the nearest, `import type`,
+  the module's own `.consts` and `.utils`, then CSS with its own `.styles.css` last. Keep the
+  import block contiguous, without blank lines between declarations or categories.
+  Multiline import declarations are allowed.
 - Prefer semantic React Testing Library queries over implementation details.
 - Keep components typed, focused, and compatible with React 19+.
 
@@ -106,8 +120,8 @@ Recommended import order:
 ```text
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "../Button/Button";
-import { useColors } from "../theme";
+import { useColors } from "../../hooks/useColors";
+import { Button } from "../Button";
 import type { ComponentNameProps } from "./ComponentName.types";
 import { getComponentClasses } from "./ComponentName.utils";
 import "./ComponentName.styles.css";

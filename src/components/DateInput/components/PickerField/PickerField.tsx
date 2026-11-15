@@ -1,8 +1,8 @@
 import { useId } from "react";
 import { usePopover } from "../../../../hooks/usePopover";
+import type { PickerFieldProps } from "./PickerField.types";
 import "../../../../css/field.css";
 import "./PickerField.styles.css";
-import type { PickerFieldProps } from "./PickerField.types";
 
 export const PickerField = ({
   placeholderClassName,

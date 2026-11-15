@@ -1,10 +1,10 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, render, screen } from "@testing-library/react";
 import { createRef, type AnchorHTMLAttributes } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, expectTypeOf, it } from "vitest";
-import type { SiteFooterProps } from "../../sections";
-import { SiteFooter } from "../../sections";
+import { SiteFooter } from "./SiteFooter";
 import * as stories from "./SiteFooter.stories";
+import type { SiteFooterProps } from "./SiteFooter.types";
 
 afterEach(cleanup);
 

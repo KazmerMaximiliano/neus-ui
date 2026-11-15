@@ -71,7 +71,7 @@ props retain their nullable default.
 | `eventStyle` | `CSSProperties` | Omitted | Inline styles on `.week-calendar-row__event--single/start/continue/end`, `.week-calendar-row__event-content` |
 | `tooltipStyle` | `CSSProperties` | Omitted | Inline styles on `.week-calendar-row__hover-tooltip` |
 | `title` | `string` | `"Calendar"` | The title displayed in the calendar header |
-| `events` | `EventsByCategory[]` | `[]` | Array of event categories with their events |
+| `events` | `readonly EventsByCategory[]` | `[]` | Array of event categories with their events |
 | `hoverContent` | `((event: CalendarEvent) => React.ReactNode)` | Omitted | Render function called with the hovered CalendarEvent, returns a React node displayed as tooltip at the cursor position |
 | `onEventClick` | `((event: CalendarEvent) => void)` | Omitted | Callback fired when clicking an event cell, receives the CalendarEvent |
 | `onDayChange` | `((weekStart: Date, weekEnd: Date) => void)` | Omitted | Callback fired when navigating to a different day, receives weekStart and weekEnd dates |

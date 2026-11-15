@@ -1,15 +1,9 @@
-import {
-  cleanup,
-  fireEvent as fireCustomization,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../../providers";
-import { Calendar, Calendar as CustomizationComponent } from "../Calendar";
-import { CalendarProps } from "../Calendar.types";
+import { ThemeProvider } from "../../../providers";
+import { Calendar } from "../Calendar";
+import type { CalendarProps } from "../Calendar.types";
 
 afterEach(() => {
   cleanup();
@@ -155,32 +149,34 @@ describe("Calendar accessibility and parts", () => {
   });
 
   it("opens the month picker from a keyboard-reachable caption", async () => {
+    const user = userEvent.setup();
     renderCalendar({ defaultValue: new Date(2026, 4, 10) });
     const caption = screen.getByRole("button", { name: /May 2026/ });
     caption.focus();
-    await userEvent.keyboard("{Enter}");
+    await user.keyboard("{Enter}");
     const may = screen.getByRole("button", { name: "May" });
     expect(may).toHaveAttribute("aria-pressed", "true");
     expect(may).toHaveAttribute("type", "button");
-    await userEvent.click(screen.getByRole("button", { name: "2026" }));
+    await user.click(screen.getByRole("button", { name: "2026" }));
     expect(
       screen.getByRole("button", { name: "2026", pressed: true }),
     ).toHaveFocus();
-    await userEvent.keyboard("{Escape}");
+    await user.keyboard("{Escape}");
     expect(
       screen.queryByRole("button", { name: "May" }),
     ).not.toBeInTheDocument();
   });
 
   it("does not submit an enclosing form from the pickers", async () => {
+    const user = userEvent.setup();
     const onSubmit = vi.fn((event: Event) => event.preventDefault());
     render(
       <form onSubmit={(e) => onSubmit(e.nativeEvent)}>
         <Calendar mode="single" defaultValue={new Date(2026, 4, 10)} />
       </form>,
     );
-    await userEvent.click(screen.getByRole("button", { name: /May 2026/ }));
-    await userEvent.click(screen.getByRole("button", { name: "June" }));
+    await user.click(screen.getByRole("button", { name: /May 2026/ }));
+    await user.click(screen.getByRole("button", { name: "June" }));
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
@@ -215,6 +211,7 @@ describe("typed selection behavior", () => {
   it.each([true, false])(
     "honors required=%s in multiple mode",
     async (required) => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       render(
         <Calendar
@@ -225,7 +222,7 @@ describe("typed selection behavior", () => {
         />,
       );
       const selected = screen.getByRole("button", { name: /October 15, 2026/ });
-      await userEvent.click(selected);
+      await user.click(selected);
       if (required) expect(onChange).not.toHaveBeenCalled();
       else expect(onChange).toHaveBeenCalledWith([]);
     },
@@ -239,13 +236,14 @@ describe("typed selection behavior", () => {
 });
 
 it("allows switching an uncontrolled calendar between selection modes", async () => {
+  const user = userEvent.setup();
   const date = new Date(2026, 9, 15);
   const { container, rerender } = render(
     <Calendar defaultValue={date} name="mode" />,
   );
   rerender(<Calendar mode="multiple" name="mode" />);
   expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue("");
-  await userEvent.click(
+  await user.click(
     screen.getByRole("button", { name: /October 15, 2026/ }),
   );
   expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue(
@@ -259,6 +257,7 @@ describe("native date localization", () => {
   it.each(["en-US", "es-AR", "fr-FR", "de-DE", "ja-JP", "ar-SA"])(
     "localizes the caption, weekdays, month picker and selection in %s",
     async (language) => {
+      const user = userEvent.setup();
       const selected = new Date(2026, 9, 15);
       const onChange = vi.fn();
       const { container } = render(
@@ -294,7 +293,7 @@ describe("native date localization", () => {
           new Date(2026, 9, 11),
         ),
       );
-      await userEvent.click(
+      await user.click(
         screen.getByRole("button", { name: caption.format(selected) }),
       );
       expect(container.querySelectorAll(".calendar__month-item")).toHaveLength(
@@ -306,7 +305,7 @@ describe("native date localization", () => {
           pressed: true,
         }),
       ).toBeInTheDocument();
-      await userEvent.click(
+      await user.click(
         screen.getByRole("button", {
           name: month.format(new Date(2026, 0, 1)),
         }),
@@ -316,7 +315,7 @@ describe("native date localization", () => {
           name: caption.format(new Date(2026, 0, 1)),
         }),
       ).toBeInTheDocument();
-      await userEvent.click(
+      await user.click(
         container.querySelector<HTMLButtonElement>(
           ".rdp-day[data-day=\"2026-01-20\"] button",
         )!,
@@ -326,11 +325,12 @@ describe("native date localization", () => {
   );
 
   it("switches language without losing the selected value or current view", async () => {
+    const user = userEvent.setup();
     const selected = new Date(2026, 9, 15);
     const { container, rerender } = render(
       <Calendar language="en-US" defaultValue={selected} name="date" />,
     );
-    await userEvent.click(screen.getByRole("button", { name: "October 2026" }));
+    await user.click(screen.getByRole("button", { name: "October 2026" }));
     rerender(<Calendar language="es-AR" defaultValue={selected} name="date" />);
     expect(
       screen.getByRole("button", { name: "octubre", pressed: true }),
@@ -338,7 +338,7 @@ describe("native date localization", () => {
     expect(container.querySelector("input[type=\"hidden\"]")).toHaveValue(
       selected.toISOString(),
     );
-    await userEvent.keyboard("{Escape}");
+    await user.keyboard("{Escape}");
     expect(
       screen.getByRole("button", { name: "octubre de 2026" }),
     ).toBeInTheDocument();
@@ -460,13 +460,14 @@ describe("Calendar part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <Calendar
             label="Date"
             required
             error="Invalid"
@@ -474,14 +475,14 @@ describe("Calendar part customization", () => {
             language="en-US"
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       if (phase === "month" || phase === "year")
-        fireCustomization.click(
+        await user.click(
           view.container.querySelector(".rdp-caption_label")!,
         );
       if (phase === "year")
-        fireCustomization.click(
+        await user.click(
           view.container.querySelector(".calendar__overlay-year-btn")!,
         );
       const targets = view.container.querySelectorAll(".consumer-part");
@@ -491,15 +492,15 @@ describe("Calendar part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <Calendar
             label="Date"
             required
             error="Invalid"
             defaultValue={new Date(2026, 9, 16)}
             language="en-US"
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

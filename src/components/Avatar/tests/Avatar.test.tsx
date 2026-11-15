@@ -1,10 +1,10 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, expectTypeOf, it } from "vitest";
-import type { AvatarProps } from "../../../index";
-import { Avatar } from "../../../index";
+import { Avatar } from "../Avatar";
 import * as stories from "../Avatar.stories";
+import type { AvatarProps } from "../Avatar.types";
 
 afterEach(cleanup);
 

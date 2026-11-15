@@ -1,11 +1,11 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import type { ComponentPropsWithRef } from "react";
 import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
-import type { CardMediaProps } from "../../../../index";
 import { CardMedia } from "./CardMedia";
 import * as stories from "./CardMedia.stories";
+import type { ComponentPropsWithRef } from "react";
+import type { CardMediaProps } from "./CardMedia.types";
 
 afterEach(cleanup);
 

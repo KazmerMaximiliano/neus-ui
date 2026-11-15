@@ -1,9 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { MapRuntime } from "./components/MapRuntime";
-import "./InteractiveMap.styles.css";
 import type { InteractiveMapProps } from "./InteractiveMap.types";
 import { parseCoordinates } from "./InteractiveMap.utils";
+import "./InteractiveMap.styles.css";
 
+// Takes `props` whole because MapRuntime receives every one of them.
 export const InteractiveMap = (props: InteractiveMapProps) => {
   const { onError } = props;
   const error = useMemo(

@@ -2,9 +2,12 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { FileType, FileUploader } from "../../components/FileUploader";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio, flatten, resolveColor } from "./design-systems.test-utils";
+import { contrastRatio, flatten, resolveColor } from "./colorContrast";
+import "../../css/app.css";
+
+// Typed with the public FileType, which must stay usable as a value and as a type.
+const CONTRACT_TYPES: FileType[] = [FileType.PDF];
 
 afterEach(cleanup);
 
@@ -19,9 +22,10 @@ const SYSTEMS = [
 
 describe.each(["light", "dark"] as const)("FileUploader designs in %s mode", (scheme) => {
   it.each(SYSTEMS)("renders the $id drop area with legible hints and keyboard focus", async (system) => {
+    const user = userEvent.setup();
     const { container } = render(
       <ThemeProvider scope="local" designSystem={system.id} colorScheme={scheme}>
-        <FileUploader allowedTypes={[FileType.PDF]} label="Contract" error="Too big" onChange={vi.fn()} />
+        <FileUploader allowedTypes={CONTRACT_TYPES} label="Contract" error="Too big" onChange={vi.fn()} />
       </ThemeProvider>,
     );
     const area = container.querySelector(".file-uploader__area") as HTMLElement;
@@ -38,7 +42,7 @@ describe.each(["light", "dark"] as const)("FileUploader designs in %s mode", (sc
       contrastRatio(error.color, flatten(error.backgroundColor, surface)),
     ).toBeGreaterThanOrEqual(4.5);
 
-    await userEvent.tab();
+    await user.tab();
     expect(screen.getByLabelText("Contract")).toHaveFocus();
     expect(styles.outlineStyle).toBe("solid");
   });
@@ -46,17 +50,18 @@ describe.each(["light", "dark"] as const)("FileUploader designs in %s mode", (sc
 
 describe("FileUploader selection in the browser", () => {
   it("selects files through the native input and clears them", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const { container } = render(
       <ThemeProvider scope="local">
-        <FileUploader allowedTypes={[FileType.PDF]} label="Contract" onChange={onChange} />
+        <FileUploader allowedTypes={CONTRACT_TYPES} label="Contract" onChange={onChange} />
       </ThemeProvider>,
     );
     const file = new File(["%PDF"], "contract.pdf", { type: "application/pdf" });
     // The drop area is the input's label; uploading through it mirrors a real click.
-    await userEvent.upload(container.querySelector("label") as HTMLLabelElement, file);
+    await user.upload(container.querySelector("label") as HTMLLabelElement, file);
     expect(onChange).toHaveBeenLastCalledWith({ files: [file], totalSize: 4 });
-    await userEvent.click(screen.getByRole("button", { name: "Delete files" }));
+    await user.click(screen.getByRole("button", { name: "Delete files" }));
     expect(onChange).toHaveBeenLastCalledWith(null);
   });
 });

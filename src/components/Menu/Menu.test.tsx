@@ -1,16 +1,9 @@
-import {
-  cleanup,
-  fireEvent as fireCustomization,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Settings as CustomizationIcon, MoreVertical } from "lucide-react";
+import { Settings, MoreVertical } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { Menu as CustomizationComponent, Menu } from "./Menu";
+import { ThemeProvider } from "../../providers";
+import { Menu } from "./Menu";
 
 afterEach(cleanup);
 
@@ -52,62 +45,68 @@ describe("Menu", () => {
 
   describe("interactions", () => {
     it("opens, focuses the first item and closes on a second click", async () => {
+      const user = userEvent.setup();
       render(<Menu text="Options" items={items()} />);
       const trigger = screen.getByRole("button", { name: "Options" });
-      await userEvent.click(trigger);
+      await user.click(trigger);
       expect(trigger).toHaveAttribute("aria-expanded", "true");
       expect(screen.getByRole("menu", { name: "Options" })).toBeInTheDocument();
       expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveFocus();
-      await userEvent.click(trigger);
+      await user.click(trigger);
       expect(screen.queryByRole("menuitem")).not.toBeInTheDocument();
     });
 
     it("moves focus with arrow keys and skips disabled items", async () => {
+      const user = userEvent.setup();
       render(<Menu text="Options" items={items()} />);
-      await userEvent.click(screen.getByRole("button", { name: "Options" }));
-      await userEvent.keyboard("{ArrowDown}");
+      await user.click(screen.getByRole("button", { name: "Options" }));
+      await user.keyboard("{ArrowDown}");
       expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus();
-      await userEvent.keyboard("{ArrowDown}");
+      await user.keyboard("{ArrowDown}");
       expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveFocus();
-      await userEvent.keyboard("{End}");
+      await user.keyboard("{End}");
       expect(screen.getByRole("menuitem", { name: "Delete" })).toHaveFocus();
-      await userEvent.keyboard("{Home}");
+      await user.keyboard("{Home}");
       expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveFocus();
     });
 
     it("runs the item action, closes and returns focus to the trigger", async () => {
+      const user = userEvent.setup();
       const list = items();
       render(<Menu text="Options" items={list} />);
       const trigger = screen.getByRole("button", { name: "Options" });
-      await userEvent.click(trigger);
-      await userEvent.click(screen.getByRole("menuitem", { name: "Delete" }));
+      await user.click(trigger);
+      await user.click(screen.getByRole("menuitem", { name: "Delete" }));
       expect(list[2].onClick).toHaveBeenCalledOnce();
       expect(screen.queryByRole("menu")).not.toBeInTheDocument();
       expect(trigger).toHaveFocus();
     });
 
     it("closes on Escape with focus restored and on outside clicks", async () => {
+      const user = userEvent.setup();
       render(<Menu text="Options" items={items()} />);
       const trigger = screen.getByRole("button", { name: "Options" });
-      await userEvent.click(trigger);
-      await userEvent.keyboard("{Escape}");
+      await user.click(trigger);
+      await user.keyboard("{Escape}");
       expect(trigger).toHaveAttribute("aria-expanded", "false");
       expect(trigger).toHaveFocus();
-      await userEvent.click(trigger);
-      fireEvent.mouseDown(document.body);
+      await user.click(trigger);
+      await user.click(document.body);
       expect(trigger).toHaveAttribute("aria-expanded", "false");
     });
 
     it("closes when focus leaves with Tab", async () => {
+      const user = userEvent.setup();
       render(<Menu text="Options" items={items()} />);
-      await userEvent.click(screen.getByRole("button", { name: "Options" }));
-      await userEvent.tab();
+      await user.click(screen.getByRole("button", { name: "Options" }));
+      await user.tab();
       expect(screen.queryByRole("menuitem")).not.toBeInTheDocument();
     });
   });
 
   describe("customization", () => {
     it("applies menuStyle and itemStyle to their parts", async () => {
+      const user = userEvent.setup();
       render(
         <Menu
           text="Options"
@@ -116,7 +115,7 @@ describe("Menu", () => {
           itemStyle={{ paddingLeft: 30 }}
         />,
       );
-      await userEvent.click(screen.getByRole("button", { name: "Options" }));
+      await user.click(screen.getByRole("button", { name: "Options" }));
       expect(screen.getByRole("menu")).toHaveStyle({ minWidth: "300px" });
       expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveStyle({
         paddingLeft: "30px",
@@ -166,24 +165,25 @@ describe("Menu part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <Menu
             text="Actions"
-            icon={phase === "icon" ? CustomizationIcon : undefined}
+            icon={phase === "icon" ? Settings : undefined}
             items={[
               { label: "Edit", onClick: () => { } },
               { label: "Delete", onClick: () => { } },
             ]}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
-      fireCustomization.click(view.container.querySelector("button")!);
+      await user.click(view.container.querySelector("button")!);
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
       for (const target of targets) {
@@ -191,16 +191,16 @@ describe("Menu part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <Menu
             text="Actions"
-            icon={phase === "icon" ? CustomizationIcon : undefined}
+            icon={phase === "icon" ? Settings : undefined}
             items={[
               { label: "Edit", onClick: () => { } },
               { label: "Delete", onClick: () => { } },
             ]}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

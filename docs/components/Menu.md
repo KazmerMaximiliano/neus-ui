@@ -50,7 +50,7 @@ retain their nullable default.
 | `icon` | `IconButtonIcon` | Omitted | Icon-only trigger rendered with the IconButton recipe |
 | `text` | `string` | Omitted | Trigger label; names the icon trigger when an icon is set |
 | `size` | `MenuSize` | `"medium"` | Size of the trigger |
-| `items` | `MenuItem[]` | Required | Menu items with label, onClick and optional disabled |
+| `items` | `readonly MenuItem[]` | Required | Menu items with label, onClick and optional disabled |
 | `menuStyle` | `CSSProperties` | Omitted | Inline styles on `.menu__panel` |
 | `itemStyle` | `CSSProperties` | Omitted | Inline styles on `.menu__item` |
 
@@ -64,9 +64,9 @@ package export.
 type MenuSize = "small" | "medium" | "large";
 
 type MenuItem = {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
+  readonly label: string;
+  readonly onClick: () => void;
+  readonly disabled?: boolean;
 };
 ```
 

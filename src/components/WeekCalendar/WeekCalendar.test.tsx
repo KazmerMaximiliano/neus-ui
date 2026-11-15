@@ -1,24 +1,16 @@
-import {
-  cleanup,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
 import { ThemeProvider } from "../../providers/ThemeProvider";
-import {
-  WeekCalendar as CustomizationComponent,
-  WeekCalendar,
-} from "./WeekCalendar";
-import { WeekCalendarProps } from "./WeekCalendar.types";
+import { WeekCalendar } from "./WeekCalendar";
+import type { WeekCalendarProps } from "./WeekCalendar.types";
 
 afterEach(() => {
   cleanup();
 });
 
-it("forwards existing event/category hooks and their class counterparts to rows", () => {
+it("forwards existing event/category hooks and their class counterparts to rows", async () => {
+  const user = userEvent.setup();
   const today = new Date();
   const end = new Date(today);
   end.setDate(end.getDate() + 3);
@@ -48,7 +40,7 @@ it("forwards existing event/category hooks and their class counterparts to rows"
   expect(events.length).toBeGreaterThan(1);
   for (const event of events)
     expect(event).toHaveStyle({ outlineOffset: "7px" });
-  fireEvent.focus(view.container.querySelector("[tabindex=\"0\"]")!);
+  await user.click(view.container.querySelector("[tabindex=\"0\"]")!);
   expect(view.container.querySelector(".consumer-tooltip")).toHaveStyle({
     outlineOffset: "8px",
   });
@@ -141,7 +133,8 @@ describe("WeekCalendar", () => {
       expect(buttons).toHaveLength(2);
     });
 
-    it("navigates to the previous day", () => {
+    it("navigates to the previous day", async () => {
+      const user = userEvent.setup();
       const { container } = renderWeekCalendar();
       const weekSelector = container.querySelector(".week-calendar__selector");
       const initialText = weekSelector?.textContent;
@@ -149,13 +142,14 @@ describe("WeekCalendar", () => {
       const prevButton = container.querySelectorAll(
         ".week-calendar__selector button",
       )[0];
-      fireEvent.click(prevButton);
+      await user.click(prevButton);
 
       const updatedText = weekSelector?.textContent;
       expect(updatedText).not.toBe(initialText);
     });
 
-    it("navigates to the next day", () => {
+    it("navigates to the next day", async () => {
+      const user = userEvent.setup();
       const { container } = renderWeekCalendar();
       const weekSelector = container.querySelector(".week-calendar__selector");
       const initialText = weekSelector?.textContent;
@@ -163,7 +157,7 @@ describe("WeekCalendar", () => {
       const nextButton = container.querySelectorAll(
         ".week-calendar__selector button",
       )[1];
-      fireEvent.click(nextButton);
+      await user.click(nextButton);
 
       const updatedText = weekSelector?.textContent;
       expect(updatedText).not.toBe(initialText);
@@ -192,7 +186,8 @@ describe("WeekCalendar", () => {
   });
 
   describe("onDayChange", () => {
-    it("calls onDayChange when navigating to previous day", () => {
+    it("calls onDayChange when navigating to previous day", async () => {
+      const user = userEvent.setup();
       const handleDayChange = vi.fn();
       const { container } = renderWeekCalendar({
         onDayChange: handleDayChange,
@@ -200,7 +195,7 @@ describe("WeekCalendar", () => {
       const prevButton = container.querySelectorAll(
         ".week-calendar__selector button",
       )[0];
-      fireEvent.click(prevButton);
+      await user.click(prevButton);
       expect(handleDayChange).toHaveBeenCalledTimes(1);
       expect(handleDayChange).toHaveBeenCalledWith(
         expect.any(Date),
@@ -208,7 +203,8 @@ describe("WeekCalendar", () => {
       );
     });
 
-    it("calls onDayChange when navigating to next day", () => {
+    it("calls onDayChange when navigating to next day", async () => {
+      const user = userEvent.setup();
       const handleDayChange = vi.fn();
       const { container } = renderWeekCalendar({
         onDayChange: handleDayChange,
@@ -216,7 +212,7 @@ describe("WeekCalendar", () => {
       const nextButton = container.querySelectorAll(
         ".week-calendar__selector button",
       )[1];
-      fireEvent.click(nextButton);
+      await user.click(nextButton);
       expect(handleDayChange).toHaveBeenCalledTimes(1);
       expect(handleDayChange).toHaveBeenCalledWith(
         expect.any(Date),
@@ -224,7 +220,8 @@ describe("WeekCalendar", () => {
       );
     });
 
-    it("provides weekEnd 6 days after weekStart", () => {
+    it("provides weekEnd 6 days after weekStart", async () => {
+      const user = userEvent.setup();
       const handleDayChange = vi.fn();
       const { container } = renderWeekCalendar({
         onDayChange: handleDayChange,
@@ -232,23 +229,25 @@ describe("WeekCalendar", () => {
       const nextButton = container.querySelectorAll(
         ".week-calendar__selector button",
       )[1];
-      fireEvent.click(nextButton);
+      await user.click(nextButton);
       const [start, end] = handleDayChange.mock.calls[0];
       const diffDays = Math.round((end.getTime() - start.getTime()) / 86400000);
       expect(diffDays).toBe(6);
     });
 
-    it("does not throw when onDayChange is not provided", () => {
+    it("does not throw when onDayChange is not provided", async () => {
+      const user = userEvent.setup();
       const { container } = renderWeekCalendar();
       const prevButton = container.querySelectorAll(
         ".week-calendar__selector button",
       )[0];
-      expect(() => fireEvent.click(prevButton)).not.toThrow();
+      await expect(user.click(prevButton)).resolves.not.toThrow();
     });
   });
 
   describe("hoverContent", () => {
-    it("passes hoverContent to event rows and renders with event data", () => {
+    it("passes hoverContent to event rows and renders with event data", async () => {
+      const user = userEvent.setup();
       const { container } = renderWeekCalendar({
         events: mockEvents,
         hoverContent: (event) => <span>{event.title}</span>,
@@ -261,14 +260,15 @@ describe("WeekCalendar", () => {
           cell.querySelector("[class*='week-calendar-row__event--']") !== null,
       );
       if (eventCell) {
-        fireEvent.mouseMove(eventCell, { clientX: 100, clientY: 200 });
+        await user.hover(eventCell);
         expect(screen.getByText("John Doe")).toBeInTheDocument();
       }
     });
   });
 
   describe("onEventClick", () => {
-    it("passes onEventClick to event rows", () => {
+    it("passes onEventClick to event rows", async () => {
+      const user = userEvent.setup();
       const handleClick = vi.fn();
       const { container } = renderWeekCalendar({
         events: mockEvents,
@@ -278,7 +278,7 @@ describe("WeekCalendar", () => {
         ".week-calendar-row__day-cell--clickable",
       );
       if (clickableCells.length > 0) {
-        fireEvent.click(clickableCells[0]);
+        await user.click(clickableCells[0]);
         expect(handleClick).toHaveBeenCalledTimes(1);
         expect(handleClick).toHaveBeenCalledWith(
           expect.objectContaining({ title: "John Doe" }),
@@ -363,16 +363,16 @@ describe("WeekCalendar part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <WeekCalendar
             title="Schedule"
             events={[
               { category: { title: "Team", label: "Work" }, events: [] },
             ]}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -381,14 +381,14 @@ describe("WeekCalendar part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <WeekCalendar
             title="Schedule"
             events={[
               { category: { title: "Team", label: "Work" }, events: [] },
             ]}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

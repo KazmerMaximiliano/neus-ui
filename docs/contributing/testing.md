@@ -8,7 +8,7 @@ subdirectory.
 
 ## Run Tests
 
-The CLI tests run `neus init`, which imports the built `dist/theme.js`: run `pnpm build`
+The CLI tests run `neus-ui init`, which imports the built `dist/theme.js`: run `pnpm build`
 once in a fresh clone before the tests.
 
 ```bash
@@ -85,8 +85,9 @@ src/components/Calendar/
 Do not mix root-level test files with files inside `tests/`. Keep descriptive filenames and
 adjust relative imports when moving tests. Use `.test.tsx` for component/JSX tests and
 `.test.ts` for tests without JSX. Subcomponents follow the same rule within their own
-directories. Shared browser suites remain in `src/design-systems/tests/`; standalone utility
-tests remain beside their utilities. Generator validation and synchronization tests live in
+directories. Shared browser suites remain in `src/design-systems/tests/`, which the library
+build excludes. A hook, utility or service with a test is a folder module, so its test sits
+in that folder (`src/utils/hexToRgb/hexToRgb.test.ts`). Generator validation and synchronization tests live in
 `src/design-systems/tooling/tests/` and run with `pnpm test:unit` in the Node project.
 
 Owned subcomponents live in `ComponentName/components/`. Public sections keep their tests
@@ -105,55 +106,79 @@ pnpm test:unit src/components/Calendar/tests/
 
 ## Basic Test Pattern
 
+A test imports the files of the module it tests (`./Button`, `./Button.types`,
+`./Button.utils`), never a package entry such as `src/index.ts`. Other modules come through
+their folder's `index.ts`.
+
 ```tsx
+// src/components/Button/Button.test.tsx
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { Button } from "neus-ui";
-import "@testing-library/jest-dom/vitest";
+import { describe, expect, it, vi } from "vitest";
+import { Button } from "./Button";
 
 describe("Button", () => {
   describe("rendering", () => {
-    it("renders label", () => {
+    it("renders the label", () => {
       render(<Button label="Click me" />);
+
       expect(screen.getByRole("button", { name: /click me/i })).toBeInTheDocument();
     });
   });
 
   describe("interactions", () => {
-    it("calls onClick", async () => {
+    it("calls onClick after a user click", async () => {
+      const user = userEvent.setup();
       const handleClick = vi.fn();
       render(<Button label="Click" onClick={handleClick} />);
-      await userEvent.click(screen.getByRole("button"));
-      expect(handleClick).toHaveBeenCalled();
+
+      await user.click(screen.getByRole("button"));
+
+      expect(handleClick).toHaveBeenCalledOnce();
     });
   });
 
   describe("states", () => {
-    it("is disabled when disabled prop is true", () => {
+    it("disables the button", () => {
       render(<Button label="Disabled" disabled />);
+
       expect(screen.getByRole("button")).toBeDisabled();
     });
   });
 });
 ```
 
+- Name tests by behavior in the present tense ("renders…", "calls…", "does not call…").
+- Interact through one `userEvent.setup()` instance per test. Keep `fireEvent` only for
+  events user-event cannot produce: `load`, `error`, media events, drag and drop, a native
+  `<dialog>`'s `cancel` and `close`, and inputs it cannot drive such as `type="color"`.
+  Browser suites that already import `userEvent` from `vitest/browser` keep that API.
+- Documented part classes and the forwarding of `className`/`*ClassName` and
+  `style`/`*Style` are public API, so asserting them is part of the contract. Assert
+  behavior through roles, labels and ARIA state.
+- A test that checks a story's own wiring renders it with `composeStories` from
+  `@storybook/react-vite`.
+- A helper shared by several test files is a plain module named after what it does, such as
+  `src/design-systems/tests/colorContrast.ts`; no `.test-utils` suffix.
+
 ## Testing with ThemeProvider
 
 Components using `useColors()` require `ThemeProvider` in tests:
 
 ```tsx
-import { Button, ThemeProvider } from "neus-ui";
+// src/components/Button/Button.test.tsx
 import { render, screen } from "@testing-library/react";
-import { it, expect } from "vitest";
-import "@testing-library/jest-dom/vitest";
+import { expect, it } from "vitest";
+import { ThemeProvider } from "../../providers/ThemeProvider";
+import { Button } from "./Button";
 
-it("renders with theme", () => {
+it("renders inside a theme", () => {
   render(
     <ThemeProvider>
       <Button label="Test" />
-    </ThemeProvider>
+    </ThemeProvider>,
   );
+
   expect(screen.getByRole("button")).toBeInTheDocument();
 });
 ```
@@ -201,7 +226,7 @@ pnpm test -- -t "Button"
 ## Configuration
 
 - **`vitest.setup.ts`** — imports `@testing-library/jest-dom/vitest` matchers
-- **`vite.config.ts`** — defines `unit` (jsdom), `ssr` (every story rendered with `renderToString` in Node, `*.ssr.test.tsx`), `cli` (`neus init` and the skill scripts, `cli/**/*.test.mjs`), `design-system-generator` (Node), `design-systems` (computed CSS and interactions in Chromium), and `storybook` (stories in Chromium)
+- **`vite.config.ts`** — defines `unit` (jsdom), `ssr` (every story rendered with `renderToString` in Node, `*.ssr.test.tsx`), `cli` (`neus-ui init` and the skill scripts, `cli/**/*.test.mjs`), `design-system-generator` (Node), `design-systems` (computed CSS and interactions in Chromium), and `storybook` (stories in Chromium)
 
 Design-system browser tests verify all six palettes in both color schemes, independent
 Button variants and sizes, nested scope resets, runtime switching, loader overrides,
