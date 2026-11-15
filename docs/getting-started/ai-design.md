@@ -31,6 +31,9 @@ it again at any time to change the system or colors: it rewrites the managed fil
 yours and updates the `data-design-system` / `data-color-scheme` values it finds in the
 root layout.
 
+In a terminal, every `neus-ui` command opens with a half-second NEUS banner and the version.
+Pipes, agents and `--json` get the output alone.
+
 ## What it writes
 
 | File | Owner | Purpose |

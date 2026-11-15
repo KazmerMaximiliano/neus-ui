@@ -119,7 +119,7 @@ const resolveOptions = async (argv, root, theme) => {
   if (values.styles) config.paths.styles = toPosix(values.styles);
 
   if (!values.yes && process.stdin.isTTY) {
-    intro("neus-ui");
+    intro("Set up this project");
     if (!detectProject(root)) {
       config.rendering = await select({
         message: "How does this project render?",
