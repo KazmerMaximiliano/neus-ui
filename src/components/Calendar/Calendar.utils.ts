@@ -1,6 +1,5 @@
-import type { DateRange } from "react-day-picker";
+import type { CalendarLocalization, CalendarSelection } from "./Calendar.types";
 import { DEFAULT_LANGUAGE, MONTH_COUNT, MONTH_REFERENCE_YEAR } from "./Calendar.consts";
-import type { CalendarLocalization } from "./Calendar.types";
 
 const resolveLanguage = (language: string): string => {
   try {
@@ -43,7 +42,7 @@ export const getCalendarLocalization = (language = DEFAULT_LANGUAGE): CalendarLo
 };
 
 export const serializeValue = (
-  val: Date | Date[] | DateRange | undefined,
+  val: CalendarSelection,
 ): string => {
   if (!val) return "";
   if (val instanceof Date) return val.toISOString();

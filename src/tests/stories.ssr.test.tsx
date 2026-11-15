@@ -1,8 +1,8 @@
-import { composeStories } from "@storybook/react";
-import type { ComponentType } from "react";
 import { renderToString } from "react-dom/server";
+import { composeStories } from "@storybook/react-vite";
 import { describe, expect, it } from "vitest";
 import { ThemeProvider } from "../providers";
+import type { ComponentType } from "react";
 
 // Every public component, section and template has one story with complete args.
 const STORY_MODULES = import.meta.glob<Parameters<typeof composeStories>[0]>(

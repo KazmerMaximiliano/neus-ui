@@ -1,13 +1,13 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { Badge } from "../../components/Badge";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
 import {
   contrastRatio,
   flatten,
   resolveColor,
-} from "./design-systems.test-utils";
+} from "./colorContrast";
+import "../../css/app.css";
 
 afterEach(cleanup);
 

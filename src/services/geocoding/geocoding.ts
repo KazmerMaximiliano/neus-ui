@@ -1,20 +1,4 @@
-interface LocationData {
-  address: string;
-  country: string;
-  state: string;
-  city: string;
-}
-
-interface AddressComponent {
-  long_name: string;
-  short_name: string;
-  types: string[];
-}
-
-interface GeocodeResult {
-  formatted_address: string;
-  address_components: AddressComponent[];
-}
+import type { AddressComponent, GeocodeResult, LocationData } from "./geocoding.types";
 
 // Perform reverse geocoding of coordinates using Google Geocoding API
 export async function reverseGeocode(

@@ -1,11 +1,11 @@
+import { createRef, useState } from "react";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createRef, useState } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Modal } from "./Modal";
-import { ModalContent } from "./components/ModalContent/ModalContent";
-import { ModalFooter } from "./components/ModalFooter/ModalFooter";
-import { ModalHeader } from "./components/ModalHeader/ModalHeader";
+import { ModalContent } from "./components/ModalContent";
+import { ModalFooter } from "./components/ModalFooter";
+import { ModalHeader } from "./components/ModalHeader";
 
 afterEach(cleanup);
 
@@ -113,7 +113,8 @@ describe("Modal", () => {
       expect(dialog).toHaveAttribute("open");
     });
 
-    it("asks to close on backdrop clicks but not on content clicks", () => {
+    it("asks to close on backdrop clicks but not on content clicks", async () => {
+      const user = userEvent.setup();
       const onClose = vi.fn();
       const onClick = vi.fn();
       render(
@@ -121,22 +122,23 @@ describe("Modal", () => {
           <ModalContent>Body</ModalContent>
         </Modal>,
       );
-      fireEvent.click(screen.getByText("Body"));
+      await user.click(screen.getByText("Body"));
       expect(onClose).not.toHaveBeenCalled();
-      fireEvent.click(screen.getByRole("dialog"));
+      await user.click(screen.getByRole("dialog"));
       expect(onClose).toHaveBeenCalledOnce();
       expect(onClick).toHaveBeenCalledTimes(2);
     });
 
     it("closes from a child action and returns focus to the opener", async () => {
+      const user = userEvent.setup();
       const onClose = vi.fn();
       render(<Example onClose={onClose} />);
       const opener = screen.getByRole("button", { name: "Open" });
-      await userEvent.click(opener);
+      await user.click(opener);
       expect(
         screen.getByRole("dialog", { name: "Delete project" }),
       ).toBeInTheDocument();
-      await userEvent.click(screen.getByRole("button", { name: "Cancel" }));
+      await user.click(screen.getByRole("button", { name: "Cancel" }));
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
       expect(onClose).not.toHaveBeenCalled();
       expect(opener).toHaveFocus();

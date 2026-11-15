@@ -1,4 +1,4 @@
-import { SelectListboxContent } from "./SelectListboxContent";
+import { SelectListboxContent } from "./components/SelectListboxContent";
 import type { SelectListboxProps } from "./SelectListbox.types";
 
 export const SelectListbox = ({

@@ -1,8 +1,8 @@
 import { createElement, type CSSProperties } from "react";
 import { resolveResponsive } from "../../utils/resolveResponsive";
-import { spaceValue } from "../Stack/Stack.utils";
-import "./Grid.styles.css";
+import { spaceValue } from "../Stack";
 import type { GridElement, GridProps } from "./Grid.types";
+import "./Grid.styles.css";
 
 /** Equal-width columns that change at 768px and 1024px, or as many as fit `minItemWidth`. */
 export const Grid = <C extends GridElement = "div">({

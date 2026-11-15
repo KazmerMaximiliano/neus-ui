@@ -1,10 +1,10 @@
 import { parseDocument } from "yaml";
+import type { DerivedDocument, DesignDocument, ModeDeclarations, TokenValue } from "./design-systems.types";
 import {
   COLOR_MODES, COMPONENT_KEYS, DERIVED_EXTENSION_KEYS, DIMENSION_GROUPS, DIMENSION_PATTERN, DOCUMENT_KEYS,
   EXTENSION_KEYS, MODES, PALETTE_KEYS, PALETTE_VARIABLE_PATTERN, RECIPE_NAMES, REFERENCE_PATTERN,
   SECTION_NAMES, SYSTEM_IDS, TEXT_KEYS, TOKEN_GROUPS, TYPOGRAPHY_DIMENSIONS, TYPOGRAPHY_KEYS,
 } from "./design-systems.consts";
-import type { DerivedDocument, DesignDocument, ModeDeclarations, TokenValue } from "./design-systems.types";
 
 // Pure DESIGN.md parsing and rendering, without the file system or the Google linter, so the
 // `neus-ui` CLI can validate and compile a project's derived system from the published package.

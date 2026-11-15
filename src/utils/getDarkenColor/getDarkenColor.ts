@@ -1,5 +1,5 @@
-import { hexToRgb } from "./hexToRgb";
-import { rgbToHex } from "./rgbToHex";
+import { hexToRgb } from "../hexToRgb";
+import { rgbToHex } from "../rgbToHex";
 
 export const getDarkenColor = (hex: string, percent: number): string => {
   const rgb = hexToRgb(hex);

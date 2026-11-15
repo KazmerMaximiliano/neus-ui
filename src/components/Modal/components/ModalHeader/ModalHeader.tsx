@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ModalTitleContext } from "../../ModalContext";
-import "./ModalHeader.styles.css";
 import type { ModalHeaderProps } from "./ModalHeader.types";
+import "./ModalHeader.styles.css";
 
 export const ModalHeader = ({
   children,

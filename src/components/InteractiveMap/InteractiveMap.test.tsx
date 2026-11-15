@@ -1,24 +1,10 @@
-import type {
-  GoogleMapProps,
-  MarkerProps,
-  StandaloneSearchBoxProps,
-} from "@react-google-maps/api";
-import {
-  act,
-  cleanup,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { ThemeProvider } from "../../providers";
 import { reverseGeocode } from "../../services/geocoding";
-import {
-  InteractiveMap as CustomizationComponent,
-  InteractiveMap,
-} from "./InteractiveMap";
+import { InteractiveMap } from "./InteractiveMap";
+import type { GoogleMapProps, MarkerProps, StandaloneSearchBoxProps } from "@react-google-maps/api";
 import type { InteractiveMapProps } from "./InteractiveMap.types";
 import { parseCoordinates } from "./InteractiveMap.utils";
 
@@ -168,12 +154,11 @@ describe("InteractiveMap", () => {
     expect(screen.getByDisplayValue("Córdoba")).toBeInTheDocument();
     expect(sdk.center).toHaveBeenCalledWith({ lat: -31, lng: -64 });
   });
-  it("ignores clicks without a coordinate and permits search typing", () => {
+  it("ignores clicks without a coordinate and permits search typing", async () => {
+    const user = userEvent.setup();
     renderMap();
     act(() => sdk.map.onClick?.({ latLng: null } as google.maps.MapMouseEvent));
-    fireEvent.change(screen.getByRole("textbox"), {
-      target: { value: "New place" },
-    });
+    await user.type(screen.getByRole("textbox"), "New place");
     expect(screen.getByDisplayValue("New place")).toBeInTheDocument();
     expect(reverseGeocode).not.toHaveBeenCalled();
   });
@@ -310,14 +295,14 @@ describe("InteractiveMap part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <InteractiveMap
             googleMapsApiKey={phase === "error" ? "" : "test-key"}
             initialCoordinates="-31,-64"
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -326,12 +311,12 @@ describe("InteractiveMap part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <InteractiveMap
             googleMapsApiKey={phase === "error" ? "" : "test-key"}
             initialCoordinates="-31,-64"
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { Files, House, LogOut, Settings, User } from "lucide-react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Sidebar as SidebarComponent } from "./Sidebar";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { SidebarStoryArgs } from "./Sidebar.types";
 import "../../templates/AppTemplate/AppTemplate.styles.css";
 import "./Sidebar.stories.css";
-import type { SidebarStoryArgs } from "./Sidebar.types";
 
 const meta: Meta<SidebarStoryArgs> = {
   title: "Navigation/Sidebar",

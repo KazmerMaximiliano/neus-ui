@@ -1,18 +1,10 @@
-import {
-  act,
-  cleanup,
-  fireEvent as fireCustomization,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { Settings as CustomizationIcon, House } from "lucide-react";
 import { renderToString } from "react-dom/server";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Settings, House } from "lucide-react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { Sidebar as CustomizationComponent, Sidebar } from "./Sidebar";
+import { ThemeProvider } from "../../providers";
+import { Sidebar } from "./Sidebar";
 import { lockSidebarScroll } from "./Sidebar.utils";
 
 const resize = (width: number) =>
@@ -121,11 +113,12 @@ describe("Sidebar navigation", () => {
   });
 
   it("supports empty navigation, absent title and missing callbacks", async () => {
+    const user = userEvent.setup();
     const { rerender, container } = render(<Sidebar items={[]} />);
     expect(screen.getByRole("navigation")).toBeEmptyDOMElement();
     expect(container.querySelector(".sidebar__title")).not.toBeInTheDocument();
     rerender(<Sidebar items={[{ label: "No callback" }]} />);
-    await userEvent.click(screen.getByRole("button", { name: "No callback" }));
+    await user.click(screen.getByRole("button", { name: "No callback" }));
   });
 
   it("executes callbacks by keyboard without submitting its parent form", async () => {
@@ -205,6 +198,7 @@ describe("Sidebar branding", () => {
   it.each([375, 900, 1280])(
     "accepts custom header children at %i px",
     async (width) => {
+      const user = userEvent.setup();
       resize(width);
       const { container, rerender } = render(
         <Sidebar title="NEUS UI" items={[]} titleStyle={{ fontWeight: 900 }}>
@@ -212,7 +206,7 @@ describe("Sidebar branding", () => {
         </Sidebar>,
       );
       if (width < 768)
-        await userEvent.click(
+        await user.click(
           screen.getByRole("button", { name: "Abrir menú" }),
         );
       expect(screen.getByText("My brand")).toHaveClass("custom-brand");
@@ -262,11 +256,11 @@ describe("Sidebar tablet", () => {
       "data-expanded",
       "false",
     );
-    fireEvent.focus(screen.getByRole("button", { name: "Home" }));
+    await user.tab({ shift: true });
+    expect(screen.getByRole("button", { name: "Home" })).toHaveFocus();
     expect(expand).toHaveAttribute("aria-expanded", "true");
-    fireEvent.blur(screen.getByRole("button", { name: "Home" }), {
-      relatedTarget: expand,
-    });
+    await user.tab({ shift: true });
+    expect(expand).toHaveFocus();
     resize(1024);
     expect(
       screen.queryByRole("button", { name: "Expandir navegación" }),
@@ -277,7 +271,8 @@ describe("Sidebar tablet", () => {
     ).toHaveAttribute("aria-expanded", "false");
   });
 
-  it("supports pointer hover only when the device advertises hover", () => {
+  it("supports pointer hover only when the device advertises hover", async () => {
+    const user = userEvent.setup();
     resize(900);
     vi.stubGlobal(
       "PointerEvent",
@@ -289,12 +284,12 @@ describe("Sidebar tablet", () => {
     vi.stubGlobal("matchMedia", matchMedia);
     const { container } = render(<Sidebar items={[]} />);
     const sidebar = container.querySelector(".sidebar")!;
-    fireEvent.pointerEnter(sidebar);
+    await user.hover(sidebar);
     expect(sidebar).toHaveAttribute("data-expanded", "true");
-    fireEvent.pointerLeave(sidebar);
+    await user.unhover(sidebar);
     expect(sidebar).toHaveAttribute("data-expanded", "false");
     matchMedia.mockReturnValue({ matches: false });
-    fireEvent.pointerEnter(sidebar);
+    await user.hover(sidebar);
     expect(sidebar).toHaveAttribute("data-expanded", "false");
   });
 });
@@ -379,33 +374,47 @@ describe("Sidebar mobile", () => {
   });
 
   it("closes only when a pointer starts and finishes on the backdrop", async () => {
+    const user = userEvent.setup();
     render(<Sidebar items={[{ label: "Home" }]} />);
-    await userEvent.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await user.click(screen.getByRole("button", { name: "Abrir menú" }));
     const dialog = screen.getByRole("dialog");
     vi.spyOn(dialog, "getBoundingClientRect").mockReturnValue(
       new DOMRect(0, 0, 320, 700),
     );
-    fireEvent.pointerDown(dialog, { clientX: 10, clientY: 10 });
-    fireEvent.click(dialog, { clientX: 10, clientY: 10 });
+    await user.pointer({
+      keys: "[MouseLeft]",
+      target: dialog,
+      coords: { clientX: 10, clientY: 10 },
+    });
     expect(dialog).toHaveAttribute("open");
-    fireEvent.pointerDown(screen.getByRole("button", { name: "Home" }));
-    fireEvent.click(dialog, { clientX: 400, clientY: 10 });
+    await user.pointer([
+      {
+        keys: "[MouseLeft>]",
+        target: screen.getByRole("button", { name: "Home" }),
+      },
+      { target: dialog, coords: { clientX: 400, clientY: 10 } },
+      { keys: "[/MouseLeft]" },
+    ]);
     expect(dialog).toHaveAttribute("open");
-    fireEvent.pointerDown(dialog, { clientX: 400, clientY: 10 });
-    fireEvent.click(dialog, { clientX: 400, clientY: 10 });
+    await user.pointer({
+      keys: "[MouseLeft]",
+      target: dialog,
+      coords: { clientX: 400, clientY: 10 },
+    });
     expect(dialog).not.toHaveAttribute("open");
   });
 
   it("releases modal state on resize and unmount without changing existing scroll styles", async () => {
+    const user = userEvent.setup();
     document.body.style.overflow = "scroll";
     const { unmount } = render(<Sidebar items={[]} />);
-    await userEvent.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await user.click(screen.getByRole("button", { name: "Abrir menú" }));
     resize(768);
     expect(document.documentElement).not.toHaveClass("sidebar-scroll-locked");
     expect(screen.getByRole("navigation")).toBeInTheDocument();
     resize(375);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-    await userEvent.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await user.click(screen.getByRole("button", { name: "Abrir menú" }));
     unmount();
     expect(document.documentElement).not.toHaveClass("sidebar-scroll-locked");
     expect(document.body.style.overflow).toBe("scroll");
@@ -534,25 +543,26 @@ describe("Sidebar part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       resize(phase === "mobile" ? 375 : phase === "tablet" ? 900 : 1280);
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <Sidebar
             title="Workspace"
             items={[
-              { label: "Home", icon: CustomizationIcon, active: true },
+              { label: "Home", icon: Settings, active: true },
               { label: "Settings" },
             ]}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       if (phase === "mobile")
-        fireCustomization.click(
+        await user.click(
           view.container.querySelector(".sidebar__toggle")!,
         );
       const targets = view.container.querySelectorAll(".consumer-part");
@@ -562,15 +572,15 @@ describe("Sidebar part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <Sidebar
             title="Workspace"
             items={[
-              { label: "Home", icon: CustomizationIcon, active: true },
+              { label: "Home", icon: Settings, active: true },
               { label: "Settings" },
             ]}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

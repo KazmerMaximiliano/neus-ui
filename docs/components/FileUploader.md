@@ -22,7 +22,7 @@ export const Example = () => {
 
 ## Behavior and accessibility
 
-`allowedTypes` is required and uses the exported FileType enum. `maxWeight` defaults to 10
+`allowedTypes` is required and takes values of the exported `FileType` object (`FileType.PNG`). `maxWeight` defaults to 10
 MiB. Validation checks combined file size first, then count, then allowed type. maxWeight
 limits the total bytes across the selection. `onChange` receives FileUploadData (`files`,
 `totalSize`) on success, or null and a FileUploadError (`type`, `message`) on validation
@@ -86,7 +86,7 @@ props retain their nullable default.
 | `uploadIconStyle` | `CSSProperties` | Omitted | Inline styles on `.file-uploader__upload-icon` |
 | `uploadTextClassName` | `string` | Omitted | Additional classes on `.file-uploader__upload-text` |
 | `uploadTextStyle` | `CSSProperties` | Omitted | Inline styles on `.file-uploader__upload-text` |
-| `allowedTypes` | `FileType[]` | Required | Accepted file types |
+| `allowedTypes` | `readonly FileType[]` | Required | Accepted file types |
 | `maxWeight` | `number` | `10 * 1024 * 1024` | Maximum total size in bytes |
 | `multiple` | `boolean` | `false` | Allows several files |
 | `error` | `string` | Omitted | Error message linked to the input |
@@ -106,24 +106,25 @@ entry point](../../src/components/FileUploader/index.ts). A type shown here is n
 necessarily a package export.
 
 ```ts
-enum FileType {
-  IMAGE = "image/*",
-  JPG = ".jpg,.jpeg",
-  PNG = ".png",
-  SVG = ".svg",
-  GIF = ".gif",
-  WEBP = ".webp",
-  PDF = ".pdf",
-  DOC = ".doc,.docx",
-  XLS = ".xls,.xlsx",
-  TXT = ".txt",
-  ZIP = ".zip",
-  RAR = ".rar",
-  VIDEO = "video/*",
-  AUDIO = "audio/*",
-  CSV = ".csv",
-  JSON = ".json",
-}
+const FileType = {
+  IMAGE: "image/*",
+  JPG: ".jpg,.jpeg",
+  PNG: ".png",
+  SVG: ".svg",
+  GIF: ".gif",
+  WEBP: ".webp",
+  PDF: ".pdf",
+  DOC: ".doc,.docx",
+  XLS: ".xls,.xlsx",
+  TXT: ".txt",
+  ZIP: ".zip",
+  RAR: ".rar",
+  VIDEO: "video/*",
+  AUDIO: "audio/*",
+  CSV: ".csv",
+  JSON: ".json",
+} as const;
+type FileType = (typeof FileType)[keyof typeof FileType];
 
 type FileUploadError = {
   type: "size" | "type" | "count";

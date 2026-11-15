@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { Card } from "../Card/Card";
-import { CardContent } from "../Card/components/CardContent/CardContent";
+import { Card } from "../Card";
+import { CardContent } from "../Card/components/CardContent";
 import { Grid as GridComponent } from "./Grid";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { GridStoryArgs } from "./Grid.types";
 
 const FEATURES = ["Starts from how you feel", "Fits between two meetings", "Learns what works", "Works offline"];

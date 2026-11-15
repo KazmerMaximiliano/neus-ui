@@ -1,12 +1,13 @@
+import { useMemo } from "react";
 import { ModuleRegistry } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useResponsive } from "../../hooks/useResponsive";
-import { IconButton } from "../IconButton/IconButton";
+import { IconButton } from "../IconButton";
 import { NoRowsOverlay } from "./components/NoRowsOverlay";
-import "./DataTable.styles.css";
 import type { DataTableProps } from "./DataTable.types";
 import { DATA_TABLE_GRID_MODULES, DATA_TABLE_THEME } from "./DataTable.consts";
+import "./DataTable.styles.css";
 
 ModuleRegistry.registerModules(DATA_TABLE_GRID_MODULES);
 
@@ -38,6 +39,9 @@ export const DataTable = <T extends object>({
   emptyStateStyle,
 }: DataTableProps<T>) => {
   const { isMobile } = useResponsive();
+  // AG Grid types rowData and columnDefs as mutable arrays: copy the readonly props once per change.
+  const rowData = useMemo(() => [...data], [data]);
+  const gridColumnDefs = useMemo(() => [...columnDefs], [columnDefs]);
   const { current_page, last_page, per_page } = pagination;
   const paginate = (page: number) => {
     if (page === current_page || page < 1 || page > Math.max(1, last_page))
@@ -90,8 +94,8 @@ export const DataTable = <T extends object>({
         >
           <AgGridReact<T>
             theme={DATA_TABLE_THEME}
-            rowData={data}
-            columnDefs={columnDefs}
+            rowData={rowData}
+            columnDefs={gridColumnDefs}
             defaultColDef={{
               sortable: true,
               filter: true,

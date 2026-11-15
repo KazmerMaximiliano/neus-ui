@@ -2,7 +2,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ModuleRegistry, ValidationModule } from "ag-grid-community";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { DataTable } from "../../components/DataTable/DataTable";
+import { DataTable } from "../../components/DataTable";
 import "../../css/app.css";
 
 afterEach(() => {
@@ -15,6 +15,7 @@ ModuleRegistry.registerModules([ValidationModule]);
 
 describe("DataTable grid modules", () => {
   it("registers every module its sorting, filtering and cell styling need", async () => {
+    const user = userEvent.setup();
     const messages: string[] = [];
     const record = (...args: unknown[]) => messages.push(args.map(String).join(" "));
     vi.spyOn(console, "error").mockImplementation(record);
@@ -38,11 +39,11 @@ describe("DataTable grid modules", () => {
     );
     await screen.findByText("Ana");
 
-    await userEvent.click(document.querySelector(".ag-header-cell-label") as HTMLElement);
+    await user.click(document.querySelector(".ag-header-cell-label") as HTMLElement);
     await vi.waitFor(() => expect(document.querySelector(".ag-header-cell")).toHaveAttribute("aria-sort", "ascending"));
 
     for (const button of document.querySelectorAll(".ag-header-cell-filter-button")) {
-      await userEvent.click(button as HTMLElement);
+      await user.click(button as HTMLElement);
     }
     await vi.waitFor(() => expect(document.querySelector(".ag-filter")).not.toBeNull());
 

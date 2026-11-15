@@ -1,6 +1,6 @@
 import { createElement } from "react";
-import "./Container.styles.css";
 import type { ContainerElement, ContainerProps } from "./Container.types";
+import "./Container.styles.css";
 
 /** Centers page content at a maximum width with responsive side padding. */
 export const Container = <C extends ContainerElement = "div">({

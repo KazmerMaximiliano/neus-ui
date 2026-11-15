@@ -1,9 +1,7 @@
-import { render as renderCustomization, fireEvent as fireCustomization } from "@testing-library/react";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { DateInput as CustomizationComponent } from "../DateInput";
-import { ThemeProvider as CustomizationThemeProvider } from "../../../providers";
+import { ThemeProvider } from "../../../providers";
 import { DateInput } from "../DateInput";
 
 afterEach(() => {
@@ -102,10 +100,11 @@ describe("DateInput", () => {
       ).toBeInTheDocument();
     });
 
-    it("does not open dropdown when disabled", () => {
+    it("does not open dropdown when disabled", async () => {
+      const user = userEvent.setup();
       const { container } = renderDateInput({ disabled: true });
       const button = container.querySelector(".date-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".date-input__dropdown"),
       ).not.toBeInTheDocument();
@@ -113,10 +112,11 @@ describe("DateInput", () => {
   });
 
   describe("readonly state", () => {
-    it("does not open dropdown when readonly", () => {
+    it("does not open dropdown when readonly", async () => {
+      const user = userEvent.setup();
       const { container } = renderDateInput({ readonly: true });
       const button = container.querySelector(".date-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".date-input__dropdown"),
       ).not.toBeInTheDocument();
@@ -124,36 +124,39 @@ describe("DateInput", () => {
   });
 
   describe("dropdown", () => {
-    it("opens dropdown on click", () => {
+    it("opens dropdown on click", async () => {
+      const user = userEvent.setup();
       const { container } = renderDateInput();
       const button = container.querySelector(".date-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".date-input__dropdown"),
       ).toBeInTheDocument();
     });
 
-    it("closes dropdown on outside click", () => {
+    it("closes dropdown on outside click", async () => {
+      const user = userEvent.setup();
       const { container } = renderDateInput();
       const button = container.querySelector(".date-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".date-input__dropdown"),
       ).toBeInTheDocument();
-      fireEvent.mouseDown(document.body);
+      await user.click(document.body);
       expect(
         container.querySelector(".date-input__dropdown"),
       ).not.toBeInTheDocument();
     });
 
-    it("toggles dropdown on click", () => {
+    it("toggles dropdown on click", async () => {
+      const user = userEvent.setup();
       const { container } = renderDateInput();
       const button = container.querySelector(".date-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".date-input__dropdown"),
       ).toBeInTheDocument();
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".date-input__dropdown"),
       ).not.toBeInTheDocument();
@@ -183,19 +186,21 @@ describe("DateInput", () => {
   });
 
   describe("modes", () => {
-    it("renders in single mode by default", () => {
+    it("renders in single mode by default", async () => {
+      const user = userEvent.setup();
       const { container } = renderDateInput();
       const button = container.querySelector(".date-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".date-input__dropdown"),
       ).toBeInTheDocument();
     });
 
-    it("renders range mode with a two-month calendar", () => {
+    it("renders range mode with a two-month calendar", async () => {
+      const user = userEvent.setup();
       const { container } = renderDateInput({ mode: "range" });
       const button = container.querySelector(".date-input__field");
-      fireEvent.click(button!);
+      await user.click(button!);
       expect(
         container.querySelector(".date-input__dropdown .calendar"),
       ).toHaveClass("calendar--multiple");
@@ -247,15 +252,16 @@ describe("DateInput accessibility and parts", () => {
   });
 
   it("opens a named dialog with focus on the selected day and closes on Escape", async () => {
+    const user = userEvent.setup();
     renderDateInput({ label: "Birthday", defaultValue: new Date(2024, 0, 15) });
     const field = screen.getByRole("button", { name: /^Birthday / });
-    await userEvent.click(field);
+    await user.click(field);
     expect(field).toHaveAttribute("aria-expanded", "true");
     expect(
       screen.getByRole("dialog", { name: "Birthday: calendario" }),
     ).toBeInTheDocument();
     expect(document.activeElement).toHaveTextContent("15");
-    await userEvent.keyboard("{Escape}");
+    await user.keyboard("{Escape}");
     expect(field).toHaveAttribute("aria-expanded", "false");
     expect(field).toHaveFocus();
   });
@@ -279,6 +285,7 @@ describe("DateInput accessibility and parts", () => {
 
 describe("picker selection and serialization", () => {
   it("selects a date, closes the picker and serializes the uncontrolled value", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const { container } = render(
       <DateInput
@@ -289,8 +296,8 @@ describe("picker selection and serialization", () => {
       />,
     );
     const field = screen.getByRole("button", { name: /^Birthday/ });
-    await userEvent.click(field);
-    await userEvent.click(
+    await user.click(field);
+    await user.click(
       screen.getByRole("button", { name: /October 16, 2026/ }),
     );
     expect(onChange).toHaveBeenLastCalledWith(new Date(2026, 9, 16));
@@ -301,6 +308,7 @@ describe("picker selection and serialization", () => {
     expect(field).toHaveFocus();
   });
   it("can clear a controlled date without restoring the initial selection", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const { rerender, container } = render(
       <DateInput
@@ -310,8 +318,8 @@ describe("picker selection and serialization", () => {
         onChange={onChange}
       />,
     );
-    await userEvent.click(screen.getByRole("button", { name: /^Birthday/ }));
-    await userEvent.click(
+    await user.click(screen.getByRole("button", { name: /^Birthday/ }));
+    await user.click(
       screen.getByRole("button", { name: /October 15, 2026/ }),
     );
     expect(onChange).toHaveBeenLastCalledWith(undefined);
@@ -326,6 +334,7 @@ describe("picker selection and serialization", () => {
     expect(container.querySelector("input[name=\"birthday\"]")).toHaveValue("");
   });
   it("keeps range selection open and exposes shared presentation and panel styles", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const { container } = render(
       <DateInput
@@ -343,8 +352,8 @@ describe("picker selection and serialization", () => {
       />,
     );
     const field = screen.getByRole("button", { name: /^Stay/ });
-    await userEvent.click(field);
-    await userEvent.click(
+    await user.click(field);
+    await user.click(
       screen.getByRole("button", { name: /October 20, 2026/ }),
     );
     expect(onChange).toHaveBeenCalledWith(
@@ -432,27 +441,28 @@ describe("DateInput part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       const overrides = { [cls]: "consumer-part", [sty]: { outlineOffset: "7px" } };
-      const view = renderCustomization(<CustomizationThemeProvider scope="local"><CustomizationComponent
+      const view = render(<ThemeProvider scope="local"><DateInput
         label="Date"
         required
         error="Invalid"
         defaultValue={phase === "placeholder" ? undefined : new Date(2026, 9, 16)}
         {...overrides}
-      /></CustomizationThemeProvider>);
-      fireCustomization.click(view.container.querySelector(".picker-field__field")!);
+      /></ThemeProvider>);
+      await user.click(view.container.querySelector(".picker-field__field")!);
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
       for (const target of targets) {
         expect(target).toHaveClass(base);
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
-      view.rerender(<CustomizationThemeProvider scope="local"><CustomizationComponent
+      view.rerender(<ThemeProvider scope="local"><DateInput
         label="Date"
         required
         error="Invalid"
         defaultValue={phase === "placeholder" ? undefined : new Date(2026, 9, 16)}
-      /></CustomizationThemeProvider>);
+      /></ThemeProvider>);
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {
         expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");

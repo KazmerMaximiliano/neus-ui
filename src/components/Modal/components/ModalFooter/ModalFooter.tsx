@@ -1,5 +1,5 @@
-import "./ModalFooter.styles.css";
 import type { ModalFooterProps } from "./ModalFooter.types";
+import "./ModalFooter.styles.css";
 
 export const ModalFooter = ({
   children,

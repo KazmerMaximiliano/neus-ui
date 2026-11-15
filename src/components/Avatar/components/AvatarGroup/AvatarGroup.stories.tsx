@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../../../design-systems";
 import { ThemeProvider } from "../../../../providers";
 import { Avatar } from "../../Avatar";
 import { AvatarGroup as AvatarGroupComponent } from "./AvatarGroup";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { AvatarGroupStoryArgs } from "./AvatarGroup.types";
 
 const TEAM = ["Valeria Ruiz", "Martín Acosta", "Lucía Benítez", "Tomás Herrera", "Camila Suárez"];
 
 const meta: Meta<AvatarGroupStoryArgs> = {
-  title: "Content/AvatarGroup",
+  title: "Content/Avatar/AvatarGroup",
   component: AvatarGroupComponent,
   tags: ["autodocs"],
   parameters: { layout: "centered" },

@@ -1,11 +1,5 @@
 import { useSyncExternalStore } from 'react';
-
-interface UseResponsiveReturn {
-  isMobile: boolean;
-  isTablet: boolean;
-  isDesktop: boolean;
-  screenWidth: number;
-}
+import type { UseResponsiveReturn } from './useResponsive.types';
 
 const subscribeResize = (notify: () => void) => {
   window.addEventListener('resize', notify);

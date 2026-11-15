@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { Card as CardComponent } from "./Card";
-import "./Card.stories.css";
 import previewImage from "./Card.stories.svg";
+import { CardContent } from "./components/CardContent";
+import { CardFooter } from "./components/CardFooter";
+import { CardHeader } from "./components/CardHeader";
+import { CardMedia } from "./components/CardMedia";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CardStoryArgs } from "./Card.types";
-import { CardContent } from "./components/CardContent/CardContent";
-import { CardFooter } from "./components/CardFooter/CardFooter";
-import { CardHeader } from "./components/CardHeader/CardHeader";
-import { CardMedia } from "./components/CardMedia/CardMedia";
+import "./Card.stories.css";
 
 const meta: Meta<CardStoryArgs> = {
   title: "Base/Card",

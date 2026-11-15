@@ -1,38 +1,38 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { DesignSystemId } from "../../design-systems";
-import type { HeadingLevel } from "../../components/Heading/Heading.types";
-import type { SectionProps } from "../../components/Section/Section.types";
+import type { HeadingLevel } from "../../components/Heading";
+import type { SectionProps } from "../../components/Section";
 
 export type HeroVariant = "split" | "centered" | "media-first";
 
 export type HeroProps = Omit<SectionProps, "title" | "children" | "as" | "container" | "contentClassName" | "contentStyle"> & {
-  title: ReactNode;
+  readonly title: ReactNode;
   /** Short label above the title, when the system's DESIGN.md allows overlines. */
-  eyebrow?: ReactNode;
-  lead?: ReactNode;
+  readonly eyebrow?: ReactNode;
+  readonly lead?: ReactNode;
   /** The primary action, and at most one secondary one. */
-  actions?: ReactNode;
+  readonly actions?: ReactNode;
   /** Microcopy under the actions: what happens next, what it asks of the user. */
-  note?: ReactNode;
+  readonly note?: ReactNode;
   /** The visual anchor: the real interface, a live demo, a picture or a MediaPlaceholder. */
-  media?: ReactNode;
+  readonly media?: ReactNode;
   /** split puts the media beside the text, centered below it, media-first above it. */
-  variant?: HeroVariant;
-  titleAs?: HeadingLevel;
-  bodyClassName?: string;
-  bodyStyle?: CSSProperties;
-  eyebrowClassName?: string;
-  eyebrowStyle?: CSSProperties;
-  titleClassName?: string;
-  titleStyle?: CSSProperties;
-  leadClassName?: string;
-  leadStyle?: CSSProperties;
-  actionsClassName?: string;
-  actionsStyle?: CSSProperties;
-  noteClassName?: string;
-  noteStyle?: CSSProperties;
-  mediaClassName?: string;
-  mediaStyle?: CSSProperties;
+  readonly variant?: HeroVariant;
+  readonly titleAs?: HeadingLevel;
+  readonly bodyClassName?: string;
+  readonly bodyStyle?: CSSProperties;
+  readonly eyebrowClassName?: string;
+  readonly eyebrowStyle?: CSSProperties;
+  readonly titleClassName?: string;
+  readonly titleStyle?: CSSProperties;
+  readonly leadClassName?: string;
+  readonly leadStyle?: CSSProperties;
+  readonly actionsClassName?: string;
+  readonly actionsStyle?: CSSProperties;
+  readonly noteClassName?: string;
+  readonly noteStyle?: CSSProperties;
+  readonly mediaClassName?: string;
+  readonly mediaStyle?: CSSProperties;
 };
 
-export type HeroStoryArgs = HeroProps & { designSystem: DesignSystemId };
+export type HeroStoryArgs = HeroProps & { readonly designSystem: DesignSystemId };

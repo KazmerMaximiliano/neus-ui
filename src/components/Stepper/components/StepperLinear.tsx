@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { StepperProps } from "../Stepper.types";
+import type { StepperProps } from "../Stepper.types";
 
 export const StepperLinear = ({
   barClassName,

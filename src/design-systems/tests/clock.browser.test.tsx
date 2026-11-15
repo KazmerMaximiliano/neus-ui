@@ -1,21 +1,23 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
-import { Clock } from "../../components/Clock/Clock";
+import { Clock } from "../../components/Clock";
 import { ThemeProvider } from "../../providers";
-import "../../css/app.css";
+import { contrastRatio, resolveColor } from "./colorContrast";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
-import { contrastRatio, resolveColor } from "./design-systems.test-utils";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
 describe.each(["light", "dark"] as const)("Clock dial in %s", (scheme) => {
   it.each(DESIGN_SYSTEMS)("keeps exact and partially overlapped numbers legible in $id", async ({ id }) => {
+    const user = userEvent.setup();
     await page.viewport(800, 800);
     const view = render(<ThemeProvider scope="local" designSystem={id} colorScheme={scheme}>
       <Clock value={{ hours: 2, minutes: 11 }} />
     </ThemeProvider>);
-    fireEvent.click(screen.getByRole("button", { name: "Minutos" }));
+    await user.click(screen.getByRole("button", { name: "Minutos" }));
     const face = screen.getByRole("slider", { name: "Minutos" });
     const numbers = view.container.querySelector<HTMLElement>(".clock__numbers")!;
     const hand = view.container.querySelector<HTMLElement>(".clock__hand")!;
@@ -40,7 +42,7 @@ describe.each(["light", "dark"] as const)("Clock dial in %s", (scheme) => {
       if (minute === 11 || minute === 59) expect(view.container.querySelector(".clock__number--selected")).toBeNull();
     }
 
-    fireEvent.click(screen.getByRole("button", { name: "Horas" }));
+    await user.click(screen.getByRole("button", { name: "Horas" }));
     for (const hour of [2, 14]) {
       view.rerender(<ThemeProvider scope="local" designSystem={id} colorScheme={scheme}>
         <Clock value={{ hours: hour, minutes: 11 }} format="24h" />

@@ -1,12 +1,12 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type {} from "@vitest/browser-playwright";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { page } from "vitest/browser";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../components/Button";
 import { ThemeProvider } from "../../providers";
+import { contrastRatio, resolveColor } from "./colorContrast";
+import type {} from "@vitest/browser-playwright";
 import "../../css/app.css";
-import { contrastRatio, resolveColor } from "./design-systems.test-utils";
 
 afterEach(cleanup);
 
@@ -141,9 +141,12 @@ describe("Theme scope isolation and state styles", () => {
     );
     await user.keyboard("{Enter}");
     expect(onClick).toHaveBeenCalledOnce();
-    fireEvent.click(screen.getByRole("button", { name: "Disabled button" }));
-    fireEvent.click(screen.getByRole("button", { name: "Loading button" }));
+    await user.click(screen.getByRole("button", { name: "Disabled button" }));
+    await user.click(screen.getByRole("button", { name: "Loading button" }));
     expect(onClick).toHaveBeenCalledOnce();
+    // Clicking a non-focusable (disabled) button moves focus to the body.
+    await user.tab();
+    expect(button).toHaveFocus();
     await user.tab();
     expect(screen.getByRole("button", { name: "Next action" })).toHaveFocus();
   });

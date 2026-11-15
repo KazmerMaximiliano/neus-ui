@@ -2,49 +2,49 @@ import type { ComponentPropsWithRef, CSSProperties, ElementType, ReactNode } fro
 import type { DesignSystemId } from "../../design-systems";
 
 export type SiteLink = {
-  label: string;
-  href: string;
+  readonly label: string;
+  readonly href: string;
   /** The current page; adds aria-current="page". */
-  active?: boolean;
+  readonly active?: boolean;
 };
 
 export type SiteHeaderLabels = {
   /** Accessible name of the navigation landmark. */
-  navigation?: string;
+  readonly navigation?: string;
   /** Accessible name of the phone menu button. */
-  menu?: string;
+  readonly menu?: string;
   /** Text of the skip link. */
-  skipLink?: string;
+  readonly skipLink?: string;
 };
 
 export type SiteHeaderProps = Omit<ComponentPropsWithRef<"header">, "children"> & {
   /** Logo or name, linked to brandHref. */
-  brand: ReactNode;
-  brandHref?: string;
-  links?: SiteLink[];
+  readonly brand: ReactNode;
+  readonly brandHref?: string;
+  readonly links?: readonly SiteLink[];
   /** Buttons at the end, such as the primary call to action. */
-  actions?: ReactNode;
+  readonly actions?: ReactNode;
   /** sticky keeps the header at the top while the page scrolls. */
-  variant?: "plain" | "sticky";
+  readonly variant?: "plain" | "sticky";
   /** Renders a skip link to this target (for example "#main"), visible on focus. */
-  skipLinkTarget?: string;
-  labels?: SiteHeaderLabels;
+  readonly skipLinkTarget?: string;
+  readonly labels?: SiteHeaderLabels;
   /** Router link component (for example Next.js Link) rendered instead of <a>. */
-  linkComponent?: ElementType;
-  innerClassName?: string;
-  innerStyle?: CSSProperties;
-  brandClassName?: string;
-  brandStyle?: CSSProperties;
-  menuClassName?: string;
-  menuStyle?: CSSProperties;
-  linkClassName?: string;
-  linkStyle?: CSSProperties;
-  actionsClassName?: string;
-  actionsStyle?: CSSProperties;
-  menuButtonClassName?: string;
-  menuButtonStyle?: CSSProperties;
-  skipLinkClassName?: string;
-  skipLinkStyle?: CSSProperties;
+  readonly linkComponent?: ElementType;
+  readonly innerClassName?: string;
+  readonly innerStyle?: CSSProperties;
+  readonly brandClassName?: string;
+  readonly brandStyle?: CSSProperties;
+  readonly menuClassName?: string;
+  readonly menuStyle?: CSSProperties;
+  readonly linkClassName?: string;
+  readonly linkStyle?: CSSProperties;
+  readonly actionsClassName?: string;
+  readonly actionsStyle?: CSSProperties;
+  readonly menuButtonClassName?: string;
+  readonly menuButtonStyle?: CSSProperties;
+  readonly skipLinkClassName?: string;
+  readonly skipLinkStyle?: CSSProperties;
 };
 
-export type SiteHeaderStoryArgs = SiteHeaderProps & { designSystem: DesignSystemId };
+export type SiteHeaderStoryArgs = SiteHeaderProps & { readonly designSystem: DesignSystemId };

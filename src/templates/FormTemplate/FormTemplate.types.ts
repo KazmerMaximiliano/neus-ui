@@ -1,16 +1,16 @@
 import type { CSSProperties, ReactNode } from "react";
 
 export type FormTemplateProps = {
-  actionsClassName?: string;
-  children: ReactNode;
-  submitLabel: string;
-  loading?: boolean;
-  actions?: ReactNode;
-  className?: string;
-  style?: CSSProperties;
-  actionsStyle?: CSSProperties;
-  columns?: number;
-  tabletColumns?: number;
-  mobileColumns?: number;
-  gap?: CSSProperties["gap"];
+  readonly actionsClassName?: string;
+  readonly children: ReactNode;
+  readonly submitLabel: string;
+  readonly loading?: boolean;
+  readonly actions?: ReactNode;
+  readonly className?: string;
+  readonly style?: CSSProperties;
+  readonly actionsStyle?: CSSProperties;
+  readonly columns?: number;
+  readonly tabletColumns?: number;
+  readonly mobileColumns?: number;
+  readonly gap?: CSSProperties["gap"];
 };

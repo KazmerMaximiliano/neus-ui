@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Select as SelectComponent } from "./Select";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { SelectStoryArgs } from "./Select.types";
+import "./Select.stories.css";
 
 const meta: Meta<SelectStoryArgs> = {
   title: "Base/Select",
@@ -231,7 +232,7 @@ export const Select: StoryObj<SelectStoryArgs> = {
   },
   render: ({ designSystem, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>
-      <div style={{ width: 320 }}>
+      <div className="select-story">
         <SelectComponent {...args} />
       </div>
     </ThemeProvider>

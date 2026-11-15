@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Avatar as AvatarComponent } from "./Avatar";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { AvatarStoryArgs } from "./Avatar.types";
 
 const meta: Meta<AvatarStoryArgs> = {

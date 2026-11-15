@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "../../components/Button/Button";
-import { MediaPlaceholder } from "../../components/MediaPlaceholder/MediaPlaceholder";
+import { Button } from "../../components/Button";
+import { MediaPlaceholder } from "../../components/MediaPlaceholder";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Hero as HeroComponent } from "./Hero";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { HeroStoryArgs } from "./Hero.types";
 
 const PART = (part: string) => ({ control: "text" as const, description: `Additional classes on the ${part}` });

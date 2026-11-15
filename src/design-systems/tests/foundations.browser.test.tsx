@@ -2,10 +2,10 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { Alert, Avatar, AvatarGroup, Card, CardContent, Grid, Heading, MediaPlaceholder, Section, Stack, Text } from "../../components";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
+import { contrastRatio, flatten } from "./colorContrast";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
-import { contrastRatio, flatten } from "./design-systems.test-utils";
+import "../../css/app.css";
 
 afterEach(cleanup);
 

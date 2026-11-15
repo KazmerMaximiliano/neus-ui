@@ -5,15 +5,15 @@ import {
   useState,
   type CSSProperties,
 } from "react";
-import "../../design-systems/design-systems.css";
 import { ThemeContext } from "./ThemeContext";
-import "./ThemeProvider.styles.css";
 import type {
   ColorScheme,
   ThemeConfig,
   ThemeProviderProps,
 } from "./ThemeProvider.types";
 import { applyTheme, resolveTheme } from "./ThemeProvider.utils";
+import "../../design-systems/design-systems.css";
+import "./ThemeProvider.styles.css";
 
 export const ThemeProvider = ({
   children,

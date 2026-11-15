@@ -1,3 +1,4 @@
+import type { PixabayPhoto, PixabayPhotoSearch, StoredSearch } from "./pixabay.types";
 import {
   PIXABAY_API_URL,
   PIXABAY_CACHE_TTL_MS,
@@ -6,20 +7,6 @@ import {
   PIXABAY_SEARCH,
   PIXABAY_STORAGE_PREFIX,
 } from "./pixabay.consts";
-
-/** A stock photo found for a query and the name of the person who published it. */
-export type PixabayPhoto = { src: string; credit: string };
-
-export type PixabayPhotoSearch = {
-  key: string;
-  query: string;
-  /** CSS aspect ratio of the frame, which picks the photo's orientation. */
-  ratio: string;
-  /** BCP 47 language of the query; ignored when Pixabay does not support it. */
-  lang?: string;
-};
-
-type StoredSearch = { at: number; photo: PixabayPhoto | null };
 
 // ponytail: settled searches stay in memory while the tab lives and expired storage entries are
 // never pruned; both are a few bytes per query, add a sweep if a page ever searches hundreds.

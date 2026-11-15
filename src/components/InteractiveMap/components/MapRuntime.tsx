@@ -1,18 +1,18 @@
 import {
-  GoogleMap,
-  Marker,
-  StandaloneSearchBox,
-  useJsApiLoader,
-} from "@react-google-maps/api";
-import {
   useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from "react";
+import {
+  GoogleMap,
+  Marker,
+  StandaloneSearchBox,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 import { reverseGeocode } from "../../../services/geocoding";
-import { Input } from "../../Input/Input";
+import { Input } from "../../Input";
 import type {
   InteractiveMapProps,
   MapCoordinates,

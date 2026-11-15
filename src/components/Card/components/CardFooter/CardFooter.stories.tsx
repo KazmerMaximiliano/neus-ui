@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../../../design-systems";
 import { ThemeProvider } from "../../../../providers";
-import { Button } from "../../../Button/Button";
+import { Button } from "../../../Button";
 import { Card } from "../../Card";
-import "../../Card.stories.css";
 import { CardFooter as CardFooterComponent } from "./CardFooter";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CardFooterStoryArgs } from "./CardFooter.types";
+import "../../Card.stories.css";
 
 const meta: Meta<CardFooterStoryArgs> = {
   title: "Base/Card/CardFooter",

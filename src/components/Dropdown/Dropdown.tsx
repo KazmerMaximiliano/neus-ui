@@ -1,9 +1,9 @@
 import { ChevronDown } from "lucide-react";
 import { usePopover } from "../../hooks/usePopover";
 import { MenuItems } from "../Menu/components/MenuItems";
+import type { DropdownProps } from "./Dropdown.types";
 import "../Menu/Menu.styles.css";
 import "./Dropdown.styles.css";
-import { DropdownProps } from "./Dropdown.types";
 
 export const Dropdown = ({
   itemClassName,

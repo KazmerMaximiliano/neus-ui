@@ -1,8 +1,4 @@
-export interface RGB {
-  r: number;
-  g: number;
-  b: number;
-}
+import type { RGB } from "./hexToRgb.types";
 
 export const hexToRgb = (hex: string): RGB | null => {
   const cleanHex = hex.replace('#', '');

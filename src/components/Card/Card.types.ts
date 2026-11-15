@@ -8,12 +8,12 @@ export type CardProps<C extends CardElement = "div"> = Omit<
   ComponentPropsWithRef<NoInfer<C>>,
   "style" | "title" | "color" | "onClick"
 > & {
-  as?: C;
-  variant?: "auto" | "filled" | "outlined" | "elevated";
-  style?: CSSProperties | null;
+  readonly as?: C;
+  readonly variant?: "auto" | "filled" | "outlined" | "elevated";
+  readonly style?: CSSProperties | null;
 };
 
 export type CardStoryArgs = Omit<CardProps, "as"> & {
-  as: CardElement;
-  designSystem: DesignSystemId;
+  readonly as: CardElement;
+  readonly designSystem: DesignSystemId;
 };

@@ -1,16 +1,12 @@
 import type { CSSProperties } from "react";
-
-export type TimeValue = {
-  hours: number;
-  minutes: number;
-};
+import type { TimeValue } from "../../Clock.types";
 
 export type ClockNumbersProps = {
-  numberClassName?: string;
-  numberStyle?: CSSProperties;
-  mode: "hours" | "minutes";
-  format: "12h" | "24h";
-  currentValue: TimeValue;
+  readonly numberClassName?: string;
+  readonly numberStyle?: CSSProperties;
+  readonly mode: "hours" | "minutes";
+  readonly format: "12h" | "24h";
+  readonly currentValue: TimeValue;
 };
 
 export type DialNumber = { key: string; label: string; selected: boolean; inner?: boolean; };

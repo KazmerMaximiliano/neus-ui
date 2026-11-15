@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { MediaPlaceholder as MediaPlaceholderComponent } from "./MediaPlaceholder";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { MediaPlaceholderStoryArgs } from "./MediaPlaceholder.types";
 
 const meta: Meta<MediaPlaceholderStoryArgs> = {

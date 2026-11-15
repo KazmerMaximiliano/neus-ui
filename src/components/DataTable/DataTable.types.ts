@@ -1,38 +1,38 @@
 import type { ColDef, ColGroupDef } from "ag-grid-community";
 import type { CSSProperties, ReactNode } from "react";
 
-export type PaginationInfo = { current_page: number; last_page: number; per_page: number; total: number; };
+export type PaginationInfo = { readonly current_page: number; readonly last_page: number; readonly per_page: number; readonly total: number; };
 export type PaginationChangeParams = { currentPage: number; pageSize: number; };
 export type DataTableColDef<T extends object = object> = ColDef<T> | ColGroupDef<T>;
 export type DataTableEmptyProps = {
-  emptyStateClassName?: string;
-  noRowsDescriptionClassName?: string;
-  noRowsDescriptionStyle?: CSSProperties;
-  noRowsTitleClassName?: string;
-  noRowsTitleStyle?: CSSProperties;
-  noDataTitle?: string;
-  noDataDescription?: string;
-  emptyStateStyle?: CSSProperties;
+  readonly emptyStateClassName?: string;
+  readonly noRowsDescriptionClassName?: string;
+  readonly noRowsDescriptionStyle?: CSSProperties;
+  readonly noRowsTitleClassName?: string;
+  readonly noRowsTitleStyle?: CSSProperties;
+  readonly noDataTitle?: string;
+  readonly noDataDescription?: string;
+  readonly emptyStateStyle?: CSSProperties;
 };
 
 export type DataTableProps<T extends object = object> = DataTableEmptyProps & {
-  cardClassName?: string;
-  cardStyle?: CSSProperties;
-  cardsClassName?: string;
-  cardsStyle?: CSSProperties;
-  gridClassName?: string;
-  gridStyle?: CSSProperties;
-  paginationClassName?: string;
-  paginationInfoClassName?: string;
-  paginationInfoStyle?: CSSProperties;
-  data: T[];
-  columnDefs: DataTableColDef<T>[];
-  pagination: PaginationInfo;
-  renderMobileCard?: (row: T) => ReactNode;
-  onPaginationChange?: (params: PaginationChangeParams) => void;
-  className?: string;
-  style?: CSSProperties;
-  paginationStyle?: CSSProperties;
+  readonly cardClassName?: string;
+  readonly cardStyle?: CSSProperties;
+  readonly cardsClassName?: string;
+  readonly cardsStyle?: CSSProperties;
+  readonly gridClassName?: string;
+  readonly gridStyle?: CSSProperties;
+  readonly paginationClassName?: string;
+  readonly paginationInfoClassName?: string;
+  readonly paginationInfoStyle?: CSSProperties;
+  readonly data: readonly T[];
+  readonly columnDefs: readonly DataTableColDef<T>[];
+  readonly pagination: PaginationInfo;
+  readonly renderMobileCard?: (row: T) => ReactNode;
+  readonly onPaginationChange?: (params: PaginationChangeParams) => void;
+  readonly className?: string;
+  readonly style?: CSSProperties;
+  readonly paginationStyle?: CSSProperties;
 };
 
 export type DataTableSampleRow = { id: number; name: string; email: string; };

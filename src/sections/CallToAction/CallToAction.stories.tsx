@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../components/Button";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { CallToAction as CallToActionComponent } from "./CallToAction";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CallToActionStoryArgs } from "./CallToAction.types";
 
 const PART = (part: string) => ({ control: "text" as const, description: `Additional classes on the ${part}` });

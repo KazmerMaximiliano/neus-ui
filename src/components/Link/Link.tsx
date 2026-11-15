@@ -1,5 +1,5 @@
+import type { LinkProps } from "./Link.types";
 import "./Link.styles.css";
-import { LinkProps } from "./Link.types";
 
 export const Link = ({
   label,

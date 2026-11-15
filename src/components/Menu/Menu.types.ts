@@ -1,46 +1,46 @@
 import type { CSSProperties, ReactNode } from "react";
-import { usePopover } from "../../hooks/usePopover";
+import type { usePopover } from "../../hooks/usePopover";
 import type { DesignSystemId } from "../../design-systems";
 import type { IconButtonIcon } from "../IconButton";
 
 type MenuSize = "small" | "medium" | "large";
 
 export type MenuItem = {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
+  readonly label: string;
+  readonly onClick: () => void;
+  readonly disabled?: boolean;
 };
 
 export type MenuProps = {
-  buttonLabelClassName?: string;
-  buttonLabelStyle?: CSSProperties;
-  className?: string;
-  iconButtonIconClassName?: string;
-  iconButtonIconStyle?: CSSProperties;
-  itemClassName?: string;
-  menuClassName?: string;
-  style?: CSSProperties;
-  triggerClassName?: string;
-  triggerStyle?: CSSProperties;
-  icon?: IconButtonIcon;
-  text?: string;
-  size?: MenuSize;
-  items: MenuItem[];
-  menuStyle?: CSSProperties;
-  itemStyle?: CSSProperties;
+  readonly buttonLabelClassName?: string;
+  readonly buttonLabelStyle?: CSSProperties;
+  readonly className?: string;
+  readonly iconButtonIconClassName?: string;
+  readonly iconButtonIconStyle?: CSSProperties;
+  readonly itemClassName?: string;
+  readonly menuClassName?: string;
+  readonly style?: CSSProperties;
+  readonly triggerClassName?: string;
+  readonly triggerStyle?: CSSProperties;
+  readonly icon?: IconButtonIcon;
+  readonly text?: string;
+  readonly size?: MenuSize;
+  readonly items: readonly MenuItem[];
+  readonly menuStyle?: CSSProperties;
+  readonly itemStyle?: CSSProperties;
 };
 
 export type MenuStoryArgs = MenuProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };
 
 export type MenuItemsProps = {
-  itemClassName?: string;
-  menuClassName?: string;
-  popover: ReturnType<typeof usePopover<HTMLButtonElement, HTMLDivElement>>;
-  label: string;
-  items: MenuItem[];
-  header?: ReactNode;
-  menuStyle?: CSSProperties;
-  itemStyle?: CSSProperties;
+  readonly itemClassName?: string;
+  readonly menuClassName?: string;
+  readonly popover: ReturnType<typeof usePopover<HTMLButtonElement, HTMLDivElement>>;
+  readonly label: string;
+  readonly items: readonly MenuItem[];
+  readonly header?: ReactNode;
+  readonly menuStyle?: CSSProperties;
+  readonly itemStyle?: CSSProperties;
 };

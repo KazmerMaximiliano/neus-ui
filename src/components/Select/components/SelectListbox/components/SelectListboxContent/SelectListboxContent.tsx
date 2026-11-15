@@ -1,8 +1,8 @@
-import { Check } from "lucide-react";
 import { useMemo, useState, type KeyboardEvent } from "react";
-import { focusMenuItem } from "../../../hooks/usePopover";
+import { Check } from "lucide-react";
+import { focusMenuItem } from "../../../../../../hooks/usePopover";
 import type { SelectListboxContentProps } from "./SelectListboxContent.types";
-import { OPTION } from "../Select.consts";
+import { OPTION } from "../../../../Select.consts";
 
 export const SelectListboxContent = ({
   boxClassName,

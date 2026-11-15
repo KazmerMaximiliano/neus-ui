@@ -7,11 +7,11 @@ export type LinkProps = Omit<
   ComponentPropsWithRef<"a">,
   "type" | "children" | "style"
 > & {
-  label: string;
-  type?: LinkType;
-  style?: CSSProperties | null;
+  readonly label: string;
+  readonly type?: LinkType;
+  readonly style?: CSSProperties | null;
 };
 
 export type LinkStoryArgs = LinkProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };

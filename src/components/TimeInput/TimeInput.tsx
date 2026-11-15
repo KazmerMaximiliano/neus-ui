@@ -1,9 +1,9 @@
-import { Clock3 } from "lucide-react";
 import { useState } from "react";
-import { Clock } from "../Clock/Clock";
-import { PickerField } from "../DateInput/components/PickerField/PickerField";
-import { TimeValue } from "../Clock/Clock.types";
-import { TimeInputProps } from "./TimeInput.types";
+import { Clock3 } from "lucide-react";
+import { Clock } from "../Clock";
+import { PickerField } from "../DateInput/components/PickerField";
+import type { TimeValue } from "../Clock";
+import type { TimeInputProps } from "./TimeInput.types";
 import { serializeTimeValue } from "./TimeInput.utils";
 
 export const TimeInput = (props: TimeInputProps) => {
@@ -27,6 +27,7 @@ export const TimeInput = (props: TimeInputProps) => {
     errorStyle,
     onChange,
   } = props;
+  // `props` stays whole: a `value` passed as undefined still makes the field controlled.
   const isControlled = Object.prototype.hasOwnProperty.call(props, "value");
   const [selectedTime, setSelectedTime] = useState<TimeValue | undefined>(
     isControlled ? value : defaultValue,

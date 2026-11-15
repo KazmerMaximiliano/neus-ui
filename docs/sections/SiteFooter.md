@@ -35,7 +35,7 @@ optional and default to undefined unless noted.
 | Prop | Type | Default / requirement | Purpose |
 | --- | --- | --- | --- |
 | `brand` | `ReactNode` | Omitted | Logo or name |
-| `columns` | `SiteFooterColumn[]` | `[]` | `{ title, links: { label, href }[] }` |
+| `columns` | `readonly SiteFooterColumn[]` | `[]` | `{ title, links: { label, href }[] }` |
 | `legal` | `ReactNode` | Omitted | Copyright, address, legal links |
 | `linkComponent` | `ElementType` | `"a"` | Router link component |
 | `className`, `style` | `string`, `CSSProperties` | Omitted | `.site-footer` |

@@ -1,7 +1,7 @@
 import { Sidebar } from "../../components";
+import type { AppTemplateProps } from "./AppTemplate.types";
 import { APP_NAME } from "./AppTemplate.consts";
 import "./AppTemplate.styles.css";
-import type { AppTemplateProps } from "./AppTemplate.types";
 
 export const AppTemplate = ({
   sidebarClassName,

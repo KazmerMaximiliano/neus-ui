@@ -2,56 +2,56 @@ import type { CSSProperties, InputHTMLAttributes, ReactNode } from "react";
 import type { DesignSystemId } from "../../design-systems";
 
 export type FieldPresentationProps = {
-  variant?: "auto" | "filled" | "outlined";
-  labelPlacement?: "auto" | "external" | "floating";
-  size?: "small" | "medium" | "large";
+  readonly variant?: "auto" | "filled" | "outlined";
+  readonly labelPlacement?: "auto" | "external" | "floating";
+  readonly size?: "small" | "medium" | "large";
 };
 
 /** Help text below a field, announced with it through aria-describedby. */
 export type FieldDescriptionProps = {
-  description?: ReactNode;
-  descriptionClassName?: string;
-  descriptionStyle?: CSSProperties;
+  readonly description?: ReactNode;
+  readonly descriptionClassName?: string;
+  readonly descriptionStyle?: CSSProperties;
 };
 
 type InputOwnProps = FieldPresentationProps & FieldDescriptionProps & {
-  className?: string;
-  controlClassName?: string;
-  controlStyle?: CSSProperties;
-  errorClassName?: string;
-  errorIconClassName?: string;
-  inputClassName?: string;
-  labelClassName?: string;
-  prefixClassName?: string;
-  requiredClassName?: string;
-  suffixClassName?: string;
-  prefix?: ReactNode;
-  suffix?: ReactNode;
-  errorIcon?: ReactNode;
-  prefixStyle?: CSSProperties;
-  suffixStyle?: CSSProperties;
-  errorIconStyle?: CSSProperties;
-  id?: string;
-  "aria-label"?: string;
-  name?: string;
-  value?: string | number;
-  defaultValue?: string | number;
-  placeholder?: string;
-  label?: string;
-  error?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  required?: boolean;
-  type?: "text" | "password" | "email" | "number" | "color" | "tel" | "url";
-  min?: string | number;
-  max?: string | number;
-  step?: string | number;
-  wrapperStyle?: CSSProperties;
-  inputStyle?: CSSProperties;
-  labelStyle?: CSSProperties;
-  requiredStyle?: CSSProperties;
-  errorStyle?: CSSProperties;
-  onChange?: (value: string) => void;
+  readonly className?: string;
+  readonly controlClassName?: string;
+  readonly controlStyle?: CSSProperties;
+  readonly errorClassName?: string;
+  readonly errorIconClassName?: string;
+  readonly inputClassName?: string;
+  readonly labelClassName?: string;
+  readonly prefixClassName?: string;
+  readonly requiredClassName?: string;
+  readonly suffixClassName?: string;
+  readonly prefix?: ReactNode;
+  readonly suffix?: ReactNode;
+  readonly errorIcon?: ReactNode;
+  readonly prefixStyle?: CSSProperties;
+  readonly suffixStyle?: CSSProperties;
+  readonly errorIconStyle?: CSSProperties;
+  readonly id?: string;
+  readonly "aria-label"?: string;
+  readonly name?: string;
+  readonly value?: string | number;
+  readonly defaultValue?: string | number;
+  readonly placeholder?: string;
+  readonly label?: string;
+  readonly error?: string;
+  readonly disabled?: boolean;
+  readonly readonly?: boolean;
+  readonly required?: boolean;
+  readonly type?: "text" | "password" | "email" | "number" | "color" | "tel" | "url";
+  readonly min?: string | number;
+  readonly max?: string | number;
+  readonly step?: string | number;
+  readonly wrapperStyle?: CSSProperties;
+  readonly inputStyle?: CSSProperties;
+  readonly labelStyle?: CSSProperties;
+  readonly requiredStyle?: CSSProperties;
+  readonly errorStyle?: CSSProperties;
+  readonly onChange?: (value: string) => void;
 };
 
 /** Native `<input>` attributes (autoComplete, inputMode, spellCheck, pattern, aria-*, data-*…) not replaced by Input's own API. */
@@ -63,7 +63,7 @@ type InputNativeProps = Omit<
 export type InputProps = InputOwnProps & InputNativeProps;
 
 export type InputStoryArgs = InputProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };
 
 export type InputStoryState = {
@@ -73,5 +73,5 @@ export type InputStoryState = {
 };
 
 export type InputStoryPreviewProps = InputStoryArgs & {
-  updateArgs: (args: Partial<InputStoryArgs>) => void;
+  readonly updateArgs: (args: Partial<InputStoryArgs>) => void;
 };

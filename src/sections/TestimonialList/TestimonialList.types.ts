@@ -7,10 +7,10 @@ export type TestimonialVariant = "plain" | "card" | "featured";
 
 export type TestimonialListProps = Omit<ComponentPropsWithRef<"ul">, "children"> & {
   /** Testimonial elements. */
-  children: ReactNode;
-  variant?: TestimonialVariant;
+  readonly children: ReactNode;
+  readonly variant?: TestimonialVariant;
   /** Columns; default 1, 2 from 768px and 3 from 1024px. */
-  columns?: Responsive<number>;
+  readonly columns?: Responsive<number>;
 };
 
-export type TestimonialListStoryArgs = TestimonialListProps & { designSystem: DesignSystemId };
+export type TestimonialListStoryArgs = TestimonialListProps & { readonly designSystem: DesignSystemId };

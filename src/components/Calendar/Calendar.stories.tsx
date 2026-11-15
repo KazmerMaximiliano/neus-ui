@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Calendar as CalendarComponent } from "./Calendar";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CalendarStoryArgs } from "./Calendar.types";
 
 const meta: Meta<CalendarStoryArgs> = {

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { Heading } from "../Heading/Heading";
-import { Text } from "../Text/Text";
+import { Heading } from "../Heading";
+import { Text } from "../Text";
 import { Container as ContainerComponent } from "./Container";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ContainerStoryArgs } from "./Container.types";
 
 const meta: Meta<ContainerStoryArgs> = {

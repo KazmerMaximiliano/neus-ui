@@ -75,9 +75,11 @@ component never asks which system is active.
   `--radius-*`, `--color-focus-ring`), never literal colors. The [token
   reference](../design/tokens.md) lists them.
 - Keep the native element: keyboard, screen readers and forms work without extra code.
-  Follow the conventions in [Development](./development.md): a separate `.types.ts`, a
-  `.consts.ts` for static data, named exports, `className` and `style` on the root, and a
-  `*ClassName` / `*Style` pair for every part.
+  Follow the conventions in [Development](./development.md): an `index.ts` with named
+  re-exports, a separate `.types.ts` with `readonly` props, a `.consts.ts` for static data,
+  named exports, `className` and `style` on the root, and a `*ClassName` / `*Style` pair for
+  every part. List the public names in `src/components/index.ts`, which never uses
+  `export *`.
 
 ## 2. Give it values in all six systems
 
@@ -133,11 +135,13 @@ Then:
 
 ## 3. Story, tests and server rendering
 
-- **One story**, `Slider.stories.tsx`, with every prop in `argTypes` and a `designSystem`
+- **One story**, `Slider.stories.tsx`, typed with `Meta` and `StoryObj` from
+  `@storybook/react-vite`, with every prop in `argTypes` and a `designSystem`
   control that wraps the component in `<ThemeProvider scope="local">`. The
   server-rendering test (`src/tests/stories.ssr.test.tsx`) picks it up automatically and
   renders it with `renderToString`.
-- **Unit tests**, `Slider.test.tsx`: rendering, props, the native value and `onChange`,
+- **Unit tests**, `Slider.test.tsx`, importing `./Slider` and interacting through
+  `userEvent.setup()`: rendering, props, the native value and `onChange`,
   keyboard steps, disabled state, every part hook, and type tests for invalid props
   (`@ts-expect-error`).
 - **A browser suite**, `src/design-systems/tests/slider.browser.test.tsx`, across all six
@@ -233,6 +237,7 @@ Check that the agent picks the Slider instead of writing `<input type="range">`,
 - [ ] Neus baseline in `x-neus.recipes.slider`; the family declared in all six DESIGN.md files, with sourced overrides
 - [ ] `RECIPE_NAMES` and `ADAPTED_COMPONENTS` updated; `pnpm design:generate` run and generated files committed
 - [ ] DESIGN.md prose describes the component in each system
+- [ ] `index.ts` with named re-exports, and the public names listed in `src/components/index.ts`
 - [ ] One story with every prop and a design-system control; unit tests; a browser suite for six systems in light and dark
 - [ ] Guide in `docs/components/` with a complete anatomy and token tables; a catalog row
 - [ ] Need-table row in `SKILL.md`; `customization.md`, `patterns.md` and `neus-rules.md` updated

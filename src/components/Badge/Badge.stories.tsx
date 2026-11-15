@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Badge as BadgeComponent } from "./Badge";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { BadgeStoryArgs } from "./Badge.types";
 
 const meta: Meta<BadgeStoryArgs> = {

@@ -1,7 +1,5 @@
 import type { CSSProperties } from "react";
-
-/** One value for every viewport, or one per breakpoint: base, md (768px and up) and lg (1024px and up). */
-export type Responsive<T> = T | { base: T; md?: T; lg?: T };
+import type { Responsive } from "./resolveResponsive.types";
 
 /**
  * Inline custom properties for a responsive prop: `name`, `name-md` and `name-lg`, always all three,

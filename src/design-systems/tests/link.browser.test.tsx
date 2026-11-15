@@ -2,9 +2,9 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 import { Link } from "../../components/Link";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio, resolveColor } from "./design-systems.test-utils";
+import { contrastRatio, resolveColor } from "./colorContrast";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -19,6 +19,7 @@ const SYSTEMS = [
 
 describe.each(["light", "dark"] as const)("Link designs in %s mode", (scheme) => {
   it.each(SYSTEMS)("renders legible $id links with a visible focus", async (system) => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider scope="local" designSystem={system.id} colorScheme={scheme}>
         <Link label="Primary" />
@@ -34,7 +35,7 @@ describe.each(["light", "dark"] as const)("Link designs in %s mode", (scheme) =>
     expect(getComputedStyle(primary).textDecorationLine).toBe(
       system.underline ? "underline" : "none",
     );
-    await userEvent.tab();
+    await user.tab();
     expect(primary).toHaveFocus();
     expect(getComputedStyle(primary).outlineStyle).toBe("solid");
   });

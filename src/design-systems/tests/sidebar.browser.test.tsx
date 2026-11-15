@@ -5,20 +5,20 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import type {} from "@vitest/browser-playwright";
 import { House } from "lucide-react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cdp, page, userEvent } from "vitest/browser";
 import { Sidebar } from "../../components/Sidebar";
-import "../../components/Sidebar/Sidebar.stories.css";
-import "../../css/app.css";
+import { ThemeProvider } from "../../providers";
+import { AppTemplate } from "../../templates/AppTemplate";
 import {
   contrastRatio,
   flatten,
   resolveColor,
-} from "./design-systems.test-utils";
-import { ThemeProvider } from "../../providers";
-import { AppTemplate } from "../../templates/AppTemplate/AppTemplate";
+} from "./colorContrast";
+import type {} from "@vitest/browser-playwright";
+import "../../components/Sidebar/Sidebar.stories.css";
+import "../../css/app.css";
 
 const ITEMS = [
   { label: "Home", icon: House, active: true },
@@ -405,8 +405,8 @@ describe("Sidebar responsive integration", () => {
     expect(screen.getByRole("button", { name: "Outside" })).toHaveFocus();
     await userEvent.tab();
     await waitFor(() => expect(getComputedStyle(sidebar).width).toBe("250px"));
-    fireEvent.blur(document.activeElement!, { relatedTarget: document.body });
-    (document.activeElement as HTMLElement).blur();
+    await userEvent.tab({ shift: true });
+    expect(screen.getByRole("button", { name: "Outside" })).toHaveFocus();
     fireEvent.pointerEnter(sidebar, { pointerType: "touch" });
     expect(sidebar).toHaveAttribute("data-expanded", "false");
     await userEvent.click(

@@ -1,5 +1,5 @@
-import "./CardFooter.styles.css";
 import type { CardFooterProps } from "./CardFooter.types";
+import "./CardFooter.styles.css";
 
 export const CardFooter = ({
   children,

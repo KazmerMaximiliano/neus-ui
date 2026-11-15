@@ -10,15 +10,15 @@ export type StackAlign = "start" | "center" | "end" | "stretch" | "baseline";
 export type StackJustify = "start" | "center" | "end" | "between";
 
 export type StackProps<C extends StackElement = "div"> = ComponentPropsWithRef<NoInfer<C>> & {
-  as?: C;
+  readonly as?: C;
   /** Main axis; per breakpoint with `{ base, md, lg }` (768px and 1024px). */
-  direction?: Responsive<StackDirection>;
-  gap?: Responsive<SpaceStep>;
+  readonly direction?: Responsive<StackDirection>;
+  readonly gap?: Responsive<SpaceStep>;
   /** Cross-axis alignment of the children. */
-  align?: StackAlign;
+  readonly align?: StackAlign;
   /** Main-axis distribution of the children. */
-  justify?: StackJustify;
-  wrap?: boolean;
+  readonly justify?: StackJustify;
+  readonly wrap?: boolean;
 };
 
-export type StackStoryArgs = Omit<StackProps, "as"> & { as: StackElement; designSystem: DesignSystemId };
+export type StackStoryArgs = Omit<StackProps, "as"> & { readonly as: StackElement; readonly designSystem: DesignSystemId };

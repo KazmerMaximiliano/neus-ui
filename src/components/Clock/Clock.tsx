@@ -1,7 +1,6 @@
 import { useState, type CSSProperties, type KeyboardEvent } from "react";
-import { ClockNumbers } from "./components/ClockNumbers/ClockNumbers";
-import "./Clock.styles.css";
-import { ClockProps, TimeValue } from "./Clock.types";
+import { ClockNumbers } from "./components/ClockNumbers";
+import type { ClockProps, TimeValue } from "./Clock.types";
 import { INNER_RING_THRESHOLD, KEY_STEPS } from "./Clock.consts";
 import {
   getDisplayHours,
@@ -10,6 +9,7 @@ import {
   serializeTimeValue,
   stepTime,
 } from "./Clock.utils";
+import "./Clock.styles.css";
 
 export const Clock = ({
   numberClassName,

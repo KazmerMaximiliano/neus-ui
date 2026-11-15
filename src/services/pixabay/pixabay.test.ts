@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
-import type { PixabayPhotoSearch } from "./pixabay";
+import type { PixabayPhotoSearch } from "./pixabay.types";
 
 const hits = { hits: [{ webformatURL: "https://cdn.pixabay.com/photo/dog_640.jpg", user: "Ana" }] };
 const answer = (body: object, status = 200) =>

@@ -1,6 +1,6 @@
-import "./Heading.styles.css";
 import type { HeadingProps } from "./Heading.types";
 import { HEADING_SIZES } from "./Heading.consts";
+import "./Heading.styles.css";
 
 /** A heading whose document level (`as`) and visual size (`size`) are chosen separately. */
 export const Heading = ({ as: Tag = "h2", size, align = "start", balance = true, className, ...props }: HeadingProps) => (

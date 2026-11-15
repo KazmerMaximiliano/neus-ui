@@ -61,7 +61,7 @@ retain their nullable default.
 | `totalSteps` | `number` | Required | Total number of steps |
 | `variant` | `StepperVariant` | `"dots"` | Visual style: dots (numbered markers), linear (progress bar), simple (compact markers) |
 | `size` | `StepperSize` | `"small"` | Size of the dot indicators (dots variant only) |
-| `labels` | `string[]` | Omitted | Step names; announced even when not shown |
+| `labels` | `readonly string[]` | Omitted | Step names; announced even when not shown |
 | `showLabels` | `boolean` | Omitted | Show step labels (dots) or the step counter (linear) |
 | `showConnectors` | `boolean` | Omitted | Show connector lines between dots (dots variant only) |
 | `dotStyle` | `CSSProperties` | Omitted | Inline styles on `.stepper__dot`, `.stepper__simple-dot` |

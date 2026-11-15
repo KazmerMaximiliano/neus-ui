@@ -1,9 +1,11 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
-import { buildThemeCss } from "../../theme";
-import { ThemeProvider, useTheme } from "../index";
+import { ThemeProvider } from "./ThemeProvider";
+import { useTheme } from "./useTheme";
+import { buildThemeCss } from "./ThemeProvider.utils";
 
 afterEach(cleanup);
 
@@ -31,7 +33,8 @@ describe("ThemeProvider", () => {
     expect(container.querySelector(".neus-theme-scope")).toBeNull();
   });
 
-  it("keeps sibling scopes and the document independent", () => {
+  it("keeps sibling scopes and the document independent", async () => {
+    const user = userEvent.setup();
     const rootStyles = document.documentElement.style.cssText;
     const bodyStyles = document.body.style.cssText;
     const { container } = render(
@@ -41,7 +44,7 @@ describe("ThemeProvider", () => {
       </>,
     );
     const scopes = container.querySelectorAll<HTMLElement>(".neus-theme-scope");
-    fireEvent.click(within(scopes[0]).getByText("Change primary"));
+    await user.click(within(scopes[0]).getByText("Change primary"));
     expect(scopes[0].style.getPropertyValue("--color-primary")).toBe("#123456");
     expect(scopes[1].style.getPropertyValue("--color-primary")).toBe("#0f62fe");
     expect(document.documentElement.style.cssText).toBe(rootStyles);
@@ -70,12 +73,13 @@ describe("ThemeProvider", () => {
     expect(screen.getByText("material/dark/#c8b3fd")).toBeInTheDocument();
   });
 
-  it("updates mode and merges runtime color overrides", () => {
+  it("updates mode and merges runtime color overrides", async () => {
+    const user = userEvent.setup();
     const { container } = render(<ThemeProvider scope="local"><Consumer /></ThemeProvider>);
-    fireEvent.click(screen.getByText("Toggle mode"));
+    await user.click(screen.getByText("Toggle mode"));
     expect(screen.getByText("neus/dark/#a5b4fc")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("Change primary"));
-    fireEvent.click(screen.getByText("Change success"));
+    await user.click(screen.getByText("Change primary"));
+    await user.click(screen.getByText("Change success"));
     expect(screen.getByText("neus/dark/#123456")).toBeInTheDocument();
     expect(screen.getByLabelText("Success color")).toHaveTextContent("#654321");
     const scope = container.querySelector<HTMLElement>(".neus-theme-scope")!;
@@ -83,12 +87,13 @@ describe("ThemeProvider", () => {
     expect(scope.style.getPropertyValue("--color-success")).toBe("#654321");
   });
 
-  it("responds to controlled system and mode changes without retaining old palette values", () => {
+  it("responds to controlled system and mode changes without retaining old palette values", async () => {
+    const user = userEvent.setup();
     const { rerender } = render(<ThemeProvider designSystem="apple" colorScheme="light"><Consumer /></ThemeProvider>);
     rerender(<ThemeProvider designSystem="vercel" colorScheme="dark"><Consumer /></ThemeProvider>);
     expect(screen.getByText("vercel/dark/#ededed")).toBeInTheDocument();
     expect(document.documentElement.style.getPropertyValue("--color-focus")).toBe("#52a8ff");
-    fireEvent.click(screen.getByText("Toggle mode"));
+    await user.click(screen.getByText("Toggle mode"));
     expect(screen.getByText("vercel/dark/#ededed")).toBeInTheDocument();
   });
 

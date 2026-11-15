@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Avatar } from "../../../../components/Avatar/Avatar";
+import { Avatar } from "../../../../components/Avatar";
 import { DESIGN_SYSTEMS } from "../../../../design-systems";
 import { ThemeProvider } from "../../../../providers";
 import { Testimonial as TestimonialComponent } from "./Testimonial";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { TestimonialStoryArgs } from "./Testimonial.types";
 
 const meta: Meta<TestimonialStoryArgs> = {
-  title: "Sections/Testimonial",
+  title: "Sections/TestimonialList/Testimonial",
   component: TestimonialComponent,
   tags: ["autodocs"],
   parameters: { layout: "padded" },

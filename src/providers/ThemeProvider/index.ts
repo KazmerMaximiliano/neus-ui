@@ -1,5 +1,5 @@
 export { ThemeProvider } from "./ThemeProvider";
-export { useTheme } from "./hooks";
+export { useTheme } from "./useTheme";
 export type {
   ColorScheme,
   ThemeColors,

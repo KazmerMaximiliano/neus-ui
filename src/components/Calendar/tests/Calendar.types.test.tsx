@@ -1,5 +1,5 @@
-import type { DateRange } from "react-day-picker";
 import { describe, expectTypeOf, it } from "vitest";
+import type { DateRange } from "react-day-picker";
 import type { CalendarProps } from "../Calendar.types";
 
 describe("Calendar public types", () => {
@@ -12,7 +12,7 @@ describe("Calendar public types", () => {
     >().toEqualTypeOf<DateRange | undefined>();
     expectTypeOf<
       Extract<CalendarProps, { mode: "multiple" }>["value"]
-    >().toEqualTypeOf<Date[] | undefined>();
+    >().toEqualTypeOf<readonly Date[] | undefined>();
     // @ts-expect-error The range mode cannot accept an array of dates.
     const invalidRange: CalendarProps = { mode: "range", value: [new Date()] };
     // @ts-expect-error Calendar no longer accepts the third-party selected prop.

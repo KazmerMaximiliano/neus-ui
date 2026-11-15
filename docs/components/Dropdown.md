@@ -52,7 +52,7 @@ retain their nullable default.
 | `triggerClassName` | `string` | Omitted | Additional classes on `.dropdown__trigger` |
 | `icon` | `IconButtonIcon` | Omitted | Avatar icon; without it the avatar shows the name initial |
 | `name` | `string` | Omitted | Account name shown in the menu header and used as trigger label |
-| `items` | `MenuItem[]` | Required | Menu items with label, onClick and optional disabled |
+| `items` | `readonly MenuItem[]` | Required | Menu items with label, onClick and optional disabled |
 | `triggerStyle` | `CSSProperties` | Omitted | Inline styles on `.dropdown__trigger` |
 | `menuStyle` | `CSSProperties` | Omitted | Inline styles on `.menu__panel` |
 | `itemStyle` | `CSSProperties` | Omitted | Inline styles on `.menu__item` |

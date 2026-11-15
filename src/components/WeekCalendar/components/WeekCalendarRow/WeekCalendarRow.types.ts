@@ -9,56 +9,56 @@ export type DayCellInfo = {
 };
 
 export type EventsByCategory = {
-  category: Category;
-  events: CalendarEvent[];
+  readonly category: Category;
+  readonly events: readonly CalendarEvent[];
 };
 
 export type Category = {
-  color?: string;
-  title: string;
-  label: string;
+  readonly color?: string;
+  readonly title: string;
+  readonly label: string;
 };
 
 export type CalendarEvent = {
-  id?: number;
-  title: string;
-  start: Date;
-  end: Date;
-  description?: string;
+  readonly id?: number;
+  readonly title: string;
+  readonly start: Date;
+  readonly end: Date;
+  readonly description?: string;
 };
 
 export type WeekCalendarRowProps = {
-  categoryClassName?: string;
-  categoryInfoClassName?: string;
-  categoryInfoStyle?: CSSProperties;
-  categoryNameClassName?: string;
-  categoryNameStyle?: CSSProperties;
-  dayCellClassName?: string;
-  dayCellStyle?: CSSProperties;
-  eventAvatarClassName?: string;
-  eventAvatarStyle?: CSSProperties;
-  eventClassName?: string;
-  eventDescriptionClassName?: string;
-  eventDescriptionStyle?: CSSProperties;
-  eventInfoClassName?: string;
-  eventInfoStyle?: CSSProperties;
-  eventTitleClassName?: string;
-  eventTitleStyle?: CSSProperties;
-  tooltipClassName?: string;
-  className?: string;
-  style?: CSSProperties;
-  categoryStyle?: CSSProperties;
-  eventStyle?: CSSProperties;
-  tooltipStyle?: CSSProperties;
-  entry: EventsByCategory;
-  days: Date[];
-  color: string;
-  hoverContent?: (event: CalendarEvent) => React.ReactNode;
-  onEventClick?: (event: CalendarEvent) => void;
+  readonly categoryClassName?: string;
+  readonly categoryInfoClassName?: string;
+  readonly categoryInfoStyle?: CSSProperties;
+  readonly categoryNameClassName?: string;
+  readonly categoryNameStyle?: CSSProperties;
+  readonly dayCellClassName?: string;
+  readonly dayCellStyle?: CSSProperties;
+  readonly eventAvatarClassName?: string;
+  readonly eventAvatarStyle?: CSSProperties;
+  readonly eventClassName?: string;
+  readonly eventDescriptionClassName?: string;
+  readonly eventDescriptionStyle?: CSSProperties;
+  readonly eventInfoClassName?: string;
+  readonly eventInfoStyle?: CSSProperties;
+  readonly eventTitleClassName?: string;
+  readonly eventTitleStyle?: CSSProperties;
+  readonly tooltipClassName?: string;
+  readonly className?: string;
+  readonly style?: CSSProperties;
+  readonly categoryStyle?: CSSProperties;
+  readonly eventStyle?: CSSProperties;
+  readonly tooltipStyle?: CSSProperties;
+  readonly entry: EventsByCategory;
+  readonly days: readonly Date[];
+  readonly color: string;
+  readonly hoverContent?: (event: CalendarEvent) => React.ReactNode;
+  readonly onEventClick?: (event: CalendarEvent) => void;
 };
 
 export type EventTooltip = { x: number; y: number; event: CalendarEvent; };
 
 export type WeekCalendarRowStoryArgs = WeekCalendarRowProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };

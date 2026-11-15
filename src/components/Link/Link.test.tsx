@@ -1,5 +1,6 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { createRef } from "react";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Link } from "./Link";
 
@@ -73,16 +74,18 @@ describe("Link", () => {
   });
 
   describe("click handling", () => {
-    it("calls onClick when clicked", () => {
+    it("calls onClick when clicked", async () => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       renderLink({ label: "Test Link", onClick });
-      fireEvent.click(screen.getByRole("link"));
+      await user.click(screen.getByRole("link"));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it("works without onClick handler", () => {
+    it("works without onClick handler", async () => {
+      const user = userEvent.setup();
       renderLink({ label: "Test Link" });
-      expect(() => fireEvent.click(screen.getByRole("link"))).not.toThrow();
+      await expect(user.click(screen.getByRole("link"))).resolves.not.toThrow();
     });
   });
 });

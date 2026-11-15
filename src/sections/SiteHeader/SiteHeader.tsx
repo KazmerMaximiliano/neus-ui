@@ -1,9 +1,9 @@
-import { Menu } from "lucide-react";
 import { useId, type MouseEvent } from "react";
-import { Container } from "../../components/Container/Container";
-import "./SiteHeader.styles.css";
+import { Menu } from "lucide-react";
+import { Container } from "../../components/Container";
 import type { SiteHeaderProps } from "./SiteHeader.types";
 import { SITE_HEADER_LABELS } from "./SiteHeader.consts";
+import "./SiteHeader.styles.css";
 
 const join = (...names: (string | undefined)[]) => names.filter(Boolean).join(" ");
 
