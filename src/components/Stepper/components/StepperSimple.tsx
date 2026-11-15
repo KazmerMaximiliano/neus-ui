@@ -1,4 +1,4 @@
-import { StepperProps } from "../Stepper.types";
+import type { StepperProps } from "../Stepper.types";
 
 export const StepperSimple = ({
   dotClassName,

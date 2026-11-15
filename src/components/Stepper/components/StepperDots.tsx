@@ -1,6 +1,6 @@
-import { Check } from "lucide-react";
 import { Fragment } from "react";
-import { StepperProps } from "../Stepper.types";
+import { Check } from "lucide-react";
+import type { StepperProps } from "../Stepper.types";
 import { STEP_STATE_TEXT } from "../Stepper.consts";
 import {
   getConnectorClasses,

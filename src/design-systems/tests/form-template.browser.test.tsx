@@ -2,10 +2,10 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { Button, DateInput, Input, Select } from "../../components";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { FormTemplate } from "../../templates/FormTemplate/FormTemplate";
+import { FormTemplate } from "../../templates/FormTemplate";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
+import "../../css/app.css";
 
 afterEach(cleanup);
 

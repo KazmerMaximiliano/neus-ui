@@ -1,17 +1,10 @@
-import {
-  cleanup,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../../providers";
-import { FormTemplate } from "../../../templates/FormTemplate/FormTemplate";
-import { Input } from "../index";
-import { Input as CustomizationComponent } from "../Input";
-import type { InputProps } from "../index";
+import { ThemeProvider } from "../../../providers";
+import { FormTemplate } from "../../../templates/FormTemplate";
+import { Input } from "../Input";
+import type { InputProps } from "../Input.types";
 
 afterEach(() => {
   cleanup();
@@ -134,12 +127,13 @@ describe("Input", () => {
       expect(input).toHaveFocus();
     });
 
-    it("keeps its own wiring over forwarded attributes and handlers", () => {
+    it("keeps its own wiring over forwarded attributes and handlers", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       const onBlur = vi.fn();
       renderInput({ label: "Name", disabled: true, onChange, onBlur });
       const input = screen.getByRole("textbox", { name: "Name" });
-      fireEvent.change(input, { target: { value: "Ana" } });
+      await user.type(input, "Ana");
       fireEvent.blur(input);
       expect(onChange).not.toHaveBeenCalled();
       expect(onBlur).toHaveBeenCalledOnce();
@@ -182,12 +176,11 @@ describe("Input", () => {
       expect(screen.getByRole("textbox")).toHaveClass("input--disabled");
     });
 
-    it("does not call onChange when disabled", () => {
+    it("does not call onChange when disabled", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderInput({ disabled: true, onChange });
-      fireEvent.change(screen.getByRole("textbox"), {
-        target: { value: "new value" },
-      });
+      await user.type(screen.getByRole("textbox"), "new value");
       expect(onChange).not.toHaveBeenCalled();
     });
   });
@@ -207,22 +200,20 @@ describe("Input", () => {
   });
 
   describe("change handling", () => {
-    it("calls onChange with value when input changes", () => {
+    it("calls onChange with value when input changes", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderInput({ onChange });
-      fireEvent.change(screen.getByRole("textbox"), {
-        target: { value: "new value" },
-      });
+      await user.type(screen.getByRole("textbox"), "new value");
       expect(onChange).toHaveBeenCalledWith("new value");
     });
 
-    it("works without onChange handler", () => {
+    it("works without onChange handler", async () => {
+      const user = userEvent.setup();
       renderInput({ defaultValue: "initial" });
-      expect(() =>
-        fireEvent.change(screen.getByRole("textbox"), {
-          target: { value: "new value" },
-        }),
-      ).not.toThrow();
+      const input = screen.getByRole("textbox");
+      await user.clear(input);
+      await expect(user.type(input, "new value")).resolves.not.toThrow();
     });
   });
 
@@ -302,11 +293,12 @@ describe("Input", () => {
 
 describe("Input accessibility and customization", () => {
   it("associates labels, hides the required marker and focuses on label click", async () => {
+    const user = userEvent.setup();
     render(<Input id="email" label="Email" required />);
     const input = screen.getByRole("textbox", { name: "Email" });
     expect(input).toHaveAttribute("id", "email");
     expect(screen.getByText("*")).toHaveAttribute("aria-hidden", "true");
-    await userEvent.click(screen.getByText("Email"));
+    await user.click(screen.getByText("Email"));
     expect(input).toHaveFocus();
   });
 
@@ -386,27 +378,29 @@ describe("Input accessibility and customization", () => {
   });
 
   it("preserves uncontrolled edits and defaultValue semantics", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const view = render(
       <Input label="Name" defaultValue="A" onChange={onChange} />,
     );
     const input = screen.getByRole("textbox", { name: "Name" });
-    await userEvent.type(input, "B");
+    await user.type(input, "B");
     expect(input).toHaveValue("AB");
     expect(onChange).toHaveBeenLastCalledWith("AB");
     view.rerender(
       <Input label="Name" defaultValue="Replacement" onChange={onChange} />,
     );
     expect(input).toHaveValue("AB");
-    await userEvent.clear(input);
+    await user.clear(input);
     expect(onChange).toHaveBeenLastCalledWith("");
   });
 
   it("keeps controlled values owned by the consumer", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const view = render(<Input label="Name" value="A" onChange={onChange} />);
     const input = screen.getByRole("textbox", { name: "Name" });
-    await userEvent.type(input, "B");
+    await user.type(input, "B");
     expect(onChange).toHaveBeenLastCalledWith("AB");
     expect(input).toHaveValue("A");
     view.rerender(<Input label="Name" value="AB" onChange={onChange} />);
@@ -414,6 +408,7 @@ describe("Input accessibility and customization", () => {
   });
 
   it("emits number edits and clearing as strings", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     render(
       <Input
@@ -424,15 +419,16 @@ describe("Input accessibility and customization", () => {
       />,
     );
     const input = screen.getByRole("spinbutton", { name: "Amount" });
-    await userEvent.clear(input);
+    await user.clear(input);
     expect(onChange).toHaveBeenLastCalledWith("");
-    await userEvent.type(input, "23");
+    await user.type(input, "23");
     expect(onChange).toHaveBeenLastCalledWith("23");
   });
 
   it.each(["disabled", "readonly"] as const)(
     "prevents user edits when %s",
     async (state) => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       render(
         <Input
@@ -443,13 +439,14 @@ describe("Input accessibility and customization", () => {
         />,
       );
       const input = screen.getByRole("textbox", { name: "Name" });
-      await userEvent.type(input, "X");
+      await user.type(input, "X");
       expect(input).toHaveValue("Original");
       expect(onChange).not.toHaveBeenCalled();
     },
   );
 
   it("preserves the wrapper used by FormTemplate and native form submission", async () => {
+    const user = userEvent.setup();
     const submit = vi.fn();
     render(
       <form
@@ -468,14 +465,15 @@ describe("Input accessibility and customization", () => {
     expect(input.closest(".input__wrapper")?.parentElement).toHaveClass(
       "form-template",
     );
-    await userEvent.type(input, "Ada");
-    await userEvent.click(screen.getByRole("button", { name: "Save" }));
+    await user.type(input, "Ada");
+    await user.click(screen.getByRole("button", { name: "Save" }));
     expect(submit).toHaveBeenCalledWith("Ada");
   });
 });
 
 describe("field presentation and adornments", () => {
   it("preserves a native label and input with composed prefix and suffix", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     render(
       <Input
@@ -490,7 +488,7 @@ describe("field presentation and adornments", () => {
     );
     expect(screen.getByText("$")).toBeInTheDocument();
     expect(screen.getByText("USD")).toBeInTheDocument();
-    await userEvent.type(screen.getByRole("textbox", { name: "Amount" }), "12");
+    await user.type(screen.getByRole("textbox", { name: "Amount" }), "12");
     expect(onChange).toHaveBeenLastCalledWith("12");
   });
   it("supplies a default error icon and allows null to remove it", () => {
@@ -588,9 +586,9 @@ describe("Input part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <Input
             label="Email"
             required
             error="Invalid"
@@ -598,7 +596,7 @@ describe("Input part customization", () => {
             suffix=".com"
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -607,15 +605,15 @@ describe("Input part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <Input
             label="Email"
             required
             error="Invalid"
             prefix="@"
             suffix=".com"
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

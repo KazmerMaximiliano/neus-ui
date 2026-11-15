@@ -2,12 +2,12 @@
 
 Pick the lowest level that expresses the change. Each level up costs more
 maintenance and is easier to get wrong. Confirm every prop, part and token
-name in the component's guide (`npx neus docs <Name>`) before using it.
+name in the component's guide (`npx neus-ui docs <Name>`) before using it.
 
 | Level | Use it for | Where it lives |
 | --- | --- | --- |
 | 0. Props and variants | Hierarchy and intent: primary vs secondary action, outlined card, small field | The component's props |
-| 1. Global action palette | Brand primary, success, error, info and warning colors | `npx neus init` (`--primary`, `--brand`), which rewrites `neus.config.json` and the generated theme file |
+| 1. Global action palette | Brand primary, success, error, info and warning colors | `npx neus-ui init` (`--primary`, `--brand`), which rewrites `neus.config.json` and the generated theme file |
 | 2. Reusable tokens | The brand's ground, ink and faces ([brand.md](brand.md)); radius, padding or typography for the whole app or a feature | `<styles>/neus.overrides.css` |
 | 3. Part classes + CSS | Hover, focus, disabled, pseudo-elements, layout of one part | `*ClassName` props + a project stylesheet |
 | 4. Part styles | One static property on one rendered part | `*Style` props |
@@ -30,7 +30,7 @@ Stack and Grid `gap`, `direction` and `columns`, per breakpoint with
 `{ base, md, lg }`; the `neus-ui/sections` variants (Hero, FeatureList,
 TestimonialList, CallToAction) and `labels` (SiteHeader); MediaPlaceholder `ratio`,
 `query` and `pixabayKey` (a stock photo preview during design, only through the
-expression `npx neus context` prints). One solid primary action per view; the rest use
+expression `npx neus-ui context` prints). One solid primary action per view; the rest use
 `secondary`, `tonal`, `outlined` or `text`.
 
 ## Level 1: global action palette
@@ -39,7 +39,7 @@ Only four colors are configurable at runtime: primary, success, error and
 info, as six-digit hex. Change them with:
 
 ```sh
-npx neus init --yes --primary "#0F766E" --error "#B42318"
+npx neus-ui init --yes --primary "#0F766E" --error "#B42318"
 ```
 
 Never write `--color-primary`, `--color-*-light`, `--color-*-dark`,

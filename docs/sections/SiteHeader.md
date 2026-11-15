@@ -45,7 +45,7 @@ optional and default to undefined unless noted.
 | --- | --- | --- | --- |
 | `brand` | `ReactNode` | Required | Logo or name, linked to `brandHref` |
 | `brandHref` | `string` | `"/"` | Destination of the brand link |
-| `links` | `SiteLink[]` | `[]` | `{ label, href, active }` navigation links |
+| `links` | `readonly SiteLink[]` | `[]` | `{ label, href, active }` navigation links |
 | `actions` | `ReactNode` | Omitted | Buttons at the end; keep the primary call to action `outlined` here when the hero has the solid one |
 | `variant` | `"plain" \| "sticky"` | `"plain"` | Static or sticky bar |
 | `skipLinkTarget` | `string` | Omitted | Target of the skip link, for example `"#main"` |

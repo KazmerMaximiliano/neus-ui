@@ -1,6 +1,6 @@
 import { createElement, type CSSProperties } from "react";
-import "./Text.styles.css";
 import type { TextElement, TextProps } from "./Text.types";
+import "./Text.styles.css";
 
 /** Running text on the system's type scale: lead, body, small, caption or overline. */
 export const Text = <C extends TextElement = "p">({

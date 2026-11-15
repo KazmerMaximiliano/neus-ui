@@ -17,7 +17,7 @@ The public contract is everything a consumer or an agent can depend on:
 | Component API | Props, their types and defaults, rendered roles and labels |
 | Documented styling hooks | Part classes in each guide's anatomy table, `*ClassName` and `*Style` props |
 | Tokens | Custom properties listed in the guides and `docs/design/tokens.md`, and the DESIGN.md `x-neus` schema |
-| CLI | Commands, flags, exit codes, `neus.config.json` fields and the files `neus init` writes |
+| CLI | Commands, flags, exit codes, `neus.config.json` fields and the files `neus-ui init` writes |
 | AI design kit | Skill names, the commands the skills call and the files they read from the package |
 
 - **Major (2.0.0):** removes or renames anything in the table, changes a prop's type or
@@ -51,7 +51,7 @@ release, with the replacement in the changelog, and removed in the next major.
    ```
 
 4. Try the package as a consumer: `pnpm pack`, install the tarball in a fresh Vite project,
-   run `npx neus init` and `npx neus --version`, and build one screen with `/neus-design`.
+   run `npx neus-ui init` and `npx neus-ui --version`, and build one screen with `/neus-design`.
 
 ## Publish
 
@@ -79,7 +79,7 @@ a version that is already on npm. Provenance is only available from CI.
 ## After a release
 
 - Check the package page on npm: version, README, license and provenance badge.
-- Install it in a fresh project with `npm install neus-ui` and run `npx neus init`.
+- Install it in a fresh project with `npm install neus-ui` and run `npx neus-ui init`.
 - Add a new `## [Unreleased]` section to the changelog if the release removed it.
 
 ## Licensing
@@ -88,5 +88,5 @@ The project is licensed under the [Apache License 2.0](../../LICENSE). Keep `LIC
 unmodified license text; the copyright line and trademark note live in
 [NOTICE](../../NOTICE). Material copied or adapted from other projects is listed with its full
 notice in [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md), and files copied into
-consumer projects by `neus init` carry their notice inside the file. Add an entry there
+consumer projects by `neus-ui init` carry their notice inside the file. Add an entry there
 before including anything new from another project.

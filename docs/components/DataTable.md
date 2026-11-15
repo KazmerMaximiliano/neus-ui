@@ -60,8 +60,8 @@ retain their nullable default.
 | `paginationClassName` | `string` | Omitted | Additional classes on `.data-table__pagination` |
 | `paginationInfoClassName` | `string` | Omitted | Additional classes on `.data-table__pagination-info` |
 | `paginationInfoStyle` | `CSSProperties` | Omitted | Inline styles on `.data-table__pagination-info` |
-| `data` | `T[]` | Required | Rows for the current page |
-| `columnDefs` | `DataTableColDef<T>[]` | Required | Typed AG Grid definitions, including custom cells |
+| `data` | `readonly T[]` | Required | Rows for the current page |
+| `columnDefs` | `readonly DataTableColDef<T>[]` | Required | Typed AG Grid definitions, including custom cells |
 | `pagination` | `PaginationInfo` | Required | Controlled pagination |
 | `renderMobileCard` | `((row: T) => ReactNode)` | Omitted | Consumer card renderer; absent keeps the mobile grid |
 | `onPaginationChange` | `((params: PaginationChangeParams) => void)` | Omitted | Requests a page; consumer supplies data |
@@ -90,7 +90,7 @@ entry point](../../src/components/DataTable/index.ts). A type shown here is not 
 a package export.
 
 ```ts
-type PaginationInfo = { current_page: number; last_page: number; per_page: number; total: number; };
+type PaginationInfo = { readonly current_page: number; readonly last_page: number; readonly per_page: number; readonly total: number; };
 
 type PaginationChangeParams = { currentPage: number; pageSize: number; };
 

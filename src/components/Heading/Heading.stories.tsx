@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Heading as HeadingComponent } from "./Heading";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { HeadingStoryArgs } from "./Heading.types";
 
 const meta: Meta<HeadingStoryArgs> = {

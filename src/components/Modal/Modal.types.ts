@@ -5,11 +5,11 @@ export type ModalProps = Omit<
   ComponentPropsWithRef<"dialog">,
   "open" | "onClose" | "onCancel" | "style"
 > & {
-  isOpen?: boolean;
-  onClose?: () => void;
-  style?: CSSProperties | null;
+  readonly isOpen?: boolean;
+  readonly onClose?: () => void;
+  readonly style?: CSSProperties | null;
 };
 
 export type ModalStoryArgs = ModalProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };

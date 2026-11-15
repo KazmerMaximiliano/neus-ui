@@ -154,7 +154,7 @@ export const SignupBand = ({ children }: { children: React.ReactNode }) => (
 ```
 
 The wrapper has no box, so the Section paints the band. Project overrides written with
-`[data-design-system="<id>"][data-color-scheme="dark"]` (the selectors `npx neus init` writes,
+`[data-design-system="<id>"][data-color-scheme="dark"]` (the selectors `npx neus-ui init` writes,
 without `:root`) reach the boundary, so a brand's dark surfaces apply inside it. The same
 code renders on the server in every rendering mode.
 

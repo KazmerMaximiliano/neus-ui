@@ -1,13 +1,8 @@
-import {
-  cleanup,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { Checkbox, Checkbox as CustomizationComponent } from "./Checkbox";
+import { ThemeProvider } from "../../providers";
+import { Checkbox } from "./Checkbox";
 
 afterEach(() => {
   cleanup();
@@ -68,32 +63,36 @@ describe("Checkbox", () => {
       expect(screen.getByRole("checkbox")).not.toBeDisabled();
     });
 
-    it("does not call onChange when disabled", () => {
+    it("does not call onChange when disabled", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderCheckbox({ disabled: true, onChange });
-      fireEvent.click(screen.getByRole("checkbox"));
+      await user.click(screen.getByRole("checkbox"));
       expect(onChange).not.toHaveBeenCalled();
     });
   });
 
   describe("change handling", () => {
-    it("calls onChange with true when checkbox is checked", () => {
+    it("calls onChange with true when checkbox is checked", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderCheckbox({ onChange, checked: false });
-      fireEvent.click(screen.getByRole("checkbox"));
+      await user.click(screen.getByRole("checkbox"));
       expect(onChange).toHaveBeenCalledWith(true);
     });
 
-    it("calls onChange with false when checkbox is unchecked", () => {
+    it("calls onChange with false when checkbox is unchecked", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderCheckbox({ onChange, checked: true });
-      fireEvent.click(screen.getByRole("checkbox"));
+      await user.click(screen.getByRole("checkbox"));
       expect(onChange).toHaveBeenCalledWith(false);
     });
 
-    it("works without onChange handler", () => {
+    it("works without onChange handler", async () => {
+      const user = userEvent.setup();
       renderCheckbox();
-      expect(() => fireEvent.click(screen.getByRole("checkbox"))).not.toThrow();
+      await expect(user.click(screen.getByRole("checkbox"))).resolves.not.toThrow();
     });
   });
 });
@@ -173,10 +172,10 @@ describe("Checkbox part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent label="Accept" checked {...overrides} />
-        </CustomizationThemeProvider>,
+      const view = render(
+        <ThemeProvider scope="local">
+          <Checkbox label="Accept" checked {...overrides} />
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -185,9 +184,9 @@ describe("Checkbox part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent label="Accept" checked />
-        </CustomizationThemeProvider>,
+        <ThemeProvider scope="local">
+          <Checkbox label="Accept" checked />
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

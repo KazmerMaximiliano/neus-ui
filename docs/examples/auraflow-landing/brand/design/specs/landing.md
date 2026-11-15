@@ -75,7 +75,7 @@ En el código (`src/App.tsx`). Testimonios y demo marcados `SAMPLE:`.
 ## Customization decisions
 
 - Level 0: Hero `centered`, FeatureList `grid`, TestimonialList `featured`, CallToAction `split` + `tone="brand"`; header action `outlined`.
-- Level 1: `npx neus init --yes --primary "#55652F" --brand "..."`.
+- Level 1: `npx neus-ui init --yes --primary "#55652F" --brand "..."`.
 - Level 2: bloque de marca en `src/styles/neus.overrides.css` (fondo, tinta, bordes, Fraunces, botones en caja normal).
 - Own markup: `.af-ruled` (regla de 1px en tinta, la signature) y el layout de la demo en `src/App.css`.
 

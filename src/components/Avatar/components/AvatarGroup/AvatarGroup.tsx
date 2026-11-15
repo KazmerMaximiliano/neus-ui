@@ -1,8 +1,8 @@
 import { Children } from "react";
 import { AvatarSizeContext } from "../../Avatar.context";
+import type { AvatarGroupProps } from "./AvatarGroup.types";
 import "../../Avatar.styles.css";
 import "./AvatarGroup.styles.css";
-import type { AvatarGroupProps } from "./AvatarGroup.types";
 
 /** Overlapping avatars of a team or the people in a thread, with a count for those not shown. */
 export const AvatarGroup = ({

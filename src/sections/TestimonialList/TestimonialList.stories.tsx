@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Avatar } from "../../components/Avatar/Avatar";
+import { Avatar } from "../../components/Avatar";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { Testimonial } from "./components/Testimonial/Testimonial";
+import { Testimonial } from "./components/Testimonial";
 import { TestimonialList as TestimonialListComponent } from "./TestimonialList";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { TestimonialListStoryArgs } from "./TestimonialList.types";
 
 const QUOTES = [

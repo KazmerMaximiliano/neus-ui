@@ -1,4 +1,4 @@
-import { TimeValue } from "./ClockNumbers.types";
+import type { TimeValue } from "../../Clock.types";
 
 export const getDisplayHours = ({
   format,

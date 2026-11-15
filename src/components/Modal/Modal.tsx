@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useId, useRef } from "react";
-import "./Modal.styles.css";
-import type { ModalProps } from "./Modal.types";
 import { ModalTitleContext } from "./ModalContext";
+import type { ModalProps } from "./Modal.types";
+import "./Modal.styles.css";
 
 export const Modal = ({
   isOpen = false,

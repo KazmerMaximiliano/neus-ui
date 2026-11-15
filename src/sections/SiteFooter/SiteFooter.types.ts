@@ -1,30 +1,30 @@
 import type { ComponentPropsWithRef, CSSProperties, ElementType, ReactNode } from "react";
 import type { DesignSystemId } from "../../design-systems";
-import type { SiteLink } from "../SiteHeader/SiteHeader.types";
+import type { SiteLink } from "../SiteHeader";
 
-export type SiteFooterColumn = { title: string; links: Omit<SiteLink, "active">[] };
+export type SiteFooterColumn = { readonly title: string; readonly links: readonly Omit<SiteLink, "active">[] };
 
 export type SiteFooterProps = Omit<ComponentPropsWithRef<"footer">, "children"> & {
   /** Logo or name, with a line about the business if it helps. */
-  brand?: ReactNode;
+  readonly brand?: ReactNode;
   /** Columns of links, each a labelled navigation landmark. */
-  columns?: SiteFooterColumn[];
+  readonly columns?: readonly SiteFooterColumn[];
   /** Copyright, address, legal links. */
-  legal?: ReactNode;
+  readonly legal?: ReactNode;
   /** Router link component (for example Next.js Link) rendered instead of <a>. */
-  linkComponent?: ElementType;
-  innerClassName?: string;
-  innerStyle?: CSSProperties;
-  brandClassName?: string;
-  brandStyle?: CSSProperties;
-  columnClassName?: string;
-  columnStyle?: CSSProperties;
-  columnTitleClassName?: string;
-  columnTitleStyle?: CSSProperties;
-  linkClassName?: string;
-  linkStyle?: CSSProperties;
-  legalClassName?: string;
-  legalStyle?: CSSProperties;
+  readonly linkComponent?: ElementType;
+  readonly innerClassName?: string;
+  readonly innerStyle?: CSSProperties;
+  readonly brandClassName?: string;
+  readonly brandStyle?: CSSProperties;
+  readonly columnClassName?: string;
+  readonly columnStyle?: CSSProperties;
+  readonly columnTitleClassName?: string;
+  readonly columnTitleStyle?: CSSProperties;
+  readonly linkClassName?: string;
+  readonly linkStyle?: CSSProperties;
+  readonly legalClassName?: string;
+  readonly legalStyle?: CSSProperties;
 };
 
-export type SiteFooterStoryArgs = SiteFooterProps & { designSystem: DesignSystemId };
+export type SiteFooterStoryArgs = SiteFooterProps & { readonly designSystem: DesignSystemId };

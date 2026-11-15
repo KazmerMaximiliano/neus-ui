@@ -6,17 +6,17 @@
 
 Use React and ReactDOM 19+ in the consuming application; they are peer dependencies. The
 package contains TypeScript declarations and ES module named exports. Install it from npm
-(or with `pnpm add neus-ui` / `yarn add neus-ui`), then let `neus init` set up the theme and the AI design tools:
+(or with `pnpm add neus-ui` / `yarn add neus-ui`), then let `neus-ui init` set up the theme and the AI design tools:
 
 ```bash
 npm install neus-ui
-npx neus init
+npx neus-ui init
 ```
 
-See [Design with AI](./ai-design.md) for what `neus init` writes, and
+See [Design with AI](./ai-design.md) for what `neus-ui init` writes, and
 [Frameworks](./frameworks.md) for Next.js, Astro and other server-rendered hosts.
 
-The `neus` CLI needs Node.js 22.13 or later. For repository development, use the pnpm
+The `neus-ui` CLI needs Node.js 22.13 or later. For repository development, use the pnpm
 version recorded in package.json; see [Development](../contributing/development.md).
 
 Import the exported CSS bundle once at the application entry point. It includes the

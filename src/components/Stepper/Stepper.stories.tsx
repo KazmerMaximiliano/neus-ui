@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Stepper as StepperComponent } from "./Stepper";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { StepperStoryArgs } from "./Stepper.types";
+import "./Stepper.stories.css";
 
 const meta: Meta<StepperStoryArgs> = {
   title: "Navigation/Stepper",
@@ -157,7 +158,7 @@ export const Stepper: StoryObj<StepperStoryArgs> = {
   },
   render: ({ designSystem, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>
-      <div style={{ width: 420 }}>
+      <div className="stepper-story">
         <StepperComponent {...args} />
       </div>
     </ThemeProvider>

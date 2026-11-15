@@ -4,7 +4,7 @@ import { parseArgs } from "node:util";
 import { CONFIG_FILE, ENV_FILES, PIXABAY_KEY_EXPRESSIONS, PIXABAY_KEY_PATTERN } from "./neus.consts.mjs";
 import { PACKAGE_ROOT, markdownSection, readJson } from "./neus.utils.mjs";
 
-const HELP = `Usage: npx neus context [--for app|page]
+const HELP = `Usage: npx neus-ui context [--for app|page]
 
 Prints what to know before designing in this project, in one short read: the active
 system's identity and rules, the key tokens, the component catalog, which component
@@ -32,7 +32,7 @@ const pixabayKey = (root) => ENV_FILES.map((file) => {
 /** The context text for a project root; throws when the project has no neus.config.json. */
 export const contextFor = (root, surface = "app") => {
   const config = readJson(path.join(root, CONFIG_FILE));
-  if (!config) throw new Error(`No ${CONFIG_FILE} in ${root}. Run npx neus init first.`);
+  if (!config) throw new Error(`No ${CONFIG_FILE} in ${root}. Run npx neus-ui init first.`);
   const derived = config.derivedSystem && existsSync(path.join(root, config.derivedSystem));
   const design = derived
     ? readFileSync(path.join(root, config.derivedSystem), "utf8")
@@ -72,8 +72,8 @@ export const contextFor = (root, surface = "app") => {
     "",
     "## Next",
     "",
-    "- npx neus docs <Name>: usage, behavior, props and parts of one component (--full adds its tokens)",
-    "- npx neus shot <route>: screenshots at 1440 and 390 px with the problems measured",
+    "- npx neus-ui docs <Name>: usage, behavior, props and parts of one component (--full adds its tokens)",
+    "- npx neus-ui shot <route>: screenshots at 1440 and 390 px with the problems measured",
   ].filter((line) => line !== null && line !== undefined).join("\n");
 };
 

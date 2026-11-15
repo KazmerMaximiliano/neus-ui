@@ -1,10 +1,10 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, render, screen } from "@testing-library/react";
 import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, expectTypeOf, it } from "vitest";
-import type { GridProps } from "../../index";
-import { Grid } from "../../index";
+import { Grid } from "./Grid";
 import * as stories from "./Grid.stories";
+import type { GridProps } from "./Grid.types";
 
 afterEach(cleanup);
 

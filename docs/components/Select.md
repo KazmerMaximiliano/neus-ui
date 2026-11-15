@@ -78,7 +78,7 @@ retain their nullable default.
 | `style` | `CSSProperties` | Omitted | Inline styles on `.select__wrapper` |
 | `triggerClassName` | `string` | Omitted | Additional classes on `.select__trigger` |
 | `triggerStyle` | `CSSProperties` | Omitted | Inline styles on `.select__trigger` |
-| `options` | `SelectOption[]` | Required | Options with value and label |
+| `options` | `readonly SelectOption[]` | Required | Options with value and label |
 | `name` | `string` | Omitted | Name of the hidden form input |
 | `value` | `string` | Omitted | Controlled value |
 | `defaultValue` | `string` | Omitted | Initial uncontrolled value |
@@ -104,8 +104,8 @@ package export.
 
 ```ts
 type SelectOption = {
-  value?: string | null;
-  label: string;
+  readonly value?: string | null;
+  readonly label: string;
 };
 ```
 

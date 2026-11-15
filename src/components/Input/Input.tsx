@@ -1,8 +1,8 @@
-import { CircleAlert } from "lucide-react";
 import { useId } from "react";
+import { CircleAlert } from "lucide-react";
+import type { InputProps } from "./Input.types";
 import "../../css/field.css";
 import "./Input.styles.css";
-import type { InputProps } from "./Input.types";
 
 export const Input = ({
   className,

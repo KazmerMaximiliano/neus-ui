@@ -1,10 +1,11 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, render, screen } from "@testing-library/react";
 import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, expectTypeOf, it } from "vitest";
-import type { FeatureListProps } from "../../sections";
-import { FeatureItem, FeatureList } from "../../sections";
+import { FeatureItem } from "./components/FeatureItem";
+import { FeatureList } from "./FeatureList";
 import * as stories from "./FeatureList.stories";
+import type { FeatureListProps } from "./FeatureList.types";
 
 afterEach(cleanup);
 

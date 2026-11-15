@@ -38,7 +38,7 @@ jobs:
       - name: Check generated design systems
         run: pnpm design:check
 
-      # The CLI tests run neus init, which imports the built dist/theme.js.
+      # The CLI tests run neus-ui init, which imports the built dist/theme.js.
       - name: Build
         run: pnpm build
 

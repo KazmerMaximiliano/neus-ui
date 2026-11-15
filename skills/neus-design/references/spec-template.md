@@ -46,7 +46,7 @@ placeholders: `[pending: refund policy text]`.
 
 ## Customization decisions
 - Level 0 (variants): ...
-- Level 1 (palette): unchanged | `npx neus init --yes --primary <hex> --brand "..."`
+- Level 1 (palette): unchanged | `npx neus-ui init --yes --primary <hex> --brand "..."`
 - Level 2 (tokens in neus.overrides.css): the brand block (brand.md); other token → value → reason
 - Level 3/4 (part classes/styles): part → reason
 

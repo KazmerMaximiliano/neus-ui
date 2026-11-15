@@ -4,15 +4,15 @@ import type { AvatarSize } from "../../Avatar.types";
 
 export type AvatarGroupProps = ComponentPropsWithRef<"div"> & {
   /** Avatar elements, in order of importance. */
-  children: ReactNode;
+  readonly children: ReactNode;
   /** Shows this many avatars and a "+N" count for the rest. */
-  max?: number;
+  readonly max?: number;
   /** Size of every avatar in the group. */
-  size?: AvatarSize;
+  readonly size?: AvatarSize;
   /** Text of the count and its accessible name; defaults to "+N". */
-  moreLabel?: (hidden: number) => string;
-  moreClassName?: string;
-  moreStyle?: CSSProperties;
+  readonly moreLabel?: (hidden: number) => string;
+  readonly moreClassName?: string;
+  readonly moreStyle?: CSSProperties;
 };
 
-export type AvatarGroupStoryArgs = AvatarGroupProps & { designSystem: DesignSystemId };
+export type AvatarGroupStoryArgs = AvatarGroupProps & { readonly designSystem: DesignSystemId };

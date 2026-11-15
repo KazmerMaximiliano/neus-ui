@@ -1,14 +1,8 @@
-import {
-  cleanup,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { Stepper as CustomizationComponent, Stepper } from "./Stepper";
+import { ThemeProvider } from "../../providers";
+import { Stepper } from "./Stepper";
 
 afterEach(() => {
   cleanup();
@@ -121,33 +115,36 @@ describe("Stepper", () => {
   });
 
   describe("onStepClick", () => {
-    it("fires onStepClick when done step is clicked", () => {
+    it("fires onStepClick when done step is clicked", async () => {
+      const user = userEvent.setup();
       const onStepClick = vi.fn();
       const { container } = render(
         <Stepper currentStep={2} totalSteps={3} onStepClick={onStepClick} />,
       );
       const doneDot = container.querySelector(".stepper__dot--done");
-      fireEvent.click(doneDot!);
+      await user.click(doneDot!);
       expect(onStepClick).toHaveBeenCalledWith(0);
     });
 
-    it("does not fire onStepClick on active step", () => {
+    it("does not fire onStepClick on active step", async () => {
+      const user = userEvent.setup();
       const onStepClick = vi.fn();
       const { container } = render(
         <Stepper currentStep={1} totalSteps={3} onStepClick={onStepClick} />,
       );
       const activeDot = container.querySelector(".stepper__dot--active");
-      fireEvent.click(activeDot!);
+      await user.click(activeDot!);
       expect(onStepClick).not.toHaveBeenCalled();
     });
 
-    it("does not fire onStepClick on inactive step", () => {
+    it("does not fire onStepClick on inactive step", async () => {
+      const user = userEvent.setup();
       const onStepClick = vi.fn();
       const { container } = render(
         <Stepper currentStep={0} totalSteps={3} onStepClick={onStepClick} />,
       );
       const inactiveDot = container.querySelector(".stepper__dot--inactive");
-      fireEvent.click(inactiveDot!);
+      await user.click(inactiveDot!);
       expect(onStepClick).not.toHaveBeenCalled();
     });
 
@@ -168,6 +165,7 @@ describe("Stepper", () => {
     });
 
     it("renders completed steps as native buttons reachable by keyboard", async () => {
+      const user = userEvent.setup();
       const onStepClick = vi.fn();
       render(
         <Stepper
@@ -180,11 +178,11 @@ describe("Stepper", () => {
       const buttons = screen.getAllByRole("button");
       expect(buttons).toHaveLength(2);
       expect(buttons[0]).toHaveAccessibleName("Step 1: Profile, completed");
-      await userEvent.tab();
+      await user.tab();
       expect(buttons[0]).toHaveFocus();
-      await userEvent.keyboard("{Enter}");
-      await userEvent.tab();
-      await userEvent.keyboard(" ");
+      await user.keyboard("{Enter}");
+      await user.tab();
+      await user.keyboard(" ");
       expect(onStepClick.mock.calls).toEqual([[0], [1]]);
     });
   });
@@ -467,9 +465,9 @@ describe("Stepper part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <Stepper
             variant={
               phase === "linear"
                 ? "linear"
@@ -483,7 +481,7 @@ describe("Stepper part customization", () => {
             labels={["One", "Two", "Three", "Four"]}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -492,8 +490,8 @@ describe("Stepper part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <Stepper
             variant={
               phase === "linear"
                 ? "linear"
@@ -506,7 +504,7 @@ describe("Stepper part customization", () => {
             showLabels
             labels={["One", "Two", "Three", "Four"]}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

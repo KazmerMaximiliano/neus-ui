@@ -1,9 +1,9 @@
 import { useId } from "react";
-import { Heading } from "../../components/Heading/Heading";
-import { Section } from "../../components/Section/Section";
-import { Text } from "../../components/Text/Text";
-import "./CallToAction.styles.css";
+import { Heading } from "../../components/Heading";
+import { Section } from "../../components/Section";
+import { Text } from "../../components/Text";
 import type { CallToActionProps } from "./CallToAction.types";
+import "./CallToAction.styles.css";
 
 const join = (...names: (string | undefined)[]) => names.filter(Boolean).join(" ");
 

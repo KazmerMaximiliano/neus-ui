@@ -1,18 +1,10 @@
-import { composeStories } from "@storybook/react";
-import {
-  cleanup,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { DESIGN_SYSTEMS } from "../../design-systems";
-import {
-  ThemeProvider as CustomizationThemeProvider,
-  ThemeProvider,
-} from "../../providers";
-import { Button, Button as CustomizationComponent } from "./Button";
+import { ThemeProvider } from "../../providers";
+import { Button } from "./Button";
 import * as stories from "./Button.stories";
 import type { ButtonActionProps } from "./Button.types";
 import { getButtonClasses } from "./Button.utils";
@@ -92,35 +84,40 @@ describe("Button", () => {
   });
 
   describe("click handling", () => {
-    it("calls onClick when clicked", () => {
+    it("calls onClick when clicked", async () => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       renderButton({ onClick });
-      fireEvent.click(screen.getByRole("button"));
+      await user.click(screen.getByRole("button"));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it("does not call onClick when disabled", () => {
+    it("does not call onClick when disabled", async () => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       renderButton({ onClick, disabled: true });
-      fireEvent.click(screen.getByRole("button"));
+      await user.click(screen.getByRole("button"));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it("does not call onClick when loading", () => {
+    it("does not call onClick when loading", async () => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       renderButton({ onClick, loading: true });
-      fireEvent.click(screen.getByRole("button"));
+      await user.click(screen.getByRole("button"));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it("works without onClick handler", () => {
+    it("works without onClick handler", async () => {
+      const user = userEvent.setup();
       renderButton();
-      expect(() => fireEvent.click(screen.getByRole("button"))).not.toThrow();
+      await expect(user.click(screen.getByRole("button"))).resolves.not.toThrow();
     });
   });
 
   describe("link", () => {
-    it("renders a link with the button's classes and label", () => {
+    it("renders a link with the button's classes and label", async () => {
+      const user = userEvent.setup();
       let clicked: EventTarget | null = null;
       const onClick = vi.fn((event?: React.MouseEvent<HTMLAnchorElement>) => {
         event?.preventDefault();
@@ -134,7 +131,7 @@ describe("Button", () => {
       expect(link).toHaveClass("button", "button--outlined", "button--primary");
       expect(link).not.toHaveAttribute("type");
       expect(screen.queryByRole("button")).not.toBeInTheDocument();
-      fireEvent.click(link);
+      await user.click(link);
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(clicked).toBe(link);
     });
@@ -148,7 +145,8 @@ describe("Button", () => {
       expect(link).toHaveClass("button");
     });
 
-    it.each([{ disabled: true }, { loading: true }])("drops the href and blocks clicks when %o", (state) => {
+    it.each([{ disabled: true }, { loading: true }])("drops the href and blocks clicks when %o", async (state) => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       const RouterLink = vi.fn((props: object) => <a {...props} />);
       render(<Button label="Pay" href="/pay" linkComponent={RouterLink} onClick={onClick} {...state} />);
@@ -156,7 +154,7 @@ describe("Button", () => {
       expect(link).not.toHaveAttribute("href");
       expect(link).toHaveAttribute("aria-disabled", "true");
       expect(RouterLink).not.toHaveBeenCalled();
-      fireEvent.click(link);
+      await user.click(link);
       expect(onClick).not.toHaveBeenCalled();
     });
 
@@ -263,7 +261,8 @@ describe("Button Storybook design systems", () => {
     },
   );
 
-  it("applies the controls and click handler to the selected system", () => {
+  it("applies the controls and click handler to the selected system", async () => {
+    const user = userEvent.setup();
     const onClick = vi.fn();
     render(
       <ThemeProvider scope="local" colorScheme="dark">
@@ -293,13 +292,14 @@ describe("Button Storybook design systems", () => {
       "data-color-scheme",
       "dark",
     );
-    fireEvent.click(button);
+    await user.click(button);
     expect(onClick).toHaveBeenCalledOnce();
   });
 
   it.each(["loading", "disabled"] as const)(
     "applies the %s control to the preview",
-    (state) => {
+    async (state) => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       render(
         <ButtonStory label="Save" {...{ [state]: true }} onClick={onClick} />,
@@ -308,7 +308,7 @@ describe("Button Storybook design systems", () => {
       expect(button).toBeDisabled();
       if (state === "loading")
         expect(button).toHaveAttribute("aria-busy", "true");
-      fireEvent.click(button);
+      await user.click(button);
       expect(onClick).not.toHaveBeenCalled();
     },
   );
@@ -433,14 +433,14 @@ describe("Button part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <Button
             label="Save"
             loading={phase === "loading"}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -449,9 +449,9 @@ describe("Button part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent label="Save" loading={phase === "loading"} />
-        </CustomizationThemeProvider>,
+        <ThemeProvider scope="local">
+          <Button label="Save" loading={phase === "loading"} />
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

@@ -7,50 +7,50 @@ export type ButtonColor = "primary" | "success" | "error" | "info" | "white";
 type ButtonSize = "small" | "medium" | "large";
 
 type ButtonBaseProps = {
-  className?: string;
-  labelClassName?: string;
-  loaderClassName?: string;
-  label: string;
-  variant?: ButtonVariant;
-  color?: ButtonColor;
-  size?: ButtonSize;
-  disabled?: boolean;
-  fullWidth?: boolean;
-  loading?: boolean;
-  buttonStyle?: CSSProperties;
-  labelStyle?: CSSProperties;
-  loaderStyle?: CSSProperties;
+  readonly className?: string;
+  readonly labelClassName?: string;
+  readonly loaderClassName?: string;
+  readonly label: string;
+  readonly variant?: ButtonVariant;
+  readonly color?: ButtonColor;
+  readonly size?: ButtonSize;
+  readonly disabled?: boolean;
+  readonly fullWidth?: boolean;
+  readonly loading?: boolean;
+  readonly buttonStyle?: CSSProperties;
+  readonly labelStyle?: CSSProperties;
+  readonly loaderStyle?: CSSProperties;
 };
 
 /** Renders a `<button>` that runs an action. */
 export type ButtonActionProps = ButtonBaseProps & {
-  href?: undefined;
-  type?: ButtonType;
-  linkComponent?: never;
-  target?: never;
-  rel?: never;
-  onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
+  readonly href?: undefined;
+  readonly type?: ButtonType;
+  readonly linkComponent?: never;
+  readonly target?: never;
+  readonly rel?: never;
+  readonly onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
 };
 
 /** Renders a link with the button's look; `linkComponent` takes a router link such as Next.js `Link`. */
 export type ButtonLinkProps = ButtonBaseProps & {
-  href: string;
-  type?: never;
-  linkComponent?: ElementType;
-  target?: HTMLAttributeAnchorTarget;
-  rel?: string;
-  onClick?: (e?: MouseEvent<HTMLAnchorElement>) => void;
+  readonly href: string;
+  readonly type?: never;
+  readonly linkComponent?: ElementType;
+  readonly target?: HTMLAttributeAnchorTarget;
+  readonly rel?: string;
+  readonly onClick?: (e?: MouseEvent<HTMLAnchorElement>) => void;
 };
 
 export type ButtonProps = ButtonActionProps | ButtonLinkProps;
 
 /** Storybook controls: one flat shape, split into the action or link props at render. */
 export type ButtonStoryArgs = ButtonBaseProps & {
-  type?: ButtonType;
-  href?: string;
-  target?: HTMLAttributeAnchorTarget;
-  rel?: string;
-  linkComponent?: ElementType;
-  onClick?: (e?: MouseEvent<HTMLElement>) => void;
-  designSystem: DesignSystemId;
+  readonly type?: ButtonType;
+  readonly href?: string;
+  readonly target?: HTMLAttributeAnchorTarget;
+  readonly rel?: string;
+  readonly linkComponent?: ElementType;
+  readonly onClick?: (e?: MouseEvent<HTMLElement>) => void;
+  readonly designSystem: DesignSystemId;
 };

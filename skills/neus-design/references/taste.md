@@ -105,7 +105,7 @@ component. Follow this order:
    social proof marked `SAMPLE:` in the code, business facts only from the
    brief.
 6. **Build, then look.** Run the visual loop in SKILL.md Phase 5
-   (`npx neus shot`) and judge the screenshots against the substance rules
+   (`npx neus-ui shot`) and judge the screenshots against the substance rules
    below.
 
 ### Substance rules for public pages
@@ -143,7 +143,7 @@ two. For every device you leave out, something must take its place.
   from grey bars standing in for the product. Every image local, sized and
   credited when it is not the client's own. Without them, a `MediaPlaceholder`
   labelled with the exact shot (the vet with a dog in the consulting room, the
-  team on stage) holds the place, marked `SAMPLE:`. When `npx neus context`
+  team on stage) holds the place, marked `SAMPLE:`. When `npx neus-ui context`
   prints a photo preview line, give each one that `pixabayKey` expression and a
   two- or three-word `query` in the page's language: a stock photo previews the
   shot while the page is designed, and the block stays `SAMPLE:` to replace.

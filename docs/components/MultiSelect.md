@@ -87,15 +87,15 @@ props retain their nullable default.
 | `triggerClassName` | `string` | Omitted | Additional classes on `.select__trigger` |
 | `triggerStyle` | `CSSProperties` | Omitted | Inline styles on `.select__trigger` |
 | `name` | `string` | Required | Name of the hidden form input |
-| `options` | `SelectOption[]` | Required | Options with value and label |
+| `options` | `readonly SelectOption[]` | Required | Options with value and label |
 | `error` | `string` | Omitted | Error message linked to the field |
 | `description` | `ReactNode` | Omitted | Help text below the field, linked with `aria-describedby` before the error |
 | `descriptionClassName` | `string` | Omitted | Additional classes on `.field__description` |
 | `descriptionStyle` | `CSSProperties` | Omitted | Inline styles on `.field__description` |
 | `placeholder` | `string` | Omitted | Text shown without a value |
 | `label` | `string` | Omitted | Visible label naming the combobox |
-| `value` | `string[]` | `[]` | Controlled values |
-| `defaultValue` | `string[]` | `[]` | Initial uncontrolled values |
+| `value` | `readonly string[]` | `[]` | Controlled values |
+| `defaultValue` | `readonly string[]` | `[]` | Initial uncontrolled values |
 | `disabled` | `boolean` | `false` | Disables the field |
 | `viewSearchBar` | `boolean` | `true` | Shows the search box |
 | `searchBarPlaceholder` | `string` | `"Buscar..."` | Placeholder and accessible name of the search box |

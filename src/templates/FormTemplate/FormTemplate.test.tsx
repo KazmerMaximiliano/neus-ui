@@ -1,8 +1,6 @@
-import { render as renderCustomization } from "@testing-library/react";
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { FormTemplate as CustomizationComponent } from "./FormTemplate";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { ThemeProvider } from "../../providers";
 import { FormTemplate } from "./FormTemplate";
 
 afterEach(cleanup);
@@ -55,14 +53,14 @@ describe("FormTemplate part customization", () => {
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base }) => {
       const overrides = { [cls]: "consumer-part", [sty]: { outlineOffset: "7px" } };
-      const view = renderCustomization(<CustomizationThemeProvider scope="local"><CustomizationComponent submitLabel="Save" {...overrides}><input aria-label="Name" /></CustomizationComponent></CustomizationThemeProvider>);
+      const view = render(<ThemeProvider scope="local"><FormTemplate submitLabel="Save" {...overrides}><input aria-label="Name" /></FormTemplate></ThemeProvider>);
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
       for (const target of targets) {
         expect(target).toHaveClass(base);
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
-      view.rerender(<CustomizationThemeProvider scope="local"><CustomizationComponent submitLabel="Save" ><input aria-label="Name" /></CustomizationComponent></CustomizationThemeProvider>);
+      view.rerender(<ThemeProvider scope="local"><FormTemplate submitLabel="Save" ><input aria-label="Name" /></FormTemplate></ThemeProvider>);
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {
         expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");

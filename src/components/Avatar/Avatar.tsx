@@ -1,8 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import "./Avatar.styles.css";
 import { AvatarSizeContext } from "./Avatar.context";
 import type { AvatarProps } from "./Avatar.types";
 import { initialsOf } from "./Avatar.utils";
+import "./Avatar.styles.css";
 
 /** A person or organization shown as a picture, or as initials when there is none. */
 export const Avatar = ({

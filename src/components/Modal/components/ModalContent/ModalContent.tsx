@@ -1,5 +1,5 @@
-import "./ModalContent.styles.css";
 import type { ModalContentProps } from "./ModalContent.types";
+import "./ModalContent.styles.css";
 
 export const ModalContent = ({
   children,

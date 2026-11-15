@@ -1,10 +1,10 @@
 export { Card } from "./Card";
 export type { CardElement, CardProps } from "./Card.types";
-export { CardHeader } from "./components/CardHeader/CardHeader";
-export type { CardHeaderProps } from "./components/CardHeader/CardHeader.types";
-export { CardMedia } from "./components/CardMedia/CardMedia";
-export type { CardMediaProps } from "./components/CardMedia/CardMedia.types";
-export { CardContent } from "./components/CardContent/CardContent";
-export type { CardContentProps } from "./components/CardContent/CardContent.types";
-export { CardFooter } from "./components/CardFooter/CardFooter";
-export type { CardFooterProps } from "./components/CardFooter/CardFooter.types";
+export { CardHeader } from "./components/CardHeader";
+export type { CardHeaderProps } from "./components/CardHeader";
+export { CardMedia } from "./components/CardMedia";
+export type { CardMediaProps } from "./components/CardMedia";
+export { CardContent } from "./components/CardContent";
+export type { CardContentProps } from "./components/CardContent";
+export { CardFooter } from "./components/CardFooter";
+export type { CardFooterProps } from "./components/CardFooter";

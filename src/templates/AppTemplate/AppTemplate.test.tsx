@@ -1,8 +1,6 @@
-import { render as renderCustomization } from "@testing-library/react";
 import { act, cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { AppTemplate as CustomizationComponent } from "./AppTemplate";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { ThemeProvider } from "../../providers";
 import { AppTemplate } from "./AppTemplate";
 
 afterEach(cleanup);
@@ -105,23 +103,23 @@ describe("AppTemplate part customization", () => {
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base }) => {
       const overrides = { [cls]: "consumer-part", [sty]: { outlineOffset: "7px" } };
-      const view = renderCustomization(<CustomizationThemeProvider scope="local"><CustomizationComponent
+      const view = render(<ThemeProvider scope="local"><AppTemplate
         title="Workspace"
         routes={[{ label: "Home" }]}
         menu={<button>Account</button>}
         {...overrides}
-      ><h1>Content</h1></CustomizationComponent></CustomizationThemeProvider>);
+      ><h1>Content</h1></AppTemplate></ThemeProvider>);
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
       for (const target of targets) {
         expect(target).toHaveClass(base);
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
-      view.rerender(<CustomizationThemeProvider scope="local"><CustomizationComponent
+      view.rerender(<ThemeProvider scope="local"><AppTemplate
         title="Workspace"
         routes={[{ label: "Home" }]}
         menu={<button>Account</button>}
-      ><h1>Content</h1></CustomizationComponent></CustomizationThemeProvider>);
+      ><h1>Content</h1></AppTemplate></ThemeProvider>);
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {
         expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");

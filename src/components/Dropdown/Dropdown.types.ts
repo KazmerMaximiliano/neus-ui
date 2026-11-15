@@ -6,27 +6,27 @@ import type { MenuItem } from "../Menu";
 export type DropdownItem = MenuItem;
 
 export type DropdownProps = {
-  itemClassName?: string;
-  menuClassName?: string;
-  avatarClassName?: string;
-  avatarIconClassName?: string;
-  avatarIconStyle?: CSSProperties;
-  avatarStyle?: CSSProperties;
-  caretClassName?: string;
-  caretStyle?: CSSProperties;
-  className?: string;
-  nameClassName?: string;
-  nameStyle?: CSSProperties;
-  style?: CSSProperties;
-  triggerClassName?: string;
-  icon?: IconButtonIcon;
-  name?: string;
-  items: DropdownItem[];
-  triggerStyle?: CSSProperties;
-  menuStyle?: CSSProperties;
-  itemStyle?: CSSProperties;
+  readonly itemClassName?: string;
+  readonly menuClassName?: string;
+  readonly avatarClassName?: string;
+  readonly avatarIconClassName?: string;
+  readonly avatarIconStyle?: CSSProperties;
+  readonly avatarStyle?: CSSProperties;
+  readonly caretClassName?: string;
+  readonly caretStyle?: CSSProperties;
+  readonly className?: string;
+  readonly nameClassName?: string;
+  readonly nameStyle?: CSSProperties;
+  readonly style?: CSSProperties;
+  readonly triggerClassName?: string;
+  readonly icon?: IconButtonIcon;
+  readonly name?: string;
+  readonly items: readonly DropdownItem[];
+  readonly triggerStyle?: CSSProperties;
+  readonly menuStyle?: CSSProperties;
+  readonly itemStyle?: CSSProperties;
 };
 
 export type DropdownStoryArgs = DropdownProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };

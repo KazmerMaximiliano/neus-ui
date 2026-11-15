@@ -1,9 +1,9 @@
-import { CalendarDays } from "lucide-react";
 import { useState } from "react";
-import { DateRange } from "react-day-picker";
-import { Calendar } from "../Calendar/Calendar";
-import { PickerField } from "./components/PickerField/PickerField";
-import { DateInputProps } from "./DateInput.types";
+import { CalendarDays } from "lucide-react";
+import { Calendar } from "../Calendar";
+import { PickerField } from "./components/PickerField";
+import type { DateRange } from "react-day-picker";
+import type { DateInputProps } from "./DateInput.types";
 import { formatDateForDisplay, serializeDateValue } from "./DateInput.utils";
 
 export const DateInput = (props: DateInputProps) => {
@@ -27,6 +27,7 @@ export const DateInput = (props: DateInputProps) => {
     errorStyle,
     onChange,
   } = props;
+  // `props` stays whole: a `value` passed as undefined still makes the field controlled.
   const isControlled = Object.prototype.hasOwnProperty.call(props, "value");
   const [selectedDate, setSelectedDate] = useState<
     Date | DateRange | undefined

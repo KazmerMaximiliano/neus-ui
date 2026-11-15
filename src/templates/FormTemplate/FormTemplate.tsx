@@ -1,8 +1,8 @@
-import type { CSSProperties } from "react";
 import { Button } from "../../components";
-import "./FormTemplate.styles.css";
+import type { CSSProperties } from "react";
 import type { FormTemplateProps } from "./FormTemplate.types";
 import { resolveColumns } from "./FormTemplate.utils";
+import "./FormTemplate.styles.css";
 
 export const FormTemplate = ({
   actionsClassName,

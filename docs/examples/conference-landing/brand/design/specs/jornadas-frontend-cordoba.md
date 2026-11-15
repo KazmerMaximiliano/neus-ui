@@ -66,7 +66,7 @@ Copy en `src/App.tsx`. Pendientes: `[pending: URL de venta de entradas]`, `[pend
 ## Customization decisions
 
 - Level 0: variants por componente (arriba).
-- Level 1: `npx neus init --yes --primary "#A8471F" --brand "Ladrillo de la Docta: ..."`.
+- Level 1: `npx neus-ui init --yes --primary "#A8471F" --brand "Ladrillo de la Docta: ..."`.
 - Level 2: bloque de marca en `src/styles/neus.overrides.css` (arena, tinta, Space Grotesk, botones en caso natural).
 - Level 3/4: precio de entrada como `Text numeric` con `style` inline a `--font-display` y `--type-headline-size` (Heading no admite `as="p"` y el precio no es un título).
 

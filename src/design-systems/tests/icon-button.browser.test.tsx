@@ -3,9 +3,9 @@ import userEvent from "@testing-library/user-event";
 import { Plus } from "lucide-react";
 import { afterEach, describe, expect, it } from "vitest";
 import { IconButton } from "../../components/IconButton";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio, resolveColor } from "./design-systems.test-utils";
+import { contrastRatio, resolveColor } from "./colorContrast";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -20,6 +20,7 @@ const SYSTEMS = [
 
 describe.each(["light", "dark"] as const)("IconButton designs in %s mode", (scheme) => {
   it.each(SYSTEMS)("renders $id geometry and legible pairs", async (system) => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider scope="local" designSystem={system.id} colorScheme={scheme}>
         <IconButton icon={Plus} label="Small" size="small" />
@@ -43,7 +44,7 @@ describe.each(["light", "dark"] as const)("IconButton designs in %s mode", (sche
     expect(contrastRatio(quiet.color, surface)).toBeGreaterThanOrEqual(4.5);
     expect(getComputedStyle(screen.getByRole("button", { name: "Disabled" })).boxShadow).toBe("none");
 
-    await userEvent.tab();
+    await user.tab();
     expect(screen.getByRole("button", { name: "Small" })).toHaveFocus();
     expect(getComputedStyle(screen.getByRole("button", { name: "Small" })).outlineStyle).toBe("solid");
   });

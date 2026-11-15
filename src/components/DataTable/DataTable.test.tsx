@@ -1,14 +1,9 @@
-import {
-  cleanup,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { AgGridReactProps } from "ag-grid-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { DataTable as CustomizationComponent, DataTable } from "./DataTable";
+import { ThemeProvider } from "../../providers";
+import { DataTable } from "./DataTable";
+import type { AgGridReactProps } from "ag-grid-react";
 import type { DataTableSampleRow } from "./DataTable.types";
 
 const grid = vi.hoisted(() => ({
@@ -48,7 +43,8 @@ describe("DataTable consumer composition", () => {
     const { rerender } = render(
       <DataTable data={data} columnDefs={columnDefs} pagination={pagination} />,
     );
-    expect(grid.props.columnDefs).toBe(columnDefs);
+    const forwardedColumnDefs = grid.props.columnDefs;
+    expect(forwardedColumnDefs).toEqual(columnDefs);
     expect(screen.getByText("Ana")).toBeInTheDocument();
     rerender(
       <DataTable
@@ -57,6 +53,7 @@ describe("DataTable consumer composition", () => {
         pagination={pagination}
       />,
     );
+    expect(grid.props.columnDefs).toBe(forwardedColumnDefs);
     expect(screen.queryByText("Ana")).not.toBeInTheDocument();
     expect(screen.getByText("Bea")).toBeInTheDocument();
   });
@@ -68,6 +65,7 @@ describe("DataTable consumer composition", () => {
     expect(screen.getByTestId("grid")).toBeInTheDocument();
   });
   it("uses consumer cards and actions only on mobile", async () => {
+    const user = userEvent.setup();
     grid.mobile = true;
     const action = vi.fn();
     render(
@@ -81,7 +79,7 @@ describe("DataTable consumer composition", () => {
       />,
     );
     expect(screen.queryByTestId("grid")).not.toBeInTheDocument();
-    await userEvent.click(screen.getByRole("button", { name: "Open Ana" }));
+    await user.click(screen.getByRole("button", { name: "Open Ana" }));
     expect(action).toHaveBeenCalledWith(data[0]);
   });
   it.each([false, true])(
@@ -105,6 +103,7 @@ describe("DataTable consumer composition", () => {
     },
   );
   it("requests pages without mutating controlled pagination", async () => {
+    const user = userEvent.setup();
     const onPaginationChange = vi.fn();
     const { rerender } = render(
       <DataTable
@@ -117,7 +116,7 @@ describe("DataTable consumer composition", () => {
     expect(
       screen.getByRole("button", { name: "Página anterior" }),
     ).toBeDisabled();
-    await userEvent.click(
+    await user.click(
       screen.getByRole("button", { name: "Página siguiente" }),
     );
     expect(onPaginationChange).toHaveBeenCalledWith({
@@ -136,7 +135,7 @@ describe("DataTable consumer composition", () => {
     expect(
       screen.getByRole("button", { name: "Página siguiente" }),
     ).toBeDisabled();
-    await userEvent.click(
+    await user.click(
       screen.getByRole("button", { name: "Página anterior" }),
     );
     expect(onPaginationChange).toHaveBeenLastCalledWith({
@@ -240,9 +239,9 @@ describe("DataTable part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <DataTable
             data={phase === "empty" ? [] : [{ id: 1, name: "Ada" }]}
             columnDefs={[{ field: "name" }]}
             pagination={{
@@ -256,7 +255,7 @@ describe("DataTable part customization", () => {
             renderMobileCard={(row) => <span>{row.name}</span>}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -265,8 +264,8 @@ describe("DataTable part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <DataTable
             data={phase === "empty" ? [] : [{ id: 1, name: "Ada" }]}
             columnDefs={[{ field: "name" }]}
             pagination={{
@@ -279,7 +278,7 @@ describe("DataTable part customization", () => {
             noDataDescription="Add rows"
             renderMobileCard={(row) => <span>{row.name}</span>}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

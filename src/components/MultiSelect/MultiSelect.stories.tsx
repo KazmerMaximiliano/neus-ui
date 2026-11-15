@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { MultiSelect as MultiSelectComponent } from "./MultiSelect";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { MultiSelectStoryArgs } from "./MultiSelect.types";
+import "./MultiSelect.stories.css";
 
 const meta: Meta<MultiSelectStoryArgs> = {
   title: "Base/MultiSelect",
@@ -281,7 +282,7 @@ export const MultiSelect: StoryObj<MultiSelectStoryArgs> = {
   },
   render: ({ designSystem, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>
-      <div style={{ width: 320 }}>
+      <div className="multiselect-story">
         <MultiSelectComponent {...args} />
       </div>
     </ThemeProvider>

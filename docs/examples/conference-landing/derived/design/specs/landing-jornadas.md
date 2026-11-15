@@ -56,8 +56,8 @@ Ver `src/App.tsx`. Pendientes: `[pending: link de la boletería]` en `TICKETS_UR
 
 ## Customization decisions
 - Level 0 (variants): Section tone inverse solo en Agenda; Button solid una vez por vista.
-- Level 1 (palette): `npx neus init --yes --base vercel --primary "#c2410c" --brand "Programa: …"`.
-- Level 2 (tokens): sistema derivado en `design/system/DESIGN.md` → `npx neus design build`; `neus.overrides.css` sin cambios.
+- Level 1 (palette): `npx neus-ui init --yes --base vercel --primary "#c2410c" --brand "Programa: …"`.
+- Level 2 (tokens): sistema derivado en `design/system/DESIGN.md` → `npx neus-ui design build`; `neus.overrides.css` sin cambios.
 - Level 3 (part classes): `.jfc-section` agrega la línea de tinta superior (firma del sistema, sin token propio); `.jfc-price` precio en serif; `.jfc-schedule` filas de agenda; `.jfc-faq` details.
 
 ## Assumptions and open questions

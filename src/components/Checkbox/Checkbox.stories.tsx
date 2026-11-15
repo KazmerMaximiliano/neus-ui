@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { useArgs } from "storybook/preview-api";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Checkbox as CheckboxComponent } from "./Checkbox";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CheckboxStoryArgs } from "./Checkbox.types";
 
 const meta: Meta<CheckboxStoryArgs> = {

@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Link as LinkComponent } from "./Link";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { LinkStoryArgs } from "./Link.types";
 
 const meta: Meta<LinkStoryArgs> = {

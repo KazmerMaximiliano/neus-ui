@@ -1,8 +1,8 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { ComponentType } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Input as InputStory } from "../Input.stories";
+import type { ComponentType } from "react";
 import type { InputStoryArgs } from "../Input.types";
 
 const { updateArgs } = vi.hoisted(() => ({ updateArgs: vi.fn() }));
@@ -17,6 +17,7 @@ afterEach(() => {
 
 describe("Input story controls", () => {
   it("keeps fast typing while earlier argument updates are acknowledged", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     const args: InputStoryArgs = {
       designSystem: "neus",
@@ -26,7 +27,7 @@ describe("Input story controls", () => {
     };
     const view = render(<Preview {...args} />);
     const input = screen.getByRole("textbox", { name: "Name" });
-    await userEvent.type(input, "ABC");
+    await user.type(input, "ABC");
     expect(input).toHaveValue("ABC");
     expect(onChange).toHaveBeenLastCalledWith("ABC");
     expect(updateArgs).toHaveBeenLastCalledWith({ value: "ABC" });
@@ -38,7 +39,7 @@ describe("Input story controls", () => {
     expect(input).toHaveValue("ABC");
     view.rerender(<Preview {...args} value="From controls" />);
     expect(input).toHaveValue("From controls");
-    await userEvent.clear(input);
+    await user.clear(input);
     expect(input).toHaveValue("");
     expect(updateArgs).toHaveBeenLastCalledWith({ value: "" });
   });
@@ -56,11 +57,12 @@ describe("Input story controls", () => {
   });
 
   it("keeps uncontrolled edits without publishing a value argument", async () => {
+    const user = userEvent.setup();
     const view = render(
       <Preview designSystem="apple" label="Name" defaultValue="A" />,
     );
     const input = screen.getByRole("textbox", { name: "Name" });
-    await userEvent.type(input, "B");
+    await user.type(input, "B");
     expect(input).toHaveValue("AB");
     expect(updateArgs).not.toHaveBeenCalled();
     view.rerender(

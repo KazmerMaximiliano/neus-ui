@@ -1,7 +1,7 @@
-import type { ElementType } from "react";
 import { createElement } from "react";
-import "./CardMedia.styles.css";
+import type { ElementType } from "react";
 import type { CardMediaProps } from "./CardMedia.types";
+import "./CardMedia.styles.css";
 
 export const CardMedia = <C extends ElementType = "img">({
   component,

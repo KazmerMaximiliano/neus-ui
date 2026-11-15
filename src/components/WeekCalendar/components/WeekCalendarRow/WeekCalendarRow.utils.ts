@@ -1,5 +1,5 @@
+import type { CalendarEvent, DayCellType } from "./WeekCalendarRow.types";
 import { CATEGORY_COLORS_HEX } from "./WeekCalendarRow.consts";
-import { CalendarEvent, DayCellType } from "./WeekCalendarRow.types";
 
 export const resolveColor = (color: string): string => {
   return CATEGORY_COLORS_HEX[color] ?? color;
@@ -7,7 +7,7 @@ export const resolveColor = (color: string): string => {
 
 export const getDayCellInfo = (
   day: Date,
-  events: CalendarEvent[],
+  events: readonly CalendarEvent[],
 ): { type: DayCellType; event: CalendarEvent | null; durationDays: number; } => {
   const dayTime = day.getTime();
 

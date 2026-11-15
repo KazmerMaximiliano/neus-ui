@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { EllipsisVertical } from "lucide-react";
 import { fn } from "storybook/test";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Menu as MenuComponent } from "./Menu";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { MenuStoryArgs } from "./Menu.types";
 
 const meta: Meta<MenuStoryArgs> = {

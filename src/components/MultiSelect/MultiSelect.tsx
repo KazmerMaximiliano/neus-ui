@@ -1,12 +1,12 @@
-import { ChevronDown, X } from "lucide-react";
 import { useId, useState } from "react";
+import { ChevronDown, X } from "lucide-react";
 import { usePopover } from "../../hooks/usePopover";
 import { SelectListbox } from "../Select/components/SelectListbox";
+import type { MultiSelectProps } from "./MultiSelect.types";
 import "../Checkbox/Checkbox.styles.css";
 import "../Select/Select.styles.css";
 import "../../css/field.css";
 import "./MultiSelect.styles.css";
-import { MultiSelectProps } from "./MultiSelect.types";
 
 export const MultiSelect = ({
   tagRemoveIconClassName,
@@ -71,7 +71,7 @@ export const MultiSelect = ({
   optionStyle,
   onChange,
 }: MultiSelectProps) => {
-  const [internalValues, setInternalValues] = useState<string[]>(defaultValue);
+  const [internalValues, setInternalValues] = useState<readonly string[]>(defaultValue);
   const selectedValues = value.length > 0 ? value : internalValues;
   const selectedOptions = selectedValues.map(
     (selected) =>

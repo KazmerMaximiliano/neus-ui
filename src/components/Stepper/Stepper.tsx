@@ -1,8 +1,8 @@
 import { StepperDots } from "./components/StepperDots";
 import { StepperLinear } from "./components/StepperLinear";
 import { StepperSimple } from "./components/StepperSimple";
+import type { StepperProps } from "./Stepper.types";
 import "./Stepper.styles.css";
-import { StepperProps } from "./Stepper.types";
 
 export const Stepper = ({
   className,

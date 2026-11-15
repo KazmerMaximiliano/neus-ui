@@ -32,10 +32,10 @@ individual parts with classes and style props.
 ### Design with AI
 
 ```bash
-npx neus init
+npx neus-ui init
 ```
 
-`neus init` asks for a design system (or None, to derive your own), the color scheme, the
+`neus-ui init` asks for a design system (or None, to derive your own), the color scheme, the
 action colors, the language and your coding agents. It writes the theme files for Vite,
 Next.js or Astro and installs the `neus-design` and `neus-audit` skills plus a
 `neus-reviewer` subagent. Then design from Claude Code with `/neus-design`, or from the Codex
@@ -44,11 +44,11 @@ building, and checks its work with the commands below.
 
 | Command | Purpose |
 | --- | --- |
-| `npx neus init` | Set up or change the system, palette, theme files, skills and subagent |
-| `npx neus context` · `npx neus docs <Name>` | The active system, catalog and rules; one component's guide |
-| `npx neus lint` | Contract breaks (P0), raw elements a component replaces, component coverage |
-| `npx neus shot <route>` | Screenshots at 1440 and 390 px with the problems measured |
-| `npx neus design build` · `npx neus specimen` | None mode: compile the derived system; preview it |
+| `npx neus-ui init` | Set up or change the system, palette, theme files, skills and subagent |
+| `npx neus-ui context` · `npx neus-ui docs <Name>` | The active system, catalog and rules; one component's guide |
+| `npx neus-ui lint` | Contract breaks (P0), raw elements a component replaces, component coverage |
+| `npx neus-ui shot <route>` | Screenshots at 1440 and 390 px with the problems measured |
+| `npx neus-ui design build` · `npx neus-ui specimen` | None mode: compile the derived system; preview it |
 
 ## Documentation
 
@@ -58,7 +58,7 @@ building, and checks its work with the commands below.
 | ------------------------------------------------------ | ------------------------------------------------------------------------------- |
 | [Installation](./docs/getting-started/installation.md) | Package, stylesheet, provider and TypeScript setup                              |
 | [Frameworks](./docs/getting-started/frameworks.md)     | Vite, Next.js, Astro, server rendering, fonts and the `neus-ui/theme` entry     |
-| [Design with AI](./docs/getting-started/ai-design.md)  | `neus init`, design and audit skills, review subagent and None mode             |
+| [Design with AI](./docs/getting-started/ai-design.md)  | `neus-ui init`, design and audit skills, review subagent and None mode             |
 | [Design systems](./docs/design/systems.md)             | Six systems, scope behavior and visual specifications                           |
 | [ThemeProvider](./docs/design/theme-provider.md)       | Color modes, runtime palette updates, hooks and isolated scopes                 |
 | [Customization](./docs/design/customization.md)        | Tokens, root/part classes, style props and CSS cascade                          |
@@ -89,7 +89,7 @@ tests, the guide, and the skills, lint and specimen of the AI design kit.
 browser checks and coverage. Agent instructions live in [AGENTS.md](./AGENTS.md).
 
 Source families live in src/components, layouts in src/templates, and scoped
-recipes/specifications in src/design-systems. The `neus` CLI lives in cli/, and the agent
+recipes/specifications in src/design-systems. The `neus-ui` CLI lives in cli/, and the agent
 skills and subagents it installs in skills/ and agents/. Subcomponents live under their owning
 family's components directory and page sections in src/sections. Public imports are named
 exports from `neus-ui` and `neus-ui/sections`.

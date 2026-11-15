@@ -7,10 +7,10 @@ export type FeatureListVariant = "grid" | "list" | "cards";
 
 export type FeatureListProps = Omit<ComponentPropsWithRef<"ul">, "children"> & {
   /** FeatureItem elements. */
-  children: ReactNode;
-  variant?: FeatureListVariant;
+  readonly children: ReactNode;
+  readonly variant?: FeatureListVariant;
   /** Columns of grid and cards; default 1, 2 from 768px and 3 from 1024px. */
-  columns?: Responsive<number>;
+  readonly columns?: Responsive<number>;
 };
 
-export type FeatureListStoryArgs = FeatureListProps & { designSystem: DesignSystemId };
+export type FeatureListStoryArgs = FeatureListProps & { readonly designSystem: DesignSystemId };

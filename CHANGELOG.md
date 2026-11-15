@@ -8,6 +8,24 @@ breaking change.
 
 ## [Unreleased]
 
+### Changed
+
+- Props types are now `readonly`, including the arrays and data a component receives
+  (`options: readonly SelectOption[]`, `SidebarItem`, `CalendarEvent`), so TypeScript reports
+  code that mutates them. Mutable arrays, `readonly` arrays and `as const` tuples are all
+  accepted, and callbacks still receive mutable arrays. `FileType` is no longer an `enum`: it
+  is an object of the same values plus a union type of the same name, so `FileType.PNG` and
+  `FileType[]` keep working, plain strings such as `".png"` are now accepted, and a member
+  can no longer be used as a type (`FileType.PNG` in a type position).
+
+### Removed
+
+- **Breaking:** the CLI's `neus` bin is now `neus-ui`, matching the package name, so
+  `npx neus-ui <command>` also works where neus-ui is not installed yet. The commands and
+  flags are unchanged. To migrate, replace `npx neus` with `npx neus-ui` in scripts and docs,
+  then run `npx neus-ui init` once: it rewrites the skills, the subagents and the `AGENTS.md`
+  block, whose instructions still call `npx neus`.
+
 ## [1.3.0] - 2026-11-11
 
 ### Added

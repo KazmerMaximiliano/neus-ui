@@ -3,9 +3,9 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Dropdown } from "../../components/Dropdown";
 import { Menu } from "../../components/Menu";
-import "../../css/app.css";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio, flatten } from "./design-systems.test-utils";
+import { contrastRatio, flatten } from "./colorContrast";
+import "../../css/app.css";
 
 afterEach(cleanup);
 
@@ -25,13 +25,14 @@ const items = [
 
 describe.each(["light", "dark"] as const)("Menu overlays in %s mode", (scheme) => {
   it.each(SYSTEMS)("renders the $id floating surface below its trigger", async (system) => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider scope="local" designSystem={system.id} colorScheme={scheme}>
         <Menu text="Options" items={items} />
       </ThemeProvider>,
     );
     const trigger = screen.getByRole("button", { name: "Options" });
-    await userEvent.click(trigger);
+    await user.click(trigger);
     const panel = screen.getByRole("menu", { name: "Options" });
     expect(panel.matches(":popover-open")).toBe(true);
     expect(panel.closest(`[data-design-system="${system.id}"]`)).not.toBeNull();
@@ -61,6 +62,7 @@ describe.each(["light", "dark"] as const)("Menu overlays in %s mode", (scheme) =
 
 describe("Dropdown trigger designs", () => {
   it.each(SYSTEMS)("keeps the $id avatar legible and opens the account menu", async (system) => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider scope="local" designSystem={system.id}>
         <Dropdown name="Ada" items={items} />
@@ -68,11 +70,12 @@ describe("Dropdown trigger designs", () => {
     );
     const avatar = getComputedStyle(document.querySelector(".dropdown__avatar")!);
     expect(contrastRatio(avatar.color, avatar.backgroundColor)).toBeGreaterThanOrEqual(4.5);
-    await userEvent.click(screen.getByRole("button", { name: "Ada" }));
+    await user.click(screen.getByRole("button", { name: "Ada" }));
     expect(screen.getByRole("menu", { name: "Ada" }).matches(":popover-open")).toBe(true);
   });
 
   it("escapes overflow clipping through the top layer", async () => {
+    const user = userEvent.setup();
     render(
       <ThemeProvider scope="local">
         <div style={{ overflow: "hidden", height: 60 }}>
@@ -80,7 +83,7 @@ describe("Dropdown trigger designs", () => {
         </div>
       </ThemeProvider>,
     );
-    await userEvent.click(screen.getByRole("button", { name: "Options" }));
+    await user.click(screen.getByRole("button", { name: "Options" }));
     const item = screen.getByRole("menuitem", { name: "Delete" });
     const { x, y, width, height } = item.getBoundingClientRect();
     expect(document.elementFromPoint(x + width / 2, y + height / 2)).toBe(item);

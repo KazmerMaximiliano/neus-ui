@@ -1,5 +1,5 @@
-import "./CardHeader.styles.css";
 import type { CardHeaderProps } from "./CardHeader.types";
+import "./CardHeader.styles.css";
 
 export const CardHeader = ({
   children,

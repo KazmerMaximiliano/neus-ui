@@ -33,6 +33,8 @@ Neus UI is a production-ready React component library that provides:
 7. **No default exports**: Only use named exports throughout the project
 8. **Component constants MUST use a dedicated file**: Static data and configuration belong in `ComponentName.consts.ts`, using named UPPER_SNAKE_CASE exports
 9. **Subcomponents MUST live in `components/`**: Every internal or public part belongs in `ComponentName/components/`, following the Stepper pattern
+10. **Modules MUST be imported through their folder**: every folder module has an `index.ts`, and other modules import the folder (`../Button`), never a file inside it. Files inside a folder import each other directly, never through their own `index.ts` or an ancestor's
+11. **Types MUST be strict**: `type` for every definition (`interface` only for module augmentation), no `enum`, `import type` for type-only imports, `readonly` props
 
 ### Restricted Operations
 
@@ -45,6 +47,8 @@ DO NOT perform these operations:
 - Create components without corresponding tests
 - Use CommonJS require() instead of ES6 imports
 - Ignore ESLint configuration
+- Import a file inside another module's folder (`../Button/Button`, `../Input/Input.types`)
+- Use `enum`, a convenience `interface` or `export *` in a barrel
 
 ### Allowed Operations
 
@@ -75,8 +79,8 @@ neus-ui/
 │   ├── index.ts                 [FILE] Library entry point (`neus-ui`)
 │   ├── sections.ts              [FILE] Sections entry (`neus-ui/sections`)
 │   └── theme.ts                 [FILE] Server-safe entry (`neus-ui/theme`), no React or CSS
-├── cli/                         [DIRECTORY] `neus` CLI (init, shot, context, docs, lint, design, specimen) and the project templates it writes
-├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus init`
+├── cli/                         [DIRECTORY] `neus-ui` CLI (init, shot, context, docs, lint, design, specimen) and the project templates it writes
+├── skills/                      [DIRECTORY] neus-design and neus-audit Agent Skills installed by `neus-ui init`
 ├── agents/                      [DIRECTORY] neus-reviewer subagent for Claude Code (.md) and Codex (.toml)
 ├── .storybook/                  [DIRECTORY] Storybook configuration
 ├── package.json                 [FILE] Dependencies and scripts
@@ -93,6 +97,7 @@ Every component MUST follow this pattern:
 
 ```
 ComponentName/
+├── index.ts                     [REQUIRED] Named re-exports other modules may import
 ├── ComponentName.tsx            [REQUIRED] Component implementation
 ├── ComponentName.types.ts       [REQUIRED] Type definitions
 ├── ComponentName.styles.css     [REQUIRED] Component styles
@@ -109,6 +114,7 @@ more test files (behavior, utilities, types or stories), move **all** of them in
 
 ```text
 ComponentName/
+├── index.ts
 ├── ComponentName.tsx
 ├── ComponentName.types.ts
 ├── ComponentName.styles.css
@@ -129,8 +135,9 @@ standalone utilities are separate from this component layout rule.
 
 All rendering parts owned by a component live in its `components/` directory,
 including parts previously declared inside the main implementation. A small
-internal part can be a direct file, as in Stepper; a part with its own styles,
-utilities, tests or stories uses a named directory inside `components/`:
+internal part can be a direct file, as in Stepper; a part with its own types, styles,
+utilities, tests or stories uses a named directory with its own `index.ts` inside
+`components/`, and the parent imports that directory (`./components/CardHeader`):
 
 ```text
 ComponentName/
@@ -142,6 +149,7 @@ ComponentName/
 └── components/
     ├── InternalPart.tsx
     └── PublicSection/
+        ├── index.ts
         ├── PublicSection.tsx
         ├── PublicSection.types.ts
         ├── PublicSection.styles.css
@@ -156,14 +164,32 @@ or public stories for internal implementation details. Dedicated internal types
 still belong in `.types.ts`, never inside the implementation.
 
 Shared internal parts keep one owning family: PickerField belongs to DateInput,
-MenuItems to Menu, and SelectListbox to Select. Sibling families import these
-implementations directly rather than duplicating them. Contexts, hooks, constants
-and utilities are not rendering subcomponents and keep their dedicated files.
-Templates follow the same rule if they introduce owned subcomponents.
+MenuItems to Menu, and SelectListbox to Select. Sibling families import them from
+their owner rather than duplicating them: through the part's directory
+(`../DateInput/components/PickerField`) or, for a single-file part, the file itself
+(`../Menu/components/MenuItems`). Contexts, hooks, constants and utilities are not
+rendering subcomponents and keep their dedicated files. Templates follow the same
+rule if they introduce owned subcomponents.
 
 Expose public sections through the owning family's `index.ts`; moving source
 files must not change imports from `neus-ui` or expose internal parts. For example,
 WeekCalendarRow lives under WeekCalendar but remains a named package export.
+
+### Barrels and module folders
+
+- A family `index.ts` re-exports by name (`export { … }`, `export type { … }`, never
+  `export *`) what other modules use: the component, its public types, and the internals
+  a sibling family needs, such as `FieldDescriptionProps` or `getButtonClasses`.
+- The aggregating barrels `src/components/index.ts`, `src/sections/index.ts` and
+  `src/templates/index.ts` list the public names explicitly, so a family barrel can export
+  internals without publishing them. A new public name goes in both barrels.
+- Hooks, utilities and services stay one flat file (`hooks/usePopover.ts`) until they gain a
+  sidecar (types, constants or a test); then they become a folder with an `index.ts`
+  (`hooks/useResponsive/`). Importers write the same path either way.
+- The only deep imports keep React out of server and Node code: `src/theme.ts` imports
+  `ThemeProvider.utils` by file so the server-safe entry never loads React or CSS,
+  `src/utils/resolvePalette.ts` (shared with the Node generator) imports
+  `ThemeProvider.types` by file, and `src/design.ts` is the CLI's entry to the generator core.
 
 ## COMPONENT INVENTORY
 
@@ -284,6 +310,8 @@ and the list variant reaches its items through a `.context.ts` file.
 
 ```typescript
 // FILE: ComponentName.types.ts
+import type { MouseEvent } from "react";
+
 type ComponentType = "type1" | "type2";
 export type ComponentColor = "primary" | "success" | "error";
 
@@ -293,7 +321,7 @@ export type ComponentProps = {
   readonly color?: ComponentColor;
   readonly disabled?: boolean;
   readonly items?: readonly string[];
-  readonly onClick?: (e?: React.MouseEvent<HTMLElement>) => void;
+  readonly onClick?: (e?: MouseEvent<HTMLElement>) => void;
   readonly onSelect?: (selected: string[]) => void;
 };
 ```
@@ -302,13 +330,22 @@ Every prop is `readonly`, and arrays the component receives are `readonly T[]`, 
 accepts mutable arrays, `readonly` arrays and `as const` tuples alike. Sort or filter a copy
 (`[...items].sort()`), never the received array. Arrays the component creates and passes to
 a callback stay `T[]` (`onSelect` above), so consumers can pass a state setter such as
-`setSelected`.
+`setSelected`. Data types that only enter through props (`SelectOption`, `MenuItem`) are
+`readonly` too; callback payloads and hook or utility results stay mutable. When a
+third-party API types an array as mutable (AG Grid's `rowData`), pass a memoized copy
+(`useMemo(() => [...data], [data])`), never a cast.
+
+Use `type` for every definition; `interface` only for module augmentation. Never `enum`:
+model variants with string unions. A public name that is both a value and a type, such as
+`FileType` (`FileType.PNG`, `FileType[]`), keeps the `as const` object in `.consts.ts`
+(`FILE_ACCEPT_PATTERNS`) and the union in `.types.ts`; TypeScript only merges a value and a
+type declared in one module, so the family `index.ts` declares the public pair.
 
 #### Component Implementation MUST follow pattern
 
 ```typescript
 // FILE: ComponentName.tsx
-import { useColors } from "../theme";
+import { useColors } from "../../hooks/useColors";
 import type { ComponentProps } from "./ComponentName.types";
 import { utilFunction } from "./ComponentName.utils";
 import "./ComponentName.styles.css";
@@ -335,8 +372,9 @@ export const ComponentName = ({
 Keep imports contiguous: do not insert blank lines between import declarations,
 including between the categories below. Multiline import declarations are allowed.
 
-1. React and external dependencies
-2. Internal components and hooks
+1. React, then external dependencies
+2. Internal components and hooks, through their folder's `index.ts`, from the farthest
+   relative path to the nearest (`../../hooks/…`, then `../Button`, then `./components/…`)
 3. Type definitions, always as `import type`
 4. Local constants from ComponentName.consts.ts
 5. Utility functions
@@ -347,8 +385,8 @@ CORRECT ORDER EXAMPLE:
 ```typescript
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "../Button/Button";
-import { useColors } from "../theme";
+import { useColors } from "../../hooks/useColors";
+import { Button } from "../Button";
 import type { InputProps } from "./Input.types";
 import { INPUT_TYPES } from "./Input.consts";
 import { validateInput } from "./Input.utils";
@@ -427,38 +465,56 @@ TEST_FILE MUST:
 
 - Live beside the component when it has a single test file; when it has multiple files, all MUST be in its `tests/` subdirectory
 - Use `.test.tsx` for component/JSX tests or `.test.ts` for tests without JSX
-- Export from vitest framework
+- Import `describe`, `it`, `expect` and `vi` from vitest explicitly
+- Import the module's own files (`./ComponentName`, `./ComponentName.types`), never a
+  package entry (`src/index.ts`, `src/sections.ts`) or an ancestor's `index.ts`
+- Interact through `const user = userEvent.setup()`; keep `fireEvent` only for events
+  user-event cannot produce (load, error, media events, drag and drop, a native `<dialog>`'s
+  `cancel`/`close`, inputs it cannot drive such as `type="color"`)
+- Name tests by behavior in the present tense ("renders…", "calls…")
 - Cover rendering, interactions, and edge cases
+
+Documented part classes and the forwarding of `className`/`*ClassName` and `style`/`*Style`
+are public API in this library, so tests may assert them; behavior is still asserted through
+roles, labels and ARIA state. A test that checks a story's own wiring composes it with
+`composeStories` from `@storybook/react-vite`. A helper shared by several test files is a
+plain module named after what it does (`src/design-systems/tests/colorContrast.ts`), never
+`*.test-utils.ts`.
 
 ### Test Structure Template
 
 ```typescript
 // FILE: ComponentName.test.tsx
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
 import { ComponentName } from "./ComponentName";
 
 describe("ComponentName", () => {
   describe("rendering", () => {
-    it("should render with label", () => {
+    it("renders the label", () => {
       render(<ComponentName label="Test" />);
+
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
   });
 
   describe("interactions", () => {
-    it("should call onClick handler", async () => {
+    it("calls onClick after a user click", async () => {
+      const user = userEvent.setup();
       const handleClick = vi.fn();
-      render(<ComponentName onClick={handleClick} />);
-      await userEvent.click(screen.getByRole("button"));
-      expect(handleClick).toHaveBeenCalled();
+      render(<ComponentName label="Test" onClick={handleClick} />);
+
+      await user.click(screen.getByRole("button"));
+
+      expect(handleClick).toHaveBeenCalledOnce();
     });
   });
 
   describe("edge cases", () => {
-    it("should handle disabled state", () => {
-      render(<ComponentName disabled />);
+    it("disables the button", () => {
+      render(<ComponentName label="Test" disabled />);
+
       expect(screen.getByRole("button")).toBeDisabled();
     });
   });
@@ -533,7 +589,8 @@ is done only when all six design systems style it through tokens and the AI desi
 ### Implementation
 
 - [ ] Create ComponentName/ directory
-- [ ] Create ComponentName.types.ts with props interface
+- [ ] Create ComponentName/index.ts with named re-exports
+- [ ] Create ComponentName.types.ts with the props type
 - [ ] Create ComponentName.tsx with export const
 - [ ] Create ComponentName.styles.css using CSS variables
 - [ ] Create ComponentName.consts.ts for static data/configuration
@@ -551,7 +608,7 @@ is done only when all six design systems style it through tokens and the AI desi
 
 ### Post-implementation
 
-- [ ] Update src/components/index.ts with export
+- [ ] List its public names in `src/components/index.ts` (or the sections/templates barrel); no `export *`
 - [ ] Verify `pnpm build` succeeds
 - [ ] Verify `pnpm test:coverage` shows 70%+ coverage
 - [ ] Verify component works in Storybook
@@ -561,7 +618,7 @@ is done only when all six design systems style it through tokens and the AI desi
 - [ ] Remove its row from BACKLOG.md
 - [ ] Add a row to the "Need → component" table in `skills/neus-design/SKILL.md`
 - [ ] Update `skills/neus-design/references/customization.md` (Level 0), `patterns.md` where it changes a pattern, and the "Already handled" list in `skills/neus-audit/references/neus-rules.md`
-- [ ] Teach `neus lint` the raw element it replaces (`RAW_TO_COMPONENT` or a line check in `cli/lint.mjs`) and add it to `cli/templates/NeusSpecimen.tsx`
+- [ ] Teach `neus-ui lint` the raw element it replaces (`RAW_TO_COMPONENT` or a line check in `cli/lint.mjs`) and add it to `cli/templates/NeusSpecimen.tsx`
 - [ ] Validate both skills with `uvx --from skills-ref agentskills validate skills/<name>`
 
 ## ERROR HANDLING FOR AGENTS
@@ -574,7 +631,7 @@ PREVENTIVE: Use provided templates, follow naming conventions
 
 ERROR: Import paths incorrect
 SOLUTION: Use relative paths from current file
-PATTERN: `../ComponentName/ComponentName` for same level
+PATTERN: `../ComponentName` (the folder's `index.ts`), never a file inside another module's folder
 
 ERROR: Type definitions missing
 SOLUTION: Create or update ComponentName.types.ts
@@ -599,8 +656,8 @@ CHECK: All files have correct exports, no circular imports
 React and ReactDOM are peer dependencies. The build keeps one file per source module,
 leaves every dependency external, adds `"use client"` to modules that import React, and
 loads no fonts. Never add build, Storybook or test tooling to `dependencies`.
-`playwright-core` is an `optionalDependencies` entry used only by `neus shot` at runtime; it
-downloads no browser. `yaml` is a runtime dependency because `neus design build` parses the
+`playwright-core` is an `optionalDependencies` entry used only by `neus-ui shot` at runtime; it
+downloads no browser. `yaml` is a runtime dependency because `neus-ui design build` parses the
 project's derived DESIGN.md with the generator core (`src/design-systems/tooling/design-systems.core.ts`,
 built as the internal `dist/design.js`).
 
@@ -650,6 +707,7 @@ Storybook
 5. Use TypeScript strict mode
 6. Test all interactive features
 7. Update documentation
+8. Import other modules through their folder's `index.ts`
 
 ### SHOULD TYPICALLY
 
@@ -678,6 +736,10 @@ Each component MUST export a single Story that exposes all props as editable con
 | Centered layout               | Use `parameters: { layout: "centered" }` unless the component requires full width |
 | Named export = component name | The Story export name must match the component name (e.g., `export const Button`) |
 | Default export = meta         | The meta object is always the default export                                      |
+| Framework types               | `Meta` and `StoryObj` come from `@storybook/react-vite`; type the story inline (`StoryObj<ButtonStoryArgs>`), no `Story` alias |
+| Parts under their parent      | A public part's story is titled under its family (`Base/Card/CardHeader`)         |
+| No inline styles              | Preview frames are classes in `ComponentName.stories.css` (block `component-name-story`) |
+| Controlled state              | Keep controls in sync with `useArgs`; React state only with a comment explaining why |
 
 ### Control Types Reference
 
@@ -740,20 +802,20 @@ interactive component catalog separately.
 ## AI DESIGN KIT MAINTENANCE
 
 - `skills/`, `agents/` and `cli/templates/` are copied into consumer projects by
-  `npx neus init`; they are product code. Keep them in English and in sync with public
+  `npx neus-ui init`; they are product code. Keep them in English and in sync with public
   props, docs and DESIGN.md files: when a prop, part, token or component changes, update
   `skills/neus-design/references/patterns.md`, `customization.md` and the audit's
   `references/neus-rules.md` (Library section) in the same change.
 - A new component is part of the kit too: a "Need → component" row in `SKILL.md`, its
-  raw-element hint in `neus lint`, a place in the specimen template and its guarantees in the
-  audit's "Already handled" list. `neus context`, `neus docs` and the lint class and token
+  raw-element hint in `neus-ui lint`, a place in the specimen template and its guarantees in the
+  audit's "Already handled" list. `neus-ui context`, `neus-ui docs` and the lint class and token
   checks pick it up from the catalog, the guide and the CSS. See
   [Adding a component](./docs/contributing/adding-a-component.md).
 - Skills follow the Agent Skills specification: `name` equals the directory, only
   `name`, `description`, `license`, `compatibility`, `metadata` and `allowed-tools` in
   frontmatter, references one level deep. Validate with
   `uvx --from skills-ref agentskills validate skills/<name>`.
-- Skills must not depend on commands the `neus` CLI does not provide; they read files from
+- Skills must not depend on commands the `neus-ui` CLI does not provide; they read files from
   `node_modules/neus-ui/` and run their own `scripts/`.
 - Keep the kit's skills on visual ground. neus-design decides the system,
   brand, components, palette, type, spacing, theme and composition. General design skills

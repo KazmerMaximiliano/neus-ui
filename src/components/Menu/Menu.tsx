@@ -1,11 +1,11 @@
 import { usePopover } from "../../hooks/usePopover";
+import { getButtonClasses } from "../Button";
+import { getIconButtonClasses } from "../IconButton";
 import { MenuItems } from "./components/MenuItems";
+import type { MenuProps } from "./Menu.types";
 import "../Button/Button.styles.css";
 import "../IconButton/IconButton.styles.css";
 import "./Menu.styles.css";
-import { MenuProps } from "./Menu.types";
-import { getButtonClasses } from "../Button/Button.utils";
-import { getIconButtonClasses } from "../IconButton/IconButton.utils";
 
 export const Menu = ({
   itemClassName,

@@ -1,15 +1,16 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { Button, Input, Menu, Modal, ModalContent, ModalHeader } from "../../components";
 import { ThemeProvider } from "../../providers";
 import * as appStories from "../../templates/AppTemplate/AppTemplate.stories";
 import * as formStories from "../../templates/FormTemplate/FormTemplate.stories";
+import { resolveColor } from "./colorContrast";
+import { DESIGN_SYSTEMS } from "../design-systems.consts";
 import "../../css/app.css";
 import "./fixtures/documentation-customization.css";
-import { DESIGN_SYSTEMS } from "../design-systems.consts";
-import { resolveColor } from "./design-systems.test-utils";
 
 const { AppTemplate } = composeStories(appStories);
 const { FormTemplate } = composeStories(formStories);
@@ -74,6 +75,7 @@ describe.each(["light", "dark"] as const)("Documented templates in %s", (scheme)
 });
 
 it.each([1280, 900, 375])("preserves responsive layout and drawer scope at %ipx", async (width) => {
+  const user = userEvent.setup();
   await page.viewport(width, 900);
   const app = render(
     <ThemeProvider scope="local" designSystem="material" colorScheme="dark">
@@ -83,7 +85,7 @@ it.each([1280, 900, 375])("preserves responsive layout and drawer scope at %ipx"
   const sidebar = app.container.querySelector<HTMLElement>(".sidebar")!;
   await waitFor(() => expect(sidebar).toHaveAttribute("data-viewport", width < 768 ? "mobile" : width < 1024 ? "tablet" : "desktop"));
   if (width < 768) {
-    fireEvent.click(app.container.querySelector(".sidebar__toggle")!);
+    await user.click(app.container.querySelector(".sidebar__toggle")!);
     const dialog = screen.getByRole("dialog");
     expect(dialog.closest("[data-design-system]")).toHaveAttribute("data-design-system", "material");
     expect(dialog.closest("[data-color-scheme]")).toHaveAttribute("data-color-scheme", "dark");
@@ -137,6 +139,7 @@ it("applies documented classes and tokens through focus, disabled and nested sco
 });
 
 it("keeps part classes and palette inheritance in popovers and dialog backdrops", async () => {
+  const user = userEvent.setup();
   const view = render(
     <ThemeProvider scope="local" designSystem="carbon" colorScheme="dark">
       <Menu
@@ -163,7 +166,7 @@ it("keeps part classes and palette inheritance in popovers and dialog backdrops"
       />
     </ThemeProvider>,
   );
-  fireEvent.click(screen.getByRole("button", { name: "Actions" }));
+  await user.click(screen.getByRole("button", { name: "Actions" }));
   const item = screen.getByRole("menuitem", { name: "Edit" });
   expect(item).toHaveClass("menu__item", "documentation-menu-item");
   expect(item.closest("[data-color-scheme]")).toHaveAttribute("data-color-scheme", "dark");

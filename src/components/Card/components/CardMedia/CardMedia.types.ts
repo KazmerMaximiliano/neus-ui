@@ -6,21 +6,21 @@ type VoidElement =
   | "link" | "meta" | "param" | "source" | "track" | "wbr";
 
 export type CardMediaProps<C extends ElementType = "img"> = {
-  component?: C;
-  className?: string;
-  style?: CSSProperties | null;
+  readonly component?: C;
+  readonly className?: string;
+  readonly style?: CSSProperties | null;
 } & Omit<ComponentPropsWithRef<NoInfer<C>>, "component" | "className" | "style">
-  & (C extends VoidElement ? { children?: never } : unknown);
+  & (C extends VoidElement ? { readonly children?: never } : unknown);
 
 export type CardMediaStoryArgs = {
-  designSystem: DesignSystemId;
-  component: "img" | "video" | "audio" | "iframe";
-  className: string;
-  style: CSSProperties | null;
-  src: string;
-  alt: string;
-  title: string;
-  controls: boolean;
-  poster: string;
-  children?: ReactNode;
+  readonly designSystem: DesignSystemId;
+  readonly component: "img" | "video" | "audio" | "iframe";
+  readonly className: string;
+  readonly style: CSSProperties | null;
+  readonly src: string;
+  readonly alt: string;
+  readonly title: string;
+  readonly controls: boolean;
+  readonly poster: string;
+  readonly children?: ReactNode;
 };

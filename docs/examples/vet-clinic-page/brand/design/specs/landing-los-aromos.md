@@ -77,7 +77,7 @@ Copy en el código (`src/App.tsx`). Voseo rioplatense, sentence case.
 ## Customization decisions
 
 - Level 0: variants above.
-- Level 1: `npx neus init --yes --primary "#2F5D3A" --brand "Aromo y monte: …"`.
+- Level 1: `npx neus-ui init --yes --primary "#2F5D3A" --brand "Aromo y monte: …"`.
 - Level 2: brand block in `src/styles/neus.overrides.css` (crema, tinta, Fraunces, botones en caja natural).
 - Level 3: page classes in `src/App.css` for the hours list and team picture.
 

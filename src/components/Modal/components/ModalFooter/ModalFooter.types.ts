@@ -2,9 +2,9 @@ import type { ComponentPropsWithRef, CSSProperties } from "react";
 import type { DesignSystemId } from "../../../../design-systems";
 
 export type ModalFooterProps = Omit<ComponentPropsWithRef<"div">, "style"> & {
-  style?: CSSProperties | null;
+  readonly style?: CSSProperties | null;
 };
 
 export type ModalFooterStoryArgs = ModalFooterProps & {
-  designSystem: DesignSystemId;
+  readonly designSystem: DesignSystemId;
 };

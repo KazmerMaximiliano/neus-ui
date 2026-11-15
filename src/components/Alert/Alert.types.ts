@@ -8,35 +8,35 @@ export type AlertLive = "assertive" | "polite" | "off";
 type AlertDismiss =
   | {
     /** Shows a close button that calls this. */
-    onDismiss: () => void;
+    readonly onDismiss: () => void;
     /** Accessible name of the close button, in the project's language. */
-    dismissLabel: string;
+    readonly dismissLabel: string;
   }
-  | { onDismiss?: never; dismissLabel?: never };
+  | { readonly onDismiss?: never; readonly dismissLabel?: never };
 
 export type AlertProps = Omit<ComponentPropsWithRef<"div">, "title" | "role"> & AlertDismiss & {
-  status?: AlertStatus;
-  title?: ReactNode;
+  readonly status?: AlertStatus;
+  readonly title?: ReactNode;
   /** Buttons or links placed under the message. */
-  actions?: ReactNode;
+  readonly actions?: ReactNode;
   /** Replaces the status icon; null removes it. */
-  icon?: ReactNode | null;
-  live?: AlertLive;
-  iconClassName?: string;
-  iconStyle?: CSSProperties;
-  titleClassName?: string;
-  titleStyle?: CSSProperties;
-  contentClassName?: string;
-  contentStyle?: CSSProperties;
-  actionsClassName?: string;
-  actionsStyle?: CSSProperties;
-  dismissClassName?: string;
-  dismissStyle?: CSSProperties;
+  readonly icon?: ReactNode | null;
+  readonly live?: AlertLive;
+  readonly iconClassName?: string;
+  readonly iconStyle?: CSSProperties;
+  readonly titleClassName?: string;
+  readonly titleStyle?: CSSProperties;
+  readonly contentClassName?: string;
+  readonly contentStyle?: CSSProperties;
+  readonly actionsClassName?: string;
+  readonly actionsStyle?: CSSProperties;
+  readonly dismissClassName?: string;
+  readonly dismissStyle?: CSSProperties;
 };
 
 export type AlertStoryArgs = Omit<AlertProps, "onDismiss" | "dismissLabel"> & {
-  dismissible: boolean;
-  dismissLabel: string;
-  onDismiss?: () => void;
-  designSystem: DesignSystemId;
+  readonly dismissible: boolean;
+  readonly dismissLabel: string;
+  readonly onDismiss?: () => void;
+  readonly designSystem: DesignSystemId;
 };

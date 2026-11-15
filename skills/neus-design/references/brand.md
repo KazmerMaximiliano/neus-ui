@@ -46,11 +46,11 @@ add "Keep <system> as it is" as the last option.
 1. Record it and set the action color:
 
    ```sh
-   npx neus init --yes --primary <#hex> --brand "<Name>: <action color, ground, display face>"
+   npx neus-ui init --yes --primary <#hex> --brand "<Name>: <action color, ground, display face>"
    ```
 
-   With "Keep <system> as it is": `npx neus init --yes --brand system`.
-   `neus init` rewrites the palette file (`src/neus/neus.theme.ts` or
+   With "Keep <system> as it is": `npx neus-ui init --yes --brand system`.
+   `neus-ui init` rewrites the palette file (`src/neus/neus.theme.ts` or
    `<styles>/neus.theme.css`); never write palette variables yourself.
 2. Write the ground, ink, faces and button case in `<styles>/neus.overrides.css`.
    Use the selectors below, without `:root`, so the brand also reaches local

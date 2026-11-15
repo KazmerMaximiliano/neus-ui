@@ -1,8 +1,8 @@
 import { createElement, type CSSProperties } from "react";
 import { resolveResponsive } from "../../utils/resolveResponsive";
-import "./Stack.styles.css";
 import type { StackElement, StackProps } from "./Stack.types";
 import { spaceValue } from "./Stack.utils";
+import "./Stack.styles.css";
 
 /** Lays children out in a column or a row with a gap from the space scale. */
 export const Stack = <C extends StackElement = "div">({

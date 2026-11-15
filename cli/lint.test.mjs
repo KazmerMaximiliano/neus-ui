@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { cssVocabulary, documentedClasses, lintFiles } from "./lint.mjs";
 import { PACKAGE_ROOT } from "./neus.utils.mjs";
 
-// The vocabulary neus lint reads from dist/neus-ui.css, built here from the sources.
+// The vocabulary neus-ui lint reads from dist/neus-ui.css, built here from the sources.
 const files = (folder, extension) => readdirSync(path.join(PACKAGE_ROOT, folder), { recursive: true })
   .filter((file) => file.endsWith(extension)).map((file) => readFileSync(path.join(PACKAGE_ROOT, folder, file), "utf8"));
 const vocabulary = {
@@ -17,7 +17,7 @@ const vocabulary = {
 const lint = (file, text, options = {}) => lintFiles([{ file, text }], { ...vocabulary, ...options });
 const rules = (result) => result.findings.map(({ severity, rule }) => `${severity} ${rule}`);
 
-describe("neus lint", () => {
+describe("neus-ui lint", () => {
   it("passes code that follows the contract", () => {
     const page = `import { Button, Heading, Section, Text } from "neus-ui";
 import "neus-ui/dist/neus-ui.css";
@@ -73,7 +73,7 @@ export const Page = () => (
     expect(rules(lintFiles([overrides], vocabulary))).toEqual(["P0 unknown-token"]);
   });
 
-  it("allows raw colors in neus.overrides.css, skips neus init's theme files and ignores the copyright sign", () => {
+  it("allows raw colors in neus.overrides.css, skips neus-ui init's theme files and ignores the copyright sign", () => {
     expect(lint("src/styles/neus.overrides.css", ":root { --font-body: x; color-scheme: light; background: #fff; }").findings).toEqual([]);
     expect(lint("src/styles/neus.theme.css", ":root { --color-primary: #ff0000 !important; }").findings).toEqual([]);
     expect(lint("src/neus/neus.theme.ts", `export const THEME = { primaryColor: "#ff0000" };`).findings).toEqual([]);

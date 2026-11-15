@@ -1,17 +1,8 @@
-import {
-  cleanup,
-  fireEvent as fireCustomization,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import {
-  MultiSelect as CustomizationComponent,
-  MultiSelect,
-} from "./MultiSelect";
+import { ThemeProvider } from "../../providers";
+import { MultiSelect } from "./MultiSelect";
 import type { MultiSelectProps } from "./MultiSelect.types";
 
 afterEach(cleanup);
@@ -90,36 +81,39 @@ describe("MultiSelect", () => {
 
   describe("interactions", () => {
     it("opens a multiselectable listbox and stays open while toggling", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderMulti({ onChange });
-      await userEvent.click(combobox());
+      await user.click(combobox());
       const listbox = screen.getByRole("listbox", { name: "Colors" });
       expect(listbox).toHaveAttribute("aria-multiselectable", "true");
-      await userEvent.click(screen.getByRole("option", { name: "Red" }));
-      await userEvent.click(screen.getByRole("option", { name: "Blue" }));
+      await user.click(screen.getByRole("option", { name: "Red" }));
+      await user.click(screen.getByRole("option", { name: "Blue" }));
       expect(onChange).toHaveBeenLastCalledWith(["red", "blue"]);
       expect(screen.getByRole("option", { name: "Red" })).toHaveAttribute(
         "aria-selected",
         "true",
       );
-      await userEvent.click(screen.getByRole("option", { name: "Red" }));
+      await user.click(screen.getByRole("option", { name: "Red" }));
       expect(onChange).toHaveBeenLastCalledWith(["blue"]);
       expect(screen.getByRole("listbox")).toBeInTheDocument();
     });
 
     it("toggles options from the keyboard", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderMulti({ onChange, viewSearchBar: false });
-      await userEvent.click(combobox());
+      await user.click(combobox());
       expect(screen.getByRole("option", { name: "Red" })).toHaveFocus();
-      await userEvent.keyboard("{ArrowDown} ");
+      await user.keyboard("{ArrowDown} ");
       expect(onChange).toHaveBeenLastCalledWith(["green"]);
     });
 
     it("removes a tag through its named button", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderMulti({ defaultValue: ["red", "green"], onChange });
-      await userEvent.click(screen.getByRole("button", { name: "Quitar Red" }));
+      await user.click(screen.getByRole("button", { name: "Quitar Red" }));
       expect(onChange).toHaveBeenLastCalledWith(["green"]);
       expect(
         screen.queryByRole("button", { name: "Quitar Red" }),
@@ -127,16 +121,18 @@ describe("MultiSelect", () => {
     });
 
     it("disables the trigger and hides tag removal", async () => {
+      const user = userEvent.setup();
       renderMulti({ disabled: true, defaultValue: ["red"] });
       expect(combobox()).toBeDisabled();
       expect(
         screen.queryByRole("button", { name: /Quitar/ }),
       ).not.toBeInTheDocument();
-      await userEvent.click(combobox());
+      await user.click(combobox());
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
     });
 
     it("ignores options without a value", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       render(
         <MultiSelect
@@ -146,8 +142,8 @@ describe("MultiSelect", () => {
           onChange={onChange}
         />,
       );
-      await userEvent.click(combobox());
-      await userEvent.click(screen.getByRole("option", { name: "None" }));
+      await user.click(combobox());
+      await user.click(screen.getByRole("option", { name: "None" }));
       expect(onChange).not.toHaveBeenCalled();
     });
   });
@@ -307,13 +303,14 @@ describe("MultiSelect part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <MultiSelect
             name="roles"
             label="Roles"
             error="Invalid"
@@ -325,15 +322,15 @@ describe("MultiSelect part customization", () => {
             placeholder="Choose"
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
-      fireCustomization.click(
+      await user.click(
         view.container.querySelector("[role=\"combobox\"]")!,
       );
       if (phase === "empty")
-        fireCustomization.change(
+        await user.type(
           view.container.querySelector("input[type=\"search\"]")!,
-          { target: { value: "unmatched-query" } },
+          "unmatched-query",
         );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -342,8 +339,8 @@ describe("MultiSelect part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <MultiSelect
             name="roles"
             label="Roles"
             error="Invalid"
@@ -354,7 +351,7 @@ describe("MultiSelect part customization", () => {
             defaultValue={phase === "placeholder" ? [] : ["a", "b"]}
             placeholder="Choose"
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

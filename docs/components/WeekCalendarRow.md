@@ -67,7 +67,7 @@ noted; section style props retain their nullable default.
 | `eventStyle` | `CSSProperties` | Omitted | Inline styles on `.week-calendar-row__event--single/start/continue/end`, `.week-calendar-row__event-content` |
 | `tooltipStyle` | `CSSProperties` | Omitted | Inline styles on `.week-calendar-row__hover-tooltip` |
 | `entry` | `EventsByCategory` | Required | Category and events |
-| `days` | `Date[]` | Required | Displayed calendar dates |
+| `days` | `readonly Date[]` | Required | Displayed calendar dates |
 | `color` | `string` | Required | Category accent |
 | `hoverContent` | `((event: CalendarEvent) => React.ReactNode)` | Omitted | Informational tooltip on hover or focus |
 | `onEventClick` | `((event: CalendarEvent) => void)` | Omitted | Mouse and keyboard event activation |
@@ -80,22 +80,22 @@ shown here is not necessarily a package export.
 
 ```ts
 type EventsByCategory = {
-  category: Category;
-  events: CalendarEvent[];
+  readonly category: Category;
+  readonly events: readonly CalendarEvent[];
 };
 
 type Category = {
-  color?: string;
-  title: string;
-  label: string;
+  readonly color?: string;
+  readonly title: string;
+  readonly label: string;
 };
 
 type CalendarEvent = {
-  id?: number;
-  title: string;
-  start: Date;
-  end: Date;
-  description?: string;
+  readonly id?: number;
+  readonly title: string;
+  readonly start: Date;
+  readonly end: Date;
+  readonly description?: string;
 };
 ```
 

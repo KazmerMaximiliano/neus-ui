@@ -39,7 +39,7 @@ in development and a short `query`:
 />
 ```
 
-Keep the key in `.env.development.local`. `npx neus context` names the variable it finds and
+Keep the key in `.env.development.local`. `npx neus-ui context` names the variable it finds and
 the expression to pass; for Next.js it is
 `process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_PIXABAY_KEY : undefined`.
 

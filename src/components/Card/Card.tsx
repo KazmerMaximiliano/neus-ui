@@ -1,6 +1,6 @@
 import { createElement } from "react";
-import "./Card.styles.css";
 import type { CardElement, CardProps } from "./Card.types";
+import "./Card.styles.css";
 
 export const Card = <C extends CardElement = "div">({
   as,

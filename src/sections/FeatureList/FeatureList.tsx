@@ -1,7 +1,7 @@
-import { Grid } from "../../components/Grid/Grid";
+import { Grid } from "../../components/Grid";
 import { FeatureListContext } from "./FeatureList.context";
-import "./FeatureList.styles.css";
 import type { FeatureListProps } from "./FeatureList.types";
+import "./FeatureList.styles.css";
 
 /** The features or services of a public page, as plain blocks, rows or cards. */
 export const FeatureList = ({ children, variant = "grid", columns, className, ...props }: FeatureListProps) => (

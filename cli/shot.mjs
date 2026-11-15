@@ -13,7 +13,7 @@ import {
 } from "./neus.consts.mjs";
 import { detectProject, readJson, toPosix } from "./neus.utils.mjs";
 
-const HELP = `Usage: npx neus shot [routes...] [options]
+const HELP = `Usage: npx neus-ui shot [routes...] [options]
 
 Screenshots each route (default /) full page at every width into ${NEUS_DIR}/shots/ and
 reports horizontal overflow, content cut off by overflow: hidden, console errors, the body text size, fonts
@@ -26,15 +26,15 @@ Options:
   --browser <path>    Chrome, Edge or Chromium executable to use
   --timeout <s>       Seconds to wait for the dev server (default ${SHOT_TIMEOUT_S})
   --json              Print the report as JSON
-  --stop              Stop the dev server started by neus shot
+  --stop              Stop the dev server started by neus-ui shot
   -h, --help          Show this help
 
 Exit codes: 0 screenshots taken (problems are reported, not failures),
 1 the server or a page failed, 2 no browser or playwright-core.`;
 
-const NO_PLAYWRIGHT = "neus shot needs playwright-core, an optional dependency of neus-ui that is not installed.\n" +
+const NO_PLAYWRIGHT = "neus-ui shot needs playwright-core, an optional dependency of neus-ui that is not installed.\n" +
   "Install it with `npm i -D playwright-core`; it downloads no browser.";
-const NO_BROWSER = "No Chrome, Edge or Chromium found. Install one or pass --browser <path>; neus shot never downloads browsers.";
+const NO_BROWSER = "No Chrome, Edge or Chromium found. Install one or pass --browser <path>; neus-ui shot never downloads browsers.";
 
 /** File-name slug of a route: "/" is "index", "/a/b?x" is "a-b". */
 export const routeSlug = (route) =>
@@ -171,7 +171,7 @@ const devServer = async (root, url, timeoutMs) => {
 const stopServer = (root) => {
   const stateFile = path.join(root, NEUS_DIR, "dev.json");
   const state = readJson(stateFile);
-  if (!state) return "No dev server started by neus shot is running.";
+  if (!state) return "No dev server started by neus-ui shot is running.";
   rmSync(stateFile, { force: true });
   if (state.background) {
     return `The dev server at ${state.url} was started in the background by the dev script; ` +
@@ -338,7 +338,7 @@ export const problems = (pages) => pages.flatMap(({ route, width, overflow, clip
   ].filter(Boolean);
 });
 
-const BACKGROUND_NOTE = "The dev script runs the server in the background, so it keeps running after neus shot; " +
+const BACKGROUND_NOTE = "The dev script runs the server in the background, so it keeps running after neus-ui shot; " +
   "stop it with the framework's own command (Astro: npx astro dev stop).";
 
 const formatReport = ({ url, pages, problems: found }, { managed, background }) => {
@@ -353,7 +353,7 @@ const formatReport = ({ url, pages, problems: found }, { managed, background }) 
     ...(pages.some(({ blankFrames }) => blankFrames)
       ? ["Note: iframes from other origins (maps, video) show blank in full-page shots; Chrome paints them only on screen."]
       : []),
-    ...(managed ? ["The dev server keeps running for the next round; stop it with npx neus shot --stop."] : []),
+    ...(managed ? ["The dev server keeps running for the next round; stop it with npx neus-ui shot --stop."] : []),
     ...(background ? [BACKGROUND_NOTE] : []),
   ].join("\n");
 };

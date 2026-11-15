@@ -1,16 +1,17 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import type { ICellRendererParams } from "ag-grid-community";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import { action } from "storybook/actions";
 import {
   designSystemControl,
   withDesignSystem,
 } from "../../../.storybook/designSystem";
-import { Card, CardContent, CardFooter, IconButton } from "../index";
+import { Card, CardContent, CardFooter } from "../Card";
+import { IconButton } from "../IconButton";
 import { DataTable as DataTableComponent } from "./DataTable";
-import "./DataTable.stories.css";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { ICellRendererParams } from "ag-grid-community";
 import type { DesignSystemPreviewArgs } from "../../../.storybook/designSystem.types";
 import type { DataTableProps, DataTableSampleRow } from "./DataTable.types";
+import "./DataTable.stories.css";
 
 const sampleData: DataTableSampleRow[] = [
   { id: 1, name: "Ana Pérez", email: "ana@example.com" },

@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { Heading } from "../Heading/Heading";
-import { Stack } from "../Stack/Stack";
-import { Text } from "../Text/Text";
+import { Heading } from "../Heading";
+import { Stack } from "../Stack";
+import { Text } from "../Text";
 import { Section as SectionComponent } from "./Section";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { SectionStoryArgs } from "./Section.types";
 
 const meta: Meta<SectionStoryArgs> = {

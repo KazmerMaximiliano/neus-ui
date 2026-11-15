@@ -1,15 +1,8 @@
-import {
-  cleanup,
-  fireEvent as fireCustomization,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { Select as CustomizationComponent, Select } from "./Select";
+import { ThemeProvider } from "../../providers";
+import { Select } from "./Select";
 import type { SelectProps } from "./Select.types";
 
 afterEach(cleanup);
@@ -109,20 +102,22 @@ describe("Select", () => {
     });
 
     it("disables the native trigger and its label", async () => {
+      const user = userEvent.setup();
       const { container } = renderSelect({ disabled: true });
       expect(combobox()).toBeDisabled();
       expect(container.querySelector(".select__label")).toHaveClass(
         "select__label--disabled",
       );
-      await userEvent.click(combobox());
+      await user.click(combobox());
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
     });
   });
 
   describe("interactions", () => {
     it("opens the listbox with the search box focused", async () => {
+      const user = userEvent.setup();
       renderSelect();
-      await userEvent.click(combobox());
+      await user.click(combobox());
       expect(combobox()).toHaveAttribute("aria-expanded", "true");
       expect(
         screen.getByRole("listbox", { name: "Country" }),
@@ -134,19 +129,21 @@ describe("Select", () => {
     });
 
     it("filters options and reports empty results", async () => {
+      const user = userEvent.setup();
       renderSelect();
-      await userEvent.click(combobox());
-      await userEvent.keyboard("bra");
+      await user.click(combobox());
+      await user.keyboard("bra");
       expect(screen.getAllByRole("option")).toHaveLength(1);
-      await userEvent.keyboard("zzz");
+      await user.keyboard("zzz");
       expect(screen.getByText("Sin resultados")).toBeInTheDocument();
     });
 
     it("selects with the pointer, closes and restores focus", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderSelect({ onChange });
-      await userEvent.click(combobox());
-      await userEvent.click(screen.getByRole("option", { name: "Chile" }));
+      await user.click(combobox());
+      await user.click(screen.getByRole("option", { name: "Chile" }));
       expect(onChange).toHaveBeenCalledWith("cl");
       expect(combobox()).toHaveTextContent("Chile");
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
@@ -154,44 +151,49 @@ describe("Select", () => {
     });
 
     it("selects with arrow keys and Enter", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       renderSelect({ onChange });
-      await userEvent.click(combobox());
-      await userEvent.keyboard("{ArrowDown}{ArrowDown}{Enter}");
+      await user.click(combobox());
+      await user.keyboard("{ArrowDown}{ArrowDown}{Enter}");
       expect(onChange).toHaveBeenCalledWith("br");
     });
 
     it("focuses the selected option when the search bar is hidden", async () => {
+      const user = userEvent.setup();
       renderSelect({ viewSearchBar: false, defaultValue: "br" });
-      await userEvent.click(combobox());
+      await user.click(combobox());
       const selected = screen.getByRole("option", { name: "Brasil" });
       expect(selected).toHaveFocus();
       expect(selected).toHaveAttribute("aria-selected", "true");
-      await userEvent.keyboard(" ");
+      await user.keyboard(" ");
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
     });
 
     it("clears the search after closing", async () => {
+      const user = userEvent.setup();
       renderSelect();
-      await userEvent.click(combobox());
-      await userEvent.keyboard("bra{Escape}");
+      await user.click(combobox());
+      await user.keyboard("bra{Escape}");
       expect(combobox()).toHaveFocus();
-      await userEvent.click(combobox());
+      await user.click(combobox());
       expect(screen.getByRole("searchbox")).toHaveValue("");
     });
 
     it("closes on outside clicks and on Tab", async () => {
+      const user = userEvent.setup();
       renderSelect();
-      await userEvent.click(combobox());
-      fireEvent.mouseDown(document.body);
+      await user.click(combobox());
+      await user.click(document.body);
       expect(combobox()).toHaveAttribute("aria-expanded", "false");
-      await userEvent.click(combobox());
-      await userEvent.keyboard("{ArrowDown}");
-      await userEvent.tab();
+      await user.click(combobox());
+      await user.keyboard("{ArrowDown}");
+      await user.tab();
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
     });
 
     it("handles options with a null value", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       render(
         <Select
@@ -200,14 +202,15 @@ describe("Select", () => {
           onChange={onChange}
         />,
       );
-      await userEvent.click(combobox());
-      await userEvent.click(screen.getByRole("option", { name: "None" }));
+      await user.click(combobox());
+      await user.click(screen.getByRole("option", { name: "None" }));
       expect(onChange).toHaveBeenCalledWith("");
     });
   });
 
   describe("customization", () => {
     it("applies each style object to its part", async () => {
+      const user = userEvent.setup();
       const { container } = renderSelect({
         fieldStyle: { borderRadius: 3 },
         listStyle: { maxHeight: 99 },
@@ -216,7 +219,7 @@ describe("Select", () => {
       expect(container.querySelector(".select__field")).toHaveStyle({
         borderRadius: "3px",
       });
-      await userEvent.click(combobox());
+      await user.click(combobox());
       expect(container.querySelector(".select__popover")).toHaveStyle({
         maxHeight: "99px",
       });
@@ -334,13 +337,14 @@ describe("Select part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <Select
             label="Role"
             error="Invalid"
             options={[
@@ -351,15 +355,15 @@ describe("Select part customization", () => {
             placeholder="Choose"
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
-      fireCustomization.click(
+      await user.click(
         view.container.querySelector("[role=\"combobox\"]")!,
       );
       if (phase === "empty")
-        fireCustomization.change(
+        await user.type(
           view.container.querySelector("input[type=\"search\"]")!,
-          { target: { value: "unmatched-query" } },
+          "unmatched-query",
         );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -368,8 +372,8 @@ describe("Select part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <Select
             label="Role"
             error="Invalid"
             options={[
@@ -379,7 +383,7 @@ describe("Select part customization", () => {
             defaultValue={phase === "placeholder" ? undefined : "a"}
             placeholder="Choose"
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

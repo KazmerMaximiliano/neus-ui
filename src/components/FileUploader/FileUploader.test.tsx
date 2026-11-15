@@ -1,20 +1,9 @@
-import {
-  cleanup,
-  fireEvent as fireCustomization,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-  waitFor as waitForCustomization,
-} from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
 import { ThemeProvider } from "../../providers/ThemeProvider";
-import {
-  FileUploader as CustomizationComponent,
-  FileUploader,
-} from "./FileUploader";
-import { FileType } from "./FileUploader.types";
+import { FileUploader } from "./FileUploader";
+import { FILE_ACCEPT_PATTERNS } from "./FileUploader.consts";
 
 afterEach(() => {
   cleanup();
@@ -22,7 +11,7 @@ afterEach(() => {
 
 const renderFileUploader = (props = {}) => {
   const defaultProps = {
-    allowedTypes: [FileType.IMAGE],
+    allowedTypes: [FILE_ACCEPT_PATTERNS.IMAGE],
     onChange: vi.fn(),
   };
   return render(
@@ -131,7 +120,7 @@ describe("FileUploader", () => {
   describe("file input", () => {
     it("sets accept attribute based on allowedTypes", () => {
       const { container } = renderFileUploader({
-        allowedTypes: [FileType.IMAGE, FileType.PDF],
+        allowedTypes: [FILE_ACCEPT_PATTERNS.IMAGE, FILE_ACCEPT_PATTERNS.PDF],
       });
       const input = container.querySelector("input[type=\"file\"]");
       expect(input).toHaveAttribute("accept", "image/*,.pdf");
@@ -151,7 +140,8 @@ describe("FileUploader", () => {
   });
 
   describe("file selection", () => {
-    it("calls onChange with file data when file is selected", () => {
+    it("calls onChange with file data when file is selected", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       const { container } = renderFileUploader({ onChange });
       const input = container.querySelector(
@@ -159,15 +149,13 @@ describe("FileUploader", () => {
       ) as HTMLInputElement;
 
       const file = new File(["test"], "test.png", { type: "image/png" });
-      Object.defineProperty(input, "files", {
-        value: [file],
-      });
 
-      fireEvent.change(input);
+      await user.upload(input, file);
       expect(onChange).toHaveBeenCalled();
     });
 
-    it("does not call onChange when disabled", () => {
+    it("does not call onChange when disabled", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       const { container } = renderFileUploader({ onChange, disabled: true });
       const input = container.querySelector(
@@ -175,11 +163,8 @@ describe("FileUploader", () => {
       ) as HTMLInputElement;
 
       const file = new File(["test"], "test.png", { type: "image/png" });
-      Object.defineProperty(input, "files", {
-        value: [file],
-      });
 
-      fireEvent.change(input);
+      await user.upload(input, file);
       expect(onChange).not.toHaveBeenCalled();
     });
   });
@@ -249,16 +234,18 @@ describe("FileUploader parts", () => {
     expect(screen.getByText("Too big")).toHaveStyle({ fontSize: "18px" });
   });
 
-  it("turns the area into a plain region once files are selected", () => {
+  it("turns the area into a plain region once files are selected", async () => {
+    const user = userEvent.setup();
     const { container } = renderFileUploader({
-      allowedTypes: [FileType.PDF],
+      allowedTypes: [FILE_ACCEPT_PATTERNS.PDF],
     });
-    const input = container.querySelector("input[type=\"file\"]")!;
-    fireEvent.change(input, {
-      target: {
-        files: [new File(["x"], "doc.pdf", { type: "application/pdf" })],
-      },
-    });
+    const input = container.querySelector<HTMLInputElement>(
+      "input[type=\"file\"]",
+    )!;
+    await user.upload(
+      input,
+      new File(["x"], "doc.pdf", { type: "application/pdf" }),
+    );
     const area = container.querySelector(".file-uploader__area")!;
     expect(area.tagName).toBe("DIV");
     expect(area).toHaveClass("file-uploader__area--has-files");
@@ -386,20 +373,21 @@ describe("FileUploader part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base, phase }) => {
+      const user = userEvent.setup();
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
-            allowedTypes={[FileType.PNG, FileType.TXT]}
+      const view = render(
+        <ThemeProvider scope="local">
+          <FileUploader
+            allowedTypes={[FILE_ACCEPT_PATTERNS.PNG, FILE_ACCEPT_PATTERNS.TXT]}
             multiple={phase === "files"}
             error="Invalid"
             onChange={() => { }}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       if (phase === "preview" || phase === "files") {
         const file = new File(
@@ -407,12 +395,14 @@ describe("FileUploader part customization", () => {
           phase === "preview" ? "image.png" : "text.txt",
           { type: phase === "preview" ? "image/png" : "text/plain" },
         );
-        fireCustomization.change(
-          view.container.querySelector("input[type=\"file\"]")!,
-          { target: { files: [file] } },
+        await user.upload(
+          view.container.querySelector<HTMLInputElement>(
+            "input[type=\"file\"]",
+          )!,
+          file,
         );
         if (phase === "preview")
-          await waitForCustomization(() =>
+          await waitFor(() =>
             expect(
               view.container.querySelector(".file-uploader__preview-image"),
             ).toBeInTheDocument(),
@@ -425,14 +415,14 @@ describe("FileUploader part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
-            allowedTypes={[FileType.PNG, FileType.TXT]}
+        <ThemeProvider scope="local">
+          <FileUploader
+            allowedTypes={[FILE_ACCEPT_PATTERNS.PNG, FILE_ACCEPT_PATTERNS.TXT]}
             multiple={phase === "files"}
             error="Invalid"
             onChange={() => { }}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

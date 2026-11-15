@@ -4,14 +4,14 @@ import { parseArgs } from "node:util";
 import { CONFIG_FILE, SYSTEM_CSS_FILE, SYSTEM_CSS_ENTRIES } from "./neus.consts.mjs";
 import { PACKAGE_ROOT, readJson, toPosix } from "./neus.utils.mjs";
 
-const HELP = `Usage: npx neus design build
+const HELP = `Usage: npx neus-ui design build
 
 Validates the derived system named by derivedSystem in neus.config.json (a DESIGN.md
 whose x-neus.extends names its base) and compiles its tokens and recipes into
 <styles>/${SYSTEM_CSS_FILE}, scoped to the base system so it applies everywhere the
 base does. Load it after neus-ui/dist/neus-ui.css and before neus.theme.css.
 
-Action colors stay in npx neus init --primary <hex>.
+Action colors stay in npx neus-ui init --primary <hex>.
 
 Options:
   -h, --help   Show this help`;
@@ -36,16 +36,16 @@ export const tokenSets = (css, base) => {
 /** Compiles the project's derived system; `core` is the package's design entry (dist/design.js). */
 export const buildDesign = (root, core, css) => {
   const config = readJson(path.join(root, CONFIG_FILE));
-  if (!config) throw new Error(`No ${CONFIG_FILE} here. Run npx neus init --system none first.`);
+  if (!config) throw new Error(`No ${CONFIG_FILE} here. Run npx neus-ui init --system none first.`);
   if (!config.derivedSystem) {
-    throw new Error(`${CONFIG_FILE} has no derivedSystem: this project uses the ${config.designSystem} system as it is. Run npx neus init --system none to derive one.`);
+    throw new Error(`${CONFIG_FILE} has no derivedSystem: this project uses the ${config.designSystem} system as it is. Run npx neus-ui init --system none to derive one.`);
   }
   const source = path.join(root, config.derivedSystem);
   if (!existsSync(source)) throw new Error(`${config.derivedSystem} does not exist yet. Derive the system with the neus-design skill first.`);
   const document = core.parseDerivedDocument(readFileSync(source, "utf8"));
   const base = document["x-neus"].extends;
   if (base !== config.designSystem) {
-    throw new Error(`${config.derivedSystem} extends ${base} but ${CONFIG_FILE} uses ${config.designSystem}. Run npx neus init --base ${base}.`);
+    throw new Error(`${config.derivedSystem} extends ${base} but ${CONFIG_FILE} uses ${config.designSystem}. Run npx neus-ui init --base ${base}.`);
   }
   const target = path.join(root, config.paths.styles, SYSTEM_CSS_FILE);
   writeFileSync(target, core.compileDerivedSystem(document, tokenSets(css, base)));

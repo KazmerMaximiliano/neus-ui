@@ -1,10 +1,10 @@
-import { composeStories } from "@storybook/react";
-import { cleanup, render, screen } from "@testing-library/react";
 import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, expectTypeOf, it } from "vitest";
-import type { SectionHeaderProps } from "../../sections";
-import { SectionHeader } from "../../sections";
+import { SectionHeader } from "./SectionHeader";
 import * as stories from "./SectionHeader.stories";
+import type { SectionHeaderProps } from "./SectionHeader.types";
 
 afterEach(cleanup);
 

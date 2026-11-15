@@ -1,0 +1,1 @@
+export { rgbToHex } from "./rgbToHex";

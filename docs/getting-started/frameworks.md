@@ -4,7 +4,7 @@
 
 Neus UI works in any React 19 host. What changes between hosts is who owns the theme: a
 global ThemeProvider in client-only apps, or attributes and stylesheets on `<html>` in
-server-rendered ones. `npx neus init` detects the host, writes the theme files and prints
+server-rendered ones. `npx neus-ui init` detects the host, writes the theme files and prints
 the remaining wiring; see [Design with AI](./ai-design.md).
 
 ## What the package provides
@@ -29,7 +29,7 @@ first byte when `<html>` carries the attributes:
 ```
 
 Custom action colors come from `buildThemeCss`, which emits the same variables a global
-ThemeProvider writes, for both schemes. `neus init` saves it as `neus.theme.css`:
+ThemeProvider writes, for both schemes. `neus-ui init` saves it as `neus.theme.css`:
 
 ```ts
 import { buildThemeCss } from "neus-ui/theme";
@@ -38,12 +38,12 @@ const css = buildThemeCss("vercel", { primaryColor: "#0f766e" });
 ```
 
 Import order: `neus-ui/dist/neus-ui.css`, `neus.system.css` (only in None mode, compiled by
-`npx neus design build`), `neus.theme.css`, `neus.overrides.css`, then application styles. Do not mount a global ThemeProvider as well; wrap only subtrees that
+`npx neus-ui design build`), `neus.theme.css`, `neus.overrides.css`, then application styles. Do not mount a global ThemeProvider as well; wrap only subtrees that
 need `useTheme()` in `<ThemeProvider scope="local">`.
 
 ## Vite and other client-only apps
 
-Wrap the root once in a global ThemeProvider (`neus init` writes `src/neus/NeusRoot.tsx`).
+Wrap the root once in a global ThemeProvider (`neus-ui init` writes `src/neus/NeusRoot.tsx`).
 The provider applies its attributes and variables in a layout effect, before the first
 paint.
 
@@ -111,7 +111,7 @@ the entry that loads global CSS (`pages/_app.tsx` in the Pages Router).
 
 ## Astro
 
-Use React through `@astrojs/react`. A layout owns `<html>` and the stylesheets (`neus init`
+Use React through `@astrojs/react`. A layout owns `<html>` and the stylesheets (`neus-ui init`
 writes `src/layouts/NeusLayout.astro`). Components without handlers render as static HTML
 with no client directive; interactive regions are islands:
 
@@ -149,7 +149,7 @@ schemes.
 ## Fonts
 
 Load the active system's faces once, in the root document, with a `<link>` (the URL
-`neus init` prints), `next/font` or Fontsource. Font tokens name the families:
+`neus-ui init` prints), `next/font` or Fontsource. Font tokens name the families:
 
 | System         | Families                     | Notes                                            |
 | -------------- | ---------------------------- | ------------------------------------------------ |

@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Text as TextComponent } from "./Text";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { TextStoryArgs } from "./Text.types";
 
 const meta: Meta<TextStoryArgs> = {

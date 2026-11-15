@@ -86,15 +86,15 @@ retain their nullable default.
 | `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.calendar__label` |
 | `errorStyle` | `CSSProperties` | Omitted | Inline styles on `.calendar__error-message` |
 | `mode` | `"single" \| "range" \| "multiple"` | Omitted | Calendar selection mode |
-| `value` | `Date \| DateRange \| Date[]` | Omitted | The current selected date(s) |
-| `defaultValue` | `Date \| DateRange \| Date[]` | Omitted | The initial date(s) value |
+| `value` | `Date \| DateRange \| readonly Date[]` | Omitted | The current selected date(s) |
+| `defaultValue` | `Date \| DateRange \| readonly Date[]` | Omitted | The initial date(s) value |
 | `onChange` | `((value: Date \| undefined) => void) \| ((value: DateRange \| undefined) => void) \| ((value: Date[] \| undefined) => void)` | Omitted | Callback when date selection changes |
 
 | Mode | Selection | Callback |
 | --- | --- | --- |
 | `single` (default) | `Date \| undefined` | `(value: Date \| undefined) => void` |
 | `range` | `DateRange \| undefined` | `(value: DateRange \| undefined) => void` |
-| `multiple` | `Date[] \| undefined` | `(value: Date[] \| undefined) => void` |
+| `multiple` | `readonly Date[] \| undefined` | `(value: Date[] \| undefined) => void` |
 
 DateRange comes from react-day-picker and contains `from: Date | undefined` and optional
 `to: Date`.
@@ -126,11 +126,11 @@ entry point](../../src/components/Calendar/index.ts). A type shown here is not n
 package export.
 
 ```ts
-type YearRange = { from: number; to: number; };
+type YearRange = { readonly from: number; readonly to: number; };
 
 type CalendarCaptionCustomization = {
-  captionClassName?: string;
-  captionStyle?: CSSProperties;
+  readonly captionClassName?: string;
+  readonly captionStyle?: CSSProperties;
 };
 ```
 

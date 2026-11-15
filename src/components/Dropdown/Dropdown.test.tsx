@@ -1,16 +1,9 @@
-import {
-  cleanup,
-  fireEvent as fireCustomization,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Settings as CustomizationIcon, User } from "lucide-react";
+import { Settings, User } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
-import { Dropdown as CustomizationComponent, Dropdown } from "./Dropdown";
+import { ThemeProvider } from "../../providers";
+import { Dropdown } from "./Dropdown";
 
 afterEach(cleanup);
 
@@ -47,9 +40,10 @@ describe("Dropdown", () => {
 
   describe("interactions", () => {
     it("opens with the name header and rotates the caret", async () => {
+      const user = userEvent.setup();
       render(<Dropdown name="Ada" items={items()} />);
       const trigger = screen.getByRole("button", { name: "Ada" });
-      await userEvent.click(trigger);
+      await user.click(trigger);
       expect(trigger).toHaveClass("dropdown__trigger--open");
       expect(screen.getByRole("menu", { name: "Ada" })).toHaveTextContent(
         "Ada",
@@ -58,22 +52,24 @@ describe("Dropdown", () => {
     });
 
     it("runs item actions and closes", async () => {
+      const user = userEvent.setup();
       const list = items();
       render(<Dropdown name="Ada" items={list} />);
-      await userEvent.click(screen.getByRole("button", { name: "Ada" }));
-      await userEvent.click(screen.getByRole("menuitem", { name: "Sign out" }));
+      await user.click(screen.getByRole("button", { name: "Ada" }));
+      await user.click(screen.getByRole("menuitem", { name: "Sign out" }));
       expect(list[1].onClick).toHaveBeenCalledOnce();
       expect(screen.queryByRole("menu")).not.toBeInTheDocument();
     });
 
     it("closes on outside clicks and Escape", async () => {
+      const user = userEvent.setup();
       render(<Dropdown name="Ada" items={items()} />);
       const trigger = screen.getByRole("button", { name: "Ada" });
-      await userEvent.click(trigger);
-      fireEvent.mouseDown(document.body);
+      await user.click(trigger);
+      await user.click(document.body);
       expect(trigger).toHaveAttribute("aria-expanded", "false");
-      await userEvent.click(trigger);
-      await userEvent.keyboard("{Escape}");
+      await user.click(trigger);
+      await user.keyboard("{Escape}");
       expect(trigger).toHaveAttribute("aria-expanded", "false");
       expect(trigger).toHaveFocus();
     });
@@ -81,6 +77,7 @@ describe("Dropdown", () => {
 
   describe("customization", () => {
     it("applies each style object to its part", async () => {
+      const user = userEvent.setup();
       render(
         <Dropdown
           name="Ada"
@@ -92,7 +89,7 @@ describe("Dropdown", () => {
       );
       const trigger = screen.getByRole("button", { name: "Ada" });
       expect(trigger).toHaveStyle({ borderRadius: "2px" });
-      await userEvent.click(trigger);
+      await user.click(trigger);
       expect(screen.getByRole("menu")).toHaveStyle({ minWidth: "280px" });
       expect(screen.getByRole("menuitem", { name: "Profile" })).toHaveStyle({
         paddingLeft: "30px",
@@ -154,24 +151,25 @@ describe("Dropdown part customization", () => {
   ])(
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base }) => {
+      const user = userEvent.setup();
       const overrides = {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+      const view = render(
+        <ThemeProvider scope="local">
+          <Dropdown
             name="Account"
-            icon={CustomizationIcon}
+            icon={Settings}
             items={[
               { label: "Edit", onClick: () => { } },
               { label: "Delete", onClick: () => { } },
             ]}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
-      fireCustomization.click(view.container.querySelector("button")!);
+      await user.click(view.container.querySelector("button")!);
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
       for (const target of targets) {
@@ -179,16 +177,16 @@ describe("Dropdown part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
+        <ThemeProvider scope="local">
+          <Dropdown
             name="Account"
-            icon={CustomizationIcon}
+            icon={Settings}
             items={[
               { label: "Edit", onClick: () => { } },
               { label: "Delete", onClick: () => { } },
             ]}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

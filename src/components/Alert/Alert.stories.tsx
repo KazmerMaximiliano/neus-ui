@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { Alert as AlertComponent } from "./Alert";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { AlertStoryArgs } from "./Alert.types";
 
 const meta: Meta<AlertStoryArgs> = {

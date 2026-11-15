@@ -1,16 +1,10 @@
-import {
-  cleanup,
-  fireEvent,
-  render,
-  render as renderCustomization,
-  screen,
-} from "@testing-library/react";
-import { Settings as CustomizationIcon, Plus } from "lucide-react";
-import type { ComponentProps } from "react";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Settings, Plus } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
 import { ThemeProvider } from "../../providers/ThemeProvider";
-import { IconButton as CustomizationComponent, IconButton } from "./IconButton";
+import { IconButton } from "./IconButton";
+import type { ComponentProps } from "react";
 import { getIconButtonClasses } from "./IconButton.utils";
 
 afterEach(() => {
@@ -79,30 +73,34 @@ describe("IconButton", () => {
   });
 
   describe("click handling", () => {
-    it("calls onClick when clicked", () => {
+    it("calls onClick when clicked", async () => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       renderIconButton({ onClick });
-      fireEvent.click(screen.getByRole("button"));
+      await user.click(screen.getByRole("button"));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it("does not call onClick when disabled", () => {
+    it("does not call onClick when disabled", async () => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       renderIconButton({ onClick, disabled: true });
-      fireEvent.click(screen.getByRole("button"));
+      await user.click(screen.getByRole("button"));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it("does not call onClick when loading", () => {
+    it("does not call onClick when loading", async () => {
+      const user = userEvent.setup();
       const onClick = vi.fn();
       renderIconButton({ onClick, loading: true });
-      fireEvent.click(screen.getByRole("button"));
+      await user.click(screen.getByRole("button"));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it("works without onClick handler", () => {
+    it("works without onClick handler", async () => {
+      const user = userEvent.setup();
       renderIconButton();
-      expect(() => fireEvent.click(screen.getByRole("button"))).not.toThrow();
+      await expect(user.click(screen.getByRole("button"))).resolves.not.toThrow();
     });
   });
 
@@ -184,10 +182,11 @@ describe("IconButton accessibility and customization", () => {
     });
   });
 
-  it("passes the click event to onClick", () => {
+  it("passes the click event to onClick", async () => {
+    const user = userEvent.setup();
     const onClick = vi.fn();
     renderIconButton({ onClick });
-    fireEvent.click(screen.getByRole("button"));
+    await user.click(screen.getByRole("button"));
     expect(onClick.mock.calls[0][0]).toHaveProperty("type", "click");
   });
 
@@ -225,15 +224,15 @@ describe("IconButton part customization", () => {
         [cls]: "consumer-part",
         [sty]: { outlineOffset: "7px" },
       };
-      const view = renderCustomization(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
-            icon={CustomizationIcon}
+      const view = render(
+        <ThemeProvider scope="local">
+          <IconButton
+            icon={Settings}
             label="Settings"
             loading={phase === "loading"}
             {...overrides}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
@@ -242,13 +241,13 @@ describe("IconButton part customization", () => {
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
       view.rerender(
-        <CustomizationThemeProvider scope="local">
-          <CustomizationComponent
-            icon={CustomizationIcon}
+        <ThemeProvider scope="local">
+          <IconButton
+            icon={Settings}
             label="Settings"
             loading={phase === "loading"}
           />
-        </CustomizationThemeProvider>,
+        </ThemeProvider>,
       );
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {

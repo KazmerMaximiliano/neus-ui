@@ -1,8 +1,8 @@
 import { X } from "lucide-react";
-import { IconButton } from "../IconButton/IconButton";
-import "./Alert.styles.css";
+import { IconButton } from "../IconButton";
 import type { AlertProps } from "./Alert.types";
 import { ALERT_ICONS, ALERT_ROLES } from "./Alert.consts";
+import "./Alert.styles.css";
 
 const join = (...names: (string | undefined)[]) => names.filter(Boolean).join(" ");
 

@@ -7,7 +7,7 @@ import {
 } from "./neus.consts.mjs";
 import { PACKAGE_ROOT, readJson, toPosix } from "./neus.utils.mjs";
 
-const HELP = `Usage: npx neus lint [paths...] [--json]
+const HELP = `Usage: npx neus-ui lint [paths...] [--json]
 
 Checks UI code against the neus-ui contract and measures how much of it uses neus
 components. Default paths: ${LINT_PATHS.join(", ")} (those that exist).
@@ -75,7 +75,7 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
         if (!tokens.has(token) && !declared.has(token)) report(file, at, "P0", "unknown-token", `${token} is not a neus-ui token and is not declared in the project`);
       }
       if (/--color-(primary|success|error|info|warning)[a-z-]*["']?\s*:|--color-(text-on-[a-z-]+|focus)["']?\s*:/.test(line)) {
-        report(file, at, "P0", "palette", "palette variables belong to neus.theme.css and npx neus init");
+        report(file, at, "P0", "palette", "palette variables belong to neus.theme.css and npx neus-ui init");
       }
       if (line.includes("!important")) report(file, at, "P0", "important", "!important breaks the token cascade");
       if (/\b(\w*Style|style)=\{\{[^}]*\b(background|color|border)/.test(line) && INTERACTIVE_ELEMENTS.includes(lastTag)) {
@@ -185,7 +185,7 @@ export const run = async (argv, root = process.cwd()) => {
   }
   const cssFile = path.join(PACKAGE_ROOT, "dist/neus-ui.css");
   if (!existsSync(cssFile)) {
-    process.stderr.write(`neus lint needs ${toPosix(path.relative(root, cssFile))}; reinstall neus-ui.\n`);
+    process.stderr.write(`neus-ui lint needs ${toPosix(path.relative(root, cssFile))}; reinstall neus-ui.\n`);
     return 2;
   }
   const targets = positionals.length ? positionals : LINT_PATHS.filter((entry) => existsSync(path.join(root, entry)));

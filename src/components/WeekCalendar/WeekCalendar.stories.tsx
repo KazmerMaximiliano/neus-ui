@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { WeekCalendar as WeekCalendarComponent } from "./WeekCalendar";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { WeekCalendarStoryArgs } from "./WeekCalendar.types";
 
 const today = new Date();
@@ -140,9 +140,7 @@ const meta: Meta<WeekCalendarStoryArgs> = {
   },
 };
 
-type Story = StoryObj<typeof meta>;
-
-export const WeekCalendar: Story = {
+export const WeekCalendar: StoryObj<WeekCalendarStoryArgs> = {
   args: {
     categoryClassName: undefined,
     dateRangeClassName: undefined,

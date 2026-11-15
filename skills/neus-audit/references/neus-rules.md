@@ -5,9 +5,9 @@ the Library section against the component guides
 (`node_modules/neus-ui/docs/components/<Name>.md`) when the library version
 changes: library fixes remove entries.
 
-## neus lint (pass 1)
+## neus-ui lint (pass 1)
 
-`npx neus lint <files> --json` checks the neus contract mechanically. Each
+`npx neus-ui lint <files> --json` checks the neus contract mechanically. Each
 entry in `findings` is a finding with the severity it carries; read the line
 before reporting it, since the checks are per-line patterns. Its rules:
 
@@ -15,7 +15,7 @@ before reporting it, since the checks are per-line patterns. Its rules:
 | --- | --- | --- |
 | `unknown-token` | P0 | `var(--x)` without fallback names no neus token and no project declaration |
 | `raw-color` | P0 | Hex, rgb, hsl or oklch outside `neus.overrides.css` |
-| `palette` | P0 | A hand-written palette variable (`npx neus init` owns them) |
+| `palette` | P0 | A hand-written palette variable (`npx neus-ui init` owns them) |
 | `inline-color` | P0 | Inline background, color or border on an interactive component |
 | `private-class` | P0 | A selector on a neus class no guide documents |
 | `important` | P0 | `!important` |
@@ -81,14 +81,14 @@ the project wrote.
 - Only tokens that exist (component guides and `docs/design/tokens.md`), only
   documented parts, only public entries (`"neus-ui"`, `"neus-ui/theme"`, the
   stylesheet).
-- Palette variables are never written by hand; `npx neus init` owns them.
+- Palette variables are never written by hand; `npx neus-ui init` owns them.
 - The brand block in `neus.overrides.css` sets only ground, ink, border,
   font and button-label tokens (the neus-design skill's `references/brand.md`),
   in light and dark, with ink at 4.5:1 or more on both grounds.
 - No inline background, color or border on interactive components.
 - One global theme owner per document (see the neus-design skill's
   `references/frameworks.md`).
-- `pixabayKey` is the development-only expression `npx neus context` prints,
+- `pixabayKey` is the development-only expression `npx neus-ui context` prints,
   never a literal key or an unguarded variable: the key is visible in the
   browser. A Pixabay preview is not a final picture; its MediaPlaceholder
   stays marked `SAMPLE:`.

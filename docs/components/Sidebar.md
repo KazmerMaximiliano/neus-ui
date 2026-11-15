@@ -69,7 +69,7 @@ retain their nullable default.
 | `panelStyle` | `CSSProperties` | Omitted | Inline styles on `.sidebar__panel` |
 | `titleClassName` | `string` | Omitted | Additional classes on `.sidebar__title` |
 | `toggleClassName` | `string` | Omitted | Additional classes on `.sidebar__expand.sidebar__avatar`, `.sidebar__toggle` |
-| `items` | `SidebarItem[]` | Required | Navigation items with optional icons, `href` (renders a link), `onClick`, active and visible flags |
+| `items` | `readonly SidebarItem[]` | Required | Navigation items with optional icons, `href` (renders a link), `onClick`, active and visible flags |
 | `linkComponent` | `ElementType` | `"a"` | Router link rendered for items with `href` instead of `<a>` |
 | `title` | `string` | Omitted | App name: full title on desktop, avatar initial in narrow layouts |
 | `children` | `ReactNode` | Omitted | Custom non-interactive branding in the header/avatar; replaces the default title or initial |
@@ -93,20 +93,20 @@ package export.
 
 ```ts
 type SidebarItem = {
-  label: string;
-  icon?: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
-  href?: string;
-  onClick?: () => void;
-  active?: boolean;
-  visible?: boolean;
+  readonly label: string;
+  readonly icon?: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+  readonly href?: string;
+  readonly onClick?: () => void;
+  readonly active?: boolean;
+  readonly visible?: boolean;
 };
 
 type SidebarLabels = {
-  navigation?: string;
-  open?: string;
-  close?: string;
-  expand?: string;
-  collapse?: string;
+  readonly navigation?: string;
+  readonly open?: string;
+  readonly close?: string;
+  readonly expand?: string;
+  readonly collapse?: string;
 };
 
 type SidebarViewport = "mobile" | "tablet" | "desktop";

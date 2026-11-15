@@ -58,7 +58,7 @@
     "**/*.css"
   ],
   "bin": {
-    "neus": "cli/neus.mjs"
+    "neus-ui": "cli/neus-ui.mjs"
   },
   "files": [
     "dist",
@@ -120,7 +120,6 @@
     "@storybook/addon-onboarding": "^10.6.0",
     "@storybook/addon-themes": "^10.6.0",
     "@storybook/addon-vitest": "^10.6.0",
-    "@storybook/react": "^10.6.0",
     "@storybook/react-vite": "^10.6.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",

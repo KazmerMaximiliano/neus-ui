@@ -1,11 +1,11 @@
-import { composeStories } from "@storybook/react";
+import { createRef } from "react";
+import { composeStories } from "@storybook/react-vite";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createRef } from "react";
 import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
-import type { AlertProps } from "../../index";
-import { Alert } from "../../index";
+import { Alert } from "./Alert";
 import * as stories from "./Alert.stories";
+import type { AlertProps } from "./Alert.types";
 
 afterEach(cleanup);
 
@@ -49,9 +49,10 @@ describe("Alert", () => {
   });
 
   it("calls onDismiss from a close button named by dismissLabel", async () => {
+    const user = userEvent.setup();
     const onDismiss = vi.fn();
     render(<Alert onDismiss={onDismiss} dismissLabel="Cerrar">Mensaje</Alert>);
-    await userEvent.click(screen.getByRole("button", { name: "Cerrar" }));
+    await user.click(screen.getByRole("button", { name: "Cerrar" }));
     expect(onDismiss).toHaveBeenCalledOnce();
   });
 

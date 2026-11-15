@@ -1,7 +1,7 @@
 import { type CSSProperties, useEffect, useState } from "react";
 import { searchPixabayPhoto } from "../../services/pixabay";
-import "./MediaPlaceholder.styles.css";
 import type { MediaPlaceholderPreview, MediaPlaceholderProps } from "./MediaPlaceholder.types";
+import "./MediaPlaceholder.styles.css";
 
 const join = (...names: (string | undefined)[]) => names.filter(Boolean).join(" ");
 

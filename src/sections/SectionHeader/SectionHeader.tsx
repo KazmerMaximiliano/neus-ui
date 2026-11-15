@@ -1,7 +1,7 @@
-import { Heading } from "../../components/Heading/Heading";
-import { Text } from "../../components/Text/Text";
-import "./SectionHeader.styles.css";
+import { Heading } from "../../components/Heading";
+import { Text } from "../../components/Text";
 import type { SectionHeaderProps } from "./SectionHeader.types";
+import "./SectionHeader.styles.css";
 
 const join = (...names: (string | undefined)[]) => names.filter(Boolean).join(" ");
 

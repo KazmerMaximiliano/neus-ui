@@ -1,7 +1,7 @@
 import { BeatLoader } from "react-spinners";
-import "./IconButton.styles.css";
-import { IconButtonProps } from "./IconButton.types";
+import type { IconButtonProps } from "./IconButton.types";
 import { getIconButtonClasses } from "./IconButton.utils";
+import "./IconButton.styles.css";
 
 export const IconButton = ({
   className,

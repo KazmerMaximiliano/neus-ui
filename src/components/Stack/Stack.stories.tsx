@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { Stack as StackComponent } from "./Stack";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { StackStoryArgs } from "./Stack.types";
 
 const STEPS = [0, 1, 2, 3, 4, 6, 8, 12, 16];

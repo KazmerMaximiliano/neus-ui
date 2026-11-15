@@ -1,10 +1,9 @@
-import type { CSSProperties } from "react";
-import { render as renderCustomization } from "@testing-library/react";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Clock as CustomizationComponent } from "./Clock";
-import { ThemeProvider as CustomizationThemeProvider } from "../../providers";
+import { ThemeProvider } from "../../providers";
 import { Clock } from "./Clock";
+import type { CSSProperties } from "react";
 
 afterEach(() => {
   cleanup();
@@ -113,19 +112,21 @@ describe("Clock", () => {
       expect(hoursButton).toBeInTheDocument();
     });
 
-    it("switches to minutes mode when minutes button is clicked", () => {
+    it("switches to minutes mode when minutes button is clicked", async () => {
+      const user = userEvent.setup();
       renderClock();
       const buttons = screen.getAllByRole("button");
       const minutesButton = buttons[1];
-      fireEvent.click(minutesButton);
+      await user.click(minutesButton);
       expect(minutesButton).toHaveClass("clock__time-button--active");
     });
 
-    it("switches to hours mode when hours button is clicked", () => {
+    it("switches to hours mode when hours button is clicked", async () => {
+      const user = userEvent.setup();
       renderClock();
       const buttons = screen.getAllByRole("button");
       const hoursButton = buttons[0];
-      fireEvent.click(hoursButton);
+      await user.click(hoursButton);
       expect(hoursButton).toHaveClass("clock__time-button--active");
     });
   });
@@ -157,27 +158,30 @@ describe("Clock", () => {
   });
 
   describe("onChange", () => {
-    it("calls onChange when time is selected", () => {
+    it("calls onChange when time is selected", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       const { container } = renderClock({ onChange });
       const clockFace = container.querySelector(".clock__face");
-      fireEvent.click(clockFace!);
+      await user.click(clockFace!);
       expect(onChange).toHaveBeenCalled();
     });
 
-    it("does not call onChange when disabled", () => {
+    it("does not call onChange when disabled", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       const { container } = renderClock({ disabled: true, onChange });
       const clockFace = container.querySelector(".clock__face");
-      fireEvent.click(clockFace!);
+      await user.click(clockFace!);
       expect(onChange).not.toHaveBeenCalled();
     });
 
-    it("does not call onChange when readonly", () => {
+    it("does not call onChange when readonly", async () => {
+      const user = userEvent.setup();
       const onChange = vi.fn();
       const { container } = renderClock({ readonly: true, onChange });
       const clockFace = container.querySelector(".clock__face");
-      fireEvent.click(clockFace!);
+      await user.click(clockFace!);
       expect(onChange).not.toHaveBeenCalled();
     });
   });
@@ -225,7 +229,8 @@ describe("pointer time selection", () => {
     { format: "24h" as const, x: 190, y: 100, hours: 15 },
     { format: "12h" as const, x: 190, y: 100, hours: 15 },
     { format: "12h" as const, x: 100, y: 10, hours: 12 },
-  ])("selects $hours from $format dial geometry", ({ format, x, y, hours }) => {
+  ])("selects $hours from $format dial geometry", async ({ format, x, y, hours }) => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Clock format={format} onChange={onChange} />);
     const dial = screen.getByRole("slider");
@@ -240,15 +245,24 @@ describe("pointer time selection", () => {
       y: 0,
       toJSON: () => ({}),
     });
-    fireEvent.click(dial, { clientX: x, clientY: y });
+    await user.pointer({
+      keys: "[MouseLeft]",
+      target: dial,
+      coords: { clientX: x, clientY: y },
+    });
     expect(onChange).toHaveBeenLastCalledWith({ hours, minutes: 0 });
-    fireEvent.click(dial, { clientX: 190, clientY: 100 });
+    await user.pointer({
+      keys: "[MouseLeft]",
+      target: dial,
+      coords: { clientX: 190, clientY: 100 },
+    });
     expect(onChange).toHaveBeenLastCalledWith({ hours, minutes: 15 });
   });
-  it("uses AM for morning selections and respects period changes", () => {
+  it("uses AM for morning selections and respects period changes", async () => {
+    const user = userEvent.setup();
     const onChange = vi.fn();
     render(<Clock value={{ hours: 9, minutes: 0 }} onChange={onChange} />);
-    fireEvent.click(screen.getByRole("button", { name: "PM" }));
+    await user.click(screen.getByRole("button", { name: "PM" }));
     expect(onChange).toHaveBeenLastCalledWith({ hours: 21, minutes: 0 });
     const dial = screen.getByRole("slider");
     vi.spyOn(dial, "getBoundingClientRect").mockReturnValue({
@@ -262,7 +276,11 @@ describe("pointer time selection", () => {
       y: 0,
       toJSON: () => ({}),
     });
-    fireEvent.click(dial, { clientX: 100, clientY: 10 });
+    await user.pointer({
+      keys: "[MouseLeft]",
+      target: dial,
+      coords: { clientX: 100, clientY: 10 },
+    });
     expect(onChange).toHaveBeenLastCalledWith({ hours: 0, minutes: 0 });
   });
 });
@@ -353,14 +371,14 @@ describe("Clock part customization", () => {
     "applies and removes $cls / $sty ($phase) while preserving base classes",
     async ({ cls, sty, base }) => {
       const overrides = { [cls]: "consumer-part", [sty]: { outlineOffset: "7px" } };
-      const view = renderCustomization(<CustomizationThemeProvider scope="local"><CustomizationComponent value={{ hours: 9, minutes: 30 }} format="12h" {...overrides} /></CustomizationThemeProvider>);
+      const view = render(<ThemeProvider scope="local"><Clock value={{ hours: 9, minutes: 30 }} format="12h" {...overrides} /></ThemeProvider>);
       const targets = view.container.querySelectorAll(".consumer-part");
       expect(targets.length).toBeGreaterThan(0);
       for (const target of targets) {
         expect(target).toHaveClass(base);
         expect(target).toHaveStyle({ outlineOffset: "7px" });
       }
-      view.rerender(<CustomizationThemeProvider scope="local"><CustomizationComponent value={{ hours: 9, minutes: 30 }} format="12h" /></CustomizationThemeProvider>);
+      view.rerender(<ThemeProvider scope="local"><Clock value={{ hours: 9, minutes: 30 }} format="12h" /></ThemeProvider>);
       expect(view.container.querySelector(".consumer-part")).toBeNull();
       for (const target of view.container.querySelectorAll("." + base)) {
         expect((target as HTMLElement).style.outlineOffset).not.toBe("7px");

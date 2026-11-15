@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { Card } from "../../../../components/Card/Card";
-import { CardContent } from "../../../../components/Card/components/CardContent/CardContent";
-import { CardHeader } from "../../../../components/Card/components/CardHeader/CardHeader";
-import { Heading } from "../../../../components/Heading/Heading";
-import { Text } from "../../../../components/Text/Text";
+import { Card } from "../../../../components/Card";
+import { CardContent } from "../../../../components/Card/components/CardContent";
+import { CardHeader } from "../../../../components/Card/components/CardHeader";
+import { Heading } from "../../../../components/Heading";
+import { Text } from "../../../../components/Text";
 import { FeatureListContext } from "../../FeatureList.context";
-import "./FeatureItem.styles.css";
 import type { FeatureItemProps } from "./FeatureItem.types";
+import "./FeatureItem.styles.css";
 
 const join = (...names: (string | undefined)[]) => names.filter(Boolean).join(" ");
 
