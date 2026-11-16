@@ -8,6 +8,14 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.3.0] - Unreleased
+
+### Added
+
+- `Switch`: an on/off setting that applies at once, a native checkbox with `role="switch"`,
+  a label, optional help text and controlled or uncontrolled state. Every design system styles
+  it through the new `switch` recipe family.
+
 ## [2.2.0] - Unreleased
 
 ### Added
@@ -192,6 +200,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.3.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.3.0...v2.0.0

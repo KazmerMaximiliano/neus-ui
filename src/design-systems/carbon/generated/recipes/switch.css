@@ -1,0 +1,19 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --switch-track-width: 48px;
+  --switch-track-height: 24px;
+  --switch-track-border-width: 0px;
+  --switch-track-background: var(--color-border-strong);
+  --switch-track-checked-background: var(--color-success-dark);
+  --switch-track-checked-border-color: var(--color-success-dark);
+  --switch-track-checked-shadow: none;
+  --switch-thumb-size: 18px;
+  --switch-thumb-checked-size: 18px;
+  --switch-thumb-color: var(--color-white);
+  --switch-thumb-hover-color: var(--color-white);
+  --switch-thumb-checked-color: var(--color-white);
+  --switch-label-line-height: 18px;
+  --switch-focus-offset: 1px;
+  --switch-duration: 70ms;
+  --switch-easing: cubic-bezier(0.2, 0, 0.38, 0.9);
+}

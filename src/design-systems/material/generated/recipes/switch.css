@@ -1,0 +1,17 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --switch-gap: 12px;
+  --switch-track-width: 52px;
+  --switch-track-height: 32px;
+  --switch-track-border-color: var(--color-text-placeholder);
+  --switch-track-background: var(--color-surface-container-highest);
+  --switch-track-hover-border-color: var(--color-text-placeholder);
+  --switch-track-checked-shadow: none;
+  --switch-thumb-size: 16px;
+  --switch-thumb-checked-size: 24px;
+  --switch-thumb-color: var(--color-text-placeholder);
+  --switch-thumb-hover-color: var(--color-text-secondary);
+  --switch-label-color: var(--color-text-primary);
+  --switch-duration: 300ms;
+  --switch-easing: cubic-bezier(0.2, 0, 0, 1);
+}

@@ -1252,6 +1252,39 @@ x-neus:
         --spinner-dot-size: 0.25em
         --spinner-dot-margin: 0.083em
         --spinner-dot-duration: 1.4s
+    switch:
+      base:
+        --switch-font-family: var(--font-body)
+        --switch-gap: "{spacing.step-3}"
+        --switch-text-gap: 2px
+        --switch-track-width: 44px
+        --switch-track-height: 24px
+        --switch-track-radius: "{rounded.pill}"
+        --switch-track-border-width: 2px
+        --switch-track-border-color: var(--color-primary-dark)
+        --switch-track-background: var(--color-surface)
+        --switch-track-shadow: none
+        --switch-track-hover-border-color: var(--color-primary)
+        --switch-track-checked-background: var(--color-primary)
+        --switch-track-checked-border-color: var(--color-primary)
+        --switch-track-checked-shadow: 0 4px 12px -4px var(--color-focus-ring)
+        --switch-thumb-size: 12px
+        --switch-thumb-checked-size: 16px
+        --switch-thumb-radius: 50%
+        --switch-thumb-color: var(--color-primary-dark)
+        --switch-thumb-hover-color: var(--color-primary)
+        --switch-thumb-checked-color: var(--color-text-on-primary)
+        --switch-thumb-shadow: none
+        --switch-label-color: var(--color-text-primary)
+        --switch-label-font-size: var(--fs-base)
+        --switch-label-line-height: 20px
+        --switch-focus-width: 2px
+        --switch-focus-color: var(--color-focus)
+        --switch-focus-offset: 2px
+        --switch-disabled-opacity: "0.38"
+        --switch-disabled-color: var(--color-text-disabled)
+        --switch-duration: 0.2s
+        --switch-easing: ease
 ---
 
 # Neus UI
@@ -1365,6 +1398,8 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 A missing picture is a quiet striped frame in the low surface with its shot written in monospace. A stock photo previewed during design fades in over the frame with its author on a dark chip in the corner, the same in light and dark because the photo does not change.
 
 A spinner marks a wait of unknown length: an indigo ring over a faint track of its own color. Inside a button it becomes three dots in the label's color. Under reduced motion it turns more slowly instead of stopping, so the page never looks frozen.
+
+A switch is a setting that applies at once. Off, it is an indigo-outlined pill with a small indigo knob, like an unchecked checkbox; on, the pill fills with indigo and the knob grows white at the far end. The label comes first and the switch sits at the end of the row; unavailable switches dim without losing their on or off look.
 
 ## Do's and Don'ts
 

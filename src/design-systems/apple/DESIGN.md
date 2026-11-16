@@ -375,6 +375,20 @@ x-neus:
         --spinner-size-large: 37px
         --spinner-stroke-width: 0.1em
         --spinner-color: var(--color-text-secondary)
+    switch:
+      base:
+        --switch-track-width: 51px
+        --switch-track-height: 31px
+        --switch-track-border-width: 0px
+        --switch-track-background: var(--color-text-placeholder)
+        --switch-track-checked-shadow: none
+        --switch-thumb-size: 27px
+        --switch-thumb-checked-size: 27px
+        --switch-thumb-color: var(--color-white)
+        --switch-thumb-hover-color: var(--color-white)
+        --switch-thumb-checked-color: var(--color-white)
+        --switch-thumb-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 3px 1px rgba(0, 0, 0, 0.06)
+        --switch-disabled-opacity: "0.5"
 ---
 
 # Apple
@@ -477,6 +491,8 @@ Sparse: one featured quote or plain columns, no card chrome.
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
 
 A spinner is a thin gray ring, as quiet as the system activity indicator, at 20px inline and 37px for a region. This is a local web mapping.
+
+A switch follows the iOS list-row toggle: a 51×31 capsule with a white 27px knob that casts a soft shadow, the label leading and the switch trailing ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-16). On uses the accent color, which the guidelines allow in place of green; off is a solid gray rather than the light iOS fill, so both states keep 3:1 against the page and the knob. The sizes and the gray are local decisions; the guidelines state none.
 
 ## Do's and Don'ts
 

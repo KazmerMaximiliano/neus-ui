@@ -467,6 +467,24 @@ x-neus:
         --spinner-size-small: 16px
         --spinner-size-large: 88px
         --spinner-stroke-width: 0.1em
+    switch:
+      base:
+        --switch-track-width: 48px
+        --switch-track-height: 24px
+        --switch-track-border-width: 0px
+        --switch-track-background: var(--color-border-strong)
+        --switch-track-checked-background: var(--color-success-dark)
+        --switch-track-checked-border-color: var(--color-success-dark)
+        --switch-track-checked-shadow: none
+        --switch-thumb-size: 18px
+        --switch-thumb-checked-size: 18px
+        --switch-thumb-color: var(--color-white)
+        --switch-thumb-hover-color: var(--color-white)
+        --switch-thumb-checked-color: var(--color-white)
+        --switch-label-line-height: 18px
+        --switch-focus-offset: 1px
+        --switch-duration: 70ms
+        --switch-easing: cubic-bezier(0.2, 0, 0.38, 0.9)
 ---
 
 # Carbon
@@ -568,6 +586,8 @@ Plain start-aligned quotes, or one featured quote in the display weight.
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
 
 Loading uses the small 16px indicator inline and the large 88px one for a whole region, in the interactive color ([Carbon loading](https://carbondesignsystem.com/components/loading/style/), consulted 2026-11-15).
+
+The toggle is the default 48×24 track with an 18px white handle, gray when off and the success green when on ([Carbon toggle style](https://carbondesignsystem.com/components/toggle/style/), consulted 2026-11-16). The green is the success role's darker step, so the white handle and the track keep 3:1 with the default palette. Carbon places the label above the toggle; here it sits before it on the same row, like the state text, which is a local mapping.
 
 ## Do's and Don'ts
 

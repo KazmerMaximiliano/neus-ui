@@ -47,6 +47,11 @@ the project wrote.
 - Input forwards native attributes (`autoComplete`, `inputMode`,
   `spellCheck`, `pattern`…): flag a missing one on Input like on a raw
   `<input>`.
+- Switch is a native checkbox with `role="switch"` inside its label: its name
+  is the label alone and its description is wired to `aria-describedby`; it
+  works and submits without JavaScript. Flag a hand-made toggle (a `div` or
+  `button` with `role="switch"` or `aria-pressed` for a setting) and a Switch
+  used for a choice that only applies after a submit button.
 - Textarea is a native `<textarea>` with Input's look; `rows`, `maxRows` and
   `autoResize` size it in whole lines through CSS. Flag a raw `<textarea>` and
   hand-made growth (a `scrollHeight` handler on input).

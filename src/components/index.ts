@@ -76,6 +76,8 @@ export type {
 } from "./Stack";
 export { Stepper } from "./Stepper";
 export type { StepperProps } from "./Stepper";
+export { Switch } from "./Switch";
+export type { SwitchProps } from "./Switch";
 export { Text } from "./Text";
 export type { TextElement, TextProps, TextTone, TextVariant, TextWeight } from "./Text";
 export { Textarea } from "./Textarea";

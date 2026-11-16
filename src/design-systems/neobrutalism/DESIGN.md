@@ -456,6 +456,24 @@ x-neus:
         --spinner-stroke-width: 0.2em
         --spinner-color: var(--color-text-primary)
         --spinner-track-color: var(--color-primary)
+    switch:
+      base:
+        --switch-track-width: 52px
+        --switch-track-height: 28px
+        --switch-track-radius: 4px
+        --switch-track-border-width: 3px
+        --switch-track-border-color: var(--color-text-primary)
+        --switch-track-shadow: 2px 2px 0 var(--color-text-primary)
+        --switch-track-hover-border-color: var(--color-text-primary)
+        --switch-track-checked-border-color: var(--color-text-primary)
+        --switch-track-checked-shadow: 2px 2px 0 var(--color-text-primary)
+        --switch-thumb-size: 16px
+        --switch-thumb-checked-size: 16px
+        --switch-thumb-radius: 2px
+        --switch-thumb-color: var(--color-text-primary)
+        --switch-thumb-hover-color: var(--color-text-primary)
+        --switch-focus-offset: 4px
+        --switch-label-color: var(--color-text-primary)
 ---
 
 # Neobrutalism
@@ -553,6 +571,8 @@ Bordered cards with bold quotes; a featured quote can sit on a yellow band.
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
 
 A spinner is a heavy ink arc over a yellow track, as thick as the frames around it.
+
+A switch is a squared, ink-framed track with a hard shadow and a square ink knob; on, the track turns yellow and the knob slides to the end.
 
 ## Do's and Don'ts
 

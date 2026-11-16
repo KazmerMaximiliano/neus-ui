@@ -239,6 +239,7 @@ component's guide.
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
+| On/off setting that applies at once | `Switch`; a choice sent with a form stays `Checkbox` |
 | Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
 | Records in a table | `DataTable` |
 | Steps of a flow | `Stepper` |

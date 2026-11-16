@@ -1,0 +1,19 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --switch-track-width: 52px;
+  --switch-track-height: 28px;
+  --switch-track-radius: 4px;
+  --switch-track-border-width: 3px;
+  --switch-track-border-color: var(--color-text-primary);
+  --switch-track-shadow: 2px 2px 0 var(--color-text-primary);
+  --switch-track-hover-border-color: var(--color-text-primary);
+  --switch-track-checked-border-color: var(--color-text-primary);
+  --switch-track-checked-shadow: 2px 2px 0 var(--color-text-primary);
+  --switch-thumb-size: 16px;
+  --switch-thumb-checked-size: 16px;
+  --switch-thumb-radius: 2px;
+  --switch-thumb-color: var(--color-text-primary);
+  --switch-thumb-hover-color: var(--color-text-primary);
+  --switch-focus-offset: 4px;
+  --switch-label-color: var(--color-text-primary);
+}
