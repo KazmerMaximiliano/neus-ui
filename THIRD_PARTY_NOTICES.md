@@ -114,4 +114,4 @@ Material were taken from the published `@carbon/type` (Apache 2.0) and `@materia
 
 Installed from npm with their own licenses: `@react-google-maps/api` (MIT),
 `ag-grid-community` and `ag-grid-react` (MIT), `lucide-react` (ISC), `react-day-picker`
-(MIT), `react-spinners` (MIT), `yaml` (ISC) and, optionally, `playwright-core` (Apache 2.0).
+(MIT), `yaml` (ISC) and, optionally, `playwright-core` (Apache 2.0).

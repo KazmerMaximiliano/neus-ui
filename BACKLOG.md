@@ -18,7 +18,6 @@ reusable public API and should reuse the existing implementation where appropria
 | P1       | Tooltip                 | Overlays     | Reusable descriptions on hover and focus; the current tooltip belongs to WeekCalendarRow.                                                 |
 | P1       | Popover                 | Overlays     | Anchored arbitrary content with positioning, dismissal and focus handling; current popovers belong to menus and pickers.                  |
 | P1       | Toast / ToastProvider   | Feedback     | Transient notifications with a queue, dismissal, configurable duration and live announcements.                                            |
-| P1       | Spinner                 | Feedback     | Standalone indeterminate loading indicator; Button currently embeds its own loader.                                                       |
 | P1       | Progress                | Feedback     | Determinate and indeterminate progress, accessible values and optional labels.                                                            |
 | P1       | Skeleton                | Feedback     | Loading placeholders for text, media and component layouts.                                                                               |
 | P1       | Tabs                    | Navigation   | Associated tab panels, keyboard navigation and controlled or uncontrolled selection.                                                      |

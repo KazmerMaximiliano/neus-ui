@@ -1,0 +1,6 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --spinner-size-small: 16px;
+  --spinner-size-large: 88px;
+  --spinner-stroke-width: 0.1em;
+}

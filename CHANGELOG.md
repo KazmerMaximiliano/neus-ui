@@ -8,6 +8,21 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.1.0] - Unreleased
+
+### Added
+
+- `Spinner`: an indeterminate loading indicator, a ring or three dots in three sizes. With a
+  `label` it is a polite status announced in the project's language; without one it is
+  decorative. Every design system styles it through the new `spinner` recipe family.
+
+### Changed
+
+- Button and IconButton draw their loading dots with Spinner. They look the same and keep
+  `.button-loader`, `.icon-button-loader`, `loaderClassName`, `loaderStyle` and the
+  `--button-loader-*` tokens; under reduced motion the dots now pulse at half speed.
+- `react-spinners` is no longer a dependency.
+
 ## [2.0.0] - 2026-11-15
 
 The CLI is now `npx neus-ui`; see "Removed" for the one-step migration. Components, props,
@@ -168,6 +183,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.3.0...v2.0.0
 [1.3.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.0...v1.2.1

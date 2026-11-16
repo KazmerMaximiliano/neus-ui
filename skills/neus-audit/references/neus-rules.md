@@ -63,6 +63,12 @@ the project wrote.
   label and the photo credit hidden from assistive technology. Its Pixabay
   preview fetches only in the browser and keeps the placeholder while it
   loads, when nothing matches and on errors.
+- Spinner with `label` is a polite `role="status"` with that text visually
+  hidden; without `label` it is `aria-hidden`. It slows down, never stops,
+  under reduced motion. Button and IconButton `loading` already render one
+  with `aria-busy`: flag a Spinner placed inside a button, and flag a
+  hand-made spinner (a rotating border, an animated SVG) or an unlabelled
+  Spinner with no other announcement of the wait.
 - Buttons and fields ship hover, focus-visible and disabled styles through
   recipe tokens. Flag project CSS or `*Style` props that remove or override
   them.

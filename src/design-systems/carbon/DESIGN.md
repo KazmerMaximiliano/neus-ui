@@ -462,6 +462,11 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+    spinner:
+      base:
+        --spinner-size-small: 16px
+        --spinner-size-large: 88px
+        --spinner-stroke-width: 0.1em
 ---
 
 # Carbon
@@ -560,6 +565,8 @@ Plain start-aligned quotes, or one featured quote in the display weight.
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+Loading uses the small 16px indicator inline and the large 88px one for a whole region, in the interactive color ([Carbon loading](https://carbondesignsystem.com/components/loading/style/), consulted 2026-11-15).
 
 ## Do's and Don'ts
 

@@ -1,8 +1,8 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Pencil } from "lucide-react";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { IconButton as IconButtonComponent } from "./IconButton";
-import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { IconButtonStoryArgs } from "./IconButton.types";
 
 const meta: Meta<IconButtonStoryArgs> = {
@@ -76,7 +76,7 @@ const meta: Meta<IconButtonStoryArgs> = {
     },
     loaderStyle: {
       control: "object",
-      description: "CSS properties applied to the BeatLoader container",
+      description: "CSS properties applied to the loader",
     },
     onClick: {
       action: "clicked",

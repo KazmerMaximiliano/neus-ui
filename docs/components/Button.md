@@ -28,8 +28,8 @@ and receives `href`, `target`, `rel`, the class, style and click handler. A disa
 loading link drops its `href`, reports `aria-disabled` and ignores clicks. `loading` disables interaction, sets `aria-busy`, keeps the
 accessible name and hides the label visually while preserving its space. `disabled` also
 blocks native button activation. The label remains in the DOM during loading. `loaderStyle`
-and `loaderClassName` target the BeatLoader container; dots use `currentColor`, and their
-size follows its font size.
+and `loaderClassName` target the loader, a dots [Spinner](./Spinner.md); its dots use
+`currentColor`, are as wide as `--button-loader-size` and slow down under reduced motion.
 
 ## Props
 
@@ -86,7 +86,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | --- | --- | --- | --- | --- |
 | `.button` | `button`, or `a` / `linkComponent` with `href` | `className` | `buttonStyle` | `Always` |
 | `.button-label` | `span` | `labelClassName` | `labelStyle` | `Always` |
-| `.button-loader` | `BeatLoader` | `loaderClassName` | `loaderStyle` | `loading` |
+| `.button-loader` | `span` (dots `Spinner`) | `loaderClassName` | `loaderStyle` | `loading` |
 
 State/variant selectors: `.button--elevated`, `.button--error`, `.button--full-width`,
 `.button--info`, `.button--large`, `.button--outlined`, `.button--primary`,

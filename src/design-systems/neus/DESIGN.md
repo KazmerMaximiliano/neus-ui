@@ -1239,6 +1239,18 @@ x-neus:
         --site-footer-link-color: var(--color-text-secondary)
         --site-footer-title-color: var(--color-text-primary)
         --site-footer-font-size: var(--fs-base)
+    spinner:
+      base:
+        --spinner-size-small: 16px
+        --spinner-size-medium: 24px
+        --spinner-size-large: 40px
+        --spinner-stroke-width: 0.125em
+        --spinner-color: var(--color-primary-text)
+        --spinner-track-color: color-mix(in srgb, currentColor 18%, transparent)
+        --spinner-ring-duration: 0.8s
+        --spinner-dot-size: 0.25em
+        --spinner-dot-margin: 0.083em
+        --spinner-dot-duration: 1.4s
 ---
 
 # Neus UI
@@ -1346,6 +1358,8 @@ Cards with an initials avatar, the name and the role, so every quote reads with 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
 
 A missing picture is a quiet striped frame in the low surface with its shot written in monospace. A stock photo previewed during design fades in over the frame with its author on a dark chip in the corner, the same in light and dark because the photo does not change.
+
+A spinner marks a wait of unknown length: an indigo ring over a faint track of its own color. Inside a button it becomes three dots in the label's color. Under reduced motion it turns more slowly instead of stopping, so the page never looks frozen.
 
 ## Do's and Don'ts
 
