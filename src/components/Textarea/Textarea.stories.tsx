@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useArgs } from "storybook/preview-api";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Textarea as TextareaComponent } from "./Textarea";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { TextareaStoryArgs } from "./Textarea.types";
 
 const meta: Meta<TextareaStoryArgs> = {

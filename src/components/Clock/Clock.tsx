@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type KeyboardEvent } from "react";
+import { type CSSProperties, type KeyboardEvent,useState } from "react";
 import { ClockNumbers } from "./components/ClockNumbers";
 import type { ClockProps, TimeValue } from "./Clock.types";
 import { INNER_RING_THRESHOLD, KEY_STEPS } from "./Clock.consts";

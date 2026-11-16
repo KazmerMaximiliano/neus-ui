@@ -1,5 +1,5 @@
 import { lint } from "@google/design.md/linter";
-import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, unlinkSync, unwatchFile, watchFile, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, unlinkSync, unwatchFile, watchFile, writeFileSync } from "node:fs";
 import path from "node:path";
 import { resolvePalette } from "../../utils/resolvePalette";
 import { parseDesignDocument, renderModes, resolveReference } from "./design-systems.core";

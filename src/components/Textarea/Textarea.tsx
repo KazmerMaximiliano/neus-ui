@@ -1,8 +1,8 @@
-import type { CSSProperties } from "react";
 import { useId } from "react";
+import type { CSSProperties } from "react";
+import type { TextareaProps } from "./Textarea.types";
 import "../../css/field.css";
 import "./Textarea.styles.css";
-import type { TextareaProps } from "./Textarea.types";
 
 export const Textarea = ({
   className,

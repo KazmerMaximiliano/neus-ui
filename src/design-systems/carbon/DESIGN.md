@@ -485,6 +485,15 @@ x-neus:
         --switch-focus-offset: 1px
         --switch-duration: 70ms
         --switch-easing: cubic-bezier(0.2, 0, 0.38, 0.9)
+    radio:
+      base:
+        --radio-size: 18px
+        --radio-gap: 10px
+        --radio-checked-background: var(--radio-background)
+        --radio-dot-color: var(--color-text-primary)
+        --radio-focus-offset: 1.5px
+        --radio-group-gap: 8px
+        --radio-group-inline-gap: 16px
 ---
 
 # Carbon
@@ -588,6 +597,8 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 Loading uses the small 16px indicator inline and the large 88px one for a whole region, in the interactive color ([Carbon loading](https://carbondesignsystem.com/components/loading/style/), consulted 2026-11-15).
 
 The toggle is the default 48×24 track with an 18px white handle, gray when off and the success green when on ([Carbon toggle style](https://carbondesignsystem.com/components/toggle/style/), consulted 2026-11-16). The green is the success role's darker step, so the white handle and the track keep 3:1 with the default palette. Carbon places the label above the toggle; here it sits before it on the same row, like the state text, which is a local mapping.
+
+A radio button is an 18px circle with a 1px ring in the primary icon color; selected, the fill stays clear and an 8px dot of the same color appears. The label sits 10px from the circle, stacked options are 8px apart and a horizontal row leaves 16px ([Carbon radio button style](https://carbondesignsystem.com/components/radio-button/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/radio-button/_radio-button.scss), consulted 2026-11-16). The style page lists 8px for the label gap and the row; the source's 10px and 16px are used.
 
 ## Do's and Don'ts
 

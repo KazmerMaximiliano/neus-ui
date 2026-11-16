@@ -1,11 +1,11 @@
 /// <reference types="vitest/config" />
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
 // https://vite.dev/config/
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
+import react from '@vitejs/plugin-react';
 import { playwright } from '@vitest/browser-playwright';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { defineConfig } from 'vite';
 import packageJson from './package.json' with { type: 'json' };
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 const EXTERNAL_PACKAGES = Object.keys({ ...packageJson.dependencies, ...packageJson.peerDependencies });

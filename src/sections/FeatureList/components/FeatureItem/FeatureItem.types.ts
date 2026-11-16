@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
-import type { DesignSystemId } from "../../../../design-systems";
 import type { HeadingLevel } from "../../../../components/Heading";
+import type { DesignSystemId } from "../../../../design-systems";
 
 export type FeatureItemProps = {
   /** A lucide-react icon element; it sits on a tinted tile. */

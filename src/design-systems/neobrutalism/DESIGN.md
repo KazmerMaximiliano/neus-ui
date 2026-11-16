@@ -474,6 +474,9 @@ x-neus:
         --switch-thumb-hover-color: var(--color-text-primary)
         --switch-focus-offset: 4px
         --switch-label-color: var(--color-text-primary)
+    radio:
+      base:
+        --radio-dot-size: 10px
 ---
 
 # Neobrutalism
@@ -573,6 +576,8 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 A spinner is a heavy ink arc over a yellow track, as thick as the frames around it.
 
 A switch is a squared, ink-framed track with a hard shadow and a square ink knob; on, the track turns yellow and the knob slides to the end.
+
+A radio is the checkbox made round: a 3px ink ring with the hard shadow, filled yellow with a 10px ink dot when chosen.
 
 ## Do's and Don'ts
 

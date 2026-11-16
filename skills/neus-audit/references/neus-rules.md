@@ -52,6 +52,14 @@ the project wrote.
   works and submits without JavaScript. Flag a hand-made toggle (a `div` or
   `button` with `role="switch"` or `aria-pressed` for a setting) and a Switch
   used for a choice that only applies after a submit button.
+- RadioGroup is a `<fieldset role="radiogroup">` named by its legend, with
+  `aria-required`, `aria-invalid` and its description and error wired to
+  `aria-describedby`; it gives its Radios a shared name, so the arrow keys move
+  the choice and it submits without JavaScript. Radio also works alone: radios
+  that share a `name` outside a RadioGroup need their own named fieldset. Flag a
+  hand-made radio (`role="radio"` or `role="radiogroup"` on a `div`), a raw
+  `<input type="radio">`, and a Select or checkboxes for a single choice
+  among two to five options that should stay visible.
 - Textarea is a native `<textarea>` with Input's look; `rows`, `maxRows` and
   `autoResize` size it in whole lines through CSS. Flag a raw `<textarea>` and
   hand-made growth (a `scrollHeight` handler on input).

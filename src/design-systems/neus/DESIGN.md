@@ -1285,6 +1285,46 @@ x-neus:
         --switch-disabled-color: var(--color-text-disabled)
         --switch-duration: 0.2s
         --switch-easing: ease
+    radio:
+      base:
+        --radio-font-family: var(--checkbox-font-family)
+        --radio-size: var(--checkbox-size)
+        --radio-gap: var(--checkbox-gap)
+        --radio-text-gap: 2px
+        --radio-border-width: var(--checkbox-border-width)
+        --radio-border-color: var(--checkbox-border-color)
+        --radio-hover-border-color: var(--checkbox-hover-border-color)
+        --radio-background: var(--checkbox-background)
+        --radio-shadow: var(--checkbox-shadow)
+        --radio-checked-background: var(--checkbox-checked-background)
+        --radio-checked-border-color: var(--checkbox-checked-border-color)
+        --radio-checked-shadow: var(--checkbox-checked-shadow)
+        --radio-dot-size: 8px
+        --radio-dot-color: var(--checkbox-check-color)
+        --radio-label-color: var(--checkbox-label-color)
+        --radio-label-font-size: var(--checkbox-label-font-size)
+        --radio-label-line-height: var(--checkbox-label-line-height)
+        --radio-focus-width: var(--checkbox-focus-width)
+        --radio-focus-color: var(--checkbox-focus-color)
+        --radio-focus-offset: var(--checkbox-focus-offset)
+        --radio-error-border-color: var(--input-error-border-color)
+        --radio-disabled-background: var(--checkbox-disabled-background)
+        --radio-disabled-border-color: var(--checkbox-disabled-border-color)
+        --radio-disabled-color: var(--checkbox-disabled-color)
+        --radio-transition: var(--checkbox-transition)
+        --radio-dot-transition: scale 0.2s ease
+        --radio-group-gap: "{spacing.step-3}"
+        --radio-group-inline-gap: "{spacing.step-6}"
+        --radio-group-text-gap: "{spacing.step-1}"
+        --radio-group-label-gap: "{spacing.step-2}"
+        --radio-group-label-color: var(--input-label-color)
+        --radio-group-label-font-size: var(--input-label-font-size)
+        --radio-group-label-weight: var(--input-label-weight)
+        --radio-group-required-color: var(--input-required-color)
+        --radio-group-required-gap: var(--input-required-gap)
+        --radio-group-error-color: var(--input-error-color)
+        --radio-group-error-font-size: var(--input-error-font-size)
+        --radio-group-disabled-color: var(--input-disabled-color)
 ---
 
 # Neus UI
@@ -1400,6 +1440,8 @@ A missing picture is a quiet striped frame in the low surface with its shot writ
 A spinner marks a wait of unknown length: an indigo ring over a faint track of its own color. Inside a button it becomes three dots in the label's color. Under reduced motion it turns more slowly instead of stopping, so the page never looks frozen.
 
 A switch is a setting that applies at once. Off, it is an indigo-outlined pill with a small indigo knob, like an unchecked checkbox; on, the pill fills with indigo and the knob grows white at the far end. The label comes first and the switch sits at the end of the row; unavailable switches dim without losing their on or off look.
+
+A radio group is one choice among a few options that all stay visible. Each radio is the checkbox drawn as a circle: the same indigo outline, filled with indigo and a white dot when selected. The group's legend reads like a field label, the options stack with the space of a related group, and a horizontal row leaves the wider gap between unrelated items.
 
 ## Do's and Don'ts
 

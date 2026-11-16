@@ -486,6 +486,13 @@ x-neus:
         --switch-label-color: var(--color-text-primary)
         --switch-duration: 300ms
         --switch-easing: cubic-bezier(0.2, 0, 0, 1)
+    radio:
+      base:
+        --radio-size: 20px
+        --radio-checked-background: var(--radio-background)
+        --radio-dot-size: 10px
+        --radio-dot-color: var(--color-primary)
+        --radio-dot-transition: scale 300ms cubic-bezier(0.05, 0.7, 0.1, 1)
 ---
 
 # Material
@@ -592,6 +599,8 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 The circular progress indicator is a 4px primary arc on an invisible track, 40px by default and 48px large, turning once every 1.57s ([Material Web progress](https://github.com/material-components/material-web/blob/main/docs/components/progress.md) and its circular indicator tokens, consulted 2026-11-15). A fixed arc is the local web mapping of its growing and shrinking one.
 
 The switch is the 52×32 track: unselected, a 2px outline around the highest container with a 16px outline-colored handle; selected, a primary track with a 24px on-primary handle ([Material Web switch tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-switch.scss), consulted 2026-11-16). The handle darkens on hover. The pressed 28px handle, the hover halo and the optional icons are left out.
+
+The radio button is a 20px circle with a 2px outline; selected, the outline turns primary and a 10px primary dot grows in over 300ms with the emphasized decelerate easing ([Material Web radio tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-radio-button.scss) and [its dot geometry](https://github.com/material-components/material-web/blob/main/radio/internal/radio.ts), consulted 2026-11-16). The 40px state layer is left out.
 
 ## Do's and Don'ts
 

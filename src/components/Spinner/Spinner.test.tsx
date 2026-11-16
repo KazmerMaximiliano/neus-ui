@@ -1,6 +1,6 @@
+import { createRef } from "react";
 import { composeStories } from "@storybook/react-vite";
 import { cleanup, render, screen } from "@testing-library/react";
-import { createRef } from "react";
 import { afterEach, describe, expect, it } from "vitest";
 import { Spinner } from "./Spinner";
 import * as stories from "./Spinner.stories";

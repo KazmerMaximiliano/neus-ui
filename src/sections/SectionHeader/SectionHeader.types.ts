@@ -1,6 +1,6 @@
 import type { ComponentPropsWithRef, CSSProperties, ReactNode } from "react";
-import type { DesignSystemId } from "../../design-systems";
 import type { HeadingLevel } from "../../components/Heading";
+import type { DesignSystemId } from "../../design-systems";
 
 export type SectionHeaderProps = Omit<ComponentPropsWithRef<"div">, "title" | "children"> & {
   readonly title: ReactNode;

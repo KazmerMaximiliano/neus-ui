@@ -8,6 +8,25 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.4.0] - Unreleased
+
+### Added
+
+- `Radio`: a native radio with a label, optional help text and controlled or uncontrolled
+  state. It works on its own, and inside a `RadioGroup` takes the group's name, choice,
+  required and invalid states.
+- `RadioGroup`: one choice among a few visible options, a `<fieldset role="radiogroup">` with a
+  legend around `Radio` components, with arrow-key navigation, vertical or horizontal layout,
+  help text, required and error states, and controlled or uncontrolled value.
+- Every design system styles both through the new `radio` recipe family, which follows each
+  system's checkbox tokens.
+
+### Changed
+
+- `neus-ui context` lists components, templates and sections by name under their catalog
+  category, without a purpose per name; the need → component table and `neus-ui docs <Name>`
+  still give the purposes. The output stays under 3000 tokens for every system.
+
 ## [2.3.0] - Unreleased
 
 ### Added
@@ -200,6 +219,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.4.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...v2.1.0

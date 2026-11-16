@@ -1,6 +1,6 @@
+import type { SpinnerProps } from "./Spinner.types";
 import { SPINNER_DOTS } from "./Spinner.consts";
 import "./Spinner.styles.css";
-import type { SpinnerProps } from "./Spinner.types";
 
 export const Spinner = ({
   label,

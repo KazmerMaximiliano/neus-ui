@@ -5,8 +5,8 @@ import { afterEach, beforeEach, describe, expect, expectTypeOf, it, vi } from "v
 import { searchPixabayPhoto } from "../../services/pixabay";
 import { MediaPlaceholder } from "./MediaPlaceholder";
 import * as stories from "./MediaPlaceholder.stories";
-import type { MediaPlaceholderProps } from "./MediaPlaceholder.types";
 import type { PixabayPhoto } from "../../services/pixabay";
+import type { MediaPlaceholderProps } from "./MediaPlaceholder.types";
 
 vi.mock("../../services/pixabay", () => ({ searchPixabayPhoto: vi.fn() }));
 

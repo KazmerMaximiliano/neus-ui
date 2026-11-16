@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Settings, MoreVertical } from "lucide-react";
+import { MoreVertical,Settings } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ThemeProvider } from "../../providers";
 import { Menu } from "./Menu";
