@@ -38,7 +38,7 @@ customize fields and buttons.
 Rows take the height of their tallest field, so a hint (`description`) or a two-line label on
 only one field of a row leaves a gap under its neighbours. Give every field of a row a hint or
 none, keep hints to one line (put examples in `placeholder`), and give a field with a long
-hint, a textarea or a consent checkbox its own row with `className="form-template__full"`,
+hint, a [Textarea](../components/Textarea.md) or a consent checkbox its own row with `className="form-template__full"`,
 which spans every column. `npx neus-ui shot` reports rows whose fields differ by more than
 20px.
 

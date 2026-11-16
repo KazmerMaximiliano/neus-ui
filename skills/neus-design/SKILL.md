@@ -229,9 +229,10 @@ component's guide.
 | Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
 | Icon-only action | `IconButton` |
 | Text navigation | `Link` |
-| Help text under a field | `description` on Input, Select, MultiSelect, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
-| Required field | `required` on Input, Select, MultiSelect, DateInput or TimeInput (asterisk and `aria-required`) |
-| Field that needs the whole row (long hint, textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
+| Help text under a field | `description` on Input, Textarea, Select, MultiSelect, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
+| Required field | `required` on Input, Textarea, Select, MultiSelect, DateInput or TimeInput (asterisk and `aria-required`) |
+| Text that wraps to several lines (message, notes, description) | `Textarea` (`rows`; `autoResize` with `maxRows` where the page has room to grow) |
+| Field that needs the whole row (long hint, Textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
 | Status or label | `Badge` |
 | Message about the page or a form (saved, failed, trial ending) | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
 | Region or value still loading, length unknown | `Spinner` (`label` in the project's language; `size`); a loading button uses its own `loading` |

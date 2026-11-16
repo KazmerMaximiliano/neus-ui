@@ -19,10 +19,11 @@ Exhaust these first. Examples: Button `variant` (`solid`, `secondary`,
 `error`, `info`, `white`), `size` and `href` (a link with the button's
 look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`,
 `outlined`, `elevated`) and `as` (`div`, `article`, `li`, `figure`,
-`section`); Input and picker fields `variant`, `size`,
+`section`); Input, Textarea and picker fields `variant`, `size`,
 `labelPlacement` and `description` (help text wired to
 `aria-describedby`), plus native attributes such as `autoComplete`,
-`inputMode` and `spellCheck` on Input; Sidebar and AppTemplate routes
+`inputMode` and `spellCheck` on Input; Textarea `rows`, `maxRows` and
+`autoResize`; Sidebar and AppTemplate routes
 `href` with `linkComponent`; Badge `variant` and `color`; Heading `as` and
 `size`; Text `variant`, `tone`, `weight`, `measure`, `lines` and `numeric`;
 Section `tone`, `spacing` and `container`; Container `size` and `gutter`;

@@ -780,6 +780,7 @@ x-neus:
         --input-filled-border-width: 0 0 1px
         --input-outlined-border-width: 1px
         --input-placeholder-rest-opacity: "1"
+        --textarea-radius: min(var(--input-radius), {rounded.default})
     link:
       base:
         --link-color: var(--color-primary-text)
@@ -1328,6 +1329,10 @@ Do not make a passive surface look clickable through hover elevation.
 Keep a visible label, legible value, subordinate placeholder,
 and explicit error message. Focus must remain evident when invalid. A read-only
 value stays readable and distinct from an unavailable field.
+
+A multi-line field keeps the same border, focus and error roles but is never a pill:
+its corners stop at the 16px content radius, and it grows by whole lines, by hand or
+with its content up to a limit.
 
 ### Sidebar
 

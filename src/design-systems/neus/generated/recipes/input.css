@@ -66,4 +66,5 @@
   --input-filled-border-width: 0 0 1px;
   --input-outlined-border-width: 1px;
   --input-placeholder-rest-opacity: 1;
+  --textarea-radius: min(var(--input-radius), 16px);
 }

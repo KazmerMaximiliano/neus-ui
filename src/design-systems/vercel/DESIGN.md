@@ -488,6 +488,9 @@ hierarchy. Choose elevation only when the surrounding layout requires it.
 Local mapping informed by [Geist Input](https://vercel.com/geist/input):
 keep compact geometry, a clear label/value hierarchy, a quiet resting border,
 visible focus, and explicit validation feedback. Read-only values remain readable.
+[Geist Textarea](https://vercel.com/geist/textarea) keeps the input's 6px frame for text that
+wraps, with a generous default of rows that grows only where the page has vertical room
+(consulted 2026-11-16).
 
 ### Sidebar
 

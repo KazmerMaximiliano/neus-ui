@@ -8,6 +8,15 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.2.0] - Unreleased
+
+### Added
+
+- `Textarea`: multi-line text with Input's label, description, error, variant, size and label
+  placement. `rows` sets its resting height in lines; `autoResize` lets it grow with its text up
+  to `maxRows`. It reuses the `input` recipes; the new `--textarea-radius` caps Neus' pill at
+  16px so a box of several lines stays a rounded rectangle.
+
 ## [2.1.0] - Unreleased
 
 ### Added
@@ -183,6 +192,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.3.0...v2.0.0
 [1.3.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v1.2.1...v1.3.0

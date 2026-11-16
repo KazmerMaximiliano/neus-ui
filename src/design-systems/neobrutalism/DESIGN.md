@@ -527,7 +527,8 @@ around every slot. The surface stays passive even when it resembles a physical t
 
 Use a framed field with a persistent, aligned label. Keep entered
 text calm and legible. Focus changes a recognizable boundary; error text explains
-the problem while focus remains apparent. Read-only must remain readable.
+the problem while focus remains apparent. Read-only must remain readable. A multi-line
+field keeps the thick frame and hard shadow and grows by whole lines.
 
 ### Sidebar
 
