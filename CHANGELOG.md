@@ -27,6 +27,15 @@ breaking change.
   category, without a purpose per name; the need → component table and `neus-ui docs <Name>`
   still give the purposes. The output stays under 3000 tokens for every system.
 
+### Fixed
+
+- `pnpm design:watch` no longer misses a DESIGN.md saved right after it starts. `fs.watchFile`
+  read each file's first state on the libuv thread pool, so under load a save could land
+  before that read, become the first state and never trigger a regeneration. The watcher now
+  reads the first state synchronously and polls itself at the same interval. This also made
+  the generator test "keeps the last valid output and recovers after an atomic editor save"
+  fail intermittently in CI.
+
 ## [2.3.0] - Unreleased
 
 ### Added

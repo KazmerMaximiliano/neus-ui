@@ -1,5 +1,5 @@
 import { lint } from "@google/design.md/linter";
-import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, unlinkSync, unwatchFile, watchFile, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, statSync, unlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { resolvePalette } from "../../utils/resolvePalette";
 import { parseDesignDocument, renderModes, resolveReference } from "./design-systems.core";
@@ -72,19 +72,30 @@ export const generateDesignSystems = (root: string, check = false): GenerationRe
   return result;
 };
 
+// The inode changes on an atomic editor save; a file missing mid-rename also counts as a change.
+const fileState = (file: string) => {
+  const stats = statSync(file, { throwIfNoEntry: false });
+  return stats ? `${stats.ino}:${stats.size}:${stats.mtimeMs}` : "missing";
+};
+
+/**
+ * Calls onChange (debounced) after any DESIGN.md changes. The first state is read synchronously
+ * before returning: fs.watchFile reads it on the libuv thread pool, so a save made right after
+ * starting could become that first state and never be reported.
+ */
 export const watchDesignDocuments = (root: string, onChange: () => void): (() => void) => {
   let timer: ReturnType<typeof setTimeout>;
-  const listeners = SYSTEM_IDS.map(id => {
-    const file = path.join(root, "src/design-systems", id, "DESIGN.md");
-    const listener = () => {
-      clearTimeout(timer);
-      timer = setTimeout(onChange, WATCH_DEBOUNCE_MS);
-    };
-    watchFile(file, { interval: WATCH_INTERVAL_MS }, listener);
-    return () => unwatchFile(file, listener);
-  });
+  const files = SYSTEM_IDS.map(id => path.join(root, "src/design-systems", id, "DESIGN.md"));
+  let states = files.map(fileState);
+  const poll = setInterval(() => {
+    const next = files.map(fileState);
+    if (next.every((state, index) => state === states[index])) return;
+    states = next;
+    clearTimeout(timer);
+    timer = setTimeout(onChange, WATCH_DEBOUNCE_MS);
+  }, WATCH_INTERVAL_MS);
   return () => {
     clearTimeout(timer);
-    listeners.forEach(close => close());
+    clearInterval(poll);
   };
 };
