@@ -56,6 +56,7 @@ retain their nullable default.
 | `iconStyle` | `CSSProperties` | Omitted | Inline styles on `.icon-button-icon` |
 | `loaderStyle` | `CSSProperties` | Omitted | Inline styles on `.icon-button-loader` |
 | `onClick` | `((e?: MouseEvent<HTMLButtonElement>) => void)` | Omitted | Callback function triggered on button click |
+| Native attributes and ref | React props for a `button` | Optional | Forwarded to the `<button>` (`aria-*`, `data-*`, `form`…), except `style`, `children` and `aria-label`, since `label` names it; a [Popover](./Popover.md) trigger spreads its props here |
 
 ### Supporting types
 

@@ -94,8 +94,10 @@ descendants; hooks do not render absent parts. Repeated item/label/dot hooks aff
 matching instance. A style object cannot express :hover, :focus-visible, :disabled or
 pseudo-elements; use a class and stylesheet.
 
-Popover position variables (`--popover-top`, `--popover-left`, `--popover-right` and
-`--popover-anchor-width`) are refreshed by the positioning hook on open, scroll and resize.
+Popover position variables (`--popover-top`, `--popover-bottom`, `--popover-left`,
+`--popover-right` and `--popover-anchor-width`) and the panel's `data-placement` are refreshed
+by the positioning hook on open, scroll and resize; the shared `.popover-panel` class reads
+them for Popover, Menu, Dropdown, Select, MultiSelect, DateInput and TimeInput.
 Treat them as runtime placement data. Use overlay spacing tokens or ordinary panel styles
 for appearance instead of relying on those values staying fixed after an interaction.
 

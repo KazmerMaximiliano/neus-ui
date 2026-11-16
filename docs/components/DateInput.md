@@ -257,8 +257,8 @@ dependencies. Do not edit generated files.
 `--field-height`, `--field-label-background`, `--field-label-left`, `--field-label-padding`,
 `--field-label-position`, `--field-label-raised-size`, `--field-label-raised-top`,
 `--field-label-raised-translate`, `--field-label-size`, `--field-label-top`,
-`--field-label-translate`, `--field-placeholder-opacity`, `--popover-left`, `--popover-top`,
-`--select-caret-color`, `--select-caret-size`.
+`--field-label-translate`, `--field-placeholder-opacity`, `--select-caret-color`,
+`--select-caret-size`; the panel is placed by the shared `.popover-panel` (see [Popover](./Popover.md)).
 
 Semantic/foundation tokens are described in [the shared token
 reference](../design/tokens.md). Component dependencies belong to their own linked recipe.

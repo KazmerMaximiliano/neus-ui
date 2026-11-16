@@ -78,6 +78,8 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
   global actions (`menu`: account, notifications). The page title and the
   page's primary action open the content.
 - One solid primary action per page; row actions use Menu or text buttons.
+- Filters for the list go in a `Popover` opened by an outlined "Filters" Button
+  beside the title; close it from an "Apply" button with a controlled `open`.
 - Pagination is controlled: wire `onPaginationChange` to the data source.
 - Provide `renderMobileCard` for tables people use on phones.
 

@@ -96,6 +96,9 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
       if (!isCss(file) && /role=["']alert["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"alert\": use Alert");
       if (!isCss(file) && /role=["']switch["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"switch\": use Switch");
       if (!isCss(file) && /role=["']radio(group)?["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made radio: use RadioGroup and Radio");
+      if (!isCss(file) && /<\w+\b[^>]*\spopover(=|[\s/>])/.test(line)) {
+        report(file, at, "P1", "raw-element", "popover attribute: use Popover (Menu for a list of actions)");
+      }
       if (isCss(file) ? /@keyframes\s+(spin|spinner|loader)\b/.test(line)
         : /<(div|span|svg|i)\b[^>]*class(Name)?=["']([^"']*\s)?(spinner|loader)(\s[^"']*)?["']/.test(line)) {
         report(file, at, "P1", "raw-element", "hand-made spinner: use Spinner (or loading on Button and IconButton)");

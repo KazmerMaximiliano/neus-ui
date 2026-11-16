@@ -477,6 +477,7 @@ x-neus:
     radio:
       base:
         --radio-dot-size: 10px
+    popover: {}
 ---
 
 # Neobrutalism
@@ -578,6 +579,8 @@ A spinner is a heavy ink arc over a yellow track, as thick as the frames around 
 A switch is a squared, ink-framed track with a hard shadow and a square ink knob; on, the track turns yellow and the knob slides to the end.
 
 A radio is the checkbox made round: a 3px ink ring with the hard shadow, filled yellow with a 10px ink dot when chosen.
+
+A popover is the menu panel with room inside: the ink frame and hard shadow, with 16px of padding.
 
 ## Do's and Don'ts
 

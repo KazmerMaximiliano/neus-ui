@@ -1,4 +1,4 @@
-import type { CSSProperties, ElementType, HTMLAttributeAnchorTarget, MouseEvent } from "react";
+import type { ComponentPropsWithRef, CSSProperties, ElementType, HTMLAttributeAnchorTarget, MouseEvent } from "react";
 import type { DesignSystemId } from "../../design-systems";
 
 type ButtonType = "button" | "submit" | "reset";
@@ -22,8 +22,16 @@ type ButtonBaseProps = {
   readonly loaderStyle?: CSSProperties;
 };
 
+type ButtonOwnKeys = keyof ButtonBaseProps | "style" | "children" | "dangerouslySetInnerHTML";
+
+/** Native `<button>` attributes (aria-*, data-*, form, name…) and its ref. */
+type ButtonActionNativeProps = Omit<ComponentPropsWithRef<"button">, ButtonOwnKeys | "type" | "onClick">;
+
+/** Native `<a>` attributes (aria-*, data-*, download…) and its ref. */
+type ButtonLinkNativeProps = Omit<ComponentPropsWithRef<"a">, ButtonOwnKeys | "href" | "type" | "target" | "rel" | "onClick">;
+
 /** Renders a `<button>` that runs an action. */
-export type ButtonActionProps = ButtonBaseProps & {
+export type ButtonActionProps = ButtonBaseProps & ButtonActionNativeProps & {
   readonly href?: undefined;
   readonly type?: ButtonType;
   readonly linkComponent?: never;
@@ -33,7 +41,7 @@ export type ButtonActionProps = ButtonBaseProps & {
 };
 
 /** Renders a link with the button's look; `linkComponent` takes a router link such as Next.js `Link`. */
-export type ButtonLinkProps = ButtonBaseProps & {
+export type ButtonLinkProps = ButtonBaseProps & ButtonLinkNativeProps & {
   readonly href: string;
   readonly type?: never;
   readonly linkComponent?: ElementType;

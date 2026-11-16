@@ -19,6 +19,7 @@ export const Button = (props: ButtonProps) => {
     buttonStyle,
     labelStyle,
     loaderStyle,
+    ...rest
   } = props;
   const inactive = disabled || loading;
   const shared = {
@@ -27,7 +28,8 @@ export const Button = (props: ButtonProps) => {
       .join(" "),
     style: buttonStyle,
     "aria-busy": loading || undefined,
-    "aria-label": loading ? label : undefined,
+    // The label is hidden while loading, so it names the button instead.
+    ...(loading && { "aria-label": label }),
   };
   const content = (
     <>
@@ -50,12 +52,13 @@ export const Button = (props: ButtonProps) => {
     </>
   );
 
-  if (props.href !== undefined) {
-    const { href, linkComponent = "a", target, rel, onClick } = props;
+  if (rest.href !== undefined) {
+    const { href, linkComponent = "a", target, rel, onClick, ...native } = rest;
     // An inactive link drops its href (and the router link), keeping a link role that reports itself disabled.
     return createElement(
       inactive ? "a" : linkComponent,
       {
+        ...native,
         ...shared,
         href: inactive ? undefined : href,
         target,
@@ -71,9 +74,10 @@ export const Button = (props: ButtonProps) => {
     );
   }
 
-  const { type = "button", onClick } = props;
+  const { type = "button", onClick, ...native } = rest;
   return (
     <button
+      {...native}
       {...shared}
       onClick={(e) => onClick?.(e)}
       type={type}

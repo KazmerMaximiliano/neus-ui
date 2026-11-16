@@ -75,7 +75,7 @@ and the stylesheet imports, plus:
   components and hydrate on their own.
 - Props from a Server Component to a neus component must be serializable:
   no functions. Anything with `onClick`, `onChange`, `routes` handlers,
-  `cellRenderer` or `renderMobileCard` lives in a Client Component. Build
+  `cellRenderer`, `renderMobileCard` or a Popover `trigger` lives in a Client Component. Build
   one Client Component per interactive screen (for example an `OrdersScreen`
   with `"use client"`, rendered by `app/orders/page.tsx`) and keep data
   loading in the page. Where that file lives and what it is called follow the
@@ -108,7 +108,8 @@ Everything in `ssr`, plus:
   no JavaScript, which suits Badge, Card or Link with no handlers, the
   layout components and every section from `neus-ui/sections`: the
   SiteHeader phone menu uses the native Popover API and needs no
-  hydration. Hydrate only the parts with handlers, such as a form.
+  hydration. Hydrate only the parts with handlers, such as a form or a
+  Popover, whose panel opens with JavaScript.
 - Directives: `client:idle` above the fold, `client:visible` below,
   `client:load` only for an island that must respond the moment the page
   appears, and `client:only="react"` for a component that fails in server

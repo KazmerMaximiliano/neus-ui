@@ -122,11 +122,6 @@
 }
 
 .picker-field__popover {
-  position: fixed;
-  inset: auto;
-  top: calc(var(--popover-top) + var(--overlay-offset));
-  left: var(--popover-left);
-  margin: 0;
   padding: 0;
   overflow: visible;
   border: 0;

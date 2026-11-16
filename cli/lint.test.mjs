@@ -62,12 +62,19 @@ export const Page = () => (
     ["raw-element", "a.tsx", `<div role="alert">Payment failed</div>`],
     ["raw-element", "a.tsx", `<button role="switch" aria-checked={on} onClick={toggle} />`],
     ["raw-element", "a.tsx", `<div role="radiogroup" aria-label="Plan">{plans}</div>`],
+    ["raw-element", "a.tsx", `<div id="filters" popover="auto" className="filters">{filters}</div>`],
+    ["raw-element", "a.tsx", `<div popover className="share">{links}</div>`],
     ["raw-element", "a.tsx", `<span className="loader" aria-hidden />`],
     ["raw-element", "a.css", "@keyframes spin { to { transform: rotate(1turn); } }"],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
     ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
   ])("reports P1 %s", (rule, file, text) => {
     expect(rules(lint(file, text))).toContain(`P1 ${rule}`);
+  });
+
+  it("does not take a Popover's props or text about popovers for the attribute", () => {
+    const text = `<Popover label="Filters" trigger={(props) => <Button {...props} label="Filters" />}>\n<Text>The popover shows filters.</Text>`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
   });
 
   it("does not take a class that only contains spinner for a hand-made one", () => {

@@ -1,43 +1,75 @@
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import type { UsePopoverOptions } from "./usePopover.types";
+import { resolvePlacement } from "./usePopover.utils";
 
 export const usePopover = <
   T extends HTMLElement = HTMLButtonElement,
   P extends HTMLElement = HTMLDivElement,
   A extends HTMLElement = HTMLDivElement,
->({ initialFocus }: { initialFocus?: string } = {}) => {
+>({
+  initialFocus,
+  placement = "bottom-start",
+  open: controlledOpen,
+  defaultOpen = false,
+  onOpenChange,
+}: UsePopoverOptions = {}) => {
   const id = useId();
   const triggerRef = useRef<T>(null);
   const popoverRef = useRef<P>(null);
   const anchorRef = useRef<A>(null);
-  const [open, setOpen] = useState(false);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
+  const open = controlledOpen ?? uncontrolledOpen;
 
   const place = useCallback(() => {
     const anchor = anchorRef.current ?? triggerRef.current;
     const popover = popoverRef.current;
     if (!anchor || !popover) return;
-    const { bottom, left, right, width } = anchor.getBoundingClientRect();
-    const viewport = document.documentElement.clientWidth;
-    popover.style.setProperty("--popover-top", `${bottom}px`);
-    popover.style.setProperty("--popover-left", `${left}px`);
-    popover.style.setProperty("--popover-right", `${viewport - right}px`);
-    popover.style.setProperty("--popover-anchor-width", `${width}px`);
-  }, []);
+    const rect = anchor.getBoundingClientRect();
+    const { clientWidth, clientHeight } = document.documentElement;
+    popover.dataset.placement = resolvePlacement(
+      placement,
+      rect,
+      { width: popover.offsetWidth, height: popover.offsetHeight },
+      { width: clientWidth, height: clientHeight },
+      getComputedStyle(anchor).direction === "rtl",
+    );
+    popover.style.setProperty("--popover-top", `${rect.bottom}px`);
+    popover.style.setProperty("--popover-bottom", `${clientHeight - rect.top}px`);
+    popover.style.setProperty("--popover-left", `${rect.left}px`);
+    popover.style.setProperty("--popover-right", `${clientWidth - rect.right}px`);
+    popover.style.setProperty("--popover-anchor-width", `${rect.width}px`);
+  }, [placement]);
 
-  const show = useCallback(() => {
-    place();
-    popoverRef.current?.togglePopover(true);
-    setOpen(true);
-  }, [place]);
+  const setOpen = useCallback((next: boolean) => {
+    if (next === open) return;
+    if (controlledOpen === undefined) setUncontrolledOpen(next);
+    onOpenChange?.(next);
+  }, [open, controlledOpen, onOpenChange]);
+
+  const show = useCallback(() => setOpen(true), [setOpen]);
 
   const hide = useCallback((restoreFocus = false) => {
-    popoverRef.current?.togglePopover(false);
     setOpen(false);
     if (restoreFocus) triggerRef.current?.focus();
-  }, []);
+  }, [setOpen]);
 
-  const toggle = useCallback(() => (open ? hide() : show()), [open, hide, show]);
+  const toggle = useCallback(() => setOpen(!open), [open, setOpen]);
 
+  // The panel follows the state. It is placed once shown, so flipping measures its real size.
+  useLayoutEffect(() => {
+    const popover = popoverRef.current;
+    if (!popover?.isConnected) return;
+    popover.togglePopover(open);
+    if (open) place();
+  }, [open, place]);
+
+  // A panel open from the first render (defaultOpen) does not take focus away from the page.
+  const openedOnMount = useRef(open);
   useEffect(() => {
+    if (openedOnMount.current) {
+      openedOnMount.current = false;
+      return;
+    }
     if (open && initialFocus) {
       popoverRef.current?.querySelector<HTMLElement>(initialFocus)?.focus();
     }

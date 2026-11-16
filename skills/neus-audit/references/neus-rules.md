@@ -39,6 +39,13 @@ the project wrote.
 - IconButton uses its required `label` as `aria-label`.
 - Modal is a native `<dialog>`: focus trapping and Escape come from the
   browser.
+- Popover wires its trigger with `aria-haspopup="dialog"`, `aria-expanded`
+  and `aria-controls`; its panel is a named non-modal dialog on the top layer
+  that flips to stay on screen, moves focus inside on opening, and closes on
+  Escape (focus back to the trigger), an outside click or Tab out. Flag a
+  hand-made floating panel (`popover` attribute, absolutely positioned
+  `div` toggled by state) and a Popover used for a list of actions (Menu)
+  or for a task that must be finished first (Modal).
 - Field components (Input, Textarea, Select, MultiSelect, DateInput, TimeInput) render
   their own `<label>` from `label`, mark `required` with an asterisk and
   `aria-required`, and wire `description` and errors to `aria-describedby`.

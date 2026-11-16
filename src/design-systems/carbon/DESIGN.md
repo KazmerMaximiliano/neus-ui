@@ -494,6 +494,11 @@ x-neus:
         --radio-focus-offset: 1.5px
         --radio-group-gap: 8px
         --radio-group-inline-gap: 16px
+    popover:
+      base:
+        --popover-radius: 2px
+        --popover-shadow: 0 2px 2px rgb(0 0 0 / 0.2)
+        --popover-max-width: 368px
 ---
 
 # Carbon
@@ -599,6 +604,8 @@ Loading uses the small 16px indicator inline and the large 88px one for a whole 
 The toggle is the default 48×24 track with an 18px white handle, gray when off and the success green when on ([Carbon toggle style](https://carbondesignsystem.com/components/toggle/style/), consulted 2026-11-16). The green is the success role's darker step, so the white handle and the track keep 3:1 with the default palette. Carbon places the label above the toggle; here it sits before it on the same row, like the state text, which is a local mapping.
 
 A radio button is an 18px circle with a 1px ring in the primary icon color; selected, the fill stays clear and an 8px dot of the same color appears. The label sits 10px from the circle, stacked options are 8px apart and a horizontal row leaves 16px ([Carbon radio button style](https://carbondesignsystem.com/components/radio-button/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/radio-button/_radio-button.scss), consulted 2026-11-16). The style page lists 8px for the label gap and the row; the source's 10px and 16px are used.
+
+A popover is a layer-colored container with 2px corners, the drop shadow of its `--drop-shadow` variant and 16px of padding, up to 368px wide ([Carbon popover style](https://carbondesignsystem.com/components/popover/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/popover/_popover.scss), consulted 2026-11-16). The style page lists 352px; the source's 368px is used. The caret is left out.
 
 ## Do's and Don'ts
 

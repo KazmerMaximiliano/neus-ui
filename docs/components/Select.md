@@ -300,7 +300,7 @@ dependencies. Do not edit generated files.
 
 ### Shared dependencies and runtime values
 
-`--color-text-secondary`, `--popover-anchor-width`, `--popover-left`, `--popover-top`.
+`--color-text-secondary`, `--popover-anchor-width`; the panel is placed by the shared `.popover-panel` (see [Popover](./Popover.md)).
 
 Semantic/foundation tokens are described in [the shared token
 reference](../design/tokens.md). Component dependencies belong to their own linked recipe.

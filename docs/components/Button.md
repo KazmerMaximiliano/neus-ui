@@ -59,6 +59,7 @@ retain their nullable default.
 | `linkComponent` | `ElementType` | `"a"` | Router link rendered instead of `<a>`; only with `href` |
 | `target` | `HTMLAttributeAnchorTarget` | Omitted | Link target; only with `href` |
 | `rel` | `string` | Omitted | Link relationship; only with `href` |
+| Native attributes and ref | React props for a `button`, or an `a` with `href` | Optional | Forwarded to the element (`aria-*`, `data-*`, `form`, `name`, `download`…), except `style` and `children`; a [Popover](./Popover.md) trigger spreads its props here |
 
 ### Supporting types
 

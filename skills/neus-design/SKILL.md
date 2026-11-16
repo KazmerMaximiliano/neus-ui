@@ -238,6 +238,7 @@ component's guide.
 | Region or value still loading, length unknown | `Spinner` (`label` in the project's language; `size`); a loading button uses its own `loading` |
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
+| Extra controls or details tied to a button (filters, share, explanation) | `Popover` (`trigger` renders a Button or IconButton with the props it receives); a list of actions stays `Menu` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
 | On/off setting that applies at once | `Switch`; a choice sent with a form stays `Checkbox` |
 | One choice among 2–5 visible options | `RadioGroup` + `Radio`; more options: `Select` |

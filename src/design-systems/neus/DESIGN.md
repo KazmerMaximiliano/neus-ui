@@ -1325,6 +1325,17 @@ x-neus:
         --radio-group-error-color: var(--input-error-color)
         --radio-group-error-font-size: var(--input-error-font-size)
         --radio-group-disabled-color: var(--input-disabled-color)
+    popover:
+      base:
+        --popover-font-family: var(--overlay-font-family)
+        --popover-background: var(--overlay-background)
+        --popover-color: var(--overlay-color)
+        --popover-border-width: var(--overlay-border-width)
+        --popover-border-color: var(--overlay-border-color)
+        --popover-radius: var(--overlay-radius)
+        --popover-shadow: var(--overlay-shadow)
+        --popover-padding: "{spacing.step-4}"
+        --popover-max-width: 320px
 ---
 
 # Neus UI
@@ -1442,6 +1453,8 @@ A spinner marks a wait of unknown length: an indigo ring over a faint track of i
 A switch is a setting that applies at once. Off, it is an indigo-outlined pill with a small indigo knob, like an unchecked checkbox; on, the pill fills with indigo and the knob grows white at the far end. The label comes first and the switch sits at the end of the row; unavailable switches dim without losing their on or off look.
 
 A radio group is one choice among a few options that all stay visible. Each radio is the checkbox drawn as a circle: the same indigo outline, filled with indigo and a white dot when selected. The group's legend reads like a field label, the options stack with the space of a related group, and a horizontal row leaves the wider gap between unrelated items.
+
+A popover holds a few controls or details tied to the button that opens it, such as filters or an explanation. It is the menu panel with room inside: the same white surface, input-colored border, rounded corners and floating shadow, with 16px of padding and at most 320px wide. It opens below the button and moves above or to the other edge when it would leave the screen.
 
 ## Do's and Don'ts
 

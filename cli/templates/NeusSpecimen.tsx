@@ -2,8 +2,8 @@
 // Run it again after changing the system, the derived system or the palette; delete it when done.
 import {
   Alert, Avatar, AvatarGroup, Badge, Button, Card, CardContent, CardFooter, CardHeader, Checkbox, DateInput, Grid,
-  Heading, Input, MediaPlaceholder, Radio, RadioGroup, Section, Select, Spinner, Stack, Switch, Text, Textarea,
-  ThemeProvider,
+  Heading, Input, MediaPlaceholder, Popover, Radio, RadioGroup, Section, Select, Spinner, Stack, Switch, Text,
+  Textarea, ThemeProvider,
 } from "neus-ui";
 import type { ColorScheme, DesignSystemId, ThemeConfig } from "neus-ui";
 
@@ -55,6 +55,9 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
             <Button label="Disabled" disabled />
             <Button label="Loading" loading />
             <Button label="Error" color="error" />
+            <Popover label="Popover" trigger={(props) => <Button {...props} label="Popover" variant="outlined" />}>
+              <Text>Anchored content, closed with Escape.</Text>
+            </Popover>
             {(["small", "medium", "large"] as const).map((size) => <Spinner key={size} size={size} label={`Loading ${size}`} />)}
             <Spinner variant="dots" label="Loading dots" />
             {(["primary", "success", "error", "info", "neutral"] as const).map((color) => <Badge key={color} label={color} color={color} />)}

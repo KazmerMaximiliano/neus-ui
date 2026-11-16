@@ -1,3 +1,4 @@
+import { createRef } from "react";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Plus,Settings } from "lucide-react";
@@ -194,6 +195,24 @@ describe("IconButton accessibility and customization", () => {
     expect(getIconButtonClasses("text", "error", "large")).toBe(
       "icon-button icon-button--text icon-button--error icon-button--large",
     );
+  });
+});
+
+describe("IconButton native attributes", () => {
+  it("forwards native attributes and the ref to the button, keeping the label as its name", () => {
+    const ref = createRef<HTMLButtonElement>();
+    render(<IconButton ref={ref} icon={Settings} label="Settings" aria-haspopup="dialog" aria-expanded data-testid="settings" />);
+    const button = screen.getByRole("button", { name: "Settings" });
+
+    expect(ref.current).toBe(button);
+    expect(button).toHaveAttribute("aria-haspopup", "dialog");
+    expect(button).toHaveAttribute("aria-expanded", "true");
+    expect(button).toHaveAttribute("data-testid", "settings");
+  });
+
+  it("keeps the label as its name over a caller's aria-label", () => {
+    render(<IconButton icon={Settings} label="Settings" {...{ "aria-label": "Other" }} />);
+    expect(screen.getByRole("button", { name: "Settings" })).toBeInTheDocument();
   });
 });
 

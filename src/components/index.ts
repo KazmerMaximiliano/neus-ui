@@ -56,6 +56,8 @@ export { Modal, ModalContent, ModalFooter, ModalHeader } from "./Modal";
 export type { ModalContentProps, ModalFooterProps, ModalHeaderProps, ModalProps } from "./Modal";
 export { MultiSelect } from "./MultiSelect";
 export type { MultiSelectProps } from "./MultiSelect";
+export { Popover } from "./Popover";
+export type { PopoverPlacement, PopoverProps, PopoverTriggerProps } from "./Popover";
 export { Radio } from "./Radio";
 export type { RadioProps } from "./Radio";
 export { RadioGroup } from "./RadioGroup";
