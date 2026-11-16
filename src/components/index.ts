@@ -78,6 +78,8 @@ export { Stepper } from "./Stepper";
 export type { StepperProps } from "./Stepper";
 export { Text } from "./Text";
 export type { TextElement, TextProps, TextTone, TextVariant, TextWeight } from "./Text";
+export { Textarea } from "./Textarea";
+export type { TextareaProps } from "./Textarea";
 export { TimeInput } from "./TimeInput";
 export type { TimeInputProps } from "./TimeInput";
 export { WeekCalendar, WeekCalendarRow } from "./WeekCalendar";

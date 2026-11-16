@@ -1,0 +1,117 @@
+.textarea__wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--input-gap);
+  align-items: flex-start;
+  font-family: var(--input-font-family);
+}
+
+.textarea__label {
+  font-size: var(--input-label-font-size);
+  color: var(--input-label-color);
+  margin-left: var(--input-label-offset);
+  font-weight: var(--input-label-weight);
+}
+
+.textarea__required {
+  color: var(--input-required-color);
+  margin-left: var(--input-required-gap);
+}
+
+.textarea__label--error {
+  color: var(--input-error-color);
+}
+
+.textarea__label--disabled {
+  color: var(--input-disabled-color);
+}
+
+/* Content-box sizing makes rows and maxRows whole lines (1lh) whatever padding the system sets;
+   stretching in the wrapper's column gives the full width with the padding outside it. */
+.textarea {
+  box-sizing: content-box;
+  align-self: stretch;
+  min-height: calc(var(--textarea-rows) * 1lh);
+  max-height: calc(var(--textarea-max-rows) * 1lh);
+  margin: 0;
+  padding: var(--input-padding);
+  border-style: solid;
+  border-width: var(--input-border-width);
+  border-color: var(--input-border-color);
+  border-radius: var(--textarea-radius);
+  background-color: var(--input-background);
+  color: var(--input-color);
+  font-family: var(--input-font-family);
+  font-size: var(--input-font-size);
+  line-height: var(--input-line-height);
+  font-weight: var(--input-font-weight);
+  box-shadow: var(--input-shadow);
+  transition: var(--input-transition);
+  resize: vertical;
+}
+
+/* Without field-sizing the field keeps its rows and stays resizable by hand. */
+@supports (field-sizing: content) {
+  .textarea--auto-resize {
+    field-sizing: content;
+    resize: none;
+  }
+}
+
+.textarea::placeholder {
+  color: var(--input-placeholder-color);
+  opacity: var(--input-placeholder-opacity);
+}
+
+.textarea:not(:focus)::placeholder {
+  opacity: var(--field-placeholder-opacity);
+}
+
+.textarea:where([readonly]:not(:disabled)) {
+  border-style: var(--input-readonly-border-style);
+  border-color: var(--input-readonly-border-color);
+  background-color: var(--input-readonly-background);
+  box-shadow: var(--input-readonly-shadow);
+}
+
+.textarea:hover:not(:focus, :disabled, [readonly], [aria-invalid="true"]) {
+  border-color: var(--input-hover-border-color);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--input-focus-border-color);
+  box-shadow: var(--input-focus-shadow);
+}
+
+.textarea[aria-invalid="true"] {
+  border-color: var(--input-error-border-color);
+  box-shadow: var(--input-error-shadow);
+  color: var(--input-error-color);
+}
+
+.textarea[aria-invalid="true"]:focus {
+  box-shadow: var(--input-error-focus-shadow);
+}
+
+.textarea:disabled {
+  background-color: var(--input-disabled-background);
+  border-color: var(--input-disabled-border-color);
+  color: var(--input-disabled-color);
+  box-shadow: var(--input-disabled-shadow);
+  cursor: not-allowed;
+  resize: none;
+}
+
+.textarea__error-message {
+  color: var(--input-error-color);
+  font-size: var(--input-error-font-size);
+  margin-left: var(--input-error-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .textarea {
+    transition: none;
+  }
+}

@@ -6,7 +6,8 @@ import { describe, expect, it } from "vitest";
 // var() in the library CSS must name a token some stylesheet declares.
 const RUNTIME = [
   "--clock-hand-angle", "--clock-hand-scale", "--clock-number-angle", "--media-placeholder-ratio", "--popover-anchor-width",
-  "--popover-left", "--popover-right", "--popover-top", "--text-lines", "--tooltip-x", "--tooltip-y",
+  "--popover-left", "--popover-right", "--popover-top", "--text-lines", "--textarea-max-rows", "--textarea-rows",
+  "--tooltip-x", "--tooltip-y",
 ];
 
 const root = path.resolve(import.meta.dirname, "..");

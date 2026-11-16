@@ -542,7 +542,8 @@ for the visual reference; interactive tile types require separate behavior desig
 Follow [Carbon text-input specifications](https://www.carbondesignsystem.com/building-blocks/core/components/text-input/specifications)
 for field geometry and focus, and [validation guidance](https://www.carbondesignsystem.com/building-blocks/core/components/text-input/guidelines)
 for invalid feedback. Keep labels and messages aligned; distinguish read-only,
-disabled, invalid, and focused states.
+disabled, invalid, and focused states. The text area variant in the same specification
+keeps the square field, the bottom rule and the inset focus; it grows by whole lines.
 
 ### Sidebar
 

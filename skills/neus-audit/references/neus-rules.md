@@ -39,7 +39,7 @@ the project wrote.
 - IconButton uses its required `label` as `aria-label`.
 - Modal is a native `<dialog>`: focus trapping and Escape come from the
   browser.
-- Field components (Input, Select, MultiSelect, DateInput, TimeInput) render
+- Field components (Input, Textarea, Select, MultiSelect, DateInput, TimeInput) render
   their own `<label>` from `label`, mark `required` with an asterisk and
   `aria-required`, and wire `description` and errors to `aria-describedby`.
   Flag "Required" or "Obligatorio" written as a hint instead of `required`. Flag a field only when it has neither `label` nor
@@ -47,6 +47,9 @@ the project wrote.
 - Input forwards native attributes (`autoComplete`, `inputMode`,
   `spellCheck`, `pattern`…): flag a missing one on Input like on a raw
   `<input>`.
+- Textarea is a native `<textarea>` with Input's look; `rows`, `maxRows` and
+  `autoResize` size it in whole lines through CSS. Flag a raw `<textarea>` and
+  hand-made growth (a `scrollHeight` handler on input).
 - Button, Sidebar and AppTemplate items with `href` render links with
   `aria-current="page"` on the active item. Flag navigation built with
   `onClick` and `window.location` where an `href` would do.

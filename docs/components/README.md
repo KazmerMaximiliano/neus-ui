@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 41 components and public sections. Import each by name from `neus-ui`.
+The package exports 42 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -36,6 +36,7 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | Component | Purpose |
 | --- | --- |
 | [Input](./Input.md) | Native input with field presentation, adornments and accessible errors. |
+| [Textarea](./Textarea.md) | Multi-line text with the Input field presentation, line-based height and optional growth. |
 | [Checkbox](./Checkbox.md) | Controlled checkbox with an indeterminate visual state. |
 | [Select](./Select.md) | Single selection with a searchable, keyboard-operated listbox. |
 | [MultiSelect](./MultiSelect.md) | Multiple selection with removable tags and searchable options. |

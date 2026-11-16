@@ -548,6 +548,8 @@ Material distinguishes filled and outlined fields and supports
 floating or external labels and supporting/error text. The Neus M3 mapping uses integrated floating labels by default. Keep invalid
 and focused treatments recognizable. Reference:
 [Material Web text fields](https://github.com/material-components/material-web/blob/main/docs/components/text-field.md).
+A textarea is the same filled or outlined field on several lines; its floating label rests on
+the first line and rises to the border like a single-line field's.
 
 ### Sidebar
 

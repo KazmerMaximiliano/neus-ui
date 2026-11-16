@@ -451,6 +451,7 @@ This Card composition is a local web convention.
 Keep the label persistent and the value visually primary.
 Use a clear focus boundary, explicit error text, and a quieter disabled surface.
 Preserve read-only text readability. These are local web form requirements.
+A multi-line field keeps the same 8px rounded rectangle and grows by whole lines.
 
 ### Sidebar
 

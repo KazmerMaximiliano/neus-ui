@@ -58,6 +58,7 @@ export const Page = () => (
     ["third-party", "a.css", ".table .ag-header-cell { color: inherit; }"],
     ["raw-element", "a.tsx", "<button onClick={go}>Go</button>"],
     ["raw-element", "a.tsx", "<footer>© 2027</footer>"],
+    ["raw-element", "a.tsx", `<textarea name="notes" rows={3} />`],
     ["raw-element", "a.tsx", `<div role="alert">Payment failed</div>`],
     ["raw-element", "a.tsx", `<span className="loader" aria-hidden />`],
     ["raw-element", "a.css", "@keyframes spin { to { transform: rotate(1turn); } }"],

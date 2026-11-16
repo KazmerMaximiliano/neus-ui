@@ -55,7 +55,7 @@
   --field-label-raised-translate: none;
   --field-label-raised-size: var(--input-label-font-size);
 }
-.field-presentation > :is(.input__label, .picker-field__label) {
+.field-presentation > :is(.input__label, .picker-field__label, .textarea__label) {
   position: var(--field-label-position);
   top: var(--field-label-top);
   left: var(--field-label-left);
@@ -69,6 +69,7 @@
 .field-presentation:has(
   :focus,
   input:not([type="hidden"]):not(:placeholder-shown),
+  textarea:not(:placeholder-shown),
   .picker-field__value,
   .picker-field__field--open,
   .input__prefix

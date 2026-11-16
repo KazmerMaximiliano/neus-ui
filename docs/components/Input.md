@@ -178,6 +178,7 @@ dependencies. Do not edit generated files.
 | `--input-required-gap` | input required gap | `0.25em` |
 | `--input-small-padding` | input small padding | `8px 16px` |
 | `--input-transition` | input transition | `border-color 0.2s` |
+| `--textarea-radius` | [Textarea](./Textarea.md) radius, never above 16px | `min(var(--input-radius), 16px)` |
 
 ### Surface and color
 
