@@ -25,7 +25,7 @@ export const Example = () => {
 
 `label` supplies the accessible name. `icon` accepts a Lucide-compatible forwarded-ref icon.
 The native button defaults to type button; loading and disabled block activation. Loading
-sets `aria-busy` and replaces the icon with a BeatLoader container. The icon is decorative.
+sets `aria-busy` and replaces the icon with a dots [Spinner](./Spinner.md). The icon is decorative.
 Use `buttonStyle` for the root, `iconStyle` for the SVG, and `loaderStyle` for the loader
 container, not its individual dots.
 
@@ -86,7 +86,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | Base class / part | Element | Class prop | Style prop | Rendering condition |
 | --- | --- | --- | --- | --- |
 | `.icon-button` | `button` | `className` | `buttonStyle` | `Always` |
-| `.icon-button-loader` | `BeatLoader` | `loaderClassName` | `loaderStyle` | `loading` |
+| `.icon-button-loader` | `span` (dots `Spinner`) | `loaderClassName` | `loaderStyle` | `loading` |
 | `.icon-button-icon` | `Icon` | `iconClassName` | `iconStyle` | `Always` |
 
 State/variant selectors: `.icon-button--error`, `.icon-button--info`, `.icon-button--large`,

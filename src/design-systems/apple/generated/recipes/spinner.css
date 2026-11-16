@@ -1,0 +1,7 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --spinner-size-medium: 20px;
+  --spinner-size-large: 37px;
+  --spinner-stroke-width: 0.1em;
+  --spinner-color: var(--color-text-secondary);
+}

@@ -1,0 +1,90 @@
+/* The root rules carry no specificity, so a host that renders the spinner as one of its parts
+   (Button's loader) restyles it without depending on stylesheet order. */
+:where(.spinner) {
+  --spinner-size: var(--spinner-size-medium);
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--spinner-color);
+  font-size: var(--spinner-size);
+  line-height: 1;
+  vertical-align: middle;
+}
+
+:where(.spinner--small) {
+  --spinner-size: var(--spinner-size-small);
+}
+
+:where(.spinner--large) {
+  --spinner-size: var(--spinner-size-large);
+}
+
+.spinner__ring {
+  box-sizing: border-box;
+  width: 1em;
+  height: 1em;
+  border: var(--spinner-stroke-width) solid var(--spinner-track-color);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spinner-rotate var(--spinner-ring-duration) linear infinite;
+}
+
+.spinner__dot {
+  display: inline-block;
+  width: var(--spinner-dot-size);
+  height: var(--spinner-dot-size);
+  margin: var(--spinner-dot-margin);
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: spinner-beat var(--spinner-dot-duration) linear infinite both;
+}
+
+.spinner__dot:nth-child(2) {
+  animation-delay: calc(var(--spinner-dot-duration) / 2);
+}
+
+.spinner__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes spinner-beat {
+  50% {
+    transform: scale(0.75);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* A stopped spinner reads as a frozen page, so reduced motion slows it down instead. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner__ring {
+    animation-duration: calc(var(--spinner-ring-duration) * 2);
+  }
+
+  .spinner__dot {
+    animation-duration: calc(var(--spinner-dot-duration) * 2);
+  }
+
+  .spinner__dot:nth-child(2) {
+    animation-delay: var(--spinner-dot-duration);
+  }
+}

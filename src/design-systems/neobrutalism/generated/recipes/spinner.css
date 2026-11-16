@@ -1,0 +1,6 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --spinner-stroke-width: 0.2em;
+  --spinner-color: var(--color-text-primary);
+  --spinner-track-color: var(--color-primary);
+}

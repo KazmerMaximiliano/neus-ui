@@ -2,7 +2,7 @@
 // Run it again after changing the system, the derived system or the palette; delete it when done.
 import {
   Alert, Avatar, AvatarGroup, Badge, Button, Card, CardContent, CardFooter, CardHeader, Checkbox, DateInput, Grid,
-  Heading, Input, MediaPlaceholder, Section, Select, Stack, Text, ThemeProvider,
+  Heading, Input, MediaPlaceholder, Section, Select, Spinner, Stack, Text, ThemeProvider,
 } from "neus-ui";
 import type { ColorScheme, DesignSystemId, ThemeConfig } from "neus-ui";
 
@@ -54,6 +54,8 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
             <Button label="Disabled" disabled />
             <Button label="Loading" loading />
             <Button label="Error" color="error" />
+            {(["small", "medium", "large"] as const).map((size) => <Spinner key={size} size={size} label={`Loading ${size}`} />)}
+            <Spinner variant="dots" label="Loading dots" />
             {(["primary", "success", "error", "info", "neutral"] as const).map((color) => <Badge key={color} label={color} color={color} />)}
           </Stack>
         </Stack>

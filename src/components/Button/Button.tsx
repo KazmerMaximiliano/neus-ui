@@ -1,8 +1,8 @@
 import { createElement, type MouseEvent } from "react";
-import { BeatLoader } from "react-spinners";
+import { Spinner } from "../Spinner";
+import "./Button.styles.css";
 import type { ButtonProps } from "./Button.types";
 import { getButtonClasses } from "./Button.utils";
-import "./Button.styles.css";
 
 export const Button = (props: ButtonProps) => {
   const {
@@ -22,7 +22,9 @@ export const Button = (props: ButtonProps) => {
   } = props;
   const inactive = disabled || loading;
   const shared = {
-    className: [getButtonClasses(variant, color, size, fullWidth), className].filter(Boolean).join(" "),
+    className: [getButtonClasses(variant, color, size, fullWidth), className]
+      .filter(Boolean)
+      .join(" "),
     style: buttonStyle,
     "aria-busy": loading || undefined,
     "aria-label": loading ? label : undefined,
@@ -37,14 +39,11 @@ export const Button = (props: ButtonProps) => {
         {label}
       </span>
       {loading && (
-        <BeatLoader
+        <Spinner
+          variant="dots"
           className={["button-loader", loaderClassName]
             .filter(Boolean)
             .join(" ")}
-          size="1em"
-          margin="0.333333em"
-          color="currentColor"
-          speedMultiplier={0.5}
           style={loaderStyle}
         />
       )}
@@ -74,7 +73,12 @@ export const Button = (props: ButtonProps) => {
 
   const { type = "button", onClick } = props;
   return (
-    <button {...shared} onClick={(e) => onClick?.(e)} type={type} disabled={inactive}>
+    <button
+      {...shared}
+      onClick={(e) => onClick?.(e)}
+      type={type}
+      disabled={inactive}
+    >
       {content}
     </button>
   );

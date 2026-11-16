@@ -40,6 +40,8 @@
   font-size: var(--icon-button-icon-size);
   color: inherit;
   line-height: 1;
+  --spinner-dot-size: calc(var(--icon-button-icon-size) * 0.3);
+  --spinner-dot-margin: calc(var(--icon-button-icon-size) * 0.08);
 }
 
 .icon-button--primary {

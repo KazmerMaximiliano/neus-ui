@@ -451,6 +451,11 @@ x-neus:
         --avatar-background: var(--color-primary)
         --avatar-color: var(--color-text-on-primary)
     sections: {}
+    spinner:
+      base:
+        --spinner-stroke-width: 0.2em
+        --spinner-color: var(--color-text-primary)
+        --spinner-track-color: var(--color-primary)
 ---
 
 # Neobrutalism
@@ -545,6 +550,8 @@ Bordered cards with bold quotes; a featured quote can sit on a yellow band.
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+A spinner is a heavy ink arc over a yellow track, as thick as the frames around it.
 
 ## Do's and Don'ts
 

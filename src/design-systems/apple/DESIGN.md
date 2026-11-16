@@ -369,6 +369,12 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+    spinner:
+      base:
+        --spinner-size-medium: 20px
+        --spinner-size-large: 37px
+        --spinner-stroke-width: 0.1em
+        --spinner-color: var(--color-text-secondary)
 ---
 
 # Apple
@@ -468,6 +474,8 @@ Sparse: one featured quote or plain columns, no card chrome.
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+A spinner is a thin gray ring, as quiet as the system activity indicator, at 20px inline and 37px for a region. This is a local web mapping.
 
 ## Do's and Don'ts
 

@@ -462,6 +462,14 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+    spinner:
+      base:
+        --spinner-size-medium: 40px
+        --spinner-size-large: 48px
+        --spinner-stroke-width: 0.1em
+        --spinner-color: var(--color-primary)
+        --spinner-track-color: transparent
+        --spinner-ring-duration: 1568ms
 ---
 
 # Material
@@ -562,6 +570,8 @@ Cards on surface-container-low with an avatar and the author's role.
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+The circular progress indicator is a 4px primary arc on an invisible track, 40px by default and 48px large, turning once every 1.57s ([Material Web progress](https://github.com/material-components/material-web/blob/main/docs/components/progress.md) and its circular indicator tokens, consulted 2026-11-15). A fixed arc is the local web mapping of its growing and shrinking one.
 
 ## Do's and Don'ts
 

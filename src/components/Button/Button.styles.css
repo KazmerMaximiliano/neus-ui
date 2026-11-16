@@ -61,6 +61,8 @@
   font-size: var(--button-loader-size);
   color: inherit;
   line-height: 1;
+  --spinner-dot-size: var(--button-loader-size);
+  --spinner-dot-margin: calc(var(--button-loader-size) / 3);
 }
 
 .button--primary {

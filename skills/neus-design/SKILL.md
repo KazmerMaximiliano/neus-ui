@@ -234,6 +234,7 @@ component's guide.
 | Field that needs the whole row (long hint, textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
 | Status or label | `Badge` |
 | Message about the page or a form (saved, failed, trial ending) | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
+| Region or value still loading, length unknown | `Spinner` (`label` in the project's language; `size`); a loading button uses its own `loading` |
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |

@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 40 reusable UI components and public sections
+- 41 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (40 total)
+### Implemented Components and Public Subcomponents (41 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -237,6 +237,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Grid             | src/components/Grid/                                    | STABLE | Responsive columns or auto-fit minimum width                                                                            |
 | Section          | src/components/Section/                                 | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container                                             |
 | MediaPlaceholder | src/components/MediaPlaceholder/                        | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
+| Spinner          | src/components/Spinner/                                 | STABLE | Ring or dots, polite status when labelled, slows under reduced motion; Button and IconButton loaders                    |
 
 ### Implemented Sections (9 total, `neus-ui/sections`)
 
@@ -668,7 +669,6 @@ ag-grid-community (DataTable; register only the modules DataTable uses)
 ag-grid-react (DataTable)
 react-day-picker (Calendar)
 lucide-react (Icon components)
-react-spinners (Loading indicators)
 @react-google-maps/api (InteractiveMap)
 ```
 
