@@ -60,6 +60,7 @@ export const Page = () => (
     ["raw-element", "a.tsx", "<footer>© 2027</footer>"],
     ["raw-element", "a.tsx", `<textarea name="notes" rows={3} />`],
     ["raw-element", "a.tsx", `<div role="alert">Payment failed</div>`],
+    ["raw-element", "a.tsx", `<button role="switch" aria-checked={on} onClick={toggle} />`],
     ["raw-element", "a.tsx", `<span className="loader" aria-hidden />`],
     ["raw-element", "a.css", "@keyframes spin { to { transform: rotate(1turn); } }"],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],

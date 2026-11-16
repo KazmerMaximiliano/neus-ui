@@ -12,7 +12,6 @@ reusable public API and should reuse the existing implementation where appropria
 | Priority | Component family        | Category     | Intended scope and current gap                                                                                                            |
 | -------- | ----------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | P1       | RadioGroup / Radio      | Forms        | One choice from a visible set, with grouped labels and keyboard navigation.                                                               |
-| P1       | Switch                  | Forms        | Immediate on/off settings with an accessible checked state.                                                                               |
 | P1       | Combobox / Autocomplete | Forms        | Editable text with suggestions, async results and optional custom values; Select currently searches predefined options.                   |
 | P1       | Tooltip                 | Overlays     | Reusable descriptions on hover and focus; the current tooltip belongs to WeekCalendarRow.                                                 |
 | P1       | Popover                 | Overlays     | Anchored arbitrary content with positioning, dismissal and focus handling; current popovers belong to menus and pickers.                  |

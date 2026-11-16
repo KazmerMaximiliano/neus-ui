@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 42 reusable UI components and public sections
+- 43 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (42 total)
+### Implemented Components and Public Subcomponents (43 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -238,6 +238,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Section          | src/components/Section/                                 | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container                                             |
 | MediaPlaceholder | src/components/MediaPlaceholder/                        | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
 | Spinner          | src/components/Spinner/                                 | STABLE | Ring or dots, polite status when labelled, slows under reduced motion; Button and IconButton loaders                    |
+| Switch           | src/components/Switch/                                  | STABLE | Native checkbox with the switch role, label first, help text, controlled or uncontrolled                                |
 | Textarea         | src/components/Textarea/                                | STABLE | Multi-line Input field: rows and maxRows in lines, optional auto-resize, description and accessible errors              |
 
 ### Implemented Sections (9 total, `neus-ui/sections`)

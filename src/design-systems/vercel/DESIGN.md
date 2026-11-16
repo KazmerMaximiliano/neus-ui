@@ -410,6 +410,20 @@ x-neus:
       base:
         --spinner-stroke-width: 0.1em
         --spinner-color: currentColor
+    switch:
+      base:
+        --switch-gap: 8px
+        --switch-track-width: 32px
+        --switch-track-height: 18px
+        --switch-track-border-width: 0px
+        --switch-track-background: var(--color-text-placeholder)
+        --switch-track-checked-shadow: none
+        --switch-thumb-size: 14px
+        --switch-thumb-checked-size: 14px
+        --switch-thumb-color: var(--color-surface)
+        --switch-thumb-hover-color: var(--color-surface)
+        --switch-label-font-size: 14px
+        --switch-duration: 150ms
 ---
 
 # Vercel
@@ -515,6 +529,8 @@ Plain quotes with small avatars, or a row of customer names.
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
 
 A spinner takes the color of the text beside it, with a thin stroke, and matches the size of that text or icon ([Geist spinner](https://vercel.com/geist/spinner), consulted 2026-11-15).
+
+A boolean setting is a compact toggle, label first ([Geist toggle](https://vercel.com/geist/toggle), consulted 2026-11-16): a 32×18 pill, filled with the ink color when on and gray when off, with a knob in the page color. Geist states no sizes or colors; these are local decisions that keep 3:1 in both modes.
 
 ## Do's and Don'ts
 

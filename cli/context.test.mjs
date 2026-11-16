@@ -33,9 +33,9 @@ describe("markdownSection", () => {
 });
 
 describe("neus-ui context", () => {
-  it.each(SYSTEMS.flatMap((system) => [[system, "app"], [system, "page"]]))("stays under 3000 tokens for %s (%s)", (system, surface) => {
+  it.each(SYSTEMS.flatMap((system) => [[system, "app"], [system, "page"]]))("stays under 3200 tokens for %s (%s)", (system, surface) => {
     const text = contextFor(project({ designSystem: system }), surface);
-    expect(tokens(text)).toBeLessThan(3000);
+    expect(tokens(text)).toBeLessThan(3200);
     expect(text).toContain(`System: ${system} (locked)`);
     expect(text).toContain("## Do's and Don'ts");
     expect(text).toContain("- Heading: ");

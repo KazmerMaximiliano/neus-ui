@@ -140,6 +140,9 @@ Group related settings in `Card` sections (`CardHeader`, `CardContent`,
 `CardFooter`). Use `variant="outlined"` for dense pages and `elevated` only
 for content that floats above the page. Lay cards out with `Grid` (for example
 `<Grid minItemWidth="20rem">`) and page titles with `Heading` and `Text`.
+A setting that applies at once is a `Switch` with its `description`, one per
+row inside `CardContent`, in a `Stack` so each track reaches the card's edge;
+choices saved with a button stay fields and checkboxes in a form.
 
 ## 6. Scheduling
 

@@ -470,6 +470,22 @@ x-neus:
         --spinner-color: var(--color-primary)
         --spinner-track-color: transparent
         --spinner-ring-duration: 1568ms
+    switch:
+      base:
+        --switch-gap: 12px
+        --switch-track-width: 52px
+        --switch-track-height: 32px
+        --switch-track-border-color: var(--color-text-placeholder)
+        --switch-track-background: var(--color-surface-container-highest)
+        --switch-track-hover-border-color: var(--color-text-placeholder)
+        --switch-track-checked-shadow: none
+        --switch-thumb-size: 16px
+        --switch-thumb-checked-size: 24px
+        --switch-thumb-color: var(--color-text-placeholder)
+        --switch-thumb-hover-color: var(--color-text-secondary)
+        --switch-label-color: var(--color-text-primary)
+        --switch-duration: 300ms
+        --switch-easing: cubic-bezier(0.2, 0, 0, 1)
 ---
 
 # Material
@@ -574,6 +590,8 @@ Cards on surface-container-low with an avatar and the author's role.
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
 
 The circular progress indicator is a 4px primary arc on an invisible track, 40px by default and 48px large, turning once every 1.57s ([Material Web progress](https://github.com/material-components/material-web/blob/main/docs/components/progress.md) and its circular indicator tokens, consulted 2026-11-15). A fixed arc is the local web mapping of its growing and shrinking one.
+
+The switch is the 52×32 track: unselected, a 2px outline around the highest container with a 16px outline-colored handle; selected, a primary track with a 24px on-primary handle ([Material Web switch tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-switch.scss), consulted 2026-11-16). The handle darkens on hover. The pressed 28px handle, the hover halo and the optional icons are left out.
 
 ## Do's and Don'ts
 

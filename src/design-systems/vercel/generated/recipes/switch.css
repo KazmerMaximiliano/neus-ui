@@ -1,0 +1,15 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --switch-gap: 8px;
+  --switch-track-width: 32px;
+  --switch-track-height: 18px;
+  --switch-track-border-width: 0px;
+  --switch-track-background: var(--color-text-placeholder);
+  --switch-track-checked-shadow: none;
+  --switch-thumb-size: 14px;
+  --switch-thumb-checked-size: 14px;
+  --switch-thumb-color: var(--color-surface);
+  --switch-thumb-hover-color: var(--color-surface);
+  --switch-label-font-size: 14px;
+  --switch-duration: 150ms;
+}
