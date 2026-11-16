@@ -162,14 +162,9 @@
 }
 
 .select__popover {
-  position: fixed;
-  inset: auto;
-  top: calc(var(--popover-top) + var(--overlay-offset));
-  left: var(--popover-left);
   box-sizing: border-box;
   width: var(--popover-anchor-width);
   max-height: var(--select-list-max-height);
-  margin: 0;
   padding: var(--overlay-padding);
   overflow-y: auto;
   border: var(--overlay-border-width) solid var(--overlay-border-color);

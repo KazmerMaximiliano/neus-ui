@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 45 reusable UI components and public sections
+- 46 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -183,7 +183,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 - The aggregating barrels `src/components/index.ts`, `src/sections/index.ts` and
   `src/templates/index.ts` list the public names explicitly, so a family barrel can export
   internals without publishing them. A new public name goes in both barrels.
-- Hooks, utilities and services stay one flat file (`hooks/usePopover.ts`) until they gain a
+- Hooks, utilities and services stay one flat file (`hooks/useColors.ts`) until they gain a
   sidecar (types, constants or a test); then they become a folder with an `index.ts`
   (`hooks/useResponsive/`). Importers write the same path either way.
 - The only deep imports keep React out of server and Node code: `src/theme.ts` imports
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (45 total)
+### Implemented Components and Public Subcomponents (46 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -201,7 +201,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Avatar           | src/components/Avatar/                                  | STABLE | Picture or initials, pre-hydration failure fallback, sizes and shapes                                                   |
 | AvatarGroup      | src/components/Avatar/components/AvatarGroup/           | STABLE | Overlap, size for its avatars, +N count                                                                                 |
 | Badge            | src/components/Badge/                                   | STABLE | Solid/dot variants, 5 semantic colors                                                                                   |
-| Button           | src/components/Button/                                  | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links                                                |
+| Button           | src/components/Button/                                  | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links, native attributes and ref                     |
 | Calendar         | src/components/Calendar/                                | STABLE | Date picker                                                                                                             |
 | Card             | src/components/Card/                                    | STABLE | Composable themed surface, semantic `as`, className and style                                                           |
 | CardHeader       | src/components/Card/components/CardHeader/              | STABLE | Free-form header content and actions                                                                                    |
@@ -214,7 +214,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | DateInput        | src/components/DateInput/                               | STABLE | Calendar picker field                                                                                                   |
 | Dropdown         | src/components/Dropdown/                                | STABLE | Dropdown menu                                                                                                           |
 | FileUploader     | src/components/FileUploader/                            | STABLE | Drag and drop                                                                                                           |
-| IconButton       | src/components/IconButton/                              | STABLE | Icon containers                                                                                                         |
+| IconButton       | src/components/IconButton/                              | STABLE | Icon containers, native attributes and ref                                                                              |
 | Input            | src/components/Input/                                   | STABLE | Seven native types, native attributes, description, accessible errors, per-part styles, six token recipes               |
 | InteractiveMap   | src/components/InteractiveMap/                          | STABLE | Google Maps integration                                                                                                 |
 | Link             | src/components/Link/                                    | STABLE | Styled links                                                                                                            |
@@ -237,6 +237,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Grid             | src/components/Grid/                                    | STABLE | Responsive columns or auto-fit minimum width                                                                            |
 | Section          | src/components/Section/                                 | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container                                             |
 | MediaPlaceholder | src/components/MediaPlaceholder/                        | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
+| Popover          | src/components/Popover/                                 | STABLE | Non-modal dialog anchored to a Button trigger, four placements that flip, controlled or not                             |
 | Radio            | src/components/Radio/                                   | STABLE | Native radio with label and help text, controlled or uncontrolled; alone or inside RadioGroup                           |
 | RadioGroup       | src/components/RadioGroup/                              | STABLE | Fieldset with the radiogroup role around Radio: legend, shared name, arrow keys, orientation, errors                    |
 | Spinner          | src/components/Spinner/                                 | STABLE | Ring or dots, polite status when labelled, slows under reduced motion; Button and IconButton loaders                    |

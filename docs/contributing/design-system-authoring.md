@@ -45,7 +45,7 @@ while the Neus extension explicitly controls which values override defaults.
 | `recipes.<family>` | Component-specific CSS variable declarations |
 
 Foundations, tokens and recipes contain `base`, `light` and/or `dark` mappings from existing
-`--variable-names` to scalar values or token references. All twenty-nine recipe families
+`--variable-names` to scalar values or token references. All thirty recipe families
 (`RECIPE_NAMES` in `src/design-systems/tooling/design-systems.consts.ts`) must be present; an empty mapping intentionally inherits Neus. Palettes resolve to six-digit hex
 colors for the existing runtime color utilities.
 

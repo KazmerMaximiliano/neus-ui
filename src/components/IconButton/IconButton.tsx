@@ -19,8 +19,10 @@ export const IconButton = ({
   iconStyle,
   loaderStyle,
   onClick,
+  ...native
 }: IconButtonProps) => (
   <button
+    {...native}
     className={[getIconButtonClasses(variant, color, size), className]
       .filter(Boolean)
       .join(" ")}

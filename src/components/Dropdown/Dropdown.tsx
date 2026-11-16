@@ -27,6 +27,7 @@ export const Dropdown = ({
   itemStyle,
 }: DropdownProps) => {
   const popover = usePopover({
+    placement: "bottom-end",
     initialFocus: "[role=\"menuitem\"]:not(:disabled)",
   });
   const { id, open, triggerRef, toggle } = popover;

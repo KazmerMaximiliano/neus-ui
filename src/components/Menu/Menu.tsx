@@ -26,6 +26,7 @@ export const Menu = ({
   itemStyle,
 }: MenuProps) => {
   const popover = usePopover({
+    placement: "bottom-end",
     initialFocus: "[role=\"menuitem\"]:not(:disabled)",
   });
   const { id, open, triggerRef, toggle } = popover;

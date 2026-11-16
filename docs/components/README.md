@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 45 components and public sections. Import each by name from `neus-ui`.
+The package exports 46 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -69,6 +69,7 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [ModalHeader](./ModalHeader.md) | Title region for an owning Modal. |
 | [ModalContent](./ModalContent.md) | Body region for Modal composition. |
 | [ModalFooter](./ModalFooter.md) | Action region for Modal composition. |
+| [Popover](./Popover.md) | Content anchored to a button in a non-modal panel that flips to stay on screen. |
 
 ## Navigation, data and location
 

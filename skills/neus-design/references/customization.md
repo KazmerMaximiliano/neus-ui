@@ -24,7 +24,8 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 `aria-describedby`), plus native attributes such as `autoComplete`,
 `inputMode` and `spellCheck` on Input; Textarea `rows`, `maxRows` and
 `autoResize`; Switch `description`; RadioGroup `orientation` and
-`description`, Radio `description`; Sidebar and AppTemplate routes
+`description`, Radio `description`; Popover `placement` and `label`, and
+native attributes and `ref` on Button and IconButton; Sidebar and AppTemplate routes
 `href` with `linkComponent`; Badge `variant` and `color`; Heading `as` and
 `size`; Text `variant`, `tone`, `weight`, `measure`, `lines` and `numeric`;
 Section `tone`, `spacing` and `container`; Container `size` and `gutter`;

@@ -1,0 +1,13 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --popover-font-family: var(--overlay-font-family);
+  --popover-background: var(--overlay-background);
+  --popover-color: var(--overlay-color);
+  --popover-border-width: var(--overlay-border-width);
+  --popover-border-color: var(--overlay-border-color);
+  --popover-radius: var(--overlay-radius);
+  --popover-shadow: var(--overlay-shadow);
+  --popover-padding: 16px;
+  --popover-max-width: 320px;
+}

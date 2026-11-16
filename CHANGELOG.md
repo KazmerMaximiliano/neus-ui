@@ -8,6 +8,27 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.5.0] - Unreleased
+
+### Added
+
+- `Popover`: content anchored to a button in a non-modal `role="dialog"` panel on the top
+  layer. `trigger` renders a Button or IconButton with the props it receives; four placements
+  that flip to the other side or edge when the panel does not fit, Escape, outside clicks and
+  Tab out close it, focus moves inside on opening and returns to the trigger on Escape, and
+  it can be controlled. Every design system styles it through the new `popover` recipe
+  family, which follows each system's overlay tokens.
+- `Button` and `IconButton` forward native attributes (`aria-*`, `data-*`, `form`…) and their
+  ref to the rendered element.
+
+### Changed
+
+- Menu, Dropdown, Select, MultiSelect, DateInput and TimeInput render their floating panel
+  through the shared `.popover-panel`, which Popover uses too. Their look, classes and part
+  props are unchanged. Their panels now open above the trigger, or from the other edge, when
+  there is no room, and follow the text direction: a Menu in right-to-left text opens from
+  the trigger's left edge.
+
 ## [2.4.0] - Unreleased
 
 ### Added
@@ -228,6 +249,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.5.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.1.0...v2.2.0

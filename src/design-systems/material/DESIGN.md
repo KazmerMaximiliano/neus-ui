@@ -493,6 +493,7 @@ x-neus:
         --radio-dot-size: 10px
         --radio-dot-color: var(--color-primary)
         --radio-dot-transition: scale 300ms cubic-bezier(0.05, 0.7, 0.1, 1)
+    popover: {}
 ---
 
 # Material
@@ -601,6 +602,8 @@ The circular progress indicator is a 4px primary arc on an invisible track, 40px
 The switch is the 52×32 track: unselected, a 2px outline around the highest container with a 16px outline-colored handle; selected, a primary track with a 24px on-primary handle ([Material Web switch tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-switch.scss), consulted 2026-11-16). The handle darkens on hover. The pressed 28px handle, the hover halo and the optional icons are left out.
 
 The radio button is a 20px circle with a 2px outline; selected, the outline turns primary and a 10px primary dot grows in over 300ms with the emphasized decelerate easing ([Material Web radio tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-radio-button.scss) and [its dot geometry](https://github.com/material-components/material-web/blob/main/radio/internal/radio.ts), consulted 2026-11-16). The 40px state layer is left out.
+
+A popover uses the menu container: the surface container color, level-2 elevation and extra-small corners ([Material Web menu tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-menu.scss), consulted 2026-11-16), with 16px of padding for arbitrary content. Material has no popover component; mapping it to the menu container is a local decision.
 
 ## Do's and Don'ts
 

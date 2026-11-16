@@ -1,5 +1,6 @@
 import type { LucideProps } from "lucide-react";
 import type {
+  ComponentPropsWithRef,
   CSSProperties,
   ForwardRefExoticComponent,
   MouseEvent,
@@ -16,7 +17,7 @@ export type IconButtonIcon = ForwardRefExoticComponent<
   Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
 >;
 
-export type IconButtonProps = {
+type IconButtonOwnProps = {
   readonly className?: string;
   readonly iconClassName?: string;
   readonly loaderClassName?: string;
@@ -33,6 +34,14 @@ export type IconButtonProps = {
   readonly loaderStyle?: CSSProperties;
   readonly onClick?: (e?: MouseEvent<HTMLButtonElement>) => void;
 };
+
+/** Native `<button>` attributes (aria-*, data-*, form, name…) and its ref; the label is its name. */
+type IconButtonNativeProps = Omit<
+  ComponentPropsWithRef<"button">,
+  keyof IconButtonOwnProps | "style" | "children" | "aria-label" | "dangerouslySetInnerHTML"
+>;
+
+export type IconButtonProps = IconButtonOwnProps & IconButtonNativeProps;
 
 export type IconButtonStoryArgs = IconButtonProps & {
   readonly designSystem: DesignSystemId;

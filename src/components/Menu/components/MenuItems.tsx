@@ -1,4 +1,5 @@
 import { focusMenuItem } from "../../../hooks/usePopover";
+import { PopoverPanel } from "../../Popover/components/PopoverPanel";
 import type { MenuItemsProps } from "../Menu.types";
 
 export const MenuItems = ({
@@ -11,10 +12,9 @@ export const MenuItems = ({
   menuStyle,
   itemStyle,
 }: MenuItemsProps) => (
-  <div
+  <PopoverPanel
     ref={popoverRef}
     id={id}
-    popover="manual"
     role="menu"
     aria-label={label}
     className={["menu__panel", menuClassName].filter(Boolean).join(" ")}
@@ -46,5 +46,5 @@ export const MenuItems = ({
         ))}
       </>
     )}
-  </div>
+  </PopoverPanel>
 );

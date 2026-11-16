@@ -427,6 +427,7 @@ x-neus:
     radio:
       base:
         --radio-dot-size: 6px
+    popover: {}
 ---
 
 # Vercel
@@ -536,6 +537,8 @@ A spinner takes the color of the text beside it, with a thin stroke, and matches
 A boolean setting is a compact toggle, label first ([Geist toggle](https://vercel.com/geist/toggle), consulted 2026-11-16): a 32×18 pill, filled with the ink color when on and gray when off, with a knob in the page color. Geist states no sizes or colors; these are local decisions that keep 3:1 in both modes.
 
 A radio is the checkbox drawn as a circle: a thin gray ring, filled with ink and a 6px dot in the opposite tone when chosen. Geist recommends radios for two to six options that should all stay visible and states no sizes or colors, so these are local decisions ([Geist radio](https://vercel.com/geist/radio), consulted 2026-11-16).
+
+A popover is the menu panel with room inside: the subtle border and soft shadow, with 16px of padding and at most 320px wide.
 
 ## Do's and Don'ts
 

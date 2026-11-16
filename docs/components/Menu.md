@@ -234,7 +234,7 @@ dependencies. Do not edit generated files.
 
 ### Shared dependencies and runtime values
 
-`--color-text-disabled`, `--popover-right`, `--popover-top`.
+`--color-text-disabled`, `--overlay-offset`; the panel is placed by the shared `.popover-panel` (see [Popover](./Popover.md)).
 
 Semantic/foundation tokens are described in [the shared token
 reference](../design/tokens.md). Component dependencies belong to their own linked recipe.
