@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 43 components and public sections. Import each by name from `neus-ui`.
+The package exports 45 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -39,6 +39,8 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Textarea](./Textarea.md) | Multi-line text with the Input field presentation, line-based height and optional growth. |
 | [Checkbox](./Checkbox.md) | Controlled checkbox with an indeterminate visual state. |
 | [Switch](./Switch.md) | On/off setting that applies at once. |
+| [Radio](./Radio.md) | Native radio with a label and help text, alone or inside a RadioGroup. |
+| [RadioGroup](./RadioGroup.md) | One choice among a few visible Radio options, with a legend. |
 | [Select](./Select.md) | Single selection with a searchable, keyboard-operated listbox. |
 | [MultiSelect](./MultiSelect.md) | Multiple selection with removable tags and searchable options. |
 | [FileUploader](./FileUploader.md) | File selection and drag/drop with size and type validation. |

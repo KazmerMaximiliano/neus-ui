@@ -1,4 +1,4 @@
-import { useMemo, useState, type KeyboardEvent } from "react";
+import { type KeyboardEvent,useMemo, useState } from "react";
 import { Check } from "lucide-react";
 import { focusMenuItem } from "../../../../../../hooks/usePopover";
 import type { SelectListboxContentProps } from "./SelectListboxContent.types";

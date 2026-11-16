@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Button as ButtonComponent } from "./Button";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ButtonStoryArgs } from "./Button.types";
 
 const meta: Meta<ButtonStoryArgs> = {

@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
-import type { DesignSystemId } from "../../design-systems";
 import type { HeadingLevel } from "../../components/Heading";
 import type { SectionProps } from "../../components/Section";
+import type { DesignSystemId } from "../../design-systems";
 
 export type HeroVariant = "split" | "centered" | "media-first";
 

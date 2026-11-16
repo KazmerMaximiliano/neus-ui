@@ -2,7 +2,8 @@
 // Run it again after changing the system, the derived system or the palette; delete it when done.
 import {
   Alert, Avatar, AvatarGroup, Badge, Button, Card, CardContent, CardFooter, CardHeader, Checkbox, DateInput, Grid,
-  Heading, Input, MediaPlaceholder, Section, Select, Spinner, Stack, Switch, Text, Textarea, ThemeProvider,
+  Heading, Input, MediaPlaceholder, Radio, RadioGroup, Section, Select, Spinner, Stack, Switch, Text, Textarea,
+  ThemeProvider,
 } from "neus-ui";
 import type { ColorScheme, DesignSystemId, ThemeConfig } from "neus-ui";
 
@@ -68,6 +69,11 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
           <Textarea label="Message" description="A few lines about your project." autoResize maxRows={5} />
           <Checkbox label="Send me the weekly summary" />
           <Switch label="Email notifications" description="Applies at once." defaultChecked />
+          <RadioGroup label="Delivery" defaultValue="standard" description="One choice, always visible.">
+            <Radio value="standard" label="Standard" />
+            <Radio value="express" label="Express" />
+            <Radio value="pickup" label="Store pickup" disabled />
+          </RadioGroup>
         </Grid>
         <Grid columns={{ base: 1, md: 2 }} gap={4}>
           {STATUSES.map((status) => <Alert key={status} status={status} title={`${status} title`}>An {status} message with its next step.</Alert>)}

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useArgs } from "storybook/preview-api";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Switch as SwitchComponent } from "./Switch";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { SwitchStoryArgs } from "./Switch.types";
 
 const meta: Meta<SwitchStoryArgs> = {

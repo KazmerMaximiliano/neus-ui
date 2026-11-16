@@ -1,6 +1,6 @@
-import type { Decorator } from "@storybook/react-vite";
 import { DESIGN_SYSTEMS } from "../src/design-systems";
 import { ThemeProvider } from "../src/providers";
+import type { Decorator } from "@storybook/react-vite";
 import type { DesignSystemPreviewArgs } from "./designSystem.types";
 
 export const designSystemControl = {

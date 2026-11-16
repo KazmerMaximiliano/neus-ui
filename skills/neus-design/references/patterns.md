@@ -86,7 +86,7 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
 Use for create/edit screens and settings forms.
 
 ```tsx
-import { Checkbox, DateInput, FormTemplate, Input, Select, Textarea } from "neus-ui";
+import { Checkbox, DateInput, FormTemplate, Input, Radio, RadioGroup, Select, Textarea } from "neus-ui";
 
 export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => (
   <form onSubmit={(event) => { event.preventDefault(); onSubmit(new FormData(event.currentTarget)); }}>
@@ -101,6 +101,10 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
         searchBarPlaceholder="Search plans"
       />
       <DateInput name="start" label="Start date" />
+      <RadioGroup name="billing" label="Billing" defaultValue="monthly" orientation="horizontal">
+        <Radio value="monthly" label="Monthly" />
+        <Radio value="yearly" label="Yearly" />
+      </RadioGroup>
       <Textarea name="notes" label="Notes" className="form-template__full" rows={2} autoResize maxRows={6} />
       <Checkbox name="invoice" label="Send monthly invoice" />
     </FormTemplate>
@@ -111,6 +115,8 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
 - The application owns validation and submission; pass messages through each
   field's `error` prop.
 - Labels are always visible. Put required markers on real requirements only.
+- Two to five options that should stay visible are a `RadioGroup` (`horizontal` for short
+  labels); longer lists are a `Select`.
 
 ## 3. Multi-step flow
 

@@ -1,7 +1,7 @@
 import { renderToString } from "react-dom/server";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Settings, House } from "lucide-react";
+import { House,Settings } from "lucide-react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ThemeProvider } from "../../providers";
 import { Sidebar } from "./Sidebar";

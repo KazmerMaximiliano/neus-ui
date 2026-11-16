@@ -1,0 +1,42 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --radio-font-family: var(--checkbox-font-family);
+  --radio-size: var(--checkbox-size);
+  --radio-gap: var(--checkbox-gap);
+  --radio-text-gap: 2px;
+  --radio-border-width: var(--checkbox-border-width);
+  --radio-border-color: var(--checkbox-border-color);
+  --radio-hover-border-color: var(--checkbox-hover-border-color);
+  --radio-background: var(--checkbox-background);
+  --radio-shadow: var(--checkbox-shadow);
+  --radio-checked-background: var(--checkbox-checked-background);
+  --radio-checked-border-color: var(--checkbox-checked-border-color);
+  --radio-checked-shadow: var(--checkbox-checked-shadow);
+  --radio-dot-size: 8px;
+  --radio-dot-color: var(--checkbox-check-color);
+  --radio-label-color: var(--checkbox-label-color);
+  --radio-label-font-size: var(--checkbox-label-font-size);
+  --radio-label-line-height: var(--checkbox-label-line-height);
+  --radio-focus-width: var(--checkbox-focus-width);
+  --radio-focus-color: var(--checkbox-focus-color);
+  --radio-focus-offset: var(--checkbox-focus-offset);
+  --radio-error-border-color: var(--input-error-border-color);
+  --radio-disabled-background: var(--checkbox-disabled-background);
+  --radio-disabled-border-color: var(--checkbox-disabled-border-color);
+  --radio-disabled-color: var(--checkbox-disabled-color);
+  --radio-transition: var(--checkbox-transition);
+  --radio-dot-transition: scale 0.2s ease;
+  --radio-group-gap: 12px;
+  --radio-group-inline-gap: 24px;
+  --radio-group-text-gap: 4px;
+  --radio-group-label-gap: 8px;
+  --radio-group-label-color: var(--input-label-color);
+  --radio-group-label-font-size: var(--input-label-font-size);
+  --radio-group-label-weight: var(--input-label-weight);
+  --radio-group-required-color: var(--input-required-color);
+  --radio-group-required-gap: var(--input-required-gap);
+  --radio-group-error-color: var(--input-error-color);
+  --radio-group-error-font-size: var(--input-error-font-size);
+  --radio-group-disabled-color: var(--input-disabled-color);
+}

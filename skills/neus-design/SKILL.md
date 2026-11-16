@@ -229,8 +229,8 @@ component's guide.
 | Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
 | Icon-only action | `IconButton` |
 | Text navigation | `Link` |
-| Help text under a field | `description` on Input, Textarea, Select, MultiSelect, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
-| Required field | `required` on Input, Textarea, Select, MultiSelect, DateInput or TimeInput (asterisk and `aria-required`) |
+| Help text under a field | `description` on Input, Textarea, Select, MultiSelect, RadioGroup, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
+| Required field | `required` on Input, Textarea, Select, MultiSelect, RadioGroup, DateInput or TimeInput (asterisk and `aria-required`) |
 | Text that wraps to several lines (message, notes, description) | `Textarea` (`rows`; `autoResize` with `maxRows` where the page has room to grow) |
 | Field that needs the whole row (long hint, Textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
 | Status or label | `Badge` |
@@ -240,6 +240,7 @@ component's guide.
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
 | On/off setting that applies at once | `Switch`; a choice sent with a form stays `Checkbox` |
+| One choice among 2–5 visible options | `RadioGroup` + `Radio`; more options: `Select` |
 | Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
 | Records in a table | `DataTable` |
 | Steps of a flow | `Stepper` |

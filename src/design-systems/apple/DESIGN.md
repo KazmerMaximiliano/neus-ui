@@ -389,6 +389,9 @@ x-neus:
         --switch-thumb-checked-color: var(--color-white)
         --switch-thumb-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 3px 1px rgba(0, 0, 0, 0.06)
         --switch-disabled-opacity: "0.5"
+    radio:
+      base:
+        --radio-dot-size: 6px
 ---
 
 # Apple
@@ -493,6 +496,8 @@ Use the same semantic foreground, surface and focus roles for selectors, date an
 A spinner is a thin gray ring, as quiet as the system activity indicator, at 20px inline and 37px for a region. This is a local web mapping.
 
 A switch follows the iOS list-row toggle: a 51×31 capsule with a white 27px knob that casts a soft shadow, the label leading and the switch trailing ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-16). On uses the accent color, which the guidelines allow in place of green; off is a solid gray rather than the light iOS fill, so both states keep 3:1 against the page and the knob. The sizes and the gray are local decisions; the guidelines state none.
+
+Radio buttons follow macOS: the checkbox drawn as a circle, a thin gray ring when not chosen and the accent fill with a small white dot when chosen. The guidelines give no sizes, so the 18px circle and 6px dot are local decisions.
 
 ## Do's and Don'ts
 
