@@ -139,6 +139,7 @@ dependencies. Do not edit generated files.
 | `--button-disabled-opacity` | button disabled opacity | `0.6` |
 | `--button-disabled-shadow` | button disabled shadow | `none` |
 | `--button-elevated-shadow-hover` | button elevated shadow hover | `var(--elevation-dialog)` |
+| `--button-elevated-shadow-active` | Elevated button's shadow while pressed | `var(--button-elevated-shadow)` |
 | `--button-focus-color` | button focus color | `var(--color-focus)` |
 | `--button-focus-inner-shadow` | button focus inner shadow | `none` |
 | `--button-focus-offset` | button focus offset | `3px` |
@@ -146,6 +147,7 @@ dependencies. Do not edit generated files.
 | `--button-secondary-hover` | button secondary hover | `color-mix(in srgb, var(--button-secondary-background) 88%, var(--color-surface))` |
 | `--button-shadow-active` | button shadow active | `none` |
 | `--button-shadow-hover` | button shadow hover | `none` |
+| `--button-outlined-shadow-hover` | Outlined button's shadow on hover | `var(--button-shadow-hover)` |
 
 ### Surface and color
 

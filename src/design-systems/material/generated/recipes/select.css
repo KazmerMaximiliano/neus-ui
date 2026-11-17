@@ -5,8 +5,9 @@
   --select-caret-color: var(--color-text-secondary);
   --select-search-radius: 4px;
   --select-tag-radius: 8px;
+  --select-tag-margin-block: -2px;
   --select-tag-background: transparent;
   --select-tag-border-width: 1px;
-  --select-tag-border-color: var(--color-border-subtle);
+  --select-tag-border-color: var(--color-border-input-hover);
   --select-tag-color: var(--color-text-secondary);
 }

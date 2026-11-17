@@ -1,6 +1,7 @@
 .multiselect__tag {
   position: relative;
   z-index: 1;
+  margin-block: var(--select-tag-margin-block);
   display: inline-flex;
   align-items: center;
   gap: 2px;

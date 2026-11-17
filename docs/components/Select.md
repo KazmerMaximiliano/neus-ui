@@ -28,6 +28,11 @@ field or selected/first option; keyboard navigation, Escape/outside dismissal an
 restoration follow the shared popover behavior. Choosing an option closes the list. A hidden
 input is rendered when name is supplied.
 
+With a floating label (Material by default, or `labelPlacement="floating"`), the label rests
+inside the empty field and rises into a gap of the border, animated, once the field has a
+value, opens or takes focus; the placeholder stays hidden until then, as in [Input](./Input.md).
+A hidden fieldset, `.field__outline`, draws that border.
+
 Current compatibility behavior uses a truthy value as the external selection and otherwise
 falls back to internal state initialized from defaultValue. Passing an empty controlled
 string does not reliably clear an edited selection. Document and account for that behavior
@@ -82,6 +87,9 @@ retain their nullable default.
 | `name` | `string` | Omitted | Name of the hidden form input |
 | `value` | `string` | Omitted | Controlled value |
 | `defaultValue` | `string` | Omitted | Initial uncontrolled value |
+| `variant` | `"outlined" \| "auto" \| "filled"` | `"auto"` | Field surface, shared with [Input](./Input.md) |
+| `labelPlacement` | `"auto" \| "external" \| "floating"` | `"auto"` | Label above the field, or floating inside it and rising onto the border |
+| `size` | `"small" \| "medium" \| "large"` | `"medium"` | Field height, matching an Input of the same size |
 | `placeholder` | `string` | Omitted | Text shown without a value |
 | `label` | `string` | Omitted | Visible label naming the combobox |
 | `error` | `string` | Omitted | Error message linked to the field |
@@ -124,6 +132,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.select__trigger` | `button` | `triggerClassName` | `triggerStyle` | `Always` |
 | `.select__value .select__placeholder` | `span` | `valueClassName`, `placeholderClassName` | `valueStyle`, `placeholderStyle` | `Always` |
 | `.select__caret` | `ChevronDown` | `caretClassName` | `caretStyle` | `Always` |
+| `.field__outline` | `fieldset`, `aria-hidden`, inside `.select__field` | — | — | `Always`; draws the border only for a floating label on an outlined field |
 | `.field__description` | `div` | `descriptionClassName` | `descriptionStyle` | `description` |
 | `.select__error-message` | `div` | `errorMessageClassName` | `errorMessageStyle` | `error` |
 | `.select__popover` | `div` | `listClassName` | `listStyle` | `Always` |

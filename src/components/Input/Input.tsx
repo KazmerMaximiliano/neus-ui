@@ -1,5 +1,6 @@
 import { useId } from "react";
 import { CircleAlert } from "lucide-react";
+import { FieldOutline } from "./components/FieldOutline";
 import type { InputProps } from "./Input.types";
 import "../../css/field.css";
 import "./Input.styles.css";
@@ -167,6 +168,7 @@ export const Input = ({
             {errorIcon ?? <CircleAlert />}
           </span>
         )}
+        <FieldOutline label={label} required={required} />
       </div>
       {description != null && (
         <div

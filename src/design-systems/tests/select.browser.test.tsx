@@ -1,11 +1,13 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
+import { cdp } from "vitest/browser";
 import { Input } from "../../components/Input";
 import { MultiSelect } from "../../components/MultiSelect";
 import { Select } from "../../components/Select";
 import { ThemeProvider } from "../../providers";
-import { contrastRatio, flatten } from "./colorContrast";
+import { contrastRatio, flatten, resolveColor } from "./colorContrast";
+import type {} from "@vitest/browser-playwright";
 import "../../css/app.css";
 
 afterEach(cleanup);
@@ -61,9 +63,99 @@ describe.each(["light", "dark"] as const)("Select fields in %s mode", (scheme) =
     expect(
       contrastRatio(
         tag.color,
-        flatten(tag.backgroundColor, getComputedStyle(field("Countries")).backgroundColor),
+        flatten(
+          tag.backgroundColor,
+          flatten(getComputedStyle(field("Countries")).backgroundColor, resolveColor(field("Countries"), "--color-surface")),
+        ),
       ),
     ).toBeGreaterThanOrEqual(4.5);
+  });
+});
+
+describe("Floating labels on selects", () => {
+  const parts = (name: string) => {
+    const wrapper = field(name).closest<HTMLElement>(".select__wrapper")!;
+    return {
+      label: wrapper.querySelector<HTMLElement>(".select__label")!,
+      notch: wrapper.querySelector<HTMLElement>(".field__notch")!,
+      outline: wrapper.querySelector<HTMLElement>(".field__outline")!,
+    };
+  };
+
+  it("rests the label inside an empty Material select and raises it into the outline's gap", async () => {
+    const user = userEvent.setup();
+    render(
+      <ThemeProvider scope="local" designSystem="material">
+        <Select label="Country" placeholder="Pick one" options={OPTIONS} />
+        <Select label="Chosen" options={OPTIONS} defaultValue="ar" />
+        <MultiSelect name="c" label="Countries" options={OPTIONS} defaultValue={["br"]} />
+      </ThemeProvider>,
+    );
+    const empty = parts("Country");
+    const box = field("Country").getBoundingClientRect();
+
+    expect(box.height).toBe(56);
+    expect(field("Countries").getBoundingClientRect().height).toBe(56);
+    expect(getComputedStyle(empty.label).fontWeight).toBe("400");
+    expect(getComputedStyle(field("Country")).backgroundColor).toBe("rgba(0, 0, 0, 0)");
+    expect(empty.label.getBoundingClientRect().top).toBeGreaterThan(box.top);
+    expect(getComputedStyle(screen.getByText("Pick one")).opacity).toBe("0");
+    expect(empty.notch.getBoundingClientRect().width).toBeLessThan(1);
+    for (const name of ["Chosen", "Countries"]) {
+      const { label, notch } = parts(name);
+      expect(label.getBoundingClientRect().top).toBeLessThan(field(name).getBoundingClientRect().top);
+      expect(notch.getBoundingClientRect().width).toBeCloseTo(label.getBoundingClientRect().width, 0);
+    }
+
+    await user.click(screen.getByRole("combobox", { name: "Country" }));
+    await waitFor(() => expect(empty.label.getBoundingClientRect().bottom).toBeLessThan(box.top + 8));
+    expect(getComputedStyle(screen.getByText("Pick one")).opacity).toBe("1");
+  });
+
+  it("keeps the label above the field in systems with external labels", () => {
+    render(
+      <ThemeProvider scope="local" designSystem="carbon">
+        <Select label="Country" options={OPTIONS} />
+      </ThemeProvider>,
+    );
+    const { label, outline } = parts("Country");
+
+    expect(getComputedStyle(label).position).toBe("static");
+    expect(label.getBoundingClientRect().bottom).toBeLessThanOrEqual(field("Country").getBoundingClientRect().top);
+    expect(getComputedStyle(outline).borderTopWidth).toBe("0px");
+  });
+
+  it("slides the label instead of jumping, and jumps under reduced motion", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(
+      <ThemeProvider scope="local" designSystem="material">
+        <Input label="Name" />
+      </ThemeProvider>,
+    );
+    const label = screen.getByText("Name");
+    const styles = getComputedStyle(label);
+
+    expect(styles.transitionDuration.split(", ")).toContain("0.15s");
+    expect(styles.transitionProperty).toContain("top");
+    await user.click(screen.getByRole("textbox", { name: "Name" }));
+    expect(getComputedStyle(label).top).not.toBe("0px");
+    await waitFor(() => expect(getComputedStyle(label).top).toBe("0px"));
+
+    const session = cdp();
+    try {
+      await session.send("Emulation.setEmulatedMedia", {
+        features: [{ name: "prefers-reduced-motion", value: "reduce" }],
+      });
+      rerender(
+        <ThemeProvider scope="local" designSystem="material">
+          <Select label="Country" options={OPTIONS} />
+        </ThemeProvider>,
+      );
+      expect(getComputedStyle(parts("Country").label).transitionDuration).toBe("0s");
+      expect(getComputedStyle(parts("Country").notch).transitionDuration).toBe("0s");
+    } finally {
+      await session.send("Emulation.setEmulatedMedia", { features: [] });
+    }
   });
 });
 

@@ -31,6 +31,8 @@ toggles the native input. `disabled` prevents interaction. `checkboxStyle` targe
 visual box, while `style` targets the enclosing label. Preserve the visually hidden input
 and its focus behavior when customizing.
 
+The box lines up with the first line of the label, its center half an x-height above the baseline (as `vertical-align: middle` defines it), so it stays centered on lowercase text in every system's font.
+
 ## Props
 
 See [the type source](../../src/components/Checkbox/Checkbox.types.ts) and

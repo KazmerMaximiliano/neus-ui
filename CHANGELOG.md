@@ -8,6 +8,72 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.6.0] - Unreleased
+
+### Added
+
+- Text fields with a floating label (Input, Textarea, DateInput, TimeInput) draw their border
+  with a hidden fieldset, `.field__outline`, so the raised label sits in a gap of the border
+  with nothing painted behind it. New input tokens: `--input-label-focus-color`,
+  `--input-focus-border-width`, `--input-notch-outline-width`, `--input-notch-border-image`, and
+  for the filled variant `--input-filled-border-color`, `--input-filled-radius`,
+  `--input-filled-padding`, `--input-filled-label-top`, `--input-filled-label-translate` and
+  `--input-filled-label-background`. Their Neus defaults keep every system's current look.
+- Textarea wraps its field and outline in `.textarea__control`.
+- Select and MultiSelect take the shared field props `variant`, `labelPlacement` and `size`, as
+  Input, Textarea and the picker fields do. With a floating label (Material by default), the
+  label rests inside the empty field and rises into the outline's gap once a value is chosen
+  or the list opens; the placeholder hides until then.
+- New tokens, with defaults that keep every other system's look: `--input-error-value-color`,
+  `--input-label-hover-color`, `--input-filled-hover-background`, `--textarea-filled-radius`,
+  `--button-outlined-shadow-hover` and `--sidebar-item-active-weight`.
+- A floating label slides between its two positions instead of jumping, and the outline's gap
+  opens with it: new tokens `--input-label-duration` and `--input-label-easing` (Material:
+  150ms with its standard easing); no motion under `prefers-reduced-motion: reduce`.
+
+### Changed
+
+- Material follows the M3 baseline scheme and its text field, dialog and picker tokens
+  (Material Web v0.192):
+  - primary `#6750a4` (dark `#d0bcff`) and error `#b3261e` (dark `#f2b8b5`), instead of
+    `#6442d6` and the Neus error red;
+  - outlined fields have no fill and 56px of height; the label rests in body large and
+    on-surface-variant, rises into the gap of the outline, and turns primary on focus, with a 2px
+    primary outline instead of an inset shadow; supporting and error text are body small, 16px in
+    from the edge, and errors use the error color;
+  - the filled variant has top corners only and its label rises inside the container;
+  - Select and MultiSelect float their label like the other fields, at 56px, also with tags
+    (new token `--select-tag-margin-block`);
+  - labels use the regular weight of body large and body small instead of medium;
+  - an invalid field keeps its value in on-surface instead of red; an outlined field's label
+    turns on-surface on hover; a filled field takes the 8% hover layer, and a filled Textarea
+    rounds only its top corners;
+  - filled and tonal buttons rise to level 1 on hover; outlined buttons stay flat; elevated
+    buttons rest at level 1, rise to level 2 on hover and return to level 1 when pressed;
+  - the sidebar is the standard navigation drawer: surface color, no shadow, 56px items with
+    24px icons and a bold current item; the application shell's header sits on the surface and
+    its content on surface-container-low;
+  - dialogs, the calendar and the clock sit on the high surface container, the clock dial on the
+    highest, and the selected hour or minute on the primary container; outlined cards use
+    outline-variant and MultiSelect chips the outline color.
+- Apple, Carbon and Vercel have no elevated button of their own, so their elevated variant now
+  casts a shadow sized for a control instead of the menu and popover elevation it borrowed:
+  Apple a short soft shadow; Carbon a 1px shadow that rises to its 2px/6px drop shadow, at 30%
+  black (80% in dark, as its Gray 100 theme); Vercel a hairline ring with a faint shadow, after
+  Geist's small material. Each one deepens on hover and returns to rest when pressed.
+
+### Fixed
+
+- The control of Radio, Checkbox and Switch lines up with the first line of its label and centers
+  on its lowercase letters, instead of sitting 1–1.5px above them in every system.
+- In Storybook and the browser tests, every design system now uses its own fonts and foundations:
+  `src/css/app.css` imported the Neus foundations a second time, after the systems' overrides. The
+  published stylesheet was not affected.
+- Elevated buttons keep their shadow on hover and press: the shared hover and press rules
+  replaced it with `--button-shadow-hover` and `--button-shadow-active`, which are `none` in Neus,
+  Apple, Carbon and Vercel. New token `--button-elevated-shadow-active` (Neus: the resting
+  shadow; Neobrutalism: the pressed 2px offset).
+
 ## [2.5.0] - Unreleased
 
 ### Added
@@ -249,6 +315,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.6.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.2.0...v2.3.0

@@ -15,4 +15,11 @@
   --button-label-transform: none;
   --button-active-transform: scale(0.98);
   --button-loader-size: 5px;
+  --button-elevated-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --button-elevated-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --button-elevated-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --button-elevated-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.6);
 }

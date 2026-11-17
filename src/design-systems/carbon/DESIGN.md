@@ -198,7 +198,11 @@ x-neus:
         --button-secondary-background: "#393939"
         --button-secondary-color: "#ffffff"
         --button-secondary-hover: "#474747"
-        --button-elevated-shadow: var(--elevation-floating)
+        --button-elevated-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
+        --button-elevated-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.3)
+      dark:
+        --button-elevated-shadow: 0 1px 2px rgba(0, 0, 0, 0.8)
+        --button-elevated-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.8)
     calendar:
       base:
         --calendar-min-width: 288px
@@ -562,6 +566,11 @@ Preserve the label alignment and action hierarchy of
 [Carbon buttons](https://www.carbondesignsystem.com/building-blocks/core/components/button/specifications).
 Use separate hover, active, focus, and disabled treatments; focus needs a boundary
 that remains visible against the button fill.
+Carbon has no elevated button; local decision: the elevated variant rests on a 1px-offset shadow
+and rises on hover to Carbon's 2px/6px drop shadow, in the `shadow` color of each theme (black
+at 30% in White, 80% in Gray 100, per the
+[theme tokens](https://github.com/carbon-design-system/carbon/tree/main/packages/themes/tokens/themes),
+consulted 2026-11-17).
 
 ### Card
 

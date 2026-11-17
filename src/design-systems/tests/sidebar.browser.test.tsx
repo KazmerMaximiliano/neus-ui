@@ -43,6 +43,26 @@ afterEach(async () => {
   await cdp().send("Emulation.setEmulatedMedia", { features: [] });
 });
 
+it("follows the M3 standard drawer in Material: 56px indicator, label-large, bold current item", () => {
+  render(
+    <ThemeProvider scope="local" designSystem="material">
+      <Sidebar title="Navigation" items={ITEMS} />
+    </ThemeProvider>,
+  );
+  const home = screen.getByRole("button", { name: "Home" });
+  const settings = screen.getByRole("button", { name: "Settings" });
+  const panel = document.querySelector(".sidebar__panel")!;
+
+  expect(home.getBoundingClientRect().height).toBe(56);
+  expect(getComputedStyle(home).borderRadius).toBe("28px");
+  expect(getComputedStyle(home).fontWeight).toBe("700");
+  expect(getComputedStyle(settings).fontWeight).toBe("500");
+  expect(getComputedStyle(settings).fontSize).toBe("14px");
+  expect(getComputedStyle(home).backgroundColor).toBe(resolveColor(home, "--color-secondary-container"));
+  expect(getComputedStyle(panel).boxShadow).toBe("none");
+  expect(home.querySelector("svg")!.getBoundingClientRect().width).toBe(24);
+});
+
 describe.each(["light", "dark"] as const)("Sidebar designs in %s", (scheme) => {
   it.each(SYSTEMS)(
     "renders $id tokens, surfaces, decoration and states",
@@ -63,7 +83,7 @@ describe.each(["light", "dark"] as const)("Sidebar designs in %s", (scheme) => {
       const expectedToken =
         system.id === "neus"
           ? "--color-primary"
-          : ["carbon", "material"].includes(system.id)
+          : system.id === "carbon"
             ? "--color-surface-secondary"
             : "--color-surface";
       expect(getComputedStyle(nav).backgroundColor).toBe(

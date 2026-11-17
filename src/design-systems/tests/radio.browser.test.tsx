@@ -6,6 +6,7 @@ import { Radio } from "../../components/Radio";
 import { RadioGroup } from "../../components/RadioGroup";
 import { ThemeProvider } from "../../providers";
 import { contrastRatio, flatten, resolveColor } from "./colorContrast";
+import { xHeightOffset } from "./labelAlignment";
 import type {} from "@vitest/browser-playwright";
 import type { RadioGroupProps } from "../../components/RadioGroup";
 import "../../css/app.css";
@@ -134,6 +135,16 @@ describe("Radio and RadioGroup layout, scopes and motion", () => {
 
     expect(description.left).toBeCloseTo(label.left, 0);
     expect(description.top).toBeGreaterThanOrEqual(label.bottom);
+  });
+
+  it.each(SYSTEMS)("centers the $id circle on the label's lowercase letters", (system) => {
+    render(
+      <ThemeProvider scope="local" designSystem={system.id}>
+        <Radio value="express" label="express" />
+      </ThemeProvider>,
+    );
+
+    expect(Math.abs(xHeightOffset(screen.getByText("express"), parts("express").circle))).toBeLessThan(0.5);
   });
 
   it("draws a lone radio like a grouped one, invalid through aria-invalid", () => {

@@ -870,7 +870,7 @@ interactive component catalog separately.
 
 All public families and both templates have six scoped recipes. Button supports
 solid/secondary/tonal/elevated/outlined/text; Card supports
-auto/filled/outlined/elevated. Input and picker fields share variant, size and
+auto/filled/outlined/elevated. Input, Textarea, Select, MultiSelect and picker fields share variant, size and
 label-placement controls. Calendar is discriminated
 by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
 renderMobileCard. DataTable actions are composed by consumers with buttons or menus,

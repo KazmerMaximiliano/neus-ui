@@ -46,6 +46,7 @@
   --sidebar-item-focus-color: var(--sidebar-color);
   --sidebar-item-size: 11px;
   --sidebar-item-weight: 700;
+  --sidebar-item-active-weight: var(--sidebar-item-weight);
   --sidebar-item-line-height: normal;
   --sidebar-item-spacing: 0.25em;
   --sidebar-item-transform: uppercase;

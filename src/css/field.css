@@ -11,8 +11,27 @@
   --field-label-raised-top: 0px;
   --field-label-raised-translate: var(--input-label-raised-translate);
   --field-label-raised-size: var(--input-label-raised-size);
+  --field-notch-outline-width: var(--input-notch-outline-width);
+  --field-notch-border-image: var(--input-notch-border-image);
+  --field-notch-width: 0.01px;
   position: relative;
   min-width: 0;
+}
+.field-presentation[data-variant="filled"] {
+  --input-background: var(--input-filled-background);
+  --input-border-width: var(--input-filled-border-width);
+  --input-border-color: var(--input-filled-border-color);
+  --input-radius: var(--input-filled-radius);
+  --input-padding: var(--input-filled-padding);
+  --textarea-radius: var(--textarea-filled-radius);
+}
+.field-presentation[data-variant="filled"]
+  :is(.input, .textarea, .picker-field__field, .select__field):hover:not(
+    :disabled,
+    [readonly],
+    .select__field--disabled
+  ) {
+  background-color: var(--input-filled-hover-background);
 }
 .field-presentation[data-size="small"] {
   --field-height: var(--input-control-height-small);
@@ -21,10 +40,6 @@
 .field-presentation[data-size="large"] {
   --field-height: var(--input-control-height-large);
   --input-padding: var(--input-large-padding);
-}
-.field-presentation[data-variant="filled"] {
-  --input-background: var(--input-filled-background);
-  --input-border-width: var(--input-filled-border-width);
 }
 .field-presentation[data-variant="outlined"] {
   --input-border-width: var(--input-outlined-border-width);
@@ -35,7 +50,9 @@
   --field-label-top: calc(var(--field-height) / 2);
   --field-label-left: 12px;
   --field-label-translate: translateY(-50%);
-  --field-label-background: var(--input-background);
+  --field-label-background: transparent;
+  --field-notch-outline-width: var(--input-border-width);
+  --field-notch-border-image: linear-gradient(transparent, transparent);
   --field-label-padding: 0 4px;
   --field-label-size: var(--input-font-size);
   --field-label-raised-top: 0px;
@@ -44,6 +61,8 @@
 }
 .field-presentation[data-label-placement="external"] {
   --field-placeholder-opacity: 1;
+  --field-notch-outline-width: 0px;
+  --field-notch-border-image: none;
   --field-label-position: static;
   --field-label-top: auto;
   --field-label-left: auto;
@@ -55,7 +74,16 @@
   --field-label-raised-translate: none;
   --field-label-raised-size: var(--input-label-font-size);
 }
-.field-presentation > :is(.input__label, .picker-field__label, .textarea__label) {
+/* A filled field has no outline to cut: a floating label rises inside the container instead. */
+.field-presentation[data-variant="filled"] {
+  --field-label-raised-top: var(--input-filled-label-top);
+  --field-label-raised-translate: var(--input-filled-label-translate);
+  --field-label-background: var(--input-filled-label-background);
+  --field-notch-outline-width: 0px;
+  --field-notch-border-image: none;
+}
+/* The label slides between resting in the field and raised on its border. */
+.field-presentation > :is(.input__label, .picker-field__label, .textarea__label, .select__label) {
   position: var(--field-label-position);
   top: var(--field-label-top);
   left: var(--field-label-left);
@@ -65,6 +93,9 @@
   font-size: var(--field-label-size);
   z-index: 1;
   max-width: calc(100% - 32px);
+  transition-property: top, transform, font-size, color;
+  transition-duration: var(--input-label-duration);
+  transition-timing-function: var(--input-label-easing);
 }
 .field-presentation:has(
   :focus,
@@ -72,15 +103,107 @@
   textarea:not(:placeholder-shown),
   .picker-field__value,
   .picker-field__field--open,
+  .select__value,
+  .select__field--open,
+  .multiselect__tag,
   .input__prefix
 ),
 .field-presentation[data-native-color] {
   --field-label-top: var(--field-label-raised-top);
   --field-label-translate: var(--field-label-raised-translate);
   --field-label-size: var(--field-label-raised-size);
+  --field-notch-width: 100%;
 }
 .field__description {
   margin-left: var(--input-error-offset);
   color: var(--input-description-color);
   font-size: var(--input-description-font-size);
+}
+/* An outlined field's label darkens while the pointer is over the field. */
+.field-presentation:not([data-variant="filled"]):not(:has([aria-invalid="true"], :disabled, :focus)):has(
+    > :is(.input__control, .textarea__control, .picker-field__container, .select__field):hover,
+    > :is(.input__label, .picker-field__label, .textarea__label, .select__label):hover
+  )
+  > :is(.input__label, .picker-field__label, .textarea__label, .select__label) {
+  color: var(--input-label-hover-color);
+}
+.field-presentation:not(:has([aria-invalid="true"])):has(:focus) > :is(.input__label, .picker-field__label, .textarea__label, .select__label) {
+  color: var(--input-label-focus-color);
+}
+
+/* With a notched outline the field hides its own border (a transparent border image paints over it,
+   whatever its state) and the fieldset draws it, with a gap behind the raised label. */
+:is(.input, .textarea, .picker-field__field, .select__field) {
+  border-image-source: var(--field-notch-border-image);
+  border-image-slice: 1;
+}
+:is(.input__control, .textarea__control, .picker-field__container, .select__field) {
+  --field-outline-color: var(--input-border-color);
+  --field-outline-width: var(--field-notch-outline-width);
+  --field-outline-style: solid;
+  position: relative;
+}
+:is(.input__control, .textarea__control, .picker-field__container, .select__field):hover:not(
+    :has(:focus, :disabled, [readonly], [aria-invalid="true"], [class*="__field--readonly"])
+  ) {
+  --field-outline-color: var(--input-hover-border-color);
+}
+:is(.input__control, .textarea__control, .picker-field__container, .select__field):has(:focus, .picker-field__field--open),
+.select__field--open {
+  --field-outline-color: var(--input-focus-border-color);
+  /* Stays 0 without a notch; with one, takes the focus width. */
+  --field-outline-width: min(var(--field-notch-outline-width) * 99, var(--input-focus-border-width));
+}
+:is(.input__control, .textarea__control, .picker-field__container, .select__field):has([aria-invalid="true"]) {
+  --field-outline-color: var(--input-error-border-color);
+}
+:is(.input__control, .textarea__control, .picker-field__container, .select__field):has([readonly]:not(:disabled), [class*="__field--readonly"]) {
+  --field-outline-color: var(--input-readonly-border-color);
+  --field-outline-style: var(--input-readonly-border-style);
+}
+:is(.input__control, .textarea__control, .picker-field__container, .select__field):has(:disabled) {
+  --field-outline-color: var(--input-disabled-border-color);
+}
+/* A fieldset draws its top border across the middle of its legend: the legend is 8px tall and the
+   fieldset starts that much minus the border above the field, so the border lies on the field's edge. */
+.field__outline {
+  position: absolute;
+  inset: calc((var(--field-outline-width) - 8px) / 2) 0 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 0 calc(var(--field-label-left) - var(--field-outline-width));
+  border: var(--field-outline-width) var(--field-outline-style) var(--field-outline-color);
+  border-radius: var(--input-radius);
+  pointer-events: none;
+  transition: var(--input-transition);
+}
+.textarea__control > .field__outline {
+  border-radius: var(--textarea-radius);
+}
+/* The legend repeats the label at its raised size to cut the gap. */
+.field__notch {
+  display: block;
+  max-width: var(--field-notch-width);
+  height: 8px;
+  padding: 0;
+  overflow: hidden;
+  font-size: var(--field-label-raised-size);
+  transition: max-width var(--input-label-duration) var(--input-label-easing);
+  white-space: nowrap;
+  visibility: hidden;
+}
+.field__notch[data-label]::before {
+  content: attr(data-label);
+  display: inline-block;
+  padding: var(--field-label-padding);
+}
+.field__notch[data-required]::before {
+  content: attr(data-label) " *";
+}
+@media (prefers-reduced-motion: reduce) {
+  .field-presentation > :is(.input__label, .picker-field__label, .textarea__label, .select__label),
+  .field__outline,
+  .field__notch {
+    transition: none;
+  }
 }

@@ -6,7 +6,7 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cdp, page } from "vitest/browser";
+import { page } from "vitest/browser";
 import {
   Button,
   Calendar,
@@ -27,48 +27,13 @@ import {
   flatten,
   resolveColor,
 } from "./colorContrast";
+import { forceState } from "./forceState";
 import type {} from "@vitest/browser-playwright";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
 import "../../css/app.css";
 import "./fixtures/refactor.test.css";
 
 afterEach(cleanup);
-
-const forceState = async (element: HTMLElement, pseudoClasses: string[]) => {
-  element.setAttribute("data-refactor-force", "target");
-  const session = cdp();
-  await session.send("DOM.enable");
-  await session.send("CSS.enable");
-  const { root } = await session.send("DOM.getDocument", {
-    depth: -1,
-    pierce: true,
-  });
-  const find = (node: typeof root): number | undefined => {
-    if (
-      node.attributes?.some(
-        (value, index, attributes) =>
-          value === "data-refactor-force" && attributes[index + 1] === "target",
-      )
-    )
-      return node.nodeId;
-    for (const child of [
-      ...(node.children ?? []),
-      ...(node.shadowRoots ?? []),
-      ...(node.contentDocument ? [node.contentDocument] : []),
-    ]) {
-      const id = find(child);
-      if (id !== undefined) return id;
-    }
-  };
-  const nodeId = find(root);
-  if (nodeId === undefined)
-    throw new Error("Browser state target was not found");
-  await session.send("CSS.forcePseudoState", {
-    nodeId,
-    forcedPseudoClasses: pseudoClasses,
-  });
-  element.removeAttribute("data-refactor-force");
-};
 
 const days = [new Date(2026, 9, 15), new Date(2026, 9, 16)];
 const rows = [{ id: 1, name: "Ana Pérez", email: "ana@example.com" }];
@@ -316,7 +281,7 @@ it("keeps narrow forms usable and honors floating-label overrides", async () => 
   const floating = screen.getByText("Floating empty", { selector: "label" });
   const resting = floating.getBoundingClientRect().top;
   field.focus();
-  expect(floating.getBoundingClientRect().top).toBeLessThan(resting);
+  await waitFor(() => expect(floating.getBoundingClientRect().top).toBeLessThan(resting));
   await user.clear(field);
   await user.type(field, "Filled");
   field.blur();

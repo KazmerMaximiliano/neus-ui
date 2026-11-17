@@ -523,6 +523,20 @@ describe("field presentation and adornments", () => {
   });
 });
 
+describe("Input notched outline", () => {
+  it("renders a hidden outline that sizes its gap from the label, without repeating the label text", () => {
+    const { container } = render(<Input label="Email" required />);
+    const outline = container.querySelector(".input__control > fieldset.field__outline")!;
+    const notch = outline.querySelector("legend.field__notch")!;
+
+    expect(outline).toHaveAttribute("aria-hidden", "true");
+    expect(notch).toHaveAttribute("data-label", "Email");
+    expect(notch).toHaveAttribute("data-required");
+    expect(notch).toBeEmptyDOMElement();
+    expect(screen.getByText("Email")).toBeInTheDocument();
+  });
+});
+
 describe("Input part customization", () => {
   it.each([
     {

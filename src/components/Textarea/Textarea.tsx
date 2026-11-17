@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { FieldOutline } from "../Input/components/FieldOutline";
 import type { CSSProperties } from "react";
 import type { TextareaProps } from "./Textarea.types";
 import "../../css/field.css";
@@ -77,6 +78,7 @@ export const Textarea = ({
           )}
         </label>
       )}
+      <div className="textarea__control">
       <textarea
         {...native}
         id={textareaId}
@@ -108,6 +110,8 @@ export const Textarea = ({
         }
         onChange={(event) => onChange?.(event.target.value)}
       />
+      <FieldOutline label={label} required={required} />
+      </div>
       {description != null && (
         <div
           id={descriptionId}

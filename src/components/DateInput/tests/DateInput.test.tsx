@@ -21,6 +21,16 @@ describe("DateInput description", () => {
   });
 });
 
+describe("DateInput notched outline", () => {
+  it("draws its hidden outline beside the field button", () => {
+    const { container } = render(<DateInput label="Start" />);
+    const outline = container.querySelector(".picker-field__container > .field__outline")!;
+
+    expect(outline).toHaveAttribute("aria-hidden", "true");
+    expect(outline.querySelector(".field__notch")).toHaveAttribute("data-label", "Start");
+  });
+});
+
 describe("DateInput", () => {
   describe("rendering", () => {
     it("renders date input wrapper", () => {

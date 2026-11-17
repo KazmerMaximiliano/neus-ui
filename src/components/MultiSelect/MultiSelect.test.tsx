@@ -28,6 +28,20 @@ describe("MultiSelect required", () => {
   });
 });
 
+describe("MultiSelect field presentation", () => {
+  it("takes the variant, label placement and size, and draws a hidden outline", () => {
+    const { container } = renderMulti({ variant: "outlined", labelPlacement: "external", size: "small" });
+    const wrapper = container.querySelector(".select__wrapper.multiselect")!;
+
+    expect(wrapper).toHaveClass("field-presentation");
+    expect(wrapper).toHaveAttribute("data-variant", "outlined");
+    expect(wrapper).toHaveAttribute("data-label-placement", "external");
+    expect(wrapper).toHaveAttribute("data-size", "small");
+    expect(container.querySelector(".select__field > .field__outline .field__notch")).toHaveAttribute("data-label", "Colors");
+    expect(combobox()).toBeInTheDocument();
+  });
+});
+
 describe("MultiSelect description", () => {
   it("renders help text and announces it before the error", () => {
     const { rerender } = renderMulti({ description: "Pick up to three.", descriptionClassName: "hint" });

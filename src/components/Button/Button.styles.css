@@ -148,6 +148,10 @@
   box-shadow: var(--button-shadow-hover);
 }
 
+.button.button--outlined:hover:not(:disabled, [aria-disabled="true"]) {
+  box-shadow: var(--button-outlined-shadow-hover);
+}
+
 .button:active:not(:disabled, [aria-disabled="true"]) {
   transform: var(--button-active-transform);
 }
@@ -242,7 +246,12 @@
     var(--button-elevated-background) 92%,
     var(--button-elevated-color)
   );
+}
+.button.button--elevated:hover:not(:disabled, [aria-disabled="true"]) {
   box-shadow: var(--button-elevated-shadow-hover);
+}
+.button.button--elevated:active:not(:disabled, [aria-disabled="true"]) {
+  box-shadow: var(--button-elevated-shadow-active);
 }
 .button--secondary:is(:disabled, [aria-disabled="true"]),
 .button--tonal:is(:disabled, [aria-disabled="true"]),

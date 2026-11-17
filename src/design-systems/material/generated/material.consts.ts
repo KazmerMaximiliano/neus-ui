@@ -10,11 +10,13 @@ export const MATERIAL_METADATA = {
 
 export const MATERIAL_PALETTE: DesignSystemPalette = {
   "light": {
-    "primary": "#6442d6",
-    "onPrimary": "#ffffff"
+    "primary": "#6750a4",
+    "onPrimary": "#ffffff",
+    "error": "#b3261e"
   },
   "dark": {
-    "primary": "#c8b3fd",
-    "onPrimary": "#161616"
+    "primary": "#d0bcff",
+    "onPrimary": "#381e72",
+    "error": "#f2b8b5"
   }
 };

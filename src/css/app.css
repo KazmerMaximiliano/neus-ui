@@ -1,4 +1,5 @@
-@import "./variables.css";
+/* The tokens come from design-systems.css, which ThemeProvider loads. Importing them here again would
+   repeat the Neus foundations after every system's overrides wherever this file loads last. */
 
 *,
 *::before,

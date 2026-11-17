@@ -45,6 +45,8 @@ makes it controlled and `defaultChecked` uncontrolled; `onChange` receives the r
 `value` when it becomes the chosen one. In a form it submits its `value` under `name` while
 chosen, without JavaScript.
 
+The circle lines up with the first line of the label, its center half an x-height above the baseline (as `vertical-align: middle` defines it), so it stays centered on lowercase text in every system's font.
+
 Inside a [RadioGroup](./RadioGroup.md), the group supplies the `name`, whether it is chosen
 (from the group's `value` or `defaultValue`), `required` and `aria-invalid`, and calls the
 group's `onChange` after the radio's own. A prop set on the radio wins over the group's.
