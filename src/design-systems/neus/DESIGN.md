@@ -492,6 +492,8 @@ x-neus:
         --button-elevated-color: color-mix(in srgb, var(--color-primary-text) 80%, var(--color-text-primary))
         --button-elevated-shadow: var(--elevation-floating)
         --button-elevated-shadow-hover: var(--elevation-dialog)
+        --button-elevated-shadow-active: var(--button-elevated-shadow)
+        --button-outlined-shadow-hover: var(--button-shadow-hover)
     calendar:
       base:
         --calendar-font-family: var(--font-body)
@@ -780,7 +782,23 @@ x-neus:
         --input-filled-border-width: 0 0 1px
         --input-outlined-border-width: 1px
         --input-placeholder-rest-opacity: "1"
+        --input-label-focus-color: var(--input-label-color)
+        --input-label-hover-color: var(--input-label-color)
+        --input-error-value-color: var(--input-error-color)
+        --input-filled-hover-background: var(--input-filled-background)
+        --input-label-duration: 0.15s
+        --input-label-easing: ease
+        --input-focus-border-width: var(--input-border-width)
+        --input-notch-outline-width: 0px
+        --input-notch-border-image: none
+        --input-filled-border-color: var(--input-border-color)
+        --input-filled-radius: var(--input-radius)
+        --input-filled-padding: var(--input-padding)
+        --input-filled-label-top: 0px
+        --input-filled-label-translate: translateY(-50%)
+        --input-filled-label-background: var(--input-filled-background)
         --textarea-radius: min(var(--input-radius), {rounded.default})
+        --textarea-filled-radius: var(--textarea-radius)
     link:
       base:
         --link-color: var(--color-primary-text)
@@ -858,6 +876,7 @@ x-neus:
         --select-search-radius: var(--radius-default)
         --select-tag-gap: 6px
         --select-tag-padding: 2px 4px 2px 10px
+        --select-tag-margin-block: 0px
         --select-tag-radius: var(--radius-pill)
         --select-tag-background: var(--color-tag-bg)
         --select-tag-color: var(--color-text-primary)
@@ -912,6 +931,7 @@ x-neus:
         --sidebar-item-focus-color: var(--sidebar-color)
         --sidebar-item-size: 11px
         --sidebar-item-weight: "700"
+        --sidebar-item-active-weight: var(--sidebar-item-weight)
         --sidebar-item-line-height: normal
         --sidebar-item-spacing: 0.25em
         --sidebar-item-transform: uppercase

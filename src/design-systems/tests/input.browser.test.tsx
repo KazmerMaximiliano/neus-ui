@@ -31,12 +31,15 @@ const INPUT_SYSTEM_CASES = [
   },
   { id: "apple", radius: 8, padding: [12, 16], border: "1px", shadow: false },
   { id: "carbon", radius: 0, padding: [12, 16], border: "0px", shadow: false },
+  // Material's floating label sits in a gap of the outline, which the fieldset draws.
   {
     id: "material",
     radius: 4,
-    padding: [16, 16],
+    padding: [15, 16],
     border: "1px",
     shadow: false,
+    gap: "4px",
+    notched: true,
   },
   {
     id: "neobrutalism",
@@ -99,15 +102,19 @@ describe.each(["light", "dark"] as const)(
         );
         expect(styles.boxShadow !== "none").toBe(system.shadow);
         expect(styles.minWidth).toBe("200px");
-        expect(getComputedStyle(wrapper).gap).toBe("8px");
+        expect(getComputedStyle(wrapper).gap).toBe("gap" in system ? system.gap : "8px");
         expect(styles.backgroundColor).toBe(
-          resolveColor(
-            wrapper,
-            system.id === "carbon"
-              ? "--color-surface-secondary"
-              : "--color-surface",
-          ),
+          "notched" in system
+            ? "rgba(0, 0, 0, 0)"
+            : resolveColor(
+              wrapper,
+              system.id === "carbon"
+                ? "--color-surface-secondary"
+                : "--color-surface",
+            ),
         );
+        const outline = getComputedStyle(input.parentElement!.querySelector(".field__outline")!);
+        expect(outline.borderTopWidth).toBe("notched" in system ? "1px" : "0px");
         expect(styles.color).toBe(
           resolveColor(
             wrapper,
@@ -135,6 +142,10 @@ describe.each(["light", "dark"] as const)(
         await waitFor(() =>
           expect(getComputedStyle(input).borderTopColor).toBe(focusColor),
         );
+        if ("notched" in system) {
+          expect(outline.borderTopColor).toBe(focusColor);
+          expect(outline.borderTopWidth).toBe("2px");
+        }
         await user.type(input, "Ada");
         expect(onChange).toHaveBeenLastCalledWith("Ada");
 
@@ -152,18 +163,16 @@ describe.each(["light", "dark"] as const)(
           .getByRole("textbox", { name: "Disabled", exact: true })
           .hover();
         expect(getComputedStyle(disabled).color).toBe(
-          resolveColor(wrapper, "--color-text-disabled"),
+          resolveColor(wrapper, "--input-disabled-color"),
         );
         expect(getComputedStyle(disabled).borderTopColor).toBe(
-          system.id === "carbon"
-            ? "rgba(0, 0, 0, 0)"
-            : resolveColor(wrapper, "--color-border-subtle"),
+          resolveColor(wrapper, "--input-disabled-border-color"),
         );
         expect(getComputedStyle(disabled).backgroundColor).toBe(
-          resolveColor(wrapper, "--color-surface-disabled"),
+          resolveColor(wrapper, "--input-disabled-background"),
         );
         expect(getComputedStyle(screen.getByText("Disabled")).color).toBe(
-          resolveColor(wrapper, "--color-text-disabled"),
+          resolveColor(wrapper, "--input-disabled-color"),
         );
         const message = getComputedStyle(screen.getByText("Still invalid")).color;
         expect(message).toBe(resolveColor(wrapper, "--input-error-color"));
@@ -207,16 +216,16 @@ describe.each(["light", "dark"] as const)(
             <Input label="Disabled" disabled defaultValue="Original" />
           </ThemeProvider>,
         );
+        // What shows focus: the field's ring or border, or the notched outline's width.
+        const indicator = (field: HTMLElement) => {
+          const own = getComputedStyle(field);
+          const outline = getComputedStyle(field.parentElement!.querySelector(".field__outline")!);
+          return [own.boxShadow, own.borderBottomColor, outline.borderTopWidth, outline.borderTopColor].join();
+        };
         const invalid = screen.getByRole("textbox", { name: "Invalid" });
-        const rest = getComputedStyle(invalid);
-        const restState = [rest.boxShadow, rest.borderBottomColor].join();
+        const restState = indicator(invalid);
         invalid.focus();
-        await waitFor(() => {
-          const focused = getComputedStyle(invalid);
-          expect([focused.boxShadow, focused.borderBottomColor].join()).not.toBe(
-            restState,
-          );
-        });
+        await waitFor(() => expect(indicator(invalid)).not.toBe(restState));
 
         const readonly = screen.getByRole("textbox", { name: "Read only" });
         const disabled = screen.getByRole("textbox", { name: "Disabled" });
@@ -233,18 +242,86 @@ describe.each(["light", "dark"] as const)(
           contrastRatio(r.color, flatten(r.backgroundColor, surface)),
         ).toBeGreaterThanOrEqual(4.5);
 
-        const readonlyRest = [r.boxShadow, r.borderBottomColor].join();
+        const readonlyRest = indicator(readonly);
         readonly.focus();
-        await waitFor(() => {
-          const focused = getComputedStyle(readonly);
-          expect([focused.boxShadow, focused.borderBottomColor].join()).not.toBe(
-            readonlyRest,
-          );
-        });
+        await waitFor(() => expect(indicator(readonly)).not.toBe(readonlyRest));
       },
     );
   },
 );
+
+describe("Material text fields", () => {
+  const notch = (field: HTMLElement) => field.parentElement!.querySelector<HTMLElement>(".field__notch")!.getBoundingClientRect();
+
+  it("opens a gap in the outline behind the raised label, with no fill behind either", async () => {
+    const user = userEvent.setup();
+    render(
+      <ThemeProvider scope="local" designSystem="material">
+        <Input label="Email" defaultValue="ada@example.com" required />
+        <Input label="Name" />
+      </ThemeProvider>,
+    );
+    const email = screen.getByRole("textbox", { name: /Email/ });
+    const name = screen.getByRole("textbox", { name: "Name" });
+    const label = email.closest(".input__wrapper")!.querySelector<HTMLElement>(".input__label")!;
+
+    expect(email.getBoundingClientRect().height).toBe(56);
+    expect(getComputedStyle(email).backgroundColor).toBe("rgba(0, 0, 0, 0)");
+    expect(getComputedStyle(label).backgroundColor).toBe("rgba(0, 0, 0, 0)");
+    expect(notch(email).left).toBeCloseTo(label.getBoundingClientRect().left, 0);
+    expect(notch(email).width).toBeCloseTo(label.getBoundingClientRect().width, 0);
+    expect(notch(name).width).toBeLessThan(1);
+
+    await user.click(name);
+    await waitFor(() => expect(notch(name).width).toBeGreaterThan(20));
+    // resolveColor appends a probe, which would retrigger waitFor's DOM observer: resolve it first.
+    const primary = resolveColor(label, "--color-primary-text");
+    await waitFor(() => expect(getComputedStyle(screen.getByText("Name")).color).toBe(primary));
+  });
+
+  it("keeps the value in on-surface while invalid and darkens an outlined label on hover", async () => {
+    render(
+      <ThemeProvider scope="local" designSystem="material">
+        <Input label="Phone" error="Enter a phone." defaultValue="12" />
+        <Input label="Name" />
+        <Input label="Filled" variant="filled" />
+      </ThemeProvider>,
+    );
+    const phone = screen.getByRole("textbox", { name: "Phone" });
+    const label = screen.getByText("Name");
+    const filled = screen.getByText("Filled");
+    const onSurface = resolveColor(label, "--color-text-primary");
+    const onSurfaceVariant = resolveColor(label, "--color-text-secondary");
+
+    expect(getComputedStyle(phone).color).toBe(onSurface);
+    expect(getComputedStyle(screen.getByText("Phone")).color).toBe(resolveColor(label, "--color-error"));
+    expect(getComputedStyle(label).color).toBe(onSurfaceVariant);
+    await page.getByRole("textbox", { name: "Name", exact: true }).hover();
+    await waitFor(() => expect(getComputedStyle(label).color).toBe(onSurface));
+    const filledRest = getComputedStyle(screen.getByRole("textbox", { name: "Filled" })).backgroundColor;
+    await page.getByRole("textbox", { name: "Filled", exact: true }).hover();
+    await waitFor(() => expect(getComputedStyle(screen.getByRole("textbox", { name: "Filled" })).backgroundColor)
+      .not.toBe(filledRest));
+    expect(getComputedStyle(filled).color).toBe(onSurfaceVariant);
+  });
+
+  it("raises a filled field's label inside its container, with top corners only", () => {
+    render(
+      <ThemeProvider scope="local" designSystem="material">
+        <Input label="Filled" variant="filled" defaultValue="Ada" />
+      </ThemeProvider>,
+    );
+    const field = screen.getByRole("textbox", { name: "Filled" });
+    const label = screen.getByText("Filled");
+    const styles = getComputedStyle(field);
+
+    expect(label.getBoundingClientRect().top - field.getBoundingClientRect().top).toBeCloseTo(8, 0);
+    expect(getComputedStyle(label).backgroundColor).toBe("rgba(0, 0, 0, 0)");
+    expect([styles.borderTopLeftRadius, styles.borderBottomLeftRadius]).toEqual(["4px", "0px"]);
+    expect(field.getBoundingClientRect().height).toBe(56);
+    expect(getComputedStyle(field.parentElement!.querySelector(".field__outline")!).borderTopWidth).toBe("0px");
+  });
+});
 
 describe("Input scopes and customization", () => {
   it("disables transitions when reduced motion is requested", async () => {

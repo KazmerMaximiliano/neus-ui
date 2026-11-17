@@ -4,7 +4,7 @@
   display: inline-grid;
   grid-template-columns: auto auto;
   justify-content: start;
-  align-items: center;
+  align-items: baseline;
   column-gap: var(--radio-gap);
   row-gap: var(--radio-text-gap);
   font-family: var(--radio-font-family);
@@ -20,10 +20,17 @@
   pointer-events: none;
 }
 
+/* The control's center sits half an x-height above the label's baseline, as vertical-align: middle
+   defines it, so it lines up with lowercase text in any font. The margins give back the space the
+   shift takes, so the row keeps its height; the control lines up with the first line of a long label. */
 .radio__circle {
-  display: inline-grid;
-  place-items: center;
+  --radio-shift: calc(var(--radio-size) / 2 - 0.5ex);
+  position: relative;
+  display: block;
   box-sizing: border-box;
+  font-size: var(--radio-label-font-size);
+  translate: 0 var(--radio-shift);
+  margin-block: calc(-1 * var(--radio-shift)) var(--radio-shift);
   width: var(--radio-size);
   height: var(--radio-size);
   border: var(--radio-border-width) solid var(--radio-border-color);
@@ -34,6 +41,9 @@
 }
 
 .radio__dot {
+  position: absolute;
+  inset: 0;
+  margin: auto;
   width: var(--radio-dot-size);
   height: var(--radio-dot-size);
   border-radius: 50%;

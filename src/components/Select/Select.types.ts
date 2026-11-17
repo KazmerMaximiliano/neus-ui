@@ -1,13 +1,13 @@
 import type { CSSProperties } from "react";
 import type { DesignSystemId } from "../../design-systems";
-import type { FieldDescriptionProps } from "../Input";
+import type { FieldDescriptionProps, FieldPresentationProps } from "../Input";
 
 export type SelectOption = {
   readonly value?: string | null;
   readonly label: string;
 };
 
-export type SelectProps = FieldDescriptionProps & {
+export type SelectProps = FieldPresentationProps & FieldDescriptionProps & {
   readonly placeholderClassName?: string;
   readonly placeholderStyle?: CSSProperties;
   readonly caretClassName?: string;

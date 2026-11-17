@@ -1,5 +1,6 @@
 import { useId } from "react";
 import { usePopover } from "../../../../hooks/usePopover";
+import { FieldOutline } from "../../../Input/components/FieldOutline";
 import { PopoverPanel } from "../../../Popover/components/PopoverPanel";
 import type { PickerFieldProps } from "./PickerField.types";
 import "../../../../css/field.css";
@@ -175,6 +176,7 @@ export const PickerField = ({
             aria-hidden
           />
         </button>
+        <FieldOutline label={label} required={required} />
 
         <PopoverPanel
           ref={popoverRef}

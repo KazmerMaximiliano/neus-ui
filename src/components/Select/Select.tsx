@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { usePopover } from "../../hooks/usePopover";
+import { FieldOutline } from "../Input/components/FieldOutline";
 import { SelectListbox } from "./components/SelectListbox";
 import type { SelectProps } from "./Select.types";
 import "../../css/field.css";
@@ -57,6 +58,9 @@ export const Select = ({
   fieldStyle,
   listStyle,
   optionStyle,
+  variant = "auto",
+  labelPlacement = "auto",
+  size = "medium",
   onChange,
 }: SelectProps) => {
   const [internalValue, setInternalValue] = useState(defaultValue ?? "");
@@ -84,7 +88,10 @@ export const Select = ({
 
   return (
     <div
-      className={["select__wrapper", className].filter(Boolean).join(" ")}
+      className={["select__wrapper field-presentation", className].filter(Boolean).join(" ")}
+      data-variant={variant}
+      data-label-placement={labelPlacement}
+      data-size={size}
       style={style}
     >
       {displayLabel && (
@@ -167,6 +174,7 @@ export const Select = ({
           style={caretStyle}
           aria-hidden
         />
+        <FieldOutline label={displayLabel} required={required} />
       </div>
       <SelectListbox
         listClassName={listClassName}

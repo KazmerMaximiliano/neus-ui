@@ -98,7 +98,9 @@ whose rendering condition is false.
 | `.textarea__wrapper .field-presentation` | `div` | `className` | `wrapperStyle` | `Always` |
 | `.textarea__label` | `label` | `labelClassName` | `labelStyle` | `label` |
 | `.textarea__required` | `span` | `requiredClassName` | `requiredStyle` | `label && required` |
+| `.textarea__control` | `div` around the textarea and its outline | — | — | `Always` |
 | `.textarea` | `textarea` | `textareaClassName` | `textareaStyle` | `Always` |
+| `.field__outline` | `fieldset`, `aria-hidden`, inside `.textarea__control` | — | — | `Always`; draws the border only for a floating label on an outlined field, as in [Input](./Input.md) |
 | `.field__description` | `div` | `descriptionClassName` | `descriptionStyle` | `description` |
 | `.textarea__error-message` | `div` | `errorClassName` | `errorStyle` | `error` |
 
@@ -136,6 +138,7 @@ Input's, so a form's fields match.
 | Token | Purpose | Neus baseline |
 | --- | --- | --- |
 | `--textarea-radius` | Corner radius: the input radius, never more than the 16px content radius | `min(var(--input-radius), 16px)` |
+| `--textarea-filled-radius` | Corner radius of a filled textarea | `var(--textarea-radius)` |
 
 ### Shared dependencies and runtime values
 

@@ -33,6 +33,32 @@ describe("Select required", () => {
   });
 });
 
+describe("Select field presentation", () => {
+  it("defaults the variant, label placement and size, and takes each prop", () => {
+    const { container, rerender } = renderSelect();
+    const wrapper = container.querySelector(".select__wrapper")!;
+
+    expect(wrapper).toHaveClass("field-presentation");
+    expect(wrapper).toHaveAttribute("data-variant", "auto");
+    expect(wrapper).toHaveAttribute("data-label-placement", "auto");
+    expect(wrapper).toHaveAttribute("data-size", "medium");
+    rerender(<Select label="Country" options={OPTIONS} variant="filled" labelPlacement="floating" size="large" />);
+    expect(wrapper).toHaveAttribute("data-variant", "filled");
+    expect(wrapper).toHaveAttribute("data-label-placement", "floating");
+    expect(wrapper).toHaveAttribute("data-size", "large");
+  });
+
+  it("draws a hidden outline in the field, sized from the label", () => {
+    const { container } = renderSelect({ required: true });
+    const outline = container.querySelector(".select__field > .field__outline")!;
+
+    expect(outline).toHaveAttribute("aria-hidden", "true");
+    expect(outline.querySelector(".field__notch")).toHaveAttribute("data-label", "Country");
+    expect(outline.querySelector(".field__notch")).toHaveAttribute("data-required");
+    expect(combobox()).toBeInTheDocument();
+  });
+});
+
 describe("Select description", () => {
   it("renders help text and announces it before the error", () => {
     const { rerender } = render(<Select label="Plan" options={[{ value: "pro", label: "Pro" }]} description="You can change it later." />);

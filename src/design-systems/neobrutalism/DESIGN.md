@@ -169,6 +169,7 @@ x-neus:
         --button-focus-offset: 6px
         --button-elevated-shadow: 4px 4px 0 var(--color-text-primary)
         --button-elevated-shadow-hover: 6px 6px 0 var(--color-text-primary)
+        --button-elevated-shadow-active: 2px 2px 0 var(--color-text-primary)
     calendar:
       base:
         --calendar-border-width: 3px

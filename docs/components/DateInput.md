@@ -98,6 +98,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.picker-field__required` | `span` | `requiredClassName` | `requiredStyle` | `required` |
 | `.picker-field__container` | `div` | `containerClassName` | `containerStyle` | `Always` |
 | `.picker-field__field` | `button` | `fieldClassName` | `fieldStyle` | `Always` |
+| `.field__outline` | `fieldset`, `aria-hidden`, inside `.picker-field__container` | — | — | `Always`; draws the border only for a floating label on an outlined field, as in [Input](./Input.md) |
 | `.picker-field__value .picker-field__placeholder` | `span` | `valueClassName`, `placeholderClassName` | `valueStyle`, `placeholderStyle` | `Always` |
 | `.picker-field__icon` | `Icon` | `iconClassName` | `iconStyle` | `Always` |
 | `.picker-field__popover` | `div` | `panelClassName` | `panelStyle` | `Always` |

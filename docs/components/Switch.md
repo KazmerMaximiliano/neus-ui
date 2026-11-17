@@ -53,6 +53,8 @@ sits right after the label. The description goes under the label. Disabled switc
 without losing their on or off look. Under `prefers-reduced-motion: reduce` the thumb jumps
 instead of sliding.
 
+The track lines up with the first line of the label, its center half an x-height above the baseline (as `vertical-align: middle` defines it), so it stays centered on lowercase text in every system's font.
+
 ## Props
 
 See [the type source](../../src/components/Switch/Switch.types.ts) and

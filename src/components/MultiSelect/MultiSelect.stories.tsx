@@ -13,6 +13,21 @@ const meta: Meta<MultiSelectStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    variant: {
+      control: "select",
+      options: ["auto", "filled", "outlined"],
+      description: "Shared field variant",
+    },
+    labelPlacement: {
+      control: "select",
+      options: ["auto", "external", "floating"],
+      description: "Shared field labelPlacement",
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Shared field size",
+    },
     tagRemoveIconClassName: {
       control: "text",
       description: "Customization for tagRemoveIcon",
@@ -213,6 +228,9 @@ const meta: Meta<MultiSelectStoryArgs> = {
 
 export const MultiSelect: StoryObj<MultiSelectStoryArgs> = {
   args: {
+    variant: "auto",
+    labelPlacement: "auto",
+    size: "medium",
     tagRemoveIconClassName: undefined,
     tagRemoveIconStyle: undefined,
     boxClassName: undefined,

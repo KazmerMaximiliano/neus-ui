@@ -5,7 +5,7 @@
   display: inline-grid;
   grid-template-columns: auto auto;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   column-gap: var(--switch-gap);
   row-gap: var(--switch-text-gap);
   font-family: var(--switch-font-family);
@@ -32,9 +32,16 @@
   pointer-events: none;
 }
 
+/* The control's center sits half an x-height above the label's baseline, as vertical-align: middle
+   defines it, so it lines up with lowercase text in any font. The margins give back the space the
+   shift takes, so the row keeps its height; the control lines up with the first line of a long label. */
 .switch__track {
+  --switch-shift: calc(var(--switch-track-height) / 2 - 0.5ex);
   position: relative;
   box-sizing: border-box;
+  font-size: var(--switch-label-font-size);
+  translate: 0 var(--switch-shift);
+  margin-block: calc(-1 * var(--switch-shift)) var(--switch-shift);
   width: var(--switch-track-width);
   height: var(--switch-track-height);
   border: var(--switch-track-border-width) solid

@@ -27,8 +27,15 @@
   color: var(--input-disabled-color);
 }
 
+/* The control holds the textarea and its outline; as a column it stretches the textarea to its width. */
+.textarea__control {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
 /* Content-box sizing makes rows and maxRows whole lines (1lh) whatever padding the system sets;
-   stretching in the wrapper's column gives the full width with the padding outside it. */
+   stretching in the control's column gives the full width with the padding outside it. */
 .textarea {
   box-sizing: content-box;
   align-self: stretch;
@@ -88,7 +95,7 @@
 .textarea[aria-invalid="true"] {
   border-color: var(--input-error-border-color);
   box-shadow: var(--input-error-shadow);
-  color: var(--input-error-color);
+  color: var(--input-error-value-color);
 }
 
 .textarea[aria-invalid="true"]:focus {

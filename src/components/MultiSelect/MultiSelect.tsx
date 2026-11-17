@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import { ChevronDown, X } from "lucide-react";
 import { usePopover } from "../../hooks/usePopover";
+import { FieldOutline } from "../Input/components/FieldOutline";
 import { SelectListbox } from "../Select/components/SelectListbox";
 import type { MultiSelectProps } from "./MultiSelect.types";
 import "../Checkbox/Checkbox.styles.css";
@@ -69,6 +70,9 @@ export const MultiSelect = ({
   tagStyle,
   listStyle,
   optionStyle,
+  variant = "auto",
+  labelPlacement = "auto",
+  size = "medium",
   onChange,
 }: MultiSelectProps) => {
   const [internalValues, setInternalValues] = useState<readonly string[]>(defaultValue);
@@ -105,9 +109,12 @@ export const MultiSelect = ({
 
   return (
     <div
-      className={["select__wrapper multiselect", className]
+      className={["select__wrapper field-presentation multiselect", className]
         .filter(Boolean)
         .join(" ")}
+      data-variant={variant}
+      data-label-placement={labelPlacement}
+      data-size={size}
       style={style}
     >
       {displayLabel && (
@@ -240,6 +247,7 @@ export const MultiSelect = ({
           style={caretStyle}
           aria-hidden
         />
+        <FieldOutline label={displayLabel} required={required} />
       </div>
       <SelectListbox
         listClassName={listClassName}

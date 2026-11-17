@@ -93,6 +93,18 @@ describe("Textarea", () => {
     });
   });
 
+  describe("notched outline", () => {
+    it("wraps the textarea and its hidden outline in a control", () => {
+      const { container } = render(<Textarea label="Message" />);
+      const control = container.querySelector(".textarea__control")!;
+
+      expect(control.querySelector("textarea")).toBe(screen.getByRole("textbox", { name: "Message" }));
+      expect(control.querySelector(".field__outline")).toHaveAttribute("aria-hidden", "true");
+      expect(control.querySelector(".field__notch")).toHaveAttribute("data-label", "Message");
+      expect(control.querySelector(".field__notch")).not.toHaveAttribute("data-required");
+    });
+  });
+
   describe("description and errors", () => {
     it("announces the description, the error and the caller's ids", () => {
       const { rerender } = render(

@@ -5,6 +5,7 @@ import { page } from "vitest/browser";
 import { Button } from "../../components/Button";
 import { ThemeProvider } from "../../providers";
 import { contrastRatio, resolveColor } from "./colorContrast";
+import { forceState } from "./forceState";
 import type {} from "@vitest/browser-playwright";
 import "../../css/app.css";
 
@@ -14,7 +15,7 @@ const SYSTEM_CASES = [
   { id: "neus", light: "rgb(40, 53, 147)", dark: "rgb(165, 180, 252)" },
   { id: "apple", light: "rgb(0, 113, 227)", dark: "rgb(41, 151, 255)" },
   { id: "carbon", light: "rgb(15, 98, 254)", dark: "rgb(120, 169, 255)" },
-  { id: "material", light: "rgb(100, 66, 214)", dark: "rgb(200, 179, 253)" },
+  { id: "material", light: "rgb(103, 80, 164)", dark: "rgb(208, 188, 255)" },
   {
     id: "neobrutalism",
     light: "rgb(253, 200, 0)",
@@ -181,6 +182,62 @@ describe.each(["light", "dark"] as const)("Button state contract in %s mode", (s
     const quiet = getComputedStyle(screen.getByRole("button", { name: "Quiet" }));
     expect(contrastRatio(quiet.color, surface)).toBeGreaterThanOrEqual(4.5);
     expect(getComputedStyle(screen.getByRole("button", { name: "Disabled" })).boxShadow).toBe("none");
+  });
+});
+
+describe("Material button elevation", () => {
+  it("lifts filled and tonal buttons to level 1 on hover, and leaves outlined ones flat", async () => {
+    render(
+      <ThemeProvider scope="local" designSystem="material">
+        <Button label="Filled" />
+        <Button label="Tonal" variant="tonal" />
+        <Button label="Outlined" variant="outlined" />
+      </ThemeProvider>,
+    );
+    for (const [name, lifted] of [["Filled", true], ["Tonal", true], ["Outlined", false]] as const) {
+      const button = screen.getByRole("button", { name });
+      expect(getComputedStyle(button).boxShadow).toBe("none");
+      await page.getByRole("button", { name, exact: true }).hover();
+      await waitFor(() => expect(getComputedStyle(button).boxShadow !== "none").toBe(lifted));
+    }
+  });
+
+  it("raises elevated buttons from level 1 to level 2 on hover", async () => {
+    render(
+      <ThemeProvider scope="local" designSystem="material">
+        <Button label="Elevated" variant="elevated" />
+      </ThemeProvider>,
+    );
+    const button = screen.getByRole("button", { name: "Elevated" });
+    expect(getComputedStyle(button).boxShadow).toBe(
+      "rgba(0, 0, 0, 0.3) 0px 1px 2px 0px, rgba(0, 0, 0, 0.15) 0px 1px 3px 1px",
+    );
+    await page.getByRole("button", { name: "Elevated" }).hover();
+    await waitFor(() => expect(getComputedStyle(button).boxShadow).toBe(
+      "rgba(0, 0, 0, 0.3) 0px 1px 2px 0px, rgba(0, 0, 0, 0.15) 0px 2px 6px 2px",
+    ));
+  });
+});
+
+describe("Elevated buttons", () => {
+  it.each(SYSTEM_CASES.map(({ id }) => id))("keeps the %s elevation on hover and press", async (id) => {
+    render(
+      <ThemeProvider scope="local" designSystem={id}>
+        <Button label="Elevated" variant="elevated" />
+      </ThemeProvider>,
+    );
+    const button = screen.getByRole("button", { name: "Elevated" });
+    const settled = async () => {
+      await Promise.all(button.getAnimations().map((animation) => animation.finished));
+      return getComputedStyle(button).boxShadow;
+    };
+    const rest = await settled();
+    expect(rest).not.toBe("none");
+    await page.getByRole("button", { name: "Elevated" }).hover();
+    expect(await settled()).not.toBe("none");
+    await forceState(button, ["hover", "active"]);
+    expect(await settled()).toBe(id === "neobrutalism" ? "rgb(28, 41, 60) 2px 2px 0px 0px" : rest);
+    await forceState(button, []);
   });
 });
 

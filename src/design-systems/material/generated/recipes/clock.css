@@ -1,7 +1,7 @@
 /* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="material"] {
   --clock-min-width: 328px;
-  --clock-background: var(--color-surface-secondary);
+  --clock-background: var(--color-surface-container-high);
   --clock-border-width: 0px;
   --clock-radius: 28px;
   --clock-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -13,9 +13,9 @@
   --clock-segment-gap: 4px;
   --clock-segment-radius: 8px;
   --clock-segment-inactive-opacity: 1;
-  --clock-segment-active-background: var(--color-secondary-container);
-  --clock-segment-active-color: var(--color-on-secondary-container);
+  --clock-segment-active-background: var(--color-primary-container);
+  --clock-segment-active-color: var(--color-on-primary-container);
   --clock-face-size: 256px;
-  --clock-face-background: var(--color-surface-container-low);
+  --clock-face-background: var(--color-surface-container-highest);
   --clock-number-size: 48px;
 }

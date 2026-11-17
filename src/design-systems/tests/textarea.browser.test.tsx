@@ -52,12 +52,21 @@ describe.each(["light", "dark"] as const)("Textarea designs in %s mode", (scheme
     expect(field.getBoundingClientRect().width).toBeCloseTo(wrapper.getBoundingClientRect().width, 1);
     expect(contentHeight(screen.getByRole("textbox", { name: "Notes" }))).toBeCloseTo(2 * contentHeight(field), 0);
 
+    // What shows focus: the field's ring or border, or the notched outline's width.
+    const indicator = (element: HTMLElement) => {
+      const own = getComputedStyle(element);
+      const outline = getComputedStyle(element.parentElement!.querySelector(".field__outline")!);
+      return [own.boxShadow, own.borderBottomColor, outline.borderTopWidth, outline.borderTopColor].join();
+    };
+    const outline = (element: HTMLElement) => getComputedStyle(element.parentElement!.querySelector(".field__outline")!);
+    expect(outline(field).borderTopWidth).toBe(outline(input).borderTopWidth);
+    expect(outline(field).borderTopLeftRadius).toBe(styles.borderTopLeftRadius);
+
     const invalid = screen.getByRole("textbox", { name: "Invalid" });
     expect(getComputedStyle(invalid).borderTopColor).toBe(resolveColor(wrapper, "--input-error-border-color"));
-    const rest = [getComputedStyle(invalid).boxShadow, getComputedStyle(invalid).borderBottomColor].join();
+    const rest = indicator(invalid);
     await user.click(invalid);
-    await waitFor(() => expect([getComputedStyle(invalid).boxShadow, getComputedStyle(invalid).borderBottomColor].join())
-      .not.toBe(rest));
+    await waitFor(() => expect(indicator(invalid)).not.toBe(rest));
     const message = getComputedStyle(screen.getByText("Write a message.")).color;
     expect(contrastRatio(message, resolveColor(wrapper, "--color-surface"))).toBeGreaterThanOrEqual(4.5);
   });
@@ -119,6 +128,21 @@ describe("Textarea growth, labels and scopes", () => {
     await user.type(screen.getByRole("textbox", { name: "Message" }), "Hi");
     screen.getByRole("textbox", { name: "Message" }).blur();
     await waitFor(() => expect(offset("Message")).toBeLessThan(rest));
+  });
+
+  it("rounds only the top of a filled Material textarea, like its Input", () => {
+    render(
+      <ThemeProvider scope="local" designSystem="material">
+        <Textarea label="Notes" variant="filled" />
+        <Textarea label="Outlined" />
+      </ThemeProvider>,
+    );
+    const filled = getComputedStyle(screen.getByRole("textbox", { name: "Notes" }));
+    const outlined = getComputedStyle(screen.getByRole("textbox", { name: "Outlined" }));
+
+    expect([filled.borderTopLeftRadius, filled.borderTopRightRadius, filled.borderBottomLeftRadius])
+      .toEqual(["4px", "4px", "0px"]);
+    expect(outlined.borderBottomLeftRadius).toBe("4px");
   });
 
   it("resets a nested Neus scope inside Carbon", () => {

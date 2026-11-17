@@ -5,6 +5,7 @@ import { cdp } from "vitest/browser";
 import { Switch } from "../../components/Switch";
 import { ThemeProvider } from "../../providers";
 import { contrastRatio, resolveColor } from "./colorContrast";
+import { xHeightOffset } from "./labelAlignment";
 import type {} from "@vitest/browser-playwright";
 import "../../css/app.css";
 
@@ -89,6 +90,16 @@ describe.each(["light", "dark"] as const)("Switch designs in %s mode", (scheme) 
 });
 
 describe("Switch layout, scopes and motion", () => {
+  it.each(SYSTEMS)("centers the $id track on the label's lowercase letters", ({ id }) => {
+    render(
+      <ThemeProvider scope="local" designSystem={id}>
+        <Switch label="wireless" />
+      </ThemeProvider>,
+    );
+
+    expect(Math.abs(xHeightOffset(screen.getByText("wireless"), parts("wireless").track))).toBeLessThan(0.5);
+  });
+
   it("puts the track at the far edge when stretched and the description under the label", () => {
     render(
       <ThemeProvider scope="local">
