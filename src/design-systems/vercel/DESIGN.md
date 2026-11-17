@@ -175,6 +175,13 @@ x-neus:
         --button-label-transform: none
         --button-loader-size: 5px
         --button-loader-gap: 1px
+        --button-elevated-shadow: 0 0 0 1px var(--color-border-subtle), 0 1px 2px rgba(0, 0, 0, 0.06)
+        --button-elevated-shadow-hover: 0 0 0 1px var(--color-border-subtle), 0 2px 4px -1px rgba(0, 0, 0,
+          0.06), 0 6px 12px -4px rgba(0, 0, 0, 0.08)
+      dark:
+        --button-elevated-shadow: 0 0 0 1px var(--color-border-subtle), 0 1px 2px rgba(0, 0, 0, 0.5)
+        --button-elevated-shadow-hover: 0 0 0 1px var(--color-border-subtle), 0 4px 8px -4px rgba(0, 0, 0,
+          0.5)
     calendar:
       base:
         --calendar-radius: 12px
@@ -494,6 +501,10 @@ use a strong neutral solid action, quieter outlined/text alternatives, concise
 labels, and consistent sizes: small, medium and large are 32, 40 and 48px tall,
 the same as inputs. Keep hover, press, keyboard focus, disabled, and loading
 states legible without decorative motion.
+Geist has no elevated button; local decision: the elevated variant takes the "slightly raised"
+small material of [Geist materials](https://vercel.com/geist/materials) (consulted 2026-11-17),
+a hairline ring with a faint shadow, and moves toward the "further raised" medium material on
+hover. In dark mode the ring carries the separation, as in the floating elevation.
 
 ### Card
 

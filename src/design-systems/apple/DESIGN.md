@@ -173,6 +173,11 @@ x-neus:
         --button-label-transform: none
         --button-active-transform: scale(0.98)
         --button-loader-size: 5px
+        --button-elevated-shadow: 0 1px 3px rgba(0, 0, 0, 0.12)
+        --button-elevated-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.16)
+      dark:
+        --button-elevated-shadow: 0 1px 3px rgba(0, 0, 0, 0.5)
+        --button-elevated-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.6)
     calendar:
       base:
         --calendar-radius: 12px
@@ -457,6 +462,9 @@ Emphasize the likely action through style, keep adjacent choices
 similarly sized, and provide a recognizable press response. Use concise action
 labels. These priorities follow [HIG buttons](https://developer.apple.com/design/human-interface-guidelines/buttons).
 Local web requirements: retain visible keyboard focus and a readable loading state.
+HIG has no elevated button; local decision: the elevated variant casts a short, soft shadow sized
+for a control, not the floating depth of menus and popovers, deepens it on hover and returns to it
+when pressed. In dark mode the shadow darkens so it still separates the button from the page.
 
 ### Card
 

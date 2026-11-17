@@ -56,6 +56,11 @@ breaking change.
   - dialogs, the calendar and the clock sit on the high surface container, the clock dial on the
     highest, and the selected hour or minute on the primary container; outlined cards use
     outline-variant and MultiSelect chips the outline color.
+- Apple, Carbon and Vercel have no elevated button of their own, so their elevated variant now
+  casts a shadow sized for a control instead of the menu and popover elevation it borrowed:
+  Apple a short soft shadow; Carbon a 1px shadow that rises to its 2px/6px drop shadow, at 30%
+  black (80% in dark, as its Gray 100 theme); Vercel a hairline ring with a faint shadow, after
+  Geist's small material. Each one deepens on hover and returns to rest when pressed.
 
 ### Fixed
 

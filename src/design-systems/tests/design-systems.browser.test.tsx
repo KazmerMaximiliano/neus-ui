@@ -220,7 +220,7 @@ describe("Material button elevation", () => {
 });
 
 describe("Elevated buttons", () => {
-  it.each(SYSTEM_CASES.map(({ id }) => id))("keeps the %s elevation on hover and press", async (id) => {
+  it.each(SYSTEM_CASES.map(({ id }) => id))("raises the %s elevation on hover and keeps it when pressed", async (id) => {
     render(
       <ThemeProvider scope="local" designSystem={id}>
         <Button label="Elevated" variant="elevated" />
@@ -234,7 +234,9 @@ describe("Elevated buttons", () => {
     const rest = await settled();
     expect(rest).not.toBe("none");
     await page.getByRole("button", { name: "Elevated" }).hover();
-    expect(await settled()).not.toBe("none");
+    const hovered = await settled();
+    expect(hovered).not.toBe("none");
+    expect(hovered).not.toBe(rest);
     await forceState(button, ["hover", "active"]);
     expect(await settled()).toBe(id === "neobrutalism" ? "rgb(28, 41, 60) 2px 2px 0px 0px" : rest);
     await forceState(button, []);
