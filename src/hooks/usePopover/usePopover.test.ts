@@ -24,6 +24,12 @@ describe("resolvePlacement", () => {
     expect(resolvePlacement("bottom-end", anchor(100, 10), { width: 1200, height: 200 }, viewport)).toBe("bottom-end");
   });
 
+  it("centers a side without an edge and flips only its side", () => {
+    expect(resolvePlacement("top", anchor(400, 10), panel, viewport)).toBe("top");
+    expect(resolvePlacement("top", anchor(20, 100), panel, viewport)).toBe("bottom");
+    expect(resolvePlacement("bottom", anchor(700, 900), panel, viewport, true)).toBe("top");
+  });
+
   it("reads start and end from the trailing edge in right-to-left text", () => {
     expect(resolvePlacement("bottom-start", anchor(100, 10), panel, viewport, true)).toBe("bottom-end");
     expect(resolvePlacement("bottom-start", anchor(100, 850), panel, viewport, true)).toBe("bottom-start");

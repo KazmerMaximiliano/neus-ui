@@ -78,6 +78,8 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
   global actions (`menu`: account, notifications). The page title and the
   page's primary action open the content.
 - One solid primary action per page; row actions use Menu or text buttons.
+  An icon-only action whose name is not enough (a limit, a consequence) gets a
+  `Tooltip`; the IconButton keeps its `label`.
 - Filters for the list go in a `Popover` opened by an outlined "Filters" Button
   beside the title; close it from an "Apply" button with a controlled `open`.
 - Pagination is controlled: wire `onPaginationChange` to the data source.
@@ -125,7 +127,9 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
   form stays an `Alert` at the top of the form or a field `error`.
 - Labels are always visible. Put required markers on real requirements only.
 - Two to five options that should stay visible are a `RadioGroup` (`horizontal` for short
-  labels); longer lists are a `Select`.
+  labels); longer lists are a `Select`. When people type to find the value (a
+  country, a customer, results from a server) or may enter a new one (a tag),
+  use a `Combobox`.
 
 ## 3. Multi-step flow
 

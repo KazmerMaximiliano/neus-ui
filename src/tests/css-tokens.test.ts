@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 // var() in the library CSS must name a token some stylesheet declares.
 const RUNTIME = [
   "--clock-hand-angle", "--clock-hand-scale", "--clock-number-angle", "--media-placeholder-ratio", "--popover-anchor-width",
-  "--popover-bottom", "--popover-left", "--popover-right", "--popover-top", "--progress-value", "--skeleton-height",
+  "--popover-bottom", "--popover-center", "--popover-left", "--popover-right", "--popover-top", "--progress-value", "--skeleton-height",
   "--skeleton-width", "--text-lines", "--textarea-max-rows", "--textarea-rows", "--tooltip-x", "--tooltip-y",
 ];
 

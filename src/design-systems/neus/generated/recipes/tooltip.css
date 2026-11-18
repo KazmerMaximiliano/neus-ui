@@ -1,0 +1,21 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --tooltip-background: var(--color-text-primary);
+  --tooltip-color: var(--color-surface);
+  --tooltip-border-width: 0px;
+  --tooltip-border-color: transparent;
+  --tooltip-radius: var(--radius-sm);
+  --tooltip-shadow: none;
+  --tooltip-padding: 6px 10px;
+  --tooltip-max-width: 240px;
+  --tooltip-multiline-padding: initial;
+  --tooltip-multiline-max-width: initial;
+  --tooltip-offset: 6px;
+  --tooltip-caret-size: 0px;
+  --tooltip-font-family: var(--font-body);
+  --tooltip-font-size: var(--fs-xs);
+  --tooltip-font-weight: 500;
+  --tooltip-line-height: 1.4;
+  --tooltip-letter-spacing: normal;
+}

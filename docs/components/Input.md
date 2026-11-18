@@ -30,8 +30,8 @@ by the consumer.
 
 A generated or supplied id associates the label. Nonempty errors set aria-invalid;
 `description` and the error are linked through aria-describedby, after any id the caller
-passes. Native attributes such as `autoComplete`, `inputMode` and `spellCheck` reach the
-`<input>`; Input's own wiring (id, label, state and value handling) takes precedence. Required markers and the error icon are decorative. Supply a label or
+passes. Native attributes such as `autoComplete`, `inputMode` and `spellCheck`, and the ref,
+reach the `<input>`; Input's own wiring (id, label, state and value handling) takes precedence. Required markers and the error icon are decorative. Supply a label or
 aria-label. Prefix and suffix render when non-null. Error icons render only with an error
 and can be suppressed with `errorIcon={null}`. Field presentation uses variant, size and
 labelPlacement data attributes. `wrapperStyle` targets the root; `inputStyle` targets the
@@ -97,7 +97,7 @@ retain their nullable default.
 | `requiredStyle` | `CSSProperties` | Omitted | Inline styles on `.input__required` |
 | `errorStyle` | `CSSProperties` | Omitted | Inline styles on `.input__error-message` |
 | `onChange` | `((value: string) => void)` | Omitted | Callback function triggered when input value changes |
-| Native attributes | `InputHTMLAttributes<HTMLInputElement>` | Optional | Forwarded to the native `<input>` (`autoComplete`, `inputMode`, `spellCheck`, `pattern`, `maxLength`, `onBlur`, `aria-*`, `data-*`…), except `size`, `prefix`, `type`, `value`, `defaultValue`, `onChange`, `readOnly` and `style`, which Input replaces |
+| Native attributes and ref | React props for an `input` | Optional | Forwarded to the native `<input>` (`autoComplete`, `inputMode`, `spellCheck`, `pattern`, `maxLength`, `onBlur`, `aria-*`, `data-*`…), except `size`, `prefix`, `type`, `value`, `defaultValue`, `onChange`, `readOnly` and `style`, which Input replaces |
 
 ## Anatomy and per-part customization
 

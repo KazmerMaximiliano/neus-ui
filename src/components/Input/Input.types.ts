@@ -1,4 +1,4 @@
-import type { CSSProperties, InputHTMLAttributes, ReactNode } from "react";
+import type { ComponentPropsWithRef, CSSProperties, ReactNode } from "react";
 import type { DesignSystemId } from "../../design-systems";
 
 export type FieldPresentationProps = {
@@ -54,9 +54,9 @@ type InputOwnProps = FieldPresentationProps & FieldDescriptionProps & {
   readonly onChange?: (value: string) => void;
 };
 
-/** Native `<input>` attributes (autoComplete, inputMode, spellCheck, pattern, aria-*, data-*…) not replaced by Input's own API. */
+/** Native `<input>` attributes (autoComplete, inputMode, spellCheck, pattern, aria-*, data-*…) and ref, not replaced by Input's own API. */
 type InputNativeProps = Omit<
-  InputHTMLAttributes<HTMLInputElement>,
+  ComponentPropsWithRef<"input">,
   keyof InputOwnProps | "style" | "readOnly" | "children" | "dangerouslySetInnerHTML"
 >;
 

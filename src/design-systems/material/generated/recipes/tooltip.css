@@ -1,0 +1,16 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --tooltip-background: #322f35;
+  --tooltip-color: #f5eff7;
+  --tooltip-radius: 4px;
+  --tooltip-padding: 4px 8px;
+  --tooltip-font-size: 12px;
+  --tooltip-font-weight: 400;
+  --tooltip-line-height: 16px;
+  --tooltip-letter-spacing: 0.4px;
+}
+
+[data-design-system="material"][data-color-scheme="dark"] {
+  --tooltip-background: #e6e0e9;
+  --tooltip-color: #322f35;
+}

@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { focusMenuItem } from "../../../../../../hooks/usePopover";
 import type { SelectListboxContentProps } from "./SelectListboxContent.types";
 import { OPTION } from "../../../../Select.consts";
+import { filterOptions } from "../../../../Select.utils";
 
 export const SelectListboxContent = ({
   boxClassName,
@@ -39,13 +40,7 @@ export const SelectListboxContent = ({
   optionStyle,
 }: SelectListboxContentProps) => {
   const [query, setQuery] = useState("");
-  const filtered = useMemo(
-    () =>
-      options.filter((option) =>
-        option.label.toLowerCase().includes(query.toLowerCase()),
-      ),
-    [options, query],
-  );
+  const filtered = useMemo(() => filterOptions(options, query), [options, query]);
 
   const onKeyDown = (event: KeyboardEvent) => {
     const inSearch = event.target instanceof HTMLInputElement;

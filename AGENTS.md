@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 49 reusable UI components and public sections
+- 51 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (49 total)
+### Implemented Components and Public Subcomponents (51 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -215,7 +215,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Dropdown         | src/components/Dropdown/                                | STABLE | Dropdown menu                                                                                                           |
 | FileUploader     | src/components/FileUploader/                            | STABLE | Drag and drop                                                                                                           |
 | IconButton       | src/components/IconButton/                              | STABLE | Icon containers, native attributes and ref                                                                              |
-| Input            | src/components/Input/                                   | STABLE | Seven native types, native attributes, description, accessible errors, per-part styles, six token recipes               |
+| Input            | src/components/Input/                                   | STABLE | Seven native types, native attributes and ref, description, accessible errors, per-part styles, six token recipes       |
 | InteractiveMap   | src/components/InteractiveMap/                          | STABLE | Google Maps integration                                                                                                 |
 | Link             | src/components/Link/                                    | STABLE | Styled links                                                                                                            |
 | Menu             | src/components/Menu/                                    | STABLE | Actions menu                                                                                                            |
@@ -246,6 +246,8 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Progress         | src/components/Progress/                                | STABLE | Determinate or indeterminate bar with label and value text; Stepper's linear track                                     |
 | Skeleton         | src/components/Skeleton/                                | STABLE | Hidden text, block and circle placeholders with pulse or shimmer that stops under reduced motion                        |
 | Toast            | src/components/Toast/                                   | STABLE | Alert that closes itself, pausing on hover and focus; queued and announced by ToastProvider and useToast                |
+| Tooltip          | src/components/Tooltip/                                 | STABLE | Description on hover and keyboard focus, centered and flipping, hoverable and dismissable; WeekCalendarRow's bubble     |
+| Combobox         | src/components/Combobox/                                | STABLE | Input with suggestions and aria-activedescendant: local filter or fetched results, custom values, loading              |
 
 ### Implemented Sections (9 total, `neus-ui/sections`)
 
@@ -873,7 +875,7 @@ interactive component catalog separately.
 
 All public families and both templates have six scoped recipes. Button supports
 solid/secondary/tonal/elevated/outlined/text; Card supports
-auto/filled/outlined/elevated. Input, Textarea, Select, MultiSelect and picker fields share variant, size and
+auto/filled/outlined/elevated. Input, Textarea, Combobox, Select, MultiSelect and picker fields share variant, size and
 label-placement controls. Calendar is discriminated
 by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
 renderMobileCard. DataTable actions are composed by consumers with buttons or menus,

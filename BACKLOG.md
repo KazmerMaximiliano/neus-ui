@@ -11,8 +11,6 @@ reusable public API and should reuse the existing implementation where appropria
 
 | Priority | Component family           | Category     | Intended scope and current gap                                                                                                            |
 | -------- | -------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| P1       | Combobox / Autocomplete    | Forms        | Editable text with suggestions, async results and optional custom values; Select currently searches predefined options.                   |
-| P1       | Tooltip                    | Overlays     | Reusable descriptions on hover and focus; the current tooltip belongs to WeekCalendarRow.                                                 |
 | P1       | Tabs                       | Navigation   | Associated tab panels, keyboard navigation and controlled or uncontrolled selection.                                                      |
 | P1       | Accordion                  | Disclosure   | Expandable sections with single or multiple open items and keyboard support.                                                              |
 | P1       | PricingCard / PricingTable | Sections     | Plans with price, period, features and the action, for public pages; today composed from Card.                                            |

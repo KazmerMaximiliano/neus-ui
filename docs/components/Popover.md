@@ -151,8 +151,8 @@ dependencies. Do not edit generated files. The surface tokens default to the
 
 The gap to the trigger is `--overlay-offset`. While open, the panel carries runtime
 properties written on open, scroll and resize: `--popover-top`, `--popover-bottom`,
-`--popover-left`, `--popover-right` and `--popover-anchor-width`. Treat them as placement
-data, not appearance.
+`--popover-left`, `--popover-right`, `--popover-anchor-width` and `--popover-center` (the left
+edge that centers a [Tooltip](./Tooltip.md)). Treat them as placement data, not appearance.
 
 ### Scoped recipe override
 

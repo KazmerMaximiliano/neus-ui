@@ -71,6 +71,10 @@ export const Page = () => (
     ["raw-element", "a.tsx", `<div className="skeleton" />`],
     ["raw-element", "a.css", "@keyframes shimmer { to { background-position: 0 0; } }"],
     ["raw-element", "a.tsx", `<div className="toast" aria-live="polite">{message}</div>`],
+    ["raw-element", "a.tsx", `<span role="tooltip" id="hint">Moves it to the trash</span>`],
+    ["raw-element", "a.tsx", `<IconButton icon={Trash2} label="Delete" title="Moves it to the trash" />`],
+    ["raw-element", "a.tsx", `<input role="combobox" aria-expanded={open} value={query} />`],
+    ["raw-element", "a.tsx", `<datalist id="cities">{cities}</datalist>`],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
     ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
   ])("reports P1 %s", (rule, file, text) => {
@@ -84,6 +88,11 @@ export const Page = () => (
 
   it("does not take Skeleton or Progress components for hand-made ones", () => {
     const text = `<Skeleton className="skeleton-card" lines={3} />\n<Progress label="Upload" value={3} max={10} />`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take Tooltip, Combobox or a titled Modal for hand-made ones", () => {
+    const text = `<Tooltip content="Moves it to the trash" trigger={(props) => <IconButton {...props} icon={Trash2} label="Delete" />} />\n<Combobox label="City" options={cities} />\n<ModalHeader title="Delete project" />`;
     expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
   });
 

@@ -229,8 +229,8 @@ component's guide.
 | Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
 | Icon-only action | `IconButton` |
 | Text navigation | `Link` |
-| Help text under a field | `description` on Input, Textarea, Select, MultiSelect, RadioGroup, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
-| Required field | `required` on Input, Textarea, Select, MultiSelect, RadioGroup, DateInput or TimeInput (asterisk and `aria-required`) |
+| Help text under a field | `description` on Input, Textarea, Combobox, Select, MultiSelect, RadioGroup, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
+| Required field | `required` on Input, Textarea, Combobox, Select, MultiSelect, RadioGroup, DateInput or TimeInput (asterisk and `aria-required`) |
 | Text that wraps to several lines (message, notes, description) | `Textarea` (`rows`; `autoResize` with `maxRows` where the page has room to grow) |
 | Field that needs the whole row (long hint, Textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
 | Status or label | `Badge` |
@@ -242,7 +242,9 @@ component's guide.
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
 | Extra controls or details tied to a button (filters, share, explanation) | `Popover` (`trigger` renders a Button or IconButton with the props it receives); a list of actions stays `Menu` |
+| Short hint for a control (what an icon button does, a limit or consequence) | `Tooltip` (`content`; `trigger` renders the Button or IconButton with the props it receives); the control keeps its own name, and anything to read or act on goes in a `Popover` or a field `description` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
+| Search with suggestions or free text (city, tag, user, long lists) | `Combobox` (`options`; `filter={false}`, `inputValue`, `onInputChange` and `loading` for fetched results; `allowCustomValue` for new values; `emptyLabel` in the project's language); browsing predefined options stays `Select` |
 | On/off setting that applies at once | `Switch`; a choice sent with a form stays `Checkbox` |
 | One choice among 2–5 visible options | `RadioGroup` + `Radio`; more options: `Select` |
 | Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
