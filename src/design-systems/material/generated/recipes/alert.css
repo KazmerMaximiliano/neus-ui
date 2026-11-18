@@ -1,1 +1,13 @@
 /* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --alert-info-background: color-mix(in srgb, var(--color-info) 10%, var(--color-surface-container-lowest));
+  --alert-info-border-color: color-mix(in srgb, var(--color-info) 35%, var(--color-surface-container-lowest));
+  --alert-success-background: color-mix(in srgb, var(--color-success) 14%, var(--color-surface-container-lowest));
+  --alert-success-border-color: color-mix(in srgb, var(--color-success) 45%, var(--color-surface-container-lowest));
+  --alert-warning-background: color-mix(in srgb, var(--color-warning) 24%, var(--color-surface-container-lowest));
+  --alert-warning-border-color: color-mix(in srgb, var(--color-warning) 60%, var(--color-surface-container-lowest));
+  --alert-warning-icon-color: color-mix(in srgb, var(--color-warning) 70%, var(--color-text-primary));
+  --alert-error-background: color-mix(in srgb, var(--color-error) 14%, var(--color-surface-container-lowest));
+  --alert-error-border-color: color-mix(in srgb, var(--color-error) 45%, var(--color-surface-container-lowest));
+  --alert-error-icon-color: var(--color-error);
+}

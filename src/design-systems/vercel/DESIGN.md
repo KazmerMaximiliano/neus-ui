@@ -435,6 +435,19 @@ x-neus:
       base:
         --radio-dot-size: 6px
     popover: {}
+    progress:
+      base:
+        --progress-label-weight: "500"
+        --progress-height-medium: 6px
+        --progress-height-large: 10px
+    skeleton:
+      base:
+        --skeleton-background: var(--color-border-subtle)
+        --skeleton-highlight: var(--color-surface-secondary)
+        --skeleton-animation-name: skeleton-shimmer
+        --skeleton-text-radius: 6px
+        --skeleton-rect-radius: 6px
+    toast: {}
 ---
 
 # Vercel
@@ -550,6 +563,12 @@ A boolean setting is a compact toggle, label first ([Geist toggle](https://verce
 A radio is the checkbox drawn as a circle: a thin gray ring, filled with ink and a 6px dot in the opposite tone when chosen. Geist recommends radios for two to six options that should all stay visible and states no sizes or colors, so these are local decisions ([Geist radio](https://vercel.com/geist/radio), consulted 2026-11-16).
 
 A popover is the menu panel with room inside: the subtle border and soft shadow, with 16px of padding and at most 320px wide.
+
+A progress bar is an ink pill on the gray border color, 6px by default; put the text that says what is progressing next to the bar ([Geist progress](https://vercel.com/geist/progress), consulted 2026-11-17). Geist states no sizes, so the 4, 6 and 10px thicknesses are local decisions.
+
+A skeleton shimmers, as in [Geist skeleton](https://vercel.com/geist/skeleton) (consulted 2026-11-17): gray shapes with 6px corners crossed by a lighter band. The colors are local decisions.
+
+A toast is the alert with the soft floating shadow. Geist keeps toasts polite and saves assertive announcements for blocking errors, and an Undo action stays on screen for 5 to 10 seconds ([Geist toast](https://vercel.com/geist/toast), consulted 2026-11-17).
 
 ## Do's and Don'ts
 

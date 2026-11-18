@@ -82,6 +82,10 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
   beside the title; close it from an "Apply" button with a controlled `open`.
 - Pagination is controlled: wire `onPaginationChange` to the data source.
 - Provide `renderMobileCard` for tables people use on phones.
+- While a list or a dashboard card loads, draw its shape with `Skeleton`
+  (lines, a `rect` for a chart, a `circle` for an avatar) inside the region,
+  which gets `aria-busy`. A long import or upload shows a `Progress` bar with
+  a count in `valueText`.
 
 ## 2. Form page
 
@@ -116,6 +120,9 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
 
 - The application owns validation and submission; pass messages through each
   field's `error` prop.
+- Confirm a save that keeps the person on the page with a toast
+  (`useToast().show({ status: "success", title })`); an error that blocks the
+  form stays an `Alert` at the top of the form or a field `error`.
 - Labels are always visible. Put required markers on real requirements only.
 - Two to five options that should stay visible are a `RadioGroup` (`horizontal` for short
   labels); longer lists are a `Select`.

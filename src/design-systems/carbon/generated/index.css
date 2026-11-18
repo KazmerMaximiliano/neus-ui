@@ -30,3 +30,6 @@
 @import "./recipes/switch.css";
 @import "./recipes/radio.css";
 @import "./recipes/popover.css";
+@import "./recipes/progress.css";
+@import "./recipes/skeleton.css";
+@import "./recipes/toast.css";

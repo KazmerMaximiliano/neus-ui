@@ -236,6 +236,9 @@ component's guide.
 | Status or label | `Badge` |
 | Message about the page or a form (saved, failed, trial ending) | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
 | Region or value still loading, length unknown | `Spinner` (`label` in the project's language; `size`); a loading button uses its own `loading` |
+| Completion of a task (upload, import, quota) | `Progress` (`label`, `value`, `max`; `valueText` in words, `showValue`); no `value` while the share is unknown |
+| Content still loading (list, card, profile) | `Skeleton` (`variant` `text`, `rect` or `circle`; `lines`) inside the region, which gets `aria-busy` |
+| Brief confirmation after an action (saved, sent, archived) | `useToast().show({ status, title, actions })` under one `ToastProvider` (`label` and `dismissLabel` in the project's language); a lasting message stays `Alert` |
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
 | Extra controls or details tied to a button (filters, share, explanation) | `Popover` (`trigger` renders a Button or IconButton with the props it receives); a list of actions stays `Menu` |

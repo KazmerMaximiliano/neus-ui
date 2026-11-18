@@ -1,0 +1,80 @@
+.skeleton {
+  display: block;
+  width: var(--skeleton-width, 100%);
+  max-width: 100%;
+}
+
+.skeleton--rect,
+.skeleton--circle,
+.skeleton__line {
+  background:
+    linear-gradient(
+        90deg,
+        transparent 25%,
+        var(--skeleton-highlight) 50%,
+        transparent 75%
+      )
+      0 0 / 400% 100%,
+    var(--skeleton-background);
+  animation: var(--skeleton-animation-name) var(--skeleton-duration) ease-in-out
+    infinite;
+}
+
+.skeleton--text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--skeleton-line-gap);
+}
+
+.skeleton__line {
+  height: var(--skeleton-text-height);
+  border-radius: var(--skeleton-text-radius);
+}
+
+.skeleton__line:last-child:not(:first-child) {
+  width: var(--skeleton-last-line-width);
+}
+
+.skeleton--rect {
+  height: var(--skeleton-height, var(--skeleton-rect-height));
+  border-radius: var(--skeleton-rect-radius);
+}
+
+/* Explicit sizes keep the circle round inside flex rows, which would stretch or shrink it. */
+.skeleton--circle {
+  flex-shrink: 0;
+  width: var(--skeleton-width, var(--skeleton-circle-size));
+  height: var(
+    --skeleton-height,
+    var(--skeleton-width, var(--skeleton-circle-size))
+  );
+  border-radius: 50%;
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  from {
+    background-position:
+      100% 0,
+      0 0;
+  }
+
+  to {
+    background-position:
+      0 0,
+      0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton--rect,
+  .skeleton--circle,
+  .skeleton__line {
+    animation: none;
+  }
+}

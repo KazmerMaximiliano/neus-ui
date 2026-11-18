@@ -1,0 +1,46 @@
+.toast-region {
+  position: fixed;
+  z-index: var(--toast-z-index);
+  inset: auto var(--toast-offset) var(--toast-offset) auto;
+  width: min(var(--toast-width), calc(100vw - 2 * var(--toast-offset)));
+  pointer-events: none;
+}
+
+.toast-region[data-placement^="top"] {
+  inset-block: var(--toast-offset) auto;
+}
+
+.toast-region[data-placement$="start"] {
+  inset-inline: var(--toast-offset) auto;
+}
+
+.toast-region[data-placement$="end"] {
+  inset-inline: auto var(--toast-offset);
+}
+
+.toast-region[data-placement$="center"] {
+  inset-inline: 0;
+  margin-inline: auto;
+}
+
+.toast-region__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--toast-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The newest toast sits nearest the edge it comes from. */
+.toast-region[data-placement^="top"] .toast-region__list {
+  flex-direction: column-reverse;
+}
+
+.toast-region__list:not(:empty) + .toast-region__list:not(:empty) {
+  margin-block-start: var(--toast-gap);
+}
+
+.toast-region__item {
+  pointer-events: auto;
+}

@@ -1356,6 +1356,54 @@ x-neus:
         --popover-shadow: var(--overlay-shadow)
         --popover-padding: "{spacing.step-4}"
         --popover-max-width: 320px
+    progress:
+      base:
+        --progress-font-family: var(--font-body)
+        --progress-gap: "{spacing.step-2}"
+        --progress-text-gap: "{spacing.step-4}"
+        --progress-label-color: var(--color-text-primary)
+        --progress-label-font-size: var(--fs-sm)
+        --progress-label-weight: "600"
+        --progress-value-color: var(--color-text-secondary)
+        --progress-value-font-size: var(--fs-sm)
+        --progress-value-weight: "500"
+        --progress-height-small: 4px
+        --progress-height-medium: 8px
+        --progress-height-large: 12px
+        --progress-track-radius: "{rounded.pill}"
+        --progress-track-border-width: 0px
+        --progress-track-border-color: transparent
+        --progress-track-background: var(--color-border-subtle)
+        --progress-fill-background: var(--color-primary)
+        --progress-fill-radius: "{rounded.pill}"
+        --progress-fill-border-width: 0px
+        --progress-transition: width 0.3s ease
+        --progress-indeterminate-width: 40%
+        --progress-indeterminate-duration: 1.6s
+    skeleton:
+      base:
+        --skeleton-background: var(--color-border-subtle)
+        --skeleton-highlight: transparent
+        --skeleton-animation-name: skeleton-pulse
+        --skeleton-duration: 1.6s
+        --skeleton-text-height: 0.75em
+        --skeleton-line-gap: 0.75em
+        --skeleton-last-line-width: 60%
+        --skeleton-text-radius: 4px
+        --skeleton-rect-height: 120px
+        --skeleton-rect-radius: var(--card-radius)
+        --skeleton-circle-size: 40px
+    toast:
+      base:
+        --toast-width: 360px
+        --toast-gap: "{spacing.step-3}"
+        --toast-offset: "{spacing.step-6}"
+        --toast-radius: var(--alert-radius)
+        --toast-shadow: var(--elevation-floating)
+        --toast-z-index: "1100"
+        --toast-duration: 0.2s
+        --toast-easing: ease-out
+        --toast-enter-offset: 8px
 ---
 
 # Neus UI
@@ -1475,6 +1523,12 @@ A switch is a setting that applies at once. Off, it is an indigo-outlined pill w
 A radio group is one choice among a few options that all stay visible. Each radio is the checkbox drawn as a circle: the same indigo outline, filled with indigo and a white dot when selected. The group's legend reads like a field label, the options stack with the space of a related group, and a horizontal row leaves the wider gap between unrelated items.
 
 A popover holds a few controls or details tied to the button that opens it, such as filters or an explanation. It is the menu panel with room inside: the same white surface, input-colored border, rounded corners and floating shadow, with 16px of padding and at most 320px wide. It opens below the button and moves above or to the other edge when it would leave the screen.
+
+A progress bar shows how much of a task is done: an indigo pill filling a gray pill track, 8px thick by default, with its label above in bold and the percentage or a count at the end in secondary ink. When the share is unknown, an indigo segment slides along the track; under reduced motion it slides more slowly instead of stopping.
+
+A skeleton holds the place of content that is still loading: gray rounded lines for text, a block with the card's corners for media and a circle for an avatar, pulsing softly. It stops pulsing under reduced motion. The region that is loading says so to screen readers, not the placeholder.
+
+A toast is a short notification that floats in a corner after an action, such as "Changes saved". It is the alert of its status with the floating shadow, 360px wide, and closes itself after five seconds unless hovered or focused. Newer toasts stack nearest the corner, 12px apart.
 
 ## Do's and Don'ts
 

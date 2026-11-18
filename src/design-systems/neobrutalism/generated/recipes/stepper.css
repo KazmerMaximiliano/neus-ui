@@ -23,11 +23,15 @@
   --stepper-bar-fill-radius: 0px;
   --stepper-bar-border-width: 3px;
   --stepper-bar-border-color: var(--color-text-primary);
-  --stepper-bar-background: var(--color-surface);
+  --stepper-bar-background: color-mix(in srgb, var(--color-text-primary) 70%, var(--color-surface));
   --stepper-simple-size: 14px;
   --stepper-simple-current-width: 32px;
   --stepper-simple-radius: 2px;
   --stepper-simple-border-width: 2px;
   --stepper-simple-border-color: var(--color-text-primary);
   --stepper-simple-background: var(--color-surface);
+}
+
+[data-design-system="neobrutalism"][data-color-scheme="dark"] {
+  --stepper-bar-background: var(--color-surface);
 }

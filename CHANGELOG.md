@@ -8,6 +8,35 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.7.0] - Unreleased
+
+### Added
+
+- `Progress`: a determinate or indeterminate bar with a visible label, the value as a percentage
+  or in words (`valueText`, announced as `aria-valuetext`), three sizes and per-part classes and
+  styles. The indeterminate segment slows down under reduced motion. New `progress` recipe family
+  in the six systems: Material's 4px linear indicator, Carbon's 8px square bar (10px when large),
+  Neobrutalism's framed yellow bar on a dark slate track.
+- `Skeleton`: hidden text, block and circle placeholders, sized with `width` and `height`, that
+  pulse or shimmer per system (Carbon and Vercel shimmer) and stand still under reduced motion.
+  New `skeleton` recipe family.
+- `Toast`, `ToastProvider` and `useToast`: brief notifications that close themselves after five
+  seconds, pause while hovered or focused, queue beyond `max` and are announced through two live
+  lists, polite and assertive, mounted while empty. A toast is an Alert with the new `toast`
+  recipe family for its width, corners, shadow, stacking and entrance (Carbon 288px and square,
+  Material's snackbar corners at the menus' level 2 elevation).
+
+### Changed
+
+- Stepper's linear variant renders a Progress bar. It looks the same and keeps its classes,
+  tokens, props and the progressbar named "Progress"; the role moves from `.stepper__bar` to
+  `.stepper__track`, which now holds the counter and the bar inside it.
+- Neobrutalism's linear Stepper bar has a dark slate track in light mode, like Progress, so the
+  yellow fill keeps 3:1 against it; dark mode keeps the page color.
+- Material's Alerts tint the lowest surface container instead of the violet-tinted surface,
+  with stronger warning and error tints and icons in the status color. Before, success turned
+  gray and warning and error looked alike.
+
 ## [2.6.0] - Unreleased
 
 ### Added
@@ -315,6 +344,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.7.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.3.0...v2.4.0

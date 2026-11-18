@@ -23,6 +23,9 @@ not on its name. `<styles>` below means `paths.styles`.
   the nearest `data-design-system` / `data-color-scheme` attributes and the
   variables on that boundary. Only `useTheme()` and `useColors()` need a
   ThemeProvider, and they throw without one.
+- Toasts: one `ToastProvider` inside the theme owner, around everything that
+  calls `useToast()`, which throws without it. Its labels go in the
+  project's language.
 - The library CSS carries every built-in palette. `neus.theme.css` (written by
   `neus-ui init`) adds the project's own colors; it is empty when the project
   keeps the system's colors. Never write palette variables by hand.
@@ -43,8 +46,9 @@ not on its name. `<styles>` below means `paths.styles`.
 
 ## spa
 
-- The root is wrapped once in `NeusRoot`. Do not add another global
-  provider. A nested ThemeProvider is always local; use one only for an
+- The root is wrapped once in `NeusRoot`. When the app shows toasts, NeusRoot
+  also wraps its children in the one ToastProvider, inside its ThemeProvider.
+  Do not add another global provider. A nested ThemeProvider is always local; use one only for an
   isolated preview or a feature with its own token scope.
 - Dark mode toggles call `useTheme().setColorScheme(...)` under the root.
 - Sidebar and AppTemplate `routes` take `href` and render links; pass the
@@ -62,6 +66,9 @@ not on its name. `<styles>` below means `paths.styles`.
 - Do not mount a global ThemeProvider: the stylesheet already themes the
   first paint. Need `useTheme()` somewhere? Wrap that subtree in
   `<ThemeProvider scope="local">`.
+- ToastProvider is a client component: mount it once in the root layout
+  (around `{children}` in App Router, which may render it from a Server
+  Component) so every screen can call `useToast()`.
 - Dark mode: an inline head script sets `data-color-scheme` before paint
   (read the saved choice from `localStorage`); a toggle flips the attribute
   and saves it. `neus.theme.css` covers both modes.
@@ -97,7 +104,8 @@ Everything in `ssr`, plus:
 - `NeusLayout.astro` owns the theme attributes, the fonts and the
   stylesheet imports. Pages use this layout.
 - Do not render a global ThemeProvider inside islands: each island is its
-  own React root and would write to `<html>`.
+  own React root and would write to `<html>`. Islands share no React context
+  either, so a ToastProvider lives inside the island that shows toasts.
 - `.astro` for static structure, content and data loading; React islands
   only for interactive regions. App screens (shell, tables, forms, dialogs)
   are one React component per page, rendered with one client directive.

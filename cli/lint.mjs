@@ -96,12 +96,20 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
       if (!isCss(file) && /role=["']alert["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"alert\": use Alert");
       if (!isCss(file) && /role=["']switch["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"switch\": use Switch");
       if (!isCss(file) && /role=["']radio(group)?["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made radio: use RadioGroup and Radio");
+      if (!isCss(file) && /role=["']progressbar["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made progress bar: use Progress");
+      if (!isCss(file) && /\saria-live=/.test(line)) {
+        report(file, at, "P1", "raw-element", "aria-live region: use useToast for notifications, Alert for a message on the page");
+      }
       if (!isCss(file) && /<\w+\b[^>]*\spopover(=|[\s/>])/.test(line)) {
         report(file, at, "P1", "raw-element", "popover attribute: use Popover (Menu for a list of actions)");
       }
       if (isCss(file) ? /@keyframes\s+(spin|spinner|loader)\b/.test(line)
         : /<(div|span|svg|i)\b[^>]*class(Name)?=["']([^"']*\s)?(spinner|loader)(\s[^"']*)?["']/.test(line)) {
         report(file, at, "P1", "raw-element", "hand-made spinner: use Spinner (or loading on Button and IconButton)");
+      }
+      if (isCss(file) ? /@keyframes\s+(shimmer|skeleton)\b/.test(line)
+        : /<(div|span)\b[^>]*class(Name)?=["']([^"']*\s)?(skeleton|shimmer)(\s[^"']*)?["']/.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made skeleton: use Skeleton");
       }
       if (/--sidebar-(header-)?background["']?\s*:/.test(line)) {
         report(file, at, "P1", "app-shell", "the Sidebar keeps the system's panel color (the primary in Neus); change the brand's primary instead");

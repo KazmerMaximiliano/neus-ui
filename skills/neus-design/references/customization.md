@@ -31,7 +31,10 @@ native attributes and `ref` on Button and IconButton; Sidebar and AppTemplate ro
 Section `tone`, `spacing` and `container`; Container `size` and `gutter`;
 Stack and Grid `gap`, `direction` and `columns`, per breakpoint with
 `{ base, md, lg }`; the `neus-ui/sections` variants (Hero, FeatureList,
-TestimonialList, CallToAction) and `labels` (SiteHeader); Spinner `variant` (`ring`, `dots`) and `size`; MediaPlaceholder `ratio`,
+TestimonialList, CallToAction) and `labels` (SiteHeader); Spinner `variant` (`ring`, `dots`) and `size`;
+Progress `size`, `showValue` and `valueText`; Skeleton `variant`, `lines`, `width` and
+`height`; ToastProvider `placement`, `max` and `duration`, and each toast's `status`,
+`duration` and `live`; MediaPlaceholder `ratio`,
 `query` and `pixabayKey` (a stock photo preview during design, only through the
 expression `npx neus-ui context` prints). One solid primary action per view; the rest use
 `secondary`, `tonal`, `outlined` or `text`.

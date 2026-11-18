@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 46 components and public sections. Import each by name from `neus-ui`.
+The package exports 49 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -29,7 +29,10 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Button](./Button.md) | Semantic button with six variants, three sizes and loading feedback. |
 | [IconButton](./IconButton.md) | Accessible icon-only button with loading feedback. |
 | [Link](./Link.md) | Styled native anchor with primary and secondary treatments. |
+| [Progress](./Progress.md) | Completion of a task as a bar, determinate or indeterminate, with a label and value. |
+| [Skeleton](./Skeleton.md) | Hidden placeholder lines, blocks and circles while content loads. |
 | [Spinner](./Spinner.md) | Indeterminate loading ring or dots, announced as a status when labelled. |
+| [Toast](./Toast.md) | Brief notification after an action, shown and announced through ToastProvider. |
 
 ## Fields and selection
 

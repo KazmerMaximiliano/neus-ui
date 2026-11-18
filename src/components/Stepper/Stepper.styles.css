@@ -128,7 +128,10 @@
   background-color: var(--stepper-connector-done-color);
 }
 
+/* The linear track is a Progress bar; these rules keep the stepper's own tokens and look. */
 .stepper--linear .stepper__track {
+  --progress-font-family: var(--stepper-font-family);
+  --progress-fill-border-width: 0px;
   display: flex;
   flex-direction: column;
   gap: var(--stepper-gap);

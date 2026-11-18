@@ -92,6 +92,20 @@ the project wrote.
   with `aria-busy`: flag a Spinner placed inside a button, and flag a
   hand-made spinner (a rotating border, an animated SVG) or an unlabelled
   Spinner with no other announcement of the wait.
+- Progress is a named `role="progressbar"` with `aria-valuenow`, `aria-valuemin`
+  and `aria-valuemax` (none while indeterminate) and `valueText` as
+  `aria-valuetext`; the visible value is hidden from assistive technology.
+  Stepper's linear mode already renders one. Flag a raw `<progress>`, a
+  hand-made `role="progressbar"` and a Progress with no name.
+- Skeleton is always `aria-hidden` and stands still under reduced motion. Flag
+  a loading region with skeletons but no `aria-busy`, and focusable controls
+  inside a skeleton.
+- ToastProvider announces toasts through two persistent live lists (polite and
+  assertive) in a labelled region; every toast has a named close button and
+  pauses while hovered or focused. Flag a hand-made toast or snackbar (a fixed
+  box with `aria-live` or a `setTimeout` that removes it), several
+  ToastProviders, `live: "assertive"` for anything but a blocking error, and a
+  toast with an action that closes in under five seconds.
 - Buttons and fields ship hover, focus-visible and disabled styles through
   recipe tokens. Flag project CSS or `*Style` props that remove or override
   them.

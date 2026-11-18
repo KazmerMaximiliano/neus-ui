@@ -79,7 +79,7 @@ export const RAW_TO_COMPONENT = {
   button: "Button or IconButton", input: "Input, Checkbox, Switch or RadioGroup", select: "Select", textarea: "Textarea",
   dialog: "Modal", a: "Link, or Button with href", p: "Text", section: "Section", ul: "Grid or Stack as=\"ul\"", ol: "Stack as=\"ol\"",
   h1: "Heading", h2: "Heading", h3: "Heading", h4: "Heading", h5: "Heading", h6: "Heading",
-  header: "SiteHeader (neus-ui/sections)", footer: "SiteFooter (neus-ui/sections)",
+  header: "SiteHeader (neus-ui/sections)", footer: "SiteFooter (neus-ui/sections)", progress: "Progress",
 };
 export const INTERACTIVE_ELEMENTS = ["Button", "IconButton", "Input", "Select", "MultiSelect", "Checkbox", "DateInput",
   "TimeInput", "Textarea", "Switch", "Radio", "Link", "Menu", "Dropdown", "button", "input", "select", "textarea",

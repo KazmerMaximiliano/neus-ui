@@ -2,8 +2,8 @@
 // Run it again after changing the system, the derived system or the palette; delete it when done.
 import {
   Alert, Avatar, AvatarGroup, Badge, Button, Card, CardContent, CardFooter, CardHeader, Checkbox, DateInput, Grid,
-  Heading, Input, MediaPlaceholder, Popover, Radio, RadioGroup, Section, Select, Spinner, Stack, Switch, Text,
-  Textarea, ThemeProvider,
+  Heading, Input, MediaPlaceholder, Popover, Progress, Radio, RadioGroup, Section, Select, Skeleton, Spinner, Stack,
+  Switch, Text, Textarea, ThemeProvider, Toast,
 } from "neus-ui";
 import type { ColorScheme, DesignSystemId, ThemeConfig } from "neus-ui";
 
@@ -80,6 +80,19 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
         </Grid>
         <Grid columns={{ base: 1, md: 2 }} gap={4}>
           {STATUSES.map((status) => <Alert key={status} status={status} title={`${status} title`}>An {status} message with its next step.</Alert>)}
+        </Grid>
+        <Grid columns={{ base: 1, md: 3 }} gap={6}>
+          <Stack gap={4}>
+            <Progress label="Uploading photos" value={3} max={8} valueText="3 of 8 photos" showValue />
+            <Progress label="Syncing" size="small" />
+          </Stack>
+          <Stack direction="row" gap={3} align="start">
+            <Skeleton variant="circle" />
+            <Skeleton lines={3} />
+          </Stack>
+          <Toast status="success" title="Changes saved" onDismiss={() => undefined} dismissLabel="Dismiss">
+            A toast floats over the page after an action.
+          </Toast>
         </Grid>
         <Grid as="ul" columns={{ base: 1, md: 2, lg: 4 }}>
           {CARDS.map((variant) => (
