@@ -1404,6 +1404,25 @@ x-neus:
         --toast-duration: 0.2s
         --toast-easing: ease-out
         --toast-enter-offset: 8px
+    tooltip:
+      base:
+        --tooltip-background: var(--color-text-primary)
+        --tooltip-color: var(--color-surface)
+        --tooltip-border-width: 0px
+        --tooltip-border-color: transparent
+        --tooltip-radius: var(--radius-sm)
+        --tooltip-shadow: none
+        --tooltip-padding: 6px 10px
+        --tooltip-max-width: 240px
+        --tooltip-multiline-padding: initial
+        --tooltip-multiline-max-width: initial
+        --tooltip-offset: 6px
+        --tooltip-caret-size: 0px
+        --tooltip-font-family: var(--font-body)
+        --tooltip-font-size: var(--fs-xs)
+        --tooltip-font-weight: "500"
+        --tooltip-line-height: "1.4"
+        --tooltip-letter-spacing: normal
 ---
 
 # Neus UI
@@ -1529,6 +1548,10 @@ A progress bar shows how much of a task is done: an indigo pill filling a gray p
 A skeleton holds the place of content that is still loading: gray rounded lines for text, a block with the card's corners for media and a circle for an avatar, pulsing softly. It stops pulsing under reduced motion. The region that is loading says so to screen readers, not the placeholder.
 
 A toast is a short notification that floats in a corner after an action, such as "Changes saved". It is the alert of its status with the floating shadow, 360px wide, and closes itself after five seconds unless hovered or focused. Newer toasts stack nearest the corner, 12px apart.
+
+A tooltip is a short dark label that names or explains a control, such as an icon button. It reverses the page colors (text color behind, surface color in front), with 12px medium text, 6px by 10px of padding, 8px corners and no shadow, at most 240px wide. It sits 6px above the control, centered, and moves below when there is no room.
+
+A combobox is a field you can type into that suggests options below it. The field is the input with every one of its variants and sizes, and the list is the select's panel and options. The option the arrow keys reach gets the hover background and the focus outline, because focus stays in the field.
 
 ## Do's and Don'ts
 

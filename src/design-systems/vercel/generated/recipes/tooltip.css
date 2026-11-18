@@ -1,0 +1,7 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --tooltip-radius: 6px;
+  --tooltip-shadow: 0 1px 1px rgb(0 0 0 / 0.02), 0 4px 8px rgb(0 0 0 / 0.04);
+  --tooltip-font-size: 13px;
+  --tooltip-font-weight: 400;
+}

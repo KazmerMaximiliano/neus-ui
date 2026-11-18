@@ -1,4 +1,5 @@
 import { type CSSProperties,useId, useState } from "react";
+import { TooltipBubble } from "../../../Tooltip/components/TooltipBubble";
 import type { EventTooltip, WeekCalendarRowProps } from "./WeekCalendarRow.types";
 import { getDayCellInfo, resolveColor } from "./WeekCalendarRow.utils";
 import "./WeekCalendarRow.styles.css";
@@ -202,9 +203,8 @@ export const WeekCalendarRow = ({
         );
       })}
       {hoverContent && tooltip && (
-        <div
+        <TooltipBubble
           id={tooltipId}
-          role="tooltip"
           className={["week-calendar-row__hover-tooltip", tooltipClassName]
             .filter(Boolean)
             .join(" ")}
@@ -217,7 +217,7 @@ export const WeekCalendarRow = ({
           }
         >
           {hoverContent(tooltip.event)}
-        </div>
+        </TooltipBubble>
       )}
     </div>
   );

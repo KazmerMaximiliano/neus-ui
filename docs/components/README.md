@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 49 components and public sections. Import each by name from `neus-ui`.
+The package exports 51 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -33,6 +33,7 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Skeleton](./Skeleton.md) | Hidden placeholder lines, blocks and circles while content loads. |
 | [Spinner](./Spinner.md) | Indeterminate loading ring or dots, announced as a status when labelled. |
 | [Toast](./Toast.md) | Brief notification after an action, shown and announced through ToastProvider. |
+| [Tooltip](./Tooltip.md) | Short description of a control on hover and keyboard focus. |
 
 ## Fields and selection
 
@@ -45,6 +46,7 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Radio](./Radio.md) | Native radio with a label and help text, alone or inside a RadioGroup. |
 | [RadioGroup](./RadioGroup.md) | One choice among a few visible Radio options, with a legend. |
 | [Select](./Select.md) | Single selection with a searchable, keyboard-operated listbox. |
+| [Combobox](./Combobox.md) | Text field with suggestions from a list or fetched results, and optional new values. |
 | [MultiSelect](./MultiSelect.md) | Multiple selection with removable tags and searchable options. |
 | [FileUploader](./FileUploader.md) | File selection and drag/drop with size and type validation. |
 

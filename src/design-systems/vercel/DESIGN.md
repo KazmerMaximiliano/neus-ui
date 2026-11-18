@@ -448,6 +448,12 @@ x-neus:
         --skeleton-text-radius: 6px
         --skeleton-rect-radius: 6px
     toast: {}
+    tooltip:
+      base:
+        --tooltip-radius: 6px
+        --tooltip-shadow: 0 1px 1px rgb(0 0 0 / 0.02), 0 4px 8px rgb(0 0 0 / 0.04)
+        --tooltip-font-size: 13px
+        --tooltip-font-weight: "400"
 ---
 
 # Vercel
@@ -569,6 +575,8 @@ A progress bar is an ink pill on the gray border color, 6px by default; put the 
 A skeleton shimmers, as in [Geist skeleton](https://vercel.com/geist/skeleton) (consulted 2026-11-17): gray shapes with 6px corners crossed by a lighter band. The colors are local decisions.
 
 A toast is the alert with the soft floating shadow. Geist keeps toasts polite and saves assertive announcements for blocking errors, and an Undo action stays on screen for 5 to 10 seconds ([Geist toast](https://vercel.com/geist/toast), consulted 2026-11-17).
+
+A tooltip is the foreground color behind background-colored text in 13px, with 6px corners and the lightest shadow, the tooltip material ([Geist materials](https://vercel.com/geist/materials), consulted 2026-11-18). Geist waits about 150ms before showing one so a sweeping pointer does not flash it ([Geist tooltip](https://vercel.com/geist/tooltip), consulted 2026-11-18), which is the component's default delay. A combobox is the input with the select's list.
 
 ## Do's and Don'ts
 

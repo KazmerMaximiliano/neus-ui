@@ -8,6 +8,32 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.8.0] - Unreleased
+
+### Added
+
+- `Tooltip`: a short description of a control, shown after the pointer rests on it for 150ms or
+  at once on keyboard focus, centered above or below it and flipping to stay on screen. The
+  trigger is a render function, as in Popover, and gets `aria-describedby`. It follows WCAG
+  1.4.13: the pointer can move onto it, Escape closes it without moving focus, and touch does
+  not show it. New `tooltip` recipe family in the six systems: the inverse label in Neus,
+  Material's plain tooltip, Carbon's tooltip with its caret and its single-line and multi-line
+  structures, Geist's tooltip material, Neobrutalism's framed card.
+- `Combobox`: a text field with suggestions, following the WAI-ARIA combobox pattern with
+  `aria-activedescendant`. It filters a local list or shows results you fetch
+  (`filter={false}`, `inputValue`, `onInputChange`, `loading`), keeps an exact match or the last
+  choice when the field is left, accepts new values with `allowCustomValue`, submits the value
+  through `name`, and takes every Input field prop. It reuses the input, select and overlay
+  recipes.
+- `Input` forwards its ref to the native `<input>`.
+
+### Changed
+
+- WeekCalendarRow's event tooltip is a Tooltip bubble: a `span` with `role="tooltip"` and the
+  `.tooltip` class besides `.week-calendar-row__hover-tooltip`, where it was a `div`. It keeps
+  its overlay surface, the calendar's type, the pointer position, `tooltipClassName` and
+  `tooltipStyle`.
+
 ## [2.7.0] - Unreleased
 
 ### Added
@@ -344,6 +370,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.8.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.7.0...v2.8.0
 [2.7.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.4.0...v2.5.0

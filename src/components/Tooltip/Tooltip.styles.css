@@ -1,0 +1,63 @@
+.tooltip {
+  max-width: var(--tooltip-max-width);
+  padding: var(--tooltip-padding);
+  border: var(--tooltip-border-width) solid var(--tooltip-border-color);
+  border-radius: var(--tooltip-radius);
+  background-color: var(--tooltip-background);
+  color: var(--tooltip-color);
+  box-shadow: var(--tooltip-shadow);
+  font-family: var(--tooltip-font-family);
+  font-size: var(--tooltip-font-size);
+  font-weight: var(--tooltip-font-weight);
+  line-height: var(--tooltip-line-height);
+  letter-spacing: var(--tooltip-letter-spacing);
+  overflow-wrap: break-word;
+}
+
+/* Tooltip floats the bubble on the top layer; usePopover centers it on the trigger and flips its side.
+   Its width comes from its text, not from the room left beside the trigger. */
+.tooltip[popover] {
+  position: fixed;
+  inset: auto;
+  width: max-content;
+  top: calc(var(--popover-top) + var(--tooltip-offset));
+  left: var(--popover-center);
+  margin: 0;
+  overflow: visible;
+}
+
+.tooltip[popover][data-placement="top"] {
+  top: auto;
+  bottom: calc(var(--popover-bottom) + var(--tooltip-offset));
+}
+
+/* Systems without a multi-line structure leave these tokens unset and keep the single-line values. */
+.tooltip[popover][data-multiline] {
+  max-width: var(--tooltip-multiline-max-width, var(--tooltip-max-width));
+  padding: var(--tooltip-multiline-padding, var(--tooltip-padding));
+}
+
+/* The caret points at the trigger's center, even when the tooltip is pushed in from a screen edge. */
+.tooltip[popover]::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + var(--tooltip-border-width));
+  left: clamp(
+    var(--tooltip-radius),
+    calc(
+      var(--popover-left) + var(--popover-anchor-width) / 2 - var(--popover-center) -
+        var(--tooltip-caret-size)
+    ),
+    calc(100% - var(--tooltip-radius) - var(--tooltip-caret-size) * 2)
+  );
+  width: calc(var(--tooltip-caret-size) * 2);
+  height: var(--tooltip-caret-size);
+  background-color: var(--tooltip-background);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+.tooltip[popover][data-placement="top"]::before {
+  top: calc(100% + var(--tooltip-border-width));
+  bottom: auto;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}

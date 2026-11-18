@@ -529,6 +529,24 @@ x-neus:
         --toast-width: 288px
         --toast-gap: 8px
         --toast-radius: 0px
+    tooltip:
+      base:
+        --tooltip-background: "#393939"
+        --tooltip-color: "#ffffff"
+        --tooltip-radius: 2px
+        --tooltip-padding: 2px 16px
+        --tooltip-max-width: 208px
+        --tooltip-multiline-padding: 16px
+        --tooltip-multiline-max-width: 288px
+        --tooltip-offset: 10px
+        --tooltip-caret-size: 6px
+        --tooltip-font-size: 14px
+        --tooltip-font-weight: "400"
+        --tooltip-line-height: 20px
+        --tooltip-letter-spacing: 0.16px
+      dark:
+        --tooltip-background: "#f4f4f4"
+        --tooltip-color: "#161616"
 ---
 
 # Carbon
@@ -647,6 +665,8 @@ A progress bar is 8px big or 4px small, square, with the interactive blue on the
 A skeleton is a square shape in the skeleton background, #e8e8e8 (#292929 in Gray 100), crossed by a shimmer of the skeleton element color, #c6c6c6 (#393939), as the theme tokens set ([Carbon themes](https://github.com/carbon-design-system/carbon/tree/main/packages/themes/tokens/themes), consulted 2026-11-17).
 
 A toast is the notification at its fixed 288px width with square corners and the floating shadow; toasts stack 8px apart ([Carbon notification style](https://carbondesignsystem.com/components/notification/style/), consulted 2026-11-17). Carbon slides them in at the top right, so pass `placement="top-end"` to ToastProvider.
+
+A tooltip is the inverse background (#393939, #f4f4f4 in dark mode) with inverse text in body 01, 14px over 20px, with no shadow. A single line has 2px by 16px of padding and is at most 208px wide; text that wraps gets 16px of padding on every side and up to 288px. A 6px caret points at the control from 4px away ([Carbon tooltip style](https://carbondesignsystem.com/components/tooltip/style/), consulted 2026-11-18). The 2px corners come from the popover's code ([Carbon popover styles](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/popover/_popover.scss), consulted 2026-11-18). A combobox is the text input with the dropdown's list.
 
 ## Do's and Don'ts
 

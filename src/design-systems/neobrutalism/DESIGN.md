@@ -503,6 +503,15 @@ x-neus:
         --skeleton-background: color-mix(in srgb, var(--color-text-primary) 14%, var(--color-surface))
         --skeleton-text-radius: 0px
     toast: {}
+    tooltip:
+      base:
+        --tooltip-background: var(--color-surface)
+        --tooltip-color: var(--color-text-primary)
+        --tooltip-border-width: 2px
+        --tooltip-border-color: var(--color-text-primary)
+        --tooltip-radius: 4px
+        --tooltip-shadow: 3px 3px 0 var(--color-text-primary)
+        --tooltip-font-weight: "700"
 ---
 
 # Neobrutalism
@@ -612,6 +621,8 @@ A progress bar is a 3px ink frame filled with yellow up to a 3px ink edge; the r
 A skeleton is a flat ink-tinted block with square text lines that pulses.
 
 A toast is the alert with the hard ink shadow.
+
+A tooltip is a small framed card: the page color with a 2px ink border, 4px corners, a 3px hard ink shadow and bold text. A combobox is the framed field with the select's list.
 
 ## Do's and Don'ts
 

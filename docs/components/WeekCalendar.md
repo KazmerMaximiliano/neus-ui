@@ -98,7 +98,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.week-calendar-row__category-cell` | `WeekCalendarRow part` | `categoryClassName` | `categoryStyle` | `Each category row` |
 | `.week-calendar-row__event--single/start/continue/end` | `WeekCalendarRow part` | `eventClassName` | `eventStyle` | `Event bars` |
 | `.week-calendar-row__event-content` | `WeekCalendarRow part` | `eventClassName` | `eventStyle` | `Event start/single content` |
-| `.week-calendar-row__hover-tooltip` | `WeekCalendarRow part` | `tooltipClassName` | `tooltipStyle` | `hoverContent and active hover/focus` |
+| `.week-calendar-row__hover-tooltip` (`.tooltip`) | `WeekCalendarRow part`, a [Tooltip](./Tooltip.md) bubble | `tooltipClassName` | `tooltipStyle` | `hoverContent and active hover/focus` |
 
 State/variant selectors: `.week-calendar-row__category-cell--with-point`,
 `.week-calendar-row__day-cell--clickable`, `.week-calendar-row__event--continue`,

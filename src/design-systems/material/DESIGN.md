@@ -568,6 +568,19 @@ x-neus:
     toast:
       base:
         --toast-radius: 4px
+    tooltip:
+      base:
+        --tooltip-background: "#322f35"
+        --tooltip-color: "#f5eff7"
+        --tooltip-radius: 4px
+        --tooltip-padding: 4px 8px
+        --tooltip-font-size: 12px
+        --tooltip-font-weight: "400"
+        --tooltip-line-height: 16px
+        --tooltip-letter-spacing: 0.4px
+      dark:
+        --tooltip-background: "#e6e0e9"
+        --tooltip-color: "#322f35"
 ---
 
 # Material
@@ -726,6 +739,8 @@ The linear progress indicator is a 4px primary bar on the highest surface contai
 Material has no skeleton; placeholders use the highest surface container, a local decision.
 
 A toast takes the snackbar's extra-small 4px corners ([Material Web snackbar tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-snackbar.scss), consulted 2026-11-17). Two local decisions depart from the snackbar: a toast keeps its status color instead of the inverse surface, so success, warning and error stay distinct, and it floats at level 2, the menus' elevation, instead of level 3, so a stack of toasts stays light.
+
+A tooltip is the plain tooltip: the inverse surface (#322f35, #e6e0e9 in dark mode) with inverse-on-surface text in body small, 12px over 16px with 0.4px tracking, and extra-small 4px corners, without elevation ([Material Web plain tooltip tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-plain-tooltip.scss), consulted 2026-11-18). The tokens leave out padding; 4px by 8px is a local decision. A combobox is the text field with the menu list below it, the exposed dropdown menu that accepts typing.
 
 Material has no success or warning roles, so alert colors are a local decision. Alerts tint the lowest surface container, not the tinted surface: mixed into its violet cast, green turns gray and orange and red look alike. Warning takes a 24% tint and error 14%, and their icons carry the status color (warning at 70% over the text color, to keep 3:1), so the two read apart in both modes.
 

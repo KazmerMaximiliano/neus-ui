@@ -97,6 +97,13 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
       if (!isCss(file) && /role=["']switch["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"switch\": use Switch");
       if (!isCss(file) && /role=["']radio(group)?["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made radio: use RadioGroup and Radio");
       if (!isCss(file) && /role=["']progressbar["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made progress bar: use Progress");
+      if (!isCss(file) && /role=["']tooltip["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made tooltip: use Tooltip");
+      if (!isCss(file) && /<(button|a|Button|IconButton|Link)\b[^>]*\stitle=/.test(line)) {
+        report(file, at, "P1", "raw-element", "title attribute as a tooltip: use Tooltip, which keyboard and touch users reach");
+      }
+      if (!isCss(file) && /role=["']combobox["']/.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made combobox: use Combobox (Select for predefined options)");
+      }
       if (!isCss(file) && /\saria-live=/.test(line)) {
         report(file, at, "P1", "raw-element", "aria-live region: use useToast for notifications, Alert for a message on the page");
       }

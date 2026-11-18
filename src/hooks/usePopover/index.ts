@@ -1,2 +1,2 @@
 export { focusMenuItem, usePopover } from "./usePopover";
-export type { PopoverPlacement, UsePopoverOptions } from "./usePopover.types";
+export type { AnchorPlacement, PopoverPlacement, UsePopoverOptions } from "./usePopover.types";

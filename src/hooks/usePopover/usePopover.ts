@@ -9,6 +9,7 @@ export const usePopover = <
 >({
   initialFocus,
   placement = "bottom-start",
+  restoreFocus = true,
   open: controlledOpen,
   defaultOpen = false,
   onOpenChange,
@@ -38,6 +39,12 @@ export const usePopover = <
     popover.style.setProperty("--popover-left", `${rect.left}px`);
     popover.style.setProperty("--popover-right", `${clientWidth - rect.right}px`);
     popover.style.setProperty("--popover-anchor-width", `${rect.width}px`);
+    // A centered panel stays whole inside the viewport.
+    const centered = rect.left + (rect.width - popover.offsetWidth) / 2;
+    popover.style.setProperty(
+      "--popover-center",
+      `${Math.max(0, Math.min(centered, clientWidth - popover.offsetWidth))}px`,
+    );
   }, [placement]);
 
   const setOpen = useCallback((next: boolean) => {
@@ -88,7 +95,7 @@ export const usePopover = <
       }
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") hide(true);
+      if (event.key === "Escape") hide(restoreFocus);
     };
     document.addEventListener("mousedown", onMouseDown);
     document.addEventListener("keydown", onKeyDown);
@@ -100,9 +107,9 @@ export const usePopover = <
       window.removeEventListener("scroll", place, true);
       window.removeEventListener("resize", place);
     };
-  }, [open, hide, place]);
+  }, [open, hide, place, restoreFocus]);
 
-  return { id, open, triggerRef, popoverRef, anchorRef, show, hide, toggle };
+  return { id, open, triggerRef, popoverRef, anchorRef, show, hide, toggle, place };
 };
 
 const NAVIGATION_KEYS = ["ArrowDown", "ArrowUp", "Home", "End"];

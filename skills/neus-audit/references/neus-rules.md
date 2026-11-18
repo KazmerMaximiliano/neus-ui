@@ -46,7 +46,18 @@ the project wrote.
   hand-made floating panel (`popover` attribute, absolutely positioned
   `div` toggled by state) and a Popover used for a list of actions (Menu)
   or for a task that must be finished first (Modal).
-- Field components (Input, Textarea, Select, MultiSelect, DateInput, TimeInput) render
+- Tooltip gives its trigger `aria-describedby`, shows on hover after 150ms and at
+  once on keyboard focus, can be hovered itself, and closes on Escape without
+  moving focus (WCAG 1.4.13); touch does not show it. Flag a hand-made
+  `role="tooltip"`, a `title` attribute used as a tooltip on a control, a
+  tooltip that replaces an icon button's name, and links or buttons inside a
+  tooltip (Popover).
+- Combobox is an Input with `role="combobox"`, `aria-autocomplete="list"` and
+  `aria-activedescendant`: focus stays in the field while the arrows move
+  through the options, and leaving the field keeps an exact match or the last
+  choice. Flag a hand-made autocomplete (a text input over a list of buttons or
+  a `<datalist>`) and a Select used where people must type to find a value.
+- Field components (Input, Textarea, Combobox, Select, MultiSelect, DateInput, TimeInput) render
   their own `<label>` from `label`, mark `required` with an asterisk and
   `aria-required`, and wire `description` and errors to `aria-describedby`.
   Flag "Required" or "Obligatorio" written as a hint instead of `required`. Flag a field only when it has neither `label` nor

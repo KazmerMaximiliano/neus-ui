@@ -406,6 +406,7 @@ x-neus:
         --progress-value-weight: "400"
     skeleton: {}
     toast: {}
+    tooltip: {}
 ---
 
 # Apple
@@ -521,6 +522,8 @@ A popover uses the menu panel: the subtle border, 12px corners and floating shad
 A progress bar is a thin accent capsule on a gray track, 6px by default, with a regular-weight label; the guidelines ask for a determinate bar whenever the share is known and an accurate description rather than a vague "Loading" ([HIG progress indicators](https://developer.apple.com/design/human-interface-guidelines/progress-indicators), consulted 2026-11-17). The 4, 6 and 8px thicknesses are local decisions; the guidelines state none.
 
 The guidelines define no skeleton or toast. Skeletons keep the Neus gray shapes with the system's rounded corners, and a toast is the alert with the soft floating shadow and the card's corners: local web mappings.
+
+Tooltips (help tags) are drawn by macOS itself and the web has no equivalent, so a tooltip keeps the Neus dark label with the system font: a local mapping. A combobox is the field with the select's list below it.
 
 ## Do's and Don'ts
 

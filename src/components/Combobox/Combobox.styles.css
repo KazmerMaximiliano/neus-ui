@@ -1,0 +1,7 @@
+/* The option the arrow keys reach; focus stays in the field, so it is drawn instead of focused. */
+.combobox__option--active {
+  background-color: var(--overlay-item-hover-background);
+  color: var(--overlay-item-hover-color);
+  outline: 2px solid var(--overlay-focus-color);
+  outline-offset: -2px;
+}

@@ -21,6 +21,8 @@ export { Checkbox } from "./Checkbox";
 export type { CheckboxProps } from "./Checkbox";
 export { Clock } from "./Clock";
 export type { ClockProps, TimeValue } from "./Clock";
+export { Combobox } from "./Combobox";
+export type { ComboboxProps } from "./Combobox";
 export { Container } from "./Container";
 export type { ContainerElement, ContainerProps, ContainerSize } from "./Container";
 export { DataTable } from "./DataTable";
@@ -96,6 +98,8 @@ export { TimeInput } from "./TimeInput";
 export type { TimeInputProps } from "./TimeInput";
 export { Toast } from "./Toast";
 export type { ToastProps } from "./Toast";
+export { Tooltip } from "./Tooltip";
+export type { TooltipPlacement, TooltipProps, TooltipTriggerProps } from "./Tooltip";
 export { WeekCalendar, WeekCalendarRow } from "./WeekCalendar";
 export type {
   CalendarEvent,
