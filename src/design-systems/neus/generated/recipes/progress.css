@@ -1,0 +1,26 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --progress-font-family: var(--font-body);
+  --progress-gap: 8px;
+  --progress-text-gap: 16px;
+  --progress-label-color: var(--color-text-primary);
+  --progress-label-font-size: var(--fs-sm);
+  --progress-label-weight: 600;
+  --progress-value-color: var(--color-text-secondary);
+  --progress-value-font-size: var(--fs-sm);
+  --progress-value-weight: 500;
+  --progress-height-small: 4px;
+  --progress-height-medium: 8px;
+  --progress-height-large: 12px;
+  --progress-track-radius: 3em;
+  --progress-track-border-width: 0px;
+  --progress-track-border-color: transparent;
+  --progress-track-background: var(--color-border-subtle);
+  --progress-fill-background: var(--color-primary);
+  --progress-fill-radius: 3em;
+  --progress-fill-border-width: 0px;
+  --progress-transition: width 0.3s ease;
+  --progress-indeterminate-width: 40%;
+  --progress-indeterminate-duration: 1.6s;
+}

@@ -1,0 +1,87 @@
+/* One class per rule: a host that renders the bar as one of its parts (Stepper's linear track)
+   imports Progress, so its own rules load later and win with the same weight. */
+.progress {
+  --progress-height: var(--progress-height-medium);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--progress-gap) var(--progress-text-gap);
+  width: 100%;
+  font-family: var(--progress-font-family);
+}
+
+.progress--small {
+  --progress-height: var(--progress-height-small);
+}
+
+.progress--large {
+  --progress-height: var(--progress-height-large);
+}
+
+.progress__label {
+  color: var(--progress-label-color);
+  font-size: var(--progress-label-font-size);
+  font-weight: var(--progress-label-weight);
+}
+
+.progress__value {
+  color: var(--progress-value-color);
+  font-size: var(--progress-value-font-size);
+  font-weight: var(--progress-value-weight);
+}
+
+.progress__label + .progress__value {
+  text-align: end;
+}
+
+.progress__track {
+  position: relative;
+  grid-column: 1 / -1;
+  box-sizing: border-box;
+  height: var(--progress-height);
+  overflow: hidden;
+  border: var(--progress-track-border-width) solid
+    var(--progress-track-border-color);
+  border-radius: var(--progress-track-radius);
+  background-color: var(--progress-track-background);
+}
+
+.progress__fill {
+  box-sizing: border-box;
+  width: calc(var(--progress-value, 0) * 100%);
+  height: 100%;
+  border-inline-end: var(--progress-fill-border-width) solid
+    var(--progress-track-border-color);
+  border-radius: var(--progress-fill-radius);
+  background-color: var(--progress-fill-background);
+  transition: var(--progress-transition);
+}
+
+.progress--indeterminate .progress__fill {
+  position: absolute;
+  inset-block: 0;
+  width: var(--progress-indeterminate-width);
+  animation: progress-slide var(--progress-indeterminate-duration) ease-in-out
+    infinite;
+}
+
+/* The segment enters fully hidden at the start and leaves fully hidden at the end. */
+@keyframes progress-slide {
+  from {
+    inset-inline-start: calc(-1 * var(--progress-indeterminate-width));
+  }
+
+  to {
+    inset-inline-start: 100%;
+  }
+}
+
+/* A still segment would read as a fixed amount, so reduced motion slows it down instead. */
+@media (prefers-reduced-motion: reduce) {
+  .progress__fill {
+    transition: none;
+  }
+
+  .progress--indeterminate .progress__fill {
+    animation-duration: calc(var(--progress-indeterminate-duration) * 2);
+  }
+}

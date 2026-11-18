@@ -27,7 +27,9 @@ default, small is the default size. In dots mode, only completed steps become bu
 onStepClick exists; the active step uses aria-current step. Visible labels depend on
 showLabels and labels. Connectors appear unless showConnectors is false.
 
-Linear/simple modes expose progressbar semantics. Linear labels use
+Linear/simple modes expose progressbar semantics. The linear mode renders a
+[Progress](./Progress.md) bar: `.stepper__track` is the progressbar, named "Progress", and its
+parts keep the stepper's classes and tokens. Linear labels use
 labelStyle/labelClassName just like dot labels; barStyle targets the track and barFillStyle
 targets its fill. Simple dots share dotStyle/dotClassName. Repeated hooks affect every
 matching part. Screen-reader text in dots mode must retain its visually hidden behavior.

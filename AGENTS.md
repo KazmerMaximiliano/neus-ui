@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 46 reusable UI components and public sections
+- 49 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (46 total)
+### Implemented Components and Public Subcomponents (49 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -243,6 +243,9 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Spinner          | src/components/Spinner/                                 | STABLE | Ring or dots, polite status when labelled, slows under reduced motion; Button and IconButton loaders                    |
 | Switch           | src/components/Switch/                                  | STABLE | Native checkbox with the switch role, label first, help text, controlled or uncontrolled                                |
 | Textarea         | src/components/Textarea/                                | STABLE | Multi-line Input field: rows and maxRows in lines, optional auto-resize, description and accessible errors              |
+| Progress         | src/components/Progress/                                | STABLE | Determinate or indeterminate bar with label and value text; Stepper's linear track                                     |
+| Skeleton         | src/components/Skeleton/                                | STABLE | Hidden text, block and circle placeholders with pulse or shimmer that stops under reduced motion                        |
+| Toast            | src/components/Toast/                                   | STABLE | Alert that closes itself, pausing on hover and focus; queued and announced by ToastProvider and useToast                |
 
 ### Implemented Sections (9 total, `neus-ui/sections`)
 

@@ -398,6 +398,14 @@ x-neus:
       base:
         --radio-dot-size: 6px
     popover: {}
+    progress:
+      base:
+        --progress-height-medium: 6px
+        --progress-height-large: 8px
+        --progress-label-weight: "400"
+        --progress-value-weight: "400"
+    skeleton: {}
+    toast: {}
 ---
 
 # Apple
@@ -509,6 +517,10 @@ A switch follows the iOS list-row toggle: a 51×31 capsule with a white 27px kno
 Radio buttons follow macOS: the checkbox drawn as a circle, a thin gray ring when not chosen and the accent fill with a small white dot when chosen. The guidelines give no sizes, so the 18px circle and 6px dot are local decisions.
 
 A popover uses the menu panel: the subtle border, 12px corners and floating shadow, with 16px of padding. The arrow of macOS and iPadOS popovers is left out; it opens below its button and moves above when there is no room, a local decision.
+
+A progress bar is a thin accent capsule on a gray track, 6px by default, with a regular-weight label; the guidelines ask for a determinate bar whenever the share is known and an accurate description rather than a vague "Loading" ([HIG progress indicators](https://developer.apple.com/design/human-interface-guidelines/progress-indicators), consulted 2026-11-17). The 4, 6 and 8px thicknesses are local decisions; the guidelines state none.
+
+The guidelines define no skeleton or toast. Skeletons keep the Neus gray shapes with the system's rounded corners, and a toast is the alert with the soft floating shadow and the card's corners: local web mappings.
 
 ## Do's and Don'ts
 

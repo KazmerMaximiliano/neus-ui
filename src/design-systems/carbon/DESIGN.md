@@ -503,6 +503,32 @@ x-neus:
         --popover-radius: 2px
         --popover-shadow: 0 2px 2px rgb(0 0 0 / 0.2)
         --popover-max-width: 368px
+    progress:
+      base:
+        --progress-label-font-size: 14px
+        --progress-label-weight: "400"
+        --progress-value-font-size: 12px
+        --progress-value-weight: "400"
+        --progress-text-gap: 16px
+        --progress-height-medium: 8px
+        --progress-height-large: 10px
+        --progress-track-radius: 0px
+        --progress-fill-radius: 0px
+    skeleton:
+      base:
+        --skeleton-background: "#e8e8e8"
+        --skeleton-highlight: "#c6c6c6"
+        --skeleton-animation-name: skeleton-shimmer
+        --skeleton-text-radius: 0px
+        --skeleton-rect-radius: 0px
+      dark:
+        --skeleton-background: "#292929"
+        --skeleton-highlight: "#393939"
+    toast:
+      base:
+        --toast-width: 288px
+        --toast-gap: 8px
+        --toast-radius: 0px
 ---
 
 # Carbon
@@ -615,6 +641,12 @@ The toggle is the default 48×24 track with an 18px white handle, gray when off 
 A radio button is an 18px circle with a 1px ring in the primary icon color; selected, the fill stays clear and an 8px dot of the same color appears. The label sits 10px from the circle, stacked options are 8px apart and a horizontal row leaves 16px ([Carbon radio button style](https://carbondesignsystem.com/components/radio-button/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/radio-button/_radio-button.scss), consulted 2026-11-16). The style page lists 8px for the label gap and the row; the source's 10px and 16px are used.
 
 A popover is a layer-colored container with 2px corners, the drop shadow of its `--drop-shadow` variant and 16px of padding, up to 368px wide ([Carbon popover style](https://carbondesignsystem.com/components/popover/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/popover/_popover.scss), consulted 2026-11-16). The style page lists 352px; the source's 368px is used. The caret is left out.
+
+A progress bar is 8px big or 4px small, square, with the interactive blue on the subtle border color; the label is body compact at 14px regular and the value helper text at 12px, 8px above the bar ([Carbon progress bar style](https://carbondesignsystem.com/components/progress-bar/style/), consulted 2026-11-17). Carbon has two sizes; large is a local 10px.
+
+A skeleton is a square shape in the skeleton background, #e8e8e8 (#292929 in Gray 100), crossed by a shimmer of the skeleton element color, #c6c6c6 (#393939), as the theme tokens set ([Carbon themes](https://github.com/carbon-design-system/carbon/tree/main/packages/themes/tokens/themes), consulted 2026-11-17).
+
+A toast is the notification at its fixed 288px width with square corners and the floating shadow; toasts stack 8px apart ([Carbon notification style](https://carbondesignsystem.com/components/notification/style/), consulted 2026-11-17). Carbon slides them in at the top right, so pass `placement="top-end"` to ToastProvider.
 
 ## Do's and Don'ts
 

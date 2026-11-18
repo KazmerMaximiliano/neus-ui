@@ -12,7 +12,7 @@ export const ADAPTED_COMPONENTS = [
   "Sidebar", "Stepper", "TimeInput", "WeekCalendar", "WeekCalendarRow", "InteractiveMap",
   "DataTable", "AppTemplate", "FormTemplate", "Heading", "Text", "Container", "Stack", "Grid",
   "Section", "MediaPlaceholder", "Alert", "Avatar", "AvatarGroup", "Spinner", "Switch", "Textarea",
-  "Radio", "RadioGroup", "Popover",
+  "Radio", "RadioGroup", "Popover", "Progress", "Skeleton", "Toast",
 ] as const;
 
 export const DESIGN_SYSTEMS: readonly DesignSystem[] = [

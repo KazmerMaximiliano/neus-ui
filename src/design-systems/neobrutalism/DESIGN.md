@@ -406,13 +406,15 @@ x-neus:
         --stepper-bar-fill-radius: 0px
         --stepper-bar-border-width: 3px
         --stepper-bar-border-color: var(--color-text-primary)
-        --stepper-bar-background: var(--color-surface)
+        --stepper-bar-background: color-mix(in srgb, var(--color-text-primary) 70%, var(--color-surface))
         --stepper-simple-size: 14px
         --stepper-simple-current-width: 32px
         --stepper-simple-radius: 2px
         --stepper-simple-border-width: 2px
         --stepper-simple-border-color: var(--color-text-primary)
         --stepper-simple-background: var(--color-surface)
+      dark:
+        --stepper-bar-background: var(--color-surface)
     week-calendar:
       base:
         --week-calendar-border-width: 3px
@@ -479,6 +481,28 @@ x-neus:
       base:
         --radio-dot-size: 10px
     popover: {}
+    progress:
+      base:
+        --progress-label-color: var(--color-text-primary)
+        --progress-label-weight: "800"
+        --progress-value-color: var(--color-text-primary)
+        --progress-value-weight: "800"
+        --progress-height-small: 10px
+        --progress-height-medium: 16px
+        --progress-height-large: 24px
+        --progress-track-radius: 4px
+        --progress-fill-radius: 0px
+        --progress-track-border-width: 3px
+        --progress-track-border-color: var(--color-text-primary)
+        --progress-track-background: color-mix(in srgb, var(--color-text-primary) 70%, var(--color-surface))
+        --progress-fill-border-width: 3px
+      dark:
+        --progress-track-background: var(--color-surface)
+    skeleton:
+      base:
+        --skeleton-background: color-mix(in srgb, var(--color-text-primary) 14%, var(--color-surface))
+        --skeleton-text-radius: 0px
+    toast: {}
 ---
 
 # Neobrutalism
@@ -582,6 +606,12 @@ A switch is a squared, ink-framed track with a hard shadow and a square ink knob
 A radio is the checkbox made round: a 3px ink ring with the hard shadow, filled yellow with a 10px ink dot when chosen.
 
 A popover is the menu panel with room inside: the ink frame and hard shadow, with 16px of padding.
+
+A progress bar is a 3px ink frame filled with yellow up to a 3px ink edge; the rest of the track, like the stepper's linear bar, is dark slate in light mode, so the yellow keeps 3:1 against it, and the page color in dark mode. It is 16px thick by default, with the label and value in heavy ink.
+
+A skeleton is a flat ink-tinted block with square text lines that pulses.
+
+A toast is the alert with the hard ink shadow.
 
 ## Do's and Don'ts
 

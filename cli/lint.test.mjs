@@ -66,6 +66,11 @@ export const Page = () => (
     ["raw-element", "a.tsx", `<div popover className="share">{links}</div>`],
     ["raw-element", "a.tsx", `<span className="loader" aria-hidden />`],
     ["raw-element", "a.css", "@keyframes spin { to { transform: rotate(1turn); } }"],
+    ["raw-element", "a.tsx", `<progress value={3} max={10} />`],
+    ["raw-element", "a.tsx", `<div role="progressbar" aria-valuenow={40} />`],
+    ["raw-element", "a.tsx", `<div className="skeleton" />`],
+    ["raw-element", "a.css", "@keyframes shimmer { to { background-position: 0 0; } }"],
+    ["raw-element", "a.tsx", `<div className="toast" aria-live="polite">{message}</div>`],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
     ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
   ])("reports P1 %s", (rule, file, text) => {
@@ -74,6 +79,11 @@ export const Page = () => (
 
   it("does not take a Popover's props or text about popovers for the attribute", () => {
     const text = `<Popover label="Filters" trigger={(props) => <Button {...props} label="Filters" />}>\n<Text>The popover shows filters.</Text>`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take Skeleton or Progress components for hand-made ones", () => {
+    const text = `<Skeleton className="skeleton-card" lines={3} />\n<Progress label="Upload" value={3} max={10} />`;
     expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
   });
 

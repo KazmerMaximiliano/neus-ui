@@ -6,6 +6,10 @@ import './css/app.css';
 // Theme system exports
 export { useColors } from './hooks/useColors';
 export { ThemeProvider, useTheme, type ThemeColors, type ThemeConfig, type ThemeProviderProps, type ColorScheme } from './providers';
+export {
+  ToastProvider, useToast, type ToastApi, type ToastLive, type ToastOptions, type ToastPlacement,
+  type ToastProviderProps
+} from './providers';
 export { DESIGN_SYSTEMS, type DesignSystem, type DesignSystemId } from './design-systems';
 
 // Color utility functions

@@ -1,0 +1,13 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --skeleton-background: #e8e8e8;
+  --skeleton-highlight: #c6c6c6;
+  --skeleton-animation-name: skeleton-shimmer;
+  --skeleton-text-radius: 0px;
+  --skeleton-rect-radius: 0px;
+}
+
+[data-design-system="carbon"][data-color-scheme="dark"] {
+  --skeleton-background: #292929;
+  --skeleton-highlight: #393939;
+}

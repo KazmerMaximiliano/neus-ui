@@ -1,0 +1,5 @@
+.toast-story {
+  display: grid;
+  justify-items: start;
+  gap: 24px;
+}

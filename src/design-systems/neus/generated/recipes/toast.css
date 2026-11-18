@@ -1,0 +1,13 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --toast-width: 360px;
+  --toast-gap: 12px;
+  --toast-offset: 24px;
+  --toast-radius: var(--alert-radius);
+  --toast-shadow: var(--elevation-floating);
+  --toast-z-index: 1100;
+  --toast-duration: 0.2s;
+  --toast-easing: ease-out;
+  --toast-enter-offset: 8px;
+}

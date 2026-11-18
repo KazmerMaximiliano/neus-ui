@@ -503,7 +503,18 @@ x-neus:
         --text-overline-transform: none
     layout: {}
     media-placeholder: {}
-    alert: {}
+    alert:
+      base:
+        --alert-info-background: color-mix(in srgb, var(--color-info) 10%, var(--color-surface-container-lowest))
+        --alert-info-border-color: color-mix(in srgb, var(--color-info) 35%, var(--color-surface-container-lowest))
+        --alert-success-background: color-mix(in srgb, var(--color-success) 14%, var(--color-surface-container-lowest))
+        --alert-success-border-color: color-mix(in srgb, var(--color-success) 45%, var(--color-surface-container-lowest))
+        --alert-warning-background: color-mix(in srgb, var(--color-warning) 24%, var(--color-surface-container-lowest))
+        --alert-warning-border-color: color-mix(in srgb, var(--color-warning) 60%, var(--color-surface-container-lowest))
+        --alert-warning-icon-color: color-mix(in srgb, var(--color-warning) 70%, var(--color-text-primary))
+        --alert-error-background: color-mix(in srgb, var(--color-error) 14%, var(--color-surface-container-lowest))
+        --alert-error-border-color: color-mix(in srgb, var(--color-error) 45%, var(--color-surface-container-lowest))
+        --alert-error-icon-color: var(--color-error)
     avatar: {}
     sections:
       base:
@@ -541,6 +552,22 @@ x-neus:
         --radio-dot-color: var(--color-primary)
         --radio-dot-transition: scale 300ms cubic-bezier(0.05, 0.7, 0.1, 1)
     popover: {}
+    progress:
+      base:
+        --progress-label-weight: "400"
+        --progress-value-weight: "400"
+        --progress-height-medium: 4px
+        --progress-height-large: 8px
+        --progress-track-radius: 0px
+        --progress-fill-radius: 0px
+        --progress-track-background: var(--color-surface-container-highest)
+        --progress-indeterminate-duration: 2s
+    skeleton:
+      base:
+        --skeleton-background: var(--color-surface-container-highest)
+    toast:
+      base:
+        --toast-radius: 4px
 ---
 
 # Material
@@ -693,6 +720,14 @@ The radio button is a 20px circle with a 2px outline; selected, the outline turn
 Dialogs and the date and time pickers sit on the high surface container with level 3 elevation, as their tokens set ([dialog](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-dialog.scss), [date picker](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-date-picker-docked.scss) and [time picker tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-time-picker.scss), consulted 2026-11-16). The time picker's dial is the highest container and its selected hour or minute uses the primary container; an outlined card's outline is outline-variant, and a selected value's chip in MultiSelect is outlined in the outline color.
 
 A popover uses the menu container: the surface container color, level-2 elevation and extra-small corners ([Material Web menu tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-menu.scss), consulted 2026-11-16), with 16px of padding for arbitrary content. Material has no popover component; mapping it to the menu container is a local decision.
+
+The linear progress indicator is a 4px primary bar on the highest surface container, with square ends, and large is 8px ([Material Web linear progress tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-linear-progress-indicator.scss), consulted 2026-11-17). Its indeterminate state slides one primary segment along the track over 2s; the two alternating segments are simplified to one.
+
+Material has no skeleton; placeholders use the highest surface container, a local decision.
+
+A toast takes the snackbar's extra-small 4px corners ([Material Web snackbar tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-snackbar.scss), consulted 2026-11-17). Two local decisions depart from the snackbar: a toast keeps its status color instead of the inverse surface, so success, warning and error stay distinct, and it floats at level 2, the menus' elevation, instead of level 3, so a stack of toasts stays light.
+
+Material has no success or warning roles, so alert colors are a local decision. Alerts tint the lowest surface container, not the tinted surface: mixed into its violet cast, green turns gray and orange and red look alike. Warning takes a 24% tint and error 14%, and their icons carry the status color (warning at 70% over the text color, to keep 3:1), so the two read apart in both modes.
 
 ## Do's and Don'ts
 
