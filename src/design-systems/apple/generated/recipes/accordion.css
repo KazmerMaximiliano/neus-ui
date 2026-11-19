@@ -1,0 +1,23 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --accordion-divider-color: #d2d2d7;
+  --accordion-header-min-height: 0px;
+  --accordion-header-padding: 17px 0;
+  --accordion-header-hover-background: transparent;
+  --accordion-title-size: 17px;
+  --accordion-title-line-height: 1.47;
+  --accordion-title-letter-spacing: -0.022em;
+  --accordion-icon-size: 17px;
+  --accordion-icon-color: #86868b;
+  --accordion-icon-duration: 0.32s;
+  --accordion-content-padding: 0 0 17px;
+  --accordion-content-size: 14px;
+  --accordion-content-line-height: 1.47;
+  --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent);
+  --accordion-focus-offset: 1px;
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --accordion-divider-color: #424245;
+  --accordion-icon-color: #6e6e73;
+}

@@ -120,7 +120,9 @@ Everything in `ssr`, plus:
   layout components and every section from `neus-ui/sections`: the
   SiteHeader phone menu uses the native Popover API and needs no
   hydration. Breadcrumbs with `href` items renders statically too; its
-  collapsed trail needs hydration only for the expand button. Hydrate only
+  collapsed trail needs hydration only for the expand button. Accordion and
+  FAQ open and close as static HTML (native `details`), one at a time with
+  `single`; hydrate them only for `onChange` or a controlled `value`. Hydrate only
   the parts with handlers, such as a form, Tabs, Pagination or a Popover,
   Tooltip or Combobox, whose panels open with JavaScript.
 - Directives: `client:idle` above the fold, `client:visible` below,

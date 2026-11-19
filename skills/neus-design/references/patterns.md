@@ -188,7 +188,7 @@ Use for product, launch and signup pages. Build the sections the brief
 lists, each with the variant the dealt composition names (taste.md), and
 apply the substance rules. The page sections from `neus-ui/sections` carry
 the structure, scale and rhythm of the active system; Heading, Text,
-Section, Grid and Card cover what they do not (an agenda, prices, a team).
+Section, Grid and Card cover what they do not (an agenda, a team).
 
 ```tsx
 import { MessageSquareText, Timer } from "lucide-react";
@@ -252,12 +252,16 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
 
 - Every section the brief lists exists; the dealt composition picks each
   variant (Hero `split`, `centered`, `media-first`; FeatureList `grid`,
-  `list`, `cards`; TestimonialList `plain`, `card`, `featured`;
-  CallToAction `band`, `split`).
+  `list`, `cards`; TestimonialList `plain`, `card`, `featured`; FAQ `list`,
+  `cards`; CallToAction `band`, `split`).
 - One `h1` (the Hero's); section titles are SectionHeader `h2`s, item titles
   `h3`s. Alternate `default` and `subtle` Section tones; one or two bands of
   strong color (`tone="brand"` or `"inverse"`).
-- Lists of other things (agenda, prices, team) are `Grid as="ul"` of
+- Plans are a `PricingTable` of `PricingCard`s, the recommended one
+  `featured` with a `badge`, every action a `fullWidth` Button (solid on the
+  featured plan, outlined on the rest). Questions are a `FAQ` under its
+  SectionHeader, with `questionAs` one level below the section title.
+- Lists of other things (agenda, team) are `Grid as="ul"` of
   `Card as="li"` with the default `variant="auto"`. Never a Card inside a Card.
 - One solid action per viewport: the header action is `outlined`. On a
   `brand` band primary buttons adapt by themselves.

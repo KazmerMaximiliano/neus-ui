@@ -8,6 +8,23 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.10.0] - Unreleased
+
+### Added
+
+- `Accordion`: sections that open under their titles on native `details` and `summary`, so they
+  work with the keyboard, before hydration and without JavaScript, and find-in-page opens the
+  matching one. `type="single"` keeps one open through a shared `name`; `value`,
+  `defaultValue` and `onChange` control it; disabled items keep their state; `titleAs` puts the
+  titles in the page outline. New `accordion` recipe family in the six systems.
+- `FAQ` in `neus-ui/sections`: questions as headings over their answers, built on Accordion, as
+  a divided `list` or `cards`, with `single` for one open answer. The neus-design skill deals
+  its variant with the rest of a page's composition.
+- `PricingCard` and `PricingTable` in `neus-ui/sections`: a plan's name, price, period,
+  description, features and action on a Card, with `featured` and `badge` for the recommended
+  plan; the table lists them in a grid with their actions aligned. Pricing and FAQ tokens join
+  the `sections` recipe.
+
 ## [2.9.0] - Unreleased
 
 ### Added
@@ -423,6 +440,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.10.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.7.0...v2.8.0
 [2.7.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.6.0...v2.7.0

@@ -466,6 +466,11 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+        --pricing-price-size: 32px
+        --pricing-price-weight: 400
+        --pricing-price-tracking: 0px
+        --pricing-featured-ring-width: 2px
+        --pricing-featured-shadow: 0 0 #0000
     spinner:
       base:
         --spinner-size-small: 16px
@@ -608,6 +613,28 @@ x-neus:
       dark:
         --pagination-item-hover-background: rgb(141 141 141 / 0.16)
         --pagination-current-background: "linear-gradient(#4589ff, #4589ff) center bottom / 16px 4px no-repeat"
+    accordion:
+      base:
+        --accordion-divider-color: "#e0e0e0"
+        --accordion-header-min-height: 40px
+        --accordion-header-padding: 0 16px
+        --accordion-header-hover-background: "#e8e8e8"
+        --accordion-title-size: 14px
+        --accordion-title-weight: "400"
+        --accordion-title-line-height: 20px
+        --accordion-title-letter-spacing: 0.16px
+        --accordion-icon-size: 16px
+        --accordion-icon-color: var(--color-text-primary)
+        --accordion-icon-duration: 0.11s
+        --accordion-content-padding: 8px 48px 24px 16px
+        --accordion-content-color: var(--color-text-primary)
+        --accordion-content-size: 14px
+        --accordion-content-line-height: 20px
+        --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 25%, transparent)
+        --accordion-transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9)
+      dark:
+        --accordion-divider-color: "#393939"
+        --accordion-header-hover-background: "#333333"
 ---
 
 # Carbon
@@ -709,6 +736,14 @@ A list or grid separated by hairlines, square tiles, pictograms over icons; no r
 
 Plain start-aligned quotes, or one featured quote in the display weight.
 
+### FAQ
+
+The accordion: regular-weight questions over subtle-border rules.
+
+### Pricing
+
+Square tiles in the layer color with the price in light 32px; Carbon has no pricing pattern, so the blue outline on the recommended plan is local.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -734,6 +769,8 @@ Line tabs are 40px tall with 16px of inline padding, labels in body compact 01 (
 A breadcrumb is body compact 01 with links in the link blue, which underline on hover, the current page in primary text at regular weight, and slashes in primary text with 8px on each side ([Carbon breadcrumb style](https://carbondesignsystem.com/components/breadcrumb/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/breadcrumb/_breadcrumb.scss), consulted 2026-11-18). Carbon tucks hidden items into an overflow menu; here an ellipsis button shows them in place.
 
 Pagination follows the pagination nav: square page buttons side by side with no gap and no corners, 14px numbers, a faint gray hover (rgb 141 141 141 at 12%, 16% in dark mode) and the current page at weight 600 over a centered 16 by 4px interactive-blue bar ([Carbon pagination](https://carbondesignsystem.com/components/pagination/style/) and [the pagination nav source](https://github.com/carbon-design-system/carbon/tree/main/packages/styles/scss/components/pagination-nav), consulted 2026-11-18). The buttons are 32px, the small size, to match the small icon buttons for previous and next. Carbon's data-table pagination, with its items-per-page select and "1–10 of 100 items", is close to the compact form with the page-size select.
+
+An accordion is one divided list: 40px rows with 1px subtle-border rules (#e0e0e0, #393939 in dark mode), titles in body 01 at regular weight with 16px of inline padding, a 16px chevron in the primary icon color that turns in 110ms, and the layer-hover fill (#e8e8e8, #333333) under the pointer. Open content has 8px above, 24px below and 48px at the end ([Carbon accordion style](https://carbondesignsystem.com/components/accordion/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/accordion/_accordion.scss), consulted 2026-11-19). Carbon draws focus as an inset ring; here it is a 2px inset outline.
 
 ## Do's and Don'ts
 

@@ -75,6 +75,7 @@ export const Page = () => (
     ["raw-element", "a.tsx", `<IconButton icon={Trash2} label="Delete" title="Moves it to the trash" />`],
     ["raw-element", "a.tsx", `<input role="combobox" aria-expanded={open} value={query} />`],
     ["raw-element", "a.tsx", `<datalist id="cities">{cities}</datalist>`],
+    ["raw-element", "a.tsx", `<details><summary>Shipping</summary>Two days</details>`],
     ["raw-element", "a.tsx", `<div role="tablist" aria-label="Settings">{tabs}</div>`],
     ["raw-element", "a.tsx", `<button role="tab" aria-selected={selected}>General</button>`],
     ["raw-element", "a.tsx", `<nav aria-label="Breadcrumb"><ol>{crumbs}</ol></nav>`],

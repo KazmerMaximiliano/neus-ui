@@ -1253,6 +1253,23 @@ x-neus:
         --testimonial-rule-width: 3px
         --testimonial-rule-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-surface))
         --testimonial-gap: var(--space-4)
+        --faq-max-width: 48rem
+        --faq-cards-gap: var(--space-3)
+        --pricing-header-gap: var(--space-3)
+        --pricing-price-font-family: var(--font-display)
+        --pricing-price-size: var(--fs-3xl)
+        --pricing-price-weight: 700
+        --pricing-price-tracking: -0.02em
+        --pricing-period-font-family: inherit
+        --pricing-period-color: var(--color-text-secondary)
+        --pricing-period-size: var(--fs-sm)
+        --pricing-feature-size: var(--fs-base)
+        --pricing-feature-gap: var(--space-3)
+        --pricing-check-size: 18px
+        --pricing-check-color: var(--color-primary-text)
+        --pricing-featured-border-color: var(--color-primary)
+        --pricing-featured-ring-width: 1px
+        --pricing-featured-shadow: var(--elevation-floating)
         --call-to-action-gap: var(--space-8)
         --site-footer-background: var(--color-surface)
         --site-footer-border-color: var(--color-border-subtle)
@@ -1527,6 +1544,42 @@ x-neus:
         --pagination-focus-color: var(--color-focus)
         --pagination-focus-offset: 2px
         --pagination-transition: background-color 180ms ease, color 180ms ease
+    accordion:
+      base:
+        --accordion-font-family: var(--font-body)
+        --accordion-gap: 0px
+        --accordion-divider-width: 1px
+        --accordion-divider-color: var(--color-border-subtle)
+        --accordion-item-background: transparent
+        --accordion-item-border-width: 0px
+        --accordion-item-border-color: transparent
+        --accordion-item-radius: 0px
+        --accordion-item-shadow: none
+        --accordion-header-min-height: 56px
+        --accordion-header-padding: 12px 8px
+        --accordion-header-gap: "{spacing.step-4}"
+        --accordion-header-radius: var(--accordion-item-radius)
+        --accordion-header-background: transparent
+        --accordion-header-hover-background: var(--color-surface-hover)
+        --accordion-title-color: var(--color-text-primary)
+        --accordion-title-size: var(--fs-base)
+        --accordion-title-weight: "600"
+        --accordion-title-line-height: "1.4"
+        --accordion-title-letter-spacing: normal
+        --accordion-icon-size: 20px
+        --accordion-icon-color: var(--color-text-secondary)
+        --accordion-icon-rotation: 180deg
+        --accordion-icon-duration: 0.2s
+        --accordion-content-padding: 0 8px 20px
+        --accordion-content-divider-width: 0px
+        --accordion-content-color: var(--color-text-secondary)
+        --accordion-content-size: var(--fs-base)
+        --accordion-content-line-height: "1.6"
+        --accordion-disabled-color: var(--color-text-disabled)
+        --accordion-focus-width: 2px
+        --accordion-focus-color: var(--color-focus)
+        --accordion-focus-offset: -2px
+        --accordion-transition: background-color 0.2s ease
 ---
 
 # Neus UI
@@ -1633,6 +1686,14 @@ Cards with a tinted icon tile and a short title, three per row on desktop; a pla
 
 Cards with an initials avatar, the name and the role, so every quote reads with its author; a featured card for one strong quote. Never stars or ratings the brief did not give.
 
+### FAQ
+
+Questions over thin dividers, semibold in ink with a gray chevron; cards for a page already built of cards.
+
+### Pricing
+
+Cards with the price large in Manrope; the recommended plan gets an indigo outline, the floating shadow, a badge and the one solid action.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -1656,6 +1717,8 @@ A toast is a short notification that floats in a corner after an action, such as
 A tooltip is a short dark label that names or explains a control, such as an icon button. It reverses the page colors (text color behind, surface color in front), with 12px medium text, 6px by 10px of padding, 8px corners and no shadow, at most 240px wide. It sits 6px above the control, centered, and moves below when there is no room.
 
 A combobox is a field you can type into that suggests options below it. The field is the input with every one of its variants and sizes, and the list is the select's panel and options. The option the arrow keys reach gets the hover background and the focus outline, because focus stays in the field.
+
+An accordion stacks sections under their titles: each title in semibold ink at 14px on its own row, with a gray chevron at the end that turns when the section opens, and thin gray rules between the rows. Hovering a row gives it the low surface; the open section's text sits below in secondary ink. Disabled titles fade to the disabled ink.
 
 Tabs switch between views of one subject. Line tabs sit on a thin gray divider: labels in secondary ink, semibold at 13px, and the selected one in indigo with a 3px indigo bar on the divider, its top corners rounded; hovering a tab gives it the low surface. Contained tabs are a segmented control: a low-surface tray with 4px of padding and the selected tab raised as a white tile with a soft shadow. Focus draws a 2px ring inside the tab.
 

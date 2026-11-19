@@ -374,6 +374,9 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+        --pricing-price-size: 40px
+        --pricing-price-tracking: normal
+        --pricing-featured-shadow: 0 0 #0000
     spinner:
       base:
         --spinner-size-medium: 20px
@@ -453,6 +456,26 @@ x-neus:
         --pagination-font-weight: "400"
         --pagination-current-font-weight: "600"
         --pagination-item-hover-background: rgb(118 118 128 / 0.12)
+    accordion:
+      base:
+        --accordion-divider-color: "#d2d2d7"
+        --accordion-header-min-height: 0px
+        --accordion-header-padding: 17px 0
+        --accordion-header-hover-background: transparent
+        --accordion-title-size: 17px
+        --accordion-title-line-height: "1.47"
+        --accordion-title-letter-spacing: -0.022em
+        --accordion-icon-size: 17px
+        --accordion-icon-color: "#86868b"
+        --accordion-icon-duration: 0.32s
+        --accordion-content-padding: 0 0 17px
+        --accordion-content-size: 14px
+        --accordion-content-line-height: "1.47"
+        --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent)
+        --accordion-focus-offset: 1px
+      dark:
+        --accordion-divider-color: "#424245"
+        --accordion-icon-color: "#6e6e73"
 ---
 
 # Apple
@@ -553,6 +576,14 @@ A plain grid without surfaces, or large-radius cards on the secondary surface; p
 
 Sparse: one featured quote or plain columns, no card chrome.
 
+### FAQ
+
+A quiet list of semibold questions over hairlines, as on apple.com, with no fills.
+
+### Pricing
+
+Equal white tiles with the price large and bold, as on the Apple One page; Apple marks no recommended plan, so the blue outline and badge are local.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -576,6 +607,8 @@ Tabs on the web have no HIG geometry: on macOS a tab view is a row of tabs on th
 Breadcrumbs follow apple.com's footer trail: 12px text with -0.01em tracking, links and the current page in ink at 72% (80% in dark mode), separated by chevrons at 48% (40%) with 12px on each side; links underline on hover ([apple.com](https://www.apple.com/iphone/) and its [global footer styles](https://www.apple.com/ac/globalfooter/8/en_US/styles/ac-globalfooter.built.css), consulted 2026-11-18). The chevron is the › character instead of the footer's drawn one. The path control on macOS hides names between the first and last items when the path is too long, which is what a collapsed trail does.
 
 Pagination has no HIG counterpart: page controls are dots for swiping through views. Page buttons are 32px capsules like the small icon buttons, regular weight with the current page a semibold blue capsule; a local mapping.
+
+An accordion follows apple.com's shared accordion in its reduced size: 17px semibold titles over 1px hairlines (#d2d2d7, #424245 in dark mode), no fills or side padding, a gray chevron (#86868b, #6e6e73 in dark mode) at the end that turns in 320ms, and 14px answers ([apple.com iCloud styles](https://www.apple.com/v/icloud/ak/built/styles/overview.built.css), consulted 2026-11-19). The guidelines describe disclosure controls without measurements ([HIG disclosure controls](https://developer.apple.com/design/human-interface-guidelines/disclosure-controls), consulted 2026-11-19).
 
 ## Do's and Don'ts
 

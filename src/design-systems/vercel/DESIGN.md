@@ -413,6 +413,13 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+        --pricing-price-size: 32px
+        --pricing-price-weight: 450
+        --pricing-price-tracking: -0.06em
+        --pricing-period-font-family: var(--font-mono)
+        --pricing-check-color: var(--color-text-primary)
+        --pricing-featured-border-color: var(--color-text-primary)
+        --pricing-featured-shadow: 0 0 #0000
     spinner:
       base:
         --spinner-stroke-width: 0.1em
@@ -504,6 +511,24 @@ x-neus:
         --pagination-current-color: var(--color-surface)
       dark:
         --pagination-item-hover-background: "#1f1f1f"
+    accordion:
+      base:
+        --accordion-divider-color: "#eaeaea"
+        --accordion-header-min-height: 48px
+        --accordion-header-padding: 12px
+        --accordion-header-radius: 6px
+        --accordion-header-hover-background: "#f2f2f2"
+        --accordion-title-size: 16px
+        --accordion-title-weight: "500"
+        --accordion-title-line-height: 24px
+        --accordion-icon-size: 16px
+        --accordion-content-padding: 0 12px 16px
+        --accordion-content-line-height: "1.6"
+        --accordion-disabled-color: "#8f8f8f"
+        --accordion-focus-offset: 0px
+      dark:
+        --accordion-divider-color: "#333333"
+        --accordion-header-hover-background: "#1a1a1a"
 ---
 
 # Vercel
@@ -608,6 +633,14 @@ A grid inside one bordered frame with hairline dividers; small monochrome icons,
 
 Plain quotes with small avatars, or a row of customer names.
 
+### FAQ
+
+Questions over hairlines with a soft gray hover, as on the pricing page.
+
+### Pricing
+
+Bordered cards with the price set tight and the period in mono; the recommended plan gets an ink outline, a pill badge and the one solid action.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -633,6 +666,8 @@ Tabs are 14px regular labels in gray 900 with 24px between them and almost no pa
 Breadcrumbs are 14px over 20px, links in gray 900 that turn gray 1000 on hover without an underline, the current page in gray 1000 and a chevron between items with 6px on each side ([Geist breadcrumbs](https://vercel.com/geist/breadcrumbs), consulted 2026-11-18). Geist draws the chevron as a 16px icon; here it is the › character.
 
 Geist's pagination links to the previous and next page by title, at the end of a document ([Geist pagination](https://vercel.com/geist/pagination), consulted 2026-11-18); it has no numbered pager. Page buttons here are 32px with 6px corners like the small buttons, gray 200 on hover, and the current page in the foreground color with background-colored numbers, like a primary button: a local mapping.
+
+An accordion follows the FAQ on the pricing page: 16px medium questions in gray 1000 over 1px dividers (#eaeaea, #333 in dark mode) from Geist's collapse, 12px of padding, a 16px chevron that turns in 200ms and a gray 100 fill with 6px corners on hover; answers at 16px with 1.6 line height ([Geist collapse](https://vercel.com/geist/collapse) and [Vercel pricing](https://vercel.com/pricing), consulted 2026-11-19).
 
 ## Do's and Don'ts
 

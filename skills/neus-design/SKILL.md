@@ -226,7 +226,9 @@ component's guide.
 | Testimonials or reviews | `TestimonialList` + `Testimonial` (`variant`: `plain`, `card`, `featured`), marked `SAMPLE:` |
 | Closing call to action, with or without a form | `CallToAction` (`variant`: `band`, `split` with the form in `aside`) |
 | Footer of a public page | `SiteFooter` |
-| Any other group of items (agenda, prices, team) | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
+| Questions and answers on a public page | `FAQ` from `neus-ui/sections` (`items`; `variant` from the dealt composition: `list`, `cards`) under a `SectionHeader` |
+| Plans and prices | `PricingTable` of `PricingCard`s from `neus-ui/sections` (`price` in the page's locale, `features`, `action`; `featured` and `badge` on the recommended plan); prices only from the brief |
+| Any other group of items (agenda, team) | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
 | Container of a widget, demo or summary | `Card` |
 | Band of strong color (agenda, final call to action) | `Section tone="brand"` (action color) or `tone="inverse"` (ink); primary buttons adapt, links and fields go in a Card |
 | Picture the project does not have yet | `MediaPlaceholder` with the shot as `label`, marked `SAMPLE:`; with the context's photo preview line, its `pixabayKey` expression and a short `query` |
@@ -247,16 +249,17 @@ component's guide.
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
 | Extra controls or details tied to a button (filters, share, explanation) | `Popover` (`trigger` renders a Button or IconButton with the props it receives); a list of actions stays `Menu` |
-| Short hint for a control (what an icon button does, a limit or consequence) | `Tooltip` (`content`; `trigger` renders the Button or IconButton with the props it receives); the control keeps its own name, and anything to read or act on goes in a `Popover` or a field `description` |
+| Short hint for a control (what an icon button does, a limit) | `Tooltip` (`content`; `trigger` renders the Button or IconButton); the control keeps its name, anything to act on goes in a `Popover` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
-| Search with suggestions or free text (city, tag, user, long lists) | `Combobox` (`options`; `filter={false}`, `inputValue`, `onInputChange` and `loading` for fetched results; `allowCustomValue` for new values; `emptyLabel` in the project's language); browsing predefined options stays `Select` |
+| Search with suggestions or free text (city, tag, user, long lists) | `Combobox` (`filter={false}`, `onInputChange` and `loading` for fetched results; `allowCustomValue` for new values); browsing predefined options stays `Select` |
 | On/off setting that applies at once | `Switch`; a choice sent with a form stays `Checkbox` |
 | One choice among 2–5 visible options | `RadioGroup` + `Radio`; more options: `Select` |
 | Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
 | Records in a table | `DataTable` (its pagination is built in; `paginationLabels` in the project's language) |
-| Views of the same subject, one at a time (settings sections, report views) | `Tabs` (`items` with `value`, `label`, `content`; `label` for the list; `variant="contained"` inside a card or toolbar); steps in order stay `Stepper`, moving between pages stays navigation |
-| Where the page sits in a hierarchy (two or more levels deep) | `Breadcrumbs` (`items` ending at the current page; `linkComponent` with a router; `labels` in the project's language; `maxItems` for long trails), above the page title or in AppTemplate's `headerStart` |
-| Long list or results split into pages | `Pagination` (`page`, `totalPages`, `onChange`; `pageSize` and `pageSizeOptions` for the page size; `variant="compact"` where room is short; `labels` in the project's language) |
+| Long content in collapsible sections (settings groups, specifications) | `Accordion` (`items`; `type="single"`; `titleAs`); on public pages, questions are a `FAQ` |
+| Views of the same subject, one at a time (settings sections) | `Tabs` (`items`, `label`; `variant="contained"` in a card or toolbar); ordered steps stay `Stepper` |
+| Where the page sits in a hierarchy (two or more levels deep) | `Breadcrumbs` (`items` ending at the current page; `linkComponent` with a router), above the title or in AppTemplate's `headerStart` |
+| Long list or results split into pages | `Pagination` (`page`, `totalPages`, `onChange`; `pageSize` and `pageSizeOptions`; `variant="compact"` where room is short) |
 | Steps of a flow | `Stepper` |
 | Files | `FileUploader` |
 | Map | `InteractiveMap` |

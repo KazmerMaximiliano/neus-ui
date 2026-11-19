@@ -13,7 +13,7 @@ export const ADAPTED_COMPONENTS = [
   "DataTable", "AppTemplate", "FormTemplate", "Heading", "Text", "Container", "Stack", "Grid",
   "Section", "MediaPlaceholder", "Alert", "Avatar", "AvatarGroup", "Spinner", "Switch", "Textarea",
   "Radio", "RadioGroup", "Popover", "Progress", "Skeleton", "Toast",
-  "Tooltip", "Combobox", "Tabs", "Breadcrumbs", "Pagination",
+  "Tooltip", "Combobox", "Tabs", "Breadcrumbs", "Pagination", "Accordion",
 ] as const;
 
 export const DESIGN_SYSTEMS: readonly DesignSystem[] = [

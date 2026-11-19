@@ -57,6 +57,10 @@
       { "name": "card", "note": "TestimonialList variant=\"card\": each quote in a card with the author's avatar, name and role. The clearest reading; the default." },
       { "name": "featured", "note": "TestimonialList variant=\"featured\": one large quote card spans the row, the rest are cards below it." }
     ],
+    "faq": [
+      { "name": "list", "note": "FAQ variant=\"list\": questions as headings over the system's dividers, answers below them; reads as one quiet column beside or under its SectionHeader." },
+      { "name": "cards", "note": "FAQ variant=\"cards\": each question a card of the system with its answer inside; for pages already built of cards." }
+    ],
     "cta": [
       { "name": "band", "note": "A full-width band one tone step off the ground, with a headline and one action; a form, if any, sits in a Card inside it." },
       { "name": "split", "note": "Headline and reassurance copy on one side, the form in a Card on the other; stacked on phones." }

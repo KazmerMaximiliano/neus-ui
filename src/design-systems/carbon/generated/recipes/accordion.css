@@ -1,0 +1,25 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --accordion-divider-color: #e0e0e0;
+  --accordion-header-min-height: 40px;
+  --accordion-header-padding: 0 16px;
+  --accordion-header-hover-background: #e8e8e8;
+  --accordion-title-size: 14px;
+  --accordion-title-weight: 400;
+  --accordion-title-line-height: 20px;
+  --accordion-title-letter-spacing: 0.16px;
+  --accordion-icon-size: 16px;
+  --accordion-icon-color: var(--color-text-primary);
+  --accordion-icon-duration: 0.11s;
+  --accordion-content-padding: 8px 48px 24px 16px;
+  --accordion-content-color: var(--color-text-primary);
+  --accordion-content-size: 14px;
+  --accordion-content-line-height: 20px;
+  --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 25%, transparent);
+  --accordion-transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+[data-design-system="carbon"][data-color-scheme="dark"] {
+  --accordion-divider-color: #393939;
+  --accordion-header-hover-background: #333333;
+}

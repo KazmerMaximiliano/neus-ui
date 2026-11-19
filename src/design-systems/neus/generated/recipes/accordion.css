@@ -1,0 +1,38 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --accordion-font-family: var(--font-body);
+  --accordion-gap: 0px;
+  --accordion-divider-width: 1px;
+  --accordion-divider-color: var(--color-border-subtle);
+  --accordion-item-background: transparent;
+  --accordion-item-border-width: 0px;
+  --accordion-item-border-color: transparent;
+  --accordion-item-radius: 0px;
+  --accordion-item-shadow: none;
+  --accordion-header-min-height: 56px;
+  --accordion-header-padding: 12px 8px;
+  --accordion-header-gap: 16px;
+  --accordion-header-radius: var(--accordion-item-radius);
+  --accordion-header-background: transparent;
+  --accordion-header-hover-background: var(--color-surface-hover);
+  --accordion-title-color: var(--color-text-primary);
+  --accordion-title-size: var(--fs-base);
+  --accordion-title-weight: 600;
+  --accordion-title-line-height: 1.4;
+  --accordion-title-letter-spacing: normal;
+  --accordion-icon-size: 20px;
+  --accordion-icon-color: var(--color-text-secondary);
+  --accordion-icon-rotation: 180deg;
+  --accordion-icon-duration: 0.2s;
+  --accordion-content-padding: 0 8px 20px;
+  --accordion-content-divider-width: 0px;
+  --accordion-content-color: var(--color-text-secondary);
+  --accordion-content-size: var(--fs-base);
+  --accordion-content-line-height: 1.6;
+  --accordion-disabled-color: var(--color-text-disabled);
+  --accordion-focus-width: 2px;
+  --accordion-focus-color: var(--color-focus);
+  --accordion-focus-offset: -2px;
+  --accordion-transition: background-color 0.2s ease;
+}

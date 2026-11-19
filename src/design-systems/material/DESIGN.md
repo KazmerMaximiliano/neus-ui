@@ -520,6 +520,11 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+        --pricing-price-size: 32px
+        --pricing-price-weight: 400
+        --pricing-price-tracking: 0px
+        --pricing-featured-ring-width: 2px
+        --pricing-featured-shadow: var(--card-shadow)
     spinner:
       base:
         --spinner-size-medium: 40px
@@ -623,6 +628,21 @@ x-neus:
         --pagination-item-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent)
         --pagination-current-background: var(--color-primary)
         --pagination-current-color: var(--color-text-on-primary)
+    accordion:
+      base:
+        --accordion-header-padding: 12px 16px
+        --accordion-header-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent)
+        --accordion-title-size: 16px
+        --accordion-title-weight: "400"
+        --accordion-title-line-height: 24px
+        --accordion-title-letter-spacing: 0.5px
+        --accordion-icon-size: 24px
+        --accordion-content-padding: 0 16px 16px
+        --accordion-content-size: 14px
+        --accordion-content-line-height: 20px
+        --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent)
+        --accordion-focus-width: 3px
+        --accordion-focus-offset: -3px
 ---
 
 # Material
@@ -762,6 +782,14 @@ Cards on container tones with the system radius, or a plain grid; icons in tonal
 
 Cards on surface-container-low with an avatar and the author's role.
 
+### FAQ
+
+List items over outline-variant dividers, or cards on container tones.
+
+### Pricing
+
+Cards on container tones with the price in headline large; the recommended plan gets a primary outline, a local mapping.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -787,6 +815,8 @@ A tooltip is the plain tooltip: the inverse surface (#322f35, #e6e0e9 in dark mo
 Tabs are the primary tabs: 48px tall, labels in title small (14px over 20px, weight 500, 0.1px tracking) in on-surface-variant, the active one in primary with a 3px primary indicator as wide as the label and rounded on top, over a 1px outline-variant divider; hovering adds the on-surface state layer at 8% ([material-web tab tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-primary-navigation-tab.scss), consulted 2026-11-18). Focus is a 3px ring inside the tab. Material 3 has no contained tabs, so they take the outlined segmented button: a 40px pill with a 1px outline that also divides the segments, on-surface labels in label large, and the selected segment in secondary container ([material-web segmented button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-outlined-segmented-button.scss), consulted 2026-11-18). Disabled tabs take on-surface at 38%.
 
 Material 3 has no breadcrumbs or pagination. Breadcrumbs keep the Neus trail in body medium (14px over 20px, 0.25px tracking): links in on-surface-variant that turn primary and underline on hover, and the current page in on-surface at weight 500, a local mapping. Page buttons are 32px circles like the small icon buttons, with the on-surface state layer on hover and the current page filled in primary with on-primary numbers, like a selected filled icon button: also a local mapping.
+
+Material 3 has no accordion either, so its rows are one-line list items: 56px tall with 16px at the sides, titles in body large (16px over 24px, 0.5px tracking) in on-surface, a 24px chevron in on-surface-variant, answers in body medium, outline-variant dividers and the on-surface state layer at 8% on hover ([material-web list tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-list.scss), consulted 2026-11-19). The chevron and the dividers between rows are a local mapping.
 
 Material has no success or warning roles, so alert colors are a local decision. Alerts tint the lowest surface container, not the tinted surface: mixed into its violet cast, green turns gray and orange and red look alike. Warning takes a 24% tint and error 14%, and their icons carry the status color (warning at 70% over the text color, to keep 3:1), so the two read apart in both modes.
 
