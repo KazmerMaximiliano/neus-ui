@@ -28,6 +28,8 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 `placement` and `delay`; Combobox `filter`, `allowCustomValue`, `loading`,
 `emptyLabel` and `loadingLabel` with every Input field prop; Tabs `variant`
 (`line`, `contained`) and `label`; Breadcrumbs `maxItems`, `linkComponent` and `labels`;
+Accordion `type` (`single`, `multiple`) and `titleAs`; FAQ `variant` (`list`, `cards`),
+`single` and `questionAs`; PricingCard `featured`, `badge` and `nameAs`, PricingTable `columns`;
 Pagination `variant` (`pages`, `compact`), `siblingCount`, `pageSize` with
 `pageSizeOptions`, and `labels`; DataTable `paginationLabels`; `labels` for the built-in
 texts of Select, MultiSelect, Clock, TimeInput, DateInput, WeekCalendar and InteractiveMap,

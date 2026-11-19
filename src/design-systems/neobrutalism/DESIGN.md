@@ -453,7 +453,13 @@ x-neus:
       base:
         --avatar-background: var(--color-primary)
         --avatar-color: var(--color-text-on-primary)
-    sections: {}
+    sections:
+      base:
+        --pricing-price-weight: 900
+        --pricing-check-color: var(--color-text-primary)
+        --pricing-featured-border-color: var(--color-text-primary)
+        --pricing-featured-ring-width: 0px
+        --pricing-featured-shadow: 6px 6px 0 var(--color-primary)
     spinner:
       base:
         --spinner-stroke-width: 0.2em
@@ -565,6 +571,32 @@ x-neus:
         --pagination-current-color: var(--color-text-on-primary)
         --pagination-current-border-color: var(--color-text-primary)
         --pagination-current-shadow: 3px 3px 0 var(--color-text-primary)
+    accordion:
+      base:
+        --accordion-gap: 16px
+        --accordion-divider-width: 3px
+        --accordion-divider-color: var(--color-text-primary)
+        --accordion-item-background: var(--color-surface)
+        --accordion-item-border-width: 3px
+        --accordion-item-border-color: var(--color-text-primary)
+        --accordion-item-radius: 4px
+        --accordion-item-shadow: 4px 4px 0 var(--color-text-primary)
+        --accordion-header-padding: 16px
+        --accordion-header-radius: 0px
+        --accordion-header-background: var(--color-primary)
+        --accordion-header-hover-background: color-mix(in srgb, var(--color-primary) 85%, var(--color-text-on-primary))
+        --accordion-title-color: var(--color-text-on-primary)
+        --accordion-title-weight: "700"
+        --accordion-title-line-height: 24px
+        --accordion-icon-color: var(--color-text-on-primary)
+        --accordion-content-padding: 16px
+        --accordion-content-divider-width: 3px
+        --accordion-content-color: var(--color-text-primary)
+        --accordion-content-size: 14px
+        --accordion-content-line-height: 20px
+        --accordion-disabled-color: color-mix(in srgb, var(--color-text-on-primary) 50%, var(--color-primary))
+        --accordion-focus-width: 3px
+        --accordion-focus-offset: -3px
 ---
 
 # Neobrutalism
@@ -657,6 +689,14 @@ Bordered cards with hard shadows, numbered or iconed, with yellow accents on the
 
 Bordered cards with bold quotes; a featured quote can sit on a yellow band.
 
+### FAQ
+
+Framed cards with yellow question bars and hard shadows.
+
+### Pricing
+
+Framed cards with the price in black weight; the recommended plan casts a yellow hard shadow and carries a badge.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
@@ -682,6 +722,8 @@ Line tabs are bold ink labels on a 2px ink rule, the selected one with a 4px ink
 Breadcrumbs are ink, medium weight, with each link bold and underlined like every link here and the current page extra bold; heavy chevrons separate the items ([neobrutalism breadcrumb](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/breadcrumb.tsx), consulted 2026-11-18).
 
 Pagination is a row of framed tiles: 40px squares with a 3px ink border and 4px corners on the page color, bold numbers, and the current page filled with yellow over a 3px hard ink shadow ([neobrutalism pagination](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/pagination.tsx), consulted 2026-11-18). The shadow is this system's mark for the current page; the components library has none there.
+
+An accordion is a stack of framed cards 16px apart: a 3px ink border, 4px corners and a hard ink shadow, each question a bold bar in yellow with ink text and chevron, and the answer below a 3px rule on the page color ([neobrutalism accordion](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/accordion.tsx), consulted 2026-11-19). The components library uses its blue and a 2px frame; the yellow and 3px frame follow this system.
 
 ## Do's and Don'ts
 

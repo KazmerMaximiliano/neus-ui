@@ -42,7 +42,7 @@ export const contextFor = (root, surface = "app") => {
     : read(`src/design-systems/${config.designSystem}/DESIGN.md`);
   const system = derived ? `${config.derivedSystem} (derived from ${config.designSystem})` : `${config.designSystem} (locked)`;
   const sections = ["## Overview", "## Typography", ...(surface === "page"
-    ? ["## Layout", "### Hero", "### Feature list", "### Testimonial"] : []), "## Do's and Don'ts"];
+    ? ["## Layout", "### Hero", "### Feature list", "### Testimonial", "### FAQ", "### Pricing"] : []), "## Do's and Don'ts"];
   const need = markdownSection(read("skills/neus-design/SKILL.md"), "### Need → component");
   const preview = pixabayKey(root);
 

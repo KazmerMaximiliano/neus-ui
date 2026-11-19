@@ -80,10 +80,10 @@ export const RAW_TO_COMPONENT = {
   dialog: "Modal", a: "Link, or Button with href", p: "Text", section: "Section", ul: "Grid or Stack as=\"ul\"", ol: "Stack as=\"ol\"",
   h1: "Heading", h2: "Heading", h3: "Heading", h4: "Heading", h5: "Heading", h6: "Heading",
   header: "SiteHeader (neus-ui/sections)", footer: "SiteFooter (neus-ui/sections)", progress: "Progress",
-  datalist: "Combobox",
+  datalist: "Combobox", details: "Accordion (FAQ from neus-ui/sections on public pages)",
 };
 export const INTERACTIVE_ELEMENTS = ["Button", "IconButton", "Input", "Combobox", "Select", "MultiSelect", "Checkbox", "DateInput",
-  "TimeInput", "Textarea", "Switch", "Radio", "Link", "Menu", "Dropdown", "Tabs", "Pagination", "button", "input", "select", "textarea",
+  "TimeInput", "Textarea", "Switch", "Radio", "Link", "Menu", "Dropdown", "Tabs", "Pagination", "Accordion", "button", "input", "select", "textarea",
   "a"];
 export const FILLER_PATTERN =
   /lorem ipsum|\bacme\b|john doe|jane doe|feature (one|two|1|2)\b|elevate your|seamless|unlock the power|welcome back/i;

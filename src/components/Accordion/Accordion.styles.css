@@ -1,0 +1,96 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--accordion-gap);
+  font-family: var(--accordion-font-family);
+}
+
+.accordion__item {
+  border: var(--accordion-item-border-width) solid var(--accordion-item-border-color);
+  border-block-start: var(--accordion-divider-width) solid var(--accordion-divider-color);
+  border-radius: var(--accordion-item-radius);
+  background: var(--accordion-item-background);
+  box-shadow: var(--accordion-item-shadow);
+}
+
+/* A divided list closes with a rule under its last item. */
+.accordion__item:last-child {
+  border-block-end-width: max(var(--accordion-divider-width), var(--accordion-item-border-width));
+  border-block-end-color: var(--accordion-divider-color);
+}
+
+.accordion__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--accordion-header-gap);
+  min-height: var(--accordion-header-min-height);
+  padding: var(--accordion-header-padding);
+  border-radius: var(--accordion-header-radius);
+  background: var(--accordion-header-background);
+  color: var(--accordion-title-color);
+  font-size: var(--accordion-title-size);
+  font-weight: var(--accordion-title-weight);
+  line-height: var(--accordion-title-line-height);
+  letter-spacing: var(--accordion-title-letter-spacing);
+  list-style: none;
+  cursor: pointer;
+  transition: var(--accordion-transition);
+}
+
+.accordion__header::-webkit-details-marker {
+  display: none;
+}
+
+.accordion__header:hover:not([aria-disabled="true"]) {
+  background: var(--accordion-header-hover-background);
+}
+
+.accordion__header:focus-visible {
+  outline: var(--accordion-focus-width) solid var(--accordion-focus-color);
+  outline-offset: var(--accordion-focus-offset);
+}
+
+.accordion__header[aria-disabled="true"] {
+  color: var(--accordion-disabled-color);
+  cursor: not-allowed;
+}
+
+/* A heading inside the summary keeps the summary's type. */
+.accordion__title {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.accordion__icon {
+  flex: none;
+  width: var(--accordion-icon-size);
+  height: var(--accordion-icon-size);
+  color: var(--accordion-icon-color);
+  transition: transform var(--accordion-icon-duration) ease;
+}
+
+.accordion__header[aria-disabled="true"] .accordion__icon {
+  color: var(--accordion-disabled-color);
+}
+
+.accordion__item[open] > .accordion__header .accordion__icon {
+  transform: rotate(var(--accordion-icon-rotation));
+}
+
+.accordion__content {
+  padding: var(--accordion-content-padding);
+  border-block-start: var(--accordion-content-divider-width) solid var(--accordion-divider-color);
+  color: var(--accordion-content-color);
+  font-size: var(--accordion-content-size);
+  line-height: var(--accordion-content-line-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion__header,
+  .accordion__icon {
+    transition: none;
+  }
+}

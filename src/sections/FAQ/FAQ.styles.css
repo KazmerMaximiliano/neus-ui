@@ -1,0 +1,21 @@
+.faq {
+  max-width: var(--faq-max-width);
+}
+
+/* Each question a card of the system: its fill, outline, corners, shadow and inset. */
+.faq[data-variant="cards"] {
+  --accordion-gap: var(--faq-cards-gap);
+  --accordion-item-background: var(--card-background);
+  --accordion-item-border-width: var(--card-border-width);
+  --accordion-item-border-color: var(--card-border-color);
+  --accordion-divider-width: var(--card-border-width);
+  --accordion-divider-color: var(--card-border-color);
+  --accordion-item-radius: var(--card-radius);
+  --accordion-item-shadow: var(--card-shadow);
+  --accordion-header-padding: var(--card-content-padding);
+  --accordion-content-padding: 0 var(--card-content-padding) var(--card-content-padding);
+}
+
+.faq[data-variant="cards"] .faq__item {
+  overflow: hidden;
+}

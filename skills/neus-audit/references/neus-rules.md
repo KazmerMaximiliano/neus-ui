@@ -73,6 +73,15 @@ the project wrote.
   in the compact variant. DataTable renders the compact one. Flag hand-made
   previous/next or numbered page buttons, and page labels left in English on a
   page in another language.
+- Accordion is native `details` and `summary`: it opens with the keyboard and
+  without JavaScript, the browser opens it to show a find-in-page match, and
+  `type="single"` shares a `name` so one item stays open. FAQ renders it with
+  the questions as headings. Flag a hand-made disclosure (a button toggling
+  a hidden panel, a raw `details` list) and FAQ answers hidden in a Modal.
+- PricingCard writes the plan name as a heading, the price and period as one
+  line and the features as a list with decorative checks; PricingTable is a
+  `ul` of them with aligned actions. Flag prices composed from loose Cards
+  and a featured plan marked only by color.
 - Built-in texts are English: accessible names and fallbacks such as "Open
   menu", "Previous page", "No results", "Hours" or "Menu". On a page in another
   language, flag every one left in English; each has a prop (`labels`,

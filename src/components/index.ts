@@ -1,3 +1,5 @@
+export { Accordion } from "./Accordion";
+export type { AccordionItem, AccordionProps, AccordionType } from "./Accordion";
 export { Alert } from "./Alert";
 export type { AlertLive, AlertProps, AlertStatus } from "./Alert";
 export { Avatar, AvatarGroup } from "./Avatar";

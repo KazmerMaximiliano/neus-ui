@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Components](../components/README.md) ·
 [Customization](../design/customization.md)
 
-The `neus-ui/sections` entry exports 9 composed regions of public pages, built from the
+The `neus-ui/sections` entry exports 12 composed regions of public pages, built from the
 components and styled by each system's `sections` recipe. Import them by name:
 
 ```tsx
@@ -23,9 +23,12 @@ it works without JavaScript and inside Astro islands.
 | [FeatureItem](./FeatureItem.md) | One feature with icon tile, title, text and link. |
 | [TestimonialList](./TestimonialList.md) | Quotes as running text, cards or one featured quote. |
 | [Testimonial](./Testimonial.md) | One quote in a figure with its author and avatar. |
+| [FAQ](./FAQ.md) | Questions and answers as a divided list or cards, one answer open or many, without JavaScript. |
+| [PricingTable](./PricingTable.md) | Plans side by side as a list of PricingCards whose actions line up. |
+| [PricingCard](./PricingCard.md) | One plan with its price, period, features, action and an optional featured outline and badge. |
 | [CallToAction](./CallToAction.md) | Closing band with the claim, the action and an optional form beside it. |
 | [SiteFooter](./SiteFooter.md) | Brand, columns of links and the legal line. |
 
 The variant names match the composition decks the neus-design skill deals: hero `split`,
 `centered` and `media-first`; features `grid`, `list` and `cards`; testimonials `plain`,
-`card` and `featured`; call to action `band` and `split`.
+`card` and `featured`; FAQ `list` and `cards`; call to action `band` and `split`.

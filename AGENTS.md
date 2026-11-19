@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 54 reusable UI components and public sections
+- 55 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (54 total)
+### Implemented Components and Public Subcomponents (55 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -251,8 +251,9 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Tabs             | src/components/Tabs/                                    | STABLE | Line or contained tabs with linked panels, roving focus and automatic activation, controlled or not                     |
 | Breadcrumbs      | src/components/Breadcrumbs/                             | STABLE | Navigation trail ending at aria-current, CSS separators, collapsing middle items, linkComponent                         |
 | Pagination       | src/components/Pagination/                              | STABLE | Page buttons with ellipses or compact previous/next, page-size Select; DataTable's controls                             |
+| Accordion        | src/components/Accordion/                               | STABLE | Native details/summary, single or multiple open, controlled or not, find-in-page, works without JavaScript              |
 
-### Implemented Sections (9 total, `neus-ui/sections`)
+### Implemented Sections (12 total, `neus-ui/sections`)
 
 Sections follow the component file structure inside `src/sections/`; owned items live in
 their family's `components/` (FeatureItem in FeatureList, Testimonial in TestimonialList),
@@ -268,6 +269,9 @@ and the list variant reaches its items through a `.context.ts` file.
 | TestimonialList | src/sections/TestimonialList/                        | STABLE | Plain/card/featured variants through context                |
 | Testimonial     | src/sections/TestimonialList/components/Testimonial/ | STABLE | Figure, localized quotes, avatar                            |
 | CallToAction    | src/sections/CallToAction/                           | STABLE | Band/split, tone, aside form                                |
+| FAQ             | src/sections/FAQ/                                    | STABLE | Accordion of questions as headings, list or cards, single   |
+| PricingTable    | src/sections/PricingTable/                           | STABLE | Grid list of PricingCards whose actions line up             |
+| PricingCard     | src/sections/PricingCard/                            | STABLE | Plan name, price, period, features, action, featured, badge |
 | SiteFooter      | src/sections/SiteFooter/                             | STABLE | Columns as labelled navigation, legal line, linkComponent   |
 
 ### Implemented Templates (2 total)
