@@ -16,8 +16,8 @@ import "neus-ui/dist/neus-ui.css";
 export const Example = () => (
   <ThemeProvider designSystem="neus">
     <Tooltip
-      content="La mueve a la papelera durante 30 días"
-      trigger={(props) => <IconButton {...props} icon={Trash2} label="Eliminar" />}
+      content="Moves it to the trash for 30 days"
+      trigger={(props) => <IconButton {...props} icon={Trash2} label="Delete" />}
     />
   </ThemeProvider>
 );
@@ -107,7 +107,7 @@ is the same `.tooltip` bubble, placed at the pointer with the overlay surface. U
 ### Instance styles and classes
 
 ```tsx
-<Tooltip className="wide-tip" content="…" trigger={(props) => <IconButton {...props} icon={Info} label="Detalles" />} />
+<Tooltip className="wide-tip" content="…" trigger={(props) => <IconButton {...props} icon={Info} label="Details" />} />
 ```
 
 ```css

@@ -1,0 +1,8 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --breadcrumbs-font-size: 14px;
+  --breadcrumbs-line-height: 20px;
+  --breadcrumbs-letter-spacing: 0.25px;
+  --breadcrumbs-link-weight: 400;
+  --breadcrumbs-current-weight: 500;
+}

@@ -8,6 +8,43 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.9.0] - Unreleased
+
+### Added
+
+- `Tabs`: views of the same subject switched from a row of tabs, following the WAI-ARIA tabs
+  pattern with automatic activation. Only the selected tab is in the Tab sequence; the arrow
+  keys, Home and End move and select, skipping disabled tabs and following right-to-left text.
+  Every panel is rendered and the hidden ones keep their state. `line` draws the tabs over a
+  divider with an indicator, `contained` inside a shared container. New `tabs` recipe family in
+  the six systems.
+- `Breadcrumbs`: a labelled navigation trail ending at the current page with
+  `aria-current="page"`, separators drawn by CSS and silent for screen readers, a router link
+  through `linkComponent`, and `maxItems`, which collapses the middle items behind a button that
+  shows them. New `breadcrumbs` recipe family, built on each system's links.
+- `Pagination`: page buttons with the first, last and nearby pages and an ellipsis for each gap,
+  or a `compact` previous and next around "page / total"; an optional page-size Select; English
+  labels you can replace. New `pagination` recipe family.
+
+### Changed
+
+- DataTable's pagination is a compact Pagination: a `nav` with the `.pagination` classes besides
+  `.data-table__pagination`, where it was a `div`. It looks the same and keeps the live position
+  text, its classes and its style props. New `paginationLabels` prop to name the landmark and
+  the buttons in the project's language.
+- Built-in texts are English, like the rest of the library; they were Spanish. Where a prop
+  exists, pass your language back:
+  - Sidebar: "Main navigation", "Open menu", "Close menu", "Expand navigation" and "Collapse
+    navigation" (`labels`), also inside AppTemplate.
+  - DataTable: "Previous page" and "Next page" (`paginationLabels`).
+  - Select and MultiSelect: "Search..." (`searchBarPlaceholder`), "No results", "Options" and,
+    without a label, "Select an option" or "Select options"; MultiSelect's remove buttons say
+    "Remove" and the option.
+  - Menu and Dropdown without a visible name: "Menu".
+  - WeekCalendar: "Previous week" and "Next week".
+  - Clock: "Hours" and "Minutes"; the DateInput and TimeInput panels: "<label>: calendar" and
+    "<label>: clock".
+
 ## [2.8.0] - Unreleased
 
 ### Added
@@ -370,6 +407,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[2.9.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.7.0...v2.8.0
 [2.7.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.5.0...v2.6.0

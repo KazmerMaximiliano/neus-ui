@@ -268,7 +268,7 @@ describe("DateInput accessibility and parts", () => {
     await user.click(field);
     expect(field).toHaveAttribute("aria-expanded", "true");
     expect(
-      screen.getByRole("dialog", { name: "Birthday: calendario" }),
+      screen.getByRole("dialog", { name: "Birthday: calendar" }),
     ).toBeInTheDocument();
     expect(document.activeElement).toHaveTextContent("15");
     await user.keyboard("{Escape}");

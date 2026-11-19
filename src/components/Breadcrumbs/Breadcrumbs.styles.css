@@ -1,0 +1,84 @@
+.breadcrumbs {
+  min-width: 0;
+  font-family: var(--breadcrumbs-font-family);
+  font-size: var(--breadcrumbs-font-size);
+  font-weight: var(--breadcrumbs-font-weight);
+  line-height: var(--breadcrumbs-line-height);
+  letter-spacing: var(--breadcrumbs-letter-spacing);
+}
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: var(--breadcrumbs-row-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  color: var(--breadcrumbs-color);
+}
+
+/* The separator is drawn, not read: its alternative text is empty. */
+.breadcrumbs__item + .breadcrumbs__item::before {
+  content: var(--breadcrumbs-separator);
+  content: var(--breadcrumbs-separator) / "";
+  margin-inline: var(--breadcrumbs-separator-gap);
+  color: var(--breadcrumbs-separator-color);
+  font-weight: var(--breadcrumbs-separator-weight);
+}
+
+.breadcrumbs__link {
+  padding: var(--breadcrumbs-link-padding);
+  border-radius: var(--breadcrumbs-link-radius);
+  color: var(--breadcrumbs-link-color);
+  font-weight: var(--breadcrumbs-link-weight);
+  text-decoration-line: var(--breadcrumbs-link-decoration);
+  text-underline-offset: var(--breadcrumbs-link-underline-offset);
+  transition: var(--breadcrumbs-transition);
+}
+
+.breadcrumbs__link:hover {
+  background: var(--breadcrumbs-link-hover-background);
+  color: var(--breadcrumbs-link-hover-color);
+  text-decoration-line: var(--breadcrumbs-link-hover-decoration);
+}
+
+.breadcrumbs__current {
+  color: var(--breadcrumbs-current-color);
+  font-weight: var(--breadcrumbs-current-weight);
+}
+
+.breadcrumbs__expand {
+  min-width: var(--breadcrumbs-expand-size);
+  min-height: var(--breadcrumbs-expand-size);
+  padding: 0;
+  border: 0;
+  border-radius: var(--breadcrumbs-link-radius);
+  background: transparent;
+  color: var(--breadcrumbs-link-color);
+  font: inherit;
+  cursor: pointer;
+}
+
+.breadcrumbs__expand:hover {
+  background: var(--breadcrumbs-link-hover-background);
+  color: var(--breadcrumbs-link-hover-color);
+}
+
+.breadcrumbs__link:focus-visible,
+.breadcrumbs__expand:focus-visible {
+  outline: var(--breadcrumbs-focus-width) solid var(--breadcrumbs-focus-color);
+  outline-offset: var(--breadcrumbs-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breadcrumbs__link {
+    transition: none;
+  }
+}

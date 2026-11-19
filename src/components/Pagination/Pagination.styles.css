@@ -1,0 +1,87 @@
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pagination-gap);
+  font-family: var(--pagination-font-family);
+}
+
+.pagination__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pagination-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination__page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--pagination-item-size);
+  height: var(--pagination-item-size);
+  padding: var(--pagination-item-padding);
+  border: var(--pagination-item-border-width) solid var(--pagination-item-border-color);
+  border-radius: var(--pagination-item-radius);
+  background: var(--pagination-item-background);
+  color: var(--pagination-item-color);
+  font: inherit;
+  font-size: var(--pagination-font-size);
+  font-weight: var(--pagination-font-weight);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--pagination-transition);
+}
+
+.pagination__page:hover:not([aria-current="page"]) {
+  background: var(--pagination-item-hover-background);
+  color: var(--pagination-item-hover-color);
+}
+
+.pagination__page[aria-current="page"] {
+  border-color: var(--pagination-current-border-color);
+  background: var(--pagination-current-background);
+  color: var(--pagination-current-color);
+  font-weight: var(--pagination-current-font-weight);
+  box-shadow: var(--pagination-current-shadow);
+  cursor: default;
+}
+
+.pagination__page:focus-visible {
+  outline: var(--pagination-focus-width) solid var(--pagination-focus-color);
+  outline-offset: var(--pagination-focus-offset);
+}
+
+.pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--pagination-item-size);
+  color: var(--pagination-ellipsis-color);
+  font-size: var(--pagination-font-size);
+}
+
+.pagination__info {
+  color: var(--pagination-info-color);
+  font-size: var(--pagination-info-font-size);
+}
+
+/* The page-size select sits on the row with its label beside it. */
+.pagination .pagination__page-size {
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+}
+
+.pagination__page-size-label {
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pagination__page {
+    transition: none;
+  }
+}

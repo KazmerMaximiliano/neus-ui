@@ -65,7 +65,7 @@ export const MultiSelect = ({
   requiredClassName,
   requiredStyle,
   viewSearchBar = true,
-  searchBarPlaceholder = "Buscar...",
+  searchBarPlaceholder = "Search...",
   fieldStyle,
   tagStyle,
   listStyle,
@@ -178,7 +178,7 @@ export const MultiSelect = ({
                   .filter(Boolean)
                   .join(" ")}
                 style={tagRemoveStyle}
-                aria-label={`Quitar ${option.label}`}
+                aria-label={`Remove ${option.label}`}
                 onClick={() =>
                   update(selectedValues.filter((v) => v !== option.value))
                 }
@@ -210,7 +210,7 @@ export const MultiSelect = ({
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-controls={id}
-          aria-label={displayLabel ? undefined : "Selecciona opciones"}
+          aria-label={displayLabel ? undefined : "Select options"}
           aria-invalid={error ? true : undefined}
           aria-required={required || undefined}
           aria-describedby={
@@ -271,7 +271,7 @@ export const MultiSelect = ({
         emptyClassName={emptyClassName}
         emptyStyle={emptyStyle}
         popover={popover}
-        label={displayLabel || "Opciones"}
+        label={displayLabel || "Options"}
         options={options}
         multiple
         isSelected={(optionValue) => selectedValues.includes(optionValue)}

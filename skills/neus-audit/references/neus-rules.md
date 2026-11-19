@@ -57,6 +57,22 @@ the project wrote.
   through the options, and leaving the field keeps an exact match or the last
   choice. Flag a hand-made autocomplete (a text input over a list of buttons or
   a `<datalist>`) and a Select used where people must type to find a value.
+- Tabs follows the WAI-ARIA tabs pattern: a named `tablist`, tabs with
+  `aria-selected` and `aria-controls`, labelled panels, one tab in the Tab
+  sequence, and arrow keys, Home and End that move and select. Flag a
+  hand-made `role="tablist"` or a row of buttons that swaps content, and Tabs
+  used for steps that follow an order (Stepper) or for page navigation.
+- Breadcrumbs is a named `nav` around an ordered list whose last item carries
+  `aria-current="page"` and is not a link; its separators are silent for
+  screen readers. Flag a hand-made trail (links joined by "/" or "›" text, a
+  `nav` labelled "Breadcrumb") and a trail that repeats the history of pages
+  visited instead of the hierarchy.
+- Pagination is a named `nav`: page buttons named "Page N" with
+  `aria-current="page"` on the current one, ellipses hidden from screen
+  readers, previous and next disabled at the ends, and a polite live position
+  in the compact variant. DataTable renders the compact one. Flag hand-made
+  previous/next or numbered page buttons, and page labels left in English on a
+  page in another language.
 - Field components (Input, Textarea, Combobox, Select, MultiSelect, DateInput, TimeInput) render
   their own `<label>` from `label`, mark `required` with an asterisk and
   `aria-required`, and wire `description` and errors to `aria-describedby`.

@@ -17,9 +17,9 @@ import "neus-ui/dist/neus-ui.css";
 export const Example = () => (
   <ThemeProvider designSystem="neus">
     <RadioGroup label="Plan" name="plan" defaultValue="monthly">
-      <Radio value="monthly" label="Mensual" />
-      <Radio value="yearly" label="Anual" description="Dos meses sin cargo." />
-      <Radio value="lifetime" label="De por vida" disabled />
+      <Radio value="monthly" label="Monthly" />
+      <Radio value="yearly" label="Yearly" description="Two months free." />
+      <Radio value="lifetime" label="Lifetime" disabled />
     </RadioGroup>
   </ThemeProvider>
 );
@@ -32,8 +32,8 @@ draw, such as one radio per plan card. Name the choice yourself, with a `<fields
 ```tsx
 <fieldset>
   <legend>Plan</legend>
-  <Card><Radio name="plan" value="monthly" label="Mensual" checked={plan === "monthly"} onChange={setPlan} /></Card>
-  <Card><Radio name="plan" value="yearly" label="Anual" checked={plan === "yearly"} onChange={setPlan} /></Card>
+  <Card><Radio name="plan" value="monthly" label="Monthly" checked={plan === "monthly"} onChange={setPlan} /></Card>
+  <Card><Radio name="plan" value="yearly" label="Yearly" checked={plan === "yearly"} onChange={setPlan} /></Card>
 </fieldset>
 ```
 
@@ -102,7 +102,7 @@ States come from the native input: `.radio__input:checked + .radio__circle`,
 ### Instance styles and classes
 
 ```tsx
-<Radio value="yearly" label="Anual" labelClassName="plan-label" />
+<Radio value="yearly" label="Yearly" labelClassName="plan-label" />
 ```
 
 ```css

@@ -209,7 +209,7 @@ describe("controlled period", () => {
         indicatorStyle={{ opacity: 0.8 }}
       />,
     );
-    expect(screen.getByRole("button", { name: "Horas" })).toHaveStyle({
+    expect(screen.getByRole("button", { name: "Hours" })).toHaveStyle({
       color: "rgb(255, 0, 0)",
     });
     expect(container.querySelector(".clock__number")).toHaveStyle({

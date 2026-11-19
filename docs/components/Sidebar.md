@@ -102,11 +102,11 @@ type SidebarItem = {
 };
 
 type SidebarLabels = {
-  readonly navigation?: string;
-  readonly open?: string;
-  readonly close?: string;
-  readonly expand?: string;
-  readonly collapse?: string;
+  readonly navigation?: string; // "Main navigation"
+  readonly open?: string; // "Open menu"
+  readonly close?: string; // "Close menu"
+  readonly expand?: string; // "Expand navigation"
+  readonly collapse?: string; // "Collapse navigation"
 };
 
 type SidebarViewport = "mobile" | "tablet" | "desktop";

@@ -77,7 +77,7 @@ export const DateInput = (props: DateInputProps) => {
       label={label}
       placeholder={placeholder}
       displayValue={formatDateForDisplay(currentValue, mode)}
-      pickerLabel={label ? `${label}: calendario` : "Calendario"}
+      pickerLabel={label ? `${label}: calendar` : "Calendar"}
       error={error}
       disabled={disabled}
       readonly={readonly}

@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 51 components and public sections. Import each by name from `neus-ui`.
+The package exports 54 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -83,6 +83,9 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Sidebar](./Sidebar.md) | Responsive navigation with desktop panel, tablet rail and mobile dialog. |
 | [Menu](./Menu.md) | Text or icon trigger for an accessible action menu. |
 | [Dropdown](./Dropdown.md) | Avatar or icon trigger with an action menu. |
+| [Tabs](./Tabs.md) | Views of the same subject switched from a row of tabs, over a divider or in a container. |
+| [Breadcrumbs](./Breadcrumbs.md) | Trail of links down to the current page, collapsing the middle when long. |
+| [Pagination](./Pagination.md) | Page buttons or previous and next for a long list, with an optional page-size select. |
 | [Stepper](./Stepper.md) | Step progress in dots, linear or simple presentation. |
 | [DataTable](./DataTable.md) | Typed AG Grid table with consumer-controlled pagination and optional mobile cards. |
 | [InteractiveMap](./InteractiveMap.md) | Google Maps location picker with search, reverse geocoding and error states. |

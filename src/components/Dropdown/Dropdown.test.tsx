@@ -34,7 +34,7 @@ describe("Dropdown", () => {
 
     it("falls back to a default label without a name", () => {
       render(<Dropdown items={items()} />);
-      expect(screen.getByRole("button", { name: "Menú" })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Menu" })).toBeInTheDocument();
     });
   });
 

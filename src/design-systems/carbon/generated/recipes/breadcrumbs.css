@@ -1,0 +1,12 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --breadcrumbs-font-size: 14px;
+  --breadcrumbs-line-height: 18px;
+  --breadcrumbs-letter-spacing: 0.16px;
+  --breadcrumbs-color: var(--color-text-primary);
+  --breadcrumbs-separator-color: var(--color-text-primary);
+  --breadcrumbs-link-color: var(--link-color);
+  --breadcrumbs-link-weight: 400;
+  --breadcrumbs-link-hover-decoration: underline;
+  --breadcrumbs-current-weight: 400;
+}

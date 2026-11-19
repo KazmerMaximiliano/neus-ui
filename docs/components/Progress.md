@@ -15,10 +15,10 @@ export const Example = ({ uploaded, total }: { uploaded: number; total: number }
   return (
     <ThemeProvider designSystem="neus">
       <Progress
-        label="Subiendo fotos"
+        label="Uploading photos"
         value={uploaded}
         max={total}
-        valueText={`${uploaded} de ${total} fotos`}
+        valueText={`${uploaded} of ${total} photos`}
         showValue
       />
     </ThemeProvider>
@@ -95,7 +95,7 @@ Stepper's linear variant renders this bar: `.stepper__track` is `.progress`,
 ### Instance styles and classes
 
 ```tsx
-<Progress className="quota" label="Almacenamiento" value={7.2} max={10} valueText="7,2 de 10 GB" showValue />
+<Progress className="quota" label="Storage" value={7.2} max={10} valueText="7.2 of 10 GB" showValue />
 ```
 
 ```css

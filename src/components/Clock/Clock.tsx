@@ -180,7 +180,7 @@ export const Clock = ({
                 .filter(Boolean)
                 .join(" ")}
               style={segmentStyle}
-              aria-label="Horas"
+              aria-label="Hours"
               aria-pressed={mode === "hours"}
               onClick={() => !disabled && !readonly && setMode("hours")}
               disabled={disabled}
@@ -206,7 +206,7 @@ export const Clock = ({
                 .filter(Boolean)
                 .join(" ")}
               style={segmentStyle}
-              aria-label="Minutos"
+              aria-label="Minutes"
               aria-pressed={mode === "minutes"}
               onClick={() => !disabled && !readonly && setMode("minutes")}
               disabled={disabled}
@@ -261,7 +261,7 @@ export const Clock = ({
           onKeyDown={handleFaceKeyDown}
           role="slider"
           tabIndex={disabled ? -1 : 0}
-          aria-label={isHours ? "Horas" : "Minutos"}
+          aria-label={isHours ? "Hours" : "Minutes"}
           aria-valuemin={isHours ? (format === "24h" ? 0 : 1) : 0}
           aria-valuemax={isHours ? (format === "24h" ? 23 : 12) : 59}
           aria-valuenow={sliderValue}

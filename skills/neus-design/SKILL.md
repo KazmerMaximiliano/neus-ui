@@ -248,11 +248,14 @@ component's guide.
 | On/off setting that applies at once | `Switch`; a choice sent with a form stays `Checkbox` |
 | One choice among 2–5 visible options | `RadioGroup` + `Radio`; more options: `Select` |
 | Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
-| Records in a table | `DataTable` |
+| Records in a table | `DataTable` (its pagination is built in; `paginationLabels` in the project's language) |
+| Views of the same subject, one at a time (settings sections, report views) | `Tabs` (`items` with `value`, `label`, `content`; `label` for the list; `variant="contained"` inside a card or toolbar); steps in order stay `Stepper`, moving between pages stays navigation |
+| Where the page sits in a hierarchy (two or more levels deep) | `Breadcrumbs` (`items` ending at the current page; `linkComponent` with a router; `labels` in the project's language; `maxItems` for long trails), above the page title or in AppTemplate's `headerStart` |
+| Long list or results split into pages | `Pagination` (`page`, `totalPages`, `onChange`; `pageSize` and `pageSizeOptions` for the page size; `variant="compact"` where room is short; `labels` in the project's language) |
 | Steps of a flow | `Stepper` |
 | Files | `FileUploader` |
 | Map | `InteractiveMap` |
-| Application shell with side navigation (dashboards, back-office) | `AppTemplate` (`title`, `routes`, `headerStart` for breadcrumb or search, `menu` for global actions); never a Sidebar with your own header |
+| Application shell with side navigation (dashboards, back-office) | `AppTemplate` (`title`, `routes`, `headerStart` for `Breadcrumbs` or search, `menu` for global actions); never a Sidebar with your own header |
 
 Write your own element only for what no row covers (a `blockquote`, a `nav`
 landmark, an inline `strong`), styled with neus tokens.

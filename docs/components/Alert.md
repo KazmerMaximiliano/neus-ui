@@ -16,12 +16,12 @@ export const Example = ({ onDismiss }: { onDismiss: () => void }) => {
     <ThemeProvider designSystem="neus">
       <Alert
         status="warning"
-        title="Tu prueba termina en 3 días"
-        actions={<Button label="Agregar medio de pago" size="small" variant="outlined" />}
+        title="Your trial ends in 3 days"
+        actions={<Button label="Add a payment method" size="small" variant="outlined" />}
         onDismiss={onDismiss}
         dismissLabel="Cerrar"
       >
-        Agregá un medio de pago para conservar tus sesiones.
+        Add a payment method to keep your sessions.
       </Alert>
     </ThemeProvider>
   );
@@ -87,7 +87,7 @@ the [stylesheet](../../src/components/Alert/Alert.styles.css) for the exact decl
 ### Instance styles and classes
 
 ```tsx
-<Alert className="checkout-alert" titleStyle={{ fontSize: 16 }} status="error" title="No pudimos cobrar">Revisá la tarjeta.</Alert>
+<Alert className="checkout-alert" titleStyle={{ fontSize: 16 }} status="error" title="We could not charge your card">Check the card details.</Alert>
 ```
 
 ```css

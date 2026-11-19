@@ -1423,6 +1423,110 @@ x-neus:
         --tooltip-font-weight: "500"
         --tooltip-line-height: "1.4"
         --tooltip-letter-spacing: normal
+    tabs:
+      base:
+        --tabs-font-family: var(--font-body)
+        --tabs-font-size: var(--fs-sm)
+        --tabs-font-weight: "600"
+        --tabs-selected-font-weight: "600"
+        --tabs-line-height: "1.4"
+        --tabs-letter-spacing: normal
+        --tabs-height: 44px
+        --tabs-min-width: 0px
+        --tabs-padding: 0 16px
+        --tabs-gap: 0px
+        --tabs-icon-gap: 8px
+        --tabs-radius: var(--radius-sm) var(--radius-sm) 0 0
+        --tabs-background: transparent
+        --tabs-color: var(--color-text-secondary)
+        --tabs-hover-color: var(--color-text-primary)
+        --tabs-hover-background: var(--color-surface-hover)
+        --tabs-selected-color: var(--color-primary-text)
+        --tabs-disabled-color: var(--color-text-disabled)
+        --tabs-divider-width: 1px
+        --tabs-divider-color: var(--color-border-subtle)
+        --tabs-indicator-height: 3px
+        --tabs-indicator-inset: 0px
+        --tabs-indicator-radius: 3px 3px 0 0
+        --tabs-indicator-color: var(--color-primary)
+        --tabs-hover-indicator-color: transparent
+        --tabs-contained-height: 36px
+        --tabs-contained-gap: 4px
+        --tabs-contained-padding: 4px
+        --tabs-contained-border-width: 0px
+        --tabs-contained-border-color: transparent
+        --tabs-contained-radius: var(--radius-default)
+        --tabs-contained-background: var(--color-surface-secondary)
+        --tabs-contained-tab-radius: var(--radius-sm)
+        --tabs-contained-tab-padding: var(--tabs-padding)
+        --tabs-contained-font-size: var(--tabs-font-size)
+        --tabs-contained-tab-background: transparent
+        --tabs-contained-color: var(--color-text-secondary)
+        --tabs-contained-hover-background: color-mix(in srgb, var(--color-text-primary) 6%, transparent)
+        --tabs-contained-selected-background: var(--color-surface)
+        --tabs-contained-selected-color: var(--color-text-primary)
+        --tabs-contained-selected-shadow: 0 1px 3px rgb(15 23 42 / 0.12)
+        --tabs-focus-width: 2px
+        --tabs-focus-color: var(--color-focus)
+        --tabs-focus-offset: 2px
+        --tabs-panel-gap: "{spacing.step-4}"
+        --tabs-transition: color 0.2s ease, background-color 0.2s ease
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-family: var(--font-body)
+        --breadcrumbs-font-size: var(--fs-sm)
+        --breadcrumbs-font-weight: "400"
+        --breadcrumbs-line-height: "1.5"
+        --breadcrumbs-letter-spacing: normal
+        --breadcrumbs-row-gap: 4px
+        --breadcrumbs-color: var(--color-text-secondary)
+        --breadcrumbs-separator: '"/"'
+        --breadcrumbs-separator-gap: 8px
+        --breadcrumbs-separator-color: var(--color-text-secondary)
+        --breadcrumbs-separator-weight: "400"
+        --breadcrumbs-link-color: var(--link-secondary-color)
+        --breadcrumbs-link-weight: "500"
+        --breadcrumbs-link-padding: var(--link-padding)
+        --breadcrumbs-link-radius: var(--link-radius)
+        --breadcrumbs-link-decoration: none
+        --breadcrumbs-link-underline-offset: var(--link-underline-offset)
+        --breadcrumbs-link-hover-color: var(--link-hover-primary-color)
+        --breadcrumbs-link-hover-background: var(--link-hover-background)
+        --breadcrumbs-link-hover-decoration: var(--link-hover-decoration)
+        --breadcrumbs-current-color: var(--color-text-primary)
+        --breadcrumbs-current-weight: "600"
+        --breadcrumbs-expand-size: 24px
+        --breadcrumbs-focus-width: var(--link-focus-width)
+        --breadcrumbs-focus-color: var(--link-focus-color)
+        --breadcrumbs-focus-offset: var(--link-focus-offset)
+        --breadcrumbs-transition: var(--link-transition)
+    pagination:
+      base:
+        --pagination-font-family: var(--font-body)
+        --pagination-font-size: var(--fs-sm)
+        --pagination-font-weight: "500"
+        --pagination-current-font-weight: "700"
+        --pagination-gap: 4px
+        --pagination-item-size: var(--icon-button-size-small)
+        --pagination-item-padding: 0 8px
+        --pagination-item-radius: var(--radius-pill)
+        --pagination-item-border-width: 0px
+        --pagination-item-border-color: transparent
+        --pagination-item-background: transparent
+        --pagination-item-color: var(--color-text-primary)
+        --pagination-item-hover-background: var(--color-surface-hover)
+        --pagination-item-hover-color: var(--color-text-primary)
+        --pagination-current-background: var(--color-primary)
+        --pagination-current-color: var(--color-text-on-primary)
+        --pagination-current-border-color: transparent
+        --pagination-current-shadow: none
+        --pagination-ellipsis-color: var(--color-text-secondary)
+        --pagination-info-color: var(--color-text-secondary)
+        --pagination-info-font-size: var(--fs-sm)
+        --pagination-focus-width: 2px
+        --pagination-focus-color: var(--color-focus)
+        --pagination-focus-offset: 2px
+        --pagination-transition: background-color 180ms ease, color 180ms ease
 ---
 
 # Neus UI
@@ -1552,6 +1656,12 @@ A toast is a short notification that floats in a corner after an action, such as
 A tooltip is a short dark label that names or explains a control, such as an icon button. It reverses the page colors (text color behind, surface color in front), with 12px medium text, 6px by 10px of padding, 8px corners and no shadow, at most 240px wide. It sits 6px above the control, centered, and moves below when there is no room.
 
 A combobox is a field you can type into that suggests options below it. The field is the input with every one of its variants and sizes, and the list is the select's panel and options. The option the arrow keys reach gets the hover background and the focus outline, because focus stays in the field.
+
+Tabs switch between views of one subject. Line tabs sit on a thin gray divider: labels in secondary ink, semibold at 13px, and the selected one in indigo with a 3px indigo bar on the divider, its top corners rounded; hovering a tab gives it the low surface. Contained tabs are a segmented control: a low-surface tray with 4px of padding and the selected tab raised as a white tile with a soft shadow. Focus draws a 2px ring inside the tab.
+
+Breadcrumbs show where the page sits: secondary-ink links in 13px separated by slashes, ending at the current page in primary ink and semibold. Links turn indigo and underline on hover, like every link, and a long trail folds its middle behind an ellipsis button.
+
+Pagination numbers the pages in 40px round buttons, as wide as the icon buttons beside them for previous and next. The current page is a solid indigo disc with white numbers in bold; the others are plain ink that gets the hover surface. The compact form reads "5 / 20" in secondary ink between the arrows.
 
 ## Do's and Don'ts
 

@@ -174,7 +174,7 @@ describe("Select interaction in the browser", () => {
         />
       </ThemeProvider>,
     );
-    const remove = screen.getByRole("button", { name: "Quitar Argentina" });
+    const remove = screen.getByRole("button", { name: "Remove Argentina" });
     const { x, y, width, height } = remove.getBoundingClientRect();
     expect(document.elementFromPoint(x + width / 2, y + height / 2)?.closest("button")).toBe(remove);
     await user.click(remove);
@@ -193,7 +193,7 @@ describe("Select interaction in the browser", () => {
   });
 
   it("shrinks a long value to its grid column instead of widening it", () => {
-    const options = [{ value: "long", label: "Con la cabeza a mil antes de una reunión importante" }];
+    const options = [{ value: "long", label: "Mind racing ahead of an important meeting with the team" }];
     render(
       <ThemeProvider scope="local">
         <div style={{ display: "grid", width: 240 }}>

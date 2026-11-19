@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 51 reusable UI components and public sections
+- 54 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (51 total)
+### Implemented Components and Public Subcomponents (54 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -248,6 +248,9 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Toast            | src/components/Toast/                                   | STABLE | Alert that closes itself, pausing on hover and focus; queued and announced by ToastProvider and useToast                |
 | Tooltip          | src/components/Tooltip/                                 | STABLE | Description on hover and keyboard focus, centered and flipping, hoverable and dismissable; WeekCalendarRow's bubble     |
 | Combobox         | src/components/Combobox/                                | STABLE | Input with suggestions and aria-activedescendant: local filter or fetched results, custom values, loading              |
+| Tabs             | src/components/Tabs/                                    | STABLE | Line or contained tabs with linked panels, roving focus and automatic activation, controlled or not                     |
+| Breadcrumbs      | src/components/Breadcrumbs/                             | STABLE | Navigation trail ending at aria-current, CSS separators, collapsing middle items, linkComponent                         |
+| Pagination       | src/components/Pagination/                              | STABLE | Page buttons with ellipses or compact previous/next, page-size Select; DataTable's controls                             |
 
 ### Implemented Sections (9 total, `neus-ui/sections`)
 

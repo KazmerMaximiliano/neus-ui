@@ -75,6 +75,10 @@ export const Page = () => (
     ["raw-element", "a.tsx", `<IconButton icon={Trash2} label="Delete" title="Moves it to the trash" />`],
     ["raw-element", "a.tsx", `<input role="combobox" aria-expanded={open} value={query} />`],
     ["raw-element", "a.tsx", `<datalist id="cities">{cities}</datalist>`],
+    ["raw-element", "a.tsx", `<div role="tablist" aria-label="Settings">{tabs}</div>`],
+    ["raw-element", "a.tsx", `<button role="tab" aria-selected={selected}>General</button>`],
+    ["raw-element", "a.tsx", `<nav aria-label="Breadcrumb"><ol>{crumbs}</ol></nav>`],
+    ["raw-element", "a.tsx", `<nav className="pager" aria-label="Paginación">{pages}</nav>`],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
     ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
   ])("reports P1 %s", (rule, file, text) => {
@@ -88,6 +92,11 @@ export const Page = () => (
 
   it("does not take Skeleton or Progress components for hand-made ones", () => {
     const text = `<Skeleton className="skeleton-card" lines={3} />\n<Progress label="Upload" value={3} max={10} />`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take Tabs, Breadcrumbs, Pagination or a tab panel for hand-made ones", () => {
+    const text = `<Tabs label="Settings" items={items} />\n<Breadcrumbs items={trail} labels={{ navigation: "Breadcrumb" }} />\n<Pagination page={page} totalPages={9} labels={{ navigation: "Pagination" }} />\n<div role="tabpanel" aria-label="Notes">{notes}</div>`;
     expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
   });
 

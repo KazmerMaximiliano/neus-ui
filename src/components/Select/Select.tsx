@@ -53,7 +53,7 @@ export const Select = ({
   requiredClassName,
   requiredStyle,
   viewSearchBar = true,
-  searchBarPlaceholder = "Buscar...",
+  searchBarPlaceholder = "Search...",
   options,
   fieldStyle,
   listStyle,
@@ -145,7 +145,7 @@ export const Select = ({
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-controls={id}
-          aria-label={displayLabel ? undefined : "Selecciona una opción"}
+          aria-label={displayLabel ? undefined : "Select an option"}
           aria-invalid={error ? true : undefined}
           aria-required={required || undefined}
           aria-describedby={
@@ -164,7 +164,7 @@ export const Select = ({
               .join(" ")}
             style={selectedLabel ? valueStyle : placeholderStyle}
           >
-            {selectedLabel || placeholder || "Selecciona una opción..."}
+            {selectedLabel || placeholder || "Select an option..."}
           </span>
         </button>
         <ChevronDown
@@ -194,7 +194,7 @@ export const Select = ({
         emptyClassName={emptyClassName}
         emptyStyle={emptyStyle}
         popover={popover}
-        label={displayLabel || "Opciones"}
+        label={displayLabel || "Options"}
         options={options}
         isSelected={(optionValue) => optionValue === selectedValue}
         onSelect={handleSelect}

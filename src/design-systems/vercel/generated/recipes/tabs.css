@@ -1,0 +1,32 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --tabs-disabled-color: #8f8f8f;
+  --tabs-font-size: 14px;
+  --tabs-font-weight: 400;
+  --tabs-selected-font-weight: 400;
+  --tabs-line-height: 20px;
+  --tabs-height: 48px;
+  --tabs-padding: 0 2px;
+  --tabs-gap: 24px;
+  --tabs-radius: 0px;
+  --tabs-hover-background: transparent;
+  --tabs-selected-color: var(--color-text-primary);
+  --tabs-indicator-height: 2px;
+  --tabs-indicator-radius: 0px;
+  --tabs-indicator-color: var(--color-text-primary);
+  --tabs-contained-height: 32px;
+  --tabs-contained-gap: 0px;
+  --tabs-contained-padding: 0px;
+  --tabs-contained-radius: 0px;
+  --tabs-contained-background: transparent;
+  --tabs-contained-tab-radius: 6px;
+  --tabs-contained-tab-padding: 0 12px;
+  --tabs-contained-font-size: 13px;
+  --tabs-contained-hover-background: transparent;
+  --tabs-contained-selected-background: #ebebeb;
+  --tabs-contained-selected-shadow: none;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --tabs-contained-selected-background: #1f1f1f;
+}

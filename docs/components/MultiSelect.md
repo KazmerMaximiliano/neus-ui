@@ -106,7 +106,7 @@ props retain their nullable default.
 | `defaultValue` | `readonly string[]` | `[]` | Initial uncontrolled values |
 | `disabled` | `boolean` | `false` | Disables the field |
 | `viewSearchBar` | `boolean` | `true` | Shows the search box |
-| `searchBarPlaceholder` | `string` | `"Buscar..."` | Placeholder and accessible name of the search box |
+| `searchBarPlaceholder` | `string` | `"Search..."` | Placeholder and accessible name of the search box |
 | `fieldStyle` | `CSSProperties` | Omitted | Inline styles on `.select__field` |
 | `tagStyle` | `CSSProperties` | Omitted | Inline styles on `.multiselect__tag` |
 | `listStyle` | `CSSProperties` | Omitted | Inline styles on `.select__popover` |

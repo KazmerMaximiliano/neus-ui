@@ -98,7 +98,7 @@ retain their nullable default.
 | `descriptionStyle` | `CSSProperties` | Omitted | Inline styles on `.field__description` |
 | `disabled` | `boolean` | `false` | Disables the field |
 | `viewSearchBar` | `boolean` | `true` | Shows the search box |
-| `searchBarPlaceholder` | `string` | `"Buscar..."` | Placeholder and accessible name of the search box |
+| `searchBarPlaceholder` | `string` | `"Search..."` | Placeholder and accessible name of the search box |
 | `fieldStyle` | `CSSProperties` | Omitted | Inline styles on `.select__field` |
 | `listStyle` | `CSSProperties` | Omitted | Inline styles on `.select__popover` |
 | `optionStyle` | `CSSProperties` | Omitted | Inline styles on `.select__option` |

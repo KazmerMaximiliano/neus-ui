@@ -73,7 +73,7 @@ export const TimeInput = (props: TimeInputProps) => {
       label={label}
       placeholder={placeholder}
       displayValue={serializeTimeValue(currentValue, format)}
-      pickerLabel={label ? `${label}: reloj` : "Reloj"}
+      pickerLabel={label ? `${label}: clock` : "Clock"}
       error={error}
       disabled={disabled}
       readonly={readonly}

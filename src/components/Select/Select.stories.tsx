@@ -243,7 +243,7 @@ export const Select: StoryObj<SelectStoryArgs> = {
     error: "",
     disabled: false,
     viewSearchBar: true,
-    searchBarPlaceholder: "Buscar...",
+    searchBarPlaceholder: "Search...",
     fieldStyle: {},
     listStyle: {},
     optionStyle: {},

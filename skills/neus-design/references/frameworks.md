@@ -82,7 +82,8 @@ and the stylesheet imports, plus:
   components and hydrate on their own.
 - Props from a Server Component to a neus component must be serializable:
   no functions. Anything with `onClick`, `onChange`, `routes` handlers,
-  `cellRenderer`, `renderMobileCard`, a Popover or Tooltip `trigger`, or a Combobox lives in a Client Component. Build
+  `cellRenderer`, `renderMobileCard`, a Popover or Tooltip `trigger`, a Combobox, Tabs or
+  Pagination lives in a Client Component. Build
   one Client Component per interactive screen (for example an `OrdersScreen`
   with `"use client"`, rendered by `app/orders/page.tsx`) and keep data
   loading in the page. Where that file lives and what it is called follow the
@@ -93,7 +94,9 @@ and the stylesheet imports, plus:
 - Navigation: `href` on Button and on Sidebar/AppTemplate routes, with
   `linkComponent={Link}` from `next/link`; `active` from `usePathname()`.
   Routes with only `href` are serializable, but `linkComponent` is a
-  function: keep the shell in a Client Component.
+  function: keep the shell in a Client Component. Breadcrumbs with only
+  `href` items render from a Server Component; with `linkComponent` it moves
+  into the Client Component too.
 - Prefer `next/font` in the root layout for the system's faces; expose each
   one as a CSS variable and map `--font-*` to it in `neus.overrides.css`.
 
@@ -116,8 +119,10 @@ Everything in `ssr`, plus:
   no JavaScript, which suits Badge, Card or Link with no handlers, the
   layout components and every section from `neus-ui/sections`: the
   SiteHeader phone menu uses the native Popover API and needs no
-  hydration. Hydrate only the parts with handlers, such as a form or a
-  Popover, Tooltip or Combobox, whose panels open with JavaScript.
+  hydration. Breadcrumbs with `href` items renders statically too; its
+  collapsed trail needs hydration only for the expand button. Hydrate only
+  the parts with handlers, such as a form, Tabs, Pagination or a Popover,
+  Tooltip or Combobox, whose panels open with JavaScript.
 - Directives: `client:idle` above the fold, `client:visible` below,
   `client:load` only for an island that must respond the moment the page
   appears, and `client:only="react"` for a component that fails in server

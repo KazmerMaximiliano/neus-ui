@@ -19,10 +19,10 @@ export const Example = () => {
 
   return (
     <ThemeProvider designSystem="neus">
-      <RadioGroup label="Envío" name="delivery" value={delivery} onChange={setDelivery}>
-        <Radio value="standard" label="Estándar" description="De 3 a 5 días hábiles." />
-        <Radio value="express" label="Express" description="Al día hábil siguiente." />
-        <Radio value="pickup" label="Retiro en tienda" />
+      <RadioGroup label="Delivery" name="delivery" value={delivery} onChange={setDelivery}>
+        <Radio value="standard" label="Standard" description="Three to five business days." />
+        <Radio value="express" label="Express" description="Next business day." />
+        <Radio value="pickup" label="Store pickup" />
       </RadioGroup>
     </ThemeProvider>
   );
@@ -104,8 +104,8 @@ States: `.radio-group[data-orientation="horizontal"]`, `.radio-group[aria-invali
 
 ```tsx
 <RadioGroup label="Plan" optionsClassName="plan-options">
-  <Radio value="monthly" label="Mensual" />
-  <Radio value="yearly" label="Anual" />
+  <Radio value="monthly" label="Monthly" />
+  <Radio value="yearly" label="Yearly" />
 </RadioGroup>
 ```
 

@@ -407,6 +407,52 @@ x-neus:
     skeleton: {}
     toast: {}
     tooltip: {}
+    tabs:
+      base:
+        --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent)
+        --tabs-font-size: 14px
+        --tabs-font-weight: "400"
+        --tabs-hover-background: transparent
+        --tabs-selected-color: var(--color-text-primary)
+        --tabs-indicator-height: 2px
+        --tabs-indicator-radius: 1px
+        --tabs-indicator-color: var(--color-text-primary)
+        --tabs-contained-height: 32px
+        --tabs-contained-gap: 0px
+        --tabs-contained-padding: 2px
+        --tabs-contained-radius: 9px
+        --tabs-contained-background: rgb(118 118 128 / 0.12)
+        --tabs-contained-tab-radius: 7px
+        --tabs-contained-font-size: 13px
+        --tabs-contained-color: var(--color-text-primary)
+        --tabs-contained-hover-background: transparent
+        --tabs-contained-selected-shadow: 0 3px 8px rgb(0 0 0 / 0.12), 0 3px 1px rgb(0 0 0 / 0.04)
+      dark:
+        --tabs-contained-background: rgb(118 118 128 / 0.24)
+        --tabs-contained-selected-background: "#636366"
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 12px
+        --breadcrumbs-line-height: "1.33337"
+        --breadcrumbs-letter-spacing: -0.01em
+        --breadcrumbs-color: color-mix(in srgb, var(--color-text-primary) 72%, transparent)
+        --breadcrumbs-separator: '"›"'
+        --breadcrumbs-separator-gap: 12px
+        --breadcrumbs-separator-color: color-mix(in srgb, var(--color-text-primary) 48%, transparent)
+        --breadcrumbs-link-color: var(--breadcrumbs-color)
+        --breadcrumbs-link-weight: "400"
+        --breadcrumbs-link-hover-color: var(--breadcrumbs-color)
+        --breadcrumbs-link-hover-decoration: underline
+        --breadcrumbs-current-weight: "400"
+        --breadcrumbs-focus-offset: 1px
+      dark:
+        --breadcrumbs-color: color-mix(in srgb, var(--color-text-primary) 80%, transparent)
+        --breadcrumbs-separator-color: color-mix(in srgb, var(--color-text-primary) 40%, transparent)
+    pagination:
+      base:
+        --pagination-font-weight: "400"
+        --pagination-current-font-weight: "600"
+        --pagination-item-hover-background: rgb(118 118 128 / 0.12)
 ---
 
 # Apple
@@ -524,6 +570,12 @@ A progress bar is a thin accent capsule on a gray track, 6px by default, with a 
 The guidelines define no skeleton or toast. Skeletons keep the Neus gray shapes with the system's rounded corners, and a toast is the alert with the soft floating shadow and the card's corners: local web mappings.
 
 Tooltips (help tags) are drawn by macOS itself and the web has no equivalent, so a tooltip keeps the Neus dark label with the system font: a local mapping. A combobox is the field with the select's list below it.
+
+Tabs on the web have no HIG geometry: on macOS a tab view is a row of tabs on the top edge of the content, and elsewhere the guidelines point to segmented controls, with segments of about equal width and no more than five to seven of them ([HIG tab views](https://developer.apple.com/design/human-interface-guidelines/tab-views) and [segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls), consulted 2026-11-18). Contained tabs follow the iOS segmented control: a 32px tray of translucent gray (rgb 118 118 128 at 12%, 24% in dark mode) with 9px corners and 2px of padding, and the selected segment a white tile (#636366 in dark mode) with 7px corners and a soft shadow, in 13px text. Line tabs are regular-weight labels with a 2px ink bar under the selected one, which turns semibold. The numbers are local decisions; the guidelines state none.
+
+Breadcrumbs follow apple.com's footer trail: 12px text with -0.01em tracking, links and the current page in ink at 72% (80% in dark mode), separated by chevrons at 48% (40%) with 12px on each side; links underline on hover ([apple.com](https://www.apple.com/iphone/) and its [global footer styles](https://www.apple.com/ac/globalfooter/8/en_US/styles/ac-globalfooter.built.css), consulted 2026-11-18). The chevron is the › character instead of the footer's drawn one. The path control on macOS hides names between the first and last items when the path is too long, which is what a collapsed trail does.
+
+Pagination has no HIG counterpart: page controls are dots for swiping through views. Page buttons are 32px capsules like the small icon buttons, regular weight with the current page a semibold blue capsule; a local mapping.
 
 ## Do's and Don'ts
 

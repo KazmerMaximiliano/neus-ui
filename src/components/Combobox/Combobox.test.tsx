@@ -257,11 +257,11 @@ describe("Combobox", () => {
 
     it("says when nothing matches", async () => {
       const user = userEvent.setup();
-      renderCombobox({ emptyLabel: "Sin resultados" });
+      renderCombobox({ emptyLabel: "Nothing found" });
 
       await user.type(field(), "zz");
 
-      expect(screen.getByRole("status")).toHaveTextContent("Sin resultados");
+      expect(screen.getByRole("status")).toHaveTextContent("Nothing found");
     });
   });
 

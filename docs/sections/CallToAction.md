@@ -12,8 +12,8 @@ import { Button } from "neus-ui";
 import { CallToAction } from "neus-ui/sections";
 
 export const Closing = () => (
-  <CallToAction id="turno" tone="brand" title="Pedí tu turno en un minuto"
-    text="Te llamamos para confirmar el horario." actions={<Button label="Pedir turno" href="#formulario" size="large" />} />
+  <CallToAction id="booking" tone="brand" title="Book a visit in a minute"
+    text="We call you to confirm the time." actions={<Button label="Book a visit" href="#booking-form" size="large" />} />
 );
 ```
 

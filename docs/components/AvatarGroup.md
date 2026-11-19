@@ -14,7 +14,7 @@ import "neus-ui/dist/neus-ui.css";
 export const Example = ({ team }: { team: { name: string; photo?: string }[] }) => {
   return (
     <ThemeProvider designSystem="neus">
-      <AvatarGroup aria-label="Equipo" max={3} moreLabel={(hidden) => `+${hidden}`}>
+      <AvatarGroup aria-label="Team" max={3} moreLabel={(hidden) => `+${hidden}`}>
         {team.map((person) => <Avatar key={person.name} name={person.name} src={person.photo} />)}
       </AvatarGroup>
     </ThemeProvider>
@@ -26,7 +26,7 @@ export const Example = ({ team }: { team: { name: string; photo?: string }[] }) 
 
 The group is `role="group"`; name it with `aria-label`. It shows the first `max` children and
 a count for the rest, `role="img"` and named by `moreLabel(hidden)` (default `+N`; pass a
-function in the project's language for a fuller name, such as `` (n) => `${n} personas más` ``).
+function in the project's language for a fuller name, such as `` (n) => `${n} more people` ``).
 `size` applies to every avatar that does not set its own. Avatars overlap by
 `--avatar-group-overlap` times their size, separated by a ring in the surface color.
 

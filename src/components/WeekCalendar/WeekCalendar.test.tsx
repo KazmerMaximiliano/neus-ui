@@ -82,8 +82,8 @@ describe("WeekCalendar", () => {
     });
 
     it("renders a custom title", () => {
-      renderWeekCalendar({ title: "Reservaciones" });
-      expect(screen.getByText("Reservaciones")).toBeInTheDocument();
+      renderWeekCalendar({ title: "Bookings" });
+      expect(screen.getByText("Bookings")).toBeInTheDocument();
     });
 
     it("renders seven day columns", () => {

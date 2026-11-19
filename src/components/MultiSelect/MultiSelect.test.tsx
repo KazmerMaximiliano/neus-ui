@@ -127,10 +127,10 @@ describe("MultiSelect", () => {
       const user = userEvent.setup();
       const onChange = vi.fn();
       renderMulti({ defaultValue: ["red", "green"], onChange });
-      await user.click(screen.getByRole("button", { name: "Quitar Red" }));
+      await user.click(screen.getByRole("button", { name: "Remove Red" }));
       expect(onChange).toHaveBeenLastCalledWith(["green"]);
       expect(
-        screen.queryByRole("button", { name: "Quitar Red" }),
+        screen.queryByRole("button", { name: "Remove Red" }),
       ).not.toBeInTheDocument();
     });
 
@@ -139,7 +139,7 @@ describe("MultiSelect", () => {
       renderMulti({ disabled: true, defaultValue: ["red"] });
       expect(combobox()).toBeDisabled();
       expect(
-        screen.queryByRole("button", { name: /Quitar/ }),
+        screen.queryByRole("button", { name: /Remove/ }),
       ).not.toBeInTheDocument();
       await user.click(combobox());
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();

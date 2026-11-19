@@ -1,5 +1,6 @@
 import type { ColDef, ColGroupDef } from "ag-grid-community";
 import type { CSSProperties, ReactNode } from "react";
+import type { PaginationLabels } from "../Pagination";
 
 export type PaginationInfo = { readonly current_page: number; readonly last_page: number; readonly per_page: number; readonly total: number; };
 export type PaginationChangeParams = { currentPage: number; pageSize: number; };
@@ -25,6 +26,8 @@ export type DataTableProps<T extends object = object> = DataTableEmptyProps & {
   readonly paginationClassName?: string;
   readonly paginationInfoClassName?: string;
   readonly paginationInfoStyle?: CSSProperties;
+  /** Names of the pagination landmark and its buttons, in the project's language. */
+  readonly paginationLabels?: Pick<PaginationLabels, "navigation" | "previous" | "next">;
   readonly data: readonly T[];
   readonly columnDefs: readonly DataTableColDef<T>[];
   readonly pagination: PaginationInfo;

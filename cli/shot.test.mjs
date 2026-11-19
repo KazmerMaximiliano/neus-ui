@@ -79,9 +79,9 @@ describe.skipIf(!executablePath)("neus-ui shot in a browser", () => {
   <p class="cut">Deliberately truncated with an ellipsis</p>
   <iframe src="http://localhost:9/"></iframe>
   <div class="form-template">
-    <div><label>Nombre</label></div><div class="tall"><label>Teléfono<span aria-hidden="true">*</span></label></div>
+    <div><label>Name</label></div><div class="tall"><label>Phone<span aria-hidden="true">*</span></label></div>
     <div><label>Mascota</label></div><div class="near"><label>Motivo</label></div>
-    <div class="form-template__submit tall">Enviar</div>
+    <div class="form-template__submit tall">Send</div>
   </div>
   <p class="small">This paragraph is set far too small for running text on a phone.</p>
   <p class="small">A second small paragraph, so small text carries most of the page.</p>
@@ -107,7 +107,7 @@ describe.skipIf(!executablePath)("neus-ui shot in a browser", () => {
     expect(result.overflow.offenders).toContain("div.wide");
     expect(result.clipped).toEqual(["div.field inside div.card (50px)"]);
     expect(result.blankFrames).toBe(1);
-    expect(result.unevenForms).toEqual([{ taller: "Teléfono", shorter: "Nombre", px: 40 }]);
+    expect(result.unevenForms).toEqual([{ taller: "Phone", shorter: "Name", px: 40 }]);
     expect(result.consoleErrors).toEqual(["boom"]);
     expect(result.bodyFontPx).toBe(12);
     expect(result.missingFonts).toEqual(["NoSuchFont"]);
@@ -115,7 +115,7 @@ describe.skipIf(!executablePath)("neus-ui shot in a browser", () => {
     expect(result.theme).toEqual({ designSystem: "neus", colorScheme: "light", primary: "#283593", font: "sans-serif" });
     expect(problems([result])).toHaveLength(7);
     expect(problems([result])).toContain(
-      '/ at 390px: uneven form row: "Teléfono" is 40px taller than "Nombre"; give both fields a hint or neither, keep hints to one line, or put the long one on its own row (form-template__full)',
+      '/ at 390px: uneven form row: "Phone" is 40px taller than "Name"; give both fields a hint or neither, keep hints to one line, or put the long one on its own row (form-template__full)',
     );
   // About 2 s alone; launching Chrome next to the whole unit suite on a CI runner can pass 30 s.
   // Above Playwright's own 30 s navigation timeout, so a real hang reports where it stopped.

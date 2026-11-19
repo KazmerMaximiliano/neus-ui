@@ -111,25 +111,3 @@ export const usePopover = <
 
   return { id, open, triggerRef, popoverRef, anchorRef, show, hide, toggle, place };
 };
-
-const NAVIGATION_KEYS = ["ArrowDown", "ArrowUp", "Home", "End"];
-
-export const focusMenuItem = (
-  container: HTMLElement | null,
-  key: string,
-  selector = '[role="menuitem"]:not(:disabled)',
-) => {
-  if (!container || !NAVIGATION_KEYS.includes(key)) return false;
-  const items = [...container.querySelectorAll<HTMLElement>(selector)];
-  if (items.length === 0) return true;
-  const current = items.indexOf(document.activeElement as HTMLElement);
-  const index =
-    key === "Home"
-      ? 0
-      : key === "End"
-        ? items.length - 1
-        : (current + (key === "ArrowDown" ? 1 : -1) + items.length) %
-        items.length;
-  items[index].focus();
-  return true;
-};

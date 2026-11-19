@@ -91,7 +91,7 @@ export const WeekCalendar = ({
             size="small"
             variant="text"
             icon={ChevronLeft}
-            label="Anterior"
+            label="Previous week"
             onClick={() => navigate(-1)}
           />
           <span
@@ -106,7 +106,7 @@ export const WeekCalendar = ({
             size="small"
             variant="text"
             icon={ChevronRight}
-            label="Siguiente"
+            label="Next week"
             onClick={() => navigate(1)}
           />
         </div>

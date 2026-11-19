@@ -292,7 +292,7 @@ export const MultiSelect: StoryObj<MultiSelectStoryArgs> = {
     error: "",
     disabled: false,
     viewSearchBar: true,
-    searchBarPlaceholder: "Buscar...",
+    searchBarPlaceholder: "Search...",
     fieldStyle: {},
     tagStyle: {},
     listStyle: {},

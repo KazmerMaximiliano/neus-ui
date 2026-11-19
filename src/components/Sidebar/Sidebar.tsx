@@ -7,6 +7,7 @@ import {
 } from "react";
 import { Menu, X } from "lucide-react";
 import type { SidebarProps, SidebarState } from "./Sidebar.types";
+import { SIDEBAR_LABELS } from "./Sidebar.consts";
 import {
   getSidebarServerViewport,
   getSidebarViewport,
@@ -89,7 +90,8 @@ export const Sidebar = ({
   const toggleRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const pointerStartedOutside = useRef(false);
-  const navigationLabel = labels?.navigation ?? "Navegación principal";
+  const text = { ...SIDEBAR_LABELS, ...labels };
+  const navigationLabel = text.navigation;
 
   const brand =
     children ??
@@ -159,7 +161,7 @@ export const Sidebar = ({
               className={["sidebar__close", closeButtonClassName]
                 .filter(Boolean)
                 .join(" ")}
-              aria-label={labels?.close ?? "Cerrar menú"}
+              aria-label={text.close}
               style={closeButtonStyle}
               onClick={closeMenu}
             >
@@ -180,8 +182,8 @@ export const Sidebar = ({
                 .join(" ")}
               aria-label={
                 pinned
-                  ? (labels?.collapse ?? "Contraer navegación")
-                  : (labels?.expand ?? "Expandir navegación")
+                  ? text.collapse
+                  : text.expand
               }
               aria-expanded={expanded}
               aria-controls={navigationId}
@@ -296,7 +298,7 @@ export const Sidebar = ({
             className={["sidebar__toggle", toggleClassName]
               .filter(Boolean)
               .join(" ")}
-            aria-label={labels?.open ?? "Abrir menú"}
+            aria-label={text.open}
             aria-expanded={open}
             aria-controls={dialogId}
             style={toggleStyle}

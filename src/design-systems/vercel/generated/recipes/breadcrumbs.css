@@ -1,0 +1,12 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --breadcrumbs-font-size: 14px;
+  --breadcrumbs-line-height: 20px;
+  --breadcrumbs-separator: "›";
+  --breadcrumbs-separator-gap: 6px;
+  --breadcrumbs-link-color: var(--color-text-secondary);
+  --breadcrumbs-link-weight: 400;
+  --breadcrumbs-link-hover-color: var(--color-text-primary);
+  --breadcrumbs-link-hover-decoration: none;
+  --breadcrumbs-current-weight: 400;
+}

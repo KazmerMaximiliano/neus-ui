@@ -283,7 +283,7 @@ describe("time selection", () => {
     await user.keyboard("{ArrowUp}");
     expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 30 });
     expect(container.querySelector("input[name=\"start\"]")).toHaveValue("11:30");
-    await user.click(screen.getByRole("button", { name: "Minutos" }));
+    await user.click(screen.getByRole("button", { name: "Minutes" }));
     await user.tab();
     await user.keyboard("{ArrowRight}");
     expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 31 });

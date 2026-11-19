@@ -12,8 +12,8 @@ const { Hero: HeroStory } = composeStories(stories);
 
 describe("Hero", () => {
   it("renders a region named by a display h1, without absent parts", () => {
-    const { container } = render(<Hero title="Respirá entre reunión y reunión" />);
-    const region = screen.getByRole("region", { name: "Respirá entre reunión y reunión" });
+    const { container } = render(<Hero title="Breathe between meetings" />);
+    const region = screen.getByRole("region", { name: "Breathe between meetings" });
     expect(region).toHaveClass("section", "hero");
     expect(region).toHaveAttribute("data-variant", "split");
     expect(region).not.toHaveAttribute("data-media");

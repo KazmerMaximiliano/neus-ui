@@ -26,7 +26,10 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 `autoResize`; Switch `description`; RadioGroup `orientation` and
 `description`, Radio `description`; Popover `placement` and `label`; Tooltip
 `placement` and `delay`; Combobox `filter`, `allowCustomValue`, `loading`,
-`emptyLabel` and `loadingLabel` with every Input field prop, and
+`emptyLabel` and `loadingLabel` with every Input field prop; Tabs `variant`
+(`line`, `contained`) and `label`; Breadcrumbs `maxItems`, `linkComponent` and `labels`;
+Pagination `variant` (`pages`, `compact`), `siblingCount`, `pageSize` with
+`pageSizeOptions`, and `labels`; DataTable `paginationLabels`, and
 native attributes and `ref` on Button, IconButton and Input; Sidebar and AppTemplate routes
 `href` with `linkComponent`; Badge `variant` and `color`; Heading `as` and
 `size`; Text `variant`, `tone`, `weight`, `measure`, `lines` and `numeric`;

@@ -1,0 +1,8 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --pagination-font-size: 14px;
+  --pagination-current-font-weight: 500;
+  --pagination-item-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  --pagination-current-background: var(--color-primary);
+  --pagination-current-color: var(--color-text-on-primary);
+}

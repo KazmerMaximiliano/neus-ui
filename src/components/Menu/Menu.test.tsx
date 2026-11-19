@@ -34,7 +34,7 @@ describe("Menu", () => {
         "true",
       );
       rerender(<Menu icon={MoreVertical} items={items()} />);
-      expect(screen.getByRole("button", { name: "Menú" })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Menu" })).toBeInTheDocument();
     });
 
     it("keeps items out of the DOM while closed", () => {

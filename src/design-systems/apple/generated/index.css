@@ -34,3 +34,6 @@
 @import "./recipes/skeleton.css";
 @import "./recipes/toast.css";
 @import "./recipes/tooltip.css";
+@import "./recipes/tabs.css";
+@import "./recipes/breadcrumbs.css";
+@import "./recipes/pagination.css";
