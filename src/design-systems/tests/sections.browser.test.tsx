@@ -59,6 +59,19 @@ describe.each(DESIGN_SYSTEMS)("Page sections in $id", ({ id }) => {
     expect(new Set(cards.map((card) => Math.round(card.getBoundingClientRect().top))).size).toBe(1);
   });
 
+  it("breaks a title word wider than its column instead of spilling into the media", async () => {
+    await page.viewport(1440, 900);
+    render(
+      <ThemeProvider scope="local" designSystem={id as never}>
+        <Hero title="Pneumonoultramicroscopicsilicovolcanoconiosis care" media={<MediaPlaceholder label="Room" />} />
+      </ThemeProvider>,
+    );
+    const title = screen.getByRole("heading", { level: 1 }).getBoundingClientRect();
+    const body = document.querySelector(".hero__body")!.getBoundingClientRect();
+    expect(title.right).toBeLessThanOrEqual(body.right + 0.5);
+    expect(screen.getByRole("img", { name: "Room" }).getBoundingClientRect().left).toBeGreaterThan(title.right);
+  });
+
   it.each(["light", "dark"] as const)("keeps the brand band's text and primary buttons legible in %s mode", async (scheme) => {
     await page.viewport(1440, 900);
     render(

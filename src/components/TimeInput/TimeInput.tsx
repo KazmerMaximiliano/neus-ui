@@ -4,6 +4,7 @@ import { Clock } from "../Clock";
 import { PickerField } from "../DateInput/components/PickerField";
 import type { TimeValue } from "../Clock";
 import type { TimeInputProps } from "./TimeInput.types";
+import { TIME_INPUT_LABELS } from "./TimeInput.consts";
 import { serializeTimeValue } from "./TimeInput.utils";
 
 export const TimeInput = (props: TimeInputProps) => {
@@ -26,7 +27,9 @@ export const TimeInput = (props: TimeInputProps) => {
     labelStyle,
     errorStyle,
     onChange,
+    labels,
   } = props;
+  const text = { ...TIME_INPUT_LABELS, ...labels };
   // `props` stays whole: a `value` passed as undefined still makes the field controlled.
   const isControlled = Object.prototype.hasOwnProperty.call(props, "value");
   const [selectedTime, setSelectedTime] = useState<TimeValue | undefined>(
@@ -73,7 +76,7 @@ export const TimeInput = (props: TimeInputProps) => {
       label={label}
       placeholder={placeholder}
       displayValue={serializeTimeValue(currentValue, format)}
-      pickerLabel={label ? `${label}: clock` : "Clock"}
+      pickerLabel={text.clock(label)}
       error={error}
       disabled={disabled}
       readonly={readonly}
@@ -93,6 +96,7 @@ export const TimeInput = (props: TimeInputProps) => {
           disabled={disabled}
           readonly={readonly}
           format={format}
+          labels={{ hours: text.hours, minutes: text.minutes }}
         />
       )}
     </PickerField>

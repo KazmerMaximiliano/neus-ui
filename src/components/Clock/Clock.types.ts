@@ -6,6 +6,13 @@ export type TimeValue = {
   minutes: number;
 };
 
+export type ClockLabels = {
+  /** Name of the hours segment and of the dial while it sets hours. */
+  readonly hours?: string;
+  /** Name of the minutes segment and of the dial while it sets minutes. */
+  readonly minutes?: string;
+};
+
 export type ClockProps = {
   readonly centerClassName?: string;
   readonly centerStyle?: CSSProperties;
@@ -40,6 +47,8 @@ export type ClockProps = {
   readonly numberStyle?: CSSProperties;
   readonly indicatorStyle?: CSSProperties;
   readonly onChange?: (value: TimeValue) => void;
+  /** Built-in texts, in the project's language. */
+  readonly labels?: ClockLabels;
 };
 
 export type ClockStoryArgs = ClockProps & {

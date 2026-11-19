@@ -1,4 +1,5 @@
 import type { StepperProps } from "../Stepper.types";
+import { STEPPER_TEXTS } from "../Stepper.consts";
 
 export const StepperSimple = ({
   dotClassName,
@@ -7,7 +8,9 @@ export const StepperSimple = ({
   currentStep,
   totalSteps,
   dotStyle,
+  texts,
 }: StepperProps) => {
+  const words = { ...STEPPER_TEXTS, ...texts };
   const steps = Array.from({ length: totalSteps }, (_, i) => i);
 
   return (
@@ -15,11 +18,11 @@ export const StepperSimple = ({
       className={["stepper__track", trackClassName].filter(Boolean).join(" ")}
       style={trackStyle}
       role="progressbar"
-      aria-label="Progress"
+      aria-label={words.progress}
       aria-valuenow={currentStep + 1}
       aria-valuemin={1}
       aria-valuemax={totalSteps}
-      aria-valuetext={`Step ${currentStep + 1} of ${totalSteps}`}
+      aria-valuetext={words.position(currentStep + 1, totalSteps)}
     >
       {steps.map((index) => (
         <div

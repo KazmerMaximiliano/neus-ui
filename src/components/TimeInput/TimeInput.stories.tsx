@@ -182,6 +182,10 @@ const meta: Meta<TimeInputStoryArgs> = {
         defaultValue: { summary: "\"24h\"" },
       },
     },
+    labels: {
+      control: false,
+      description: "Built-in texts: clock (a function of the label), hours and minutes",
+    },
     onChange: {
       action: "changed",
       description: "Callback when time selection changes",
@@ -234,6 +238,7 @@ export const TimeInput: StoryObj<TimeInputStoryArgs> = {
     descriptionStyle: undefined,
     error: undefined,
     format: "24h",
+    labels: {},
   },
   render: ({ designSystem, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>

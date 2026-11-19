@@ -3,6 +3,11 @@ import type { DateRange } from "react-day-picker";
 import type { DesignSystemId } from "../../design-systems";
 import type { FieldDescriptionProps, FieldPresentationProps } from "../Input";
 
+export type DateInputLabels = {
+  /** Name of the calendar panel, given the field's label when it has one. */
+  readonly calendar?: (label?: string) => string;
+};
+
 export type DateInputProps = FieldPresentationProps & FieldDescriptionProps & {
   readonly placeholderClassName?: string;
   readonly placeholderStyle?: CSSProperties;
@@ -37,6 +42,10 @@ export type DateInputProps = FieldPresentationProps & FieldDescriptionProps & {
   readonly labelStyle?: CSSProperties;
   readonly errorStyle?: CSSProperties;
   readonly onChange?: (value: Date | DateRange | undefined) => void;
+  /** Built-in texts, in the project's language. */
+  readonly labels?: DateInputLabels;
+  /** BCP 47 tag for the shown date and the calendar, such as "es-AR"; en-US when omitted or unsupported. */
+  readonly language?: string;
 };
 
 export type DateInputStoryArgs = DateInputProps & {

@@ -65,6 +65,10 @@ const meta: Meta<typeof InteractiveMapComponent> = {
       control: "text",
       description: "Custom instructions text below the map",
     },
+    labels: {
+      control: "object",
+      description: "Built-in texts: search, loading, loadError and resolveError",
+    },
     readonly: {
       control: "boolean",
       description: "If true, the map is in read-only mode",
@@ -95,6 +99,7 @@ export const InteractiveMap: StoryObj<typeof InteractiveMapComponent> = {
     googleMapsApiKey: "",
     initialCoordinates: "-31.4201,-64.1888",
     initialAddress: "Plaza San Martín, Córdoba, Argentina",
+    labels: {},
   },
 };
 

@@ -81,6 +81,17 @@ retain their nullable default.
 | `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.picker-field__label` |
 | `errorStyle` | `CSSProperties` | Omitted | Inline styles on `.picker-field__error` |
 | `onChange` | `((value: TimeValue \| undefined) => void)` | Omitted | Callback when time selection changes |
+| `labels` | `TimeInputLabels` | English defaults | Name of the clock panel and the Clock's labels, in the project's language |
+
+### Supporting types
+
+```ts
+type TimeInputLabels = {
+  readonly clock?: (label?: string) => string; // (label) => label ? `${label}: clock` : "Clock"
+  readonly hours?: string; // "Hours"
+  readonly minutes?: string; // "Minutes"
+};
+```
 
 ## Anatomy and per-part customization
 

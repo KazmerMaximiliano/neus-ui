@@ -50,6 +50,17 @@ const renderRow = (props: Partial<WeekCalendarRowProps> = {}) => {
 };
 
 describe("WeekCalendarRow", () => {
+  describe("language", () => {
+    it("dates each event's name in English unless language says otherwise", () => {
+      const { rerender } = renderRow({ onEventClick: () => undefined });
+
+      expect(screen.getAllByRole("button", { name: `Test Event, ${today.toLocaleDateString("en-US")}` })).toHaveLength(1);
+
+      rerender(<WeekCalendarRow entry={mockEntry} days={mockDays} color="purple" language="es-AR" onEventClick={() => undefined} />);
+      expect(screen.getAllByRole("button", { name: `Test Event, ${today.toLocaleDateString("es-AR")}` })).toHaveLength(1);
+    });
+  });
+
   describe("rendering", () => {
     it("renders the row container", () => {
       const { container } = renderRow();

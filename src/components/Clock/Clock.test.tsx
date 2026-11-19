@@ -187,6 +187,17 @@ describe("Clock", () => {
   });
 });
 
+describe("Clock labels", () => {
+  it("names its segments and dial through labels", async () => {
+    const user = userEvent.setup();
+    render(<Clock value={{ hours: 9, minutes: 5 }} labels={{ hours: "Hour", minutes: "Minute" }} />);
+
+    expect(screen.getByRole("button", { name: "Hour" })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Minute" }));
+    expect(screen.getByRole("slider", { name: "Minute" })).toBeInTheDocument();
+  });
+});
+
 describe("controlled period", () => {
   it("updates AM/PM with the controlled value", () => {
     const { rerender } = render(<Clock value={{ hours: 9, minutes: 0 }} />);

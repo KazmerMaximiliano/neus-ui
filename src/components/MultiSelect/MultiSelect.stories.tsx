@@ -203,6 +203,10 @@ const meta: Meta<MultiSelectStoryArgs> = {
       control: "text",
       description: "Placeholder and accessible name of the search box",
     },
+    labels: {
+      control: false,
+      description: "Built-in texts: unselected, options, empty and remove (a function of the option)",
+    },
     fieldStyle: {
       control: "object",
       description: "CSS properties applied to the field box",
@@ -293,6 +297,7 @@ export const MultiSelect: StoryObj<MultiSelectStoryArgs> = {
     disabled: false,
     viewSearchBar: true,
     searchBarPlaceholder: "Search...",
+    labels: {},
     fieldStyle: {},
     tagStyle: {},
     listStyle: {},

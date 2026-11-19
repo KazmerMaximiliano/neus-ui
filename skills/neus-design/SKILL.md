@@ -196,9 +196,14 @@ Codex, keeps the same direction.
   facts (prices, trial days, guarantees, metrics, customer counts) appear
   only when the brief gives them: otherwise leave them out or ask. Never
   invent them.
-- Pass user-facing defaults in the project's `language` (Select
-  `searchBarPlaceholder`, FileUploader texts, Sidebar `labels`, DataTable
-  empty texts).
+- Built-in texts are English. On a page in another language, pass them in the
+  project's `language`: Select and MultiSelect `searchBarPlaceholder` and
+  `labels`, Sidebar, Breadcrumbs, Pagination, WeekCalendar, Clock, DateInput,
+  TimeInput and InteractiveMap `labels`, Stepper `texts`, Dropdown `label`,
+  Menu `text`, DataTable `paginationLabels` and empty texts, Combobox
+  `emptyLabel` and `loadingLabel`, FileUploader texts, ToastProvider `label`
+  and `dismissLabel`, SiteHeader `labels`; dates through `language` on
+  Calendar, DateInput and WeekCalendar.
 - On refinement turns, change only what the user named. Edit in place.
 
 ### Need → component

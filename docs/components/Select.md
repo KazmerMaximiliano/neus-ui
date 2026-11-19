@@ -99,6 +99,7 @@ retain their nullable default.
 | `disabled` | `boolean` | `false` | Disables the field |
 | `viewSearchBar` | `boolean` | `true` | Shows the search box |
 | `searchBarPlaceholder` | `string` | `"Search..."` | Placeholder and accessible name of the search box |
+| `labels` | `SelectLabels` | English defaults | Built-in texts in the project's language |
 | `fieldStyle` | `CSSProperties` | Omitted | Inline styles on `.select__field` |
 | `listStyle` | `CSSProperties` | Omitted | Inline styles on `.select__popover` |
 | `optionStyle` | `CSSProperties` | Omitted | Inline styles on `.select__option` |
@@ -111,6 +112,12 @@ entry point](../../src/components/Select/index.ts). A type shown here is not nec
 package export.
 
 ```ts
+type SelectLabels = {
+  readonly unselected?: string; // "Select an option": shown and announced with no label or placeholder
+  readonly options?: string; // "Options": the list's name with no label or placeholder
+  readonly empty?: string; // "No results": when the search matches nothing
+};
+
 type SelectOption = {
   readonly value?: string | null;
   readonly label: string;

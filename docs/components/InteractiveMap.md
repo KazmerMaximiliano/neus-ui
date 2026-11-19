@@ -65,6 +65,7 @@ section style props retain their nullable default.
 | `initialAddress` | `string` | Omitted | Initial address to display in search box |
 | `searchBoxPlaceholder` | `string` | Omitted | Placeholder text for the search box |
 | `instructionsText` | `string` | Omitted | Custom instructions text below the map |
+| `labels` | `InteractiveMapLabels` | English defaults | Built-in texts in the project's language |
 | `readonly` | `boolean` | `false` | If true, the map is in read-only mode |
 | `onLocationSelect` | `((location: LocationData) => void)` | Omitted | Callback when a location is selected |
 
@@ -75,6 +76,13 @@ entry point](../../src/components/InteractiveMap/index.ts). A type shown here is
 necessarily a package export.
 
 ```ts
+type InteractiveMapLabels = {
+  readonly search?: string; // "Find location": the search box's name, and its placeholder without searchBoxPlaceholder
+  readonly loading?: string; // "Loading map…"
+  readonly loadError?: string; // "Unable to load the map."
+  readonly resolveError?: string; // "Unable to resolve this location. Choose another location to try again."
+};
+
 type LocationData = {
   address: string;
   country: string;

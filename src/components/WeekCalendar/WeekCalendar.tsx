@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { resolveLanguage } from "../Calendar";
 import { IconButton } from "../IconButton";
 import { WeekCalendarRow } from "./components/WeekCalendarRow";
 import type { WeekCalendarProps } from "./WeekCalendar.types";
-import { CATEGORY_COLORS, DAY_NAMES } from "./WeekCalendar.consts";
-import { formatDate, getCenterDate, getWeekDays } from "./WeekCalendar.utils";
+import { CATEGORY_COLORS, WEEK_CALENDAR_LABELS } from "./WeekCalendar.consts";
+import { formatDate, formatDayName, getCenterDate, getWeekDays } from "./WeekCalendar.utils";
 import "./WeekCalendar.styles.css";
 
 export const WeekCalendar = ({
@@ -41,7 +42,11 @@ export const WeekCalendar = ({
   hoverContent,
   onEventClick,
   onDayChange,
+  labels,
+  language = "en-US",
 }: WeekCalendarProps) => {
+  const locale = resolveLanguage(language);
+  const text = { ...WEEK_CALENDAR_LABELS, ...labels };
   const [weekStart, setWeekStart] = useState<Date>(() =>
     getCenterDate(new Date()),
   );
@@ -91,7 +96,7 @@ export const WeekCalendar = ({
             size="small"
             variant="text"
             icon={ChevronLeft}
-            label="Previous week"
+            label={text.previous}
             onClick={() => navigate(-1)}
           />
           <span
@@ -100,13 +105,13 @@ export const WeekCalendar = ({
               .join(" ")}
             style={dateRangeStyle}
           >
-            {formatDate(weekStart)} - {formatDate(weekEnd)}
+            {formatDate(weekStart, locale)} - {formatDate(weekEnd, locale)}
           </span>
           <IconButton
             size="small"
             variant="text"
             icon={ChevronRight}
-            label="Next week"
+            label={text.next}
             onClick={() => navigate(1)}
           />
         </div>
@@ -152,7 +157,7 @@ export const WeekCalendar = ({
                     .join(" ")}
                   style={dayNameStyle}
                 >
-                  {DAY_NAMES[day.getDay()]}
+                  {formatDayName(day, locale)}
                 </span>
                 <span
                   className={["week-calendar__day-number", dayNumberClassName]
@@ -183,6 +188,7 @@ export const WeekCalendar = ({
             }
             hoverContent={hoverContent}
             onEventClick={onEventClick}
+            language={locale}
           />
         ))}
       </div>

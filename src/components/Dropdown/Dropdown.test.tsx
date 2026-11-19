@@ -36,6 +36,11 @@ describe("Dropdown", () => {
       render(<Dropdown items={items()} />);
       expect(screen.getByRole("button", { name: "Menu" })).toBeInTheDocument();
     });
+
+    it("takes its accessible name from label when there is no name", () => {
+      render(<Dropdown items={items()} label="Account" />);
+      expect(screen.getByRole("button", { name: "Account" })).toBeInTheDocument();
+    });
   });
 
   describe("interactions", () => {

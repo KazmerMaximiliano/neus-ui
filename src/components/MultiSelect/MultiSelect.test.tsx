@@ -134,6 +134,23 @@ describe("MultiSelect", () => {
       ).not.toBeInTheDocument();
     });
 
+    it("takes its built-in texts from labels", async () => {
+      const user = userEvent.setup();
+      render(
+        <MultiSelect
+          options={OPTIONS}
+          defaultValue={["red"]}
+          labels={{ unselected: "Pick colors", options: "Colors", empty: "Nothing found", remove: (option) => `Drop ${option}` }}
+        />,
+      );
+
+      expect(screen.getByRole("button", { name: "Drop Red" })).toBeInTheDocument();
+      await user.click(screen.getByRole("combobox", { name: "Pick colors" }));
+      expect(screen.getByRole("listbox", { name: "Colors" })).toBeInTheDocument();
+      await user.keyboard("zzz");
+      expect(screen.getByText("Nothing found")).toBeInTheDocument();
+    });
+
     it("disables the trigger and hides tag removal", async () => {
       const user = userEvent.setup();
       renderMulti({ disabled: true, defaultValue: ["red"] });

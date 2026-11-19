@@ -107,11 +107,23 @@ props retain their nullable default.
 | `disabled` | `boolean` | `false` | Disables the field |
 | `viewSearchBar` | `boolean` | `true` | Shows the search box |
 | `searchBarPlaceholder` | `string` | `"Search..."` | Placeholder and accessible name of the search box |
+| `labels` | `MultiSelectLabels` | English defaults | Built-in texts in the project's language |
 | `fieldStyle` | `CSSProperties` | Omitted | Inline styles on `.select__field` |
 | `tagStyle` | `CSSProperties` | Omitted | Inline styles on `.multiselect__tag` |
 | `listStyle` | `CSSProperties` | Omitted | Inline styles on `.select__popover` |
 | `optionStyle` | `CSSProperties` | Omitted | Inline styles on `.select__option` |
 | `onChange` | `((values: string[]) => void)` | Omitted | Called with the selected values |
+
+### Supporting types
+
+```ts
+type MultiSelectLabels = {
+  readonly unselected?: string; // "Select options": announced with no label or placeholder
+  readonly options?: string; // "Options": the list's name with no label or placeholder
+  readonly empty?: string; // "No results": when the search matches nothing
+  readonly remove?: (option: string) => string; // (option) => `Remove ${option}`
+};
+```
 
 ## Anatomy and per-part customization
 

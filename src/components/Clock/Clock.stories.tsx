@@ -141,6 +141,10 @@ const meta: Meta<ClockStoryArgs> = {
         defaultValue: { summary: "12h" },
       },
     },
+    labels: {
+      control: "object",
+      description: "Names of the hours and minutes segments and the dial",
+    },
     onChange: {
       action: "changed",
       description: "Callback when time selection changes",
@@ -186,6 +190,7 @@ export const Clock: StoryObj<ClockStoryArgs> = {
     indicatorStyle: {},
 
     format: "12h",
+    labels: {},
     disabled: false,
     readonly: false,
   },

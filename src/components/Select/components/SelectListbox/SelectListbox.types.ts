@@ -33,6 +33,8 @@ export type SelectListboxProps = {
   readonly onSelect: (value: string) => void;
   readonly viewSearchBar: boolean;
   readonly searchBarPlaceholder: string;
+  /** Shown when the search matches no option. */
+  readonly emptyLabel: string;
   readonly listStyle?: CSSProperties;
   readonly optionStyle?: CSSProperties;
 };

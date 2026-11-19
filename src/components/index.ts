@@ -22,7 +22,7 @@ export type {
 export { Checkbox } from "./Checkbox";
 export type { CheckboxProps } from "./Checkbox";
 export { Clock } from "./Clock";
-export type { ClockProps, TimeValue } from "./Clock";
+export type { ClockLabels, ClockProps, TimeValue } from "./Clock";
 export { Combobox } from "./Combobox";
 export type { ComboboxProps } from "./Combobox";
 export { Container } from "./Container";
@@ -35,7 +35,7 @@ export type {
   PaginationInfo
 } from "./DataTable";
 export { DateInput } from "./DateInput";
-export type { DateInputProps } from "./DateInput";
+export type { DateInputLabels, DateInputProps } from "./DateInput";
 export { Dropdown } from "./Dropdown";
 export type { DropdownItem, DropdownProps } from "./Dropdown";
 export { FileType, FileUploader } from "./FileUploader";
@@ -49,7 +49,7 @@ export type { IconButtonColor, IconButtonIcon, IconButtonProps } from "./IconBut
 export { Input } from "./Input";
 export type { FieldPresentationProps, InputProps } from "./Input";
 export { InteractiveMap } from "./InteractiveMap";
-export type { InteractiveMapProps, LocationData, MapCoordinates } from "./InteractiveMap";
+export type { InteractiveMapLabels, InteractiveMapProps, LocationData, MapCoordinates } from "./InteractiveMap";
 export { Link } from "./Link";
 export type { LinkProps } from "./Link";
 export { MediaPlaceholder } from "./MediaPlaceholder";
@@ -59,7 +59,7 @@ export type { MenuItem, MenuProps } from "./Menu";
 export { Modal, ModalContent, ModalFooter, ModalHeader } from "./Modal";
 export type { ModalContentProps, ModalFooterProps, ModalHeaderProps, ModalProps } from "./Modal";
 export { MultiSelect } from "./MultiSelect";
-export type { MultiSelectProps } from "./MultiSelect";
+export type { MultiSelectLabels, MultiSelectProps } from "./MultiSelect";
 export { Pagination } from "./Pagination";
 export type { PaginationLabels, PaginationProps, PaginationVariant } from "./Pagination";
 export { Popover } from "./Popover";
@@ -73,7 +73,7 @@ export type { RadioGroupOrientation, RadioGroupProps } from "./RadioGroup";
 export { Section } from "./Section";
 export type { SectionElement, SectionProps, SectionSpacing, SectionTone } from "./Section";
 export { Select } from "./Select";
-export type { SelectOption, SelectProps } from "./Select";
+export type { SelectLabels, SelectOption, SelectProps } from "./Select";
 export { Sidebar } from "./Sidebar";
 export type { SidebarItem, SidebarLabels, SidebarProps } from "./Sidebar";
 export { Skeleton } from "./Skeleton";
@@ -91,7 +91,7 @@ export type {
   StackProps
 } from "./Stack";
 export { Stepper } from "./Stepper";
-export type { StepperProps } from "./Stepper";
+export type { StepperProps, StepperTexts } from "./Stepper";
 export { Switch } from "./Switch";
 export type { SwitchProps } from "./Switch";
 export { Tabs } from "./Tabs";
@@ -101,7 +101,7 @@ export type { TextElement, TextProps, TextTone, TextVariant, TextWeight } from "
 export { Textarea } from "./Textarea";
 export type { TextareaProps } from "./Textarea";
 export { TimeInput } from "./TimeInput";
-export type { TimeInputProps } from "./TimeInput";
+export type { TimeInputLabels, TimeInputProps } from "./TimeInput";
 export { Toast } from "./Toast";
 export type { ToastProps } from "./Toast";
 export { Tooltip } from "./Tooltip";
@@ -114,6 +114,7 @@ export type {
   DayCellType,
   EventsByCategory,
   EventTooltip,
+  WeekCalendarLabels,
   WeekCalendarProps,
   WeekCalendarRowProps,
   WeekCalendarRowStoryArgs,

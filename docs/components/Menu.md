@@ -48,7 +48,7 @@ retain their nullable default.
 | `triggerClassName` | `string` | Omitted | Additional classes on `.button.icon-button` |
 | `triggerStyle` | `CSSProperties` | Omitted | Inline styles on `.button.icon-button` |
 | `icon` | `IconButtonIcon` | Omitted | Icon-only trigger rendered with the IconButton recipe |
-| `text` | `string` | Omitted | Trigger label; names the icon trigger when an icon is set |
+| `text` | `string` | `"Menu"` | Trigger label, or the icon trigger's accessible name when an icon is set; write it in the project's language |
 | `size` | `MenuSize` | `"medium"` | Size of the trigger |
 | `items` | `readonly MenuItem[]` | Required | Menu items with label, onClick and optional disabled |
 | `menuStyle` | `CSSProperties` | Omitted | Inline styles on `.menu__panel` |

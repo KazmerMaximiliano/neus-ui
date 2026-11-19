@@ -37,6 +37,7 @@ export const SelectListboxContent = ({
   onSelect,
   viewSearchBar,
   searchBarPlaceholder,
+  emptyLabel,
   optionStyle,
 }: SelectListboxContentProps) => {
   const [query, setQuery] = useState("");
@@ -130,7 +131,7 @@ export const SelectListboxContent = ({
           );
         })}
         {filtered.length === 0 && (
-          <div className={["select__empty", emptyClassName].filter(Boolean).join(" ")} style={emptyStyle}>No results</div>
+          <div className={["select__empty", emptyClassName].filter(Boolean).join(" ")} style={emptyStyle}>{emptyLabel}</div>
         )}
       </div>
     </div>

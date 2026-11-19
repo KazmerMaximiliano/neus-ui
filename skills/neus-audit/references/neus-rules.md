@@ -73,6 +73,12 @@ the project wrote.
   in the compact variant. DataTable renders the compact one. Flag hand-made
   previous/next or numbered page buttons, and page labels left in English on a
   page in another language.
+- Built-in texts are English: accessible names and fallbacks such as "Open
+  menu", "Previous page", "No results", "Hours" or "Menu". On a page in another
+  language, flag every one left in English; each has a prop (`labels`,
+  `paginationLabels`, `searchBarPlaceholder`, Stepper `texts`, Dropdown
+  `label`, Menu `text`). Dates and day names follow `language` on Calendar,
+  DateInput and WeekCalendar.
 - Field components (Input, Textarea, Combobox, Select, MultiSelect, DateInput, TimeInput) render
   their own `<label>` from `label`, mark `required` with an asterisk and
   `aria-required`, and wire `description` and errors to `aria-describedby`.

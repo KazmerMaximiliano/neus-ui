@@ -242,6 +242,30 @@ describe("Stepper", () => {
       expect(dots[0]).not.toHaveClass("stepper__simple-dot--current");
     });
 
+    it("takes its built-in texts from texts in every variant", () => {
+      const texts = {
+        progress: "Checkout",
+        position: (step: number, total: number) => `${step}/${total}`,
+        step: (step: number) => `Stage ${step}`,
+        done: "finished",
+        active: "here",
+        inactive: "pending",
+      };
+      const { rerender } = render(<Stepper currentStep={1} totalSteps={3} texts={texts} />);
+
+      expect(screen.getByRole("navigation", { name: "Checkout" })).toBeInTheDocument();
+      expect(screen.getByText("Stage 1, finished")).toBeInTheDocument();
+      expect(screen.getByText("Stage 2, here")).toBeInTheDocument();
+      expect(screen.getByText("Stage 3, pending")).toBeInTheDocument();
+
+      rerender(<Stepper currentStep={1} totalSteps={3} variant="linear" showLabels texts={texts} />);
+      expect(screen.getByRole("progressbar", { name: "Checkout" })).toHaveAttribute("aria-valuetext", "2/3");
+      expect(screen.getByText("2/3")).toBeInTheDocument();
+
+      rerender(<Stepper currentStep={1} totalSteps={3} variant="simple" texts={texts} />);
+      expect(screen.getByRole("progressbar", { name: "Checkout" })).toHaveAttribute("aria-valuetext", "2/3");
+    });
+
     it("exposes its position as a named progressbar", () => {
       render(<Stepper currentStep={1} totalSteps={3} variant="simple" />);
       const progress = screen.getByRole("progressbar", { name: "Progress" });

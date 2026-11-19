@@ -91,7 +91,24 @@ describe("Select", () => {
       render(<Select options={OPTIONS} />);
       expect(
         screen.getByRole("combobox", { name: "Select an option" }),
-      ).toHaveTextContent("Select an option...");
+      ).toHaveTextContent("Select an option");
+    });
+
+    it("takes its built-in texts from labels", async () => {
+      const user = userEvent.setup();
+      render(
+        <Select
+          options={OPTIONS}
+          labels={{ unselected: "Pick a country", options: "Countries", empty: "Nothing found" }}
+        />,
+      );
+      const trigger = screen.getByRole("combobox", { name: "Pick a country" });
+
+      expect(trigger).toHaveTextContent("Pick a country");
+      await user.click(trigger);
+      expect(screen.getByRole("listbox", { name: "Countries" })).toBeInTheDocument();
+      await user.keyboard("zzz");
+      expect(screen.getByText("Nothing found")).toBeInTheDocument();
     });
 
     it("submits the value through a hidden input", () => {

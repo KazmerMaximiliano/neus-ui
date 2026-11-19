@@ -25,6 +25,13 @@ breaking change.
 - `Pagination`: page buttons with the first, last and nearby pages and an ellipsis for each gap,
   or a `compact` previous and next around "page / total"; an optional page-size Select; English
   labels you can replace. New `pagination` recipe family.
+- `labels` on Select, MultiSelect, Clock, TimeInput, DateInput, WeekCalendar and InteractiveMap,
+  `texts` on Stepper (whose `labels` are the step names) and `label` on Dropdown, for the texts
+  they render themselves, with the types `SelectLabels`, `MultiSelectLabels`, `ClockLabels`,
+  `TimeInputLabels`, `DateInputLabels`, `WeekCalendarLabels`, `InteractiveMapLabels` and
+  `StepperTexts`.
+- `language` on WeekCalendar, WeekCalendarRow and DateInput, as Calendar has: day names, dates and
+  DateInput's calendar in the project's language.
 
 ### Changed
 
@@ -32,18 +39,27 @@ breaking change.
   `.data-table__pagination`, where it was a `div`. It looks the same and keeps the live position
   text, its classes and its style props. New `paginationLabels` prop to name the landmark and
   the buttons in the project's language.
-- Built-in texts are English, like the rest of the library; they were Spanish. Where a prop
-  exists, pass your language back:
+- Built-in texts are English, like the rest of the library; they were Spanish. Each has a prop
+  to write it in the project's language:
   - Sidebar: "Main navigation", "Open menu", "Close menu", "Expand navigation" and "Collapse
     navigation" (`labels`), also inside AppTemplate.
-  - DataTable: "Previous page" and "Next page" (`paginationLabels`).
-  - Select and MultiSelect: "Search..." (`searchBarPlaceholder`), "No results", "Options" and,
-    without a label, "Select an option" or "Select options"; MultiSelect's remove buttons say
-    "Remove" and the option.
-  - Menu and Dropdown without a visible name: "Menu".
-  - WeekCalendar: "Previous week" and "Next week".
+  - DataTable: "Pagination", "Previous page" and "Next page" (`paginationLabels`).
+  - Select and MultiSelect: "Search..." (`searchBarPlaceholder`), and "Select an option" or
+    "Select options", "Options", "No results" and MultiSelect's "Remove <option>" (`labels`).
+  - Menu and Dropdown without a visible name: "Menu" (Menu's `text`, Dropdown's `label`).
+  - WeekCalendar: "Previous week" and "Next week" (`labels`).
   - Clock: "Hours" and "Minutes"; the DateInput and TimeInput panels: "<label>: calendar" and
-    "<label>: clock".
+    "<label>: clock" (`labels`, which TimeInput also passes to its Clock).
+- DateInput shows its date in `language`, en-US by default, where it followed the browser's
+  locale; the field and its calendar now agree, and the server and the browser render the same
+  text. WeekCalendarRow dates its events' accessible names the same way.
+
+### Fixed
+
+- A Heading with a word wider than its container breaks the word instead of spilling out, as a
+  Hero title did over its media with wider fallback fonts.
+- FileUploader's image preview has an empty `alt`: the file name beside it names it, where
+  screen readers heard "Preview".
 
 ## [2.8.0] - Unreleased
 

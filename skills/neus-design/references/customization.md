@@ -29,7 +29,9 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 `emptyLabel` and `loadingLabel` with every Input field prop; Tabs `variant`
 (`line`, `contained`) and `label`; Breadcrumbs `maxItems`, `linkComponent` and `labels`;
 Pagination `variant` (`pages`, `compact`), `siblingCount`, `pageSize` with
-`pageSizeOptions`, and `labels`; DataTable `paginationLabels`, and
+`pageSizeOptions`, and `labels`; DataTable `paginationLabels`; `labels` for the built-in
+texts of Select, MultiSelect, Clock, TimeInput, DateInput, WeekCalendar and InteractiveMap,
+Stepper `texts`, Dropdown `label`; `language` on Calendar, DateInput and WeekCalendar, and
 native attributes and `ref` on Button, IconButton and Input; Sidebar and AppTemplate routes
 `href` with `linkComponent`; Badge `variant` and `color`; Heading `as` and
 `size`; Text `variant`, `tone`, `weight`, `measure`, `lines` and `numeric`;

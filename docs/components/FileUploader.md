@@ -29,7 +29,7 @@ limits the total bytes across the selection. `onChange` receives FileUploadData 
 failure. Clearing emits null. Error display is consumer-owned through `error`; callback
 errors are not automatically displayed.
 
-Single image selection creates a preview; other selections show file metadata. The empty
+Single image selection creates a preview, with an empty `alt` because the file name beside it names it; other selections show file metadata. The empty
 drop area is a label associated with the native file input; after selection it becomes a
 div. `disabled` prevents picking and dropping. The forwarded ref targets the file input. A
 composed public Button clears the selection; style its existing classes or tokens rather

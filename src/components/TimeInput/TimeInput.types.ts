@@ -1,7 +1,12 @@
 import type { CSSProperties } from "react";
 import type { DesignSystemId } from "../../design-systems";
-import type { TimeValue } from "../Clock";
+import type { ClockLabels, TimeValue } from "../Clock";
 import type { FieldDescriptionProps, FieldPresentationProps } from "../Input";
+
+export type TimeInputLabels = ClockLabels & {
+  /** Name of the clock panel, given the field's label when it has one. */
+  readonly clock?: (label?: string) => string;
+};
 
 export type TimeInputProps = FieldPresentationProps & FieldDescriptionProps & {
   readonly placeholderClassName?: string;
@@ -33,6 +38,8 @@ export type TimeInputProps = FieldPresentationProps & FieldDescriptionProps & {
   readonly disabled?: boolean;
   readonly readonly?: boolean;
   readonly format?: "12h" | "24h";
+  /** Built-in texts, in the project's language. */
+  readonly labels?: TimeInputLabels;
   readonly fieldStyle?: CSSProperties;
   readonly labelStyle?: CSSProperties;
   readonly errorStyle?: CSSProperties;
