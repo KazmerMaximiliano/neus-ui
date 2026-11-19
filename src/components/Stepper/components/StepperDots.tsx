@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Check } from "lucide-react";
 import type { StepperProps } from "../Stepper.types";
-import { STEP_STATE_TEXT } from "../Stepper.consts";
+import { STEPPER_TEXTS } from "../Stepper.consts";
 import {
   getConnectorClasses,
   getDotClasses,
@@ -31,14 +31,16 @@ export const StepperDots = ({
   labelStyle,
   connectorStyle,
   onStepClick,
+  texts,
 }: StepperProps) => {
+  const words = { ...STEPPER_TEXTS, ...texts };
   const steps = Array.from({ length: totalSteps }, (_, i) => i);
 
   return (
     <nav
       className={["stepper__track", trackClassName].filter(Boolean).join(" ")}
       style={trackStyle}
-      aria-label="Progress"
+      aria-label={words.progress}
     >
       {steps.map((index) => {
         const state = getStepState(index, currentStep);
@@ -88,7 +90,7 @@ export const StepperDots = ({
                     .join(" ")}
                   style={srOnlyStyle}
                 >
-                  {`Step ${index + 1}${label && !visibleLabel ? `: ${label}` : ""}, ${STEP_STATE_TEXT[state]}`}
+                  {`${words.step(index + 1)}${label && !visibleLabel ? `: ${label}` : ""}, ${words[state]}`}
                 </span>
               </Dot>
               {visibleLabel && (

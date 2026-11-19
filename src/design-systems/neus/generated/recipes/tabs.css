@@ -1,0 +1,50 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --tabs-font-family: var(--font-body);
+  --tabs-font-size: var(--fs-sm);
+  --tabs-font-weight: 600;
+  --tabs-selected-font-weight: 600;
+  --tabs-line-height: 1.4;
+  --tabs-letter-spacing: normal;
+  --tabs-height: 44px;
+  --tabs-min-width: 0px;
+  --tabs-padding: 0 16px;
+  --tabs-gap: 0px;
+  --tabs-icon-gap: 8px;
+  --tabs-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  --tabs-background: transparent;
+  --tabs-color: var(--color-text-secondary);
+  --tabs-hover-color: var(--color-text-primary);
+  --tabs-hover-background: var(--color-surface-hover);
+  --tabs-selected-color: var(--color-primary-text);
+  --tabs-disabled-color: var(--color-text-disabled);
+  --tabs-divider-width: 1px;
+  --tabs-divider-color: var(--color-border-subtle);
+  --tabs-indicator-height: 3px;
+  --tabs-indicator-inset: 0px;
+  --tabs-indicator-radius: 3px 3px 0 0;
+  --tabs-indicator-color: var(--color-primary);
+  --tabs-hover-indicator-color: transparent;
+  --tabs-contained-height: 36px;
+  --tabs-contained-gap: 4px;
+  --tabs-contained-padding: 4px;
+  --tabs-contained-border-width: 0px;
+  --tabs-contained-border-color: transparent;
+  --tabs-contained-radius: var(--radius-default);
+  --tabs-contained-background: var(--color-surface-secondary);
+  --tabs-contained-tab-radius: var(--radius-sm);
+  --tabs-contained-tab-padding: var(--tabs-padding);
+  --tabs-contained-font-size: var(--tabs-font-size);
+  --tabs-contained-tab-background: transparent;
+  --tabs-contained-color: var(--color-text-secondary);
+  --tabs-contained-hover-background: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+  --tabs-contained-selected-background: var(--color-surface);
+  --tabs-contained-selected-color: var(--color-text-primary);
+  --tabs-contained-selected-shadow: 0 1px 3px rgb(15 23 42 / 0.12);
+  --tabs-focus-width: 2px;
+  --tabs-focus-color: var(--color-focus);
+  --tabs-focus-offset: 2px;
+  --tabs-panel-gap: 16px;
+  --tabs-transition: color 0.2s ease, background-color 0.2s ease;
+}

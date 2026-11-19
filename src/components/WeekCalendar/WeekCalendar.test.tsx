@@ -82,8 +82,8 @@ describe("WeekCalendar", () => {
     });
 
     it("renders a custom title", () => {
-      renderWeekCalendar({ title: "Reservaciones" });
-      expect(screen.getByText("Reservaciones")).toBeInTheDocument();
+      renderWeekCalendar({ title: "Bookings" });
+      expect(screen.getByText("Bookings")).toBeInTheDocument();
     });
 
     it("renders seven day columns", () => {
@@ -97,6 +97,29 @@ describe("WeekCalendar", () => {
       const weekSelector = container.querySelector(".week-calendar__selector");
       expect(weekSelector).toBeInTheDocument();
       expect(weekSelector?.textContent).toMatch(/\w+ \d+\s*-\s*\w+ \d+/);
+    });
+  });
+
+  describe("language", () => {
+    it("writes the day names and the range in the language given", () => {
+      const { container } = renderWeekCalendar({ language: "es-AR" });
+      const names = [...container.querySelectorAll(".week-calendar__day-name")].map((name) => name.textContent);
+      const week = [...Array(7)].map((_, index) => {
+        const day = new Date();
+        day.setDate(day.getDate() - 3 + index);
+        return day;
+      });
+      const date = (day: Date) => day.toLocaleDateString("es-AR", { day: "numeric", month: "short" });
+
+      expect(names).toEqual(week.map((day) => day.toLocaleDateString("es-AR", { weekday: "short" })));
+      expect(container.querySelector(".week-calendar__date-range")).toHaveTextContent(`${date(week[0])} - ${date(week[6])}`);
+    });
+
+    it("falls back to English for an unsupported tag", () => {
+      const { container } = renderWeekCalendar({ language: "not a tag" });
+      const names = [...container.querySelectorAll(".week-calendar__day-name")].map((name) => name.textContent);
+
+      expect(names.every((name) => /^(Sun|Mon|Tue|Wed|Thu|Fri|Sat)$/.test(name ?? ""))).toBe(true);
     });
   });
 
@@ -131,6 +154,21 @@ describe("WeekCalendar", () => {
         ".week-calendar__selector button",
       );
       expect(buttons).toHaveLength(2);
+    });
+
+    it("names the week buttons in English unless labels says otherwise", () => {
+      const { rerender } = renderWeekCalendar();
+
+      expect(screen.getByRole("button", { name: "Previous week" })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Next week" })).toBeInTheDocument();
+
+      rerender(
+        <ThemeProvider>
+          <WeekCalendar labels={{ previous: "Earlier", next: "Later" }} />
+        </ThemeProvider>,
+      );
+      expect(screen.getByRole("button", { name: "Earlier" })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Later" })).toBeInTheDocument();
     });
 
     it("navigates to the previous day", async () => {

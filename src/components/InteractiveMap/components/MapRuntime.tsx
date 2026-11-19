@@ -21,6 +21,7 @@ import type {
 import {
   DEFAULT_CENTER,
   GOOGLE_MAPS_LIBRARIES,
+  INTERACTIVE_MAP_LABELS,
 } from "../InteractiveMap.consts";
 import { parseCoordinates } from "../InteractiveMap.utils";
 
@@ -44,7 +45,9 @@ export const MapRuntime = ({
   instructionsStyle,
   loadingStyle,
   errorStyle,
+  labels,
 }: InteractiveMapProps) => {
+  const text = { ...INTERACTIVE_MAP_LABELS, ...labels };
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey,
@@ -132,7 +135,7 @@ export const MapRuntime = ({
           .join(" ")}
         style={errorStyle}
       >
-        Unable to load the map.
+        {text.loadError}
       </div>
     );
   if (!isLoaded)
@@ -144,7 +147,7 @@ export const MapRuntime = ({
           .join(" ")}
         style={loadingStyle}
       >
-        Loading map…
+        {text.loading}
       </div>
     );
 
@@ -170,8 +173,8 @@ export const MapRuntime = ({
             }}
           >
             <Input
-              aria-label="Find location"
-              placeholder={searchBoxPlaceholder || "Find location..."}
+              aria-label={text.search}
+              placeholder={searchBoxPlaceholder || text.search}
               value={searchValue}
               onChange={setSearchValue}
             />
@@ -226,7 +229,7 @@ export const MapRuntime = ({
             .join(" ")}
           style={errorStyle}
         >
-          Unable to resolve this location. Choose another location to try again.
+          {text.resolveError}
         </div>
       )}
       {!readonly && (

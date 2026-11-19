@@ -1,0 +1,29 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --pagination-font-family: var(--font-body);
+  --pagination-font-size: var(--fs-sm);
+  --pagination-font-weight: 500;
+  --pagination-current-font-weight: 700;
+  --pagination-gap: 4px;
+  --pagination-item-size: var(--icon-button-size-small);
+  --pagination-item-padding: 0 8px;
+  --pagination-item-radius: var(--radius-pill);
+  --pagination-item-border-width: 0px;
+  --pagination-item-border-color: transparent;
+  --pagination-item-background: transparent;
+  --pagination-item-color: var(--color-text-primary);
+  --pagination-item-hover-background: var(--color-surface-hover);
+  --pagination-item-hover-color: var(--color-text-primary);
+  --pagination-current-background: var(--color-primary);
+  --pagination-current-color: var(--color-text-on-primary);
+  --pagination-current-border-color: transparent;
+  --pagination-current-shadow: none;
+  --pagination-ellipsis-color: var(--color-text-secondary);
+  --pagination-info-color: var(--color-text-secondary);
+  --pagination-info-font-size: var(--fs-sm);
+  --pagination-focus-width: 2px;
+  --pagination-focus-color: var(--color-focus);
+  --pagination-focus-offset: 2px;
+  --pagination-transition: background-color 180ms ease, color 180ms ease;
+}

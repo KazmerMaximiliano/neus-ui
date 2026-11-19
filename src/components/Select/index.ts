@@ -1,3 +1,4 @@
 export { Select } from "./Select";
+export { SELECT_LABELS } from "./Select.consts";
 export { filterOptions } from "./Select.utils";
-export type { SelectOption, SelectProps } from "./Select.types";
+export type { SelectLabels, SelectOption, SelectProps } from "./Select.types";

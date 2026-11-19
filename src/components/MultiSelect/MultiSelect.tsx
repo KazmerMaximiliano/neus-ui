@@ -4,6 +4,7 @@ import { usePopover } from "../../hooks/usePopover";
 import { FieldOutline } from "../Input/components/FieldOutline";
 import { SelectListbox } from "../Select/components/SelectListbox";
 import type { MultiSelectProps } from "./MultiSelect.types";
+import { MULTI_SELECT_LABELS } from "./MultiSelect.consts";
 import "../Checkbox/Checkbox.styles.css";
 import "../Select/Select.styles.css";
 import "../../css/field.css";
@@ -65,7 +66,8 @@ export const MultiSelect = ({
   requiredClassName,
   requiredStyle,
   viewSearchBar = true,
-  searchBarPlaceholder = "Buscar...",
+  searchBarPlaceholder = "Search...",
+  labels,
   fieldStyle,
   tagStyle,
   listStyle,
@@ -85,6 +87,7 @@ export const MultiSelect = ({
       },
   );
   const displayLabel = label || placeholder;
+  const text = { ...MULTI_SELECT_LABELS, ...labels };
   const fieldId = useId();
   const errorId = useId();
   const descriptionId = useId();
@@ -178,7 +181,7 @@ export const MultiSelect = ({
                   .filter(Boolean)
                   .join(" ")}
                 style={tagRemoveStyle}
-                aria-label={`Quitar ${option.label}`}
+                aria-label={text.remove(option.label)}
                 onClick={() =>
                   update(selectedValues.filter((v) => v !== option.value))
                 }
@@ -210,7 +213,7 @@ export const MultiSelect = ({
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-controls={id}
-          aria-label={displayLabel ? undefined : "Selecciona opciones"}
+          aria-label={displayLabel ? undefined : text.unselected}
           aria-invalid={error ? true : undefined}
           aria-required={required || undefined}
           aria-describedby={
@@ -271,13 +274,14 @@ export const MultiSelect = ({
         emptyClassName={emptyClassName}
         emptyStyle={emptyStyle}
         popover={popover}
-        label={displayLabel || "Opciones"}
+        label={displayLabel || text.options}
         options={options}
         multiple
         isSelected={(optionValue) => selectedValues.includes(optionValue)}
         onSelect={toggleValue}
         viewSearchBar={viewSearchBar}
         searchBarPlaceholder={searchBarPlaceholder}
+        emptyLabel={text.empty}
         listStyle={listStyle}
         optionStyle={optionStyle}
       />

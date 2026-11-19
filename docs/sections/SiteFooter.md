@@ -12,9 +12,9 @@ import { SiteFooter } from "neus-ui/sections";
 
 export const Footer = () => (
   <SiteFooter
-    brand="Veterinaria Los Aromos"
-    columns={[{ title: "Clínica", links: [{ label: "Servicios", href: "#servicios" }, { label: "Equipo", href: "#equipo" }] }]}
-    legal="Bv. Oroño 1450, Rosario · Lunes a viernes de 9 a 20 h, sábados de 9 a 13 h"
+    brand="Los Aromos Vet"
+    columns={[{ title: "Clinic", links: [{ label: "Services", href: "#services" }, { label: "Team", href: "#team" }] }]}
+    legal="Bv. Oroño 1450, Rosario · Mon–Fri 9–20 h, Sat 9–13 h"
   />
 );
 ```

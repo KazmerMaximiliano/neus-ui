@@ -7,7 +7,7 @@ export async function reverseGeocode(
   googleMapsApiKey?: string
 ): Promise<LocationData> {
   if (!googleMapsApiKey) {
-    throw new Error("VITE_GOOGLE_MAPS_API_KEY no está configurada");
+    throw new Error("VITE_GOOGLE_MAPS_API_KEY is not set");
   }
 
   try {
@@ -16,13 +16,13 @@ export async function reverseGeocode(
     );
 
     if (!response.ok) {
-      throw new Error(`Error en geocoding: ${response.statusText}`);
+      throw new Error(`Geocoding failed: ${response.statusText}`);
     }
 
     const data = await response.json();
 
     if (data.status !== "OK" || data.results.length === 0) {
-      throw new Error("No se encontraron resultados de geocoding");
+      throw new Error("Geocoding found no results");
     }
 
     const result: GeocodeResult = data.results[0];
@@ -30,7 +30,7 @@ export async function reverseGeocode(
 
     return locationData;
   } catch (error) {
-    console.error("Error en reverse geocoding:", error);
+    console.error("Reverse geocoding failed:", error);
     throw error;
   }
 }

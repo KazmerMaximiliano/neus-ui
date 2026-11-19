@@ -28,7 +28,7 @@ onStepClick exists; the active step uses aria-current step. Visible labels depen
 showLabels and labels. Connectors appear unless showConnectors is false.
 
 Linear/simple modes expose progressbar semantics. The linear mode renders a
-[Progress](./Progress.md) bar: `.stepper__track` is the progressbar, named "Progress", and its
+[Progress](./Progress.md) bar: `.stepper__track` is the progressbar, named by `texts.progress`, and its
 parts keep the stepper's classes and tokens. Linear labels use
 labelStyle/labelClassName just like dot labels; barStyle targets the track and barFillStyle
 targets its fill. Simple dots share dotStyle/dotClassName. Repeated hooks affect every
@@ -71,6 +71,7 @@ retain their nullable default.
 | `connectorStyle` | `CSSProperties` | Omitted | Inline styles on `.stepper__connector` |
 | `barStyle` | `CSSProperties` | Omitted | Inline styles on `.stepper__bar` |
 | `onStepClick` | `((step: number) => void)` | Omitted | Makes completed steps buttons; receives the step index (0-indexed) |
+| `texts` | `StepperTexts` | English defaults | Built-in texts in the project's language; `labels` holds the step names |
 
 ### Supporting types
 
@@ -82,6 +83,15 @@ package export.
 type StepperVariant = "dots" | "linear" | "simple";
 
 type StepperSize = "small" | "medium" | "large";
+
+type StepperTexts = {
+  readonly progress?: string; // "Progress": name of the track
+  readonly position?: (step: number, total: number) => string; // "Step 2 of 5"
+  readonly step?: (step: number) => string; // "Step 2", read before a dot's state
+  readonly done?: string; // "completed"
+  readonly active?: string; // "current"
+  readonly inactive?: string; // "not started"
+};
 ```
 
 ## Anatomy and per-part customization

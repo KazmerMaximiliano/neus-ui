@@ -21,6 +21,7 @@ export const Dropdown = ({
   triggerClassName,
   icon: Icon,
   name,
+  label: menuLabel = "Menu",
   items,
   triggerStyle,
   menuStyle,
@@ -31,7 +32,7 @@ export const Dropdown = ({
     initialFocus: "[role=\"menuitem\"]:not(:disabled)",
   });
   const { id, open, triggerRef, toggle } = popover;
-  const label = name || "Menú";
+  const label = name || menuLabel;
 
   return (
     <div

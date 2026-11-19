@@ -454,6 +454,56 @@ x-neus:
         --tooltip-shadow: 0 1px 1px rgb(0 0 0 / 0.02), 0 4px 8px rgb(0 0 0 / 0.04)
         --tooltip-font-size: 13px
         --tooltip-font-weight: "400"
+    tabs:
+      base:
+        --tabs-disabled-color: "#8f8f8f"
+        --tabs-font-size: 14px
+        --tabs-font-weight: "400"
+        --tabs-selected-font-weight: "400"
+        --tabs-line-height: 20px
+        --tabs-height: 48px
+        --tabs-padding: 0 2px
+        --tabs-gap: 24px
+        --tabs-radius: 0px
+        --tabs-hover-background: transparent
+        --tabs-selected-color: var(--color-text-primary)
+        --tabs-indicator-height: 2px
+        --tabs-indicator-radius: 0px
+        --tabs-indicator-color: var(--color-text-primary)
+        --tabs-contained-height: 32px
+        --tabs-contained-gap: 0px
+        --tabs-contained-padding: 0px
+        --tabs-contained-radius: 0px
+        --tabs-contained-background: transparent
+        --tabs-contained-tab-radius: 6px
+        --tabs-contained-tab-padding: 0 12px
+        --tabs-contained-font-size: 13px
+        --tabs-contained-hover-background: transparent
+        --tabs-contained-selected-background: "#ebebeb"
+        --tabs-contained-selected-shadow: none
+      dark:
+        --tabs-contained-selected-background: "#1f1f1f"
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 14px
+        --breadcrumbs-line-height: 20px
+        --breadcrumbs-separator: '"›"'
+        --breadcrumbs-separator-gap: 6px
+        --breadcrumbs-link-color: var(--color-text-secondary)
+        --breadcrumbs-link-weight: "400"
+        --breadcrumbs-link-hover-color: var(--color-text-primary)
+        --breadcrumbs-link-hover-decoration: none
+        --breadcrumbs-current-weight: "400"
+    pagination:
+      base:
+        --pagination-font-size: 14px
+        --pagination-current-font-weight: "500"
+        --pagination-item-radius: 6px
+        --pagination-item-hover-background: "#ebebeb"
+        --pagination-current-background: var(--color-text-primary)
+        --pagination-current-color: var(--color-surface)
+      dark:
+        --pagination-item-hover-background: "#1f1f1f"
 ---
 
 # Vercel
@@ -577,6 +627,12 @@ A skeleton shimmers, as in [Geist skeleton](https://vercel.com/geist/skeleton) (
 A toast is the alert with the soft floating shadow. Geist keeps toasts polite and saves assertive announcements for blocking errors, and an Undo action stays on screen for 5 to 10 seconds ([Geist toast](https://vercel.com/geist/toast), consulted 2026-11-17).
 
 A tooltip is the foreground color behind background-colored text in 13px, with 6px corners and the lightest shadow, the tooltip material ([Geist materials](https://vercel.com/geist/materials), consulted 2026-11-18). Geist waits about 150ms before showing one so a sweeping pointer does not flash it ([Geist tooltip](https://vercel.com/geist/tooltip), consulted 2026-11-18), which is the component's default delay. A combobox is the input with the select's list.
+
+Tabs are 14px regular labels in gray 900 with 24px between them and almost no padding; the selected and the hovered one turn gray 1000, the selected one over a 2px foreground line across the tab, on a 1px gray divider. Secondary tabs, the contained variant here, are 32px tall with 12px of padding, 13px text and 6px corners, with no tray: the selected tab fills with gray 200 (#ebebeb, #1f1f1f in dark mode) ([Geist tabs](https://vercel.com/geist/tabs), consulted 2026-11-18).
+
+Breadcrumbs are 14px over 20px, links in gray 900 that turn gray 1000 on hover without an underline, the current page in gray 1000 and a chevron between items with 6px on each side ([Geist breadcrumbs](https://vercel.com/geist/breadcrumbs), consulted 2026-11-18). Geist draws the chevron as a 16px icon; here it is the › character.
+
+Geist's pagination links to the previous and next page by title, at the end of a document ([Geist pagination](https://vercel.com/geist/pagination), consulted 2026-11-18); it has no numbered pager. Page buttons here are 32px with 6px corners like the small buttons, gray 200 on hover, and the current page in the foreground color with background-colored numbers, like a primary button: a local mapping.
 
 ## Do's and Don'ts
 

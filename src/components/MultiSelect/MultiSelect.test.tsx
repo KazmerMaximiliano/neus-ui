@@ -127,11 +127,28 @@ describe("MultiSelect", () => {
       const user = userEvent.setup();
       const onChange = vi.fn();
       renderMulti({ defaultValue: ["red", "green"], onChange });
-      await user.click(screen.getByRole("button", { name: "Quitar Red" }));
+      await user.click(screen.getByRole("button", { name: "Remove Red" }));
       expect(onChange).toHaveBeenLastCalledWith(["green"]);
       expect(
-        screen.queryByRole("button", { name: "Quitar Red" }),
+        screen.queryByRole("button", { name: "Remove Red" }),
       ).not.toBeInTheDocument();
+    });
+
+    it("takes its built-in texts from labels", async () => {
+      const user = userEvent.setup();
+      render(
+        <MultiSelect
+          options={OPTIONS}
+          defaultValue={["red"]}
+          labels={{ unselected: "Pick colors", options: "Colors", empty: "Nothing found", remove: (option) => `Drop ${option}` }}
+        />,
+      );
+
+      expect(screen.getByRole("button", { name: "Drop Red" })).toBeInTheDocument();
+      await user.click(screen.getByRole("combobox", { name: "Pick colors" }));
+      expect(screen.getByRole("listbox", { name: "Colors" })).toBeInTheDocument();
+      await user.keyboard("zzz");
+      expect(screen.getByText("Nothing found")).toBeInTheDocument();
     });
 
     it("disables the trigger and hides tag removal", async () => {
@@ -139,7 +156,7 @@ describe("MultiSelect", () => {
       renderMulti({ disabled: true, defaultValue: ["red"] });
       expect(combobox()).toBeDisabled();
       expect(
-        screen.queryByRole("button", { name: /Quitar/ }),
+        screen.queryByRole("button", { name: /Remove/ }),
       ).not.toBeInTheDocument();
       await user.click(combobox());
       expect(screen.queryByRole("listbox")).not.toBeInTheDocument();

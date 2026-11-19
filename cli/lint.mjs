@@ -104,6 +104,13 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
       if (!isCss(file) && /role=["']combobox["']/.test(line)) {
         report(file, at, "P1", "raw-element", "hand-made combobox: use Combobox (Select for predefined options)");
       }
+      if (!isCss(file) && /role=["']tab(list)?["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made tabs: use Tabs");
+      if (!isCss(file) && /<nav\b[^>]*aria-label=["'][^"']*breadcrumb/i.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made breadcrumbs: use Breadcrumbs");
+      }
+      if (!isCss(file) && /<nav\b[^>]*aria-label=["'][^"']*(pagination|paginaci[oó]n)/i.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made pagination: use Pagination");
+      }
       if (!isCss(file) && /\saria-live=/.test(line)) {
         report(file, at, "P1", "raw-element", "aria-live region: use useToast for notifications, Alert for a message on the page");
       }

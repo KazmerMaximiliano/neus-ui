@@ -117,6 +117,10 @@ const meta: Meta<StepperStoryArgs> = {
       control: "object",
       description: "CSS properties applied to the linear track",
     },
+    texts: {
+      control: false,
+      description: "Built-in texts: progress, position and step (functions), done, active and inactive",
+    },
     onStepClick: {
       action: "stepClicked",
       description:
@@ -149,6 +153,7 @@ export const Stepper: StoryObj<StepperStoryArgs> = {
     variant: "dots",
     size: "small",
     labels: ["Profile", "Goals", "Done"],
+    texts: {},
     showLabels: true,
     showConnectors: true,
     dotStyle: {},

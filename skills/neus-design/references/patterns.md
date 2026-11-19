@@ -76,13 +76,17 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
 
 - The header holds context (`headerStart`: workspace, breadcrumb, search) and
   global actions (`menu`: account, notifications). The page title and the
-  page's primary action open the content.
+  page's primary action open the content. A page below the list, such as an
+  order's detail, puts `Breadcrumbs` in `headerStart` (`Orders`, then `#1042`
+  as the current page).
 - One solid primary action per page; row actions use Menu or text buttons.
   An icon-only action whose name is not enough (a limit, a consequence) gets a
   `Tooltip`; the IconButton keeps its `label`.
 - Filters for the list go in a `Popover` opened by an outlined "Filters" Button
   beside the title; close it from an "Apply" button with a controlled `open`.
-- Pagination is controlled: wire `onPaginationChange` to the data source.
+- Pagination is controlled: wire `onPaginationChange` to the data source. A
+  list that is not a table (cards, search results) pages with `Pagination`
+  below it, wired the same way.
 - Provide `renderMobileCard` for tables people use on phones.
 - While a list or a dashboard card loads, draw its shape with `Skeleton`
   (lines, a `rect` for a chart, a `circle` for an avatar) inside the region,
@@ -161,7 +165,9 @@ for content that floats above the page. Lay cards out with `Grid` (for example
 `<Grid minItemWidth="20rem">`) and page titles with `Heading` and `Text`.
 A setting that applies at once is a `Switch` with its `description`, one per
 row inside `CardContent`, in a `Stack` so each track reaches the card's edge;
-choices saved with a button stay fields and checkboxes in a form.
+choices saved with a button stay fields and checkboxes in a form. When the
+settings have several unrelated groups (general, members, billing), put each
+group in a `Tabs` panel under the page title instead of one long page.
 
 ## 6. Scheduling
 

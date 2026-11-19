@@ -3,6 +3,8 @@
   color: var(--heading-color);
   font-family: var(--heading-font-family);
   text-align: start;
+  /* A word wider than the container breaks instead of spilling out, also as a flex item that would size to it. */
+  max-width: 100%;
   overflow-wrap: break-word;
 }
 

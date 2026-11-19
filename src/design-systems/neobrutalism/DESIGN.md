@@ -512,6 +512,59 @@ x-neus:
         --tooltip-radius: 4px
         --tooltip-shadow: 3px 3px 0 var(--color-text-primary)
         --tooltip-font-weight: "700"
+    tabs:
+      base:
+        --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 50%, transparent)
+        --tabs-font-weight: "700"
+        --tabs-selected-font-weight: "700"
+        --tabs-radius: 0px
+        --tabs-color: var(--color-text-primary)
+        --tabs-hover-background: color-mix(in srgb, var(--color-primary) 35%, transparent)
+        --tabs-selected-color: var(--color-text-primary)
+        --tabs-divider-width: 2px
+        --tabs-divider-color: var(--color-text-primary)
+        --tabs-indicator-height: 4px
+        --tabs-indicator-radius: 0px
+        --tabs-indicator-color: var(--color-text-primary)
+        --tabs-contained-height: 40px
+        --tabs-contained-gap: 4px
+        --tabs-contained-padding: 4px
+        --tabs-contained-border-width: 3px
+        --tabs-contained-border-color: var(--color-text-primary)
+        --tabs-contained-radius: 4px
+        --tabs-contained-background: var(--color-surface)
+        --tabs-contained-tab-radius: 2px
+        --tabs-contained-color: var(--color-text-primary)
+        --tabs-contained-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface))
+        --tabs-contained-selected-background: var(--color-primary)
+        --tabs-contained-selected-color: var(--color-text-on-primary)
+        --tabs-contained-selected-shadow: inset 0 0 0 2px var(--color-text-primary)
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 14px
+        --breadcrumbs-font-weight: "500"
+        --breadcrumbs-color: var(--color-text-primary)
+        --breadcrumbs-separator: '"›"'
+        --breadcrumbs-separator-gap: 6px
+        --breadcrumbs-separator-color: var(--color-text-primary)
+        --breadcrumbs-separator-weight: "800"
+        --breadcrumbs-link-color: var(--color-text-primary)
+        --breadcrumbs-link-weight: var(--link-font-weight)
+        --breadcrumbs-link-decoration: var(--link-decoration)
+        --breadcrumbs-current-weight: "800"
+    pagination:
+      base:
+        --pagination-font-weight: "700"
+        --pagination-current-font-weight: "800"
+        --pagination-item-radius: 4px
+        --pagination-item-border-width: 3px
+        --pagination-item-border-color: var(--color-text-primary)
+        --pagination-item-background: var(--color-surface)
+        --pagination-item-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface))
+        --pagination-current-background: var(--color-primary)
+        --pagination-current-color: var(--color-text-on-primary)
+        --pagination-current-border-color: var(--color-text-primary)
+        --pagination-current-shadow: 3px 3px 0 var(--color-text-primary)
 ---
 
 # Neobrutalism
@@ -623,6 +676,12 @@ A skeleton is a flat ink-tinted block with square text lines that pulses.
 A toast is the alert with the hard ink shadow.
 
 A tooltip is a small framed card: the page color with a 2px ink border, 4px corners, a 3px hard ink shadow and bold text. A combobox is the framed field with the select's list.
+
+Line tabs are bold ink labels on a 2px ink rule, the selected one with a 4px ink bar, and hovering tints a tab with the yellow. Contained tabs sit in a framed tray, a 3px ink border with 4px corners and 4px of padding, where the selected tab is a yellow tile outlined in ink. The thicker frame and the ink indicator follow this system's controls; the neobrutalism components draw a 2px frame and a blue bar ([neobrutalism tabs](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/tabs.tsx), consulted 2026-11-18).
+
+Breadcrumbs are ink, medium weight, with each link bold and underlined like every link here and the current page extra bold; heavy chevrons separate the items ([neobrutalism breadcrumb](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/breadcrumb.tsx), consulted 2026-11-18).
+
+Pagination is a row of framed tiles: 40px squares with a 3px ink border and 4px corners on the page color, bold numbers, and the current page filled with yellow over a 3px hard ink shadow ([neobrutalism pagination](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/pagination.tsx), consulted 2026-11-18). The shadow is this system's mark for the current page; the components library has none there.
 
 ## Do's and Don'ts
 

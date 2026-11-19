@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { CalendarDays } from "lucide-react";
-import { Calendar } from "../Calendar";
+import { Calendar, resolveLanguage } from "../Calendar";
 import { PickerField } from "./components/PickerField";
 import type { DateRange } from "react-day-picker";
 import type { DateInputProps } from "./DateInput.types";
+import { DATE_INPUT_LABELS } from "./DateInput.consts";
 import { formatDateForDisplay, serializeDateValue } from "./DateInput.utils";
 
 export const DateInput = (props: DateInputProps) => {
@@ -26,7 +27,11 @@ export const DateInput = (props: DateInputProps) => {
     labelStyle,
     errorStyle,
     onChange,
+    labels,
+    language = "en-US",
   } = props;
+  const locale = resolveLanguage(language);
+  const text = { ...DATE_INPUT_LABELS, ...labels };
   // `props` stays whole: a `value` passed as undefined still makes the field controlled.
   const isControlled = Object.prototype.hasOwnProperty.call(props, "value");
   const [selectedDate, setSelectedDate] = useState<
@@ -76,8 +81,8 @@ export const DateInput = (props: DateInputProps) => {
       icon={CalendarDays}
       label={label}
       placeholder={placeholder}
-      displayValue={formatDateForDisplay(currentValue, mode)}
-      pickerLabel={label ? `${label}: calendario` : "Calendario"}
+      displayValue={formatDateForDisplay(currentValue, mode, locale)}
+      pickerLabel={text.calendar(label)}
       error={error}
       disabled={disabled}
       readonly={readonly}
@@ -92,6 +97,7 @@ export const DateInput = (props: DateInputProps) => {
         mode === "single" ? (
           <Calendar
             mode="single"
+            language={locale}
             value={currentValue instanceof Date ? currentValue : undefined}
             onChange={(newValue) =>
               handleSelect(newValue as Date | DateRange | undefined, close)
@@ -103,6 +109,7 @@ export const DateInput = (props: DateInputProps) => {
         ) : (
           <Calendar
             mode="range"
+            language={locale}
             value={
               currentValue && !(currentValue instanceof Date)
                 ? currentValue

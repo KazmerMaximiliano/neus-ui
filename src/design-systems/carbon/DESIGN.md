@@ -547,6 +547,67 @@ x-neus:
       dark:
         --tooltip-background: "#f4f4f4"
         --tooltip-color: "#161616"
+    tabs:
+      base:
+        --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 25%, transparent)
+        --tabs-font-size: 14px
+        --tabs-font-weight: "400"
+        --tabs-line-height: 18px
+        --tabs-letter-spacing: 0.16px
+        --tabs-height: 40px
+        --tabs-padding: 8px 16px
+        --tabs-gap: 1px
+        --tabs-radius: 0px
+        --tabs-hover-background: transparent
+        --tabs-selected-color: var(--color-text-primary)
+        --tabs-divider-width: 2px
+        --tabs-indicator-height: 2px
+        --tabs-indicator-radius: 0px
+        --tabs-indicator-color: "#0f62fe"
+        --tabs-hover-indicator-color: "#8d8d8d"
+        --tabs-contained-height: 48px
+        --tabs-contained-gap: 1px
+        --tabs-contained-padding: 0px
+        --tabs-contained-radius: 0px
+        --tabs-contained-background: "#8d8d8d"
+        --tabs-contained-tab-radius: 0px
+        --tabs-contained-tab-background: "#e0e0e0"
+        --tabs-contained-hover-background: "#d1d1d1"
+        --tabs-contained-selected-background: "#f4f4f4"
+        --tabs-contained-selected-shadow: inset 0 2px 0 var(--tabs-indicator-color)
+      dark:
+        --tabs-indicator-color: "#4589ff"
+        --tabs-hover-indicator-color: "#6f6f6f"
+        --tabs-contained-background: "#6f6f6f"
+        --tabs-contained-tab-background: "#393939"
+        --tabs-contained-hover-background: "#474747"
+        --tabs-contained-selected-background: "#262626"
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 14px
+        --breadcrumbs-line-height: 18px
+        --breadcrumbs-letter-spacing: 0.16px
+        --breadcrumbs-color: var(--color-text-primary)
+        --breadcrumbs-separator-color: var(--color-text-primary)
+        --breadcrumbs-link-color: var(--link-color)
+        --breadcrumbs-link-weight: "400"
+        --breadcrumbs-link-hover-decoration: underline
+        --breadcrumbs-current-weight: "400"
+    pagination:
+      base:
+        --pagination-font-size: 14px
+        --pagination-font-weight: "400"
+        --pagination-current-font-weight: "600"
+        --pagination-gap: 0px
+        --pagination-item-padding: 0 4px
+        --pagination-item-radius: 0px
+        --pagination-item-hover-background: rgb(141 141 141 / 0.12)
+        --pagination-current-background: "linear-gradient(#0f62fe, #0f62fe) center bottom / 16px 4px no-repeat"
+        --pagination-current-color: var(--color-text-primary)
+        --pagination-focus-offset: -2px
+      dark:
+        --pagination-item-hover-background: rgb(141 141 141 / 0.16)
+        --pagination-current-background: "linear-gradient(#4589ff, #4589ff) center bottom / 16px 4px no-repeat"
 ---
 
 # Carbon
@@ -667,6 +728,12 @@ A skeleton is a square shape in the skeleton background, #e8e8e8 (#292929 in Gra
 A toast is the notification at its fixed 288px width with square corners and the floating shadow; toasts stack 8px apart ([Carbon notification style](https://carbondesignsystem.com/components/notification/style/), consulted 2026-11-17). Carbon slides them in at the top right, so pass `placement="top-end"` to ToastProvider.
 
 A tooltip is the inverse background (#393939, #f4f4f4 in dark mode) with inverse text in body 01, 14px over 20px, with no shadow. A single line has 2px by 16px of padding and is at most 208px wide; text that wraps gets 16px of padding on every side and up to 288px. A 6px caret points at the control from 4px away ([Carbon tooltip style](https://carbondesignsystem.com/components/tooltip/style/), consulted 2026-11-18). The 2px corners come from the popover's code ([Carbon popover styles](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/popover/_popover.scss), consulted 2026-11-18). A combobox is the text input with the dropdown's list.
+
+Line tabs are 40px tall with 16px of inline padding, labels in body compact 01 (14px over 18px, 0.16px tracking) in the secondary text color, and the selected one in primary text at weight 600 over a 2px interactive-blue line (#0f62fe, #4589ff in dark mode). Every tab sits on a 2px subtle-border line that turns #8d8d8d (#6f6f6f) under the pointer. Contained tabs are 48px tiles in layer accent (#e0e0e0, #393939 in dark mode; #d1d1d1 and #474747 on hover) with 1px strong-border lines between them; the selected tile takes the layer color (#f4f4f4, #262626) with a 2px interactive line on top. Neither has corners or shadows ([Carbon tabs style](https://carbondesignsystem.com/components/tabs/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/tree/main/packages/styles/scss/components/tabs), consulted 2026-11-18). The style page lists contained tabs at 40px; the source's 48px is used. Carbon draws one underline per tab with 1px between them; here one divider runs under the whole list. Disabled tabs take the text color at 25%.
+
+A breadcrumb is body compact 01 with links in the link blue, which underline on hover, the current page in primary text at regular weight, and slashes in primary text with 8px on each side ([Carbon breadcrumb style](https://carbondesignsystem.com/components/breadcrumb/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/breadcrumb/_breadcrumb.scss), consulted 2026-11-18). Carbon tucks hidden items into an overflow menu; here an ellipsis button shows them in place.
+
+Pagination follows the pagination nav: square page buttons side by side with no gap and no corners, 14px numbers, a faint gray hover (rgb 141 141 141 at 12%, 16% in dark mode) and the current page at weight 600 over a centered 16 by 4px interactive-blue bar ([Carbon pagination](https://carbondesignsystem.com/components/pagination/style/) and [the pagination nav source](https://github.com/carbon-design-system/carbon/tree/main/packages/styles/scss/components/pagination-nav), consulted 2026-11-18). The buttons are 32px, the small size, to match the small icon buttons for previous and next. Carbon's data-table pagination, with its items-per-page select and "1–10 of 100 items", is close to the compact form with the page-size select.
 
 ## Do's and Don'ts
 

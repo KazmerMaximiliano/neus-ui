@@ -78,6 +78,7 @@ retain their nullable default.
 | `numberStyle` | `CSSProperties` | Omitted | Inline styles on `.clock__number` |
 | `indicatorStyle` | `CSSProperties` | Omitted | Inline styles on `.clock__hand` |
 | `onChange` | `((value: TimeValue) => void)` | Omitted | Callback when time selection changes |
+| `labels` | `ClockLabels` | English defaults | Names of the hours and minutes segments and the dial, in the project's language |
 
 ### Supporting types
 
@@ -86,6 +87,11 @@ entry point](../../src/components/Clock/index.ts). A type shown here is not nece
 package export.
 
 ```ts
+type ClockLabels = {
+  readonly hours?: string; // "Hours"
+  readonly minutes?: string; // "Minutes"
+};
+
 type TimeValue = {
   hours: number;
   minutes: number;

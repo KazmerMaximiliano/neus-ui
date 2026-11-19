@@ -263,7 +263,7 @@ export const FileUploader = forwardRef<HTMLInputElement, FileUploaderProps>(
           >
             <img
               src={previewUrl}
-              alt="Preview"
+              alt=""
               className={["file-uploader__preview-image", previewImageClassName]
                 .filter(Boolean)
                 .join(" ")}

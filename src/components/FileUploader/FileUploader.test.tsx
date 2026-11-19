@@ -154,6 +154,17 @@ describe("FileUploader", () => {
       expect(onChange).toHaveBeenCalled();
     });
 
+    it("shows an image's preview beside its name, which names it", async () => {
+      const user = userEvent.setup();
+      const { container } = renderFileUploader();
+      const input = container.querySelector("input[type=\"file\"]") as HTMLInputElement;
+
+      await user.upload(input, new File(["test"], "photo.png", { type: "image/png" }));
+
+      await waitFor(() => expect(container.querySelector(".file-uploader__preview-image")).toHaveAttribute("alt", ""));
+      expect(screen.getByText("photo.png")).toHaveClass("file-uploader__file-name");
+    });
+
     it("does not call onChange when disabled", async () => {
       const user = userEvent.setup();
       const onChange = vi.fn();

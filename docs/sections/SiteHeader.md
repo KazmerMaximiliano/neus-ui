@@ -13,12 +13,11 @@ import { SiteHeader } from "neus-ui/sections";
 
 export const Header = () => (
   <SiteHeader
-    brand="Veterinaria Los Aromos"
-    links={[{ label: "Servicios", href: "#servicios" }, { label: "Equipo", href: "#equipo" }]}
-    actions={<Button label="Pedir turno" href="#turno" variant="outlined" size="small" />}
+    brand="Los Aromos Vet"
+    links={[{ label: "Services", href: "#services" }, { label: "Team", href: "#team" }]}
+    actions={<Button label="Book a visit" href="#booking" variant="outlined" size="small" />}
     variant="sticky"
     skipLinkTarget="#main"
-    labels={{ navigation: "Principal", menu: "Menú", skipLink: "Saltar al contenido" }}
   />
 );
 ```

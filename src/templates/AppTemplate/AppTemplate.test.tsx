@@ -52,7 +52,7 @@ describe("AppTemplate responsive integration", () => {
     });
     const { container } = render(<AppTemplate routes={[{ label: "Home" }]}
       menu={<button>Account</button>}><h1>Content</h1></AppTemplate>);
-    expect(screen.getAllByRole("button", { name: "Abrir menú" })).toHaveLength(1);
+    expect(screen.getAllByRole("button", { name: "Open menu" })).toHaveLength(1);
     expect(screen.getByRole("button", { name: "Account" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Content" })).toBeInTheDocument();
     expect(container.querySelector(".app-template__overlay")).not.toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("AppTemplate responsive integration", () => {
       window.dispatchEvent(new Event("resize"));
     });
     expect(screen.getByRole("button", { name: "Home" })).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "Abrir menú" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Open menu" })).not.toBeInTheDocument();
   });
 });
 

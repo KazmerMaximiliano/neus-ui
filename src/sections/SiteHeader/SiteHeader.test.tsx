@@ -10,7 +10,7 @@ import type { SiteHeaderProps } from "./SiteHeader.types";
 afterEach(cleanup);
 
 const { SiteHeader: SiteHeaderStory } = composeStories(stories);
-const LINKS = [{ label: "Servicios", href: "#servicios" }, { label: "Equipo", href: "/equipo", active: true }];
+const LINKS = [{ label: "Services", href: "#services" }, { label: "Team", href: "/team", active: true }];
 
 // The menu is a closed popover until the phone menu button opens it, so its contents count as hidden.
 describe("SiteHeader", () => {
@@ -24,15 +24,15 @@ describe("SiteHeader", () => {
   });
 
   it("wires the phone menu button to a popover that holds the navigation and the actions", () => {
-    render(<SiteHeader brand="B" links={LINKS} actions={<button type="button">Pedir turno</button>} labels={{ menu: "Menú", navigation: "Principal" }} />);
-    const button = screen.getByRole("button", { name: "Menú" });
+    render(<SiteHeader brand="B" links={LINKS} actions={<button type="button">Book a visit</button>} labels={{ menu: "Open menu", navigation: "Primary" }} />);
+    const button = screen.getByRole("button", { name: "Open menu" });
     const menu = document.getElementById(button.getAttribute("popovertarget")!)!;
     expect(menu).toHaveAttribute("popover", "auto");
     expect(menu).toHaveClass("site-header__menu");
-    expect(screen.getByRole("navigation", { name: "Principal", hidden: true }).parentElement).toBe(menu);
-    expect(screen.getByRole("button", { name: "Pedir turno", hidden: true }).parentElement).toHaveClass("site-header__actions");
-    expect(screen.getByRole("link", { name: "Equipo", hidden: true })).toHaveAttribute("aria-current", "page");
-    expect(screen.getByRole("link", { name: "Servicios", hidden: true })).not.toHaveAttribute("aria-current");
+    expect(screen.getByRole("navigation", { name: "Primary", hidden: true }).parentElement).toBe(menu);
+    expect(screen.getByRole("button", { name: "Book a visit", hidden: true }).parentElement).toHaveClass("site-header__actions");
+    expect(screen.getByRole("link", { name: "Team", hidden: true })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: "Services", hidden: true })).not.toHaveAttribute("aria-current");
   });
 
   it("closes the open menu when a link is followed", async () => {
@@ -41,7 +41,7 @@ describe("SiteHeader", () => {
     const menu = document.querySelector<HTMLElement>("[popover]")!;
     vi.spyOn(menu, "matches").mockReturnValue(true);
     menu.hidePopover = vi.fn();
-    await user.click(screen.getByRole("link", { name: "Servicios", hidden: true }));
+    await user.click(screen.getByRole("link", { name: "Services", hidden: true }));
     expect(menu.hidePopover).toHaveBeenCalledOnce();
   });
 
@@ -50,7 +50,7 @@ describe("SiteHeader", () => {
     render(<SiteHeader brand="B" links={LINKS} variant="sticky" skipLinkTarget="#main" linkComponent={RouterLink} />);
     expect(screen.getByRole("banner")).toHaveAttribute("data-variant", "sticky");
     expect(screen.getByRole("link", { name: "Skip to content" })).toHaveAttribute("href", "#main");
-    expect(screen.getByRole("link", { name: "Equipo", hidden: true })).toHaveAttribute("data-router");
+    expect(screen.getByRole("link", { name: "Team", hidden: true })).toHaveAttribute("data-router");
     expect(screen.getByRole("link", { name: "B" })).toHaveAttribute("data-router");
   });
 

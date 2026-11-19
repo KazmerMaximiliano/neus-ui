@@ -1,0 +1,28 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 50%, transparent);
+  --tabs-font-weight: 700;
+  --tabs-selected-font-weight: 700;
+  --tabs-radius: 0px;
+  --tabs-color: var(--color-text-primary);
+  --tabs-hover-background: color-mix(in srgb, var(--color-primary) 35%, transparent);
+  --tabs-selected-color: var(--color-text-primary);
+  --tabs-divider-width: 2px;
+  --tabs-divider-color: var(--color-text-primary);
+  --tabs-indicator-height: 4px;
+  --tabs-indicator-radius: 0px;
+  --tabs-indicator-color: var(--color-text-primary);
+  --tabs-contained-height: 40px;
+  --tabs-contained-gap: 4px;
+  --tabs-contained-padding: 4px;
+  --tabs-contained-border-width: 3px;
+  --tabs-contained-border-color: var(--color-text-primary);
+  --tabs-contained-radius: 4px;
+  --tabs-contained-background: var(--color-surface);
+  --tabs-contained-tab-radius: 2px;
+  --tabs-contained-color: var(--color-text-primary);
+  --tabs-contained-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface));
+  --tabs-contained-selected-background: var(--color-primary);
+  --tabs-contained-selected-color: var(--color-text-on-primary);
+  --tabs-contained-selected-shadow: inset 0 0 0 2px var(--color-text-primary);
+}

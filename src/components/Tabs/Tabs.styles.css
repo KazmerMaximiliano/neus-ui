@@ -1,0 +1,131 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tabs-panel-gap);
+  min-width: 0;
+  font-family: var(--tabs-font-family);
+}
+
+/* Tabs that do not fit scroll sideways; arrow keys bring the focused one into view. */
+.tabs__list {
+  display: flex;
+  gap: var(--tabs-gap);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs__tab {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tabs-icon-gap);
+  min-width: var(--tabs-min-width);
+  min-height: var(--tabs-height);
+  padding: var(--tabs-padding);
+  border: 0;
+  border-radius: var(--tabs-radius);
+  background: var(--tabs-background);
+  color: var(--tabs-color);
+  font: inherit;
+  font-size: var(--tabs-font-size);
+  font-weight: var(--tabs-font-weight);
+  line-height: var(--tabs-line-height);
+  letter-spacing: var(--tabs-letter-spacing);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--tabs-transition);
+}
+
+.tabs__tab:hover:not(:disabled, [aria-selected="true"]) {
+  background: var(--tabs-hover-background);
+  color: var(--tabs-hover-color);
+}
+
+.tabs__tab[aria-selected="true"] {
+  color: var(--tabs-selected-color);
+  font-weight: var(--tabs-selected-font-weight);
+}
+
+/* Inside the list, which scrolls and would clip an outline drawn outside the tab. */
+.tabs__tab:focus-visible {
+  outline: var(--tabs-focus-width) solid var(--tabs-focus-color);
+  outline-offset: calc(-1 * var(--tabs-focus-width));
+}
+
+.tabs__tab:disabled {
+  color: var(--tabs-disabled-color);
+  cursor: not-allowed;
+}
+
+/* Line: tabs over a divider; the selected one carries the indicator on top of it. */
+.tabs--line .tabs__list {
+  box-shadow: inset 0 calc(-1 * var(--tabs-divider-width)) 0 var(--tabs-divider-color);
+}
+
+.tabs--line .tabs__tab::after {
+  content: "";
+  position: absolute;
+  inset-inline: var(--tabs-indicator-inset);
+  bottom: 0;
+  height: var(--tabs-indicator-height);
+  border-radius: var(--tabs-indicator-radius);
+  background: transparent;
+  transition: var(--tabs-transition);
+}
+
+.tabs--line .tabs__tab:hover:not(:disabled, [aria-selected="true"])::after {
+  background: var(--tabs-hover-indicator-color);
+}
+
+.tabs--line .tabs__tab[aria-selected="true"]::after {
+  background: var(--tabs-indicator-color);
+}
+
+/* Contained: tabs inside a shared container; the selected one is a raised surface. */
+.tabs--contained .tabs__list {
+  align-self: flex-start;
+  gap: var(--tabs-contained-gap);
+  padding: var(--tabs-contained-padding);
+  border: var(--tabs-contained-border-width) solid var(--tabs-contained-border-color);
+  border-radius: var(--tabs-contained-radius);
+  background: var(--tabs-contained-background);
+}
+
+.tabs--contained .tabs__tab {
+  min-height: var(--tabs-contained-height);
+  padding: var(--tabs-contained-tab-padding);
+  font-size: var(--tabs-contained-font-size);
+  border-radius: var(--tabs-contained-tab-radius);
+  background: var(--tabs-contained-tab-background);
+  color: var(--tabs-contained-color);
+}
+
+.tabs--contained .tabs__tab:hover:not(:disabled, [aria-selected="true"]) {
+  background: var(--tabs-contained-hover-background);
+  color: var(--tabs-hover-color);
+}
+
+.tabs--contained .tabs__tab[aria-selected="true"] {
+  background: var(--tabs-contained-selected-background);
+  color: var(--tabs-contained-selected-color);
+  box-shadow: var(--tabs-contained-selected-shadow);
+}
+
+.tabs--contained .tabs__tab:disabled {
+  color: var(--tabs-disabled-color);
+}
+
+.tabs__panel:focus-visible {
+  outline: var(--tabs-focus-width) solid var(--tabs-focus-color);
+  outline-offset: var(--tabs-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs__tab,
+  .tabs--line .tabs__tab::after {
+    transition: none;
+  }
+}

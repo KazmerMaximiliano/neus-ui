@@ -12,7 +12,7 @@ import { Avatar } from "neus-ui";
 import { Testimonial, TestimonialList } from "neus-ui/sections";
 
 // SAMPLE: example reviews; replace with real ones.
-const REVIEWS = [{ quote: "Nos atendieron un sábado sin turno.", name: "Graciela P.", role: "Bruno, labrador" }];
+const REVIEWS = [{ quote: "They saw us on a Saturday without an appointment.", name: "Graciela P.", role: "Bruno, labrador" }];
 
 export const Reviews = () => (
   <TestimonialList variant="card">

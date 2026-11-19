@@ -27,6 +27,11 @@ resizable by default; a column definition can override those settings and supply
 renderer. Pagination callbacks request a page but do not fetch or replace data. Supply the
 next `data` and `pagination` from the application.
 
+The controls below the table are a compact [Pagination](./Pagination.md): a navigation
+landmark with previous and next around "page / total", which is announced after each move.
+They take Pagination's English names ("Pagination", "Previous page", "Next page"); pass
+`paginationLabels` to name them in the project's language.
+
 Below the mobile breakpoint, `renderMobileCard` replaces the grid with consumer-rendered
 cards. Without it the grid remains. Empty grid and mobile content share NoRowsOverlay and
 its customization props. Compose row actions using buttons or menus in a cell/card; there is
@@ -60,6 +65,7 @@ retain their nullable default.
 | `paginationClassName` | `string` | Omitted | Additional classes on `.data-table__pagination` |
 | `paginationInfoClassName` | `string` | Omitted | Additional classes on `.data-table__pagination-info` |
 | `paginationInfoStyle` | `CSSProperties` | Omitted | Inline styles on `.data-table__pagination-info` |
+| `paginationLabels` | `Pick<PaginationLabels, "navigation" \| "previous" \| "next">` | Pagination's defaults | Names of the pagination landmark and its buttons |
 | `data` | `readonly T[]` | Required | Rows for the current page |
 | `columnDefs` | `readonly DataTableColDef<T>[]` | Required | Typed AG Grid definitions, including custom cells |
 | `pagination` | `PaginationInfo` | Required | Controlled pagination |
@@ -111,8 +117,8 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.data-table__cards` | `div` | `cardsClassName` | `cardsStyle` | `data.length` |
 | `.data-table__card` | `div` | `cardClassName` | `cardStyle` | `Always` |
 | `.data-table__grid` | `div` | `gridClassName` | `gridStyle` | `Always` |
-| `.data-table__pagination` | `div` | `paginationClassName` | `paginationStyle` | `Always` |
-| `.data-table__pagination-info` | `span` | `paginationInfoClassName` | `paginationInfoStyle` | `Always` |
+| `.data-table__pagination` | Pagination `nav`, also `.pagination.pagination--compact` | `paginationClassName` | `paginationStyle` | `Always` |
+| `.data-table__pagination-info` | `span`, also `.pagination__info` | `paginationInfoClassName` | `paginationInfoStyle` | `Always` |
 | `.data-table__no-rows` | `div` | `emptyStateClassName` | `emptyStateStyle` | `Always` |
 | `.data-table__no-rows-title` | `h3` | `noRowsTitleClassName` | `noRowsTitleStyle` | `Always` |
 | `.data-table__no-rows-description` | `p` | `noRowsDescriptionClassName` | `noRowsDescriptionStyle` | `Always` |
@@ -198,7 +204,10 @@ dependencies. Do not edit generated files.
 
 ### Shared dependencies and runtime values
 
-`--color-focus`, `--overlay-shadow`, `--theme-color-scheme`.
+`--color-focus`, `--overlay-shadow`, `--theme-color-scheme`. The pagination takes
+`--data-table-spacing` as its gap and `--data-table-muted` and `--data-table-font-size` for its
+position text, through the `--pagination-*` tokens it sets on `.data-table__pagination`; its
+buttons follow the [IconButton](./IconButton.md) recipe.
 
 Semantic/foundation tokens are described in [the shared token
 reference](../design/tokens.md). Component dependencies belong to their own linked recipe.

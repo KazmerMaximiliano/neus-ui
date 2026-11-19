@@ -16,16 +16,16 @@ import "../../css/app.css";
 
 afterEach(cleanup);
 
-const LINKS = [{ label: "Servicios", href: "#servicios" }, { label: "Equipo", href: "#equipo" }];
+const LINKS = [{ label: "Services", href: "#services" }, { label: "Team", href: "#team" }];
 
 const renderPage = (id: string) => render(
   <ThemeProvider scope="local" designSystem={id as never}>
-    <SiteHeader brand="Los Aromos" links={LINKS} actions={<Button label="Pedir turno" size="small" href="#turno" />} />
-    <Hero title="Tu veterinaria de barrio" lead="Consultas y vacunas." actions={<Button label="Pedir turno" href="#turno" />}
+    <SiteHeader brand="Los Aromos" links={LINKS} actions={<Button label="Book a visit" size="small" href="#booking" />} />
+    <Hero title="Your neighbourhood vet" lead="Check-ups and vaccines." actions={<Button label="Book a visit" href="#booking" />}
       media={<MediaPlaceholder label="Consultorio" />} />
-    <FeatureList variant="cards"><FeatureItem title="Consultas" /><FeatureItem title="Vacunas" /><FeatureItem title="Cirugías" /></FeatureList>
-    <CallToAction tone="brand" title="Pedí tu turno" actions={<Button label="Pedir turno" href="#turno" />} />
-    <SiteFooter brand="Los Aromos" columns={[{ title: "Clínica", links: LINKS }]} legal="Bv. Oroño 1450" />
+    <FeatureList variant="cards"><FeatureItem title="Check-ups" /><FeatureItem title="Vaccines" /><FeatureItem title="Surgery" /></FeatureList>
+    <CallToAction tone="brand" title="Book your visit" actions={<Button label="Book a visit" href="#booking" />} />
+    <SiteFooter brand="Los Aromos" columns={[{ title: "Clinic", links: LINKS }]} legal="Bv. Oroño 1450" />
   </ThemeProvider>,
 );
 
@@ -40,7 +40,7 @@ describe.each(DESIGN_SYSTEMS)("Page sections in $id", ({ id }) => {
     expect(getComputedStyle(menu).display).toBe("none");
     await user.click(button);
     expect(menu.matches(":popover-open")).toBe(true);
-    const link = menu.querySelector<HTMLElement>('a[href="#equipo"]')!;
+    const link = menu.querySelector<HTMLElement>('a[href="#team"]')!;
     expect(link).toBeVisible();
     await user.click(link);
     expect(menu.matches(":popover-open")).toBe(false);
@@ -59,19 +59,32 @@ describe.each(DESIGN_SYSTEMS)("Page sections in $id", ({ id }) => {
     expect(new Set(cards.map((card) => Math.round(card.getBoundingClientRect().top))).size).toBe(1);
   });
 
+  it("breaks a title word wider than its column instead of spilling into the media", async () => {
+    await page.viewport(1440, 900);
+    render(
+      <ThemeProvider scope="local" designSystem={id as never}>
+        <Hero title="Pneumonoultramicroscopicsilicovolcanoconiosis care" media={<MediaPlaceholder label="Room" />} />
+      </ThemeProvider>,
+    );
+    const title = screen.getByRole("heading", { level: 1 }).getBoundingClientRect();
+    const body = document.querySelector(".hero__body")!.getBoundingClientRect();
+    expect(title.right).toBeLessThanOrEqual(body.right + 0.5);
+    expect(screen.getByRole("img", { name: "Room" }).getBoundingClientRect().left).toBeGreaterThan(title.right);
+  });
+
   it.each(["light", "dark"] as const)("keeps the brand band's text and primary buttons legible in %s mode", async (scheme) => {
     await page.viewport(1440, 900);
     render(
       <ThemeProvider scope="local" designSystem={id} colorScheme={scheme}>
-        <CallToAction tone="brand" title="Pedí tu turno" actions={<><Button label="Reservar" /><Button label="Ver horarios" variant="outlined" /></>} />
+        <CallToAction tone="brand" title="Book your visit" actions={<><Button label="Book" /><Button label="See hours" variant="outlined" /></>} />
       </ThemeProvider>,
     );
     const band = getComputedStyle(screen.getByRole("region")).backgroundColor;
     expect(contrastRatio(getComputedStyle(screen.getByRole("heading")).color, band)).toBeGreaterThanOrEqual(4.5);
-    const solid = getComputedStyle(screen.getByRole("button", { name: "Reservar" }));
+    const solid = getComputedStyle(screen.getByRole("button", { name: "Book" }));
     expect(contrastRatio(solid.backgroundColor, band)).toBeGreaterThanOrEqual(3);
     expect(contrastRatio(solid.color, solid.backgroundColor)).toBeGreaterThanOrEqual(4.5);
-    expect(contrastRatio(getComputedStyle(screen.getByRole("button", { name: "Ver horarios" })).color, band)).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio(getComputedStyle(screen.getByRole("button", { name: "See hours" })).color, band)).toBeGreaterThanOrEqual(4.5);
   });
 
   it.each(["plain", "card", "featured"] as const)("ties each %s quote to its author", async (variant) => {
@@ -79,8 +92,8 @@ describe.each(DESIGN_SYSTEMS)("Page sections in $id", ({ id }) => {
     render(
       <ThemeProvider scope="local" designSystem={id}>
         <TestimonialList variant={variant}>
-          <Testimonial quote="Nos atendieron un sábado sin turno." name="Graciela P." role="Bruno, labrador" avatar={<Avatar name="Graciela P." alt="" />} />
-          <Testimonial quote="Llevamos a Tola desde cachorra." name="Silvina M." role="Tola, mestiza" />
+          <Testimonial quote="They saw us on a Saturday, walk-in." name="Graciela P." role="Bruno, labrador" avatar={<Avatar name="Graciela P." alt="" />} />
+          <Testimonial quote="We have brought Tola since a puppy." name="Silvina M." role="Tola, mixed breed" />
         </TestimonialList>
       </ThemeProvider>,
     );

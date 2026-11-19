@@ -12,19 +12,19 @@ const { FeatureItem: FeatureItemStory } = composeStories(stories);
 
 describe("FeatureItem", () => {
   it("renders a grid list item with an h3 at size sm and a decorative icon tile", () => {
-    render(<ul><FeatureItem icon={<svg data-testid="icon" />} title="Turnos online">Pedí turno desde el celular.</FeatureItem></ul>);
+    render(<ul><FeatureItem icon={<svg data-testid="icon" />} title="Online booking">Book from your phone.</FeatureItem></ul>);
     const item = screen.getByRole("listitem");
     expect(item).toHaveClass("feature-item");
     expect(item).toHaveAttribute("data-variant-item", "grid");
-    const heading = screen.getByRole("heading", { level: 3, name: "Turnos online" });
+    const heading = screen.getByRole("heading", { level: 3, name: "Online booking" });
     expect(heading).toHaveAttribute("data-size", "sm");
     expect(screen.getByTestId("icon").parentElement).toHaveClass("feature-item__icon");
     expect(screen.getByTestId("icon").parentElement).toHaveAttribute("aria-hidden", "true");
-    expect(screen.getByText("Pedí turno desde el celular.")).toHaveClass("feature-item__description");
+    expect(screen.getByText("Book from your phone.")).toHaveClass("feature-item__description");
   });
 
   it("becomes a Card list item inside a cards list, without empty parts", () => {
-    const { container } = render(<FeatureList variant="cards"><FeatureItem title="Vacunación" /></FeatureList>);
+    const { container } = render(<FeatureList variant="cards"><FeatureItem title="Vaccination" /></FeatureList>);
     const item = screen.getByRole("listitem");
     expect(item).toHaveClass("card", "feature-item");
     expect(item.querySelector(".card-header")).toHaveClass("feature-item__header");
@@ -36,7 +36,7 @@ describe("FeatureItem", () => {
   it("takes the list variant, a heading level and every part hook", () => {
     render(
       <FeatureList variant="list">
-        <FeatureItem icon={<svg />} title="Consultas" titleAs="h4" action={<a href="#turno">Pedir turno</a>}
+        <FeatureItem icon={<svg />} title="Check-ups" titleAs="h4" action={<a href="#booking">Book a visit</a>}
           className="f" style={{ color: "red" }} iconClassName="i" iconStyle={{ color: "red" }}
           titleClassName="t" titleStyle={{ color: "red" }} descriptionClassName="d" descriptionStyle={{ color: "red" }}
           actionClassName="a" actionStyle={{ color: "red" }}>

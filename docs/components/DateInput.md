@@ -84,6 +84,18 @@ retain their nullable default.
 | `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.picker-field__label` |
 | `errorStyle` | `CSSProperties` | Omitted | Inline styles on `.picker-field__error` |
 | `onChange` | `((value: Date \| DateRange \| undefined) => void)` | Omitted | Callback when date selection changes |
+| `labels` | `DateInputLabels` | English defaults | Name of the calendar panel, in the project's language |
+| `language` | `string` | `"en-US"` | BCP 47 tag for the shown date and the calendar's months, days and labels; en-US when unsupported |
+
+### Supporting types
+
+```ts
+type DateInputLabels = {
+  readonly calendar?: (label?: string) => string; // (label) => label ? `${label}: calendar` : "Calendar"
+};
+```
+
+`language` also reaches the [Calendar](./Calendar.md), so its months, days and buttons follow it.
 
 ## Anatomy and per-part customization
 

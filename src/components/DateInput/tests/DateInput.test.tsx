@@ -268,12 +268,31 @@ describe("DateInput accessibility and parts", () => {
     await user.click(field);
     expect(field).toHaveAttribute("aria-expanded", "true");
     expect(
-      screen.getByRole("dialog", { name: "Birthday: calendario" }),
+      screen.getByRole("dialog", { name: "Birthday: calendar" }),
     ).toBeInTheDocument();
     expect(document.activeElement).toHaveTextContent("15");
     await user.keyboard("{Escape}");
     expect(field).toHaveAttribute("aria-expanded", "false");
     expect(field).toHaveFocus();
+  });
+
+  it("shows the date and the calendar in the language given", async () => {
+    const user = userEvent.setup();
+    const date = new Date(2024, 0, 15);
+    renderDateInput({ label: "Birthday", defaultValue: date, language: "es-AR" });
+    const field = screen.getByRole("button", { name: /^Birthday/ });
+
+    expect(field).toHaveTextContent(date.toLocaleDateString("es-AR"));
+    await user.click(field);
+    expect(screen.getByRole("dialog")).toHaveTextContent(/enero/i);
+  });
+
+  it("names the calendar panel through labels", async () => {
+    const user = userEvent.setup();
+    renderDateInput({ label: "Birthday", labels: { calendar: (label?: string) => `Pick the ${label?.toLowerCase()}` } });
+    await user.click(screen.getByRole("button", { name: /^Birthday/ }));
+
+    expect(screen.getByRole("dialog", { name: "Pick the birthday" })).toBeInTheDocument();
   });
 
   it("links the error and applies each style object", () => {

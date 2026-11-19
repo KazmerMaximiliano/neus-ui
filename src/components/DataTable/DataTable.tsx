@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 import { ModuleRegistry } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useResponsive } from "../../hooks/useResponsive";
-import { IconButton } from "../IconButton";
+import { Pagination } from "../Pagination";
 import { NoRowsOverlay } from "./components/NoRowsOverlay";
 import type { DataTableProps } from "./DataTable.types";
 import { DATA_TABLE_GRID_MODULES, DATA_TABLE_THEME } from "./DataTable.consts";
@@ -26,6 +25,7 @@ export const DataTable = <T extends object>({
   paginationClassName,
   paginationInfoClassName,
   paginationInfoStyle,
+  paginationLabels,
   data,
   columnDefs,
   pagination,
@@ -43,11 +43,6 @@ export const DataTable = <T extends object>({
   const rowData = useMemo(() => [...data], [data]);
   const gridColumnDefs = useMemo(() => [...columnDefs], [columnDefs]);
   const { current_page, last_page, per_page } = pagination;
-  const paginate = (page: number) => {
-    if (page === current_page || page < 1 || page > Math.max(1, last_page))
-      return;
-    onPaginationChange?.({ currentPage: page, pageSize: per_page });
-  };
   return (
     <div
       className={["data-table", className].filter(Boolean).join(" ")}
@@ -121,38 +116,17 @@ export const DataTable = <T extends object>({
           />
         </div>
       )}
-      <div
-        className={["data-table__pagination", paginationClassName]
-          .filter(Boolean)
-          .join(" ")}
+      <Pagination
+        variant="compact"
+        page={current_page}
+        totalPages={last_page}
+        onChange={(page) => onPaginationChange?.({ currentPage: page, pageSize: per_page })}
+        labels={paginationLabels}
+        className={["data-table__pagination", paginationClassName].filter(Boolean).join(" ")}
         style={paginationStyle}
-      >
-        <IconButton
-          disabled={current_page <= 1}
-          onClick={() => paginate(current_page - 1)}
-          icon={ChevronLeft}
-          label="Página anterior"
-          size="small"
-          variant="text"
-        />
-        <span
-          className={["data-table__pagination-info", paginationInfoClassName]
-            .filter(Boolean)
-            .join(" ")}
-          style={paginationInfoStyle}
-          aria-live="polite"
-        >
-          {current_page} / {Math.max(1, last_page)}
-        </span>
-        <IconButton
-          disabled={current_page >= Math.max(1, last_page)}
-          onClick={() => paginate(current_page + 1)}
-          icon={ChevronRight}
-          label="Página siguiente"
-          size="small"
-          variant="text"
-        />
-      </div>
+        infoClassName={["data-table__pagination-info", paginationInfoClassName].filter(Boolean).join(" ")}
+        infoStyle={paginationInfoStyle}
+      />
     </div>
   );
 };

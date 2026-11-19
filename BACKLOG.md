@@ -11,12 +11,9 @@ reusable public API and should reuse the existing implementation where appropria
 
 | Priority | Component family           | Category     | Intended scope and current gap                                                                                                            |
 | -------- | -------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| P1       | Tabs                       | Navigation   | Associated tab panels, keyboard navigation and controlled or uncontrolled selection.                                                      |
 | P1       | Accordion                  | Disclosure   | Expandable sections with single or multiple open items and keyboard support.                                                              |
 | P1       | PricingCard / PricingTable | Sections     | Plans with price, period, features and the action, for public pages; today composed from Card.                                            |
 | P1       | FAQ                        | Sections     | Questions and answers on public pages on native details/summary, with a single-open option.                                               |
-| P1       | Breadcrumbs                | Navigation   | Hierarchical page links with a current-page indicator and overflow handling.                                                              |
-| P1       | Pagination                 | Navigation   | Reusable page navigation and page-size selection independent of DataTable.                                                                |
 | P2       | NumberInput                | Forms        | Numeric stepping, precision and formatting beyond the existing native Input type="number".                                                |
 | P2       | Slider / RangeSlider       | Forms        | Single-value or interval selection with bounds, steps and keyboard controls.                                                              |
 | P2       | ToggleGroup / Toggle       | Forms        | Pressed-state buttons and single or multiple selection for compact controls.                                                              |

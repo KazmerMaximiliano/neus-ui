@@ -1,6 +1,7 @@
-import { focusMenuItem } from "../../../hooks/usePopover";
+import { focusItem } from "../../../utils/focusItem";
 import { PopoverPanel } from "../../Popover/components/PopoverPanel";
 import type { MenuItemsProps } from "../Menu.types";
+import { MENU_ITEM } from "../Menu.consts";
 
 export const MenuItems = ({
   itemClassName,
@@ -20,7 +21,7 @@ export const MenuItems = ({
     className={["menu__panel", menuClassName].filter(Boolean).join(" ")}
     style={menuStyle}
     onKeyDown={(event) => {
-      if (focusMenuItem(popoverRef.current, event.key)) event.preventDefault();
+      if (focusItem(popoverRef.current, event.key, MENU_ITEM)) event.preventDefault();
       if (event.key === "Tab") hide();
     }}
   >

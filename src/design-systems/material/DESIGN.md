@@ -581,6 +581,48 @@ x-neus:
       dark:
         --tooltip-background: "#e6e0e9"
         --tooltip-color: "#322f35"
+    tabs:
+      base:
+        --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent)
+        --tabs-font-size: 14px
+        --tabs-font-weight: "500"
+        --tabs-selected-font-weight: "500"
+        --tabs-line-height: 20px
+        --tabs-letter-spacing: 0.1px
+        --tabs-height: 48px
+        --tabs-radius: 0px
+        --tabs-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent)
+        --tabs-selected-color: var(--color-primary)
+        --tabs-indicator-inset: 16px
+        --tabs-focus-width: 3px
+        --tabs-contained-height: 40px
+        --tabs-contained-gap: 1px
+        --tabs-contained-padding: 0px
+        --tabs-contained-border-width: 1px
+        --tabs-contained-border-color: var(--color-border-input-hover)
+        --tabs-contained-radius: "{rounded.pill}"
+        --tabs-contained-background: var(--color-border-input-hover)
+        --tabs-contained-tab-radius: 0px
+        --tabs-contained-tab-background: var(--color-surface)
+        --tabs-contained-color: var(--color-text-primary)
+        --tabs-contained-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, var(--color-surface))
+        --tabs-contained-selected-background: var(--color-secondary-container)
+        --tabs-contained-selected-color: var(--color-on-secondary-container)
+        --tabs-contained-selected-shadow: none
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 14px
+        --breadcrumbs-line-height: 20px
+        --breadcrumbs-letter-spacing: 0.25px
+        --breadcrumbs-link-weight: "400"
+        --breadcrumbs-current-weight: "500"
+    pagination:
+      base:
+        --pagination-font-size: 14px
+        --pagination-current-font-weight: "500"
+        --pagination-item-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent)
+        --pagination-current-background: var(--color-primary)
+        --pagination-current-color: var(--color-text-on-primary)
 ---
 
 # Material
@@ -741,6 +783,10 @@ Material has no skeleton; placeholders use the highest surface container, a loca
 A toast takes the snackbar's extra-small 4px corners ([Material Web snackbar tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-snackbar.scss), consulted 2026-11-17). Two local decisions depart from the snackbar: a toast keeps its status color instead of the inverse surface, so success, warning and error stay distinct, and it floats at level 2, the menus' elevation, instead of level 3, so a stack of toasts stays light.
 
 A tooltip is the plain tooltip: the inverse surface (#322f35, #e6e0e9 in dark mode) with inverse-on-surface text in body small, 12px over 16px with 0.4px tracking, and extra-small 4px corners, without elevation ([Material Web plain tooltip tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-plain-tooltip.scss), consulted 2026-11-18). The tokens leave out padding; 4px by 8px is a local decision. A combobox is the text field with the menu list below it, the exposed dropdown menu that accepts typing.
+
+Tabs are the primary tabs: 48px tall, labels in title small (14px over 20px, weight 500, 0.1px tracking) in on-surface-variant, the active one in primary with a 3px primary indicator as wide as the label and rounded on top, over a 1px outline-variant divider; hovering adds the on-surface state layer at 8% ([material-web tab tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-primary-navigation-tab.scss), consulted 2026-11-18). Focus is a 3px ring inside the tab. Material 3 has no contained tabs, so they take the outlined segmented button: a 40px pill with a 1px outline that also divides the segments, on-surface labels in label large, and the selected segment in secondary container ([material-web segmented button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-outlined-segmented-button.scss), consulted 2026-11-18). Disabled tabs take on-surface at 38%.
+
+Material 3 has no breadcrumbs or pagination. Breadcrumbs keep the Neus trail in body medium (14px over 20px, 0.25px tracking): links in on-surface-variant that turn primary and underline on hover, and the current page in on-surface at weight 500, a local mapping. Page buttons are 32px circles like the small icon buttons, with the on-surface state layer on hover and the current page filled in primary with on-primary numbers, like a selected filled icon button: also a local mapping.
 
 Material has no success or warning roles, so alert colors are a local decision. Alerts tint the lowest surface container, not the tinted surface: mixed into its violet cast, green turns gray and orange and red look alike. Warning takes a 24% tint and error 14%, and their icons carry the status color (warning at 70% over the text color, to keep 3:1), so the two read apart in both modes.
 

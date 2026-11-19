@@ -18,8 +18,8 @@ export const Example = () => {
   return (
     <ThemeProvider designSystem="neus">
       <Switch
-        label="Avisos por email"
-        description="Un resumen de la semana, cada lunes."
+        label="Email notifications"
+        description="A summary of the week, every Monday."
         checked={alerts}
         onChange={setAlerts}
       />

@@ -12,12 +12,12 @@ const { Testimonial: TestimonialStory } = composeStories(stories);
 
 describe("Testimonial", () => {
   it("renders a figure with the quote in a blockquote and the author in the caption", () => {
-    const { container } = render(<Testimonial quote="Nos atendieron sin turno." name="Graciela P." role="Bruno, labrador" />);
+    const { container } = render(<Testimonial quote="They saw us without an appointment." name="Graciela P." role="Bruno, labrador" />);
     const root = container.firstElementChild!;
     expect(root).toHaveClass("card", "testimonial");
     expect(root.tagName).toBe("DIV");
     expect(screen.getByRole("figure")).toHaveClass("testimonial__figure");
-    expect(screen.getByRole("blockquote")).toHaveTextContent("Nos atendieron sin turno.");
+    expect(screen.getByRole("blockquote")).toHaveTextContent("They saw us without an appointment.");
     expect(container.querySelector("q")).toBeInTheDocument();
     expect(screen.getByText("Graciela P.")).toHaveClass("testimonial__name");
     expect(screen.getByText("Bruno, labrador")).toHaveClass("testimonial__role");

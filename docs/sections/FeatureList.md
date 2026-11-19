@@ -13,9 +13,9 @@ import { FeatureItem, FeatureList } from "neus-ui/sections";
 
 export const Services = () => (
   <FeatureList variant="cards">
-    <FeatureItem icon={<Stethoscope />} title="Consultas">Controles de rutina y la consulta cuando algo no anda bien.</FeatureItem>
-    <FeatureItem icon={<Syringe />} title="Vacunación">Plan de vacunas con la libreta al día.</FeatureItem>
-    <FeatureItem icon={<Scissors />} title="Peluquería">Baño y corte con turno.</FeatureItem>
+    <FeatureItem icon={<Stethoscope />} title="Check-ups">Routine check-ups, and a visit when something is wrong.</FeatureItem>
+    <FeatureItem icon={<Syringe />} title="Vaccination">A vaccine plan that keeps the record up to date.</FeatureItem>
+    <FeatureItem icon={<Scissors />} title="Grooming">Bath and haircut by appointment.</FeatureItem>
   </FeatureList>
 );
 ```

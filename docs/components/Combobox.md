@@ -19,7 +19,7 @@ const COUNTRIES = [
 
 export const Example = () => (
   <ThemeProvider designSystem="neus">
-    <Combobox name="country" label="País" options={COUNTRIES} emptyLabel="Sin resultados" />
+    <Combobox name="country" label="Country" options={COUNTRIES} emptyLabel="No countries found" />
   </ThemeProvider>
 );
 ```
@@ -37,13 +37,13 @@ const [query, setQuery] = useState("");
 const { data = [], isLoading } = useCitySearch(query);
 
 <Combobox
-  label="Ciudad"
+  label="City"
   options={data}
   filter={false}
   inputValue={query}
   onInputChange={setQuery}
   loading={isLoading}
-  loadingLabel="Buscando…"
+  loadingLabel="Searching…"
   onChange={setCity}
 />
 ```
@@ -125,7 +125,7 @@ option, and `.combobox__option--active` on the one the arrow keys reach. Use the
 ### Instance styles and classes
 
 ```tsx
-<Combobox label="Etiquetas" options={tags} allowCustomValue listClassName="tag-list" />
+<Combobox label="Tags" options={tags} allowCustomValue listClassName="tag-list" />
 ```
 
 ```css

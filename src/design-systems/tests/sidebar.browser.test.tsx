@@ -293,7 +293,7 @@ describe("Sidebar responsive integration", () => {
         <Sidebar title="NEUS UI" items={ITEMS} />
       </ThemeProvider>,
     );
-    const toggle = screen.getByRole("button", { name: "Abrir menú" });
+    const toggle = screen.getByRole("button", { name: "Open menu" });
     expect(getComputedStyle(toggle).visibility).toBe("visible");
     await userEvent.click(toggle);
     expect(getComputedStyle(toggle).visibility).toBe("hidden");
@@ -309,7 +309,7 @@ describe("Sidebar responsive integration", () => {
         path: "__screenshots__/sidebar-mobile-clean-avatar.png",
       });
     }
-    await userEvent.click(screen.getByRole("button", { name: "Cerrar menú" }));
+    await userEvent.click(screen.getByRole("button", { name: "Close menu" }));
     expect(getComputedStyle(toggle).visibility).toBe("visible");
     expect(toggle).toHaveFocus();
     await userEvent.keyboard("{Enter}");
@@ -327,25 +327,25 @@ describe("Sidebar responsive integration", () => {
         </Sidebar>
       </ThemeProvider>,
     );
-    const avatar = screen.getByRole("button", { name: "Expandir navegación" });
+    const avatar = screen.getByRole("button", { name: "Expand navigation" });
     expect(avatar.querySelector(".brand-mark")).toHaveTextContent("AC");
     await userEvent.tab();
     expect(avatar).toHaveFocus();
     await userEvent.keyboard("{Enter}");
     expect(
-      screen.getByRole("button", { name: "Contraer navegación" }),
+      screen.getByRole("button", { name: "Collapse navigation" }),
     ).toBeInTheDocument();
     await page.viewport(375, 800);
     await waitFor(() =>
       expect(
-        screen.getByRole("button", { name: "Abrir menú" }),
+        screen.getByRole("button", { name: "Open menu" }),
       ).toBeInTheDocument(),
     );
-    await userEvent.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
     const brand = screen.getByText("AC");
     expect(container.querySelector(".sidebar__avatar")).toContainElement(brand);
     expect(container.querySelector(".sidebar__avatar")!.tagName).toBe("DIV");
-    expect(screen.getByRole("button", { name: "Cerrar menú" })).toHaveFocus();
+    expect(screen.getByRole("button", { name: "Close menu" })).toHaveFocus();
   });
   it.each([767, 768, 1023, 1024])(
     "matches AppTemplate layout at %i px",
@@ -367,7 +367,7 @@ describe("Sidebar responsive integration", () => {
       );
       if (width < 768) {
         expect(
-          screen.getAllByRole("button", { name: "Abrir menú" }),
+          screen.getAllByRole("button", { name: "Open menu" }),
         ).toHaveLength(1);
         expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
       } else {
@@ -394,7 +394,7 @@ describe("Sidebar responsive integration", () => {
     );
     const sidebar = container.querySelector(".sidebar")!;
     const app = container.querySelector(".app-template")!;
-    const avatar = screen.getByRole("button", { name: "Expandir navegación" });
+    const avatar = screen.getByRole("button", { name: "Expand navigation" });
     expect(avatar).toHaveTextContent("N");
     expect(avatar.querySelector("svg")).toBeNull();
     expect(getComputedStyle(avatar).borderRadius).toBe("50%");
@@ -403,7 +403,7 @@ describe("Sidebar responsive integration", () => {
     await userEvent.hover(screen.getByRole("button", { name: "Home" }));
     await waitFor(() => expect(getComputedStyle(sidebar).width).toBe("250px"));
     expect(
-      screen.getByRole("button", { name: "Expandir navegación" }),
+      screen.getByRole("button", { name: "Expand navigation" }),
     ).toHaveAttribute("aria-expanded", "true");
     expect(
       getComputedStyle(container.querySelector(".sidebar__button-label")!)
@@ -430,12 +430,12 @@ describe("Sidebar responsive integration", () => {
     fireEvent.pointerEnter(sidebar, { pointerType: "touch" });
     expect(sidebar).toHaveAttribute("data-expanded", "false");
     await userEvent.click(
-      screen.getByRole("button", { name: "Expandir navegación" }),
+      screen.getByRole("button", { name: "Expand navigation" }),
     );
     await userEvent.click(screen.getByRole("button", { name: "Outside" }));
     await waitFor(() => expect(getComputedStyle(app).marginLeft).toBe("250px"));
     await userEvent.click(
-      screen.getByRole("button", { name: "Contraer navegación" }),
+      screen.getByRole("button", { name: "Collapse navigation" }),
     );
     await userEvent.click(screen.getByRole("button", { name: "Outside" }));
     await waitFor(() => expect(getComputedStyle(app).marginLeft).toBe("100px"));
@@ -450,7 +450,7 @@ describe("Sidebar responsive integration", () => {
         <button>Outside</button>
       </ThemeProvider>,
     );
-    const toggle = screen.getByRole("button", { name: "Abrir menú" });
+    const toggle = screen.getByRole("button", { name: "Open menu" });
     await userEvent.click(toggle);
     const dialog = screen.getByRole("dialog") as HTMLDialogElement;
     expect(dialog.matches(":modal")).toBe(true);
@@ -458,12 +458,12 @@ describe("Sidebar responsive integration", () => {
     expect(
       getComputedStyle(screen.getByRole("navigation")).backgroundColor,
     ).toBe("rgb(38, 38, 38)");
-    expect(screen.getByRole("button", { name: "Cerrar menú" })).toHaveFocus();
+    expect(screen.getByRole("button", { name: "Close menu" })).toHaveFocus();
     expect(getComputedStyle(document.documentElement).overflow).toBe("hidden");
     await userEvent.tab({ shift: true });
     expect(screen.getByRole("button", { name: "Home" })).toHaveFocus();
     await userEvent.tab();
-    expect(screen.getByRole("button", { name: "Cerrar menú" })).toHaveFocus();
+    expect(screen.getByRole("button", { name: "Close menu" })).toHaveFocus();
     await userEvent.tab();
     expect(screen.getByRole("button", { name: "Home" })).toHaveFocus();
     await userEvent.tab();
@@ -485,7 +485,7 @@ describe("Sidebar responsive integration", () => {
     });
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     await userEvent.click(toggle);
-    await userEvent.click(screen.getByRole("button", { name: "Cerrar menú" }));
+    await userEvent.click(screen.getByRole("button", { name: "Close menu" }));
     expect(toggle).toHaveFocus();
     expect(container.querySelectorAll("nav")).toHaveLength(1);
     if (import.meta.env.VITE_SIDEBAR_VISUAL_QA === "true") {
@@ -505,7 +505,7 @@ describe("Sidebar responsive integration", () => {
         />
       </ThemeProvider>,
     );
-    await userEvent.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
     const nav = screen.getByRole("navigation");
     const dialog = screen.getByRole("dialog");
     expect(dialog.getBoundingClientRect().width).toBe(320);
@@ -518,7 +518,7 @@ describe("Sidebar responsive integration", () => {
     );
     expect(document.documentElement).not.toHaveClass("sidebar-scroll-locked");
     await userEvent.click(
-      screen.getByRole("button", { name: "Expandir navegación" }),
+      screen.getByRole("button", { name: "Expand navigation" }),
     );
     await page.viewport(1024, 600);
     await waitFor(() =>
@@ -530,17 +530,17 @@ describe("Sidebar responsive integration", () => {
     await page.viewport(1023, 600);
     await waitFor(() =>
       expect(
-        screen.getByRole("button", { name: "Expandir navegación" }),
+        screen.getByRole("button", { name: "Expand navigation" }),
       ).toBeInTheDocument(),
     );
     await page.viewport(767, 600);
     await waitFor(() =>
       expect(
-        screen.getByRole("button", { name: "Abrir menú" }),
+        screen.getByRole("button", { name: "Open menu" }),
       ).toHaveAttribute("aria-expanded", "false"),
     );
     expect(container.querySelectorAll("nav")).toHaveLength(1);
-    await userEvent.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
     unmount();
     expect(document.documentElement).not.toHaveClass("sidebar-scroll-locked");
   });

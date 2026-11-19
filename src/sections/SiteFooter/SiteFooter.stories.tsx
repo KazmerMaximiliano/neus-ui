@@ -38,7 +38,7 @@ const meta: Meta<SiteFooterStoryArgs> = {
 export const SiteFooter: StoryObj<SiteFooterStoryArgs> = {
   args: {
     designSystem: "neus",
-    brand: "Veterinaria Los Aromos",
+    brand: "Los Aromos Vet",
     columns: [
       { title: "Clinic", links: [{ label: "Services", href: "#services" }, { label: "Team", href: "#team" }] },
       { title: "Visit", links: [{ label: "Book a visit", href: "#booking" }, { label: "How to get here", href: "#location" }] },

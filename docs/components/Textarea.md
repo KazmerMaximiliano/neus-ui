@@ -17,7 +17,7 @@ export const Example = () => {
       <Textarea
         name="message"
         label="Mensaje"
-        description="Contanos qué necesitás; respondemos en un día."
+        description="Tell us what you need; we reply within a day."
         autoResize
         maxRows={8}
         required
@@ -113,7 +113,7 @@ State/variant selectors: `.textarea--auto-resize`, `.textarea__label--error`,
 ### Instance styles and classes
 
 ```tsx
-<Textarea className="order-notes" label="Notas del pedido" rows={2} />
+<Textarea className="order-notes" label="Order notes" rows={2} />
 ```
 
 ```css

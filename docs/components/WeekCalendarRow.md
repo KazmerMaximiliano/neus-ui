@@ -71,6 +71,7 @@ noted; section style props retain their nullable default.
 | `color` | `string` | Required | Category accent |
 | `hoverContent` | `((event: CalendarEvent) => React.ReactNode)` | Omitted | Informational tooltip on hover or focus |
 | `onEventClick` | `((event: CalendarEvent) => void)` | Omitted | Mouse and keyboard event activation |
+| `language` | `string` | `"en-US"` | BCP 47 tag for the date in each event's accessible name; WeekCalendar passes its own |
 
 ### Supporting types
 

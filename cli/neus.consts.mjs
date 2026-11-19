@@ -83,7 +83,7 @@ export const RAW_TO_COMPONENT = {
   datalist: "Combobox",
 };
 export const INTERACTIVE_ELEMENTS = ["Button", "IconButton", "Input", "Combobox", "Select", "MultiSelect", "Checkbox", "DateInput",
-  "TimeInput", "Textarea", "Switch", "Radio", "Link", "Menu", "Dropdown", "button", "input", "select", "textarea",
+  "TimeInput", "Textarea", "Switch", "Radio", "Link", "Menu", "Dropdown", "Tabs", "Pagination", "button", "input", "select", "textarea",
   "a"];
 export const FILLER_PATTERN =
   /lorem ipsum|\bacme\b|john doe|jane doe|feature (one|two|1|2)\b|elevate your|seamless|unlock the power|welcome back/i;

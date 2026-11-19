@@ -16,12 +16,12 @@ const SaveButton = () => {
   const { show } = useToast();
   return (
     <Button
-      label="Guardar"
+      label="Save"
       onClick={() =>
         show({
           status: "success",
           title: "Cambios guardados",
-          actions: (close) => <Button label="Deshacer" size="small" variant="text" onClick={close} />,
+          actions: (close) => <Button label="Undo" size="small" variant="text" onClick={close} />,
         })
       }
     />

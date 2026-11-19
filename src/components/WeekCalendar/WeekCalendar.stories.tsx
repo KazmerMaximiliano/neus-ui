@@ -118,6 +118,14 @@ const meta: Meta<WeekCalendarStoryArgs> = {
       control: "text",
       description: "The title displayed in the calendar header",
     },
+    labels: {
+      control: "object",
+      description: "Accessible names of the previous and next week buttons",
+    },
+    language: {
+      control: "text",
+      description: "BCP 47 tag for the day names and dates, such as es-AR",
+    },
     events: {
       control: "object",
       description: "Array of event categories with their events",
@@ -173,6 +181,8 @@ export const WeekCalendar: StoryObj<WeekCalendarStoryArgs> = {
     tooltipStyle: {},
 
     title: "Events",
+    labels: {},
+    language: "en-US",
     hoverContent: (event) => (
       <div>
         <strong>{event.title}</strong>

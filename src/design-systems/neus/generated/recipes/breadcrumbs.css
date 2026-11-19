@@ -1,0 +1,31 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --breadcrumbs-font-family: var(--font-body);
+  --breadcrumbs-font-size: var(--fs-sm);
+  --breadcrumbs-font-weight: 400;
+  --breadcrumbs-line-height: 1.5;
+  --breadcrumbs-letter-spacing: normal;
+  --breadcrumbs-row-gap: 4px;
+  --breadcrumbs-color: var(--color-text-secondary);
+  --breadcrumbs-separator: "/";
+  --breadcrumbs-separator-gap: 8px;
+  --breadcrumbs-separator-color: var(--color-text-secondary);
+  --breadcrumbs-separator-weight: 400;
+  --breadcrumbs-link-color: var(--link-secondary-color);
+  --breadcrumbs-link-weight: 500;
+  --breadcrumbs-link-padding: var(--link-padding);
+  --breadcrumbs-link-radius: var(--link-radius);
+  --breadcrumbs-link-decoration: none;
+  --breadcrumbs-link-underline-offset: var(--link-underline-offset);
+  --breadcrumbs-link-hover-color: var(--link-hover-primary-color);
+  --breadcrumbs-link-hover-background: var(--link-hover-background);
+  --breadcrumbs-link-hover-decoration: var(--link-hover-decoration);
+  --breadcrumbs-current-color: var(--color-text-primary);
+  --breadcrumbs-current-weight: 600;
+  --breadcrumbs-expand-size: 24px;
+  --breadcrumbs-focus-width: var(--link-focus-width);
+  --breadcrumbs-focus-color: var(--link-focus-color);
+  --breadcrumbs-focus-offset: var(--link-focus-offset);
+  --breadcrumbs-transition: var(--link-transition);
+}
