@@ -182,6 +182,14 @@ const meta: Meta<DateInputStoryArgs> = {
         defaultValue: { summary: "single" },
       },
     },
+    language: {
+      control: "text",
+      description: "BCP 47 tag for the shown date and the calendar, such as es-AR",
+    },
+    labels: {
+      control: false,
+      description: "Built-in texts: calendar, the panel's name as a function of the label",
+    },
     onChange: {
       action: "changed",
       description: "Callback when date selection changes",
@@ -234,6 +242,8 @@ export const DateInput: StoryObj<DateInputStoryArgs> = {
     descriptionClassName: undefined,
     descriptionStyle: undefined,
     error: undefined,
+    labels: {},
+    language: "en-US",
   },
   render: ({ designSystem, ...args }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>

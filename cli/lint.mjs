@@ -94,6 +94,37 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
       }
       if (/(\/\/|\{\/\*|\/\*)\s*SAMPLE:/.test(line)) samples.push({ file, line: at, text: line.trim() });
       if (!isCss(file) && /role=["']alert["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"alert\": use Alert");
+      if (!isCss(file) && /role=["']switch["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"switch\": use Switch");
+      if (!isCss(file) && /role=["']radio(group)?["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made radio: use RadioGroup and Radio");
+      if (!isCss(file) && /role=["']progressbar["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made progress bar: use Progress");
+      if (!isCss(file) && /role=["']tooltip["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made tooltip: use Tooltip");
+      if (!isCss(file) && /<(button|a|Button|IconButton|Link)\b[^>]*\stitle=/.test(line)) {
+        report(file, at, "P1", "raw-element", "title attribute as a tooltip: use Tooltip, which keyboard and touch users reach");
+      }
+      if (!isCss(file) && /role=["']combobox["']/.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made combobox: use Combobox (Select for predefined options)");
+      }
+      if (!isCss(file) && /role=["']tab(list)?["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made tabs: use Tabs");
+      if (!isCss(file) && /<nav\b[^>]*aria-label=["'][^"']*breadcrumb/i.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made breadcrumbs: use Breadcrumbs");
+      }
+      if (!isCss(file) && /<nav\b[^>]*aria-label=["'][^"']*(pagination|paginaci[oó]n)/i.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made pagination: use Pagination");
+      }
+      if (!isCss(file) && /\saria-live=/.test(line)) {
+        report(file, at, "P1", "raw-element", "aria-live region: use useToast for notifications, Alert for a message on the page");
+      }
+      if (!isCss(file) && /<\w+\b[^>]*\spopover(=|[\s/>])/.test(line)) {
+        report(file, at, "P1", "raw-element", "popover attribute: use Popover (Menu for a list of actions)");
+      }
+      if (isCss(file) ? /@keyframes\s+(spin|spinner|loader)\b/.test(line)
+        : /<(div|span|svg|i)\b[^>]*class(Name)?=["']([^"']*\s)?(spinner|loader)(\s[^"']*)?["']/.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made spinner: use Spinner (or loading on Button and IconButton)");
+      }
+      if (isCss(file) ? /@keyframes\s+(shimmer|skeleton)\b/.test(line)
+        : /<(div|span)\b[^>]*class(Name)?=["']([^"']*\s)?(skeleton|shimmer)(\s[^"']*)?["']/.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made skeleton: use Skeleton");
+      }
       if (/--sidebar-(header-)?background["']?\s*:/.test(line)) {
         report(file, at, "P1", "app-shell", "the Sidebar keeps the system's panel color (the primary in Neus); change the brand's primary instead");
       }

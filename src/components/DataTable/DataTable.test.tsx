@@ -114,10 +114,10 @@ describe("DataTable consumer composition", () => {
       />,
     );
     expect(
-      screen.getByRole("button", { name: "Página anterior" }),
+      screen.getByRole("button", { name: "Previous page" }),
     ).toBeDisabled();
     await user.click(
-      screen.getByRole("button", { name: "Página siguiente" }),
+      screen.getByRole("button", { name: "Next page" }),
     );
     expect(onPaginationChange).toHaveBeenCalledWith({
       currentPage: 2,
@@ -133,10 +133,10 @@ describe("DataTable consumer composition", () => {
       />,
     );
     expect(
-      screen.getByRole("button", { name: "Página siguiente" }),
+      screen.getByRole("button", { name: "Next page" }),
     ).toBeDisabled();
     await user.click(
-      screen.getByRole("button", { name: "Página anterior" }),
+      screen.getByRole("button", { name: "Previous page" }),
     );
     expect(onPaginationChange).toHaveBeenLastCalledWith({
       currentPage: 2,
@@ -153,8 +153,31 @@ describe("DataTable consumer composition", () => {
     );
     expect(screen.getByText("1 / 1")).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "Página siguiente" }),
+      screen.getByRole("button", { name: "Next page" }),
     ).toBeDisabled();
+  });
+  it("renders a compact pagination whose names paginationLabels replaces", () => {
+    const { rerender } = render(
+      <DataTable data={data} columnDefs={columnDefs} pagination={pagination} />,
+    );
+
+    expect(screen.getByRole("navigation", { name: "Pagination" })).toHaveClass(
+      "data-table__pagination",
+      "pagination--compact",
+    );
+    expect(screen.getByText("1 / 3")).toHaveAttribute("aria-live", "polite");
+
+    rerender(
+      <DataTable
+        data={data}
+        columnDefs={columnDefs}
+        pagination={pagination}
+        paginationLabels={{ navigation: "Orders pages", next: "More orders" }}
+      />,
+    );
+    expect(screen.getByRole("navigation", { name: "Orders pages" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "More orders" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Previous page" })).toBeInTheDocument();
   });
   it("applies root and pagination styles independently", () => {
     const { container } = render(

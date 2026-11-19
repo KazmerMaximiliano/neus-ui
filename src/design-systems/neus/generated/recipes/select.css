@@ -8,6 +8,7 @@
   --select-search-radius: var(--radius-default);
   --select-tag-gap: 6px;
   --select-tag-padding: 2px 4px 2px 10px;
+  --select-tag-margin-block: 0px;
   --select-tag-radius: var(--radius-pill);
   --select-tag-background: var(--color-tag-bg);
   --select-tag-color: var(--color-text-primary);

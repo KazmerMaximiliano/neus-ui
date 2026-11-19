@@ -1,0 +1,15 @@
+.popover {
+  display: inline-block;
+}
+
+.popover__panel {
+  box-sizing: border-box;
+  max-width: var(--popover-max-width);
+  padding: var(--popover-padding);
+  border: var(--popover-border-width) solid var(--popover-border-color);
+  border-radius: var(--popover-radius);
+  background-color: var(--popover-background);
+  color: var(--popover-color);
+  box-shadow: var(--popover-shadow);
+  font-family: var(--popover-font-family);
+}

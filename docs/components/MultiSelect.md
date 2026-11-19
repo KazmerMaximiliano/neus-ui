@@ -27,6 +27,11 @@ Selected tags can be removed unless disabled. The shared listbox supports search
 navigation, aria-selected and multi-selection. Empty option values are ignored.
 `viewSearchBar` defaults to true.
 
+With a floating label (Material by default, or `labelPlacement="floating"`), the label rests
+inside the empty field and rises into a gap of the border, animated, once a tag is
+selected, the field opens or takes focus; the placeholder stays hidden until then, as in [Input](./Input.md).
+A hidden fieldset, `.field__outline`, draws that border.
+
 Current compatibility behavior uses a nonempty value array as the external selection and
 otherwise falls back to internal values initialized from defaultValue. An empty controlled
 array does not reliably clear an edited internal selection; use uncontrolled/defaultValue
@@ -92,18 +97,33 @@ props retain their nullable default.
 | `description` | `ReactNode` | Omitted | Help text below the field, linked with `aria-describedby` before the error |
 | `descriptionClassName` | `string` | Omitted | Additional classes on `.field__description` |
 | `descriptionStyle` | `CSSProperties` | Omitted | Inline styles on `.field__description` |
+| `variant` | `"outlined" \| "auto" \| "filled"` | `"auto"` | Field surface, shared with [Input](./Input.md) |
+| `labelPlacement` | `"auto" \| "external" \| "floating"` | `"auto"` | Label above the field, or floating inside it and rising onto the border |
+| `size` | `"small" \| "medium" \| "large"` | `"medium"` | Field height, matching an Input of the same size |
 | `placeholder` | `string` | Omitted | Text shown without a value |
 | `label` | `string` | Omitted | Visible label naming the combobox |
 | `value` | `readonly string[]` | `[]` | Controlled values |
 | `defaultValue` | `readonly string[]` | `[]` | Initial uncontrolled values |
 | `disabled` | `boolean` | `false` | Disables the field |
 | `viewSearchBar` | `boolean` | `true` | Shows the search box |
-| `searchBarPlaceholder` | `string` | `"Buscar..."` | Placeholder and accessible name of the search box |
+| `searchBarPlaceholder` | `string` | `"Search..."` | Placeholder and accessible name of the search box |
+| `labels` | `MultiSelectLabels` | English defaults | Built-in texts in the project's language |
 | `fieldStyle` | `CSSProperties` | Omitted | Inline styles on `.select__field` |
 | `tagStyle` | `CSSProperties` | Omitted | Inline styles on `.multiselect__tag` |
 | `listStyle` | `CSSProperties` | Omitted | Inline styles on `.select__popover` |
 | `optionStyle` | `CSSProperties` | Omitted | Inline styles on `.select__option` |
 | `onChange` | `((values: string[]) => void)` | Omitted | Called with the selected values |
+
+### Supporting types
+
+```ts
+type MultiSelectLabels = {
+  readonly unselected?: string; // "Select options": announced with no label or placeholder
+  readonly options?: string; // "Options": the list's name with no label or placeholder
+  readonly empty?: string; // "No results": when the search matches nothing
+  readonly remove?: (option: string) => string; // (option) => `Remove ${option}`
+};
+```
 
 ## Anatomy and per-part customization
 
@@ -124,6 +144,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.select__placeholder` | `span` | `placeholderClassName` | `placeholderStyle` | `selectedOptions.length === 0` |
 | `.select__sr-only` | `span` | `srOnlyClassName` | `srOnlyStyle` | `Always` |
 | `.select__caret` | `ChevronDown` | `caretClassName` | `caretStyle` | `Always` |
+| `.field__outline` | `fieldset`, `aria-hidden`, inside `.select__field` | — | — | `Always`; draws the border only for a floating label on an outlined field |
 | `.field__description` | `div` | `descriptionClassName` | `descriptionStyle` | `description` |
 | `.select__error-message` | `div` | `errorMessageClassName` | `errorMessageStyle` | `error` |
 | `.select__popover` | `div` | `listClassName` | `listStyle` | `Always` |
@@ -324,13 +345,14 @@ dependencies. Do not edit generated files.
 | `--select-list-max-height` | select list max height | `250px` |
 | `--select-search-radius` | select search radius | `var(--radius-default)` |
 | `--select-tag-gap` | select tag gap | `6px` |
+| `--select-tag-margin-block` | Space above and below each tag; negative keeps a tag inside the field's line | `0px` |
 | `--select-tag-padding` | select tag padding | `2px 4px 2px 10px` |
 | `--select-tag-radius` | select tag radius | `var(--radius-pill)` |
 
 ### Shared dependencies and runtime values
 
 `--color-focus`, `--color-surface-hover`, `--color-text-secondary`,
-`--popover-anchor-width`, `--popover-left`, `--popover-top`.
+`--popover-anchor-width`; the panel is placed by the shared `.popover-panel` (see [Popover](./Popover.md)).
 
 Semantic/foundation tokens are described in [the shared token
 reference](../design/tokens.md). Component dependencies belong to their own linked recipe.

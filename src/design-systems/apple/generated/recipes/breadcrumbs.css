@@ -1,0 +1,21 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --breadcrumbs-font-size: 12px;
+  --breadcrumbs-line-height: 1.33337;
+  --breadcrumbs-letter-spacing: -0.01em;
+  --breadcrumbs-color: color-mix(in srgb, var(--color-text-primary) 72%, transparent);
+  --breadcrumbs-separator: "›";
+  --breadcrumbs-separator-gap: 12px;
+  --breadcrumbs-separator-color: color-mix(in srgb, var(--color-text-primary) 48%, transparent);
+  --breadcrumbs-link-color: var(--breadcrumbs-color);
+  --breadcrumbs-link-weight: 400;
+  --breadcrumbs-link-hover-color: var(--breadcrumbs-color);
+  --breadcrumbs-link-hover-decoration: underline;
+  --breadcrumbs-current-weight: 400;
+  --breadcrumbs-focus-offset: 1px;
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --breadcrumbs-color: color-mix(in srgb, var(--color-text-primary) 80%, transparent);
+  --breadcrumbs-separator-color: color-mix(in srgb, var(--color-text-primary) 40%, transparent);
+}

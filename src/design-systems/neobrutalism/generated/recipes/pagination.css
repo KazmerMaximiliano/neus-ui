@@ -1,0 +1,14 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --pagination-font-weight: 700;
+  --pagination-current-font-weight: 800;
+  --pagination-item-radius: 4px;
+  --pagination-item-border-width: 3px;
+  --pagination-item-border-color: var(--color-text-primary);
+  --pagination-item-background: var(--color-surface);
+  --pagination-item-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface));
+  --pagination-current-background: var(--color-primary);
+  --pagination-current-color: var(--color-text-on-primary);
+  --pagination-current-border-color: var(--color-text-primary);
+  --pagination-current-shadow: 3px 3px 0 var(--color-text-primary);
+}

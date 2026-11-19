@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { beforeEach,describe, expect, it, vi } from "vitest";
 import { reverseGeocode } from "./geocoding";
 
 const mockGeocodeResponse = {
@@ -34,7 +34,7 @@ describe("reverseGeocode", () => {
 
   it("throws an error when no API key is provided", async () => {
     await expect(reverseGeocode(-34.6, -58.4)).rejects.toThrow(
-      "VITE_GOOGLE_MAPS_API_KEY no está configurada",
+      "VITE_GOOGLE_MAPS_API_KEY is not set",
     );
   });
 
@@ -75,7 +75,7 @@ describe("reverseGeocode", () => {
 
     await expect(
       reverseGeocode(-34.6, -58.4, "test-api-key"),
-    ).rejects.toThrow("Error en geocoding: Forbidden");
+    ).rejects.toThrow("Geocoding failed: Forbidden");
   });
 
   it("throws when geocoding status is not OK", async () => {
@@ -87,7 +87,7 @@ describe("reverseGeocode", () => {
 
     await expect(
       reverseGeocode(-34.6, -58.4, "test-api-key"),
-    ).rejects.toThrow("No se encontraron resultados de geocoding");
+    ).rejects.toThrow("Geocoding found no results");
   });
 
   it("throws when results array is empty", async () => {
@@ -98,7 +98,7 @@ describe("reverseGeocode", () => {
 
     await expect(
       reverseGeocode(-34.6, -58.4, "test-api-key"),
-    ).rejects.toThrow("No se encontraron resultados de geocoding");
+    ).rejects.toThrow("Geocoding found no results");
   });
 
   it("throws when fetch rejects", async () => {

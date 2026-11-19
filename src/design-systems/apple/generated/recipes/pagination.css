@@ -1,0 +1,6 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --pagination-font-weight: 400;
+  --pagination-current-font-weight: 600;
+  --pagination-item-hover-background: rgb(118 118 128 / 0.12);
+}

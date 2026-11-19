@@ -1,0 +1,35 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --switch-font-family: var(--font-body);
+  --switch-gap: 12px;
+  --switch-text-gap: 2px;
+  --switch-track-width: 44px;
+  --switch-track-height: 24px;
+  --switch-track-radius: 3em;
+  --switch-track-border-width: 2px;
+  --switch-track-border-color: var(--color-primary-dark);
+  --switch-track-background: var(--color-surface);
+  --switch-track-shadow: none;
+  --switch-track-hover-border-color: var(--color-primary);
+  --switch-track-checked-background: var(--color-primary);
+  --switch-track-checked-border-color: var(--color-primary);
+  --switch-track-checked-shadow: 0 4px 12px -4px var(--color-focus-ring);
+  --switch-thumb-size: 12px;
+  --switch-thumb-checked-size: 16px;
+  --switch-thumb-radius: 50%;
+  --switch-thumb-color: var(--color-primary-dark);
+  --switch-thumb-hover-color: var(--color-primary);
+  --switch-thumb-checked-color: var(--color-text-on-primary);
+  --switch-thumb-shadow: none;
+  --switch-label-color: var(--color-text-primary);
+  --switch-label-font-size: var(--fs-base);
+  --switch-label-line-height: 20px;
+  --switch-focus-width: 2px;
+  --switch-focus-color: var(--color-focus);
+  --switch-focus-offset: 2px;
+  --switch-disabled-opacity: 0.38;
+  --switch-disabled-color: var(--color-text-disabled);
+  --switch-duration: 0.2s;
+  --switch-easing: ease;
+}

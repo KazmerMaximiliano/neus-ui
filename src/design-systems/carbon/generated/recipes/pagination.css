@@ -1,0 +1,18 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --pagination-font-size: 14px;
+  --pagination-font-weight: 400;
+  --pagination-current-font-weight: 600;
+  --pagination-gap: 0px;
+  --pagination-item-padding: 0 4px;
+  --pagination-item-radius: 0px;
+  --pagination-item-hover-background: rgb(141 141 141 / 0.12);
+  --pagination-current-background: linear-gradient(#0f62fe, #0f62fe) center bottom / 16px 4px no-repeat;
+  --pagination-current-color: var(--color-text-primary);
+  --pagination-focus-offset: -2px;
+}
+
+[data-design-system="carbon"][data-color-scheme="dark"] {
+  --pagination-item-hover-background: rgb(141 141 141 / 0.16);
+  --pagination-current-background: linear-gradient(#4589ff, #4589ff) center bottom / 16px 4px no-repeat;
+}

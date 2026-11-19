@@ -1,13 +1,22 @@
 import type { CSSProperties } from "react";
 import type { DesignSystemId } from "../../design-systems";
-import type { FieldDescriptionProps } from "../Input";
+import type { FieldDescriptionProps, FieldPresentationProps } from "../Input";
 
 export type SelectOption = {
   readonly value?: string | null;
   readonly label: string;
 };
 
-export type SelectProps = FieldDescriptionProps & {
+export type SelectLabels = {
+  /** Shown and announced while nothing is chosen, when the field has no label or placeholder. */
+  readonly unselected?: string;
+  /** Accessible name of the list when the field has no label or placeholder. */
+  readonly options?: string;
+  /** Shown when the search matches no option. */
+  readonly empty?: string;
+};
+
+export type SelectProps = FieldPresentationProps & FieldDescriptionProps & {
   readonly placeholderClassName?: string;
   readonly placeholderStyle?: CSSProperties;
   readonly caretClassName?: string;
@@ -53,6 +62,8 @@ export type SelectProps = FieldDescriptionProps & {
   readonly disabled?: boolean;
   readonly viewSearchBar?: boolean;
   readonly searchBarPlaceholder?: string;
+  /** Built-in texts, in the project's language. */
+  readonly labels?: SelectLabels;
   readonly fieldStyle?: CSSProperties;
   readonly listStyle?: CSSProperties;
   readonly optionStyle?: CSSProperties;

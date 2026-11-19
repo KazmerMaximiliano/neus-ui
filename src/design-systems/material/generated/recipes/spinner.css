@@ -1,0 +1,9 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --spinner-size-medium: 40px;
+  --spinner-size-large: 48px;
+  --spinner-stroke-width: 0.1em;
+  --spinner-color: var(--color-primary);
+  --spinner-track-color: transparent;
+  --spinner-ring-duration: 1568ms;
+}

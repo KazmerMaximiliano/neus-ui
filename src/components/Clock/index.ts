@@ -1,2 +1,3 @@
 export { Clock } from "./Clock";
-export type { ClockProps, TimeValue } from "./Clock.types";
+export { CLOCK_LABELS } from "./Clock.consts";
+export type { ClockLabels, ClockProps, TimeValue } from "./Clock.types";

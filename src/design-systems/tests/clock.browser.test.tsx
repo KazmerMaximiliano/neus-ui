@@ -17,8 +17,8 @@ describe.each(["light", "dark"] as const)("Clock dial in %s", (scheme) => {
     const view = render(<ThemeProvider scope="local" designSystem={id} colorScheme={scheme}>
       <Clock value={{ hours: 2, minutes: 11 }} />
     </ThemeProvider>);
-    await user.click(screen.getByRole("button", { name: "Minutos" }));
-    const face = screen.getByRole("slider", { name: "Minutos" });
+    await user.click(screen.getByRole("button", { name: "Minutes" }));
+    const face = screen.getByRole("slider", { name: "Minutes" });
     const numbers = view.container.querySelector<HTMLElement>(".clock__numbers")!;
     const hand = view.container.querySelector<HTMLElement>(".clock__hand")!;
     expect(Number(getComputedStyle(numbers).zIndex)).toBeGreaterThan(Number(getComputedStyle(hand).zIndex));
@@ -42,7 +42,7 @@ describe.each(["light", "dark"] as const)("Clock dial in %s", (scheme) => {
       if (minute === 11 || minute === 59) expect(view.container.querySelector(".clock__number--selected")).toBeNull();
     }
 
-    await user.click(screen.getByRole("button", { name: "Horas" }));
+    await user.click(screen.getByRole("button", { name: "Hours" }));
     for (const hour of [2, 14]) {
       view.rerender(<ThemeProvider scope="local" designSystem={id} colorScheme={scheme}>
         <Clock value={{ hours: hour, minutes: 11 }} format="24h" />

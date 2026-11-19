@@ -1,0 +1,21 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --tooltip-background: #393939;
+  --tooltip-color: #ffffff;
+  --tooltip-radius: 2px;
+  --tooltip-padding: 2px 16px;
+  --tooltip-max-width: 208px;
+  --tooltip-multiline-padding: 16px;
+  --tooltip-multiline-max-width: 288px;
+  --tooltip-offset: 10px;
+  --tooltip-caret-size: 6px;
+  --tooltip-font-size: 14px;
+  --tooltip-font-weight: 400;
+  --tooltip-line-height: 20px;
+  --tooltip-letter-spacing: 0.16px;
+}
+
+[data-design-system="carbon"][data-color-scheme="dark"] {
+  --tooltip-background: #f4f4f4;
+  --tooltip-color: #161616;
+}

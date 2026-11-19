@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 40 components and public sections. Import each by name from `neus-ui`.
+The package exports 55 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -29,14 +29,24 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Button](./Button.md) | Semantic button with six variants, three sizes and loading feedback. |
 | [IconButton](./IconButton.md) | Accessible icon-only button with loading feedback. |
 | [Link](./Link.md) | Styled native anchor with primary and secondary treatments. |
+| [Progress](./Progress.md) | Completion of a task as a bar, determinate or indeterminate, with a label and value. |
+| [Skeleton](./Skeleton.md) | Hidden placeholder lines, blocks and circles while content loads. |
+| [Spinner](./Spinner.md) | Indeterminate loading ring or dots, announced as a status when labelled. |
+| [Toast](./Toast.md) | Brief notification after an action, shown and announced through ToastProvider. |
+| [Tooltip](./Tooltip.md) | Short description of a control on hover and keyboard focus. |
 
 ## Fields and selection
 
 | Component | Purpose |
 | --- | --- |
 | [Input](./Input.md) | Native input with field presentation, adornments and accessible errors. |
+| [Textarea](./Textarea.md) | Multi-line text with the Input field presentation, line-based height and optional growth. |
 | [Checkbox](./Checkbox.md) | Controlled checkbox with an indeterminate visual state. |
+| [Switch](./Switch.md) | On/off setting that applies at once. |
+| [Radio](./Radio.md) | Native radio with a label and help text, alone or inside a RadioGroup. |
+| [RadioGroup](./RadioGroup.md) | One choice among a few visible Radio options, with a legend. |
 | [Select](./Select.md) | Single selection with a searchable, keyboard-operated listbox. |
+| [Combobox](./Combobox.md) | Text field with suggestions from a list or fetched results, and optional new values. |
 | [MultiSelect](./MultiSelect.md) | Multiple selection with removable tags and searchable options. |
 | [FileUploader](./FileUploader.md) | File selection and drag/drop with size and type validation. |
 
@@ -64,6 +74,8 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [ModalHeader](./ModalHeader.md) | Title region for an owning Modal. |
 | [ModalContent](./ModalContent.md) | Body region for Modal composition. |
 | [ModalFooter](./ModalFooter.md) | Action region for Modal composition. |
+| [Popover](./Popover.md) | Content anchored to a button in a non-modal panel that flips to stay on screen. |
+| [Accordion](./Accordion.md) | Collapsible sections on native details, one or many open, that work without JavaScript. |
 
 ## Navigation, data and location
 
@@ -72,6 +84,9 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Sidebar](./Sidebar.md) | Responsive navigation with desktop panel, tablet rail and mobile dialog. |
 | [Menu](./Menu.md) | Text or icon trigger for an accessible action menu. |
 | [Dropdown](./Dropdown.md) | Avatar or icon trigger with an action menu. |
+| [Tabs](./Tabs.md) | Views of the same subject switched from a row of tabs, over a divider or in a container. |
+| [Breadcrumbs](./Breadcrumbs.md) | Trail of links down to the current page, collapsing the middle when long. |
+| [Pagination](./Pagination.md) | Page buttons or previous and next for a long list, with an optional page-size select. |
 | [Stepper](./Stepper.md) | Step progress in dots, linear or simple presentation. |
 | [DataTable](./DataTable.md) | Typed AG Grid table with consumer-controlled pagination and optional mobile cards. |
 | [InteractiveMap](./InteractiveMap.md) | Google Maps location picker with search, reverse geocoding and error states. |

@@ -70,7 +70,7 @@ describe("ThemeProvider", () => {
         <ThemeProvider><Consumer /></ThemeProvider>
       </ThemeProvider>,
     );
-    expect(screen.getByText("material/dark/#c8b3fd")).toBeInTheDocument();
+    expect(screen.getByText("material/dark/#d0bcff")).toBeInTheDocument();
   });
 
   it("updates mode and merges runtime color overrides", async () => {

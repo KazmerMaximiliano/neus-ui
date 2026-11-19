@@ -2,10 +2,10 @@ import { useArgs } from "storybook/preview-api";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Button } from "../Button";
-import { Modal as ModalComponent } from "./Modal";
 import { ModalContent } from "./components/ModalContent";
 import { ModalFooter } from "./components/ModalFooter";
 import { ModalHeader } from "./components/ModalHeader";
+import { Modal as ModalComponent } from "./Modal";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { ModalStoryArgs } from "./Modal.types";
 

@@ -111,7 +111,9 @@ Core rules:
   packages, internal modules from the farthest relative path to the nearest, `import type`,
   the module's own `.consts` and `.utils`, then CSS with its own `.styles.css` last. Keep the
   import block contiguous, without blank lines between declarations or categories.
-  Multiline import declarations are allowed.
+  Multiline import declarations are allowed. `pnpm lint` checks the order and
+  `pnpm exec eslint --fix` applies it; in VS Code the repository's settings run that fix on
+  save instead of "Organize Imports".
 - Prefer semantic React Testing Library queries over implementation details.
 - Keep components typed, focused, and compatible with React 19+.
 

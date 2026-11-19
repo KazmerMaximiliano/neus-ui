@@ -1,7 +1,8 @@
 import type { CalendarLocalization, CalendarSelection } from "./Calendar.types";
 import { DEFAULT_LANGUAGE, MONTH_COUNT, MONTH_REFERENCE_YEAR } from "./Calendar.consts";
 
-const resolveLanguage = (language: string): string => {
+/** A supported BCP 47 tag for Intl, or en-US when the tag is invalid or unsupported. */
+export const resolveLanguage = (language: string): string => {
   try {
     return Intl.DateTimeFormat.supportedLocalesOf(language)[0] ?? DEFAULT_LANGUAGE;
   } catch {

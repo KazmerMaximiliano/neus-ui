@@ -30,12 +30,20 @@ by the consumer.
 
 A generated or supplied id associates the label. Nonempty errors set aria-invalid;
 `description` and the error are linked through aria-describedby, after any id the caller
-passes. Native attributes such as `autoComplete`, `inputMode` and `spellCheck` reach the
-`<input>`; Input's own wiring (id, label, state and value handling) takes precedence. Required markers and the error icon are decorative. Supply a label or
+passes. Native attributes such as `autoComplete`, `inputMode` and `spellCheck`, and the ref,
+reach the `<input>`; Input's own wiring (id, label, state and value handling) takes precedence. Required markers and the error icon are decorative. Supply a label or
 aria-label. Prefix and suffix render when non-null. Error icons render only with an error
 and can be suppressed with `errorIcon={null}`. Field presentation uses variant, size and
 labelPlacement data attributes. `wrapperStyle` targets the root; `inputStyle` targets the
 native field.
+
+A floating label rises onto the border of an outlined field and sits in a gap of it, with
+nothing painted behind it, as Material's outlined text field does: a hidden fieldset
+(`.field__outline`) draws the border then, and the field's own border is hidden. In a filled
+field the label rises inside the container instead. With an external label the field draws its
+own border and the outline has no width. Material floats its labels by default. The label
+slides between its two positions over `--input-label-duration` with `--input-label-easing`, and
+the gap opens with it; under `prefers-reduced-motion: reduce` both change at once.
 
 ## Props
 
@@ -89,7 +97,7 @@ retain their nullable default.
 | `requiredStyle` | `CSSProperties` | Omitted | Inline styles on `.input__required` |
 | `errorStyle` | `CSSProperties` | Omitted | Inline styles on `.input__error-message` |
 | `onChange` | `((value: string) => void)` | Omitted | Callback function triggered when input value changes |
-| Native attributes | `InputHTMLAttributes<HTMLInputElement>` | Optional | Forwarded to the native `<input>` (`autoComplete`, `inputMode`, `spellCheck`, `pattern`, `maxLength`, `onBlur`, `aria-*`, `data-*`…), except `size`, `prefix`, `type`, `value`, `defaultValue`, `onChange`, `readOnly` and `style`, which Input replaces |
+| Native attributes and ref | React props for an `input` | Optional | Forwarded to the native `<input>` (`autoComplete`, `inputMode`, `spellCheck`, `pattern`, `maxLength`, `onBlur`, `aria-*`, `data-*`…), except `size`, `prefix`, `type`, `value`, `defaultValue`, `onChange`, `readOnly` and `style`, which Input replaces |
 
 ## Anatomy and per-part customization
 
@@ -107,6 +115,8 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.input` | `input` | `inputClassName` | `inputStyle` | `Always` |
 | `.input__suffix` | `span` | `suffixClassName` | `suffixStyle` | `suffix != null` |
 | `.input__error-icon` | `span` | `errorIconClassName` | `errorIconStyle` | `error && errorIcon !== null` |
+| `.field__outline` | `fieldset`, `aria-hidden`, inside `.input__control` | — | — | `Always`; draws the border only for a floating label on an outlined field |
+| `.field__notch` | `legend` inside the outline | — | — | `Always`; as wide as the raised label |
 | `.field__description` | `div` | `descriptionClassName` | `descriptionStyle` | `description` |
 | `.input__error-message` | `div` | `errorClassName` | `errorStyle` | `error` |
 
@@ -158,6 +168,10 @@ dependencies. Do not edit generated files.
 | `--input-control-height-large` | input control height large | `56px` |
 | `--input-control-height-medium` | input control height medium | `48px` |
 | `--input-control-height-small` | input control height small | `36px` |
+| `--input-filled-label-top` | Raised label's distance from the top of a filled field | `0px` |
+| `--input-filled-label-translate` | Raised label's shift in a filled field | `translateY(-50%)` |
+| `--input-filled-padding` | Padding of a filled field, room for a label inside it | `var(--input-padding)` |
+| `--input-filled-radius` | Corners of a filled field | `var(--input-radius)` |
 | `--input-gap` | input gap | `8px` |
 | `--input-label-left` | input label left | `auto` |
 | `--input-label-offset` | input label offset | `1em` |
@@ -178,6 +192,7 @@ dependencies. Do not edit generated files.
 | `--input-required-gap` | input required gap | `0.25em` |
 | `--input-small-padding` | input small padding | `8px 16px` |
 | `--input-transition` | input transition | `border-color 0.2s` |
+| `--textarea-radius` | [Textarea](./Textarea.md) radius, never above 16px | `min(var(--input-radius), 16px)` |
 
 ### Surface and color
 
@@ -192,6 +207,11 @@ dependencies. Do not edit generated files.
 | `--input-color-swatch-padding` | input color swatch padding | `0px` |
 | `--input-filled-background` | input filled background | `var(--color-surface-secondary)` |
 | `--input-filled-border-width` | input filled border width | `0 0 1px` |
+| `--input-filled-border-color` | Border (active indicator) of a filled field | `var(--input-border-color)` |
+| `--input-filled-label-background` | Behind a label raised in a filled field | `var(--input-filled-background)` |
+| `--input-filled-hover-background` | Filled field's container on hover | `var(--input-filled-background)` |
+| `--input-notch-outline-width` | With the default label placement, the notched outline's width; `0px` lets the field draw its own border | `0px` |
+| `--input-notch-border-image` | With the default label placement, hides the field's own border under the notched outline | `none` |
 | `--input-label-background` | input label background | `transparent` |
 | `--input-label-color` | input label color | `var(--color-control-text)` |
 | `--input-outlined-border-width` | input outlined border width | `1px` |
@@ -213,6 +233,7 @@ dependencies. Do not edit generated files.
 | `--input-disabled-shadow` | input disabled shadow | `none` |
 | `--input-error-border-color` | input error border color | `var(--color-error)` |
 | `--input-error-color` | input error color | `var(--color-error-text)` |
+| `--input-error-value-color` | The typed value while invalid | `var(--input-error-color)` |
 | `--input-error-focus-shadow` | input error focus shadow | `0 0 0 3px var(--color-focus-ring-error)` |
 | `--input-error-font-size` | input error font size | `0.85em` |
 | `--input-description-color` | input description color | `var(--color-text-secondary)` |
@@ -221,6 +242,11 @@ dependencies. Do not edit generated files.
 | `--input-error-shadow` | input error shadow | `var(--input-shadow)` |
 | `--input-focus-border-color` | input focus border color | `var(--color-info-300)` |
 | `--input-focus-shadow` | input focus shadow | `0 0 0 3px var(--color-focus-ring)` |
+| `--input-focus-border-width` | Notched outline's width on focus | `var(--input-border-width)` |
+| `--input-label-duration` | How long a floating label takes to rise or rest | `0.15s` |
+| `--input-label-easing` | Easing of the floating label and the gap | `ease` |
+| `--input-label-focus-color` | Label while the field has focus | `var(--input-label-color)` |
+| `--input-label-hover-color` | An outlined field's label while the pointer is over it | `var(--input-label-color)` |
 | `--input-hover-border-color` | input hover border color | `var(--color-border-input-hover)` |
 
 ### Typography and text
@@ -239,7 +265,9 @@ dependencies. Do not edit generated files.
 `--field-height`, `--field-label-background`, `--field-label-left`, `--field-label-padding`,
 `--field-label-position`, `--field-label-raised-size`, `--field-label-raised-top`,
 `--field-label-raised-translate`, `--field-label-size`, `--field-label-top`,
-`--field-label-translate`, `--field-placeholder-opacity`.
+`--field-label-translate`, `--field-placeholder-opacity`, `--field-notch-outline-width`,
+`--field-notch-border-image`, `--field-notch-width`, `--field-outline-color`,
+`--field-outline-width`, `--field-outline-style`.
 
 Semantic/foundation tokens are described in [the shared token
 reference](../design/tokens.md). Component dependencies belong to their own linked recipe.

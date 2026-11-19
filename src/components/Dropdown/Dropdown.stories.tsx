@@ -71,6 +71,10 @@ const meta: Meta<DropdownStoryArgs> = {
       description:
         "Account name shown in the menu header and used as trigger label",
     },
+    label: {
+      control: "text",
+      description: "Accessible name of the trigger and the menu when there is no name",
+    },
     items: {
       control: "object",
       description: "Menu items with label, onClick and optional disabled",
@@ -108,6 +112,7 @@ export const Dropdown: StoryObj<DropdownStoryArgs> = {
     designSystem: "neus",
     icon: User,
     name: "Ada Lovelace",
+    label: "Menu",
     items: [
       { label: "Profile", onClick: fn() },
       { label: "Settings", onClick: fn() },

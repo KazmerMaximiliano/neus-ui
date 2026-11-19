@@ -175,6 +175,13 @@ x-neus:
         --button-label-transform: none
         --button-loader-size: 5px
         --button-loader-gap: 1px
+        --button-elevated-shadow: 0 0 0 1px var(--color-border-subtle), 0 1px 2px rgba(0, 0, 0, 0.06)
+        --button-elevated-shadow-hover: 0 0 0 1px var(--color-border-subtle), 0 2px 4px -1px rgba(0, 0, 0,
+          0.06), 0 6px 12px -4px rgba(0, 0, 0, 0.08)
+      dark:
+        --button-elevated-shadow: 0 0 0 1px var(--color-border-subtle), 0 1px 2px rgba(0, 0, 0, 0.5)
+        --button-elevated-shadow-hover: 0 0 0 1px var(--color-border-subtle), 0 4px 8px -4px rgba(0, 0, 0,
+          0.5)
     calendar:
       base:
         --calendar-radius: 12px
@@ -406,6 +413,122 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+        --pricing-price-size: 32px
+        --pricing-price-weight: 450
+        --pricing-price-tracking: -0.06em
+        --pricing-period-font-family: var(--font-mono)
+        --pricing-check-color: var(--color-text-primary)
+        --pricing-featured-border-color: var(--color-text-primary)
+        --pricing-featured-shadow: 0 0 #0000
+    spinner:
+      base:
+        --spinner-stroke-width: 0.1em
+        --spinner-color: currentColor
+    switch:
+      base:
+        --switch-gap: 8px
+        --switch-track-width: 32px
+        --switch-track-height: 18px
+        --switch-track-border-width: 0px
+        --switch-track-background: var(--color-text-placeholder)
+        --switch-track-checked-shadow: none
+        --switch-thumb-size: 14px
+        --switch-thumb-checked-size: 14px
+        --switch-thumb-color: var(--color-surface)
+        --switch-thumb-hover-color: var(--color-surface)
+        --switch-label-font-size: 14px
+        --switch-duration: 150ms
+    radio:
+      base:
+        --radio-dot-size: 6px
+    popover: {}
+    progress:
+      base:
+        --progress-label-weight: "500"
+        --progress-height-medium: 6px
+        --progress-height-large: 10px
+    skeleton:
+      base:
+        --skeleton-background: var(--color-border-subtle)
+        --skeleton-highlight: var(--color-surface-secondary)
+        --skeleton-animation-name: skeleton-shimmer
+        --skeleton-text-radius: 6px
+        --skeleton-rect-radius: 6px
+    toast: {}
+    tooltip:
+      base:
+        --tooltip-radius: 6px
+        --tooltip-shadow: 0 1px 1px rgb(0 0 0 / 0.02), 0 4px 8px rgb(0 0 0 / 0.04)
+        --tooltip-font-size: 13px
+        --tooltip-font-weight: "400"
+    tabs:
+      base:
+        --tabs-disabled-color: "#8f8f8f"
+        --tabs-font-size: 14px
+        --tabs-font-weight: "400"
+        --tabs-selected-font-weight: "400"
+        --tabs-line-height: 20px
+        --tabs-height: 48px
+        --tabs-padding: 0 2px
+        --tabs-gap: 24px
+        --tabs-radius: 0px
+        --tabs-hover-background: transparent
+        --tabs-selected-color: var(--color-text-primary)
+        --tabs-indicator-height: 2px
+        --tabs-indicator-radius: 0px
+        --tabs-indicator-color: var(--color-text-primary)
+        --tabs-contained-height: 32px
+        --tabs-contained-gap: 0px
+        --tabs-contained-padding: 0px
+        --tabs-contained-radius: 0px
+        --tabs-contained-background: transparent
+        --tabs-contained-tab-radius: 6px
+        --tabs-contained-tab-padding: 0 12px
+        --tabs-contained-font-size: 13px
+        --tabs-contained-hover-background: transparent
+        --tabs-contained-selected-background: "#ebebeb"
+        --tabs-contained-selected-shadow: none
+      dark:
+        --tabs-contained-selected-background: "#1f1f1f"
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 14px
+        --breadcrumbs-line-height: 20px
+        --breadcrumbs-separator: '"›"'
+        --breadcrumbs-separator-gap: 6px
+        --breadcrumbs-link-color: var(--color-text-secondary)
+        --breadcrumbs-link-weight: "400"
+        --breadcrumbs-link-hover-color: var(--color-text-primary)
+        --breadcrumbs-link-hover-decoration: none
+        --breadcrumbs-current-weight: "400"
+    pagination:
+      base:
+        --pagination-font-size: 14px
+        --pagination-current-font-weight: "500"
+        --pagination-item-radius: 6px
+        --pagination-item-hover-background: "#ebebeb"
+        --pagination-current-background: var(--color-text-primary)
+        --pagination-current-color: var(--color-surface)
+      dark:
+        --pagination-item-hover-background: "#1f1f1f"
+    accordion:
+      base:
+        --accordion-divider-color: "#eaeaea"
+        --accordion-header-min-height: 48px
+        --accordion-header-padding: 12px
+        --accordion-header-radius: 6px
+        --accordion-header-hover-background: "#f2f2f2"
+        --accordion-title-size: 16px
+        --accordion-title-weight: "500"
+        --accordion-title-line-height: 24px
+        --accordion-icon-size: 16px
+        --accordion-content-padding: 0 12px 16px
+        --accordion-content-line-height: "1.6"
+        --accordion-disabled-color: "#8f8f8f"
+        --accordion-focus-offset: 0px
+      dark:
+        --accordion-divider-color: "#333333"
+        --accordion-header-hover-background: "#1a1a1a"
 ---
 
 # Vercel
@@ -472,6 +595,10 @@ use a strong neutral solid action, quieter outlined/text alternatives, concise
 labels, and consistent sizes: small, medium and large are 32, 40 and 48px tall,
 the same as inputs. Keep hover, press, keyboard focus, disabled, and loading
 states legible without decorative motion.
+Geist has no elevated button; local decision: the elevated variant takes the "slightly raised"
+small material of [Geist materials](https://vercel.com/geist/materials) (consulted 2026-11-17),
+a hairline ring with a faint shadow, and moves toward the "further raised" medium material on
+hover. In dark mode the ring carries the separation, as in the floating elevation.
 
 ### Card
 
@@ -484,6 +611,9 @@ hierarchy. Choose elevation only when the surrounding layout requires it.
 Local mapping informed by [Geist Input](https://vercel.com/geist/input):
 keep compact geometry, a clear label/value hierarchy, a quiet resting border,
 visible focus, and explicit validation feedback. Read-only values remain readable.
+[Geist Textarea](https://vercel.com/geist/textarea) keeps the input's 6px frame for text that
+wraps, with a generous default of rows that grows only where the page has vertical room
+(consulted 2026-11-16).
 
 ### Sidebar
 
@@ -503,9 +633,41 @@ A grid inside one bordered frame with hairline dividers; small monochrome icons,
 
 Plain quotes with small avatars, or a row of customer names.
 
+### FAQ
+
+Questions over hairlines with a soft gray hover, as on the pricing page.
+
+### Pricing
+
+Bordered cards with the price set tight and the period in mono; the recommended plan gets an ink outline, a pill badge and the one solid action.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+A spinner takes the color of the text beside it, with a thin stroke, and matches the size of that text or icon ([Geist spinner](https://vercel.com/geist/spinner), consulted 2026-11-15).
+
+A boolean setting is a compact toggle, label first ([Geist toggle](https://vercel.com/geist/toggle), consulted 2026-11-16): a 32×18 pill, filled with the ink color when on and gray when off, with a knob in the page color. Geist states no sizes or colors; these are local decisions that keep 3:1 in both modes.
+
+A radio is the checkbox drawn as a circle: a thin gray ring, filled with ink and a 6px dot in the opposite tone when chosen. Geist recommends radios for two to six options that should all stay visible and states no sizes or colors, so these are local decisions ([Geist radio](https://vercel.com/geist/radio), consulted 2026-11-16).
+
+A popover is the menu panel with room inside: the subtle border and soft shadow, with 16px of padding and at most 320px wide.
+
+A progress bar is an ink pill on the gray border color, 6px by default; put the text that says what is progressing next to the bar ([Geist progress](https://vercel.com/geist/progress), consulted 2026-11-17). Geist states no sizes, so the 4, 6 and 10px thicknesses are local decisions.
+
+A skeleton shimmers, as in [Geist skeleton](https://vercel.com/geist/skeleton) (consulted 2026-11-17): gray shapes with 6px corners crossed by a lighter band. The colors are local decisions.
+
+A toast is the alert with the soft floating shadow. Geist keeps toasts polite and saves assertive announcements for blocking errors, and an Undo action stays on screen for 5 to 10 seconds ([Geist toast](https://vercel.com/geist/toast), consulted 2026-11-17).
+
+A tooltip is the foreground color behind background-colored text in 13px, with 6px corners and the lightest shadow, the tooltip material ([Geist materials](https://vercel.com/geist/materials), consulted 2026-11-18). Geist waits about 150ms before showing one so a sweeping pointer does not flash it ([Geist tooltip](https://vercel.com/geist/tooltip), consulted 2026-11-18), which is the component's default delay. A combobox is the input with the select's list.
+
+Tabs are 14px regular labels in gray 900 with 24px between them and almost no padding; the selected and the hovered one turn gray 1000, the selected one over a 2px foreground line across the tab, on a 1px gray divider. Secondary tabs, the contained variant here, are 32px tall with 12px of padding, 13px text and 6px corners, with no tray: the selected tab fills with gray 200 (#ebebeb, #1f1f1f in dark mode) ([Geist tabs](https://vercel.com/geist/tabs), consulted 2026-11-18).
+
+Breadcrumbs are 14px over 20px, links in gray 900 that turn gray 1000 on hover without an underline, the current page in gray 1000 and a chevron between items with 6px on each side ([Geist breadcrumbs](https://vercel.com/geist/breadcrumbs), consulted 2026-11-18). Geist draws the chevron as a 16px icon; here it is the › character.
+
+Geist's pagination links to the previous and next page by title, at the end of a document ([Geist pagination](https://vercel.com/geist/pagination), consulted 2026-11-18); it has no numbered pager. Page buttons here are 32px with 6px corners like the small buttons, gray 200 on hover, and the current page in the foreground color with background-colored numbers, like a primary button: a local mapping.
+
+An accordion follows the FAQ on the pricing page: 16px medium questions in gray 1000 over 1px dividers (#eaeaea, #333 in dark mode) from Geist's collapse, 12px of padding, a 16px chevron that turns in 200ms and a gray 100 fill with 6px corners on hover; answers at 16px with 1.6 line height ([Geist collapse](https://vercel.com/geist/collapse) and [Vercel pricing](https://vercel.com/pricing), consulted 2026-11-19).
 
 ## Do's and Don'ts
 

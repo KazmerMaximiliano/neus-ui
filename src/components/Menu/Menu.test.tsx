@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Settings, MoreVertical } from "lucide-react";
+import { MoreVertical,Settings } from "lucide-react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ThemeProvider } from "../../providers";
 import { Menu } from "./Menu";
@@ -34,7 +34,7 @@ describe("Menu", () => {
         "true",
       );
       rerender(<Menu icon={MoreVertical} items={items()} />);
-      expect(screen.getByRole("button", { name: "Menú" })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Menu" })).toBeInTheDocument();
     });
 
     it("keeps items out of the DOM while closed", () => {

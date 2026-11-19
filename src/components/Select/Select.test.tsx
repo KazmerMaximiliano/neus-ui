@@ -33,6 +33,32 @@ describe("Select required", () => {
   });
 });
 
+describe("Select field presentation", () => {
+  it("defaults the variant, label placement and size, and takes each prop", () => {
+    const { container, rerender } = renderSelect();
+    const wrapper = container.querySelector(".select__wrapper")!;
+
+    expect(wrapper).toHaveClass("field-presentation");
+    expect(wrapper).toHaveAttribute("data-variant", "auto");
+    expect(wrapper).toHaveAttribute("data-label-placement", "auto");
+    expect(wrapper).toHaveAttribute("data-size", "medium");
+    rerender(<Select label="Country" options={OPTIONS} variant="filled" labelPlacement="floating" size="large" />);
+    expect(wrapper).toHaveAttribute("data-variant", "filled");
+    expect(wrapper).toHaveAttribute("data-label-placement", "floating");
+    expect(wrapper).toHaveAttribute("data-size", "large");
+  });
+
+  it("draws a hidden outline in the field, sized from the label", () => {
+    const { container } = renderSelect({ required: true });
+    const outline = container.querySelector(".select__field > .field__outline")!;
+
+    expect(outline).toHaveAttribute("aria-hidden", "true");
+    expect(outline.querySelector(".field__notch")).toHaveAttribute("data-label", "Country");
+    expect(outline.querySelector(".field__notch")).toHaveAttribute("data-required");
+    expect(combobox()).toBeInTheDocument();
+  });
+});
+
 describe("Select description", () => {
   it("renders help text and announces it before the error", () => {
     const { rerender } = render(<Select label="Plan" options={[{ value: "pro", label: "Pro" }]} description="You can change it later." />);
@@ -64,8 +90,25 @@ describe("Select", () => {
     it("shows the default placeholder and names an unlabeled combobox", () => {
       render(<Select options={OPTIONS} />);
       expect(
-        screen.getByRole("combobox", { name: "Selecciona una opción" }),
-      ).toHaveTextContent("Selecciona una opción...");
+        screen.getByRole("combobox", { name: "Select an option" }),
+      ).toHaveTextContent("Select an option");
+    });
+
+    it("takes its built-in texts from labels", async () => {
+      const user = userEvent.setup();
+      render(
+        <Select
+          options={OPTIONS}
+          labels={{ unselected: "Pick a country", options: "Countries", empty: "Nothing found" }}
+        />,
+      );
+      const trigger = screen.getByRole("combobox", { name: "Pick a country" });
+
+      expect(trigger).toHaveTextContent("Pick a country");
+      await user.click(trigger);
+      expect(screen.getByRole("listbox", { name: "Countries" })).toBeInTheDocument();
+      await user.keyboard("zzz");
+      expect(screen.getByText("Nothing found")).toBeInTheDocument();
     });
 
     it("submits the value through a hidden input", () => {
@@ -124,7 +167,7 @@ describe("Select", () => {
       ).toBeInTheDocument();
       expect(screen.getAllByRole("option")).toHaveLength(3);
       expect(
-        screen.getByRole("searchbox", { name: "Buscar..." }),
+        screen.getByRole("searchbox", { name: "Search..." }),
       ).toHaveFocus();
     });
 
@@ -135,7 +178,7 @@ describe("Select", () => {
       await user.keyboard("bra");
       expect(screen.getAllByRole("option")).toHaveLength(1);
       await user.keyboard("zzz");
-      expect(screen.getByText("Sin resultados")).toBeInTheDocument();
+      expect(screen.getByText("No results")).toBeInTheDocument();
     });
 
     it("selects with the pointer, closes and restores focus", async () => {

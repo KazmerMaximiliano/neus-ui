@@ -4,6 +4,18 @@ import type { DesignSystemId } from "../../design-systems";
 type StepperVariant = "dots" | "linear" | "simple";
 type StepperSize = "small" | "medium" | "large";
 
+export type StepperTexts = {
+  /** Name of the step track. */
+  readonly progress?: string;
+  /** The position, announced by the linear and simple variants and shown by the linear one. */
+  readonly position?: (step: number, total: number) => string;
+  /** Name of a step in the dots variant. */
+  readonly step?: (step: number) => string;
+  readonly done?: string;
+  readonly active?: string;
+  readonly inactive?: string;
+};
+
 export type StepperProps = {
   readonly barClassName?: string;
   readonly barFillClassName?: string;
@@ -33,6 +45,8 @@ export type StepperProps = {
   readonly connectorStyle?: CSSProperties;
   readonly barStyle?: CSSProperties;
   readonly onStepClick?: (step: number) => void;
+  /** Built-in texts, in the project's language; `labels` holds the step names. */
+  readonly texts?: StepperTexts;
 };
 
 export type StepperStoryArgs = StepperProps & {

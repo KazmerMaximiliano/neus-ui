@@ -6,15 +6,15 @@ import { afterEach, describe, expect, expectTypeOf, it, vi } from "vitest";
 import { DESIGN_SYSTEMS } from "../../design-systems";
 import { ThemeProvider } from "../../providers";
 import { Card } from "./Card";
+import * as stories from "./Card.stories";
 import { CardContent } from "./components/CardContent";
 import { CardFooter } from "./components/CardFooter";
 import { CardHeader } from "./components/CardHeader";
 import { CardMedia } from "./components/CardMedia";
-import * as stories from "./Card.stories";
+import type { CardProps } from "./Card.types";
 import type { CardContentProps } from "./components/CardContent";
 import type { CardFooterProps } from "./components/CardFooter";
 import type { CardHeaderProps } from "./components/CardHeader";
-import type { CardProps } from "./Card.types";
 
 afterEach(cleanup);
 

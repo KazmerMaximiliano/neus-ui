@@ -1,0 +1,27 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --accordion-gap: 16px;
+  --accordion-divider-width: 3px;
+  --accordion-divider-color: var(--color-text-primary);
+  --accordion-item-background: var(--color-surface);
+  --accordion-item-border-width: 3px;
+  --accordion-item-border-color: var(--color-text-primary);
+  --accordion-item-radius: 4px;
+  --accordion-item-shadow: 4px 4px 0 var(--color-text-primary);
+  --accordion-header-padding: 16px;
+  --accordion-header-radius: 0px;
+  --accordion-header-background: var(--color-primary);
+  --accordion-header-hover-background: color-mix(in srgb, var(--color-primary) 85%, var(--color-text-on-primary));
+  --accordion-title-color: var(--color-text-on-primary);
+  --accordion-title-weight: 700;
+  --accordion-title-line-height: 24px;
+  --accordion-icon-color: var(--color-text-on-primary);
+  --accordion-content-padding: 16px;
+  --accordion-content-divider-width: 3px;
+  --accordion-content-color: var(--color-text-primary);
+  --accordion-content-size: 14px;
+  --accordion-content-line-height: 20px;
+  --accordion-disabled-color: color-mix(in srgb, var(--color-text-on-primary) 50%, var(--color-primary));
+  --accordion-focus-width: 3px;
+  --accordion-focus-offset: -3px;
+}

@@ -20,8 +20,11 @@ const read = (file) => readFileSync(path.join(PACKAGE_ROOT, file), "utf8");
 // Citations and format notes help maintainers, not the agent reading the context.
 const withoutSources = (section) => section?.split("\n")
   .filter((line) => !/^(Format|Design references|Reference)\b/.test(line)).join("\n").trim();
-const catalog = (file) => [...read(file).matchAll(/^\| \[(\w+)\]\([^)]+\) \| (.+) \|$/gm)]
-  .map(([, name, purpose]) => `- ${name}: ${purpose}`);
+// Names only, one line per catalog heading: the need table and `neus-ui docs <Name>` carry the purposes.
+const catalog = (file, title) => read(file).split(/^## /m).flatMap((block, index) => {
+  const names = [...block.matchAll(/^\| \[(\w+)\]\(/gm)].map(([, name]) => name);
+  return names.length ? [`- ${index ? block.slice(0, block.indexOf("\n")) : title}: ${names.join(", ")}`] : [];
+});
 // The variable and file of a Pixabay key, read only to name them.
 const pixabayKey = (root) => ENV_FILES.map((file) => {
   const envFile = path.join(root, file);
@@ -39,7 +42,7 @@ export const contextFor = (root, surface = "app") => {
     : read(`src/design-systems/${config.designSystem}/DESIGN.md`);
   const system = derived ? `${config.derivedSystem} (derived from ${config.designSystem})` : `${config.designSystem} (locked)`;
   const sections = ["## Overview", "## Typography", ...(surface === "page"
-    ? ["## Layout", "### Hero", "### Feature list", "### Testimonial"] : []), "## Do's and Don'ts"];
+    ? ["## Layout", "### Hero", "### Feature list", "### Testimonial", "### FAQ", "### Pricing"] : []), "## Do's and Don'ts"];
   const need = markdownSection(read("skills/neus-design/SKILL.md"), "### Need → component");
   const preview = pixabayKey(root);
 
@@ -62,11 +65,8 @@ export const contextFor = (root, surface = "app") => {
     "## Components",
     "",
     ...catalog("docs/components/README.md"),
-    ...catalog("docs/templates/README.md"),
-    "",
-    "## Sections (`neus-ui/sections`)",
-    "",
-    ...catalog("docs/sections/README.md"),
+    ...catalog("docs/templates/README.md", "Templates"),
+    ...catalog("docs/sections/README.md", "Sections (`neus-ui/sections`)"),
     "",
     need?.replace("### Need → component", "## Need → component"),
     "",

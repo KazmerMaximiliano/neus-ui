@@ -21,6 +21,8 @@ export type DropdownProps = {
   readonly triggerClassName?: string;
   readonly icon?: IconButtonIcon;
   readonly name?: string;
+  /** Accessible name of the trigger and the menu when there is no name, in the project's language. */
+  readonly label?: string;
   readonly items: readonly DropdownItem[];
   readonly triggerStyle?: CSSProperties;
   readonly menuStyle?: CSSProperties;

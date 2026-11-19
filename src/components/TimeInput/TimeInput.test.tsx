@@ -283,10 +283,24 @@ describe("time selection", () => {
     await user.keyboard("{ArrowUp}");
     expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 30 });
     expect(container.querySelector("input[name=\"start\"]")).toHaveValue("11:30");
-    await user.click(screen.getByRole("button", { name: "Minutos" }));
+    await user.click(screen.getByRole("button", { name: "Minutes" }));
     await user.tab();
     await user.keyboard("{ArrowRight}");
     expect(onChange).toHaveBeenLastCalledWith({ hours: 11, minutes: 31 });
+  });
+  it("names the clock panel and the clock's parts through labels", async () => {
+    const user = userEvent.setup();
+    render(
+      <TimeInput
+        label="Start"
+        labels={{ clock: (label) => `${label} time`, hours: "Hour", minutes: "Minute" }}
+      />,
+    );
+    await user.click(screen.getByRole("button", { name: /^Start/ }));
+
+    expect(screen.getByRole("dialog", { name: "Start time" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Hour" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Minute" })).toBeInTheDocument();
   });
   it("leaves controlled time with the consumer and clears an explicit undefined", async () => {
     const user = userEvent.setup();

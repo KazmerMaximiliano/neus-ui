@@ -2,4 +2,11 @@
 [data-design-system="vercel"] {
   --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px);
+  --pricing-price-size: 32px;
+  --pricing-price-weight: 450;
+  --pricing-price-tracking: -0.06em;
+  --pricing-period-font-family: var(--font-mono);
+  --pricing-check-color: var(--color-text-primary);
+  --pricing-featured-border-color: var(--color-text-primary);
+  --pricing-featured-shadow: 0 0;
 }

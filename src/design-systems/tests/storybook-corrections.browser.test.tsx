@@ -14,8 +14,8 @@ import * as clockStories from "../../components/Clock/Clock.stories";
 import * as tableStories from "../../components/DataTable/DataTable.stories";
 import * as dateStories from "../../components/DateInput/DateInput.stories";
 import * as timeStories from "../../components/TimeInput/TimeInput.stories";
-import * as weekStories from "../../components/WeekCalendar/WeekCalendar.stories";
 import * as rowStories from "../../components/WeekCalendar/components/WeekCalendarRow/WeekCalendarRow.stories";
+import * as weekStories from "../../components/WeekCalendar/WeekCalendar.stories";
 import { ThemeProvider } from "../../providers";
 import { resolveColor } from "./colorContrast";
 import { DESIGN_SYSTEMS } from "../design-systems.consts";
@@ -137,22 +137,24 @@ describe.each(["light", "dark"] as const)(
             const restTop = label.getBoundingClientRect().top;
             field.focus();
             expect(getComputedStyle(placeholder).opacity).toBe("1");
+            // The label slides up, so its final position is awaited.
             if (floating)
-              expect(label.getBoundingClientRect().bottom).toBeLessThan(
+              await waitFor(() => expect(label.getBoundingClientRect().bottom).toBeLessThan(
                 placeholder.getBoundingClientRect().top,
-              );
+              ));
             field.blur();
             expect(getComputedStyle(placeholder).opacity).toBe(
               floating ? "0" : "1",
             );
-            expect(label.getBoundingClientRect().top).toBe(restTop);
+            await waitFor(() => expect(label.getBoundingClientRect().top).toBe(restTop));
             await user.click(field);
             expect(field).toHaveAttribute("aria-expanded", "true");
             expect(getComputedStyle(placeholder).opacity).toBe("1");
+            // The label slides up, so its final position is awaited.
             if (floating)
-              expect(label.getBoundingClientRect().bottom).toBeLessThan(
+              await waitFor(() => expect(label.getBoundingClientRect().bottom).toBeLessThan(
                 placeholder.getBoundingClientRect().top,
-              );
+              ));
             view.unmount();
           }
           const unlabelled = render(

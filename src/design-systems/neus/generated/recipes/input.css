@@ -66,4 +66,21 @@
   --input-filled-border-width: 0 0 1px;
   --input-outlined-border-width: 1px;
   --input-placeholder-rest-opacity: 1;
+  --input-label-focus-color: var(--input-label-color);
+  --input-label-hover-color: var(--input-label-color);
+  --input-error-value-color: var(--input-error-color);
+  --input-filled-hover-background: var(--input-filled-background);
+  --input-label-duration: 0.15s;
+  --input-label-easing: ease;
+  --input-focus-border-width: var(--input-border-width);
+  --input-notch-outline-width: 0px;
+  --input-notch-border-image: none;
+  --input-filled-border-color: var(--input-border-color);
+  --input-filled-radius: var(--input-radius);
+  --input-filled-padding: var(--input-padding);
+  --input-filled-label-top: 0px;
+  --input-filled-label-translate: translateY(-50%);
+  --input-filled-label-background: var(--input-filled-background);
+  --textarea-radius: min(var(--input-radius), 16px);
+  --textarea-filled-radius: var(--textarea-radius);
 }

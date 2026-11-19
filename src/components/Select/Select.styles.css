@@ -38,8 +38,8 @@
   box-sizing: border-box;
   width: 100%;
   min-width: var(--input-min-width);
-  /* Same height as a medium Input, so fields of one form line up. */
-  min-height: var(--input-control-height-medium);
+  /* As tall as an Input of the same size, so fields of one form line up. */
+  min-height: var(--field-height);
   padding: var(--input-padding);
   padding-inline-end: calc(
     var(--select-caret-size) + var(--select-caret-gap) * 2
@@ -122,8 +122,13 @@
   color: var(--input-placeholder-color);
 }
 
+/* Under a floating label at rest the placeholder hides, as an Input's does, until the field opens. */
+.select__field:not(:focus-within, .select__field--open) .select__placeholder {
+  opacity: var(--field-placeholder-opacity);
+}
+
 .select__field--error .select__value {
-  color: var(--input-error-color);
+  color: var(--input-error-value-color);
 }
 
 .select__caret {
@@ -162,14 +167,9 @@
 }
 
 .select__popover {
-  position: fixed;
-  inset: auto;
-  top: calc(var(--popover-top) + var(--overlay-offset));
-  left: var(--popover-left);
   box-sizing: border-box;
   width: var(--popover-anchor-width);
   max-height: var(--select-list-max-height);
-  margin: 0;
   padding: var(--overlay-padding);
   overflow-y: auto;
   border: var(--overlay-border-width) solid var(--overlay-border-color);

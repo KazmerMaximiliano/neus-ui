@@ -1,0 +1,6 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --popover-radius: 2px;
+  --popover-shadow: 0 2px 2px rgb(0 0 0 / 0.2);
+  --popover-max-width: 368px;
+}

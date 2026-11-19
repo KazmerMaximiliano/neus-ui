@@ -173,6 +173,11 @@ x-neus:
         --button-label-transform: none
         --button-active-transform: scale(0.98)
         --button-loader-size: 5px
+        --button-elevated-shadow: 0 1px 3px rgba(0, 0, 0, 0.12)
+        --button-elevated-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.16)
+      dark:
+        --button-elevated-shadow: 0 1px 3px rgba(0, 0, 0, 0.5)
+        --button-elevated-shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.6)
     calendar:
       base:
         --calendar-radius: 12px
@@ -369,6 +374,108 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+        --pricing-price-size: 40px
+        --pricing-price-tracking: normal
+        --pricing-featured-shadow: 0 0 #0000
+    spinner:
+      base:
+        --spinner-size-medium: 20px
+        --spinner-size-large: 37px
+        --spinner-stroke-width: 0.1em
+        --spinner-color: var(--color-text-secondary)
+    switch:
+      base:
+        --switch-track-width: 51px
+        --switch-track-height: 31px
+        --switch-track-border-width: 0px
+        --switch-track-background: var(--color-text-placeholder)
+        --switch-track-checked-shadow: none
+        --switch-thumb-size: 27px
+        --switch-thumb-checked-size: 27px
+        --switch-thumb-color: var(--color-white)
+        --switch-thumb-hover-color: var(--color-white)
+        --switch-thumb-checked-color: var(--color-white)
+        --switch-thumb-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 3px 1px rgba(0, 0, 0, 0.06)
+        --switch-disabled-opacity: "0.5"
+    radio:
+      base:
+        --radio-dot-size: 6px
+    popover: {}
+    progress:
+      base:
+        --progress-height-medium: 6px
+        --progress-height-large: 8px
+        --progress-label-weight: "400"
+        --progress-value-weight: "400"
+    skeleton: {}
+    toast: {}
+    tooltip: {}
+    tabs:
+      base:
+        --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent)
+        --tabs-font-size: 14px
+        --tabs-font-weight: "400"
+        --tabs-hover-background: transparent
+        --tabs-selected-color: var(--color-text-primary)
+        --tabs-indicator-height: 2px
+        --tabs-indicator-radius: 1px
+        --tabs-indicator-color: var(--color-text-primary)
+        --tabs-contained-height: 32px
+        --tabs-contained-gap: 0px
+        --tabs-contained-padding: 2px
+        --tabs-contained-radius: 9px
+        --tabs-contained-background: rgb(118 118 128 / 0.12)
+        --tabs-contained-tab-radius: 7px
+        --tabs-contained-font-size: 13px
+        --tabs-contained-color: var(--color-text-primary)
+        --tabs-contained-hover-background: transparent
+        --tabs-contained-selected-shadow: 0 3px 8px rgb(0 0 0 / 0.12), 0 3px 1px rgb(0 0 0 / 0.04)
+      dark:
+        --tabs-contained-background: rgb(118 118 128 / 0.24)
+        --tabs-contained-selected-background: "#636366"
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 12px
+        --breadcrumbs-line-height: "1.33337"
+        --breadcrumbs-letter-spacing: -0.01em
+        --breadcrumbs-color: color-mix(in srgb, var(--color-text-primary) 72%, transparent)
+        --breadcrumbs-separator: '"›"'
+        --breadcrumbs-separator-gap: 12px
+        --breadcrumbs-separator-color: color-mix(in srgb, var(--color-text-primary) 48%, transparent)
+        --breadcrumbs-link-color: var(--breadcrumbs-color)
+        --breadcrumbs-link-weight: "400"
+        --breadcrumbs-link-hover-color: var(--breadcrumbs-color)
+        --breadcrumbs-link-hover-decoration: underline
+        --breadcrumbs-current-weight: "400"
+        --breadcrumbs-focus-offset: 1px
+      dark:
+        --breadcrumbs-color: color-mix(in srgb, var(--color-text-primary) 80%, transparent)
+        --breadcrumbs-separator-color: color-mix(in srgb, var(--color-text-primary) 40%, transparent)
+    pagination:
+      base:
+        --pagination-font-weight: "400"
+        --pagination-current-font-weight: "600"
+        --pagination-item-hover-background: rgb(118 118 128 / 0.12)
+    accordion:
+      base:
+        --accordion-divider-color: "#d2d2d7"
+        --accordion-header-min-height: 0px
+        --accordion-header-padding: 17px 0
+        --accordion-header-hover-background: transparent
+        --accordion-title-size: 17px
+        --accordion-title-line-height: "1.47"
+        --accordion-title-letter-spacing: -0.022em
+        --accordion-icon-size: 17px
+        --accordion-icon-color: "#86868b"
+        --accordion-icon-duration: 0.32s
+        --accordion-content-padding: 0 0 17px
+        --accordion-content-size: 14px
+        --accordion-content-line-height: "1.47"
+        --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent)
+        --accordion-focus-offset: 1px
+      dark:
+        --accordion-divider-color: "#424245"
+        --accordion-icon-color: "#6e6e73"
 ---
 
 # Apple
@@ -433,6 +540,9 @@ Emphasize the likely action through style, keep adjacent choices
 similarly sized, and provide a recognizable press response. Use concise action
 labels. These priorities follow [HIG buttons](https://developer.apple.com/design/human-interface-guidelines/buttons).
 Local web requirements: retain visible keyboard focus and a readable loading state.
+HIG has no elevated button; local decision: the elevated variant casts a short, soft shadow sized
+for a control, not the floating depth of menus and popovers, deepens it on hover and returns to it
+when pressed. In dark mode the shadow darkens so it still separates the button from the page.
 
 ### Card
 
@@ -445,6 +555,7 @@ This Card composition is a local web convention.
 Keep the label persistent and the value visually primary.
 Use a clear focus boundary, explicit error text, and a quieter disabled surface.
 Preserve read-only text readability. These are local web form requirements.
+A multi-line field keeps the same 8px rounded rectangle and grows by whole lines.
 
 ### Sidebar
 
@@ -465,9 +576,39 @@ A plain grid without surfaces, or large-radius cards on the secondary surface; p
 
 Sparse: one featured quote or plain columns, no card chrome.
 
+### FAQ
+
+A quiet list of semibold questions over hairlines, as on apple.com, with no fills.
+
+### Pricing
+
+Equal white tiles with the price large and bold, as on the Apple One page; Apple marks no recommended plan, so the blue outline and badge are local.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+A spinner is a thin gray ring, as quiet as the system activity indicator, at 20px inline and 37px for a region. This is a local web mapping.
+
+A switch follows the iOS list-row toggle: a 51×31 capsule with a white 27px knob that casts a soft shadow, the label leading and the switch trailing ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-16). On uses the accent color, which the guidelines allow in place of green; off is a solid gray rather than the light iOS fill, so both states keep 3:1 against the page and the knob. The sizes and the gray are local decisions; the guidelines state none.
+
+Radio buttons follow macOS: the checkbox drawn as a circle, a thin gray ring when not chosen and the accent fill with a small white dot when chosen. The guidelines give no sizes, so the 18px circle and 6px dot are local decisions.
+
+A popover uses the menu panel: the subtle border, 12px corners and floating shadow, with 16px of padding. The arrow of macOS and iPadOS popovers is left out; it opens below its button and moves above when there is no room, a local decision.
+
+A progress bar is a thin accent capsule on a gray track, 6px by default, with a regular-weight label; the guidelines ask for a determinate bar whenever the share is known and an accurate description rather than a vague "Loading" ([HIG progress indicators](https://developer.apple.com/design/human-interface-guidelines/progress-indicators), consulted 2026-11-17). The 4, 6 and 8px thicknesses are local decisions; the guidelines state none.
+
+The guidelines define no skeleton or toast. Skeletons keep the Neus gray shapes with the system's rounded corners, and a toast is the alert with the soft floating shadow and the card's corners: local web mappings.
+
+Tooltips (help tags) are drawn by macOS itself and the web has no equivalent, so a tooltip keeps the Neus dark label with the system font: a local mapping. A combobox is the field with the select's list below it.
+
+Tabs on the web have no HIG geometry: on macOS a tab view is a row of tabs on the top edge of the content, and elsewhere the guidelines point to segmented controls, with segments of about equal width and no more than five to seven of them ([HIG tab views](https://developer.apple.com/design/human-interface-guidelines/tab-views) and [segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls), consulted 2026-11-18). Contained tabs follow the iOS segmented control: a 32px tray of translucent gray (rgb 118 118 128 at 12%, 24% in dark mode) with 9px corners and 2px of padding, and the selected segment a white tile (#636366 in dark mode) with 7px corners and a soft shadow, in 13px text. Line tabs are regular-weight labels with a 2px ink bar under the selected one, which turns semibold. The numbers are local decisions; the guidelines state none.
+
+Breadcrumbs follow apple.com's footer trail: 12px text with -0.01em tracking, links and the current page in ink at 72% (80% in dark mode), separated by chevrons at 48% (40%) with 12px on each side; links underline on hover ([apple.com](https://www.apple.com/iphone/) and its [global footer styles](https://www.apple.com/ac/globalfooter/8/en_US/styles/ac-globalfooter.built.css), consulted 2026-11-18). The chevron is the › character instead of the footer's drawn one. The path control on macOS hides names between the first and last items when the path is too long, which is what a collapsed trail does.
+
+Pagination has no HIG counterpart: page controls are dots for swiping through views. Page buttons are 32px capsules like the small icon buttons, regular weight with the current page a semibold blue capsule; a local mapping.
+
+An accordion follows apple.com's shared accordion in its reduced size: 17px semibold titles over 1px hairlines (#d2d2d7, #424245 in dark mode), no fills or side padding, a gray chevron (#86868b, #6e6e73 in dark mode) at the end that turns in 320ms, and 14px answers ([apple.com iCloud styles](https://www.apple.com/v/icloud/ak/built/styles/overview.built.css), consulted 2026-11-19). The guidelines describe disclosure controls without measurements ([HIG disclosure controls](https://developer.apple.com/design/human-interface-guidelines/disclosure-controls), consulted 2026-11-19).
 
 ## Do's and Don'ts
 

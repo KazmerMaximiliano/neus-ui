@@ -1,7 +1,7 @@
 .checkbox {
   position: relative;
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--checkbox-gap);
   font-family: var(--checkbox-font-family);
   cursor: pointer;
@@ -16,12 +16,18 @@
   pointer-events: none;
 }
 
+/* The control's center sits half an x-height above the label's baseline, as vertical-align: middle
+   defines it, so it lines up with lowercase text in any font. The margins give back the space the
+   shift takes, so the row keeps its height; the control lines up with the first line of a long label. */
 .checkbox__box {
-  display: inline-flex;
+  --checkbox-shift: calc(var(--checkbox-size) / 2 - 0.5ex);
+  position: relative;
+  display: block;
   flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
   box-sizing: border-box;
+  font-size: var(--checkbox-label-font-size);
+  translate: 0 var(--checkbox-shift);
+  margin-block: calc(-1 * var(--checkbox-shift)) var(--checkbox-shift);
   width: var(--checkbox-size);
   height: var(--checkbox-size);
   border: var(--checkbox-border-width) solid var(--checkbox-border-color);
@@ -32,6 +38,9 @@
 }
 
 .checkbox__icon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
   width: var(--checkbox-icon-size);
   height: var(--checkbox-icon-size);
   stroke-width: var(--checkbox-icon-stroke);

@@ -19,16 +19,31 @@ Exhaust these first. Examples: Button `variant` (`solid`, `secondary`,
 `error`, `info`, `white`), `size` and `href` (a link with the button's
 look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`,
 `outlined`, `elevated`) and `as` (`div`, `article`, `li`, `figure`,
-`section`); Input and picker fields `variant`, `size`,
+`section`); Input, Textarea, Combobox, Select, MultiSelect and picker fields `variant`, `size`,
 `labelPlacement` and `description` (help text wired to
 `aria-describedby`), plus native attributes such as `autoComplete`,
-`inputMode` and `spellCheck` on Input; Sidebar and AppTemplate routes
+`inputMode` and `spellCheck` on Input; Textarea `rows`, `maxRows` and
+`autoResize`; Switch `description`; RadioGroup `orientation` and
+`description`, Radio `description`; Popover `placement` and `label`; Tooltip
+`placement` and `delay`; Combobox `filter`, `allowCustomValue`, `loading`,
+`emptyLabel` and `loadingLabel` with every Input field prop; Tabs `variant`
+(`line`, `contained`) and `label`; Breadcrumbs `maxItems`, `linkComponent` and `labels`;
+Accordion `type` (`single`, `multiple`) and `titleAs`; FAQ `variant` (`list`, `cards`),
+`single` and `questionAs`; PricingCard `featured`, `badge` and `nameAs`, PricingTable `columns`;
+Pagination `variant` (`pages`, `compact`), `siblingCount`, `pageSize` with
+`pageSizeOptions`, and `labels`; DataTable `paginationLabels`; `labels` for the built-in
+texts of Select, MultiSelect, Clock, TimeInput, DateInput, WeekCalendar and InteractiveMap,
+Stepper `texts`, Dropdown `label`; `language` on Calendar, DateInput and WeekCalendar, and
+native attributes and `ref` on Button, IconButton and Input; Sidebar and AppTemplate routes
 `href` with `linkComponent`; Badge `variant` and `color`; Heading `as` and
 `size`; Text `variant`, `tone`, `weight`, `measure`, `lines` and `numeric`;
 Section `tone`, `spacing` and `container`; Container `size` and `gutter`;
 Stack and Grid `gap`, `direction` and `columns`, per breakpoint with
 `{ base, md, lg }`; the `neus-ui/sections` variants (Hero, FeatureList,
-TestimonialList, CallToAction) and `labels` (SiteHeader); MediaPlaceholder `ratio`,
+TestimonialList, CallToAction) and `labels` (SiteHeader); Spinner `variant` (`ring`, `dots`) and `size`;
+Progress `size`, `showValue` and `valueText`; Skeleton `variant`, `lines`, `width` and
+`height`; ToastProvider `placement`, `max` and `duration`, and each toast's `status`,
+`duration` and `live`; MediaPlaceholder `ratio`,
 `query` and `pixabayKey` (a stock photo preview during design, only through the
 expression `npx neus-ui context` prints). One solid primary action per view; the rest use
 `secondary`, `tonal`, `outlined` or `text`.

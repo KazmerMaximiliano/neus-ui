@@ -1,4 +1,6 @@
-import { useId, useState, type CSSProperties } from "react";
+import { type CSSProperties,useId, useState } from "react";
+import { resolveLanguage } from "../../../Calendar";
+import { TooltipBubble } from "../../../Tooltip/components/TooltipBubble";
 import type { EventTooltip, WeekCalendarRowProps } from "./WeekCalendarRow.types";
 import { getDayCellInfo, resolveColor } from "./WeekCalendarRow.utils";
 import "./WeekCalendarRow.styles.css";
@@ -31,7 +33,9 @@ export const WeekCalendarRow = ({
   color,
   hoverContent,
   onEventClick,
+  language = "en-US",
 }: WeekCalendarRowProps) => {
+  const locale = resolveLanguage(language);
   const tooltipId = useId();
   const [tooltip, setTooltip] = useState<EventTooltip | null>(null);
   const hideTooltip = () => setTooltip(null);
@@ -92,7 +96,7 @@ export const WeekCalendarRow = ({
             }
             aria-label={
               hasEvent && event
-                ? `${event.title}, ${day.toLocaleDateString()}`
+                ? `${event.title}, ${day.toLocaleDateString(locale)}`
                 : undefined
             }
             aria-describedby={tooltip?.event === event ? tooltipId : undefined}
@@ -202,9 +206,8 @@ export const WeekCalendarRow = ({
         );
       })}
       {hoverContent && tooltip && (
-        <div
+        <TooltipBubble
           id={tooltipId}
-          role="tooltip"
           className={["week-calendar-row__hover-tooltip", tooltipClassName]
             .filter(Boolean)
             .join(" ")}
@@ -217,7 +220,7 @@ export const WeekCalendarRow = ({
           }
         >
           {hoverContent(tooltip.event)}
-        </div>
+        </TooltipBubble>
       )}
     </div>
   );

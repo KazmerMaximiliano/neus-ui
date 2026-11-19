@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
-import type { usePopover } from "../../hooks/usePopover";
 import type { DesignSystemId } from "../../design-systems";
+import type { usePopover } from "../../hooks/usePopover";
 import type { IconButtonIcon } from "../IconButton";
 
 type MenuSize = "small" | "medium" | "large";

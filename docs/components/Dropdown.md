@@ -52,6 +52,7 @@ retain their nullable default.
 | `triggerClassName` | `string` | Omitted | Additional classes on `.dropdown__trigger` |
 | `icon` | `IconButtonIcon` | Omitted | Avatar icon; without it the avatar shows the name initial |
 | `name` | `string` | Omitted | Account name shown in the menu header and used as trigger label |
+| `label` | `string` | `"Menu"` | Accessible name of the trigger and the menu when there is no `name`, in the project's language |
 | `items` | `readonly MenuItem[]` | Required | Menu items with label, onClick and optional disabled |
 | `triggerStyle` | `CSSProperties` | Omitted | Inline styles on `.dropdown__trigger` |
 | `menuStyle` | `CSSProperties` | Omitted | Inline styles on `.menu__panel` |
@@ -186,7 +187,7 @@ dependencies. Do not edit generated files.
 
 ### Shared dependencies and runtime values
 
-`--color-focus`, `--color-text-disabled`, `--popover-right`, `--popover-top`.
+`--color-focus`, `--color-text-disabled`, `--overlay-offset`; the panel is placed by the shared `.popover-panel` (see [Popover](./Popover.md)).
 
 Semantic/foundation tokens are described in [the shared token
 reference](../design/tokens.md). Component dependencies belong to their own linked recipe.

@@ -1,0 +1,26 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent);
+  --tabs-font-size: 14px;
+  --tabs-font-weight: 400;
+  --tabs-hover-background: transparent;
+  --tabs-selected-color: var(--color-text-primary);
+  --tabs-indicator-height: 2px;
+  --tabs-indicator-radius: 1px;
+  --tabs-indicator-color: var(--color-text-primary);
+  --tabs-contained-height: 32px;
+  --tabs-contained-gap: 0px;
+  --tabs-contained-padding: 2px;
+  --tabs-contained-radius: 9px;
+  --tabs-contained-background: rgb(118 118 128 / 0.12);
+  --tabs-contained-tab-radius: 7px;
+  --tabs-contained-font-size: 13px;
+  --tabs-contained-color: var(--color-text-primary);
+  --tabs-contained-hover-background: transparent;
+  --tabs-contained-selected-shadow: 0 3px 8px rgb(0 0 0 / 0.12), 0 3px 1px rgb(0 0 0 / 0.04);
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --tabs-contained-background: rgb(118 118 128 / 0.24);
+  --tabs-contained-selected-background: #636366;
+}

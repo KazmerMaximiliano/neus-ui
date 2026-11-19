@@ -1,0 +1,11 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --progress-label-weight: 400;
+  --progress-value-weight: 400;
+  --progress-height-medium: 4px;
+  --progress-height-large: 8px;
+  --progress-track-radius: 0px;
+  --progress-fill-radius: 0px;
+  --progress-track-background: var(--color-surface-container-highest);
+  --progress-indeterminate-duration: 2s;
+}

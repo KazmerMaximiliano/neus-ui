@@ -23,12 +23,30 @@ const items = [
   { label: "Delete", onClick: vi.fn() },
 ];
 
+it("keeps a menu near the left edge inside the viewport", async () => {
+  const user = userEvent.setup();
+  render(
+    <ThemeProvider scope="local">
+      <Menu text="Options" items={items} />
+    </ThemeProvider>,
+  );
+  const trigger = screen.getByRole("button", { name: "Options" });
+  await user.click(trigger);
+  const panel = screen.getByRole("menu", { name: "Options" });
+
+  expect(panel.dataset.placement).toBe("bottom-start");
+  expect(panel.getBoundingClientRect().left).toBeCloseTo(trigger.getBoundingClientRect().left, 0);
+  expect(panel.getBoundingClientRect().left).toBeGreaterThanOrEqual(0);
+});
+
 describe.each(["light", "dark"] as const)("Menu overlays in %s mode", (scheme) => {
   it.each(SYSTEMS)("renders the $id floating surface below its trigger", async (system) => {
     const user = userEvent.setup();
     render(
       <ThemeProvider scope="local" designSystem={system.id} colorScheme={scheme}>
-        <Menu text="Options" items={items} />
+        <div style={{ paddingInlineStart: 240 }}>
+          <Menu text="Options" items={items} />
+        </div>
       </ThemeProvider>,
     );
     const trigger = screen.getByRole("button", { name: "Options" });

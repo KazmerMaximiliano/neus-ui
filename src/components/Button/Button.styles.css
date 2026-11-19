@@ -61,6 +61,8 @@
   font-size: var(--button-loader-size);
   color: inherit;
   line-height: 1;
+  --spinner-dot-size: var(--button-loader-size);
+  --spinner-dot-margin: calc(var(--button-loader-size) / 3);
 }
 
 .button--primary {
@@ -144,6 +146,10 @@
 
 .button:hover:not(:disabled, [aria-disabled="true"]):not(.button--text) {
   box-shadow: var(--button-shadow-hover);
+}
+
+.button.button--outlined:hover:not(:disabled, [aria-disabled="true"]) {
+  box-shadow: var(--button-outlined-shadow-hover);
 }
 
 .button:active:not(:disabled, [aria-disabled="true"]) {
@@ -240,7 +246,12 @@
     var(--button-elevated-background) 92%,
     var(--button-elevated-color)
   );
+}
+.button.button--elevated:hover:not(:disabled, [aria-disabled="true"]) {
   box-shadow: var(--button-elevated-shadow-hover);
+}
+.button.button--elevated:active:not(:disabled, [aria-disabled="true"]) {
+  box-shadow: var(--button-elevated-shadow-active);
 }
 .button--secondary:is(:disabled, [aria-disabled="true"]),
 .button--tonal:is(:disabled, [aria-disabled="true"]),

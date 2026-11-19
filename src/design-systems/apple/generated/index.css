@@ -26,3 +26,15 @@
 @import "./recipes/alert.css";
 @import "./recipes/avatar.css";
 @import "./recipes/sections.css";
+@import "./recipes/spinner.css";
+@import "./recipes/switch.css";
+@import "./recipes/radio.css";
+@import "./recipes/popover.css";
+@import "./recipes/progress.css";
+@import "./recipes/skeleton.css";
+@import "./recipes/toast.css";
+@import "./recipes/tooltip.css";
+@import "./recipes/tabs.css";
+@import "./recipes/breadcrumbs.css";
+@import "./recipes/pagination.css";
+@import "./recipes/accordion.css";

@@ -1,2 +1,2 @@
 export { InteractiveMap } from "./InteractiveMap";
-export type { InteractiveMapProps, LocationData, MapCoordinates } from "./InteractiveMap.types";
+export type { InteractiveMapLabels, InteractiveMapProps, LocationData, MapCoordinates } from "./InteractiveMap.types";

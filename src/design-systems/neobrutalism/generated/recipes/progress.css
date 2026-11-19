@@ -1,0 +1,20 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --progress-label-color: var(--color-text-primary);
+  --progress-label-weight: 800;
+  --progress-value-color: var(--color-text-primary);
+  --progress-value-weight: 800;
+  --progress-height-small: 10px;
+  --progress-height-medium: 16px;
+  --progress-height-large: 24px;
+  --progress-track-radius: 4px;
+  --progress-fill-radius: 0px;
+  --progress-track-border-width: 3px;
+  --progress-track-border-color: var(--color-text-primary);
+  --progress-track-background: color-mix(in srgb, var(--color-text-primary) 70%, var(--color-surface));
+  --progress-fill-border-width: 3px;
+}
+
+[data-design-system="neobrutalism"][data-color-scheme="dark"] {
+  --progress-track-background: var(--color-surface);
+}

@@ -492,6 +492,8 @@ x-neus:
         --button-elevated-color: color-mix(in srgb, var(--color-primary-text) 80%, var(--color-text-primary))
         --button-elevated-shadow: var(--elevation-floating)
         --button-elevated-shadow-hover: var(--elevation-dialog)
+        --button-elevated-shadow-active: var(--button-elevated-shadow)
+        --button-outlined-shadow-hover: var(--button-shadow-hover)
     calendar:
       base:
         --calendar-font-family: var(--font-body)
@@ -780,6 +782,23 @@ x-neus:
         --input-filled-border-width: 0 0 1px
         --input-outlined-border-width: 1px
         --input-placeholder-rest-opacity: "1"
+        --input-label-focus-color: var(--input-label-color)
+        --input-label-hover-color: var(--input-label-color)
+        --input-error-value-color: var(--input-error-color)
+        --input-filled-hover-background: var(--input-filled-background)
+        --input-label-duration: 0.15s
+        --input-label-easing: ease
+        --input-focus-border-width: var(--input-border-width)
+        --input-notch-outline-width: 0px
+        --input-notch-border-image: none
+        --input-filled-border-color: var(--input-border-color)
+        --input-filled-radius: var(--input-radius)
+        --input-filled-padding: var(--input-padding)
+        --input-filled-label-top: 0px
+        --input-filled-label-translate: translateY(-50%)
+        --input-filled-label-background: var(--input-filled-background)
+        --textarea-radius: min(var(--input-radius), {rounded.default})
+        --textarea-filled-radius: var(--textarea-radius)
     link:
       base:
         --link-color: var(--color-primary-text)
@@ -857,6 +876,7 @@ x-neus:
         --select-search-radius: var(--radius-default)
         --select-tag-gap: 6px
         --select-tag-padding: 2px 4px 2px 10px
+        --select-tag-margin-block: 0px
         --select-tag-radius: var(--radius-pill)
         --select-tag-background: var(--color-tag-bg)
         --select-tag-color: var(--color-text-primary)
@@ -911,6 +931,7 @@ x-neus:
         --sidebar-item-focus-color: var(--sidebar-color)
         --sidebar-item-size: 11px
         --sidebar-item-weight: "700"
+        --sidebar-item-active-weight: var(--sidebar-item-weight)
         --sidebar-item-line-height: normal
         --sidebar-item-spacing: 0.25em
         --sidebar-item-transform: uppercase
@@ -1232,6 +1253,23 @@ x-neus:
         --testimonial-rule-width: 3px
         --testimonial-rule-color: color-mix(in srgb, var(--color-primary) 45%, var(--color-surface))
         --testimonial-gap: var(--space-4)
+        --faq-max-width: 48rem
+        --faq-cards-gap: var(--space-3)
+        --pricing-header-gap: var(--space-3)
+        --pricing-price-font-family: var(--font-display)
+        --pricing-price-size: var(--fs-3xl)
+        --pricing-price-weight: 700
+        --pricing-price-tracking: -0.02em
+        --pricing-period-font-family: inherit
+        --pricing-period-color: var(--color-text-secondary)
+        --pricing-period-size: var(--fs-sm)
+        --pricing-feature-size: var(--fs-base)
+        --pricing-feature-gap: var(--space-3)
+        --pricing-check-size: 18px
+        --pricing-check-color: var(--color-primary-text)
+        --pricing-featured-border-color: var(--color-primary)
+        --pricing-featured-ring-width: 1px
+        --pricing-featured-shadow: var(--elevation-floating)
         --call-to-action-gap: var(--space-8)
         --site-footer-background: var(--color-surface)
         --site-footer-border-color: var(--color-border-subtle)
@@ -1239,6 +1277,309 @@ x-neus:
         --site-footer-link-color: var(--color-text-secondary)
         --site-footer-title-color: var(--color-text-primary)
         --site-footer-font-size: var(--fs-base)
+    spinner:
+      base:
+        --spinner-size-small: 16px
+        --spinner-size-medium: 24px
+        --spinner-size-large: 40px
+        --spinner-stroke-width: 0.125em
+        --spinner-color: var(--color-primary-text)
+        --spinner-track-color: color-mix(in srgb, currentColor 18%, transparent)
+        --spinner-ring-duration: 0.8s
+        --spinner-dot-size: 0.25em
+        --spinner-dot-margin: 0.083em
+        --spinner-dot-duration: 1.4s
+    switch:
+      base:
+        --switch-font-family: var(--font-body)
+        --switch-gap: "{spacing.step-3}"
+        --switch-text-gap: 2px
+        --switch-track-width: 44px
+        --switch-track-height: 24px
+        --switch-track-radius: "{rounded.pill}"
+        --switch-track-border-width: 2px
+        --switch-track-border-color: var(--color-primary-dark)
+        --switch-track-background: var(--color-surface)
+        --switch-track-shadow: none
+        --switch-track-hover-border-color: var(--color-primary)
+        --switch-track-checked-background: var(--color-primary)
+        --switch-track-checked-border-color: var(--color-primary)
+        --switch-track-checked-shadow: 0 4px 12px -4px var(--color-focus-ring)
+        --switch-thumb-size: 12px
+        --switch-thumb-checked-size: 16px
+        --switch-thumb-radius: 50%
+        --switch-thumb-color: var(--color-primary-dark)
+        --switch-thumb-hover-color: var(--color-primary)
+        --switch-thumb-checked-color: var(--color-text-on-primary)
+        --switch-thumb-shadow: none
+        --switch-label-color: var(--color-text-primary)
+        --switch-label-font-size: var(--fs-base)
+        --switch-label-line-height: 20px
+        --switch-focus-width: 2px
+        --switch-focus-color: var(--color-focus)
+        --switch-focus-offset: 2px
+        --switch-disabled-opacity: "0.38"
+        --switch-disabled-color: var(--color-text-disabled)
+        --switch-duration: 0.2s
+        --switch-easing: ease
+    radio:
+      base:
+        --radio-font-family: var(--checkbox-font-family)
+        --radio-size: var(--checkbox-size)
+        --radio-gap: var(--checkbox-gap)
+        --radio-text-gap: 2px
+        --radio-border-width: var(--checkbox-border-width)
+        --radio-border-color: var(--checkbox-border-color)
+        --radio-hover-border-color: var(--checkbox-hover-border-color)
+        --radio-background: var(--checkbox-background)
+        --radio-shadow: var(--checkbox-shadow)
+        --radio-checked-background: var(--checkbox-checked-background)
+        --radio-checked-border-color: var(--checkbox-checked-border-color)
+        --radio-checked-shadow: var(--checkbox-checked-shadow)
+        --radio-dot-size: 8px
+        --radio-dot-color: var(--checkbox-check-color)
+        --radio-label-color: var(--checkbox-label-color)
+        --radio-label-font-size: var(--checkbox-label-font-size)
+        --radio-label-line-height: var(--checkbox-label-line-height)
+        --radio-focus-width: var(--checkbox-focus-width)
+        --radio-focus-color: var(--checkbox-focus-color)
+        --radio-focus-offset: var(--checkbox-focus-offset)
+        --radio-error-border-color: var(--input-error-border-color)
+        --radio-disabled-background: var(--checkbox-disabled-background)
+        --radio-disabled-border-color: var(--checkbox-disabled-border-color)
+        --radio-disabled-color: var(--checkbox-disabled-color)
+        --radio-transition: var(--checkbox-transition)
+        --radio-dot-transition: scale 0.2s ease
+        --radio-group-gap: "{spacing.step-3}"
+        --radio-group-inline-gap: "{spacing.step-6}"
+        --radio-group-text-gap: "{spacing.step-1}"
+        --radio-group-label-gap: "{spacing.step-2}"
+        --radio-group-label-color: var(--input-label-color)
+        --radio-group-label-font-size: var(--input-label-font-size)
+        --radio-group-label-weight: var(--input-label-weight)
+        --radio-group-required-color: var(--input-required-color)
+        --radio-group-required-gap: var(--input-required-gap)
+        --radio-group-error-color: var(--input-error-color)
+        --radio-group-error-font-size: var(--input-error-font-size)
+        --radio-group-disabled-color: var(--input-disabled-color)
+    popover:
+      base:
+        --popover-font-family: var(--overlay-font-family)
+        --popover-background: var(--overlay-background)
+        --popover-color: var(--overlay-color)
+        --popover-border-width: var(--overlay-border-width)
+        --popover-border-color: var(--overlay-border-color)
+        --popover-radius: var(--overlay-radius)
+        --popover-shadow: var(--overlay-shadow)
+        --popover-padding: "{spacing.step-4}"
+        --popover-max-width: 320px
+    progress:
+      base:
+        --progress-font-family: var(--font-body)
+        --progress-gap: "{spacing.step-2}"
+        --progress-text-gap: "{spacing.step-4}"
+        --progress-label-color: var(--color-text-primary)
+        --progress-label-font-size: var(--fs-sm)
+        --progress-label-weight: "600"
+        --progress-value-color: var(--color-text-secondary)
+        --progress-value-font-size: var(--fs-sm)
+        --progress-value-weight: "500"
+        --progress-height-small: 4px
+        --progress-height-medium: 8px
+        --progress-height-large: 12px
+        --progress-track-radius: "{rounded.pill}"
+        --progress-track-border-width: 0px
+        --progress-track-border-color: transparent
+        --progress-track-background: var(--color-border-subtle)
+        --progress-fill-background: var(--color-primary)
+        --progress-fill-radius: "{rounded.pill}"
+        --progress-fill-border-width: 0px
+        --progress-transition: width 0.3s ease
+        --progress-indeterminate-width: 40%
+        --progress-indeterminate-duration: 1.6s
+    skeleton:
+      base:
+        --skeleton-background: var(--color-border-subtle)
+        --skeleton-highlight: transparent
+        --skeleton-animation-name: skeleton-pulse
+        --skeleton-duration: 1.6s
+        --skeleton-text-height: 0.75em
+        --skeleton-line-gap: 0.75em
+        --skeleton-last-line-width: 60%
+        --skeleton-text-radius: 4px
+        --skeleton-rect-height: 120px
+        --skeleton-rect-radius: var(--card-radius)
+        --skeleton-circle-size: 40px
+    toast:
+      base:
+        --toast-width: 360px
+        --toast-gap: "{spacing.step-3}"
+        --toast-offset: "{spacing.step-6}"
+        --toast-radius: var(--alert-radius)
+        --toast-shadow: var(--elevation-floating)
+        --toast-z-index: "1100"
+        --toast-duration: 0.2s
+        --toast-easing: ease-out
+        --toast-enter-offset: 8px
+    tooltip:
+      base:
+        --tooltip-background: var(--color-text-primary)
+        --tooltip-color: var(--color-surface)
+        --tooltip-border-width: 0px
+        --tooltip-border-color: transparent
+        --tooltip-radius: var(--radius-sm)
+        --tooltip-shadow: none
+        --tooltip-padding: 6px 10px
+        --tooltip-max-width: 240px
+        --tooltip-multiline-padding: initial
+        --tooltip-multiline-max-width: initial
+        --tooltip-offset: 6px
+        --tooltip-caret-size: 0px
+        --tooltip-font-family: var(--font-body)
+        --tooltip-font-size: var(--fs-xs)
+        --tooltip-font-weight: "500"
+        --tooltip-line-height: "1.4"
+        --tooltip-letter-spacing: normal
+    tabs:
+      base:
+        --tabs-font-family: var(--font-body)
+        --tabs-font-size: var(--fs-sm)
+        --tabs-font-weight: "600"
+        --tabs-selected-font-weight: "600"
+        --tabs-line-height: "1.4"
+        --tabs-letter-spacing: normal
+        --tabs-height: 44px
+        --tabs-min-width: 0px
+        --tabs-padding: 0 16px
+        --tabs-gap: 0px
+        --tabs-icon-gap: 8px
+        --tabs-radius: var(--radius-sm) var(--radius-sm) 0 0
+        --tabs-background: transparent
+        --tabs-color: var(--color-text-secondary)
+        --tabs-hover-color: var(--color-text-primary)
+        --tabs-hover-background: var(--color-surface-hover)
+        --tabs-selected-color: var(--color-primary-text)
+        --tabs-disabled-color: var(--color-text-disabled)
+        --tabs-divider-width: 1px
+        --tabs-divider-color: var(--color-border-subtle)
+        --tabs-indicator-height: 3px
+        --tabs-indicator-inset: 0px
+        --tabs-indicator-radius: 3px 3px 0 0
+        --tabs-indicator-color: var(--color-primary)
+        --tabs-hover-indicator-color: transparent
+        --tabs-contained-height: 36px
+        --tabs-contained-gap: 4px
+        --tabs-contained-padding: 4px
+        --tabs-contained-border-width: 0px
+        --tabs-contained-border-color: transparent
+        --tabs-contained-radius: var(--radius-default)
+        --tabs-contained-background: var(--color-surface-secondary)
+        --tabs-contained-tab-radius: var(--radius-sm)
+        --tabs-contained-tab-padding: var(--tabs-padding)
+        --tabs-contained-font-size: var(--tabs-font-size)
+        --tabs-contained-tab-background: transparent
+        --tabs-contained-color: var(--color-text-secondary)
+        --tabs-contained-hover-background: color-mix(in srgb, var(--color-text-primary) 6%, transparent)
+        --tabs-contained-selected-background: var(--color-surface)
+        --tabs-contained-selected-color: var(--color-text-primary)
+        --tabs-contained-selected-shadow: 0 1px 3px rgb(15 23 42 / 0.12)
+        --tabs-focus-width: 2px
+        --tabs-focus-color: var(--color-focus)
+        --tabs-focus-offset: 2px
+        --tabs-panel-gap: "{spacing.step-4}"
+        --tabs-transition: color 0.2s ease, background-color 0.2s ease
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-family: var(--font-body)
+        --breadcrumbs-font-size: var(--fs-sm)
+        --breadcrumbs-font-weight: "400"
+        --breadcrumbs-line-height: "1.5"
+        --breadcrumbs-letter-spacing: normal
+        --breadcrumbs-row-gap: 4px
+        --breadcrumbs-color: var(--color-text-secondary)
+        --breadcrumbs-separator: '"/"'
+        --breadcrumbs-separator-gap: 8px
+        --breadcrumbs-separator-color: var(--color-text-secondary)
+        --breadcrumbs-separator-weight: "400"
+        --breadcrumbs-link-color: var(--link-secondary-color)
+        --breadcrumbs-link-weight: "500"
+        --breadcrumbs-link-padding: var(--link-padding)
+        --breadcrumbs-link-radius: var(--link-radius)
+        --breadcrumbs-link-decoration: none
+        --breadcrumbs-link-underline-offset: var(--link-underline-offset)
+        --breadcrumbs-link-hover-color: var(--link-hover-primary-color)
+        --breadcrumbs-link-hover-background: var(--link-hover-background)
+        --breadcrumbs-link-hover-decoration: var(--link-hover-decoration)
+        --breadcrumbs-current-color: var(--color-text-primary)
+        --breadcrumbs-current-weight: "600"
+        --breadcrumbs-expand-size: 24px
+        --breadcrumbs-focus-width: var(--link-focus-width)
+        --breadcrumbs-focus-color: var(--link-focus-color)
+        --breadcrumbs-focus-offset: var(--link-focus-offset)
+        --breadcrumbs-transition: var(--link-transition)
+    pagination:
+      base:
+        --pagination-font-family: var(--font-body)
+        --pagination-font-size: var(--fs-sm)
+        --pagination-font-weight: "500"
+        --pagination-current-font-weight: "700"
+        --pagination-gap: 4px
+        --pagination-item-size: var(--icon-button-size-small)
+        --pagination-item-padding: 0 8px
+        --pagination-item-radius: var(--radius-pill)
+        --pagination-item-border-width: 0px
+        --pagination-item-border-color: transparent
+        --pagination-item-background: transparent
+        --pagination-item-color: var(--color-text-primary)
+        --pagination-item-hover-background: var(--color-surface-hover)
+        --pagination-item-hover-color: var(--color-text-primary)
+        --pagination-current-background: var(--color-primary)
+        --pagination-current-color: var(--color-text-on-primary)
+        --pagination-current-border-color: transparent
+        --pagination-current-shadow: none
+        --pagination-ellipsis-color: var(--color-text-secondary)
+        --pagination-info-color: var(--color-text-secondary)
+        --pagination-info-font-size: var(--fs-sm)
+        --pagination-focus-width: 2px
+        --pagination-focus-color: var(--color-focus)
+        --pagination-focus-offset: 2px
+        --pagination-transition: background-color 180ms ease, color 180ms ease
+    accordion:
+      base:
+        --accordion-font-family: var(--font-body)
+        --accordion-gap: 0px
+        --accordion-divider-width: 1px
+        --accordion-divider-color: var(--color-border-subtle)
+        --accordion-item-background: transparent
+        --accordion-item-border-width: 0px
+        --accordion-item-border-color: transparent
+        --accordion-item-radius: 0px
+        --accordion-item-shadow: none
+        --accordion-header-min-height: 56px
+        --accordion-header-padding: 12px 8px
+        --accordion-header-gap: "{spacing.step-4}"
+        --accordion-header-radius: var(--accordion-item-radius)
+        --accordion-header-background: transparent
+        --accordion-header-hover-background: var(--color-surface-hover)
+        --accordion-title-color: var(--color-text-primary)
+        --accordion-title-size: var(--fs-base)
+        --accordion-title-weight: "600"
+        --accordion-title-line-height: "1.4"
+        --accordion-title-letter-spacing: normal
+        --accordion-icon-size: 20px
+        --accordion-icon-color: var(--color-text-secondary)
+        --accordion-icon-rotation: 180deg
+        --accordion-icon-duration: 0.2s
+        --accordion-content-padding: 0 8px 20px
+        --accordion-content-divider-width: 0px
+        --accordion-content-color: var(--color-text-secondary)
+        --accordion-content-size: var(--fs-base)
+        --accordion-content-line-height: "1.6"
+        --accordion-disabled-color: var(--color-text-disabled)
+        --accordion-focus-width: 2px
+        --accordion-focus-color: var(--color-focus)
+        --accordion-focus-offset: -2px
+        --accordion-transition: background-color 0.2s ease
 ---
 
 # Neus UI
@@ -1317,6 +1658,10 @@ Keep a visible label, legible value, subordinate placeholder,
 and explicit error message. Focus must remain evident when invalid. A read-only
 value stays readable and distinct from an unavailable field.
 
+A multi-line field keeps the same border, focus and error roles but is never a pill:
+its corners stop at the 16px content radius, and it grows by whole lines, by hand or
+with its content up to a limit.
+
 ### Sidebar
 
 Use the primary-colored panel to anchor navigation. Keep hover,
@@ -1341,11 +1686,45 @@ Cards with a tinted icon tile and a short title, three per row on desktop; a pla
 
 Cards with an initials avatar, the name and the role, so every quote reads with its author; a featured card for one strong quote. Never stars or ratings the brief did not give.
 
+### FAQ
+
+Questions over thin dividers, semibold in ink with a gray chevron; cards for a page already built of cards.
+
+### Pricing
+
+Cards with the price large in Manrope; the recommended plan gets an indigo outline, the floating shadow, a badge and the one solid action.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
 
 A missing picture is a quiet striped frame in the low surface with its shot written in monospace. A stock photo previewed during design fades in over the frame with its author on a dark chip in the corner, the same in light and dark because the photo does not change.
+
+A spinner marks a wait of unknown length: an indigo ring over a faint track of its own color. Inside a button it becomes three dots in the label's color. Under reduced motion it turns more slowly instead of stopping, so the page never looks frozen.
+
+A switch is a setting that applies at once. Off, it is an indigo-outlined pill with a small indigo knob, like an unchecked checkbox; on, the pill fills with indigo and the knob grows white at the far end. The label comes first and the switch sits at the end of the row; unavailable switches dim without losing their on or off look.
+
+A radio group is one choice among a few options that all stay visible. Each radio is the checkbox drawn as a circle: the same indigo outline, filled with indigo and a white dot when selected. The group's legend reads like a field label, the options stack with the space of a related group, and a horizontal row leaves the wider gap between unrelated items.
+
+A popover holds a few controls or details tied to the button that opens it, such as filters or an explanation. It is the menu panel with room inside: the same white surface, input-colored border, rounded corners and floating shadow, with 16px of padding and at most 320px wide. It opens below the button and moves above or to the other edge when it would leave the screen.
+
+A progress bar shows how much of a task is done: an indigo pill filling a gray pill track, 8px thick by default, with its label above in bold and the percentage or a count at the end in secondary ink. When the share is unknown, an indigo segment slides along the track; under reduced motion it slides more slowly instead of stopping.
+
+A skeleton holds the place of content that is still loading: gray rounded lines for text, a block with the card's corners for media and a circle for an avatar, pulsing softly. It stops pulsing under reduced motion. The region that is loading says so to screen readers, not the placeholder.
+
+A toast is a short notification that floats in a corner after an action, such as "Changes saved". It is the alert of its status with the floating shadow, 360px wide, and closes itself after five seconds unless hovered or focused. Newer toasts stack nearest the corner, 12px apart.
+
+A tooltip is a short dark label that names or explains a control, such as an icon button. It reverses the page colors (text color behind, surface color in front), with 12px medium text, 6px by 10px of padding, 8px corners and no shadow, at most 240px wide. It sits 6px above the control, centered, and moves below when there is no room.
+
+A combobox is a field you can type into that suggests options below it. The field is the input with every one of its variants and sizes, and the list is the select's panel and options. The option the arrow keys reach gets the hover background and the focus outline, because focus stays in the field.
+
+An accordion stacks sections under their titles: each title in semibold ink at 14px on its own row, with a gray chevron at the end that turns when the section opens, and thin gray rules between the rows. Hovering a row gives it the low surface; the open section's text sits below in secondary ink. Disabled titles fade to the disabled ink.
+
+Tabs switch between views of one subject. Line tabs sit on a thin gray divider: labels in secondary ink, semibold at 13px, and the selected one in indigo with a 3px indigo bar on the divider, its top corners rounded; hovering a tab gives it the low surface. Contained tabs are a segmented control: a low-surface tray with 4px of padding and the selected tab raised as a white tile with a soft shadow. Focus draws a 2px ring inside the tab.
+
+Breadcrumbs show where the page sits: secondary-ink links in 13px separated by slashes, ending at the current page in primary ink and semibold. Links turn indigo and underline on hover, like every link, and a long trail folds its middle behind an ellipsis button.
+
+Pagination numbers the pages in 40px round buttons, as wide as the icon buttons beside them for previous and next. The current page is a solid indigo disc with white numbers in bold; the others are plain ink that gets the hover surface. The compact form reads "5 / 20" in secondary ink between the arrows.
 
 ## Do's and Don'ts
 

@@ -1,0 +1,12 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --progress-label-font-size: 14px;
+  --progress-label-weight: 400;
+  --progress-value-font-size: 12px;
+  --progress-value-weight: 400;
+  --progress-text-gap: 16px;
+  --progress-height-medium: 8px;
+  --progress-height-large: 10px;
+  --progress-track-radius: 0px;
+  --progress-fill-radius: 0px;
+}

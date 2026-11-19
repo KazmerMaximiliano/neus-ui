@@ -2,4 +2,9 @@
 [data-design-system="carbon"] {
   --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent);
   --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px);
+  --pricing-price-size: 32px;
+  --pricing-price-weight: 400;
+  --pricing-price-tracking: 0px;
+  --pricing-featured-ring-width: 2px;
+  --pricing-featured-shadow: 0 0;
 }

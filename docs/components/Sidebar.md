@@ -102,11 +102,11 @@ type SidebarItem = {
 };
 
 type SidebarLabels = {
-  readonly navigation?: string;
-  readonly open?: string;
-  readonly close?: string;
-  readonly expand?: string;
-  readonly collapse?: string;
+  readonly navigation?: string; // "Main navigation"
+  readonly open?: string; // "Open menu"
+  readonly close?: string; // "Close menu"
+  readonly expand?: string; // "Expand navigation"
+  readonly collapse?: string; // "Collapse navigation"
 };
 
 type SidebarViewport = "mobile" | "tablet" | "desktop";
@@ -258,6 +258,7 @@ dependencies. Do not edit generated files.
 | `--sidebar-font-family` | sidebar font family | `var(--font-body)` |
 | `--sidebar-item-line-height` | sidebar item line height | `normal` |
 | `--sidebar-item-weight` | sidebar item weight | `700` |
+| `--sidebar-item-active-weight` | Current item's weight | `var(--sidebar-item-weight)` |
 | `--sidebar-title-line-height` | sidebar title line height | `1.3` |
 | `--sidebar-title-weight` | sidebar title weight | `700` |
 

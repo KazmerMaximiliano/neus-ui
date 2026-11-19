@@ -198,7 +198,11 @@ x-neus:
         --button-secondary-background: "#393939"
         --button-secondary-color: "#ffffff"
         --button-secondary-hover: "#474747"
-        --button-elevated-shadow: var(--elevation-floating)
+        --button-elevated-shadow: 0 1px 2px rgba(0, 0, 0, 0.3)
+        --button-elevated-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.3)
+      dark:
+        --button-elevated-shadow: 0 1px 2px rgba(0, 0, 0, 0.8)
+        --button-elevated-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.8)
     calendar:
       base:
         --calendar-min-width: 288px
@@ -462,6 +466,175 @@ x-neus:
       base:
         --site-header-sticky-background: color-mix(in srgb, var(--color-surface) 88%, transparent)
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
+        --pricing-price-size: 32px
+        --pricing-price-weight: 400
+        --pricing-price-tracking: 0px
+        --pricing-featured-ring-width: 2px
+        --pricing-featured-shadow: 0 0 #0000
+    spinner:
+      base:
+        --spinner-size-small: 16px
+        --spinner-size-large: 88px
+        --spinner-stroke-width: 0.1em
+    switch:
+      base:
+        --switch-track-width: 48px
+        --switch-track-height: 24px
+        --switch-track-border-width: 0px
+        --switch-track-background: var(--color-border-strong)
+        --switch-track-checked-background: var(--color-success-dark)
+        --switch-track-checked-border-color: var(--color-success-dark)
+        --switch-track-checked-shadow: none
+        --switch-thumb-size: 18px
+        --switch-thumb-checked-size: 18px
+        --switch-thumb-color: var(--color-white)
+        --switch-thumb-hover-color: var(--color-white)
+        --switch-thumb-checked-color: var(--color-white)
+        --switch-label-line-height: 18px
+        --switch-focus-offset: 1px
+        --switch-duration: 70ms
+        --switch-easing: cubic-bezier(0.2, 0, 0.38, 0.9)
+    radio:
+      base:
+        --radio-size: 18px
+        --radio-gap: 10px
+        --radio-checked-background: var(--radio-background)
+        --radio-dot-color: var(--color-text-primary)
+        --radio-focus-offset: 1.5px
+        --radio-group-gap: 8px
+        --radio-group-inline-gap: 16px
+    popover:
+      base:
+        --popover-radius: 2px
+        --popover-shadow: 0 2px 2px rgb(0 0 0 / 0.2)
+        --popover-max-width: 368px
+    progress:
+      base:
+        --progress-label-font-size: 14px
+        --progress-label-weight: "400"
+        --progress-value-font-size: 12px
+        --progress-value-weight: "400"
+        --progress-text-gap: 16px
+        --progress-height-medium: 8px
+        --progress-height-large: 10px
+        --progress-track-radius: 0px
+        --progress-fill-radius: 0px
+    skeleton:
+      base:
+        --skeleton-background: "#e8e8e8"
+        --skeleton-highlight: "#c6c6c6"
+        --skeleton-animation-name: skeleton-shimmer
+        --skeleton-text-radius: 0px
+        --skeleton-rect-radius: 0px
+      dark:
+        --skeleton-background: "#292929"
+        --skeleton-highlight: "#393939"
+    toast:
+      base:
+        --toast-width: 288px
+        --toast-gap: 8px
+        --toast-radius: 0px
+    tooltip:
+      base:
+        --tooltip-background: "#393939"
+        --tooltip-color: "#ffffff"
+        --tooltip-radius: 2px
+        --tooltip-padding: 2px 16px
+        --tooltip-max-width: 208px
+        --tooltip-multiline-padding: 16px
+        --tooltip-multiline-max-width: 288px
+        --tooltip-offset: 10px
+        --tooltip-caret-size: 6px
+        --tooltip-font-size: 14px
+        --tooltip-font-weight: "400"
+        --tooltip-line-height: 20px
+        --tooltip-letter-spacing: 0.16px
+      dark:
+        --tooltip-background: "#f4f4f4"
+        --tooltip-color: "#161616"
+    tabs:
+      base:
+        --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 25%, transparent)
+        --tabs-font-size: 14px
+        --tabs-font-weight: "400"
+        --tabs-line-height: 18px
+        --tabs-letter-spacing: 0.16px
+        --tabs-height: 40px
+        --tabs-padding: 8px 16px
+        --tabs-gap: 1px
+        --tabs-radius: 0px
+        --tabs-hover-background: transparent
+        --tabs-selected-color: var(--color-text-primary)
+        --tabs-divider-width: 2px
+        --tabs-indicator-height: 2px
+        --tabs-indicator-radius: 0px
+        --tabs-indicator-color: "#0f62fe"
+        --tabs-hover-indicator-color: "#8d8d8d"
+        --tabs-contained-height: 48px
+        --tabs-contained-gap: 1px
+        --tabs-contained-padding: 0px
+        --tabs-contained-radius: 0px
+        --tabs-contained-background: "#8d8d8d"
+        --tabs-contained-tab-radius: 0px
+        --tabs-contained-tab-background: "#e0e0e0"
+        --tabs-contained-hover-background: "#d1d1d1"
+        --tabs-contained-selected-background: "#f4f4f4"
+        --tabs-contained-selected-shadow: inset 0 2px 0 var(--tabs-indicator-color)
+      dark:
+        --tabs-indicator-color: "#4589ff"
+        --tabs-hover-indicator-color: "#6f6f6f"
+        --tabs-contained-background: "#6f6f6f"
+        --tabs-contained-tab-background: "#393939"
+        --tabs-contained-hover-background: "#474747"
+        --tabs-contained-selected-background: "#262626"
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 14px
+        --breadcrumbs-line-height: 18px
+        --breadcrumbs-letter-spacing: 0.16px
+        --breadcrumbs-color: var(--color-text-primary)
+        --breadcrumbs-separator-color: var(--color-text-primary)
+        --breadcrumbs-link-color: var(--link-color)
+        --breadcrumbs-link-weight: "400"
+        --breadcrumbs-link-hover-decoration: underline
+        --breadcrumbs-current-weight: "400"
+    pagination:
+      base:
+        --pagination-font-size: 14px
+        --pagination-font-weight: "400"
+        --pagination-current-font-weight: "600"
+        --pagination-gap: 0px
+        --pagination-item-padding: 0 4px
+        --pagination-item-radius: 0px
+        --pagination-item-hover-background: rgb(141 141 141 / 0.12)
+        --pagination-current-background: "linear-gradient(#0f62fe, #0f62fe) center bottom / 16px 4px no-repeat"
+        --pagination-current-color: var(--color-text-primary)
+        --pagination-focus-offset: -2px
+      dark:
+        --pagination-item-hover-background: rgb(141 141 141 / 0.16)
+        --pagination-current-background: "linear-gradient(#4589ff, #4589ff) center bottom / 16px 4px no-repeat"
+    accordion:
+      base:
+        --accordion-divider-color: "#e0e0e0"
+        --accordion-header-min-height: 40px
+        --accordion-header-padding: 0 16px
+        --accordion-header-hover-background: "#e8e8e8"
+        --accordion-title-size: 14px
+        --accordion-title-weight: "400"
+        --accordion-title-line-height: 20px
+        --accordion-title-letter-spacing: 0.16px
+        --accordion-icon-size: 16px
+        --accordion-icon-color: var(--color-text-primary)
+        --accordion-icon-duration: 0.11s
+        --accordion-content-padding: 8px 48px 24px 16px
+        --accordion-content-color: var(--color-text-primary)
+        --accordion-content-size: 14px
+        --accordion-content-line-height: 20px
+        --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 25%, transparent)
+        --accordion-transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9)
+      dark:
+        --accordion-divider-color: "#393939"
+        --accordion-header-hover-background: "#333333"
 ---
 
 # Carbon
@@ -525,6 +698,11 @@ Preserve the label alignment and action hierarchy of
 [Carbon buttons](https://www.carbondesignsystem.com/building-blocks/core/components/button/specifications).
 Use separate hover, active, focus, and disabled treatments; focus needs a boundary
 that remains visible against the button fill.
+Carbon has no elevated button; local decision: the elevated variant rests on a 1px-offset shadow
+and rises on hover to Carbon's 2px/6px drop shadow, in the `shadow` color of each theme (black
+at 30% in White, 80% in Gray 100, per the
+[theme tokens](https://github.com/carbon-design-system/carbon/tree/main/packages/themes/tokens/themes),
+consulted 2026-11-17).
 
 ### Card
 
@@ -537,7 +715,8 @@ for the visual reference; interactive tile types require separate behavior desig
 Follow [Carbon text-input specifications](https://www.carbondesignsystem.com/building-blocks/core/components/text-input/specifications)
 for field geometry and focus, and [validation guidance](https://www.carbondesignsystem.com/building-blocks/core/components/text-input/guidelines)
 for invalid feedback. Keep labels and messages aligned; distinguish read-only,
-disabled, invalid, and focused states.
+disabled, invalid, and focused states. The text area variant in the same specification
+keeps the square field, the bottom rule and the inset focus; it grows by whole lines.
 
 ### Sidebar
 
@@ -557,9 +736,41 @@ A list or grid separated by hairlines, square tiles, pictograms over icons; no r
 
 Plain start-aligned quotes, or one featured quote in the display weight.
 
+### FAQ
+
+The accordion: regular-weight questions over subtle-border rules.
+
+### Pricing
+
+Square tiles in the layer color with the price in light 32px; Carbon has no pricing pattern, so the blue outline on the recommended plan is local.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+Loading uses the small 16px indicator inline and the large 88px one for a whole region, in the interactive color ([Carbon loading](https://carbondesignsystem.com/components/loading/style/), consulted 2026-11-15).
+
+The toggle is the default 48×24 track with an 18px white handle, gray when off and the success green when on ([Carbon toggle style](https://carbondesignsystem.com/components/toggle/style/), consulted 2026-11-16). The green is the success role's darker step, so the white handle and the track keep 3:1 with the default palette. Carbon places the label above the toggle; here it sits before it on the same row, like the state text, which is a local mapping.
+
+A radio button is an 18px circle with a 1px ring in the primary icon color; selected, the fill stays clear and an 8px dot of the same color appears. The label sits 10px from the circle, stacked options are 8px apart and a horizontal row leaves 16px ([Carbon radio button style](https://carbondesignsystem.com/components/radio-button/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/radio-button/_radio-button.scss), consulted 2026-11-16). The style page lists 8px for the label gap and the row; the source's 10px and 16px are used.
+
+A popover is a layer-colored container with 2px corners, the drop shadow of its `--drop-shadow` variant and 16px of padding, up to 368px wide ([Carbon popover style](https://carbondesignsystem.com/components/popover/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/popover/_popover.scss), consulted 2026-11-16). The style page lists 352px; the source's 368px is used. The caret is left out.
+
+A progress bar is 8px big or 4px small, square, with the interactive blue on the subtle border color; the label is body compact at 14px regular and the value helper text at 12px, 8px above the bar ([Carbon progress bar style](https://carbondesignsystem.com/components/progress-bar/style/), consulted 2026-11-17). Carbon has two sizes; large is a local 10px.
+
+A skeleton is a square shape in the skeleton background, #e8e8e8 (#292929 in Gray 100), crossed by a shimmer of the skeleton element color, #c6c6c6 (#393939), as the theme tokens set ([Carbon themes](https://github.com/carbon-design-system/carbon/tree/main/packages/themes/tokens/themes), consulted 2026-11-17).
+
+A toast is the notification at its fixed 288px width with square corners and the floating shadow; toasts stack 8px apart ([Carbon notification style](https://carbondesignsystem.com/components/notification/style/), consulted 2026-11-17). Carbon slides them in at the top right, so pass `placement="top-end"` to ToastProvider.
+
+A tooltip is the inverse background (#393939, #f4f4f4 in dark mode) with inverse text in body 01, 14px over 20px, with no shadow. A single line has 2px by 16px of padding and is at most 208px wide; text that wraps gets 16px of padding on every side and up to 288px. A 6px caret points at the control from 4px away ([Carbon tooltip style](https://carbondesignsystem.com/components/tooltip/style/), consulted 2026-11-18). The 2px corners come from the popover's code ([Carbon popover styles](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/popover/_popover.scss), consulted 2026-11-18). A combobox is the text input with the dropdown's list.
+
+Line tabs are 40px tall with 16px of inline padding, labels in body compact 01 (14px over 18px, 0.16px tracking) in the secondary text color, and the selected one in primary text at weight 600 over a 2px interactive-blue line (#0f62fe, #4589ff in dark mode). Every tab sits on a 2px subtle-border line that turns #8d8d8d (#6f6f6f) under the pointer. Contained tabs are 48px tiles in layer accent (#e0e0e0, #393939 in dark mode; #d1d1d1 and #474747 on hover) with 1px strong-border lines between them; the selected tile takes the layer color (#f4f4f4, #262626) with a 2px interactive line on top. Neither has corners or shadows ([Carbon tabs style](https://carbondesignsystem.com/components/tabs/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/tree/main/packages/styles/scss/components/tabs), consulted 2026-11-18). The style page lists contained tabs at 40px; the source's 48px is used. Carbon draws one underline per tab with 1px between them; here one divider runs under the whole list. Disabled tabs take the text color at 25%.
+
+A breadcrumb is body compact 01 with links in the link blue, which underline on hover, the current page in primary text at regular weight, and slashes in primary text with 8px on each side ([Carbon breadcrumb style](https://carbondesignsystem.com/components/breadcrumb/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/breadcrumb/_breadcrumb.scss), consulted 2026-11-18). Carbon tucks hidden items into an overflow menu; here an ellipsis button shows them in place.
+
+Pagination follows the pagination nav: square page buttons side by side with no gap and no corners, 14px numbers, a faint gray hover (rgb 141 141 141 at 12%, 16% in dark mode) and the current page at weight 600 over a centered 16 by 4px interactive-blue bar ([Carbon pagination](https://carbondesignsystem.com/components/pagination/style/) and [the pagination nav source](https://github.com/carbon-design-system/carbon/tree/main/packages/styles/scss/components/pagination-nav), consulted 2026-11-18). The buttons are 32px, the small size, to match the small icon buttons for previous and next. Carbon's data-table pagination, with its items-per-page select and "1–10 of 100 items", is close to the compact form with the page-size select.
+
+An accordion is one divided list: 40px rows with 1px subtle-border rules (#e0e0e0, #393939 in dark mode), titles in body 01 at regular weight with 16px of inline padding, a 16px chevron in the primary icon color that turns in 110ms, and the layer-hover fill (#e8e8e8, #333333) under the pointer. Open content has 8px above, 24px below and 48px at the end ([Carbon accordion style](https://carbondesignsystem.com/components/accordion/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/accordion/_accordion.scss), consulted 2026-11-19). Carbon draws focus as an inset ring; here it is a 2px inset outline.
 
 ## Do's and Don'ts
 

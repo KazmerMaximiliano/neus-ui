@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 40 reusable UI components and public sections
+- 55 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -183,7 +183,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 - The aggregating barrels `src/components/index.ts`, `src/sections/index.ts` and
   `src/templates/index.ts` list the public names explicitly, so a family barrel can export
   internals without publishing them. A new public name goes in both barrels.
-- Hooks, utilities and services stay one flat file (`hooks/usePopover.ts`) until they gain a
+- Hooks, utilities and services stay one flat file (`hooks/useColors.ts`) until they gain a
   sidecar (types, constants or a test); then they become a folder with an `index.ts`
   (`hooks/useResponsive/`). Importers write the same path either way.
 - The only deep imports keep React out of server and Node code: `src/theme.ts` imports
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (40 total)
+### Implemented Components and Public Subcomponents (55 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -201,7 +201,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Avatar           | src/components/Avatar/                                  | STABLE | Picture or initials, pre-hydration failure fallback, sizes and shapes                                                   |
 | AvatarGroup      | src/components/Avatar/components/AvatarGroup/           | STABLE | Overlap, size for its avatars, +N count                                                                                 |
 | Badge            | src/components/Badge/                                   | STABLE | Solid/dot variants, 5 semantic colors                                                                                   |
-| Button           | src/components/Button/                                  | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links                                                |
+| Button           | src/components/Button/                                  | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links, native attributes and ref                     |
 | Calendar         | src/components/Calendar/                                | STABLE | Date picker                                                                                                             |
 | Card             | src/components/Card/                                    | STABLE | Composable themed surface, semantic `as`, className and style                                                           |
 | CardHeader       | src/components/Card/components/CardHeader/              | STABLE | Free-form header content and actions                                                                                    |
@@ -214,8 +214,8 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | DateInput        | src/components/DateInput/                               | STABLE | Calendar picker field                                                                                                   |
 | Dropdown         | src/components/Dropdown/                                | STABLE | Dropdown menu                                                                                                           |
 | FileUploader     | src/components/FileUploader/                            | STABLE | Drag and drop                                                                                                           |
-| IconButton       | src/components/IconButton/                              | STABLE | Icon containers                                                                                                         |
-| Input            | src/components/Input/                                   | STABLE | Seven native types, native attributes, description, accessible errors, per-part styles, six token recipes               |
+| IconButton       | src/components/IconButton/                              | STABLE | Icon containers, native attributes and ref                                                                              |
+| Input            | src/components/Input/                                   | STABLE | Seven native types, native attributes and ref, description, accessible errors, per-part styles, six token recipes       |
 | InteractiveMap   | src/components/InteractiveMap/                          | STABLE | Google Maps integration                                                                                                 |
 | Link             | src/components/Link/                                    | STABLE | Styled links                                                                                                            |
 | Menu             | src/components/Menu/                                    | STABLE | Actions menu                                                                                                            |
@@ -237,8 +237,23 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Grid             | src/components/Grid/                                    | STABLE | Responsive columns or auto-fit minimum width                                                                            |
 | Section          | src/components/Section/                                 | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container                                             |
 | MediaPlaceholder | src/components/MediaPlaceholder/                        | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
+| Popover          | src/components/Popover/                                 | STABLE | Non-modal dialog anchored to a Button trigger, four placements that flip, controlled or not                             |
+| Radio            | src/components/Radio/                                   | STABLE | Native radio with label and help text, controlled or uncontrolled; alone or inside RadioGroup                           |
+| RadioGroup       | src/components/RadioGroup/                              | STABLE | Fieldset with the radiogroup role around Radio: legend, shared name, arrow keys, orientation, errors                    |
+| Spinner          | src/components/Spinner/                                 | STABLE | Ring or dots, polite status when labelled, slows under reduced motion; Button and IconButton loaders                    |
+| Switch           | src/components/Switch/                                  | STABLE | Native checkbox with the switch role, label first, help text, controlled or uncontrolled                                |
+| Textarea         | src/components/Textarea/                                | STABLE | Multi-line Input field: rows and maxRows in lines, optional auto-resize, description and accessible errors              |
+| Progress         | src/components/Progress/                                | STABLE | Determinate or indeterminate bar with label and value text; Stepper's linear track                                     |
+| Skeleton         | src/components/Skeleton/                                | STABLE | Hidden text, block and circle placeholders with pulse or shimmer that stops under reduced motion                        |
+| Toast            | src/components/Toast/                                   | STABLE | Alert that closes itself, pausing on hover and focus; queued and announced by ToastProvider and useToast                |
+| Tooltip          | src/components/Tooltip/                                 | STABLE | Description on hover and keyboard focus, centered and flipping, hoverable and dismissable; WeekCalendarRow's bubble     |
+| Combobox         | src/components/Combobox/                                | STABLE | Input with suggestions and aria-activedescendant: local filter or fetched results, custom values, loading              |
+| Tabs             | src/components/Tabs/                                    | STABLE | Line or contained tabs with linked panels, roving focus and automatic activation, controlled or not                     |
+| Breadcrumbs      | src/components/Breadcrumbs/                             | STABLE | Navigation trail ending at aria-current, CSS separators, collapsing middle items, linkComponent                         |
+| Pagination       | src/components/Pagination/                              | STABLE | Page buttons with ellipses or compact previous/next, page-size Select; DataTable's controls                             |
+| Accordion        | src/components/Accordion/                               | STABLE | Native details/summary, single or multiple open, controlled or not, find-in-page, works without JavaScript              |
 
-### Implemented Sections (9 total, `neus-ui/sections`)
+### Implemented Sections (12 total, `neus-ui/sections`)
 
 Sections follow the component file structure inside `src/sections/`; owned items live in
 their family's `components/` (FeatureItem in FeatureList, Testimonial in TestimonialList),
@@ -254,6 +269,9 @@ and the list variant reaches its items through a `.context.ts` file.
 | TestimonialList | src/sections/TestimonialList/                        | STABLE | Plain/card/featured variants through context                |
 | Testimonial     | src/sections/TestimonialList/components/Testimonial/ | STABLE | Figure, localized quotes, avatar                            |
 | CallToAction    | src/sections/CallToAction/                           | STABLE | Band/split, tone, aside form                                |
+| FAQ             | src/sections/FAQ/                                    | STABLE | Accordion of questions as headings, list or cards, single   |
+| PricingTable    | src/sections/PricingTable/                           | STABLE | Grid list of PricingCards whose actions line up             |
+| PricingCard     | src/sections/PricingCard/                            | STABLE | Plan name, price, period, features, action, featured, badge |
 | SiteFooter      | src/sections/SiteFooter/                             | STABLE | Columns as labelled navigation, legal line, linkComponent   |
 
 ### Implemented Templates (2 total)
@@ -392,6 +410,13 @@ import { INPUT_TYPES } from "./Input.consts";
 import { validateInput } from "./Input.utils";
 import "./Input.styles.css";
 ```
+
+`pnpm lint` enforces this order in `.ts` and `.tsx` files (`simple-import-sort` in
+`eslint.config.js`), and `eslint --fix` applies it. Within a step, imports are alphabetical
+and `import type` from packages comes before local types; constants and utilities count as
+local when they belong to the module or its owning family (`../Stepper.consts`). The
+workspace `.vscode/settings.json` turns off VS Code's "Organize Imports" on save, which
+sorts by path alone, and runs the ESLint fix instead.
 
 ### Naming Rules
 
@@ -668,7 +693,6 @@ ag-grid-community (DataTable; register only the modules DataTable uses)
 ag-grid-react (DataTable)
 react-day-picker (Calendar)
 lucide-react (Icon components)
-react-spinners (Loading indicators)
 @react-google-maps/api (InteractiveMap)
 ```
 
@@ -858,7 +882,7 @@ interactive component catalog separately.
 
 All public families and both templates have six scoped recipes. Button supports
 solid/secondary/tonal/elevated/outlined/text; Card supports
-auto/filled/outlined/elevated. Input and picker fields share variant, size and
+auto/filled/outlined/elevated. Input, Textarea, Combobox, Select, MultiSelect and picker fields share variant, size and
 label-placement controls. Calendar is discriminated
 by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
 renderMobileCard. DataTable actions are composed by consumers with buttons or menus,

@@ -172,7 +172,8 @@ describe.each(["light", "dark"] as const)("Slider in %s mode", (scheme) => {
   `neus-ui lint` treats the classes in the anatomy table as public: a project stylesheet that
   targets a class missing from the table gets a `private-class` P0.
 - A row in the right table of `docs/components/README.md`: the name linked to its guide and
-  its purpose in one sentence. `npx neus-ui context` builds the agents' catalog from these rows.
+  its purpose in one sentence. `npx neus-ui context` lists the names of these rows under their
+  table's heading.
 - Update the counts: the component count in `README.md`, `docs/README.md`,
   `docs/getting-started/introduction.md` and `docs/components/README.md`, plus the inventory
   table and the count in `AGENTS.md`. Remove the row from `BACKLOG.md`.

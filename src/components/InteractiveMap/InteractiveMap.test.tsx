@@ -108,6 +108,20 @@ describe("InteractiveMap", () => {
     expect(screen.getByRole("status")).toHaveTextContent("Loading map");
     expect(screen.getByRole("status")).toHaveStyle({ padding: "20px" });
   });
+  it("takes its built-in texts from labels", async () => {
+    const labels = { search: "Search places", loading: "Getting the map", loadError: "No map", resolveError: "No address" };
+    sdk.loaded = false;
+    const view = renderMap({ labels });
+    expect(screen.getByRole("status")).toHaveTextContent("Getting the map");
+
+    sdk.loaded = true;
+    view.rerender(<InteractiveMap googleMapsApiKey="test-key" labels={labels} />);
+    expect(screen.getByRole("textbox", { name: "Search places" })).toHaveAttribute("placeholder", "Search places");
+
+    sdk.error = new Error("SDK failed");
+    view.rerender(<InteractiveMap googleMapsApiKey="test-key" labels={labels} />);
+    expect(screen.getByRole("alert")).toHaveTextContent("No map");
+  });
   it("reports SDK failures", async () => {
     sdk.error = new Error("SDK failed");
     const onError = vi.fn();
@@ -182,6 +196,12 @@ describe("InteractiveMap", () => {
       ...resolved,
       coordinates: "5,6",
     });
+  });
+  it("says a point has no address in the words of labels", async () => {
+    vi.mocked(reverseGeocode).mockRejectedValueOnce(new Error("Geocode failed"));
+    renderMap({ labels: { resolveError: "That point has no address." } });
+    await act(async () => sdk.map.onClick?.(click()));
+    expect(screen.getByRole("alert")).toHaveTextContent("That point has no address.");
   });
   it("shows recoverable geocoding errors and reports them", async () => {
     const error = new Error("Geocode failed");

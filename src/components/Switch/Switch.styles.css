@@ -1,0 +1,127 @@
+/* Label first and the track at the end; stretched in a form or a settings list, the track
+   reaches the far edge. The description sits under the label. */
+.switch {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-items: baseline;
+  column-gap: var(--switch-gap);
+  row-gap: var(--switch-text-gap);
+  font-family: var(--switch-font-family);
+  cursor: pointer;
+}
+
+.switch__label {
+  color: var(--switch-label-color);
+  font-size: var(--switch-label-font-size);
+  line-height: var(--switch-label-line-height);
+}
+
+.switch > .field__description {
+  grid-column: 1;
+  margin-left: 0;
+}
+
+.switch__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The control's center sits half an x-height above the label's baseline, as vertical-align: middle
+   defines it, so it lines up with lowercase text in any font. The margins give back the space the
+   shift takes, so the row keeps its height; the control lines up with the first line of a long label. */
+.switch__track {
+  --switch-shift: calc(var(--switch-track-height) / 2 - 0.5ex);
+  position: relative;
+  box-sizing: border-box;
+  font-size: var(--switch-label-font-size);
+  translate: 0 var(--switch-shift);
+  margin-block: calc(-1 * var(--switch-shift)) var(--switch-shift);
+  width: var(--switch-track-width);
+  height: var(--switch-track-height);
+  border: var(--switch-track-border-width) solid
+    var(--switch-track-border-color);
+  border-radius: var(--switch-track-radius);
+  background-color: var(--switch-track-background);
+  box-shadow: var(--switch-track-shadow);
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: var(--switch-duration);
+  transition-timing-function: var(--switch-easing);
+}
+
+/* The thumb's center sits half the track height from either end, so it stays concentric
+   with the rounded ends whatever the track and thumb sizes. */
+.switch__thumb {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: calc(
+    var(--switch-track-height) / 2 - var(--switch-track-border-width) -
+      var(--switch-thumb-size) / 2
+  );
+  width: var(--switch-thumb-size);
+  height: var(--switch-thumb-size);
+  border-radius: var(--switch-thumb-radius);
+  background-color: var(--switch-thumb-color);
+  box-shadow: var(--switch-thumb-shadow);
+  translate: 0 -50%;
+  transition-property: inset-inline-start, width, height, background-color;
+  transition-duration: var(--switch-duration);
+  transition-timing-function: var(--switch-easing);
+}
+
+.switch:hover .switch__input:not(:checked, :disabled) + .switch__track {
+  border-color: var(--switch-track-hover-border-color);
+}
+
+.switch:hover
+  .switch__input:not(:checked, :disabled)
+  + .switch__track
+  .switch__thumb {
+  background-color: var(--switch-thumb-hover-color);
+}
+
+.switch__input:checked + .switch__track {
+  border-color: var(--switch-track-checked-border-color);
+  background-color: var(--switch-track-checked-background);
+  box-shadow: var(--switch-track-checked-shadow);
+}
+
+.switch__input:checked + .switch__track .switch__thumb {
+  inset-inline-start: calc(
+    100% + var(--switch-track-border-width) - var(--switch-track-height) / 2 -
+      var(--switch-thumb-checked-size) / 2
+  );
+  width: var(--switch-thumb-checked-size);
+  height: var(--switch-thumb-checked-size);
+  background-color: var(--switch-thumb-checked-color);
+}
+
+.switch__input:focus-visible + .switch__track {
+  outline: var(--switch-focus-width) solid var(--switch-focus-color);
+  outline-offset: var(--switch-focus-offset);
+}
+
+.switch:has(.switch__input:disabled) {
+  cursor: not-allowed;
+}
+
+.switch:has(.switch__input:disabled) .switch__label {
+  color: var(--switch-disabled-color);
+}
+
+/* Dimming keeps the on and off looks recognizable while unavailable. */
+.switch__input:disabled + .switch__track {
+  opacity: var(--switch-disabled-opacity);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch__track,
+  .switch__thumb {
+    transition: none;
+  }
+}

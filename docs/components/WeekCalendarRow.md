@@ -71,6 +71,7 @@ noted; section style props retain their nullable default.
 | `color` | `string` | Required | Category accent |
 | `hoverContent` | `((event: CalendarEvent) => React.ReactNode)` | Omitted | Informational tooltip on hover or focus |
 | `onEventClick` | `((event: CalendarEvent) => void)` | Omitted | Mouse and keyboard event activation |
+| `language` | `string` | `"en-US"` | BCP 47 tag for the date in each event's accessible name; WeekCalendar passes its own |
 
 ### Supporting types
 
@@ -118,7 +119,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.week-calendar-row__event-info` | `div` | `eventInfoClassName` | `eventInfoStyle` | `showDetails && event` |
 | `.week-calendar-row__event-title` | `span` | `eventTitleClassName` | `eventTitleStyle` | `showDetails && event` |
 | `.week-calendar-row__event-description` | `span` | `eventDescriptionClassName` | `eventDescriptionStyle` | `event.description` |
-| `.week-calendar-row__hover-tooltip` | `div` | `tooltipClassName` | `tooltipStyle` | `hoverContent && tooltip` |
+| `.week-calendar-row__hover-tooltip` (`.tooltip`) | `span` with `role="tooltip"`, a [Tooltip](./Tooltip.md) bubble | `tooltipClassName` | `tooltipStyle` | `hoverContent && tooltip` |
 
 State/variant selectors: `.week-calendar-row__category-cell--with-point`,
 `.week-calendar-row__day-cell--clickable`, `.week-calendar-row__event--continue`,

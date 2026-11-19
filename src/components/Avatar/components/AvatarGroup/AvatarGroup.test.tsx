@@ -28,12 +28,12 @@ describe("AvatarGroup", () => {
   });
 
   it("collapses the rest into a labelled count", () => {
-    render(<AvatarGroup max={2} moreLabel={(hidden) => `${hidden} más`} moreClassName="more" moreStyle={{ color: "red" }}>{people}</AvatarGroup>);
+    render(<AvatarGroup max={2} moreLabel={(hidden) => `${hidden} others`} moreClassName="more" moreStyle={{ color: "red" }}>{people}</AvatarGroup>);
     expect(screen.getAllByRole("img")).toHaveLength(3);
-    const more = screen.getByRole("img", { name: "2 más" });
+    const more = screen.getByRole("img", { name: "2 others" });
     expect(more).toHaveClass("avatar", "avatar-group__more", "more");
     expect(more).toHaveStyle({ color: "rgb(255, 0, 0)" });
-    expect(more).toHaveTextContent("2 más");
+    expect(more).toHaveTextContent("2 others");
   });
 
   it("uses +N by default and forwards native attributes, classes, styles and refs", () => {

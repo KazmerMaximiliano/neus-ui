@@ -1,0 +1,38 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 25%, transparent);
+  --tabs-font-size: 14px;
+  --tabs-font-weight: 400;
+  --tabs-line-height: 18px;
+  --tabs-letter-spacing: 0.16px;
+  --tabs-height: 40px;
+  --tabs-padding: 8px 16px;
+  --tabs-gap: 1px;
+  --tabs-radius: 0px;
+  --tabs-hover-background: transparent;
+  --tabs-selected-color: var(--color-text-primary);
+  --tabs-divider-width: 2px;
+  --tabs-indicator-height: 2px;
+  --tabs-indicator-radius: 0px;
+  --tabs-indicator-color: #0f62fe;
+  --tabs-hover-indicator-color: #8d8d8d;
+  --tabs-contained-height: 48px;
+  --tabs-contained-gap: 1px;
+  --tabs-contained-padding: 0px;
+  --tabs-contained-radius: 0px;
+  --tabs-contained-background: #8d8d8d;
+  --tabs-contained-tab-radius: 0px;
+  --tabs-contained-tab-background: #e0e0e0;
+  --tabs-contained-hover-background: #d1d1d1;
+  --tabs-contained-selected-background: #f4f4f4;
+  --tabs-contained-selected-shadow: inset 0 2px 0 var(--tabs-indicator-color);
+}
+
+[data-design-system="carbon"][data-color-scheme="dark"] {
+  --tabs-indicator-color: #4589ff;
+  --tabs-hover-indicator-color: #6f6f6f;
+  --tabs-contained-background: #6f6f6f;
+  --tabs-contained-tab-background: #393939;
+  --tabs-contained-hover-background: #474747;
+  --tabs-contained-selected-background: #262626;
+}

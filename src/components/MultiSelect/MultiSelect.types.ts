@@ -1,9 +1,14 @@
 import type { CSSProperties } from "react";
 import type { DesignSystemId } from "../../design-systems";
-import type { FieldDescriptionProps } from "../Input";
-import type { SelectOption } from "../Select";
+import type { FieldDescriptionProps, FieldPresentationProps } from "../Input";
+import type { SelectLabels, SelectOption } from "../Select";
 
-export type MultiSelectProps = FieldDescriptionProps & {
+export type MultiSelectLabels = SelectLabels & {
+  /** Accessible name of the button that removes a chosen option, given the option's label. */
+  readonly remove?: (option: string) => string;
+};
+
+export type MultiSelectProps = FieldPresentationProps & FieldDescriptionProps & {
   readonly tagRemoveIconClassName?: string;
   readonly tagRemoveIconStyle?: CSSProperties;
   readonly boxClassName?: string;
@@ -58,6 +63,8 @@ export type MultiSelectProps = FieldDescriptionProps & {
   readonly disabled?: boolean;
   readonly viewSearchBar?: boolean;
   readonly searchBarPlaceholder?: string;
+  /** Built-in texts, in the project's language. */
+  readonly labels?: MultiSelectLabels;
   readonly fieldStyle?: CSSProperties;
   readonly tagStyle?: CSSProperties;
   readonly listStyle?: CSSProperties;

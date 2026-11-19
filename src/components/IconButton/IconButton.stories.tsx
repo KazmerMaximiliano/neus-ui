@@ -76,7 +76,7 @@ const meta: Meta<IconButtonStoryArgs> = {
     },
     loaderStyle: {
       control: "object",
-      description: "CSS properties applied to the BeatLoader container",
+      description: "CSS properties applied to the loader",
     },
     onClick: {
       action: "clicked",

@@ -1,5 +1,5 @@
 import { createElement, type MouseEvent } from "react";
-import { BeatLoader } from "react-spinners";
+import { Spinner } from "../Spinner";
 import type { ButtonProps } from "./Button.types";
 import { getButtonClasses } from "./Button.utils";
 import "./Button.styles.css";
@@ -19,13 +19,17 @@ export const Button = (props: ButtonProps) => {
     buttonStyle,
     labelStyle,
     loaderStyle,
+    ...rest
   } = props;
   const inactive = disabled || loading;
   const shared = {
-    className: [getButtonClasses(variant, color, size, fullWidth), className].filter(Boolean).join(" "),
+    className: [getButtonClasses(variant, color, size, fullWidth), className]
+      .filter(Boolean)
+      .join(" "),
     style: buttonStyle,
     "aria-busy": loading || undefined,
-    "aria-label": loading ? label : undefined,
+    // The label is hidden while loading, so it names the button instead.
+    ...(loading && { "aria-label": label }),
   };
   const content = (
     <>
@@ -37,26 +41,24 @@ export const Button = (props: ButtonProps) => {
         {label}
       </span>
       {loading && (
-        <BeatLoader
+        <Spinner
+          variant="dots"
           className={["button-loader", loaderClassName]
             .filter(Boolean)
             .join(" ")}
-          size="1em"
-          margin="0.333333em"
-          color="currentColor"
-          speedMultiplier={0.5}
           style={loaderStyle}
         />
       )}
     </>
   );
 
-  if (props.href !== undefined) {
-    const { href, linkComponent = "a", target, rel, onClick } = props;
+  if (rest.href !== undefined) {
+    const { href, linkComponent = "a", target, rel, onClick, ...native } = rest;
     // An inactive link drops its href (and the router link), keeping a link role that reports itself disabled.
     return createElement(
       inactive ? "a" : linkComponent,
       {
+        ...native,
         ...shared,
         href: inactive ? undefined : href,
         target,
@@ -72,9 +74,15 @@ export const Button = (props: ButtonProps) => {
     );
   }
 
-  const { type = "button", onClick } = props;
+  const { type = "button", onClick, ...native } = rest;
   return (
-    <button {...shared} onClick={(e) => onClick?.(e)} type={type} disabled={inactive}>
+    <button
+      {...native}
+      {...shared}
+      onClick={(e) => onClick?.(e)}
+      type={type}
+      disabled={inactive}
+    >
       {content}
     </button>
   );

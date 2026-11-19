@@ -28,7 +28,7 @@ tablet expansion and mobile. Header menu and main children are consumer content.
 The sidebar's top block (the title) and the header form one band in the header color, with
 its border below; the header is as tall as that block plus the sidebar's curve, so the curve
 joins the panel to the band. The content area sits on `--app-template-content-background`.
-`headerStart` holds context at the start of the header (breadcrumb, workspace, search) and
+`headerStart` holds context at the start of the header ([Breadcrumbs](../components/Breadcrumbs.md), workspace, search) and
 `menu` the global actions at its end; page titles and page actions belong in the content.
 Prefer this shell to a Sidebar with a hand-made header: the alignment comes from shared tokens. The title
 defaults to VITE_APP_NAME or NEUS UI. `sidebarStyle` and sidebarClassName target the

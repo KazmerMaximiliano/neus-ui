@@ -13,6 +13,8 @@ export const getCenterDate = (date: Date): Date => {
   return d;
 };
 
-export const formatDate = (date: Date): string => {
-  return date.toLocaleDateString("en-US", { day: "numeric", month: "short" });
-};
+export const formatDate = (date: Date, language = "en-US"): string =>
+  date.toLocaleDateString(language, { day: "numeric", month: "short" });
+
+export const formatDayName = (date: Date, language = "en-US"): string =>
+  date.toLocaleDateString(language, { weekday: "short" });

@@ -40,7 +40,8 @@ const meta: Meta<ButtonStoryArgs> = {
     },
     href: {
       control: "text",
-      description: "Destination; renders a link with the button's look instead of a button",
+      description:
+        "Destination; renders a link with the button's look instead of a button",
     },
     target: {
       control: "select",
@@ -53,7 +54,8 @@ const meta: Meta<ButtonStoryArgs> = {
     },
     linkComponent: {
       control: false,
-      description: "Router link component (for example Next.js Link) rendered instead of <a>; only with href",
+      description:
+        "Router link component (for example Next.js Link) rendered instead of <a>; only with href",
     },
     variant: {
       control: "select",
@@ -93,11 +95,12 @@ const meta: Meta<ButtonStoryArgs> = {
     loaderStyle: {
       control: "object",
       description:
-        "CSS properties applied to the BeatLoader container (not its individual dots)",
+        "CSS properties applied to the loader (not its individual dots)",
     },
     onClick: {
       action: "clicked",
-      description: "Callback triggered on click; receives the anchor event with href",
+      description:
+        "Callback triggered on click; receives the anchor event with href",
     },
   },
 };
@@ -124,10 +127,24 @@ export const Button: StoryObj<ButtonStoryArgs> = {
     labelStyle: {},
     loaderStyle: {},
   },
-  render: ({ designSystem, type, href, target, rel, linkComponent, ...args }) => (
+  render: ({
+    designSystem,
+    type,
+    href,
+    target,
+    rel,
+    linkComponent,
+    ...args
+  }) => (
     <ThemeProvider scope="local" designSystem={designSystem}>
       {href ? (
-        <ButtonComponent {...args} href={href} target={target} rel={rel} linkComponent={linkComponent} />
+        <ButtonComponent
+          {...args}
+          href={href}
+          target={target}
+          rel={rel}
+          linkComponent={linkComponent}
+        />
       ) : (
         <ButtonComponent {...args} type={type} />
       )}

@@ -11,7 +11,9 @@ export const ADAPTED_COMPONENTS = [
   "FileUploader", "IconButton", "Input", "Link", "Menu", "Modal", "MultiSelect", "Select",
   "Sidebar", "Stepper", "TimeInput", "WeekCalendar", "WeekCalendarRow", "InteractiveMap",
   "DataTable", "AppTemplate", "FormTemplate", "Heading", "Text", "Container", "Stack", "Grid",
-  "Section", "MediaPlaceholder", "Alert", "Avatar", "AvatarGroup",
+  "Section", "MediaPlaceholder", "Alert", "Avatar", "AvatarGroup", "Spinner", "Switch", "Textarea",
+  "Radio", "RadioGroup", "Popover", "Progress", "Skeleton", "Toast",
+  "Tooltip", "Combobox", "Tabs", "Breadcrumbs", "Pagination", "Accordion",
 ] as const;
 
 export const DESIGN_SYSTEMS: readonly DesignSystem[] = [

@@ -169,6 +169,7 @@ x-neus:
         --button-focus-offset: 6px
         --button-elevated-shadow: 4px 4px 0 var(--color-text-primary)
         --button-elevated-shadow-hover: 6px 6px 0 var(--color-text-primary)
+        --button-elevated-shadow-active: 2px 2px 0 var(--color-text-primary)
     calendar:
       base:
         --calendar-border-width: 3px
@@ -405,13 +406,15 @@ x-neus:
         --stepper-bar-fill-radius: 0px
         --stepper-bar-border-width: 3px
         --stepper-bar-border-color: var(--color-text-primary)
-        --stepper-bar-background: var(--color-surface)
+        --stepper-bar-background: color-mix(in srgb, var(--color-text-primary) 70%, var(--color-surface))
         --stepper-simple-size: 14px
         --stepper-simple-current-width: 32px
         --stepper-simple-radius: 2px
         --stepper-simple-border-width: 2px
         --stepper-simple-border-color: var(--color-text-primary)
         --stepper-simple-background: var(--color-surface)
+      dark:
+        --stepper-bar-background: var(--color-surface)
     week-calendar:
       base:
         --week-calendar-border-width: 3px
@@ -450,7 +453,150 @@ x-neus:
       base:
         --avatar-background: var(--color-primary)
         --avatar-color: var(--color-text-on-primary)
-    sections: {}
+    sections:
+      base:
+        --pricing-price-weight: 900
+        --pricing-check-color: var(--color-text-primary)
+        --pricing-featured-border-color: var(--color-text-primary)
+        --pricing-featured-ring-width: 0px
+        --pricing-featured-shadow: 6px 6px 0 var(--color-primary)
+    spinner:
+      base:
+        --spinner-stroke-width: 0.2em
+        --spinner-color: var(--color-text-primary)
+        --spinner-track-color: var(--color-primary)
+    switch:
+      base:
+        --switch-track-width: 52px
+        --switch-track-height: 28px
+        --switch-track-radius: 4px
+        --switch-track-border-width: 3px
+        --switch-track-border-color: var(--color-text-primary)
+        --switch-track-shadow: 2px 2px 0 var(--color-text-primary)
+        --switch-track-hover-border-color: var(--color-text-primary)
+        --switch-track-checked-border-color: var(--color-text-primary)
+        --switch-track-checked-shadow: 2px 2px 0 var(--color-text-primary)
+        --switch-thumb-size: 16px
+        --switch-thumb-checked-size: 16px
+        --switch-thumb-radius: 2px
+        --switch-thumb-color: var(--color-text-primary)
+        --switch-thumb-hover-color: var(--color-text-primary)
+        --switch-focus-offset: 4px
+        --switch-label-color: var(--color-text-primary)
+    radio:
+      base:
+        --radio-dot-size: 10px
+    popover: {}
+    progress:
+      base:
+        --progress-label-color: var(--color-text-primary)
+        --progress-label-weight: "800"
+        --progress-value-color: var(--color-text-primary)
+        --progress-value-weight: "800"
+        --progress-height-small: 10px
+        --progress-height-medium: 16px
+        --progress-height-large: 24px
+        --progress-track-radius: 4px
+        --progress-fill-radius: 0px
+        --progress-track-border-width: 3px
+        --progress-track-border-color: var(--color-text-primary)
+        --progress-track-background: color-mix(in srgb, var(--color-text-primary) 70%, var(--color-surface))
+        --progress-fill-border-width: 3px
+      dark:
+        --progress-track-background: var(--color-surface)
+    skeleton:
+      base:
+        --skeleton-background: color-mix(in srgb, var(--color-text-primary) 14%, var(--color-surface))
+        --skeleton-text-radius: 0px
+    toast: {}
+    tooltip:
+      base:
+        --tooltip-background: var(--color-surface)
+        --tooltip-color: var(--color-text-primary)
+        --tooltip-border-width: 2px
+        --tooltip-border-color: var(--color-text-primary)
+        --tooltip-radius: 4px
+        --tooltip-shadow: 3px 3px 0 var(--color-text-primary)
+        --tooltip-font-weight: "700"
+    tabs:
+      base:
+        --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 50%, transparent)
+        --tabs-font-weight: "700"
+        --tabs-selected-font-weight: "700"
+        --tabs-radius: 0px
+        --tabs-color: var(--color-text-primary)
+        --tabs-hover-background: color-mix(in srgb, var(--color-primary) 35%, transparent)
+        --tabs-selected-color: var(--color-text-primary)
+        --tabs-divider-width: 2px
+        --tabs-divider-color: var(--color-text-primary)
+        --tabs-indicator-height: 4px
+        --tabs-indicator-radius: 0px
+        --tabs-indicator-color: var(--color-text-primary)
+        --tabs-contained-height: 40px
+        --tabs-contained-gap: 4px
+        --tabs-contained-padding: 4px
+        --tabs-contained-border-width: 3px
+        --tabs-contained-border-color: var(--color-text-primary)
+        --tabs-contained-radius: 4px
+        --tabs-contained-background: var(--color-surface)
+        --tabs-contained-tab-radius: 2px
+        --tabs-contained-color: var(--color-text-primary)
+        --tabs-contained-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface))
+        --tabs-contained-selected-background: var(--color-primary)
+        --tabs-contained-selected-color: var(--color-text-on-primary)
+        --tabs-contained-selected-shadow: inset 0 0 0 2px var(--color-text-primary)
+    breadcrumbs:
+      base:
+        --breadcrumbs-font-size: 14px
+        --breadcrumbs-font-weight: "500"
+        --breadcrumbs-color: var(--color-text-primary)
+        --breadcrumbs-separator: '"›"'
+        --breadcrumbs-separator-gap: 6px
+        --breadcrumbs-separator-color: var(--color-text-primary)
+        --breadcrumbs-separator-weight: "800"
+        --breadcrumbs-link-color: var(--color-text-primary)
+        --breadcrumbs-link-weight: var(--link-font-weight)
+        --breadcrumbs-link-decoration: var(--link-decoration)
+        --breadcrumbs-current-weight: "800"
+    pagination:
+      base:
+        --pagination-font-weight: "700"
+        --pagination-current-font-weight: "800"
+        --pagination-item-radius: 4px
+        --pagination-item-border-width: 3px
+        --pagination-item-border-color: var(--color-text-primary)
+        --pagination-item-background: var(--color-surface)
+        --pagination-item-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface))
+        --pagination-current-background: var(--color-primary)
+        --pagination-current-color: var(--color-text-on-primary)
+        --pagination-current-border-color: var(--color-text-primary)
+        --pagination-current-shadow: 3px 3px 0 var(--color-text-primary)
+    accordion:
+      base:
+        --accordion-gap: 16px
+        --accordion-divider-width: 3px
+        --accordion-divider-color: var(--color-text-primary)
+        --accordion-item-background: var(--color-surface)
+        --accordion-item-border-width: 3px
+        --accordion-item-border-color: var(--color-text-primary)
+        --accordion-item-radius: 4px
+        --accordion-item-shadow: 4px 4px 0 var(--color-text-primary)
+        --accordion-header-padding: 16px
+        --accordion-header-radius: 0px
+        --accordion-header-background: var(--color-primary)
+        --accordion-header-hover-background: color-mix(in srgb, var(--color-primary) 85%, var(--color-text-on-primary))
+        --accordion-title-color: var(--color-text-on-primary)
+        --accordion-title-weight: "700"
+        --accordion-title-line-height: 24px
+        --accordion-icon-color: var(--color-text-on-primary)
+        --accordion-content-padding: 16px
+        --accordion-content-divider-width: 3px
+        --accordion-content-color: var(--color-text-primary)
+        --accordion-content-size: 14px
+        --accordion-content-line-height: 20px
+        --accordion-disabled-color: color-mix(in srgb, var(--color-text-on-primary) 50%, var(--color-primary))
+        --accordion-focus-width: 3px
+        --accordion-focus-offset: -3px
 ---
 
 # Neobrutalism
@@ -522,7 +668,8 @@ around every slot. The surface stays passive even when it resembles a physical t
 
 Use a framed field with a persistent, aligned label. Keep entered
 text calm and legible. Focus changes a recognizable boundary; error text explains
-the problem while focus remains apparent. Read-only must remain readable.
+the problem while focus remains apparent. Read-only must remain readable. A multi-line
+field keeps the thick frame and hard shadow and grows by whole lines.
 
 ### Sidebar
 
@@ -542,9 +689,41 @@ Bordered cards with hard shadows, numbered or iconed, with yellow accents on the
 
 Bordered cards with bold quotes; a featured quote can sit on a yellow band.
 
+### FAQ
+
+Framed cards with yellow question bars and hard shadows.
+
+### Pricing
+
+Framed cards with the price in black weight; the recommended plan casts a yellow hard shadow and carries a badge.
+
 ### Supporting controls and content
 
 Use the same semantic foreground, surface and focus roles for selectors, date and time controls, feedback and data views. Keep selected values distinct from hover and keyboard focus. Floating panels share the overlay geometry; tables and calendars preserve readable alignment when space is constrained. Templates establish page rhythm and responsive grouping without changing the visual identity of embedded controls.
+
+A spinner is a heavy ink arc over a yellow track, as thick as the frames around it.
+
+A switch is a squared, ink-framed track with a hard shadow and a square ink knob; on, the track turns yellow and the knob slides to the end.
+
+A radio is the checkbox made round: a 3px ink ring with the hard shadow, filled yellow with a 10px ink dot when chosen.
+
+A popover is the menu panel with room inside: the ink frame and hard shadow, with 16px of padding.
+
+A progress bar is a 3px ink frame filled with yellow up to a 3px ink edge; the rest of the track, like the stepper's linear bar, is dark slate in light mode, so the yellow keeps 3:1 against it, and the page color in dark mode. It is 16px thick by default, with the label and value in heavy ink.
+
+A skeleton is a flat ink-tinted block with square text lines that pulses.
+
+A toast is the alert with the hard ink shadow.
+
+A tooltip is a small framed card: the page color with a 2px ink border, 4px corners, a 3px hard ink shadow and bold text. A combobox is the framed field with the select's list.
+
+Line tabs are bold ink labels on a 2px ink rule, the selected one with a 4px ink bar, and hovering tints a tab with the yellow. Contained tabs sit in a framed tray, a 3px ink border with 4px corners and 4px of padding, where the selected tab is a yellow tile outlined in ink. The thicker frame and the ink indicator follow this system's controls; the neobrutalism components draw a 2px frame and a blue bar ([neobrutalism tabs](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/tabs.tsx), consulted 2026-11-18).
+
+Breadcrumbs are ink, medium weight, with each link bold and underlined like every link here and the current page extra bold; heavy chevrons separate the items ([neobrutalism breadcrumb](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/breadcrumb.tsx), consulted 2026-11-18).
+
+Pagination is a row of framed tiles: 40px squares with a 3px ink border and 4px corners on the page color, bold numbers, and the current page filled with yellow over a 3px hard ink shadow ([neobrutalism pagination](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/pagination.tsx), consulted 2026-11-18). The shadow is this system's mark for the current page; the components library has none there.
+
+An accordion is a stack of framed cards 16px apart: a 3px ink border, 4px corners and a hard ink shadow, each question a bold bar in yellow with ink text and chevron, and the answer below a 3px rule on the page color ([neobrutalism accordion](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/accordion.tsx), consulted 2026-11-19). The components library uses its blue and a 2px frame; the yellow and 3px frame follow this system.
 
 ## Do's and Don'ts
 

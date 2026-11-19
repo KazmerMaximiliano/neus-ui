@@ -1,7 +1,7 @@
 import { renderToString } from "react-dom/server";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Settings, House } from "lucide-react";
+import { House,Settings } from "lucide-react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ThemeProvider } from "../../providers";
 import { Sidebar } from "./Sidebar";
@@ -70,7 +70,7 @@ describe("Sidebar navigation", () => {
     );
     expect(screen.getByText("My App")).toBeInTheDocument();
     expect(screen.getByRole("navigation")).toHaveAccessibleName(
-      "Navegación principal",
+      "Main navigation",
     );
     expect(screen.getByRole("button", { name: "Home" })).toHaveAttribute(
       "aria-current",
@@ -187,7 +187,7 @@ describe("Sidebar branding", () => {
   it("uses one initial avatar as the tablet expansion control without an arrow", () => {
     resize(900);
     const { container } = render(<Sidebar title="NEUS UI" items={[]} />);
-    const avatar = screen.getByRole("button", { name: "Expandir navegación" });
+    const avatar = screen.getByRole("button", { name: "Expand navigation" });
     expect(avatar).toHaveClass("sidebar__avatar");
     expect(avatar).toHaveTextContent("N");
     expect(avatar.querySelector("svg")).not.toBeInTheDocument();
@@ -207,7 +207,7 @@ describe("Sidebar branding", () => {
       );
       if (width < 768)
         await user.click(
-          screen.getByRole("button", { name: "Abrir menú" }),
+          screen.getByRole("button", { name: "Open menu" }),
         );
       expect(screen.getByText("My brand")).toHaveClass("custom-brand");
       expect(container.querySelector(".sidebar__title")).toHaveStyle({
@@ -237,11 +237,11 @@ describe("Sidebar tablet", () => {
       </>,
     );
     const user = userEvent.setup();
-    const expand = screen.getByRole("button", { name: "Expandir navegación" });
+    const expand = screen.getByRole("button", { name: "Expand navigation" });
     expect(expand).toHaveAttribute("aria-expanded", "false");
     await user.click(expand);
     expect(
-      screen.getByRole("button", { name: "Contraer navegación" }),
+      screen.getByRole("button", { name: "Collapse navigation" }),
     ).toHaveAttribute("aria-expanded", "true");
     await user.click(screen.getByRole("button", { name: "Outside" }));
     expect(container.querySelector(".sidebar")).toHaveAttribute(
@@ -249,7 +249,7 @@ describe("Sidebar tablet", () => {
       "true",
     );
     await user.click(
-      screen.getByRole("button", { name: "Contraer navegación" }),
+      screen.getByRole("button", { name: "Collapse navigation" }),
     );
     await user.click(screen.getByRole("button", { name: "Outside" }));
     expect(container.querySelector(".sidebar")).toHaveAttribute(
@@ -263,11 +263,11 @@ describe("Sidebar tablet", () => {
     expect(expand).toHaveFocus();
     resize(1024);
     expect(
-      screen.queryByRole("button", { name: "Expandir navegación" }),
+      screen.queryByRole("button", { name: "Expand navigation" }),
     ).not.toBeInTheDocument();
     resize(1023);
     expect(
-      screen.getByRole("button", { name: "Expandir navegación" }),
+      screen.getByRole("button", { name: "Expand navigation" }),
     ).toHaveAttribute("aria-expanded", "false");
   });
 
@@ -307,11 +307,11 @@ describe("Sidebar mobile", () => {
       />,
     );
     expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
-    const toggle = screen.getByRole("button", { name: "Abrir menú" });
+    const toggle = screen.getByRole("button", { name: "Open menu" });
     expect(toggle).toHaveStyle({ borderRadius: "5px" });
     const user = userEvent.setup();
     await user.click(toggle);
-    const close = screen.getByRole("button", { name: "Cerrar menú" });
+    const close = screen.getByRole("button", { name: "Close menu" });
     expect(close).toHaveFocus();
     expect(close).toHaveStyle({ width: "48px" });
     expect(toggle).toHaveAttribute("aria-expanded", "true");
@@ -361,13 +361,13 @@ describe("Sidebar mobile", () => {
     const onClick = vi.fn((event?: unknown) => event);
     render(<Sidebar items={[{ label: "Home", href: "#home", onClick }, { label: "Settings", href: "#settings" }]} />);
     const user = userEvent.setup();
-    const toggle = screen.getByRole("button", { name: "Abrir menú" });
+    const toggle = screen.getByRole("button", { name: "Open menu" });
     await user.click(toggle);
     vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     const settings = screen.getByRole("link", { name: "Settings" });
     settings.focus();
     await user.tab();
-    expect(screen.getByRole("button", { name: "Cerrar menú" })).toHaveFocus();
+    expect(screen.getByRole("button", { name: "Close menu" })).toHaveFocus();
     await user.click(screen.getByRole("link", { name: "Home" }));
     expect(onClick).toHaveBeenCalledOnce();
     expect(toggle).toHaveAttribute("aria-expanded", "false");
@@ -376,7 +376,7 @@ describe("Sidebar mobile", () => {
   it("closes only when a pointer starts and finishes on the backdrop", async () => {
     const user = userEvent.setup();
     render(<Sidebar items={[{ label: "Home" }]} />);
-    await user.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
     const dialog = screen.getByRole("dialog");
     vi.spyOn(dialog, "getBoundingClientRect").mockReturnValue(
       new DOMRect(0, 0, 320, 700),
@@ -408,13 +408,13 @@ describe("Sidebar mobile", () => {
     const user = userEvent.setup();
     document.body.style.overflow = "scroll";
     const { unmount } = render(<Sidebar items={[]} />);
-    await user.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
     resize(768);
     expect(document.documentElement).not.toHaveClass("sidebar-scroll-locked");
     expect(screen.getByRole("navigation")).toBeInTheDocument();
     resize(375);
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: "Abrir menú" }));
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
     unmount();
     expect(document.documentElement).not.toHaveClass("sidebar-scroll-locked");
     expect(document.body.style.overflow).toBe("scroll");

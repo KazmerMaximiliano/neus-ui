@@ -72,7 +72,7 @@
 .input--error:focus,
 .input--error:active {
   border-color: var(--input-error-border-color);
-  color: var(--input-error-color);
+  color: var(--input-error-value-color);
 }
 
 .input--error {

@@ -1,0 +1,15 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --switch-track-width: 51px;
+  --switch-track-height: 31px;
+  --switch-track-border-width: 0px;
+  --switch-track-background: var(--color-text-placeholder);
+  --switch-track-checked-shadow: none;
+  --switch-thumb-size: 27px;
+  --switch-thumb-checked-size: 27px;
+  --switch-thumb-color: var(--color-white);
+  --switch-thumb-hover-color: var(--color-white);
+  --switch-thumb-checked-color: var(--color-white);
+  --switch-thumb-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 3px 1px rgba(0, 0, 0, 0.06);
+  --switch-disabled-opacity: 0.5;
+}

@@ -1,0 +1,14 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --spinner-size-small: 16px;
+  --spinner-size-medium: 24px;
+  --spinner-size-large: 40px;
+  --spinner-stroke-width: 0.125em;
+  --spinner-color: var(--color-primary-text);
+  --spinner-track-color: color-mix(in srgb, currentColor 18%, transparent);
+  --spinner-ring-duration: 0.8s;
+  --spinner-dot-size: 0.25em;
+  --spinner-dot-margin: 0.083em;
+  --spinner-dot-duration: 1.4s;
+}

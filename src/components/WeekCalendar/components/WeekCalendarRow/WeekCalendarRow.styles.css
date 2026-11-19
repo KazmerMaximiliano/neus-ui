@@ -168,10 +168,15 @@
 }
 
 .week-calendar-row__hover-tooltip {
+  display: block;
   position: fixed;
   z-index: 100;
   pointer-events: none;
   transform: translate(12px, 12px);
+  /* A Tooltip bubble that keeps the overlay surface and the calendar's type. */
+  font: inherit;
+  letter-spacing: inherit;
+  overflow-wrap: normal;
 }
 
 .week-calendar-row__day-cell > [class^="week-calendar-row__event--"] { background: color-mix(in srgb, var(--category-color, var(--color-primary)) 18%, var(--week-calendar-background)); }

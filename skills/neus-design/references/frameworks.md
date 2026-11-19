@@ -23,6 +23,9 @@ not on its name. `<styles>` below means `paths.styles`.
   the nearest `data-design-system` / `data-color-scheme` attributes and the
   variables on that boundary. Only `useTheme()` and `useColors()` need a
   ThemeProvider, and they throw without one.
+- Toasts: one `ToastProvider` inside the theme owner, around everything that
+  calls `useToast()`, which throws without it. Its labels go in the
+  project's language.
 - The library CSS carries every built-in palette. `neus.theme.css` (written by
   `neus-ui init`) adds the project's own colors; it is empty when the project
   keeps the system's colors. Never write palette variables by hand.
@@ -43,8 +46,9 @@ not on its name. `<styles>` below means `paths.styles`.
 
 ## spa
 
-- The root is wrapped once in `NeusRoot`. Do not add another global
-  provider. A nested ThemeProvider is always local; use one only for an
+- The root is wrapped once in `NeusRoot`. When the app shows toasts, NeusRoot
+  also wraps its children in the one ToastProvider, inside its ThemeProvider.
+  Do not add another global provider. A nested ThemeProvider is always local; use one only for an
   isolated preview or a feature with its own token scope.
 - Dark mode toggles call `useTheme().setColorScheme(...)` under the root.
 - Sidebar and AppTemplate `routes` take `href` and render links; pass the
@@ -62,6 +66,9 @@ not on its name. `<styles>` below means `paths.styles`.
 - Do not mount a global ThemeProvider: the stylesheet already themes the
   first paint. Need `useTheme()` somewhere? Wrap that subtree in
   `<ThemeProvider scope="local">`.
+- ToastProvider is a client component: mount it once in the root layout
+  (around `{children}` in App Router, which may render it from a Server
+  Component) so every screen can call `useToast()`.
 - Dark mode: an inline head script sets `data-color-scheme` before paint
   (read the saved choice from `localStorage`); a toggle flips the attribute
   and saves it. `neus.theme.css` covers both modes.
@@ -75,7 +82,8 @@ and the stylesheet imports, plus:
   components and hydrate on their own.
 - Props from a Server Component to a neus component must be serializable:
   no functions. Anything with `onClick`, `onChange`, `routes` handlers,
-  `cellRenderer` or `renderMobileCard` lives in a Client Component. Build
+  `cellRenderer`, `renderMobileCard`, a Popover or Tooltip `trigger`, a Combobox, Tabs or
+  Pagination lives in a Client Component. Build
   one Client Component per interactive screen (for example an `OrdersScreen`
   with `"use client"`, rendered by `app/orders/page.tsx`) and keep data
   loading in the page. Where that file lives and what it is called follow the
@@ -86,7 +94,9 @@ and the stylesheet imports, plus:
 - Navigation: `href` on Button and on Sidebar/AppTemplate routes, with
   `linkComponent={Link}` from `next/link`; `active` from `usePathname()`.
   Routes with only `href` are serializable, but `linkComponent` is a
-  function: keep the shell in a Client Component.
+  function: keep the shell in a Client Component. Breadcrumbs with only
+  `href` items render from a Server Component; with `linkComponent` it moves
+  into the Client Component too.
 - Prefer `next/font` in the root layout for the system's faces; expose each
   one as a CSS variable and map `--font-*` to it in `neus.overrides.css`.
 
@@ -97,7 +107,8 @@ Everything in `ssr`, plus:
 - `NeusLayout.astro` owns the theme attributes, the fonts and the
   stylesheet imports. Pages use this layout.
 - Do not render a global ThemeProvider inside islands: each island is its
-  own React root and would write to `<html>`.
+  own React root and would write to `<html>`. Islands share no React context
+  either, so a ToastProvider lives inside the island that shows toasts.
 - `.astro` for static structure, content and data loading; React islands
   only for interactive regions. App screens (shell, tables, forms, dialogs)
   are one React component per page, rendered with one client directive.
@@ -108,7 +119,12 @@ Everything in `ssr`, plus:
   no JavaScript, which suits Badge, Card or Link with no handlers, the
   layout components and every section from `neus-ui/sections`: the
   SiteHeader phone menu uses the native Popover API and needs no
-  hydration. Hydrate only the parts with handlers, such as a form.
+  hydration. Breadcrumbs with `href` items renders statically too; its
+  collapsed trail needs hydration only for the expand button. Accordion and
+  FAQ open and close as static HTML (native `details`), one at a time with
+  `single`; hydrate them only for `onChange` or a controlled `value`. Hydrate only
+  the parts with handlers, such as a form, Tabs, Pagination or a Popover,
+  Tooltip or Combobox, whose panels open with JavaScript.
 - Directives: `client:idle` above the fold, `client:visible` below,
   `client:load` only for an island that must respond the moment the page
   appears, and `client:only="react"` for a component that fails in server

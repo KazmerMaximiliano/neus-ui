@@ -1,3 +1,4 @@
+import { createRef } from "react";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -106,6 +107,13 @@ describe("Input", () => {
   });
 
   describe("native attributes and description", () => {
+    it("forwards its ref to the native input", () => {
+      const ref = createRef<HTMLInputElement>();
+      renderInput({ ref });
+
+      expect(ref.current).toBe(screen.getByRole("textbox"));
+    });
+
     it("forwards native input attributes that Input does not replace", () => {
       renderInput({
         autoComplete: "email",
@@ -520,6 +528,20 @@ describe("field presentation and adornments", () => {
     expect(screen.getByText("P")).toHaveStyle({ opacity: 0.7 });
     expect(screen.getByText("S")).toHaveStyle({ opacity: 0.8 });
     expect(screen.getByText("!")).toHaveStyle({ opacity: 0.9 });
+  });
+});
+
+describe("Input notched outline", () => {
+  it("renders a hidden outline that sizes its gap from the label, without repeating the label text", () => {
+    const { container } = render(<Input label="Email" required />);
+    const outline = container.querySelector(".input__control > fieldset.field__outline")!;
+    const notch = outline.querySelector("legend.field__notch")!;
+
+    expect(outline).toHaveAttribute("aria-hidden", "true");
+    expect(notch).toHaveAttribute("data-label", "Email");
+    expect(notch).toHaveAttribute("data-required");
+    expect(notch).toBeEmptyDOMElement();
+    expect(screen.getByText("Email")).toBeInTheDocument();
   });
 });
 

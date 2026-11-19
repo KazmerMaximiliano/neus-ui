@@ -26,10 +26,11 @@ export const Menu = ({
   itemStyle,
 }: MenuProps) => {
   const popover = usePopover({
+    placement: "bottom-end",
     initialFocus: "[role=\"menuitem\"]:not(:disabled)",
   });
   const { id, open, triggerRef, toggle } = popover;
-  const name = text || "Menú";
+  const name = text || "Menu";
 
   return (
     <div className={["menu", className].filter(Boolean).join(" ")} style={style}>

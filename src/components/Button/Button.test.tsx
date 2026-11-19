@@ -1,3 +1,4 @@
+import { createRef } from "react";
 import { composeStories } from "@storybook/react-vite";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -205,6 +206,38 @@ describe("Button accessibility", () => {
     expect(button).not.toHaveAttribute("aria-busy");
     expect(button).not.toHaveAttribute("aria-label");
     expect(button).toBeEnabled();
+  });
+});
+
+describe("Button native attributes", () => {
+  it("forwards native attributes and the ref to the button, keeping its own", () => {
+    const ref = createRef<HTMLButtonElement>();
+    render(<Button ref={ref} label="Filters" aria-expanded={false} aria-controls="panel" data-testid="filters" form="search" />);
+    const button = screen.getByRole("button", { name: "Filters" });
+
+    expect(ref.current).toBe(button);
+    expect(button).toHaveAttribute("aria-expanded", "false");
+    expect(button).toHaveAttribute("aria-controls", "panel");
+    expect(button).toHaveAttribute("data-testid", "filters");
+    expect(button).toHaveAttribute("form", "search");
+    expect(button).toHaveAttribute("type", "button");
+  });
+
+  it("forwards native attributes and the ref to a link", () => {
+    const ref = createRef<HTMLAnchorElement>();
+    render(<Button ref={ref} href="/plans" label="Plans" aria-current="page" download />);
+    const link = screen.getByRole("link", { name: "Plans" });
+
+    expect(ref.current).toBe(link);
+    expect(link).toHaveAttribute("aria-current", "page");
+    expect(link).toHaveAttribute("download");
+  });
+
+  it("names a loading button by its label over a caller's aria-label only while loading", () => {
+    const { rerender } = render(<Button label="Save" aria-label="Save changes" />);
+    expect(screen.getByRole("button", { name: "Save changes" })).toBeInTheDocument();
+    rerender(<Button label="Save" aria-label="Save changes" loading />);
+    expect(screen.getByRole("button", { name: "Save" })).toHaveAttribute("aria-busy", "true");
   });
 });
 

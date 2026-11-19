@@ -1,7 +1,7 @@
-import { useState, type CSSProperties, type KeyboardEvent } from "react";
+import { type CSSProperties, type KeyboardEvent,useState } from "react";
 import { ClockNumbers } from "./components/ClockNumbers";
 import type { ClockProps, TimeValue } from "./Clock.types";
-import { INNER_RING_THRESHOLD, KEY_STEPS } from "./Clock.consts";
+import { CLOCK_LABELS, INNER_RING_THRESHOLD, KEY_STEPS } from "./Clock.consts";
 import {
   getDisplayHours,
   getHandAngle,
@@ -45,7 +45,9 @@ export const Clock = ({
   numberStyle,
   indicatorStyle,
   onChange,
+  labels,
 }: ClockProps) => {
+  const text = { ...CLOCK_LABELS, ...labels };
   const initialValue = value || { hours: 12, minutes: 0 };
   const isControlled = value !== undefined;
 
@@ -180,7 +182,7 @@ export const Clock = ({
                 .filter(Boolean)
                 .join(" ")}
               style={segmentStyle}
-              aria-label="Horas"
+              aria-label={text.hours}
               aria-pressed={mode === "hours"}
               onClick={() => !disabled && !readonly && setMode("hours")}
               disabled={disabled}
@@ -206,7 +208,7 @@ export const Clock = ({
                 .filter(Boolean)
                 .join(" ")}
               style={segmentStyle}
-              aria-label="Minutos"
+              aria-label={text.minutes}
               aria-pressed={mode === "minutes"}
               onClick={() => !disabled && !readonly && setMode("minutes")}
               disabled={disabled}
@@ -261,7 +263,7 @@ export const Clock = ({
           onKeyDown={handleFaceKeyDown}
           role="slider"
           tabIndex={disabled ? -1 : 0}
-          aria-label={isHours ? "Horas" : "Minutos"}
+          aria-label={isHours ? text.hours : text.minutes}
           aria-valuemin={isHours ? (format === "24h" ? 0 : 1) : 0}
           aria-valuemax={isHours ? (format === "24h" ? 23 : 12) : 59}
           aria-valuenow={sliderValue}

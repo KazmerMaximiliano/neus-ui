@@ -1,8 +1,10 @@
 import { useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { usePopover } from "../../hooks/usePopover";
+import { FieldOutline } from "../Input/components/FieldOutline";
 import { SelectListbox } from "./components/SelectListbox";
 import type { SelectProps } from "./Select.types";
+import { SELECT_LABELS } from "./Select.consts";
 import "../../css/field.css";
 import "./Select.styles.css";
 
@@ -52,11 +54,15 @@ export const Select = ({
   requiredClassName,
   requiredStyle,
   viewSearchBar = true,
-  searchBarPlaceholder = "Buscar...",
+  searchBarPlaceholder = "Search...",
+  labels,
   options,
   fieldStyle,
   listStyle,
   optionStyle,
+  variant = "auto",
+  labelPlacement = "auto",
+  size = "medium",
   onChange,
 }: SelectProps) => {
   const [internalValue, setInternalValue] = useState(defaultValue ?? "");
@@ -65,6 +71,7 @@ export const Select = ({
     (option) => option.value === selectedValue,
   )?.label;
   const displayLabel = label || placeholder;
+  const text = { ...SELECT_LABELS, ...labels };
   const fieldId = useId();
   const errorId = useId();
   const descriptionId = useId();
@@ -84,7 +91,10 @@ export const Select = ({
 
   return (
     <div
-      className={["select__wrapper", className].filter(Boolean).join(" ")}
+      className={["select__wrapper field-presentation", className].filter(Boolean).join(" ")}
+      data-variant={variant}
+      data-label-placement={labelPlacement}
+      data-size={size}
       style={style}
     >
       {displayLabel && (
@@ -138,7 +148,7 @@ export const Select = ({
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-controls={id}
-          aria-label={displayLabel ? undefined : "Selecciona una opción"}
+          aria-label={displayLabel ? undefined : text.unselected}
           aria-invalid={error ? true : undefined}
           aria-required={required || undefined}
           aria-describedby={
@@ -157,7 +167,7 @@ export const Select = ({
               .join(" ")}
             style={selectedLabel ? valueStyle : placeholderStyle}
           >
-            {selectedLabel || placeholder || "Selecciona una opción..."}
+            {selectedLabel || placeholder || text.unselected}
           </span>
         </button>
         <ChevronDown
@@ -167,6 +177,7 @@ export const Select = ({
           style={caretStyle}
           aria-hidden
         />
+        <FieldOutline label={displayLabel} required={required} />
       </div>
       <SelectListbox
         listClassName={listClassName}
@@ -186,12 +197,13 @@ export const Select = ({
         emptyClassName={emptyClassName}
         emptyStyle={emptyStyle}
         popover={popover}
-        label={displayLabel || "Opciones"}
+        label={displayLabel || text.options}
         options={options}
         isSelected={(optionValue) => optionValue === selectedValue}
         onSelect={handleSelect}
         viewSearchBar={viewSearchBar}
         searchBarPlaceholder={searchBarPlaceholder}
+        emptyLabel={text.empty}
         listStyle={listStyle}
         optionStyle={optionStyle}
       />

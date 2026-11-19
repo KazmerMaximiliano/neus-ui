@@ -8,8 +8,8 @@ One feature or service of a [FeatureList](./FeatureList.md), laid out by the lis
 ## Usage
 
 ```tsx
-<FeatureItem icon={<Timer />} title="Cabe entre dos reuniones" action={<Link href="/sesiones" label="Ver sesiones" />}>
-  Sesiones de uno a diez minutos para el escritorio o el transporte.
+<FeatureItem icon={<Timer />} title="Fits between two meetings" action={<Link href="/sessions" label="See sessions" />}>
+  Sessions from one to ten minutes for the desk or the commute.
 </FeatureItem>
 ```
 

@@ -28,8 +28,8 @@ and receives `href`, `target`, `rel`, the class, style and click handler. A disa
 loading link drops its `href`, reports `aria-disabled` and ignores clicks. `loading` disables interaction, sets `aria-busy`, keeps the
 accessible name and hides the label visually while preserving its space. `disabled` also
 blocks native button activation. The label remains in the DOM during loading. `loaderStyle`
-and `loaderClassName` target the BeatLoader container; dots use `currentColor`, and their
-size follows its font size.
+and `loaderClassName` target the loader, a dots [Spinner](./Spinner.md); its dots use
+`currentColor`, are as wide as `--button-loader-size` and slow down under reduced motion.
 
 ## Props
 
@@ -59,6 +59,7 @@ retain their nullable default.
 | `linkComponent` | `ElementType` | `"a"` | Router link rendered instead of `<a>`; only with `href` |
 | `target` | `HTMLAttributeAnchorTarget` | Omitted | Link target; only with `href` |
 | `rel` | `string` | Omitted | Link relationship; only with `href` |
+| Native attributes and ref | React props for a `button`, or an `a` with `href` | Optional | Forwarded to the element (`aria-*`, `data-*`, `form`, `name`, `download`…), except `style` and `children`; a [Popover](./Popover.md) trigger spreads its props here |
 
 ### Supporting types
 
@@ -86,7 +87,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | --- | --- | --- | --- | --- |
 | `.button` | `button`, or `a` / `linkComponent` with `href` | `className` | `buttonStyle` | `Always` |
 | `.button-label` | `span` | `labelClassName` | `labelStyle` | `Always` |
-| `.button-loader` | `BeatLoader` | `loaderClassName` | `loaderStyle` | `loading` |
+| `.button-loader` | `span` (dots `Spinner`) | `loaderClassName` | `loaderStyle` | `loading` |
 
 State/variant selectors: `.button--elevated`, `.button--error`, `.button--full-width`,
 `.button--info`, `.button--large`, `.button--outlined`, `.button--primary`,
@@ -138,6 +139,7 @@ dependencies. Do not edit generated files.
 | `--button-disabled-opacity` | button disabled opacity | `0.6` |
 | `--button-disabled-shadow` | button disabled shadow | `none` |
 | `--button-elevated-shadow-hover` | button elevated shadow hover | `var(--elevation-dialog)` |
+| `--button-elevated-shadow-active` | Elevated button's shadow while pressed | `var(--button-elevated-shadow)` |
 | `--button-focus-color` | button focus color | `var(--color-focus)` |
 | `--button-focus-inner-shadow` | button focus inner shadow | `none` |
 | `--button-focus-offset` | button focus offset | `3px` |
@@ -145,6 +147,7 @@ dependencies. Do not edit generated files.
 | `--button-secondary-hover` | button secondary hover | `color-mix(in srgb, var(--button-secondary-background) 88%, var(--color-surface))` |
 | `--button-shadow-active` | button shadow active | `none` |
 | `--button-shadow-hover` | button shadow hover | `none` |
+| `--button-outlined-shadow-hover` | Outlined button's shadow on hover | `var(--button-shadow-hover)` |
 
 ### Surface and color
 

@@ -94,6 +94,10 @@ const meta: Meta<WeekCalendarRowStoryArgs> = {
       control: false,
       description: "Informational tooltip on hover or focus",
     },
+    language: {
+      control: "text",
+      description: "BCP 47 tag for the date in each event's accessible name",
+    },
     onEventClick: {
       action: "event-clicked",
       description: "Mouse and keyboard event activation",
@@ -140,6 +144,7 @@ export const WeekCalendarRow: StoryObj<typeof meta> = {
       ],
     },
     hoverContent: (event) => <span>{event.title}</span>,
+    language: "en-US",
     className: "",
     style: {},
     categoryStyle: {},

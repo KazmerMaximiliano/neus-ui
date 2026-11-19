@@ -13,12 +13,12 @@ import { Hero } from "neus-ui/sections";
 
 export const Opening = () => (
   <Hero
-    title="Tu veterinaria de barrio en Bv. Oroño"
-    lead="Consultas, vacunas, cirugías menores y peluquería, con tiempo para escucharte."
-    actions={<Button label="Pedir turno" href="#turno" size="large" />}
-    note="Te llamamos para confirmar el horario."
+    title="Your neighbourhood vet on Bv. Oroño"
+    lead="Check-ups, vaccines, minor surgery and grooming, with time to listen to you."
+    actions={<Button label="Book a visit" href="#booking" size="large" />}
+    note="We call you to confirm the time."
     // SAMPLE: replace with the clinic's own photo.
-    media={<MediaPlaceholder label="Veterinaria revisando a un perro en el consultorio" />}
+    media={<MediaPlaceholder label="Vet examining a dog in the consulting room" />}
   />
 );
 ```

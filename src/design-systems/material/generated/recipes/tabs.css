@@ -1,0 +1,29 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --tabs-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent);
+  --tabs-font-size: 14px;
+  --tabs-font-weight: 500;
+  --tabs-selected-font-weight: 500;
+  --tabs-line-height: 20px;
+  --tabs-letter-spacing: 0.1px;
+  --tabs-height: 48px;
+  --tabs-radius: 0px;
+  --tabs-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  --tabs-selected-color: var(--color-primary);
+  --tabs-indicator-inset: 16px;
+  --tabs-focus-width: 3px;
+  --tabs-contained-height: 40px;
+  --tabs-contained-gap: 1px;
+  --tabs-contained-padding: 0px;
+  --tabs-contained-border-width: 1px;
+  --tabs-contained-border-color: var(--color-border-input-hover);
+  --tabs-contained-radius: 3em;
+  --tabs-contained-background: var(--color-border-input-hover);
+  --tabs-contained-tab-radius: 0px;
+  --tabs-contained-tab-background: var(--color-surface);
+  --tabs-contained-color: var(--color-text-primary);
+  --tabs-contained-hover-background: color-mix(in srgb, var(--color-text-primary) 8%, var(--color-surface));
+  --tabs-contained-selected-background: var(--color-secondary-container);
+  --tabs-contained-selected-color: var(--color-on-secondary-container);
+  --tabs-contained-selected-shadow: none;
+}

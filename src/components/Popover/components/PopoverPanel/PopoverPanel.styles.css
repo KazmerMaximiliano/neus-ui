@@ -1,0 +1,24 @@
+/* usePopover writes the anchor's edges and the resolved data-placement; start lines up the leading edges. */
+.popover-panel {
+  position: fixed;
+  inset: auto;
+  top: calc(var(--popover-top) + var(--overlay-offset));
+  left: var(--popover-left);
+  margin: 0;
+}
+
+.popover-panel[data-placement^="top"] {
+  top: auto;
+  bottom: calc(var(--popover-bottom) + var(--overlay-offset));
+}
+
+.popover-panel[data-placement$="end"],
+.popover-panel:dir(rtl):not([data-placement$="end"]) {
+  left: auto;
+  right: var(--popover-right);
+}
+
+.popover-panel:dir(rtl)[data-placement$="end"] {
+  right: auto;
+  left: var(--popover-left);
+}

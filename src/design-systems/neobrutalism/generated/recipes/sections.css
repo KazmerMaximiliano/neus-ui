@@ -1,1 +1,8 @@
 /* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --pricing-price-weight: 900;
+  --pricing-check-color: var(--color-text-primary);
+  --pricing-featured-border-color: var(--color-text-primary);
+  --pricing-featured-ring-width: 0px;
+  --pricing-featured-shadow: 6px 6px 0 var(--color-primary);
+}

@@ -1,0 +1,10 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --tooltip-background: var(--color-surface);
+  --tooltip-color: var(--color-text-primary);
+  --tooltip-border-width: 2px;
+  --tooltip-border-color: var(--color-text-primary);
+  --tooltip-radius: 4px;
+  --tooltip-shadow: 3px 3px 0 var(--color-text-primary);
+  --tooltip-font-weight: 700;
+}

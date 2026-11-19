@@ -22,7 +22,9 @@ export const RECIPE_NAMES = [
   "badge", "button", "calendar", "card", "checkbox", "clock", "dropdown",
   "file-uploader", "icon-button", "input", "link", "modal", "overlay", "select",
   "sidebar", "stepper", "week-calendar", "interactive-map", "data-table", "templates",
-  "typography", "layout", "media-placeholder", "alert", "avatar", "sections",
+  "typography", "layout", "media-placeholder", "alert", "avatar", "sections", "spinner",
+  "switch", "radio", "popover", "progress", "skeleton", "toast", "tooltip", "tabs",
+  "breadcrumbs", "pagination", "accordion",
 ] as const;
 
 export const SECTION_NAMES = [

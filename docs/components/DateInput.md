@@ -84,6 +84,18 @@ retain their nullable default.
 | `labelStyle` | `CSSProperties` | Omitted | Inline styles on `.picker-field__label` |
 | `errorStyle` | `CSSProperties` | Omitted | Inline styles on `.picker-field__error` |
 | `onChange` | `((value: Date \| DateRange \| undefined) => void)` | Omitted | Callback when date selection changes |
+| `labels` | `DateInputLabels` | English defaults | Name of the calendar panel, in the project's language |
+| `language` | `string` | `"en-US"` | BCP 47 tag for the shown date and the calendar's months, days and labels; en-US when unsupported |
+
+### Supporting types
+
+```ts
+type DateInputLabels = {
+  readonly calendar?: (label?: string) => string; // (label) => label ? `${label}: calendar` : "Calendar"
+};
+```
+
+`language` also reaches the [Calendar](./Calendar.md), so its months, days and buttons follow it.
 
 ## Anatomy and per-part customization
 
@@ -98,6 +110,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.picker-field__required` | `span` | `requiredClassName` | `requiredStyle` | `required` |
 | `.picker-field__container` | `div` | `containerClassName` | `containerStyle` | `Always` |
 | `.picker-field__field` | `button` | `fieldClassName` | `fieldStyle` | `Always` |
+| `.field__outline` | `fieldset`, `aria-hidden`, inside `.picker-field__container` | — | — | `Always`; draws the border only for a floating label on an outlined field, as in [Input](./Input.md) |
 | `.picker-field__value .picker-field__placeholder` | `span` | `valueClassName`, `placeholderClassName` | `valueStyle`, `placeholderStyle` | `Always` |
 | `.picker-field__icon` | `Icon` | `iconClassName` | `iconStyle` | `Always` |
 | `.picker-field__popover` | `div` | `panelClassName` | `panelStyle` | `Always` |
@@ -257,8 +270,8 @@ dependencies. Do not edit generated files.
 `--field-height`, `--field-label-background`, `--field-label-left`, `--field-label-padding`,
 `--field-label-position`, `--field-label-raised-size`, `--field-label-raised-top`,
 `--field-label-raised-translate`, `--field-label-size`, `--field-label-top`,
-`--field-label-translate`, `--field-placeholder-opacity`, `--popover-left`, `--popover-top`,
-`--select-caret-color`, `--select-caret-size`.
+`--field-label-translate`, `--field-placeholder-opacity`, `--select-caret-color`,
+`--select-caret-size`; the panel is placed by the shared `.popover-panel` (see [Popover](./Popover.md)).
 
 Semantic/foundation tokens are described in [the shared token
 reference](../design/tokens.md). Component dependencies belong to their own linked recipe.

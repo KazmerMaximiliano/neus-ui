@@ -1,9 +1,9 @@
 import {
+  type CSSProperties,
   useContext,
   useLayoutEffect,
   useMemo,
   useState,
-  type CSSProperties,
 } from "react";
 import { ThemeContext } from "./ThemeContext";
 import type {

@@ -76,17 +76,29 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
 
 - The header holds context (`headerStart`: workspace, breadcrumb, search) and
   global actions (`menu`: account, notifications). The page title and the
-  page's primary action open the content.
+  page's primary action open the content. A page below the list, such as an
+  order's detail, puts `Breadcrumbs` in `headerStart` (`Orders`, then `#1042`
+  as the current page).
 - One solid primary action per page; row actions use Menu or text buttons.
-- Pagination is controlled: wire `onPaginationChange` to the data source.
+  An icon-only action whose name is not enough (a limit, a consequence) gets a
+  `Tooltip`; the IconButton keeps its `label`.
+- Filters for the list go in a `Popover` opened by an outlined "Filters" Button
+  beside the title; close it from an "Apply" button with a controlled `open`.
+- Pagination is controlled: wire `onPaginationChange` to the data source. A
+  list that is not a table (cards, search results) pages with `Pagination`
+  below it, wired the same way.
 - Provide `renderMobileCard` for tables people use on phones.
+- While a list or a dashboard card loads, draw its shape with `Skeleton`
+  (lines, a `rect` for a chart, a `circle` for an avatar) inside the region,
+  which gets `aria-busy`. A long import or upload shows a `Progress` bar with
+  a count in `valueText`.
 
 ## 2. Form page
 
 Use for create/edit screens and settings forms.
 
 ```tsx
-import { Checkbox, DateInput, FormTemplate, Input, Select } from "neus-ui";
+import { Checkbox, DateInput, FormTemplate, Input, Radio, RadioGroup, Select, Textarea } from "neus-ui";
 
 export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => (
   <form onSubmit={(event) => { event.preventDefault(); onSubmit(new FormData(event.currentTarget)); }}>
@@ -101,6 +113,11 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
         searchBarPlaceholder="Search plans"
       />
       <DateInput name="start" label="Start date" />
+      <RadioGroup name="billing" label="Billing" defaultValue="monthly" orientation="horizontal">
+        <Radio value="monthly" label="Monthly" />
+        <Radio value="yearly" label="Yearly" />
+      </RadioGroup>
+      <Textarea name="notes" label="Notes" className="form-template__full" rows={2} autoResize maxRows={6} />
       <Checkbox name="invoice" label="Send monthly invoice" />
     </FormTemplate>
   </form>
@@ -109,7 +126,14 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
 
 - The application owns validation and submission; pass messages through each
   field's `error` prop.
+- Confirm a save that keeps the person on the page with a toast
+  (`useToast().show({ status: "success", title })`); an error that blocks the
+  form stays an `Alert` at the top of the form or a field `error`.
 - Labels are always visible. Put required markers on real requirements only.
+- Two to five options that should stay visible are a `RadioGroup` (`horizontal` for short
+  labels); longer lists are a `Select`. When people type to find the value (a
+  country, a customer, results from a server) or may enter a new one (a tag),
+  use a `Combobox`.
 
 ## 3. Multi-step flow
 
@@ -139,6 +163,11 @@ Group related settings in `Card` sections (`CardHeader`, `CardContent`,
 `CardFooter`). Use `variant="outlined"` for dense pages and `elevated` only
 for content that floats above the page. Lay cards out with `Grid` (for example
 `<Grid minItemWidth="20rem">`) and page titles with `Heading` and `Text`.
+A setting that applies at once is a `Switch` with its `description`, one per
+row inside `CardContent`, in a `Stack` so each track reaches the card's edge;
+choices saved with a button stay fields and checkboxes in a form. When the
+settings have several unrelated groups (general, members, billing), put each
+group in a `Tabs` panel under the page title instead of one long page.
 
 ## 6. Scheduling
 
@@ -159,7 +188,7 @@ Use for product, launch and signup pages. Build the sections the brief
 lists, each with the variant the dealt composition names (taste.md), and
 apply the substance rules. The page sections from `neus-ui/sections` carry
 the structure, scale and rhythm of the active system; Heading, Text,
-Section, Grid and Card cover what they do not (an agenda, prices, a team).
+Section, Grid and Card cover what they do not (an agenda, a team).
 
 ```tsx
 import { MessageSquareText, Timer } from "lucide-react";
@@ -223,12 +252,16 @@ export const LandingPage = ({ onSignup }: { onSignup: (data: FormData) => void }
 
 - Every section the brief lists exists; the dealt composition picks each
   variant (Hero `split`, `centered`, `media-first`; FeatureList `grid`,
-  `list`, `cards`; TestimonialList `plain`, `card`, `featured`;
-  CallToAction `band`, `split`).
+  `list`, `cards`; TestimonialList `plain`, `card`, `featured`; FAQ `list`,
+  `cards`; CallToAction `band`, `split`).
 - One `h1` (the Hero's); section titles are SectionHeader `h2`s, item titles
   `h3`s. Alternate `default` and `subtle` Section tones; one or two bands of
   strong color (`tone="brand"` or `"inverse"`).
-- Lists of other things (agenda, prices, team) are `Grid as="ul"` of
+- Plans are a `PricingTable` of `PricingCard`s, the recommended one
+  `featured` with a `badge`, every action a `fullWidth` Button (solid on the
+  featured plan, outlined on the rest). Questions are a `FAQ` under its
+  SectionHeader, with `questionAs` one level below the section title.
+- Lists of other things (agenda, team) are `Grid as="ul"` of
   `Card as="li"` with the default `variant="auto"`. Never a Card inside a Card.
 - One solid action per viewport: the header action is `outlined`. On a
   `brand` band primary buttons adapt by themselves.

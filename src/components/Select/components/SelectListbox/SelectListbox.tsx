@@ -1,3 +1,4 @@
+import { PopoverPanel } from "../../../Popover/components/PopoverPanel";
 import { SelectListboxContent } from "./components/SelectListboxContent";
 import type { SelectListboxProps } from "./SelectListbox.types";
 
@@ -7,15 +8,14 @@ export const SelectListbox = ({
   listStyle,
   ...props
 }: SelectListboxProps) => (
-  <div
+  <PopoverPanel
     ref={popoverRef}
-    popover="manual"
     className={["select__popover", listClassName].filter(Boolean).join(" ")}
     style={listStyle}
   >
     {open && (
       <SelectListboxContent id={id} panel={popoverRef} hide={hide} {...props} />
     )}
-  </div>
+  </PopoverPanel>
 );
 

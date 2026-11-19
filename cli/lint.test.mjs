@@ -58,11 +58,57 @@ export const Page = () => (
     ["third-party", "a.css", ".table .ag-header-cell { color: inherit; }"],
     ["raw-element", "a.tsx", "<button onClick={go}>Go</button>"],
     ["raw-element", "a.tsx", "<footer>© 2027</footer>"],
+    ["raw-element", "a.tsx", `<textarea name="notes" rows={3} />`],
     ["raw-element", "a.tsx", `<div role="alert">Payment failed</div>`],
+    ["raw-element", "a.tsx", `<button role="switch" aria-checked={on} onClick={toggle} />`],
+    ["raw-element", "a.tsx", `<div role="radiogroup" aria-label="Plan">{plans}</div>`],
+    ["raw-element", "a.tsx", `<div id="filters" popover="auto" className="filters">{filters}</div>`],
+    ["raw-element", "a.tsx", `<div popover className="share">{links}</div>`],
+    ["raw-element", "a.tsx", `<span className="loader" aria-hidden />`],
+    ["raw-element", "a.css", "@keyframes spin { to { transform: rotate(1turn); } }"],
+    ["raw-element", "a.tsx", `<progress value={3} max={10} />`],
+    ["raw-element", "a.tsx", `<div role="progressbar" aria-valuenow={40} />`],
+    ["raw-element", "a.tsx", `<div className="skeleton" />`],
+    ["raw-element", "a.css", "@keyframes shimmer { to { background-position: 0 0; } }"],
+    ["raw-element", "a.tsx", `<div className="toast" aria-live="polite">{message}</div>`],
+    ["raw-element", "a.tsx", `<span role="tooltip" id="hint">Moves it to the trash</span>`],
+    ["raw-element", "a.tsx", `<IconButton icon={Trash2} label="Delete" title="Moves it to the trash" />`],
+    ["raw-element", "a.tsx", `<input role="combobox" aria-expanded={open} value={query} />`],
+    ["raw-element", "a.tsx", `<datalist id="cities">{cities}</datalist>`],
+    ["raw-element", "a.tsx", `<details><summary>Shipping</summary>Two days</details>`],
+    ["raw-element", "a.tsx", `<div role="tablist" aria-label="Settings">{tabs}</div>`],
+    ["raw-element", "a.tsx", `<button role="tab" aria-selected={selected}>General</button>`],
+    ["raw-element", "a.tsx", `<nav aria-label="Breadcrumb"><ol>{crumbs}</ol></nav>`],
+    ["raw-element", "a.tsx", `<nav className="pager" aria-label="Paginación">{pages}</nav>`],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
     ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
   ])("reports P1 %s", (rule, file, text) => {
     expect(rules(lint(file, text))).toContain(`P1 ${rule}`);
+  });
+
+  it("does not take a Popover's props or text about popovers for the attribute", () => {
+    const text = `<Popover label="Filters" trigger={(props) => <Button {...props} label="Filters" />}>\n<Text>The popover shows filters.</Text>`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take Skeleton or Progress components for hand-made ones", () => {
+    const text = `<Skeleton className="skeleton-card" lines={3} />\n<Progress label="Upload" value={3} max={10} />`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take Tabs, Breadcrumbs, Pagination or a tab panel for hand-made ones", () => {
+    const text = `<Tabs label="Settings" items={items} />\n<Breadcrumbs items={trail} labels={{ navigation: "Breadcrumb" }} />\n<Pagination page={page} totalPages={9} labels={{ navigation: "Pagination" }} />\n<div role="tabpanel" aria-label="Notes">{notes}</div>`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take Tooltip, Combobox or a titled Modal for hand-made ones", () => {
+    const text = `<Tooltip content="Moves it to the trash" trigger={(props) => <IconButton {...props} icon={Trash2} label="Delete" />} />\n<Combobox label="City" options={cities} />\n<ModalHeader title="Delete project" />`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take a class that only contains spinner for a hand-made one", () => {
+    const text = `<div className="results-spinner"><Spinner className="results-spinner__icon" label="Loading" /></div>`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
   });
 
   it("accepts next/font variables declared in the project, also when only the overrides are linted", () => {

@@ -13,6 +13,21 @@ const meta: Meta<SelectStoryArgs> = {
   },
   tags: ["autodocs"],
   argTypes: {
+    variant: {
+      control: "select",
+      options: ["auto", "filled", "outlined"],
+      description: "Shared field variant",
+    },
+    labelPlacement: {
+      control: "select",
+      options: ["auto", "external", "floating"],
+      description: "Shared field labelPlacement",
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Shared field size",
+    },
     placeholderClassName: {
       control: "text",
       description: "Additional CSS classes for placeholder",
@@ -155,6 +170,10 @@ const meta: Meta<SelectStoryArgs> = {
       control: "text",
       description: "Placeholder and accessible name of the search box",
     },
+    labels: {
+      control: "object",
+      description: "Built-in texts: unselected, options and empty",
+    },
     fieldStyle: {
       control: "object",
       description: "CSS properties applied to the field box",
@@ -173,6 +192,9 @@ const meta: Meta<SelectStoryArgs> = {
 
 export const Select: StoryObj<SelectStoryArgs> = {
   args: {
+    variant: "auto",
+    labelPlacement: "auto",
+    size: "medium",
     placeholderClassName: undefined,
     placeholderStyle: undefined,
     caretClassName: undefined,
@@ -225,7 +247,8 @@ export const Select: StoryObj<SelectStoryArgs> = {
     error: "",
     disabled: false,
     viewSearchBar: true,
-    searchBarPlaceholder: "Buscar...",
+    searchBarPlaceholder: "Search...",
+    labels: {},
     fieldStyle: {},
     listStyle: {},
     optionStyle: {},

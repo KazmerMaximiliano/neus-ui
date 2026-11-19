@@ -1,4 +1,4 @@
-import { BeatLoader } from "react-spinners";
+import { Spinner } from "../Spinner";
 import type { IconButtonProps } from "./IconButton.types";
 import { getIconButtonClasses } from "./IconButton.utils";
 import "./IconButton.styles.css";
@@ -19,8 +19,10 @@ export const IconButton = ({
   iconStyle,
   loaderStyle,
   onClick,
+  ...native
 }: IconButtonProps) => (
   <button
+    {...native}
     className={[getIconButtonClasses(variant, color, size), className]
       .filter(Boolean)
       .join(" ")}
@@ -32,14 +34,11 @@ export const IconButton = ({
     aria-busy={loading || undefined}
   >
     {loading ? (
-      <BeatLoader
+      <Spinner
+        variant="dots"
         className={["icon-button-loader", loaderClassName]
           .filter(Boolean)
           .join(" ")}
-        size="0.3em"
-        margin="0.08em"
-        color="currentColor"
-        speedMultiplier={0.5}
         style={loaderStyle}
       />
     ) : (

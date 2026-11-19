@@ -1,8 +1,9 @@
-import { useMemo, useState, type KeyboardEvent } from "react";
+import { type KeyboardEvent,useMemo, useState } from "react";
 import { Check } from "lucide-react";
-import { focusMenuItem } from "../../../../../../hooks/usePopover";
+import { focusItem } from "../../../../../../utils/focusItem";
 import type { SelectListboxContentProps } from "./SelectListboxContent.types";
 import { OPTION } from "../../../../Select.consts";
+import { filterOptions } from "../../../../Select.utils";
 
 export const SelectListboxContent = ({
   boxClassName,
@@ -36,21 +37,16 @@ export const SelectListboxContent = ({
   onSelect,
   viewSearchBar,
   searchBarPlaceholder,
+  emptyLabel,
   optionStyle,
 }: SelectListboxContentProps) => {
   const [query, setQuery] = useState("");
-  const filtered = useMemo(
-    () =>
-      options.filter((option) =>
-        option.label.toLowerCase().includes(query.toLowerCase()),
-      ),
-    [options, query],
-  );
+  const filtered = useMemo(() => filterOptions(options, query), [options, query]);
 
   const onKeyDown = (event: KeyboardEvent) => {
     const inSearch = event.target instanceof HTMLInputElement;
     if (inSearch && (event.key === "Home" || event.key === "End")) return;
-    if (focusMenuItem(panel.current, event.key, OPTION)) {
+    if (focusItem(panel.current, event.key, OPTION)) {
       event.preventDefault();
     } else if (event.key === "Tab") {
       hide();
@@ -135,7 +131,7 @@ export const SelectListboxContent = ({
           );
         })}
         {filtered.length === 0 && (
-          <div className={["select__empty", emptyClassName].filter(Boolean).join(" ")} style={emptyStyle}>Sin resultados</div>
+          <div className={["select__empty", emptyClassName].filter(Boolean).join(" ")} style={emptyStyle}>{emptyLabel}</div>
         )}
       </div>
     </div>

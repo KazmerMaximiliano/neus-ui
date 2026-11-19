@@ -55,6 +55,8 @@ export type WeekCalendarRowProps = {
   readonly color: string;
   readonly hoverContent?: (event: CalendarEvent) => React.ReactNode;
   readonly onEventClick?: (event: CalendarEvent) => void;
+  /** BCP 47 tag for the date in each event's accessible name; en-US when omitted or unsupported. */
+  readonly language?: string;
 };
 
 export type EventTooltip = { x: number; y: number; event: CalendarEvent; };

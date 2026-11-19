@@ -1,0 +1,14 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --breadcrumbs-font-size: 14px;
+  --breadcrumbs-font-weight: 500;
+  --breadcrumbs-color: var(--color-text-primary);
+  --breadcrumbs-separator: "›";
+  --breadcrumbs-separator-gap: 6px;
+  --breadcrumbs-separator-color: var(--color-text-primary);
+  --breadcrumbs-separator-weight: 800;
+  --breadcrumbs-link-color: var(--color-text-primary);
+  --breadcrumbs-link-weight: var(--link-font-weight);
+  --breadcrumbs-link-decoration: var(--link-decoration);
+  --breadcrumbs-current-weight: 800;
+}

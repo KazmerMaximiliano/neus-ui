@@ -1,9 +1,9 @@
-import type { Preview } from "@storybook/react-vite";
 import { DESIGN_SYSTEMS } from "../src/design-systems";
 import { ThemeProvider } from "../src/providers";
-import "../src/css/app.css";
+import type { Preview } from "@storybook/react-vite";
 import type { DesignSystemId } from "../src/design-systems";
 import type { ColorScheme } from "../src/providers";
+import "../src/css/app.css";
 
 const preview: Preview = {
   globalTypes: {

@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { Checkbox } from "../../components/Checkbox";
 import { ThemeProvider } from "../../providers";
 import { contrastRatio, resolveColor } from "./colorContrast";
+import { xHeightOffset } from "./labelAlignment";
 import "../../css/app.css";
 
 afterEach(cleanup);
@@ -53,6 +54,17 @@ describe.each(["light", "dark"] as const)("Checkbox designs in %s mode", (scheme
 });
 
 describe("Checkbox interaction", () => {
+  it.each(SYSTEMS)("centers the $id box on the label's lowercase letters", ({ id }) => {
+    const { container } = render(
+      <ThemeProvider scope="local" designSystem={id}>
+        <Checkbox label="accept terms" />
+      </ThemeProvider>,
+    );
+
+    expect(Math.abs(xHeightOffset(screen.getByText("accept terms"), container.querySelector(".checkbox__box")!)))
+      .toBeLessThan(0.5);
+  });
+
   it("toggles through its label and keyboard", async () => {
     const user = userEvent.setup();
     const changes: boolean[] = [];

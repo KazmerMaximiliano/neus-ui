@@ -1,5 +1,7 @@
 import { useId } from "react";
 import { usePopover } from "../../../../hooks/usePopover";
+import { FieldOutline } from "../../../Input/components/FieldOutline";
+import { PopoverPanel } from "../../../Popover/components/PopoverPanel";
 import type { PickerFieldProps } from "./PickerField.types";
 import "../../../../css/field.css";
 import "./PickerField.styles.css";
@@ -174,11 +176,11 @@ export const PickerField = ({
             aria-hidden
           />
         </button>
+        <FieldOutline label={label} required={required} />
 
-        <div
+        <PopoverPanel
           ref={popoverRef}
           id={id}
-          popover="manual"
           role="dialog"
           aria-label={pickerLabel}
           className={["picker-field__popover", panelClassName]
@@ -196,7 +198,7 @@ export const PickerField = ({
               {children(() => hide(true))}
             </div>
           )}
-        </div>
+        </PopoverPanel>
       </div>
 
       {name && (

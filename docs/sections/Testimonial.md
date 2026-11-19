@@ -9,9 +9,9 @@ One quote with its author: a figure, inside a list item when it belongs to a Tes
 
 ```tsx
 <Testimonial
-  quote="La abro en el ascensor antes de la daily."
+  quote="I open it in the lift before the daily."
   name="Lucía Ferreyra"
-  role="Diseñadora de producto"
+  role="Product designer"
   avatar={<Avatar name="Lucía Ferreyra" alt="" />}
 />
 ```

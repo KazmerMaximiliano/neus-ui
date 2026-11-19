@@ -1,0 +1,6 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --progress-label-weight: 500;
+  --progress-height-medium: 6px;
+  --progress-height-large: 10px;
+}

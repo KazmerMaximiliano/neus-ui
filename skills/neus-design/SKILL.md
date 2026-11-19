@@ -196,9 +196,14 @@ Codex, keeps the same direction.
   facts (prices, trial days, guarantees, metrics, customer counts) appear
   only when the brief gives them: otherwise leave them out or ask. Never
   invent them.
-- Pass user-facing defaults in the project's `language` (Select
-  `searchBarPlaceholder`, FileUploader texts, Sidebar `labels`, DataTable
-  empty texts).
+- Built-in texts are English. On a page in another language, pass them in the
+  project's `language`: Select and MultiSelect `searchBarPlaceholder` and
+  `labels`, Sidebar, Breadcrumbs, Pagination, WeekCalendar, Clock, DateInput,
+  TimeInput and InteractiveMap `labels`, Stepper `texts`, Dropdown `label`,
+  Menu `text`, DataTable `paginationLabels` and empty texts, Combobox
+  `emptyLabel` and `loadingLabel`, FileUploader texts, ToastProvider `label`
+  and `dismissLabel`, SiteHeader `labels`; dates through `language` on
+  Calendar, DateInput and WeekCalendar.
 - On refinement turns, change only what the user named. Edit in place.
 
 ### Need → component
@@ -221,7 +226,9 @@ component's guide.
 | Testimonials or reviews | `TestimonialList` + `Testimonial` (`variant`: `plain`, `card`, `featured`), marked `SAMPLE:` |
 | Closing call to action, with or without a form | `CallToAction` (`variant`: `band`, `split` with the form in `aside`) |
 | Footer of a public page | `SiteFooter` |
-| Any other group of items (agenda, prices, team) | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
+| Questions and answers on a public page | `FAQ` from `neus-ui/sections` (`items`; `variant` from the dealt composition: `list`, `cards`) under a `SectionHeader` |
+| Plans and prices | `PricingTable` of `PricingCard`s from `neus-ui/sections` (`price` in the page's locale, `features`, `action`; `featured` and `badge` on the recommended plan); prices only from the brief |
+| Any other group of items (agenda, team) | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
 | Container of a widget, demo or summary | `Card` |
 | Band of strong color (agenda, final call to action) | `Section tone="brand"` (action color) or `tone="inverse"` (ink); primary buttons adapt, links and fields go in a Card |
 | Picture the project does not have yet | `MediaPlaceholder` with the shot as `label`, marked `SAMPLE:`; with the context's photo preview line, its `pixabayKey` expression and a short `query` |
@@ -229,20 +236,34 @@ component's guide.
 | Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
 | Icon-only action | `IconButton` |
 | Text navigation | `Link` |
-| Help text under a field | `description` on Input, Select, MultiSelect, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
-| Required field | `required` on Input, Select, MultiSelect, DateInput or TimeInput (asterisk and `aria-required`) |
-| Field that needs the whole row (long hint, textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
+| Help text under a field | `description` on Input, Textarea, Combobox, Select, MultiSelect, RadioGroup, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
+| Required field | `required` on Input, Textarea, Combobox, Select, MultiSelect, RadioGroup, DateInput or TimeInput (asterisk and `aria-required`) |
+| Text that wraps to several lines (message, notes, description) | `Textarea` (`rows`; `autoResize` with `maxRows` where the page has room to grow) |
+| Field that needs the whole row (long hint, Textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
 | Status or label | `Badge` |
 | Message about the page or a form (saved, failed, trial ending) | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
+| Region or value still loading, length unknown | `Spinner` (`label` in the project's language; `size`); a loading button uses its own `loading` |
+| Completion of a task (upload, import, quota) | `Progress` (`label`, `value`, `max`; `valueText` in words, `showValue`); no `value` while the share is unknown |
+| Content still loading (list, card, profile) | `Skeleton` (`variant` `text`, `rect` or `circle`; `lines`) inside the region, which gets `aria-busy` |
+| Brief confirmation after an action (saved, sent, archived) | `useToast().show({ status, title, actions })` under one `ToastProvider` (`label` and `dismissLabel` in the project's language); a lasting message stays `Alert` |
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
+| Extra controls or details tied to a button (filters, share, explanation) | `Popover` (`trigger` renders a Button or IconButton with the props it receives); a list of actions stays `Menu` |
+| Short hint for a control (what an icon button does, a limit) | `Tooltip` (`content`; `trigger` renders the Button or IconButton); the control keeps its name, anything to act on goes in a `Popover` |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
+| Search with suggestions or free text (city, tag, user, long lists) | `Combobox` (`filter={false}`, `onInputChange` and `loading` for fetched results; `allowCustomValue` for new values); browsing predefined options stays `Select` |
+| On/off setting that applies at once | `Switch`; a choice sent with a form stays `Checkbox` |
+| One choice among 2–5 visible options | `RadioGroup` + `Radio`; more options: `Select` |
 | Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
-| Records in a table | `DataTable` |
+| Records in a table | `DataTable` (its pagination is built in; `paginationLabels` in the project's language) |
+| Long content in collapsible sections (settings groups, specifications) | `Accordion` (`items`; `type="single"`; `titleAs`); on public pages, questions are a `FAQ` |
+| Views of the same subject, one at a time (settings sections) | `Tabs` (`items`, `label`; `variant="contained"` in a card or toolbar); ordered steps stay `Stepper` |
+| Where the page sits in a hierarchy (two or more levels deep) | `Breadcrumbs` (`items` ending at the current page; `linkComponent` with a router), above the title or in AppTemplate's `headerStart` |
+| Long list or results split into pages | `Pagination` (`page`, `totalPages`, `onChange`; `pageSize` and `pageSizeOptions`; `variant="compact"` where room is short) |
 | Steps of a flow | `Stepper` |
 | Files | `FileUploader` |
 | Map | `InteractiveMap` |
-| Application shell with side navigation (dashboards, back-office) | `AppTemplate` (`title`, `routes`, `headerStart` for breadcrumb or search, `menu` for global actions); never a Sidebar with your own header |
+| Application shell with side navigation (dashboards, back-office) | `AppTemplate` (`title`, `routes`, `headerStart` for `Breadcrumbs` or search, `menu` for global actions); never a Sidebar with your own header |
 
 Write your own element only for what no row covers (a `blockquote`, a `nav`
 landmark, an inline `strong`), styled with neus tokens.

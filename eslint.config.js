@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { defineConfig, globalIgnores } from "eslint/config";
 import globals from "globals";
 import tseslint from "typescript-eslint";
@@ -34,6 +35,22 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+    },
+    plugins: { "simple-import-sort": simpleImportSort },
+    rules: {
+      // The import order of AGENTS.md, fixed on save; one inner array keeps the steps without blank lines.
+      "simple-import-sort/imports": ["error", {
+        groups: [[
+          "^react(-dom)?(/.*)?$",
+          "^@?\\w",
+          "^\\.",
+          "^@?\\w.*\\u0000$",
+          "^\\..*\\u0000$",
+          "^\\.[./]*/[^/]+\\.consts$",
+          "^\\.[./]*/[^/]+\\.utils$",
+          "^\\u0000",
+        ]],
+      }],
     },
   },
 ]);

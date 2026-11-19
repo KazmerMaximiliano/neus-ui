@@ -13,8 +13,8 @@ import { SectionHeader } from "neus-ui/sections";
 
 export const Agenda = () => (
   <Section id="agenda" aria-labelledby="agenda-title">
-    <SectionHeader titleId="agenda-title" title="Dos días, dos recorridos"
-      description="El viernes, plataforma y rendimiento; el sábado, diseño y oficio." />
+    <SectionHeader titleId="agenda-title" title="Two days, two tracks"
+      description="Friday is platform and performance; Saturday, design and craft." />
     {/* The agenda itself. */}
   </Section>
 );

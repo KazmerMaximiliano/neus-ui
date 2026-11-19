@@ -38,9 +38,10 @@ describe("neus-ui context", () => {
     expect(tokens(text)).toBeLessThan(3000);
     expect(text).toContain(`System: ${system} (locked)`);
     expect(text).toContain("## Do's and Don'ts");
-    expect(text).toContain("- Heading: ");
-    expect(text).toContain("- FormTemplate: ");
-    expect(text).toContain("- Hero: ");
+    expect(text).toContain("- Typography, layout and media: Heading, Text, ");
+    expect(text).toContain("- Templates: AppTemplate, FormTemplate");
+    expect(text).toContain("- Sections (`neus-ui/sections`): SiteHeader, Hero, ");
+    expect(text).not.toContain("- Heading: ");
     expect(text).toContain("| Features or services |");
     expect(text).toContain("`--space-1`");
     expect(text).not.toMatch(/^Format:/m);

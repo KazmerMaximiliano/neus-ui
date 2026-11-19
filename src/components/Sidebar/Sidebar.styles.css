@@ -150,6 +150,7 @@
 .sidebar__button--active:hover {
   background: var(--sidebar-item-active-background);
   color: var(--sidebar-item-active-color);
+  font-weight: var(--sidebar-item-active-weight);
 }
 
 .sidebar__button-icon {

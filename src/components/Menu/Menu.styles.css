@@ -4,11 +4,6 @@
 }
 
 .menu__panel {
-  position: fixed;
-  inset: auto;
-  top: calc(var(--popover-top) + var(--overlay-offset));
-  right: var(--popover-right);
-  margin: 0;
   box-sizing: border-box;
   min-width: var(--overlay-min-width);
   padding: var(--overlay-padding);

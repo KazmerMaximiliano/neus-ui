@@ -15,17 +15,13 @@
   border-radius: var(--data-table-radius);
 }
 
+/* A compact Pagination at the end of the row, in the table's spacing and muted text. */
 .data-table__pagination {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  --pagination-gap: var(--data-table-spacing);
+  --pagination-font-family: var(--data-table-font-family);
+  --pagination-info-color: var(--data-table-muted);
+  --pagination-info-font-size: var(--data-table-font-size);
   justify-content: flex-end;
-  gap: var(--data-table-spacing);
-}
-
-.data-table__pagination-info {
-  color: var(--data-table-muted);
-  font-size: var(--data-table-font-size);
 }
 
 .data-table__cards {
