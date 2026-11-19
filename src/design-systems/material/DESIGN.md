@@ -643,6 +643,14 @@ x-neus:
         --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent)
         --accordion-focus-width: 3px
         --accordion-focus-offset: -3px
+    form-field: {}
+    number-input:
+      base:
+        --number-input-button-size: 32px
+        --number-input-icon-size: 20px
+        --number-input-button-hover-color: var(--color-text-secondary)
+        --number-input-button-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent)
+        --number-input-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent)
 ---
 
 # Material
@@ -819,6 +827,10 @@ Material 3 has no breadcrumbs or pagination. Breadcrumbs keep the Neus trail in 
 Material 3 has no accordion either, so its rows are one-line list items: 56px tall with 16px at the sides, titles in body large (16px over 24px, 0.5px tracking) in on-surface, a 24px chevron in on-surface-variant, answers in body medium, outline-variant dividers and the on-surface state layer at 8% on hover ([material-web list tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-list.scss), consulted 2026-11-19). The chevron and the dividers between rows are a local mapping.
 
 Material has no success or warning roles, so alert colors are a local decision. Alerts tint the lowest surface container, not the tinted surface: mixed into its violet cast, green turns gray and orange and red look alike. Warning takes a 24% tint and error 14%, and their icons carry the status color (warning at 70% over the text color, to keep 3:1), so the two read apart in both modes.
+
+A form field or a fieldset takes the text field's label, supporting text and error styles, so they need no values of their own.
+
+A number input ends in two round 32px icon buttons with 20px icons in on-surface-variant, and an 8% state layer on hover. Material 3 has no stepper, so the buttons follow the shape of its icon buttons as a local decision.
 
 ## Do's and Don'ts
 

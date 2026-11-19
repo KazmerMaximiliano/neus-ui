@@ -1,0 +1,16 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --number-input-stepper-gap: 0px;
+  --number-input-button-size: 32px;
+  --number-input-button-radius: 0px;
+  --number-input-button-color: var(--color-text-primary);
+  --number-input-divider-width: 1px;
+  --number-input-divider-color: var(--color-border-subtle);
+  --number-input-button-hover-background: #e8e8e8;
+  --number-input-button-hover-color: var(--color-text-primary);
+  --number-input-transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+
+[data-design-system="carbon"][data-color-scheme="dark"] {
+  --number-input-button-hover-background: #333333;
+}

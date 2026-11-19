@@ -635,6 +635,20 @@ x-neus:
       dark:
         --accordion-divider-color: "#393939"
         --accordion-header-hover-background: "#333333"
+    form-field: {}
+    number-input:
+      base:
+        --number-input-stepper-gap: 0px
+        --number-input-button-size: 32px
+        --number-input-button-radius: 0px
+        --number-input-button-color: var(--color-text-primary)
+        --number-input-divider-width: 1px
+        --number-input-divider-color: var(--color-border-subtle)
+        --number-input-button-hover-background: "#e8e8e8"
+        --number-input-button-hover-color: var(--color-text-primary)
+        --number-input-transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9)
+      dark:
+        --number-input-button-hover-background: "#333333"
 ---
 
 # Carbon
@@ -771,6 +785,10 @@ A breadcrumb is body compact 01 with links in the link blue, which underline on 
 Pagination follows the pagination nav: square page buttons side by side with no gap and no corners, 14px numbers, a faint gray hover (rgb 141 141 141 at 12%, 16% in dark mode) and the current page at weight 600 over a centered 16 by 4px interactive-blue bar ([Carbon pagination](https://carbondesignsystem.com/components/pagination/style/) and [the pagination nav source](https://github.com/carbon-design-system/carbon/tree/main/packages/styles/scss/components/pagination-nav), consulted 2026-11-18). The buttons are 32px, the small size, to match the small icon buttons for previous and next. Carbon's data-table pagination, with its items-per-page select and "1–10 of 100 items", is close to the compact form with the page-size select.
 
 An accordion is one divided list: 40px rows with 1px subtle-border rules (#e0e0e0, #393939 in dark mode), titles in body 01 at regular weight with 16px of inline padding, a 16px chevron in the primary icon color that turns in 110ms, and the layer-hover fill (#e8e8e8, #333333) under the pointer. Open content has 8px above, 24px below and 48px at the end ([Carbon accordion style](https://carbondesignsystem.com/components/accordion/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/accordion/_accordion.scss), consulted 2026-11-19). Carbon draws focus as an inset ring; here it is a 2px inset outline.
+
+A form field or a fieldset takes the input's label, helper text and error styles, so they need no values of their own.
+
+A number input ends in square minus and plus controls in primary icon color with a 1px subtle rule between them. Their 16px icons and the field-hover fill (#e8e8e8, #333333 in dark mode) follow the number input's style page ([Carbon number input style](https://carbondesignsystem.com/components/number-input/style/), consulted 2026-11-19); the page gives no control width, so the 32px square is a local decision.
 
 ## Do's and Don'ts
 

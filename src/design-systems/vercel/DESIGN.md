@@ -529,6 +529,15 @@ x-neus:
       dark:
         --accordion-divider-color: "#333333"
         --accordion-header-hover-background: "#1a1a1a"
+    form-field: {}
+    number-input:
+      base:
+        --number-input-button-size: 24px
+        --number-input-button-radius: 6px
+        --number-input-icon-size: 14px
+        --number-input-button-hover-background: "#f2f2f2"
+      dark:
+        --number-input-button-hover-background: "#1a1a1a"
 ---
 
 # Vercel
@@ -668,6 +677,10 @@ Breadcrumbs are 14px over 20px, links in gray 900 that turn gray 1000 on hover w
 Geist's pagination links to the previous and next page by title, at the end of a document ([Geist pagination](https://vercel.com/geist/pagination), consulted 2026-11-18); it has no numbered pager. Page buttons here are 32px with 6px corners like the small buttons, gray 200 on hover, and the current page in the foreground color with background-colored numbers, like a primary button: a local mapping.
 
 An accordion follows the FAQ on the pricing page: 16px medium questions in gray 1000 over 1px dividers (#eaeaea, #333 in dark mode) from Geist's collapse, 12px of padding, a 16px chevron that turns in 200ms and a gray 100 fill with 6px corners on hover; answers at 16px with 1.6 line height ([Geist collapse](https://vercel.com/geist/collapse) and [Vercel pricing](https://vercel.com/pricing), consulted 2026-11-19).
+
+A form field or a fieldset takes the input's label and error styles, so they need no values of their own.
+
+A number input ends in two small 24px buttons with 14px icons, 6px corners and the gray hover fill (#f2f2f2, #1a1a1a in dark mode). Geist's input documents suffixes but no stepper, so the sizes are local decisions ([Geist input](https://vercel.com/geist/input), consulted 2026-11-19).
 
 ## Do's and Don'ts
 

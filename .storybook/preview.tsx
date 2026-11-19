@@ -41,6 +41,7 @@ const preview: Preview = {
         order: [
           "Theming",
           "Base",
+          "Form",
           "Navigation",
           "Date & Time",
           "Location",

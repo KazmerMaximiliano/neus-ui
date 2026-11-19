@@ -186,7 +186,9 @@ Update them in the same change as the component:
 - **`skills/neus-design/SKILL.md`, "Need → component" table.** Add the need in plain words
   so the agent finds it before writing markup:
   `| One value in a range (rooms, hours, volume) | Slider (min, max, step; label and visible value) |`.
-  `neus-ui context` prints this table to the agent.
+  `neus-ui context` prints this table to the agent, and `cli/context.test.mjs` keeps that output
+  under 3000 tokens: keep the row short, leave details to the guide, and extend an existing row
+  when the need is the same (a new field type joins "Text field" or "Choice from options").
 - **`skills/neus-design/references/customization.md`, Level 0.** Add the props and variants
   that change its look, so the agent tries props before tokens.
 - **`skills/neus-design/references/patterns.md`.** Use it in the skeleton where it belongs (a

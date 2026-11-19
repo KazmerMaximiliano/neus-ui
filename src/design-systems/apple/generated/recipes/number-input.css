@@ -1,0 +1,10 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --number-input-stepper-gap: 0px;
+  --number-input-stepper-background: var(--color-surface-secondary);
+  --number-input-stepper-radius: 8px;
+  --number-input-button-radius: 0px;
+  --number-input-button-color: var(--color-text-primary);
+  --number-input-divider-width: 1px;
+  --number-input-divider-color: var(--color-border-subtle);
+}

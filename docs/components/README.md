@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 55 components and public sections. Import each by name from `neus-ui`.
+The package exports 58 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -40,6 +40,7 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | Component | Purpose |
 | --- | --- |
 | [Input](./Input.md) | Native input with field presentation, adornments and accessible errors. |
+| [NumberInput](./NumberInput.md) | Number field with keyboard and button steps, range, precision and locale formatting. |
 | [Textarea](./Textarea.md) | Multi-line text with the Input field presentation, line-based height and optional growth. |
 | [Checkbox](./Checkbox.md) | Controlled checkbox with an indeterminate visual state. |
 | [Switch](./Switch.md) | On/off setting that applies at once. |
@@ -49,6 +50,8 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Combobox](./Combobox.md) | Text field with suggestions from a list or fetched results, and optional new values. |
 | [MultiSelect](./MultiSelect.md) | Multiple selection with removable tags and searchable options. |
 | [FileUploader](./FileUploader.md) | File selection and drag/drop with size and type validation. |
+| [FormField](./FormField.md) | Label, help text and error wired to a control the library does not draw. |
+| [Fieldset](./Fieldset.md) | Native fieldset with a legend, help text and error around several controls. |
 
 ## Date and time
 

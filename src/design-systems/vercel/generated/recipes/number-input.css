@@ -1,0 +1,11 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --number-input-button-size: 24px;
+  --number-input-button-radius: 6px;
+  --number-input-icon-size: 14px;
+  --number-input-button-hover-background: #f2f2f2;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --number-input-button-hover-background: #1a1a1a;
+}

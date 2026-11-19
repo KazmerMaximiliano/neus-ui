@@ -1,0 +1,17 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --form-field-font-family: var(--input-font-family);
+  --form-field-gap: var(--input-gap);
+  --form-field-label-color: var(--input-label-color);
+  --form-field-label-font-size: var(--input-label-font-size);
+  --form-field-label-weight: var(--input-label-weight);
+  --form-field-required-color: var(--input-required-color);
+  --form-field-required-gap: var(--input-required-gap);
+  --form-field-error-color: var(--input-error-color);
+  --form-field-error-font-size: var(--input-error-font-size);
+  --form-field-disabled-color: var(--input-disabled-color);
+  --fieldset-gap: 4px;
+  --fieldset-label-gap: 8px;
+  --fieldset-content-gap: 16px;
+}

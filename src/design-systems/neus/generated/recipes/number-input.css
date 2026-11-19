@@ -1,0 +1,19 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --number-input-stepper-gap: 4px;
+  --number-input-stepper-inset: var(--input-adornment-gap);
+  --number-input-stepper-background: transparent;
+  --number-input-stepper-radius: 0px;
+  --number-input-button-size: 28px;
+  --number-input-button-radius: var(--radius-pill);
+  --number-input-button-background: transparent;
+  --number-input-button-color: var(--color-text-secondary);
+  --number-input-button-hover-background: var(--color-surface-hover);
+  --number-input-button-hover-color: var(--color-text-primary);
+  --number-input-icon-size: 16px;
+  --number-input-divider-width: 0px;
+  --number-input-divider-color: var(--input-border-color);
+  --number-input-disabled-color: var(--color-text-disabled);
+  --number-input-transition: background-color 0.2s ease, color 0.2s ease;
+}

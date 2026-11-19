@@ -476,6 +476,16 @@ x-neus:
       dark:
         --accordion-divider-color: "#424245"
         --accordion-icon-color: "#6e6e73"
+    form-field: {}
+    number-input:
+      base:
+        --number-input-stepper-gap: 0px
+        --number-input-stepper-background: var(--color-surface-secondary)
+        --number-input-stepper-radius: 8px
+        --number-input-button-radius: 0px
+        --number-input-button-color: var(--color-text-primary)
+        --number-input-divider-width: 1px
+        --number-input-divider-color: var(--color-border-subtle)
 ---
 
 # Apple
@@ -609,6 +619,10 @@ Breadcrumbs follow apple.com's footer trail: 12px text with -0.01em tracking, li
 Pagination has no HIG counterpart: page controls are dots for swiping through views. Page buttons are 32px capsules like the small icon buttons, regular weight with the current page a semibold blue capsule; a local mapping.
 
 An accordion follows apple.com's shared accordion in its reduced size: 17px semibold titles over 1px hairlines (#d2d2d7, #424245 in dark mode), no fills or side padding, a gray chevron (#86868b, #6e6e73 in dark mode) at the end that turns in 320ms, and 14px answers ([apple.com iCloud styles](https://www.apple.com/v/icloud/ak/built/styles/overview.built.css), consulted 2026-11-19). The guidelines describe disclosure controls without measurements ([HIG disclosure controls](https://developer.apple.com/design/human-interface-guidelines/disclosure-controls), consulted 2026-11-19).
+
+A form field or a fieldset reads like the input's label above its control, with help text in secondary gray and the error in red; both inherit the input's type, so they need no values of their own.
+
+A number input ends in a stepper drawn like the HIG's two-segment control: a light gray capsule with 8px corners, minus and plus in primary ink, split by a hairline ([HIG steppers](https://developer.apple.com/design/human-interface-guidelines/steppers), consulted 2026-11-19; the page gives no measurements, so the sizes are local decisions).
 
 ## Do's and Don'ts
 

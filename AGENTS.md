@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 55 reusable UI components and public sections
+- 58 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (55 total)
+### Implemented Components and Public Subcomponents (58 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -252,6 +252,9 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Breadcrumbs      | src/components/Breadcrumbs/                             | STABLE | Navigation trail ending at aria-current, CSS separators, collapsing middle items, linkComponent                         |
 | Pagination       | src/components/Pagination/                              | STABLE | Page buttons with ellipses or compact previous/next, page-size Select; DataTable's controls                             |
 | Accordion        | src/components/Accordion/                               | STABLE | Native details/summary, single or multiple open, controlled or not, find-in-page, works without JavaScript              |
+| FormField        | src/components/FormField/                               | STABLE | Label, help text, required mark and error handed to a control it does not draw through a render function                |
+| Fieldset         | src/components/Fieldset/                                | STABLE | Native fieldset with legend, help text and error; disables every control; RadioGroup's base                             |
+| NumberInput      | src/components/NumberInput/                             | STABLE | Spinbutton on Input: arrow/page/home/end and stepper buttons, clamping, precision, Intl formatting, plain submit value  |
 
 ### Implemented Sections (12 total, `neus-ui/sections`)
 
@@ -882,7 +885,7 @@ interactive component catalog separately.
 
 All public families and both templates have six scoped recipes. Button supports
 solid/secondary/tonal/elevated/outlined/text; Card supports
-auto/filled/outlined/elevated. Input, Textarea, Combobox, Select, MultiSelect and picker fields share variant, size and
+auto/filled/outlined/elevated. Input, NumberInput, Textarea, Combobox, Select, MultiSelect and picker fields share variant, size and
 label-placement controls. Calendar is discriminated
 by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
 renderMobileCard. DataTable actions are composed by consumers with buttons or menus,

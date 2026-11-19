@@ -109,6 +109,18 @@ the project wrote.
   hand-made radio (`role="radio"` or `role="radiogroup"` on a `div`), a raw
   `<input type="radio">`, and a Select or checkboxes for a single choice
   among two to five options that should stay visible.
+- Fieldset is a native `<fieldset>` named by its legend, with its description
+  and error wired to `aria-describedby`; `disabled` turns off every control
+  inside. FormField labels one control neus does not draw: its label points to
+  the control by `for` and `aria-labelledby`, and the control receives
+  `aria-describedby`, `aria-invalid` and `aria-required`. Flag a raw `<label>`
+  or `<fieldset>` beside neus fields, and a group of related fields without a
+  caption.
+- NumberInput is a `role="spinbutton"` field with `aria-valuenow`, `-min`,
+  `-max` and a formatted `aria-valuetext`; the arrow, Page and Home/End keys
+  step it, the steppers stay out of the Tab order, it clamps and rounds the
+  number and submits it unformatted. Flag `<input type="number">`, an Input
+  with `type="number"`, and hand-made plus/minus buttons around a field.
 - Textarea is a native `<textarea>` with Input's look; `rows`, `maxRows` and
   `autoResize` size it in whole lines through CSS. Flag a raw `<textarea>` and
   hand-made growth (a `scrollHeight` handler on input).

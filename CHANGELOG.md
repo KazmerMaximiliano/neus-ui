@@ -8,6 +8,34 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.11.0] - Unreleased
+
+### Added
+
+- `FormField`: the label, help text, required mark and error of one control the library does
+  not draw (a star rating, a third-party widget). Its `children` function
+  receives the `id`, `aria-labelledby`, `aria-describedby`, `aria-invalid`, `aria-required`
+  and `disabled` to spread on the control. New `form-field` recipe family, built on each system's input labels.
+- `Fieldset`: a native fieldset with its legend, help text, required mark and error around
+  several controls; `disabled` turns off every control inside. It shares the `form-field`
+  recipe.
+- `NumberInput`: a `spinbutton` field on Input for quantities and amounts. The arrow, Page,
+  Home and End keys and two stepper buttons step it; it clamps to `min` and `max`, rounds to
+  `precision`, shows the number with `Intl.NumberFormat` (`locale`, `formatOptions` for
+  currency, percent or units) and submits it unformatted. English stepper names you can
+  replace through `labels`. New `number-input` recipe family in the six systems.
+- `neus-ui lint` suggests NumberInput for `type="number"`, FormField for a raw `<label>` and
+  Fieldset for a raw `<fieldset>`; the neus-design and neus-audit skills and the specimen know
+  the three components.
+
+### Changed
+
+- `RadioGroup` is built on Fieldset. Its classes, tokens, props and accessible names stay the
+  same; its parts also carry Fieldset's classes. In Storybook it moves from Base to a new Form
+  category, with Fieldset and FormField.
+- The neus-design "Need → component" table merges related rows and leaves details to each
+  guide, so `neus-ui context` reads about 570 tokens shorter.
+
 ## [2.10.0] - 2026-11-19
 
 ### Added
@@ -439,7 +467,8 @@ First public release on npm.
 - Five reference examples with the pages the design skill produced, on a built-in system
   with a brand and on a derived system.
 
-[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...HEAD
+[2.11.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.7.0...v2.8.0
