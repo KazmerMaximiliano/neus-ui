@@ -597,6 +597,16 @@ x-neus:
         --accordion-disabled-color: color-mix(in srgb, var(--color-text-on-primary) 50%, var(--color-primary))
         --accordion-focus-width: 3px
         --accordion-focus-offset: -3px
+    form-field: {}
+    number-input:
+      base:
+        --number-input-stepper-gap: 0px
+        --number-input-button-radius: 0px
+        --number-input-button-color: var(--color-text-primary)
+        --number-input-button-hover-background: var(--color-primary)
+        --number-input-button-hover-color: var(--color-text-on-primary)
+        --number-input-divider-width: 3px
+        --number-input-divider-color: var(--color-text-primary)
 ---
 
 # Neobrutalism
@@ -724,6 +734,10 @@ Breadcrumbs are ink, medium weight, with each link bold and underlined like ever
 Pagination is a row of framed tiles: 40px squares with a 3px ink border and 4px corners on the page color, bold numbers, and the current page filled with yellow over a 3px hard ink shadow ([neobrutalism pagination](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/pagination.tsx), consulted 2026-11-18). The shadow is this system's mark for the current page; the components library has none there.
 
 An accordion is a stack of framed cards 16px apart: a 3px ink border, 4px corners and a hard ink shadow, each question a bold bar in yellow with ink text and chevron, and the answer below a 3px rule on the page color ([neobrutalism accordion](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/accordion.tsx), consulted 2026-11-19). The components library uses its blue and a 2px frame; the yellow and 3px frame follow this system.
+
+A form field or a fieldset takes the input's label and error styles, so they need no values of their own.
+
+A number input ends in square minus and plus buttons in ink, split by a 3px ink rule like the field's border; hovering one fills it with yellow. The components library has no stepper, so this is a local decision on top of its input ([neobrutalism input](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/input.tsx), consulted 2026-11-19).
 
 ## Do's and Don'ts
 

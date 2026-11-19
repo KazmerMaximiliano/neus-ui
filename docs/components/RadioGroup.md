@@ -36,7 +36,7 @@ on/off setting.
 
 ## Behavior and accessibility
 
-RadioGroup renders a `<fieldset role="radiogroup">` whose `<legend>` names it. The Radio
+RadioGroup renders a [Fieldset](./Fieldset.md) with `role="radiogroup"`, whose `<legend>` names it. The Radio
 components inside it share one `name` (the `name` prop, or a generated one), so the browser gives them radio-group
 keyboard behavior: Tab enters the group at the chosen radio, the arrow keys move the choice and
 Tab leaves the group. `value` makes it controlled (`null` keeps nothing chosen) and
@@ -96,6 +96,9 @@ whose rendering condition is false.
 | `.radio-group__options` | `div` | `optionsClassName` | `optionsStyle` | `Always` |
 | `.radio-group__error` | `div` | `errorClassName` | `errorStyle` | `error` |
 
+Each part also carries the matching [Fieldset](./Fieldset.md) class (`.fieldset`,
+`.fieldset__label`, `.fieldset__content`…); target the `radio-group` classes above.
+
 States: `.radio-group[data-orientation="horizontal"]`, `.radio-group[aria-invalid="true"]` and
 `.radio-group:disabled`. Use the
 [stylesheet](../../src/components/RadioGroup/RadioGroup.styles.css) for the exact declarations.
@@ -144,6 +147,9 @@ dependencies. Do not edit generated files. The group tokens belong to the `radio
 | `--radio-group-error-color` | Error message, and legend while invalid | `var(--input-error-color)` |
 | `--radio-group-error-font-size` | Error message size | `var(--input-error-font-size)` |
 | `--radio-group-disabled-color` | Legend while disabled | `var(--input-disabled-color)` |
+
+RadioGroup sets the Fieldset's `--fieldset-*` and `--form-field-*` tokens from the ones
+above, so they keep driving its legend, required mark, gaps and error.
 
 ### Shared dependencies and runtime values
 

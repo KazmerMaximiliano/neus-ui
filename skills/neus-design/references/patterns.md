@@ -98,7 +98,7 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
 Use for create/edit screens and settings forms.
 
 ```tsx
-import { Checkbox, DateInput, FormTemplate, Input, Radio, RadioGroup, Select, Textarea } from "neus-ui";
+import { Checkbox, DateInput, FormTemplate, Input, NumberInput, Radio, RadioGroup, Select, Textarea } from "neus-ui";
 
 export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => (
   <form onSubmit={(event) => { event.preventDefault(); onSubmit(new FormData(event.currentTarget)); }}>
@@ -113,6 +113,7 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
         searchBarPlaceholder="Search plans"
       />
       <DateInput name="start" label="Start date" />
+      <NumberInput name="seats" label="Seats" defaultValue={5} min={1} max={500} />
       <RadioGroup name="billing" label="Billing" defaultValue="monthly" orientation="horizontal">
         <Radio value="monthly" label="Monthly" />
         <Radio value="yearly" label="Yearly" />
@@ -134,6 +135,12 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
   labels); longer lists are a `Select`. When people type to find the value (a
   country, a customer, results from a server) or may enter a new one (a tag),
   use a `Combobox`.
+- Numbers people count or pay (seats, quantity, budget) are a `NumberInput`, with
+  `formatOptions` for currency or percent; codes that only look like numbers (a phone,
+  a postal code) stay an `Input`.
+- Group related fields under one caption with `Fieldset` (an address, notification
+  channels); wrap a control neus does not draw in `FormField` so it gets the same
+  label, help text and error.
 
 ## 3. Multi-step flow
 

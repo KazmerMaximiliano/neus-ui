@@ -1,0 +1,10 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --number-input-stepper-gap: 0px;
+  --number-input-button-radius: 0px;
+  --number-input-button-color: var(--color-text-primary);
+  --number-input-button-hover-background: var(--color-primary);
+  --number-input-button-hover-color: var(--color-text-on-primary);
+  --number-input-divider-width: 3px;
+  --number-input-divider-color: var(--color-text-primary);
+}

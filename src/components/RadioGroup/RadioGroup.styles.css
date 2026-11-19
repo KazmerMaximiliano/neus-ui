@@ -1,52 +1,25 @@
+/* RadioGroup is a Fieldset: its own tokens drive the fieldset's. */
 .radio-group {
-  display: grid;
-  row-gap: var(--radio-group-text-gap);
-  min-inline-size: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-family: var(--radio-font-family);
+  --fieldset-gap: var(--radio-group-text-gap);
+  --fieldset-label-gap: var(--radio-group-label-gap);
+  --form-field-font-family: var(--radio-font-family);
+  --form-field-label-color: var(--radio-group-label-color);
+  --form-field-label-font-size: var(--radio-group-label-font-size);
+  --form-field-label-weight: var(--radio-group-label-weight);
+  --form-field-required-color: var(--radio-group-required-color);
+  --form-field-required-gap: var(--radio-group-required-gap);
+  --form-field-error-color: var(--radio-group-error-color);
+  --form-field-error-font-size: var(--radio-group-error-font-size);
+  --form-field-disabled-color: var(--radio-group-disabled-color);
 }
 
-.radio-group__label {
-  padding: 0;
-  margin-block-end: var(--radio-group-label-gap);
-  color: var(--radio-group-label-color);
-  font-size: var(--radio-group-label-font-size);
-  font-weight: var(--radio-group-label-weight);
-}
-
-.radio-group__required {
-  margin-inline-start: var(--radio-group-required-gap);
-  color: var(--radio-group-required-color);
-}
-
-.radio-group > .field__description {
-  margin-left: 0;
-}
-
-.radio-group__options {
-  display: flex;
-  flex-direction: column;
+.radio-group > .radio-group__options {
   align-items: flex-start;
   gap: var(--radio-group-gap);
 }
 
-.radio-group[data-orientation="horizontal"] .radio-group__options {
+.radio-group[data-orientation="horizontal"] > .radio-group__options {
   flex-direction: row;
   flex-wrap: wrap;
   column-gap: var(--radio-group-inline-gap);
-}
-
-.radio-group__error {
-  color: var(--radio-group-error-color);
-  font-size: var(--radio-group-error-font-size);
-}
-
-.radio-group[aria-invalid="true"] .radio-group__label {
-  color: var(--radio-group-error-color);
-}
-
-.radio-group:disabled .radio-group__label {
-  color: var(--radio-group-disabled-color);
 }

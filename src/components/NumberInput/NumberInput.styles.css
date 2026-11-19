@@ -1,0 +1,72 @@
+.number-input .input {
+  font-variant-numeric: tabular-nums;
+}
+
+.number-input .input__control:has(.number-input__stepper) .input {
+  padding-right: calc(
+    2 * var(--number-input-button-size) + var(--number-input-stepper-gap) +
+      var(--number-input-divider-width) + var(--number-input-stepper-inset) +
+      var(--input-adornment-gap)
+  );
+}
+
+.number-input .input__control:has(.number-input__stepper):has(.input__error-icon) .input {
+  padding-right: calc(
+    2 * var(--number-input-button-size) + var(--number-input-stepper-gap) +
+      var(--number-input-divider-width) + var(--input-adornment-size) +
+      3 * var(--input-adornment-gap)
+  );
+}
+
+.number-input .input__suffix {
+  right: var(--number-input-stepper-inset);
+}
+
+.number-input__stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--number-input-stepper-gap);
+  overflow: hidden;
+  border-radius: var(--number-input-stepper-radius);
+  background-color: var(--number-input-stepper-background);
+}
+
+.number-input__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--number-input-button-size);
+  block-size: var(--number-input-button-size);
+  padding: 0;
+  border: 0;
+  border-radius: var(--number-input-button-radius);
+  background-color: var(--number-input-button-background);
+  color: var(--number-input-button-color);
+  cursor: pointer;
+  transition: var(--number-input-transition);
+}
+
+.number-input__increment {
+  border-inline-start: var(--number-input-divider-width) solid var(--number-input-divider-color);
+}
+
+.number-input__button svg {
+  inline-size: var(--number-input-icon-size);
+  block-size: var(--number-input-icon-size);
+}
+
+.number-input__button:hover:not(:disabled) {
+  background-color: var(--number-input-button-hover-background);
+  color: var(--number-input-button-hover-color);
+}
+
+.number-input__button:disabled {
+  color: var(--number-input-disabled-color);
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .number-input__button {
+    transition: none;
+  }
+}

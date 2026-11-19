@@ -80,6 +80,9 @@ export const Page = () => (
     ["raw-element", "a.tsx", `<button role="tab" aria-selected={selected}>General</button>`],
     ["raw-element", "a.tsx", `<nav aria-label="Breadcrumb"><ol>{crumbs}</ol></nav>`],
     ["raw-element", "a.tsx", `<nav className="pager" aria-label="Paginación">{pages}</nav>`],
+    ["raw-element", "a.tsx", `<Input label="Guests" type="number" min={1} />`],
+    ["raw-element", "a.tsx", `<label htmlFor="avatar">Avatar</label>`],
+    ["raw-element", "a.tsx", `<fieldset><legend>Address</legend>{fields}</fieldset>`],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
     ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
   ])("reports P1 %s", (rule, file, text) => {
@@ -103,6 +106,11 @@ export const Page = () => (
 
   it("does not take Tooltip, Combobox or a titled Modal for hand-made ones", () => {
     const text = `<Tooltip content="Moves it to the trash" trigger={(props) => <IconButton {...props} icon={Trash2} label="Delete" />} />\n<Combobox label="City" options={cities} />\n<ModalHeader title="Delete project" />`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take NumberInput, FormField or Fieldset for hand-made fields", () => {
+    const text = `<NumberInput label="Guests" min={1} />\n<FormField label="Avatar">{(control) => <Uploader {...control} />}</FormField>\n<Fieldset label="Address">{fields}</Fieldset>`;
     expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
   });
 

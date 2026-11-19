@@ -24,7 +24,7 @@ export const RECIPE_NAMES = [
   "sidebar", "stepper", "week-calendar", "interactive-map", "data-table", "templates",
   "typography", "layout", "media-placeholder", "alert", "avatar", "sections", "spinner",
   "switch", "radio", "popover", "progress", "skeleton", "toast", "tooltip", "tabs",
-  "breadcrumbs", "pagination", "accordion",
+  "breadcrumbs", "pagination", "accordion", "form-field", "number-input",
 ] as const;
 
 export const SECTION_NAMES = [

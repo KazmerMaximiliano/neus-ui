@@ -105,6 +105,9 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
         report(file, at, "P1", "raw-element", "hand-made combobox: use Combobox (Select for predefined options)");
       }
       if (!isCss(file) && /role=["']tab(list)?["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made tabs: use Tabs");
+      if (!isCss(file) && /<(input|Input)\b[^>]*\stype=["']number["']/.test(line)) {
+        report(file, at, "P1", "raw-element", "number field: use NumberInput, which steps, clamps and formats the number");
+      }
       if (!isCss(file) && /<nav\b[^>]*aria-label=["'][^"']*breadcrumb/i.test(line)) {
         report(file, at, "P1", "raw-element", "hand-made breadcrumbs: use Breadcrumbs");
       }

@@ -24,7 +24,9 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 `aria-describedby`), plus native attributes such as `autoComplete`,
 `inputMode` and `spellCheck` on Input; Textarea `rows`, `maxRows` and
 `autoResize`; Switch `description`; RadioGroup `orientation` and
-`description`, Radio `description`; Popover `placement` and `label`; Tooltip
+`description`, Radio `description`; NumberInput `min`, `max`, `step`, `precision`,
+`locale`, `formatOptions` and `hideStepper` with every Input field prop; FormField and
+Fieldset `description`, `error` and `required`, Fieldset `disabled`; Popover `placement` and `label`; Tooltip
 `placement` and `delay`; Combobox `filter`, `allowCustomValue`, `loading`,
 `emptyLabel` and `loadingLabel` with every Input field prop; Tabs `variant`
 (`line`, `contained`) and `label`; Breadcrumbs `maxItems`, `linkComponent` and `labels`;

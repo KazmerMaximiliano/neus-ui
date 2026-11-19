@@ -1580,6 +1580,38 @@ x-neus:
         --accordion-focus-color: var(--color-focus)
         --accordion-focus-offset: -2px
         --accordion-transition: background-color 0.2s ease
+    form-field:
+      base:
+        --form-field-font-family: var(--input-font-family)
+        --form-field-gap: var(--input-gap)
+        --form-field-label-color: var(--input-label-color)
+        --form-field-label-font-size: var(--input-label-font-size)
+        --form-field-label-weight: var(--input-label-weight)
+        --form-field-required-color: var(--input-required-color)
+        --form-field-required-gap: var(--input-required-gap)
+        --form-field-error-color: var(--input-error-color)
+        --form-field-error-font-size: var(--input-error-font-size)
+        --form-field-disabled-color: var(--input-disabled-color)
+        --fieldset-gap: "{spacing.step-1}"
+        --fieldset-label-gap: "{spacing.step-2}"
+        --fieldset-content-gap: "{spacing.step-4}"
+    number-input:
+      base:
+        --number-input-stepper-gap: "{spacing.step-1}"
+        --number-input-stepper-inset: var(--input-adornment-gap)
+        --number-input-stepper-background: transparent
+        --number-input-stepper-radius: 0px
+        --number-input-button-size: 28px
+        --number-input-button-radius: var(--radius-pill)
+        --number-input-button-background: transparent
+        --number-input-button-color: var(--color-text-secondary)
+        --number-input-button-hover-background: var(--color-surface-hover)
+        --number-input-button-hover-color: var(--color-text-primary)
+        --number-input-icon-size: 16px
+        --number-input-divider-width: 0px
+        --number-input-divider-color: var(--input-border-color)
+        --number-input-disabled-color: var(--color-text-disabled)
+        --number-input-transition: background-color 0.2s ease, color 0.2s ease
 ---
 
 # Neus UI
@@ -1725,6 +1757,10 @@ Tabs switch between views of one subject. Line tabs sit on a thin gray divider: 
 Breadcrumbs show where the page sits: secondary-ink links in 13px separated by slashes, ending at the current page in primary ink and semibold. Links turn indigo and underline on hover, like every link, and a long trail folds its middle behind an ellipsis button.
 
 Pagination numbers the pages in 40px round buttons, as wide as the icon buttons beside them for previous and next. The current page is a solid indigo disc with white numbers in bold; the others are plain ink that gets the hover surface. The compact form reads "5 / 20" in secondary ink between the arrows.
+
+A form field around a control the library does not draw, and a fieldset around several controls, read like the input's own label: the same weight, size and color, the red asterisk for required, help text in secondary ink and the error in the error color. Their text starts at the control's edge, without the input's inset. A fieldset leaves 16px between the controls it groups.
+
+A number input is the input with the number set in tabular figures and two round steppers at the end, minus then plus, in secondary ink with the hover surface. A stepper fades to the disabled ink at the end of the range.
 
 ## Do's and Don'ts
 

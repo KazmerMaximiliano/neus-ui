@@ -2,7 +2,8 @@
 // Run it again after changing the system, the derived system or the palette; delete it when done.
 import {
   Accordion, Alert, Avatar, AvatarGroup, Badge, Breadcrumbs, Button, Card, CardContent, CardFooter, CardHeader, Checkbox, Combobox,
-  DateInput, Grid, Heading, Input, MediaPlaceholder, Pagination, Popover, Progress, Radio, RadioGroup, Section, Select,
+  DateInput, Fieldset, FormField, Grid, Heading, Input, MediaPlaceholder, NumberInput, Pagination, Popover, Progress, Radio,
+  RadioGroup, Section, Select,
   Skeleton, Spinner, Stack, Switch, Tabs, Text, Textarea, ThemeProvider, Toast, Tooltip,
 } from "neus-ui";
 import type { ColorScheme, DesignSystemId, ThemeConfig } from "neus-ui";
@@ -82,6 +83,22 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
             <Radio value="express" label="Express" />
             <Radio value="pickup" label="Store pickup" disabled />
           </RadioGroup>
+          <NumberInput label="Guests" defaultValue={2} min={1} max={8} description="Up to eight people." />
+          {/* A control of the project's own, the kind FormField labels: a 1–5 score. */}
+          <FormField label="Rating" description="How was your stay?">
+            {({ disabled, ...control }) => (
+              <Stack {...control} role="radiogroup" direction="row" gap={1}>
+                {[1, 2, 3, 4, 5].map((score) => (
+                  <Button key={score} label={String(score)} size="small" variant={score === 4 ? "solid" : "outlined"}
+                    role="radio" aria-checked={score === 4} disabled={disabled} />
+                ))}
+              </Stack>
+            )}
+          </FormField>
+          <Fieldset label="Notify me by" description="Pick any.">
+            <Switch label="Email" defaultChecked />
+            <Switch label="Text message" />
+          </Fieldset>
         </Grid>
         <Grid columns={{ base: 1, md: 2 }} gap={6}>
           <Stack gap={6}>
