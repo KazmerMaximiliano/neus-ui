@@ -8,7 +8,7 @@ breaking change.
 
 ## [Unreleased]
 
-## [2.10.0] - Unreleased
+## [2.10.0] - 2026-11-19
 
 ### Added
 
