@@ -2,10 +2,11 @@
 // Run it again after changing the system, the derived system or the palette; delete it when done.
 import { useState } from "react";
 import {
-  Accordion, Alert, Avatar, AvatarGroup, Badge, Breadcrumbs, Button, Card, CardContent, CardFooter, CardHeader, Checkbox, Combobox,
-  DateInput, Drawer, DrawerContent, DrawerFooter, DrawerHeader, Fieldset, FormField, Grid, Heading, Input, MediaPlaceholder, NumberInput, Pagination, Popover, Progress, Radio,
-  RadioGroup, Section, Select,
-  Skeleton, Slider, Spinner, Stack, Switch, Tabs, Text, Textarea, ThemeProvider, Toast, Toggle, ToggleGroup, Tooltip,
+  Accordion, Alert, Avatar, AvatarGroup, Badge, Breadcrumbs, Button, Card, CardContent, CardFooter, CardHeader,
+  Checkbox, Chip, Combobox, DateInput, Drawer, DrawerContent, DrawerFooter, DrawerHeader, Fieldset, FormField, Grid,
+  Heading, Input, List, ListItem, MediaPlaceholder, NumberInput, Pagination, Popover, Progress, Radio, RadioGroup,
+  Section, Select, Skeleton, Slider, Spinner, Stack, Switch, Tabs, Text, Textarea, ThemeProvider, Toast, Toggle,
+  ToggleGroup, Tooltip,
 } from "neus-ui";
 import type { ColorScheme, DesignSystemId, ThemeConfig } from "neus-ui";
 
@@ -89,6 +90,9 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
             {(["small", "medium", "large"] as const).map((size) => <Spinner key={size} size={size} label={`Loading ${size}`} />)}
             <Spinner variant="dots" label="Loading dots" />
             {(["primary", "success", "error", "info", "neutral"] as const).map((color) => <Badge key={color} label={color} color={color} />)}
+            <Chip label="Chip" onSelectedChange={() => {}} />
+            <Chip label="Selected" defaultSelected />
+            <Chip label="Removable" size="small" onRemove={() => {}} />
           </Stack>
         </Stack>
         <Grid columns={{ base: 1, md: 3 }} gap={6}>
@@ -121,6 +125,10 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
               </Stack>
             )}
           </FormField>
+          <List divided aria-label="Settings">
+            <ListItem title="Notifications" description="Every Monday." trailing={<Switch aria-label="Notifications" defaultChecked />} />
+            <ListItem title="Billing" trailing="Monthly" />
+          </List>
           <Fieldset label="Notify me by" description="Pick any.">
             <Switch label="Email" defaultChecked />
             <Switch label="Text message" />

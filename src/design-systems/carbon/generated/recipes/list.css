@@ -1,0 +1,15 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --list-gap: 0px;
+  --list-item-min-height: 48px;
+  --list-item-padding: 14px 16px;
+  --list-item-gap: 12px;
+  --list-leading-size: 16px;
+  --list-leading-color: var(--color-text-primary);
+  --list-title-size: 14px;
+  --list-title-weight: 400;
+  --list-title-line-height: 20px;
+  --list-description-size: 12px;
+  --list-description-line-height: 16px;
+  --list-trailing-size: 14px;
+}

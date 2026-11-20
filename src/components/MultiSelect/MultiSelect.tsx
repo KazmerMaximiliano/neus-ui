@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { usePopover } from "../../hooks/usePopover";
+import { Chip } from "../Chip";
 import { FieldOutline } from "../Input/components/FieldOutline";
 import { SelectListbox } from "../Select/components/SelectListbox";
 import type { MultiSelectProps } from "./MultiSelect.types";
@@ -166,39 +167,25 @@ export const MultiSelect = ({
         style={fieldStyle}
       >
         {selectedOptions.map((option) => (
-          <span
+          <Chip
             key={option.value}
-            className={["multiselect__tag", tagClassName]
+            label={option.label}
+            size="small"
+            className={["multiselect__tag", tagClassName].filter(Boolean).join(" ")}
+            style={tagStyle}
+            removeClassName={["multiselect__tag-remove", tagRemoveClassName].filter(Boolean).join(" ")}
+            removeStyle={tagRemoveStyle}
+            removeIconClassName={["multiselect__tag-remove-icon", tagRemoveIconClassName]
               .filter(Boolean)
               .join(" ")}
-            style={tagStyle}
-          >
-            {option.label}
-            {!disabled && (
-              <button
-                type="button"
-                className={["multiselect__tag-remove", tagRemoveClassName]
-                  .filter(Boolean)
-                  .join(" ")}
-                style={tagRemoveStyle}
-                aria-label={text.remove(option.label)}
-                onClick={() =>
-                  update(selectedValues.filter((v) => v !== option.value))
-                }
-              >
-                <X
-                  aria-hidden
-                  className={[
-                    "multiselect__tag-remove-icon",
-                    tagRemoveIconClassName,
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                  style={tagRemoveIconStyle}
-                />
-              </button>
-            )}
-          </span>
+            removeIconStyle={tagRemoveIconStyle}
+            labels={{ remove: text.remove }}
+            onRemove={
+              disabled
+                ? undefined
+                : () => update(selectedValues.filter((v) => v !== option.value))
+            }
+          />
         ))}
         <button
           ref={triggerRef}

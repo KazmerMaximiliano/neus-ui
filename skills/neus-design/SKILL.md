@@ -243,6 +243,8 @@ component's guide.
 | Files, map | `FileUploader`, `InteractiveMap` |
 | Action | `Button` (`variant`; `href` when it navigates); icon only: `IconButton`; inside text: `Link` |
 | Status or label | `Badge` |
+| Filter or tag a person picks or removes | `Chip` (`selected`, `onRemove`) |
+| Rows of settings, people or files | `List` (`divided`) + `ListItem` (`leading`, `title`, `description`, `trailing`) |
 | Message about the page or a form | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
 | Brief confirmation after an action | `useToast().show({ status, title })` under one `ToastProvider`; lasting: `Alert` |
 | Loading | `Spinner` (`label`; a button has `loading`); `Skeleton` (`variant`, `lines`) in a region with `aria-busy`; `Progress` (`value`, `max`, `valueText`) for a known share |

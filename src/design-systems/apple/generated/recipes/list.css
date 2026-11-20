@@ -1,0 +1,23 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --list-radius: 26px;
+  --list-background: var(--color-surface-secondary);
+  --list-divider-color: #c6c6c8;
+  --list-divider-inset: 16px;
+  --list-divider-end-inset: 16px;
+  --list-item-min-height: 52px;
+  --list-item-padding: 12px 16px;
+  --list-item-gap: 20px;
+  --list-leading-size: 20px;
+  --list-leading-color: var(--color-primary);
+  --list-title-size: 17px;
+  --list-title-weight: 400;
+  --list-title-line-height: 1.29412;
+  --list-description-size: 15px;
+  --list-description-line-height: 1.33333;
+  --list-trailing-size: 17px;
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --list-divider-color: #38383a;
+}

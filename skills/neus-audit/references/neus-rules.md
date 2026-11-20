@@ -39,6 +39,15 @@ the project wrote.
 - IconButton uses its required `label` as `aria-label`.
 - Modal is a native `<dialog>`: focus trapping and Escape come from the
   browser.
+- Chip is a `<span>`; selectable, its label is a `<button aria-pressed>`
+  with a check while selected, and removable, a sibling `<button>` named
+  "Remove {label}" (`labels`). Flag a hand-made chip (a `span` with a chip or
+  tag class and a click handler, a remove `×` without a name) and a Badge used
+  as a filter.
+- List is a native `ul` or `ol` of ListItem rows with leading, title,
+  description and trailing parts. Flag rows of settings or people built from
+  `div`s or a bare `ul` with hand-made row layout, and a List used for actions
+  (Menu) or for sortable records (DataTable).
 - Drawer is a native modal `<dialog>` against an edge (`side`), named by
   DrawerHeader; Tab wraps inside it, Escape and a backdrop press request
   `onClose`, focus returns to the opener and the page behind does not scroll.

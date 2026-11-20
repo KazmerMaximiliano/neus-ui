@@ -1,0 +1,30 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --list-font-family: var(--font-body);
+  --list-gap: 8px;
+  --list-padding: 0px;
+  --list-radius: 0px;
+  --list-background: transparent;
+  --list-border-width: 0px;
+  --list-border-color: transparent;
+  --list-divider-width: 1px;
+  --list-divider-color: var(--color-border-subtle);
+  --list-divider-inset: 0px;
+  --list-divider-end-inset: 0px;
+  --list-item-min-height: 56px;
+  --list-item-padding: 12px 0;
+  --list-item-gap: 12px;
+  --list-body-gap: 2px;
+  --list-leading-size: 24px;
+  --list-leading-color: var(--color-text-secondary);
+  --list-title-color: var(--color-text-primary);
+  --list-title-size: var(--fs-base);
+  --list-title-weight: 600;
+  --list-title-line-height: 1.4;
+  --list-description-color: var(--color-text-secondary);
+  --list-description-size: var(--fs-sm);
+  --list-description-line-height: 1.5;
+  --list-trailing-color: var(--color-text-secondary);
+  --list-trailing-size: var(--fs-sm);
+}

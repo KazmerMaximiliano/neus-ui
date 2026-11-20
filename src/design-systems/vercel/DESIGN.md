@@ -789,6 +789,48 @@ x-neus:
         --drawer-content-padding: 16px
         --drawer-duration: 0.2s
         --drawer-easing: cubic-bezier(0.4, 0, 0.2, 1)
+    chip:
+      base:
+        --chip-font-size-medium: 12px
+        --chip-height-small: 20px
+        --chip-height-medium: 24px
+        --chip-padding-small: 6px
+        --chip-padding-medium: 8px
+        --chip-gap: 4px
+        --chip-radius: 6px
+        --chip-border-width: 0px
+        --chip-background: "#f2f2f2"
+        --chip-icon-size: 12px
+        --chip-hover-background: color-mix(in srgb, var(--chip-background), var(--color-text-primary) 5%)
+        --chip-selected-background: var(--color-primary)
+        --chip-selected-hover-background: var(--color-primary-dark)
+        --chip-selected-color: var(--color-text-on-primary)
+        --chip-remove-size-small: 20px
+        --chip-remove-size-medium: 20px
+        --chip-remove-icon-size: 12px
+        --chip-remove-inset: 2px
+        --chip-remove-radius: 8px
+        --chip-remove-color: color-mix(in srgb, currentColor 50%, transparent)
+        --chip-remove-hover-background: color-mix(in srgb, currentColor 10%, transparent)
+        --chip-focus-offset: 0px
+        --chip-disabled-opacity: "0.5"
+        --chip-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1)
+      dark:
+        --chip-background: "#1a1a1a"
+    list:
+      base:
+        --list-gap: 16px
+        --list-item-min-height: 0px
+        --list-item-padding: 10px 12px
+        --list-item-gap: 10px
+        --list-body-gap: 4px
+        --list-leading-size: 16px
+        --list-leading-color: var(--color-text-primary)
+        --list-title-weight: "500"
+        --list-title-line-height: "1.375"
+        --list-description-size: 14px
+        --list-trailing-color: var(--color-text-primary)
+        --list-trailing-size: 14px
 ---
 
 # Vercel
@@ -957,6 +999,10 @@ A slider follows the [shadcn/ui Slider](https://ui.shadcn.com/docs/components/ba
 A toggle and a toggle group follow [shadcn/ui Toggle](https://ui.shadcn.com/docs/components/base/toggle) and [Toggle Group](https://ui.shadcn.com/docs/components/base/toggle-group) in their default variant (consulted 2026-11-20): a borderless, transparent button with 10px corners, 14px medium labels and 16px icons 4px apart, 28, 32 and 36px tall with 10px of side padding. Hover and the pressed state fill it with gray 100 (#f2f2f2, #1a1a1a in dark mode) under foreground text, keyboard focus draws a 2px focus-blue outline at its edge, and a disabled toggle dims to half opacity. A group is a row or column of these toggles 8px apart, with no tray or border of its own. shadcn's small toggle has 8px corners and 12.8px text; here every size keeps the 10px corners and 14px type, a local decision.
 
 A drawer follows the shadcn/ui sheet ([shadcn/ui Sheet](https://ui.shadcn.com/docs/components/base/sheet), consulted 2026-11-20): a square panel on the surface color, three quarters of the screen wide up to 384px, separated from the page by a 1px border on its inner edge and raised with Geist's dialog material over the modal's black backdrop at 10% opacity. The header, body and footer have 16px of padding, the title is 16px medium on a 24px line, and the panel slides in 200ms on an ease-in-out curve. shadcn's bottom drawer ([shadcn/ui Drawer](https://ui.shadcn.com/docs/components/base/drawer), consulted 2026-11-20) rounds its top corners to 14px, drops the shadow, stops 96px below the top of the screen and can be dragged; this drawer is a dialog like the sheet and is not dragged, so it takes the drawer's 14px corners and its 96px gap from the top only when it rises from the top or bottom, and keeps the shadow. shadcn blurs the backdrop, stacks the footer actions and moves the sheet only 40px while it fades; this drawer leaves the page sharp, keeps the actions in a row at the end and slides the whole panel: local decisions.
+
+shadcn/ui has no chip, so a chip combines its Badge with the chips of its Combobox, both in the default base-nova style ([shadcn/ui Badge](https://ui.shadcn.com/docs/components/base/badge) and [shadcn/ui Combobox](https://ui.shadcn.com/docs/components/base/combobox), consulted 2026-11-20). It is a muted tile (#f2f2f2, #1a1a1a in dark mode) with the combobox chip's 6px corners, which is also how the MultiSelect tag looks. Its text is 12px medium in the foreground color, with 12px icons 4px apart. A small chip is 20px tall with 6px of padding, the badge's height. A medium chip is 24px tall with 8px of padding, the height of shadcn's extra-small buttons. Under the pointer it darkens by 5% of the foreground, like the secondary button. A selected chip takes the default badge's primary ink with on-primary text, and under the pointer it uses the button's darker primary. The remove button is shadcn's extra-small ghost icon button: a 12px cross at half the chip's text color, with 8px corners. Keyboard focus draws a 2px focus-blue outline on the edge, and a disabled chip drops to half opacity. Three things are local decisions. The remove button is 20px instead of shadcn's 24px so it fits the small chip. It takes a faint tint of the text color under the pointer, where shadcn's hover fill matches the chip and only brings the cross to full strength. The medium size does not exist in shadcn.
+
+A list follows the base-nova style of [shadcn/ui Item](https://ui.shadcn.com/docs/components/base/item) (consulted 2026-11-20, [source](https://ui.shadcn.com/r/styles/base-nova/item.json)). Rows are 16px apart in an unframed column, as ItemGroup lays them out. Each row has 10px by 12px of padding and 10px between a 16px foreground icon, the text and the trailing content. Titles are 14px medium foreground text with tight 1.375 leading. Descriptions are 14px in the secondary color, 4px below, and trailing content inherits the 14px foreground text. Dividers are ItemSeparator's 1px rule in the border color across the full width. shadcn sets no minimum row height, so a one-line row is about 40px. Two things are local decisions. shadcn's examples frame or tint each item (the outline and muted variants, [item-group example](https://github.com/shadcn-ui/ui/blob/main/apps/v4/examples/base/item-group.tsx)), but here the rows stay unframed, like its default variant. shadcn also adds 8px of margin around a separator, but here a divided list closes the gap and the rule sits between the rows' own padding.
 
 ## Do's and Don'ts
 

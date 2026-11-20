@@ -1,0 +1,15 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --list-gap: 16px;
+  --list-item-min-height: 0px;
+  --list-item-padding: 10px 12px;
+  --list-item-gap: 10px;
+  --list-body-gap: 4px;
+  --list-leading-size: 16px;
+  --list-leading-color: var(--color-text-primary);
+  --list-title-weight: 500;
+  --list-title-line-height: 1.375;
+  --list-description-size: 14px;
+  --list-trailing-color: var(--color-text-primary);
+  --list-trailing-size: 14px;
+}

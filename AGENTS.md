@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 65 reusable UI components and public sections
+- 68 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,14 +193,17 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (65 total)
+### Implemented Components and Public Subcomponents (68 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
 | Alert            | src/components/Alert/                                   | STABLE | Info/success/warning/error, live roles, actions, labelled dismiss                                                       |
 | Avatar           | src/components/Avatar/                                  | STABLE | Picture or initials, pre-hydration failure fallback, sizes and shapes                                                   |
 | AvatarGroup      | src/components/Avatar/components/AvatarGroup/           | STABLE | Overlap, size for its avatars, +N count                                                                                 |
+| List             | src/components/List/                                    | STABLE | Native ul/ol of rows, plain or divided with inset rules                                                                 |
+| ListItem         | src/components/List/components/ListItem/                | STABLE | Leading, title, description, extra content and trailing parts                                                           |
 | Badge            | src/components/Badge/                                   | STABLE | Solid/dot variants, 5 semantic colors                                                                                   |
+| Chip             | src/components/Chip/                                    | STABLE | Compact value: toggle (aria-pressed, check when selected), removable with a named button, or both; MultiSelect tags     |
 | Button           | src/components/Button/                                  | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links, native attributes and ref                     |
 | Calendar         | src/components/Calendar/                                | STABLE | Date picker                                                                                                             |
 | Card             | src/components/Card/                                    | STABLE | Composable themed surface, semantic `as`, className and style                                                           |
@@ -227,7 +230,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | DrawerHeader     | src/components/Drawer/components/DrawerHeader/          | STABLE | Title row that names the drawer                                                                                         |
 | DrawerContent    | src/components/Drawer/components/DrawerContent/         | STABLE | Body that scrolls between header and footer                                                                             |
 | DrawerFooter     | src/components/Drawer/components/DrawerFooter/          | STABLE | Wrapping row of actions                                                                                                 |
-| MultiSelect      | src/components/MultiSelect/                             | STABLE | Multiple selection                                                                                                      |
+| MultiSelect      | src/components/MultiSelect/                             | STABLE | Multiple selection; selected values as removable Chips                                                                  |
 | Select           | src/components/Select/                                  | STABLE | Single selection                                                                                                        |
 | Sidebar          | src/components/Sidebar/                                 | STABLE | Six token recipes, transparent curves, tablet rail and a Drawer on phones, href items with linkComponent               |
 | TimeInput        | src/components/TimeInput/                               | STABLE | Clock picker field                                                                                                      |

@@ -1,0 +1,17 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--list-gap);
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--list-padding);
+  border: var(--list-border-width) solid var(--list-border-color);
+  border-radius: var(--list-radius);
+  background: var(--list-background);
+  font-family: var(--list-font-family);
+  list-style: none;
+}
+
+.list[data-divided] {
+  gap: 0;
+}

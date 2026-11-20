@@ -887,6 +887,15 @@ x-neus:
         --select-tag-border-color: transparent
         --select-tag-font-size: var(--fs-xs)
         --select-tag-remove-color: var(--color-tag-remove)
+        --select-tag-inner-gap: 2px
+        --select-tag-line-height: "1.4"
+        --select-tag-remove-size: 20px
+        --select-tag-remove-icon-size: 14px
+        --select-tag-remove-radius: 50%
+        --select-tag-remove-hover-background: var(--color-surface-hover)
+        --select-tag-focus-width: 2px
+        --select-tag-focus-color: var(--color-focus)
+        --select-tag-focus-offset: 1px
     sidebar:
       base:
         --sidebar-background: var(--color-primary)
@@ -1749,6 +1758,70 @@ x-neus:
         --drawer-divider-color: var(--modal-divider-color)
         --drawer-duration: 0.3s
         --drawer-easing: cubic-bezier(0.2, 0, 0, 1)
+    chip:
+      base:
+        --chip-font-family: var(--font-body)
+        --chip-font-size-small: var(--fs-xs)
+        --chip-font-size-medium: var(--fs-sm)
+        --chip-font-weight: "500"
+        --chip-line-height: "1.4"
+        --chip-height-small: 24px
+        --chip-height-medium: 32px
+        --chip-padding-small: 10px
+        --chip-padding-medium: 12px
+        --chip-padding-block: 0px
+        --chip-gap: 6px
+        --chip-radius: "{rounded.pill}"
+        --chip-border-width: 1px
+        --chip-border-color: var(--color-border-input)
+        --chip-background: transparent
+        --chip-color: var(--color-text-primary)
+        --chip-icon-size: 16px
+        --chip-hover-background: var(--color-surface-hover)
+        --chip-selected-background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))
+        --chip-selected-hover-background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface))
+        --chip-selected-color: var(--color-primary-text)
+        --chip-selected-border-color: var(--color-primary)
+        --chip-remove-size-small: 20px
+        --chip-remove-size-medium: 20px
+        --chip-remove-icon-size: 14px
+        --chip-remove-inset: 4px
+        --chip-remove-radius: 50%
+        --chip-remove-color: var(--color-text-secondary)
+        --chip-remove-hover-background: var(--color-surface-hover)
+        --chip-focus-width: 2px
+        --chip-focus-color: var(--color-focus)
+        --chip-focus-offset: 1px
+        --chip-disabled-opacity: "0.38"
+        --chip-transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease
+    list:
+      base:
+        --list-font-family: var(--font-body)
+        --list-gap: "{spacing.step-2}"
+        --list-padding: 0px
+        --list-radius: 0px
+        --list-background: transparent
+        --list-border-width: 0px
+        --list-border-color: transparent
+        --list-divider-width: 1px
+        --list-divider-color: var(--color-border-subtle)
+        --list-divider-inset: 0px
+        --list-divider-end-inset: 0px
+        --list-item-min-height: 56px
+        --list-item-padding: 12px 0
+        --list-item-gap: "{spacing.step-3}"
+        --list-body-gap: 2px
+        --list-leading-size: 24px
+        --list-leading-color: var(--color-text-secondary)
+        --list-title-color: var(--color-text-primary)
+        --list-title-size: var(--fs-base)
+        --list-title-weight: "600"
+        --list-title-line-height: "1.4"
+        --list-description-color: var(--color-text-secondary)
+        --list-description-size: var(--fs-sm)
+        --list-description-line-height: "1.5"
+        --list-trailing-color: var(--color-text-secondary)
+        --list-trailing-size: var(--fs-sm)
 ---
 
 # Neus UI
