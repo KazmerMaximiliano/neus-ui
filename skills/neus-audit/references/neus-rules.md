@@ -39,6 +39,12 @@ the project wrote.
 - IconButton uses its required `label` as `aria-label`.
 - Modal is a native `<dialog>`: focus trapping and Escape come from the
   browser.
+- Drawer is a native modal `<dialog>` against an edge (`side`), named by
+  DrawerHeader; Tab wraps inside it, Escape and a backdrop press request
+  `onClose`, focus returns to the opener and the page behind does not scroll.
+  Flag a hand-made off-canvas panel (a fixed `div` translated in and out), a
+  filter panel of many fields squeezed into a Popover, and a Drawer used for a
+  short confirmation (Modal).
 - Popover wires its trigger with `aria-haspopup="dialog"`, `aria-expanded`
   and `aria-controls`; its panel is a named non-modal dialog on the top layer
   that flips to stay on screen, moves focus inside on opening, and closes on

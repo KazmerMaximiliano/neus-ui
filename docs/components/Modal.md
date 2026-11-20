@@ -107,6 +107,7 @@ dependencies. Do not edit generated files.
 | `--modal-divider-width` | modal divider width | `1px` |
 | `--modal-footer-gap` | modal footer gap | `12px` |
 | `--modal-footer-item-flex` | modal footer item flex | `0 1 auto` |
+| `--modal-footer-outlined-border-width` | Outline of an outlined Button in the footer; `0px` for actions that fill the row | `var(--button-outlined-border-width)` |
 | `--modal-footer-justify` | modal footer justify | `flex-end` |
 | `--modal-footer-padding` | modal footer padding | `16px 24px` |
 | `--modal-header-gap` | modal header gap | `8px` |

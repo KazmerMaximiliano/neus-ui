@@ -777,6 +777,18 @@ x-neus:
         --toggle-pressed-hover-background: "#1a1a1a"
         --toggle-group-item-hover-background: "#1a1a1a"
         --toggle-group-item-pressed-background: "#1a1a1a"
+    drawer:
+      base:
+        --drawer-width: 384px
+        --drawer-viewport-margin: 25%
+        --drawer-border-color: var(--color-border-subtle)
+        --drawer-radius: 0px
+        --drawer-sheet-radius: 14px
+        --drawer-sheet-max-height: calc(100% - 96px)
+        --drawer-title-line-height: 24px
+        --drawer-content-padding: 16px
+        --drawer-duration: 0.2s
+        --drawer-easing: cubic-bezier(0.4, 0, 0.2, 1)
 ---
 
 # Vercel
@@ -943,6 +955,8 @@ A number input ends in two ghost icon buttons, the extra-small icon buttons of [
 A slider follows the [shadcn/ui Slider](https://ui.shadcn.com/docs/components/base/slider) in its default base-nova style ([source](https://ui.shadcn.com/r/styles/base-nova/slider.json), consulted 2026-11-20): a 4px gray 100 track with full corners (#f2f2f2, #1a1a1a in dark mode) filled with the primary ink up to a white 12px circle with a 1px border in the placeholder gray and no shadow. A 3px halo of that gray at half opacity appears under the pointer and while pressed; keyboard focus draws a solid 2px focus-blue ring inside the translucent focus halo instead. The slider dims to half opacity when disabled. shadcn draws no step marks; the 2px dots in the same gray, surface-colored on the fill, are a local decision.
 
 A toggle and a toggle group follow [shadcn/ui Toggle](https://ui.shadcn.com/docs/components/base/toggle) and [Toggle Group](https://ui.shadcn.com/docs/components/base/toggle-group) in their default variant (consulted 2026-11-20): a borderless, transparent button with 10px corners, 14px medium labels and 16px icons 4px apart, 28, 32 and 36px tall with 10px of side padding. Hover and the pressed state fill it with gray 100 (#f2f2f2, #1a1a1a in dark mode) under foreground text, keyboard focus draws a 2px focus-blue outline at its edge, and a disabled toggle dims to half opacity. A group is a row or column of these toggles 8px apart, with no tray or border of its own. shadcn's small toggle has 8px corners and 12.8px text; here every size keeps the 10px corners and 14px type, a local decision.
+
+A drawer follows the shadcn/ui sheet ([shadcn/ui Sheet](https://ui.shadcn.com/docs/components/base/sheet), consulted 2026-11-20): a square panel on the surface color, three quarters of the screen wide up to 384px, separated from the page by a 1px border on its inner edge and raised with Geist's dialog material over the modal's black backdrop at 10% opacity. The header, body and footer have 16px of padding, the title is 16px medium on a 24px line, and the panel slides in 200ms on an ease-in-out curve. shadcn's bottom drawer ([shadcn/ui Drawer](https://ui.shadcn.com/docs/components/base/drawer), consulted 2026-11-20) rounds its top corners to 14px, drops the shadow, stops 96px below the top of the screen and can be dragged; this drawer is a dialog like the sheet and is not dragged, so it takes the drawer's 14px corners and its 96px gap from the top only when it rises from the top or bottom, and keeps the shadow. shadcn blurs the backdrop, stacks the footer actions and moves the sheet only 40px while it fades; this drawer leaves the page sharp, keeps the actions in a row at the end and slides the whole panel: local decisions.
 
 ## Do's and Don'ts
 

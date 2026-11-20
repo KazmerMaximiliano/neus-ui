@@ -26,4 +26,5 @@
   --modal-footer-gap: 12px;
   --modal-footer-justify: flex-end;
   --modal-footer-item-flex: 0 1 auto;
+  --modal-footer-outlined-border-width: var(--button-outlined-border-width);
 }

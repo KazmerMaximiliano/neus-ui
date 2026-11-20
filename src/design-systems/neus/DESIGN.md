@@ -845,6 +845,7 @@ x-neus:
         --modal-footer-gap: 12px
         --modal-footer-justify: flex-end
         --modal-footer-item-flex: 0 1 auto
+        --modal-footer-outlined-border-width: var(--button-outlined-border-width)
     overlay:
       base:
         --overlay-background: var(--color-surface)
@@ -1715,6 +1716,39 @@ x-neus:
         --toggle-group-item-pressed-color: var(--tabs-contained-selected-color)
         --toggle-group-item-pressed-border-color: var(--toggle-pressed-border-color)
         --toggle-group-item-pressed-shadow: var(--tabs-contained-selected-shadow)
+    drawer:
+      base:
+        --drawer-font-family: var(--modal-font-family)
+        --drawer-width: 400px
+        --drawer-viewport-margin: var(--modal-viewport-margin)
+        --drawer-sheet-width: 100%
+        --drawer-sheet-max-height: 85%
+        --drawer-background: var(--modal-background)
+        --drawer-color: var(--modal-color)
+        --drawer-border-width: var(--modal-border-width)
+        --drawer-border-color: var(--modal-border-color)
+        --drawer-radius: var(--modal-radius)
+        --drawer-sheet-radius: var(--drawer-radius)
+        --drawer-shadow: var(--modal-shadow)
+        --drawer-backdrop: var(--modal-backdrop)
+        --drawer-header-padding: var(--modal-header-padding)
+        --drawer-header-gap: var(--modal-header-gap)
+        --drawer-title-font-family: var(--modal-title-font-family)
+        --drawer-title-size: var(--modal-title-size)
+        --drawer-title-weight: var(--modal-title-weight)
+        --drawer-title-line-height: var(--modal-title-line-height)
+        --drawer-content-padding: var(--modal-content-padding)
+        --drawer-content-color: var(--modal-content-color)
+        --drawer-content-line-height: var(--modal-content-line-height)
+        --drawer-footer-padding: var(--modal-footer-padding)
+        --drawer-footer-gap: var(--modal-footer-gap)
+        --drawer-footer-justify: var(--modal-footer-justify)
+        --drawer-footer-item-flex: var(--modal-footer-item-flex)
+        --drawer-footer-outlined-border-width: var(--modal-footer-outlined-border-width)
+        --drawer-divider-width: var(--modal-divider-width)
+        --drawer-divider-color: var(--modal-divider-color)
+        --drawer-duration: 0.3s
+        --drawer-easing: cubic-bezier(0.2, 0, 0, 1)
 ---
 
 # Neus UI
@@ -1868,6 +1902,8 @@ A number input is the input with the number set in tabular figures and two round
 A slider sets a value by dragging along a gray pill track that fills with indigo up to a white knob ringed in indigo, 20px across, with a soft indigo halo while the pointer is on the knob, a little wider while it is pressed. Step marks are 4px dots on the track, secondary ink outside the value and white inside it. The label reads like the input's, with the value in secondary ink at the end of its row; a range has two knobs and fills between them.
 
 A toggle is a button that stays pressed: an outlined pill in 13px semibold ink that turns into a light indigo tint with indigo text and border while on. A toggle group is the contained tabs' tray, a low surface with 4px of padding, where the pressed toggle rises as a white tile.
+
+A drawer is the modal's panel against an edge of the screen: the same white surface, floating shadow and backdrop, 400px wide from the start or end and as tall as the screen, or content-high from the top or bottom, rounded only on the corners that face the page. It slides in from its edge in 300ms on the emphasized curve and back out when it closes, without motion under reduced motion. Its header, body and footer space and type their content like the modal's.
 
 ## Do's and Don'ts
 

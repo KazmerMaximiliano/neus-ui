@@ -15,4 +15,5 @@
   --modal-footer-gap: 0;
   --modal-footer-justify: stretch;
   --modal-footer-item-flex: 1 1 0;
+  --modal-footer-outlined-border-width: 0px;
 }

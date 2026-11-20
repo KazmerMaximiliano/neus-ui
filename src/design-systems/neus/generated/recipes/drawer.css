@@ -1,0 +1,35 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --drawer-font-family: var(--modal-font-family);
+  --drawer-width: 400px;
+  --drawer-viewport-margin: var(--modal-viewport-margin);
+  --drawer-sheet-width: 100%;
+  --drawer-sheet-max-height: 85%;
+  --drawer-background: var(--modal-background);
+  --drawer-color: var(--modal-color);
+  --drawer-border-width: var(--modal-border-width);
+  --drawer-border-color: var(--modal-border-color);
+  --drawer-radius: var(--modal-radius);
+  --drawer-sheet-radius: var(--drawer-radius);
+  --drawer-shadow: var(--modal-shadow);
+  --drawer-backdrop: var(--modal-backdrop);
+  --drawer-header-padding: var(--modal-header-padding);
+  --drawer-header-gap: var(--modal-header-gap);
+  --drawer-title-font-family: var(--modal-title-font-family);
+  --drawer-title-size: var(--modal-title-size);
+  --drawer-title-weight: var(--modal-title-weight);
+  --drawer-title-line-height: var(--modal-title-line-height);
+  --drawer-content-padding: var(--modal-content-padding);
+  --drawer-content-color: var(--modal-content-color);
+  --drawer-content-line-height: var(--modal-content-line-height);
+  --drawer-footer-padding: var(--modal-footer-padding);
+  --drawer-footer-gap: var(--modal-footer-gap);
+  --drawer-footer-justify: var(--modal-footer-justify);
+  --drawer-footer-item-flex: var(--modal-footer-item-flex);
+  --drawer-footer-outlined-border-width: var(--modal-footer-outlined-border-width);
+  --drawer-divider-width: var(--modal-divider-width);
+  --drawer-divider-color: var(--modal-divider-color);
+  --drawer-duration: 0.3s;
+  --drawer-easing: cubic-bezier(0.2, 0, 0, 1);
+}

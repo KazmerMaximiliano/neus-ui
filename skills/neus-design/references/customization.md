@@ -28,7 +28,7 @@ look; `linkComponent` takes the router's link); Card `variant` (`auto`, `filled`
 `locale`, `formatOptions` and `hideStepper` with every Input field prop; Slider `range`,
 `min`, `max`, `step`, `showValue`, `showSteps`, `formatOptions` and `labels`; Toggle `size`, `icon` and
 `iconOnly`, ToggleGroup `type` (`single`, `multiple`), `orientation` and `size`; FormField and
-Fieldset `description`, `error` and `required`, Fieldset `disabled`; Popover `placement` and `label`; Tooltip
+Fieldset `description`, `error` and `required`, Fieldset `disabled`; Drawer `side`; Popover `placement` and `label`; Tooltip
 `placement` and `delay`; Combobox `filter`, `allowCustomValue`, `loading`,
 `emptyLabel` and `loadingLabel` with every Input field prop; Tabs `variant`
 (`line`, `contained`) and `label`; Breadcrumbs `maxItems`, `linkComponent` and `labels`;

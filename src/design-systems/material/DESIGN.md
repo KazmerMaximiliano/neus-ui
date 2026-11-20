@@ -694,6 +694,20 @@ x-neus:
         --toggle-pressed-border-color: transparent
         --toggle-focus-width: 3px
         --toggle-group-item-outer-radius: "{rounded.pill}"
+    drawer:
+      base:
+        --drawer-width: 256px
+        --drawer-sheet-width: 640px
+        --drawer-background: var(--color-surface-container-low)
+        --drawer-radius: 16px
+        --drawer-sheet-radius: 28px
+        --drawer-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15)
+        --drawer-header-gap: 12px
+        --drawer-title-size: 22px
+        --drawer-title-line-height: 28px
+        --drawer-footer-padding: 16px 24px 24px
+        --drawer-footer-justify: flex-start
+        --drawer-duration: 275ms
 ---
 
 # Material
@@ -878,6 +892,8 @@ A number input ends in two round 32px icon buttons with 20px icons in on-surface
 A slider follows the Material 3 expressive slider in its extra-small size: a 16px track with full outer corners and 2px corners beside the handle, primary up to the handle and secondary container after it, and a 4px by 44px primary bar for a handle that clears 6px of track on each side. The handle has no hover state; on keyboard focus and while pressed it narrows to 2px in the same slot, and focus adds a 3px ring 2px away. The handle travels 8px in from each end of the track, where a 4px primary stop indicator marks the end of the inactive track until the handle reaches it. Step marks are 4px dots, on-primary over the active track and on-secondary-container over the inactive one, and the ones inside a handle's gap are not drawn ([Compose Material 3 Slider](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/Slider.kt), [MDC Android slider tokens](https://github.com/material-components/material-components-android/tree/master/lib/java/com/google/android/material/slider) and [material-web slider tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-slider.scss), consulted 2026-11-19; m3.material.io does not render for reading). The value label bubble above the handle is left out: the value reads at the end of the label row.
 
 A toggle is a filled toggle button: 40px tall with full corners, a high surface container and on-surface-variant label at rest, primary with an on-primary label when selected, label-large type ([icon button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-icon-button-filled.scss), consulted 2026-11-19); the shape change on selection is left out. A toggle group is the outlined segmented button of the contained tabs: a 1px outline with full outer corners, dividers between segments, and the selected one in secondary container ([segmented button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-outlined-segmented-button.scss), consulted 2026-11-19), without the check mark.
+
+A drawer is a modal side sheet: a 256px panel on the low surface container (#f7f2fa, #1d1b20 in dark mode) at level 1 elevation, as tall as the screen, with 16px corners on the edge that faces the page, over the dialog's 32% black scrim. Its headline is title large (22px over 28px, regular weight) with 24px of padding and 12px before the close button. The body keeps the dialog's 24px sides, and actions sit at the start with 16px above and 24px below. Top and bottom drawers are bottom sheets, at most 640px wide and centered, with 28px corners. The panel slides in over 275ms on the emphasized curve. Sources: [side sheet tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-sheet-side.scss), [bottom sheet tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-sheet-bottom.scss), [scrim tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-scrim.scss), [MDC Android side sheet](https://github.com/material-components/material-components-android/blob/master/docs/components/SideSheet.md) with [its tokens](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/sidesheet/res/values/tokens.xml) and [enter animation](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/sidesheet/res/anim/m3_side_sheet_enter_from_right.xml), [MDC Android bottom sheet dimensions](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/bottomsheet/res/values/dimens.xml) and [Compose SheetDefaults](https://github.com/androidx/androidx/blob/androidx-main/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/SheetDefaults.kt), all consulted 2026-11-20. The 12px gap and the action padding come from the [side sheet specs](https://m3.material.io/components/side-sheets/specs) (consulted 2026-11-20). That page draws its tables with JavaScript, so these values were read from two independent transcriptions of it. The specs allow up to 400px, but the 256px token width is used. Some parts are local decisions: the drawer is not dragged, so it has no drag handle; the headline keeps the panel's text color instead of on-surface-variant; and the optional divider above the actions is not drawn.
 
 ## Do's and Don'ts
 

@@ -528,6 +528,17 @@ x-neus:
       dark:
         --toggle-background: rgb(118 118 128 / 0.24)
         --toggle-hover-background: rgb(118 118 128 / 0.32)
+    drawer:
+      base:
+        --drawer-background: var(--color-surface)
+        --drawer-radius: 16px
+        --drawer-sheet-radius: 37px
+        --drawer-backdrop: rgba(0, 0, 0, 0.2)
+        --drawer-header-padding: 16px
+        --drawer-content-padding: 0 16px 16px
+        --drawer-footer-padding: 16px
+      dark:
+        --drawer-backdrop: rgba(0, 0, 0, 0.5)
 ---
 
 # Apple
@@ -669,6 +680,8 @@ A number input ends in a stepper drawn like the HIG's two-segment control: a lig
 A slider follows the illustrations of the HIG sliders page: a 6px track with full corners, filled with the accent color up to the thumb and a faint gray after it (black at 6%, white at 20% in dark mode), and a thumb drawn as a horizontal capsule, 24 by 20px, almost white with a blue tint that fades across it, a white rim and a soft shadow (light gray #e6e7e8 in dark mode). Tick marks are 2px gray dots centered 8px below the track, the same color on both sides of the thumb ([HIG sliders](https://developer.apple.com/design/human-interface-guidelines/sliders), consulted 2026-11-19; the page publishes images, not measurements, so the sizes are measured from them and the shadow is a local approximation). The thumb has no hover state, as on Apple platforms; a range with two thumbs is a local extension.
 
 A toggle is a button that changes its background while on, as the guidelines describe ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-19): a capsule of translucent gray that fills with the accent color and white text when pressed. A toggle group is the segmented control of the contained tabs, which also allows several selected segments as on macOS ([HIG segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls), consulted 2026-11-19); the sizes are local decisions.
+
+A drawer follows the iOS sheet ([HIG sheets](https://developer.apple.com/design/human-interface-guidelines/sheets), consulted 2026-11-20): an opaque panel on the main surface, white in light mode and #1c1c1e in dark mode rather than the modal's secondary gray, with 37px corners on the edge that faces the page from the top or bottom and the Mac sheet's 16px from a side, over the page dimmed with black at 20% (about 50% in dark mode). The header, body and footer keep 16px from the panel's edges, the margin of the toolbar buttons in the guidelines' illustrations, and the title is the modal's 17px semibold. The guidelines publish images, not measurements: the corners, margins and dimming are measured from the iPhone and Mac illustrations, and the dark dimming is an estimate. The drawer draws no grabber because it is not dragged, its title sits at the start of the header instead of centered between Cancel and Done: local decisions.
 
 ## Do's and Don'ts
 

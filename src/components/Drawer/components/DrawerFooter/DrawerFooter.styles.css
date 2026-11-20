@@ -1,0 +1,21 @@
+.drawer-footer {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: var(--drawer-footer-justify);
+  gap: var(--drawer-footer-gap);
+  padding: var(--drawer-footer-padding);
+  border-top: var(--drawer-divider-width) solid var(--drawer-divider-color);
+}
+
+.drawer-footer > * {
+  flex: var(--drawer-footer-item-flex);
+}
+
+/* A system whose actions fill the row (Carbon) drops the outline of an outlined action, which
+   would otherwise double the footer's rule and the panel's edge. */
+.drawer-footer > .button {
+  --button-outlined-border-width: var(--drawer-footer-outlined-border-width);
+}

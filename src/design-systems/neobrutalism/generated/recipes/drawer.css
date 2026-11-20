@@ -1,0 +1,12 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --drawer-width: 384px;
+  --drawer-viewport-margin: 25%;
+  --drawer-radius: 0px;
+  --drawer-sheet-radius: 4px;
+  --drawer-shadow: none;
+  --drawer-header-padding: 16px;
+  --drawer-content-padding: 16px;
+  --drawer-footer-padding: 16px;
+  --drawer-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}

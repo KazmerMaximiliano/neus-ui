@@ -1,0 +1,11 @@
+/* The body takes the room left between the header and the footer, and scrolls inside it. */
+.drawer-content {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--drawer-content-padding);
+  color: var(--drawer-content-color);
+  line-height: var(--drawer-content-line-height);
+}

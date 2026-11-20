@@ -12,3 +12,9 @@
 .modal-footer > * {
   flex: var(--modal-footer-item-flex);
 }
+
+/* A system whose actions fill the row (Carbon) drops the outline of an outlined action, which
+   would otherwise double the modal's edges. */
+.modal-footer > .button {
+  --button-outlined-border-width: var(--modal-footer-outlined-border-width);
+}

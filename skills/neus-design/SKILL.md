@@ -248,6 +248,7 @@ component's guide.
 | Loading | `Spinner` (`label`; a button has `loading`); `Skeleton` (`variant`, `lines`) in a region with `aria-busy`; `Progress` (`value`, `max`, `valueText`) for a known share |
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
+| Side panel or bottom sheet (filters, details) | `Drawer` (`side`) + `DrawerHeader`, `DrawerContent`, `DrawerFooter` |
 | Controls or details tied to a button | `Popover` (`trigger` renders a Button or IconButton with the props it receives) |
 | Short hint for a control | `Tooltip` (`content`, `trigger`); the control keeps its name, anything to act on goes in a `Popover` |
 | Collapsible sections | `Accordion` (`items`; `type="single"`; `titleAs`) |

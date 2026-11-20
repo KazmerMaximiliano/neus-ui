@@ -1,0 +1,12 @@
+/* Parts previewed on a static drawer surface. */
+.drawer-story {
+  display: flex;
+  position: static;
+  inline-size: 360px;
+  translate: none;
+}
+
+.drawer-story-filters {
+  display: grid;
+  gap: var(--space-4);
+}

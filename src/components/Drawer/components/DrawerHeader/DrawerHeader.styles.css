@@ -1,0 +1,14 @@
+.drawer-header {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--drawer-header-gap);
+  padding: var(--drawer-header-padding);
+  border-bottom: var(--drawer-divider-width) solid var(--drawer-divider-color);
+  font-family: var(--drawer-title-font-family);
+  font-size: var(--drawer-title-size);
+  font-weight: var(--drawer-title-weight);
+  line-height: var(--drawer-title-line-height);
+}
