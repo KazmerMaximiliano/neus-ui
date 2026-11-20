@@ -8,6 +8,45 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.12.0] - Unreleased
+
+### Added
+
+- `Slider`: a value picked by dragging along a track, on native range inputs. With `range`,
+  two thumbs pick both ends of a range and never cross. The value reads at the end of the label
+  row and in `aria-valuetext`, formatted with `locale` and `formatOptions`; `showSteps` marks
+  every step on the track. English thumb names you can replace through `labels`. New `slider`
+  recipe family in the six systems: Material's expressive slider, Apple's capsule thumb and the
+  shadcn/ui slider in Vercel.
+- `Toggle`: a button that stays pressed (`aria-pressed`), with an optional icon or an icon
+  alone, controlled or not, in three sizes.
+- `ToggleGroup`: toggles that share one choice, as a radio group with arrow keys that press, or
+  several at once; roving focus, horizontal or vertical. Its segments follow each system's
+  contained tabs, Carbon's content switcher and Geist's switch. New `toggle` recipe family,
+  shared with Toggle.
+- `neus-ui lint` suggests Slider for `type="range"` and Toggle for a hand-made `aria-pressed`
+  button; the neus-design and neus-audit skills and the specimen know the three components.
+- Tokens `--button-outlined-border-color` (the outlined button's border, `currentColor` by
+  default) and `--textarea-line-height` (the textarea's lines, the input's line height by
+  default).
+
+### Changed
+
+- The Vercel design system keeps Geist's foundations (palette, Geist Sans and Mono, elevation)
+  and now draws its components after shadcn/ui's Base UI components in their default base-nova
+  style: buttons and fields 28, 32 and 36px tall with 10px corners, cards and dialogs with 14px
+  corners, gray-100 fills for secondary, muted and hover states, the shadcn menu, popover,
+  tooltip, dialog, alert, tabs, accordion, sidebar, calendar, table, toggle group and slider.
+  Focus stays Geist's blue. Each family cites its shadcn source in the Vercel DESIGN.md.
+- Pagination's previous and next buttons take the page size, so the row lines up in every
+  system.
+
+### Fixed
+
+- Token values with an inline `#` (such as `0 0 #0000`) are quoted in the six DESIGN.md files;
+  YAML read the rest as a comment. Carbon's featured pricing card and several slider shadows
+  were affected, and a generator test now guards against it.
+
 ## [2.11.0] - Unreleased
 
 ### Added
@@ -468,6 +507,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...HEAD
+[2.12.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.11.0...v2.12.0
 [2.11.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.8.0...v2.9.0

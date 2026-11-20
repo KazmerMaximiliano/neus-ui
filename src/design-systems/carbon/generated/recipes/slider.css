@@ -1,0 +1,32 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --slider-track-height: 2px;
+  --slider-track-radius: 0px;
+  --slider-track-background: #e0e0e0;
+  --slider-fill-background: #161616;
+  --slider-thumb-width: 14px;
+  --slider-thumb-height: 14px;
+  --slider-thumb-border-width: 0px;
+  --slider-thumb-background: #161616;
+  --slider-thumb-shadow: 0 0 #0000;
+  --slider-thumb-hover-shadow: 0 0 0 3px #161616;
+  --slider-focus-shadow: 0 0 0 1px var(--color-surface), 0 0 0 3px var(--color-focus);
+  --slider-value-color: var(--color-text-primary);
+  --slider-value-font-size: 14px;
+  --slider-value-weight: 400;
+  --slider-transition: box-shadow 70ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  --slider-step-width: 2px;
+  --slider-step-height: 8px;
+  --slider-step-radius: 0px;
+  --slider-step-color: #8d8d8d;
+  --slider-step-active-color: #161616;
+}
+
+[data-design-system="carbon"][data-color-scheme="dark"] {
+  --slider-track-background: #393939;
+  --slider-fill-background: #f4f4f4;
+  --slider-thumb-background: #f4f4f4;
+  --slider-thumb-hover-shadow: 0 0 0 3px #f4f4f4;
+  --slider-step-color: #6f6f6f;
+  --slider-step-active-color: #f4f4f4;
+}

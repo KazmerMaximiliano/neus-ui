@@ -6,5 +6,5 @@
   --pricing-price-weight: 400;
   --pricing-price-tracking: 0px;
   --pricing-featured-ring-width: 2px;
-  --pricing-featured-shadow: 0 0;
+  --pricing-featured-shadow: 0 0 #0000;
 }

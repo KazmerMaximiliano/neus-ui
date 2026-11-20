@@ -1,22 +1,30 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --calendar-radius: 12px;
+  --calendar-radius: 10px;
   --calendar-border-color: var(--color-border-subtle);
   --calendar-label-color: var(--color-text-primary);
   --calendar-caption-color: var(--color-text-primary);
-  --calendar-caption-weight: 600;
+  --calendar-caption-size: 14px;
+  --calendar-caption-weight: 500;
   --calendar-nav-color: var(--color-text-primary);
-  --calendar-day-radius: 6px;
-  --calendar-item-radius: 6px;
-  --calendar-day-hover-background: var(--color-surface-secondary);
+  --calendar-weekday-size: 0.8rem;
+  --calendar-day-size: 30px;
+  --calendar-day-font-size: 14px;
+  --calendar-day-radius: 8px;
+  --calendar-item-radius: 8px;
+  --calendar-day-hover-background: #f2f2f2;
   --calendar-selected-background: var(--color-primary);
   --calendar-selected-color: var(--color-text-on-primary);
-  --calendar-selected-weight: 500;
-  --calendar-range-middle-background: var(--color-surface-secondary);
-  --calendar-today-color: #0068d6;
-  --calendar-today-ring: none;
+  --calendar-selected-weight: 400;
+  --calendar-range-middle-background: #f2f2f2;
+  --calendar-today-color: var(--color-text-primary);
+  --calendar-today-weight: 400;
+  --calendar-today-ring: inset 0 0 0 var(--calendar-day-size) #f2f2f2;
+  --calendar-disabled-opacity: 0.5;
 }
 
 [data-design-system="vercel"][data-color-scheme="dark"] {
-  --calendar-today-color: #52a8ff;
+  --calendar-day-hover-background: color-mix(in srgb, #1a1a1a 50%, transparent);
+  --calendar-range-middle-background: #1a1a1a;
+  --calendar-today-ring: inset 0 0 0 var(--calendar-day-size) #1a1a1a;
 }

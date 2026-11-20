@@ -18,7 +18,7 @@ const SYSTEMS = [
   { id: "carbon", radius: 0 },
   { id: "material", radius: 4 },
   { id: "neobrutalism", radius: 4 },
-  { id: "vercel", radius: 6 },
+  { id: "vercel", radius: 10 },
 ] as const;
 
 const SHARED = [

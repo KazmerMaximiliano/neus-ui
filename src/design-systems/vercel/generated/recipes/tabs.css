@@ -1,32 +1,38 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --tabs-disabled-color: #8f8f8f;
   --tabs-font-size: 14px;
-  --tabs-font-weight: 400;
-  --tabs-selected-font-weight: 400;
+  --tabs-font-weight: 500;
+  --tabs-selected-font-weight: 500;
   --tabs-line-height: 20px;
-  --tabs-height: 48px;
-  --tabs-padding: 0 2px;
-  --tabs-gap: 24px;
-  --tabs-radius: 0px;
+  --tabs-height: 32px;
+  --tabs-padding: 2px 6px;
+  --tabs-gap: 4px;
+  --tabs-icon-gap: 6px;
+  --tabs-radius: 8px;
+  --tabs-color: color-mix(in srgb, var(--color-text-primary) 60%, transparent);
   --tabs-hover-background: transparent;
   --tabs-selected-color: var(--color-text-primary);
+  --tabs-disabled-color: color-mix(in srgb, var(--tabs-color) 50%, transparent);
+  --tabs-divider-width: 0px;
   --tabs-indicator-height: 2px;
   --tabs-indicator-radius: 0px;
   --tabs-indicator-color: var(--color-text-primary);
-  --tabs-contained-height: 32px;
+  --tabs-panel-gap: 8px;
+  --tabs-contained-height: 26px;
   --tabs-contained-gap: 0px;
-  --tabs-contained-padding: 0px;
-  --tabs-contained-radius: 0px;
-  --tabs-contained-background: transparent;
-  --tabs-contained-tab-radius: 6px;
-  --tabs-contained-tab-padding: 0 12px;
-  --tabs-contained-font-size: 13px;
+  --tabs-contained-padding: 3px;
+  --tabs-contained-radius: 10px;
+  --tabs-contained-background: #f2f2f2;
+  --tabs-contained-tab-radius: 8px;
+  --tabs-contained-tab-padding: 2px 6px;
+  --tabs-contained-font-size: 14px;
+  --tabs-contained-color: var(--tabs-color);
   --tabs-contained-hover-background: transparent;
-  --tabs-contained-selected-background: #ebebeb;
-  --tabs-contained-selected-shadow: none;
+  --tabs-contained-selected-background: var(--color-surface);
+  --tabs-contained-selected-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
 [data-design-system="vercel"][data-color-scheme="dark"] {
-  --tabs-contained-selected-background: #1f1f1f;
+  --tabs-color: var(--color-text-secondary);
+  --tabs-contained-background: #1a1a1a;
 }

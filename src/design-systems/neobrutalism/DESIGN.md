@@ -607,6 +607,43 @@ x-neus:
         --number-input-button-hover-color: var(--color-text-on-primary)
         --number-input-divider-width: 3px
         --number-input-divider-color: var(--color-text-primary)
+    slider:
+      base:
+        --slider-track-height: 12px
+        --slider-track-radius: 4px
+        --slider-track-border-width: 3px
+        --slider-track-border-color: var(--color-text-primary)
+        --slider-track-background: var(--color-surface)
+        --slider-thumb-border-width: 3px
+        --slider-thumb-border-color: var(--color-text-primary)
+        --slider-thumb-shadow: 2px 2px 0 var(--color-text-primary)
+        --slider-thumb-hover-shadow: "0 0 #0000"
+        --slider-disabled-opacity: "0.5"
+        --slider-step-radius: 0px
+        --slider-step-color: var(--color-text-primary)
+        --slider-step-active-color: var(--color-text-on-primary)
+    toggle:
+      base:
+        --toggle-font-weight: "700"
+        --toggle-height-small: 36px
+        --toggle-height-large: 44px
+        --toggle-padding-small: 0 10px
+        --toggle-padding-medium: 0 12px
+        --toggle-padding-large: 0 16px
+        --toggle-icon-size-small: 14px
+        --toggle-icon-size-medium: 16px
+        --toggle-icon-size-large: 16px
+        --toggle-radius: 4px
+        --toggle-border-width: 3px
+        --toggle-border-color: var(--color-text-primary)
+        --toggle-background: var(--color-surface)
+        --toggle-shadow: 2px 2px 0 var(--color-text-primary)
+        --toggle-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface))
+        --toggle-pressed-background: var(--color-primary)
+        --toggle-pressed-hover-background: var(--color-primary)
+        --toggle-pressed-color: var(--color-text-on-primary)
+        --toggle-pressed-border-color: var(--color-text-primary)
+        --toggle-focus-offset: 4px
 ---
 
 # Neobrutalism
@@ -738,6 +775,10 @@ An accordion is a stack of framed cards 16px apart: a 3px ink border, 4px corner
 A form field or a fieldset takes the input's label and error styles, so they need no values of their own.
 
 A number input ends in square minus and plus buttons in ink, split by a 3px ink rule like the field's border; hovering one fills it with yellow. The components library has no stepper, so this is a local decision on top of its input ([neobrutalism input](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/input.tsx), consulted 2026-11-19).
+
+A slider is a 12px track with a 3px ink outline and 4px corners, filled with the primary color up to a white circle knob in the same ink outline with a hard 2px shadow ([neobrutalism slider source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/slider.tsx), consulted 2026-11-19, with the 3px borders and offset shadows of this system). Step marks are 4px ink squares inside the track, in the ink that reads on the primary fill inside the value, a local decision.
+
+A toggle is a white button with a 3px ink border, 4px corners, bold type and a hard 2px shadow; pressed, it fills with the primary color and drops the shadow, as if pushed in ([neobrutalism toggle source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/toggle.tsx), consulted 2026-11-19, where the pressed toggle fills with the main color). A toggle group is the contained tabs' tray, with the pressed toggle filled in primary.
 
 ## Do's and Don'ts
 

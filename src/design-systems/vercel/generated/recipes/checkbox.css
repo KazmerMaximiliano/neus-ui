@@ -3,7 +3,10 @@
   --checkbox-size: 16px;
   --checkbox-border-width: 1px;
   --checkbox-border-color: var(--color-text-placeholder);
-  --checkbox-hover-border-color: var(--color-text-primary);
+  --checkbox-hover-border-color: var(--color-text-placeholder);
   --checkbox-checked-shadow: none;
-  --checkbox-icon-size: 12px;
+  --checkbox-icon-size: 14px;
+  --checkbox-icon-stroke: 2;
+  --checkbox-focus-offset: 0px;
+  --checkbox-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }

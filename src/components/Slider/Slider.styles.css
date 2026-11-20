@@ -1,0 +1,302 @@
+/* The label and the value share the first row; the control, the help text and the error take
+   the whole width below. */
+.slider {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--slider-gap) var(--slider-text-gap);
+  min-width: var(--slider-min-width);
+  font-family: var(--slider-font-family);
+}
+
+.slider__label {
+  color: var(--slider-label-color);
+  font-size: var(--slider-label-font-size);
+  font-weight: var(--slider-label-weight);
+}
+
+.slider__value {
+  color: var(--slider-value-color);
+  font-size: var(--slider-value-font-size);
+  font-weight: var(--slider-value-weight);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.slider > .field__description,
+.slider__control,
+.slider__error {
+  grid-column: 1 / -1;
+}
+
+.slider > .field__description {
+  margin-left: 0;
+}
+
+.slider__error {
+  color: var(--slider-error-color);
+  font-size: var(--slider-error-font-size);
+}
+
+.slider--invalid > .slider__label {
+  color: var(--slider-error-color);
+}
+
+.slider--disabled > .slider__label {
+  color: var(--slider-disabled-color);
+}
+
+/* A thumb's center travels between the two thumb insets: the input's margins move the native
+   thumb that far from each end. The track's stretches follow those centers, leaving the gap each
+   system sets on both sides of a thumb (0 lets the thumb cover the joint). */
+.slider__control {
+  --slider-input-margin: calc(var(--slider-thumb-inset) - var(--slider-thumb-width) / 2);
+  --slider-travel: calc(100% - 2 * var(--slider-thumb-inset));
+  --slider-from: calc(var(--slider-thumb-inset) + var(--slider-start) * var(--slider-travel));
+  --slider-to: calc(var(--slider-thumb-inset) + var(--slider-end) * var(--slider-travel));
+  --slider-direction: to right;
+  position: relative;
+  display: grid;
+  block-size: var(--slider-control-height);
+}
+
+.slider__control:dir(rtl) {
+  --slider-direction: to left;
+}
+
+.slider--disabled .slider__control {
+  opacity: var(--slider-disabled-opacity);
+}
+
+.slider__track {
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: var(--slider-track-height);
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.slider__fill,
+.slider__rail {
+  position: absolute;
+  inset-block: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: var(--slider-track-border-width) solid var(--slider-track-border-color);
+  border-radius: var(--slider-track-inner-radius);
+}
+
+.slider__rail {
+  background: var(--slider-track-background);
+}
+
+.slider__fill {
+  inset-inline-start: 0;
+  inline-size: max(0px, var(--slider-to) - var(--slider-track-gap));
+  border-start-start-radius: var(--slider-track-radius);
+  border-end-start-radius: var(--slider-track-radius);
+  background: var(--slider-fill-background);
+}
+
+.slider[data-range] .slider__fill {
+  inset-inline-start: calc(var(--slider-from) + var(--slider-track-gap));
+  inline-size: max(0px, var(--slider-to) - var(--slider-from) - 2 * var(--slider-track-gap));
+  border-radius: var(--slider-track-inner-radius);
+}
+
+.slider__rail--before {
+  inset-inline-start: 0;
+  inline-size: max(0px, var(--slider-from) - var(--slider-track-gap));
+  border-start-start-radius: var(--slider-track-radius);
+  border-end-start-radius: var(--slider-track-radius);
+}
+
+.slider__rail--after {
+  inset-inline-start: calc(var(--slider-to) + var(--slider-track-gap));
+  inline-size: max(0px, 100% - var(--slider-to) - var(--slider-track-gap));
+  border-start-end-radius: var(--slider-track-radius);
+  border-end-end-radius: var(--slider-track-radius);
+}
+
+/* A stop marks the end of a stretch outside the value; the rail clips it as a thumb's gap
+   reaches it. */
+.slider__rail::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: var(--slider-stop-size);
+  height: var(--slider-stop-size);
+  margin-block-start: calc(var(--slider-stop-size) / -2);
+  border-radius: 50%;
+  background: var(--slider-stop-color);
+}
+
+.slider__rail--before::after {
+  inset-inline-start: calc(
+    var(--slider-stop-inset) - var(--slider-stop-size) / 2 - var(--slider-track-border-width)
+  );
+}
+
+.slider__rail--after::after {
+  inset-inline-end: calc(
+    var(--slider-stop-inset) - var(--slider-stop-size) / 2 - var(--slider-track-border-width)
+  );
+}
+
+/* Marks inside a thumb's gap are masked, as the track is cleared there. */
+.slider__steps {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mask-image: linear-gradient(
+    var(--slider-direction),
+    #000 calc(var(--slider-to) - var(--slider-track-gap)),
+    transparent 0 calc(var(--slider-to) + var(--slider-track-gap)),
+    #000 0
+  );
+}
+
+.slider[data-range] .slider__steps {
+  mask-image: linear-gradient(
+    var(--slider-direction),
+    #000 calc(var(--slider-from) - var(--slider-track-gap)),
+    transparent 0 calc(var(--slider-from) + var(--slider-track-gap)),
+    #000 0 calc(var(--slider-to) - var(--slider-track-gap)),
+    transparent 0 calc(var(--slider-to) + var(--slider-track-gap)),
+    #000 0
+  );
+}
+
+/* A mark sits where its value puts a thumb's center; margins center it in either direction. */
+.slider__step {
+  position: absolute;
+  top: calc(50% + var(--slider-step-offset));
+  inset-inline-start: calc(var(--slider-thumb-inset) + var(--slider-step) * var(--slider-travel));
+  width: var(--slider-step-width);
+  height: var(--slider-step-height);
+  margin-block-start: calc(var(--slider-step-height) / -2);
+  margin-inline-start: calc(var(--slider-step-width) / -2);
+  border-radius: var(--slider-step-radius);
+  background: var(--slider-step-color);
+}
+
+.slider__step[data-active] {
+  background: var(--slider-step-active-color);
+}
+
+.slider__input {
+  position: relative;
+  z-index: 1;
+  grid-area: 1 / 1;
+  inline-size: calc(100% - 2 * var(--slider-input-margin));
+  block-size: 100%;
+  margin: 0 var(--slider-input-margin);
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+}
+
+.slider__input:disabled {
+  cursor: not-allowed;
+}
+
+.slider__input[data-raised] {
+  z-index: 2;
+}
+
+/* Two inputs lie on top of each other: only their thumbs take the pointer. */
+.slider[data-range] .slider__input {
+  pointer-events: none;
+  cursor: default;
+}
+
+.slider__input:focus-visible {
+  outline: none;
+}
+
+/* Each engine needs its own rules: one unknown pseudo-element drops a whole selector list. The
+   thumb's own :hover and :active keep the pointer states on the thumb, not on the whole track. */
+.slider__input::-webkit-slider-runnable-track {
+  height: var(--slider-control-height);
+  background: transparent;
+}
+
+.slider__input::-moz-range-track {
+  height: var(--slider-control-height);
+  background: transparent;
+}
+
+.slider__input::-webkit-slider-thumb {
+  box-sizing: border-box;
+  width: var(--slider-thumb-width);
+  height: var(--slider-thumb-height);
+  margin-top: calc((var(--slider-control-height) - var(--slider-thumb-height)) / 2);
+  border: var(--slider-thumb-border-width) solid var(--slider-thumb-border-color);
+  border-radius: var(--slider-thumb-radius);
+  background: var(--slider-thumb-background);
+  box-shadow: var(--slider-thumb-shadow);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: var(--slider-transition);
+  appearance: none;
+}
+
+.slider__input::-moz-range-thumb {
+  box-sizing: border-box;
+  width: var(--slider-thumb-width);
+  height: var(--slider-thumb-height);
+  border: var(--slider-thumb-border-width) solid var(--slider-thumb-border-color);
+  border-radius: var(--slider-thumb-radius);
+  background: var(--slider-thumb-background);
+  box-shadow: var(--slider-thumb-shadow);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: var(--slider-transition);
+}
+
+.slider__input:disabled::-webkit-slider-thumb {
+  cursor: not-allowed;
+}
+
+.slider__input:disabled::-moz-range-thumb {
+  cursor: not-allowed;
+}
+
+.slider__input:not(:disabled)::-webkit-slider-thumb:hover {
+  box-shadow: var(--slider-thumb-hover-shadow), var(--slider-thumb-shadow);
+}
+
+.slider__input:not(:disabled)::-moz-range-thumb:hover {
+  box-shadow: var(--slider-thumb-hover-shadow), var(--slider-thumb-shadow);
+}
+
+.slider__input:focus-visible::-webkit-slider-thumb {
+  width: var(--slider-thumb-focus-width);
+  box-shadow: var(--slider-focus-shadow), var(--slider-thumb-shadow);
+}
+
+.slider__input:focus-visible::-moz-range-thumb {
+  width: var(--slider-thumb-focus-width);
+  box-shadow: var(--slider-focus-shadow), var(--slider-thumb-shadow);
+}
+
+.slider__input:not(:disabled)::-webkit-slider-thumb:active {
+  width: var(--slider-thumb-active-width);
+  box-shadow: var(--slider-thumb-active-shadow), var(--slider-thumb-shadow);
+}
+
+.slider__input:not(:disabled)::-moz-range-thumb:active {
+  width: var(--slider-thumb-active-width);
+  box-shadow: var(--slider-thumb-active-shadow), var(--slider-thumb-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider__input::-webkit-slider-thumb {
+    transition: none;
+  }
+
+  .slider__input::-moz-range-thumb {
+    transition: none;
+  }
+}

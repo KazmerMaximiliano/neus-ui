@@ -19,7 +19,7 @@ const SYSTEMS = [
   { id: "carbon", medium: 24, stroke: 2, track: "visible" },
   { id: "material", medium: 40, stroke: 4, track: "transparent" },
   { id: "neobrutalism", medium: 24, stroke: 4, track: "visible" },
-  { id: "vercel", medium: 24, stroke: 2, track: "visible" },
+  { id: "vercel", medium: 16, stroke: 1, track: "visible" },
 ] as const;
 
 const ring = () => screen.getByRole("status").querySelector<HTMLElement>(".spinner__ring")!;

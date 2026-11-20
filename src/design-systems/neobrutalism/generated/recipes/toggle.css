@@ -1,0 +1,23 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --toggle-font-weight: 700;
+  --toggle-height-small: 36px;
+  --toggle-height-large: 44px;
+  --toggle-padding-small: 0 10px;
+  --toggle-padding-medium: 0 12px;
+  --toggle-padding-large: 0 16px;
+  --toggle-icon-size-small: 14px;
+  --toggle-icon-size-medium: 16px;
+  --toggle-icon-size-large: 16px;
+  --toggle-radius: 4px;
+  --toggle-border-width: 3px;
+  --toggle-border-color: var(--color-text-primary);
+  --toggle-background: var(--color-surface);
+  --toggle-shadow: 2px 2px 0 var(--color-text-primary);
+  --toggle-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface));
+  --toggle-pressed-background: var(--color-primary);
+  --toggle-pressed-hover-background: var(--color-primary);
+  --toggle-pressed-color: var(--color-text-on-primary);
+  --toggle-pressed-border-color: var(--color-text-primary);
+  --toggle-focus-offset: 4px;
+}

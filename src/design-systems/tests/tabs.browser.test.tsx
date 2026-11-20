@@ -18,7 +18,7 @@ const SYSTEMS = [
   { id: "carbon", height: 40, contained: 48, indicator: 2 },
   { id: "material", height: 48, contained: 40, indicator: 3 },
   { id: "neobrutalism", height: 44, contained: 40, indicator: 4 },
-  { id: "vercel", height: 48, contained: 32, indicator: 2 },
+  { id: "vercel", height: 32, contained: 26, indicator: 2 },
 ] as const;
 
 const ITEMS = [

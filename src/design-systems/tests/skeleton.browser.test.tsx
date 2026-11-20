@@ -15,7 +15,7 @@ const SYSTEMS = [
   { id: "carbon", animation: "skeleton-shimmer", square: true },
   { id: "material", animation: "skeleton-pulse", square: false },
   { id: "neobrutalism", animation: "skeleton-pulse", square: true },
-  { id: "vercel", animation: "skeleton-shimmer", square: false },
+  { id: "vercel", animation: "skeleton-pulse", square: false },
 ] as const;
 
 describe.each(["light", "dark"] as const)("Skeleton designs in %s mode", (scheme) => {

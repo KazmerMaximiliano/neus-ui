@@ -1,0 +1,20 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --toggle-font-size: 14px;
+  --toggle-font-weight: 400;
+  --toggle-height-small: 28px;
+  --toggle-height-medium: 32px;
+  --toggle-height-large: 40px;
+  --toggle-border-width: 0px;
+  --toggle-background: rgb(118 118 128 / 0.12);
+  --toggle-hover-background: rgb(118 118 128 / 0.2);
+  --toggle-pressed-background: var(--color-primary);
+  --toggle-pressed-hover-background: var(--color-primary);
+  --toggle-pressed-color: var(--color-text-on-primary);
+  --toggle-pressed-border-color: transparent;
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --toggle-background: rgb(118 118 128 / 0.24);
+  --toggle-hover-background: rgb(118 118 128 / 0.32);
+}

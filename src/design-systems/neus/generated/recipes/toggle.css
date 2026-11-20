@@ -1,0 +1,55 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --toggle-font-family: var(--font-body);
+  --toggle-font-size: var(--fs-sm);
+  --toggle-font-weight: 600;
+  --toggle-gap: 8px;
+  --toggle-height-small: 32px;
+  --toggle-height-medium: 40px;
+  --toggle-height-large: 48px;
+  --toggle-padding-small: 0 12px;
+  --toggle-padding-medium: 0 16px;
+  --toggle-padding-large: 0 20px;
+  --toggle-icon-size-small: 16px;
+  --toggle-icon-size-medium: 18px;
+  --toggle-icon-size-large: 20px;
+  --toggle-radius: 3em;
+  --toggle-border-width: 1px;
+  --toggle-border-color: var(--color-border-input);
+  --toggle-background: transparent;
+  --toggle-color: var(--color-text-primary);
+  --toggle-shadow: none;
+  --toggle-hover-background: var(--color-surface-hover);
+  --toggle-hover-color: var(--toggle-color);
+  --toggle-pressed-background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+  --toggle-pressed-hover-background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface));
+  --toggle-pressed-color: var(--color-primary-text);
+  --toggle-pressed-border-color: var(--color-primary);
+  --toggle-pressed-shadow: none;
+  --toggle-focus-width: 2px;
+  --toggle-focus-color: var(--color-focus);
+  --toggle-focus-offset: 2px;
+  --toggle-disabled-opacity: 0.38;
+  --toggle-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  --toggle-group-gap: var(--tabs-contained-gap);
+  --toggle-group-padding: var(--tabs-contained-padding);
+  --toggle-group-border-width: var(--tabs-contained-border-width);
+  --toggle-group-border-color: var(--tabs-contained-border-color);
+  --toggle-group-radius: var(--tabs-contained-radius);
+  --toggle-group-background: var(--tabs-contained-background);
+  --toggle-group-divider-width: 0px;
+  --toggle-group-divider-color: transparent;
+  --toggle-group-item-radius: var(--tabs-contained-tab-radius);
+  --toggle-group-item-outer-radius: var(--toggle-group-item-radius);
+  --toggle-group-item-border-width: 0px;
+  --toggle-group-item-background: var(--tabs-contained-tab-background);
+  --toggle-group-item-color: var(--tabs-contained-color);
+  --toggle-group-item-shadow: none;
+  --toggle-group-item-hover-background: var(--tabs-contained-hover-background);
+  --toggle-group-item-hover-color: var(--tabs-contained-selected-color);
+  --toggle-group-item-pressed-background: var(--tabs-contained-selected-background);
+  --toggle-group-item-pressed-color: var(--tabs-contained-selected-color);
+  --toggle-group-item-pressed-border-color: var(--toggle-pressed-border-color);
+  --toggle-group-item-pressed-shadow: var(--tabs-contained-selected-shadow);
+}

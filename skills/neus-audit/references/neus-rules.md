@@ -98,8 +98,8 @@ the project wrote.
   `<input>`.
 - Switch is a native checkbox with `role="switch"` inside its label: its name
   is the label alone and its description is wired to `aria-describedby`; it
-  works and submits without JavaScript. Flag a hand-made toggle (a `div` or
-  `button` with `role="switch"` or `aria-pressed` for a setting) and a Switch
+  works and submits without JavaScript. Flag a hand-made switch (a `div` or
+  `button` with `role="switch"`, or `aria-pressed` for a setting) and a Switch
   used for a choice that only applies after a submit button.
 - RadioGroup is a `<fieldset role="radiogroup">` named by its legend, with
   `aria-required`, `aria-invalid` and its description and error wired to
@@ -121,6 +121,18 @@ the project wrote.
   step it, the steppers stay out of the Tab order, it clamps and rounds the
   number and submits it unformatted. Flag `<input type="number">`, an Input
   with `type="number"`, and hand-made plus/minus buttons around a field.
+- Slider is a native `<input type="range">` named by its label, with a
+  formatted `aria-valuetext` and its description and error wired to
+  `aria-describedby`; a range is a group of two inputs named "Minimum" and
+  "Maximum" (through `labels`) whose thumbs cannot cross. It submits plain
+  numbers. Flag a raw `<input type="range">`, a hand-made `role="slider"`, and
+  two sliders standing in for one range.
+- Toggle is a native button with `aria-pressed`, named by its label even when
+  only the icon shows; ToggleGroup is a `radiogroup` of toggles (one choice,
+  arrows press) or a `group` (several), with one Tab stop and arrow keys between
+  them. Flag a hand-made `aria-pressed` button, a row of buttons with a selected
+  class and no pressed state, and a ToggleGroup for options sent with a form
+  (RadioGroup).
 - Textarea is a native `<textarea>` with Input's look; `rows`, `maxRows` and
   `autoResize` size it in whole lines through CSS. Flag a raw `<textarea>` and
   hand-made growth (a `scrollHeight` handler on input).

@@ -48,7 +48,7 @@ const INPUT_SYSTEM_CASES = [
     border: "3px",
     shadow: true,
   },
-  { id: "vercel", radius: 6, padding: [8, 12], border: "1px", shadow: false },
+  { id: "vercel", radius: 10, padding: [7, 10], border: "1px", shadow: false },
 ] as const;
 
 describe.each(["light", "dark"] as const)(
@@ -380,7 +380,7 @@ describe("Input scopes and customization", () => {
     expect(
       getComputedStyle(screen.getByRole("textbox", { name: "Sibling" }))
         .borderRadius,
-    ).toBe("6px");
+    ).toBe("10px");
   });
 
   it("updates design and scheme without losing an uncontrolled value", async () => {

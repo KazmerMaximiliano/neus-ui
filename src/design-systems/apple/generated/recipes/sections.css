@@ -4,5 +4,5 @@
   --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px);
   --pricing-price-size: 40px;
   --pricing-price-tracking: normal;
-  --pricing-featured-shadow: 0 0;
+  --pricing-featured-shadow: 0 0 #0000;
 }

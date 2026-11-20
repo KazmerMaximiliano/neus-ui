@@ -1,10 +1,14 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --icon-button-radius: 6px;
-  --icon-button-size-small: 32px;
-  --icon-button-size-medium: 40px;
-  --icon-button-size-large: 48px;
+  --icon-button-radius: 10px;
+  --icon-button-size-small: 28px;
+  --icon-button-size-medium: 32px;
+  --icon-button-size-large: 36px;
   --icon-button-icon-size-small: 16px;
   --icon-button-icon-size-medium: 16px;
-  --icon-button-icon-size-large: 20px;
+  --icon-button-icon-size-large: 16px;
+  --icon-button-active-transform: translateY(1px);
+  --icon-button-focus-offset: 0px;
+  --icon-button-disabled-opacity: 0.5;
+  --icon-button-transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }

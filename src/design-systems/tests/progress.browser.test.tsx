@@ -16,7 +16,7 @@ const SYSTEMS = [
   { id: "carbon", medium: 8, square: true },
   { id: "material", medium: 4, square: true },
   { id: "neobrutalism", medium: 16, square: false },
-  { id: "vercel", medium: 6, square: false },
+  { id: "vercel", medium: 4, square: false },
 ] as const;
 
 const part = (name: string) => screen.getByRole("progressbar").querySelector<HTMLElement>(`.progress__${name}`)!;

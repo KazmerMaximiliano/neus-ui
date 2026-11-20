@@ -1,8 +1,11 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --skeleton-background: var(--color-border-subtle);
-  --skeleton-highlight: var(--color-surface-secondary);
-  --skeleton-animation-name: skeleton-shimmer;
-  --skeleton-text-radius: 6px;
-  --skeleton-rect-radius: 6px;
+  --skeleton-background: #f2f2f2;
+  --skeleton-duration: 2s;
+  --skeleton-text-radius: 8px;
+  --skeleton-rect-radius: 8px;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --skeleton-background: #1a1a1a;
 }

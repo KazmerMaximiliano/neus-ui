@@ -1,0 +1,28 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --slider-control-height: 24px;
+  --slider-track-height: 6px;
+  --slider-track-background: rgb(0 0 0 / 0.06);
+  --slider-thumb-width: 24px;
+  --slider-thumb-height: 20px;
+  --slider-thumb-radius: 3em;
+  --slider-thumb-border-width: 1px;
+  --slider-thumb-border-color: #ffffff;
+  --slider-thumb-background: linear-gradient(to right, rgb(243 250 255), rgb(253 253 253));
+  --slider-thumb-shadow: 0 0.5px 1.5px rgb(0 0 0 / 0.12), 0 3px 8px rgb(0 0 0 / 0.1);
+  --slider-thumb-hover-shadow: 0 0 #0000;
+  --slider-thumb-active-shadow: 0 0 #0000;
+  --slider-value-weight: 400;
+  --slider-step-width: 2px;
+  --slider-step-height: 2px;
+  --slider-step-offset: 8px;
+  --slider-step-color: rgb(0 0 0 / 0.26);
+  --slider-step-active-color: var(--slider-step-color);
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --slider-track-background: rgb(255 255 255 / 0.2);
+  --slider-thumb-background: #e6e7e8;
+  --slider-thumb-shadow: 0 0.5px 1.5px rgb(0 0 0 / 0.3);
+  --slider-step-color: rgb(255 255 255 / 0.32);
+}

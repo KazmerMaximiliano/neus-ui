@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 58 reusable UI components and public sections
+- 61 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (58 total)
+### Implemented Components and Public Subcomponents (61 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -255,6 +255,9 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | FormField        | src/components/FormField/                               | STABLE | Label, help text, required mark and error handed to a control it does not draw through a render function                |
 | Fieldset         | src/components/Fieldset/                                | STABLE | Native fieldset with legend, help text and error; disables every control; RadioGroup's base                             |
 | NumberInput      | src/components/NumberInput/                             | STABLE | Spinbutton on Input: arrow/page/home/end and stepper buttons, clamping, precision, Intl formatting, plain submit value  |
+| Slider           | src/components/Slider/                                  | STABLE | Native range inputs: one value or a range with two thumbs that do not cross, Intl value text                            |
+| Toggle           | src/components/Toggle/                                  | STABLE | Button with aria-pressed, icon or icon only, controlled or not; ToggleGroup's radios                                    |
+| ToggleGroup      | src/components/ToggleGroup/                             | STABLE | Single (radiogroup) or multiple toggles, roving focus, arrows, orientation, Tabs' segments                              |
 
 ### Implemented Sections (12 total, `neus-ui/sections`)
 

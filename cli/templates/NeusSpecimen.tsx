@@ -4,7 +4,7 @@ import {
   Accordion, Alert, Avatar, AvatarGroup, Badge, Breadcrumbs, Button, Card, CardContent, CardFooter, CardHeader, Checkbox, Combobox,
   DateInput, Fieldset, FormField, Grid, Heading, Input, MediaPlaceholder, NumberInput, Pagination, Popover, Progress, Radio,
   RadioGroup, Section, Select,
-  Skeleton, Spinner, Stack, Switch, Tabs, Text, Textarea, ThemeProvider, Toast, Tooltip,
+  Skeleton, Slider, Spinner, Stack, Switch, Tabs, Text, Textarea, ThemeProvider, Toast, Toggle, ToggleGroup, Tooltip,
 } from "neus-ui";
 import type { ColorScheme, DesignSystemId, ThemeConfig } from "neus-ui";
 
@@ -58,6 +58,13 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
             <Button label="Disabled" disabled />
             <Button label="Loading" loading />
             <Button label="Error" color="error" />
+            <Toggle label="Toggle" />
+            <Toggle label="Pressed" defaultPressed />
+            <ToggleGroup label="View" defaultValue="list">
+              <Toggle value="list" label="List" />
+              <Toggle value="grid" label="Grid" />
+              <Toggle value="map" label="Map" />
+            </ToggleGroup>
             <Popover label="Popover" trigger={(props) => <Button {...props} label="Popover" variant="outlined" />}>
               <Text>Anchored content, closed with Escape.</Text>
             </Popover>
@@ -84,6 +91,9 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
             <Radio value="pickup" label="Store pickup" disabled />
           </RadioGroup>
           <NumberInput label="Guests" defaultValue={2} min={1} max={8} description="Up to eight people." />
+          <Slider label="Rooms" min={1} max={8} defaultValue={3} description="Bedrooms only." showSteps />
+          <Slider label="Price per night" range max={1000} step={10} defaultValue={[200, 800]}
+            formatOptions={{ style: "currency", currency: "USD", maximumFractionDigits: 0 }} />
           {/* A control of the project's own, the kind FormField labels: a 1–5 score. */}
           <FormField label="Rating" description="How was your stay?">
             {({ disabled, ...control }) => (

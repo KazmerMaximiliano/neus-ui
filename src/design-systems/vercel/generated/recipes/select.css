@@ -1,8 +1,16 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
   --select-caret-size: 16px;
-  --select-caret-gap: 12px;
+  --select-caret-gap: 8px;
   --select-caret-color: var(--color-text-secondary);
   --select-search-radius: 6px;
+  --select-tag-gap: 4px;
+  --select-tag-padding: 0 2px 0 6px;
   --select-tag-radius: 6px;
+  --select-tag-background: #f2f2f2;
+  --select-tag-remove-color: color-mix(in srgb, var(--color-text-primary) 50%, transparent);
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --select-tag-background: #1a1a1a;
 }

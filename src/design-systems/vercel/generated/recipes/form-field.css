@@ -1,1 +1,6 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --fieldset-gap: 16px;
+  --fieldset-label-gap: 6px;
+  --fieldset-content-gap: 20px;
+}

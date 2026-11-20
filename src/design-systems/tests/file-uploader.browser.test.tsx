@@ -17,7 +17,7 @@ const SYSTEMS = [
   { id: "carbon", radius: "0px", border: "1px" },
   { id: "material", radius: "12px", border: "1px" },
   { id: "neobrutalism", radius: "4px", border: "3px" },
-  { id: "vercel", radius: "12px", border: "1px" },
+  { id: "vercel", radius: "14px", border: "1px" },
 ] as const;
 
 describe.each(["light", "dark"] as const)("FileUploader designs in %s mode", (scheme) => {

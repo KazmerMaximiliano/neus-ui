@@ -108,6 +108,12 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
       if (!isCss(file) && /<(input|Input)\b[^>]*\stype=["']number["']/.test(line)) {
         report(file, at, "P1", "raw-element", "number field: use NumberInput, which steps, clamps and formats the number");
       }
+      if (!isCss(file) && /<(input|Input)\b[^>]*\stype=["']range["']|role=["']slider["']/.test(line)) {
+        report(file, at, "P1", "raw-element", "range input: use Slider, which labels, fills and formats it (range for two thumbs)");
+      }
+      if (!isCss(file) && /\saria-pressed=/.test(line)) {
+        report(file, at, "P1", "raw-element", "hand-made toggle button: use Toggle, or ToggleGroup for a set");
+      }
       if (!isCss(file) && /<nav\b[^>]*aria-label=["'][^"']*breadcrumb/i.test(line)) {
         report(file, at, "P1", "raw-element", "hand-made breadcrumbs: use Breadcrumbs");
       }
