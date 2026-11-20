@@ -16,6 +16,12 @@
   list-style: none;
 }
 
+/* The arrows are small icon buttons sized like the pages, so the row lines up in every system. */
+.pagination__previous,
+.pagination__next {
+  --icon-button-size-small: var(--pagination-item-size);
+}
+
 .pagination__page {
   display: inline-flex;
   align-items: center;

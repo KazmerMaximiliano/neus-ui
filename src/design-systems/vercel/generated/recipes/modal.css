@@ -1,17 +1,18 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --modal-width: 540px;
-  --modal-radius: 12px;
+  --modal-width: 384px;
+  --modal-radius: 14px;
   --modal-border-width: 1px;
-  --modal-border-color: var(--color-border-subtle);
+  --modal-border-color: color-mix(in srgb, var(--color-text-primary) 10%, transparent);
   --modal-shadow: var(--elevation-dialog);
-  --modal-backdrop: rgba(0, 0, 0, 0.3);
+  --modal-backdrop: color-mix(in srgb, var(--color-black) 10%, transparent);
   --modal-divider-width: 0px;
-  --modal-title-size: 24px;
-  --modal-content-padding: 0 24px 24px;
-  --modal-footer-padding: 16px 24px;
-}
-
-[data-design-system="vercel"][data-color-scheme="dark"] {
-  --modal-background: var(--color-surface-secondary);
+  --modal-header-padding: 16px;
+  --modal-title-size: 16px;
+  --modal-title-weight: 500;
+  --modal-title-line-height: 1;
+  --modal-content-padding: 0 16px 16px;
+  --modal-content-line-height: 20px;
+  --modal-footer-padding: 16px;
+  --modal-footer-gap: 8px;
 }

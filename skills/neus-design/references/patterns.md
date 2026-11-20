@@ -83,7 +83,9 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
   An icon-only action whose name is not enough (a limit, a consequence) gets a
   `Tooltip`; the IconButton keeps its `label`.
 - Filters for the list go in a `Popover` opened by an outlined "Filters" Button
-  beside the title; close it from an "Apply" button with a controlled `open`.
+  beside the title; close it from an "Apply" button with a controlled `open`. A price
+  or size span inside it is a `Slider` with `range`. Switching the list between views
+  (list, grid, map) is a `ToggleGroup` beside the title.
 - Pagination is controlled: wire `onPaginationChange` to the data source. A
   list that is not a table (cards, search results) pages with `Pagination`
   below it, wired the same way.
@@ -137,7 +139,8 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
   use a `Combobox`.
 - Numbers people count or pay (seats, quantity, budget) are a `NumberInput`, with
   `formatOptions` for currency or percent; codes that only look like numbers (a phone,
-  a postal code) stay an `Input`.
+  a postal code) stay an `Input`. A value where the place in a range matters more
+  than the exact number (a volume, a comfort level) is a `Slider`.
 - Group related fields under one caption with `Fieldset` (an address, notification
   channels); wrap a control neus does not draw in `FormField` so it gets the same
   label, help text and error.

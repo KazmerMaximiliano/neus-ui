@@ -1,29 +1,48 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
+  --sidebar-width: 256px;
+  --sidebar-compact-width: 48px;
+  --sidebar-mobile-width: 288px;
+  --sidebar-transition: 0.2s linear;
   --sidebar-header-height: 64px;
   --sidebar-header-min-height: 64px;
-  --sidebar-header-padding: 10px;
+  --sidebar-header-padding: 8px;
   --sidebar-background: var(--color-surface);
   --sidebar-color: var(--color-text-primary);
   --sidebar-header-background: var(--sidebar-background);
   --sidebar-decoration-display: none;
   --sidebar-convex-radius: 0px;
   --sidebar-title-color: var(--color-text-primary);
-  --sidebar-item-color: var(--color-text-secondary);
-  --sidebar-item-hover-background: var(--color-surface-hover);
+  --sidebar-body-padding: 8px;
+  --sidebar-body-gap: 0px;
+  --sidebar-body-padding-bottom: 8px;
+  --sidebar-body-padding-left: 8px;
+  --sidebar-item-padding: 6px 8px;
+  --sidebar-item-gap: 8px;
+  --sidebar-item-min-height: 32px;
+  --sidebar-item-radius: 8px;
+  --sidebar-item-color: var(--color-text-primary);
+  --sidebar-item-hover-background: #f2f2f2;
   --sidebar-item-hover-color: var(--color-text-primary);
-  --sidebar-item-active-background: var(--color-primary-light);
-  --sidebar-item-active-color: var(--color-primary);
+  --sidebar-item-active-background: #f2f2f2;
+  --sidebar-item-active-color: var(--color-text-primary);
   --sidebar-item-focus-color: var(--color-focus);
   --sidebar-item-size: 14px;
-  --sidebar-item-weight: 500;
+  --sidebar-item-weight: 400;
+  --sidebar-item-active-weight: 500;
+  --sidebar-item-line-height: 20px;
   --sidebar-item-spacing: 0px;
   --sidebar-item-transform: none;
-  --sidebar-item-padding: 12px 16px;
-  --sidebar-body-gap: 8px;
   --sidebar-border-width: 1px;
-  --sidebar-item-radius: 6px;
   --sidebar-header-border-width: 1px;
-  --sidebar-control-radius: 6px;
+  --sidebar-control-size: 32px;
+  --sidebar-control-radius: 10px;
+  --sidebar-control-icon-size: 16px;
   --sidebar-control-shadow: none;
+  --sidebar-backdrop-background: rgb(0 0 0 / 0.1);
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --sidebar-item-hover-background: #1a1a1a;
+  --sidebar-item-active-background: #1a1a1a;
 }

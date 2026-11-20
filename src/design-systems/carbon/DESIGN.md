@@ -470,7 +470,7 @@ x-neus:
         --pricing-price-weight: 400
         --pricing-price-tracking: 0px
         --pricing-featured-ring-width: 2px
-        --pricing-featured-shadow: 0 0 #0000
+        --pricing-featured-shadow: "0 0 #0000"
     spinner:
       base:
         --spinner-size-small: 16px
@@ -649,6 +649,83 @@ x-neus:
         --number-input-transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9)
       dark:
         --number-input-button-hover-background: "#333333"
+    slider:
+      base:
+        --slider-track-height: 2px
+        --slider-track-radius: 0px
+        --slider-track-background: "#e0e0e0"
+        --slider-fill-background: "#161616"
+        --slider-thumb-width: 14px
+        --slider-thumb-height: 14px
+        --slider-thumb-border-width: 0px
+        --slider-thumb-background: "#161616"
+        --slider-thumb-shadow: "0 0 #0000"
+        --slider-thumb-hover-shadow: "0 0 0 3px #161616"
+        --slider-focus-shadow: 0 0 0 1px var(--color-surface), 0 0 0 3px var(--color-focus)
+        --slider-value-color: var(--color-text-primary)
+        --slider-value-font-size: 14px
+        --slider-value-weight: "400"
+        --slider-transition: box-shadow 70ms cubic-bezier(0.2, 0, 0.38, 0.9)
+        --slider-step-width: 2px
+        --slider-step-height: 8px
+        --slider-step-radius: 0px
+        --slider-step-color: "#8d8d8d"
+        --slider-step-active-color: "#161616"
+      dark:
+        --slider-track-background: "#393939"
+        --slider-fill-background: "#f4f4f4"
+        --slider-thumb-background: "#f4f4f4"
+        --slider-thumb-hover-shadow: "0 0 0 3px #f4f4f4"
+        --slider-step-color: "#6f6f6f"
+        --slider-step-active-color: "#f4f4f4"
+    toggle:
+      base:
+        --toggle-font-size: 14px
+        --toggle-font-weight: "400"
+        --toggle-padding-small: 0 16px
+        --toggle-padding-medium: 0 16px
+        --toggle-padding-large: 0 16px
+        --toggle-icon-size-small: 16px
+        --toggle-icon-size-medium: 16px
+        --toggle-icon-size-large: 20px
+        --toggle-radius: 4px
+        --toggle-border-color: "#161616"
+        --toggle-color: "#525252"
+        --toggle-hover-background: "#e8e8e8"
+        --toggle-hover-color: "#161616"
+        --toggle-pressed-background: "#161616"
+        --toggle-pressed-hover-background: "#161616"
+        --toggle-pressed-color: "#ffffff"
+        --toggle-pressed-border-color: "#161616"
+        --toggle-focus-offset: -2px
+        --toggle-transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), color 70ms cubic-bezier(0.2, 0, 0.38, 0.9)
+        --toggle-group-gap: 0px
+        --toggle-group-padding: 0px
+        --toggle-group-border-width: 1px
+        --toggle-group-border-color: var(--toggle-border-color)
+        --toggle-group-radius: 4px
+        --toggle-group-background: transparent
+        --toggle-group-divider-width: 1px
+        --toggle-group-divider-color: "#e0e0e0"
+        --toggle-group-item-radius: 0px
+        --toggle-group-item-outer-radius: 3px
+        --toggle-group-item-background: transparent
+        --toggle-group-item-color: var(--toggle-color)
+        --toggle-group-item-hover-background: var(--toggle-hover-background)
+        --toggle-group-item-hover-color: var(--toggle-hover-color)
+        --toggle-group-item-pressed-background: var(--toggle-pressed-background)
+        --toggle-group-item-pressed-color: var(--toggle-pressed-color)
+        --toggle-group-item-pressed-shadow: none
+      dark:
+        --toggle-border-color: "#f4f4f4"
+        --toggle-color: "#c6c6c6"
+        --toggle-hover-background: "#333333"
+        --toggle-hover-color: "#f4f4f4"
+        --toggle-pressed-background: "#f4f4f4"
+        --toggle-pressed-hover-background: "#f4f4f4"
+        --toggle-pressed-color: "#161616"
+        --toggle-pressed-border-color: "#f4f4f4"
+        --toggle-group-divider-color: "#393939"
 ---
 
 # Carbon
@@ -789,6 +866,10 @@ An accordion is one divided list: 40px rows with 1px subtle-border rules (#e0e0e
 A form field or a fieldset takes the input's label, helper text and error styles, so they need no values of their own.
 
 A number input ends in square minus and plus controls in primary icon color with a 1px subtle rule between them. Their 16px icons and the field-hover fill (#e8e8e8, #333333 in dark mode) follow the number input's style page ([Carbon number input style](https://carbondesignsystem.com/components/number-input/style/), consulted 2026-11-19); the page gives no control width, so the 32px square is a local decision.
+
+A slider is a thin 2px track in subtle gray (#e0e0e0, #393939 in dark mode) filled in ink (#161616, #f4f4f4) up to a 14px ink thumb that grows to 20px under the pointer, with the label above in 12px secondary type and the value in 14px primary type ([Carbon slider style](https://carbondesignsystem.com/components/slider/style/), consulted 2026-11-19). The style page gives the track as 4px while the component code draws 2px; the library follows the code. Focus adds a 1px gap and a 2px blue ring around the thumb, an approximation of the code's inset ring. Carbon's slider has no step marks; the 2px by 8px ticks across the track, strong border gray outside the value and ink inside it, are a local decision.
+
+A toggle group is the content switcher: segments 32, 40 or 48px tall inside a 1px ink outline with 4px corners, split by 1px subtle dividers, in 14px regular type in secondary gray; the selected segment fills with ink and white text, and hovering one gives it #e8e8e8 (#333333 in dark mode) ([Carbon content switcher style](https://carbondesignsystem.com/components/content-switcher/style/), consulted 2026-11-19). The dividers run the full height instead of Carbon's 16px. Carbon has no toggle button of its own; a toggle on its own is one segment of the switcher, a local mapping.
 
 ## Do's and Don'ts
 

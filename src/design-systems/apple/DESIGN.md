@@ -376,7 +376,7 @@ x-neus:
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
         --pricing-price-size: 40px
         --pricing-price-tracking: normal
-        --pricing-featured-shadow: 0 0 #0000
+        --pricing-featured-shadow: "0 0 #0000"
     spinner:
       base:
         --spinner-size-medium: 20px
@@ -486,6 +486,48 @@ x-neus:
         --number-input-button-color: var(--color-text-primary)
         --number-input-divider-width: 1px
         --number-input-divider-color: var(--color-border-subtle)
+    slider:
+      base:
+        --slider-control-height: 24px
+        --slider-track-height: 6px
+        --slider-track-background: rgb(0 0 0 / 0.06)
+        --slider-thumb-width: 24px
+        --slider-thumb-height: 20px
+        --slider-thumb-radius: "{rounded.pill}"
+        --slider-thumb-border-width: 1px
+        --slider-thumb-border-color: "#ffffff"
+        --slider-thumb-background: linear-gradient(to right, rgb(243 250 255), rgb(253 253 253))
+        --slider-thumb-shadow: 0 0.5px 1.5px rgb(0 0 0 / 0.12), 0 3px 8px rgb(0 0 0 / 0.1)
+        --slider-thumb-hover-shadow: "0 0 #0000"
+        --slider-thumb-active-shadow: "0 0 #0000"
+        --slider-value-weight: "400"
+        --slider-step-width: 2px
+        --slider-step-height: 2px
+        --slider-step-offset: 8px
+        --slider-step-color: rgb(0 0 0 / 0.26)
+        --slider-step-active-color: var(--slider-step-color)
+      dark:
+        --slider-track-background: rgb(255 255 255 / 0.2)
+        --slider-thumb-background: "#e6e7e8"
+        --slider-thumb-shadow: 0 0.5px 1.5px rgb(0 0 0 / 0.3)
+        --slider-step-color: rgb(255 255 255 / 0.32)
+    toggle:
+      base:
+        --toggle-font-size: 14px
+        --toggle-font-weight: "400"
+        --toggle-height-small: 28px
+        --toggle-height-medium: 32px
+        --toggle-height-large: 40px
+        --toggle-border-width: 0px
+        --toggle-background: rgb(118 118 128 / 0.12)
+        --toggle-hover-background: rgb(118 118 128 / 0.2)
+        --toggle-pressed-background: var(--color-primary)
+        --toggle-pressed-hover-background: var(--color-primary)
+        --toggle-pressed-color: var(--color-text-on-primary)
+        --toggle-pressed-border-color: transparent
+      dark:
+        --toggle-background: rgb(118 118 128 / 0.24)
+        --toggle-hover-background: rgb(118 118 128 / 0.32)
 ---
 
 # Apple
@@ -623,6 +665,10 @@ An accordion follows apple.com's shared accordion in its reduced size: 17px semi
 A form field or a fieldset reads like the input's label above its control, with help text in secondary gray and the error in red; both inherit the input's type, so they need no values of their own.
 
 A number input ends in a stepper drawn like the HIG's two-segment control: a light gray capsule with 8px corners, minus and plus in primary ink, split by a hairline ([HIG steppers](https://developer.apple.com/design/human-interface-guidelines/steppers), consulted 2026-11-19; the page gives no measurements, so the sizes are local decisions).
+
+A slider follows the illustrations of the HIG sliders page: a 6px track with full corners, filled with the accent color up to the thumb and a faint gray after it (black at 6%, white at 20% in dark mode), and a thumb drawn as a horizontal capsule, 24 by 20px, almost white with a blue tint that fades across it, a white rim and a soft shadow (light gray #e6e7e8 in dark mode). Tick marks are 2px gray dots centered 8px below the track, the same color on both sides of the thumb ([HIG sliders](https://developer.apple.com/design/human-interface-guidelines/sliders), consulted 2026-11-19; the page publishes images, not measurements, so the sizes are measured from them and the shadow is a local approximation). The thumb has no hover state, as on Apple platforms; a range with two thumbs is a local extension.
+
+A toggle is a button that changes its background while on, as the guidelines describe ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-19): a capsule of translucent gray that fills with the accent color and white text when pressed. A toggle group is the segmented control of the contained tabs, which also allows several selected segments as on macOS ([HIG segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls), consulted 2026-11-19); the sizes are local decisions.
 
 ## Do's and Don'ts
 

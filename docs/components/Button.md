@@ -159,6 +159,7 @@ dependencies. Do not edit generated files.
 | `--button-elevated-color` | button elevated color | `color-mix(in srgb, var(--color-primary-text) 80%, var(--color-text-primary))` |
 | `--button-elevated-shadow` | button elevated shadow | `var(--elevation-floating)` |
 | `--button-outlined-border-width` | button outlined border width | `1px` |
+| `--button-outlined-border-color` | button outlined border color | `currentColor` |
 | `--button-secondary-background` | button secondary background | `var(--color-text-primary)` |
 | `--button-secondary-color` | button secondary color | `var(--color-surface)` |
 | `--button-shadow` | button shadow | `none` |

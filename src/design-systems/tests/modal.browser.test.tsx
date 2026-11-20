@@ -18,7 +18,7 @@ const SYSTEMS = [
   { id: "carbon", radius: "0px", border: "0px" },
   { id: "material", radius: "28px", border: "0px" },
   { id: "neobrutalism", radius: "4px", border: "3px" },
-  { id: "vercel", radius: "12px", border: "1px" },
+  { id: "vercel", radius: "14px", border: "1px" },
 ] as const;
 
 const Example = ({ system, scheme }: { system: DesignSystemId; scheme: "light" | "dark" }) => {

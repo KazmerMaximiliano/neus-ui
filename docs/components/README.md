@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 58 components and public sections. Import each by name from `neus-ui`.
+The package exports 61 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -41,9 +41,12 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | --- | --- |
 | [Input](./Input.md) | Native input with field presentation, adornments and accessible errors. |
 | [NumberInput](./NumberInput.md) | Number field with keyboard and button steps, range, precision and locale formatting. |
+| [Slider](./Slider.md) | Value or range picked by dragging along a track, on native range inputs. |
 | [Textarea](./Textarea.md) | Multi-line text with the Input field presentation, line-based height and optional growth. |
 | [Checkbox](./Checkbox.md) | Controlled checkbox with an indeterminate visual state. |
 | [Switch](./Switch.md) | On/off setting that applies at once. |
+| [Toggle](./Toggle.md) | Button that stays pressed, such as Bold in a toolbar. |
+| [ToggleGroup](./ToggleGroup.md) | Toggles that share one choice, like a segmented control, or several. |
 | [Radio](./Radio.md) | Native radio with a label and help text, alone or inside a RadioGroup. |
 | [RadioGroup](./RadioGroup.md) | One choice among a few visible Radio options, with a legend. |
 | [Select](./Select.md) | Single selection with a searchable, keyboard-operated listbox. |

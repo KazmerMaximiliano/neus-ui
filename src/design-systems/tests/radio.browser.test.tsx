@@ -19,7 +19,7 @@ const SYSTEMS = [
   { id: "carbon", circle: 18, dot: 8 },
   { id: "material", circle: 20, dot: 10 },
   { id: "neobrutalism", circle: 22, dot: 10 },
-  { id: "vercel", circle: 16, dot: 6 },
+  { id: "vercel", circle: 16, dot: 8 },
 ] as const;
 
 const parts = (name: string) => {

@@ -17,7 +17,7 @@ const SYSTEMS = [
   { id: "carbon", track: [48, 24], thumb: [18, 18] },
   { id: "material", track: [52, 32], thumb: [16, 24] },
   { id: "neobrutalism", track: [52, 28], thumb: [16, 16] },
-  { id: "vercel", track: [32, 18], thumb: [14, 14] },
+  { id: "vercel", track: [32, 18], thumb: [16, 16] },
 ] as const;
 
 const parts = (name: string) => {
@@ -80,7 +80,7 @@ describe.each(["light", "dark"] as const)("Switch designs in %s mode", (scheme) 
     expect(wifi.control).toHaveFocus();
     expect(getComputedStyle(wifi.track).outlineStyle).toBe("solid");
     expect(getComputedStyle(wifi.track).outlineColor).toBe(resolveColor(wifi.track, "--color-focus"));
-    expect(getComputedStyle(bluetooth.track).opacity).toBe(system.id === "apple" ? "0.5" : "0.38");
+    expect(getComputedStyle(bluetooth.track).opacity).toBe(["apple", "vercel"].includes(system.id) ? "0.5" : "0.38");
     expect(getComputedStyle(bluetooth.thumb).left).not.toBe(getComputedStyle(wifi.thumb).left);
     expect(getComputedStyle(screen.getByText("Bluetooth")).color).toBe(resolveColor(bluetooth.track, "--color-text-disabled"));
     expect(getComputedStyle(screen.getByText("Bluetooth").parentElement!).cursor).toBe("not-allowed");

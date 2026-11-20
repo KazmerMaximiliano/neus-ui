@@ -4,7 +4,7 @@
 [![CI](https://github.com/KazmerMaximiliano/neus-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/KazmerMaximiliano/neus-ui/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/KazmerMaximiliano/neus-ui)](./LICENSE)
 
-A React 19+ component library with TypeScript: 58 components (counting public subcomponents
+A React 19+ component library with TypeScript: 61 components (counting public subcomponents
 such as CardHeader), twelve page sections for public pages (`neus-ui/sections`), two layout
 templates, and six design systems driven by scoped CSS tokens.
 
@@ -62,7 +62,7 @@ building, and checks its work with the commands below.
 | [Design systems](./docs/design/systems.md)             | Six systems, scope behavior and visual specifications                           |
 | [ThemeProvider](./docs/design/theme-provider.md)       | Color modes, runtime palette updates, hooks and isolated scopes                 |
 | [Customization](./docs/design/customization.md)        | Tokens, root/part classes, style props and CSS cascade                          |
-| [Components](./docs/components/README.md)              | All 58 public components/sections, complete props, anatomy and token references |
+| [Components](./docs/components/README.md)              | All 61 public components/sections, complete props, anatomy and token references |
 | [Sections](./docs/sections/README.md)                  | `neus-ui/sections`: header, hero, features, testimonials, call to action and footer for public pages |
 | [Templates](./docs/templates/README.md)                | AppTemplate and FormTemplate composition and responsive layouts                 |
 | [Examples](./docs/examples/README.md)                  | Five briefs to try the design skill, with the pages it produced and their code |

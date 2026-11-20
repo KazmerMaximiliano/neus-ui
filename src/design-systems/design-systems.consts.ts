@@ -14,7 +14,7 @@ export const ADAPTED_COMPONENTS = [
   "Section", "MediaPlaceholder", "Alert", "Avatar", "AvatarGroup", "Spinner", "Switch", "Textarea",
   "Radio", "RadioGroup", "Popover", "Progress", "Skeleton", "Toast",
   "Tooltip", "Combobox", "Tabs", "Breadcrumbs", "Pagination", "Accordion", "FormField",
-  "Fieldset", "NumberInput",
+  "Fieldset", "NumberInput", "Slider", "Toggle", "ToggleGroup",
 ] as const;
 
 export const DESIGN_SYSTEMS: readonly DesignSystem[] = [

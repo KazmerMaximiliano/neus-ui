@@ -30,7 +30,7 @@ typefaces). Brand material always wins over anything you invent.
 | `carbon` | Square geometry, precise alignment, purposeful color | Enterprise, operations, finance, data-heavy | Playful consumer |
 | `material` | Tonal surfaces, semantic color pairs, rounded shapes | Broad consumer and productivity | Editorial, luxury |
 | `neobrutalism` | Thick borders, hard offset shadows, bright flat accents | Creative tools, youth, events, games | Enterprise, health |
-| `vercel` | Neutral surfaces, compact controls, small radii | Developer tools, technical settings, data workflows | Warm consumer |
+| `vercel` | Geist palette and type, shadcn/ui components, compact controls | Developer tools, technical settings, data workflows | Warm consumer |
 
 Read the base's `node_modules/neus-ui/src/design-systems/<base>/DESIGN.md`
 and state your choice in one sentence with the reason.

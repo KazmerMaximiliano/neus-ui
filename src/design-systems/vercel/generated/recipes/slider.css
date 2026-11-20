@@ -1,0 +1,24 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --slider-track-height: 4px;
+  --slider-track-background: #f2f2f2;
+  --slider-thumb-width: 12px;
+  --slider-thumb-height: 12px;
+  --slider-thumb-border-width: 1px;
+  --slider-thumb-border-color: var(--color-text-placeholder);
+  --slider-thumb-background: var(--color-white);
+  --slider-thumb-shadow: 0 0 #0000;
+  --slider-thumb-hover-shadow: 0 0 0 3px color-mix(in srgb, var(--color-text-placeholder) 50%, transparent);
+  --slider-thumb-active-shadow: var(--slider-thumb-hover-shadow);
+  --slider-focus-shadow: 0 0 0 2px var(--color-focus), 0 0 0 5px var(--color-focus-ring);
+  --slider-disabled-opacity: 0.5;
+  --slider-transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --slider-step-width: 2px;
+  --slider-step-height: 2px;
+  --slider-step-color: var(--color-text-placeholder);
+  --slider-step-active-color: var(--color-surface);
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --slider-track-background: #1a1a1a;
+}

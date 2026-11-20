@@ -18,7 +18,7 @@ Markdown; read them in GitHub or an editor without starting a server.
 
 | Reference | Contents |
 | --- | --- |
-| [Components](./components/README.md) | All 58 components and public subcomponents, props, anatomy, states and complete token inventories |
+| [Components](./components/README.md) | All 61 components and public subcomponents, props, anatomy, states and complete token inventories |
 | [Sections](./sections/README.md) | `neus-ui/sections`: SiteHeader, Hero, SectionHeader, FeatureList, TestimonialList, CallToAction and SiteFooter for public pages |
 | [Templates](./templates/README.md) | AppTemplate and FormTemplate composition, responsive behavior and styling |
 | [Examples](./examples/README.md) | Five briefs for the `neus-design` skill, how to run them, and the pages it produced with their code |

@@ -76,7 +76,7 @@ export const THEME_FILES = ["neus.theme.css", "neus.theme.ts", "neus.system.css"
 export const OVERRIDES_FILE = "neus.overrides.css";
 export const LIBRARY_STYLESHEET = "neus-ui/dist/neus-ui.css";
 export const RAW_TO_COMPONENT = {
-  button: "Button or IconButton", input: "Input, NumberInput, Checkbox, Switch or RadioGroup", select: "Select", textarea: "Textarea",
+  button: "Button or IconButton", input: "Input, NumberInput, Slider, Checkbox, Switch or RadioGroup", select: "Select", textarea: "Textarea",
   dialog: "Modal", a: "Link, or Button with href", p: "Text", section: "Section", ul: "Grid or Stack as=\"ul\"", ol: "Stack as=\"ol\"",
   h1: "Heading", h2: "Heading", h3: "Heading", h4: "Heading", h5: "Heading", h6: "Heading",
   header: "SiteHeader (neus-ui/sections)", footer: "SiteFooter (neus-ui/sections)", progress: "Progress",
@@ -85,7 +85,8 @@ export const RAW_TO_COMPONENT = {
   fieldset: "Fieldset (RadioGroup for radios)",
 };
 export const INTERACTIVE_ELEMENTS = ["Button", "IconButton", "Input", "Combobox", "Select", "MultiSelect", "Checkbox", "DateInput",
-  "TimeInput", "Textarea", "Switch", "Radio", "Link", "Menu", "Dropdown", "Tabs", "Pagination", "Accordion", "NumberInput", "button", "input", "select", "textarea",
+  "TimeInput", "Textarea", "Switch", "Radio", "Link", "Menu", "Dropdown", "Tabs", "Pagination", "Accordion", "NumberInput", "Slider", "Toggle",
+  "button", "input", "select", "textarea",
   "a"];
 export const FILLER_PATTERN =
   /lorem ipsum|\bacme\b|john doe|jane doe|feature (one|two|1|2)\b|elevate your|seamless|unlock the power|welcome back/i;

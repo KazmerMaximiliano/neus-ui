@@ -83,6 +83,9 @@ export const Page = () => (
     ["raw-element", "a.tsx", `<Input label="Guests" type="number" min={1} />`],
     ["raw-element", "a.tsx", `<label htmlFor="avatar">Avatar</label>`],
     ["raw-element", "a.tsx", `<fieldset><legend>Address</legend>{fields}</fieldset>`],
+    ["raw-element", "a.tsx", `<input type="range" min={0} max={100} value={volume} />`],
+    ["raw-element", "a.tsx", `<div role="slider" aria-valuenow={volume} tabIndex={0} />`],
+    ["raw-element", "a.tsx", `<Button label="Bold" aria-pressed={bold} onClick={toggleBold} />`],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
     ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
   ])("reports P1 %s", (rule, file, text) => {
@@ -111,6 +114,11 @@ export const Page = () => (
 
   it("does not take NumberInput, FormField or Fieldset for hand-made fields", () => {
     const text = `<NumberInput label="Guests" min={1} />\n<FormField label="Avatar">{(control) => <Uploader {...control} />}</FormField>\n<Fieldset label="Address">{fields}</Fieldset>`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take Slider, Toggle or ToggleGroup for hand-made controls", () => {
+    const text = `<Slider label="Price" range value={price} onChange={setPrice} />\n<Toggle label="Bold" pressed={bold} onPressedChange={setBold} />\n<ToggleGroup label="View" value={view} onChange={setView}>{views}</ToggleGroup>`;
     expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
   });
 

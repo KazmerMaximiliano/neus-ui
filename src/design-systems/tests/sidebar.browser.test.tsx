@@ -30,7 +30,7 @@ const SYSTEMS = [
   { id: "carbon", radius: "0px", border: "1px" },
   { id: "material", radius: "28px", border: "0px" },
   { id: "neobrutalism", radius: "4px", border: "3px" },
-  { id: "vercel", radius: "6px", border: "1px" },
+  { id: "vercel", radius: "8px", border: "1px", width: "256px" },
 ] as const;
 
 beforeEach(async () => {
@@ -89,7 +89,7 @@ describe.each(["light", "dark"] as const)("Sidebar designs in %s", (scheme) => {
       expect(getComputedStyle(nav).backgroundColor).toBe(
         resolveColor(nav, expectedToken),
       );
-      expect(getComputedStyle(sidebar).width).toBe("250px");
+      expect(getComputedStyle(sidebar).width).toBe("width" in system ? system.width : "250px");
       expect(getComputedStyle(home).borderRadius).toBe(system.radius);
       expect(
         getComputedStyle(container.querySelector(".sidebar__panel")!)

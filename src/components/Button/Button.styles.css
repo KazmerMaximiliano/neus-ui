@@ -129,7 +129,7 @@
   background-color: transparent;
   color: var(--button-accent-text);
   border-width: var(--button-outlined-border-width);
-  border-color: currentColor;
+  border-color: var(--button-outlined-border-color);
 }
 
 .button--text {

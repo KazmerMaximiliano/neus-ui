@@ -232,11 +232,13 @@ component's guide.
 | Text field | `Input`; several lines: `Textarea` (`rows`; `autoResize` with `maxRows`) |
 | Help text or required field | `description` (one line, on every field of a row or none; examples go in `placeholder`), `required` |
 | Quantity or amount | `NumberInput` (`min`, `max`, `step`; `formatOptions` for currency) |
+| Value or range along a scale (volume, price filter) | `Slider` (`min`, `max`, `step`; `range` for two ends) |
 | Fields under one caption | `Fieldset` (`label` is the legend) |
 | Label and error for a control neus does not draw | `FormField` (`children` receives the control's props) |
 | Choice from options | `Select`, `MultiSelect`, `Checkbox`; 2–5 visible: `RadioGroup` + `Radio`; actions: `Menu`, `Dropdown` |
 | Search or free value with suggestions | `Combobox` (`filter={false}`, `onInputChange` and `loading` when fetched; `allowCustomValue`); predefined options stay `Select` |
 | On/off that applies at once | `Switch`; sent with a form: `Checkbox` |
+| Pressed state or view switch (Bold, list or grid) | `Toggle`; a set: `ToggleGroup` (`type="multiple"` for several) |
 | Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
 | Files, map | `FileUploader`, `InteractiveMap` |
 | Action | `Button` (`variant`; `href` when it navigates); icon only: `IconButton`; inside text: `Link` |

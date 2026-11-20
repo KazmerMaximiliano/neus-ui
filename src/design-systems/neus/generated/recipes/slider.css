@@ -1,0 +1,50 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --slider-font-family: var(--input-font-family);
+  --slider-gap: 8px;
+  --slider-text-gap: 16px;
+  --slider-min-width: var(--input-min-width);
+  --slider-label-color: var(--input-label-color);
+  --slider-label-font-size: var(--input-label-font-size);
+  --slider-label-weight: var(--input-label-weight);
+  --slider-value-color: var(--color-text-secondary);
+  --slider-value-font-size: var(--input-label-font-size);
+  --slider-value-weight: 500;
+  --slider-error-color: var(--input-error-color);
+  --slider-error-font-size: var(--input-error-font-size);
+  --slider-disabled-color: var(--input-disabled-color);
+  --slider-control-height: 24px;
+  --slider-track-height: 6px;
+  --slider-track-radius: 3em;
+  --slider-track-border-width: 0px;
+  --slider-track-border-color: transparent;
+  --slider-track-background: var(--color-border-subtle);
+  --slider-track-inner-radius: 0px;
+  --slider-track-gap: 0px;
+  --slider-fill-background: var(--color-primary);
+  --slider-thumb-width: 20px;
+  --slider-thumb-height: 20px;
+  --slider-thumb-inset: calc(var(--slider-thumb-width) / 2);
+  --slider-thumb-radius: 50%;
+  --slider-thumb-background: var(--color-surface);
+  --slider-thumb-border-width: 2px;
+  --slider-thumb-border-color: var(--color-primary);
+  --slider-thumb-shadow: 0 1px 3px rgb(15 23 42 / 0.2);
+  --slider-thumb-hover-shadow: 0 0 0 6px color-mix(in srgb, var(--color-primary) 14%, transparent);
+  --slider-thumb-active-shadow: 0 0 0 8px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  --slider-thumb-focus-width: var(--slider-thumb-width);
+  --slider-thumb-active-width: var(--slider-thumb-width);
+  --slider-focus-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-focus);
+  --slider-step-width: 4px;
+  --slider-step-height: 4px;
+  --slider-step-radius: 50%;
+  --slider-step-offset: 0px;
+  --slider-step-color: var(--color-text-secondary);
+  --slider-step-active-color: var(--color-text-on-primary);
+  --slider-stop-size: 0px;
+  --slider-stop-inset: 0px;
+  --slider-stop-color: var(--slider-step-color);
+  --slider-disabled-opacity: 0.38;
+  --slider-transition: box-shadow 0.2s ease;
+}

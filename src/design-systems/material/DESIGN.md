@@ -651,6 +651,49 @@ x-neus:
         --number-input-button-hover-color: var(--color-text-secondary)
         --number-input-button-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent)
         --number-input-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent)
+    slider:
+      base:
+        --slider-control-height: 44px
+        --slider-track-height: 16px
+        --slider-track-inner-radius: 2px
+        --slider-track-gap: 8px
+        --slider-track-background: var(--color-secondary-container)
+        --slider-thumb-width: 4px
+        --slider-thumb-height: 44px
+        --slider-thumb-inset: 8px
+        --slider-thumb-radius: "{rounded.pill}"
+        --slider-thumb-border-width: 0px
+        --slider-thumb-background: var(--color-primary)
+        --slider-thumb-shadow: "0 0 #0000"
+        --slider-thumb-hover-shadow: "0 0 #0000"
+        --slider-thumb-active-shadow: "0 0 #0000"
+        --slider-thumb-focus-width: 2px
+        --slider-thumb-active-width: 2px
+        --slider-focus-shadow: 0 0 0 2px var(--color-surface), 0 0 0 5px var(--color-focus)
+        --slider-step-color: var(--color-on-secondary-container)
+        --slider-step-active-color: var(--color-text-on-primary)
+        --slider-stop-size: 4px
+        --slider-stop-inset: 8px
+        --slider-stop-color: var(--color-primary)
+        --slider-transition: width 100ms cubic-bezier(0.2, 0, 0, 1)
+    toggle:
+      base:
+        --toggle-font-size: 14px
+        --toggle-font-weight: "500"
+        --toggle-height-large: 56px
+        --toggle-padding-large: 0 24px
+        --toggle-icon-size-medium: 20px
+        --toggle-icon-size-large: 24px
+        --toggle-border-width: 0px
+        --toggle-background: var(--color-surface-container-high)
+        --toggle-color: var(--color-text-secondary)
+        --toggle-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, var(--color-surface-container-high))
+        --toggle-pressed-background: var(--color-primary)
+        --toggle-pressed-hover-background: color-mix(in srgb, var(--color-text-on-primary) 8%, var(--color-primary))
+        --toggle-pressed-color: var(--color-text-on-primary)
+        --toggle-pressed-border-color: transparent
+        --toggle-focus-width: 3px
+        --toggle-group-item-outer-radius: "{rounded.pill}"
 ---
 
 # Material
@@ -831,6 +874,10 @@ Material has no success or warning roles, so alert colors are a local decision. 
 A form field or a fieldset takes the text field's label, supporting text and error styles, so they need no values of their own.
 
 A number input ends in two round 32px icon buttons with 20px icons in on-surface-variant, and an 8% state layer on hover. Material 3 has no stepper, so the buttons follow the shape of its icon buttons as a local decision.
+
+A slider follows the Material 3 expressive slider in its extra-small size: a 16px track with full outer corners and 2px corners beside the handle, primary up to the handle and secondary container after it, and a 4px by 44px primary bar for a handle that clears 6px of track on each side. The handle has no hover state; on keyboard focus and while pressed it narrows to 2px in the same slot, and focus adds a 3px ring 2px away. The handle travels 8px in from each end of the track, where a 4px primary stop indicator marks the end of the inactive track until the handle reaches it. Step marks are 4px dots, on-primary over the active track and on-secondary-container over the inactive one, and the ones inside a handle's gap are not drawn ([Compose Material 3 Slider](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/Slider.kt), [MDC Android slider tokens](https://github.com/material-components/material-components-android/tree/master/lib/java/com/google/android/material/slider) and [material-web slider tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-slider.scss), consulted 2026-11-19; m3.material.io does not render for reading). The value label bubble above the handle is left out: the value reads at the end of the label row.
+
+A toggle is a filled toggle button: 40px tall with full corners, a high surface container and on-surface-variant label at rest, primary with an on-primary label when selected, label-large type ([icon button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-icon-button-filled.scss), consulted 2026-11-19); the shape change on selection is left out. A toggle group is the outlined segmented button of the contained tabs: a 1px outline with full outer corners, dividers between segments, and the selected one in secondary container ([segmented button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-outlined-segmented-button.scss), consulted 2026-11-19), without the check mark.
 
 ## Do's and Don'ts
 

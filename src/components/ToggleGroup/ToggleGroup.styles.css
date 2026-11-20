@@ -1,0 +1,68 @@
+/* The group restyles its toggles through their own tokens: a tray with tiles, joined segments
+   with dividers, or separate buttons, as each system's recipe sets them. */
+.toggle-group {
+  display: inline-flex;
+  align-items: stretch;
+  gap: var(--toggle-group-gap);
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: var(--toggle-group-padding);
+  border: var(--toggle-group-border-width) solid var(--toggle-group-border-color);
+  border-radius: var(--toggle-group-radius);
+  background-color: var(--toggle-group-background);
+}
+
+.toggle-group[data-orientation="vertical"] {
+  flex-direction: column;
+}
+
+.toggle-group .toggle {
+  --toggle-radius: var(--toggle-group-item-radius);
+  --toggle-border-width: var(--toggle-group-item-border-width);
+  --toggle-background: var(--toggle-group-item-background);
+  --toggle-color: var(--toggle-group-item-color);
+  --toggle-hover-background: var(--toggle-group-item-hover-background);
+  --toggle-hover-color: var(--toggle-group-item-hover-color);
+  --toggle-shadow: var(--toggle-group-item-shadow);
+  --toggle-pressed-background: var(--toggle-group-item-pressed-background);
+  --toggle-pressed-hover-background: var(--toggle-group-item-pressed-background);
+  --toggle-pressed-color: var(--toggle-group-item-pressed-color);
+  --toggle-pressed-border-color: var(--toggle-group-item-pressed-border-color);
+  --toggle-pressed-shadow: var(--toggle-group-item-pressed-shadow);
+  flex: 1 1 0;
+}
+
+/* The first and last toggles follow the group's corners. */
+.toggle-group[data-orientation="horizontal"] .toggle:first-child {
+  border-start-start-radius: var(--toggle-group-item-outer-radius);
+  border-end-start-radius: var(--toggle-group-item-outer-radius);
+}
+
+.toggle-group[data-orientation="horizontal"] .toggle:last-child {
+  border-start-end-radius: var(--toggle-group-item-outer-radius);
+  border-end-end-radius: var(--toggle-group-item-outer-radius);
+}
+
+.toggle-group[data-orientation="vertical"] .toggle:first-child {
+  border-start-start-radius: var(--toggle-group-item-outer-radius);
+  border-start-end-radius: var(--toggle-group-item-outer-radius);
+}
+
+.toggle-group[data-orientation="vertical"] .toggle:last-child {
+  border-end-start-radius: var(--toggle-group-item-outer-radius);
+  border-end-end-radius: var(--toggle-group-item-outer-radius);
+}
+
+.toggle-group[data-orientation="horizontal"] .toggle + .toggle {
+  border-inline-start: var(--toggle-group-divider-width) solid var(--toggle-group-divider-color);
+}
+
+.toggle-group[data-orientation="vertical"] .toggle + .toggle {
+  border-block-start: var(--toggle-group-divider-width) solid var(--toggle-group-divider-color);
+}
+
+/* Joined toggles touch: the focused one's ring stays above its neighbors. */
+.toggle-group .toggle:focus-visible {
+  position: relative;
+  z-index: 1;
+}

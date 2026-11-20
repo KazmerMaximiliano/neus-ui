@@ -16,7 +16,7 @@ const SYSTEMS = [
   { id: "carbon", width: 288, radius: "0px" },
   { id: "material", width: 360, radius: "4px" },
   { id: "neobrutalism", width: 360, radius: "4px" },
-  { id: "vercel", width: 360, radius: "6px" },
+  { id: "vercel", width: 384, radius: "18px" },
 ] as const;
 
 const box = (title: string) => screen.getByText(title).closest<HTMLElement>(".toast")!;

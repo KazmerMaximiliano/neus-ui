@@ -1,22 +1,28 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --input-radius: 6px;
-  --input-padding: 8px 12px;
-  --input-control-height-small: 32px;
-  --input-control-height-medium: 40px;
-  --input-control-height-large: 48px;
+  --input-radius: 10px;
+  --input-padding: 7px 10px;
+  --input-control-height-small: 28px;
+  --input-control-height-medium: 32px;
+  --input-control-height-large: 36px;
   --input-small-padding: 5px 10px;
-  --input-large-padding: 13px 16px;
-  --input-border-color: var(--color-border-subtle);
+  --input-large-padding: 9px 10px;
+  --input-border-color: var(--color-border-input);
+  --input-hover-border-color: var(--color-border-input);
   --input-font-size: 14px;
-  --input-line-height: 20px;
+  --input-line-height: 16px;
+  --textarea-line-height: 20px;
   --input-color: var(--color-text-primary);
+  --input-label-font-size: 14px;
   --input-label-color: var(--color-text-primary);
   --input-label-offset: 0px;
+  --input-error-font-size: 14px;
   --input-error-offset: 0px;
   --input-focus-border-color: var(--color-focus);
   --input-focus-shadow: 0 0 0 3px var(--color-focus-ring);
   --input-error-focus-shadow: 0 0 0 3px var(--color-focus-ring-error);
+  --input-transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --input-adornment-size: 16px;
   --input-readonly-background: var(--color-surface-secondary);
   --input-readonly-border-style: solid;
   --input-readonly-border-color: var(--color-border-subtle);

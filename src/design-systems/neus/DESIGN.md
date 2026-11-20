@@ -467,6 +467,7 @@ x-neus:
         --button-border-width: 0px
         --button-border-color: transparent
         --button-outlined-border-width: 1px
+        --button-outlined-border-color: currentColor
         --button-shadow: none
         --button-shadow-hover: none
         --button-shadow-active: none
@@ -799,6 +800,7 @@ x-neus:
         --input-filled-label-background: var(--input-filled-background)
         --textarea-radius: min(var(--input-radius), {rounded.default})
         --textarea-filled-radius: var(--textarea-radius)
+        --textarea-line-height: var(--input-line-height)
     link:
       base:
         --link-color: var(--color-primary-text)
@@ -1612,6 +1614,107 @@ x-neus:
         --number-input-divider-color: var(--input-border-color)
         --number-input-disabled-color: var(--color-text-disabled)
         --number-input-transition: background-color 0.2s ease, color 0.2s ease
+    slider:
+      base:
+        --slider-font-family: var(--input-font-family)
+        --slider-gap: "{spacing.step-2}"
+        --slider-text-gap: "{spacing.step-4}"
+        --slider-min-width: var(--input-min-width)
+        --slider-label-color: var(--input-label-color)
+        --slider-label-font-size: var(--input-label-font-size)
+        --slider-label-weight: var(--input-label-weight)
+        --slider-value-color: var(--color-text-secondary)
+        --slider-value-font-size: var(--input-label-font-size)
+        --slider-value-weight: "500"
+        --slider-error-color: var(--input-error-color)
+        --slider-error-font-size: var(--input-error-font-size)
+        --slider-disabled-color: var(--input-disabled-color)
+        --slider-control-height: 24px
+        --slider-track-height: 6px
+        --slider-track-radius: "{rounded.pill}"
+        --slider-track-border-width: 0px
+        --slider-track-border-color: transparent
+        --slider-track-background: var(--color-border-subtle)
+        --slider-track-inner-radius: 0px
+        --slider-track-gap: 0px
+        --slider-fill-background: var(--color-primary)
+        --slider-thumb-width: 20px
+        --slider-thumb-height: 20px
+        --slider-thumb-inset: calc(var(--slider-thumb-width) / 2)
+        --slider-thumb-radius: 50%
+        --slider-thumb-background: var(--color-surface)
+        --slider-thumb-border-width: 2px
+        --slider-thumb-border-color: var(--color-primary)
+        --slider-thumb-shadow: 0 1px 3px rgb(15 23 42 / 0.2)
+        --slider-thumb-hover-shadow: 0 0 0 6px color-mix(in srgb, var(--color-primary) 14%, transparent)
+        --slider-thumb-active-shadow: 0 0 0 8px color-mix(in srgb, var(--color-primary) 18%, transparent)
+        --slider-thumb-focus-width: var(--slider-thumb-width)
+        --slider-thumb-active-width: var(--slider-thumb-width)
+        --slider-focus-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-focus)
+        --slider-step-width: 4px
+        --slider-step-height: 4px
+        --slider-step-radius: 50%
+        --slider-step-offset: 0px
+        --slider-step-color: var(--color-text-secondary)
+        --slider-step-active-color: var(--color-text-on-primary)
+        --slider-stop-size: 0px
+        --slider-stop-inset: 0px
+        --slider-stop-color: var(--slider-step-color)
+        --slider-disabled-opacity: "0.38"
+        --slider-transition: box-shadow 0.2s ease
+    toggle:
+      base:
+        --toggle-font-family: var(--font-body)
+        --toggle-font-size: var(--fs-sm)
+        --toggle-font-weight: "600"
+        --toggle-gap: "{spacing.step-2}"
+        --toggle-height-small: 32px
+        --toggle-height-medium: 40px
+        --toggle-height-large: 48px
+        --toggle-padding-small: 0 12px
+        --toggle-padding-medium: 0 16px
+        --toggle-padding-large: 0 20px
+        --toggle-icon-size-small: 16px
+        --toggle-icon-size-medium: 18px
+        --toggle-icon-size-large: 20px
+        --toggle-radius: "{rounded.pill}"
+        --toggle-border-width: 1px
+        --toggle-border-color: var(--color-border-input)
+        --toggle-background: transparent
+        --toggle-color: var(--color-text-primary)
+        --toggle-shadow: none
+        --toggle-hover-background: var(--color-surface-hover)
+        --toggle-hover-color: var(--toggle-color)
+        --toggle-pressed-background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))
+        --toggle-pressed-hover-background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface))
+        --toggle-pressed-color: var(--color-primary-text)
+        --toggle-pressed-border-color: var(--color-primary)
+        --toggle-pressed-shadow: none
+        --toggle-focus-width: 2px
+        --toggle-focus-color: var(--color-focus)
+        --toggle-focus-offset: 2px
+        --toggle-disabled-opacity: "0.38"
+        --toggle-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease
+        --toggle-group-gap: var(--tabs-contained-gap)
+        --toggle-group-padding: var(--tabs-contained-padding)
+        --toggle-group-border-width: var(--tabs-contained-border-width)
+        --toggle-group-border-color: var(--tabs-contained-border-color)
+        --toggle-group-radius: var(--tabs-contained-radius)
+        --toggle-group-background: var(--tabs-contained-background)
+        --toggle-group-divider-width: 0px
+        --toggle-group-divider-color: transparent
+        --toggle-group-item-radius: var(--tabs-contained-tab-radius)
+        --toggle-group-item-outer-radius: var(--toggle-group-item-radius)
+        --toggle-group-item-border-width: 0px
+        --toggle-group-item-background: var(--tabs-contained-tab-background)
+        --toggle-group-item-color: var(--tabs-contained-color)
+        --toggle-group-item-shadow: none
+        --toggle-group-item-hover-background: var(--tabs-contained-hover-background)
+        --toggle-group-item-hover-color: var(--tabs-contained-selected-color)
+        --toggle-group-item-pressed-background: var(--tabs-contained-selected-background)
+        --toggle-group-item-pressed-color: var(--tabs-contained-selected-color)
+        --toggle-group-item-pressed-border-color: var(--toggle-pressed-border-color)
+        --toggle-group-item-pressed-shadow: var(--tabs-contained-selected-shadow)
 ---
 
 # Neus UI
@@ -1761,6 +1864,10 @@ Pagination numbers the pages in 40px round buttons, as wide as the icon buttons 
 A form field around a control the library does not draw, and a fieldset around several controls, read like the input's own label: the same weight, size and color, the red asterisk for required, help text in secondary ink and the error in the error color. Their text starts at the control's edge, without the input's inset. A fieldset leaves 16px between the controls it groups.
 
 A number input is the input with the number set in tabular figures and two round steppers at the end, minus then plus, in secondary ink with the hover surface. A stepper fades to the disabled ink at the end of the range.
+
+A slider sets a value by dragging along a gray pill track that fills with indigo up to a white knob ringed in indigo, 20px across, with a soft indigo halo while the pointer is on the knob, a little wider while it is pressed. Step marks are 4px dots on the track, secondary ink outside the value and white inside it. The label reads like the input's, with the value in secondary ink at the end of its row; a range has two knobs and fills between them.
+
+A toggle is a button that stays pressed: an outlined pill in 13px semibold ink that turns into a light indigo tint with indigo text and border while on. A toggle group is the contained tabs' tray, a low surface with 4px of padding, where the pressed toggle rises as a white tile.
 
 ## Do's and Don'ts
 

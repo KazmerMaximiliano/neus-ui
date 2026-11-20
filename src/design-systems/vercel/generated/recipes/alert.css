@@ -1,1 +1,18 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --alert-radius: 10px;
+  --alert-padding: 8px 10px;
+  --alert-gap: 8px;
+  --alert-line-height: 20px;
+  --alert-title-weight: 500;
+  --alert-icon-size: 16px;
+  --alert-info-background: var(--color-surface);
+  --alert-info-border-color: var(--color-border-subtle);
+  --alert-info-icon-color: var(--color-text-primary);
+  --alert-success-background: var(--color-surface);
+  --alert-success-border-color: var(--color-border-subtle);
+  --alert-warning-background: var(--color-surface);
+  --alert-warning-border-color: var(--color-border-subtle);
+  --alert-error-background: var(--color-surface);
+  --alert-error-border-color: var(--color-border-subtle);
+}

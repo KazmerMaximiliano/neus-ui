@@ -1,9 +1,20 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --data-table-radius: 6px;
-  --data-table-control-radius: 6px;
-  --data-table-spacing: 6px;
-  --data-table-row-height: 40px;
-  --data-table-header-height: 40px;
+  --data-table-header-background: var(--color-surface);
+  --data-table-hover-background: color-mix(in srgb, #f2f2f2 50%, transparent);
+  --data-table-selection-background: #f2f2f2;
   --data-table-font-size: 14px;
+  --data-table-header-font-size: 14px;
+  --data-table-spacing: 4px;
+  --data-table-radius: 8px;
+  --data-table-control-radius: 6px;
+  --data-table-row-height: 36px;
+  --data-table-header-height: 40px;
+  --data-table-empty-height: 96px;
+  --data-table-empty-title-size: 14px;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --data-table-hover-background: color-mix(in srgb, #1a1a1a 50%, transparent);
+  --data-table-selection-background: #1a1a1a;
 }

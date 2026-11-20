@@ -2,14 +2,17 @@
 [data-design-system="vercel"] {
   --switch-gap: 8px;
   --switch-track-width: 32px;
-  --switch-track-height: 18px;
+  --switch-track-height: 18.4px;
   --switch-track-border-width: 0px;
   --switch-track-background: var(--color-text-placeholder);
   --switch-track-checked-shadow: none;
-  --switch-thumb-size: 14px;
-  --switch-thumb-checked-size: 14px;
+  --switch-thumb-size: 16px;
+  --switch-thumb-checked-size: 16px;
   --switch-thumb-color: var(--color-surface);
   --switch-thumb-hover-color: var(--color-surface);
   --switch-label-font-size: 14px;
+  --switch-focus-offset: 0px;
+  --switch-disabled-opacity: 0.5;
   --switch-duration: 150ms;
+  --switch-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }

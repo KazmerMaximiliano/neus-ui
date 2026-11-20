@@ -1,0 +1,45 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --toggle-font-size: 14px;
+  --toggle-font-weight: 500;
+  --toggle-gap: 4px;
+  --toggle-height-small: 28px;
+  --toggle-height-medium: 32px;
+  --toggle-height-large: 36px;
+  --toggle-padding-small: 0 10px;
+  --toggle-padding-medium: 0 10px;
+  --toggle-padding-large: 0 10px;
+  --toggle-icon-size-small: 14px;
+  --toggle-icon-size-medium: 16px;
+  --toggle-icon-size-large: 16px;
+  --toggle-radius: 10px;
+  --toggle-border-width: 0px;
+  --toggle-hover-background: #f2f2f2;
+  --toggle-pressed-background: #f2f2f2;
+  --toggle-pressed-hover-background: #f2f2f2;
+  --toggle-pressed-color: var(--color-text-primary);
+  --toggle-focus-offset: 0px;
+  --toggle-disabled-opacity: 0.5;
+  --toggle-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --toggle-group-gap: 8px;
+  --toggle-group-padding: 0px;
+  --toggle-group-border-width: 0px;
+  --toggle-group-radius: 10px;
+  --toggle-group-background: transparent;
+  --toggle-group-item-radius: 10px;
+  --toggle-group-item-background: transparent;
+  --toggle-group-item-color: var(--color-text-primary);
+  --toggle-group-item-hover-background: #f2f2f2;
+  --toggle-group-item-hover-color: var(--color-text-primary);
+  --toggle-group-item-pressed-background: #f2f2f2;
+  --toggle-group-item-pressed-color: var(--color-text-primary);
+  --toggle-group-item-pressed-shadow: none;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --toggle-hover-background: #1a1a1a;
+  --toggle-pressed-background: #1a1a1a;
+  --toggle-pressed-hover-background: #1a1a1a;
+  --toggle-group-item-hover-background: #1a1a1a;
+  --toggle-group-item-pressed-background: #1a1a1a;
+}

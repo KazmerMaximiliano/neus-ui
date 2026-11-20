@@ -1,14 +1,22 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --dropdown-padding: 4px 8px 4px 4px;
-  --dropdown-radius: 6px;
+  --dropdown-padding: 3px 8px;
+  --dropdown-gap: 6px;
+  --dropdown-radius: 10px;
   --dropdown-border-color: var(--color-border-subtle);
   --dropdown-hover-border-color: var(--color-text-placeholder);
-  --dropdown-avatar-size: 28px;
+  --dropdown-avatar-size: 24px;
+  --dropdown-avatar-background: #f2f2f2;
+  --dropdown-avatar-color: var(--color-text-secondary);
   --dropdown-caret-size: 16px;
   --dropdown-caret-stroke: 2;
-  --dropdown-caret-color: var(--color-text-secondary);
-  --dropdown-name-color: var(--color-text-primary);
+  --dropdown-caret-color: var(--color-text-primary);
+  --dropdown-name-color: var(--color-text-secondary);
   --dropdown-name-weight: 500;
   --dropdown-name-transform: none;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --dropdown-border-color: var(--color-border);
+  --dropdown-avatar-background: #1a1a1a;
 }

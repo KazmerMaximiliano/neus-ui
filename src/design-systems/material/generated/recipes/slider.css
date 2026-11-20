@@ -1,0 +1,26 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --slider-control-height: 44px;
+  --slider-track-height: 16px;
+  --slider-track-inner-radius: 2px;
+  --slider-track-gap: 8px;
+  --slider-track-background: var(--color-secondary-container);
+  --slider-thumb-width: 4px;
+  --slider-thumb-height: 44px;
+  --slider-thumb-inset: 8px;
+  --slider-thumb-radius: 3em;
+  --slider-thumb-border-width: 0px;
+  --slider-thumb-background: var(--color-primary);
+  --slider-thumb-shadow: 0 0 #0000;
+  --slider-thumb-hover-shadow: 0 0 #0000;
+  --slider-thumb-active-shadow: 0 0 #0000;
+  --slider-thumb-focus-width: 2px;
+  --slider-thumb-active-width: 2px;
+  --slider-focus-shadow: 0 0 0 2px var(--color-surface), 0 0 0 5px var(--color-focus);
+  --slider-step-color: var(--color-on-secondary-container);
+  --slider-step-active-color: var(--color-text-on-primary);
+  --slider-stop-size: 4px;
+  --slider-stop-inset: 8px;
+  --slider-stop-color: var(--color-primary);
+  --slider-transition: width 100ms cubic-bezier(0.2, 0, 0, 1);
+}

@@ -1,0 +1,16 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --slider-track-height: 12px;
+  --slider-track-radius: 4px;
+  --slider-track-border-width: 3px;
+  --slider-track-border-color: var(--color-text-primary);
+  --slider-track-background: var(--color-surface);
+  --slider-thumb-border-width: 3px;
+  --slider-thumb-border-color: var(--color-text-primary);
+  --slider-thumb-shadow: 2px 2px 0 var(--color-text-primary);
+  --slider-thumb-hover-shadow: 0 0 #0000;
+  --slider-disabled-opacity: 0.5;
+  --slider-step-radius: 0px;
+  --slider-step-color: var(--color-text-primary);
+  --slider-step-active-color: var(--color-text-on-primary);
+}

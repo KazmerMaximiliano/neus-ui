@@ -14,7 +14,7 @@ const SYSTEMS = [
   { id: "carbon", underline: false },
   { id: "material", underline: true },
   { id: "neobrutalism", underline: true },
-  { id: "vercel", underline: false },
+  { id: "vercel", underline: true },
 ] as const;
 
 describe.each(["light", "dark"] as const)("Link designs in %s mode", (scheme) => {

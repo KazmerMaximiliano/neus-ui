@@ -96,6 +96,13 @@ describe("document validation", () => {
     expect(() => parseDesignDocument(markdown(value), "apple")).toThrow(/CSS value/);
   });
 
+  it("quotes every token value that holds a hash, which YAML would read as a comment", () => {
+    for (const id of SYSTEM_IDS) {
+      const unquoted = source(id).split("\n").filter((line) => /^\s+--[\w-]+: [^"'\s][^\n]* #/.test(line));
+      expect(unquoted, id).toEqual([]);
+    }
+  });
+
   it("reserves the shared foundations for Neus", () => {
     const value = document();
     value["x-neus"].foundations = { base: {} };

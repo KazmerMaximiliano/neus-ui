@@ -11,8 +11,6 @@ reusable public API and should reuse the existing implementation where appropria
 
 | Priority | Component family           | Category     | Intended scope and current gap                                                                                                            |
 | -------- | -------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| P2       | Slider / RangeSlider       | Forms        | Single-value or interval selection with bounds, steps and keyboard controls.                                                              |
-| P2       | ToggleGroup / Toggle       | Forms        | Pressed-state buttons and single or multiple selection for compact controls.                                                              |
 | P2       | Drawer / Sheet             | Overlays     | General-purpose edge panels with focus management; Sidebar's mobile drawer is tied to navigation.                                         |
 | P2       | Chip / Tag                 | Data display | Standalone removable or selectable tokens; MultiSelect currently owns its selected tags, while Badge displays status.                     |
 | P2       | Separator                  | Layout       | Horizontal or vertical dividers with decorative and semantic modes.                                                                       |
