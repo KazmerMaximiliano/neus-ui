@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 61 reusable UI components and public sections
+- 65 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (61 total)
+### Implemented Components and Public Subcomponents (65 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -223,9 +223,13 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | ModalHeader      | src/components/Modal/components/ModalHeader/            | STABLE | Dialog title and header composition                                                                                     |
 | ModalContent     | src/components/Modal/components/ModalContent/           | STABLE | Dialog body composition                                                                                                 |
 | ModalFooter      | src/components/Modal/components/ModalFooter/            | STABLE | Dialog action composition                                                                                               |
+| Drawer           | src/components/Drawer/                                  | STABLE | Modal dialog against an edge: start/end/top/bottom, slides, wraps Tab, backdrop press, keeps content mounted            |
+| DrawerHeader     | src/components/Drawer/components/DrawerHeader/          | STABLE | Title row that names the drawer                                                                                         |
+| DrawerContent    | src/components/Drawer/components/DrawerContent/         | STABLE | Body that scrolls between header and footer                                                                             |
+| DrawerFooter     | src/components/Drawer/components/DrawerFooter/          | STABLE | Wrapping row of actions                                                                                                 |
 | MultiSelect      | src/components/MultiSelect/                             | STABLE | Multiple selection                                                                                                      |
 | Select           | src/components/Select/                                  | STABLE | Single selection                                                                                                        |
-| Sidebar          | src/components/Sidebar/                                 | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer, href items with linkComponent                     |
+| Sidebar          | src/components/Sidebar/                                 | STABLE | Six token recipes, transparent curves, tablet rail and a Drawer on phones, href items with linkComponent               |
 | TimeInput        | src/components/TimeInput/                               | STABLE | Clock picker field                                                                                                      |
 | WeekCalendar     | src/components/WeekCalendar/                            | STABLE | Weekly view, event categories, navigation                                                                               |
 | WeekCalendarRow  | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler                                                                             |

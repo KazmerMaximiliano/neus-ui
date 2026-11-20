@@ -644,6 +644,17 @@ x-neus:
         --toggle-pressed-color: var(--color-text-on-primary)
         --toggle-pressed-border-color: var(--color-text-primary)
         --toggle-focus-offset: 4px
+    drawer:
+      base:
+        --drawer-width: 384px
+        --drawer-viewport-margin: 25%
+        --drawer-radius: 0px
+        --drawer-sheet-radius: 4px
+        --drawer-shadow: none
+        --drawer-header-padding: 16px
+        --drawer-content-padding: 16px
+        --drawer-footer-padding: 16px
+        --drawer-easing: cubic-bezier(0.4, 0, 0.2, 1)
 ---
 
 # Neobrutalism
@@ -779,6 +790,8 @@ A number input ends in square minus and plus buttons in ink, split by a 3px ink 
 A slider is a 12px track with a 3px ink outline and 4px corners, filled with the primary color up to a white circle knob in the same ink outline with a hard 2px shadow ([neobrutalism slider source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/slider.tsx), consulted 2026-11-19, with the 3px borders and offset shadows of this system). Step marks are 4px ink squares inside the track, in the ink that reads on the primary fill inside the value, a local decision.
 
 A toggle is a white button with a 3px ink border, 4px corners, bold type and a hard 2px shadow; pressed, it fills with the primary color and drops the shadow, as if pushed in ([neobrutalism toggle source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/toggle.tsx), consulted 2026-11-19, where the pressed toggle fills with the main color). A toggle group is the contained tabs' tray, with the pressed toggle filled in primary.
+
+A drawer follows the neobrutalism sheet ([neobrutalism sheet](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/sheet.tsx), consulted 2026-11-20): a square slab on the surface color, three quarters of the screen wide up to 384px, with no shadow, so the ink border on its inner edge alone sets it off from the page. The header, body and footer have 16px of padding, the title is the modal's extra-bold ink, and the panel slides in 300ms on an ease-in-out curve; the library opens in 500ms and closes in 300ms, and one duration serves both here. The 3px border, where the library draws 2px, the 2px ink rules under the header and above the footer, the ink backdrop at 60% instead of black at 80%, and the 16px gap between footer actions follow this system's modal: local decisions. The library's swipe drawer ([neobrutalism drawer](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/drawer.tsx), consulted 2026-11-20) rounds its edge to 5px; a drawer from the top or bottom takes those corners at this system's 4px, and a side drawer keeps the sheet's square edge.
 
 ## Do's and Don'ts
 

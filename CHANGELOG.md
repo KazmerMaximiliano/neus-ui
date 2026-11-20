@@ -8,6 +8,27 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.13.0] - Unreleased
+
+### Added
+
+- `Drawer`, with `DrawerHeader`, `DrawerContent` and `DrawerFooter`: a modal `<dialog>` panel
+  that slides in from the start, end, top or bottom edge. Escape and a press that starts and
+  ends on the backdrop request `onClose`, Tab wraps inside it, focus returns to the opener,
+  the page behind does not scroll, and the content stays mounted while it is closed. New
+  `drawer` recipe family in the six systems; in Carbon the footer's actions fill the row and an
+  outlined action drops its outline there.
+- `neus-ui lint` suggests Drawer for a raw `<dialog>` used as an edge panel; the neus-design and
+  neus-audit skills and the specimen know it.
+
+### Changed
+
+- In Carbon, an outlined action in a Modal's full-bleed footer drops its outline, which doubled
+  the modal's edges; new token `--modal-footer-outlined-border-width`, which the drawer's footer
+  follows.
+- `Sidebar` opens its phone menu in a Drawer. Its classes, tokens, props, focus handling and
+  scroll locking stay the same; the dialog also carries Drawer's classes.
+
 ## [2.12.0] - Unreleased
 
 ### Added
@@ -507,6 +528,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...HEAD
+[2.13.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.12.0...v2.13.0
 [2.12.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.11.0...v2.12.0
 [2.11.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.9.0...v2.10.0

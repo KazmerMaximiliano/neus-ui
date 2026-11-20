@@ -224,29 +224,20 @@
   outline-offset: var(--sidebar-control-focus-offset);
 }
 
+/* The mobile menu is a Drawer with the sidebar's own panel inside: the drawer adds no surface,
+   corners or motion of its own, and the panel draws the look. */
 .sidebar__dialog {
-  position: fixed;
-  inset: 0 auto 0 0;
-  box-sizing: border-box;
-  width: min(
-    var(--sidebar-mobile-width),
-    calc(100vw - var(--sidebar-floating-offset))
-  );
-  max-width: none;
-  height: 100vh;
-  height: 100dvh;
-  max-height: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  --drawer-width: var(--sidebar-mobile-width);
+  --drawer-viewport-margin: var(--sidebar-floating-offset);
+  --drawer-background: transparent;
+  --drawer-border-width: 0px;
+  --drawer-radius: 0px;
+  --drawer-shadow: none;
+  --drawer-backdrop: var(--sidebar-backdrop-background);
+  --drawer-duration: 0s;
   color: inherit;
   font: inherit;
   overflow: visible;
-}
-
-.sidebar__dialog::backdrop {
-  background: var(--sidebar-backdrop-background);
 }
 
 html.sidebar-scroll-locked,

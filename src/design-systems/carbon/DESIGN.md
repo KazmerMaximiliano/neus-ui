@@ -351,6 +351,7 @@ x-neus:
         --modal-footer-gap: "0"
         --modal-footer-justify: stretch
         --modal-footer-item-flex: 1 1 0
+        --modal-footer-outlined-border-width: 0px
     overlay:
       base:
         --overlay-background: var(--color-surface-secondary)
@@ -726,6 +727,22 @@ x-neus:
         --toggle-pressed-color: "#161616"
         --toggle-pressed-border-color: "#f4f4f4"
         --toggle-group-divider-color: "#393939"
+    drawer:
+      base:
+        --drawer-width: 480px
+        --drawer-viewport-margin: 0px
+        --drawer-border-width: 1px
+        --drawer-border-color: "#c6c6c6"
+        --drawer-shadow: none
+        --drawer-header-padding: 16px
+        --drawer-title-line-height: 28px
+        --drawer-content-padding: 16px
+        --drawer-divider-width: 1px
+        --drawer-divider-color: var(--drawer-border-color)
+        --drawer-duration: 150ms
+        --drawer-easing: cubic-bezier(0.2, 0, 0.38, 0.9)
+      dark:
+        --drawer-border-color: "#525252"
 ---
 
 # Carbon
@@ -870,6 +887,10 @@ A number input ends in square minus and plus controls in primary icon color with
 A slider is a thin 2px track in subtle gray (#e0e0e0, #393939 in dark mode) filled in ink (#161616, #f4f4f4) up to a 14px ink thumb that grows to 20px under the pointer, with the label above in 12px secondary type and the value in 14px primary type ([Carbon slider style](https://carbondesignsystem.com/components/slider/style/), consulted 2026-11-19). The style page gives the track as 4px while the component code draws 2px; the library follows the code. Focus adds a 1px gap and a 2px blue ring around the thumb, an approximation of the code's inset ring. Carbon's slider has no step marks; the 2px by 8px ticks across the track, strong border gray outside the value and ink inside it, are a local decision.
 
 A toggle group is the content switcher: segments 32, 40 or 48px tall inside a 1px ink outline with 4px corners, split by 1px subtle dividers, in 14px regular type in secondary gray; the selected segment fills with ink and white text, and hovering one gives it #e8e8e8 (#333333 in dark mode) ([Carbon content switcher style](https://carbondesignsystem.com/components/content-switcher/style/), consulted 2026-11-19). The dividers run the full height instead of Carbon's 16px. Carbon has no toggle button of its own; a toggle on its own is one segment of the switcher, a local mapping.
+
+A modal ends in Carbon's action set: full-bleed buttons that share the bottom row with no gap or padding around them. An outlined action drops its outline there and reads as the action set's ghost button, so its edges do not double the modal's ([Carbon modal usage](https://carbondesignsystem.com/components/modal/usage/), consulted 2026-11-20).
+
+A drawer is Carbon's side panel from IBM Products. It is a 480px (medium) panel in the layer color (#f4f4f4, #262626 in dark mode) with square corners, as tall as the screen. A 1px subtle-border rule (#c6c6c6, #525252) runs along the edge that faces the page, and there is no shadow, since the overlay already sets the panel apart. The title is heading 03 (20px over 28px, regular weight) in a 16px header. The body has 16px on every side, and the actions are full-bleed buttons under a matching rule; an outlined action drops its outline there and reads as the action set's ghost button, so no line doubles the rule or the panel's edge. On screens too narrow for it, the panel takes the full width. It slides in over 150ms on the productive standard curve. Sources: [side panel Sass](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_side-panel.scss), [its sizes](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_side-panel-variables.scss), [animations](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_animations.scss) and [defaults](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/SidePanel/SidePanel.tsx), [action set Sass](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/ActionSet/_action-set.scss), [theme tokens](https://unpkg.com/@carbon/themes/scss/generated/_themes.scss) and [motion tokens](https://github.com/carbon-design-system/carbon/blob/main/packages/motion/tokens/motion.tokens.json), all consulted 2026-11-20. Carbon core has no side panel and no top or bottom sheet, so those drawers reuse the side values. Some parts are local decisions. Carbon places the panel 48px down, below the UI shell header; here it covers the full height. Carbon slides the panel only 320px while fading it, with separate entrance and exit curves; here it slides its own width on one curve. Carbon shows the header rule once the content scrolls under the title and lets the title's padding space the body; here the rule is always drawn, so the body keeps its own 16px below it.
 
 ## Do's and Don'ts
 

@@ -83,7 +83,9 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
   An icon-only action whose name is not enough (a limit, a consequence) gets a
   `Tooltip`; the IconButton keeps its `label`.
 - Filters for the list go in a `Popover` opened by an outlined "Filters" Button
-  beside the title; close it from an "Apply" button with a controlled `open`. A price
+  beside the title; close it from an "Apply" button with a controlled `open`. When
+  they are more than a few fields, open them in a `Drawer` from the end instead,
+  with the actions in its `DrawerFooter`; on phones a `side="bottom"` drawer fits. A price
   or size span inside it is a `Slider` with `range`. Switching the list between views
   (list, grid, map) is a `ToggleGroup` beside the title.
 - Pagination is controlled: wire `onPaginationChange` to the data source. A

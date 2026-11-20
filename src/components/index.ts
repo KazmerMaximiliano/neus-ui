@@ -38,6 +38,14 @@ export type {
 } from "./DataTable";
 export { DateInput } from "./DateInput";
 export type { DateInputLabels, DateInputProps } from "./DateInput";
+export { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from "./Drawer";
+export type {
+  DrawerContentProps,
+  DrawerFooterProps,
+  DrawerHeaderProps,
+  DrawerProps,
+  DrawerSide,
+} from "./Drawer";
 export { Dropdown } from "./Dropdown";
 export type { DropdownItem, DropdownProps } from "./Dropdown";
 export { Fieldset } from "./Fieldset";

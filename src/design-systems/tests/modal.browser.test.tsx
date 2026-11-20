@@ -88,4 +88,16 @@ describe("Modal behavior in the browser", () => {
     expect(remove.right).toBeCloseTo(dialog.right, 0);
     expect(cancel.right).toBeCloseTo(remove.left, 0);
   });
+
+  it("drops the outline of an outlined action in Carbon's full-bleed footer, and keeps it elsewhere", async () => {
+    const user = userEvent.setup();
+    render(<Example system="carbon" scheme="light" />);
+    await user.click(screen.getByRole("button", { name: "Open" }));
+    expect(getComputedStyle(screen.getByRole("button", { name: "Cancel" })).borderTopWidth).toBe("0px");
+    cleanup();
+
+    render(<Example system="neus" scheme="light" />);
+    await user.click(screen.getByRole("button", { name: "Open" }));
+    expect(getComputedStyle(screen.getByRole("button", { name: "Cancel" })).borderTopWidth).toBe("1px");
+  });
 });
