@@ -23,6 +23,8 @@ export type {
 } from "./Card";
 export { Checkbox } from "./Checkbox";
 export type { CheckboxProps } from "./Checkbox";
+export { Chip } from "./Chip";
+export type { ChipLabels, ChipProps, ChipSize } from "./Chip";
 export { Clock } from "./Clock";
 export type { ClockLabels, ClockProps, TimeValue } from "./Clock";
 export { Combobox } from "./Combobox";
@@ -66,6 +68,8 @@ export { InteractiveMap } from "./InteractiveMap";
 export type { InteractiveMapLabels, InteractiveMapProps, LocationData, MapCoordinates } from "./InteractiveMap";
 export { Link } from "./Link";
 export type { LinkProps } from "./Link";
+export { List, ListItem } from "./List";
+export type { ListItemProps, ListProps } from "./List";
 export { MediaPlaceholder } from "./MediaPlaceholder";
 export type { MediaPlaceholderProps } from "./MediaPlaceholder";
 export { Menu } from "./Menu";

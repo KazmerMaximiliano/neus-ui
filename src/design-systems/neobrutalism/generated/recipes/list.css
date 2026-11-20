@@ -1,0 +1,21 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --list-radius: 4px;
+  --list-background: var(--color-surface);
+  --list-border-width: 3px;
+  --list-border-color: var(--color-text-primary);
+  --list-divider-width: 2px;
+  --list-divider-color: var(--color-text-primary);
+  --list-item-min-height: 0px;
+  --list-item-padding: 14px 16px;
+  --list-item-gap: 14px;
+  --list-body-gap: 4px;
+  --list-leading-size: 20px;
+  --list-leading-color: var(--color-text-primary);
+  --list-title-weight: 700;
+  --list-title-line-height: 1.375;
+  --list-description-color: var(--color-text-primary);
+  --list-description-size: 14px;
+  --list-trailing-color: var(--color-text-primary);
+  --list-trailing-size: 14px;
+}

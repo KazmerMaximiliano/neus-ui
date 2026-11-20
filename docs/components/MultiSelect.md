@@ -23,7 +23,7 @@ export const Example = () => {
 ## Behavior and accessibility
 
 Values and callbacks are string arrays; each selected value creates an indexed hidden input.
-Selected tags can be removed unless disabled. The shared listbox supports search, keyboard
+Selected values are [Chips](./Chip.md) in the select's tag look: each can be removed unless the field is disabled. The shared listbox supports search, keyboard
 navigation, aria-selected and multi-selection. Empty option values are ignored.
 `viewSearchBar` defaults to true.
 

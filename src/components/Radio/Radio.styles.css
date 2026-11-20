@@ -11,6 +11,11 @@
   cursor: pointer;
 }
 
+/* Without a visible label the circle stands alone: no empty column or gap after it. */
+.radio:not(:has(> .radio__label)) {
+  grid-template-columns: auto;
+}
+
 .radio__input {
   position: absolute;
   width: 1px;

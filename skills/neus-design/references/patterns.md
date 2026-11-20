@@ -85,7 +85,12 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
 - Filters for the list go in a `Popover` opened by an outlined "Filters" Button
   beside the title; close it from an "Apply" button with a controlled `open`. When
   they are more than a few fields, open them in a `Drawer` from the end instead,
-  with the actions in its `DrawerFooter`; on phones a `side="bottom"` drawer fits. A price
+  with the actions in its `DrawerFooter`; on phones a `side="bottom"` drawer fits.
+  Show the filters in force as removable `Chip`s above the list, and quick filters
+  as selectable chips.
+- A settings page or a detail panel lists its rows in a `List` with `divided` inside
+  a Card: an icon `leading`, the setting's name as `title`, its effect as
+  `description` and the control (a Switch, a Badge, a Button) `trailing`. A price
   or size span inside it is a `Slider` with `range`. Switching the list between views
   (list, grid, map) is a `ToggleGroup` beside the title.
 - Pagination is controlled: wire `onPaginationChange` to the data source. A

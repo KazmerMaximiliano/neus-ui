@@ -16,4 +16,13 @@
   --select-tag-border-color: transparent;
   --select-tag-font-size: var(--fs-xs);
   --select-tag-remove-color: var(--color-tag-remove);
+  --select-tag-inner-gap: 2px;
+  --select-tag-line-height: 1.4;
+  --select-tag-remove-size: 20px;
+  --select-tag-remove-icon-size: 14px;
+  --select-tag-remove-radius: 50%;
+  --select-tag-remove-hover-background: var(--color-surface-hover);
+  --select-tag-focus-width: 2px;
+  --select-tag-focus-color: var(--color-focus);
+  --select-tag-focus-offset: 1px;
 }

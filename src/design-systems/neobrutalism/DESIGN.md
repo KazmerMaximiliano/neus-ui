@@ -655,6 +655,43 @@ x-neus:
         --drawer-content-padding: 16px
         --drawer-footer-padding: 16px
         --drawer-easing: cubic-bezier(0.4, 0, 0.2, 1)
+    chip:
+      base:
+        --chip-font-weight: "700"
+        --chip-radius: 4px
+        --chip-border-width: 2px
+        --chip-border-color: var(--color-text-primary)
+        --chip-background: var(--color-surface)
+        --chip-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface))
+        --chip-selected-background: var(--color-primary)
+        --chip-selected-hover-background: var(--color-primary)
+        --chip-selected-color: var(--color-text-on-primary)
+        --chip-selected-border-color: var(--color-text-primary)
+        --chip-remove-radius: 2px
+        --chip-remove-color: currentColor
+        --chip-remove-hover-background: color-mix(in srgb, currentColor 15%, transparent)
+        --chip-focus-offset: 4px
+        --chip-disabled-opacity: "0.5"
+    list:
+      base:
+        --list-radius: 4px
+        --list-background: var(--color-surface)
+        --list-border-width: 3px
+        --list-border-color: var(--color-text-primary)
+        --list-divider-width: 2px
+        --list-divider-color: var(--color-text-primary)
+        --list-item-min-height: 0px
+        --list-item-padding: 14px 16px
+        --list-item-gap: 14px
+        --list-body-gap: 4px
+        --list-leading-size: 20px
+        --list-leading-color: var(--color-text-primary)
+        --list-title-weight: "700"
+        --list-title-line-height: "1.375"
+        --list-description-color: var(--color-text-primary)
+        --list-description-size: 14px
+        --list-trailing-color: var(--color-text-primary)
+        --list-trailing-size: 14px
 ---
 
 # Neobrutalism
@@ -792,6 +829,10 @@ A slider is a 12px track with a 3px ink outline and 4px corners, filled with the
 A toggle is a white button with a 3px ink border, 4px corners, bold type and a hard 2px shadow; pressed, it fills with the primary color and drops the shadow, as if pushed in ([neobrutalism toggle source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/toggle.tsx), consulted 2026-11-19, where the pressed toggle fills with the main color). A toggle group is the contained tabs' tray, with the pressed toggle filled in primary.
 
 A drawer follows the neobrutalism sheet ([neobrutalism sheet](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/sheet.tsx), consulted 2026-11-20): a square slab on the surface color, three quarters of the screen wide up to 384px, with no shadow, so the ink border on its inner edge alone sets it off from the page. The header, body and footer have 16px of padding, the title is the modal's extra-bold ink, and the panel slides in 300ms on an ease-in-out curve; the library opens in 500ms and closes in 300ms, and one duration serves both here. The 3px border, where the library draws 2px, the 2px ink rules under the header and above the footer, the ink backdrop at 60% instead of black at 80%, and the 16px gap between footer actions follow this system's modal: local decisions. The library's swipe drawer ([neobrutalism drawer](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/drawer.tsx), consulted 2026-11-20) rounds its edge to 5px; a drawer from the top or bottom takes those corners at this system's 4px, and a side drawer keeps the sheet's square edge.
+
+The neobrutalism components have no chip; their multi-select combobox example lists the chosen labels as text in the trigger. A chip borrows from two of their components. Their Badge is a 2px ink frame around 12px text, with 10px of side padding and 12px icons, which gives a 24px height. Their Toggle fills with the main color when pressed ([neobrutalism badge](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/badge.tsx), [toggle](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/toggle.tsx) and [combobox](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/combobox.tsx), consulted 2026-11-20). Here a chip is a page-colored tile with the system's 4px corners and a 2px ink border, like the MultiSelect tag, with bold ink text. Hovering tints it with yellow at 35%. A selected chip fills with yellow and keeps its ink border and dark text. The remove button is a cross in the chip's text color with nearly square 2px corners and a faint tint of that color under the pointer. The keyboard outline sits 4px outside the chip, as on toggles and checkboxes, and a disabled chip drops to half opacity. Chips cast no hard shadow, so a row of chips stays calm. The missing shadow and the bold weight are local decisions.
+
+A list follows the neobrutalism Item ([neobrutalism item](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/item.tsx), consulted 2026-11-20). Rows have 14px by 16px of padding and 14px between a 20px ink icon, the text and the trailing content. Titles are 14px on a 1.375 line, and descriptions are 14px in ink, not a muted gray, 4px below. The library frames each item with a 2px border and spaces items 16px apart. This system frames the group once instead, as its cards do: a page-colored panel with a 3px ink border and 4px corners. In a divided list, rows are separated by 2px ink rules, as in the modal. Titles are bold, following the system's heavy short labels, where the library uses its 500 base weight. The single frame, the bold titles and the 2px rules are local decisions.
 
 ## Do's and Don'ts
 

@@ -708,6 +708,47 @@ x-neus:
         --drawer-footer-padding: 16px 24px 24px
         --drawer-footer-justify: flex-start
         --drawer-duration: 275ms
+    chip:
+      base:
+        --chip-height-small: 24px
+        --chip-height-medium: 32px
+        --chip-padding-small: 8px
+        --chip-padding-medium: 16px
+        --chip-gap: 8px
+        --chip-radius: 8px
+        --chip-font-size-small: 12px
+        --chip-font-size-medium: 14px
+        --chip-font-weight: "500"
+        --chip-border-width: 1px
+        --chip-border-color: var(--color-border-input-hover)
+        --chip-background: transparent
+        --chip-color: var(--color-text-secondary)
+        --chip-icon-size: 18px
+        --chip-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent)
+        --chip-selected-background: var(--color-secondary-container)
+        --chip-selected-hover-background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container))
+        --chip-selected-color: var(--color-on-secondary-container)
+        --chip-selected-border-color: transparent
+        --chip-remove-size-small: 20px
+        --chip-remove-size-medium: 24px
+        --chip-remove-icon-size: 18px
+        --chip-remove-color: currentColor
+        --chip-remove-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent)
+        --chip-focus-width: 3px
+        --chip-focus-offset: 2px
+    list:
+      base:
+        --list-gap: 0px
+        --list-padding: 8px 0
+        --list-divider-inset: 16px
+        --list-item-padding: 12px 16px
+        --list-item-gap: 16px
+        --list-title-size: 16px
+        --list-title-weight: "400"
+        --list-title-line-height: 24px
+        --list-description-size: 14px
+        --list-description-line-height: 20px
+        --list-trailing-size: 11px
 ---
 
 # Material
@@ -894,6 +935,10 @@ A slider follows the Material 3 expressive slider in its extra-small size: a 16p
 A toggle is a filled toggle button: 40px tall with full corners, a high surface container and on-surface-variant label at rest, primary with an on-primary label when selected, label-large type ([icon button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-icon-button-filled.scss), consulted 2026-11-19); the shape change on selection is left out. A toggle group is the outlined segmented button of the contained tabs: a 1px outline with full outer corners, dividers between segments, and the selected one in secondary container ([segmented button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-outlined-segmented-button.scss), consulted 2026-11-19), without the check mark.
 
 A drawer is a modal side sheet: a 256px panel on the low surface container (#f7f2fa, #1d1b20 in dark mode) at level 1 elevation, as tall as the screen, with 16px corners on the edge that faces the page, over the dialog's 32% black scrim. Its headline is title large (22px over 28px, regular weight) with 24px of padding and 12px before the close button. The body keeps the dialog's 24px sides, and actions sit at the start with 16px above and 24px below. Top and bottom drawers are bottom sheets, at most 640px wide and centered, with 28px corners. The panel slides in over 275ms on the emphasized curve. Sources: [side sheet tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-sheet-side.scss), [bottom sheet tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-sheet-bottom.scss), [scrim tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-scrim.scss), [MDC Android side sheet](https://github.com/material-components/material-components-android/blob/master/docs/components/SideSheet.md) with [its tokens](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/sidesheet/res/values/tokens.xml) and [enter animation](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/sidesheet/res/anim/m3_side_sheet_enter_from_right.xml), [MDC Android bottom sheet dimensions](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/bottomsheet/res/values/dimens.xml) and [Compose SheetDefaults](https://github.com/androidx/androidx/blob/androidx-main/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/SheetDefaults.kt), all consulted 2026-11-20. The 12px gap and the action padding come from the [side sheet specs](https://m3.material.io/components/side-sheets/specs) (consulted 2026-11-20). That page draws its tables with JavaScript, so these values were read from two independent transcriptions of it. The specs allow up to 400px, but the 256px token width is used. Some parts are local decisions: the drawer is not dragged, so it has no drag handle; the headline keeps the panel's text color instead of on-surface-variant; and the optional divider above the actions is not drawn.
+
+A chip is the Material 3 filter and input chip: 32px tall with 8px corners, a 1px outline (#79747e, #938f99 in dark mode), a transparent fill and a label-large label (14px, medium) in on-surface-variant, with 18px icons 8px from the label and 16px of padding at each end. Hovering adds an 8% on-surface-variant layer. A selected chip drops its outline and fills with the secondary container in on-secondary-container text, with a check in place of its icon. The remove button is an 18px X in a round 24px target with the same hover layer, and focus draws a 3px ring 2px outside it ([filter chip](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-filter-chip.scss) and [input chip tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-input-chip.scss), [state](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-sys-state.scss) and [typescale tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-sys-typescale.scss), consulted 2026-11-20). Local decisions: M3 has a single size, so the small chip is 24px with 8px of padding, 12px text and a 20px remove target; the outline keeps the shipped outline role, matching MultiSelect's tags; the focus ring keeps this system's primary focus color; and both ends keep 16px of padding where M3 trims the side next to an icon to 8px.
+
+A list is the Material 3 list: rows at least 56px tall with 12px by 16px of padding and 16px between the leading element, the text and the trailing element, a 24px leading icon in on-surface-variant, a body-large title (16px over 24px, regular) over a body-medium supporting line (14px over 20px) in on-surface-variant, and label-small trailing text (11px). The list has 8px of padding above and below, and a divided list separates rows with outline-variant rules that start 16px in ([list tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-list.scss), [item layout](https://github.com/material-components/material-web/blob/main/labs/item/internal/_item.scss) and [divider tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-divider.scss), consulted 2026-11-20). The list stays transparent instead of painting the surface color, so it sits on a card without a lighter band, and a two-line row grows with its text instead of taking M3's fixed 72px: local decisions.
 
 ## Do's and Don'ts
 

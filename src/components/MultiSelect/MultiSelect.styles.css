@@ -1,46 +1,33 @@
+/* Selected values are Chips in the select's tag look: the select tokens drive the chip's. */
 .multiselect__tag {
+  --chip-height-small: 0px;
+  --chip-padding-small: 0px;
+  --chip-padding-block: 0px;
+  --chip-gap: var(--select-tag-inner-gap);
+  --chip-radius: var(--select-tag-radius);
+  --chip-border-width: var(--select-tag-border-width);
+  --chip-border-color: var(--select-tag-border-color);
+  --chip-background: var(--select-tag-background);
+  --chip-color: var(--select-tag-color);
+  --chip-font-family: var(--input-font-family);
+  --chip-font-size-small: var(--select-tag-font-size);
+  --chip-font-weight: var(--input-font-weight);
+  --chip-line-height: var(--select-tag-line-height);
+  --chip-remove-size-small: var(--select-tag-remove-size);
+  --chip-remove-icon-size: var(--select-tag-remove-icon-size);
+  --chip-remove-inset: 0px;
+  --chip-remove-radius: var(--select-tag-remove-radius);
+  --chip-remove-color: var(--select-tag-remove-color);
+  --chip-remove-hover-background: var(--select-tag-remove-hover-background);
+  --chip-focus-width: var(--select-tag-focus-width);
+  --chip-focus-color: var(--select-tag-focus-color);
+  --chip-focus-offset: var(--select-tag-focus-offset);
+  --chip-disabled-opacity: 1;
   position: relative;
   z-index: 1;
   margin-block: var(--select-tag-margin-block);
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  max-width: 100%;
+  /* The select's padding token is a four-side shorthand, so it applies as is. */
   padding: var(--select-tag-padding);
-  border: var(--select-tag-border-width) solid var(--select-tag-border-color);
-  border-radius: var(--select-tag-radius);
-  background-color: var(--select-tag-background);
-  color: var(--select-tag-color);
-  font-size: var(--select-tag-font-size);
-  line-height: 1.4;
-}
-
-.multiselect__tag-remove {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--select-tag-remove-color);
-  cursor: pointer;
-}
-
-.multiselect__tag-remove svg {
-  width: 14px;
-  height: 14px;
-}
-
-.multiselect__tag-remove:hover {
-  background-color: var(--color-surface-hover);
-}
-
-.multiselect__tag-remove:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 1px;
 }
 
 .multiselect .select__option .checkbox {

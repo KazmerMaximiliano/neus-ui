@@ -539,6 +539,43 @@ x-neus:
         --drawer-footer-padding: 16px
       dark:
         --drawer-backdrop: rgba(0, 0, 0, 0.5)
+    chip:
+      base:
+        --chip-font-size-medium: 14px
+        --chip-font-weight: "400"
+        --chip-radius: 6px
+        --chip-border-width: 0px
+        --chip-background: rgb(118 118 128 / 0.12)
+        --chip-icon-size: 1em
+        --chip-hover-background: rgb(118 118 128 / 0.2)
+        --chip-selected-background: var(--color-primary)
+        --chip-selected-hover-background: var(--color-primary)
+        --chip-selected-color: var(--color-text-on-primary)
+        --chip-remove-color: color-mix(in srgb, currentColor 60%, transparent)
+        --chip-remove-hover-background: color-mix(in srgb, currentColor 12%, transparent)
+      dark:
+        --chip-background: rgb(118 118 128 / 0.24)
+        --chip-hover-background: rgb(118 118 128 / 0.32)
+    list:
+      base:
+        --list-radius: 26px
+        --list-background: var(--color-surface-secondary)
+        --list-divider-color: "#c6c6c8"
+        --list-divider-inset: 16px
+        --list-divider-end-inset: 16px
+        --list-item-min-height: 52px
+        --list-item-padding: 12px 16px
+        --list-item-gap: 20px
+        --list-leading-size: 20px
+        --list-leading-color: var(--color-primary)
+        --list-title-size: 17px
+        --list-title-weight: "400"
+        --list-title-line-height: "1.29412"
+        --list-description-size: 15px
+        --list-description-line-height: "1.33333"
+        --list-trailing-size: 17px
+      dark:
+        --list-divider-color: "#38383a"
 ---
 
 # Apple
@@ -682,6 +719,10 @@ A slider follows the illustrations of the HIG sliders page: a 6px track with ful
 A toggle is a button that changes its background while on, as the guidelines describe ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-19): a capsule of translucent gray that fills with the accent color and white text when pressed. A toggle group is the segmented control of the contained tabs, which also allows several selected segments as on macOS ([HIG segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls), consulted 2026-11-19); the sizes are local decisions.
 
 A drawer follows the iOS sheet ([HIG sheets](https://developer.apple.com/design/human-interface-guidelines/sheets), consulted 2026-11-20): an opaque panel on the main surface, white in light mode and #1c1c1e in dark mode rather than the modal's secondary gray, with 37px corners on the edge that faces the page from the top or bottom and the Mac sheet's 16px from a side, over the page dimmed with black at 20% (about 50% in dark mode). The header, body and footer keep 16px from the panel's edges, the margin of the toolbar buttons in the guidelines' illustrations, and the title is the modal's 17px semibold. The guidelines publish images, not measurements: the corners, margins and dimming are measured from the iPhone and Mac illustrations, and the dark dimming is an estimate. The drawer draws no grabber because it is not dragged, its title sits at the start of the header instead of centered between Cancel and Done: local decisions.
+
+The guidelines define no chip. The nearest Apple elements are tokens. In an iOS search field a token is a rounded rectangle about 23pt tall with corners of about 5pt, a symbol as large as its 17pt text and about 5pt of padding. In a macOS token field it is a 19pt rounded rectangle with 2pt corners, tinted with the accent color, and a selected token turns solid accent with white text ([HIG search fields](https://developer.apple.com/design/human-interface-guidelines/search-fields) and [HIG token fields](https://developer.apple.com/design/human-interface-guidelines/token-fields), consulted 2026-11-20, measured from their illustrations). Here a chip is that rounded rectangle with 6px corners, the same radius as the MultiSelect tag. Its text is regular weight, 12px small and 14px medium, and its icon is as large as the text. It sits on the translucent gray system fill of the toggle (rgb 118 118 128 at 12%, 24% in dark mode), which darkens under the pointer. A selected chip fills with the accent color and white text, like a pressed toggle ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-20). The remove button is the field's clear button reduced to its cross, drawn at 60% of the chip's text color like a secondary label, with a faint tint of that color under the pointer. The heights, padding, gray fill and remove button are local decisions, because Apple publishes no chip.
+
+A list follows the inset grouped list in the HIG illustrations ([HIG lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables), consulted 2026-11-20). It is a rounded group with 26px corners. Rows are at least 52px tall with 16px on each side. Titles are 17px regular on a 22px line, the body style ([HIG typography](https://developer.apple.com/design/human-interface-guidelines/typography), consulted 2026-11-20). Trailing values are 17px secondary gray, and leading symbols take the accent color, 20px from the text. Dividers are hairlines (#c6c6c8, #38383a in dark mode) inset 16px at both ends. The guidelines publish images, not measurements, so the corners, row height, insets, spacing and colors are measured from the iOS illustrations. Three choices are local decisions. The group sits on the secondary surface (#f5f5f7, #2c2c2e in dark mode) instead of iOS's white rows on a gray page, so it stays visible on the white web page. A description line is 15px secondary text on a 20px line, the subheadline style; the illustrations show no second line. Rows taller than one line keep 12px of vertical padding.
 
 ## Do's and Don'ts
 

@@ -15,6 +15,7 @@ export const ADAPTED_COMPONENTS = [
   "Radio", "RadioGroup", "Popover", "Progress", "Skeleton", "Toast",
   "Tooltip", "Combobox", "Tabs", "Breadcrumbs", "Pagination", "Accordion", "FormField",
   "Fieldset", "NumberInput", "Slider", "Toggle", "ToggleGroup", "Drawer",
+  "Chip", "List", "ListItem",
 ] as const;
 
 export const DESIGN_SYSTEMS: readonly DesignSystem[] = [

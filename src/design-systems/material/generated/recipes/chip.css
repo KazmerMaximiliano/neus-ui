@@ -1,0 +1,29 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --chip-height-small: 24px;
+  --chip-height-medium: 32px;
+  --chip-padding-small: 8px;
+  --chip-padding-medium: 16px;
+  --chip-gap: 8px;
+  --chip-radius: 8px;
+  --chip-font-size-small: 12px;
+  --chip-font-size-medium: 14px;
+  --chip-font-weight: 500;
+  --chip-border-width: 1px;
+  --chip-border-color: var(--color-border-input-hover);
+  --chip-background: transparent;
+  --chip-color: var(--color-text-secondary);
+  --chip-icon-size: 18px;
+  --chip-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+  --chip-selected-background: var(--color-secondary-container);
+  --chip-selected-hover-background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container));
+  --chip-selected-color: var(--color-on-secondary-container);
+  --chip-selected-border-color: transparent;
+  --chip-remove-size-small: 20px;
+  --chip-remove-size-medium: 24px;
+  --chip-remove-icon-size: 18px;
+  --chip-remove-color: currentColor;
+  --chip-remove-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+  --chip-focus-width: 3px;
+  --chip-focus-offset: 2px;
+}

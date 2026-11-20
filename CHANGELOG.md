@@ -8,6 +8,29 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.14.0] - Unreleased
+
+### Added
+
+- `Chip`: a compact value that is a toggle (`selected`, `aria-pressed`, a check in place of its
+  icon while selected), removable (`onRemove`, a remove button named after the label, English
+  name replaceable through `labels`), or both, in two sizes. New `chip` recipe family.
+- `List` and `ListItem`: a native `ul` or `ol` of rows with leading content, a title, a
+  description, extra content and trailing content, plain or divided. New `list` recipe family.
+- Select tokens for the tag values that were fixed in MultiSelect's stylesheet:
+  `--select-tag-inner-gap`, `--select-tag-line-height`, `--select-tag-remove-size`,
+  `--select-tag-remove-icon-size`, `--select-tag-remove-radius`,
+  `--select-tag-remove-hover-background` and `--select-tag-focus-*`.
+- `neus-ui lint` suggests Chip for a hand-made chip or tag class and List for rows built from a
+  raw `ul`; the neus-design and neus-audit skills and the specimen know the three components.
+
+### Changed
+
+- A `Switch` or `Radio` without a visible label no longer keeps the gap meant for its label, so
+  it ends on the edge of a list row, a toolbar or any container.
+- `MultiSelect` draws its selected values as Chips. Its classes, tokens, props and accessible
+  names stay the same, and the tags look the same in every system.
+
 ## [2.13.0] - Unreleased
 
 ### Added
@@ -528,6 +551,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...HEAD
+[2.14.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.13.0...v2.14.0
 [2.13.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.12.0...v2.13.0
 [2.12.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.11.0...v2.12.0
 [2.11.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...v2.11.0

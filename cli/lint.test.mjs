@@ -85,6 +85,8 @@ export const Page = () => (
     ["raw-element", "a.tsx", `<fieldset><legend>Address</legend>{fields}</fieldset>`],
     ["raw-element", "a.tsx", `<input type="range" min={0} max={100} value={volume} />`],
     ["raw-element", "a.tsx", `<div role="slider" aria-valuenow={volume} tabIndex={0} />`],
+    ["raw-element", "a.tsx", `<span className="tag">{name}</span>`],
+    ["raw-element", "a.tsx", `<button className="filter chip">{label}</button>`],
     ["raw-element", "a.tsx", `<Button label="Bold" aria-pressed={bold} onClick={toggleBold} />`],
     ["app-shell", "a.tsx", `import { Sidebar, Stack } from "neus-ui";\n<Sidebar title="Pulso" items={items} />\n<Stack as="header">Workspace</Stack>`],
     ["app-shell", "a.css", ".pulso-sidebar { --sidebar-background: var(--color-surface); }"],
@@ -119,6 +121,11 @@ export const Page = () => (
 
   it("does not take Slider, Toggle or ToggleGroup for hand-made controls", () => {
     const text = `<Slider label="Price" range value={price} onChange={setPrice} />\n<Toggle label="Bold" pressed={bold} onPressedChange={setBold} />\n<ToggleGroup label="View" value={view} onChange={setView}>{views}</ToggleGroup>`;
+    expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
+  });
+
+  it("does not take Chip, List, a MultiSelect part or words that contain tag for hand-made ones", () => {
+    const text = `<Chip label="Design" onRemove={remove} />\n<List divided aria-label="Team">{rows}</List>\n<span className="multiselect__tag" />\n<Text className="tagline">Fast</Text>\n<div className="tag-list" />`;
     expect(rules(lint("a.tsx", text))).not.toContain("P1 raw-element");
   });
 

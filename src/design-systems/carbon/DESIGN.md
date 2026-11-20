@@ -743,6 +743,52 @@ x-neus:
         --drawer-easing: cubic-bezier(0.2, 0, 0.38, 0.9)
       dark:
         --drawer-border-color: "#525252"
+    chip:
+      base:
+        --chip-height-small: 18px
+        --chip-height-medium: 24px
+        --chip-padding-small: 8px
+        --chip-padding-medium: 8px
+        --chip-gap: 4px
+        --chip-radius: 16px
+        --chip-font-size-small: 12px
+        --chip-font-size-medium: 12px
+        --chip-font-weight: "400"
+        --chip-line-height: 16px
+        --chip-border-color: transparent
+        --chip-background: "#e0e0e0"
+        --chip-color: var(--color-text-primary)
+        --chip-hover-background: "#d1d1d1"
+        --chip-selected-background: var(--color-text-primary)
+        --chip-selected-hover-background: var(--color-text-primary)
+        --chip-selected-color: var(--color-surface)
+        --chip-selected-border-color: var(--color-text-primary)
+        --chip-remove-size-small: 16px
+        --chip-remove-size-medium: 22px
+        --chip-remove-icon-size: 16px
+        --chip-remove-inset: 0px
+        --chip-remove-color: currentColor
+        --chip-remove-hover-background: "#d1d1d1"
+        --chip-disabled-opacity: "0.25"
+        --chip-transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9)
+      dark:
+        --chip-background: "#525252"
+        --chip-hover-background: "#636363"
+        --chip-remove-hover-background: "#636363"
+    list:
+      base:
+        --list-gap: 0px
+        --list-item-min-height: 48px
+        --list-item-padding: 14px 16px
+        --list-item-gap: 12px
+        --list-leading-size: 16px
+        --list-leading-color: var(--color-text-primary)
+        --list-title-size: 14px
+        --list-title-weight: "400"
+        --list-title-line-height: 20px
+        --list-description-size: 12px
+        --list-description-line-height: 16px
+        --list-trailing-size: 14px
 ---
 
 # Carbon
@@ -891,6 +937,10 @@ A toggle group is the content switcher: segments 32, 40 or 48px tall inside a 1p
 A modal ends in Carbon's action set: full-bleed buttons that share the bottom row with no gap or padding around them. An outlined action drops its outline there and reads as the action set's ghost button, so its edges do not double the modal's ([Carbon modal usage](https://carbondesignsystem.com/components/modal/usage/), consulted 2026-11-20).
 
 A drawer is Carbon's side panel from IBM Products. It is a 480px (medium) panel in the layer color (#f4f4f4, #262626 in dark mode) with square corners, as tall as the screen. A 1px subtle-border rule (#c6c6c6, #525252) runs along the edge that faces the page, and there is no shadow, since the overlay already sets the panel apart. The title is heading 03 (20px over 28px, regular weight) in a 16px header. The body has 16px on every side, and the actions are full-bleed buttons under a matching rule; an outlined action drops its outline there and reads as the action set's ghost button, so no line doubles the rule or the panel's edge. On screens too narrow for it, the panel takes the full width. It slides in over 150ms on the productive standard curve. Sources: [side panel Sass](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_side-panel.scss), [its sizes](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_side-panel-variables.scss), [animations](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_animations.scss) and [defaults](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/SidePanel/SidePanel.tsx), [action set Sass](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/ActionSet/_action-set.scss), [theme tokens](https://unpkg.com/@carbon/themes/scss/generated/_themes.scss) and [motion tokens](https://github.com/carbon-design-system/carbon/blob/main/packages/motion/tokens/motion.tokens.json), all consulted 2026-11-20. Carbon core has no side panel and no top or bottom sheet, so those drawers reuse the side values. Some parts are local decisions. Carbon places the panel 48px down, below the UI shell header; here it covers the full height. Carbon slides the panel only 320px while fading it, with separate entrance and exit curves; here it slides its own width on one curve. Carbon shows the header rule once the content scrolls under the title and lets the title's padding space the body; here the rule is always drawn, so the body keeps its own 16px below it.
+
+A chip is the Carbon tag: a pill 24px tall (18px small) with 8px of side padding and a label-01 label (12px over 16px, regular) on the gray tag color, #161616 on #e0e0e0 (#f4f4f4 on #525252 in dark mode), hovering to #d1d1d1 (#636363), with a 16px icon 4px before the label. Removable, it ends in a round button with a 16px close icon in the text color. Selected, it follows the selectable tag and inverts: an ink fill and border with white text, with a check in place of its icon. Focus draws a 2px focus ring 1px outside it, and its fill changes in 70ms on the productive curve ([tag Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/tag/_tag.scss), [tag color tokens](https://unpkg.com/@carbon/themes@11.86.0/scss/generated/_tag-tokens.scss), consulted 2026-11-20). Local decisions: an unselected chip keeps the gray read-only tag rather than the outlined selectable tag; the remove button fills the tag's height inside its 1px border, 16px small and 22px medium, where Carbon matches it to the tag's height; and a disabled chip fades to 25% instead of Carbon's swap to disabled colors.
+
+A list follows the Carbon contained list: no background, border or padding of its own, rows 48px tall with 14px by 16px of padding, a 16px leading icon in the primary text color 12px before a body-01 title (14px over 20px, regular), and full-width subtle-border rules between rows when divided ([contained list Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/contained-list/_contained-list.scss), consulted 2026-11-20). Carbon gives its list items no secondary line or trailing text; the description takes helper-text sizing (12px over 16px) and the trailing text 14px, both in the secondary text color, local decisions.
 
 ## Do's and Don'ts
 
