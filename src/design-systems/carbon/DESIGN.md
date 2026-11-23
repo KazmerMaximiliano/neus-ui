@@ -789,6 +789,33 @@ x-neus:
         --list-description-size: 12px
         --list-description-line-height: 16px
         --list-trailing-size: 14px
+    separator:
+      base:
+        --separator-color: var(--color-border-subtle)
+        --separator-thickness: 1px
+        --separator-spacing: 4px
+    empty-state:
+      base:
+        --empty-state-align: start
+        --empty-state-text-align: start
+        --empty-state-gap: 8px
+        --empty-state-background: transparent
+        --empty-state-border-width: 0px
+        --empty-state-radius: 0px
+        --empty-state-media-size: 80px
+        --empty-state-media-color: var(--color-text-secondary)
+        --empty-state-media-background: transparent
+        --empty-state-media-padding: 0px
+        --empty-state-media-radius: 0px
+        --empty-state-title-color: var(--color-text-primary)
+        --empty-state-title-size: 20px
+        --empty-state-title-weight: "400"
+        --empty-state-title-line-height: 28px
+        --empty-state-description-color: var(--color-text-secondary)
+        --empty-state-description-size: 14px
+        --empty-state-description-line-height: 20px
+        --empty-state-actions-gap: 16px
+        --empty-state-actions-spacing: 8px
 ---
 
 # Carbon
@@ -941,6 +968,14 @@ A drawer is Carbon's side panel from IBM Products. It is a 480px (medium) panel 
 A chip is the Carbon tag: a pill 24px tall (18px small) with 8px of side padding and a label-01 label (12px over 16px, regular) on the gray tag color, #161616 on #e0e0e0 (#f4f4f4 on #525252 in dark mode), hovering to #d1d1d1 (#636363), with a 16px icon 4px before the label. Removable, it ends in a round button with a 16px close icon in the text color. Selected, it follows the selectable tag and inverts: an ink fill and border with white text, with a check in place of its icon. Focus draws a 2px focus ring 1px outside it, and its fill changes in 70ms on the productive curve ([tag Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/tag/_tag.scss), [tag color tokens](https://unpkg.com/@carbon/themes@11.86.0/scss/generated/_tag-tokens.scss), consulted 2026-11-20). Local decisions: an unselected chip keeps the gray read-only tag rather than the outlined selectable tag; the remove button fills the tag's height inside its 1px border, 16px small and 22px medium, where Carbon matches it to the tag's height; and a disabled chip fades to 25% instead of Carbon's swap to disabled colors.
 
 A list follows the Carbon contained list: no background, border or padding of its own, rows 48px tall with 14px by 16px of padding, a 16px leading icon in the primary text color 12px before a body-01 title (14px over 20px, regular), and full-width subtle-border rules between rows when divided ([contained list Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/contained-list/_contained-list.scss), consulted 2026-11-20). Carbon gives its list items no secondary line or trailing text; the description takes helper-text sizing (12px over 16px) and the trailing text 14px, both in the secondary text color, local decisions.
+
+Carbon has no divider component. Its components draw separation as 1px rules in the subtle-border color. The structured list rules its rows this way, and the menu's item divider is a 1px subtle-border line with 4px ($spacing-02) above and below ([structured list Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/structured-list/_structured-list.scss), consulted 2026-11-20; [menu Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/menu/_menu.scss), consulted 2026-11-22). A separator takes that rule: 1px in border-subtle-00 (#e0e0e0, #393939 in Gray 100, [theme tokens](https://unpkg.com/@carbon/themes/scss/generated/_themes.scss), consulted 2026-11-20) with 4px on each side. A standalone separator, its spacing and the vertical form are local mappings of the menu divider. On a layer surface, Carbon would switch to border-subtle-01 (#c6c6c6, #525252); this rule keeps the 00 value.
+
+An empty state follows the Carbon empty states pattern and the IBM Products EmptyState that implements it ([pattern](https://carbondesignsystem.com/patterns/empty-states-pattern/), [Sass](https://unpkg.com/@carbon/ibm-products-styles@2.99.0/scss/components/EmptyStates/_empty-state.scss) and [component](https://unpkg.com/@carbon/ibm-products@2.103.0/es/components/EmptyStates/EmptyStateContent.js), consulted 2026-11-20). Its parts are aligned to the start as a block, with no fill, border or corners: it replaces the component it stands in for. The default large illustration is 80px ($spacing-11; 64px when small) and sits above the text. The title is heading 03 (20px over 28px, regular weight) in the primary text color, with 8px below it. The subtitle is body 01 (14px over 20px) in the secondary text color, with 16px below it before the action. The action is a small tertiary button, and a link can follow 16px below it ([type styles](https://unpkg.com/@carbon/type@11.71.0/scss/_styles.scss) and [spacing](https://unpkg.com/@carbon/layout@11.63.0/scss/generated/_spacing.scss), consulted 2026-11-20). The pattern page publishes no sizes, colors or maximum width. Some parts are local decisions:
+- Carbon uses multicolor illustrations, so an icon takes the secondary icon color (#525252, #c6c6c6 in Gray 100).
+- The one 8px gap also sits below the media, where Carbon leaves 16px.
+- Actions sit side by side 16px apart, borrowing the spacing between Carbon's stacked button and link.
+- The baseline padding keeps the block off the region's edges, because the Sass gives it none.
 
 ## Do's and Don'ts
 

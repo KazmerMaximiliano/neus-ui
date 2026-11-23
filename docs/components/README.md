@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 68 components and public sections. Import each by name from `neus-ui`.
+The package exports 70 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -16,6 +16,7 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Stack](./Stack.md) | Column or row with space-scale gaps that can change at 768px and 1024px. |
 | [Grid](./Grid.md) | Equal responsive columns or auto-fit items of a minimum width. |
 | [Section](./Section.md) | Full-width page band with tone, vertical rhythm and an inner Container. |
+| [Separator](./Separator.md) | Line between groups of content, across a column or down a row, semantic or decorative. |
 | [Avatar](./Avatar.md) | Picture or initials of a person or organization, with an image-failure fallback. |
 | [AvatarGroup](./AvatarGroup.md) | Overlapping avatars with a +N count. |
 | [List](./List.md) | Rows of static content with leading and trailing parts, plain or divided. |
@@ -34,6 +35,7 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Link](./Link.md) | Styled native anchor with primary and secondary treatments. |
 | [Progress](./Progress.md) | Completion of a task as a bar, determinate or indeterminate, with a label and value. |
 | [Skeleton](./Skeleton.md) | Hidden placeholder lines, blocks and circles while content loads. |
+| [EmptyState](./EmptyState.md) | Says a region has no content yet, with media, title, description and actions. |
 | [Spinner](./Spinner.md) | Indeterminate loading ring or dots, announced as a status when labelled. |
 | [Toast](./Toast.md) | Brief notification after an action, shown and announced through ToastProvider. |
 | [Tooltip](./Tooltip.md) | Short description of a control on hover and keyboard focus. |

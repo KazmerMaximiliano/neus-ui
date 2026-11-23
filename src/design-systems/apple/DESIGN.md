@@ -576,6 +576,26 @@ x-neus:
         --list-trailing-size: 17px
       dark:
         --list-divider-color: "#38383a"
+    separator:
+      base:
+        --separator-color: "#c6c6c8"
+      dark:
+        --separator-color: "#38383a"
+    empty-state:
+      base:
+        --empty-state-gap: 4px
+        --empty-state-media-size: 48px
+        --empty-state-media-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent)
+        --empty-state-media-background: transparent
+        --empty-state-media-padding: 16px
+        --empty-state-title-color: var(--color-text-secondary)
+        --empty-state-title-size: 15px
+        --empty-state-title-weight: "700"
+        --empty-state-title-line-height: "1.33333"
+        --empty-state-description-size: 15px
+        --empty-state-description-line-height: "1.33333"
+        --empty-state-actions-gap: 6px
+        --empty-state-actions-spacing: 14px
 ---
 
 # Apple
@@ -723,6 +743,10 @@ A drawer follows the iOS sheet ([HIG sheets](https://developer.apple.com/design/
 The guidelines define no chip. The nearest Apple elements are tokens. In an iOS search field a token is a rounded rectangle about 23pt tall with corners of about 5pt, a symbol as large as its 17pt text and about 5pt of padding. In a macOS token field it is a 19pt rounded rectangle with 2pt corners, tinted with the accent color, and a selected token turns solid accent with white text ([HIG search fields](https://developer.apple.com/design/human-interface-guidelines/search-fields) and [HIG token fields](https://developer.apple.com/design/human-interface-guidelines/token-fields), consulted 2026-11-20, measured from their illustrations). Here a chip is that rounded rectangle with 6px corners, the same radius as the MultiSelect tag. Its text is regular weight, 12px small and 14px medium, and its icon is as large as the text. It sits on the translucent gray system fill of the toggle (rgb 118 118 128 at 12%, 24% in dark mode), which darkens under the pointer. A selected chip fills with the accent color and white text, like a pressed toggle ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-20). The remove button is the field's clear button reduced to its cross, drawn at 60% of the chip's text color like a secondary label, with a faint tint of that color under the pointer. The heights, padding, gray fill and remove button are local decisions, because Apple publishes no chip.
 
 A list follows the inset grouped list in the HIG illustrations ([HIG lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables), consulted 2026-11-20). It is a rounded group with 26px corners. Rows are at least 52px tall with 16px on each side. Titles are 17px regular on a 22px line, the body style ([HIG typography](https://developer.apple.com/design/human-interface-guidelines/typography), consulted 2026-11-20). Trailing values are 17px secondary gray, and leading symbols take the accent color, 20px from the text. Dividers are hairlines (#c6c6c8, #38383a in dark mode) inset 16px at both ends. The guidelines publish images, not measurements, so the corners, row height, insets, spacing and colors are measured from the iOS illustrations. Three choices are local decisions. The group sits on the secondary surface (#f5f5f7, #2c2c2e in dark mode) instead of iOS's white rows on a gray page, so it stays visible on the white web page. A description line is 15px secondary text on a 20px line, the subheadline style; the illustrations show no second line. Rows taller than one line keep 12px of vertical padding.
+
+A separator is a 1px hairline in the opaque separator gray, #c6c6c8 (#38383a in dark mode), with 16px of space on each side. It matches the list dividers, which were measured from the iOS illustrations in [HIG lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables) (consulted 2026-11-20). [HIG layout](https://developer.apple.com/design/human-interface-guidelines/layout) (consulted 2026-11-20) names separator lines as one way to group related items, but it publishes no thickness, color or spacing. Two choices are local decisions. The line is 1px where iOS draws one device pixel (0.5pt), because half-pixel rules can disappear on standard-density screens. The 16px spacing is the Neus default, close to the 16pt standard margin.
+
+An empty state follows SwiftUI's [ContentUnavailableView](https://developer.apple.com/documentation/swiftui/contentunavailableview) (consulted 2026-11-20). It is a centered stack with no frame. A large symbol sits at the top in a pale tertiary gray: the text color at 30%, the alpha of Apple's tertiary label. Below it are a bold title and a regular description. Both are 15px on a 20px line, the macOS Title 3 size in [HIG typography](https://developer.apple.com/design/human-interface-guidelines/typography) (consulted 2026-11-20), and both use the secondary text color. The buttons sit in a row 6px apart, about 18px below the text. The documentation publishes no sizes, so these values were measured from the view as SwiftUI draws it on macOS 27.2. There, the symbol is about 42 by 30pt, about 27pt above the title, and the title is 4–5pt above the description. The 48px icon box draws a 24-unit icon at about that size. The box keeps 16px of clear space around the icon, so the gap between the symbol and the title comes out close to the measurement. [HIG writing](https://developer.apple.com/design/human-interface-guidelines/writing) (consulted 2026-11-20) asks for clear next steps on blank screens and a button or link to take them. Three choices are local decisions. The sizes follow macOS rather than iPhone. The iPhone illustration in [UIContentUnavailableConfiguration](https://developer.apple.com/documentation/uikit/uicontentunavailableconfiguration-swift.struct) (consulted 2026-11-20) shows the same arrangement with 22pt text and a 48pt symbol in a tinted disc. The secondary gray is the system's text role (#6e6e73, #a1a1a6 in dark mode), a little darker than Apple's secondary label. The 40ch measure is kept: the rendered view wraps at about 340pt, close to 40ch of 15px text.
 
 ## Do's and Don'ts
 

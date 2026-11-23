@@ -93,6 +93,9 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
   `description` and the control (a Switch, a Badge, a Button) `trailing`. A price
   or size span inside it is a `Slider` with `range`. Switching the list between views
   (list, grid, map) is a `ToggleGroup` beside the title.
+- A list or a search with nothing to show is an `EmptyState` in the list's place:
+  what is missing as the title, why or what will appear as the description, and the
+  one action that fills it (DataTable shows its own when it has no rows).
 - Pagination is controlled: wire `onPaginationChange` to the data source. A
   list that is not a table (cards, search results) pages with `Pagination`
   below it, wired the same way.

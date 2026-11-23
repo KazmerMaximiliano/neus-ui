@@ -247,6 +247,7 @@ component's guide.
 | Rows of settings, people or files | `List` (`divided`) + `ListItem` (`leading`, `title`, `description`, `trailing`) |
 | Message about the page or a form | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
 | Brief confirmation after an action | `useToast().show({ status, title })` under one `ToastProvider`; lasting: `Alert` |
+| Nothing to show yet (first use, no results) | `EmptyState` (`title`, `description`, `actions`; `role="status"` after a search) |
 | Loading | `Spinner` (`label`; a button has `loading`); `Skeleton` (`variant`, `lines`) in a region with `aria-busy`; `Progress` (`value`, `max`, `valueText`) for a known share |
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |

@@ -1,0 +1,30 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --empty-state-font-family: var(--font-body);
+  --empty-state-gap: 8px;
+  --empty-state-padding: 32px 24px;
+  --empty-state-min-height: 0px;
+  --empty-state-max-width: 40ch;
+  --empty-state-align: center;
+  --empty-state-text-align: center;
+  --empty-state-background: transparent;
+  --empty-state-border-width: 0px;
+  --empty-state-border-style: solid;
+  --empty-state-border-color: transparent;
+  --empty-state-radius: var(--card-radius);
+  --empty-state-media-size: 24px;
+  --empty-state-media-color: var(--color-primary-text);
+  --empty-state-media-background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+  --empty-state-media-padding: 12px;
+  --empty-state-media-radius: 50%;
+  --empty-state-title-color: var(--color-text-primary);
+  --empty-state-title-size: var(--fs-lg);
+  --empty-state-title-weight: 600;
+  --empty-state-title-line-height: 1.3;
+  --empty-state-description-color: var(--color-text-secondary);
+  --empty-state-description-size: var(--fs-sm);
+  --empty-state-description-line-height: 1.5;
+  --empty-state-actions-gap: 12px;
+  --empty-state-actions-spacing: 8px;
+}

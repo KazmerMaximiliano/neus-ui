@@ -1,0 +1,21 @@
+/* Generated from src/design-systems/neobrutalism/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="neobrutalism"] {
+  --empty-state-padding: 24px;
+  --empty-state-max-width: 24rem;
+  --empty-state-background: var(--color-surface);
+  --empty-state-border-width: 3px;
+  --empty-state-border-style: dashed;
+  --empty-state-border-color: var(--color-text-primary);
+  --empty-state-media-size: 20px;
+  --empty-state-media-color: var(--color-text-on-primary);
+  --empty-state-media-background: var(--color-primary);
+  --empty-state-media-padding: 10px;
+  --empty-state-media-radius: 4px;
+  --empty-state-title-size: 14px;
+  --empty-state-title-weight: 700;
+  --empty-state-title-line-height: 1.42857;
+  --empty-state-description-color: var(--color-text-primary);
+  --empty-state-description-size: 14px;
+  --empty-state-description-line-height: 1.625;
+  --empty-state-actions-gap: 10px;
+}

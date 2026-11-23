@@ -1,0 +1,23 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --empty-state-align: start;
+  --empty-state-text-align: start;
+  --empty-state-gap: 8px;
+  --empty-state-background: transparent;
+  --empty-state-border-width: 0px;
+  --empty-state-radius: 0px;
+  --empty-state-media-size: 80px;
+  --empty-state-media-color: var(--color-text-secondary);
+  --empty-state-media-background: transparent;
+  --empty-state-media-padding: 0px;
+  --empty-state-media-radius: 0px;
+  --empty-state-title-color: var(--color-text-primary);
+  --empty-state-title-size: 20px;
+  --empty-state-title-weight: 400;
+  --empty-state-title-line-height: 28px;
+  --empty-state-description-color: var(--color-text-secondary);
+  --empty-state-description-size: 14px;
+  --empty-state-description-line-height: 20px;
+  --empty-state-actions-gap: 16px;
+  --empty-state-actions-spacing: 8px;
+}

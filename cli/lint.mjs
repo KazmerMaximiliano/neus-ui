@@ -93,6 +93,7 @@ export const lintFiles = (files, { tokens, classes, documented, allowedImports, 
         report(file, at, "P1", "emoji", "emoji used as an icon; use a lucide-react icon");
       }
       if (/(\/\/|\{\/\*|\/\*)\s*SAMPLE:/.test(line)) samples.push({ file, line: at, text: line.trim() });
+      if (!isCss(file) && /role=["']separator["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made separator: use Separator");
       if (!isCss(file) && /role=["']alert["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"alert\": use Alert");
       if (!isCss(file) && /role=["']switch["']/.test(line)) report(file, at, "P1", "raw-element", "role=\"switch\": use Switch");
       if (!isCss(file) && /role=["']radio(group)?["']/.test(line)) report(file, at, "P1", "raw-element", "hand-made radio: use RadioGroup and Radio");

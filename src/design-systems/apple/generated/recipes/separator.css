@@ -1,0 +1,8 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --separator-color: #c6c6c8;
+}
+
+[data-design-system="apple"][data-color-scheme="dark"] {
+  --separator-color: #38383a;
+}

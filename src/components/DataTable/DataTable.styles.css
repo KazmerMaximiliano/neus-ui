@@ -29,25 +29,25 @@
   gap: var(--data-table-gap);
 }
 
+/* The empty state is an EmptyState in the table's look: the table tokens drive its own. */
 .data-table__no-rows {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  white-space: normal;
-  padding: var(--data-table-empty-padding);
-  min-height: var(--data-table-empty-height);
-  color: var(--data-table-muted);
-}
-
-.data-table__no-rows-title {
-  font-size: var(--data-table-empty-title-size);
-  color: var(--data-table-color);
-}
-
-.data-table__no-rows-description {
-  font-size: var(--data-table-font-size);
+  --empty-state-font-family: var(--data-table-font-family);
+  --empty-state-gap: var(--data-table-empty-gap);
+  --empty-state-padding: var(--data-table-empty-padding);
+  --empty-state-min-height: var(--data-table-empty-height);
+  --empty-state-max-width: none;
+  --empty-state-align: center;
+  --empty-state-text-align: center;
+  --empty-state-background: transparent;
+  --empty-state-border-width: 0px;
+  --empty-state-radius: 0px;
+  --empty-state-title-color: var(--data-table-color);
+  --empty-state-title-size: var(--data-table-empty-title-size);
+  --empty-state-title-weight: var(--data-table-empty-title-weight);
+  --empty-state-title-line-height: var(--data-table-empty-line-height);
+  --empty-state-description-color: var(--data-table-muted);
+  --empty-state-description-size: var(--data-table-font-size);
+  --empty-state-description-line-height: var(--data-table-empty-line-height);
 }
 
 .data-table .ag-menu,

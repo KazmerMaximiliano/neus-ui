@@ -692,6 +692,30 @@ x-neus:
         --list-description-size: 14px
         --list-trailing-color: var(--color-text-primary)
         --list-trailing-size: 14px
+    separator:
+      base:
+        --separator-color: var(--color-text-primary)
+        --separator-thickness: 2px
+    empty-state:
+      base:
+        --empty-state-padding: 24px
+        --empty-state-max-width: 24rem
+        --empty-state-background: var(--color-surface)
+        --empty-state-border-width: 3px
+        --empty-state-border-style: dashed
+        --empty-state-border-color: var(--color-text-primary)
+        --empty-state-media-size: 20px
+        --empty-state-media-color: var(--color-text-on-primary)
+        --empty-state-media-background: var(--color-primary)
+        --empty-state-media-padding: 10px
+        --empty-state-media-radius: 4px
+        --empty-state-title-size: 14px
+        --empty-state-title-weight: "700"
+        --empty-state-title-line-height: "1.42857"
+        --empty-state-description-color: var(--color-text-primary)
+        --empty-state-description-size: 14px
+        --empty-state-description-line-height: "1.625"
+        --empty-state-actions-gap: 10px
 ---
 
 # Neobrutalism
@@ -833,6 +857,10 @@ A drawer follows the neobrutalism sheet ([neobrutalism sheet](https://github.com
 The neobrutalism components have no chip; their multi-select combobox example lists the chosen labels as text in the trigger. A chip borrows from two of their components. Their Badge is a 2px ink frame around 12px text, with 10px of side padding and 12px icons, which gives a 24px height. Their Toggle fills with the main color when pressed ([neobrutalism badge](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/badge.tsx), [toggle](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/toggle.tsx) and [combobox](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/combobox.tsx), consulted 2026-11-20). Here a chip is a page-colored tile with the system's 4px corners and a 2px ink border, like the MultiSelect tag, with bold ink text. Hovering tints it with yellow at 35%. A selected chip fills with yellow and keeps its ink border and dark text. The remove button is a cross in the chip's text color with nearly square 2px corners and a faint tint of that color under the pointer. The keyboard outline sits 4px outside the chip, as on toggles and checkboxes, and a disabled chip drops to half opacity. Chips cast no hard shadow, so a row of chips stays calm. The missing shadow and the bold weight are local decisions.
 
 A list follows the neobrutalism Item ([neobrutalism item](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/item.tsx), consulted 2026-11-20). Rows have 14px by 16px of padding and 14px between a 20px ink icon, the text and the trailing content. Titles are 14px on a 1.375 line, and descriptions are 14px in ink, not a muted gray, 4px below. The library frames each item with a 2px border and spaces items 16px apart. This system frames the group once instead, as its cards do: a page-colored panel with a 3px ink border and 4px corners. In a divided list, rows are separated by 2px ink rules, as in the modal. Titles are bold, following the system's heavy short labels, where the library uses its 500 base weight. The single frame, the bold titles and the 2px rules are local decisions.
+
+A separator is a 2px ink rule with 16px of space on each side. The neobrutalism components have no separator component (none in [src/components/ui](https://github.com/ekmas/neobrutalism-components/tree/main/src/components/ui), consulted 2026-11-20), so the rule is a local decision. It is the system's own divider, as in the modal, the tabs and divided lists, where 2px ink rules separate parts inside 3px frames.
+
+An empty state follows [neobrutalism Empty](https://www.neobrutalism.dev/docs/empty) (consulted 2026-11-20, [source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/empty.tsx)). It is a page-colored panel inside a dashed ink border, with the card's 4px corners and 24px of padding. Its centered text column is at most 24rem wide. The icon is 20px in a 40px square tile with 4px corners. The title is 14px bold ink on a 20px line. The description is 14px ink text with relaxed 1.625 leading, 8px below. The actions sit 16px below the text, 10px apart, as in EmptyContent. Three choices are local decisions. The border is 3px, like the system's card frames, where the library draws 2px. The icon tile is filled yellow with dark text, like the system's accent tiles, where the library draws a white tile with a 2px ink border: the recipe has no media border, and a white tile without one would vanish on the page color. The padding stays 24px on wide screens, where the library grows it to 48px from the md breakpoint.
 
 ## Do's and Don'ts
 

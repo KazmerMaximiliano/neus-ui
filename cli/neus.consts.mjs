@@ -81,7 +81,7 @@ export const RAW_TO_COMPONENT = {
   ol: "List as=\"ol\" for rows; Stack as=\"ol\" for layout",
   h1: "Heading", h2: "Heading", h3: "Heading", h4: "Heading", h5: "Heading", h6: "Heading",
   header: "SiteHeader (neus-ui/sections)", footer: "SiteFooter (neus-ui/sections)", progress: "Progress",
-  datalist: "Combobox", details: "Accordion (FAQ from neus-ui/sections on public pages)",
+  datalist: "Combobox", hr: "Separator", details: "Accordion (FAQ from neus-ui/sections on public pages)",
   label: "the label prop of the field, or FormField around a control neus-ui does not draw",
   fieldset: "Fieldset (RadioGroup for radios)",
 };

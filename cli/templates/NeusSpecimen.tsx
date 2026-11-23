@@ -3,9 +3,9 @@
 import { useState } from "react";
 import {
   Accordion, Alert, Avatar, AvatarGroup, Badge, Breadcrumbs, Button, Card, CardContent, CardFooter, CardHeader,
-  Checkbox, Chip, Combobox, DateInput, Drawer, DrawerContent, DrawerFooter, DrawerHeader, Fieldset, FormField, Grid,
+  Checkbox, Chip, Combobox, DateInput, Drawer, DrawerContent, DrawerFooter, DrawerHeader, EmptyState, Fieldset, FormField, Grid,
   Heading, Input, List, ListItem, MediaPlaceholder, NumberInput, Pagination, Popover, Progress, Radio, RadioGroup,
-  Section, Select, Skeleton, Slider, Spinner, Stack, Switch, Tabs, Text, Textarea, ThemeProvider, Toast, Toggle,
+  Section, Select, Separator, Skeleton, Slider, Spinner, Stack, Switch, Tabs, Text, Textarea, ThemeProvider, Toast, Toggle,
   ToggleGroup, Tooltip,
 } from "neus-ui";
 import type { ColorScheme, DesignSystemId, ThemeConfig } from "neus-ui";
@@ -84,6 +84,7 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
             <Popover label="Popover" trigger={(props) => <Button {...props} label="Popover" variant="outlined" />}>
               <Text>Anchored content, closed with Escape.</Text>
             </Popover>
+            <Separator orientation="vertical" decorative />
             <DrawerDemo />
             <Tooltip content="Hover or focus shows this hint."
               trigger={(props) => <Button {...props} label="Tooltip" variant="text" />} />
@@ -125,6 +126,7 @@ const Panel = ({ scheme }: { scheme: ColorScheme }) => (
               </Stack>
             )}
           </FormField>
+          <EmptyState title="No projects yet" description="Projects you create appear here." actions={<Button label="New project" />} />
           <List divided aria-label="Settings">
             <ListItem title="Notifications" description="Every Monday." trailing={<Switch aria-label="Notifications" defaultChecked />} />
             <ListItem title="Billing" trailing="Monthly" />

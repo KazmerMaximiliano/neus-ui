@@ -8,6 +8,24 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.15.0] - Unreleased
+
+### Added
+
+- `Separator`: a line between groups of content, across a column or down a row, with the
+  `separator` role or `decorative`. New `separator` recipe family.
+- `EmptyState`: says a region has no content yet, with optional media, a title (`h2` by default,
+  `titleAs` for the outline), a description and actions. New `empty-state` recipe family.
+- DataTable tokens `--data-table-empty-title-weight`, `--data-table-empty-gap` and
+  `--data-table-empty-line-height` for values its empty view took from the browser defaults.
+- `neus-ui lint` suggests Separator for a raw `<hr>` or `role="separator"`; the neus-design and
+  neus-audit skills and the specimen know both components.
+
+### Changed
+
+- `DataTable` shows an EmptyState when it has no rows. Its classes, props, tokens and the status
+  announcement stay the same, and it looks the same in every system.
+
 ## [2.14.0] - Unreleased
 
 ### Added
@@ -551,6 +569,7 @@ First public release on npm.
   with a brand and on a derived system.
 
 [Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...HEAD
+[2.15.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.14.0...v2.15.0
 [2.14.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.13.0...v2.14.0
 [2.13.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.12.0...v2.13.0
 [2.12.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.11.0...v2.12.0
