@@ -376,7 +376,7 @@ x-neus:
         --site-header-sticky-backdrop-filter: saturate(1.4) blur(12px)
         --pricing-price-size: 40px
         --pricing-price-tracking: normal
-        --pricing-featured-shadow: 0 0 #0000
+        --pricing-featured-shadow: "0 0 #0000"
     spinner:
       base:
         --spinner-size-medium: 20px
@@ -476,6 +476,126 @@ x-neus:
       dark:
         --accordion-divider-color: "#424245"
         --accordion-icon-color: "#6e6e73"
+    form-field: {}
+    number-input:
+      base:
+        --number-input-stepper-gap: 0px
+        --number-input-stepper-background: var(--color-surface-secondary)
+        --number-input-stepper-radius: 8px
+        --number-input-button-radius: 0px
+        --number-input-button-color: var(--color-text-primary)
+        --number-input-divider-width: 1px
+        --number-input-divider-color: var(--color-border-subtle)
+    slider:
+      base:
+        --slider-control-height: 24px
+        --slider-track-height: 6px
+        --slider-track-background: rgb(0 0 0 / 0.06)
+        --slider-thumb-width: 24px
+        --slider-thumb-height: 20px
+        --slider-thumb-radius: "{rounded.pill}"
+        --slider-thumb-border-width: 1px
+        --slider-thumb-border-color: "#ffffff"
+        --slider-thumb-background: linear-gradient(to right, rgb(243 250 255), rgb(253 253 253))
+        --slider-thumb-shadow: 0 0.5px 1.5px rgb(0 0 0 / 0.12), 0 3px 8px rgb(0 0 0 / 0.1)
+        --slider-thumb-hover-shadow: "0 0 #0000"
+        --slider-thumb-active-shadow: "0 0 #0000"
+        --slider-value-weight: "400"
+        --slider-step-width: 2px
+        --slider-step-height: 2px
+        --slider-step-offset: 8px
+        --slider-step-color: rgb(0 0 0 / 0.26)
+        --slider-step-active-color: var(--slider-step-color)
+      dark:
+        --slider-track-background: rgb(255 255 255 / 0.2)
+        --slider-thumb-background: "#e6e7e8"
+        --slider-thumb-shadow: 0 0.5px 1.5px rgb(0 0 0 / 0.3)
+        --slider-step-color: rgb(255 255 255 / 0.32)
+    toggle:
+      base:
+        --toggle-font-size: 14px
+        --toggle-font-weight: "400"
+        --toggle-height-small: 28px
+        --toggle-height-medium: 32px
+        --toggle-height-large: 40px
+        --toggle-border-width: 0px
+        --toggle-background: rgb(118 118 128 / 0.12)
+        --toggle-hover-background: rgb(118 118 128 / 0.2)
+        --toggle-pressed-background: var(--color-primary)
+        --toggle-pressed-hover-background: var(--color-primary)
+        --toggle-pressed-color: var(--color-text-on-primary)
+        --toggle-pressed-border-color: transparent
+      dark:
+        --toggle-background: rgb(118 118 128 / 0.24)
+        --toggle-hover-background: rgb(118 118 128 / 0.32)
+    drawer:
+      base:
+        --drawer-background: var(--color-surface)
+        --drawer-radius: 16px
+        --drawer-sheet-radius: 37px
+        --drawer-backdrop: rgba(0, 0, 0, 0.2)
+        --drawer-header-padding: 16px
+        --drawer-content-padding: 0 16px 16px
+        --drawer-footer-padding: 16px
+      dark:
+        --drawer-backdrop: rgba(0, 0, 0, 0.5)
+    chip:
+      base:
+        --chip-font-size-medium: 14px
+        --chip-font-weight: "400"
+        --chip-radius: 6px
+        --chip-border-width: 0px
+        --chip-background: rgb(118 118 128 / 0.12)
+        --chip-icon-size: 1em
+        --chip-hover-background: rgb(118 118 128 / 0.2)
+        --chip-selected-background: var(--color-primary)
+        --chip-selected-hover-background: var(--color-primary)
+        --chip-selected-color: var(--color-text-on-primary)
+        --chip-remove-color: color-mix(in srgb, currentColor 60%, transparent)
+        --chip-remove-hover-background: color-mix(in srgb, currentColor 12%, transparent)
+      dark:
+        --chip-background: rgb(118 118 128 / 0.24)
+        --chip-hover-background: rgb(118 118 128 / 0.32)
+    list:
+      base:
+        --list-radius: 26px
+        --list-background: var(--color-surface-secondary)
+        --list-divider-color: "#c6c6c8"
+        --list-divider-inset: 16px
+        --list-divider-end-inset: 16px
+        --list-item-min-height: 52px
+        --list-item-padding: 12px 16px
+        --list-item-gap: 20px
+        --list-leading-size: 20px
+        --list-leading-color: var(--color-primary)
+        --list-title-size: 17px
+        --list-title-weight: "400"
+        --list-title-line-height: "1.29412"
+        --list-description-size: 15px
+        --list-description-line-height: "1.33333"
+        --list-trailing-size: 17px
+      dark:
+        --list-divider-color: "#38383a"
+    separator:
+      base:
+        --separator-color: "#c6c6c8"
+      dark:
+        --separator-color: "#38383a"
+    empty-state:
+      base:
+        --empty-state-gap: 4px
+        --empty-state-media-size: 48px
+        --empty-state-media-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent)
+        --empty-state-media-background: transparent
+        --empty-state-media-padding: 16px
+        --empty-state-title-color: var(--color-text-secondary)
+        --empty-state-title-size: 15px
+        --empty-state-title-weight: "700"
+        --empty-state-title-line-height: "1.33333"
+        --empty-state-description-size: 15px
+        --empty-state-description-line-height: "1.33333"
+        --empty-state-actions-gap: 6px
+        --empty-state-actions-spacing: 14px
 ---
 
 # Apple
@@ -609,6 +729,24 @@ Breadcrumbs follow apple.com's footer trail: 12px text with -0.01em tracking, li
 Pagination has no HIG counterpart: page controls are dots for swiping through views. Page buttons are 32px capsules like the small icon buttons, regular weight with the current page a semibold blue capsule; a local mapping.
 
 An accordion follows apple.com's shared accordion in its reduced size: 17px semibold titles over 1px hairlines (#d2d2d7, #424245 in dark mode), no fills or side padding, a gray chevron (#86868b, #6e6e73 in dark mode) at the end that turns in 320ms, and 14px answers ([apple.com iCloud styles](https://www.apple.com/v/icloud/ak/built/styles/overview.built.css), consulted 2026-11-19). The guidelines describe disclosure controls without measurements ([HIG disclosure controls](https://developer.apple.com/design/human-interface-guidelines/disclosure-controls), consulted 2026-11-19).
+
+A form field or a fieldset reads like the input's label above its control, with help text in secondary gray and the error in red; both inherit the input's type, so they need no values of their own.
+
+A number input ends in a stepper drawn like the HIG's two-segment control: a light gray capsule with 8px corners, minus and plus in primary ink, split by a hairline ([HIG steppers](https://developer.apple.com/design/human-interface-guidelines/steppers), consulted 2026-11-19; the page gives no measurements, so the sizes are local decisions).
+
+A slider follows the illustrations of the HIG sliders page: a 6px track with full corners, filled with the accent color up to the thumb and a faint gray after it (black at 6%, white at 20% in dark mode), and a thumb drawn as a horizontal capsule, 24 by 20px, almost white with a blue tint that fades across it, a white rim and a soft shadow (light gray #e6e7e8 in dark mode). Tick marks are 2px gray dots centered 8px below the track, the same color on both sides of the thumb ([HIG sliders](https://developer.apple.com/design/human-interface-guidelines/sliders), consulted 2026-11-19; the page publishes images, not measurements, so the sizes are measured from them and the shadow is a local approximation). The thumb has no hover state, as on Apple platforms; a range with two thumbs is a local extension.
+
+A toggle is a button that changes its background while on, as the guidelines describe ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-19): a capsule of translucent gray that fills with the accent color and white text when pressed. A toggle group is the segmented control of the contained tabs, which also allows several selected segments as on macOS ([HIG segmented controls](https://developer.apple.com/design/human-interface-guidelines/segmented-controls), consulted 2026-11-19); the sizes are local decisions.
+
+A drawer follows the iOS sheet ([HIG sheets](https://developer.apple.com/design/human-interface-guidelines/sheets), consulted 2026-11-20): an opaque panel on the main surface, white in light mode and #1c1c1e in dark mode rather than the modal's secondary gray, with 37px corners on the edge that faces the page from the top or bottom and the Mac sheet's 16px from a side, over the page dimmed with black at 20% (about 50% in dark mode). The header, body and footer keep 16px from the panel's edges, the margin of the toolbar buttons in the guidelines' illustrations, and the title is the modal's 17px semibold. The guidelines publish images, not measurements: the corners, margins and dimming are measured from the iPhone and Mac illustrations, and the dark dimming is an estimate. The drawer draws no grabber because it is not dragged, its title sits at the start of the header instead of centered between Cancel and Done: local decisions.
+
+The guidelines define no chip. The nearest Apple elements are tokens. In an iOS search field a token is a rounded rectangle about 23pt tall with corners of about 5pt, a symbol as large as its 17pt text and about 5pt of padding. In a macOS token field it is a 19pt rounded rectangle with 2pt corners, tinted with the accent color, and a selected token turns solid accent with white text ([HIG search fields](https://developer.apple.com/design/human-interface-guidelines/search-fields) and [HIG token fields](https://developer.apple.com/design/human-interface-guidelines/token-fields), consulted 2026-11-20, measured from their illustrations). Here a chip is that rounded rectangle with 6px corners, the same radius as the MultiSelect tag. Its text is regular weight, 12px small and 14px medium, and its icon is as large as the text. It sits on the translucent gray system fill of the toggle (rgb 118 118 128 at 12%, 24% in dark mode), which darkens under the pointer. A selected chip fills with the accent color and white text, like a pressed toggle ([HIG toggles](https://developer.apple.com/design/human-interface-guidelines/toggles), consulted 2026-11-20). The remove button is the field's clear button reduced to its cross, drawn at 60% of the chip's text color like a secondary label, with a faint tint of that color under the pointer. The heights, padding, gray fill and remove button are local decisions, because Apple publishes no chip.
+
+A list follows the inset grouped list in the HIG illustrations ([HIG lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables), consulted 2026-11-20). It is a rounded group with 26px corners. Rows are at least 52px tall with 16px on each side. Titles are 17px regular on a 22px line, the body style ([HIG typography](https://developer.apple.com/design/human-interface-guidelines/typography), consulted 2026-11-20). Trailing values are 17px secondary gray, and leading symbols take the accent color, 20px from the text. Dividers are hairlines (#c6c6c8, #38383a in dark mode) inset 16px at both ends. The guidelines publish images, not measurements, so the corners, row height, insets, spacing and colors are measured from the iOS illustrations. Three choices are local decisions. The group sits on the secondary surface (#f5f5f7, #2c2c2e in dark mode) instead of iOS's white rows on a gray page, so it stays visible on the white web page. A description line is 15px secondary text on a 20px line, the subheadline style; the illustrations show no second line. Rows taller than one line keep 12px of vertical padding.
+
+A separator is a 1px hairline in the opaque separator gray, #c6c6c8 (#38383a in dark mode), with 16px of space on each side. It matches the list dividers, which were measured from the iOS illustrations in [HIG lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables) (consulted 2026-11-20). [HIG layout](https://developer.apple.com/design/human-interface-guidelines/layout) (consulted 2026-11-20) names separator lines as one way to group related items, but it publishes no thickness, color or spacing. Two choices are local decisions. The line is 1px where iOS draws one device pixel (0.5pt), because half-pixel rules can disappear on standard-density screens. The 16px spacing is the Neus default, close to the 16pt standard margin.
+
+An empty state follows SwiftUI's [ContentUnavailableView](https://developer.apple.com/documentation/swiftui/contentunavailableview) (consulted 2026-11-20). It is a centered stack with no frame. A large symbol sits at the top in a pale tertiary gray: the text color at 30%, the alpha of Apple's tertiary label. Below it are a bold title and a regular description. Both are 15px on a 20px line, the macOS Title 3 size in [HIG typography](https://developer.apple.com/design/human-interface-guidelines/typography) (consulted 2026-11-20), and both use the secondary text color. The buttons sit in a row 6px apart, about 18px below the text. The documentation publishes no sizes, so these values were measured from the view as SwiftUI draws it on macOS 27.2. There, the symbol is about 42 by 30pt, about 27pt above the title, and the title is 4–5pt above the description. The 48px icon box draws a 24-unit icon at about that size. The box keeps 16px of clear space around the icon, so the gap between the symbol and the title comes out close to the measurement. [HIG writing](https://developer.apple.com/design/human-interface-guidelines/writing) (consulted 2026-11-20) asks for clear next steps on blank screens and a button or link to take them. Three choices are local decisions. The sizes follow macOS rather than iPhone. The iPhone illustration in [UIContentUnavailableConfiguration](https://developer.apple.com/documentation/uikit/uicontentunavailableconfiguration-swift.struct) (consulted 2026-11-20) shows the same arrangement with 22pt text and a 48pt symbol in a tinted disc. The secondary gray is the system's text role (#6e6e73, #a1a1a6 in dark mode), a little darker than Apple's secondary label. The 40ch measure is kept: the rendered view wraps at about 340pt, close to 40ch of 15px text.
 
 ## Do's and Don'ts
 

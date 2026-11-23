@@ -13,7 +13,7 @@ templates have recipes in all six systems.
 | `carbon` | [Carbon](../../src/design-systems/carbon/DESIGN.md) | Project adaptation of IBM Carbon |
 | `material` | [Material](../../src/design-systems/material/DESIGN.md) | Project adaptation of Material 3 base vocabulary |
 | `neobrutalism` | [Neobrutalism](../../src/design-systems/neobrutalism/DESIGN.md) | Bold borders, geometry and hard shadows |
-| `vercel` | [Vercel](../../src/design-systems/vercel/DESIGN.md) | Project adaptation of Geist |
+| `vercel` | [Vercel](../../src/design-systems/vercel/DESIGN.md) | Geist foundations with shadcn/ui components (base-nova) |
 
 External systems are adaptations, not complete implementations of their original libraries.
 Their specifications record sources, consultation dates and local decisions. Fonts use local

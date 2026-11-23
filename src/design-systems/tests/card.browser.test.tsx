@@ -62,11 +62,11 @@ const CARD_SYSTEM_CASES = [
   },
   {
     id: "vercel",
-    radius: "6px",
+    radius: "14px",
     border: "1px",
     shadow: [],
     surface: "--color-surface",
-    footer: "8px 16px 16px",
+    footer: "16px",
     footerGap: "8px",
   },
 ] as const;
@@ -186,7 +186,7 @@ describe("Card theme boundaries and overrides", () => {
     expect(getComputedStyle(screen.getByText("Inner")).borderBottomWidth).toBe(
       "1px",
     );
-    expect(sibling.borderRadius).toBe("6px");
+    expect(sibling.borderRadius).toBe("14px");
     expect(sibling.boxShadow).toBe("none");
   });
 

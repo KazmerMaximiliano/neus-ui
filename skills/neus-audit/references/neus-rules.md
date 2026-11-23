@@ -39,6 +39,28 @@ the project wrote.
 - IconButton uses its required `label` as `aria-label`.
 - Modal is a native `<dialog>`: focus trapping and Escape come from the
   browser.
+- Chip is a `<span>`; selectable, its label is a `<button aria-pressed>`
+  with a check while selected, and removable, a sibling `<button>` named
+  "Remove {label}" (`labels`). Flag a hand-made chip (a `span` with a chip or
+  tag class and a click handler, a remove `×` without a name) and a Badge used
+  as a filter.
+- List is a native `ul` or `ol` of ListItem rows with leading, title,
+  description and trailing parts. Flag rows of settings or people built from
+  `div`s or a bare `ul` with hand-made row layout, and a List used for actions
+  (Menu) or for sortable records (DataTable).
+- Separator is a line with the `separator` role (`aria-orientation` when
+  vertical), or `role="none"` when `decorative`. Flag a raw `<hr>`, a `div`
+  with a border used as a rule, and rules between list rows (List `divided`).
+- EmptyState gives an empty region a heading (`titleAs`), a description and a
+  way forward; with `role="status"` it is announced after a search. Flag a blank
+  region, a lone "No data" text without a next step, and an empty state shown
+  while content is still loading (Skeleton).
+- Drawer is a native modal `<dialog>` against an edge (`side`), named by
+  DrawerHeader; Tab wraps inside it, Escape and a backdrop press request
+  `onClose`, focus returns to the opener and the page behind does not scroll.
+  Flag a hand-made off-canvas panel (a fixed `div` translated in and out), a
+  filter panel of many fields squeezed into a Popover, and a Drawer used for a
+  short confirmation (Modal).
 - Popover wires its trigger with `aria-haspopup="dialog"`, `aria-expanded`
   and `aria-controls`; its panel is a named non-modal dialog on the top layer
   that flips to stay on screen, moves focus inside on opening, and closes on
@@ -98,8 +120,8 @@ the project wrote.
   `<input>`.
 - Switch is a native checkbox with `role="switch"` inside its label: its name
   is the label alone and its description is wired to `aria-describedby`; it
-  works and submits without JavaScript. Flag a hand-made toggle (a `div` or
-  `button` with `role="switch"` or `aria-pressed` for a setting) and a Switch
+  works and submits without JavaScript. Flag a hand-made switch (a `div` or
+  `button` with `role="switch"`, or `aria-pressed` for a setting) and a Switch
   used for a choice that only applies after a submit button.
 - RadioGroup is a `<fieldset role="radiogroup">` named by its legend, with
   `aria-required`, `aria-invalid` and its description and error wired to
@@ -109,6 +131,30 @@ the project wrote.
   hand-made radio (`role="radio"` or `role="radiogroup"` on a `div`), a raw
   `<input type="radio">`, and a Select or checkboxes for a single choice
   among two to five options that should stay visible.
+- Fieldset is a native `<fieldset>` named by its legend, with its description
+  and error wired to `aria-describedby`; `disabled` turns off every control
+  inside. FormField labels one control neus does not draw: its label points to
+  the control by `for` and `aria-labelledby`, and the control receives
+  `aria-describedby`, `aria-invalid` and `aria-required`. Flag a raw `<label>`
+  or `<fieldset>` beside neus fields, and a group of related fields without a
+  caption.
+- NumberInput is a `role="spinbutton"` field with `aria-valuenow`, `-min`,
+  `-max` and a formatted `aria-valuetext`; the arrow, Page and Home/End keys
+  step it, the steppers stay out of the Tab order, it clamps and rounds the
+  number and submits it unformatted. Flag `<input type="number">`, an Input
+  with `type="number"`, and hand-made plus/minus buttons around a field.
+- Slider is a native `<input type="range">` named by its label, with a
+  formatted `aria-valuetext` and its description and error wired to
+  `aria-describedby`; a range is a group of two inputs named "Minimum" and
+  "Maximum" (through `labels`) whose thumbs cannot cross. It submits plain
+  numbers. Flag a raw `<input type="range">`, a hand-made `role="slider"`, and
+  two sliders standing in for one range.
+- Toggle is a native button with `aria-pressed`, named by its label even when
+  only the icon shows; ToggleGroup is a `radiogroup` of toggles (one choice,
+  arrows press) or a `group` (several), with one Tab stop and arrow keys between
+  them. Flag a hand-made `aria-pressed` button, a row of buttons with a selected
+  class and no pressed state, and a ToggleGroup for options sent with a form
+  (RadioGroup).
 - Textarea is a native `<textarea>` with Input's look; `rows`, `maxRows` and
   `autoResize` size it in whole lines through CSS. Flag a raw `<textarea>` and
   hand-made growth (a `scrollHeight` handler on input).

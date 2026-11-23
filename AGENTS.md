@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 55 reusable UI components and public sections
+- 70 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,14 +193,17 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (55 total)
+### Implemented Components and Public Subcomponents (70 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
 | Alert            | src/components/Alert/                                   | STABLE | Info/success/warning/error, live roles, actions, labelled dismiss                                                       |
 | Avatar           | src/components/Avatar/                                  | STABLE | Picture or initials, pre-hydration failure fallback, sizes and shapes                                                   |
 | AvatarGroup      | src/components/Avatar/components/AvatarGroup/           | STABLE | Overlap, size for its avatars, +N count                                                                                 |
+| List             | src/components/List/                                    | STABLE | Native ul/ol of rows, plain or divided with inset rules                                                                 |
+| ListItem         | src/components/List/components/ListItem/                | STABLE | Leading, title, description, extra content and trailing parts                                                           |
 | Badge            | src/components/Badge/                                   | STABLE | Solid/dot variants, 5 semantic colors                                                                                   |
+| Chip             | src/components/Chip/                                    | STABLE | Compact value: toggle (aria-pressed, check when selected), removable with a named button, or both; MultiSelect tags     |
 | Button           | src/components/Button/                                  | STABLE | Multiple variants, sizes (small/medium/large), loading state, href links, native attributes and ref                     |
 | Calendar         | src/components/Calendar/                                | STABLE | Date picker                                                                                                             |
 | Card             | src/components/Card/                                    | STABLE | Composable themed surface, semantic `as`, className and style                                                           |
@@ -210,7 +213,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | CardFooter       | src/components/Card/components/CardFooter/              | STABLE | Wrapping footer content and actions                                                                                     |
 | Checkbox         | src/components/Checkbox/                                | STABLE | Indeterminate state                                                                                                     |
 | Clock            | src/components/Clock/                                   | STABLE | Time picker                                                                                                             |
-| DataTable        | src/components/DataTable/                               | STABLE | Sorting, pagination, filtering                                                                                          |
+| DataTable        | src/components/DataTable/                               | STABLE | Sorting, pagination, filtering; an EmptyState when there are no rows                                                    |
 | DateInput        | src/components/DateInput/                               | STABLE | Calendar picker field                                                                                                   |
 | Dropdown         | src/components/Dropdown/                                | STABLE | Dropdown menu                                                                                                           |
 | FileUploader     | src/components/FileUploader/                            | STABLE | Drag and drop                                                                                                           |
@@ -223,9 +226,13 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | ModalHeader      | src/components/Modal/components/ModalHeader/            | STABLE | Dialog title and header composition                                                                                     |
 | ModalContent     | src/components/Modal/components/ModalContent/           | STABLE | Dialog body composition                                                                                                 |
 | ModalFooter      | src/components/Modal/components/ModalFooter/            | STABLE | Dialog action composition                                                                                               |
-| MultiSelect      | src/components/MultiSelect/                             | STABLE | Multiple selection                                                                                                      |
+| Drawer           | src/components/Drawer/                                  | STABLE | Modal dialog against an edge: start/end/top/bottom, slides, wraps Tab, backdrop press, keeps content mounted            |
+| DrawerHeader     | src/components/Drawer/components/DrawerHeader/          | STABLE | Title row that names the drawer                                                                                         |
+| DrawerContent    | src/components/Drawer/components/DrawerContent/         | STABLE | Body that scrolls between header and footer                                                                             |
+| DrawerFooter     | src/components/Drawer/components/DrawerFooter/          | STABLE | Wrapping row of actions                                                                                                 |
+| MultiSelect      | src/components/MultiSelect/                             | STABLE | Multiple selection; selected values as removable Chips                                                                  |
 | Select           | src/components/Select/                                  | STABLE | Single selection                                                                                                        |
-| Sidebar          | src/components/Sidebar/                                 | STABLE | Six token recipes, transparent curves, tablet rail and mobile drawer, href items with linkComponent                     |
+| Sidebar          | src/components/Sidebar/                                 | STABLE | Six token recipes, transparent curves, tablet rail and a Drawer on phones, href items with linkComponent               |
 | TimeInput        | src/components/TimeInput/                               | STABLE | Clock picker field                                                                                                      |
 | WeekCalendar     | src/components/WeekCalendar/                            | STABLE | Weekly view, event categories, navigation                                                                               |
 | WeekCalendarRow  | src/components/WeekCalendar/components/WeekCalendarRow/ | STABLE | Event row with hover tooltip, click handler                                                                             |
@@ -236,6 +243,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Stack            | src/components/Stack/                                   | STABLE | Responsive direction and space-scale gap, list semantics                                                                |
 | Grid             | src/components/Grid/                                    | STABLE | Responsive columns or auto-fit minimum width                                                                            |
 | Section          | src/components/Section/                                 | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container                                             |
+| Separator        | src/components/Separator/                               | STABLE | Horizontal or vertical line with the separator role, or decorative; recipe color, thickness and spacing                 |
 | MediaPlaceholder | src/components/MediaPlaceholder/                        | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
 | Popover          | src/components/Popover/                                 | STABLE | Non-modal dialog anchored to a Button trigger, four placements that flip, controlled or not                             |
 | Radio            | src/components/Radio/                                   | STABLE | Native radio with label and help text, controlled or uncontrolled; alone or inside RadioGroup                           |
@@ -245,6 +253,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Textarea         | src/components/Textarea/                                | STABLE | Multi-line Input field: rows and maxRows in lines, optional auto-resize, description and accessible errors              |
 | Progress         | src/components/Progress/                                | STABLE | Determinate or indeterminate bar with label and value text; Stepper's linear track                                     |
 | Skeleton         | src/components/Skeleton/                                | STABLE | Hidden text, block and circle placeholders with pulse or shimmer that stops under reduced motion                        |
+| EmptyState       | src/components/EmptyState/                              | STABLE | Media, title as h2-h4 or p, description and actions for an empty region; DataTable's empty view                         |
 | Toast            | src/components/Toast/                                   | STABLE | Alert that closes itself, pausing on hover and focus; queued and announced by ToastProvider and useToast                |
 | Tooltip          | src/components/Tooltip/                                 | STABLE | Description on hover and keyboard focus, centered and flipping, hoverable and dismissable; WeekCalendarRow's bubble     |
 | Combobox         | src/components/Combobox/                                | STABLE | Input with suggestions and aria-activedescendant: local filter or fetched results, custom values, loading              |
@@ -252,6 +261,12 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Breadcrumbs      | src/components/Breadcrumbs/                             | STABLE | Navigation trail ending at aria-current, CSS separators, collapsing middle items, linkComponent                         |
 | Pagination       | src/components/Pagination/                              | STABLE | Page buttons with ellipses or compact previous/next, page-size Select; DataTable's controls                             |
 | Accordion        | src/components/Accordion/                               | STABLE | Native details/summary, single or multiple open, controlled or not, find-in-page, works without JavaScript              |
+| FormField        | src/components/FormField/                               | STABLE | Label, help text, required mark and error handed to a control it does not draw through a render function                |
+| Fieldset         | src/components/Fieldset/                                | STABLE | Native fieldset with legend, help text and error; disables every control; RadioGroup's base                             |
+| NumberInput      | src/components/NumberInput/                             | STABLE | Spinbutton on Input: arrow/page/home/end and stepper buttons, clamping, precision, Intl formatting, plain submit value  |
+| Slider           | src/components/Slider/                                  | STABLE | Native range inputs: one value or a range with two thumbs that do not cross, Intl value text                            |
+| Toggle           | src/components/Toggle/                                  | STABLE | Button with aria-pressed, icon or icon only, controlled or not; ToggleGroup's radios                                    |
+| ToggleGroup      | src/components/ToggleGroup/                             | STABLE | Single (radiogroup) or multiple toggles, roving focus, arrows, orientation, Tabs' segments                              |
 
 ### Implemented Sections (12 total, `neus-ui/sections`)
 
@@ -882,7 +897,7 @@ interactive component catalog separately.
 
 All public families and both templates have six scoped recipes. Button supports
 solid/secondary/tonal/elevated/outlined/text; Card supports
-auto/filled/outlined/elevated. Input, Textarea, Combobox, Select, MultiSelect and picker fields share variant, size and
+auto/filled/outlined/elevated. Input, NumberInput, Textarea, Combobox, Select, MultiSelect and picker fields share variant, size and
 label-placement controls. Calendar is discriminated
 by mode and uses numberOfMonths. DataTable requires typed columnDefs and accepts
 renderMobileCard. DataTable actions are composed by consumers with buttons or menus,

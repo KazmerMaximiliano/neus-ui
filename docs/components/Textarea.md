@@ -139,6 +139,7 @@ Input's, so a form's fields match.
 | --- | --- | --- |
 | `--textarea-radius` | Corner radius: the input radius, never more than the 16px content radius | `min(var(--input-radius), 16px)` |
 | `--textarea-filled-radius` | Corner radius of a filled textarea | `var(--textarea-radius)` |
+| `--textarea-line-height` | Height of each line, which `rows` and `maxRows` count | `var(--input-line-height)` |
 
 ### Shared dependencies and runtime values
 

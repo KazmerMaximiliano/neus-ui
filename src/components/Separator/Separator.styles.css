@@ -1,0 +1,22 @@
+.separator {
+  flex: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: var(--separator-color);
+}
+
+.separator[data-orientation="horizontal"] {
+  align-self: stretch;
+  block-size: var(--separator-thickness);
+  margin-block: var(--separator-spacing);
+}
+
+/* Down a row it takes the row's height, at least a line of text when nothing stretches it. */
+.separator[data-orientation="vertical"] {
+  align-self: stretch;
+  inline-size: var(--separator-thickness);
+  min-block-size: 1em;
+  margin-inline: var(--separator-spacing);
+}

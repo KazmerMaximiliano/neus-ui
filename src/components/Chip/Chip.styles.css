@@ -1,0 +1,135 @@
+.chip {
+  --chip-height: var(--chip-height-medium);
+  --chip-padding: var(--chip-padding-medium);
+  --chip-font-size: var(--chip-font-size-medium);
+  --chip-remove-size: var(--chip-remove-size-medium);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--chip-gap);
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: var(--chip-height);
+  padding-inline: var(--chip-padding);
+  padding-block: var(--chip-padding-block);
+  border: var(--chip-border-width) solid var(--chip-border-color);
+  border-radius: var(--chip-radius);
+  background-color: var(--chip-background);
+  color: var(--chip-color);
+  font-family: var(--chip-font-family);
+  font-size: var(--chip-font-size);
+  font-weight: var(--chip-font-weight);
+  line-height: var(--chip-line-height);
+  vertical-align: middle;
+  transition: var(--chip-transition);
+}
+
+.chip[data-size="small"] {
+  --chip-height: var(--chip-height-small);
+  --chip-padding: var(--chip-padding-small);
+  --chip-font-size: var(--chip-font-size-small);
+  --chip-remove-size: var(--chip-remove-size-small);
+}
+
+/* A selectable chip's button fills it, so the whole chip takes the press. */
+.chip:has(.chip__action) {
+  padding-inline: 0;
+}
+
+.chip__action {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  align-self: stretch;
+  gap: var(--chip-gap);
+  min-width: 0;
+  margin: 0;
+  padding-inline: var(--chip-padding);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.chip:has(.chip__action):has(.chip__remove) .chip__action {
+  padding-inline-end: 0;
+}
+
+.chip:has(.chip__action) .chip__remove {
+  margin-inline-end: var(--chip-remove-inset);
+}
+
+.chip:has(.chip__action:hover:not(:disabled)) {
+  background-color: var(--chip-hover-background);
+}
+
+.chip[data-selected] {
+  border-color: var(--chip-selected-border-color);
+  background-color: var(--chip-selected-background);
+  color: var(--chip-selected-color);
+}
+
+.chip[data-selected]:has(.chip__action:hover:not(:disabled)) {
+  background-color: var(--chip-selected-hover-background);
+}
+
+.chip__icon {
+  flex: none;
+  width: var(--chip-icon-size);
+  height: var(--chip-icon-size);
+}
+
+.chip__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The remove button sits at the end, its circle touching the chip's inner edge. */
+.chip__remove {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--chip-remove-size);
+  height: var(--chip-remove-size);
+  margin: 0;
+  margin-inline-end: calc(var(--chip-remove-inset) - var(--chip-padding));
+  padding: 0;
+  border: 0;
+  border-radius: var(--chip-remove-radius);
+  background: transparent;
+  color: var(--chip-remove-color);
+  cursor: pointer;
+}
+
+.chip__remove-icon {
+  width: var(--chip-remove-icon-size);
+  height: var(--chip-remove-icon-size);
+}
+
+.chip__remove:hover:not(:disabled) {
+  background-color: var(--chip-remove-hover-background);
+}
+
+.chip__action:focus-visible,
+.chip__remove:focus-visible {
+  outline: var(--chip-focus-width) solid var(--chip-focus-color);
+  outline-offset: var(--chip-focus-offset);
+}
+
+.chip[data-disabled] {
+  opacity: var(--chip-disabled-opacity);
+}
+
+.chip :disabled {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+  }
+}

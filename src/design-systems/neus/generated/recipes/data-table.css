@@ -23,4 +23,7 @@
   --data-table-empty-padding: 24px;
   --data-table-empty-height: 150px;
   --data-table-empty-title-size: 18px;
+  --data-table-empty-title-weight: 700;
+  --data-table-empty-gap: 0px;
+  --data-table-empty-line-height: normal;
 }

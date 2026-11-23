@@ -20,7 +20,7 @@ const SYSTEMS = [
   { id: "carbon", radius: "2px", padding: "2px 16px", fontSize: "14px", offset: 10 },
   { id: "material", radius: "4px", padding: "4px 8px", fontSize: "12px", offset: 6 },
   { id: "neobrutalism", radius: "4px", padding: "6px 10px", fontSize: "12px", offset: 6 },
-  { id: "vercel", radius: "6px", padding: "6px 10px", fontSize: "13px", offset: 6 },
+  { id: "vercel", radius: "8px", padding: "6px 12px", fontSize: "12px", offset: 4 },
 ] as const;
 
 const tip = (

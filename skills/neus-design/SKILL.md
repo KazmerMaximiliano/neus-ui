@@ -213,57 +213,53 @@ component's guide.
 
 | Need | Component |
 | --- | --- |
-| Page or section title | `Heading` (`as` for the level, `size` for the look; `size="display"` for the main headline of a public page) |
-| Paragraph, lead, caption, label text | `Text` (`variant`, `tone`; `numeric` for figures) |
-| Page band with its own background | `Section` (`tone`, `id` for links, `aria-labelledby`) |
-| Page width and side margins outside a Section | `Container` |
-| Items in a row or column | `Stack` (`direction`, `gap`; `{ base, md, lg }` per breakpoint) |
-| Columns of cards or items | `Grid` (`columns` or `minItemWidth`; `as="ul"` with `Card as="li"`) |
-| Header of a public page (brand, links, action) | `SiteHeader` from `neus-ui/sections` (`labels` in the project's language) |
-| Opening of a public page | `Hero` (`variant` from the dealt composition: `split`, `centered`, `media-first`) |
+| Page or section title | `Heading` (`as` for the level, `size` for the look; `size="display"` for a public page's headline) |
+| Body, lead, caption or label text | `Text` (`variant`, `tone`; `numeric` for figures) |
+| Page band | `Section` (`tone`, `id`, `aria-labelledby`); a strong band is `tone="brand"` or `"inverse"`, with links and fields in a Card |
+| Page width outside a Section | `Container` |
+| Row, column or columns of items | `Stack` (`direction`, `gap`), `Grid` (`columns` or `minItemWidth`; `as="ul"` with `Card as="li"`); `{ base, md, lg }` per breakpoint |
+| Public page header and footer | `SiteHeader` (`labels`), `SiteFooter` |
+| Public page opening | `Hero` (`variant` from the dealt composition) |
 | Title block of a section | `SectionHeader` (`titleId` + the Section's `aria-labelledby`) |
-| Features or services | `FeatureList` + `FeatureItem` (`variant`: `grid`, `list`, `cards`) |
-| Testimonials or reviews | `TestimonialList` + `Testimonial` (`variant`: `plain`, `card`, `featured`), marked `SAMPLE:` |
-| Closing call to action, with or without a form | `CallToAction` (`variant`: `band`, `split` with the form in `aside`) |
-| Footer of a public page | `SiteFooter` |
-| Questions and answers on a public page | `FAQ` from `neus-ui/sections` (`items`; `variant` from the dealt composition: `list`, `cards`) under a `SectionHeader` |
-| Plans and prices | `PricingTable` of `PricingCard`s from `neus-ui/sections` (`price` in the page's locale, `features`, `action`; `featured` and `badge` on the recommended plan); prices only from the brief |
-| Any other group of items (agenda, team) | `Card as="li"` + `CardHeader` + `CardContent`, inside `Grid as="ul"` |
-| Container of a widget, demo or summary | `Card` |
-| Band of strong color (agenda, final call to action) | `Section tone="brand"` (action color) or `tone="inverse"` (ink); primary buttons adapt, links and fields go in a Card |
-| Picture the project does not have yet | `MediaPlaceholder` with the shot as `label`, marked `SAMPLE:`; with the context's photo preview line, its `pixabayKey` expression and a short `query` |
-| Signup, contact or create form | `<form>` + `FormTemplate` + `Input` (`Select`, `Checkbox`, `DateInput`…), inside a `Card` on public pages |
-| Primary or secondary action | `Button` with `variant`; with `href` when it navigates (a CTA to a section or page) |
-| Icon-only action | `IconButton` |
-| Text navigation | `Link` |
-| Help text under a field | `description` on Input, Textarea, Combobox, Select, MultiSelect, RadioGroup, DateInput or TimeInput: one line, on every field of the row or none; examples go in `placeholder` |
-| Required field | `required` on Input, Textarea, Combobox, Select, MultiSelect, RadioGroup, DateInput or TimeInput (asterisk and `aria-required`) |
-| Text that wraps to several lines (message, notes, description) | `Textarea` (`rows`; `autoResize` with `maxRows` where the page has room to grow) |
-| Field that needs the whole row (long hint, Textarea, consent) | `className="form-template__full"` on the field inside FormTemplate |
+| Features or services | `FeatureList` + `FeatureItem` (`variant`) |
+| Testimonials or reviews | `TestimonialList` + `Testimonial`, marked `SAMPLE:` |
+| Closing call to action | `CallToAction` (`variant="split"` puts a form in `aside`) |
+| Questions and answers | `FAQ` (`items`) under a `SectionHeader` |
+| Plans and prices | `PricingTable` of `PricingCard`s (`featured`, `badge`); prices only from the brief |
+| Group of items (agenda, team) | `Card as="li"` + `CardHeader` + `CardContent` in `Grid as="ul"`; one widget or summary: `Card` |
+| Picture the project lacks | `MediaPlaceholder` (`label` names the shot, marked `SAMPLE:`; with a photo preview line, `pixabayKey` and a short `query`) |
+| Form | `<form>` + `FormTemplate` + fields, in a `Card` on public pages; `className="form-template__full"` on a field that needs the row |
+| Text field | `Input`; several lines: `Textarea` (`rows`; `autoResize` with `maxRows`) |
+| Help text or required field | `description` (one line, on every field of a row or none; examples go in `placeholder`), `required` |
+| Quantity or amount | `NumberInput` (`min`, `max`, `step`; `formatOptions` for currency) |
+| Value or range along a scale (volume, price filter) | `Slider` (`min`, `max`, `step`; `range` for two ends) |
+| Fields under one caption | `Fieldset` (`label` is the legend) |
+| Label and error for a control neus does not draw | `FormField` (`children` receives the control's props) |
+| Choice from options | `Select`, `MultiSelect`, `Checkbox`; 2–5 visible: `RadioGroup` + `Radio`; actions: `Menu`, `Dropdown` |
+| Search or free value with suggestions | `Combobox` (`filter={false}`, `onInputChange` and `loading` when fetched; `allowCustomValue`); predefined options stay `Select` |
+| On/off that applies at once | `Switch`; sent with a form: `Checkbox` |
+| Pressed state or view switch (Bold, list or grid) | `Toggle`; a set: `ToggleGroup` (`type="multiple"` for several) |
+| Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
+| Files, map | `FileUploader`, `InteractiveMap` |
+| Action | `Button` (`variant`; `href` when it navigates); icon only: `IconButton`; inside text: `Link` |
 | Status or label | `Badge` |
-| Message about the page or a form (saved, failed, trial ending) | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
-| Region or value still loading, length unknown | `Spinner` (`label` in the project's language; `size`); a loading button uses its own `loading` |
-| Completion of a task (upload, import, quota) | `Progress` (`label`, `value`, `max`; `valueText` in words, `showValue`); no `value` while the share is unknown |
-| Content still loading (list, card, profile) | `Skeleton` (`variant` `text`, `rect` or `circle`; `lines`) inside the region, which gets `aria-busy` |
-| Brief confirmation after an action (saved, sent, archived) | `useToast().show({ status, title, actions })` under one `ToastProvider` (`label` and `dismissLabel` in the project's language); a lasting message stays `Alert` |
+| Filter or tag a person picks or removes | `Chip` (`selected`, `onRemove`) |
+| Rows of settings, people or files | `List` (`divided`) + `ListItem` (`leading`, `title`, `description`, `trailing`) |
+| Message about the page or a form | `Alert` (`status`, `title`, `actions`; `live="assertive"` for errors after an action) |
+| Brief confirmation after an action | `useToast().show({ status, title })` under one `ToastProvider`; lasting: `Alert` |
+| Nothing to show yet (first use, no results) | `EmptyState` (`title`, `description`, `actions`; `role="status"` after a search) |
+| Loading | `Spinner` (`label`; a button has `loading`); `Skeleton` (`variant`, `lines`) in a region with `aria-busy`; `Progress` (`value`, `max`, `valueText`) for a known share |
 | Person or organization | `Avatar` (`alt=""` beside a written name); several: `AvatarGroup` |
 | Confirmation or detail | `Modal` + `ModalHeader` + `ModalContent` + `ModalFooter` |
-| Extra controls or details tied to a button (filters, share, explanation) | `Popover` (`trigger` renders a Button or IconButton with the props it receives); a list of actions stays `Menu` |
-| Short hint for a control (what an icon button does, a limit) | `Tooltip` (`content`; `trigger` renders the Button or IconButton); the control keeps its name, anything to act on goes in a `Popover` |
-| Choice from options | `Select`, `MultiSelect`, `Checkbox`, `Dropdown`, `Menu` |
-| Search with suggestions or free text (city, tag, user, long lists) | `Combobox` (`filter={false}`, `onInputChange` and `loading` for fetched results; `allowCustomValue` for new values); browsing predefined options stays `Select` |
-| On/off setting that applies at once | `Switch`; a choice sent with a form stays `Checkbox` |
-| One choice among 2–5 visible options | `RadioGroup` + `Radio`; more options: `Select` |
-| Date or time | `DateInput`, `TimeInput`, `Calendar`, `Clock`, `WeekCalendar` |
-| Records in a table | `DataTable` (its pagination is built in; `paginationLabels` in the project's language) |
-| Long content in collapsible sections (settings groups, specifications) | `Accordion` (`items`; `type="single"`; `titleAs`); on public pages, questions are a `FAQ` |
-| Views of the same subject, one at a time (settings sections) | `Tabs` (`items`, `label`; `variant="contained"` in a card or toolbar); ordered steps stay `Stepper` |
-| Where the page sits in a hierarchy (two or more levels deep) | `Breadcrumbs` (`items` ending at the current page; `linkComponent` with a router), above the title or in AppTemplate's `headerStart` |
-| Long list or results split into pages | `Pagination` (`page`, `totalPages`, `onChange`; `pageSize` and `pageSizeOptions`; `variant="compact"` where room is short) |
-| Steps of a flow | `Stepper` |
-| Files | `FileUploader` |
-| Map | `InteractiveMap` |
-| Application shell with side navigation (dashboards, back-office) | `AppTemplate` (`title`, `routes`, `headerStart` for `Breadcrumbs` or search, `menu` for global actions); never a Sidebar with your own header |
+| Side panel or bottom sheet (filters, details) | `Drawer` (`side`) + `DrawerHeader`, `DrawerContent`, `DrawerFooter` |
+| Controls or details tied to a button | `Popover` (`trigger` renders a Button or IconButton with the props it receives) |
+| Short hint for a control | `Tooltip` (`content`, `trigger`); the control keeps its name, anything to act on goes in a `Popover` |
+| Collapsible sections | `Accordion` (`items`; `type="single"`; `titleAs`) |
+| Views of one subject, one at a time | `Tabs` (`items`, `label`; `variant="contained"` in a card); ordered steps: `Stepper` |
+| Place in a hierarchy | `Breadcrumbs` (`items` ending at the current page; `linkComponent`) |
+| Records in a table | `DataTable` (pagination built in) |
+| Long list split into pages | `Pagination` (`page`, `totalPages`, `onChange`; `variant="compact"`) |
+| App shell with side navigation | `AppTemplate` (`title`, `routes`, `headerStart`, `menu`); never a Sidebar with your own header |
 
 Write your own element only for what no row covers (a `blockquote`, a `nav`
 landmark, an inline `strong`), styled with neus tokens.

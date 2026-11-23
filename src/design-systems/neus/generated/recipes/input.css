@@ -83,4 +83,5 @@
   --input-filled-label-background: var(--input-filled-background);
   --textarea-radius: min(var(--input-radius), 16px);
   --textarea-filled-radius: var(--textarea-radius);
+  --textarea-line-height: var(--input-line-height);
 }

@@ -18,7 +18,7 @@ const SYSTEMS = [
   { id: "carbon", radius: "0px", border: "0px" },
   { id: "material", radius: "28px", border: "0px" },
   { id: "neobrutalism", radius: "4px", border: "3px" },
-  { id: "vercel", radius: "12px", border: "1px" },
+  { id: "vercel", radius: "14px", border: "1px" },
 ] as const;
 
 const Example = ({ system, scheme }: { system: DesignSystemId; scheme: "light" | "dark" }) => {
@@ -87,5 +87,17 @@ describe("Modal behavior in the browser", () => {
     expect(cancel.left).toBeCloseTo(dialog.left, 0);
     expect(remove.right).toBeCloseTo(dialog.right, 0);
     expect(cancel.right).toBeCloseTo(remove.left, 0);
+  });
+
+  it("drops the outline of an outlined action in Carbon's full-bleed footer, and keeps it elsewhere", async () => {
+    const user = userEvent.setup();
+    render(<Example system="carbon" scheme="light" />);
+    await user.click(screen.getByRole("button", { name: "Open" }));
+    expect(getComputedStyle(screen.getByRole("button", { name: "Cancel" })).borderTopWidth).toBe("0px");
+    cleanup();
+
+    render(<Example system="neus" scheme="light" />);
+    await user.click(screen.getByRole("button", { name: "Open" }));
+    expect(getComputedStyle(screen.getByRole("button", { name: "Cancel" })).borderTopWidth).toBe("1px");
   });
 });

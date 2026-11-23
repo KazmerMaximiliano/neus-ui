@@ -1,5 +1,9 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --spinner-stroke-width: 0.1em;
+  --spinner-size-small: 12px;
+  --spinner-size-medium: 16px;
+  --spinner-size-large: 24px;
+  --spinner-stroke-width: 0.0833em;
   --spinner-color: currentColor;
+  --spinner-ring-duration: 1s;
 }

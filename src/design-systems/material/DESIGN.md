@@ -643,6 +643,139 @@ x-neus:
         --accordion-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent)
         --accordion-focus-width: 3px
         --accordion-focus-offset: -3px
+    form-field: {}
+    number-input:
+      base:
+        --number-input-button-size: 32px
+        --number-input-icon-size: 20px
+        --number-input-button-hover-color: var(--color-text-secondary)
+        --number-input-button-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent)
+        --number-input-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent)
+    slider:
+      base:
+        --slider-control-height: 44px
+        --slider-track-height: 16px
+        --slider-track-inner-radius: 2px
+        --slider-track-gap: 8px
+        --slider-track-background: var(--color-secondary-container)
+        --slider-thumb-width: 4px
+        --slider-thumb-height: 44px
+        --slider-thumb-inset: 8px
+        --slider-thumb-radius: "{rounded.pill}"
+        --slider-thumb-border-width: 0px
+        --slider-thumb-background: var(--color-primary)
+        --slider-thumb-shadow: "0 0 #0000"
+        --slider-thumb-hover-shadow: "0 0 #0000"
+        --slider-thumb-active-shadow: "0 0 #0000"
+        --slider-thumb-focus-width: 2px
+        --slider-thumb-active-width: 2px
+        --slider-focus-shadow: 0 0 0 2px var(--color-surface), 0 0 0 5px var(--color-focus)
+        --slider-step-color: var(--color-on-secondary-container)
+        --slider-step-active-color: var(--color-text-on-primary)
+        --slider-stop-size: 4px
+        --slider-stop-inset: 8px
+        --slider-stop-color: var(--color-primary)
+        --slider-transition: width 100ms cubic-bezier(0.2, 0, 0, 1)
+    toggle:
+      base:
+        --toggle-font-size: 14px
+        --toggle-font-weight: "500"
+        --toggle-height-large: 56px
+        --toggle-padding-large: 0 24px
+        --toggle-icon-size-medium: 20px
+        --toggle-icon-size-large: 24px
+        --toggle-border-width: 0px
+        --toggle-background: var(--color-surface-container-high)
+        --toggle-color: var(--color-text-secondary)
+        --toggle-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, var(--color-surface-container-high))
+        --toggle-pressed-background: var(--color-primary)
+        --toggle-pressed-hover-background: color-mix(in srgb, var(--color-text-on-primary) 8%, var(--color-primary))
+        --toggle-pressed-color: var(--color-text-on-primary)
+        --toggle-pressed-border-color: transparent
+        --toggle-focus-width: 3px
+        --toggle-group-item-outer-radius: "{rounded.pill}"
+    drawer:
+      base:
+        --drawer-width: 256px
+        --drawer-sheet-width: 640px
+        --drawer-background: var(--color-surface-container-low)
+        --drawer-radius: 16px
+        --drawer-sheet-radius: 28px
+        --drawer-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15)
+        --drawer-header-gap: 12px
+        --drawer-title-size: 22px
+        --drawer-title-line-height: 28px
+        --drawer-footer-padding: 16px 24px 24px
+        --drawer-footer-justify: flex-start
+        --drawer-duration: 275ms
+    chip:
+      base:
+        --chip-height-small: 24px
+        --chip-height-medium: 32px
+        --chip-padding-small: 8px
+        --chip-padding-medium: 16px
+        --chip-gap: 8px
+        --chip-radius: 8px
+        --chip-font-size-small: 12px
+        --chip-font-size-medium: 14px
+        --chip-font-weight: "500"
+        --chip-border-width: 1px
+        --chip-border-color: var(--color-border-input-hover)
+        --chip-background: transparent
+        --chip-color: var(--color-text-secondary)
+        --chip-icon-size: 18px
+        --chip-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent)
+        --chip-selected-background: var(--color-secondary-container)
+        --chip-selected-hover-background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container))
+        --chip-selected-color: var(--color-on-secondary-container)
+        --chip-selected-border-color: transparent
+        --chip-remove-size-small: 20px
+        --chip-remove-size-medium: 24px
+        --chip-remove-icon-size: 18px
+        --chip-remove-color: currentColor
+        --chip-remove-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent)
+        --chip-focus-width: 3px
+        --chip-focus-offset: 2px
+    list:
+      base:
+        --list-gap: 0px
+        --list-padding: 8px 0
+        --list-divider-inset: 16px
+        --list-item-padding: 12px 16px
+        --list-item-gap: 16px
+        --list-title-size: 16px
+        --list-title-weight: "400"
+        --list-title-line-height: 24px
+        --list-description-size: 14px
+        --list-description-line-height: 20px
+        --list-trailing-size: 11px
+    separator:
+      base:
+        --separator-color: var(--color-border-subtle)
+        --separator-thickness: 1px
+        --separator-spacing: 8px
+    empty-state:
+      base:
+        --empty-state-align: center
+        --empty-state-gap: 16px
+        --empty-state-padding: 24px
+        --empty-state-background: transparent
+        --empty-state-border-width: 0px
+        --empty-state-media-size: 48px
+        --empty-state-media-color: "#625b71"
+        --empty-state-media-background: transparent
+        --empty-state-media-padding: 0px
+        --empty-state-title-color: var(--color-text-primary)
+        --empty-state-title-size: 24px
+        --empty-state-title-weight: "400"
+        --empty-state-title-line-height: 32px
+        --empty-state-description-color: var(--color-text-secondary)
+        --empty-state-description-size: 14px
+        --empty-state-description-line-height: 20px
+        --empty-state-actions-gap: 8px
+        --empty-state-actions-spacing: 8px
+      dark:
+        --empty-state-media-color: "#ccc2dc"
 ---
 
 # Material
@@ -819,6 +952,27 @@ Material 3 has no breadcrumbs or pagination. Breadcrumbs keep the Neus trail in 
 Material 3 has no accordion either, so its rows are one-line list items: 56px tall with 16px at the sides, titles in body large (16px over 24px, 0.5px tracking) in on-surface, a 24px chevron in on-surface-variant, answers in body medium, outline-variant dividers and the on-surface state layer at 8% on hover ([material-web list tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-list.scss), consulted 2026-11-19). The chevron and the dividers between rows are a local mapping.
 
 Material has no success or warning roles, so alert colors are a local decision. Alerts tint the lowest surface container, not the tinted surface: mixed into its violet cast, green turns gray and orange and red look alike. Warning takes a 24% tint and error 14%, and their icons carry the status color (warning at 70% over the text color, to keep 3:1), so the two read apart in both modes.
+
+A form field or a fieldset takes the text field's label, supporting text and error styles, so they need no values of their own.
+
+A number input ends in two round 32px icon buttons with 20px icons in on-surface-variant, and an 8% state layer on hover. Material 3 has no stepper, so the buttons follow the shape of its icon buttons as a local decision.
+
+A slider follows the Material 3 expressive slider in its extra-small size: a 16px track with full outer corners and 2px corners beside the handle, primary up to the handle and secondary container after it, and a 4px by 44px primary bar for a handle that clears 6px of track on each side. The handle has no hover state; on keyboard focus and while pressed it narrows to 2px in the same slot, and focus adds a 3px ring 2px away. The handle travels 8px in from each end of the track, where a 4px primary stop indicator marks the end of the inactive track until the handle reaches it. Step marks are 4px dots, on-primary over the active track and on-secondary-container over the inactive one, and the ones inside a handle's gap are not drawn ([Compose Material 3 Slider](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/Slider.kt), [MDC Android slider tokens](https://github.com/material-components/material-components-android/tree/master/lib/java/com/google/android/material/slider) and [material-web slider tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-slider.scss), consulted 2026-11-19; m3.material.io does not render for reading). The value label bubble above the handle is left out: the value reads at the end of the label row.
+
+A toggle is a filled toggle button: 40px tall with full corners, a high surface container and on-surface-variant label at rest, primary with an on-primary label when selected, label-large type ([icon button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-icon-button-filled.scss), consulted 2026-11-19); the shape change on selection is left out. A toggle group is the outlined segmented button of the contained tabs: a 1px outline with full outer corners, dividers between segments, and the selected one in secondary container ([segmented button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-outlined-segmented-button.scss), consulted 2026-11-19), without the check mark.
+
+A drawer is a modal side sheet: a 256px panel on the low surface container (#f7f2fa, #1d1b20 in dark mode) at level 1 elevation, as tall as the screen, with 16px corners on the edge that faces the page, over the dialog's 32% black scrim. Its headline is title large (22px over 28px, regular weight) with 24px of padding and 12px before the close button. The body keeps the dialog's 24px sides, and actions sit at the start with 16px above and 24px below. Top and bottom drawers are bottom sheets, at most 640px wide and centered, with 28px corners. The panel slides in over 275ms on the emphasized curve. Sources: [side sheet tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-sheet-side.scss), [bottom sheet tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-sheet-bottom.scss), [scrim tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-scrim.scss), [MDC Android side sheet](https://github.com/material-components/material-components-android/blob/master/docs/components/SideSheet.md) with [its tokens](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/sidesheet/res/values/tokens.xml) and [enter animation](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/sidesheet/res/anim/m3_side_sheet_enter_from_right.xml), [MDC Android bottom sheet dimensions](https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/bottomsheet/res/values/dimens.xml) and [Compose SheetDefaults](https://github.com/androidx/androidx/blob/androidx-main/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/SheetDefaults.kt), all consulted 2026-11-20. The 12px gap and the action padding come from the [side sheet specs](https://m3.material.io/components/side-sheets/specs) (consulted 2026-11-20). That page draws its tables with JavaScript, so these values were read from two independent transcriptions of it. The specs allow up to 400px, but the 256px token width is used. Some parts are local decisions: the drawer is not dragged, so it has no drag handle; the headline keeps the panel's text color instead of on-surface-variant; and the optional divider above the actions is not drawn.
+
+A chip is the Material 3 filter and input chip: 32px tall with 8px corners, a 1px outline (#79747e, #938f99 in dark mode), a transparent fill and a label-large label (14px, medium) in on-surface-variant, with 18px icons 8px from the label and 16px of padding at each end. Hovering adds an 8% on-surface-variant layer. A selected chip drops its outline and fills with the secondary container in on-secondary-container text, with a check in place of its icon. The remove button is an 18px X in a round 24px target with the same hover layer, and focus draws a 3px ring 2px outside it ([filter chip](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-filter-chip.scss) and [input chip tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-input-chip.scss), [state](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-sys-state.scss) and [typescale tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-sys-typescale.scss), consulted 2026-11-20). Local decisions: M3 has a single size, so the small chip is 24px with 8px of padding, 12px text and a 20px remove target; the outline keeps the shipped outline role, matching MultiSelect's tags; the focus ring keeps this system's primary focus color; and both ends keep 16px of padding where M3 trims the side next to an icon to 8px.
+
+A list is the Material 3 list: rows at least 56px tall with 12px by 16px of padding and 16px between the leading element, the text and the trailing element, a 24px leading icon in on-surface-variant, a body-large title (16px over 24px, regular) over a body-medium supporting line (14px over 20px) in on-surface-variant, and label-small trailing text (11px). The list has 8px of padding above and below, and a divided list separates rows with outline-variant rules that start 16px in ([list tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-list.scss), [item layout](https://github.com/material-components/material-web/blob/main/labs/item/internal/_item.scss) and [divider tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-divider.scss), consulted 2026-11-20). The list stays transparent instead of painting the surface color, so it sits on a card without a lighter band, and a two-line row grows with its text instead of taking M3's fixed 72px: local decisions.
+
+A separator is the Material 3 divider: a 1px rule in outline-variant (#cac4d0, #49454f in dark mode), as wide as its container ([divider tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-divider.scss) and [divider styles](https://github.com/material-components/material-web/blob/main/divider/internal/_divider.scss), consulted 2026-11-20). The divider tokens set no outer space. The 8px on each side comes from the menu, which places a divider 8px above and below ([menu styles](https://github.com/material-components/material-web/blob/main/menu/internal/_menu.scss), consulted 2026-11-22). A vertical separator uses the same rule and spacing across the row, which is a local mapping. The divider's 16px inset variants are not offered.
+
+Material 3 has no empty-state component and no empty-state page; a search of m3.material.io on 2026-11-20 found none. So an empty state borrows the layout of a dialog with an icon, a local mapping ([dialog tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-dialog.scss) and [dialog layout](https://github.com/material-components/material-web/blob/main/dialog/internal/_dialog.scss), consulted 2026-11-20). Everything is centered and sits on the surface beneath it, with no fill or outline. The icon is in the secondary color (#625b71, #ccc2dc in dark mode, [system colors](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-sys-color.scss), consulted 2026-11-22). The title is headline small (24px over 32px, regular weight) in on-surface. The description is body medium (14px over 20px) in on-surface-variant ([typescale](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-sys-typescale.scss), consulted 2026-11-20). The dialog supplies the spacing: 24px of padding, 16px between the icon and the headline, 24px above the actions (8px plus the actions' 16px top padding) and 8px between actions. Three parts are local decisions:
+- The dialog's 24px icon is enlarged to 48px, the largest optical size of Material Symbols ([Material Symbols guide](https://developers.google.com/fonts/docs/material_symbols), consulted 2026-11-22).
+- The 16px gap also separates the title from the description, where material-web leaves 24px.
+- The actions are centered, where a dialog places them at the end.
 
 ## Do's and Don'ts
 

@@ -43,9 +43,11 @@ describe.each(["light", "dark"] as const)("Pagination designs in %s mode", (sche
     expect(current.getBoundingClientRect().top).toBe(previous.getBoundingClientRect().top);
     expect(contrastRatio(currentStyles.color, currentFill)).toBeGreaterThanOrEqual(4.5);
     expect(contrastRatio(getComputedStyle(other).color, otherFill)).toBeGreaterThanOrEqual(4.5);
-    // The current page stands out by a fill, Carbon's bar under the number or Neobrutalism's ink shadow.
+    // The current page stands out by a fill, a 3:1 border (Vercel's outline), Carbon's bar under the
+    // number or Neobrutalism's ink shadow.
     expect(
       contrastRatio(currentFill, surface) >= 3 ||
+        (parseFloat(currentStyles.borderTopWidth) > 0 && contrastRatio(currentStyles.borderTopColor, surface) >= 3) ||
         currentStyles.backgroundImage !== "none" ||
         currentStyles.boxShadow !== "none",
     ).toBe(true);

@@ -351,6 +351,7 @@ x-neus:
         --modal-footer-gap: "0"
         --modal-footer-justify: stretch
         --modal-footer-item-flex: 1 1 0
+        --modal-footer-outlined-border-width: 0px
     overlay:
       base:
         --overlay-background: var(--color-surface-secondary)
@@ -470,7 +471,7 @@ x-neus:
         --pricing-price-weight: 400
         --pricing-price-tracking: 0px
         --pricing-featured-ring-width: 2px
-        --pricing-featured-shadow: 0 0 #0000
+        --pricing-featured-shadow: "0 0 #0000"
     spinner:
       base:
         --spinner-size-small: 16px
@@ -635,6 +636,186 @@ x-neus:
       dark:
         --accordion-divider-color: "#393939"
         --accordion-header-hover-background: "#333333"
+    form-field: {}
+    number-input:
+      base:
+        --number-input-stepper-gap: 0px
+        --number-input-button-size: 32px
+        --number-input-button-radius: 0px
+        --number-input-button-color: var(--color-text-primary)
+        --number-input-divider-width: 1px
+        --number-input-divider-color: var(--color-border-subtle)
+        --number-input-button-hover-background: "#e8e8e8"
+        --number-input-button-hover-color: var(--color-text-primary)
+        --number-input-transition: background-color 0.11s cubic-bezier(0.2, 0, 0.38, 0.9)
+      dark:
+        --number-input-button-hover-background: "#333333"
+    slider:
+      base:
+        --slider-track-height: 2px
+        --slider-track-radius: 0px
+        --slider-track-background: "#e0e0e0"
+        --slider-fill-background: "#161616"
+        --slider-thumb-width: 14px
+        --slider-thumb-height: 14px
+        --slider-thumb-border-width: 0px
+        --slider-thumb-background: "#161616"
+        --slider-thumb-shadow: "0 0 #0000"
+        --slider-thumb-hover-shadow: "0 0 0 3px #161616"
+        --slider-focus-shadow: 0 0 0 1px var(--color-surface), 0 0 0 3px var(--color-focus)
+        --slider-value-color: var(--color-text-primary)
+        --slider-value-font-size: 14px
+        --slider-value-weight: "400"
+        --slider-transition: box-shadow 70ms cubic-bezier(0.2, 0, 0.38, 0.9)
+        --slider-step-width: 2px
+        --slider-step-height: 8px
+        --slider-step-radius: 0px
+        --slider-step-color: "#8d8d8d"
+        --slider-step-active-color: "#161616"
+      dark:
+        --slider-track-background: "#393939"
+        --slider-fill-background: "#f4f4f4"
+        --slider-thumb-background: "#f4f4f4"
+        --slider-thumb-hover-shadow: "0 0 0 3px #f4f4f4"
+        --slider-step-color: "#6f6f6f"
+        --slider-step-active-color: "#f4f4f4"
+    toggle:
+      base:
+        --toggle-font-size: 14px
+        --toggle-font-weight: "400"
+        --toggle-padding-small: 0 16px
+        --toggle-padding-medium: 0 16px
+        --toggle-padding-large: 0 16px
+        --toggle-icon-size-small: 16px
+        --toggle-icon-size-medium: 16px
+        --toggle-icon-size-large: 20px
+        --toggle-radius: 4px
+        --toggle-border-color: "#161616"
+        --toggle-color: "#525252"
+        --toggle-hover-background: "#e8e8e8"
+        --toggle-hover-color: "#161616"
+        --toggle-pressed-background: "#161616"
+        --toggle-pressed-hover-background: "#161616"
+        --toggle-pressed-color: "#ffffff"
+        --toggle-pressed-border-color: "#161616"
+        --toggle-focus-offset: -2px
+        --toggle-transition: background-color 70ms cubic-bezier(0.2, 0, 0.38, 0.9), color 70ms cubic-bezier(0.2, 0, 0.38, 0.9)
+        --toggle-group-gap: 0px
+        --toggle-group-padding: 0px
+        --toggle-group-border-width: 1px
+        --toggle-group-border-color: var(--toggle-border-color)
+        --toggle-group-radius: 4px
+        --toggle-group-background: transparent
+        --toggle-group-divider-width: 1px
+        --toggle-group-divider-color: "#e0e0e0"
+        --toggle-group-item-radius: 0px
+        --toggle-group-item-outer-radius: 3px
+        --toggle-group-item-background: transparent
+        --toggle-group-item-color: var(--toggle-color)
+        --toggle-group-item-hover-background: var(--toggle-hover-background)
+        --toggle-group-item-hover-color: var(--toggle-hover-color)
+        --toggle-group-item-pressed-background: var(--toggle-pressed-background)
+        --toggle-group-item-pressed-color: var(--toggle-pressed-color)
+        --toggle-group-item-pressed-shadow: none
+      dark:
+        --toggle-border-color: "#f4f4f4"
+        --toggle-color: "#c6c6c6"
+        --toggle-hover-background: "#333333"
+        --toggle-hover-color: "#f4f4f4"
+        --toggle-pressed-background: "#f4f4f4"
+        --toggle-pressed-hover-background: "#f4f4f4"
+        --toggle-pressed-color: "#161616"
+        --toggle-pressed-border-color: "#f4f4f4"
+        --toggle-group-divider-color: "#393939"
+    drawer:
+      base:
+        --drawer-width: 480px
+        --drawer-viewport-margin: 0px
+        --drawer-border-width: 1px
+        --drawer-border-color: "#c6c6c6"
+        --drawer-shadow: none
+        --drawer-header-padding: 16px
+        --drawer-title-line-height: 28px
+        --drawer-content-padding: 16px
+        --drawer-divider-width: 1px
+        --drawer-divider-color: var(--drawer-border-color)
+        --drawer-duration: 150ms
+        --drawer-easing: cubic-bezier(0.2, 0, 0.38, 0.9)
+      dark:
+        --drawer-border-color: "#525252"
+    chip:
+      base:
+        --chip-height-small: 18px
+        --chip-height-medium: 24px
+        --chip-padding-small: 8px
+        --chip-padding-medium: 8px
+        --chip-gap: 4px
+        --chip-radius: 16px
+        --chip-font-size-small: 12px
+        --chip-font-size-medium: 12px
+        --chip-font-weight: "400"
+        --chip-line-height: 16px
+        --chip-border-color: transparent
+        --chip-background: "#e0e0e0"
+        --chip-color: var(--color-text-primary)
+        --chip-hover-background: "#d1d1d1"
+        --chip-selected-background: var(--color-text-primary)
+        --chip-selected-hover-background: var(--color-text-primary)
+        --chip-selected-color: var(--color-surface)
+        --chip-selected-border-color: var(--color-text-primary)
+        --chip-remove-size-small: 16px
+        --chip-remove-size-medium: 22px
+        --chip-remove-icon-size: 16px
+        --chip-remove-inset: 0px
+        --chip-remove-color: currentColor
+        --chip-remove-hover-background: "#d1d1d1"
+        --chip-disabled-opacity: "0.25"
+        --chip-transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9)
+      dark:
+        --chip-background: "#525252"
+        --chip-hover-background: "#636363"
+        --chip-remove-hover-background: "#636363"
+    list:
+      base:
+        --list-gap: 0px
+        --list-item-min-height: 48px
+        --list-item-padding: 14px 16px
+        --list-item-gap: 12px
+        --list-leading-size: 16px
+        --list-leading-color: var(--color-text-primary)
+        --list-title-size: 14px
+        --list-title-weight: "400"
+        --list-title-line-height: 20px
+        --list-description-size: 12px
+        --list-description-line-height: 16px
+        --list-trailing-size: 14px
+    separator:
+      base:
+        --separator-color: var(--color-border-subtle)
+        --separator-thickness: 1px
+        --separator-spacing: 4px
+    empty-state:
+      base:
+        --empty-state-align: start
+        --empty-state-text-align: start
+        --empty-state-gap: 8px
+        --empty-state-background: transparent
+        --empty-state-border-width: 0px
+        --empty-state-radius: 0px
+        --empty-state-media-size: 80px
+        --empty-state-media-color: var(--color-text-secondary)
+        --empty-state-media-background: transparent
+        --empty-state-media-padding: 0px
+        --empty-state-media-radius: 0px
+        --empty-state-title-color: var(--color-text-primary)
+        --empty-state-title-size: 20px
+        --empty-state-title-weight: "400"
+        --empty-state-title-line-height: 28px
+        --empty-state-description-color: var(--color-text-secondary)
+        --empty-state-description-size: 14px
+        --empty-state-description-line-height: 20px
+        --empty-state-actions-gap: 16px
+        --empty-state-actions-spacing: 8px
 ---
 
 # Carbon
@@ -771,6 +952,30 @@ A breadcrumb is body compact 01 with links in the link blue, which underline on 
 Pagination follows the pagination nav: square page buttons side by side with no gap and no corners, 14px numbers, a faint gray hover (rgb 141 141 141 at 12%, 16% in dark mode) and the current page at weight 600 over a centered 16 by 4px interactive-blue bar ([Carbon pagination](https://carbondesignsystem.com/components/pagination/style/) and [the pagination nav source](https://github.com/carbon-design-system/carbon/tree/main/packages/styles/scss/components/pagination-nav), consulted 2026-11-18). The buttons are 32px, the small size, to match the small icon buttons for previous and next. Carbon's data-table pagination, with its items-per-page select and "1–10 of 100 items", is close to the compact form with the page-size select.
 
 An accordion is one divided list: 40px rows with 1px subtle-border rules (#e0e0e0, #393939 in dark mode), titles in body 01 at regular weight with 16px of inline padding, a 16px chevron in the primary icon color that turns in 110ms, and the layer-hover fill (#e8e8e8, #333333) under the pointer. Open content has 8px above, 24px below and 48px at the end ([Carbon accordion style](https://carbondesignsystem.com/components/accordion/style/) and [its Sass source](https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/accordion/_accordion.scss), consulted 2026-11-19). Carbon draws focus as an inset ring; here it is a 2px inset outline.
+
+A form field or a fieldset takes the input's label, helper text and error styles, so they need no values of their own.
+
+A number input ends in square minus and plus controls in primary icon color with a 1px subtle rule between them. Their 16px icons and the field-hover fill (#e8e8e8, #333333 in dark mode) follow the number input's style page ([Carbon number input style](https://carbondesignsystem.com/components/number-input/style/), consulted 2026-11-19); the page gives no control width, so the 32px square is a local decision.
+
+A slider is a thin 2px track in subtle gray (#e0e0e0, #393939 in dark mode) filled in ink (#161616, #f4f4f4) up to a 14px ink thumb that grows to 20px under the pointer, with the label above in 12px secondary type and the value in 14px primary type ([Carbon slider style](https://carbondesignsystem.com/components/slider/style/), consulted 2026-11-19). The style page gives the track as 4px while the component code draws 2px; the library follows the code. Focus adds a 1px gap and a 2px blue ring around the thumb, an approximation of the code's inset ring. Carbon's slider has no step marks; the 2px by 8px ticks across the track, strong border gray outside the value and ink inside it, are a local decision.
+
+A toggle group is the content switcher: segments 32, 40 or 48px tall inside a 1px ink outline with 4px corners, split by 1px subtle dividers, in 14px regular type in secondary gray; the selected segment fills with ink and white text, and hovering one gives it #e8e8e8 (#333333 in dark mode) ([Carbon content switcher style](https://carbondesignsystem.com/components/content-switcher/style/), consulted 2026-11-19). The dividers run the full height instead of Carbon's 16px. Carbon has no toggle button of its own; a toggle on its own is one segment of the switcher, a local mapping.
+
+A modal ends in Carbon's action set: full-bleed buttons that share the bottom row with no gap or padding around them. An outlined action drops its outline there and reads as the action set's ghost button, so its edges do not double the modal's ([Carbon modal usage](https://carbondesignsystem.com/components/modal/usage/), consulted 2026-11-20).
+
+A drawer is Carbon's side panel from IBM Products. It is a 480px (medium) panel in the layer color (#f4f4f4, #262626 in dark mode) with square corners, as tall as the screen. A 1px subtle-border rule (#c6c6c6, #525252) runs along the edge that faces the page, and there is no shadow, since the overlay already sets the panel apart. The title is heading 03 (20px over 28px, regular weight) in a 16px header. The body has 16px on every side, and the actions are full-bleed buttons under a matching rule; an outlined action drops its outline there and reads as the action set's ghost button, so no line doubles the rule or the panel's edge. On screens too narrow for it, the panel takes the full width. It slides in over 150ms on the productive standard curve. Sources: [side panel Sass](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_side-panel.scss), [its sizes](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_side-panel-variables.scss), [animations](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/SidePanel/_animations.scss) and [defaults](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/SidePanel/SidePanel.tsx), [action set Sass](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products-styles/src/components/ActionSet/_action-set.scss), [theme tokens](https://unpkg.com/@carbon/themes/scss/generated/_themes.scss) and [motion tokens](https://github.com/carbon-design-system/carbon/blob/main/packages/motion/tokens/motion.tokens.json), all consulted 2026-11-20. Carbon core has no side panel and no top or bottom sheet, so those drawers reuse the side values. Some parts are local decisions. Carbon places the panel 48px down, below the UI shell header; here it covers the full height. Carbon slides the panel only 320px while fading it, with separate entrance and exit curves; here it slides its own width on one curve. Carbon shows the header rule once the content scrolls under the title and lets the title's padding space the body; here the rule is always drawn, so the body keeps its own 16px below it.
+
+A chip is the Carbon tag: a pill 24px tall (18px small) with 8px of side padding and a label-01 label (12px over 16px, regular) on the gray tag color, #161616 on #e0e0e0 (#f4f4f4 on #525252 in dark mode), hovering to #d1d1d1 (#636363), with a 16px icon 4px before the label. Removable, it ends in a round button with a 16px close icon in the text color. Selected, it follows the selectable tag and inverts: an ink fill and border with white text, with a check in place of its icon. Focus draws a 2px focus ring 1px outside it, and its fill changes in 70ms on the productive curve ([tag Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/tag/_tag.scss), [tag color tokens](https://unpkg.com/@carbon/themes@11.86.0/scss/generated/_tag-tokens.scss), consulted 2026-11-20). Local decisions: an unselected chip keeps the gray read-only tag rather than the outlined selectable tag; the remove button fills the tag's height inside its 1px border, 16px small and 22px medium, where Carbon matches it to the tag's height; and a disabled chip fades to 25% instead of Carbon's swap to disabled colors.
+
+A list follows the Carbon contained list: no background, border or padding of its own, rows 48px tall with 14px by 16px of padding, a 16px leading icon in the primary text color 12px before a body-01 title (14px over 20px, regular), and full-width subtle-border rules between rows when divided ([contained list Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/contained-list/_contained-list.scss), consulted 2026-11-20). Carbon gives its list items no secondary line or trailing text; the description takes helper-text sizing (12px over 16px) and the trailing text 14px, both in the secondary text color, local decisions.
+
+Carbon has no divider component. Its components draw separation as 1px rules in the subtle-border color. The structured list rules its rows this way, and the menu's item divider is a 1px subtle-border line with 4px ($spacing-02) above and below ([structured list Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/structured-list/_structured-list.scss), consulted 2026-11-20; [menu Sass](https://unpkg.com/@carbon/styles@1.120.0/scss/components/menu/_menu.scss), consulted 2026-11-22). A separator takes that rule: 1px in border-subtle-00 (#e0e0e0, #393939 in Gray 100, [theme tokens](https://unpkg.com/@carbon/themes/scss/generated/_themes.scss), consulted 2026-11-20) with 4px on each side. A standalone separator, its spacing and the vertical form are local mappings of the menu divider. On a layer surface, Carbon would switch to border-subtle-01 (#c6c6c6, #525252); this rule keeps the 00 value.
+
+An empty state follows the Carbon empty states pattern and the IBM Products EmptyState that implements it ([pattern](https://carbondesignsystem.com/patterns/empty-states-pattern/), [Sass](https://unpkg.com/@carbon/ibm-products-styles@2.99.0/scss/components/EmptyStates/_empty-state.scss) and [component](https://unpkg.com/@carbon/ibm-products@2.103.0/es/components/EmptyStates/EmptyStateContent.js), consulted 2026-11-20). Its parts are aligned to the start as a block, with no fill, border or corners: it replaces the component it stands in for. The default large illustration is 80px ($spacing-11; 64px when small) and sits above the text. The title is heading 03 (20px over 28px, regular weight) in the primary text color, with 8px below it. The subtitle is body 01 (14px over 20px) in the secondary text color, with 16px below it before the action. The action is a small tertiary button, and a link can follow 16px below it ([type styles](https://unpkg.com/@carbon/type@11.71.0/scss/_styles.scss) and [spacing](https://unpkg.com/@carbon/layout@11.63.0/scss/generated/_spacing.scss), consulted 2026-11-20). The pattern page publishes no sizes, colors or maximum width. Some parts are local decisions:
+- Carbon uses multicolor illustrations, so an icon takes the secondary icon color (#525252, #c6c6c6 in Gray 100).
+- The one 8px gap also sits below the media, where Carbon leaves 16px.
+- Actions sit side by side 16px apart, borrowing the spacing between Carbon's stacked button and link.
+- The baseline padding keeps the block off the region's edges, because the Sass gives it none.
 
 ## Do's and Don'ts
 

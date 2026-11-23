@@ -467,6 +467,7 @@ x-neus:
         --button-border-width: 0px
         --button-border-color: transparent
         --button-outlined-border-width: 1px
+        --button-outlined-border-color: currentColor
         --button-shadow: none
         --button-shadow-hover: none
         --button-shadow-active: none
@@ -799,6 +800,7 @@ x-neus:
         --input-filled-label-background: var(--input-filled-background)
         --textarea-radius: min(var(--input-radius), {rounded.default})
         --textarea-filled-radius: var(--textarea-radius)
+        --textarea-line-height: var(--input-line-height)
     link:
       base:
         --link-color: var(--color-primary-text)
@@ -843,6 +845,7 @@ x-neus:
         --modal-footer-gap: 12px
         --modal-footer-justify: flex-end
         --modal-footer-item-flex: 0 1 auto
+        --modal-footer-outlined-border-width: var(--button-outlined-border-width)
     overlay:
       base:
         --overlay-background: var(--color-surface)
@@ -884,6 +887,15 @@ x-neus:
         --select-tag-border-color: transparent
         --select-tag-font-size: var(--fs-xs)
         --select-tag-remove-color: var(--color-tag-remove)
+        --select-tag-inner-gap: 2px
+        --select-tag-line-height: "1.4"
+        --select-tag-remove-size: 20px
+        --select-tag-remove-icon-size: 14px
+        --select-tag-remove-radius: 50%
+        --select-tag-remove-hover-background: var(--color-surface-hover)
+        --select-tag-focus-width: 2px
+        --select-tag-focus-color: var(--color-focus)
+        --select-tag-focus-offset: 1px
     sidebar:
       base:
         --sidebar-background: var(--color-primary)
@@ -1069,6 +1081,9 @@ x-neus:
         --data-table-empty-padding: 24px
         --data-table-empty-height: 150px
         --data-table-empty-title-size: 18px
+        --data-table-empty-title-weight: "700"
+        --data-table-empty-gap: 0px
+        --data-table-empty-line-height: normal
     templates:
       base:
         --app-template-background: var(--color-surface)
@@ -1580,6 +1595,269 @@ x-neus:
         --accordion-focus-color: var(--color-focus)
         --accordion-focus-offset: -2px
         --accordion-transition: background-color 0.2s ease
+    form-field:
+      base:
+        --form-field-font-family: var(--input-font-family)
+        --form-field-gap: var(--input-gap)
+        --form-field-label-color: var(--input-label-color)
+        --form-field-label-font-size: var(--input-label-font-size)
+        --form-field-label-weight: var(--input-label-weight)
+        --form-field-required-color: var(--input-required-color)
+        --form-field-required-gap: var(--input-required-gap)
+        --form-field-error-color: var(--input-error-color)
+        --form-field-error-font-size: var(--input-error-font-size)
+        --form-field-disabled-color: var(--input-disabled-color)
+        --fieldset-gap: "{spacing.step-1}"
+        --fieldset-label-gap: "{spacing.step-2}"
+        --fieldset-content-gap: "{spacing.step-4}"
+    number-input:
+      base:
+        --number-input-stepper-gap: "{spacing.step-1}"
+        --number-input-stepper-inset: var(--input-adornment-gap)
+        --number-input-stepper-background: transparent
+        --number-input-stepper-radius: 0px
+        --number-input-button-size: 28px
+        --number-input-button-radius: var(--radius-pill)
+        --number-input-button-background: transparent
+        --number-input-button-color: var(--color-text-secondary)
+        --number-input-button-hover-background: var(--color-surface-hover)
+        --number-input-button-hover-color: var(--color-text-primary)
+        --number-input-icon-size: 16px
+        --number-input-divider-width: 0px
+        --number-input-divider-color: var(--input-border-color)
+        --number-input-disabled-color: var(--color-text-disabled)
+        --number-input-transition: background-color 0.2s ease, color 0.2s ease
+    slider:
+      base:
+        --slider-font-family: var(--input-font-family)
+        --slider-gap: "{spacing.step-2}"
+        --slider-text-gap: "{spacing.step-4}"
+        --slider-min-width: var(--input-min-width)
+        --slider-label-color: var(--input-label-color)
+        --slider-label-font-size: var(--input-label-font-size)
+        --slider-label-weight: var(--input-label-weight)
+        --slider-value-color: var(--color-text-secondary)
+        --slider-value-font-size: var(--input-label-font-size)
+        --slider-value-weight: "500"
+        --slider-error-color: var(--input-error-color)
+        --slider-error-font-size: var(--input-error-font-size)
+        --slider-disabled-color: var(--input-disabled-color)
+        --slider-control-height: 24px
+        --slider-track-height: 6px
+        --slider-track-radius: "{rounded.pill}"
+        --slider-track-border-width: 0px
+        --slider-track-border-color: transparent
+        --slider-track-background: var(--color-border-subtle)
+        --slider-track-inner-radius: 0px
+        --slider-track-gap: 0px
+        --slider-fill-background: var(--color-primary)
+        --slider-thumb-width: 20px
+        --slider-thumb-height: 20px
+        --slider-thumb-inset: calc(var(--slider-thumb-width) / 2)
+        --slider-thumb-radius: 50%
+        --slider-thumb-background: var(--color-surface)
+        --slider-thumb-border-width: 2px
+        --slider-thumb-border-color: var(--color-primary)
+        --slider-thumb-shadow: 0 1px 3px rgb(15 23 42 / 0.2)
+        --slider-thumb-hover-shadow: 0 0 0 6px color-mix(in srgb, var(--color-primary) 14%, transparent)
+        --slider-thumb-active-shadow: 0 0 0 8px color-mix(in srgb, var(--color-primary) 18%, transparent)
+        --slider-thumb-focus-width: var(--slider-thumb-width)
+        --slider-thumb-active-width: var(--slider-thumb-width)
+        --slider-focus-shadow: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-focus)
+        --slider-step-width: 4px
+        --slider-step-height: 4px
+        --slider-step-radius: 50%
+        --slider-step-offset: 0px
+        --slider-step-color: var(--color-text-secondary)
+        --slider-step-active-color: var(--color-text-on-primary)
+        --slider-stop-size: 0px
+        --slider-stop-inset: 0px
+        --slider-stop-color: var(--slider-step-color)
+        --slider-disabled-opacity: "0.38"
+        --slider-transition: box-shadow 0.2s ease
+    toggle:
+      base:
+        --toggle-font-family: var(--font-body)
+        --toggle-font-size: var(--fs-sm)
+        --toggle-font-weight: "600"
+        --toggle-gap: "{spacing.step-2}"
+        --toggle-height-small: 32px
+        --toggle-height-medium: 40px
+        --toggle-height-large: 48px
+        --toggle-padding-small: 0 12px
+        --toggle-padding-medium: 0 16px
+        --toggle-padding-large: 0 20px
+        --toggle-icon-size-small: 16px
+        --toggle-icon-size-medium: 18px
+        --toggle-icon-size-large: 20px
+        --toggle-radius: "{rounded.pill}"
+        --toggle-border-width: 1px
+        --toggle-border-color: var(--color-border-input)
+        --toggle-background: transparent
+        --toggle-color: var(--color-text-primary)
+        --toggle-shadow: none
+        --toggle-hover-background: var(--color-surface-hover)
+        --toggle-hover-color: var(--toggle-color)
+        --toggle-pressed-background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))
+        --toggle-pressed-hover-background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface))
+        --toggle-pressed-color: var(--color-primary-text)
+        --toggle-pressed-border-color: var(--color-primary)
+        --toggle-pressed-shadow: none
+        --toggle-focus-width: 2px
+        --toggle-focus-color: var(--color-focus)
+        --toggle-focus-offset: 2px
+        --toggle-disabled-opacity: "0.38"
+        --toggle-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease
+        --toggle-group-gap: var(--tabs-contained-gap)
+        --toggle-group-padding: var(--tabs-contained-padding)
+        --toggle-group-border-width: var(--tabs-contained-border-width)
+        --toggle-group-border-color: var(--tabs-contained-border-color)
+        --toggle-group-radius: var(--tabs-contained-radius)
+        --toggle-group-background: var(--tabs-contained-background)
+        --toggle-group-divider-width: 0px
+        --toggle-group-divider-color: transparent
+        --toggle-group-item-radius: var(--tabs-contained-tab-radius)
+        --toggle-group-item-outer-radius: var(--toggle-group-item-radius)
+        --toggle-group-item-border-width: 0px
+        --toggle-group-item-background: var(--tabs-contained-tab-background)
+        --toggle-group-item-color: var(--tabs-contained-color)
+        --toggle-group-item-shadow: none
+        --toggle-group-item-hover-background: var(--tabs-contained-hover-background)
+        --toggle-group-item-hover-color: var(--tabs-contained-selected-color)
+        --toggle-group-item-pressed-background: var(--tabs-contained-selected-background)
+        --toggle-group-item-pressed-color: var(--tabs-contained-selected-color)
+        --toggle-group-item-pressed-border-color: var(--toggle-pressed-border-color)
+        --toggle-group-item-pressed-shadow: var(--tabs-contained-selected-shadow)
+    drawer:
+      base:
+        --drawer-font-family: var(--modal-font-family)
+        --drawer-width: 400px
+        --drawer-viewport-margin: var(--modal-viewport-margin)
+        --drawer-sheet-width: 100%
+        --drawer-sheet-max-height: 85%
+        --drawer-background: var(--modal-background)
+        --drawer-color: var(--modal-color)
+        --drawer-border-width: var(--modal-border-width)
+        --drawer-border-color: var(--modal-border-color)
+        --drawer-radius: var(--modal-radius)
+        --drawer-sheet-radius: var(--drawer-radius)
+        --drawer-shadow: var(--modal-shadow)
+        --drawer-backdrop: var(--modal-backdrop)
+        --drawer-header-padding: var(--modal-header-padding)
+        --drawer-header-gap: var(--modal-header-gap)
+        --drawer-title-font-family: var(--modal-title-font-family)
+        --drawer-title-size: var(--modal-title-size)
+        --drawer-title-weight: var(--modal-title-weight)
+        --drawer-title-line-height: var(--modal-title-line-height)
+        --drawer-content-padding: var(--modal-content-padding)
+        --drawer-content-color: var(--modal-content-color)
+        --drawer-content-line-height: var(--modal-content-line-height)
+        --drawer-footer-padding: var(--modal-footer-padding)
+        --drawer-footer-gap: var(--modal-footer-gap)
+        --drawer-footer-justify: var(--modal-footer-justify)
+        --drawer-footer-item-flex: var(--modal-footer-item-flex)
+        --drawer-footer-outlined-border-width: var(--modal-footer-outlined-border-width)
+        --drawer-divider-width: var(--modal-divider-width)
+        --drawer-divider-color: var(--modal-divider-color)
+        --drawer-duration: 0.3s
+        --drawer-easing: cubic-bezier(0.2, 0, 0, 1)
+    chip:
+      base:
+        --chip-font-family: var(--font-body)
+        --chip-font-size-small: var(--fs-xs)
+        --chip-font-size-medium: var(--fs-sm)
+        --chip-font-weight: "500"
+        --chip-line-height: "1.4"
+        --chip-height-small: 24px
+        --chip-height-medium: 32px
+        --chip-padding-small: 10px
+        --chip-padding-medium: 12px
+        --chip-padding-block: 0px
+        --chip-gap: 6px
+        --chip-radius: "{rounded.pill}"
+        --chip-border-width: 1px
+        --chip-border-color: var(--color-border-input)
+        --chip-background: transparent
+        --chip-color: var(--color-text-primary)
+        --chip-icon-size: 16px
+        --chip-hover-background: var(--color-surface-hover)
+        --chip-selected-background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))
+        --chip-selected-hover-background: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface))
+        --chip-selected-color: var(--color-primary-text)
+        --chip-selected-border-color: var(--color-primary)
+        --chip-remove-size-small: 20px
+        --chip-remove-size-medium: 20px
+        --chip-remove-icon-size: 14px
+        --chip-remove-inset: 4px
+        --chip-remove-radius: 50%
+        --chip-remove-color: var(--color-text-secondary)
+        --chip-remove-hover-background: var(--color-surface-hover)
+        --chip-focus-width: 2px
+        --chip-focus-color: var(--color-focus)
+        --chip-focus-offset: 1px
+        --chip-disabled-opacity: "0.38"
+        --chip-transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease
+    list:
+      base:
+        --list-font-family: var(--font-body)
+        --list-gap: "{spacing.step-2}"
+        --list-padding: 0px
+        --list-radius: 0px
+        --list-background: transparent
+        --list-border-width: 0px
+        --list-border-color: transparent
+        --list-divider-width: 1px
+        --list-divider-color: var(--color-border-subtle)
+        --list-divider-inset: 0px
+        --list-divider-end-inset: 0px
+        --list-item-min-height: 56px
+        --list-item-padding: 12px 0
+        --list-item-gap: "{spacing.step-3}"
+        --list-body-gap: 2px
+        --list-leading-size: 24px
+        --list-leading-color: var(--color-text-secondary)
+        --list-title-color: var(--color-text-primary)
+        --list-title-size: var(--fs-base)
+        --list-title-weight: "600"
+        --list-title-line-height: "1.4"
+        --list-description-color: var(--color-text-secondary)
+        --list-description-size: var(--fs-sm)
+        --list-description-line-height: "1.5"
+        --list-trailing-color: var(--color-text-secondary)
+        --list-trailing-size: var(--fs-sm)
+    separator:
+      base:
+        --separator-color: var(--color-border-subtle)
+        --separator-thickness: 1px
+        --separator-spacing: "{spacing.step-4}"
+    empty-state:
+      base:
+        --empty-state-font-family: var(--font-body)
+        --empty-state-gap: "{spacing.step-2}"
+        --empty-state-padding: "{spacing.step-8} {spacing.step-6}"
+        --empty-state-min-height: 0px
+        --empty-state-max-width: 40ch
+        --empty-state-align: center
+        --empty-state-text-align: center
+        --empty-state-background: transparent
+        --empty-state-border-width: 0px
+        --empty-state-border-style: solid
+        --empty-state-border-color: transparent
+        --empty-state-radius: var(--card-radius)
+        --empty-state-media-size: 24px
+        --empty-state-media-color: var(--color-primary-text)
+        --empty-state-media-background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))
+        --empty-state-media-padding: 12px
+        --empty-state-media-radius: 50%
+        --empty-state-title-color: var(--color-text-primary)
+        --empty-state-title-size: var(--fs-lg)
+        --empty-state-title-weight: "600"
+        --empty-state-title-line-height: "1.3"
+        --empty-state-description-color: var(--color-text-secondary)
+        --empty-state-description-size: var(--fs-sm)
+        --empty-state-description-line-height: "1.5"
+        --empty-state-actions-gap: "{spacing.step-3}"
+        --empty-state-actions-spacing: "{spacing.step-2}"
 ---
 
 # Neus UI
@@ -1725,6 +2003,16 @@ Tabs switch between views of one subject. Line tabs sit on a thin gray divider: 
 Breadcrumbs show where the page sits: secondary-ink links in 13px separated by slashes, ending at the current page in primary ink and semibold. Links turn indigo and underline on hover, like every link, and a long trail folds its middle behind an ellipsis button.
 
 Pagination numbers the pages in 40px round buttons, as wide as the icon buttons beside them for previous and next. The current page is a solid indigo disc with white numbers in bold; the others are plain ink that gets the hover surface. The compact form reads "5 / 20" in secondary ink between the arrows.
+
+A form field around a control the library does not draw, and a fieldset around several controls, read like the input's own label: the same weight, size and color, the red asterisk for required, help text in secondary ink and the error in the error color. Their text starts at the control's edge, without the input's inset. A fieldset leaves 16px between the controls it groups.
+
+A number input is the input with the number set in tabular figures and two round steppers at the end, minus then plus, in secondary ink with the hover surface. A stepper fades to the disabled ink at the end of the range.
+
+A slider sets a value by dragging along a gray pill track that fills with indigo up to a white knob ringed in indigo, 20px across, with a soft indigo halo while the pointer is on the knob, a little wider while it is pressed. Step marks are 4px dots on the track, secondary ink outside the value and white inside it. The label reads like the input's, with the value in secondary ink at the end of its row; a range has two knobs and fills between them.
+
+A toggle is a button that stays pressed: an outlined pill in 13px semibold ink that turns into a light indigo tint with indigo text and border while on. A toggle group is the contained tabs' tray, a low surface with 4px of padding, where the pressed toggle rises as a white tile.
+
+A drawer is the modal's panel against an edge of the screen: the same white surface, floating shadow and backdrop, 400px wide from the start or end and as tall as the screen, or content-high from the top or bottom, rounded only on the corners that face the page. It slides in from its edge in 300ms on the emphasized curve and back out when it closes, without motion under reduced motion. Its header, body and footer space and type their content like the modal's.
 
 ## Do's and Don'ts
 

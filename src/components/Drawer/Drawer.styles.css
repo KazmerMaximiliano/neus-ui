@@ -1,0 +1,120 @@
+/* The dialog is the panel; it stays mounted while closed, so it can slide out and keep its state. */
+.drawer {
+  --drawer-offset: 100% 0;
+  position: fixed;
+  box-sizing: border-box;
+  flex-direction: column;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0 solid var(--drawer-border-color);
+  background: var(--drawer-background);
+  box-shadow: var(--drawer-shadow);
+  color: var(--drawer-color);
+  font-family: var(--drawer-font-family);
+  translate: var(--drawer-offset);
+  transition:
+    translate var(--drawer-duration) var(--drawer-easing),
+    overlay var(--drawer-duration) allow-discrete,
+    display var(--drawer-duration) allow-discrete;
+}
+
+.drawer[open] {
+  display: flex;
+  translate: 0 0;
+}
+
+@starting-style {
+  .drawer[open] {
+    translate: var(--drawer-offset);
+  }
+}
+
+.drawer::backdrop {
+  background: var(--drawer-backdrop);
+  opacity: 0;
+  transition:
+    opacity var(--drawer-duration) var(--drawer-easing),
+    overlay var(--drawer-duration) allow-discrete,
+    display var(--drawer-duration) allow-discrete;
+}
+
+.drawer[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  .drawer[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* Side drawers take the full height; the viewport margin keeps the page in reach beside them. */
+.drawer:is([data-side="start"], [data-side="end"]) {
+  inset-block: 0;
+  inline-size: min(var(--drawer-width), 100% - var(--drawer-viewport-margin));
+  block-size: 100vh;
+  block-size: 100dvh;
+}
+
+.drawer[data-side="start"] {
+  --drawer-offset: -100% 0;
+  inset-inline: 0 auto;
+  border-inline-end-width: var(--drawer-border-width);
+  border-start-end-radius: var(--drawer-radius);
+  border-end-end-radius: var(--drawer-radius);
+}
+
+.drawer[data-side="end"] {
+  inset-inline: auto 0;
+  border-inline-start-width: var(--drawer-border-width);
+  border-start-start-radius: var(--drawer-radius);
+  border-end-start-radius: var(--drawer-radius);
+}
+
+.drawer[data-side="start"]:dir(rtl) {
+  --drawer-offset: 100% 0;
+}
+
+.drawer[data-side="end"]:dir(rtl) {
+  --drawer-offset: -100% 0;
+}
+
+/* Sheets take their content's height, centered when the system limits their width. */
+.drawer:is([data-side="top"], [data-side="bottom"]) {
+  inset-inline: 0;
+  inline-size: min(var(--drawer-sheet-width), 100%);
+  max-block-size: var(--drawer-sheet-max-height);
+  margin-inline: auto;
+}
+
+.drawer[data-side="top"] {
+  --drawer-offset: 0 -100%;
+  inset-block: 0 auto;
+  border-block-end-width: var(--drawer-border-width);
+  border-end-start-radius: var(--drawer-sheet-radius);
+  border-end-end-radius: var(--drawer-sheet-radius);
+}
+
+.drawer[data-side="bottom"] {
+  --drawer-offset: 0 100%;
+  inset-block: auto 0;
+  border-block-start-width: var(--drawer-border-width);
+  border-start-start-radius: var(--drawer-sheet-radius);
+  border-start-end-radius: var(--drawer-sheet-radius);
+}
+
+/* The page behind a modal drawer does not scroll. */
+:root:has(.drawer:modal) {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer::backdrop {
+    transition: none;
+  }
+}

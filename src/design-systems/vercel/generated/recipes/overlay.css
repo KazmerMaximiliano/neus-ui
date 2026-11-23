@@ -1,16 +1,19 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --overlay-border-color: var(--color-border-subtle);
-  --overlay-radius: 12px;
+  --overlay-border-color: color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+  --overlay-radius: 10px;
   --overlay-shadow: var(--elevation-floating);
   --overlay-offset: 4px;
-  --overlay-padding: 8px;
-  --overlay-item-padding: 8px;
-  --overlay-item-min-height: 40px;
-  --overlay-item-radius: 6px;
+  --overlay-padding: 4px;
+  --overlay-min-width: 128px;
+  --overlay-item-padding: 4px 6px;
+  --overlay-item-min-height: 28px;
+  --overlay-item-radius: 8px;
   --overlay-item-font-weight: 400;
+  --overlay-item-hover-background: #f2f2f2;
 }
 
 [data-design-system="vercel"][data-color-scheme="dark"] {
   --overlay-shadow: var(--elevation-floating);
+  --overlay-item-hover-background: #1a1a1a;
 }

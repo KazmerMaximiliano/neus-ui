@@ -1,4 +1,6 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --radio-dot-size: 6px;
+  --radio-group-gap: 8px;
+  --radio-group-text-gap: 12px;
+  --radio-group-label-gap: 6px;
 }

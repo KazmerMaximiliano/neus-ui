@@ -1,0 +1,19 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --toggle-font-size: 14px;
+  --toggle-font-weight: 500;
+  --toggle-height-large: 56px;
+  --toggle-padding-large: 0 24px;
+  --toggle-icon-size-medium: 20px;
+  --toggle-icon-size-large: 24px;
+  --toggle-border-width: 0px;
+  --toggle-background: var(--color-surface-container-high);
+  --toggle-color: var(--color-text-secondary);
+  --toggle-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, var(--color-surface-container-high));
+  --toggle-pressed-background: var(--color-primary);
+  --toggle-pressed-hover-background: color-mix(in srgb, var(--color-text-on-primary) 8%, var(--color-primary));
+  --toggle-pressed-color: var(--color-text-on-primary);
+  --toggle-pressed-border-color: transparent;
+  --toggle-focus-width: 3px;
+  --toggle-group-item-outer-radius: 3em;
+}

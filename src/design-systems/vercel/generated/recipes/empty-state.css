@@ -1,0 +1,22 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --empty-state-padding: 24px;
+  --empty-state-max-width: 24rem;
+  --empty-state-border-style: dashed;
+  --empty-state-border-color: var(--color-border-subtle);
+  --empty-state-media-size: 16px;
+  --empty-state-media-color: var(--color-text-primary);
+  --empty-state-media-background: #f2f2f2;
+  --empty-state-media-padding: 8px;
+  --empty-state-media-radius: 10px;
+  --empty-state-title-size: 14px;
+  --empty-state-title-weight: 500;
+  --empty-state-title-line-height: 1.42857;
+  --empty-state-description-size: 14px;
+  --empty-state-description-line-height: 1.625;
+  --empty-state-actions-gap: 8px;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --empty-state-media-background: #1a1a1a;
+}

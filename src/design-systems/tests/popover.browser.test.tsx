@@ -21,7 +21,7 @@ const SYSTEMS = [
   { id: "carbon", radius: "2px", maxWidth: "368px", offset: 2 },
   { id: "material", radius: "4px", maxWidth: "320px", offset: 4 },
   { id: "neobrutalism", radius: "4px", maxWidth: "320px", offset: 8 },
-  { id: "vercel", radius: "12px", maxWidth: "320px", offset: 4 },
+  { id: "vercel", radius: "10px", maxWidth: "288px", offset: 4, padding: "10px" },
 ] as const;
 
 const filters = (props: Partial<PopoverProps> = {}, system: DesignSystemId = "neus", scheme: "light" | "dark" = "light") => (
@@ -48,7 +48,7 @@ describe.each(["light", "dark"] as const)("Popover designs in %s mode", (scheme)
     await waitFor(() => expect(panel.getBoundingClientRect().top)
       .toBeCloseTo(trigger.getBoundingClientRect().bottom + system.offset, 0));
     expect(panel.getBoundingClientRect().left).toBeCloseTo(trigger.getBoundingClientRect().left, 0);
-    expect(styles.paddingTop).toBe("16px");
+    expect(styles.paddingTop).toBe("padding" in system ? system.padding : "16px");
     expect(styles.borderTopLeftRadius).toBe(system.radius);
     expect(styles.maxWidth).toBe(system.maxWidth);
     expect(styles.backgroundColor).toBe(resolveColor(panel, "--overlay-background"));

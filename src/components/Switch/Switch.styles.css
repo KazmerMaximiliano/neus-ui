@@ -12,6 +12,11 @@
   cursor: pointer;
 }
 
+/* Without a visible label the track stands alone: no empty column or gap after it. */
+.switch:not(:has(> .switch__label)) {
+  grid-template-columns: auto;
+}
+
 .switch__label {
   color: var(--switch-label-color);
   font-size: var(--switch-label-font-size);

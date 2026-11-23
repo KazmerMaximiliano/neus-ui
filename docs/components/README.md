@@ -3,7 +3,7 @@
 [Documentation](../README.md) · [Templates](../templates/README.md) ·
 [Customization](../design/customization.md)
 
-The package exports 55 components and public sections. Import each by name from `neus-ui`.
+The package exports 70 components and public sections. Import each by name from `neus-ui`.
 Each guide covers behavior, props, anatomy, per-part classes/styles and CSS tokens.
 
 ## Typography, layout and media
@@ -16,8 +16,11 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [Stack](./Stack.md) | Column or row with space-scale gaps that can change at 768px and 1024px. |
 | [Grid](./Grid.md) | Equal responsive columns or auto-fit items of a minimum width. |
 | [Section](./Section.md) | Full-width page band with tone, vertical rhythm and an inner Container. |
+| [Separator](./Separator.md) | Line between groups of content, across a column or down a row, semantic or decorative. |
 | [Avatar](./Avatar.md) | Picture or initials of a person or organization, with an image-failure fallback. |
 | [AvatarGroup](./AvatarGroup.md) | Overlapping avatars with a +N count. |
+| [List](./List.md) | Rows of static content with leading and trailing parts, plain or divided. |
+| [ListItem](./ListItem.md) | A List row: leading content, title, description and trailing content. |
 | [MediaPlaceholder](./MediaPlaceholder.md) | Sized frame that stands in for a picture not taken yet and says what it will show; previews a Pixabay photo during design. |
 
 ## Actions and status
@@ -26,11 +29,13 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | --- | --- |
 | [Alert](./Alert.md) | Inline info, success, warning or error message with actions and an optional close button. |
 | [Badge](./Badge.md) | Status indicator with solid and dot variants. |
+| [Chip](./Chip.md) | Compact value that can be selected like a toggle, removed, or both. |
 | [Button](./Button.md) | Semantic button with six variants, three sizes and loading feedback. |
 | [IconButton](./IconButton.md) | Accessible icon-only button with loading feedback. |
 | [Link](./Link.md) | Styled native anchor with primary and secondary treatments. |
 | [Progress](./Progress.md) | Completion of a task as a bar, determinate or indeterminate, with a label and value. |
 | [Skeleton](./Skeleton.md) | Hidden placeholder lines, blocks and circles while content loads. |
+| [EmptyState](./EmptyState.md) | Says a region has no content yet, with media, title, description and actions. |
 | [Spinner](./Spinner.md) | Indeterminate loading ring or dots, announced as a status when labelled. |
 | [Toast](./Toast.md) | Brief notification after an action, shown and announced through ToastProvider. |
 | [Tooltip](./Tooltip.md) | Short description of a control on hover and keyboard focus. |
@@ -40,15 +45,21 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | Component | Purpose |
 | --- | --- |
 | [Input](./Input.md) | Native input with field presentation, adornments and accessible errors. |
+| [NumberInput](./NumberInput.md) | Number field with keyboard and button steps, range, precision and locale formatting. |
+| [Slider](./Slider.md) | Value or range picked by dragging along a track, on native range inputs. |
 | [Textarea](./Textarea.md) | Multi-line text with the Input field presentation, line-based height and optional growth. |
 | [Checkbox](./Checkbox.md) | Controlled checkbox with an indeterminate visual state. |
 | [Switch](./Switch.md) | On/off setting that applies at once. |
+| [Toggle](./Toggle.md) | Button that stays pressed, such as Bold in a toolbar. |
+| [ToggleGroup](./ToggleGroup.md) | Toggles that share one choice, like a segmented control, or several. |
 | [Radio](./Radio.md) | Native radio with a label and help text, alone or inside a RadioGroup. |
 | [RadioGroup](./RadioGroup.md) | One choice among a few visible Radio options, with a legend. |
 | [Select](./Select.md) | Single selection with a searchable, keyboard-operated listbox. |
 | [Combobox](./Combobox.md) | Text field with suggestions from a list or fetched results, and optional new values. |
 | [MultiSelect](./MultiSelect.md) | Multiple selection with removable tags and searchable options. |
 | [FileUploader](./FileUploader.md) | File selection and drag/drop with size and type validation. |
+| [FormField](./FormField.md) | Label, help text and error wired to a control the library does not draw. |
+| [Fieldset](./Fieldset.md) | Native fieldset with a legend, help text and error around several controls. |
 
 ## Date and time
 
@@ -74,6 +85,10 @@ Each guide covers behavior, props, anatomy, per-part classes/styles and CSS toke
 | [ModalHeader](./ModalHeader.md) | Title region for an owning Modal. |
 | [ModalContent](./ModalContent.md) | Body region for Modal composition. |
 | [ModalFooter](./ModalFooter.md) | Action region for Modal composition. |
+| [Drawer](./Drawer.md) | Modal panel that slides in from an edge: filters, details, a bottom sheet. |
+| [DrawerHeader](./DrawerHeader.md) | Title row that names an owning Drawer. |
+| [DrawerContent](./DrawerContent.md) | Body of a Drawer that scrolls between its header and footer. |
+| [DrawerFooter](./DrawerFooter.md) | Actions at the end of a Drawer. |
 | [Popover](./Popover.md) | Content anchored to a button in a non-modal panel that flips to stay on screen. |
 | [Accordion](./Accordion.md) | Collapsible sections on native details, one or many open, that work without JavaScript. |
 

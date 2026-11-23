@@ -1,0 +1,35 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --chip-height-small: 18px;
+  --chip-height-medium: 24px;
+  --chip-padding-small: 8px;
+  --chip-padding-medium: 8px;
+  --chip-gap: 4px;
+  --chip-radius: 16px;
+  --chip-font-size-small: 12px;
+  --chip-font-size-medium: 12px;
+  --chip-font-weight: 400;
+  --chip-line-height: 16px;
+  --chip-border-color: transparent;
+  --chip-background: #e0e0e0;
+  --chip-color: var(--color-text-primary);
+  --chip-hover-background: #d1d1d1;
+  --chip-selected-background: var(--color-text-primary);
+  --chip-selected-hover-background: var(--color-text-primary);
+  --chip-selected-color: var(--color-surface);
+  --chip-selected-border-color: var(--color-text-primary);
+  --chip-remove-size-small: 16px;
+  --chip-remove-size-medium: 22px;
+  --chip-remove-icon-size: 16px;
+  --chip-remove-inset: 0px;
+  --chip-remove-color: currentColor;
+  --chip-remove-hover-background: #d1d1d1;
+  --chip-disabled-opacity: 0.25;
+  --chip-transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9);
+}
+
+[data-design-system="carbon"][data-color-scheme="dark"] {
+  --chip-background: #525252;
+  --chip-hover-background: #636363;
+  --chip-remove-hover-background: #636363;
+}

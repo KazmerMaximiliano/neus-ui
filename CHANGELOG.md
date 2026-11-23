@@ -8,6 +8,135 @@ breaking change.
 
 ## [Unreleased]
 
+## [2.15.0] - Unreleased
+
+### Added
+
+- `Separator`: a line between groups of content, across a column or down a row, with the
+  `separator` role or `decorative`. New `separator` recipe family.
+- `EmptyState`: says a region has no content yet, with optional media, a title (`h2` by default,
+  `titleAs` for the outline), a description and actions. New `empty-state` recipe family.
+- DataTable tokens `--data-table-empty-title-weight`, `--data-table-empty-gap` and
+  `--data-table-empty-line-height` for values its empty view took from the browser defaults.
+- `neus-ui lint` suggests Separator for a raw `<hr>` or `role="separator"`; the neus-design and
+  neus-audit skills and the specimen know both components.
+
+### Changed
+
+- `DataTable` shows an EmptyState when it has no rows. Its classes, props, tokens and the status
+  announcement stay the same, and it looks the same in every system.
+
+## [2.14.0] - Unreleased
+
+### Added
+
+- `Chip`: a compact value that is a toggle (`selected`, `aria-pressed`, a check in place of its
+  icon while selected), removable (`onRemove`, a remove button named after the label, English
+  name replaceable through `labels`), or both, in two sizes. New `chip` recipe family.
+- `List` and `ListItem`: a native `ul` or `ol` of rows with leading content, a title, a
+  description, extra content and trailing content, plain or divided. New `list` recipe family.
+- Select tokens for the tag values that were fixed in MultiSelect's stylesheet:
+  `--select-tag-inner-gap`, `--select-tag-line-height`, `--select-tag-remove-size`,
+  `--select-tag-remove-icon-size`, `--select-tag-remove-radius`,
+  `--select-tag-remove-hover-background` and `--select-tag-focus-*`.
+- `neus-ui lint` suggests Chip for a hand-made chip or tag class and List for rows built from a
+  raw `ul`; the neus-design and neus-audit skills and the specimen know the three components.
+
+### Changed
+
+- A `Switch` or `Radio` without a visible label no longer keeps the gap meant for its label, so
+  it ends on the edge of a list row, a toolbar or any container.
+- `MultiSelect` draws its selected values as Chips. Its classes, tokens, props and accessible
+  names stay the same, and the tags look the same in every system.
+
+## [2.13.0] - Unreleased
+
+### Added
+
+- `Drawer`, with `DrawerHeader`, `DrawerContent` and `DrawerFooter`: a modal `<dialog>` panel
+  that slides in from the start, end, top or bottom edge. Escape and a press that starts and
+  ends on the backdrop request `onClose`, Tab wraps inside it, focus returns to the opener,
+  the page behind does not scroll, and the content stays mounted while it is closed. New
+  `drawer` recipe family in the six systems; in Carbon the footer's actions fill the row and an
+  outlined action drops its outline there.
+- `neus-ui lint` suggests Drawer for a raw `<dialog>` used as an edge panel; the neus-design and
+  neus-audit skills and the specimen know it.
+
+### Changed
+
+- In Carbon, an outlined action in a Modal's full-bleed footer drops its outline, which doubled
+  the modal's edges; new token `--modal-footer-outlined-border-width`, which the drawer's footer
+  follows.
+- `Sidebar` opens its phone menu in a Drawer. Its classes, tokens, props, focus handling and
+  scroll locking stay the same; the dialog also carries Drawer's classes.
+
+## [2.12.0] - Unreleased
+
+### Added
+
+- `Slider`: a value picked by dragging along a track, on native range inputs. With `range`,
+  two thumbs pick both ends of a range and never cross. The value reads at the end of the label
+  row and in `aria-valuetext`, formatted with `locale` and `formatOptions`; `showSteps` marks
+  every step on the track. English thumb names you can replace through `labels`. New `slider`
+  recipe family in the six systems: Material's expressive slider, Apple's capsule thumb and the
+  shadcn/ui slider in Vercel.
+- `Toggle`: a button that stays pressed (`aria-pressed`), with an optional icon or an icon
+  alone, controlled or not, in three sizes.
+- `ToggleGroup`: toggles that share one choice, as a radio group with arrow keys that press, or
+  several at once; roving focus, horizontal or vertical. Its segments follow each system's
+  contained tabs, Carbon's content switcher and Geist's switch. New `toggle` recipe family,
+  shared with Toggle.
+- `neus-ui lint` suggests Slider for `type="range"` and Toggle for a hand-made `aria-pressed`
+  button; the neus-design and neus-audit skills and the specimen know the three components.
+- Tokens `--button-outlined-border-color` (the outlined button's border, `currentColor` by
+  default) and `--textarea-line-height` (the textarea's lines, the input's line height by
+  default).
+
+### Changed
+
+- The Vercel design system keeps Geist's foundations (palette, Geist Sans and Mono, elevation)
+  and now draws its components after shadcn/ui's Base UI components in their default base-nova
+  style: buttons and fields 28, 32 and 36px tall with 10px corners, cards and dialogs with 14px
+  corners, gray-100 fills for secondary, muted and hover states, the shadcn menu, popover,
+  tooltip, dialog, alert, tabs, accordion, sidebar, calendar, table, toggle group and slider.
+  Focus stays Geist's blue. Each family cites its shadcn source in the Vercel DESIGN.md.
+- Pagination's previous and next buttons take the page size, so the row lines up in every
+  system.
+
+### Fixed
+
+- Token values with an inline `#` (such as `0 0 #0000`) are quoted in the six DESIGN.md files;
+  YAML read the rest as a comment. Carbon's featured pricing card and several slider shadows
+  were affected, and a generator test now guards against it.
+
+## [2.11.0] - Unreleased
+
+### Added
+
+- `FormField`: the label, help text, required mark and error of one control the library does
+  not draw (a star rating, a third-party widget). Its `children` function
+  receives the `id`, `aria-labelledby`, `aria-describedby`, `aria-invalid`, `aria-required`
+  and `disabled` to spread on the control. New `form-field` recipe family, built on each system's input labels.
+- `Fieldset`: a native fieldset with its legend, help text, required mark and error around
+  several controls; `disabled` turns off every control inside. It shares the `form-field`
+  recipe.
+- `NumberInput`: a `spinbutton` field on Input for quantities and amounts. The arrow, Page,
+  Home and End keys and two stepper buttons step it; it clamps to `min` and `max`, rounds to
+  `precision`, shows the number with `Intl.NumberFormat` (`locale`, `formatOptions` for
+  currency, percent or units) and submits it unformatted. English stepper names you can
+  replace through `labels`. New `number-input` recipe family in the six systems.
+- `neus-ui lint` suggests NumberInput for `type="number"`, FormField for a raw `<label>` and
+  Fieldset for a raw `<fieldset>`; the neus-design and neus-audit skills and the specimen know
+  the three components.
+
+### Changed
+
+- `RadioGroup` is built on Fieldset. Its classes, tokens, props and accessible names stay the
+  same; its parts also carry Fieldset's classes. In Storybook it moves from Base to a new Form
+  category, with Fieldset and FormField.
+- The neus-design "Need → component" table merges related rows and leaves details to each
+  guide, so `neus-ui context` reads about 570 tokens shorter.
+
 ## [2.10.0] - 2026-11-19
 
 ### Added
@@ -439,7 +568,12 @@ First public release on npm.
 - Five reference examples with the pages the design skill produced, on a built-in system
   with a brand and on a derived system.
 
-[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...HEAD
+[2.15.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.14.0...v2.15.0
+[2.14.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.13.0...v2.14.0
+[2.13.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.12.0...v2.13.0
+[2.12.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.11.0...v2.12.0
+[2.11.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/KazmerMaximiliano/neus-ui/compare/v2.7.0...v2.8.0

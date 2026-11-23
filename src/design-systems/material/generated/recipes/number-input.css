@@ -1,0 +1,8 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --number-input-button-size: 32px;
+  --number-input-icon-size: 20px;
+  --number-input-button-hover-color: var(--color-text-secondary);
+  --number-input-button-hover-background: color-mix(in srgb, var(--color-text-secondary) 8%, transparent);
+  --number-input-disabled-color: color-mix(in srgb, var(--color-text-primary) 38%, transparent);
+}

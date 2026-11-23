@@ -15,7 +15,7 @@ const SYSTEMS = [
   { id: "carbon", radius: "0px", sizes: [32, 40, 48], icon: 16 },
   { id: "material", radius: "50%", sizes: [32, 40, 56], icon: 24 },
   { id: "neobrutalism", radius: "4px", sizes: [40, 48, 60], icon: 20 },
-  { id: "vercel", radius: "6px", sizes: [32, 40, 48], icon: 16 },
+  { id: "vercel", radius: "10px", sizes: [28, 32, 36], icon: 16 },
 ] as const;
 
 describe.each(["light", "dark"] as const)("IconButton designs in %s mode", (scheme) => {

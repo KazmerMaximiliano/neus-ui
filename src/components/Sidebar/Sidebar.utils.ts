@@ -32,13 +32,3 @@ export const lockSidebarScroll = (document: Document) => {
     }
   };
 };
-
-export const isOutsideSidebarDialog = (
-  dialog: HTMLDialogElement,
-  clientX: number,
-  clientY: number,
-) => {
-  const bounds = dialog.getBoundingClientRect();
-  return clientX < bounds.left || clientX > bounds.right
-    || clientY < bounds.top || clientY > bounds.bottom;
-};

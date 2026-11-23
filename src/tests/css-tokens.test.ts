@@ -7,7 +7,7 @@ import { describe, expect, it } from "vitest";
 const RUNTIME = [
   "--clock-hand-angle", "--clock-hand-scale", "--clock-number-angle", "--media-placeholder-ratio", "--popover-anchor-width",
   "--popover-bottom", "--popover-center", "--popover-left", "--popover-right", "--popover-top", "--progress-value", "--skeleton-height",
-  "--skeleton-width", "--text-lines", "--textarea-max-rows", "--textarea-rows", "--tooltip-x", "--tooltip-y",
+  "--skeleton-width", "--slider-end", "--slider-start", "--slider-step", "--text-lines", "--textarea-max-rows", "--textarea-rows", "--tooltip-x", "--tooltip-y",
 ];
 
 const root = path.resolve(import.meta.dirname, "..");

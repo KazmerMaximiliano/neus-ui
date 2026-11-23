@@ -1,1 +1,10 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --toast-width: 384px;
+  --toast-gap: 12px;
+  --toast-offset: 16px;
+  --toast-radius: 18px;
+  --toast-duration: 500ms;
+  --toast-easing: cubic-bezier(0.22, 1, 0.36, 1);
+  --toast-enter-offset: 150%;
+}

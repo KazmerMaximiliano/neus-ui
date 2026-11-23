@@ -23,9 +23,10 @@ export const Example = () => {
 ## Behavior and accessibility
 
 Desktop begins at 1024px. Tablet spans 768–1023px and uses a compact rail that expands on
-pointer hover, focus or pinning. Below 768px a floating trigger opens a modal drawer with a
-close control, Escape/backdrop dismissal, focus containment, focus restoration and scroll
-locking. The dialog stays in the provider scope.
+pointer hover, focus or pinning. Below 768px a floating trigger opens the panel in a
+[Drawer](./Drawer.md) from the start edge, with a close control, Escape/backdrop dismissal,
+focus containment, focus restoration and scroll locking; the drawer adds no surface or motion
+of its own, so the panel keeps the sidebar's look. The dialog stays in the provider scope.
 
 Items with visible false are omitted; active items expose aria-current page. An item with
 `href` renders a link (Cmd/Ctrl+click and "open in new tab" work); `linkComponent` swaps
@@ -137,7 +138,7 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.sidebar__button-label` | `span` | `labelClassName` | `labelStyle` | `item.visible !== false` |
 | `.sidebar` | `div` | `className` | `sidebarStyle` | `Always` |
 | `.sidebar__toggle` | `button` | `toggleClassName` | `toggleStyle` | `isMobile` |
-| `.sidebar__dialog` | `dialog` | `dialogClassName` | `dialogStyle` | `isMobile` |
+| `.sidebar__dialog` | `dialog.drawer` (a [Drawer](./Drawer.md)) | `dialogClassName` | `dialogStyle` | `isMobile` |
 
 State/variant selectors: `.sidebar__button--active`.
 

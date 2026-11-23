@@ -51,7 +51,7 @@
   color: var(--input-color);
   font-family: var(--input-font-family);
   font-size: var(--input-font-size);
-  line-height: var(--input-line-height);
+  line-height: var(--textarea-line-height);
   font-weight: var(--input-font-weight);
   box-shadow: var(--input-shadow);
   transition: var(--input-transition);

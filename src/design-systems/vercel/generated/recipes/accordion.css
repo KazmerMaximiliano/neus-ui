@@ -1,21 +1,18 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
-  --accordion-divider-color: #eaeaea;
-  --accordion-header-min-height: 48px;
-  --accordion-header-padding: 12px;
-  --accordion-header-radius: 6px;
-  --accordion-header-hover-background: #f2f2f2;
-  --accordion-title-size: 16px;
+  --accordion-header-min-height: 40px;
+  --accordion-header-padding: 10px 0;
+  --accordion-header-radius: 10px;
+  --accordion-header-hover-background: transparent;
+  --accordion-title-size: 14px;
   --accordion-title-weight: 500;
-  --accordion-title-line-height: 24px;
+  --accordion-title-line-height: 20px;
   --accordion-icon-size: 16px;
-  --accordion-content-padding: 0 12px 16px;
-  --accordion-content-line-height: 1.6;
+  --accordion-icon-duration: 0s;
+  --accordion-content-padding: 0 0 10px;
+  --accordion-content-color: var(--color-text-primary);
+  --accordion-content-size: 14px;
+  --accordion-content-line-height: 20px;
   --accordion-disabled-color: #8f8f8f;
   --accordion-focus-offset: 0px;
-}
-
-[data-design-system="vercel"][data-color-scheme="dark"] {
-  --accordion-divider-color: #333333;
-  --accordion-header-hover-background: #1a1a1a;
 }

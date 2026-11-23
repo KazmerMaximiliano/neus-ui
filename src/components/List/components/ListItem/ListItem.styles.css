@@ -1,0 +1,62 @@
+.list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--list-item-gap);
+  box-sizing: border-box;
+  min-height: var(--list-item-min-height);
+  padding: var(--list-item-padding);
+}
+
+/* Rules sit between rows, inset from each end as the system sets (Apple keeps them off both edges). */
+.list[data-divided] > .list-item + .list-item::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: var(--list-divider-inset) var(--list-divider-end-inset);
+  border-block-start: var(--list-divider-width) solid var(--list-divider-color);
+}
+
+.list-item__leading {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--list-leading-color);
+}
+
+.list-item__leading > svg {
+  width: var(--list-leading-size);
+  height: var(--list-leading-size);
+}
+
+.list-item__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--list-body-gap);
+  min-width: 0;
+}
+
+.list-item__title {
+  color: var(--list-title-color);
+  font-size: var(--list-title-size);
+  font-weight: var(--list-title-weight);
+  line-height: var(--list-title-line-height);
+}
+
+.list-item__description {
+  color: var(--list-description-color);
+  font-size: var(--list-description-size);
+  line-height: var(--list-description-line-height);
+}
+
+.list-item__trailing {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--list-item-gap);
+  margin-inline-start: auto;
+  color: var(--list-trailing-color);
+  font-size: var(--list-trailing-size);
+}

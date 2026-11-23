@@ -6,12 +6,12 @@ import {
   useSyncExternalStore,
 } from "react";
 import { Menu, X } from "lucide-react";
+import { Drawer } from "../Drawer";
 import type { SidebarProps, SidebarState } from "./Sidebar.types";
 import { SIDEBAR_LABELS } from "./Sidebar.consts";
 import {
   getSidebarServerViewport,
   getSidebarViewport,
-  isOutsideSidebarDialog,
   lockSidebarScroll,
   subscribeSidebarViewport,
 } from "./Sidebar.utils";
@@ -86,10 +86,7 @@ export const Sidebar = ({
   const id = useId();
   const dialogId = `${id}-dialog`;
   const navigationId = `${id}-navigation`;
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const toggleRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const pointerStartedOutside = useRef(false);
   const text = { ...SIDEBAR_LABELS, ...labels };
   const navigationLabel = text.navigation;
 
@@ -107,19 +104,12 @@ export const Sidebar = ({
 
   const closeMenu = () => setState((current) => ({ ...current, open: false }));
 
+  // The drawer opens first (child effects run before this one), then focus moves to the close button.
   useEffect(() => {
-    const dialog = dialogRef.current;
-    const toggle = toggleRef.current;
-    if (!isMobile || !open || !dialog) return;
-    dialog.showModal();
-    closeRef.current?.focus();
-    const unlockScroll = lockSidebarScroll(dialog.ownerDocument);
-    return () => {
-      if (dialog.open) dialog.close();
-      unlockScroll();
-      if (toggle?.isConnected && getSidebarViewport() === "mobile")
-        toggle.focus();
-    };
+    const close = closeRef.current;
+    if (!isMobile || !open || !close) return;
+    close.focus();
+    return lockSidebarScroll(close.ownerDocument);
   }, [isMobile, open]);
 
   const panel = (
@@ -293,7 +283,6 @@ export const Sidebar = ({
       {isMobile ? (
         <>
           <button
-            ref={toggleRef}
             type="button"
             className={["sidebar__toggle", toggleClassName]
               .filter(Boolean)
@@ -312,73 +301,19 @@ export const Sidebar = ({
               style={toggleIconStyle}
             />
           </button>
-          <dialog
-            ref={dialogRef}
+          <Drawer
+            isOpen={open}
+            onClose={closeMenu}
+            side="start"
             id={dialogId}
             className={["sidebar__dialog", dialogClassName]
               .filter(Boolean)
               .join(" ")}
             style={dialogStyle}
             aria-label={navigationLabel}
-            onKeyDown={(event) => {
-              if (event.key !== "Tab") return;
-              const buttons = Array.from(
-                event.currentTarget.querySelectorAll<HTMLElement>(
-                  "button, a[href]",
-                ),
-              ).filter(
-                (button) =>
-                  !button.matches(":disabled") &&
-                  button.getClientRects().length > 0,
-              );
-              const first = buttons[0];
-              const last = buttons[buttons.length - 1];
-              if (
-                event.shiftKey &&
-                event.currentTarget.ownerDocument.activeElement === first
-              ) {
-                event.preventDefault();
-                last?.focus();
-              } else if (
-                !event.shiftKey &&
-                event.currentTarget.ownerDocument.activeElement === last
-              ) {
-                event.preventDefault();
-                first?.focus();
-              }
-            }}
-            onCancel={(event) => {
-              event.preventDefault();
-              closeMenu();
-            }}
-            onClose={(event) => {
-              if (!event.currentTarget.open) closeMenu();
-            }}
-            onPointerDown={(event) => {
-              pointerStartedOutside.current =
-                event.target === event.currentTarget &&
-                isOutsideSidebarDialog(
-                  event.currentTarget,
-                  event.clientX,
-                  event.clientY,
-                );
-            }}
-            onClick={(event) => {
-              if (
-                pointerStartedOutside.current &&
-                event.target === event.currentTarget &&
-                isOutsideSidebarDialog(
-                  event.currentTarget,
-                  event.clientX,
-                  event.clientY,
-                )
-              )
-                closeMenu();
-              pointerStartedOutside.current = false;
-            }}
           >
             {panel}
-          </dialog>
+          </Drawer>
         </>
       ) : (
         panel

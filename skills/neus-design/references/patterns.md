@@ -83,7 +83,19 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
   An icon-only action whose name is not enough (a limit, a consequence) gets a
   `Tooltip`; the IconButton keeps its `label`.
 - Filters for the list go in a `Popover` opened by an outlined "Filters" Button
-  beside the title; close it from an "Apply" button with a controlled `open`.
+  beside the title; close it from an "Apply" button with a controlled `open`. When
+  they are more than a few fields, open them in a `Drawer` from the end instead,
+  with the actions in its `DrawerFooter`; on phones a `side="bottom"` drawer fits.
+  Show the filters in force as removable `Chip`s above the list, and quick filters
+  as selectable chips.
+- A settings page or a detail panel lists its rows in a `List` with `divided` inside
+  a Card: an icon `leading`, the setting's name as `title`, its effect as
+  `description` and the control (a Switch, a Badge, a Button) `trailing`. A price
+  or size span inside it is a `Slider` with `range`. Switching the list between views
+  (list, grid, map) is a `ToggleGroup` beside the title.
+- A list or a search with nothing to show is an `EmptyState` in the list's place:
+  what is missing as the title, why or what will appear as the description, and the
+  one action that fills it (DataTable shows its own when it has no rows).
 - Pagination is controlled: wire `onPaginationChange` to the data source. A
   list that is not a table (cards, search results) pages with `Pagination`
   below it, wired the same way.
@@ -98,7 +110,7 @@ export const OrdersPage = ({ orders, pagination, currentPath }: OrdersPageProps)
 Use for create/edit screens and settings forms.
 
 ```tsx
-import { Checkbox, DateInput, FormTemplate, Input, Radio, RadioGroup, Select, Textarea } from "neus-ui";
+import { Checkbox, DateInput, FormTemplate, Input, NumberInput, Radio, RadioGroup, Select, Textarea } from "neus-ui";
 
 export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void }) => (
   <form onSubmit={(event) => { event.preventDefault(); onSubmit(new FormData(event.currentTarget)); }}>
@@ -113,6 +125,7 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
         searchBarPlaceholder="Search plans"
       />
       <DateInput name="start" label="Start date" />
+      <NumberInput name="seats" label="Seats" defaultValue={5} min={1} max={500} />
       <RadioGroup name="billing" label="Billing" defaultValue="monthly" orientation="horizontal">
         <Radio value="monthly" label="Monthly" />
         <Radio value="yearly" label="Yearly" />
@@ -134,6 +147,13 @@ export const NewClientForm = ({ onSubmit }: { onSubmit: (data: FormData) => void
   labels); longer lists are a `Select`. When people type to find the value (a
   country, a customer, results from a server) or may enter a new one (a tag),
   use a `Combobox`.
+- Numbers people count or pay (seats, quantity, budget) are a `NumberInput`, with
+  `formatOptions` for currency or percent; codes that only look like numbers (a phone,
+  a postal code) stay an `Input`. A value where the place in a range matters more
+  than the exact number (a volume, a comfort level) is a `Slider`.
+- Group related fields under one caption with `Fieldset` (an address, notification
+  channels); wrap a control neus does not draw in `FormField` so it gets the same
+  label, help text and error.
 
 ## 3. Multi-step flow
 

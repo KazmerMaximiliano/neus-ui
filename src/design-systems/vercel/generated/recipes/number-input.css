@@ -1,0 +1,13 @@
+/* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="vercel"] {
+  --number-input-stepper-gap: 8px;
+  --number-input-stepper-inset: 4px;
+  --number-input-button-size: 24px;
+  --number-input-button-radius: 7px;
+  --number-input-button-hover-background: #f2f2f2;
+  --number-input-transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --number-input-button-hover-background: color-mix(in srgb, #1a1a1a 50%, transparent);
+}

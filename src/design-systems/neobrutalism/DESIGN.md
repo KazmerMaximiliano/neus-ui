@@ -597,6 +597,125 @@ x-neus:
         --accordion-disabled-color: color-mix(in srgb, var(--color-text-on-primary) 50%, var(--color-primary))
         --accordion-focus-width: 3px
         --accordion-focus-offset: -3px
+    form-field: {}
+    number-input:
+      base:
+        --number-input-stepper-gap: 0px
+        --number-input-button-radius: 0px
+        --number-input-button-color: var(--color-text-primary)
+        --number-input-button-hover-background: var(--color-primary)
+        --number-input-button-hover-color: var(--color-text-on-primary)
+        --number-input-divider-width: 3px
+        --number-input-divider-color: var(--color-text-primary)
+    slider:
+      base:
+        --slider-track-height: 12px
+        --slider-track-radius: 4px
+        --slider-track-border-width: 3px
+        --slider-track-border-color: var(--color-text-primary)
+        --slider-track-background: var(--color-surface)
+        --slider-thumb-border-width: 3px
+        --slider-thumb-border-color: var(--color-text-primary)
+        --slider-thumb-shadow: 2px 2px 0 var(--color-text-primary)
+        --slider-thumb-hover-shadow: "0 0 #0000"
+        --slider-disabled-opacity: "0.5"
+        --slider-step-radius: 0px
+        --slider-step-color: var(--color-text-primary)
+        --slider-step-active-color: var(--color-text-on-primary)
+    toggle:
+      base:
+        --toggle-font-weight: "700"
+        --toggle-height-small: 36px
+        --toggle-height-large: 44px
+        --toggle-padding-small: 0 10px
+        --toggle-padding-medium: 0 12px
+        --toggle-padding-large: 0 16px
+        --toggle-icon-size-small: 14px
+        --toggle-icon-size-medium: 16px
+        --toggle-icon-size-large: 16px
+        --toggle-radius: 4px
+        --toggle-border-width: 3px
+        --toggle-border-color: var(--color-text-primary)
+        --toggle-background: var(--color-surface)
+        --toggle-shadow: 2px 2px 0 var(--color-text-primary)
+        --toggle-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface))
+        --toggle-pressed-background: var(--color-primary)
+        --toggle-pressed-hover-background: var(--color-primary)
+        --toggle-pressed-color: var(--color-text-on-primary)
+        --toggle-pressed-border-color: var(--color-text-primary)
+        --toggle-focus-offset: 4px
+    drawer:
+      base:
+        --drawer-width: 384px
+        --drawer-viewport-margin: 25%
+        --drawer-radius: 0px
+        --drawer-sheet-radius: 4px
+        --drawer-shadow: none
+        --drawer-header-padding: 16px
+        --drawer-content-padding: 16px
+        --drawer-footer-padding: 16px
+        --drawer-easing: cubic-bezier(0.4, 0, 0.2, 1)
+    chip:
+      base:
+        --chip-font-weight: "700"
+        --chip-radius: 4px
+        --chip-border-width: 2px
+        --chip-border-color: var(--color-text-primary)
+        --chip-background: var(--color-surface)
+        --chip-hover-background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface))
+        --chip-selected-background: var(--color-primary)
+        --chip-selected-hover-background: var(--color-primary)
+        --chip-selected-color: var(--color-text-on-primary)
+        --chip-selected-border-color: var(--color-text-primary)
+        --chip-remove-radius: 2px
+        --chip-remove-color: currentColor
+        --chip-remove-hover-background: color-mix(in srgb, currentColor 15%, transparent)
+        --chip-focus-offset: 4px
+        --chip-disabled-opacity: "0.5"
+    list:
+      base:
+        --list-radius: 4px
+        --list-background: var(--color-surface)
+        --list-border-width: 3px
+        --list-border-color: var(--color-text-primary)
+        --list-divider-width: 2px
+        --list-divider-color: var(--color-text-primary)
+        --list-item-min-height: 0px
+        --list-item-padding: 14px 16px
+        --list-item-gap: 14px
+        --list-body-gap: 4px
+        --list-leading-size: 20px
+        --list-leading-color: var(--color-text-primary)
+        --list-title-weight: "700"
+        --list-title-line-height: "1.375"
+        --list-description-color: var(--color-text-primary)
+        --list-description-size: 14px
+        --list-trailing-color: var(--color-text-primary)
+        --list-trailing-size: 14px
+    separator:
+      base:
+        --separator-color: var(--color-text-primary)
+        --separator-thickness: 2px
+    empty-state:
+      base:
+        --empty-state-padding: 24px
+        --empty-state-max-width: 24rem
+        --empty-state-background: var(--color-surface)
+        --empty-state-border-width: 3px
+        --empty-state-border-style: dashed
+        --empty-state-border-color: var(--color-text-primary)
+        --empty-state-media-size: 20px
+        --empty-state-media-color: var(--color-text-on-primary)
+        --empty-state-media-background: var(--color-primary)
+        --empty-state-media-padding: 10px
+        --empty-state-media-radius: 4px
+        --empty-state-title-size: 14px
+        --empty-state-title-weight: "700"
+        --empty-state-title-line-height: "1.42857"
+        --empty-state-description-color: var(--color-text-primary)
+        --empty-state-description-size: 14px
+        --empty-state-description-line-height: "1.625"
+        --empty-state-actions-gap: 10px
 ---
 
 # Neobrutalism
@@ -724,6 +843,24 @@ Breadcrumbs are ink, medium weight, with each link bold and underlined like ever
 Pagination is a row of framed tiles: 40px squares with a 3px ink border and 4px corners on the page color, bold numbers, and the current page filled with yellow over a 3px hard ink shadow ([neobrutalism pagination](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/pagination.tsx), consulted 2026-11-18). The shadow is this system's mark for the current page; the components library has none there.
 
 An accordion is a stack of framed cards 16px apart: a 3px ink border, 4px corners and a hard ink shadow, each question a bold bar in yellow with ink text and chevron, and the answer below a 3px rule on the page color ([neobrutalism accordion](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/accordion.tsx), consulted 2026-11-19). The components library uses its blue and a 2px frame; the yellow and 3px frame follow this system.
+
+A form field or a fieldset takes the input's label and error styles, so they need no values of their own.
+
+A number input ends in square minus and plus buttons in ink, split by a 3px ink rule like the field's border; hovering one fills it with yellow. The components library has no stepper, so this is a local decision on top of its input ([neobrutalism input](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/input.tsx), consulted 2026-11-19).
+
+A slider is a 12px track with a 3px ink outline and 4px corners, filled with the primary color up to a white circle knob in the same ink outline with a hard 2px shadow ([neobrutalism slider source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/slider.tsx), consulted 2026-11-19, with the 3px borders and offset shadows of this system). Step marks are 4px ink squares inside the track, in the ink that reads on the primary fill inside the value, a local decision.
+
+A toggle is a white button with a 3px ink border, 4px corners, bold type and a hard 2px shadow; pressed, it fills with the primary color and drops the shadow, as if pushed in ([neobrutalism toggle source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/toggle.tsx), consulted 2026-11-19, where the pressed toggle fills with the main color). A toggle group is the contained tabs' tray, with the pressed toggle filled in primary.
+
+A drawer follows the neobrutalism sheet ([neobrutalism sheet](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/sheet.tsx), consulted 2026-11-20): a square slab on the surface color, three quarters of the screen wide up to 384px, with no shadow, so the ink border on its inner edge alone sets it off from the page. The header, body and footer have 16px of padding, the title is the modal's extra-bold ink, and the panel slides in 300ms on an ease-in-out curve; the library opens in 500ms and closes in 300ms, and one duration serves both here. The 3px border, where the library draws 2px, the 2px ink rules under the header and above the footer, the ink backdrop at 60% instead of black at 80%, and the 16px gap between footer actions follow this system's modal: local decisions. The library's swipe drawer ([neobrutalism drawer](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/drawer.tsx), consulted 2026-11-20) rounds its edge to 5px; a drawer from the top or bottom takes those corners at this system's 4px, and a side drawer keeps the sheet's square edge.
+
+The neobrutalism components have no chip; their multi-select combobox example lists the chosen labels as text in the trigger. A chip borrows from two of their components. Their Badge is a 2px ink frame around 12px text, with 10px of side padding and 12px icons, which gives a 24px height. Their Toggle fills with the main color when pressed ([neobrutalism badge](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/badge.tsx), [toggle](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/toggle.tsx) and [combobox](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/combobox.tsx), consulted 2026-11-20). Here a chip is a page-colored tile with the system's 4px corners and a 2px ink border, like the MultiSelect tag, with bold ink text. Hovering tints it with yellow at 35%. A selected chip fills with yellow and keeps its ink border and dark text. The remove button is a cross in the chip's text color with nearly square 2px corners and a faint tint of that color under the pointer. The keyboard outline sits 4px outside the chip, as on toggles and checkboxes, and a disabled chip drops to half opacity. Chips cast no hard shadow, so a row of chips stays calm. The missing shadow and the bold weight are local decisions.
+
+A list follows the neobrutalism Item ([neobrutalism item](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/item.tsx), consulted 2026-11-20). Rows have 14px by 16px of padding and 14px between a 20px ink icon, the text and the trailing content. Titles are 14px on a 1.375 line, and descriptions are 14px in ink, not a muted gray, 4px below. The library frames each item with a 2px border and spaces items 16px apart. This system frames the group once instead, as its cards do: a page-colored panel with a 3px ink border and 4px corners. In a divided list, rows are separated by 2px ink rules, as in the modal. Titles are bold, following the system's heavy short labels, where the library uses its 500 base weight. The single frame, the bold titles and the 2px rules are local decisions.
+
+A separator is a 2px ink rule with 16px of space on each side. The neobrutalism components have no separator component (none in [src/components/ui](https://github.com/ekmas/neobrutalism-components/tree/main/src/components/ui), consulted 2026-11-20), so the rule is a local decision. It is the system's own divider, as in the modal, the tabs and divided lists, where 2px ink rules separate parts inside 3px frames.
+
+An empty state follows [neobrutalism Empty](https://www.neobrutalism.dev/docs/empty) (consulted 2026-11-20, [source](https://github.com/ekmas/neobrutalism-components/blob/main/src/components/ui/empty.tsx)). It is a page-colored panel inside a dashed ink border, with the card's 4px corners and 24px of padding. Its centered text column is at most 24rem wide. The icon is 20px in a 40px square tile with 4px corners. The title is 14px bold ink on a 20px line. The description is 14px ink text with relaxed 1.625 leading, 8px below. The actions sit 16px below the text, 10px apart, as in EmptyContent. Three choices are local decisions. The border is 3px, like the system's card frames, where the library draws 2px. The icon tile is filled yellow with dark text, like the system's accent tiles, where the library draws a white tile with a 2px ink border: the recipe has no media border, and a white tile without one would vanish on the page color. The padding stays 24px on wide screens, where the library grows it to 48px from the md breakpoint.
 
 ## Do's and Don'ts
 

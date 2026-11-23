@@ -1,13 +1,19 @@
 /* Generated from src/design-systems/vercel/DESIGN.md. Edit the document, then run pnpm design:generate. */
 [data-design-system="vercel"] {
   --pagination-font-size: 14px;
+  --pagination-font-weight: 500;
   --pagination-current-font-weight: 500;
-  --pagination-item-radius: 6px;
-  --pagination-item-hover-background: #ebebeb;
-  --pagination-current-background: var(--color-text-primary);
-  --pagination-current-color: var(--color-surface);
+  --pagination-gap: 2px;
+  --pagination-item-size: 32px;
+  --pagination-item-radius: 10px;
+  --pagination-item-border-width: 1px;
+  --pagination-item-hover-background: #f2f2f2;
+  --pagination-current-background: var(--color-surface);
+  --pagination-current-color: var(--color-text-primary);
+  --pagination-current-border-color: var(--color-text-primary);
+  --pagination-ellipsis-color: var(--color-text-primary);
 }
 
 [data-design-system="vercel"][data-color-scheme="dark"] {
-  --pagination-item-hover-background: #1f1f1f;
+  --pagination-item-hover-background: color-mix(in srgb, #1a1a1a 50%, transparent);
 }

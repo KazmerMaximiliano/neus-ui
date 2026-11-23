@@ -3,22 +3,37 @@
   --stepper-dot-size-small: 24px;
   --stepper-dot-size-medium: 32px;
   --stepper-dot-size-large: 40px;
+  --stepper-dot-font-size-small: 12px;
+  --stepper-dot-font-size-medium: 14px;
+  --stepper-dot-font-size-large: 14px;
   --stepper-dot-border-width: 1px;
   --stepper-dot-font-weight: 500;
+  --stepper-dot-border-color: var(--color-border-subtle);
   --stepper-dot-done-background: var(--color-surface);
   --stepper-dot-done-border-color: var(--color-text-primary);
   --stepper-dot-done-color: var(--color-text-primary);
-  --stepper-dot-hover-background: var(--color-surface-secondary);
-  --stepper-label-font-size-small: 13px;
+  --stepper-dot-hover-background: #f2f2f2;
+  --stepper-label-font-size-small: 12px;
   --stepper-label-font-size-medium: 14px;
+  --stepper-label-font-size-large: 14px;
+  --stepper-label-weight: 400;
+  --stepper-label-active-weight: 500;
   --stepper-label-active-color: var(--color-text-primary);
   --stepper-connector-thickness: 1px;
   --stepper-connector-done-color: var(--color-text-primary);
+  --stepper-counter-font-size: 14px;
+  --stepper-counter-weight: 400;
   --stepper-counter-transform: none;
   --stepper-counter-spacing: normal;
-  --stepper-bar-height: 6px;
-  --stepper-bar-radius: 3px;
-  --stepper-bar-fill-radius: 3px;
+  --stepper-bar-height: 4px;
+  --stepper-bar-radius: 3em;
+  --stepper-bar-fill-radius: 0px;
+  --stepper-bar-background: #f2f2f2;
   --stepper-simple-size: 8px;
   --stepper-simple-current-width: 20px;
+}
+
+[data-design-system="vercel"][data-color-scheme="dark"] {
+  --stepper-dot-hover-background: #1a1a1a;
+  --stepper-bar-background: #1a1a1a;
 }
