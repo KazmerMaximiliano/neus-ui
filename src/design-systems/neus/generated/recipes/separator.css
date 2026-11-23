@@ -1,0 +1,7 @@
+/* Generated from src/design-systems/neus/DESIGN.md. Edit the document, then run pnpm design:generate. */
+:root,
+[data-design-system] {
+  --separator-color: var(--color-border-subtle);
+  --separator-thickness: 1px;
+  --separator-spacing: 16px;
+}

@@ -1,0 +1,6 @@
+/* Generated from src/design-systems/carbon/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="carbon"] {
+  --separator-color: var(--color-border-subtle);
+  --separator-thickness: 1px;
+  --separator-spacing: 4px;
+}

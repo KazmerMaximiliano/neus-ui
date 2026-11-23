@@ -1,0 +1,25 @@
+/* Generated from src/design-systems/material/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="material"] {
+  --empty-state-align: center;
+  --empty-state-gap: 16px;
+  --empty-state-padding: 24px;
+  --empty-state-background: transparent;
+  --empty-state-border-width: 0px;
+  --empty-state-media-size: 48px;
+  --empty-state-media-color: #625b71;
+  --empty-state-media-background: transparent;
+  --empty-state-media-padding: 0px;
+  --empty-state-title-color: var(--color-text-primary);
+  --empty-state-title-size: 24px;
+  --empty-state-title-weight: 400;
+  --empty-state-title-line-height: 32px;
+  --empty-state-description-color: var(--color-text-secondary);
+  --empty-state-description-size: 14px;
+  --empty-state-description-line-height: 20px;
+  --empty-state-actions-gap: 8px;
+  --empty-state-actions-spacing: 8px;
+}
+
+[data-design-system="material"][data-color-scheme="dark"] {
+  --empty-state-media-color: #ccc2dc;
+}

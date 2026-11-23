@@ -1081,6 +1081,9 @@ x-neus:
         --data-table-empty-padding: 24px
         --data-table-empty-height: 150px
         --data-table-empty-title-size: 18px
+        --data-table-empty-title-weight: "700"
+        --data-table-empty-gap: 0px
+        --data-table-empty-line-height: normal
     templates:
       base:
         --app-template-background: var(--color-surface)
@@ -1822,6 +1825,39 @@ x-neus:
         --list-description-line-height: "1.5"
         --list-trailing-color: var(--color-text-secondary)
         --list-trailing-size: var(--fs-sm)
+    separator:
+      base:
+        --separator-color: var(--color-border-subtle)
+        --separator-thickness: 1px
+        --separator-spacing: "{spacing.step-4}"
+    empty-state:
+      base:
+        --empty-state-font-family: var(--font-body)
+        --empty-state-gap: "{spacing.step-2}"
+        --empty-state-padding: "{spacing.step-8} {spacing.step-6}"
+        --empty-state-min-height: 0px
+        --empty-state-max-width: 40ch
+        --empty-state-align: center
+        --empty-state-text-align: center
+        --empty-state-background: transparent
+        --empty-state-border-width: 0px
+        --empty-state-border-style: solid
+        --empty-state-border-color: transparent
+        --empty-state-radius: var(--card-radius)
+        --empty-state-media-size: 24px
+        --empty-state-media-color: var(--color-primary-text)
+        --empty-state-media-background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface))
+        --empty-state-media-padding: 12px
+        --empty-state-media-radius: 50%
+        --empty-state-title-color: var(--color-text-primary)
+        --empty-state-title-size: var(--fs-lg)
+        --empty-state-title-weight: "600"
+        --empty-state-title-line-height: "1.3"
+        --empty-state-description-color: var(--color-text-secondary)
+        --empty-state-description-size: var(--fs-sm)
+        --empty-state-description-line-height: "1.5"
+        --empty-state-actions-gap: "{spacing.step-3}"
+        --empty-state-actions-spacing: "{spacing.step-2}"
 ---
 
 # Neus UI

@@ -831,6 +831,26 @@ x-neus:
         --list-description-size: 14px
         --list-trailing-color: var(--color-text-primary)
         --list-trailing-size: 14px
+    separator: {}
+    empty-state:
+      base:
+        --empty-state-padding: 24px
+        --empty-state-max-width: 24rem
+        --empty-state-border-style: dashed
+        --empty-state-border-color: var(--color-border-subtle)
+        --empty-state-media-size: 16px
+        --empty-state-media-color: var(--color-text-primary)
+        --empty-state-media-background: "#f2f2f2"
+        --empty-state-media-padding: 8px
+        --empty-state-media-radius: 10px
+        --empty-state-title-size: 14px
+        --empty-state-title-weight: "500"
+        --empty-state-title-line-height: "1.42857"
+        --empty-state-description-size: 14px
+        --empty-state-description-line-height: "1.625"
+        --empty-state-actions-gap: 8px
+      dark:
+        --empty-state-media-background: "#1a1a1a"
 ---
 
 # Vercel
@@ -1003,6 +1023,10 @@ A drawer follows the shadcn/ui sheet ([shadcn/ui Sheet](https://ui.shadcn.com/do
 shadcn/ui has no chip, so a chip combines its Badge with the chips of its Combobox, both in the default base-nova style ([shadcn/ui Badge](https://ui.shadcn.com/docs/components/base/badge) and [shadcn/ui Combobox](https://ui.shadcn.com/docs/components/base/combobox), consulted 2026-11-20). It is a muted tile (#f2f2f2, #1a1a1a in dark mode) with the combobox chip's 6px corners, which is also how the MultiSelect tag looks. Its text is 12px medium in the foreground color, with 12px icons 4px apart. A small chip is 20px tall with 6px of padding, the badge's height. A medium chip is 24px tall with 8px of padding, the height of shadcn's extra-small buttons. Under the pointer it darkens by 5% of the foreground, like the secondary button. A selected chip takes the default badge's primary ink with on-primary text, and under the pointer it uses the button's darker primary. The remove button is shadcn's extra-small ghost icon button: a 12px cross at half the chip's text color, with 8px corners. Keyboard focus draws a 2px focus-blue outline on the edge, and a disabled chip drops to half opacity. Three things are local decisions. The remove button is 20px instead of shadcn's 24px so it fits the small chip. It takes a faint tint of the text color under the pointer, where shadcn's hover fill matches the chip and only brings the cross to full strength. The medium size does not exist in shadcn.
 
 A list follows the base-nova style of [shadcn/ui Item](https://ui.shadcn.com/docs/components/base/item) (consulted 2026-11-20, [source](https://ui.shadcn.com/r/styles/base-nova/item.json)). Rows are 16px apart in an unframed column, as ItemGroup lays them out. Each row has 10px by 12px of padding and 10px between a 16px foreground icon, the text and the trailing content. Titles are 14px medium foreground text with tight 1.375 leading. Descriptions are 14px in the secondary color, 4px below, and trailing content inherits the 14px foreground text. Dividers are ItemSeparator's 1px rule in the border color across the full width. shadcn sets no minimum row height, so a one-line row is about 40px. Two things are local decisions. shadcn's examples frame or tint each item (the outline and muted variants, [item-group example](https://github.com/shadcn-ui/ui/blob/main/apps/v4/examples/base/item-group.tsx)), but here the rows stay unframed, like its default variant. shadcn also adds 8px of margin around a separator, but here a divided list closes the gap and the rule sits between the rows' own padding.
+
+A separator follows the base-nova style of [shadcn/ui Separator](https://ui.shadcn.com/docs/components/base/separator) (consulted 2026-11-20, [source](https://ui.shadcn.com/r/styles/base-nova/separator.json)). It is a 1px line in the border color, running the full width of its container or the full height of its row. shadcn gives the line no margin. Its [demo](https://github.com/shadcn-ui/ui/blob/main/apps/v4/examples/base/separator-demo.tsx) puts it in a column with a 16px gap, and that spacing is kept on both sides. All three values equal the Neus defaults, so the system declares no overrides.
+
+An empty state follows the base-nova style of [shadcn/ui Empty](https://ui.shadcn.com/docs/components/base/empty) (consulted 2026-11-20, [source](https://ui.shadcn.com/r/styles/base-nova/empty.json)). It is a centered column with 24px of padding and the card's 14px corners. Its text column is at most 24rem (384px) wide. The icon is 16px, in the foreground color, on a 32px muted tile (#f2f2f2, #1a1a1a in dark mode) with 10px corners, as in EmptyMedia's icon variant. The title is 14px medium foreground text on a 20px line. The description is 14px secondary text with relaxed 1.625 leading, 8px below the title. The actions sit 16px below the text, in a row 8px apart, as in the [demo](https://github.com/shadcn-ui/ui/blob/main/apps/v4/examples/base/empty-demo.tsx). There is no background and, by default, no visible frame. The dashed border style and border color are set, so a 1px border width gives shadcn's outline example, a dashed frame in the border color ([empty-outline](https://github.com/shadcn-ui/ui/blob/main/apps/v4/examples/base/empty-outline.tsx)). One choice is a local decision. shadcn adds 8px of margin below the media, so its icon sits 16px above the title, but here the icon keeps the same 8px gap as the text.
 
 ## Do's and Don'ts
 

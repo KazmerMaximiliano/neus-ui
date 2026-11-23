@@ -33,8 +33,8 @@ They take Pagination's English names ("Pagination", "Previous page", "Next page"
 `paginationLabels` to name them in the project's language.
 
 Below the mobile breakpoint, `renderMobileCard` replaces the grid with consumer-rendered
-cards. Without it the grid remains. Empty grid and mobile content share NoRowsOverlay and
-its customization props. Compose row actions using buttons or menus in a cell/card; there is
+cards. Without it the grid remains. Empty grid and mobile content share NoRowsOverlay, an
+[EmptyState](./EmptyState.md) announced as a status, and its customization props. Compose row actions using buttons or menus in a cell/card; there is
 no Actions component. Neus owns the grid container and empty overlay, while AG Grid owns
 generated cells, rows and headers. Use column definitions and the documented AG Grid theme
 bridge for those internals.
@@ -119,9 +119,9 @@ removes that override. Hooks do not create a part whose rendering condition is f
 | `.data-table__grid` | `div` | `gridClassName` | `gridStyle` | `Always` |
 | `.data-table__pagination` | Pagination `nav`, also `.pagination.pagination--compact` | `paginationClassName` | `paginationStyle` | `Always` |
 | `.data-table__pagination-info` | `span`, also `.pagination__info` | `paginationInfoClassName` | `paginationInfoStyle` | `Always` |
-| `.data-table__no-rows` | `div` | `emptyStateClassName` | `emptyStateStyle` | `Always` |
-| `.data-table__no-rows-title` | `h3` | `noRowsTitleClassName` | `noRowsTitleStyle` | `Always` |
-| `.data-table__no-rows-description` | `p` | `noRowsDescriptionClassName` | `noRowsDescriptionStyle` | `Always` |
+| `.data-table__no-rows` | `div.empty-state`, `role="status"` | `emptyStateClassName` | `emptyStateStyle` | `Always` |
+| `.data-table__no-rows-title` | `h3.empty-state__title` | `noRowsTitleClassName` | `noRowsTitleStyle` | `Always` |
+| `.data-table__no-rows-description` | `p.empty-state__description` | `noRowsDescriptionClassName` | `noRowsDescriptionStyle` | `Always` |
 
 Interaction states use native pseudo-classes and ARIA/data attributes where present.
 
@@ -169,6 +169,9 @@ dependencies. Do not edit generated files.
 | `--data-table-empty-height` | data table empty height | `150px` |
 | `--data-table-empty-padding` | data table empty padding | `24px` |
 | `--data-table-empty-title-size` | data table empty title size | `18px` |
+| `--data-table-empty-title-weight` | Title weight of the empty view | `700` |
+| `--data-table-empty-gap` | Space between the empty view's title and description | `0px` |
+| `--data-table-empty-line-height` | Line height of the empty view's text | `normal` |
 | `--data-table-gap` | data table gap | `16px` |
 | `--data-table-header-height` | data table header height | `44px` |
 | `--data-table-muted` | data table muted | `var(--color-text-secondary)` |

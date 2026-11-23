@@ -48,6 +48,13 @@ the project wrote.
   description and trailing parts. Flag rows of settings or people built from
   `div`s or a bare `ul` with hand-made row layout, and a List used for actions
   (Menu) or for sortable records (DataTable).
+- Separator is a line with the `separator` role (`aria-orientation` when
+  vertical), or `role="none"` when `decorative`. Flag a raw `<hr>`, a `div`
+  with a border used as a rule, and rules between list rows (List `divided`).
+- EmptyState gives an empty region a heading (`titleAs`), a description and a
+  way forward; with `role="status"` it is announced after a search. Flag a blank
+  region, a lone "No data" text without a next step, and an empty state shown
+  while content is still loading (Skeleton).
 - Drawer is a native modal `<dialog>` against an edge (`side`), named by
   DrawerHeader; Tab wraps inside it, Escape and a backdrop press request
   `onClose`, focus returns to the opener and the page behind does not scroll.

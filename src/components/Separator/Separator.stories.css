@@ -1,0 +1,12 @@
+.separator-story {
+  display: flex;
+  width: 320px;
+}
+
+.separator-story--horizontal {
+  flex-direction: column;
+}
+
+.separator-story--vertical {
+  align-items: center;
+}

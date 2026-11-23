@@ -48,6 +48,8 @@ export type {
   DrawerProps,
   DrawerSide,
 } from "./Drawer";
+export { EmptyState } from "./EmptyState";
+export type { EmptyStateProps, EmptyStateTitleElement } from "./EmptyState";
 export { Dropdown } from "./Dropdown";
 export type { DropdownItem, DropdownProps } from "./Dropdown";
 export { Fieldset } from "./Fieldset";
@@ -94,6 +96,8 @@ export { Section } from "./Section";
 export type { SectionElement, SectionProps, SectionSpacing, SectionTone } from "./Section";
 export { Select } from "./Select";
 export type { SelectLabels, SelectOption, SelectProps } from "./Select";
+export { Separator } from "./Separator";
+export type { SeparatorOrientation, SeparatorProps } from "./Separator";
 export { Sidebar } from "./Sidebar";
 export type { SidebarItem, SidebarLabels, SidebarProps } from "./Sidebar";
 export { Skeleton } from "./Skeleton";

@@ -1,0 +1,16 @@
+/* Generated from src/design-systems/apple/DESIGN.md. Edit the document, then run pnpm design:generate. */
+[data-design-system="apple"] {
+  --empty-state-gap: 4px;
+  --empty-state-media-size: 48px;
+  --empty-state-media-color: color-mix(in srgb, var(--color-text-primary) 30%, transparent);
+  --empty-state-media-background: transparent;
+  --empty-state-media-padding: 16px;
+  --empty-state-title-color: var(--color-text-secondary);
+  --empty-state-title-size: 15px;
+  --empty-state-title-weight: 700;
+  --empty-state-title-line-height: 1.33333;
+  --empty-state-description-size: 15px;
+  --empty-state-description-line-height: 1.33333;
+  --empty-state-actions-gap: 6px;
+  --empty-state-actions-spacing: 14px;
+}

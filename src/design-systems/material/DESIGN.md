@@ -749,6 +749,33 @@ x-neus:
         --list-description-size: 14px
         --list-description-line-height: 20px
         --list-trailing-size: 11px
+    separator:
+      base:
+        --separator-color: var(--color-border-subtle)
+        --separator-thickness: 1px
+        --separator-spacing: 8px
+    empty-state:
+      base:
+        --empty-state-align: center
+        --empty-state-gap: 16px
+        --empty-state-padding: 24px
+        --empty-state-background: transparent
+        --empty-state-border-width: 0px
+        --empty-state-media-size: 48px
+        --empty-state-media-color: "#625b71"
+        --empty-state-media-background: transparent
+        --empty-state-media-padding: 0px
+        --empty-state-title-color: var(--color-text-primary)
+        --empty-state-title-size: 24px
+        --empty-state-title-weight: "400"
+        --empty-state-title-line-height: 32px
+        --empty-state-description-color: var(--color-text-secondary)
+        --empty-state-description-size: 14px
+        --empty-state-description-line-height: 20px
+        --empty-state-actions-gap: 8px
+        --empty-state-actions-spacing: 8px
+      dark:
+        --empty-state-media-color: "#ccc2dc"
 ---
 
 # Material
@@ -939,6 +966,13 @@ A drawer is a modal side sheet: a 256px panel on the low surface container (#f7f
 A chip is the Material 3 filter and input chip: 32px tall with 8px corners, a 1px outline (#79747e, #938f99 in dark mode), a transparent fill and a label-large label (14px, medium) in on-surface-variant, with 18px icons 8px from the label and 16px of padding at each end. Hovering adds an 8% on-surface-variant layer. A selected chip drops its outline and fills with the secondary container in on-secondary-container text, with a check in place of its icon. The remove button is an 18px X in a round 24px target with the same hover layer, and focus draws a 3px ring 2px outside it ([filter chip](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-filter-chip.scss) and [input chip tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-input-chip.scss), [state](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-sys-state.scss) and [typescale tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-sys-typescale.scss), consulted 2026-11-20). Local decisions: M3 has a single size, so the small chip is 24px with 8px of padding, 12px text and a 20px remove target; the outline keeps the shipped outline role, matching MultiSelect's tags; the focus ring keeps this system's primary focus color; and both ends keep 16px of padding where M3 trims the side next to an icon to 8px.
 
 A list is the Material 3 list: rows at least 56px tall with 12px by 16px of padding and 16px between the leading element, the text and the trailing element, a 24px leading icon in on-surface-variant, a body-large title (16px over 24px, regular) over a body-medium supporting line (14px over 20px) in on-surface-variant, and label-small trailing text (11px). The list has 8px of padding above and below, and a divided list separates rows with outline-variant rules that start 16px in ([list tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-list.scss), [item layout](https://github.com/material-components/material-web/blob/main/labs/item/internal/_item.scss) and [divider tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-divider.scss), consulted 2026-11-20). The list stays transparent instead of painting the surface color, so it sits on a card without a lighter band, and a two-line row grows with its text instead of taking M3's fixed 72px: local decisions.
+
+A separator is the Material 3 divider: a 1px rule in outline-variant (#cac4d0, #49454f in dark mode), as wide as its container ([divider tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-divider.scss) and [divider styles](https://github.com/material-components/material-web/blob/main/divider/internal/_divider.scss), consulted 2026-11-20). The divider tokens set no outer space. The 8px on each side comes from the menu, which places a divider 8px above and below ([menu styles](https://github.com/material-components/material-web/blob/main/menu/internal/_menu.scss), consulted 2026-11-22). A vertical separator uses the same rule and spacing across the row, which is a local mapping. The divider's 16px inset variants are not offered.
+
+Material 3 has no empty-state component and no empty-state page; a search of m3.material.io on 2026-11-20 found none. So an empty state borrows the layout of a dialog with an icon, a local mapping ([dialog tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/latest/sass/_md-comp-dialog.scss) and [dialog layout](https://github.com/material-components/material-web/blob/main/dialog/internal/_dialog.scss), consulted 2026-11-20). Everything is centered and sits on the surface beneath it, with no fill or outline. The icon is in the secondary color (#625b71, #ccc2dc in dark mode, [system colors](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-sys-color.scss), consulted 2026-11-22). The title is headline small (24px over 32px, regular weight) in on-surface. The description is body medium (14px over 20px) in on-surface-variant ([typescale](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-sys-typescale.scss), consulted 2026-11-20). The dialog supplies the spacing: 24px of padding, 16px between the icon and the headline, 24px above the actions (8px plus the actions' 16px top padding) and 8px between actions. Three parts are local decisions:
+- The dialog's 24px icon is enlarged to 48px, the largest optical size of Material Symbols ([Material Symbols guide](https://developers.google.com/fonts/docs/material_symbols), consulted 2026-11-22).
+- The 16px gap also separates the title from the description, where material-web leaves 24px.
+- The actions are centered, where a dialog places them at the end.
 
 ## Do's and Don'ts
 

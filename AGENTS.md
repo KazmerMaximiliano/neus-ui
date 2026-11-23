@@ -14,7 +14,7 @@ PACKAGE_MANAGER: pnpm
 
 Neus UI is a production-ready React component library that provides:
 
-- 68 reusable UI components and public sections
+- 70 reusable UI components and public sections
 - Dynamic theming system with CSS variables
 - TypeScript support with full type safety
 - React hooks for theme and color management
@@ -193,7 +193,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 
 ## COMPONENT INVENTORY
 
-### Implemented Components and Public Subcomponents (68 total)
+### Implemented Components and Public Subcomponents (70 total)
 
 | NAME             | FILE_PATH                                               | STATUS | FEATURES                                                                                                                |
 | ---------------- | ------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -213,7 +213,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | CardFooter       | src/components/Card/components/CardFooter/              | STABLE | Wrapping footer content and actions                                                                                     |
 | Checkbox         | src/components/Checkbox/                                | STABLE | Indeterminate state                                                                                                     |
 | Clock            | src/components/Clock/                                   | STABLE | Time picker                                                                                                             |
-| DataTable        | src/components/DataTable/                               | STABLE | Sorting, pagination, filtering                                                                                          |
+| DataTable        | src/components/DataTable/                               | STABLE | Sorting, pagination, filtering; an EmptyState when there are no rows                                                    |
 | DateInput        | src/components/DateInput/                               | STABLE | Calendar picker field                                                                                                   |
 | Dropdown         | src/components/Dropdown/                                | STABLE | Dropdown menu                                                                                                           |
 | FileUploader     | src/components/FileUploader/                            | STABLE | Drag and drop                                                                                                           |
@@ -243,6 +243,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Stack            | src/components/Stack/                                   | STABLE | Responsive direction and space-scale gap, list semantics                                                                |
 | Grid             | src/components/Grid/                                    | STABLE | Responsive columns or auto-fit minimum width                                                                            |
 | Section          | src/components/Section/                                 | STABLE | Default/subtle/accent/brand/inverse bands, vertical rhythm, inner Container                                             |
+| Separator        | src/components/Separator/                               | STABLE | Horizontal or vertical line with the separator role, or decorative; recipe color, thickness and spacing                 |
 | MediaPlaceholder | src/components/MediaPlaceholder/                        | STABLE | Sized stand-in for a missing picture, labelled with what it will show; optional Pixabay design-time preview with credit |
 | Popover          | src/components/Popover/                                 | STABLE | Non-modal dialog anchored to a Button trigger, four placements that flip, controlled or not                             |
 | Radio            | src/components/Radio/                                   | STABLE | Native radio with label and help text, controlled or uncontrolled; alone or inside RadioGroup                           |
@@ -252,6 +253,7 @@ WeekCalendarRow lives under WeekCalendar but remains a named package export.
 | Textarea         | src/components/Textarea/                                | STABLE | Multi-line Input field: rows and maxRows in lines, optional auto-resize, description and accessible errors              |
 | Progress         | src/components/Progress/                                | STABLE | Determinate or indeterminate bar with label and value text; Stepper's linear track                                     |
 | Skeleton         | src/components/Skeleton/                                | STABLE | Hidden text, block and circle placeholders with pulse or shimmer that stops under reduced motion                        |
+| EmptyState       | src/components/EmptyState/                              | STABLE | Media, title as h2-h4 or p, description and actions for an empty region; DataTable's empty view                         |
 | Toast            | src/components/Toast/                                   | STABLE | Alert that closes itself, pausing on hover and focus; queued and announced by ToastProvider and useToast                |
 | Tooltip          | src/components/Tooltip/                                 | STABLE | Description on hover and keyboard focus, centered and flipping, hoverable and dismissable; WeekCalendarRow's bubble     |
 | Combobox         | src/components/Combobox/                                | STABLE | Input with suggestions and aria-activedescendant: local filter or fetched results, custom values, loading              |
